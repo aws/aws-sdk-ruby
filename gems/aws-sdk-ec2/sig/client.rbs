@@ -1402,7 +1402,8 @@ module Aws
                                         connection_log_options: {
                                           enabled: bool?,
                                           cloudwatch_log_group: ::String?,
-                                          cloudwatch_log_stream: ::String?
+                                          cloudwatch_log_stream: ::String?,
+                                          include_authorization_policy_context: bool?
                                         },
                                         ?dns_servers: Array[::String],
                                         ?transport_protocol: ("tcp" | "udp"),
@@ -1444,7 +1445,8 @@ module Aws
                                           transit_gateway_id: ::String?,
                                           availability_zones: Array[::String]?,
                                           availability_zone_ids: Array[::String]?
-                                        }
+                                        },
+                                        ?device_posture_options: Params::device_posture_options
                                       ) -> _CreateClientVpnEndpointResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClientVpnEndpointResponseSuccess
 
@@ -2041,7 +2043,7 @@ module Aws
       def create_ipam_internet_registry_association: (
                                                        ?dry_run: bool,
                                                        ipam_id: ::String,
-                                                       rir: ("ripe" | "apnic" | "arin" | "lacnic"),
+                                                       rir: ("ripe" | "apnic" | "arin" | "lacnic" | "nicbr"),
                                                        organization_handle: ::String,
                                                        ?description: ::String,
                                                        ?tag_specifications: Array[
@@ -4343,6 +4345,17 @@ module Aws
                                         ?dry_run: bool
                                       ) -> _DeleteClientVpnEndpointResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClientVpnEndpointResponseSuccess
+
+      interface _DeleteClientVpnEndpointAuthorizationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClientVpnEndpointAuthorizationPolicyResult]
+        def status: () -> ("creating" | "updating" | "active" | "failed" | "deleting")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#delete_client_vpn_endpoint_authorization_policy-instance_method
+      def delete_client_vpn_endpoint_authorization_policy: (
+                                                             client_vpn_endpoint_id: ::String,
+                                                             ?dry_run: bool
+                                                           ) -> _DeleteClientVpnEndpointAuthorizationPolicyResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClientVpnEndpointAuthorizationPolicyResponseSuccess
 
       interface _DeleteClientVpnRouteResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClientVpnRouteResult]
@@ -10325,6 +10338,21 @@ module Aws
                                           ) -> _GetCapacityReservationUsageResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCapacityReservationUsageResponseSuccess
 
+      interface _GetClientVpnEndpointAuthorizationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetClientVpnEndpointAuthorizationPolicyResult]
+        def client_vpn_endpoint_id: () -> ::String
+        def policy_document: () -> ::String
+        def description: () -> ::String
+        def shadow_mode: () -> ("enabled" | "disabled")
+        def status: () -> ("creating" | "updating" | "active" | "failed" | "deleting")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_client_vpn_endpoint_authorization_policy-instance_method
+      def get_client_vpn_endpoint_authorization_policy: (
+                                                          client_vpn_endpoint_id: ::String,
+                                                          ?dry_run: bool
+                                                        ) -> _GetClientVpnEndpointAuthorizationPolicyResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClientVpnEndpointAuthorizationPolicyResponseSuccess
+
       interface _GetCoipPoolUsageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCoipPoolUsageResult]
         def coip_pool_id: () -> ::String
@@ -11841,7 +11869,8 @@ module Aws
                                         ?connection_log_options: {
                                           enabled: bool?,
                                           cloudwatch_log_group: ::String?,
-                                          cloudwatch_log_stream: ::String?
+                                          cloudwatch_log_stream: ::String?,
+                                          include_authorization_policy_context: bool?
                                         },
                                         ?dns_servers: {
                                           custom_dns_servers: Array[::String]?,
@@ -11871,9 +11900,25 @@ module Aws
                                           transit_gateway_id: ::String?,
                                           availability_zones: Array[::String]?,
                                           availability_zone_ids: Array[::String]?
-                                        }
+                                        },
+                                        ?device_posture_options: Params::device_posture_options
                                       ) -> _ModifyClientVpnEndpointResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClientVpnEndpointResponseSuccess
+
+      interface _ModifyClientVpnEndpointAuthorizationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyClientVpnEndpointAuthorizationPolicyResult]
+        def status: () -> ("creating" | "updating" | "active" | "failed" | "deleting")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#modify_client_vpn_endpoint_authorization_policy-instance_method
+      def modify_client_vpn_endpoint_authorization_policy: (
+                                                             client_vpn_endpoint_id: ::String,
+                                                             ?policy_document: ::String,
+                                                             ?description: ::String,
+                                                             ?shadow_mode: ("enabled" | "disabled"),
+                                                             ?client_token: ::String,
+                                                             ?dry_run: bool
+                                                           ) -> _ModifyClientVpnEndpointAuthorizationPolicyResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClientVpnEndpointAuthorizationPolicyResponseSuccess
 
       interface _ModifyDefaultCreditSpecificationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyDefaultCreditSpecificationResult]

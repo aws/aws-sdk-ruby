@@ -235,7 +235,8 @@ module Aws
       }?,
       streaming_configuration: {
         enable_response_streaming: bool?
-      }?
+      }?,
+      disable_mcp_list_tools_pagination: bool?
     }
 
       type gateway_protocol_configuration = {

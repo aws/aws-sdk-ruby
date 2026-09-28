@@ -3744,6 +3744,28 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The credentials that a chat participant uses to connect to the Connect
+    # Customer Participant Service.
+    #
+    # @!attribute [rw] connection_token
+    #   The connection token used by the chat participant to call the
+    #   Connect Customer Participant Service.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry
+    #   The expiration of the token. It's specified in ISO 8601 format:
+    #   yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ConnectionCredentials AWS API Documentation
+    #
+    class ConnectionCredentials < Struct.new(
+      :connection_token,
+      :expiry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information required to join the call.
     #
     # @!attribute [rw] attendee
@@ -34428,6 +34450,52 @@ module Aws::Connect
     #   disconnect flows such as surveys or feedback forms.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] connection_types
+    #   The types of connection information to return in the response. This
+    #   parameter is optional.
+    #
+    #   Specify `CONNECTION_CREDENTIALS` to receive a connection token.
+    #   Specify `WEBSOCKET` to receive a websocket URL. You can specify
+    #   both. No other value returns connection information.
+    #
+    #   Request `WEBSOCKET` to get a URL the participant connects to
+    #   directly. You do not need to call [CreateParticipantConnection][1]
+    #   for it. Request `CONNECTION_CREDENTIALS` on its own and the response
+    #   returns a connection token but no websocket URL.
+    #
+    #   If you omit this parameter, the response has no connection
+    #   information.
+    #
+    #   <note markdown="1"> If the information you request cannot be returned, StartChatContact
+    #   returns an error rather than a response that omits it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] chat_streaming_configuration
+    #   The streaming configuration, such as the Amazon SNS streaming
+    #   endpoint. Use it to initiate real-time message streaming when the
+    #   chat is created. This parameter is optional.
+    #
+    #   When you set this parameter, the response includes `StreamingId`.
+    #   You do not need to call [StartContactStreaming][1].
+    #
+    #   <note markdown="1"> This parameter starts message streaming only. The response does not
+    #   include connection information, and setting this parameter does not
+    #   remove the need to call [CreateParticipantConnection][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html
+    #   [2]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #   @return [Types::ChatStreamingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
     #
     class StartChatContactRequest < Struct.new(
@@ -34444,7 +34512,9 @@ module Aws::Connect
       :related_contact_id,
       :segment_attributes,
       :customer_id,
-      :disconnect_on_customer_exit)
+      :disconnect_on_customer_exit,
+      :connection_types,
+      :chat_streaming_configuration)
       SENSITIVE = [:customer_id]
       include Aws::Structure
     end
@@ -34473,13 +34543,37 @@ module Aws::Connect
     #   field is populated only for persistent chats.
     #   @return [String]
     #
+    # @!attribute [rw] connection_credentials
+    #   The connection credentials for the chat participant. Returned only
+    #   when the request includes `CONNECTION_CREDENTIALS` in
+    #   `ConnectionTypes`.
+    #   @return [Types::ConnectionCredentials]
+    #
+    # @!attribute [rw] websocket
+    #   The websocket for the chat participant. Returned only when the
+    #   request includes `WEBSOCKET` in `ConnectionTypes`.
+    #   @return [Types::Websocket]
+    #
+    # @!attribute [rw] streaming_id
+    #   The identifier of the streaming configuration enabled with the chat.
+    #   Returned only when the request sets `ChatStreamingConfiguration`.
+    #   Use this value to call [StopContactStreaming][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StopContactStreaming.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactResponse AWS API Documentation
     #
     class StartChatContactResponse < Struct.new(
       :contact_id,
       :participant_id,
       :participant_token,
-      :continued_from_contact_id)
+      :continued_from_contact_id,
+      :connection_credentials,
+      :websocket,
+      :streaming_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38552,13 +38646,6 @@ module Aws::Connect
     #   resource.
     #
     #    </note>
-    #
-    #   <note markdown="1"> If you set the attribute type `AUTO_MUTE_AGENT_ON_HOLD` to `true`,
-    #   the system automatically mutes agents while they're on hold and
-    #   unmutes them when they resume the contact. Agents can't change
-    #   their mute state while on hold.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -41841,6 +41928,28 @@ module Aws::Connect
     #
     class WebNotificationSource < Struct.new(
       :source_campaign)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The websocket that a chat participant uses to receive messages and
+    # events for the chat.
+    #
+    # @!attribute [rw] url
+    #   The URL of the websocket.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_expiry
+    #   The expiration of the websocket URL. It's specified in ISO 8601
+    #   format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+    #   2019-11-08T02:41:28.172Z.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Websocket AWS API Documentation
+    #
+    class Websocket < Struct.new(
+      :url,
+      :connection_expiry)
       SENSITIVE = []
       include Aws::Structure
     end

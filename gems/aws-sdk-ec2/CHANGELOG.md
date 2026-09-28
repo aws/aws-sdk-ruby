@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.653.0 (2026-09-28)
+------------------
+
+* Feature - API changes to AWS Client VPN to support device posture assessment and Cedar authorization policies
+
 1.652.0 (2026-09-22)
 ------------------
 

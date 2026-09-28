@@ -66,11 +66,12 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
-    # Source details for a record auto-detected from an AgentCore Gateway
-    # resource.
+    # The source details for a registry record that was auto-detected from
+    # an Amazon Bedrock AgentCore Gateway resource.
     #
     # @!attribute [rw] protocol_type
-    #   The protocol type of an AgentCore Gateway.
+    #   The protocol type of the AgentCore Gateway resource that the
+    #   registry record was detected from, for example `MCP`.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_type
@@ -84,7 +85,8 @@ module Aws::AgentRegistryControl
     #   @return [Types::AuthorizerConfiguration]
     #
     # @!attribute [rw] workload_identity_details
-    #   Workload identity details associated with a source resource.
+    #   The workload identity details for the AgentCore Gateway resource.
+    #   Present when the gateway has a workload identity configured.
     #   @return [Types::WorkloadIdentityDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/AgentCoreGatewaySourceDetails AWS API Documentation
@@ -98,10 +100,12 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
-    # Protocol configuration for an AgentCore Runtime.
+    # The protocol configuration of an AgentCore Runtime resource that a
+    # registry record was auto-detected from.
     #
     # @!attribute [rw] server_protocol
-    #   The server protocol used by an AgentCore Runtime.
+    #   The server protocol used by the AgentCore Runtime, such as `MCP`,
+    #   `HTTP`, `A2A`, or `AGUI`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/AgentCoreRuntimeProtocolConfiguration AWS API Documentation
@@ -112,11 +116,12 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
-    # Source details for a record auto-detected from an AgentCore Runtime
-    # resource.
+    # The source details for a registry record that was auto-detected from
+    # an Amazon Bedrock AgentCore Runtime resource.
     #
     # @!attribute [rw] protocol_configuration
-    #   Protocol configuration for an AgentCore Runtime.
+    #   The protocol configuration of the AgentCore Runtime resource that
+    #   the registry record was detected from.
     #   @return [Types::AgentCoreRuntimeProtocolConfiguration]
     #
     # @!attribute [rw] authorizer_configuration
@@ -125,7 +130,8 @@ module Aws::AgentRegistryControl
     #   @return [Types::AuthorizerConfiguration]
     #
     # @!attribute [rw] workload_identity_details
-    #   Workload identity details associated with a source resource.
+    #   The workload identity details for the AgentCore Runtime resource.
+    #   Present when the runtime has a workload identity configured.
     #   @return [Types::WorkloadIdentityDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/AgentCoreRuntimeSourceDetails AWS API Documentation
@@ -407,11 +413,19 @@ module Aws::AgentRegistryControl
     #   @return [String]
     #
     # @!attribute [rw] provenance
-    #   List of provenance entries on a registry record. Capped at one entry
-    #   today: a record carries a single DETECTED\_FROM lineage. Modeled as
-    #   a list so additional relations can be unlocked post-GA by raising
-    #   this bound without a breaking shape change.
+    #   The provenance lineage entries for the registry record. This field
+    #   is reserved for the Amazon Web Services Agent Registry
+    #   auto-detection service principal. Requests that include this field
+    #   from other callers are rejected.
     #   @return [Array<Types::Provenance>]
+    #
+    # @!attribute [rw] custom_metadata
+    #   The custom metadata to attach to the registry record. Each key must
+    #   match a property defined in the registry's custom metadata schema.
+    #   Values can be strings (maximum 128 characters) or native JSON
+    #   booleans (`true` or `false`). Values are validated against the
+    #   schema at creation time.
+    #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] tags
     #   Tags to associate with the registry record
@@ -429,8 +443,9 @@ module Aws::AgentRegistryControl
       :record_version,
       :client_token,
       :provenance,
+      :custom_metadata,
       :tags)
-      SENSITIVE = [:description]
+      SENSITIVE = [:description, :custom_metadata]
       include Aws::Structure
     end
 
@@ -494,6 +509,12 @@ module Aws::AgentRegistryControl
     #   Approval configuration for registry records
     #   @return [Types::ApprovalConfiguration]
     #
+    # @!attribute [rw] custom_metadata_schema_configuration
+    #   The optional custom metadata schema configuration for the registry.
+    #   When provided, registry records can carry structured metadata
+    #   validated against this schema.
+    #   @return [Types::CustomMetadataSchemaConfiguration]
+    #
     # @!attribute [rw] auto_detection_configuration
     #   The optional auto-detection configuration for the registry. When
     #   provided, the registry is automatically populated with resources
@@ -512,8 +533,9 @@ module Aws::AgentRegistryControl
       :client_token,
       :tags,
       :approval_configuration,
+      :custom_metadata_schema_configuration,
       :auto_detection_configuration)
-      SENSITIVE = [:description]
+      SENSITIVE = [:description, :custom_metadata_schema_configuration]
       include Aws::Structure
     end
 
@@ -619,6 +641,34 @@ module Aws::AgentRegistryControl
       :private_endpoint,
       :private_endpoint_overrides)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that defines a typed metadata schema for a registry.
+    # Specify at least one of a default schema or per-record-type schema
+    # overrides. You can provide both.
+    #
+    # @!attribute [rw] default_schema
+    #   The default JSON Schema that applies to record types without a
+    #   specific override. Supported property types are `string`, `string`
+    #   with an `enum` constraint, `string` with a `uri` format, and
+    #   `boolean`.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_type_schema_overrides
+    #   A list of per-record-type schema overrides. When a record's type
+    #   matches an override, that override's schema is used instead of the
+    #   default schema for validation. If you don't specify an override for
+    #   a record type, the default schema applies. If no default schema
+    #   exists, custom metadata on records of that type is rejected.
+    #   @return [Array<Types::RecordTypeSchemaOverride>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/CustomMetadataSchemaConfiguration AWS API Documentation
+    #
+    class CustomMetadataSchemaConfiguration < Struct.new(
+      :default_schema,
+      :record_type_schema_overrides)
+      SENSITIVE = [:default_schema]
       include Aws::Structure
     end
 
@@ -872,10 +922,9 @@ module Aws::AgentRegistryControl
     #   @return [String]
     #
     # @!attribute [rw] provenance
-    #   List of provenance entries on a registry record. Capped at one entry
-    #   today: a record carries a single DETECTED\_FROM lineage. Modeled as
-    #   a list so additional relations can be unlocked post-GA by raising
-    #   this bound without a breaking shape change.
+    #   The provenance lineage entries for the registry record. Populated
+    #   for records created by auto-detection; each entry identifies the
+    #   upstream source that the record was detected from.
     #   @return [Array<Types::Provenance>]
     #
     # @!attribute [rw] created_by_auto_detection
@@ -888,6 +937,17 @@ module Aws::AgentRegistryControl
     # @!attribute [rw] created_by
     #   The ID of the Amazon Web Services account that created the registry
     #   record.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_metadata
+    #   The custom metadata attached to this registry record. Values are
+    #   strings (maximum 128 characters) or booleans.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] custom_metadata_schema_compliance_status
+    #   Indicates whether this record's custom metadata conforms to the
+    #   registry's current schema. This status is computed at read time
+    #   against the latest schema.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/GetRegistryRecordResponse AWS API Documentation
@@ -908,8 +968,10 @@ module Aws::AgentRegistryControl
       :status_reason,
       :provenance,
       :created_by_auto_detection,
-      :created_by)
-      SENSITIVE = [:description]
+      :created_by,
+      :custom_metadata,
+      :custom_metadata_schema_compliance_status)
+      SENSITIVE = [:description, :custom_metadata]
       include Aws::Structure
     end
 
@@ -959,6 +1021,11 @@ module Aws::AgentRegistryControl
     #   Approval configuration for registry records
     #   @return [Types::ApprovalConfiguration]
     #
+    # @!attribute [rw] custom_metadata_schema_configuration
+    #   The custom metadata schema configuration for this registry, if one
+    #   has been defined.
+    #   @return [Types::CustomMetadataSchemaConfiguration]
+    #
     # @!attribute [rw] status
     #   Current status of the registry
     #   @return [String]
@@ -992,12 +1059,13 @@ module Aws::AgentRegistryControl
       :discovery_configuration,
       :encryption_configuration,
       :approval_configuration,
+      :custom_metadata_schema_configuration,
       :status,
       :status_reason,
       :auto_detection,
       :created_at,
       :updated_at)
-      SENSITIVE = [:description]
+      SENSITIVE = [:description, :custom_metadata_schema_configuration]
       include Aws::Structure
     end
 
@@ -1310,11 +1378,15 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
-    # One provenance entry describing the lineage of a registry record.
+    # A provenance entry that describes the lineage of a registry record.
+    # Records that were auto-detected by Amazon Web Services Agent Registry
+    # carry a provenance entry that links the record back to its upstream
+    # source.
     #
     # @!attribute [rw] relation
-    #   The relationship between the registry record and its provenance
-    #   source.
+    #   The relationship between the registry record and its upstream
+    #   source. `DETECTED_FROM` indicates that the record was auto-detected
+    #   from the source resource.
     #   @return [String]
     #
     # @!attribute [rw] source_id
@@ -1344,13 +1416,14 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
-    # Condensed provenance entry for list results — the key triple only (no
-    # sourceDetails union). Enough to display and client-side-filter lineage
-    # without the full-read config payload.
+    # A condensed provenance entry surfaced in list results. Contains the
+    # source identity of a lineage entry without the source details returned
+    # by `GetRegistryRecord`.
     #
     # @!attribute [rw] relation
-    #   The relationship between the registry record and its provenance
-    #   source.
+    #   The relationship between the registry record and its upstream
+    #   source. `DETECTED_FROM` indicates that the record was auto-detected
+    #   from the source resource.
     #   @return [String]
     #
     # @!attribute [rw] source_id
@@ -1370,6 +1443,27 @@ module Aws::AgentRegistryControl
       :source_id,
       :source_type)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A schema override for a specific record type within a custom metadata
+    # schema configuration.
+    #
+    # @!attribute [rw] record_type
+    #   The record type that this schema override applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The JSON Schema for the specified record type. Must follow the same
+    #   structural rules as the default schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/RecordTypeSchemaOverride AWS API Documentation
+    #
+    class RecordTypeSchemaOverride < Struct.new(
+      :record_type,
+      :schema)
+      SENSITIVE = [:schema]
       include Aws::Structure
     end
 
@@ -1584,10 +1678,16 @@ module Aws::AgentRegistryControl
     #   @return [String]
     #
     # @!attribute [rw] provenance_summary_list
-    #   List of condensed provenance entries surfaced on
-    #   RegistryRecordSummary. Mirrors ProvenanceList's cardinality (one
-    #   entry today); modeled as a list for forward-compatibility.
+    #   The condensed provenance lineage for the registry record. Each entry
+    #   contains the source relation, source identifier, and source type of
+    #   an auto-detection lineage entry. Populated for records created by
+    #   auto-detection.
     #   @return [Array<Types::ProvenanceSummary>]
+    #
+    # @!attribute [rw] custom_metadata_schema_compliance_status
+    #   Indicates whether this record's custom metadata conforms to the
+    #   registry's current schema.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/RegistryRecordSummary AWS API Documentation
     #
@@ -1605,7 +1705,8 @@ module Aws::AgentRegistryControl
       :updated_at,
       :created_by_auto_detection,
       :created_by,
-      :provenance_summary_list)
+      :provenance_summary_list,
+      :custom_metadata_schema_compliance_status)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -1732,13 +1833,15 @@ module Aws::AgentRegistryControl
     # @note SourceDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceDetails corresponding to the set member.
     #
     # @!attribute [rw] agentcore_runtime
-    #   Source details for a record auto-detected from an AgentCore Runtime
-    #   resource.
+    #   The source details for a registry record that was auto-detected from
+    #   an Amazon Bedrock AgentCore Runtime resource. Populated when the
+    #   source type is `AWS::BedrockAgentCore::Runtime`.
     #   @return [Types::AgentCoreRuntimeSourceDetails]
     #
     # @!attribute [rw] agentcore_gateway
-    #   Source details for a record auto-detected from an AgentCore Gateway
-    #   resource.
+    #   The source details for a registry record that was auto-detected from
+    #   an Amazon Bedrock AgentCore Gateway resource. Populated when the
+    #   source type is `AWS::BedrockAgentCore::Gateway`.
     #   @return [Types::AgentCoreGatewaySourceDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/SourceDetails AWS API Documentation
@@ -1906,16 +2009,26 @@ module Aws::AgentRegistryControl
     #   version unchanged.
     #   @return [String]
     #
+    # @!attribute [rw] custom_metadata
+    #   The updated custom metadata for the registry record. Values can be
+    #   strings (maximum 128 characters) or native JSON booleans (`true` or
+    #   `false`). Omit to leave the existing metadata unchanged. Supply the
+    #   wrapper with a full replacement set to update, or with a null value
+    #   to clear all metadata.
+    #   @return [Types::UpdatedCustomMetadataMap]
+    #
     # @!attribute [rw] trigger_synchronization
     #   Whether to trigger synchronization of the record's descriptor
     #   content from its source
     #   @return [Boolean]
     #
     # @!attribute [rw] provenance
-    #   List of provenance entries on a registry record. Capped at one entry
-    #   today: a record carries a single DETECTED\_FROM lineage. Modeled as
-    #   a list so additional relations can be unlocked post-GA by raising
-    #   this bound without a breaking shape change.
+    #   The provenance lineage re-assertion for the registry record. This
+    #   field is reserved for the Amazon Web Services Agent Registry
+    #   auto-detection service principal. Requests that include this field
+    #   from other callers are rejected. The source identity of an existing
+    #   lineage is immutable; a re-assertion may only refresh the source
+    #   details.
     #   @return [Array<Types::Provenance>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdateRegistryRecordRequest AWS API Documentation
@@ -1929,6 +2042,7 @@ module Aws::AgentRegistryControl
       :record_type,
       :descriptors,
       :record_version,
+      :custom_metadata,
       :trigger_synchronization,
       :provenance)
       SENSITIVE = []
@@ -1994,10 +2108,9 @@ module Aws::AgentRegistryControl
     #   @return [String]
     #
     # @!attribute [rw] provenance
-    #   List of provenance entries on a registry record. Capped at one entry
-    #   today: a record carries a single DETECTED\_FROM lineage. Modeled as
-    #   a list so additional relations can be unlocked post-GA by raising
-    #   this bound without a breaking shape change.
+    #   The provenance lineage entries for the registry record. Populated
+    #   for records created by auto-detection; each entry identifies the
+    #   upstream source that the record was detected from.
     #   @return [Array<Types::Provenance>]
     #
     # @!attribute [rw] created_by_auto_detection
@@ -2010,6 +2123,17 @@ module Aws::AgentRegistryControl
     # @!attribute [rw] created_by
     #   The ID of the Amazon Web Services account that created the registry
     #   record.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_metadata
+    #   The custom metadata attached to this registry record. Values are
+    #   strings (maximum 128 characters) or booleans.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] custom_metadata_schema_compliance_status
+    #   Indicates whether this record's custom metadata conforms to the
+    #   registry's current schema. This status is computed at read time
+    #   against the latest schema.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdateRegistryRecordResponse AWS API Documentation
@@ -2030,8 +2154,10 @@ module Aws::AgentRegistryControl
       :status_reason,
       :provenance,
       :created_by_auto_detection,
-      :created_by)
-      SENSITIVE = [:description]
+      :created_by,
+      :custom_metadata,
+      :custom_metadata_schema_compliance_status)
+      SENSITIVE = [:description, :custom_metadata]
       include Aws::Structure
     end
 
@@ -2129,6 +2255,14 @@ module Aws::AgentRegistryControl
     #   already in PENDING\_APPROVAL are unaffected.
     #   @return [Types::UpdatedApprovalConfiguration]
     #
+    # @!attribute [rw] custom_metadata_schema_configuration
+    #   Updated custom metadata schema configuration for the registry. Omit
+    #   to leave the existing schema unchanged. Schema evolution is additive
+    #   only: you can add properties and enum values, but you cannot remove
+    #   properties, change property types or formats, add or remove enum
+    #   constraints, or remove record type overrides.
+    #   @return [Types::UpdatedCustomMetadataSchemaConfiguration]
+    #
     # @!attribute [rw] auto_detection_configuration
     #   The updated auto-detection configuration for the registry, with
     #   PATCH semantics. Omit this field to leave the current configuration
@@ -2144,6 +2278,7 @@ module Aws::AgentRegistryControl
       :description,
       :discovery_configuration,
       :approval_configuration,
+      :custom_metadata_schema_configuration,
       :auto_detection_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -2181,6 +2316,11 @@ module Aws::AgentRegistryControl
     #   Approval configuration for registry records
     #   @return [Types::ApprovalConfiguration]
     #
+    # @!attribute [rw] custom_metadata_schema_configuration
+    #   The custom metadata schema configuration for this registry, if one
+    #   has been defined.
+    #   @return [Types::CustomMetadataSchemaConfiguration]
+    #
     # @!attribute [rw] status
     #   Current status of the registry
     #   @return [String]
@@ -2214,12 +2354,13 @@ module Aws::AgentRegistryControl
       :discovery_configuration,
       :encryption_configuration,
       :approval_configuration,
+      :custom_metadata_schema_configuration,
       :status,
       :status_reason,
       :auto_detection,
       :created_at,
       :updated_at)
-      SENSITIVE = [:description]
+      SENSITIVE = [:description, :custom_metadata_schema_configuration]
       include Aws::Structure
     end
 
@@ -2493,6 +2634,39 @@ module Aws::AgentRegistryControl
     class UpdatedCustomDescriptorFields < Struct.new(
       :data)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The custom metadata patch wrapper. Omit to leave the existing metadata
+    # unchanged; supply with a null value to clear all metadata; supply with
+    # key-value pairs to replace the existing metadata.
+    #
+    # @!attribute [rw] optional_value
+    #   The value to set for this field. Omit the wrapper to leave the field
+    #   unchanged.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedCustomMetadataMap AWS API Documentation
+    #
+    class UpdatedCustomMetadataMap < Struct.new(
+      :optional_value)
+      SENSITIVE = [:optional_value]
+      include Aws::Structure
+    end
+
+    # The custom metadata schema configuration patch wrapper. Omit to leave
+    # the existing schema unchanged.
+    #
+    # @!attribute [rw] optional_value
+    #   The value to set for this field. Omit the wrapper to leave the field
+    #   unchanged.
+    #   @return [Types::CustomMetadataSchemaConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedCustomMetadataSchemaConfiguration AWS API Documentation
+    #
+    class UpdatedCustomMetadataSchemaConfiguration < Struct.new(
+      :optional_value)
+      SENSITIVE = [:optional_value]
       include Aws::Structure
     end
 
@@ -2840,7 +3014,9 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
-    # Workload identity details associated with a source resource.
+    # The workload identity details associated with a source resource.
+    # Present on the source details of a provenance entry when the upstream
+    # resource has a workload identity configured.
     #
     # @!attribute [rw] workload_identity_arn
     #   The Amazon Resource Name (ARN) of the workload identity associated

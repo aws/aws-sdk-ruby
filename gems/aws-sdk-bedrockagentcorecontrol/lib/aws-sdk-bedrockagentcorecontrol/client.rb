@@ -2099,6 +2099,7 @@ module Aws::BedrockAgentCoreControl
     #         streaming_configuration: {
     #           enable_response_streaming: false,
     #         },
+    #         disable_mcp_list_tools_pagination: false,
     #       },
     #     },
     #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM, NONE, AUTHENTICATE_ONLY
@@ -2220,6 +2221,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
     #   resp.protocol_configuration.mcp.session_configuration.session_timeout_in_seconds #=> Integer
     #   resp.protocol_configuration.mcp.streaming_configuration.enable_response_streaming #=> Boolean
+    #   resp.protocol_configuration.mcp.disable_mcp_list_tools_pagination #=> Boolean
     #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE", "AUTHENTICATE_ONLY"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
@@ -7888,6 +7890,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
     #   resp.protocol_configuration.mcp.session_configuration.session_timeout_in_seconds #=> Integer
     #   resp.protocol_configuration.mcp.streaming_configuration.enable_response_streaming #=> Boolean
+    #   resp.protocol_configuration.mcp.disable_mcp_list_tools_pagination #=> Boolean
     #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE", "AUTHENTICATE_ONLY"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
@@ -13349,6 +13352,7 @@ module Aws::BedrockAgentCoreControl
     #         streaming_configuration: {
     #           enable_response_streaming: false,
     #         },
+    #         disable_mcp_list_tools_pagination: false,
     #       },
     #     },
     #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM, NONE, AUTHENTICATE_ONLY
@@ -13475,6 +13479,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
     #   resp.protocol_configuration.mcp.session_configuration.session_timeout_in_seconds #=> Integer
     #   resp.protocol_configuration.mcp.streaming_configuration.enable_response_streaming #=> Boolean
+    #   resp.protocol_configuration.mcp.disable_mcp_list_tools_pagination #=> Boolean
     #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE", "AUTHENTICATE_ONLY"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
@@ -17032,7 +17037,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

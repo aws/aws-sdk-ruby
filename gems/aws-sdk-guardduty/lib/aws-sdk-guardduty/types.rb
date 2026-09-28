@@ -11262,11 +11262,17 @@ module Aws::GuardDuty
     #   it is `False` the API caller is from outside your environment.
     #   @return [Boolean]
     #
+    # @!attribute [rw] aws_service_name
+    #   If the remote account belongs to an Amazon Web Services service,
+    #   this field indicates which service the remote account belongs to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemoteAccountDetails AWS API Documentation
     #
     class RemoteAccountDetails < Struct.new(
       :account_id,
-      :affiliated)
+      :affiliated,
+      :aws_service_name)
       SENSITIVE = []
       include Aws::Structure
     end

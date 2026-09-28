@@ -510,6 +510,11 @@ module Aws::AgentRegistryControl
     # @option params [Types::ApprovalConfiguration] :approval_configuration
     #   Approval configuration for registry records
     #
+    # @option params [Types::CustomMetadataSchemaConfiguration] :custom_metadata_schema_configuration
+    #   The optional custom metadata schema configuration for the registry.
+    #   When provided, registry records can carry structured metadata
+    #   validated against this schema.
+    #
     # @option params [Types::AutoDetectionConfiguration] :auto_detection_configuration
     #   The optional auto-detection configuration for the registry. When
     #   provided, the registry is automatically populated with resources
@@ -595,6 +600,15 @@ module Aws::AgentRegistryControl
     #     approval_configuration: {
     #       auto_approval_rules: ["APPROVE_ALL"], # accepts APPROVE_ALL
     #     },
+    #     custom_metadata_schema_configuration: {
+    #       default_schema: "CustomMetadataSchemaDefinition",
+    #       record_type_schema_overrides: [
+    #         {
+    #           record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY
+    #           schema: "CustomMetadataSchemaDefinition", # required
+    #         },
+    #       ],
+    #     },
     #     auto_detection_configuration: {
     #       scope: "ORGANIZATION", # required, accepts ORGANIZATION
     #       enabled: false, # required
@@ -649,10 +663,22 @@ module Aws::AgentRegistryControl
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Provenance>] :provenance
-    #   List of provenance entries on a registry record. Capped at one entry
-    #   today: a record carries a single DETECTED\_FROM lineage. Modeled as a
-    #   list so additional relations can be unlocked post-GA by raising this
-    #   bound without a breaking shape change.
+    #   The provenance lineage entries for the registry record. This field is
+    #   reserved for the Amazon Web Services Agent Registry auto-detection
+    #   service principal. Requests that include this field from other callers
+    #   are rejected.
+    #
+    # @option params [Hash,Array,String,Numeric,Boolean] :custom_metadata
+    #   The custom metadata to attach to the registry record. Each key must
+    #   match a property defined in the registry's custom metadata schema.
+    #   Values can be strings (maximum 128 characters) or native JSON booleans
+    #   (`true` or `false`). Values are validated against the schema at
+    #   creation time.
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to associate with the registry record
@@ -966,6 +992,8 @@ module Aws::AgentRegistryControl
     #         },
     #       },
     #     ],
+    #     custom_metadata: {
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1054,6 +1082,7 @@ module Aws::AgentRegistryControl
     #   * {Types::GetRegistryResponse#discovery_configuration #discovery_configuration} => Types::DiscoveryConfiguration
     #   * {Types::GetRegistryResponse#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
     #   * {Types::GetRegistryResponse#approval_configuration #approval_configuration} => Types::ApprovalConfiguration
+    #   * {Types::GetRegistryResponse#custom_metadata_schema_configuration #custom_metadata_schema_configuration} => Types::CustomMetadataSchemaConfiguration
     #   * {Types::GetRegistryResponse#status #status} => String
     #   * {Types::GetRegistryResponse#status_reason #status_reason} => String
     #   * {Types::GetRegistryResponse#auto_detection #auto_detection} => Types::AutoDetection
@@ -1112,6 +1141,10 @@ module Aws::AgentRegistryControl
     #   resp.encryption_configuration.kms_key_arn #=> String
     #   resp.approval_configuration.auto_approval_rules #=> Array
     #   resp.approval_configuration.auto_approval_rules[0] #=> String, one of "APPROVE_ALL"
+    #   resp.custom_metadata_schema_configuration.default_schema #=> String
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides #=> Array
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].schema #=> String
     #   resp.status #=> String, one of "CREATING", "READY", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.status_reason #=> String
     #   resp.auto_detection.configuration.scope #=> String, one of "ORGANIZATION"
@@ -1161,6 +1194,8 @@ module Aws::AgentRegistryControl
     #   * {Types::GetRegistryRecordResponse#provenance #provenance} => Array&lt;Types::Provenance&gt;
     #   * {Types::GetRegistryRecordResponse#created_by_auto_detection #created_by_auto_detection} => Boolean
     #   * {Types::GetRegistryRecordResponse#created_by #created_by} => String
+    #   * {Types::GetRegistryRecordResponse#custom_metadata #custom_metadata} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::GetRegistryRecordResponse#custom_metadata_schema_compliance_status #custom_metadata_schema_compliance_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1337,6 +1372,7 @@ module Aws::AgentRegistryControl
     #   resp.provenance[0].source_details.agentcore_gateway.workload_identity_details.workload_identity_arn #=> String
     #   resp.created_by_auto_detection #=> Boolean
     #   resp.created_by #=> String
+    #   resp.custom_metadata_schema_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1503,6 +1539,7 @@ module Aws::AgentRegistryControl
     #   resp.registry_records[0].provenance_summary_list[0].relation #=> String, one of "DETECTED_FROM"
     #   resp.registry_records[0].provenance_summary_list[0].source_id #=> String
     #   resp.registry_records[0].provenance_summary_list[0].source_type #=> String, one of "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Gateway"
+    #   resp.registry_records[0].custom_metadata_schema_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/ListRegistryRecords AWS API Documentation
@@ -1678,6 +1715,13 @@ module Aws::AgentRegistryControl
     #   that move to PENDING\_APPROVAL after the update; records already in
     #   PENDING\_APPROVAL are unaffected.
     #
+    # @option params [Types::UpdatedCustomMetadataSchemaConfiguration] :custom_metadata_schema_configuration
+    #   Updated custom metadata schema configuration for the registry. Omit to
+    #   leave the existing schema unchanged. Schema evolution is additive
+    #   only: you can add properties and enum values, but you cannot remove
+    #   properties, change property types or formats, add or remove enum
+    #   constraints, or remove record type overrides.
+    #
     # @option params [Types::UpdatedAutoDetectionConfiguration] :auto_detection_configuration
     #   The updated auto-detection configuration for the registry, with PATCH
     #   semantics. Omit this field to leave the current configuration
@@ -1693,6 +1737,7 @@ module Aws::AgentRegistryControl
     #   * {Types::UpdateRegistryResponse#discovery_configuration #discovery_configuration} => Types::DiscoveryConfiguration
     #   * {Types::UpdateRegistryResponse#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
     #   * {Types::UpdateRegistryResponse#approval_configuration #approval_configuration} => Types::ApprovalConfiguration
+    #   * {Types::UpdateRegistryResponse#custom_metadata_schema_configuration #custom_metadata_schema_configuration} => Types::CustomMetadataSchemaConfiguration
     #   * {Types::UpdateRegistryResponse#status #status} => String
     #   * {Types::UpdateRegistryResponse#status_reason #status_reason} => String
     #   * {Types::UpdateRegistryResponse#auto_detection #auto_detection} => Types::AutoDetection
@@ -1772,6 +1817,17 @@ module Aws::AgentRegistryControl
     #         auto_approval_rules: ["APPROVE_ALL"], # accepts APPROVE_ALL
     #       },
     #     },
+    #     custom_metadata_schema_configuration: {
+    #       optional_value: {
+    #         default_schema: "CustomMetadataSchemaDefinition",
+    #         record_type_schema_overrides: [
+    #           {
+    #             record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY
+    #             schema: "CustomMetadataSchemaDefinition", # required
+    #           },
+    #         ],
+    #       },
+    #     },
     #     auto_detection_configuration: {
     #       optional_value: {
     #         scope: "ORGANIZATION", # required, accepts ORGANIZATION
@@ -1826,6 +1882,10 @@ module Aws::AgentRegistryControl
     #   resp.encryption_configuration.kms_key_arn #=> String
     #   resp.approval_configuration.auto_approval_rules #=> Array
     #   resp.approval_configuration.auto_approval_rules[0] #=> String, one of "APPROVE_ALL"
+    #   resp.custom_metadata_schema_configuration.default_schema #=> String
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides #=> Array
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].schema #=> String
     #   resp.status #=> String, one of "CREATING", "READY", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.status_reason #=> String
     #   resp.auto_detection.configuration.scope #=> String, one of "ORGANIZATION"
@@ -1879,15 +1939,24 @@ module Aws::AgentRegistryControl
     #   The updated version of the registry record. Omit to leave the version
     #   unchanged.
     #
+    # @option params [Types::UpdatedCustomMetadataMap] :custom_metadata
+    #   The updated custom metadata for the registry record. Values can be
+    #   strings (maximum 128 characters) or native JSON booleans (`true` or
+    #   `false`). Omit to leave the existing metadata unchanged. Supply the
+    #   wrapper with a full replacement set to update, or with a null value to
+    #   clear all metadata.
+    #
     # @option params [Boolean] :trigger_synchronization
     #   Whether to trigger synchronization of the record's descriptor content
     #   from its source
     #
     # @option params [Array<Types::Provenance>] :provenance
-    #   List of provenance entries on a registry record. Capped at one entry
-    #   today: a record carries a single DETECTED\_FROM lineage. Modeled as a
-    #   list so additional relations can be unlocked post-GA by raising this
-    #   bound without a breaking shape change.
+    #   The provenance lineage re-assertion for the registry record. This
+    #   field is reserved for the Amazon Web Services Agent Registry
+    #   auto-detection service principal. Requests that include this field
+    #   from other callers are rejected. The source identity of an existing
+    #   lineage is immutable; a re-assertion may only refresh the source
+    #   details.
     #
     # @return [Types::UpdateRegistryRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1907,6 +1976,8 @@ module Aws::AgentRegistryControl
     #   * {Types::UpdateRegistryRecordResponse#provenance #provenance} => Array&lt;Types::Provenance&gt;
     #   * {Types::UpdateRegistryRecordResponse#created_by_auto_detection #created_by_auto_detection} => Boolean
     #   * {Types::UpdateRegistryRecordResponse#created_by #created_by} => String
+    #   * {Types::UpdateRegistryRecordResponse#custom_metadata #custom_metadata} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::UpdateRegistryRecordResponse#custom_metadata_schema_compliance_status #custom_metadata_schema_compliance_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2134,6 +2205,10 @@ module Aws::AgentRegistryControl
     #       },
     #     },
     #     record_version: "RegistryRecordVersion",
+    #     custom_metadata: {
+    #       optional_value: {
+    #       },
+    #     },
     #     trigger_synchronization: false,
     #     provenance: [
     #       {
@@ -2441,6 +2516,7 @@ module Aws::AgentRegistryControl
     #   resp.provenance[0].source_details.agentcore_gateway.workload_identity_details.workload_identity_arn #=> String
     #   resp.created_by_auto_detection #=> Boolean
     #   resp.created_by #=> String
+    #   resp.custom_metadata_schema_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdateRegistryRecord AWS API Documentation
     #
@@ -2524,7 +2600,7 @@ module Aws::AgentRegistryControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-agentregistrycontrol'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

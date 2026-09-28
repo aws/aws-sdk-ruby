@@ -2546,6 +2546,7 @@ module Aws::GuardDuty
     class RemoteAccountDetails
       attr_accessor account_id: ::String
       attr_accessor affiliated: bool
+      attr_accessor aws_service_name: ::String
       SENSITIVE: []
     end
 

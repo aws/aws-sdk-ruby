@@ -1,10 +1,11 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListDiscoverableRegistryRecordsNonexistentFailure",
-    "operationName" : "ListDiscoverableRegistryRecords",
+    "id" : "SearchDiscoverableRegistryRecordsNonexistentFailure",
+    "operationName" : "SearchDiscoverableRegistryRecords",
     "input" : {
-      "registryId" : "aaaaaaaaaaaa"
+      "searchQuery" : "smoke-test",
+      "registryIds" : [ "aaaaaaaaaaaa" ]
     },
     "expectation" : {
       "failure" : { }
@@ -34,11 +35,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "SearchDiscoverableRegistryRecordsNonexistentFailure",
-    "operationName" : "SearchDiscoverableRegistryRecords",
+    "id" : "ListDiscoverableRegistryRecordsNonexistentFailure",
+    "operationName" : "ListDiscoverableRegistryRecords",
     "input" : {
-      "searchQuery" : "smoke-test",
-      "registryIds" : [ "aaaaaaaaaaaa" ]
+      "registryId" : "aaaaaaaaaaaa"
     },
     "expectation" : {
       "failure" : { }

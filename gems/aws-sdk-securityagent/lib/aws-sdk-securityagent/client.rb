@@ -702,6 +702,7 @@ module Aws::SecurityAgent
     #   resp.deleted[0].report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
     #   resp.deleted[0].report_filters.annotation_notes #=> Boolean
     #   resp.deleted[0].report_filters.compliance_report #=> Boolean
+    #   resp.deleted[0].cicd_configuration.enabled #=> Boolean
     #   resp.deleted[0].created_at #=> Time
     #   resp.deleted[0].updated_at #=> Time
     #   resp.failed #=> Array
@@ -1330,13 +1331,23 @@ module Aws::SecurityAgent
     #   resp.pentest_jobs[0].disable_managed_skills #=> Array
     #   resp.pentest_jobs[0].disable_managed_skills[0] #=> String, one of "FINDING_PERSONALIZATION", "LOGIN_OPTIMIZATION"
     #   resp.pentest_jobs[0].max_task_hours #=> Float
-    #   resp.pentest_jobs[0].job_type #=> String, one of "FULL", "REVALIDATION"
+    #   resp.pentest_jobs[0].job_type #=> String, one of "FULL", "REVALIDATION", "CICD"
     #   resp.pentest_jobs[0].selected_finding_ids #=> Array
     #   resp.pentest_jobs[0].selected_finding_ids[0] #=> String
     #   resp.pentest_jobs[0].report_destination.integration_id #=> String
     #   resp.pentest_jobs[0].report_destination.container_id #=> String
     #   resp.pentest_jobs[0].report_destination.parent_id #=> String
     #   resp.pentest_jobs[0].report_destination.document_id #=> String
+    #   resp.pentest_jobs[0].report_url #=> String
+    #   resp.pentest_jobs[0].scope_result.decision #=> String, one of "IN_SCOPE", "SCOPED_OUT", "SCOPE_CONFLICT"
+    #   resp.pentest_jobs[0].scope_result.reason #=> String
+    #   resp.pentest_jobs[0].scope_changes #=> Array
+    #   resp.pentest_jobs[0].scope_changes[0].integration_id #=> String
+    #   resp.pentest_jobs[0].scope_changes[0].provider_resource_id #=> String
+    #   resp.pentest_jobs[0].scope_changes[0].base_commit_sha #=> String
+    #   resp.pentest_jobs[0].scope_changes[0].head_commit_sha #=> String
+    #   resp.pentest_jobs[0].scope_changes[0].trigger_run_id #=> String
+    #   resp.pentest_jobs[0].cicd_configuration.enabled #=> Boolean
     #   resp.pentest_jobs[0].created_at #=> Time
     #   resp.pentest_jobs[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1443,6 +1454,7 @@ module Aws::SecurityAgent
     #   resp.pentests[0].report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
     #   resp.pentests[0].report_filters.annotation_notes #=> Boolean
     #   resp.pentests[0].report_filters.compliance_report #=> Boolean
+    #   resp.pentests[0].cicd_configuration.enabled #=> Boolean
     #   resp.pentests[0].created_at #=> Time
     #   resp.pentests[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -2385,6 +2397,9 @@ module Aws::SecurityAgent
     # @option params [Types::ReportFilters] :report_filters
     #   The report-generation filters applied when the report is exported.
     #
+    # @option params [Types::CiCdConfiguration] :cicd_configuration
+    #   The CI/CD pentesting configuration to apply to the pentest.
+    #
     # @return [Types::CreatePentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePentestOutput#pentest_id #pentest_id} => String
@@ -2398,6 +2413,7 @@ module Aws::SecurityAgent
     #   * {Types::CreatePentestOutput#agent_space_id #agent_space_id} => String
     #   * {Types::CreatePentestOutput#report_destination #report_destination} => Types::ReportDestination
     #   * {Types::CreatePentestOutput#report_filters #report_filters} => Types::ReportFilters
+    #   * {Types::CreatePentestOutput#cicd_configuration #cicd_configuration} => Types::CiCdConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -2500,6 +2516,9 @@ module Aws::SecurityAgent
     #       annotation_notes: false,
     #       compliance_report: false,
     #     },
+    #     cicd_configuration: {
+    #       enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2558,6 +2577,7 @@ module Aws::SecurityAgent
     #   resp.report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
     #   resp.report_filters.annotation_notes #=> Boolean
     #   resp.report_filters.compliance_report #=> Boolean
+    #   resp.cicd_configuration.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreatePentest AWS API Documentation
     #
@@ -4397,6 +4417,10 @@ module Aws::SecurityAgent
     #   request. For subsequent calls, use the nextToken value returned from
     #   the previous request.
     #
+    # @option params [String] :job_type
+    #   Filters the returned pentest jobs to only those of the specified job
+    #   type.
+    #
     # @return [Types::ListPentestJobsForPentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPentestJobsForPentestOutput#pentest_job_summaries #pentest_job_summaries} => Array&lt;Types::PentestJobSummary&gt;
@@ -4411,6 +4435,7 @@ module Aws::SecurityAgent
     #     pentest_id: "String", # required
     #     agent_space_id: "String", # required
     #     next_token: "NextToken",
+    #     job_type: "FULL", # accepts FULL, REVALIDATION, CICD
     #   })
     #
     # @example Response structure
@@ -4422,6 +4447,8 @@ module Aws::SecurityAgent
     #   resp.pentest_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
     #   resp.pentest_job_summaries[0].created_at #=> Time
     #   resp.pentest_job_summaries[0].updated_at #=> Time
+    #   resp.pentest_job_summaries[0].job_type #=> String, one of "FULL", "REVALIDATION", "CICD"
+    #   resp.pentest_job_summaries[0].report_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListPentestJobsForPentest AWS API Documentation
@@ -5013,14 +5040,20 @@ module Aws::SecurityAgent
     #   The unique identifier of the pentest to start a job for.
     #
     # @option params [String] :job_type
-    #   The type of pentest job to start. Valid values are FULL and
-    #   REVALIDATION. When set to REVALIDATION, the selectedFindingIds
-    #   parameter is required.
+    #   The type of pentest job to start. Valid values are FULL, REVALIDATION,
+    #   and CICD. When set to REVALIDATION, the selectedFindingIds parameter
+    #   is required. When set to CICD, the scopeChanges parameter defines the
+    #   code changes to test.
     #
     # @option params [Array<String>] :selected_finding_ids
     #   The list of finding identifiers to revalidate. Required when jobType
     #   is REVALIDATION. Each finding must belong to the same agent space and
     #   pentest.
+    #
+    # @option params [Array<Types::ScopeChange>] :scope_changes
+    #   The code changes that define the scope of a CI/CD pentest job. Provide
+    #   this when starting a job with jobType CICD to test only the changes in
+    #   the current pipeline run.
     #
     # @return [Types::StartPentestJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5037,8 +5070,17 @@ module Aws::SecurityAgent
     #   resp = client.start_pentest_job({
     #     agent_space_id: "String", # required
     #     pentest_id: "String", # required
-    #     job_type: "FULL", # accepts FULL, REVALIDATION
+    #     job_type: "FULL", # accepts FULL, REVALIDATION, CICD
     #     selected_finding_ids: ["String"],
+    #     scope_changes: [
+    #       {
+    #         integration_id: "String", # required
+    #         provider_resource_id: "String", # required
+    #         base_commit_sha: "String",
+    #         head_commit_sha: "String", # required
+    #         trigger_run_id: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5762,6 +5804,9 @@ module Aws::SecurityAgent
     # @option params [Types::ReportFilters] :report_filters
     #   The report-generation filters applied when the report is exported.
     #
+    # @option params [Types::CiCdConfiguration] :cicd_configuration
+    #   The updated CI/CD pentesting configuration to apply to the pentest.
+    #
     # @return [Types::UpdatePentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePentestOutput#pentest_id #pentest_id} => String
@@ -5775,6 +5820,7 @@ module Aws::SecurityAgent
     #   * {Types::UpdatePentestOutput#agent_space_id #agent_space_id} => String
     #   * {Types::UpdatePentestOutput#report_destination #report_destination} => Types::ReportDestination
     #   * {Types::UpdatePentestOutput#report_filters #report_filters} => Types::ReportFilters
+    #   * {Types::UpdatePentestOutput#cicd_configuration #cicd_configuration} => Types::CiCdConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -5878,6 +5924,9 @@ module Aws::SecurityAgent
     #       annotation_notes: false,
     #       compliance_report: false,
     #     },
+    #     cicd_configuration: {
+    #       enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5936,6 +5985,7 @@ module Aws::SecurityAgent
     #   resp.report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
     #   resp.report_filters.annotation_notes #=> Boolean
     #   resp.report_filters.compliance_report #=> Boolean
+    #   resp.cicd_configuration.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdatePentest AWS API Documentation
     #
@@ -6484,7 +6534,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

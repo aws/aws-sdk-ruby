@@ -4658,6 +4658,9 @@ module Aws
         def participant_id: () -> ::String
         def participant_token: () -> ::String
         def continued_from_contact_id: () -> ::String
+        def connection_credentials: () -> Types::ConnectionCredentials
+        def websocket: () -> Types::Websocket
+        def streaming_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#start_chat_contact-instance_method
       def start_chat_contact: (
@@ -4684,7 +4687,11 @@ module Aws
                                 ?related_contact_id: ::String,
                                 ?segment_attributes: Hash[::String, Params::segment_attribute_value],
                                 ?customer_id: ::String,
-                                ?disconnect_on_customer_exit: Array[("AGENT")]
+                                ?disconnect_on_customer_exit: Array[("AGENT")],
+                                ?connection_types: Array[("WEBSOCKET" | "CONNECTION_CREDENTIALS" | "AUTHENTICATION_SESSION" | "WEBRTC_CONNECTION")],
+                                ?chat_streaming_configuration: {
+                                  streaming_endpoint_arn: ::String
+                                }
                               ) -> _StartChatContactResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartChatContactResponseSuccess
 

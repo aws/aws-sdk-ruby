@@ -8135,6 +8135,11 @@ module Aws::EC2
     #   compliance, if applicable.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] authorization_policy_last_evaluated_time
+    #   The date and time the authorization policy was last evaluated for
+    #   the client connection, if applicable.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnConnection AWS API Documentation
     #
     class ClientVpnConnection < Struct.new(
@@ -8152,7 +8157,8 @@ module Aws::EC2
       :common_name,
       :status,
       :connection_end_time,
-      :posture_compliance_statuses)
+      :posture_compliance_statuses,
+      :authorization_policy_last_evaluated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8328,6 +8334,11 @@ module Aws::EC2
     #   The Transit Gateway configuration for the Client VPN endpoint.
     #   @return [Types::TransitGatewayConfigurationDescribeEndpointStructure]
     #
+    # @!attribute [rw] device_posture_options
+    #   The device trust providers configured for the Client VPN endpoint,
+    #   if applicable.
+    #   @return [Types::DevicePostureResponseOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint AWS API Documentation
     #
     class ClientVpnEndpoint < Struct.new(
@@ -8358,7 +8369,8 @@ module Aws::EC2
       :disconnect_on_session_timeout,
       :endpoint_ip_address_type,
       :traffic_ip_address_type,
-      :transit_gateway_configuration)
+      :transit_gateway_configuration,
+      :device_posture_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8491,6 +8503,70 @@ module Aws::EC2
     class ClientVpnRouteStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a device trust provider configured for a Client VPN
+    # endpoint.
+    #
+    # @!attribute [rw] trust_provider_type
+    #   The type of the device trust provider. Possible values include:
+    #
+    #   * `crowdstrike` - CrowdStrike device trust provider.
+    #
+    #   * `jamf` - Jamf device trust provider.
+    #
+    #   * `jumpcloud` - JumpCloud device trust provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_id
+    #   The tenant ID associated with your device trust provider account.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_signing_key_url
+    #   The URL of the public signing key that is used to verify the
+    #   identity token issued by the device trust provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnTrustProvider AWS API Documentation
+    #
+    class ClientVpnTrustProvider < Struct.new(
+      :trust_provider_type,
+      :tenant_id,
+      :public_signing_key_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a device trust provider to configure for a Client VPN
+    # endpoint.
+    #
+    # @!attribute [rw] trust_provider_type
+    #   The type of the device trust provider. Possible values include:
+    #
+    #   * `crowdstrike` - CrowdStrike device trust provider.
+    #
+    #   * `jamf` - Jamf device trust provider.
+    #
+    #   * `jumpcloud` - JumpCloud device trust provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_id
+    #   The tenant ID associated with your device trust provider account.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_signing_key_url
+    #   The URL of the public signing key that is used to verify the
+    #   identity token issued by the device trust provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnTrustProviderRequest AWS API Documentation
+    #
+    class ClientVpnTrustProviderRequest < Struct.new(
+      :trust_provider_type,
+      :tenant_id,
+      :public_signing_key_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8747,12 +8823,18 @@ module Aws::EC2
     #   data is published.
     #   @return [String]
     #
+    # @!attribute [rw] include_authorization_policy_context
+    #   Specifies whether to include the authorization policy evaluation
+    #   context in the connection logs for the Client VPN endpoint.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionLogOptions AWS API Documentation
     #
     class ConnectionLogOptions < Struct.new(
       :enabled,
       :cloudwatch_log_group,
-      :cloudwatch_log_stream)
+      :cloudwatch_log_stream,
+      :include_authorization_policy_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8775,12 +8857,18 @@ module Aws::EC2
     #   connection logging data is published.
     #   @return [String]
     #
+    # @!attribute [rw] include_authorization_policy_context
+    #   Specifies whether the authorization policy evaluation context is
+    #   included in the connection logs for the Client VPN endpoint.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionLogResponseOptions AWS API Documentation
     #
     class ConnectionLogResponseOptions < Struct.new(
       :enabled,
       :cloudwatch_log_group,
-      :cloudwatch_log_stream)
+      :cloudwatch_log_stream,
+      :include_authorization_policy_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10811,6 +10899,12 @@ module Aws::EC2
     #   `TransitGatewayConfiguration` and `VpcId`/`SecurityGroupIds`.
     #   @return [Types::TransitGatewayConfigurationInputStructure]
     #
+    # @!attribute [rw] device_posture_options
+    #   The device posture options for the Client VPN endpoint. Use this
+    #   parameter to specify the device trust providers that the endpoint
+    #   uses to evaluate the security posture of connecting devices.
+    #   @return [Types::DevicePostureOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointRequest AWS API Documentation
     #
     class CreateClientVpnEndpointRequest < Struct.new(
@@ -10836,7 +10930,8 @@ module Aws::EC2
       :disconnect_on_session_timeout,
       :endpoint_ip_address_type,
       :traffic_ip_address_type,
-      :transit_gateway_configuration)
+      :transit_gateway_configuration,
+      :device_posture_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18378,7 +18473,14 @@ module Aws::EC2
     # @!attribute [rw] vpc_endpoint_type
     #   The type of endpoint.
     #
+    #   For more information about the types of VPC endpoints, see [VPC
+    #   endpoints][1] in the *Amazon Web Services PrivateLink User Guide*.
+    #
     #   Default: Gateway
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -18401,15 +18503,21 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   (Interface and Gateway Load Balancer endpoints) The IDs of the
-    #   subnets in which to create endpoint network interfaces. For a
-    #   Gateway Load Balancer endpoint, you can specify only one subnet.
+    #   (Interface, Gateway Load Balancer endpoints, Resource,
+    #   ServiceNetwork, and Tunnel endpoints only) The IDs of the subnets in
+    #   which to create endpoint network interfaces. For a Gateway Load
+    #   Balancer endpoint, you can specify only one subnet. For a `Tunnel`
+    #   endpoint, the subnets must be in the Availability Zones of the
+    #   resource gateway associated with the shared resource configuration.
+    #   An endpoint network interface is created only in an Availability
+    #   Zone that the resource gateway is also in.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   (Interface endpoint) The IDs of the security groups to associate
-    #   with the endpoint network interfaces. If this parameter is not
-    #   specified, we use the default security group for the VPC.
+    #   (Interface, Resource, ServiceNetwork, and Tunnel endpoints only) The
+    #   IDs of the security groups to associate with the endpoint network
+    #   interfaces. If this parameter is not specified, we use the default
+    #   security group for the VPC.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ip_address_type
@@ -18459,8 +18567,29 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_configuration_arn
-    #   The Amazon Resource Name (ARN) of a resource configuration that will
-    #   be associated with the VPC endpoint of type resource.
+    #   (Resource and Tunnel endpoints only) The Amazon Resource Name (ARN)
+    #   of a resource configuration associated with the VPC endpoint. The
+    #   type of resource configuration depends on the endpoint type:
+    #
+    #   * For a Resource endpoint, you can specify a resource configuration
+    #     that is of type `SINGLE`, `GROUP`, or `ARN`. To reach a resource
+    #     that belongs to a group, specify the parent `GROUP` resource
+    #     configuration.
+    #
+    #   * For a Tunnel endpoint, you can specify a resource configuration
+    #     that is of type `CIDR`.
+    #
+    #   For more information about the types of resource configurations, see
+    #   [Types of resource configurations][1] in the *Amazon Web Services
+    #   PrivateLink User Guide*.
+    #
+    #   This request fails if a VPC endpoint owned by a different Amazon Web
+    #   Services account already exists on a resource gateway that is
+    #   enabled for `ResourceGatewayCharges` payer responsibility.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/privatelink/resource-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] service_region
@@ -19459,6 +19588,38 @@ module Aws::EC2
     #
     class DeleteCarrierGatewayResult < Struct.new(
       :carrier_gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnEndpointAuthorizationPolicyRequest AWS API Documentation
+    #
+    class DeleteClientVpnEndpointAuthorizationPolicyRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current state of the authorization policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnEndpointAuthorizationPolicyResult AWS API Documentation
+    #
+    class DeleteClientVpnEndpointAuthorizationPolicyResult < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37897,7 +38058,7 @@ module Aws::EC2
     #
     #   * `vpc-endpoint-type` - The type of VPC endpoint (`Interface` \|
     #     `Gateway` \| `GatewayLoadBalancer` \| `Resource` \|
-    #     `ServiceNetwork`).
+    #     `ServiceNetwork` \| `Tunnel`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -38708,6 +38869,44 @@ module Aws::EC2
     class DeviceOptions < Struct.new(
       :tenant_id,
       :public_signing_key_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the device posture options for a Client VPN endpoint. Device
+    # posture options specify the device trust providers that the endpoint
+    # uses to evaluate the security posture of connecting devices.
+    #
+    # @!attribute [rw] trust_providers
+    #   The device trust providers to configure for the Client VPN endpoint.
+    #   @return [Array<Types::ClientVpnTrustProviderRequest>]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether device posture evaluation is enabled for the
+    #   Client VPN endpoint. Specify `false` to disable device posture,
+    #   which clears the configured device trust providers.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DevicePostureOptions AWS API Documentation
+    #
+    class DevicePostureOptions < Struct.new(
+      :trust_providers,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the device posture options for a Client VPN
+    # endpoint.
+    #
+    # @!attribute [rw] trust_providers
+    #   The device trust providers configured for the Client VPN endpoint.
+    #   @return [Array<Types::ClientVpnTrustProvider>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DevicePostureResponseOptions AWS API Documentation
+    #
+    class DevicePostureResponseOptions < Struct.new(
+      :trust_providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46679,6 +46878,65 @@ module Aws::EC2
       :interruptible,
       :interruptible_capacity_allocation,
       :interruption_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetClientVpnEndpointAuthorizationPolicyRequest AWS API Documentation
+    #
+    class GetClientVpnEndpointAuthorizationPolicyRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The authorization policy document, written in the Cedar policy
+    #   language.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the authorization policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] shadow_mode
+    #   Specifies whether the authorization policy is evaluated in shadow
+    #   mode. Possible values include:
+    #
+    #   * `enabled` - The authorization policy is evaluated and the results
+    #     are logged, but access is not enforced.
+    #
+    #   * `disabled` - The authorization policy is enforced.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the authorization policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetClientVpnEndpointAuthorizationPolicyResult AWS API Documentation
+    #
+    class GetClientVpnEndpointAuthorizationPolicyResult < Struct.new(
+      :client_vpn_endpoint_id,
+      :policy_document,
+      :description,
+      :shadow_mode,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -65155,6 +65413,78 @@ module Aws::EC2
     end
 
     # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The authorization policy document, written in the Cedar policy
+    #   language. This parameter is required when you create the
+    #   authorization policy for a Client VPN endpoint that does not already
+    #   have one.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the authorization policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] shadow_mode
+    #   Specifies whether the authorization policy is evaluated in shadow
+    #   mode. Possible values include:
+    #
+    #   * `enabled` - The authorization policy is evaluated and the results
+    #     are logged, but access is not enforced.
+    #
+    #   * `disabled` - The authorization policy is enforced.
+    #
+    #   The default value is `disabled`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointAuthorizationPolicyRequest AWS API Documentation
+    #
+    class ModifyClientVpnEndpointAuthorizationPolicyRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :policy_document,
+      :description,
+      :shadow_mode,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current state of the authorization policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointAuthorizationPolicyResult AWS API Documentation
+    #
+    class ModifyClientVpnEndpointAuthorizationPolicyResult < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_vpn_endpoint_id
     #   The ID of the Client VPN endpoint to modify.
     #   @return [String]
     #
@@ -65275,6 +65605,13 @@ module Aws::EC2
     #   option is currently not supported.
     #   @return [Types::TransitGatewayConfigurationInputStructure]
     #
+    # @!attribute [rw] device_posture_options
+    #   The device posture options for the Client VPN endpoint. Specifying
+    #   this parameter replaces the entire device posture configuration for
+    #   the endpoint. To remove all device trust providers, specify an empty
+    #   list.
+    #   @return [Types::DevicePostureOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
     #
     class ModifyClientVpnEndpointRequest < Struct.new(
@@ -65294,7 +65631,8 @@ module Aws::EC2
       :client_login_banner_options,
       :client_route_enforcement_options,
       :disconnect_on_session_timeout,
-      :transit_gateway_configuration)
+      :transit_gateway_configuration,
+      :device_posture_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -91941,6 +92279,13 @@ module Aws::EC2
     #
     # @!attribute [rw] vpc_endpoint_type
     #   The type of endpoint.
+    #
+    #   For more information about the types of VPC endpoints, see [VPC
+    #   endpoints][1] in the *Amazon Web Services PrivateLink User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -91965,12 +92310,15 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   (Interface endpoint) The subnets for the endpoint.
+    #   (Interface, Gateway Load Balancer endpoints, Resource,
+    #   ServiceNetwork, and Tunnel endpoints only) The subnets for the
+    #   endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] groups
-    #   (Interface endpoint) Information about the security groups that are
-    #   associated with the network interface.
+    #   (Interface, Resource, ServiceNetwork, and Tunnel endpoints only)
+    #   Information about the security groups that are associated with the
+    #   network interface.
     #   @return [Array<Types::SecurityGroupIdentifier>]
     #
     # @!attribute [rw] ip_address_type
@@ -91991,7 +92339,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] network_interface_ids
-    #   (Interface endpoint) The network interfaces for the endpoint.
+    #   (Interface, Gateway Load Balancer endpoints, Resource,
+    #   ServiceNetwork, and Tunnel endpoints only) The network interfaces
+    #   for the endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dns_entries

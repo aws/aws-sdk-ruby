@@ -58,6 +58,17 @@ module Aws
       ]?
     }
 
+      type device_posture_options = {
+      trust_providers: Array[
+        {
+          trust_provider_type: ("crowdstrike" | "jamf" | "jumpcloud")?,
+          tenant_id: ::String?,
+          public_signing_key_url: ::String?
+        }
+      ]?,
+      enabled: bool?
+    }
+
       type fleet_launch_template_config_request = {
       launch_template_specification: {
         launch_template_id: ::String?,

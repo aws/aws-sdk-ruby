@@ -631,6 +631,13 @@ module Aws::AgentRegistry
     #   results. Supports the field-level operators `$eq`, `$ne`, and `$in`,
     #   and the logical operators `$and` and `$or` on filterable fields.
     #
+    #   You can also filter on custom metadata fields using the
+    #   `customMetadata.{key}` prefix. For example, to filter by a custom
+    #   metadata field: `{"customMetadata.environment": {"$eq":
+    #   "production"}}`. Filter values must be strings, so match a boolean
+    #   field on its string form: `{"customMetadata.requiresApproval": {"$eq":
+    #   "true"}}`.
+    #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
     #   serialized using the same format as its surroundings and requires no
@@ -708,7 +715,7 @@ module Aws::AgentRegistry
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-agentregistry'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

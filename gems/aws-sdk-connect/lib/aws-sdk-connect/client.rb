@@ -17009,6 +17009,8 @@ module Aws::Connect
     #   * {Types::ListEvaluationFormAIVersionsResponse#ai_version_summaries #ai_version_summaries} => Array&lt;Types::EvaluationFormAIVersionSummary&gt;
     #   * {Types::ListEvaluationFormAIVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_evaluation_form_ai_versions({
@@ -24587,6 +24589,11 @@ module Aws::Connect
     # [CreateParticipantConnection][1] with WEBSOCKET and
     # CONNECTION\_CREDENTIALS.
     #
+    # To receive connection information directly in the response, set
+    # `ConnectionTypes` on the request. To initiate real-time message
+    # streaming when the chat is created, set `ChatStreamingConfiguration`
+    # on the request. Both parameters are optional.
+    #
     # A 429 error occurs in the following situations:
     #
     # * API rate limit is exceeded. API TPS throttling returns a
@@ -24736,12 +24743,59 @@ module Aws::Connect
     #   customer ends the chat session, allowing them to continue through
     #   disconnect flows such as surveys or feedback forms.
     #
+    # @option params [Array<String>] :connection_types
+    #   The types of connection information to return in the response. This
+    #   parameter is optional.
+    #
+    #   Specify `CONNECTION_CREDENTIALS` to receive a connection token.
+    #   Specify `WEBSOCKET` to receive a websocket URL. You can specify both.
+    #   No other value returns connection information.
+    #
+    #   Request `WEBSOCKET` to get a URL the participant connects to directly.
+    #   You do not need to call [CreateParticipantConnection][1] for it.
+    #   Request `CONNECTION_CREDENTIALS` on its own and the response returns a
+    #   connection token but no websocket URL.
+    #
+    #   If you omit this parameter, the response has no connection
+    #   information.
+    #
+    #   <note markdown="1"> If the information you request cannot be returned, StartChatContact
+    #   returns an error rather than a response that omits it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #
+    # @option params [Types::ChatStreamingConfiguration] :chat_streaming_configuration
+    #   The streaming configuration, such as the Amazon SNS streaming
+    #   endpoint. Use it to initiate real-time message streaming when the chat
+    #   is created. This parameter is optional.
+    #
+    #   When you set this parameter, the response includes `StreamingId`. You
+    #   do not need to call [StartContactStreaming][1].
+    #
+    #   <note markdown="1"> This parameter starts message streaming only. The response does not
+    #   include connection information, and setting this parameter does not
+    #   remove the need to call [CreateParticipantConnection][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html
+    #   [2]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #
     # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChatContactResponse#contact_id #contact_id} => String
     #   * {Types::StartChatContactResponse#participant_id #participant_id} => String
     #   * {Types::StartChatContactResponse#participant_token #participant_token} => String
     #   * {Types::StartChatContactResponse#continued_from_contact_id #continued_from_contact_id} => String
+    #   * {Types::StartChatContactResponse#connection_credentials #connection_credentials} => Types::ConnectionCredentials
+    #   * {Types::StartChatContactResponse#websocket #websocket} => Types::Websocket
+    #   * {Types::StartChatContactResponse#streaming_id #streaming_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -24788,6 +24842,10 @@ module Aws::Connect
     #     },
     #     customer_id: "CustomerIdNonEmpty",
     #     disconnect_on_customer_exit: ["AGENT"], # accepts AGENT
+    #     connection_types: ["WEBSOCKET"], # accepts WEBSOCKET, CONNECTION_CREDENTIALS, AUTHENTICATION_SESSION, WEBRTC_CONNECTION
+    #     chat_streaming_configuration: {
+    #       streaming_endpoint_arn: "ChatStreamingEndpointARN", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -24796,6 +24854,11 @@ module Aws::Connect
     #   resp.participant_id #=> String
     #   resp.participant_token #=> String
     #   resp.continued_from_contact_id #=> String
+    #   resp.connection_credentials.connection_token #=> String
+    #   resp.connection_credentials.expiry #=> String
+    #   resp.websocket.url #=> String
+    #   resp.websocket.connection_expiry #=> String
+    #   resp.streaming_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContact AWS API Documentation
     #
@@ -28908,13 +28971,6 @@ module Aws::Connect
     #
     #    </note>
     #
-    #   <note markdown="1"> If you set the attribute type `AUTO_MUTE_AGENT_ON_HOLD` to `true`, the
-    #   system automatically mutes agents while they're on hold and unmutes
-    #   them when they resume the contact. Agents can't change their mute
-    #   state while on hold.
-    #
-    #    </note>
-    #
     # @option params [required, String] :value
     #   The value for the attribute. Maximum character limit is 100.
     #
@@ -31625,7 +31681,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.282.0'
+      context[:gem_version] = '1.283.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

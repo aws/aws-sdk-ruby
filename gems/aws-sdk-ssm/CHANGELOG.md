@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.223.0 (2026-09-28)
+------------------
+
+* Feature - Add support for sharing SSM documents with organizations and OUs using RAM.
+
 1.222.0 (2026-09-11)
 ------------------
 

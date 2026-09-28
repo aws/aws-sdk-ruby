@@ -506,6 +506,7 @@ module Aws
         def agent_space_id: () -> ::String
         def report_destination: () -> Types::ReportDestination
         def report_filters: () -> Types::ReportFilters
+        def cicd_configuration: () -> Types::CiCdConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_pentest-instance_method
       def create_pentest: (
@@ -533,7 +534,10 @@ module Aws
                               parent_id: ::String?,
                               document_id: ::String?
                             },
-                            ?report_filters: Params::report_filters
+                            ?report_filters: Params::report_filters,
+                            ?cicd_configuration: {
+                              enabled: bool?
+                            }
                           ) -> _CreatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePentestResponseSuccess
 
@@ -1105,7 +1109,8 @@ module Aws
                                            ?max_results: ::Integer,
                                            pentest_id: ::String,
                                            agent_space_id: ::String,
-                                           ?next_token: ::String
+                                           ?next_token: ::String,
+                                           ?job_type: ("FULL" | "REVALIDATION" | "CICD")
                                          ) -> _ListPentestJobsForPentestResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPentestJobsForPentestResponseSuccess
 
@@ -1286,8 +1291,17 @@ module Aws
       def start_pentest_job: (
                                agent_space_id: ::String,
                                pentest_id: ::String,
-                               ?job_type: ("FULL" | "REVALIDATION"),
-                               ?selected_finding_ids: Array[::String]
+                               ?job_type: ("FULL" | "REVALIDATION" | "CICD"),
+                               ?selected_finding_ids: Array[::String],
+                               ?scope_changes: Array[
+                                 {
+                                   integration_id: ::String,
+                                   provider_resource_id: ::String,
+                                   base_commit_sha: ::String?,
+                                   head_commit_sha: ::String,
+                                   trigger_run_id: ::String?
+                                 }
+                               ]
                              ) -> _StartPentestJobResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPentestJobResponseSuccess
 
@@ -1521,6 +1535,7 @@ module Aws
         def agent_space_id: () -> ::String
         def report_destination: () -> Types::ReportDestination
         def report_filters: () -> Types::ReportFilters
+        def cicd_configuration: () -> Types::CiCdConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_pentest-instance_method
       def update_pentest: (
@@ -1549,7 +1564,10 @@ module Aws
                               parent_id: ::String?,
                               document_id: ::String?
                             },
-                            ?report_filters: Params::report_filters
+                            ?report_filters: Params::report_filters,
+                            ?cicd_configuration: {
+                              enabled: bool?
+                            }
                           ) -> _UpdatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePentestResponseSuccess
 

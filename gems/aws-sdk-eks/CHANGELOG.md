@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2026-09-28)
+------------------
+
+* Feature - An optional customer provided prefix used to construct the hostname of the Argo CD server endpoint for EKS Argo CD Capability.
+
 1.178.0 (2026-09-11)
 ------------------
 

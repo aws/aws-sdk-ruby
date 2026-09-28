@@ -8889,6 +8889,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:batch_delete_connection, Seahorse::Model::Operation.new.tap do |o|
@@ -8911,6 +8912,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:batch_delete_table, Seahorse::Model::Operation.new.tap do |o|
@@ -8925,6 +8927,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:batch_delete_table_version, Seahorse::Model::Operation.new.tap do |o|
@@ -9114,6 +9117,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:cancel_data_quality_rule_recommendation_run, Seahorse::Model::Operation.new.tap do |o|

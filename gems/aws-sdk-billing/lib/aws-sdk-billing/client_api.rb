@@ -57,6 +57,16 @@ module Aws::Billing
     BillingViewsMaxResults = Shapes::IntegerShape.new(name: 'BillingViewsMaxResults')
     BillingYear = Shapes::IntegerShape.new(name: 'BillingYear')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BusinessSupportAccountCharge = Shapes::StructureShape.new(name: 'BusinessSupportAccountCharge')
+    BusinessSupportAccountChargeList = Shapes::ListShape.new(name: 'BusinessSupportAccountChargeList')
+    BusinessSupportBillingMonth = Shapes::StringShape.new(name: 'BusinessSupportBillingMonth')
+    BusinessSupportDiscount = Shapes::StructureShape.new(name: 'BusinessSupportDiscount')
+    BusinessSupportServiceSpend = Shapes::StructureShape.new(name: 'BusinessSupportServiceSpend')
+    BusinessSupportServiceSpendList = Shapes::ListShape.new(name: 'BusinessSupportServiceSpendList')
+    BusinessSupportSubscriptionContract = Shapes::StructureShape.new(name: 'BusinessSupportSubscriptionContract')
+    BusinessSupportSubscriptionContractList = Shapes::ListShape.new(name: 'BusinessSupportSubscriptionContractList')
+    BusinessSupportTierCharge = Shapes::StructureShape.new(name: 'BusinessSupportTierCharge')
+    BusinessSupportTierChargeList = Shapes::ListShape.new(name: 'BusinessSupportTierChargeList')
     ChargeAccount = Shapes::StructureShape.new(name: 'ChargeAccount')
     ChargeAccountList = Shapes::ListShape.new(name: 'ChargeAccountList')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -114,6 +124,12 @@ module Aws::Billing
     ListBillingViewSegmentsResponse = Shapes::StructureShape.new(name: 'ListBillingViewSegmentsResponse')
     ListBillingViewsRequest = Shapes::StructureShape.new(name: 'ListBillingViewsRequest')
     ListBillingViewsResponse = Shapes::StructureShape.new(name: 'ListBillingViewsResponse')
+    ListBusinessSupportAccountChargesRequest = Shapes::StructureShape.new(name: 'ListBusinessSupportAccountChargesRequest')
+    ListBusinessSupportAccountChargesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListBusinessSupportAccountChargesRequestMaxResultsInteger')
+    ListBusinessSupportAccountChargesResponse = Shapes::StructureShape.new(name: 'ListBusinessSupportAccountChargesResponse')
+    ListBusinessSupportSubscriptionHistoryRequest = Shapes::StructureShape.new(name: 'ListBusinessSupportSubscriptionHistoryRequest')
+    ListBusinessSupportSubscriptionHistoryRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListBusinessSupportSubscriptionHistoryRequestMaxResultsInteger')
+    ListBusinessSupportSubscriptionHistoryResponse = Shapes::StructureShape.new(name: 'ListBusinessSupportSubscriptionHistoryResponse')
     ListEnterpriseSupportLinkedAccountChargesRequest = Shapes::StructureShape.new(name: 'ListEnterpriseSupportLinkedAccountChargesRequest')
     ListEnterpriseSupportLinkedAccountChargesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListEnterpriseSupportLinkedAccountChargesRequestMaxResultsInteger')
     ListEnterpriseSupportLinkedAccountChargesResponse = Shapes::StructureShape.new(name: 'ListEnterpriseSupportLinkedAccountChargesResponse')
@@ -283,6 +299,50 @@ module Aws::Billing
     BillingViewStatusReasons.member = Shapes::ShapeRef.new(shape: BillingViewStatusReason)
 
     BillingViewTypeList.member = Shapes::ShapeRef.new(shape: BillingViewType)
+
+    BusinessSupportAccountCharge.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    BusinessSupportAccountCharge.add_member(:support_plan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "supportPlanName"))
+    BusinessSupportAccountCharge.add_member(:total_charge, Shapes::ShapeRef.new(shape: String, required: true, location_name: "totalCharge"))
+    BusinessSupportAccountCharge.add_member(:total_usage_basis, Shapes::ShapeRef.new(shape: String, required: true, location_name: "totalUsageBasis"))
+    BusinessSupportAccountCharge.add_member(:tier_charges, Shapes::ShapeRef.new(shape: BusinessSupportTierChargeList, location_name: "tierCharges"))
+    BusinessSupportAccountCharge.add_member(:support_discount, Shapes::ShapeRef.new(shape: BusinessSupportDiscount, location_name: "supportDiscount"))
+    BusinessSupportAccountCharge.add_member(:support_eligible_spend_by_service, Shapes::ShapeRef.new(shape: BusinessSupportServiceSpendList, location_name: "supportEligibleSpendByService"))
+    BusinessSupportAccountCharge.struct_class = Types::BusinessSupportAccountCharge
+
+    BusinessSupportAccountChargeList.member = Shapes::ShapeRef.new(shape: BusinessSupportAccountCharge)
+
+    BusinessSupportDiscount.add_member(:discount_amount, Shapes::ShapeRef.new(shape: String, location_name: "discountAmount"))
+    BusinessSupportDiscount.add_member(:discount_percentage, Shapes::ShapeRef.new(shape: String, location_name: "discountPercentage"))
+    BusinessSupportDiscount.add_member(:discount_type, Shapes::ShapeRef.new(shape: String, location_name: "discountType"))
+    BusinessSupportDiscount.add_member(:discount_source, Shapes::ShapeRef.new(shape: String, location_name: "discountSource"))
+    BusinessSupportDiscount.struct_class = Types::BusinessSupportDiscount
+
+    BusinessSupportServiceSpend.add_member(:contributing_service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "contributingService"))
+    BusinessSupportServiceSpend.add_member(:item_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "itemType"))
+    BusinessSupportServiceSpend.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    BusinessSupportServiceSpend.add_member(:charge_amount, Shapes::ShapeRef.new(shape: String, required: true, location_name: "chargeAmount"))
+    BusinessSupportServiceSpend.add_member(:currency, Shapes::ShapeRef.new(shape: String, required: true, location_name: "currency"))
+    BusinessSupportServiceSpend.struct_class = Types::BusinessSupportServiceSpend
+
+    BusinessSupportServiceSpendList.member = Shapes::ShapeRef.new(shape: BusinessSupportServiceSpend)
+
+    BusinessSupportSubscriptionContract.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    BusinessSupportSubscriptionContract.add_member(:plan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "planName"))
+    BusinessSupportSubscriptionContract.add_member(:contract_start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "contractStartDate"))
+    BusinessSupportSubscriptionContract.add_member(:contract_end_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "contractEndDate"))
+    BusinessSupportSubscriptionContract.struct_class = Types::BusinessSupportSubscriptionContract
+
+    BusinessSupportSubscriptionContractList.member = Shapes::ShapeRef.new(shape: BusinessSupportSubscriptionContract)
+
+    BusinessSupportTierCharge.add_member(:tier_description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "tierDescription"))
+    BusinessSupportTierCharge.add_member(:tier_rate, Shapes::ShapeRef.new(shape: String, required: true, location_name: "tierRate"))
+    BusinessSupportTierCharge.add_member(:usage_slice, Shapes::ShapeRef.new(shape: String, required: true, location_name: "usageSlice"))
+    BusinessSupportTierCharge.add_member(:tier_charge, Shapes::ShapeRef.new(shape: String, required: true, location_name: "tierCharge"))
+    BusinessSupportTierCharge.add_member(:charge_period_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "chargePeriodStartDate"))
+    BusinessSupportTierCharge.add_member(:charge_period_end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "chargePeriodEndDate"))
+    BusinessSupportTierCharge.struct_class = Types::BusinessSupportTierCharge
+
+    BusinessSupportTierChargeList.member = Shapes::ShapeRef.new(shape: BusinessSupportTierCharge)
 
     ChargeAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     ChargeAccount.add_member(:charge_percentage, Shapes::ShapeRef.new(shape: String, required: true, location_name: "chargePercentage"))
@@ -511,6 +571,33 @@ module Aws::Billing
     ListBillingViewsResponse.add_member(:billing_views, Shapes::ShapeRef.new(shape: BillingViewList, required: true, location_name: "billingViews"))
     ListBillingViewsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
     ListBillingViewsResponse.struct_class = Types::ListBillingViewsResponse
+
+    ListBusinessSupportAccountChargesRequest.add_member(:billing_month, Shapes::ShapeRef.new(shape: BusinessSupportBillingMonth, required: true, location_name: "billingMonth"))
+    ListBusinessSupportAccountChargesRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    ListBusinessSupportAccountChargesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListBusinessSupportAccountChargesRequestMaxResultsInteger, location_name: "maxResults"))
+    ListBusinessSupportAccountChargesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListBusinessSupportAccountChargesRequest.struct_class = Types::ListBusinessSupportAccountChargesRequest
+
+    ListBusinessSupportAccountChargesResponse.add_member(:billing_month, Shapes::ShapeRef.new(shape: BusinessSupportBillingMonth, required: true, location_name: "billingMonth"))
+    ListBusinessSupportAccountChargesResponse.add_member(:is_estimated, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isEstimated"))
+    ListBusinessSupportAccountChargesResponse.add_member(:total_support_charge, Shapes::ShapeRef.new(shape: String, required: true, location_name: "totalSupportCharge"))
+    ListBusinessSupportAccountChargesResponse.add_member(:total_support_eligible_spend, Shapes::ShapeRef.new(shape: String, required: true, location_name: "totalSupportEligibleSpend"))
+    ListBusinessSupportAccountChargesResponse.add_member(:account_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "accountCount"))
+    ListBusinessSupportAccountChargesResponse.add_member(:account_charges, Shapes::ShapeRef.new(shape: BusinessSupportAccountChargeList, required: true, location_name: "accountCharges"))
+    ListBusinessSupportAccountChargesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListBusinessSupportAccountChargesResponse.struct_class = Types::ListBusinessSupportAccountChargesResponse
+
+    ListBusinessSupportSubscriptionHistoryRequest.add_member(:billing_month, Shapes::ShapeRef.new(shape: BusinessSupportBillingMonth, location_name: "billingMonth"))
+    ListBusinessSupportSubscriptionHistoryRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    ListBusinessSupportSubscriptionHistoryRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startDate"))
+    ListBusinessSupportSubscriptionHistoryRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endDate"))
+    ListBusinessSupportSubscriptionHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListBusinessSupportSubscriptionHistoryRequestMaxResultsInteger, location_name: "maxResults"))
+    ListBusinessSupportSubscriptionHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListBusinessSupportSubscriptionHistoryRequest.struct_class = Types::ListBusinessSupportSubscriptionHistoryRequest
+
+    ListBusinessSupportSubscriptionHistoryResponse.add_member(:subscription_contracts, Shapes::ShapeRef.new(shape: BusinessSupportSubscriptionContractList, required: true, location_name: "subscriptionContracts"))
+    ListBusinessSupportSubscriptionHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListBusinessSupportSubscriptionHistoryResponse.struct_class = Types::ListBusinessSupportSubscriptionHistoryResponse
 
     ListEnterpriseSupportLinkedAccountChargesRequest.add_member(:billing_month, Shapes::ShapeRef.new(shape: EnterpriseSupportBillingMonth, required: true, location_name: "billingMonth"))
     ListEnterpriseSupportLinkedAccountChargesRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
@@ -862,6 +949,44 @@ module Aws::Billing
         o.input = Shapes::ShapeRef.new(shape: ListBillingViewsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBillingViewsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_business_support_account_charges, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBusinessSupportAccountCharges"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListBusinessSupportAccountChargesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBusinessSupportAccountChargesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_business_support_subscription_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBusinessSupportSubscriptionHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListBusinessSupportSubscriptionHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBusinessSupportSubscriptionHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

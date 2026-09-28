@@ -50,6 +50,7 @@ module Aws::EKS
     ArgoCdAwsIdcConfigResponse = Shapes::StructureShape.new(name: 'ArgoCdAwsIdcConfigResponse')
     ArgoCdConfigRequest = Shapes::StructureShape.new(name: 'ArgoCdConfigRequest')
     ArgoCdConfigResponse = Shapes::StructureShape.new(name: 'ArgoCdConfigResponse')
+    ArgoCdEndpointPrefix = Shapes::StringShape.new(name: 'ArgoCdEndpointPrefix')
     ArgoCdNetworkAccessConfigRequest = Shapes::StructureShape.new(name: 'ArgoCdNetworkAccessConfigRequest')
     ArgoCdNetworkAccessConfigResponse = Shapes::StructureShape.new(name: 'ArgoCdNetworkAccessConfigResponse')
     ArgoCdRole = Shapes::StringShape.new(name: 'ArgoCdRole')
@@ -600,6 +601,7 @@ module Aws::EKS
     ArgoCdConfigRequest.add_member(:aws_idc, Shapes::ShapeRef.new(shape: ArgoCdAwsIdcConfigRequest, required: true, location_name: "awsIdc"))
     ArgoCdConfigRequest.add_member(:rbac_role_mappings, Shapes::ShapeRef.new(shape: ArgoCdRoleMappingList, location_name: "rbacRoleMappings"))
     ArgoCdConfigRequest.add_member(:network_access, Shapes::ShapeRef.new(shape: ArgoCdNetworkAccessConfigRequest, location_name: "networkAccess"))
+    ArgoCdConfigRequest.add_member(:endpoint_prefix, Shapes::ShapeRef.new(shape: ArgoCdEndpointPrefix, location_name: "endpointPrefix"))
     ArgoCdConfigRequest.struct_class = Types::ArgoCdConfigRequest
 
     ArgoCdConfigResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
@@ -607,6 +609,7 @@ module Aws::EKS
     ArgoCdConfigResponse.add_member(:rbac_role_mappings, Shapes::ShapeRef.new(shape: ArgoCdRoleMappingList, location_name: "rbacRoleMappings"))
     ArgoCdConfigResponse.add_member(:network_access, Shapes::ShapeRef.new(shape: ArgoCdNetworkAccessConfigResponse, location_name: "networkAccess"))
     ArgoCdConfigResponse.add_member(:server_url, Shapes::ShapeRef.new(shape: String, location_name: "serverUrl"))
+    ArgoCdConfigResponse.add_member(:endpoint_prefix, Shapes::ShapeRef.new(shape: ArgoCdEndpointPrefix, location_name: "endpointPrefix"))
     ArgoCdConfigResponse.struct_class = Types::ArgoCdConfigResponse
 
     ArgoCdNetworkAccessConfigRequest.add_member(:vpce_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "vpceIds"))

@@ -4264,6 +4264,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor search_type: ("SEMANTIC")
       attr_accessor session_configuration: Types::SessionConfiguration
       attr_accessor streaming_configuration: Types::StreamingConfiguration
+      attr_accessor disable_mcp_list_tools_pagination: bool
       SENSITIVE: [:instructions]
     end
 

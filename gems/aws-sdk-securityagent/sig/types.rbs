@@ -451,6 +451,11 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class CiCdConfiguration
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class CloudWatchLog
       attr_accessor log_group: ::String
       attr_accessor log_stream: ::String
@@ -720,6 +725,7 @@ module Aws::SecurityAgent
       attr_accessor max_task_hours: ::Float
       attr_accessor report_destination: Types::ReportDestination
       attr_accessor report_filters: Types::ReportFilters
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
       SENSITIVE: []
     end
 
@@ -735,6 +741,7 @@ module Aws::SecurityAgent
       attr_accessor agent_space_id: ::String
       attr_accessor report_destination: Types::ReportDestination
       attr_accessor report_filters: Types::ReportFilters
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
       SENSITIVE: []
     end
 
@@ -1562,6 +1569,7 @@ module Aws::SecurityAgent
       attr_accessor pentest_id: ::String
       attr_accessor agent_space_id: ::String
       attr_accessor next_token: ::String
+      attr_accessor job_type: ("FULL" | "REVALIDATION" | "CICD")
       SENSITIVE: []
     end
 
@@ -1776,6 +1784,7 @@ module Aws::SecurityAgent
       attr_accessor max_task_hours: ::Float
       attr_accessor report_destination: Types::ReportDestination
       attr_accessor report_filters: Types::ReportFilters
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1807,9 +1816,13 @@ module Aws::SecurityAgent
       attr_accessor clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
       attr_accessor max_task_hours: ::Float
-      attr_accessor job_type: ("FULL" | "REVALIDATION")
+      attr_accessor job_type: ("FULL" | "REVALIDATION" | "CICD")
       attr_accessor selected_finding_ids: ::Array[::String]
       attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_url: ::String
+      attr_accessor scope_result: Types::ScopeResult
+      attr_accessor scope_changes: ::Array[Types::ScopeChange]
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1822,6 +1835,8 @@ module Aws::SecurityAgent
       attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor job_type: ("FULL" | "REVALIDATION" | "CICD")
+      attr_accessor report_url: ::String
       SENSITIVE: []
     end
 
@@ -1928,6 +1943,21 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class ScopeChange
+      attr_accessor integration_id: ::String
+      attr_accessor provider_resource_id: ::String
+      attr_accessor base_commit_sha: ::String
+      attr_accessor head_commit_sha: ::String
+      attr_accessor trigger_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class ScopeResult
+      attr_accessor decision: ("IN_SCOPE" | "SCOPED_OUT" | "SCOPE_CONFLICT")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
     class SecurityRequirementArtifact
       attr_accessor name: ::String
       attr_accessor format: ("MD" | "PDF" | "TXT" | "DOCX" | "DOC")
@@ -2017,8 +2047,9 @@ module Aws::SecurityAgent
     class StartPentestJobInput
       attr_accessor agent_space_id: ::String
       attr_accessor pentest_id: ::String
-      attr_accessor job_type: ("FULL" | "REVALIDATION")
+      attr_accessor job_type: ("FULL" | "REVALIDATION" | "CICD")
       attr_accessor selected_finding_ids: ::Array[::String]
+      attr_accessor scope_changes: ::Array[Types::ScopeChange]
       SENSITIVE: []
     end
 
@@ -2408,6 +2439,7 @@ module Aws::SecurityAgent
       attr_accessor max_task_hours: ::Float
       attr_accessor report_destination: Types::ReportDestination
       attr_accessor report_filters: Types::ReportFilters
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
       SENSITIVE: []
     end
 
@@ -2423,6 +2455,7 @@ module Aws::SecurityAgent
       attr_accessor agent_space_id: ::String
       attr_accessor report_destination: Types::ReportDestination
       attr_accessor report_filters: Types::ReportFilters
+      attr_accessor cicd_configuration: Types::CiCdConfiguration
       SENSITIVE: []
     end
 

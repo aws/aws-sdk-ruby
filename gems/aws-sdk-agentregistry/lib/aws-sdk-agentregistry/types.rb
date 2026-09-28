@@ -604,6 +604,12 @@ module Aws::AgentRegistry
     #   The timestamp when the registry record was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] custom_metadata
+    #   The custom metadata attached to this registry record. Values are
+    #   strings (maximum 128 characters) or booleans. This field is only
+    #   present if the registry has a custom metadata schema configured.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/RegistryRecordSummary AWS API Documentation
     #
     class RegistryRecordSummary < Struct.new(
@@ -618,8 +624,9 @@ module Aws::AgentRegistry
       :record_version,
       :status,
       :created_at,
-      :updated_at)
-      SENSITIVE = [:description]
+      :updated_at,
+      :custom_metadata)
+      SENSITIVE = [:description, :custom_metadata]
       include Aws::Structure
     end
 
@@ -677,6 +684,13 @@ module Aws::AgentRegistry
     #   An optional structured JSON metadata filter that narrows the search
     #   results. Supports the field-level operators `$eq`, `$ne`, and `$in`,
     #   and the logical operators `$and` and `$or` on filterable fields.
+    #
+    #   You can also filter on custom metadata fields using the
+    #   `customMetadata.{key}` prefix. For example, to filter by a custom
+    #   metadata field: `{"customMetadata.environment": {"$eq":
+    #   "production"}}`. Filter values must be strings, so match a boolean
+    #   field on its string form: `{"customMetadata.requiresApproval":
+    #   {"$eq": "true"}}`.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/SearchDiscoverableRegistryRecordsRequest AWS API Documentation

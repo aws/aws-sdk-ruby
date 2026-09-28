@@ -687,13 +687,21 @@ module Aws::EKS
     #   endpoints.
     #   @return [Types::ArgoCdNetworkAccessConfigRequest]
     #
+    # @!attribute [rw] endpoint_prefix
+    #   An optional prefix used to construct the hostname of the Argo CD
+    #   server endpoint. If not specified, Amazon EKS automatically
+    #   generates the endpoint. This value can't be changed after the
+    #   capability is created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ArgoCdConfigRequest AWS API Documentation
     #
     class ArgoCdConfigRequest < Struct.new(
       :namespace,
       :aws_idc,
       :rbac_role_mappings,
-      :network_access)
+      :network_access,
+      :endpoint_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -729,6 +737,11 @@ module Aws::EKS
     #   web interface and API.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_prefix
+    #   The prefix that was configured for the hostname of the Argo CD
+    #   server endpoint when the capability was created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ArgoCdConfigResponse AWS API Documentation
     #
     class ArgoCdConfigResponse < Struct.new(
@@ -736,7 +749,8 @@ module Aws::EKS
       :aws_idc,
       :rbac_role_mappings,
       :network_access,
-      :server_url)
+      :server_url,
+      :endpoint_prefix)
       SENSITIVE = []
       include Aws::Structure
     end

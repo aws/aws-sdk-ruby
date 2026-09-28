@@ -1509,6 +1509,21 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # The configuration that enables a pentest to run as part of a CI/CD
+    # pipeline, scoped to the code changes in each pipeline run.
+    #
+    # @!attribute [rw] enabled
+    #   Whether CI/CD pentesting is enabled for this pentest.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CiCdConfiguration AWS API Documentation
+    #
+    class CiCdConfiguration < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon CloudWatch Logs configuration for pentest job logging.
     #
     # @!attribute [rw] log_group
@@ -2603,6 +2618,10 @@ module Aws::SecurityAgent
     #   The report-generation filters applied when the report is exported.
     #   @return [Types::ReportFilters]
     #
+    # @!attribute [rw] cicd_configuration
+    #   The CI/CD pentesting configuration to apply to the pentest.
+    #   @return [Types::CiCdConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreatePentestInput AWS API Documentation
     #
     class CreatePentestInput < Struct.new(
@@ -2618,7 +2637,8 @@ module Aws::SecurityAgent
       :disable_managed_skills,
       :max_task_hours,
       :report_destination,
-      :report_filters)
+      :report_filters,
+      :cicd_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2670,6 +2690,10 @@ module Aws::SecurityAgent
     #   The report-generation filters applied when the report is exported.
     #   @return [Types::ReportFilters]
     #
+    # @!attribute [rw] cicd_configuration
+    #   The CI/CD pentesting configuration applied to the pentest.
+    #   @return [Types::CiCdConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreatePentestOutput AWS API Documentation
     #
     class CreatePentestOutput < Struct.new(
@@ -2683,7 +2707,8 @@ module Aws::SecurityAgent
       :log_config,
       :agent_space_id,
       :report_destination,
-      :report_filters)
+      :report_filters,
+      :cicd_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5649,13 +5674,19 @@ module Aws::SecurityAgent
     #   the previous request.
     #   @return [String]
     #
+    # @!attribute [rw] job_type
+    #   Filters the returned pentest jobs to only those of the specified job
+    #   type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListPentestJobsForPentestInput AWS API Documentation
     #
     class ListPentestJobsForPentestInput < Struct.new(
       :max_results,
       :pentest_id,
       :agent_space_id,
-      :next_token)
+      :next_token,
+      :job_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6379,6 +6410,11 @@ module Aws::SecurityAgent
     #   The report-generation filters applied when the report is exported.
     #   @return [Types::ReportFilters]
     #
+    # @!attribute [rw] cicd_configuration
+    #   The CI/CD pentesting configuration for this pentest. Present when
+    #   the pentest is set up to run from a CI/CD pipeline.
+    #   @return [Types::CiCdConfiguration]
+    #
     # @!attribute [rw] created_at
     #   The date and time the pentest was created, in UTC format.
     #   @return [Time]
@@ -6405,6 +6441,7 @@ module Aws::SecurityAgent
       :max_task_hours,
       :report_destination,
       :report_filters,
+      :cicd_configuration,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -6521,7 +6558,8 @@ module Aws::SecurityAgent
     #   @return [Float]
     #
     # @!attribute [rw] job_type
-    #   The type of the pentest job. Valid values are FULL and REVALIDATION.
+    #   The type of the pentest job. Valid values are FULL, REVALIDATION,
+    #   and CICD.
     #   @return [String]
     #
     # @!attribute [rw] selected_finding_ids
@@ -6533,6 +6571,25 @@ module Aws::SecurityAgent
     #   The destination for publishing scan reports to an integrated
     #   document provider.
     #   @return [Types::ReportDestination]
+    #
+    # @!attribute [rw] report_url
+    #   The URL to view this pentest job's findings report in the console.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_result
+    #   The scoping outcome for this CI/CD pentest job. Present only for
+    #   jobs of type CICD.
+    #   @return [Types::ScopeResult]
+    #
+    # @!attribute [rw] scope_changes
+    #   The code changes that defined the scope of this CI/CD pentest job.
+    #   Present only for jobs of type CICD.
+    #   @return [Array<Types::ScopeChange>]
+    #
+    # @!attribute [rw] cicd_configuration
+    #   The configuration that enables a pentest to run as part of a CI/CD
+    #   pipeline, scoped to the code changes in each pipeline run.
+    #   @return [Types::CiCdConfiguration]
     #
     # @!attribute [rw] created_at
     #   The date and time the pentest job was created, in UTC format.
@@ -6573,6 +6630,10 @@ module Aws::SecurityAgent
       :job_type,
       :selected_finding_ids,
       :report_destination,
+      :report_url,
+      :scope_result,
+      :scope_changes,
+      :cicd_configuration,
       :created_at,
       :updated_at)
       SENSITIVE = [:trusted_ca_certificates]
@@ -6605,6 +6666,15 @@ module Aws::SecurityAgent
     #   The date and time the pentest job was last updated, in UTC format.
     #   @return [Time]
     #
+    # @!attribute [rw] job_type
+    #   The type of the pentest job. Valid values are FULL, REVALIDATION,
+    #   and CICD.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_url
+    #   The URL to view this pentest job's findings report in the console.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/PentestJobSummary AWS API Documentation
     #
     class PentestJobSummary < Struct.new(
@@ -6613,7 +6683,9 @@ module Aws::SecurityAgent
       :title,
       :status,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :job_type,
+      :report_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6926,6 +6998,66 @@ module Aws::SecurityAgent
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A code change in a CI/CD pipeline run that defines what a CI/CD
+    # pentest job tests. Each scope change identifies an integrated
+    # repository and the commit range for the change.
+    #
+    # @!attribute [rw] integration_id
+    #   The identifier of the integration for the source-code provider that
+    #   hosts the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_resource_id
+    #   The provider-specific identifier of the repository the change
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_commit_sha
+    #   The commit SHA that the change is compared against. When omitted,
+    #   the change is evaluated against the head commit alone.
+    #   @return [String]
+    #
+    # @!attribute [rw] head_commit_sha
+    #   The commit SHA at the tip of the change to be tested.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_run_id
+    #   The identifier of the CI/CD pipeline run that triggered this pentest
+    #   job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ScopeChange AWS API Documentation
+    #
+    class ScopeChange < Struct.new(
+      :integration_id,
+      :provider_resource_id,
+      :base_commit_sha,
+      :head_commit_sha,
+      :trigger_run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The outcome of scoping a CI/CD pentest job's code changes, including
+    # the decision and the reason for it.
+    #
+    # @!attribute [rw] decision
+    #   The scoping decision for the job's code changes.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A human-readable explanation of the scoping decision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ScopeResult AWS API Documentation
+    #
+    class ScopeResult < Struct.new(
+      :decision,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7267,9 +7399,10 @@ module Aws::SecurityAgent
     #   @return [String]
     #
     # @!attribute [rw] job_type
-    #   The type of pentest job to start. Valid values are FULL and
-    #   REVALIDATION. When set to REVALIDATION, the selectedFindingIds
-    #   parameter is required.
+    #   The type of pentest job to start. Valid values are FULL,
+    #   REVALIDATION, and CICD. When set to REVALIDATION, the
+    #   selectedFindingIds parameter is required. When set to CICD, the
+    #   scopeChanges parameter defines the code changes to test.
     #   @return [String]
     #
     # @!attribute [rw] selected_finding_ids
@@ -7278,13 +7411,20 @@ module Aws::SecurityAgent
     #   and pentest.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] scope_changes
+    #   The code changes that define the scope of a CI/CD pentest job.
+    #   Provide this when starting a job with jobType CICD to test only the
+    #   changes in the current pipeline run.
+    #   @return [Array<Types::ScopeChange>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StartPentestJobInput AWS API Documentation
     #
     class StartPentestJobInput < Struct.new(
       :agent_space_id,
       :pentest_id,
       :job_type,
-      :selected_finding_ids)
+      :selected_finding_ids,
+      :scope_changes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8810,6 +8950,10 @@ module Aws::SecurityAgent
     #   The report-generation filters applied when the report is exported.
     #   @return [Types::ReportFilters]
     #
+    # @!attribute [rw] cicd_configuration
+    #   The updated CI/CD pentesting configuration to apply to the pentest.
+    #   @return [Types::CiCdConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdatePentestInput AWS API Documentation
     #
     class UpdatePentestInput < Struct.new(
@@ -8826,7 +8970,8 @@ module Aws::SecurityAgent
       :disable_managed_skills,
       :max_task_hours,
       :report_destination,
-      :report_filters)
+      :report_filters,
+      :cicd_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8878,6 +9023,10 @@ module Aws::SecurityAgent
     #   The report-generation filters applied when the report is exported.
     #   @return [Types::ReportFilters]
     #
+    # @!attribute [rw] cicd_configuration
+    #   The CI/CD pentesting configuration applied to the pentest.
+    #   @return [Types::CiCdConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdatePentestOutput AWS API Documentation
     #
     class UpdatePentestOutput < Struct.new(
@@ -8891,7 +9040,8 @@ module Aws::SecurityAgent
       :log_config,
       :agent_space_id,
       :report_destination,
-      :report_filters)
+      :report_filters,
+      :cicd_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

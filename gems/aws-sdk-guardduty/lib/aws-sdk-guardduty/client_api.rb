@@ -2825,6 +2825,7 @@ module Aws::GuardDuty
 
     RemoteAccountDetails.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
     RemoteAccountDetails.add_member(:affiliated, Shapes::ShapeRef.new(shape: Boolean, location_name: "affiliated"))
+    RemoteAccountDetails.add_member(:aws_service_name, Shapes::ShapeRef.new(shape: String, location_name: "awsServiceName"))
     RemoteAccountDetails.struct_class = Types::RemoteAccountDetails
 
     RemoteIpDetails.add_member(:city, Shapes::ShapeRef.new(shape: City, location_name: "city"))

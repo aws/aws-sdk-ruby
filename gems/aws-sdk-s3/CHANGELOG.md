@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.232.3 (2026-09-28)
+------------------
+
 * Issue - Remove `:thread_count` from transfer options even when a custom `:executor` is configured on `TransferManager`, fixing an `ArgumentError` raised on single-part `upload_file` calls.
 
 * Issue - Fix `:thread_count` being ignored by the deprecated `Object#download_file`, which always used the default thread count.

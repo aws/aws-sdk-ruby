@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.164.0 (2026-09-28)
+------------------
+
+* Feature - Adding awsServiceName field to GuardDuty Findings
+
 1.163.0 (2026-09-17)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2026-09-28)
+------------------
+
+* Feature - Amazon FSx has expanded the model-level maximum on the ThroughputCapacity, ThroughputCapacityPerHAPair, and Iops API parameters. Actual supported values are unchanged and depend on file system type and configuration.
+
 1.139.0 (2026-09-11)
 ------------------
 

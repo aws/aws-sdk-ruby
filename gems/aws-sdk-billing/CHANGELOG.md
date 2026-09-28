@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2026-09-28)
+------------------
+
+* Feature - Adds support for (a) listing Business Support account charges via ListBusinessSupportAccountCharges and (b) subscription history via ListBusinessSupportSubscriptionHistory through the AWS Billing API.
+
 1.34.0 (2026-09-23)
 ------------------
 

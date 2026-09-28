@@ -927,6 +927,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ConnectionCredentials
+      attr_accessor connection_token: ::String
+      attr_accessor expiry: ::String
+      SENSITIVE: []
+    end
+
     class ConnectionData
       attr_accessor attendee: Types::Attendee
       attr_accessor meeting: Types::Meeting
@@ -8039,6 +8045,8 @@ module Aws::Connect
       attr_accessor segment_attributes: ::Hash[::String, Types::SegmentAttributeValue]
       attr_accessor customer_id: ::String
       attr_accessor disconnect_on_customer_exit: ::Array[("AGENT")]
+      attr_accessor connection_types: ::Array[("WEBSOCKET" | "CONNECTION_CREDENTIALS" | "AUTHENTICATION_SESSION" | "WEBRTC_CONNECTION")]
+      attr_accessor chat_streaming_configuration: Types::ChatStreamingConfiguration
       SENSITIVE: [:customer_id]
     end
 
@@ -8047,6 +8055,9 @@ module Aws::Connect
       attr_accessor participant_id: ::String
       attr_accessor participant_token: ::String
       attr_accessor continued_from_contact_id: ::String
+      attr_accessor connection_credentials: Types::ConnectionCredentials
+      attr_accessor websocket: Types::Websocket
+      attr_accessor streaming_id: ::String
       SENSITIVE: []
     end
 
@@ -9784,6 +9795,12 @@ module Aws::Connect
 
     class WebNotificationSource
       attr_accessor source_campaign: Types::SourceCampaign
+      SENSITIVE: []
+    end
+
+    class Websocket
+      attr_accessor url: ::String
+      attr_accessor connection_expiry: ::String
       SENSITIVE: []
     end
 

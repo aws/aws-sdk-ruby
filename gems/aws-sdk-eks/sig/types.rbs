@@ -167,6 +167,7 @@ module Aws::EKS
       attr_accessor aws_idc: Types::ArgoCdAwsIdcConfigRequest
       attr_accessor rbac_role_mappings: ::Array[Types::ArgoCdRoleMapping]
       attr_accessor network_access: Types::ArgoCdNetworkAccessConfigRequest
+      attr_accessor endpoint_prefix: ::String
       SENSITIVE: []
     end
 
@@ -176,6 +177,7 @@ module Aws::EKS
       attr_accessor rbac_role_mappings: ::Array[Types::ArgoCdRoleMapping]
       attr_accessor network_access: Types::ArgoCdNetworkAccessConfigResponse
       attr_accessor server_url: ::String
+      attr_accessor endpoint_prefix: ::String
       SENSITIVE: []
     end
 

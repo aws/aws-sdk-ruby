@@ -1306,6 +1306,7 @@ module Aws::EKS
     #         network_access: {
     #           vpce_ids: ["String"],
     #         },
+    #         endpoint_prefix: "ArgoCdEndpointPrefix",
     #       },
     #     },
     #     tags: {
@@ -1335,6 +1336,7 @@ module Aws::EKS
     #   resp.capability.configuration.argo_cd.network_access.vpce_ids #=> Array
     #   resp.capability.configuration.argo_cd.network_access.vpce_ids[0] #=> String
     #   resp.capability.configuration.argo_cd.server_url #=> String
+    #   resp.capability.configuration.argo_cd.endpoint_prefix #=> String
     #   resp.capability.tags #=> Hash
     #   resp.capability.tags["TagKey"] #=> String
     #   resp.capability.health.issues #=> Array
@@ -2861,6 +2863,7 @@ module Aws::EKS
     #   resp.capability.configuration.argo_cd.network_access.vpce_ids #=> Array
     #   resp.capability.configuration.argo_cd.network_access.vpce_ids[0] #=> String
     #   resp.capability.configuration.argo_cd.server_url #=> String
+    #   resp.capability.configuration.argo_cd.endpoint_prefix #=> String
     #   resp.capability.tags #=> Hash
     #   resp.capability.tags["TagKey"] #=> String
     #   resp.capability.health.issues #=> Array
@@ -3763,6 +3766,7 @@ module Aws::EKS
     #   resp.capability.configuration.argo_cd.network_access.vpce_ids #=> Array
     #   resp.capability.configuration.argo_cd.network_access.vpce_ids[0] #=> String
     #   resp.capability.configuration.argo_cd.server_url #=> String
+    #   resp.capability.configuration.argo_cd.endpoint_prefix #=> String
     #   resp.capability.tags #=> Hash
     #   resp.capability.tags["TagKey"] #=> String
     #   resp.capability.health.issues #=> Array
@@ -7104,7 +7108,7 @@ module Aws::EKS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.178.0'
+      context[:gem_version] = '1.179.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1871,6 +1871,7 @@ module Aws::EC2
       attr_accessor status: Types::ClientVpnConnectionStatus
       attr_accessor connection_end_time: ::String
       attr_accessor posture_compliance_statuses: ::Array[::String]
+      attr_accessor authorization_policy_last_evaluated_time: ::String
       SENSITIVE: []
     end
 
@@ -1909,6 +1910,7 @@ module Aws::EC2
       attr_accessor endpoint_ip_address_type: ("ipv4" | "ipv6" | "dual-stack")
       attr_accessor traffic_ip_address_type: ("ipv4" | "ipv6" | "dual-stack")
       attr_accessor transit_gateway_configuration: Types::TransitGatewayConfigurationDescribeEndpointStructure
+      attr_accessor device_posture_options: Types::DevicePostureResponseOptions
       SENSITIVE: []
     end
 
@@ -1939,6 +1941,20 @@ module Aws::EC2
     class ClientVpnRouteStatus
       attr_accessor code: ("creating" | "active" | "failed" | "deleting")
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ClientVpnTrustProvider
+      attr_accessor trust_provider_type: ("crowdstrike" | "jamf" | "jumpcloud")
+      attr_accessor tenant_id: ::String
+      attr_accessor public_signing_key_url: ::String
+      SENSITIVE: []
+    end
+
+    class ClientVpnTrustProviderRequest
+      attr_accessor trust_provider_type: ("crowdstrike" | "jamf" | "jumpcloud")
+      attr_accessor tenant_id: ::String
+      attr_accessor public_signing_key_url: ::String
       SENSITIVE: []
     end
 
@@ -2003,6 +2019,7 @@ module Aws::EC2
       attr_accessor enabled: bool
       attr_accessor cloudwatch_log_group: ::String
       attr_accessor cloudwatch_log_stream: ::String
+      attr_accessor include_authorization_policy_context: bool
       SENSITIVE: []
     end
 
@@ -2010,6 +2027,7 @@ module Aws::EC2
       attr_accessor enabled: bool
       attr_accessor cloudwatch_log_group: ::String
       attr_accessor cloudwatch_log_stream: ::String
+      attr_accessor include_authorization_policy_context: bool
       SENSITIVE: []
     end
 
@@ -2348,6 +2366,7 @@ module Aws::EC2
       attr_accessor endpoint_ip_address_type: ("ipv4" | "ipv6" | "dual-stack")
       attr_accessor traffic_ip_address_type: ("ipv4" | "ipv6" | "dual-stack")
       attr_accessor transit_gateway_configuration: Types::TransitGatewayConfigurationInputStructure
+      attr_accessor device_posture_options: Types::DevicePostureOptions
       SENSITIVE: []
     end
 
@@ -2690,7 +2709,7 @@ module Aws::EC2
     class CreateIpamInternetRegistryAssociationRequest
       attr_accessor dry_run: bool
       attr_accessor ipam_id: ::String
-      attr_accessor rir: ("ripe" | "apnic" | "arin" | "lacnic")
+      attr_accessor rir: ("ripe" | "apnic" | "arin" | "lacnic" | "nicbr")
       attr_accessor organization_handle: ::String
       attr_accessor description: ::String
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
@@ -4204,6 +4223,17 @@ module Aws::EC2
 
     class DeleteCarrierGatewayResult
       attr_accessor carrier_gateway: Types::CarrierGateway
+      SENSITIVE: []
+    end
+
+    class DeleteClientVpnEndpointAuthorizationPolicyRequest
+      attr_accessor client_vpn_endpoint_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DeleteClientVpnEndpointAuthorizationPolicyResult
+      attr_accessor status: ("creating" | "updating" | "active" | "failed" | "deleting")
       SENSITIVE: []
     end
 
@@ -8346,6 +8376,17 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DevicePostureOptions
+      attr_accessor trust_providers: ::Array[Types::ClientVpnTrustProviderRequest]
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class DevicePostureResponseOptions
+      attr_accessor trust_providers: ::Array[Types::ClientVpnTrustProvider]
+      SENSITIVE: []
+    end
+
     class DhcpConfiguration
       attr_accessor key: ::String
       attr_accessor values: ::Array[Types::AttributeValue]
@@ -10168,6 +10209,21 @@ module Aws::EC2
       attr_accessor interruptible: bool
       attr_accessor interruptible_capacity_allocation: Types::InterruptibleCapacityAllocation
       attr_accessor interruption_info: Types::InterruptionInfo
+      SENSITIVE: []
+    end
+
+    class GetClientVpnEndpointAuthorizationPolicyRequest
+      attr_accessor client_vpn_endpoint_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetClientVpnEndpointAuthorizationPolicyResult
+      attr_accessor client_vpn_endpoint_id: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor description: ::String
+      attr_accessor shadow_mode: ("enabled" | "disabled")
+      attr_accessor status: ("creating" | "updating" | "active" | "failed" | "deleting")
       SENSITIVE: []
     end
 
@@ -12638,10 +12694,10 @@ module Aws::EC2
       attr_accessor ipam_internet_registry_association_arn: ::String
       attr_accessor ipam_id: ::String
       attr_accessor ipam_region: ::String
-      attr_accessor rir: ("ripe" | "apnic" | "arin" | "lacnic")
+      attr_accessor rir: ("ripe" | "apnic" | "arin" | "lacnic" | "nicbr")
       attr_accessor organization_handle: ::String
       attr_accessor description: ::String
-      attr_accessor state: ("pending-enable" | "create-in-progress" | "create-failed" | "enable-in-progress" | "enable-complete" | "enable-failed" | "delete-in-progress" | "delete-complete" | "delete-failed")
+      attr_accessor state: ("pending-enable" | "create-in-progress" | "create-failed" | "enable-in-progress" | "enable-complete" | "enable-failed" | "disable-in-progress" | "disable-complete" | "disable-failed" | "delete-in-progress" | "delete-complete" | "delete-failed")
       attr_accessor state_message: ::String
       attr_accessor child_request_xml: ::String
       attr_accessor tags: ::Array[Types::Tag]
@@ -13993,6 +14049,21 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class ModifyClientVpnEndpointAuthorizationPolicyRequest
+      attr_accessor client_vpn_endpoint_id: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor description: ::String
+      attr_accessor shadow_mode: ("enabled" | "disabled")
+      attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ModifyClientVpnEndpointAuthorizationPolicyResult
+      attr_accessor status: ("creating" | "updating" | "active" | "failed" | "deleting")
+      SENSITIVE: []
+    end
+
     class ModifyClientVpnEndpointRequest
       attr_accessor client_vpn_endpoint_id: ::String
       attr_accessor server_certificate_arn: ::String
@@ -14011,6 +14082,7 @@ module Aws::EC2
       attr_accessor client_route_enforcement_options: Types::ClientRouteEnforcementOptions
       attr_accessor disconnect_on_session_timeout: bool
       attr_accessor transit_gateway_configuration: Types::TransitGatewayConfigurationInputStructure
+      attr_accessor device_posture_options: Types::DevicePostureOptions
       SENSITIVE: []
     end
 

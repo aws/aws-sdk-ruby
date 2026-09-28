@@ -2987,9 +2987,15 @@ module Aws::SSM
     #   with shared parameters][1] in the *Amazon Web Services Systems
     #   Manager User Guide*.
     #
+    # * `Document` – Shares the document using Resource Access Manager
+    #   (RAM). For more information about sharing documents, see [Sharing
+    #   Systems Manager documents][2] in the *Amazon Web Services Systems
+    #   Manager User Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html
+    # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-ssm-sharing.html
     #
     # @option params [required, String] :resource_arn
     #   Amazon Resource Name (ARN) of the resource to which the policies are
@@ -3002,6 +3008,17 @@ module Aws::SSM
     #   ID of the current policy version. The hash helps to prevent multiple
     #   calls from attempting to overwrite a policy.
     #
+    # @option params [String] :deletion_mode
+    #   Specifies the intended outcome of the operation. Applies only to the
+    #   `Document` resource type. The operation ignores this parameter for
+    #   other resource types. Optional. Defaults to `RemoveSharing`.
+    #
+    #   * `RemoveSharing` – Deletes the resource policy and removes sharing of
+    #     the document.
+    #
+    #   * `RollbackMigration` – Reverts the document to Custom sharing,
+    #     preserving existing consumer access, instead of removing the policy.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3010,6 +3027,7 @@ module Aws::SSM
     #     resource_arn: "ResourceArnString", # required
     #     policy_id: "PolicyId", # required
     #     policy_hash: "PolicyHash", # required
+    #     deletion_mode: "RemoveSharing", # accepts RemoveSharing, RollbackMigration
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourcePolicy AWS API Documentation
@@ -10207,6 +10225,22 @@ module Aws::SSM
     #    For more information, see [Sharing a parameter][6] in the *Amazon
     #   Web Services Systems Manager User Guide*
     #
+    # * `Document` – Shares the document using Resource Access Manager
+    #   (RAM). For more information about sharing documents, see [Sharing
+    #   Systems Manager documents][7] in the *Amazon Web Services Systems
+    #   Manager User Guide*.
+    #
+    # While you can share a document using the Systems Manager
+    # `PutResourcePolicy` operation, we recommend using Resource Access
+    # Manager (RAM) instead. Using `PutResourcePolicy` requires an extra
+    # step. You must promote the document to a standard RAM Resource Share
+    # using the RAM [PromoteResourceShareCreatedFromPolicy][4] API
+    # operation. Otherwise, the Systems Manager [ListDocuments][8] API
+    # operation won't return the document when filtering for shared
+    # documents. The Amazon Web Services Config
+    # [PutRemediationConfigurations][9] API operation also can't use the
+    # document.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
@@ -10215,6 +10249,9 @@ module Aws::SSM
     # [4]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
     # [5]: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeParameters.html
     # [6]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html#share
+    # [7]: https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-ssm-sharing.html
+    # [8]: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListDocuments.html
+    # [9]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutRemediationConfigurations.html
     #
     # @option params [required, String] :resource_arn
     #   Amazon Resource Name (ARN) of the resource to which you want to attach
@@ -12560,8 +12597,8 @@ module Aws::SSM
     #    </note>
     #
     # @option params [String] :document_format
-    #   Specify the document format for the new document version. Systems
-    #   Manager supports JSON and YAML documents. JSON is the default format.
+    #   Specify the document format for the new document version. The document
+    #   format can be JSON, YAML, or TEXT. JSON is the default format.
     #
     # @option params [String] :target_type
     #   Specify a new target type for the document.
@@ -14040,7 +14077,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.222.0'
+      context[:gem_version] = '1.223.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

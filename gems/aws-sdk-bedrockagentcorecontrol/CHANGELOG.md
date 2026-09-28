@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2026-09-28)
+------------------
+
+* Feature - Amazon Bedrock AgentCore Gateway now supports returning the complete MCP tools list in a single response by disabling pagination for the tools list operation. This feature is available in limited preview.
+
 1.75.0 (2026-09-25)
 ------------------
 

@@ -4455,6 +4455,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.aws_api_call_action.service_name #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_account_details.account_id #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_account_details.affiliated #=> Boolean
+    #   resp.findings[0].service.action.aws_api_call_action.remote_account_details.aws_service_name #=> String
     #   resp.findings[0].service.action.aws_api_call_action.affected_resources #=> Hash
     #   resp.findings[0].service.action.aws_api_call_action.affected_resources["String"] #=> String
     #   resp.findings[0].service.action.dns_request_action.domain #=> String
@@ -9735,7 +9736,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.163.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

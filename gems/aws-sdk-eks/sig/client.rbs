@@ -236,7 +236,8 @@ module Aws
                                    ]?,
                                    network_access: {
                                      vpce_ids: Array[::String]?
-                                   }?
+                                   }?,
+                                   endpoint_prefix: ::String?
                                  }?
                                },
                                ?tags: Hash[::String, ::String],

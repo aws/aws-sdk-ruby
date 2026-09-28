@@ -108,6 +108,7 @@ module Aws::SecurityAgent
     Category = Shapes::StructureShape.new(name: 'Category')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
     CertificateChain = Shapes::StringShape.new(name: 'CertificateChain')
+    CiCdConfiguration = Shapes::StructureShape.new(name: 'CiCdConfiguration')
     CleanUpStrategy = Shapes::StringShape.new(name: 'CleanUpStrategy')
     CloudWatchLog = Shapes::StructureShape.new(name: 'CloudWatchLog')
     CodeLocation = Shapes::StructureShape.new(name: 'CodeLocation')
@@ -383,6 +384,10 @@ module Aws::SecurityAgent
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3BucketArns = Shapes::ListShape.new(name: 'S3BucketArns')
+    ScopeChange = Shapes::StructureShape.new(name: 'ScopeChange')
+    ScopeChangeList = Shapes::ListShape.new(name: 'ScopeChangeList')
+    ScopeDecision = Shapes::StringShape.new(name: 'ScopeDecision')
+    ScopeResult = Shapes::StructureShape.new(name: 'ScopeResult')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecretArns = Shapes::ListShape.new(name: 'SecretArns')
     SecurityGroupArn = Shapes::StringShape.new(name: 'SecurityGroupArn')
@@ -868,6 +873,9 @@ module Aws::SecurityAgent
 
     CategoryList.member = Shapes::ShapeRef.new(shape: Category)
 
+    CiCdConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    CiCdConfiguration.struct_class = Types::CiCdConfiguration
+
     CloudWatchLog.add_member(:log_group, Shapes::ShapeRef.new(shape: String, location_name: "logGroup"))
     CloudWatchLog.add_member(:log_stream, Shapes::ShapeRef.new(shape: String, location_name: "logStream"))
     CloudWatchLog.struct_class = Types::CloudWatchLog
@@ -1107,6 +1115,7 @@ module Aws::SecurityAgent
     CreatePentestInput.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     CreatePentestInput.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "reportDestination"))
     CreatePentestInput.add_member(:report_filters, Shapes::ShapeRef.new(shape: ReportFilters, location_name: "reportFilters"))
+    CreatePentestInput.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
     CreatePentestInput.struct_class = Types::CreatePentestInput
 
     CreatePentestOutput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestId"))
@@ -1120,6 +1129,7 @@ module Aws::SecurityAgent
     CreatePentestOutput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, location_name: "agentSpaceId"))
     CreatePentestOutput.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "reportDestination"))
     CreatePentestOutput.add_member(:report_filters, Shapes::ShapeRef.new(shape: ReportFilters, location_name: "reportFilters"))
+    CreatePentestOutput.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
     CreatePentestOutput.struct_class = Types::CreatePentestOutput
 
     CreatePrivateConnectionInput.add_member(:private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, required: true, location_name: "privateConnectionName"))
@@ -1767,6 +1777,7 @@ module Aws::SecurityAgent
     ListPentestJobsForPentestInput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pentestId"))
     ListPentestJobsForPentestInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
     ListPentestJobsForPentestInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPentestJobsForPentestInput.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
     ListPentestJobsForPentestInput.struct_class = Types::ListPentestJobsForPentestInput
 
     ListPentestJobsForPentestOutput.add_member(:pentest_job_summaries, Shapes::ShapeRef.new(shape: PentestJobSummaryList, location_name: "pentestJobSummaries"))
@@ -1923,6 +1934,7 @@ module Aws::SecurityAgent
     Pentest.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     Pentest.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "reportDestination"))
     Pentest.add_member(:report_filters, Shapes::ShapeRef.new(shape: ReportFilters, location_name: "reportFilters"))
+    Pentest.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
     Pentest.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     Pentest.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     Pentest.struct_class = Types::Pentest
@@ -1957,6 +1969,10 @@ module Aws::SecurityAgent
     PentestJob.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
     PentestJob.add_member(:selected_finding_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "selectedFindingIds"))
     PentestJob.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "reportDestination"))
+    PentestJob.add_member(:report_url, Shapes::ShapeRef.new(shape: String, location_name: "reportUrl"))
+    PentestJob.add_member(:scope_result, Shapes::ShapeRef.new(shape: ScopeResult, location_name: "scopeResult"))
+    PentestJob.add_member(:scope_changes, Shapes::ShapeRef.new(shape: ScopeChangeList, location_name: "scopeChanges"))
+    PentestJob.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
     PentestJob.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     PentestJob.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     PentestJob.struct_class = Types::PentestJob
@@ -1971,6 +1987,8 @@ module Aws::SecurityAgent
     PentestJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
     PentestJobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     PentestJobSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    PentestJobSummary.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
+    PentestJobSummary.add_member(:report_url, Shapes::ShapeRef.new(shape: String, location_name: "reportUrl"))
     PentestJobSummary.struct_class = Types::PentestJobSummary
 
     PentestJobSummaryList.member = Shapes::ShapeRef.new(shape: PentestJobSummary)
@@ -2068,6 +2086,19 @@ module Aws::SecurityAgent
 
     S3BucketArns.member = Shapes::ShapeRef.new(shape: S3BucketArn)
 
+    ScopeChange.add_member(:integration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "integrationId"))
+    ScopeChange.add_member(:provider_resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "providerResourceId"))
+    ScopeChange.add_member(:base_commit_sha, Shapes::ShapeRef.new(shape: String, location_name: "baseCommitSha"))
+    ScopeChange.add_member(:head_commit_sha, Shapes::ShapeRef.new(shape: String, required: true, location_name: "headCommitSha"))
+    ScopeChange.add_member(:trigger_run_id, Shapes::ShapeRef.new(shape: String, location_name: "triggerRunId"))
+    ScopeChange.struct_class = Types::ScopeChange
+
+    ScopeChangeList.member = Shapes::ShapeRef.new(shape: ScopeChange)
+
+    ScopeResult.add_member(:decision, Shapes::ShapeRef.new(shape: ScopeDecision, required: true, location_name: "decision"))
+    ScopeResult.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
+    ScopeResult.struct_class = Types::ScopeResult
+
     SecretArns.member = Shapes::ShapeRef.new(shape: SecretArn)
 
     SecurityGroupArns.member = Shapes::ShapeRef.new(shape: SecurityGroupArn)
@@ -2153,6 +2184,7 @@ module Aws::SecurityAgent
     StartPentestJobInput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pentestId"))
     StartPentestJobInput.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
     StartPentestJobInput.add_member(:selected_finding_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "selectedFindingIds"))
+    StartPentestJobInput.add_member(:scope_changes, Shapes::ShapeRef.new(shape: ScopeChangeList, location_name: "scopeChanges"))
     StartPentestJobInput.struct_class = Types::StartPentestJobInput
 
     StartPentestJobOutput.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
@@ -2520,6 +2552,7 @@ module Aws::SecurityAgent
     UpdatePentestInput.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
     UpdatePentestInput.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "reportDestination"))
     UpdatePentestInput.add_member(:report_filters, Shapes::ShapeRef.new(shape: ReportFilters, location_name: "reportFilters"))
+    UpdatePentestInput.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
     UpdatePentestInput.struct_class = Types::UpdatePentestInput
 
     UpdatePentestOutput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestId"))
@@ -2533,6 +2566,7 @@ module Aws::SecurityAgent
     UpdatePentestOutput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, location_name: "agentSpaceId"))
     UpdatePentestOutput.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "reportDestination"))
     UpdatePentestOutput.add_member(:report_filters, Shapes::ShapeRef.new(shape: ReportFilters, location_name: "reportFilters"))
+    UpdatePentestOutput.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
     UpdatePentestOutput.struct_class = Types::UpdatePentestOutput
 
     UpdatePrivateConnectionCertificateInput.add_member(:private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, required: true, location_name: "privateConnectionName"))

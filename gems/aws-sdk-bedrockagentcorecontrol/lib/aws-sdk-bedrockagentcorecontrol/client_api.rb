@@ -4691,6 +4691,7 @@ module Aws::BedrockAgentCoreControl
     MCPGatewayConfiguration.add_member(:search_type, Shapes::ShapeRef.new(shape: SearchType, location_name: "searchType"))
     MCPGatewayConfiguration.add_member(:session_configuration, Shapes::ShapeRef.new(shape: SessionConfiguration, location_name: "sessionConfiguration"))
     MCPGatewayConfiguration.add_member(:streaming_configuration, Shapes::ShapeRef.new(shape: StreamingConfiguration, location_name: "streamingConfiguration"))
+    MCPGatewayConfiguration.add_member(:disable_mcp_list_tools_pagination, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableMcpListToolsPagination"))
     MCPGatewayConfiguration.struct_class = Types::MCPGatewayConfiguration
 
     ManagedResourceDetails.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, location_name: "domain"))

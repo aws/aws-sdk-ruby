@@ -98,6 +98,15 @@ module Aws
                              ?approval_configuration: {
                                auto_approval_rules: Array[("APPROVE_ALL")]?
                              },
+                             ?custom_metadata_schema_configuration: {
+                               default_schema: ::String?,
+                               record_type_schema_overrides: Array[
+                                 {
+                                   record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY"),
+                                   schema: ::String
+                                 }
+                               ]?
+                             },
                              ?auto_detection_configuration: {
                                scope: ("ORGANIZATION"),
                                enabled: bool
@@ -160,6 +169,8 @@ module Aws
                                     ?provenance: Array[
                                       Params::provenance
                                     ],
+                                    ?custom_metadata: {
+                                    },
                                     ?tags: Hash[::String, ::String]
                                   ) -> _CreateRegistryRecordResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRegistryRecordResponseSuccess
@@ -193,6 +204,7 @@ module Aws
         def discovery_configuration: () -> Types::DiscoveryConfiguration
         def encryption_configuration: () -> Types::EncryptionConfiguration
         def approval_configuration: () -> Types::ApprovalConfiguration
+        def custom_metadata_schema_configuration: () -> Types::CustomMetadataSchemaConfiguration
         def status: () -> ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
         def status_reason: () -> ::String
         def auto_detection: () -> Types::AutoDetection
@@ -223,6 +235,8 @@ module Aws
         def provenance: () -> ::Array[Types::Provenance]
         def created_by_auto_detection: () -> bool
         def created_by: () -> ::String
+        def custom_metadata: () -> untyped
+        def custom_metadata_schema_compliance_status: () -> ("COMPLIANT" | "NON_COMPLIANT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#get_registry_record-instance_method
       def get_registry_record: (
@@ -322,6 +336,7 @@ module Aws
         def discovery_configuration: () -> Types::DiscoveryConfiguration
         def encryption_configuration: () -> Types::EncryptionConfiguration
         def approval_configuration: () -> Types::ApprovalConfiguration
+        def custom_metadata_schema_configuration: () -> Types::CustomMetadataSchemaConfiguration
         def status: () -> ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
         def status_reason: () -> ::String
         def auto_detection: () -> Types::AutoDetection
@@ -343,6 +358,17 @@ module Aws
                              ?approval_configuration: {
                                optional_value: {
                                  auto_approval_rules: Array[("APPROVE_ALL")]?
+                               }?
+                             },
+                             ?custom_metadata_schema_configuration: {
+                               optional_value: {
+                                 default_schema: ::String?,
+                                 record_type_schema_overrides: Array[
+                                   {
+                                     record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY"),
+                                     schema: ::String
+                                   }
+                                 ]?
                                }?
                              },
                              ?auto_detection_configuration: {
@@ -372,6 +398,8 @@ module Aws
         def provenance: () -> ::Array[Types::Provenance]
         def created_by_auto_detection: () -> bool
         def created_by: () -> ::String
+        def custom_metadata: () -> untyped
+        def custom_metadata_schema_compliance_status: () -> ("COMPLIANT" | "NON_COMPLIANT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#update_registry_record-instance_method
       def update_registry_record: (
@@ -468,6 +496,10 @@ module Aws
                                       }?
                                     },
                                     ?record_version: ::String,
+                                    ?custom_metadata: {
+                                      optional_value: {
+                                      }?
+                                    },
                                     ?trigger_synchronization: bool,
                                     ?provenance: Array[
                                       Params::provenance

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2026-09-28)
+------------------
+
+* Feature - Run automated penetration tests directly from your CI-CD pipeline to scan code changes before they ship, gating deployments on the findings
+
 1.17.0 (2026-09-25)
 ------------------
 

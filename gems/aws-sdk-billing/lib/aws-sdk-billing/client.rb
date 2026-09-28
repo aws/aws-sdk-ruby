@@ -1461,16 +1461,158 @@ module Aws::Billing
       req.send_request(options)
     end
 
+    # Returns Business Support charges broken down at the linked account
+    # level for a given billing month.
+    #
+    # @option params [required, String] :billing_month
+    #   The billing month to retrieve Business Support charges for, in YYYY-MM
+    #   format. You can request the current month (charges will be estimated)
+    #   or a past month (charges will be finalized).
+    #
+    # @option params [String] :account_id
+    #   The linked account ID to filter results to a specific account. If you
+    #   don't specify a value, the response includes charges for all linked
+    #   accounts.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. Default is 100.
+    #
+    # @option params [String] :next_token
+    #   The pagination token for the next page of results.
+    #
+    # @return [Types::ListBusinessSupportAccountChargesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBusinessSupportAccountChargesResponse#billing_month #billing_month} => String
+    #   * {Types::ListBusinessSupportAccountChargesResponse#is_estimated #is_estimated} => Boolean
+    #   * {Types::ListBusinessSupportAccountChargesResponse#total_support_charge #total_support_charge} => String
+    #   * {Types::ListBusinessSupportAccountChargesResponse#total_support_eligible_spend #total_support_eligible_spend} => String
+    #   * {Types::ListBusinessSupportAccountChargesResponse#account_count #account_count} => Integer
+    #   * {Types::ListBusinessSupportAccountChargesResponse#account_charges #account_charges} => Array&lt;Types::BusinessSupportAccountCharge&gt;
+    #   * {Types::ListBusinessSupportAccountChargesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_business_support_account_charges({
+    #     billing_month: "BusinessSupportBillingMonth", # required
+    #     account_id: "AccountId",
+    #     max_results: 1,
+    #     next_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.billing_month #=> String
+    #   resp.is_estimated #=> Boolean
+    #   resp.total_support_charge #=> String
+    #   resp.total_support_eligible_spend #=> String
+    #   resp.account_count #=> Integer
+    #   resp.account_charges #=> Array
+    #   resp.account_charges[0].account_id #=> String
+    #   resp.account_charges[0].support_plan_name #=> String
+    #   resp.account_charges[0].total_charge #=> String
+    #   resp.account_charges[0].total_usage_basis #=> String
+    #   resp.account_charges[0].tier_charges #=> Array
+    #   resp.account_charges[0].tier_charges[0].tier_description #=> String
+    #   resp.account_charges[0].tier_charges[0].tier_rate #=> String
+    #   resp.account_charges[0].tier_charges[0].usage_slice #=> String
+    #   resp.account_charges[0].tier_charges[0].tier_charge #=> String
+    #   resp.account_charges[0].tier_charges[0].charge_period_start_date #=> Time
+    #   resp.account_charges[0].tier_charges[0].charge_period_end_date #=> Time
+    #   resp.account_charges[0].support_discount.discount_amount #=> String
+    #   resp.account_charges[0].support_discount.discount_percentage #=> String
+    #   resp.account_charges[0].support_discount.discount_type #=> String
+    #   resp.account_charges[0].support_discount.discount_source #=> String
+    #   resp.account_charges[0].support_eligible_spend_by_service #=> Array
+    #   resp.account_charges[0].support_eligible_spend_by_service[0].contributing_service #=> String
+    #   resp.account_charges[0].support_eligible_spend_by_service[0].item_type #=> String
+    #   resp.account_charges[0].support_eligible_spend_by_service[0].description #=> String
+    #   resp.account_charges[0].support_eligible_spend_by_service[0].charge_amount #=> String
+    #   resp.account_charges[0].support_eligible_spend_by_service[0].currency #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBusinessSupportAccountCharges AWS API Documentation
+    #
+    # @overload list_business_support_account_charges(params = {})
+    # @param [Hash] params ({})
+    def list_business_support_account_charges(params = {}, options = {})
+      req = build_request(:list_business_support_account_charges, params)
+      req.send_request(options)
+    end
+
+    # Returns the history of Business Support subscription contracts across
+    # accounts.
+    #
+    # @option params [String] :billing_month
+    #   The billing month to retrieve subscription contracts for, in YYYY-MM
+    #   format. If you don't specify a value, defaults to the current month.
+    #
+    # @option params [String] :account_id
+    #   The account ID to filter results to a specific account. If you don't
+    #   specify a value, the response includes subscription history for all
+    #   accounts.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_date
+    #   The start date to filter subscription contracts from.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
+    #   The end date to filter subscription contracts to.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. Default is 100.
+    #
+    # @option params [String] :next_token
+    #   The pagination token for the next page of results.
+    #
+    # @return [Types::ListBusinessSupportSubscriptionHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBusinessSupportSubscriptionHistoryResponse#subscription_contracts #subscription_contracts} => Array&lt;Types::BusinessSupportSubscriptionContract&gt;
+    #   * {Types::ListBusinessSupportSubscriptionHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_business_support_subscription_history({
+    #     billing_month: "BusinessSupportBillingMonth",
+    #     account_id: "AccountId",
+    #     start_date: Time.now,
+    #     end_date: Time.now,
+    #     max_results: 1,
+    #     next_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscription_contracts #=> Array
+    #   resp.subscription_contracts[0].account_id #=> String
+    #   resp.subscription_contracts[0].plan_name #=> String
+    #   resp.subscription_contracts[0].contract_start_date #=> Time
+    #   resp.subscription_contracts[0].contract_end_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBusinessSupportSubscriptionHistory AWS API Documentation
+    #
+    # @overload list_business_support_subscription_history(params = {})
+    # @param [Hash] params ({})
+    def list_business_support_subscription_history(params = {}, options = {})
+      req = build_request(:list_business_support_subscription_history, params)
+      req.send_request(options)
+    end
+
     # Returns Support-eligible spend broken down at linked account level.
     #
     # @option params [required, String] :billing_month
     #   The billing month in YYYY-MM format. This must be a month in the past.
     #
     # @option params [String] :account_id
-    #   An optional linked account ID to filter results to a specific account.
+    #   The linked account ID to filter results to a specific account. If you
+    #   don't specify a value, the response includes charges for all linked
+    #   accounts.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. Default is 100.
     #
     # @option params [String] :next_token
     #   The pagination token for the next page of results.
@@ -1898,7 +2040,7 @@ module Aws::Billing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billing'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

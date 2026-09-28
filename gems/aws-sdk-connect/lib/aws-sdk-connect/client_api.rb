@@ -287,7 +287,10 @@ module Aws::Connect
     Conditions = Shapes::ListShape.new(name: 'Conditions')
     ConfigurableNotificationPriority = Shapes::StringShape.new(name: 'ConfigurableNotificationPriority')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionCredentials = Shapes::StructureShape.new(name: 'ConnectionCredentials')
     ConnectionData = Shapes::StructureShape.new(name: 'ConnectionData')
+    ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
+    ConnectionTypeList = Shapes::ListShape.new(name: 'ConnectionTypeList')
     Contact = Shapes::StructureShape.new(name: 'Contact')
     ContactAnalysis = Shapes::StructureShape.new(name: 'ContactAnalysis')
     ContactAnalysisReference = Shapes::StructureShape.new(name: 'ContactAnalysisReference')
@@ -1538,6 +1541,7 @@ module Aws::Connect
     PreEvaluationFilterType = Shapes::StringShape.new(name: 'PreEvaluationFilterType')
     PreEvaluationFilters = Shapes::StructureShape.new(name: 'PreEvaluationFilters')
     PreSignedAttachmentUrl = Shapes::StringShape.new(name: 'PreSignedAttachmentUrl')
+    PreSignedConnectionUrl = Shapes::StringShape.new(name: 'PreSignedConnectionUrl')
     PredefinedAttribute = Shapes::StructureShape.new(name: 'PredefinedAttribute')
     PredefinedAttributeConfiguration = Shapes::StructureShape.new(name: 'PredefinedAttributeConfiguration')
     PredefinedAttributeName = Shapes::StringShape.new(name: 'PredefinedAttributeName')
@@ -2335,6 +2339,7 @@ module Aws::Connect
     WebNotificationContent = Shapes::StructureShape.new(name: 'WebNotificationContent')
     WebNotificationSource = Shapes::StructureShape.new(name: 'WebNotificationSource')
     WebSessionId = Shapes::StringShape.new(name: 'WebSessionId')
+    Websocket = Shapes::StructureShape.new(name: 'Websocket')
     WeekdayOccurrenceInteger = Shapes::IntegerShape.new(name: 'WeekdayOccurrenceInteger')
     WeekdayOccurrenceList = Shapes::ListShape.new(name: 'WeekdayOccurrenceList')
     WidgetDestination = Shapes::StructureShape.new(name: 'WidgetDestination')
@@ -3155,9 +3160,15 @@ module Aws::Connect
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
+    ConnectionCredentials.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, location_name: "ConnectionToken"))
+    ConnectionCredentials.add_member(:expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "Expiry"))
+    ConnectionCredentials.struct_class = Types::ConnectionCredentials
+
     ConnectionData.add_member(:attendee, Shapes::ShapeRef.new(shape: Attendee, location_name: "Attendee"))
     ConnectionData.add_member(:meeting, Shapes::ShapeRef.new(shape: Meeting, location_name: "Meeting"))
     ConnectionData.struct_class = Types::ConnectionData
+
+    ConnectionTypeList.member = Shapes::ShapeRef.new(shape: ConnectionType)
 
     Contact.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     Contact.add_member(:id, Shapes::ShapeRef.new(shape: ContactId, location_name: "Id"))
@@ -8813,12 +8824,17 @@ module Aws::Connect
     StartChatContactRequest.add_member(:segment_attributes, Shapes::ShapeRef.new(shape: SegmentAttributes, location_name: "SegmentAttributes"))
     StartChatContactRequest.add_member(:customer_id, Shapes::ShapeRef.new(shape: CustomerIdNonEmpty, location_name: "CustomerId"))
     StartChatContactRequest.add_member(:disconnect_on_customer_exit, Shapes::ShapeRef.new(shape: DisconnectOnCustomerExit, location_name: "DisconnectOnCustomerExit"))
+    StartChatContactRequest.add_member(:connection_types, Shapes::ShapeRef.new(shape: ConnectionTypeList, location_name: "ConnectionTypes"))
+    StartChatContactRequest.add_member(:chat_streaming_configuration, Shapes::ShapeRef.new(shape: ChatStreamingConfiguration, location_name: "ChatStreamingConfiguration"))
     StartChatContactRequest.struct_class = Types::StartChatContactRequest
 
     StartChatContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
     StartChatContactResponse.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ParticipantId"))
     StartChatContactResponse.add_member(:participant_token, Shapes::ShapeRef.new(shape: ParticipantToken, location_name: "ParticipantToken"))
     StartChatContactResponse.add_member(:continued_from_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContinuedFromContactId"))
+    StartChatContactResponse.add_member(:connection_credentials, Shapes::ShapeRef.new(shape: ConnectionCredentials, location_name: "ConnectionCredentials"))
+    StartChatContactResponse.add_member(:websocket, Shapes::ShapeRef.new(shape: Websocket, location_name: "Websocket"))
+    StartChatContactResponse.add_member(:streaming_id, Shapes::ShapeRef.new(shape: StreamingId, location_name: "StreamingId"))
     StartChatContactResponse.struct_class = Types::StartChatContactResponse
 
     StartContactConversationalAnalyticsJobRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -10228,6 +10244,10 @@ module Aws::Connect
 
     WebNotificationSource.add_member(:source_campaign, Shapes::ShapeRef.new(shape: SourceCampaign, required: true, location_name: "SourceCampaign"))
     WebNotificationSource.struct_class = Types::WebNotificationSource
+
+    Websocket.add_member(:url, Shapes::ShapeRef.new(shape: PreSignedConnectionUrl, location_name: "Url"))
+    Websocket.add_member(:connection_expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "ConnectionExpiry"))
+    Websocket.struct_class = Types::Websocket
 
     WeekdayOccurrenceList.member = Shapes::ShapeRef.new(shape: WeekdayOccurrenceInteger)
 
@@ -13432,6 +13452,12 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_evaluation_form_versions, Seahorse::Model::Operation.new.tap do |o|

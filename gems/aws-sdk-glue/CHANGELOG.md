@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.277.0 (2026-09-28)
+------------------
+
+* Feature - Added a new exception to several batch APIs
+
 1.276.0 (2026-09-25)
 ------------------
 

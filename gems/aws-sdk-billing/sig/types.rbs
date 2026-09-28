@@ -125,6 +125,52 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class BusinessSupportAccountCharge
+      attr_accessor account_id: ::String
+      attr_accessor support_plan_name: ::String
+      attr_accessor total_charge: ::String
+      attr_accessor total_usage_basis: ::String
+      attr_accessor tier_charges: ::Array[Types::BusinessSupportTierCharge]
+      attr_accessor support_discount: Types::BusinessSupportDiscount
+      attr_accessor support_eligible_spend_by_service: ::Array[Types::BusinessSupportServiceSpend]
+      SENSITIVE: []
+    end
+
+    class BusinessSupportDiscount
+      attr_accessor discount_amount: ::String
+      attr_accessor discount_percentage: ::String
+      attr_accessor discount_type: ::String
+      attr_accessor discount_source: ::String
+      SENSITIVE: []
+    end
+
+    class BusinessSupportServiceSpend
+      attr_accessor contributing_service: ::String
+      attr_accessor item_type: ::String
+      attr_accessor description: ::String
+      attr_accessor charge_amount: ::String
+      attr_accessor currency: ::String
+      SENSITIVE: []
+    end
+
+    class BusinessSupportSubscriptionContract
+      attr_accessor account_id: ::String
+      attr_accessor plan_name: ::String
+      attr_accessor contract_start_date: ::Time
+      attr_accessor contract_end_date: ::Time
+      SENSITIVE: []
+    end
+
+    class BusinessSupportTierCharge
+      attr_accessor tier_description: ::String
+      attr_accessor tier_rate: ::String
+      attr_accessor usage_slice: ::String
+      attr_accessor tier_charge: ::String
+      attr_accessor charge_period_start_date: ::Time
+      attr_accessor charge_period_end_date: ::Time
+      SENSITIVE: []
+    end
+
     class ChargeAccount
       attr_accessor account_id: ::String
       attr_accessor charge_percentage: ::String
@@ -403,6 +449,41 @@ module Aws::Billing
 
     class ListBillingViewsResponse
       attr_accessor billing_views: ::Array[Types::BillingViewListElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBusinessSupportAccountChargesRequest
+      attr_accessor billing_month: ::String
+      attr_accessor account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBusinessSupportAccountChargesResponse
+      attr_accessor billing_month: ::String
+      attr_accessor is_estimated: bool
+      attr_accessor total_support_charge: ::String
+      attr_accessor total_support_eligible_spend: ::String
+      attr_accessor account_count: ::Integer
+      attr_accessor account_charges: ::Array[Types::BusinessSupportAccountCharge]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBusinessSupportSubscriptionHistoryRequest
+      attr_accessor billing_month: ::String
+      attr_accessor account_id: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBusinessSupportSubscriptionHistoryResponse
+      attr_accessor subscription_contracts: ::Array[Types::BusinessSupportSubscriptionContract]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end

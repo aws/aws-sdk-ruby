@@ -7433,6 +7433,11 @@ module Aws::EC2
     #   instead of a VPC. You cannot specify both
     #   `TransitGatewayConfiguration` and `VpcId`/`SecurityGroupIds`.
     #
+    # @option params [Types::DevicePostureOptions] :device_posture_options
+    #   The device posture options for the Client VPN endpoint. Use this
+    #   parameter to specify the device trust providers that the endpoint uses
+    #   to evaluate the security posture of connecting devices.
+    #
     # @return [Types::CreateClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClientVpnEndpointResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
@@ -7463,6 +7468,7 @@ module Aws::EC2
     #       enabled: false,
     #       cloudwatch_log_group: "String",
     #       cloudwatch_log_stream: "String",
+    #       include_authorization_policy_context: false,
     #     },
     #     dns_servers: ["String"],
     #     transport_protocol: "tcp", # accepts tcp, udp
@@ -7504,6 +7510,16 @@ module Aws::EC2
     #       transit_gateway_id: "TransitGatewayId",
     #       availability_zones: ["AvailabilityZoneName"],
     #       availability_zone_ids: ["AvailabilityZoneId"],
+    #     },
+    #     device_posture_options: {
+    #       trust_providers: [
+    #         {
+    #           trust_provider_type: "crowdstrike", # accepts crowdstrike, jamf, jumpcloud
+    #           tenant_id: "String",
+    #           public_signing_key_url: "String",
+    #         },
+    #       ],
+    #       enabled: false,
     #     },
     #   })
     #
@@ -10285,7 +10301,7 @@ module Aws::EC2
     #   resp = client.create_ipam_internet_registry_association({
     #     dry_run: false,
     #     ipam_id: "IpamId", # required
-    #     rir: "ripe", # required, accepts ripe, apnic, arin, lacnic
+    #     rir: "ripe", # required, accepts ripe, apnic, arin, lacnic, nicbr
     #     organization_handle: "String", # required
     #     description: "String",
     #     tag_specifications: [
@@ -10309,10 +10325,10 @@ module Aws::EC2
     #   resp.ipam_internet_registry_association.ipam_internet_registry_association_arn #=> String
     #   resp.ipam_internet_registry_association.ipam_id #=> String
     #   resp.ipam_internet_registry_association.ipam_region #=> String
-    #   resp.ipam_internet_registry_association.rir #=> String, one of "ripe", "apnic", "arin", "lacnic"
+    #   resp.ipam_internet_registry_association.rir #=> String, one of "ripe", "apnic", "arin", "lacnic", "nicbr"
     #   resp.ipam_internet_registry_association.organization_handle #=> String
     #   resp.ipam_internet_registry_association.description #=> String
-    #   resp.ipam_internet_registry_association.state #=> String, one of "pending-enable", "create-in-progress", "create-failed", "enable-in-progress", "enable-complete", "enable-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_internet_registry_association.state #=> String, one of "pending-enable", "create-in-progress", "create-failed", "enable-in-progress", "enable-complete", "enable-failed", "disable-in-progress", "disable-complete", "disable-failed", "delete-in-progress", "delete-complete", "delete-failed"
     #   resp.ipam_internet_registry_association.state_message #=> String
     #   resp.ipam_internet_registry_association.child_request_xml #=> String
     #   resp.ipam_internet_registry_association.tags #=> Array
@@ -19649,7 +19665,14 @@ module Aws::EC2
     # @option params [String] :vpc_endpoint_type
     #   The type of endpoint.
     #
+    #   For more information about the types of VPC endpoints, see [VPC
+    #   endpoints][1] in the *Amazon Web Services PrivateLink User Guide*.
+    #
     #   Default: Gateway
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -19667,14 +19690,20 @@ module Aws::EC2
     #   (Gateway endpoint) The route table IDs.
     #
     # @option params [Array<String>] :subnet_ids
-    #   (Interface and Gateway Load Balancer endpoints) The IDs of the subnets
-    #   in which to create endpoint network interfaces. For a Gateway Load
-    #   Balancer endpoint, you can specify only one subnet.
+    #   (Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork,
+    #   and Tunnel endpoints only) The IDs of the subnets in which to create
+    #   endpoint network interfaces. For a Gateway Load Balancer endpoint, you
+    #   can specify only one subnet. For a `Tunnel` endpoint, the subnets must
+    #   be in the Availability Zones of the resource gateway associated with
+    #   the shared resource configuration. An endpoint network interface is
+    #   created only in an Availability Zone that the resource gateway is also
+    #   in.
     #
     # @option params [Array<String>] :security_group_ids
-    #   (Interface endpoint) The IDs of the security groups to associate with
-    #   the endpoint network interfaces. If this parameter is not specified,
-    #   we use the default security group for the VPC.
+    #   (Interface, Resource, ServiceNetwork, and Tunnel endpoints only) The
+    #   IDs of the security groups to associate with the endpoint network
+    #   interfaces. If this parameter is not specified, we use the default
+    #   security group for the VPC.
     #
     # @option params [String] :ip_address_type
     #   The IP address type for the endpoint.
@@ -19716,8 +19745,29 @@ module Aws::EC2
     #   associated with the VPC endpoint of type service-network.
     #
     # @option params [String] :resource_configuration_arn
-    #   The Amazon Resource Name (ARN) of a resource configuration that will
-    #   be associated with the VPC endpoint of type resource.
+    #   (Resource and Tunnel endpoints only) The Amazon Resource Name (ARN) of
+    #   a resource configuration associated with the VPC endpoint. The type of
+    #   resource configuration depends on the endpoint type:
+    #
+    #   * For a Resource endpoint, you can specify a resource configuration
+    #     that is of type `SINGLE`, `GROUP`, or `ARN`. To reach a resource
+    #     that belongs to a group, specify the parent `GROUP` resource
+    #     configuration.
+    #
+    #   * For a Tunnel endpoint, you can specify a resource configuration that
+    #     is of type `CIDR`.
+    #
+    #   For more information about the types of resource configurations, see
+    #   [Types of resource configurations][1] in the *Amazon Web Services
+    #   PrivateLink User Guide*.
+    #
+    #   This request fails if a VPC endpoint owned by a different Amazon Web
+    #   Services account already exists on a resource gateway that is enabled
+    #   for `ResourceGatewayCharges` payer responsibility.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/privatelink/resource-configuration.html
     #
     # @option params [String] :service_region
     #   The Region where the service is hosted. The default is the current
@@ -20812,6 +20862,41 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes the authorization policy for a Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteClientVpnEndpointAuthorizationPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteClientVpnEndpointAuthorizationPolicyResult#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_client_vpn_endpoint_authorization_policy({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "creating", "updating", "active", "failed", "deleting"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnEndpointAuthorizationPolicy AWS API Documentation
+    #
+    # @overload delete_client_vpn_endpoint_authorization_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_client_vpn_endpoint_authorization_policy(params = {}, options = {})
+      req = build_request(:delete_client_vpn_endpoint_authorization_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes a route from a Client VPN endpoint. You can only delete routes
     # that you manually added using the **CreateClientVpnRoute** action. You
     # cannot delete routes that were automatically added when associating a
@@ -21603,10 +21688,10 @@ module Aws::EC2
     #   resp.ipam_internet_registry_association.ipam_internet_registry_association_arn #=> String
     #   resp.ipam_internet_registry_association.ipam_id #=> String
     #   resp.ipam_internet_registry_association.ipam_region #=> String
-    #   resp.ipam_internet_registry_association.rir #=> String, one of "ripe", "apnic", "arin", "lacnic"
+    #   resp.ipam_internet_registry_association.rir #=> String, one of "ripe", "apnic", "arin", "lacnic", "nicbr"
     #   resp.ipam_internet_registry_association.organization_handle #=> String
     #   resp.ipam_internet_registry_association.description #=> String
-    #   resp.ipam_internet_registry_association.state #=> String, one of "pending-enable", "create-in-progress", "create-failed", "enable-in-progress", "enable-complete", "enable-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_internet_registry_association.state #=> String, one of "pending-enable", "create-in-progress", "create-failed", "enable-in-progress", "enable-complete", "enable-failed", "disable-in-progress", "disable-complete", "disable-failed", "delete-in-progress", "delete-complete", "delete-failed"
     #   resp.ipam_internet_registry_association.state_message #=> String
     #   resp.ipam_internet_registry_association.child_request_xml #=> String
     #   resp.ipam_internet_registry_association.tags #=> Array
@@ -28937,6 +29022,7 @@ module Aws::EC2
     #   resp.connections[0].connection_end_time #=> String
     #   resp.connections[0].posture_compliance_statuses #=> Array
     #   resp.connections[0].posture_compliance_statuses[0] #=> String
+    #   resp.connections[0].authorization_policy_last_evaluated_time #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnConnections AWS API Documentation
@@ -29026,6 +29112,7 @@ module Aws::EC2
     #   resp.client_vpn_endpoints[0].connection_log_options.enabled #=> Boolean
     #   resp.client_vpn_endpoints[0].connection_log_options.cloudwatch_log_group #=> String
     #   resp.client_vpn_endpoints[0].connection_log_options.cloudwatch_log_stream #=> String
+    #   resp.client_vpn_endpoints[0].connection_log_options.include_authorization_policy_context #=> Boolean
     #   resp.client_vpn_endpoints[0].tags #=> Array
     #   resp.client_vpn_endpoints[0].tags[0].key #=> String
     #   resp.client_vpn_endpoints[0].tags[0].value #=> String
@@ -29050,6 +29137,10 @@ module Aws::EC2
     #   resp.client_vpn_endpoints[0].transit_gateway_configuration.availability_zones[0] #=> String
     #   resp.client_vpn_endpoints[0].transit_gateway_configuration.availability_zone_ids #=> Array
     #   resp.client_vpn_endpoints[0].transit_gateway_configuration.availability_zone_ids[0] #=> String
+    #   resp.client_vpn_endpoints[0].device_posture_options.trust_providers #=> Array
+    #   resp.client_vpn_endpoints[0].device_posture_options.trust_providers[0].trust_provider_type #=> String, one of "crowdstrike", "jamf", "jumpcloud"
+    #   resp.client_vpn_endpoints[0].device_posture_options.trust_providers[0].tenant_id #=> String
+    #   resp.client_vpn_endpoints[0].device_posture_options.trust_providers[0].public_signing_key_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpoints AWS API Documentation
@@ -35464,10 +35555,10 @@ module Aws::EC2
     #   resp.ipam_internet_registry_associations[0].ipam_internet_registry_association_arn #=> String
     #   resp.ipam_internet_registry_associations[0].ipam_id #=> String
     #   resp.ipam_internet_registry_associations[0].ipam_region #=> String
-    #   resp.ipam_internet_registry_associations[0].rir #=> String, one of "ripe", "apnic", "arin", "lacnic"
+    #   resp.ipam_internet_registry_associations[0].rir #=> String, one of "ripe", "apnic", "arin", "lacnic", "nicbr"
     #   resp.ipam_internet_registry_associations[0].organization_handle #=> String
     #   resp.ipam_internet_registry_associations[0].description #=> String
-    #   resp.ipam_internet_registry_associations[0].state #=> String, one of "pending-enable", "create-in-progress", "create-failed", "enable-in-progress", "enable-complete", "enable-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_internet_registry_associations[0].state #=> String, one of "pending-enable", "create-in-progress", "create-failed", "enable-in-progress", "enable-complete", "enable-failed", "disable-in-progress", "disable-complete", "disable-failed", "delete-in-progress", "delete-complete", "delete-failed"
     #   resp.ipam_internet_registry_associations[0].state_message #=> String
     #   resp.ipam_internet_registry_associations[0].child_request_xml #=> String
     #   resp.ipam_internet_registry_associations[0].tags #=> Array
@@ -48883,8 +48974,8 @@ module Aws::EC2
     #     `deleted` \| `rejected` \| `failed`).
     #
     #   * `vpc-endpoint-type` - The type of VPC endpoint (`Interface` \|
-    #     `Gateway` \| `GatewayLoadBalancer` \| `Resource` \|
-    #     `ServiceNetwork`).
+    #     `Gateway` \| `GatewayLoadBalancer` \| `Resource` \| `ServiceNetwork`
+    #     \| `Tunnel`).
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. The request
@@ -53172,10 +53263,10 @@ module Aws::EC2
     #   resp.ipam_internet_registry_association.ipam_internet_registry_association_arn #=> String
     #   resp.ipam_internet_registry_association.ipam_id #=> String
     #   resp.ipam_internet_registry_association.ipam_region #=> String
-    #   resp.ipam_internet_registry_association.rir #=> String, one of "ripe", "apnic", "arin", "lacnic"
+    #   resp.ipam_internet_registry_association.rir #=> String, one of "ripe", "apnic", "arin", "lacnic", "nicbr"
     #   resp.ipam_internet_registry_association.organization_handle #=> String
     #   resp.ipam_internet_registry_association.description #=> String
-    #   resp.ipam_internet_registry_association.state #=> String, one of "pending-enable", "create-in-progress", "create-failed", "enable-in-progress", "enable-complete", "enable-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_internet_registry_association.state #=> String, one of "pending-enable", "create-in-progress", "create-failed", "enable-in-progress", "enable-complete", "enable-failed", "disable-in-progress", "disable-complete", "disable-failed", "delete-in-progress", "delete-complete", "delete-failed"
     #   resp.ipam_internet_registry_association.state_message #=> String
     #   resp.ipam_internet_registry_association.child_request_xml #=> String
     #   resp.ipam_internet_registry_association.tags #=> Array
@@ -54725,6 +54816,49 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_capacity_reservation_usage(params = {}, options = {})
       req = build_request(:get_capacity_reservation_usage, params)
+      req.send_request(options)
+    end
+
+    # Describes the authorization policy for a Client VPN endpoint.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetClientVpnEndpointAuthorizationPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetClientVpnEndpointAuthorizationPolicyResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
+    #   * {Types::GetClientVpnEndpointAuthorizationPolicyResult#policy_document #policy_document} => String
+    #   * {Types::GetClientVpnEndpointAuthorizationPolicyResult#description #description} => String
+    #   * {Types::GetClientVpnEndpointAuthorizationPolicyResult#shadow_mode #shadow_mode} => String
+    #   * {Types::GetClientVpnEndpointAuthorizationPolicyResult#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_client_vpn_endpoint_authorization_policy({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_vpn_endpoint_id #=> String
+    #   resp.policy_document #=> String
+    #   resp.description #=> String
+    #   resp.shadow_mode #=> String, one of "enabled", "disabled"
+    #   resp.status #=> String, one of "creating", "updating", "active", "failed", "deleting"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetClientVpnEndpointAuthorizationPolicy AWS API Documentation
+    #
+    # @overload get_client_vpn_endpoint_authorization_policy(params = {})
+    # @param [Hash] params ({})
+    def get_client_vpn_endpoint_authorization_policy(params = {}, options = {})
+      req = build_request(:get_client_vpn_endpoint_authorization_policy, params)
       req.send_request(options)
     end
 
@@ -61762,6 +61896,12 @@ module Aws::EC2
     #   The Transit Gateway configuration for the Client VPN endpoint. This
     #   option is currently not supported.
     #
+    # @option params [Types::DevicePostureOptions] :device_posture_options
+    #   The device posture options for the Client VPN endpoint. Specifying
+    #   this parameter replaces the entire device posture configuration for
+    #   the endpoint. To remove all device trust providers, specify an empty
+    #   list.
+    #
     # @return [Types::ModifyClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClientVpnEndpointResult#return #return} => Boolean
@@ -61775,6 +61915,7 @@ module Aws::EC2
     #       enabled: false,
     #       cloudwatch_log_group: "String",
     #       cloudwatch_log_stream: "String",
+    #       include_authorization_policy_context: false,
     #     },
     #     dns_servers: {
     #       custom_dns_servers: ["String"],
@@ -61805,6 +61946,16 @@ module Aws::EC2
     #       availability_zones: ["AvailabilityZoneName"],
     #       availability_zone_ids: ["AvailabilityZoneId"],
     #     },
+    #     device_posture_options: {
+    #       trust_providers: [
+    #         {
+    #           trust_provider_type: "crowdstrike", # accepts crowdstrike, jamf, jumpcloud
+    #           tenant_id: "String",
+    #           public_signing_key_url: "String",
+    #         },
+    #       ],
+    #       enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -61817,6 +61968,80 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_client_vpn_endpoint(params = {}, options = {})
       req = build_request(:modify_client_vpn_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates the authorization policy for a Client VPN endpoint.
+    # A Client VPN endpoint can have one authorization policy. If a policy
+    # already exists for the endpoint, the values that you specify replace
+    # the corresponding values in the existing policy, and values that you
+    # do not specify remain unchanged.
+    #
+    # @option params [required, String] :client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #
+    # @option params [String] :policy_document
+    #   The authorization policy document, written in the Cedar policy
+    #   language. This parameter is required when you create the authorization
+    #   policy for a Client VPN endpoint that does not already have one.
+    #
+    # @option params [String] :description
+    #   A brief description of the authorization policy.
+    #
+    # @option params [String] :shadow_mode
+    #   Specifies whether the authorization policy is evaluated in shadow
+    #   mode. Possible values include:
+    #
+    #   * `enabled` - The authorization policy is evaluated and the results
+    #     are logged, but access is not enforced.
+    #
+    #   * `disabled` - The authorization policy is enforced.
+    #
+    #   The default value is `disabled`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyClientVpnEndpointAuthorizationPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyClientVpnEndpointAuthorizationPolicyResult#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_client_vpn_endpoint_authorization_policy({
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
+    #     policy_document: "String",
+    #     description: "String",
+    #     shadow_mode: "enabled", # accepts enabled, disabled
+    #     client_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "creating", "updating", "active", "failed", "deleting"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointAuthorizationPolicy AWS API Documentation
+    #
+    # @overload modify_client_vpn_endpoint_authorization_policy(params = {})
+    # @param [Hash] params ({})
+    def modify_client_vpn_endpoint_authorization_policy(params = {}, options = {})
+      req = build_request(:modify_client_vpn_endpoint_authorization_policy, params)
       req.send_request(options)
     end
 
@@ -77693,7 +77918,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.652.0'
+      context[:gem_version] = '1.653.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

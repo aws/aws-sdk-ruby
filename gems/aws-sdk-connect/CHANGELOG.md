@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.283.0 (2026-09-28)
+------------------
+
+* Feature - This release adds ConnectionTypes and ChatStreamingConfiguration to StartChatContact, and ConnectionCredentials, Websocket, and StreamingId to its response, so customers can request connection information and chat streaming in the same call that starts the chat.
+
 1.282.0 (2026-09-25)
 ------------------
 

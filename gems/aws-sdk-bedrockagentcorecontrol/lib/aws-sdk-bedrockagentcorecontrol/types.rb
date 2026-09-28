@@ -15636,6 +15636,14 @@ module Aws::BedrockAgentCoreControl
     #   controls whether response streaming is enabled for the gateway.
     #   @return [Types::StreamingConfiguration]
     #
+    # @!attribute [rw] disable_mcp_list_tools_pagination
+    #   Specifies whether pagination is disabled for the Model Context
+    #   Protocol (MCP) `tools/list` operation. When set to `true`, the
+    #   gateway returns the complete list of tools in a single response
+    #   without a pagination cursor. When set to `false` or omitted, the
+    #   gateway returns tools in paginated responses.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/MCPGatewayConfiguration AWS API Documentation
     #
     class MCPGatewayConfiguration < Struct.new(
@@ -15643,7 +15651,8 @@ module Aws::BedrockAgentCoreControl
       :instructions,
       :search_type,
       :session_configuration,
-      :streaming_configuration)
+      :streaming_configuration,
+      :disable_mcp_list_tools_pagination)
       SENSITIVE = [:instructions]
       include Aws::Structure
     end
