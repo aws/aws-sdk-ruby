@@ -20,7 +20,7 @@ module Aws
 
         it 'raises when executor is shutdown' do
           subject.shutdown
-          expect { subject.post }.to raise_error(RuntimeError)
+          expect { subject.post }.to raise_error(DefaultExecutor::RejectedExecutionError)
         end
       end
 
@@ -44,7 +44,7 @@ module Aws
           fill_queue
           producer = Thread.new do
             executor.post {}
-          rescue RuntimeError => e
+          rescue DefaultExecutor::RejectedExecutionError => e
             errors << e
           end
           sleep(0.1)
@@ -68,7 +68,7 @@ module Aws
           producer = park_producer
           expect(executor.kill).to be(true)
           expect(producer.join(2)).to_not be_nil
-          expect(errors.first).to be_a(RuntimeError)
+          expect(errors.first).to be_a(DefaultExecutor::RejectedExecutionError)
         end
 
         it 'shutdown does not deadlock while holding the lock' do
@@ -76,7 +76,32 @@ module Aws
           shutdown = Thread.new { executor.shutdown(0.5) }
           expect(shutdown.join(2)).to_not be_nil
           expect(producer.join(2)).to_not be_nil
-          expect(errors.first).to be_a(RuntimeError)
+          expect(errors.first).to be_a(DefaultExecutor::RejectedExecutionError)
+        end
+
+        it 'replaces a worker killed by a task so a parked producer is not stranded' do
+          # Read by threads at creation, so set before the first post spawns a worker.
+          previous = Thread.report_on_exception
+          Thread.report_on_exception = false
+          ran = Queue.new
+          started = Queue.new
+          executor.post do
+            started << :running
+            release.pop
+            raise NoMemoryError, 'worker died'
+          end
+          started.pop
+          executor.post { ran << :queued }
+          parked = Thread.new { executor.post { ran << :parked } }
+          sleep(0.1)
+          expect(parked.status).to eq('sleep')
+
+          release << :go
+          expect(parked.join(2)).to_not be_nil
+          expect([ran.pop, ran.pop]).to contain_exactly(:queued, :parked)
+          expect { executor.shutdown(2) }.to raise_error(NoMemoryError, 'worker died')
+        ensure
+          Thread.report_on_exception = previous
         end
       end
 
@@ -86,6 +111,41 @@ module Aws
           subject.post { result = true }
           expect(subject.shutdown).to be(true)
           expect(result).to be(true)
+        end
+
+        it 'runs remaining tasks and re-raises the error that killed a worker' do
+          previous = Thread.report_on_exception
+          Thread.report_on_exception = false
+          executor = DefaultExecutor.new(max_threads: 1)
+          ran = Queue.new
+          executor.post { raise NoMemoryError, 'worker died' }
+          executor.post { ran << :after }
+          # Once the queued task has run on the replacement, the dead worker is out
+          # of the pool, so shutdown cannot pick the error up by joining it.
+          expect(ran.pop).to eq(:after)
+          expect { executor.shutdown }.to raise_error(NoMemoryError, 'worker died')
+        ensure
+          Thread.report_on_exception = previous
+        end
+
+        it 'waits for all tasks when a worker dies during shutdown' do
+          previous = Thread.report_on_exception
+          Thread.report_on_exception = false
+          executor = DefaultExecutor.new(max_threads: 2)
+          done = Queue.new
+          executor.post do
+            sleep(0.1)
+            raise NoMemoryError, 'worker died'
+          end
+          executor.post do
+            sleep(0.3)
+            done << :slow
+          end
+          3.times { executor.post { done << :queued } }
+          expect { executor.shutdown }.to raise_error(NoMemoryError, 'worker died')
+          expect(done.size).to eq(4)
+        ensure
+          Thread.report_on_exception = previous
         end
 
         it 'kills threads after timeout' do

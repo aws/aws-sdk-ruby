@@ -140,7 +140,7 @@ module Aws
       end
 
       def upload_with_executor(pending, completed, options)
-        upload_attempts = 0
+        queued_parts = 0
         completion_queue = Queue.new
         abort_upload = false
         errors = []
@@ -157,7 +157,8 @@ module Aws
               completed_part = { etag: resp.etag, part_number: p[:part_number] }
               apply_part_checksum(resp, completed_part)
               completed.push(completed_part)
-            rescue StandardError => e
+            # Any failure must abort; otherwise the upload completes without this part.
+            rescue Exception => e # rubocop:disable Lint/RescueException
               abort_upload = true
               errors << e
             ensure
@@ -167,7 +168,7 @@ module Aws
             end
             # Count only successfully queued parts; a failed post never runs the
             # block, so it never pushes :done and must not be waited on below.
-            upload_attempts += 1
+            queued_parts += 1
           rescue StandardError => e
             # The executor rejected the task (e.g. shut down mid-upload). Record
             # it so the abort ceremony runs instead of the error escaping and
@@ -178,7 +179,7 @@ module Aws
           end
         end
 
-        upload_attempts.times { completion_queue.pop }
+        queued_parts.times { completion_queue.pop }
         errors
       end
 

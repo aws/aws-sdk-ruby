@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Bound memory usage in `upload_stream` when the source produces data faster than parts can be uploaded.
+* Issue - Fix unbounded memory growth in `upload_stream` when the data source outpaces the upload (#3407).
 
 1.232.3 (2026-09-28)
 ------------------

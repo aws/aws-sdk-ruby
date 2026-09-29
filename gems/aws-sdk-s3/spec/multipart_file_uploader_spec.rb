@@ -125,6 +125,18 @@ module Aws
           expect { subject.upload(large_file, params) }.to raise_error(/multipart upload failed: part 3 failed/)
         end
 
+        it 'aborts instead of completing without a part when a part raises a non-StandardError' do
+          client.stub_responses(:upload_part, lambda { |ctx|
+            raise NoMemoryError, 'part 2 failed' if ctx.params[:part_number] == 2
+
+            { etag: 'etag' }
+          })
+          expect(client).to receive(:abort_multipart_upload).with(params.merge(upload_id: 'MultipartUploadId'))
+          expect(client).not_to receive(:complete_multipart_upload)
+
+          expect { subject.upload(large_file, params) }.to raise_error(MultipartUploadError, /part 2 failed/)
+        end
+
         it 'closes all file parts even when a part upload fails' do
           # Fail the last part so the posting loop can't break early and skip
           # un-posted parts. This keeps the assertion deterministic across MRI
@@ -179,7 +191,7 @@ module Aws
           # rejected the way DefaultExecutor#post now raises on a closed queue.
           allow(executor).to receive(:post).and_wrap_original do |original, *args, &blk|
             calls += 1
-            raise 'Executor has been shutdown and is no longer accepting tasks' if calls == 2
+            raise DefaultExecutor::RejectedExecutionError if calls == 2
 
             original.call(*args, &blk)
           end

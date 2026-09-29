@@ -4,6 +4,13 @@ module Aws
   module S3
     # @api private
     class DefaultExecutor
+      # Raised when a task is posted to an executor that is shutting down or has been shut down.
+      class RejectedExecutionError < RuntimeError
+        def initialize(msg = 'Executor has been shutdown and is no longer accepting tasks')
+          super
+        end
+      end
+
       DEFAULT_MAX_THREADS = 10
       RUNNING = :running
       SHUTTING_DOWN = :shutting_down
@@ -16,6 +23,7 @@ module Aws
         @queue = @max_queue.zero? ? Queue.new : SizedQueue.new(@max_queue) # 0 is unbounded
         @pool = []
         @mutex = Mutex.new
+        @fatal_error = nil
       end
 
       # Submits a task for execution.
@@ -24,7 +32,7 @@ module Aws
       # @return [Boolean] Returns true if the task was submitted successfully
       def post(*args, &block)
         @mutex.synchronize do
-          raise 'Executor has been shutdown and is no longer accepting tasks' unless @state == RUNNING
+          raise RejectedExecutionError unless @state == RUNNING
 
           ensure_worker_available
         end
@@ -34,7 +42,7 @@ module Aws
         true
       rescue ClosedQueueError
         # shutdown or kill happened while parked on a full queue
-        raise 'Executor has been shutdown and is no longer accepting tasks'
+        raise RejectedExecutionError
       end
 
       # Immediately terminates all worker threads and clears pending tasks.
@@ -68,23 +76,34 @@ module Aws
           @queue.close
         end
 
-        if timeout
-          deadline = Time.now + timeout
-          @pool.each do |thread|
-            remaining = deadline - Time.now
-            break if remaining <= 0
+        # Snapshot under the lock and repeat, since a dying worker may swap in a
+        # replacement while joining.
+        deadline = Time.now + timeout if timeout
+        until (threads = @mutex.synchronize { @pool.select(&:alive?) }).empty?
+          threads.each do |thread|
+            remaining = deadline - Time.now if deadline
+            break if remaining && remaining <= 0
 
-            thread.join([remaining, 0].max)
+            begin
+              thread.join(remaining && [remaining, 0].max)
+            rescue Exception # rubocop:disable Lint/RescueException
+              # A worker that died re-raises here; it was recorded by #replace_worker
+              # and is raised below once the remaining workers have finished.
+              nil
+            end
           end
-          @pool.select(&:alive?).each(&:kill)
-        else
-          @pool.each(&:join)
+          break if deadline && Time.now >= deadline
         end
+        @mutex.synchronize { @pool.select(&:alive?).each(&:kill) } if timeout
 
         @mutex.synchronize do
           @pool.clear
           @state = SHUTDOWN
         end
+        # Dead workers are replaced rather than joined, so surface the first
+        # error that killed one for callers whose tasks do not rescue it.
+        raise @fatal_error if @fatal_error
+
         true
       end
 
@@ -103,6 +122,20 @@ module Aws
             args, block = job
             block.call(*args)
           end
+        rescue Exception => e # rubocop:disable Lint/RescueException
+          # A task raised something it did not rescue. Replace this worker
+          # before it dies so queued tasks still drain, otherwise a
+          # producer parked on a full queue waits forever.
+          replace_worker(e)
+          raise
+        end
+      end
+
+      def replace_worker(error)
+        @mutex.synchronize do
+          @fatal_error ||= error
+          @pool.delete(Thread.current)
+          @pool << spawn_worker unless @state == SHUTDOWN
         end
       end
     end

@@ -151,7 +151,8 @@ module Aws
               resp = @client.upload_part(part)
               completed_part = create_completed_part(resp, part)
               completed.push(completed_part)
-            rescue StandardError => e
+            # Any failure must abort; otherwise the upload completes without this part.
+            rescue Exception => e # rubocop:disable Lint/RescueException
               mutex.synchronize do
                 errors.push(e)
                 read_pipe.close_read unless read_pipe.closed?
