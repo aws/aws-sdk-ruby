@@ -29,6 +29,7 @@ module Aws::LambdaMicrovms
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {InsufficientCapacityException}
   # * {InternalServerException}
   # * {InvalidParameterValueException}
   # * {ResourceConflictException}
@@ -82,6 +83,21 @@ module Aws::LambdaMicrovms
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+    end
+
+    class InsufficientCapacityException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LambdaMicrovms::Types::InsufficientCapacityException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

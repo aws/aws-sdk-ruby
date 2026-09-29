@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2026-09-21)
+------------------
+
+* Feature - Launching Auto Billing Transfer Billing Group Creation Preference feature
+
+1.63.0 (2026-09-14)
+------------------
+
+* Feature - This release adds support for custom volume tiering. You can now define custom tiers on a pricing rule's tiering configuration, where each tier specifies a usage range and the rate applied to usage in that range.
+
+1.62.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.61.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.60.0 (2026-07-09)
 ------------------
 

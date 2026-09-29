@@ -36,6 +36,7 @@
     "GetWorkloadAccessToken": "<p>Obtains a workload access token for agentic workloads not acting on behalf of a user.</p>",
     "GetWorkloadAccessTokenForJWT": "<p>Obtains a workload access token for agentic workloads acting on behalf of a user, using a JWT token.</p>",
     "GetWorkloadAccessTokenForUserId": "<p>Obtains a workload access token for agentic workloads acting on behalf of a user, using the user's ID.</p>",
+    "IngestData": "<p>Submits content directly for ingestion to generate long-term memory records in a AgentCore Memory resource.</p> <p>To use this operation, you must have the <code>bedrock-agentcore:IngestData</code> permission.</p>",
     "InvokeAgentRuntime": "<p>Sends a request to an agent or tool hosted in an Amazon Bedrock AgentCore Runtime and receives responses in real-time. </p> <p>To invoke an agent, you can specify either the AgentCore Runtime ARN or the agent ID with an account ID, and provide a payload containing your request. When you use the agent ID instead of the full ARN, you don't need to URL-encode the identifier. You can optionally specify a qualifier to target a specific endpoint of the agent.</p> <p>This operation supports streaming responses, allowing you to receive partial responses as they become available. We recommend using pagination to ensure that the operation returns quickly and successfully when processing large responses.</p> <p>For example code, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-invoke-agent.html\">Invoke an AgentCore Runtime agent</a>. </p> <p>If you're integrating your agent with OAuth, you can't use the Amazon Web Services SDK to call <code>InvokeAgentRuntime</code>. Instead, make a HTTPS request to <code>InvokeAgentRuntime</code>. For an example, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-oauth.html\">Authenticate and authorize with Inbound Auth and Outbound Auth</a>.</p> <p>To use this operation, you must have the <code>bedrock-agentcore:InvokeAgentRuntime</code> permission. If you are making a call to <code>InvokeAgentRuntime</code> on behalf of a user ID with the <code>X-Amzn-Bedrock-AgentCore-Runtime-User-Id</code> header, You require permissions to both actions (<code>bedrock-agentcore:InvokeAgentRuntime</code> and <code>bedrock-agentcore:InvokeAgentRuntimeForUser</code>). </p>",
     "InvokeAgentRuntimeCommand": "<p>Executes a command in a runtime session container and streams the output back to the caller. This operation allows you to run shell commands within the agent runtime environment and receive real-time streaming responses including standard output and standard error.</p> <p>To invoke a command, you must specify the agent runtime ARN and a runtime session ID. The command execution supports streaming responses, allowing you to receive output as it becomes available through <code>contentStart</code>, <code>contentDelta</code>, and <code>contentStop</code> events.</p> <p>To use this operation, you must have the <code>bedrock-agentcore:InvokeAgentRuntimeCommand</code> permission.</p>",
     "InvokeBrowser": "<p>Invokes an operating system-level action on a browser session in Amazon Bedrock AgentCore. This operation provides direct OS-level control over browser sessions, enabling mouse actions, keyboard input, and screenshots that the WebSocket-based Chrome DevTools Protocol (CDP) cannot handle — such as interacting with print dialogs, context menus, and JavaScript alerts.</p> <p>You send a request with exactly one action in the <code>BrowserAction</code> union, and receive a corresponding result in the <code>BrowserActionResult</code> union.</p> <p>The following operations are related to <code>InvokeBrowser</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartBrowserSession.html\">StartBrowserSession</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html\">GetBrowserSession</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html\">StopBrowserSession</a> </p> </li> </ul>",
@@ -185,6 +186,7 @@
         "DeleteEventInput$actorId": "<p>The identifier of the actor associated with the event to delete.</p>",
         "Event$actorId": "<p>The identifier of the actor associated with the event.</p>",
         "GetEventInput$actorId": "<p>The identifier of the actor associated with the event.</p>",
+        "IngestDataInput$actorId": "<p>The identifier of the actor associated with this content. An actor represents an entity that participates in sessions and generates content.</p>",
         "ListEventsInput$actorId": "<p>The identifier of the actor for which to list events.</p>",
         "ListSessionsInput$actorId": "<p>The identifier of the actor for which to list sessions. </p>",
         "SessionSummary$actorId": "<p>The identifier of the actor associated with the session.</p>"
@@ -702,10 +704,16 @@
         "DataSourceConfig$cloudWatchLogs": "<p>Configuration for pulling agent session traces from CloudWatch Logs.</p>"
       }
     },
-    "CloudWatchLogsSourceLogGroupNamesList": {
-      "base": null,
+    "CloudWatchLogsSourceLogGroupNamePrefixesList": {
+      "base": "<p>List of CloudWatch Logs log group name prefixes to source trace data from.</p>",
       "refs": {
-        "CloudWatchLogsSource$logGroupNames": "<p>The list of CloudWatch log group names to read agent traces from. Maximum of 5 log groups.</p>"
+        "CloudWatchLogsSource$logGroupNamePrefixes": "<p>The list of CloudWatch log group name prefixes to read agent traces from. Specify this instead of <code>logGroupNames</code> to match log groups by prefix. Maximum of 5 prefixes. Specify either <code>logGroupNames</code> or <code>logGroupNamePrefixes</code>, not both. One of the two is required.</p>"
+      }
+    },
+    "CloudWatchLogsSourceLogGroupNamesList": {
+      "base": "<p>Length is constrained per member, because members relaxed from @required carry @default([]).</p>",
+      "refs": {
+        "CloudWatchLogsSource$logGroupNames": "<p>The list of CloudWatch log group names to read agent traces from. Maximum of 10 log groups.</p>"
       }
     },
     "CloudWatchLogsSourceServiceNamesList": {
@@ -906,6 +914,12 @@
         "ResponseChunk$contentDelta": "<p>An event containing incremental output (stdout or stderr) from the command execution. These are the middle chunks.</p>"
       }
     },
+    "ContentSource": {
+      "base": "<p>The source of the content to ingest. Only inline content is supported.</p>",
+      "refs": {
+        "IngestDataInput$source": "<p>The content to ingest. Only inline content is supported.</p>"
+      }
+    },
     "ContentStartEvent": {
       "base": "<p>An event that signals the start of content streaming from a command execution. This event is sent when the command begins producing output.</p>",
       "refs": {
@@ -940,6 +954,7 @@
     "Conversational": {
       "base": "<p>Contains conversational content for an event payload.</p>",
       "refs": {
+        "IngestPayloadType$conversational": "<p>The conversational content for this payload item.</p>",
         "PayloadType$conversational": "<p>The conversational content of the payload.</p>"
       }
     },
@@ -1519,6 +1534,13 @@
         "ExternalProxy$port": "<p>The port number of the proxy server. Valid range: 1-65535.</p>"
       }
     },
+    "ExtractionConfig": {
+      "base": "<p>The configuration for extraction behavior. Use this structure to specify namespace variable keys and their values for namespace substitution during long-term memory extraction.</p>",
+      "refs": {
+        "CreateEventInput$extractionConfig": "<p>The extraction configuration for long-term memory records. Use this parameter to specify namespace variable keys and their values for namespace substitution during extraction.</p>",
+        "IngestDataInput$extractionConfig": "<p>The extraction configuration for long-term memory records. Use this parameter to specify namespace variable keys and their values for namespace substitution during extraction.</p>"
+      }
+    },
     "ExtractionJob": {
       "base": "<p>Represents the metadata of a memory extraction job such as the message identifiers that compose this job.</p>",
       "refs": {
@@ -1938,6 +1960,42 @@
         "HarnessModelConfiguration$geminiModelConfig": "<p>Configuration for a Google Gemini model.</p>"
       }
     },
+    "HarnessHookDecision": {
+      "base": null,
+      "refs": {
+        "HarnessHookEvent$decision": "<p>The decision applied to the hook event. This field is present only for blocking Lambda targets.</p>"
+      }
+    },
+    "HarnessHookEvent": {
+      "base": "<p>A lifecycle hook event emitted in the invocation stream for visibility into hook decisions.</p>",
+      "refs": {
+        "InvokeHarnessStreamOutput$hookEvent": "<p>A lifecycle hook event emitted when a configured hook runs.</p>"
+      }
+    },
+    "HarnessHookEventId": {
+      "base": null,
+      "refs": {
+        "HarnessHookEvent$hookEventId": "<p>The unique identifier for this hook event.</p>"
+      }
+    },
+    "HarnessHookEventReasonString": {
+      "base": null,
+      "refs": {
+        "HarnessHookEvent$reason": "<p>The optional reason for the applied decision.</p>"
+      }
+    },
+    "HarnessHookEventType": {
+      "base": null,
+      "refs": {
+        "HarnessHookEvent$type": "<p>The type of lifecycle hook event.</p>"
+      }
+    },
+    "HarnessHookName": {
+      "base": null,
+      "refs": {
+        "HarnessHookEvent$name": "<p>The name of the hook that ran.</p>"
+      }
+    },
     "HarnessInlineFunctionConfig": {
       "base": "<p>Configuration for an inline function tool. When the agent calls this tool, the tool call is returned to the caller for external execution.</p>",
       "refs": {
@@ -1996,6 +2054,12 @@
       "base": "<p>Specification of which model to use.</p>",
       "refs": {
         "InvokeHarnessRequest$model": "<p>The model configuration to use for this invocation. If specified, overrides the harness default.</p>"
+      }
+    },
+    "HarnessOpenAiApiBase": {
+      "base": null,
+      "refs": {
+        "HarnessOpenAiModelConfig$apiBase": "<p>Optional custom endpoint URL for an OpenAI-compatible endpoint.</p>"
       }
     },
     "HarnessOpenAiApiFormat": {
@@ -2315,6 +2379,26 @@
         "EvaluationResultContent$ignoredReferenceInputFields": "<p> The list of reference input field names that were provided but not used by the evaluator. Helps identify which ground truth data was not consumed during evaluation. </p>"
       }
     },
+    "IngestDataInput": {
+      "base": null,
+      "refs": {}
+    },
+    "IngestDataOutput": {
+      "base": null,
+      "refs": {}
+    },
+    "IngestPayloadList": {
+      "base": null,
+      "refs": {
+        "InlineMemoryContent$payload": "<p>The list of content payload items to ingest.</p>"
+      }
+    },
+    "IngestPayloadType": {
+      "base": "<p>A single content payload item to ingest. A payload item contains either conversational or JSON content.</p>",
+      "refs": {
+        "IngestPayloadList$member": null
+      }
+    },
     "InlineContent": {
       "base": null,
       "refs": {
@@ -2336,6 +2420,12 @@
       "base": null,
       "refs": {
         "InlineGroundTruth$turns": "<p>A list of per-turn ground truth data, each containing an input prompt and expected response.</p>"
+      }
+    },
+    "InlineMemoryContent": {
+      "base": "<p>The content included directly in the request as one or more payload items.</p>",
+      "refs": {
+        "ContentSource$inline": "<p>The content included directly in the request.</p>"
       }
     },
     "InputContentBlock": {
@@ -2878,6 +2968,24 @@
         "BrowserSessionStream$liveViewStream": "<p>The stream that provides a visual representation of the browser content. This stream allows agents to observe the current state of the browser, including rendered web pages and visual elements.</p>"
       }
     },
+    "LogGroupName": {
+      "base": null,
+      "refs": {
+        "CloudWatchLogsSourceLogGroupNamesList$member": null
+      }
+    },
+    "LogGroupNamePrefix": {
+      "base": "<p>Prefix of a CloudWatch Logs log group name.</p>",
+      "refs": {
+        "CloudWatchLogsSourceLogGroupNamePrefixesList$member": null
+      }
+    },
+    "LogStreamName": {
+      "base": "<p>A log stream name. The pattern is CloudWatch Logs' own log stream name pattern, which already admits the empty string; empty is the @default of members relaxed from @required and means &quot;no log stream&quot;. No @length is applied, because CloudWatch's min of 1 would reject that default.</p>",
+      "refs": {
+        "CloudWatchOutputConfig$logStreamName": "<p>The name of the CloudWatch log stream where evaluation results will be written.</p>"
+      }
+    },
     "Long": {
       "base": null,
       "refs": {
@@ -2959,6 +3067,7 @@
         "Event$memoryId": "<p>The identifier of the AgentCore Memory resource containing the event.</p>",
         "GetEventInput$memoryId": "<p>The identifier of the AgentCore Memory resource containing the event.</p>",
         "GetMemoryRecordInput$memoryId": "<p>The identifier of the AgentCore Memory resource containing the memory record.</p>",
+        "IngestDataInput$memoryId": "<p>The identifier of the AgentCore Memory resource to ingest content into.</p>",
         "ListActorsInput$memoryId": "<p>The identifier of the AgentCore Memory resource for which to list actors.</p>",
         "ListEventsInput$memoryId": "<p>The identifier of the AgentCore Memory resource for which to list events.</p>",
         "ListMemoryExtractionJobsInput$memoryId": "<p>The unique identifier of the memory to list extraction jobs for.</p>",
@@ -2966,6 +3075,19 @@
         "ListSessionsInput$memoryId": "<p>The identifier of the AgentCore Memory resource for which to list sessions.</p>",
         "RetrieveMemoryRecordsInput$memoryId": "<p>The identifier of the AgentCore Memory resource from which to retrieve memory records.</p>",
         "StartMemoryExtractionJobInput$memoryId": "<p>The unique identifier of the memory for which to start extraction jobs.</p>"
+      }
+    },
+    "MemoryJsonData": {
+      "base": "<p>Contains non-conversational, JSON-formatted content for an event payload. JSON payloads are extracted into long-term memory.</p>",
+      "refs": {
+        "IngestPayloadType$json": "<p>The JSON content for this payload item.</p>",
+        "PayloadType$json": "<p>The JSON content of the payload. Use this type to store non-conversational, JSON-formatted data, such as behavioral events, activity logs, or system events.</p>"
+      }
+    },
+    "MemoryJsonDataContent": {
+      "base": null,
+      "refs": {
+        "MemoryJsonData$content": "<p>The JSON content of the payload. Accepts any JSON value, including objects, arrays, strings, numbers, booleans, and null. The maximum size is 100 KB.</p>"
       }
     },
     "MemoryMetadataFilterExpression": {
@@ -3148,7 +3270,8 @@
       "base": null,
       "refs": {
         "CreateEventInput$metadata": "<p>The key-value metadata to attach to the event.</p>",
-        "Event$metadata": "<p>Metadata associated with an event.</p>"
+        "Event$metadata": "<p>Metadata associated with an event.</p>",
+        "IngestDataInput$metadata": "<p>The key-value metadata to attach to the content.</p>"
       }
     },
     "MetadataValue": {
@@ -3162,6 +3285,12 @@
       "base": null,
       "refs": {
         "MetadataValue$stringValue": "<p>Value associated with the <code>eventMetadata</code> key.</p>"
+      }
+    },
+    "MetricsNamespace": {
+      "base": "<p>CloudWatch metrics namespace for evaluation result metrics.</p>",
+      "refs": {
+        "CloudWatchOutputConfig$metricsNamespace": "<p>The CloudWatch metrics namespace where evaluation result metrics are published. If you omit this value, the service publishes metrics to <code>Bedrock-AgentCore/Evaluations</code>. This value can't begin with <code>AWS/</code>.</p>"
       }
     },
     "MimeType": {
@@ -3300,11 +3429,32 @@
     "Namespace": {
       "base": null,
       "refs": {
+        "DeleteMemoryRecordInput$namespace": "<p>The namespace of the memory record to delete. This value is used for IAM condition key authorization.</p>",
+        "GetMemoryRecordInput$namespace": "<p>The namespace of the memory record to retrieve. This value is used for IAM condition key authorization.</p>",
         "ListMemoryRecordsInput$namespace": "<p>The namespace prefix to filter memory records by. Returns all memory records in namespaces that start with the provided prefix. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>",
         "ListMemoryRecordsInput$namespacePath": "<p>Use namespacePath for hierarchical retrievals. Return all memory records where namespace falls under the same parent hierarchy. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>",
+        "MemoryRecordDeleteInput$namespace": "<p>The namespace of the memory record being deleted. This value is used for IAM condition key authorization.</p>",
         "NamespacesList$member": null,
         "RetrieveMemoryRecordsInput$namespace": "<p>The namespace prefix to filter memory records by. Searches for memory records in namespaces that start with the provided prefix. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>",
         "RetrieveMemoryRecordsInput$namespacePath": "<p>Use namespacePath for hierarchical retrievals. Return all memory records where namespace falls under the same parent hierarchy. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>"
+      }
+    },
+    "NamespaceVariableName": {
+      "base": "<p>The name of the namespace variable key. The name cannot be a built-in variable name (<code>actorId</code>, <code>sessionId</code>, or <code>memoryStrategyId</code>).</p>",
+      "refs": {
+        "NamespaceVariablesMap$key": null
+      }
+    },
+    "NamespaceVariableValue": {
+      "base": "<p>The value of a namespace variable key.</p>",
+      "refs": {
+        "NamespaceVariablesMap$value": null
+      }
+    },
+    "NamespaceVariablesMap": {
+      "base": "<p>A map of <code>namespaceKeys</code> to their values for namespace substitution.</p>",
+      "refs": {
+        "ExtractionConfig$namespaceVariables": "<p>A map of <code>namespaceKeys</code> to their values. The service substitutes these values into <code>namespaceTemplates</code> during long-term memory extraction to control namespace hierarchy.</p>"
       }
     },
     "NamespacesList": {
@@ -3313,7 +3463,8 @@
         "MemoryRecord$namespaces": "<p>The namespaces associated with this memory record. Namespaces help organize and categorize memory records.</p>",
         "MemoryRecordCreateInput$namespaces": "<p>A list of namespace identifiers that categorize or group the memory record.</p>",
         "MemoryRecordSummary$namespaces": "<p>The namespaces associated with this memory record.</p>",
-        "MemoryRecordUpdateInput$namespaces": "<p>The updated list of namespace identifiers for categorizing the memory record.</p>"
+        "MemoryRecordUpdateInput$namespaces": "<p>The updated list of namespace identifiers for categorizing the memory record.</p>",
+        "MemoryRecordUpdateInput$sourceNamespaces": "<p>The namespaces of the source memory record being updated. This value is used for IAM condition key authorization.</p>"
       }
     },
     "NextToken": {
@@ -3459,10 +3610,17 @@
         "EventMetadataFilterExpression$operator": "<p>Operator applied to the event metadata filter expression.</p>"
       }
     },
+    "OptionalLogGroupName": {
+      "base": "<p>A log group name that may also be empty. The empty string is the @default of members that were relaxed from @required, and carries the meaning &quot;no log group&quot; for that member.</p>",
+      "refs": {
+        "CloudWatchOutputConfig$logGroupName": "<p>The name of the CloudWatch log group where evaluation results will be written. This value doesn't apply when <code>resultDestination</code> is <code>SOURCE_LOG_GROUP</code>, because results are written back to the trace source log group. The name can't be under the service-reserved <code>/aws/bedrock-agentcore/evaluations/</code> namespace, apart from the service-managed default group.</p>"
+      }
+    },
     "OutputConfig": {
       "base": "<p>Output destination configuration.</p>",
       "refs": {
         "GetBatchEvaluationResponse$outputConfig": "<p>The output configuration specifying where evaluation results are written.</p>",
+        "StartBatchEvaluationRequest$outputConfig": null,
         "StartBatchEvaluationResponse$outputConfig": "<p>The output configuration specifying where evaluation results are written.</p>"
       }
     },
@@ -3498,7 +3656,7 @@
     "PayloadTypeList": {
       "base": null,
       "refs": {
-        "CreateEventInput$payload": "<p>The content payload of the event. This can include conversational data or binary content.</p>",
+        "CreateEventInput$payload": "<p>The content payload of the event. This can include conversational data, JSON data, or binary content.</p>",
         "Event$payload": "<p>The content payload of the event.</p>"
       }
     },
@@ -4036,6 +4194,12 @@
         "InvokeAgentRuntimeResponse$response": "<p>The response data from the agent runtime. The format of this data depends on the specific agent configuration and the requested accept type. For most agents, this is a JSON object containing the agent's response to the user's request.</p>"
       }
     },
+    "ResultDestination": {
+      "base": "<p>Where evaluation results are written: dedicated results log group (default) or the source log group.</p>",
+      "refs": {
+        "CloudWatchOutputConfig$resultDestination": "<p>The destination where evaluation results are written. Valid values:</p> <ul> <li> <p> <code>DEDICATED_LOG_GROUP</code> (default) – Writes results to a dedicated result log group.</p> </li> <li> <p> <code>SOURCE_LOG_GROUP</code> – Writes results back to the log group that the agent traces were read from. If you use this value, don't specify <code>logGroupName</code>.</p> </li> </ul>"
+      }
+    },
     "RetrieveMemoryRecordsInput": {
       "base": null,
       "refs": {}
@@ -4318,6 +4482,8 @@
         "Event$sessionId": "<p>The identifier of the session containing the event.</p>",
         "GetAgentCardResponse$runtimeSessionId": "<p>The ID of the session associated with the AgentCore Runtime agent.</p>",
         "GetEventInput$sessionId": "<p>The identifier of the session containing the event.</p>",
+        "IngestDataInput$sessionId": "<p>The identifier of the session that the content belongs to. If not provided, a session identifier is generated and returned in the response.</p>",
+        "IngestDataOutput$sessionId": "<p>The identifier of the session that the service ingested the content into. This value echoes the session identifier from the request, or the identifier that the service generated when you did not provide one.</p>",
         "InvokeAgentRuntimeCommandResponse$runtimeSessionId": "<p>The unique identifier of the runtime session in which the command was executed.</p>",
         "InvokeAgentRuntimeResponse$runtimeSessionId": "<p>The identifier of the runtime session.</p>",
         "InvokeAgentRuntimeResponse$mcpSessionId": "<p>The identifier of the MCP session.</p>",
@@ -4361,6 +4527,18 @@
       "base": null,
       "refs": {
         "ListSessionsOutput$sessionSummaries": "<p>The list of session summaries that match the specified criteria.</p>"
+      }
+    },
+    "SessionTraceIds": {
+      "base": "<p>A pairing of a session with the specific trace IDs to evaluate within that session. Use this to evaluate individual traces rather than an entire session.</p>",
+      "refs": {
+        "SessionTraceIdsList$member": null
+      }
+    },
+    "SessionTraceIdsList": {
+      "base": null,
+      "refs": {
+        "CloudWatchFilterConfig$sessionTraceIds": "<p>A list of session and trace ID pairs that restrict evaluation to specific traces within a session. If specified, only the listed traces are evaluated instead of the entire session.</p>"
       }
     },
     "SessionType": {
@@ -4570,11 +4748,8 @@
         "BatchCreateMemoryRecordsInput$clientToken": "<p>A unique, case-sensitive identifier to ensure idempotent processing of the batch request.</p>",
         "BrowserSessionSummary$browserIdentifier": "<p>The unique identifier of the browser associated with the session. This identifier specifies which browser environment is used for the session.</p>",
         "CloudWatchFilterConfigSessionIdsList$member": null,
-        "CloudWatchLogsSourceLogGroupNamesList$member": null,
         "CloudWatchLogsSourceServiceNamesList$member": null,
         "CloudWatchLogsTraceConfigLogGroupArnsList$member": null,
-        "CloudWatchOutputConfig$logGroupName": "<p>The name of the CloudWatch log group where evaluation results will be written.</p>",
-        "CloudWatchOutputConfig$logStreamName": "<p>The name of the CloudWatch log stream where evaluation results will be written.</p>",
         "CodeInterpreterSessionSummary$codeInterpreterIdentifier": "<p>The unique identifier of the code interpreter associated with the session. This identifier specifies which code interpreter environment is used for the session.</p>",
         "ConfigurationBundleToolEntry$toolDescriptionJsonPath": "<p>The JSON path within the configuration bundle's components that contains the tool description.</p>",
         "ContentBlock$text": "<p>The text content of the block.</p>",
@@ -4628,6 +4803,7 @@
         "HarnessSkillGitSource$path": "<p>Subdirectory within the repository containing the skill.</p>",
         "HarnessToolUseBlock$serverName": "<p>The name of the MCP server providing this tool.</p>",
         "HarnessToolUseBlockStart$serverName": "<p>The name of the MCP server providing this tool.</p>",
+        "IngestDataInput$clientToken": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, AgentCore ignores the request, but does not return an error.</p>",
         "InsightsFailureSignal$evidence": "<p>The evidence supporting the failure detection.</p>",
         "InvalidInputException$message": null,
         "InvokeAgentRuntimeCommandRequest$agentRuntimeArn": "<p>The Amazon Resource Name (ARN) of the agent runtime on which to execute the command. This identifies the specific agent runtime environment where the command will run.</p>",
@@ -4680,6 +4856,7 @@
         "ServiceException$message": null,
         "SessionMetadataShape$sessionId": "<p>The unique identifier of the session this metadata applies to.</p>",
         "SessionMetadataShape$testScenarioId": "<p>An optional test scenario identifier for categorizing and tracking evaluation results.</p>",
+        "SessionTraceIds$sessionId": "<p>The unique identifier of the session that contains the traces to evaluate.</p>",
         "SpanContext$sessionId": "<p> The unique identifier of the session containing this span. Sessions represent complete conversation flows and are detected using configurable <code>SessionTimeoutMinutes</code> (default 15 minutes). </p>",
         "SpanContext$traceId": "<p> The unique identifier of the trace containing this span. Traces represent individual request-response interactions within a session and group related spans together. </p>",
         "SpanContext$spanId": "<p> The unique identifier of the specific span being referenced. Spans represent individual operations like tool calls, model invocations, or other discrete actions within the agent's execution. </p>",
@@ -4952,6 +5129,7 @@
         "GetABTestResponse$maxDurationExpiresAt": "<p>The timestamp when the A/B test will automatically expire.</p>",
         "GetABTestResponse$createdAt": "<p>The timestamp when the A/B test was created.</p>",
         "GetABTestResponse$updatedAt": "<p>The timestamp when the A/B test was last updated.</p>",
+        "IngestDataInput$contentTimestamp": "<p>The timestamp of when the content occurred.</p>",
         "MemoryRecord$createdAt": "<p>The timestamp when the memory record was created.</p>",
         "MemoryRecordCreateInput$timestamp": "<p>Time at which the memory record was created.</p>",
         "MemoryRecordMetadataValue$dateTimeValue": "<p>A timestamp value in ISO 8601 UTC format.</p>",
@@ -5097,7 +5275,14 @@
     "TraceId": {
       "base": null,
       "refs": {
+        "TraceIdList$member": null,
         "TraceIds$member": null
+      }
+    },
+    "TraceIdList": {
+      "base": null,
+      "refs": {
+        "SessionTraceIds$traceIds": "<p>The list of trace IDs within the session to evaluate.</p>"
       }
     },
     "TraceIds": {

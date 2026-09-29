@@ -10,7 +10,7 @@
 module Aws::Mgn
   module Types
 
-    # Operating denied due to a file permission or access check error.
+    # Operation denied due to a file permission or access check error.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -270,6 +270,26 @@ module Aws::Mgn
     class Checksum < Struct.new(
       :encryption_algorithm,
       :hash)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Maps a source CIDR range to the corresponding target CIDR range to use
+    # in the target network.
+    #
+    # @!attribute [rw] original_cidr
+    #   The original CIDR range in the source network.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_cidr
+    #   The updated CIDR range to use in the target network.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CidrMapping AWS API Documentation
+    #
+    class CidrMapping < Struct.new(
+      :original_cidr,
+      :updated_cidr)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -558,6 +578,19 @@ module Aws::Mgn
     #   The target deployment configuration for the migrated network.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_provisioning_strategy
+    #   Specifies whether to create new target VPCs or use existing ones.
+    #   Set to `CREATE_NEW` to provision new target VPCs as part of the
+    #   migration, or `USE_EXISTING` to migrate into existing VPCs in the
+    #   target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_mappings
+    #   A list of CIDR mappings that map original source CIDR ranges to
+    #   updated target CIDR ranges. CIDR mappings can be provided only when
+    #   `vpcProvisioningStrategy` is set to `USE_EXISTING`.
+    #   @return [Array<Types::CidrMapping>]
+    #
     # @!attribute [rw] tags
     #   Tags to assign to the network migration definition.
     #   @return [Hash<String,String>]
@@ -576,6 +609,8 @@ module Aws::Mgn
       :target_s3_configuration,
       :target_network,
       :target_deployment,
+      :vpc_provisioning_strategy,
+      :cidr_mappings,
       :tags,
       :scope_tags)
       SENSITIVE = [:tags, :scope_tags]
@@ -1238,7 +1273,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   Request to filter Source Servers list by Accoun ID.
+    #   Request to filter Source Servers list by Account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeSourceServersRequest AWS API Documentation
@@ -1287,11 +1322,11 @@ module Aws::Mgn
     end
 
     # @!attribute [rw] items
-    #   Request to filter Source Servers list by item.
+    #   The list of returned Source Servers.
     #   @return [Array<Types::SourceServer>]
     #
     # @!attribute [rw] next_token
-    #   Request to filter Source Servers next token.
+    #   The token of the next Source Server to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeSourceServersResponse AWS API Documentation
@@ -2008,14 +2043,14 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # Import task summery waves.
+    # Import task summary waves.
     #
     # @!attribute [rw] created_count
-    #   Import task summery waves created count.
+    #   Import task summary waves created count.
     #   @return [Integer]
     #
     # @!attribute [rw] modified_count
-    #   Import task summery waves modified count.
+    #   Import task summary waves modified count.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ImportTaskSummaryWaves AWS API Documentation
@@ -2179,8 +2214,7 @@ module Aws::Mgn
     # Launch Status of the Job Post Launch Actions.
     #
     # @!attribute [rw] ssm_document
-    #   AWS Systems Manager's Document of the of the Job Post Launch
-    #   Actions.
+    #   AWS Systems Manager's Document of the Job Post Launch Actions.
     #   @return [Types::SsmDocument]
     #
     # @!attribute [rw] ssm_document_type
@@ -2188,8 +2222,8 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] execution_id
-    #   AWS Systems Manager Document's execution ID of the of the Job Post
-    #   Launch Actions.
+    #   AWS Systems Manager Document's execution ID of the Job Post Launch
+    #   Actions.
     #   @return [String]
     #
     # @!attribute [rw] execution_status
@@ -2283,7 +2317,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] post_launch_actions
-    #   Post Launch Actions to executed on the Test or Cutover instance.
+    #   Post Launch Actions to be executed on the Test or Cutover instance.
     #   @return [Types::PostLaunchActions]
     #
     # @!attribute [rw] enable_map_auto_tagging
@@ -2429,12 +2463,22 @@ module Aws::Mgn
     #   Launch template disk throughput configuration.
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_initialization_rate
+    #   Launch template disk volume initialization rate configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Launch template disk delete on termination configuration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/LaunchTemplateDiskConf AWS API Documentation
     #
     class LaunchTemplateDiskConf < Struct.new(
       :volume_type,
       :iops,
-      :throughput)
+      :throughput,
+      :volume_initialization_rate,
+      :delete_on_termination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2490,7 +2534,7 @@ module Aws::Mgn
     # Lifecycle.
     #
     # @!attribute [rw] added_to_service_date_time
-    #   Lifecycle added to service data and time.
+    #   Lifecycle added to service date and time.
     #   @return [String]
     #
     # @!attribute [rw] first_byte_date_time
@@ -2628,7 +2672,7 @@ module Aws::Mgn
     # Lifecycle last Test finalized.
     #
     # @!attribute [rw] api_call_date_time
-    #   Lifecycle Test failed API call date and time.
+    #   Lifecycle Test finalized API call date and time.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/LifeCycleLastTestFinalized AWS API Documentation
@@ -4257,8 +4301,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] artifact_type
-    #   The type of the artifact, such as CLOUDFORMATION\_TEMPLATE or
-    #   TERRAFORM\_MODULE.
+    #   The type of the generated artifact.
     #   @return [String]
     #
     # @!attribute [rw] artifact_sub_type
@@ -4437,6 +4480,18 @@ module Aws::Mgn
     #   The target deployment configuration for the migrated network.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_provisioning_strategy
+    #   Indicates whether the migration creates new target VPCs or uses
+    #   existing ones. `CREATE_NEW` provisions new target VPCs;
+    #   `USE_EXISTING` migrates into existing VPCs in the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_mappings
+    #   A list of CIDR mappings that map original source CIDR ranges to
+    #   updated target CIDR ranges. CIDR mappings apply only when
+    #   `vpcProvisioningStrategy` is set to `USE_EXISTING`.
+    #   @return [Array<Types::CidrMapping>]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the network migration definition was created.
     #   @return [Time]
@@ -4465,6 +4520,8 @@ module Aws::Mgn
       :target_s3_configuration,
       :target_network,
       :target_deployment,
+      :vpc_provisioning_strategy,
+      :cidr_mappings,
       :created_at,
       :updated_at,
       :tags,
@@ -4687,7 +4744,9 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] segment_type
-    #   The type of the segment, such as VPC, subnet, or security group.
+    #   The category of the network migration segment. A segment groups the
+    #   network constructs (such as VPCs, subnets, and security groups) that
+    #   are migrated together. Valid values: `WORKLOAD`, `APPLIANCE`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4999,7 +5058,7 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # Post Launch Actions to executed on the Test or Cutover instance.
+    # Post Launch Actions to be executed on the Test or Cutover instance.
     #
     # @!attribute [rw] deployment
     #   Deployment type in which AWS Systems Manager Documents will be
@@ -5608,7 +5667,7 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # The request could not be completed because its exceeded the service
+    # The request could not be completed because it exceeded the service
     # quota.
     #
     # @!attribute [rw] message
@@ -6079,7 +6138,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Start import request tags.
+    #   Start export request tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartExportRequest AWS API Documentation
@@ -6913,7 +6972,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] post_launch_actions
-    #   Post Launch Actions to executed on the Test or Cutover instance.
+    #   Post Launch Actions to be executed on the Test or Cutover instance.
     #   @return [Types::PostLaunchActions]
     #
     # @!attribute [rw] enable_map_auto_tagging
@@ -7063,6 +7122,19 @@ module Aws::Mgn
     #   The updated target deployment configuration.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_provisioning_strategy
+    #   Updates whether the migration creates new target VPCs or uses
+    #   existing ones. Set to `USE_EXISTING` to migrate into existing VPCs
+    #   in the target account, or to `CREATE_NEW` to provision new target
+    #   VPCs.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_mappings
+    #   The updated list of CIDR mappings that map original source CIDR
+    #   ranges to updated target CIDR ranges. CIDR mappings can be provided
+    #   only when `vpcProvisioningStrategy` is set to `USE_EXISTING`.
+    #   @return [Array<Types::CidrMapping>]
+    #
     # @!attribute [rw] scope_tags
     #   The updated scope tags for the network migration definition.
     #   @return [Hash<String,String>]
@@ -7077,6 +7149,8 @@ module Aws::Mgn
       :target_s3_configuration,
       :target_network,
       :target_deployment,
+      :vpc_provisioning_strategy,
+      :cidr_mappings,
       :scope_tags)
       SENSITIVE = [:scope_tags]
       include Aws::Structure

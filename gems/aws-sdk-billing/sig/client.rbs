@@ -249,6 +249,23 @@ module Aws
                                ) -> _GetResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
 
+      interface _ListBillingViewSegmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBillingViewSegmentsResponse]
+        def items: () -> ::Array[Types::BillingViewSegmentsListElement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#list_billing_view_segments-instance_method
+      def list_billing_view_segments: (
+                                        ?time_range: {
+                                          begin_date_inclusive: ::Time?,
+                                          end_date_exclusive: ::Time?
+                                        },
+                                        ?arn: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListBillingViewSegmentsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBillingViewSegmentsResponseSuccess
+
       interface _ListBillingViewsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBillingViewsResponse]
         def billing_views: () -> ::Array[Types::BillingViewListElement]
@@ -274,6 +291,41 @@ module Aws
                                 ?next_token: ::String
                               ) -> _ListBillingViewsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBillingViewsResponseSuccess
+
+      interface _ListBusinessSupportAccountChargesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBusinessSupportAccountChargesResponse]
+        def billing_month: () -> ::String
+        def is_estimated: () -> bool
+        def total_support_charge: () -> ::String
+        def total_support_eligible_spend: () -> ::String
+        def account_count: () -> ::Integer
+        def account_charges: () -> ::Array[Types::BusinessSupportAccountCharge]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#list_business_support_account_charges-instance_method
+      def list_business_support_account_charges: (
+                                                   billing_month: ::String,
+                                                   ?account_id: ::String,
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListBusinessSupportAccountChargesResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBusinessSupportAccountChargesResponseSuccess
+
+      interface _ListBusinessSupportSubscriptionHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBusinessSupportSubscriptionHistoryResponse]
+        def subscription_contracts: () -> ::Array[Types::BusinessSupportSubscriptionContract]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#list_business_support_subscription_history-instance_method
+      def list_business_support_subscription_history: (
+                                                        ?billing_month: ::String,
+                                                        ?account_id: ::String,
+                                                        ?start_date: ::Time,
+                                                        ?end_date: ::Time,
+                                                        ?max_results: ::Integer,
+                                                        ?next_token: ::String
+                                                      ) -> _ListBusinessSupportSubscriptionHistoryResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBusinessSupportSubscriptionHistoryResponseSuccess
 
       interface _ListEnterpriseSupportLinkedAccountChargesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEnterpriseSupportLinkedAccountChargesResponse]

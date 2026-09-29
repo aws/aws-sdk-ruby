@@ -4141,6 +4141,12 @@ module Aws::DataZone
     #   The user parameters of this Amazon DataZone blueprint.
     #   @return [Array<Types::CustomParameter>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the Amazon DataZone blueprint. The only valid value
+    #   is `TOOLING`, which creates a blueprint that provisions the tooling
+    #   resources of a project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentBlueprintInput AWS API Documentation
     #
     class CreateEnvironmentBlueprintInput < Struct.new(
@@ -4148,7 +4154,8 @@ module Aws::DataZone
       :name,
       :description,
       :provisioning_properties,
-      :user_parameters)
+      :user_parameters,
+      :blueprint_category)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -4185,6 +4192,12 @@ module Aws::DataZone
     #   The glossary terms attached to this Amazon DataZone blueprint.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the Amazon DataZone blueprint. The only valid value
+    #   is `TOOLING`, which indicates a blueprint that provisions the
+    #   tooling resources of a project.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp at which the environment blueprint was created.
     #   @return [Time]
@@ -4204,6 +4217,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at)
       SENSITIVE = [:description]
@@ -5022,6 +5036,10 @@ module Aws::DataZone
     #   The description of the notebook.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the notebook.
+    #   @return [String]
+    #
     # @!attribute [rw] metadata
     #   The metadata for the notebook, specified as key-value pairs. You can
     #   specify up to 50 entries, with keys up to 128 characters and values
@@ -5049,6 +5067,7 @@ module Aws::DataZone
       :owning_project_identifier,
       :name,
       :description,
+      :type,
       :metadata,
       :parameters,
       :client_token)
@@ -5078,6 +5097,10 @@ module Aws::DataZone
     #
     # @!attribute [rw] status
     #   The status of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the notebook.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -5145,6 +5168,7 @@ module Aws::DataZone
       :domain_id,
       :cell_order,
       :status,
+      :type,
       :description,
       :created_at,
       :created_by,
@@ -7105,8 +7129,25 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] skip_deletion_check
-    #   Specifies the optional flag to delete all child entities within the
-    #   domain.
+    #   Specifies whether to skip the check that prevents deletion of a
+    #   domain that still contains resources. When you use this parameter,
+    #   Amazon DataZone deletes the domain but might not remove its
+    #   associated resources, which can leave orphaned resources behind. To
+    #   delete a domain and fully clean up its associated resources, use
+    #   `cascadeDelete` instead. You can't use this parameter together with
+    #   `cascadeDelete`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cascade_delete
+    #   Specifies whether to delete the domain along with all of its
+    #   associated resources. When you use this parameter, Amazon DataZone
+    #   deletes the domain and cleanly removes its associated resources
+    #   without leaving orphaned resources behind. Amazon DataZone reports
+    #   deletion progress in the `deleteProgress` field. Amazon DataZone
+    #   reports any resources that it can't delete in the `failureReasons`
+    #   field of the `GetDomain` response. You can't use this parameter
+    #   together with `skipDeletionCheck`. If you don't specify a value,
+    #   the default is `false`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDomainInput AWS API Documentation
@@ -7114,7 +7155,8 @@ module Aws::DataZone
     class DeleteDomainInput < Struct.new(
       :identifier,
       :client_token,
-      :skip_deletion_check)
+      :skip_deletion_check,
+      :cascade_delete)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7398,6 +7440,24 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteNotebookOutput AWS API Documentation
     #
     class DeleteNotebookOutput < Aws::EmptyStructure; end
+
+    # The progress of a domain deletion, including the number of projects
+    # that Amazon DataZone successfully deleted. Amazon DataZone returns
+    # this structure in the response to a `GetDomain` request while a
+    # cascade deletion is in progress.
+    #
+    # @!attribute [rw] successfully_deleted_project_count
+    #   The number of projects that Amazon DataZone successfully deleted
+    #   during the domain deletion.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteProgress AWS API Documentation
+    #
+    class DeleteProgress < Struct.new(
+      :successfully_deleted_project_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] domain_identifier
     #   The ID of the Amazon DataZone domain in which the project is
@@ -8237,6 +8297,11 @@ module Aws::DataZone
     #   The timestamp of when the blueprint was enabled.
     #   @return [Time]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the environment blueprint. The only valid value is
+    #   `TOOLING`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/EnvironmentBlueprintSummary AWS API Documentation
     #
     class EnvironmentBlueprintSummary < Struct.new(
@@ -8246,7 +8311,8 @@ module Aws::DataZone
       :provider,
       :provisioning_properties,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :blueprint_category)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -8697,6 +8763,27 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/FailureCause AWS API Documentation
     #
     class FailureCause < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a resource deletion failure during a cascade deletion
+    # of the domain.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the resource that failed to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the resource that failed to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/FailureReason AWS API Documentation
+    #
+    class FailureReason < Struct.new(
+      :id,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -9922,6 +10009,16 @@ module Aws::DataZone
     #   The service role of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reasons
+    #   The list of failure reasons for resources that Amazon DataZone could
+    #   not delete during a cascade deletion of the domain.
+    #   @return [Array<Types::FailureReason>]
+    #
+    # @!attribute [rw] delete_progress
+    #   The progress of the current domain deletion, including the number of
+    #   projects that Amazon DataZone successfully deleted.
+    #   @return [Types::DeleteProgress]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDomainOutput AWS API Documentation
     #
     class GetDomainOutput < Struct.new(
@@ -9939,7 +10036,9 @@ module Aws::DataZone
       :last_updated_at,
       :tags,
       :domain_version,
-      :service_role)
+      :service_role,
+      :failure_reasons,
+      :delete_progress)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10215,6 +10314,12 @@ module Aws::DataZone
     #   The glossary terms attached to this Amazon DataZone blueprint.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of this Amazon DataZone blueprint. The only valid value
+    #   is `TOOLING`, which indicates a blueprint that provisions the
+    #   tooling resources of a project.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   A timestamp of when this blueprint was created.
     #   @return [Time]
@@ -10234,6 +10339,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at)
       SENSITIVE = [:description]
@@ -11414,6 +11520,10 @@ module Aws::DataZone
     #   The status of the notebook.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the notebook.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the notebook.
     #   @return [String]
@@ -11479,6 +11589,7 @@ module Aws::DataZone
       :domain_id,
       :cell_order,
       :status,
+      :type,
       :description,
       :created_at,
       :created_by,
@@ -13341,10 +13452,17 @@ module Aws::DataZone
     #   for a connection.
     #   @return [Boolean]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role to associate with the connection as the
+    #   project user role. To use this operation, you must have
+    #   `iam:PassRole` permission for this role.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/IamPropertiesInput AWS API Documentation
     #
     class IamPropertiesInput < Struct.new(
-      :glue_lineage_sync_enabled)
+      :glue_lineage_sync_enabled,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15705,6 +15823,10 @@ module Aws::DataZone
     #   The status to filter notebooks by.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type to filter notebooks by.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   When the number of notebooks is greater than the default value for
     #   the `MaxResults` parameter, or if you explicitly specify a value for
@@ -15723,6 +15845,7 @@ module Aws::DataZone
       :sort_order,
       :sort_by,
       :status,
+      :type,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -17441,6 +17564,10 @@ module Aws::DataZone
     #   The status of the notebook.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the notebook.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the notebook.
     #   @return [String]
@@ -17469,6 +17596,7 @@ module Aws::DataZone
       :owning_project_id,
       :domain_id,
       :status,
+      :type,
       :description,
       :created_at,
       :created_by,
@@ -24038,6 +24166,10 @@ module Aws::DataZone
     #   `UpdateEnvironmentBlueprint` action.
     #   @return [Array<Types::CustomParameter>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category to update. The only valid value is `TOOLING`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateEnvironmentBlueprintInput AWS API Documentation
     #
     class UpdateEnvironmentBlueprintInput < Struct.new(
@@ -24045,7 +24177,8 @@ module Aws::DataZone
       :identifier,
       :description,
       :provisioning_properties,
-      :user_parameters)
+      :user_parameters,
+      :blueprint_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24088,6 +24221,11 @@ module Aws::DataZone
     #   `UpdateEnvironmentBlueprint` action.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the environment blueprint. The only valid value is
+    #   `TOOLING`.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the environment blueprint was created.
     #   @return [Time]
@@ -24107,6 +24245,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at)
       SENSITIVE = [:description]
@@ -24704,6 +24843,10 @@ module Aws::DataZone
     #   The updated ordered list of cells in the notebook.
     #   @return [Array<Types::CellInformation>]
     #
+    # @!attribute [rw] type
+    #   The updated type of the notebook.
+    #   @return [String]
+    #
     # @!attribute [rw] metadata
     #   The updated metadata for the notebook, specified as key-value pairs.
     #   @return [Hash<String,String>]
@@ -24734,6 +24877,7 @@ module Aws::DataZone
       :status,
       :name,
       :cell_order,
+      :type,
       :metadata,
       :parameters,
       :environment_configuration,
@@ -24764,6 +24908,10 @@ module Aws::DataZone
     #
     # @!attribute [rw] status
     #   The status of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the notebook.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -24831,6 +24979,7 @@ module Aws::DataZone
       :domain_id,
       :cell_order,
       :status,
+      :type,
       :description,
       :created_at,
       :created_by,

@@ -896,6 +896,7 @@
         {"shape":"OperationNotPermittedException"},
         {"shape":"NotOrganizationMasterAccountException"},
         {"shape":"NoManagementAccountSLRExistsException"},
+        {"shape":"ConflictException"},
         {"shape":"ThrottlingException"}
       ],
       "idempotent":true
@@ -1631,7 +1632,8 @@
         "CloudWatchLogsRoleArn":{"shape":"String"},
         "KmsKeyId":{"shape":"String"},
         "IsOrganizationTrail":{"shape":"Boolean"},
-        "TagsList":{"shape":"TagsList"}
+        "TagsList":{"shape":"TagsList"},
+        "RecursiveLogging":{"shape":"Boolean"}
       }
     },
     "CreateTrailResponse":{
@@ -1652,7 +1654,8 @@
         "CloudWatchLogsLogGroupArn":{"shape":"String"},
         "CloudWatchLogsRoleArn":{"shape":"String"},
         "KmsKeyId":{"shape":"String"},
-        "IsOrganizationTrail":{"shape":"Boolean"}
+        "IsOrganizationTrail":{"shape":"Boolean"},
+        "RecursiveLogging":{"shape":"Boolean"}
       }
     },
     "DashboardArn":{
@@ -3754,7 +3757,8 @@
         "KmsKeyId":{"shape":"String"},
         "HasCustomEventSelectors":{"shape":"Boolean"},
         "HasInsightSelectors":{"shape":"Boolean"},
-        "IsOrganizationTrail":{"shape":"Boolean"}
+        "IsOrganizationTrail":{"shape":"Boolean"},
+        "RecursiveLogging":{"shape":"Boolean"}
       }
     },
     "TrailAlreadyExistsException":{
@@ -3899,7 +3903,8 @@
         "CloudWatchLogsLogGroupArn":{"shape":"String"},
         "CloudWatchLogsRoleArn":{"shape":"String"},
         "KmsKeyId":{"shape":"String"},
-        "IsOrganizationTrail":{"shape":"Boolean"}
+        "IsOrganizationTrail":{"shape":"Boolean"},
+        "RecursiveLogging":{"shape":"Boolean"}
       }
     },
     "UpdateTrailResponse":{
@@ -3920,7 +3925,8 @@
         "CloudWatchLogsLogGroupArn":{"shape":"String"},
         "CloudWatchLogsRoleArn":{"shape":"String"},
         "KmsKeyId":{"shape":"String"},
-        "IsOrganizationTrail":{"shape":"Boolean"}
+        "IsOrganizationTrail":{"shape":"Boolean"},
+        "RecursiveLogging":{"shape":"Boolean"}
       }
     },
     "ViewPropertiesKey":{

@@ -197,13 +197,21 @@ module Aws::ObservabilityAdmin
     #   Metric specific configuration for centralization source metrics.
     #   @return [Types::SourceMetricsConfiguration]
     #
+    # @!attribute [rw] source_context_graph_configuration
+    #   Configuration that enables centralization of the context graph for
+    #   the selected sources. Including this configuration in a rule's
+    #   source opts the rule into centralizing the context graph for the
+    #   selected sources.
+    #   @return [Types::SourceContextGraphConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CentralizationRuleSource AWS API Documentation
     #
     class CentralizationRuleSource < Struct.new(
       :regions,
       :scope,
       :source_logs_configuration,
-      :source_metrics_configuration)
+      :source_metrics_configuration,
+      :source_context_graph_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -259,6 +267,13 @@ module Aws::ObservabilityAdmin
     #   when `TagPropagationStatus` is `Unhealthy`.
     #   @return [String]
     #
+    # @!attribute [rw] context_graph_status
+    #   The status of context graph centralization for this rule. Returns
+    #   `Provisioning` while the context graph is being set up, `Healthy`
+    #   once it is active, or `Unhealthy` if provisioning failed. This
+    #   status is independent of the overall `RuleHealth` for log delivery.
+    #   @return [String]
+    #
     # @!attribute [rw] destination_account_id
     #   The primary destination account of the organization centralization
     #   rule.
@@ -282,6 +297,7 @@ module Aws::ObservabilityAdmin
       :failure_reason,
       :tag_propagation_status,
       :tag_propagation_failure_reason,
+      :context_graph_status,
       :destination_account_id,
       :destination_region)
       SENSITIVE = []
@@ -423,6 +439,54 @@ module Aws::ObservabilityAdmin
     #
     class CreateCentralizationRuleForOrganizationOutput < Struct.new(
       :rule_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
+    #   CloudWatch permission to access the resources needed for the dataset
+    #   integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pairs to associate with the dataset integration
+    #   resource for categorization and management purposes.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateDatasetIntegrationInput AWS API Documentation
+    #
+    class CreateDatasetIntegrationInput < Struct.new(
+      :role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the created dataset integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   dataset integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the dataset integration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the dataset integration was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateDatasetIntegrationOutput AWS API Documentation
+    #
+    class CreateDatasetIntegrationOutput < Struct.new(
+      :arn,
+      :role_arn,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -613,6 +677,38 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Contains summary information about a dataset integration, including
+    # its ARN, associated IAM role, and creation and update timestamps, as
+    # returned by `ListDatasetIntegrations`.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the dataset integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   dataset integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the dataset integration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the dataset integration was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DatasetIntegrationSummary AWS API Documentation
+    #
+    class DatasetIntegrationSummary < Struct.new(
+      :arn,
+      :role_arn,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] rule_identifier
     #   The identifier (name or ARN) of the organization centralization rule
     #   to delete.
@@ -622,6 +718,18 @@ module Aws::ObservabilityAdmin
     #
     class DeleteCentralizationRuleForOrganizationInput < Struct.new(
       :rule_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the dataset integration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteDatasetIntegrationInput AWS API Documentation
+    #
+    class DeleteDatasetIntegrationInput < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -897,6 +1005,13 @@ module Aws::ObservabilityAdmin
     #   when `TagPropagationStatus` is `Unhealthy`.
     #   @return [String]
     #
+    # @!attribute [rw] context_graph_status
+    #   The status of context graph centralization for this rule. Returns
+    #   `Provisioning` while the context graph is being set up, `Healthy`
+    #   once it is active, or `Unhealthy` if provisioning failed. This
+    #   status is independent of the overall `RuleHealth` for log delivery.
+    #   @return [String]
+    #
     # @!attribute [rw] centralization_rule
     #   The configuration details for the organization centralization rule.
     #   @return [Types::CentralizationRule]
@@ -914,7 +1029,49 @@ module Aws::ObservabilityAdmin
       :failure_reason,
       :tag_propagation_status,
       :tag_propagation_failure_reason,
+      :context_graph_status,
       :centralization_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the dataset integration to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetDatasetIntegrationInput AWS API Documentation
+    #
+    class GetDatasetIntegrationInput < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the dataset integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   dataset integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the dataset integration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the dataset integration was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetDatasetIntegrationOutput AWS API Documentation
+    #
+    class GetDatasetIntegrationOutput < Struct.new(
+      :arn,
+      :role_arn,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1349,6 +1506,41 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. A previous call generates
+    #   this token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListDatasetIntegrationsInput AWS API Documentation
+    #
+    class ListDatasetIntegrationsInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_integration_summaries
+    #   The dataset integrations in your account.
+    #   @return [Array<Types::DatasetIntegrationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListDatasetIntegrationsOutput AWS API Documentation
+    #
+    class ListDatasetIntegrationsOutput < Struct.new(
+      :dataset_integration_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_identifiers
     #   A list of Amazon Web Services accounts used to filter the resources
     #   to those associated with the specified accounts.
@@ -1361,8 +1553,22 @@ module Aws::ObservabilityAdmin
     #
     # @!attribute [rw] resource_types
     #   A list of resource types used to filter resources in the
-    #   organization. If this parameter is provided, the resources will be
-    #   returned in the same order used in the request.
+    #   organization. If this parameter is provided, the service returns the
+    #   resources in the same order as specified in the request. Currently
+    #   supported resource types for discovery are:
+    #
+    #   * `AWS::EC2::Instance`
+    #
+    #   * `AWS::EC2::VPC`
+    #
+    #   * `AWS::Lambda::Function`
+    #
+    #   * `AWS::EKS::Cluster`
+    #
+    #   * `AWS::WAFv2::WebACL`
+    #
+    #   * `AWS::ElasticLoadBalancingV2::LoadBalancer` (Network Load
+    #     Balancers only)
     #   @return [Array<String>]
     #
     # @!attribute [rw] telemetry_configuration_state
@@ -1431,8 +1637,22 @@ module Aws::ObservabilityAdmin
     #
     # @!attribute [rw] resource_types
     #   A list of resource types used to filter resources supported by
-    #   telemetry config. If this parameter is provided, the resources will
-    #   be returned in the same order used in the request.
+    #   telemetry config. If this parameter is provided, the service returns
+    #   the resources in the same order as specified in the request.
+    #   Currently supported resource types for discovery are:
+    #
+    #   * `AWS::EC2::Instance`
+    #
+    #   * `AWS::EC2::VPC`
+    #
+    #   * `AWS::Lambda::Function`
+    #
+    #   * `AWS::EKS::Cluster`
+    #
+    #   * `AWS::WAFv2::WebACL`
+    #
+    #   * `AWS::ElasticLoadBalancingV2::LoadBalancer` (Network Load
+    #     Balancers only)
     #   @return [Array<String>]
     #
     # @!attribute [rw] telemetry_configuration_state
@@ -2070,6 +2290,17 @@ module Aws::ObservabilityAdmin
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Configuration that enables centralization of the context graph for the
+    # selected sources. Including this configuration in a rule's source
+    # opts the rule into centralizing the context graph for the selected
+    # sources.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/SourceContextGraphConfiguration AWS API Documentation
+    #
+    class SourceContextGraphConfiguration < Aws::EmptyStructure; end
 
     # Configuration for selecting and handling source log groups for
     # centralization.
@@ -2773,6 +3004,52 @@ module Aws::ObservabilityAdmin
     #
     class UpdateCentralizationRuleForOrganizationOutput < Struct.new(
       :rule_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the dataset integration to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to associate with the
+    #   dataset integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/UpdateDatasetIntegrationInput AWS API Documentation
+    #
+    class UpdateDatasetIntegrationInput < Struct.new(
+      :arn,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the updated dataset integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   updated dataset integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the dataset integration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the dataset integration was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/UpdateDatasetIntegrationOutput AWS API Documentation
+    #
+    class UpdateDatasetIntegrationOutput < Struct.new(
+      :arn,
+      :role_arn,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end

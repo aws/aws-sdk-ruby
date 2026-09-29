@@ -200,12 +200,17 @@ module Aws::WorkspacesInstances
     #   Number of threads per CPU core.
     #   @return [Integer]
     #
+    # @!attribute [rw] nested_virtualization
+    #   Specifies whether to enable or disable nested virtualization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/CpuOptionsRequest AWS API Documentation
     #
     class CpuOptionsRequest < Struct.new(
       :amd_sev_snp,
       :core_count,
-      :threads_per_core)
+      :threads_per_core,
+      :nested_virtualization)
       SENSITIVE = []
       include Aws::Structure
     end

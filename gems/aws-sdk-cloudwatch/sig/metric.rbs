@@ -117,6 +117,10 @@ module Aws
                          sliding_window: {
                          }?
                        },
+                       ?warm_up_configuration: {
+                         warm_up_period_duration_in_minutes: ::Integer,
+                         only_start_evaluating_after_warm_up_period_ends: bool?
+                       },
                        ?evaluation_criteria: {
                          prom_ql_criteria: {
                            query: ::String,

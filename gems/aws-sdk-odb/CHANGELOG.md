@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2026-09-02)
+------------------
+
+* Feature - Adds the ListFlexComponents API for listing the flex components available for a given DB system shape.
+
 1.27.0 (2026-08-12)
 ------------------
 

@@ -34,6 +34,7 @@ module Aws::Bedrock
     AdvancedPromptOptimizationJobStatus = Shapes::StringShape.new(name: 'AdvancedPromptOptimizationJobStatus')
     AdvancedPromptOptimizationJobSummaries = Shapes::ListShape.new(name: 'AdvancedPromptOptimizationJobSummaries')
     AdvancedPromptOptimizationJobSummary = Shapes::StructureShape.new(name: 'AdvancedPromptOptimizationJobSummary')
+    AdvancedPromptOptimizationModelIdentifier = Shapes::StringShape.new(name: 'AdvancedPromptOptimizationModelIdentifier')
     AdvancedPromptOptimizationOutputConfig = Shapes::StructureShape.new(name: 'AdvancedPromptOptimizationOutputConfig')
     AgreementAvailability = Shapes::StructureShape.new(name: 'AgreementAvailability')
     AgreementStatus = Shapes::StringShape.new(name: 'AgreementStatus')
@@ -3231,7 +3232,7 @@ module Aws::Bedrock
     MetadataConfigurationForReranking.add_member(:selective_mode_configuration, Shapes::ShapeRef.new(shape: RerankingMetadataSelectiveModeConfiguration, location_name: "selectiveModeConfiguration"))
     MetadataConfigurationForReranking.struct_class = Types::MetadataConfigurationForReranking
 
-    ModelConfiguration.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    ModelConfiguration.add_member(:model_id, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationModelIdentifier, required: true, location_name: "modelId"))
     ModelConfiguration.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfig"))
     ModelConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
     ModelConfiguration.struct_class = Types::ModelConfiguration

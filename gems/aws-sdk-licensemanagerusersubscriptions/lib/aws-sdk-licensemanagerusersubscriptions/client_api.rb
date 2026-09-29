@@ -326,6 +326,7 @@ module Aws::LicenseManagerUserSubscriptions
     ProductUserSummary.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
     ProductUserSummary.add_member(:subscription_start_date, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionStartDate"))
     ProductUserSummary.add_member(:subscription_end_date, Shapes::ShapeRef.new(shape: String, location_name: "SubscriptionEndDate"))
+    ProductUserSummary.add_member(:license_expiration_date, Shapes::ShapeRef.new(shape: String, location_name: "LicenseExpirationDate"))
     ProductUserSummary.struct_class = Types::ProductUserSummary
 
     ProductUserSummaryList.member = Shapes::ShapeRef.new(shape: ProductUserSummary)

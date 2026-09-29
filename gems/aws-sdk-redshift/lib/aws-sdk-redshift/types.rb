@@ -972,6 +972,11 @@ module Aws::Redshift
     #   Default: false
     #   @return [String]
     #
+    # @!attribute [rw] logging_publish_status
+    #   The status of system table publishing for the cluster. This field is
+    #   present only when system table publishing is configured.
+    #   @return [Types::LoggingPublishStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -1037,7 +1042,8 @@ module Aws::Redshift
       :multi_az_secondary,
       :lakehouse_registration_status,
       :catalog_arn,
-      :extra_compute_for_automatic_optimization)
+      :extra_compute_for_automatic_optimization,
+      :logging_publish_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6248,10 +6254,26 @@ module Aws::Redshift
     #   Example: `examplecluster`
     #   @return [String]
     #
+    # @!attribute [rw] log_destination_type
+    #   The log destination type. An enum with possible values of `s3`,
+    #   `cloudwatch`, and `s3table`. When set to `s3table`, stops system
+    #   table publishing. When omitted, the operation disables audit
+    #   logging.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_exports
+    #   The collection of log types to stop exporting. When
+    #   `LogDestinationType` is `s3table`, the values are the names of the
+    #   system tables to stop publishing. Omitting this parameter or passing
+    #   `all` stops publishing all system tables.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLoggingMessage AWS API Documentation
     #
     class DisableLoggingMessage < Struct.new(
-      :cluster_identifier)
+      :cluster_identifier,
+      :log_destination_type,
+      :log_exports)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6392,14 +6414,32 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] log_destination_type
-    #   The log destination type. An enum with possible values of `s3` and
-    #   `cloudwatch`.
+    #   The log destination type. An enum with possible values of `s3`,
+    #   `cloudwatch`, and `s3table`.
     #   @return [String]
     #
     # @!attribute [rw] log_exports
-    #   The collection of exported log types. Possible values are
-    #   `connectionlog`, `useractivitylog`, and `userlog`.
+    #   The collection of exported log types. When `LogDestinationType` is
+    #   `s3` or `cloudwatch`, possible values are `connectionlog`,
+    #   `useractivitylog`, and `userlog`. When `LogDestinationType` is
+    #   `s3table`, the values are the names of the system tables to publish.
+    #   Omitting this parameter, passing an empty list, or including the
+    #   value `all` publishes all current and future system tables.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_table_kms_key_id
+    #   The identifier of a customer managed KMS key used to encrypt the S3
+    #   tables. This parameter is valid only when `LogDestinationType` is
+    #   `s3table`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_table_granularity
+    #   The scope of system table publishing. Valid values are `cluster` and
+    #   `account`. A value of `cluster` scopes publishing to the individual
+    #   cluster. A value of `account` scopes publishing to the Amazon Web
+    #   Services account. This parameter is valid only when
+    #   `LogDestinationType` is `s3table`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLoggingMessage AWS API Documentation
     #
@@ -6408,7 +6448,9 @@ module Aws::Redshift
       :bucket_name,
       :s3_key_prefix,
       :log_destination_type,
-      :log_exports)
+      :log_exports,
+      :s3_table_kms_key_id,
+      :s3_table_granularity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8182,6 +8224,20 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Describes the system table publishing status for a cluster.
+    #
+    # @!attribute [rw] s3_tables
+    #   The status of system table publishing to S3 Tables.
+    #   @return [Types::S3TablePublishStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/LoggingPublishStatus AWS API Documentation
+    #
+    class LoggingPublishStatus < Struct.new(
+      :s3_tables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the status of logging for a cluster.
     #
     # @!attribute [rw] logging_enabled
@@ -8209,14 +8265,22 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] log_destination_type
-    #   The log destination type. An enum with possible values of `s3` and
-    #   `cloudwatch`.
+    #   The log destination type. An enum with possible values of `s3`,
+    #   `cloudwatch`, and `s3table`.
     #   @return [String]
     #
     # @!attribute [rw] log_exports
-    #   The collection of exported log types. Possible values are
-    #   `connectionlog`, `useractivitylog`, and `userlog`.
+    #   The collection of exported log types. When `LogDestinationType` is
+    #   `s3` or `cloudwatch`, possible values are `connectionlog`,
+    #   `useractivitylog`, and `userlog`. When `LogDestinationType` is
+    #   `s3table`, the values are the names of the system tables being
+    #   published.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_tables
+    #   The status of system table publishing to S3 Tables. This field is
+    #   populated only when system table publishing is active.
+    #   @return [Types::S3TablePublishStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/LoggingStatus AWS API Documentation
     #
@@ -8228,7 +8292,8 @@ module Aws::Redshift
       :last_failure_time,
       :last_failure_message,
       :log_destination_type,
-      :log_exports)
+      :log_exports,
+      :s3_tables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8543,11 +8608,6 @@ module Aws::Redshift
     #
     #   You can't use `MasterUserPassword` if `ManageMasterPassword` is
     #   `true`.
-    #
-    #   If your admin user account is locked, this operation also unlocks
-    #   your account and resets the failed-login counter. This option is
-    #   available only when account lockout security is enabled for the
-    #   cluster.
     #
     #   <note markdown="1"> Operations never return the password, so this operation provides a
     #   way to regain access to the admin user account for a cluster if the
@@ -11803,6 +11863,46 @@ module Aws::Redshift
 
       class ReadWriteAccess < S3AccessGrantsScopeUnion; end
       class Unknown < S3AccessGrantsScopeUnion; end
+    end
+
+    # Describes the status of system table publishing to S3 Tables for a
+    # cluster.
+    #
+    # @!attribute [rw] s3_tables
+    #   The system tables currently being published.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_table_namespace
+    #   The namespace in the S3 table bucket that holds the published
+    #   tables.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_table_granularity
+    #   The scope of system table publishing in effect. Possible values are
+    #   `cluster` and `account`.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_all
+    #   `true` if the cluster is enrolled in all current and future system
+    #   tables rather than an explicit subset.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_ingestion_times
+    #   A map whose keys are the names of the published system tables and
+    #   whose values are the time each table last received data. Use this to
+    #   judge data freshness.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/S3TablePublishStatus AWS API Documentation
+    #
+    class S3TablePublishStatus < Struct.new(
+      :s3_tables,
+      :s3_table_namespace,
+      :s3_table_granularity,
+      :enabled_all,
+      :last_ingestion_times)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Amazon SNS has responded that there is a problem with the specified

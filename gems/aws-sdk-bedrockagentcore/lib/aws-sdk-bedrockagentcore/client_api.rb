@@ -100,6 +100,7 @@ module Aws::BedrockAgentCore
     CloudWatchLogsFilterOperator = Shapes::StringShape.new(name: 'CloudWatchLogsFilterOperator')
     CloudWatchLogsRule = Shapes::StructureShape.new(name: 'CloudWatchLogsRule')
     CloudWatchLogsSource = Shapes::StructureShape.new(name: 'CloudWatchLogsSource')
+    CloudWatchLogsSourceLogGroupNamePrefixesList = Shapes::ListShape.new(name: 'CloudWatchLogsSourceLogGroupNamePrefixesList')
     CloudWatchLogsSourceLogGroupNamesList = Shapes::ListShape.new(name: 'CloudWatchLogsSourceLogGroupNamesList')
     CloudWatchLogsSourceServiceNamesList = Shapes::ListShape.new(name: 'CloudWatchLogsSourceServiceNamesList')
     CloudWatchLogsTraceConfig = Shapes::StructureShape.new(name: 'CloudWatchLogsTraceConfig')
@@ -132,6 +133,7 @@ module Aws::BedrockAgentCore
     ContentBlockList = Shapes::ListShape.new(name: 'ContentBlockList')
     ContentBlockType = Shapes::StringShape.new(name: 'ContentBlockType')
     ContentDeltaEvent = Shapes::StructureShape.new(name: 'ContentDeltaEvent')
+    ContentSource = Shapes::UnionShape.new(name: 'ContentSource')
     ContentStartEvent = Shapes::StructureShape.new(name: 'ContentStartEvent')
     ContentStopEvent = Shapes::StructureShape.new(name: 'ContentStopEvent')
     ContentTextString = Shapes::StringShape.new(name: 'ContentTextString')
@@ -232,6 +234,7 @@ module Aws::BedrockAgentCore
     ExecutionSummaryClusteringResultContent = Shapes::StructureShape.new(name: 'ExecutionSummaryClusteringResultContent')
     ExternalProxy = Shapes::StructureShape.new(name: 'ExternalProxy')
     ExternalProxyPortInteger = Shapes::IntegerShape.new(name: 'ExternalProxyPortInteger')
+    ExtractionConfig = Shapes::StructureShape.new(name: 'ExtractionConfig')
     ExtractionJob = Shapes::StructureShape.new(name: 'ExtractionJob')
     ExtractionJobFilterInput = Shapes::StructureShape.new(name: 'ExtractionJobFilterInput')
     ExtractionJobMessages = Shapes::UnionShape.new(name: 'ExtractionJobMessages')
@@ -312,6 +315,12 @@ module Aws::BedrockAgentCore
     HarnessEndpointName = Shapes::StringShape.new(name: 'HarnessEndpointName')
     HarnessGatewayOutboundAuth = Shapes::UnionShape.new(name: 'HarnessGatewayOutboundAuth')
     HarnessGeminiModelConfig = Shapes::StructureShape.new(name: 'HarnessGeminiModelConfig')
+    HarnessHookDecision = Shapes::StringShape.new(name: 'HarnessHookDecision')
+    HarnessHookEvent = Shapes::StructureShape.new(name: 'HarnessHookEvent')
+    HarnessHookEventId = Shapes::StringShape.new(name: 'HarnessHookEventId')
+    HarnessHookEventReasonString = Shapes::StringShape.new(name: 'HarnessHookEventReasonString')
+    HarnessHookEventType = Shapes::StringShape.new(name: 'HarnessHookEventType')
+    HarnessHookName = Shapes::StringShape.new(name: 'HarnessHookName')
     HarnessInlineFunctionConfig = Shapes::StructureShape.new(name: 'HarnessInlineFunctionConfig')
     HarnessInlineFunctionDescription = Shapes::StringShape.new(name: 'HarnessInlineFunctionDescription')
     HarnessLiteLlmApiBase = Shapes::StringShape.new(name: 'HarnessLiteLlmApiBase')
@@ -322,6 +331,7 @@ module Aws::BedrockAgentCore
     HarnessMessages = Shapes::ListShape.new(name: 'HarnessMessages')
     HarnessMetadataEvent = Shapes::StructureShape.new(name: 'HarnessMetadataEvent')
     HarnessModelConfiguration = Shapes::UnionShape.new(name: 'HarnessModelConfiguration')
+    HarnessOpenAiApiBase = Shapes::StringShape.new(name: 'HarnessOpenAiApiBase')
     HarnessOpenAiApiFormat = Shapes::StringShape.new(name: 'HarnessOpenAiApiFormat')
     HarnessOpenAiModelConfig = Shapes::StructureShape.new(name: 'HarnessOpenAiModelConfig')
     HarnessReasoningContentBlock = Shapes::UnionShape.new(name: 'HarnessReasoningContentBlock')
@@ -373,9 +383,14 @@ module Aws::BedrockAgentCore
     HttpResponseCode = Shapes::IntegerShape.new(name: 'HttpResponseCode')
     IgnoredReferenceInputField = Shapes::StringShape.new(name: 'IgnoredReferenceInputField')
     IgnoredReferenceInputFields = Shapes::ListShape.new(name: 'IgnoredReferenceInputFields')
+    IngestDataInput = Shapes::StructureShape.new(name: 'IngestDataInput')
+    IngestDataOutput = Shapes::StructureShape.new(name: 'IngestDataOutput')
+    IngestPayloadList = Shapes::ListShape.new(name: 'IngestPayloadList')
+    IngestPayloadType = Shapes::UnionShape.new(name: 'IngestPayloadType')
     InlineContent = Shapes::StringShape.new(name: 'InlineContent')
     InlineGroundTruth = Shapes::StructureShape.new(name: 'InlineGroundTruth')
     InlineGroundTruthTurnsList = Shapes::ListShape.new(name: 'InlineGroundTruthTurnsList')
+    InlineMemoryContent = Shapes::StructureShape.new(name: 'InlineMemoryContent')
     InputContentBlock = Shapes::StructureShape.new(name: 'InputContentBlock')
     InputContentBlockList = Shapes::ListShape.new(name: 'InputContentBlockList')
     Insight = Shapes::StructureShape.new(name: 'Insight')
@@ -468,6 +483,9 @@ module Aws::BedrockAgentCore
     ListSessionsInput = Shapes::StructureShape.new(name: 'ListSessionsInput')
     ListSessionsOutput = Shapes::StructureShape.new(name: 'ListSessionsOutput')
     LiveViewStream = Shapes::StructureShape.new(name: 'LiveViewStream')
+    LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
+    LogGroupNamePrefix = Shapes::StringShape.new(name: 'LogGroupNamePrefix')
+    LogStreamName = Shapes::StringShape.new(name: 'LogStreamName')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxLenString = Shapes::StringShape.new(name: 'MaxLenString')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -477,6 +495,8 @@ module Aws::BedrockAgentCore
     MemoryContentTextString = Shapes::StringShape.new(name: 'MemoryContentTextString')
     MemoryDocument = Shapes::DocumentShape.new(name: 'MemoryDocument', document: true)
     MemoryId = Shapes::StringShape.new(name: 'MemoryId')
+    MemoryJsonData = Shapes::StructureShape.new(name: 'MemoryJsonData')
+    MemoryJsonDataContent = Shapes::DocumentShape.new(name: 'MemoryJsonDataContent', document: true)
     MemoryMetadataFilterExpression = Shapes::StructureShape.new(name: 'MemoryMetadataFilterExpression')
     MemoryMetadataFilterList = Shapes::ListShape.new(name: 'MemoryMetadataFilterList')
     MemoryRecord = Shapes::StructureShape.new(name: 'MemoryRecord')
@@ -505,6 +525,7 @@ module Aws::BedrockAgentCore
     MetadataMap = Shapes::MapShape.new(name: 'MetadataMap')
     MetadataValue = Shapes::UnionShape.new(name: 'MetadataValue')
     MetadataValueStringValueString = Shapes::StringShape.new(name: 'MetadataValueStringValueString')
+    MetricsNamespace = Shapes::StringShape.new(name: 'MetricsNamespace')
     MimeType = Shapes::StringShape.new(name: 'MimeType')
     ModelId = Shapes::StringShape.new(name: 'ModelId')
     MountPath = Shapes::StringShape.new(name: 'MountPath')
@@ -526,6 +547,9 @@ module Aws::BedrockAgentCore
     MppPaymentOutputSelectedPaymentIdString = Shapes::StringShape.new(name: 'MppPaymentOutputSelectedPaymentIdString')
     Name = Shapes::StringShape.new(name: 'Name')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
+    NamespaceVariableName = Shapes::StringShape.new(name: 'NamespaceVariableName')
+    NamespaceVariableValue = Shapes::StringShape.new(name: 'NamespaceVariableValue')
+    NamespaceVariablesMap = Shapes::MapShape.new(name: 'NamespaceVariablesMap')
     NamespacesList = Shapes::ListShape.new(name: 'NamespacesList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
@@ -547,6 +571,7 @@ module Aws::BedrockAgentCore
     OnlineEvaluationConfigSource = Shapes::StructureShape.new(name: 'OnlineEvaluationConfigSource')
     OnlineEvaluationTraceConfig = Shapes::StructureShape.new(name: 'OnlineEvaluationTraceConfig')
     OperatorType = Shapes::StringShape.new(name: 'OperatorType')
+    OptionalLogGroupName = Shapes::StringShape.new(name: 'OptionalLogGroupName')
     OutputConfig = Shapes::UnionShape.new(name: 'OutputConfig')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PathPattern = Shapes::StringShape.new(name: 'PathPattern')
@@ -628,6 +653,7 @@ module Aws::BedrockAgentCore
     ResourcesListType = Shapes::ListShape.new(name: 'ResourcesListType')
     ResponseChunk = Shapes::StructureShape.new(name: 'ResponseChunk')
     ResponseStream = Shapes::BlobShape.new(name: 'ResponseStream', streaming: true)
+    ResultDestination = Shapes::StringShape.new(name: 'ResultDestination')
     RetrieveMemoryRecordsInput = Shapes::StructureShape.new(name: 'RetrieveMemoryRecordsInput')
     RetrieveMemoryRecordsOutput = Shapes::StructureShape.new(name: 'RetrieveMemoryRecordsOutput')
     RetryableConflictException = Shapes::StructureShape.new(name: 'RetryableConflictException')
@@ -680,6 +706,8 @@ module Aws::BedrockAgentCore
     SessionStatus = Shapes::StringShape.new(name: 'SessionStatus')
     SessionSummary = Shapes::StructureShape.new(name: 'SessionSummary')
     SessionSummaryList = Shapes::ListShape.new(name: 'SessionSummaryList')
+    SessionTraceIds = Shapes::StructureShape.new(name: 'SessionTraceIds')
+    SessionTraceIdsList = Shapes::ListShape.new(name: 'SessionTraceIdsList')
     SessionType = Shapes::StringShape.new(name: 'SessionType')
     SkillDefinition = Shapes::StructureShape.new(name: 'SkillDefinition')
     SkillMdDefinition = Shapes::StructureShape.new(name: 'SkillMdDefinition')
@@ -775,6 +803,7 @@ module Aws::BedrockAgentCore
     TopK = Shapes::IntegerShape.new(name: 'TopK')
     TopP = Shapes::FloatShape.new(name: 'TopP')
     TraceId = Shapes::StringShape.new(name: 'TraceId')
+    TraceIdList = Shapes::ListShape.new(name: 'TraceIdList')
     TraceIds = Shapes::ListShape.new(name: 'TraceIds')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     Unit = Shapes::StructureShape.new(name: 'Unit')
@@ -1030,6 +1059,7 @@ module Aws::BedrockAgentCore
 
     CloudWatchFilterConfig.add_member(:session_ids, Shapes::ShapeRef.new(shape: CloudWatchFilterConfigSessionIdsList, location_name: "sessionIds"))
     CloudWatchFilterConfig.add_member(:time_range, Shapes::ShapeRef.new(shape: SessionFilterConfig, location_name: "timeRange"))
+    CloudWatchFilterConfig.add_member(:session_trace_ids, Shapes::ShapeRef.new(shape: SessionTraceIdsList, location_name: "sessionTraceIds"))
     CloudWatchFilterConfig.struct_class = Types::CloudWatchFilterConfig
 
     CloudWatchFilterConfigSessionIdsList.member = Shapes::ShapeRef.new(shape: String)
@@ -1045,11 +1075,14 @@ module Aws::BedrockAgentCore
     CloudWatchLogsRule.struct_class = Types::CloudWatchLogsRule
 
     CloudWatchLogsSource.add_member(:service_names, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceServiceNamesList, required: true, location_name: "serviceNames"))
-    CloudWatchLogsSource.add_member(:log_group_names, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceLogGroupNamesList, required: true, location_name: "logGroupNames"))
+    CloudWatchLogsSource.add_member(:log_group_names, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceLogGroupNamesList, location_name: "logGroupNames"))
+    CloudWatchLogsSource.add_member(:log_group_name_prefixes, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceLogGroupNamePrefixesList, location_name: "logGroupNamePrefixes"))
     CloudWatchLogsSource.add_member(:filter_config, Shapes::ShapeRef.new(shape: CloudWatchFilterConfig, location_name: "filterConfig"))
     CloudWatchLogsSource.struct_class = Types::CloudWatchLogsSource
 
-    CloudWatchLogsSourceLogGroupNamesList.member = Shapes::ShapeRef.new(shape: String)
+    CloudWatchLogsSourceLogGroupNamePrefixesList.member = Shapes::ShapeRef.new(shape: LogGroupNamePrefix)
+
+    CloudWatchLogsSourceLogGroupNamesList.member = Shapes::ShapeRef.new(shape: LogGroupName)
 
     CloudWatchLogsSourceServiceNamesList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1062,8 +1095,10 @@ module Aws::BedrockAgentCore
 
     CloudWatchLogsTraceConfigLogGroupArnsList.member = Shapes::ShapeRef.new(shape: String)
 
-    CloudWatchOutputConfig.add_member(:log_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "logGroupName"))
-    CloudWatchOutputConfig.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "logStreamName"))
+    CloudWatchOutputConfig.add_member(:log_group_name, Shapes::ShapeRef.new(shape: OptionalLogGroupName, location_name: "logGroupName"))
+    CloudWatchOutputConfig.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "logStreamName"))
+    CloudWatchOutputConfig.add_member(:metrics_namespace, Shapes::ShapeRef.new(shape: MetricsNamespace, location_name: "metricsNamespace"))
+    CloudWatchOutputConfig.add_member(:result_destination, Shapes::ShapeRef.new(shape: ResultDestination, location_name: "resultDestination"))
     CloudWatchOutputConfig.struct_class = Types::CloudWatchOutputConfig
 
     CodeInterpreterResult.add_member(:content, Shapes::ShapeRef.new(shape: ContentBlockList, required: true, location_name: "content"))
@@ -1148,6 +1183,12 @@ module Aws::BedrockAgentCore
     ContentDeltaEvent.add_member(:stderr, Shapes::ShapeRef.new(shape: String, location_name: "stderr"))
     ContentDeltaEvent.struct_class = Types::ContentDeltaEvent
 
+    ContentSource.add_member(:inline, Shapes::ShapeRef.new(shape: InlineMemoryContent, location_name: "inline"))
+    ContentSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ContentSource.add_member_subclass(:inline, Types::ContentSource::Inline)
+    ContentSource.add_member_subclass(:unknown, Types::ContentSource::Unknown)
+    ContentSource.struct_class = Types::ContentSource
+
     ContentStartEvent.struct_class = Types::ContentStartEvent
 
     ContentStopEvent.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "exitCode"))
@@ -1198,6 +1239,7 @@ module Aws::BedrockAgentCore
     CreateEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateEventInput.add_member(:metadata, Shapes::ShapeRef.new(shape: MetadataMap, location_name: "metadata"))
     CreateEventInput.add_member(:extraction_mode, Shapes::ShapeRef.new(shape: ExtractionMode, location_name: "extractionMode"))
+    CreateEventInput.add_member(:extraction_config, Shapes::ShapeRef.new(shape: ExtractionConfig, location_name: "extractionConfig"))
     CreateEventInput.struct_class = Types::CreateEventInput
 
     CreateEventOutput.add_member(:event, Shapes::ShapeRef.new(shape: Event, required: true, location_name: "event"))
@@ -1285,6 +1327,7 @@ module Aws::BedrockAgentCore
 
     DeleteMemoryRecordInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
     DeleteMemoryRecordInput.add_member(:memory_record_id, Shapes::ShapeRef.new(shape: MemoryRecordId, required: true, location: "uri", location_name: "memoryRecordId"))
+    DeleteMemoryRecordInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
     DeleteMemoryRecordInput.struct_class = Types::DeleteMemoryRecordInput
 
     DeleteMemoryRecordOutput.add_member(:memory_record_id, Shapes::ShapeRef.new(shape: MemoryRecordId, required: true, location_name: "memoryRecordId"))
@@ -1478,6 +1521,9 @@ module Aws::BedrockAgentCore
     ExternalProxy.add_member(:credentials, Shapes::ShapeRef.new(shape: ProxyCredentials, location_name: "credentials"))
     ExternalProxy.struct_class = Types::ExternalProxy
 
+    ExtractionConfig.add_member(:namespace_variables, Shapes::ShapeRef.new(shape: NamespaceVariablesMap, location_name: "namespaceVariables"))
+    ExtractionConfig.struct_class = Types::ExtractionConfig
+
     ExtractionJob.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     ExtractionJob.struct_class = Types::ExtractionJob
 
@@ -1654,6 +1700,7 @@ module Aws::BedrockAgentCore
 
     GetMemoryRecordInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
     GetMemoryRecordInput.add_member(:memory_record_id, Shapes::ShapeRef.new(shape: MemoryRecordId, required: true, location: "uri", location_name: "memoryRecordId"))
+    GetMemoryRecordInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
     GetMemoryRecordInput.struct_class = Types::GetMemoryRecordInput
 
     GetMemoryRecordOutput.add_member(:memory_record, Shapes::ShapeRef.new(shape: MemoryRecord, required: true, location_name: "memoryRecord"))
@@ -1865,6 +1912,13 @@ module Aws::BedrockAgentCore
     HarnessGeminiModelConfig.add_member(:additional_params, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParams"))
     HarnessGeminiModelConfig.struct_class = Types::HarnessGeminiModelConfig
 
+    HarnessHookEvent.add_member(:hook_event_id, Shapes::ShapeRef.new(shape: HarnessHookEventId, required: true, location_name: "hookEventId"))
+    HarnessHookEvent.add_member(:name, Shapes::ShapeRef.new(shape: HarnessHookName, required: true, location_name: "name"))
+    HarnessHookEvent.add_member(:type, Shapes::ShapeRef.new(shape: HarnessHookEventType, required: true, location_name: "type"))
+    HarnessHookEvent.add_member(:decision, Shapes::ShapeRef.new(shape: HarnessHookDecision, location_name: "decision"))
+    HarnessHookEvent.add_member(:reason, Shapes::ShapeRef.new(shape: HarnessHookEventReasonString, location_name: "reason"))
+    HarnessHookEvent.struct_class = Types::HarnessHookEvent
+
     HarnessInlineFunctionConfig.add_member(:description, Shapes::ShapeRef.new(shape: HarnessInlineFunctionDescription, required: true, location_name: "description"))
     HarnessInlineFunctionConfig.add_member(:input_schema, Shapes::ShapeRef.new(shape: SensitiveJson, required: true, location_name: "inputSchema"))
     HarnessInlineFunctionConfig.struct_class = Types::HarnessInlineFunctionConfig
@@ -1908,6 +1962,7 @@ module Aws::BedrockAgentCore
 
     HarnessOpenAiModelConfig.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelId, required: true, location_name: "modelId"))
     HarnessOpenAiModelConfig.add_member(:api_key_arn, Shapes::ShapeRef.new(shape: ApiKeyArn, required: true, location_name: "apiKeyArn"))
+    HarnessOpenAiModelConfig.add_member(:api_base, Shapes::ShapeRef.new(shape: HarnessOpenAiApiBase, location_name: "apiBase"))
     HarnessOpenAiModelConfig.add_member(:max_tokens, Shapes::ShapeRef.new(shape: MaxTokens, location_name: "maxTokens"))
     HarnessOpenAiModelConfig.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
     HarnessOpenAiModelConfig.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
@@ -2063,12 +2118,38 @@ module Aws::BedrockAgentCore
 
     IgnoredReferenceInputFields.member = Shapes::ShapeRef.new(shape: IgnoredReferenceInputField)
 
+    IngestDataInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
+    IngestDataInput.add_member(:source, Shapes::ShapeRef.new(shape: ContentSource, required: true, location_name: "source"))
+    IngestDataInput.add_member(:content_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "contentTimestamp"))
+    IngestDataInput.add_member(:actor_id, Shapes::ShapeRef.new(shape: ActorId, required: true, location_name: "actorId"))
+    IngestDataInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "sessionId"))
+    IngestDataInput.add_member(:extraction_config, Shapes::ShapeRef.new(shape: ExtractionConfig, location_name: "extractionConfig"))
+    IngestDataInput.add_member(:metadata, Shapes::ShapeRef.new(shape: MetadataMap, location_name: "metadata"))
+    IngestDataInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    IngestDataInput.struct_class = Types::IngestDataInput
+
+    IngestDataOutput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "sessionId"))
+    IngestDataOutput.struct_class = Types::IngestDataOutput
+
+    IngestPayloadList.member = Shapes::ShapeRef.new(shape: IngestPayloadType)
+
+    IngestPayloadType.add_member(:conversational, Shapes::ShapeRef.new(shape: Conversational, location_name: "conversational"))
+    IngestPayloadType.add_member(:json, Shapes::ShapeRef.new(shape: MemoryJsonData, location_name: "json"))
+    IngestPayloadType.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IngestPayloadType.add_member_subclass(:conversational, Types::IngestPayloadType::Conversational)
+    IngestPayloadType.add_member_subclass(:json, Types::IngestPayloadType::Json)
+    IngestPayloadType.add_member_subclass(:unknown, Types::IngestPayloadType::Unknown)
+    IngestPayloadType.struct_class = Types::IngestPayloadType
+
     InlineGroundTruth.add_member(:assertions, Shapes::ShapeRef.new(shape: EvaluationContentList, location_name: "assertions"))
     InlineGroundTruth.add_member(:expected_trajectory, Shapes::ShapeRef.new(shape: EvaluationExpectedTrajectory, location_name: "expectedTrajectory"))
     InlineGroundTruth.add_member(:turns, Shapes::ShapeRef.new(shape: InlineGroundTruthTurnsList, location_name: "turns"))
     InlineGroundTruth.struct_class = Types::InlineGroundTruth
 
     InlineGroundTruthTurnsList.member = Shapes::ShapeRef.new(shape: GroundTruthTurn)
+
+    InlineMemoryContent.add_member(:payload, Shapes::ShapeRef.new(shape: IngestPayloadList, required: true, location_name: "payload"))
+    InlineMemoryContent.struct_class = Types::InlineMemoryContent
 
     InputContentBlock.add_member(:path, Shapes::ShapeRef.new(shape: MaxLenString, required: true, location_name: "path"))
     InputContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: MaxLenString, location_name: "text"))
@@ -2227,6 +2308,7 @@ module Aws::BedrockAgentCore
     InvokeHarnessStreamOutput.add_member(:internal_server_exception, Shapes::ShapeRef.new(shape: InternalServerException, location_name: "internalServerException"))
     InvokeHarnessStreamOutput.add_member(:validation_exception, Shapes::ShapeRef.new(shape: ValidationException, location_name: "validationException"))
     InvokeHarnessStreamOutput.add_member(:runtime_client_error, Shapes::ShapeRef.new(shape: RuntimeClientError, location_name: "runtimeClientError"))
+    InvokeHarnessStreamOutput.add_member(:hook_event, Shapes::ShapeRef.new(shape: HarnessHookEvent, event: true, location_name: "hookEvent"))
     InvokeHarnessStreamOutput.struct_class = Types::InvokeHarnessStreamOutput
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
@@ -2434,6 +2516,9 @@ module Aws::BedrockAgentCore
     MemoryContent.add_member_subclass(:unknown, Types::MemoryContent::Unknown)
     MemoryContent.struct_class = Types::MemoryContent
 
+    MemoryJsonData.add_member(:content, Shapes::ShapeRef.new(shape: MemoryJsonDataContent, required: true, location_name: "content"))
+    MemoryJsonData.struct_class = Types::MemoryJsonData
+
     MemoryMetadataFilterExpression.add_member(:left, Shapes::ShapeRef.new(shape: MemoryRecordLeftExpression, required: true, location_name: "left"))
     MemoryMetadataFilterExpression.add_member(:operator, Shapes::ShapeRef.new(shape: MemoryRecordOperatorType, required: true, location_name: "operator"))
     MemoryMetadataFilterExpression.add_member(:right, Shapes::ShapeRef.new(shape: MemoryRecordRightExpression, location_name: "right"))
@@ -2458,6 +2543,7 @@ module Aws::BedrockAgentCore
     MemoryRecordCreateInput.struct_class = Types::MemoryRecordCreateInput
 
     MemoryRecordDeleteInput.add_member(:memory_record_id, Shapes::ShapeRef.new(shape: MemoryRecordId, required: true, location_name: "memoryRecordId"))
+    MemoryRecordDeleteInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "namespace"))
     MemoryRecordDeleteInput.struct_class = Types::MemoryRecordDeleteInput
 
     MemoryRecordLeftExpression.add_member(:metadata_key, Shapes::ShapeRef.new(shape: MetadataKey, location_name: "metadataKey"))
@@ -2509,6 +2595,7 @@ module Aws::BedrockAgentCore
     MemoryRecordUpdateInput.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timestamp"))
     MemoryRecordUpdateInput.add_member(:content, Shapes::ShapeRef.new(shape: MemoryContent, location_name: "content"))
     MemoryRecordUpdateInput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaces"))
+    MemoryRecordUpdateInput.add_member(:source_namespaces, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "sourceNamespaces"))
     MemoryRecordUpdateInput.add_member(:memory_strategy_id, Shapes::ShapeRef.new(shape: MemoryStrategyId, location_name: "memoryStrategyId"))
     MemoryRecordUpdateInput.add_member(:metadata, Shapes::ShapeRef.new(shape: MemoryRecordMetadataMap, location_name: "metadata"))
     MemoryRecordUpdateInput.struct_class = Types::MemoryRecordUpdateInput
@@ -2585,6 +2672,9 @@ module Aws::BedrockAgentCore
     MppPaymentOutput.add_member(:payment_credential, Shapes::ShapeRef.new(shape: MppPaymentCredential, required: true, location_name: "paymentCredential"))
     MppPaymentOutput.struct_class = Types::MppPaymentOutput
 
+    NamespaceVariablesMap.key = Shapes::ShapeRef.new(shape: NamespaceVariableName)
+    NamespaceVariablesMap.value = Shapes::ShapeRef.new(shape: NamespaceVariableValue)
+
     NamespacesList.member = Shapes::ShapeRef.new(shape: Namespace)
 
     OAuth2Authentication.add_member(:sub, Shapes::ShapeRef.new(shape: OAuth2AuthenticationSubString, required: true, location_name: "sub"))
@@ -2622,9 +2712,11 @@ module Aws::BedrockAgentCore
 
     PayloadType.add_member(:conversational, Shapes::ShapeRef.new(shape: Conversational, location_name: "conversational"))
     PayloadType.add_member(:blob, Shapes::ShapeRef.new(shape: MemoryDocument, location_name: "blob"))
+    PayloadType.add_member(:json, Shapes::ShapeRef.new(shape: MemoryJsonData, location_name: "json"))
     PayloadType.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     PayloadType.add_member_subclass(:conversational, Types::PayloadType::Conversational)
     PayloadType.add_member_subclass(:blob, Types::PayloadType::Blob)
+    PayloadType.add_member_subclass(:json, Types::PayloadType::Json)
     PayloadType.add_member_subclass(:unknown, Types::PayloadType::Unknown)
     PayloadType.struct_class = Types::PayloadType
 
@@ -2962,6 +3054,12 @@ module Aws::BedrockAgentCore
 
     SessionSummaryList.member = Shapes::ShapeRef.new(shape: SessionSummary)
 
+    SessionTraceIds.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sessionId"))
+    SessionTraceIds.add_member(:trace_ids, Shapes::ShapeRef.new(shape: TraceIdList, required: true, location_name: "traceIds"))
+    SessionTraceIds.struct_class = Types::SessionTraceIds
+
+    SessionTraceIdsList.member = Shapes::ShapeRef.new(shape: SessionTraceIds)
+
     SkillDefinition.add_member(:schema_version, Shapes::ShapeRef.new(shape: SchemaVersion, location_name: "schemaVersion"))
     SkillDefinition.add_member(:inline_content, Shapes::ShapeRef.new(shape: InlineContent, location_name: "inlineContent"))
     SkillDefinition.struct_class = Types::SkillDefinition
@@ -2987,6 +3085,7 @@ module Aws::BedrockAgentCore
     StartBatchEvaluationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     StartBatchEvaluationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     StartBatchEvaluationRequest.add_member(:description, Shapes::ShapeRef.new(shape: BatchEvaluationDescription, location_name: "description"))
+    StartBatchEvaluationRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "outputConfig"))
     StartBatchEvaluationRequest.struct_class = Types::StartBatchEvaluationRequest
 
     StartBatchEvaluationRequestEvaluatorsList.member = Shapes::ShapeRef.new(shape: Evaluator)
@@ -3272,6 +3371,8 @@ module Aws::BedrockAgentCore
     ToolsFileSystemConfiguration.struct_class = Types::ToolsFileSystemConfiguration
 
     ToolsFileSystemConfigurations.member = Shapes::ShapeRef.new(shape: ToolsFileSystemConfiguration)
+
+    TraceIdList.member = Shapes::ShapeRef.new(shape: TraceId)
 
     TraceIds.member = Shapes::ShapeRef.new(shape: TraceId)
 
@@ -3879,6 +3980,20 @@ module Aws::BedrockAgentCore
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:ingest_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "IngestData"
+        o.http_method = "POST"
+        o.http_request_uri = "/memories/{memoryId}/ingest"
+        o.input = Shapes::ShapeRef.new(shape: IngestDataInput)
+        o.output = Shapes::ShapeRef.new(shape: IngestDataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:invoke_agent_runtime, Seahorse::Model::Operation.new.tap do |o|

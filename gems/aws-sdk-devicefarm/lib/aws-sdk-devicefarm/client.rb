@@ -889,6 +889,9 @@ module Aws::DeviceFarm
     #         host: "DeviceProxyHost", # required
     #         port: 1, # required
     #       },
+    #       parameters: {
+    #         "RemoteAccessParameterKey" => "RemoteAccessParameterValue",
+    #       },
     #     },
     #     interaction_mode: "INTERACTIVE", # accepts INTERACTIVE, NO_VIDEO, VIDEO_ONLY
     #     skip_app_resign: false,
@@ -2760,14 +2763,12 @@ module Aws::DeviceFarm
     end
 
     # A session is an instance of a browser created through a
-    # `RemoteWebDriver` with the URL from CreateTestGridUrlResult$url. You
+    # `RemoteWebDriver` with the URL from ` CreateTestGridUrlResult`. You
     # can use the following to look up sessions:
     #
-    # * The session ARN (GetTestGridSessionRequest$sessionArn).
+    # * The session ARN.
     #
-    # * The project ARN and a session ID
-    #   (GetTestGridSessionRequest$projectArn and
-    #   GetTestGridSessionRequest$sessionId).
+    # * The project ARN and a session ID.
     #
     # @option params [String] :project_arn
     #   The ARN for the project that this session belongs to. See
@@ -4226,6 +4227,9 @@ module Aws::DeviceFarm
     end
 
     # Gets information about samples, given an AWS Device Farm job ARN.
+    #
+    # Device Farm does not support performance data samples during test
+    # executions.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the job used to list samples.
@@ -6347,7 +6351,7 @@ module Aws::DeviceFarm
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -656,6 +656,25 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "IngestData":{
+      "name":"IngestData",
+      "http":{
+        "method":"POST",
+        "requestUri":"/memories/{memoryId}/ingest",
+        "responseCode":202
+      },
+      "input":{"shape":"IngestDataInput"},
+      "output":{"shape":"IngestDataOutput"},
+      "errors":[
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ThrottledException"},
+        {"shape":"ServiceException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "idempotent":true
+    },
     "InvokeAgentRuntime":{
       "name":"InvokeAgentRuntime",
       "http":{
@@ -1889,7 +1908,8 @@
       "type":"structure",
       "members":{
         "sessionIds":{"shape":"CloudWatchFilterConfigSessionIdsList"},
-        "timeRange":{"shape":"SessionFilterConfig"}
+        "timeRange":{"shape":"SessionFilterConfig"},
+        "sessionTraceIds":{"shape":"SessionTraceIdsList"}
       }
     },
     "CloudWatchFilterConfigSessionIdsList":{
@@ -1942,21 +1962,25 @@
     },
     "CloudWatchLogsSource":{
       "type":"structure",
-      "required":[
-        "serviceNames",
-        "logGroupNames"
-      ],
+      "required":["serviceNames"],
       "members":{
         "serviceNames":{"shape":"CloudWatchLogsSourceServiceNamesList"},
         "logGroupNames":{"shape":"CloudWatchLogsSourceLogGroupNamesList"},
+        "logGroupNamePrefixes":{"shape":"CloudWatchLogsSourceLogGroupNamePrefixesList"},
         "filterConfig":{"shape":"CloudWatchFilterConfig"}
       }
     },
-    "CloudWatchLogsSourceLogGroupNamesList":{
+    "CloudWatchLogsSourceLogGroupNamePrefixesList":{
       "type":"list",
-      "member":{"shape":"String"},
+      "member":{"shape":"LogGroupNamePrefix"},
       "max":5,
       "min":1
+    },
+    "CloudWatchLogsSourceLogGroupNamesList":{
+      "type":"list",
+      "member":{"shape":"LogGroupName"},
+      "max":10,
+      "min":0
     },
     "CloudWatchLogsSourceServiceNamesList":{
       "type":"list",
@@ -1988,13 +2012,11 @@
     },
     "CloudWatchOutputConfig":{
       "type":"structure",
-      "required":[
-        "logGroupName",
-        "logStreamName"
-      ],
       "members":{
-        "logGroupName":{"shape":"String"},
-        "logStreamName":{"shape":"String"}
+        "logGroupName":{"shape":"OptionalLogGroupName"},
+        "logStreamName":{"shape":"LogStreamName"},
+        "metricsNamespace":{"shape":"MetricsNamespace"},
+        "resultDestination":{"shape":"ResultDestination"}
       }
     },
     "CodeInterpreterResult":{
@@ -2210,6 +2232,13 @@
         "stderr":{"shape":"String"}
       }
     },
+    "ContentSource":{
+      "type":"structure",
+      "members":{
+        "inline":{"shape":"InlineMemoryContent"}
+      },
+      "union":true
+    },
     "ContentStartEvent":{
       "type":"structure",
       "members":{}
@@ -2329,7 +2358,8 @@
           "idempotencyToken":true
         },
         "metadata":{"shape":"MetadataMap"},
-        "extractionMode":{"shape":"ExtractionMode"}
+        "extractionMode":{"shape":"ExtractionMode"},
+        "extractionConfig":{"shape":"ExtractionConfig"}
       }
     },
     "CreateEventOutput":{
@@ -2623,6 +2653,11 @@
           "shape":"MemoryRecordId",
           "location":"uri",
           "locationName":"memoryRecordId"
+        },
+        "namespace":{
+          "shape":"Namespace",
+          "location":"querystring",
+          "locationName":"namespace"
         }
       }
     },
@@ -2980,11 +3015,13 @@
     },
     "EvaluatorArn":{
       "type":"string",
-      "pattern":"arn:aws[a-zA-Z-]*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:evaluator\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$|^arn:aws[a-zA-Z-]*:bedrock-agentcore:::evaluator/Builtin.[a-zA-Z0-9_-]+"
+      "pattern":"arn:aws[a-zA-Z-]*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:evaluator\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$|^arn:aws[a-zA-Z-]*:bedrock-agentcore:::evaluator/(Builtin|ThirdParty)\\.[a-zA-Z0-9._-]+"
     },
     "EvaluatorId":{
       "type":"string",
-      "pattern":"(Builtin.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})"
+      "max":111,
+      "min":1,
+      "pattern":"(Builtin\\.[a-zA-Z0-9._-]+|ThirdParty\\.[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})"
     },
     "EvaluatorList":{
       "type":"list",
@@ -3009,7 +3046,9 @@
     },
     "EvaluatorName":{
       "type":"string",
-      "pattern":"(Builtin.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9_]{0,47})"
+      "max":48,
+      "min":1,
+      "pattern":"(Builtin\\.[a-zA-Z0-9._-]+|ThirdParty\\.[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9_]{0,47})"
     },
     "EvaluatorStatistics":{
       "type":"structure",
@@ -3146,6 +3185,12 @@
       "box":true,
       "max":65535,
       "min":1
+    },
+    "ExtractionConfig":{
+      "type":"structure",
+      "members":{
+        "namespaceVariables":{"shape":"NamespaceVariablesMap"}
+      }
     },
     "ExtractionJob":{
       "type":"structure",
@@ -3560,6 +3605,11 @@
           "shape":"MemoryRecordId",
           "location":"uri",
           "locationName":"memoryRecordId"
+        },
+        "namespace":{
+          "shape":"Namespace",
+          "location":"querystring",
+          "locationName":"namespace"
         }
       }
     },
@@ -4020,6 +4070,53 @@
         "additionalParams":{"shape":"Document"}
       }
     },
+    "HarnessHookDecision":{
+      "type":"string",
+      "enum":[
+        "allow",
+        "deny"
+      ]
+    },
+    "HarnessHookEvent":{
+      "type":"structure",
+      "required":[
+        "hookEventId",
+        "name",
+        "type"
+      ],
+      "members":{
+        "hookEventId":{"shape":"HarnessHookEventId"},
+        "name":{"shape":"HarnessHookName"},
+        "type":{"shape":"HarnessHookEventType"},
+        "decision":{"shape":"HarnessHookDecision"},
+        "reason":{"shape":"HarnessHookEventReasonString"}
+      },
+      "event":true
+    },
+    "HarnessHookEventId":{
+      "type":"string",
+      "pattern":"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+    },
+    "HarnessHookEventReasonString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "HarnessHookEventType":{
+      "type":"string",
+      "enum":[
+        "before_tool_call",
+        "after_tool_call",
+        "before_invocation",
+        "after_invocation"
+      ]
+    },
+    "HarnessHookName":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-]+"
+    },
     "HarnessInlineFunctionConfig":{
       "type":"structure",
       "required":[
@@ -4109,6 +4206,12 @@
       },
       "union":true
     },
+    "HarnessOpenAiApiBase":{
+      "type":"string",
+      "max":16383,
+      "min":1,
+      "sensitive":true
+    },
     "HarnessOpenAiApiFormat":{
       "type":"string",
       "enum":[
@@ -4125,6 +4228,7 @@
       "members":{
         "modelId":{"shape":"ModelId"},
         "apiKeyArn":{"shape":"ApiKeyArn"},
+        "apiBase":{"shape":"HarnessOpenAiApiBase"},
         "maxTokens":{"shape":"MaxTokens"},
         "temperature":{"shape":"Temperature"},
         "topP":{"shape":"TopP"},
@@ -4251,7 +4355,8 @@
         "model_context_window_exceeded",
         "max_iterations_exceeded",
         "max_output_tokens_exceeded",
-        "timeout_exceeded"
+        "timeout_exceeded",
+        "hook_stopped"
       ]
     },
     "HarnessStreamMetrics":{
@@ -4497,6 +4602,53 @@
       "max":100,
       "min":0
     },
+    "IngestDataInput":{
+      "type":"structure",
+      "required":[
+        "memoryId",
+        "source",
+        "contentTimestamp",
+        "actorId"
+      ],
+      "members":{
+        "memoryId":{
+          "shape":"MemoryId",
+          "location":"uri",
+          "locationName":"memoryId"
+        },
+        "source":{"shape":"ContentSource"},
+        "contentTimestamp":{"shape":"Timestamp"},
+        "actorId":{"shape":"ActorId"},
+        "sessionId":{"shape":"SessionId"},
+        "extractionConfig":{"shape":"ExtractionConfig"},
+        "metadata":{"shape":"MetadataMap"},
+        "clientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "IngestDataOutput":{
+      "type":"structure",
+      "required":["sessionId"],
+      "members":{
+        "sessionId":{"shape":"SessionId"}
+      }
+    },
+    "IngestPayloadList":{
+      "type":"list",
+      "member":{"shape":"IngestPayloadType"},
+      "max":100,
+      "min":1
+    },
+    "IngestPayloadType":{
+      "type":"structure",
+      "members":{
+        "conversational":{"shape":"Conversational"},
+        "json":{"shape":"MemoryJsonData"}
+      },
+      "union":true
+    },
     "InlineContent":{
       "type":"string",
       "max":409600,
@@ -4514,6 +4666,13 @@
       "type":"list",
       "member":{"shape":"GroundTruthTurn"},
       "min":1
+    },
+    "InlineMemoryContent":{
+      "type":"structure",
+      "required":["payload"],
+      "members":{
+        "payload":{"shape":"IngestPayloadList"}
+      }
     },
     "InputContentBlock":{
       "type":"structure",
@@ -5146,7 +5305,8 @@
         "metadata":{"shape":"HarnessMetadataEvent"},
         "internalServerException":{"shape":"InternalServerException"},
         "validationException":{"shape":"ValidationException"},
-        "runtimeClientError":{"shape":"RuntimeClientError"}
+        "runtimeClientError":{"shape":"RuntimeClientError"},
+        "hookEvent":{"shape":"HarnessHookEvent"}
       },
       "eventstream":true
     },
@@ -5638,6 +5798,20 @@
         "streamEndpoint":{"shape":"BrowserStreamEndpoint"}
       }
     },
+    "LogGroupName":{
+      "type":"string",
+      "pattern":"[.\\-_/#A-Za-z0-9]+"
+    },
+    "LogGroupNamePrefix":{
+      "type":"string",
+      "max":512,
+      "min":1,
+      "pattern":"[.\\-_/#A-Za-z0-9]+"
+    },
+    "LogStreamName":{
+      "type":"string",
+      "pattern":"[^:*]*"
+    },
     "Long":{
       "type":"long",
       "box":true
@@ -5692,6 +5866,20 @@
       "type":"string",
       "min":12,
       "pattern":"(arn:(aws|aws-cn|aws-us-gov):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/)?[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}"
+    },
+    "MemoryJsonData":{
+      "type":"structure",
+      "required":["content"],
+      "members":{
+        "content":{"shape":"MemoryJsonDataContent"}
+      },
+      "sensitive":true
+    },
+    "MemoryJsonDataContent":{
+      "type":"structure",
+      "members":{},
+      "document":true,
+      "sensitive":true
     },
     "MemoryMetadataFilterExpression":{
       "type":"structure",
@@ -5750,7 +5938,8 @@
       "type":"structure",
       "required":["memoryRecordId"],
       "members":{
-        "memoryRecordId":{"shape":"MemoryRecordId"}
+        "memoryRecordId":{"shape":"MemoryRecordId"},
+        "namespace":{"shape":"Namespace"}
       }
     },
     "MemoryRecordId":{
@@ -5860,6 +6049,7 @@
         "timestamp":{"shape":"Timestamp"},
         "content":{"shape":"MemoryContent"},
         "namespaces":{"shape":"NamespacesList"},
+        "sourceNamespaces":{"shape":"NamespacesList"},
         "memoryStrategyId":{"shape":"MemoryStrategyId"},
         "metadata":{"shape":"MemoryRecordMetadataMap"}
       }
@@ -5937,6 +6127,12 @@
       "max":256,
       "min":0,
       "pattern":"[a-zA-Z0-9\\s._:/=+@-]*"
+    },
+    "MetricsNamespace":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[a-zA-Z0-9._#/:-]+"
     },
     "MimeType":{
       "type":"string",
@@ -6108,6 +6304,25 @@
       "min":1,
       "pattern":"[a-zA-Z0-9/*][a-zA-Z0-9-_/*]*(?::[a-zA-Z0-9-_/*]+)*[a-zA-Z0-9-_/*]*"
     },
+    "NamespaceVariableName":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"(?!memoryStrategyId$|actorId$|sessionId$)[a-z][a-z0-9]*"
+    },
+    "NamespaceVariableValue":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-z0-9][a-z0-9-_]*"
+    },
+    "NamespaceVariablesMap":{
+      "type":"map",
+      "key":{"shape":"NamespaceVariableName"},
+      "value":{"shape":"NamespaceVariableValue"},
+      "max":5,
+      "min":1
+    },
     "NamespacesList":{
       "type":"list",
       "member":{"shape":"Namespace"},
@@ -6252,6 +6467,10 @@
         "NOT_EXISTS"
       ]
     },
+    "OptionalLogGroupName":{
+      "type":"string",
+      "pattern":"$|^[.\\-_/#A-Za-z0-9]+"
+    },
     "OutputConfig":{
       "type":"structure",
       "members":{
@@ -6269,7 +6488,8 @@
       "type":"structure",
       "members":{
         "conversational":{"shape":"Conversational"},
-        "blob":{"shape":"MemoryDocument"}
+        "blob":{"shape":"MemoryDocument"},
+        "json":{"shape":"MemoryJsonData"}
       },
       "union":true
     },
@@ -6923,6 +7143,13 @@
       "sensitive":true,
       "streaming":true
     },
+    "ResultDestination":{
+      "type":"string",
+      "enum":[
+        "DEDICATED_LOG_GROUP",
+        "SOURCE_LOG_GROUP"
+      ]
+    },
     "RetrieveMemoryRecordsInput":{
       "type":"structure",
       "required":[
@@ -7349,6 +7576,23 @@
       "type":"list",
       "member":{"shape":"SessionSummary"}
     },
+    "SessionTraceIds":{
+      "type":"structure",
+      "required":[
+        "sessionId",
+        "traceIds"
+      ],
+      "members":{
+        "sessionId":{"shape":"String"},
+        "traceIds":{"shape":"TraceIdList"}
+      }
+    },
+    "SessionTraceIdsList":{
+      "type":"list",
+      "member":{"shape":"SessionTraceIds"},
+      "max":500,
+      "min":1
+    },
     "SessionType":{
       "type":"string",
       "max":256,
@@ -7395,7 +7639,7 @@
     "Spans":{
       "type":"list",
       "member":{"shape":"Span"},
-      "max":1000,
+      "max":20000,
       "min":1,
       "sensitive":true
     },
@@ -7417,7 +7661,8 @@
         "evaluationMetadata":{"shape":"EvaluationMetadata"},
         "tags":{"shape":"TagsMap"},
         "kmsKeyArn":{"shape":"KmsKeyArn"},
-        "description":{"shape":"BatchEvaluationDescription"}
+        "description":{"shape":"BatchEvaluationDescription"},
+        "outputConfig":{"shape":"OutputConfig"}
       }
     },
     "StartBatchEvaluationRequestEvaluatorsList":{
@@ -8268,6 +8513,12 @@
       "type":"string",
       "max":32,
       "min":32
+    },
+    "TraceIdList":{
+      "type":"list",
+      "member":{"shape":"TraceId"},
+      "max":100,
+      "min":1
     },
     "TraceIds":{
       "type":"list",

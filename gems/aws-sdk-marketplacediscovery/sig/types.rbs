@@ -13,6 +13,12 @@ module Aws::MarketplaceDiscovery
       SENSITIVE: []
     end
 
+    class AmazonMachineImageEbsVolume
+      attr_accessor volume_types: ::Array[::String]
+      attr_accessor iops: ::Integer
+      SENSITIVE: []
+    end
+
     class AmazonMachineImageFulfillmentOption
       attr_accessor fulfillment_option_id: ::String
       attr_accessor fulfillment_option_name: ::String
@@ -23,6 +29,12 @@ module Aws::MarketplaceDiscovery
       attr_accessor recommendation: Types::AmazonMachineImageRecommendation
       attr_accessor release_notes: ::String
       attr_accessor usage_instructions: ::String
+      attr_accessor available_from_time: ::Time
+      attr_accessor access_url_template: ::String
+      attr_accessor architecture: ::String
+      attr_accessor ami_alias: ::String
+      attr_accessor ebs_volume: Types::AmazonMachineImageEbsVolume
+      attr_accessor short_description: ::String
       SENSITIVE: []
     end
 
@@ -35,6 +47,15 @@ module Aws::MarketplaceDiscovery
 
     class AmazonMachineImageRecommendation
       attr_accessor instance_type: ::String
+      attr_accessor security_groups: ::Array[Types::AmazonMachineImageSecurityGroup]
+      SENSITIVE: []
+    end
+
+    class AmazonMachineImageSecurityGroup
+      attr_accessor protocol: ::String
+      attr_accessor from_port: ::Integer
+      attr_accessor to_port: ::Integer
+      attr_accessor cidr_ip_addresses: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -74,6 +95,9 @@ module Aws::MarketplaceDiscovery
       attr_accessor fulfillment_option_version: ::String
       attr_accessor release_notes: ::String
       attr_accessor usage_instructions: ::String
+      attr_accessor available_from_time: ::Time
+      attr_accessor short_description: ::String
+      attr_accessor long_description: ::String
       SENSITIVE: []
     end
 
@@ -179,6 +203,11 @@ module Aws::MarketplaceDiscovery
       SENSITIVE: []
     end
 
+    class FixedPercentage
+      attr_accessor percentage_value: ::String
+      SENSITIVE: []
+    end
+
     class FixedUpfrontPricingTerm
       attr_accessor id: ::String
       attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
@@ -248,11 +277,13 @@ module Aws::MarketplaceDiscovery
     end
 
     class GetListingInput
+      attr_accessor locale: ::String
       attr_accessor listing_id: ::String
       SENSITIVE: []
     end
 
     class GetListingOutput
+      attr_accessor locale: ::String
       attr_accessor associated_entities: ::Array[Types::ListingAssociatedEntity]
       attr_accessor badges: ::Array[Types::ListingBadge]
       attr_accessor catalog: ::String
@@ -277,11 +308,13 @@ module Aws::MarketplaceDiscovery
     end
 
     class GetOfferInput
+      attr_accessor locale: ::String
       attr_accessor offer_id: ::String
       SENSITIVE: []
     end
 
     class GetOfferOutput
+      attr_accessor locale: ::String
       attr_accessor offer_id: ::String
       attr_accessor catalog: ::String
       attr_accessor offer_name: ::String
@@ -297,11 +330,13 @@ module Aws::MarketplaceDiscovery
     end
 
     class GetOfferSetInput
+      attr_accessor locale: ::String
       attr_accessor offer_set_id: ::String
       SENSITIVE: []
     end
 
     class GetOfferSetOutput
+      attr_accessor locale: ::String
       attr_accessor offer_set_id: ::String
       attr_accessor catalog: ::String
       attr_accessor offer_set_name: ::String
@@ -315,6 +350,7 @@ module Aws::MarketplaceDiscovery
     end
 
     class GetOfferTermsInput
+      attr_accessor locale: ::String
       attr_accessor offer_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -322,17 +358,20 @@ module Aws::MarketplaceDiscovery
     end
 
     class GetOfferTermsOutput
+      attr_accessor locale: ::String
       attr_accessor offer_terms: ::Array[Types::OfferTerm]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class GetProductInput
+      attr_accessor locale: ::String
       attr_accessor product_id: ::String
       SENSITIVE: []
     end
 
     class GetProductOutput
+      attr_accessor locale: ::String
       attr_accessor product_id: ::String
       attr_accessor catalog: ::String
       attr_accessor product_name: ::String
@@ -347,6 +386,7 @@ module Aws::MarketplaceDiscovery
       attr_accessor promotional_media: ::Array[Types::PromotionalMedia]
       attr_accessor resources: ::Array[Types::Resource]
       attr_accessor seller_engagements: ::Array[Types::SellerEngagement]
+      attr_accessor listing_id: ::String
       SENSITIVE: []
     end
 
@@ -392,6 +432,7 @@ module Aws::MarketplaceDiscovery
     end
 
     class ListFulfillmentOptionsInput
+      attr_accessor locale: ::String
       attr_accessor product_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -399,12 +440,14 @@ module Aws::MarketplaceDiscovery
     end
 
     class ListFulfillmentOptionsOutput
+      attr_accessor locale: ::String
       attr_accessor fulfillment_options: ::Array[Types::FulfillmentOption]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListPurchaseOptionsInput
+      attr_accessor locale: ::String
       attr_accessor filters: ::Array[Types::PurchaseOptionFilter]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -538,12 +581,45 @@ module Aws::MarketplaceDiscovery
       end
     end
 
+    class PaymentScheduleEntry
+      attr_accessor charge_date_offset: ::String
+      attr_accessor charge_percentage: ::String
+      attr_accessor day_of_month: ::Integer
+      SENSITIVE: []
+    end
+
     class PaymentScheduleTerm
       attr_accessor id: ::String
       attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor currency_code: ::String
       attr_accessor schedule: ::Array[Types::ScheduleItem]
       SENSITIVE: []
+    end
+
+    class PaymentScheduleTermTemplate
+      attr_accessor schedule: ::Array[Types::PaymentScheduleEntry]
+      SENSITIVE: []
+    end
+
+    class PercentageRange
+      attr_accessor minimum_value: ::String
+      attr_accessor maximum_value: ::String
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class PriceIncrease
+      attr_accessor fixed_percentage: Types::FixedPercentage
+      attr_accessor percentage_range: Types::PercentageRange
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FixedPercentage < PriceIncrease
+      end
+      class PercentageRange < PriceIncrease
+      end
+      class Unknown < PriceIncrease
+      end
     end
 
     class PricingModel
@@ -611,7 +687,7 @@ module Aws::MarketplaceDiscovery
 
     class PurchaseOptionBadge
       attr_accessor display_name: ::String
-      attr_accessor badge_type: ("PRIVATE_PRICING" | "FUTURE_DATED" | "REPLACEMENT_OFFER")
+      attr_accessor badge_type: ("PRIVATE_PRICING" | "FUTURE_DATED" | "REPLACEMENT_OFFER" | "AUTO_RENEW")
       SENSITIVE: []
     end
 
@@ -656,6 +732,11 @@ module Aws::MarketplaceDiscovery
     class RenewalTerm
       attr_accessor id: ::String
       attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
+      attr_accessor max_renewals: ::Integer
+      attr_accessor lockout_period: ::String
+      attr_accessor adjustment_deadline: ::String
+      attr_accessor price_increase: Types::PriceIncrease
+      attr_accessor term_templates: ::Array[Types::TermTemplate]
       SENSITIVE: []
     end
 
@@ -692,6 +773,9 @@ module Aws::MarketplaceDiscovery
       attr_accessor fulfillment_option_display_name: ::String
       attr_accessor fulfillment_url: ::String
       attr_accessor usage_instructions: ::String
+      attr_accessor available_from_time: ::Time
+      attr_accessor launch_url: ::String
+      attr_accessor quick_launch: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -721,6 +805,8 @@ module Aws::MarketplaceDiscovery
       attr_accessor release_notes: ::String
       attr_accessor usage_instructions: ::String
       attr_accessor recommendation: Types::SageMakerModelRecommendation
+      attr_accessor supported_content_types: ::Array[::String]
+      attr_accessor supported_response_mime_types: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -737,6 +823,7 @@ module Aws::MarketplaceDiscovery
     end
 
     class SearchFacetsInput
+      attr_accessor locale: ::String
       attr_accessor search_text: ::String
       attr_accessor filters: ::Array[Types::SearchFilter]
       attr_accessor facet_types: ::Array[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS")]
@@ -758,6 +845,7 @@ module Aws::MarketplaceDiscovery
     end
 
     class SearchListingsInput
+      attr_accessor locale: ::String
       attr_accessor search_text: ::String
       attr_accessor filters: ::Array[Types::SearchFilter]
       attr_accessor max_results: ::Integer
@@ -798,6 +886,17 @@ module Aws::MarketplaceDiscovery
       attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor refund_policy: ::String
       SENSITIVE: []
+    end
+
+    class TermTemplate
+      attr_accessor payment_schedule_term_template: Types::PaymentScheduleTermTemplate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PaymentScheduleTermTemplate < TermTemplate
+      end
+      class Unknown < TermTemplate
+      end
     end
 
     class ThrottlingException

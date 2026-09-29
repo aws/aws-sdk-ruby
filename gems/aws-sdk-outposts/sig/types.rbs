@@ -114,6 +114,7 @@ module Aws::Outposts
       attr_accessor weight_lbs: ::Integer
       attr_accessor supported_uplink_gbps: ::Array[::Integer]
       attr_accessor supported_storage: ::Array[("EBS" | "S3")]
+      attr_accessor rack_scaling_type: ("SINGLE_RACK" | "MULTI_RACK")
       SENSITIVE: []
     end
 
@@ -171,6 +172,18 @@ module Aws::Outposts
 
     class CreateOutpostOutput
       attr_accessor outpost: Types::Outpost
+      SENSITIVE: []
+    end
+
+    class CreatePrivateConnectivityConfigInput
+      attr_accessor outpost_id: ::String
+      attr_accessor vpc_information_list: ::Array[Types::VpcInformation]
+      SENSITIVE: []
+    end
+
+    class CreatePrivateConnectivityConfigOutput
+      attr_accessor private_connectivity_config: Types::PrivateConnectivityConfig
+      attr_accessor outpost_id: ::String
       SENSITIVE: []
     end
 
@@ -377,6 +390,16 @@ module Aws::Outposts
     class GetOutpostSupportedInstanceTypesOutput
       attr_accessor instance_types: ::Array[Types::InstanceTypeItem]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPrivateConnectivityConfigInput
+      attr_accessor outpost_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPrivateConnectivityConfigOutput
+      attr_accessor private_connectivity_config: Types::PrivateConnectivityConfig
       SENSITIVE: []
     end
 
@@ -677,12 +700,22 @@ module Aws::Outposts
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor site_arn: ::String
       attr_accessor supported_hardware_type: ("RACK" | "SERVER")
+      attr_accessor generation: ("GENERATION_2" | "GENERATION_1")
+      attr_accessor rack_scaling_type: ("SINGLE_RACK" | "MULTI_RACK")
       SENSITIVE: []
     end
 
     class PricingOption
       attr_accessor pricing_type: ("SUBSCRIPTION")
       attr_accessor subscription_pricing_details: Types::SubscriptionPricingDetails
+      SENSITIVE: []
+    end
+
+    class PrivateConnectivityConfig
+      attr_accessor role_arn: ::String
+      attr_accessor private_connectivity_status: ("ENABLED" | "DISABLED")
+      attr_accessor vpc_information_list: ::Array[Types::VpcInformation]
+      attr_accessor provisioning_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -714,7 +747,7 @@ module Aws::Outposts
     end
 
     class QuoteConstraint
-      attr_accessor quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS")
+      attr_accessor quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS" | "RACK_SPACE_CONSTRAINED")
       attr_accessor value: ::String
       SENSITIVE: []
     end
@@ -989,6 +1022,13 @@ module Aws::Outposts
 
     class ValidationException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcInformation
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_endpoint_id: ::String
       SENSITIVE: []
     end
   end

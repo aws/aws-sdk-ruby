@@ -384,6 +384,276 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # Specifies a time range with an inclusive begin date and an exclusive
+    # end date.
+    #
+    # @!attribute [rw] begin_date_inclusive
+    #   The inclusive start of the time range. This value can't be in the
+    #   future.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_exclusive
+    #   The exclusive end of the time range. This value must be after
+    #   `beginDateInclusive`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingViewSegmentTimeRange AWS API Documentation
+    #
+    class BillingViewSegmentTimeRange < Struct.new(
+      :begin_date_inclusive,
+      :end_date_exclusive)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A billing view segment. A segment represents a time range during which
+    # the billing domain and account relationships for a billing view
+    # remained unchanged.
+    #
+    # @!attribute [rw] domain
+    #   The billing domain for this segment. The following values are valid:
+    #
+    #   * `PRO_FORMA` - Data shaped by Billing Conductor that doesn't
+    #     reflect the final charges owed to Amazon Web Services.
+    #
+    #   * `BILLABLE` - Data that represents the final charges owed to Amazon
+    #     Web Services.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_range
+    #   The time range during which this segment is effective.
+    #   @return [Types::BillingViewSegmentTimeRange]
+    #
+    # @!attribute [rw] billing_transfer_account_id
+    #   The billing transfer account ID. The response includes this field
+    #   only when the caller is a billing transfer source account. The
+    #   response omits this field for billing group billing views.
+    #   @return [String]
+    #
+    # @!attribute [rw] management_account_id
+    #   The management account ID of the organization. The response includes
+    #   this field for organization member accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_group_primary_account_id
+    #   The billing group primary account ID. The response includes this
+    #   field for billing group members. Compare this value to your own
+    #   account ID to determine whether you are the primary account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingViewSegmentsListElement AWS API Documentation
+    #
+    class BillingViewSegmentsListElement < Struct.new(
+      :domain,
+      :time_range,
+      :billing_transfer_account_id,
+      :management_account_id,
+      :billing_group_primary_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Business Support charges for a linked account.
+    #
+    # @!attribute [rw] account_id
+    #   The linked account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_plan_name
+    #   The Support plan name for this account. Valid values:
+    #   `AWSSupportBusiness` (Business Support plan), `AWSSupportDeveloper`
+    #   (Developer Support plan), `AWSSupportEssential` (Basic Support
+    #   plan).
+    #   @return [String]
+    #
+    # @!attribute [rw] total_charge
+    #   The total Business Support charge amount for this account in the
+    #   billing month.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_usage_basis
+    #   The total Support-eligible spend used as the basis for calculating
+    #   the Business Support charge for this account.
+    #   @return [String]
+    #
+    # @!attribute [rw] tier_charges
+    #   The tier-level charges that make up the total Business Support
+    #   charge for this account. Each tier represents a spend range with its
+    #   own rate.
+    #   @return [Array<Types::BusinessSupportTierCharge>]
+    #
+    # @!attribute [rw] support_discount
+    #   The discount applied to the Business Support charge for this
+    #   account, if any. This field is absent when no discount applies.
+    #   @return [Types::BusinessSupportDiscount]
+    #
+    # @!attribute [rw] support_eligible_spend_by_service
+    #   The Support-eligible spend broken down by contributing service for
+    #   this account.
+    #   @return [Array<Types::BusinessSupportServiceSpend>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BusinessSupportAccountCharge AWS API Documentation
+    #
+    class BusinessSupportAccountCharge < Struct.new(
+      :account_id,
+      :support_plan_name,
+      :total_charge,
+      :total_usage_basis,
+      :tier_charges,
+      :support_discount,
+      :support_eligible_spend_by_service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A discount applied to a Business Support account charge, including the
+    # discount amount, percentage, type, and source.
+    #
+    # @!attribute [rw] discount_amount
+    #   The discount amount applied to the Business Support charge. This
+    #   value is negative, representing a reduction in the charge.
+    #   @return [String]
+    #
+    # @!attribute [rw] discount_percentage
+    #   The discount percentage applied to the Business Support charge,
+    #   expressed as a decimal (for example, `0.12` for a 12% discount).
+    #   @return [String]
+    #
+    # @!attribute [rw] discount_type
+    #   The type of discount applied. Valid values: `Distributor_Discount`
+    #   (a discount applied through a distributor arrangement),
+    #   `SPP_Discount` (a discount applied through the Solution Provider
+    #   Program).
+    #   @return [String]
+    #
+    # @!attribute [rw] discount_source
+    #   The source or program through which the discount was applied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BusinessSupportDiscount AWS API Documentation
+    #
+    class BusinessSupportDiscount < Struct.new(
+      :discount_amount,
+      :discount_percentage,
+      :discount_type,
+      :discount_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A service-level spend entry contributing to Business Support eligible
+    # spend.
+    #
+    # @!attribute [rw] contributing_service
+    #   The name of the Amazon Web Services service contributing to the
+    #   Support-eligible spend.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_type
+    #   The type of the line item. Valid values: `Usage`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the service spend entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_amount
+    #   The Support-eligible spend amount for this service.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency
+    #   The ISO 4217 currency code for the charge amount (for example,
+    #   `USD`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BusinessSupportServiceSpend AWS API Documentation
+    #
+    class BusinessSupportServiceSpend < Struct.new(
+      :contributing_service,
+      :item_type,
+      :description,
+      :charge_amount,
+      :currency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A Business Support subscription contract for an account.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID associated with this subscription contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_name
+    #   The name of the Support plan for this subscription contract. Valid
+    #   values: `AWSSupportBusiness` (Business Support plan),
+    #   `AWSSupportDeveloper` (Developer Support plan),
+    #   `AWSSupportEssential` (Basic Support plan).
+    #   @return [String]
+    #
+    # @!attribute [rw] contract_start_date
+    #   The start date of the subscription contract.
+    #   @return [Time]
+    #
+    # @!attribute [rw] contract_end_date
+    #   The end date of the subscription contract.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BusinessSupportSubscriptionContract AWS API Documentation
+    #
+    class BusinessSupportSubscriptionContract < Struct.new(
+      :account_id,
+      :plan_name,
+      :contract_start_date,
+      :contract_end_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tier-level charge within a Business Support pricing plan. Business
+    # Support uses tiered pricing where different percentage rates apply to
+    # different ranges of Support-eligible spend.
+    #
+    # @!attribute [rw] tier_description
+    #   A human-readable description of the pricing tier, including the
+    #   spend range and percentage rate applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] tier_rate
+    #   The percentage rate applied to Support-eligible spend within this
+    #   pricing tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_slice
+    #   The amount of Support-eligible spend that falls within this pricing
+    #   tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] tier_charge
+    #   The Business Support charge amount calculated for this pricing tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_period_start_date
+    #   The start date of the charge period for this tier charge.
+    #   @return [Time]
+    #
+    # @!attribute [rw] charge_period_end_date
+    #   The end date of the charge period for this tier charge.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BusinessSupportTierCharge AWS API Documentation
+    #
+    class BusinessSupportTierCharge < Struct.new(
+      :tier_description,
+      :tier_rate,
+      :usage_slice,
+      :tier_charge,
+      :charge_period_start_date,
+      :charge_period_end_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An account that is charged all or a portion of the total Support
     # charge and the percentage of the charge allocated to it.
     #
@@ -1077,8 +1347,8 @@ module Aws::Billing
     #   @return [Time]
     #
     # @!attribute [rw] is_estimated
-    #   When true, the Support charge amount is estimated. When false, the
-    #   Support charge amount is finalized.
+    #   Specifies whether the Support charge amount is estimated. When
+    #   false, the charge amount is finalized.
     #   @return [Boolean]
     #
     # @!attribute [rw] bill_date
@@ -1382,6 +1652,60 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # @!attribute [rw] time_range
+    #   The billing period to query. If you don't provide a time range, the
+    #   current billing period, which is the calendar month in UTC, is used.
+    #   @return [Types::BillingViewSegmentTimeRange]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the billing
+    #   view to query. If you don't provide an ARN, the caller's `PRIMARY`
+    #   billing view is used. The ARN must reference a primary billing view.
+    #   Custom billing views aren't supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of entries a paginated response contains. Valid values
+    #   range from 1 to 100. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that is used on subsequent calls to list
+    #   billing view segments.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBillingViewSegmentsRequest AWS API Documentation
+    #
+    class ListBillingViewSegmentsRequest < Struct.new(
+      :time_range,
+      :arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of billing view segments. Each segment covers a portion of
+    #   the requested time period. The response omits hidden segments, so
+    #   the segments it returns might not cover the entire requested time
+    #   period.
+    #   @return [Array<Types::BillingViewSegmentsListElement>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that is used on subsequent calls to list
+    #   billing view segments.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBillingViewSegmentsResponse AWS API Documentation
+    #
+    class ListBillingViewSegmentsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] active_time_range
     #   The time range for the billing views listed. `PRIMARY` billing view
     #   is always listed. `BILLING_GROUP` billing views are listed for time
@@ -1456,6 +1780,154 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # Contains the billing month and optional filters used to retrieve
+    # Business Support charges broken down by linked account.
+    #
+    # @!attribute [rw] billing_month
+    #   The billing month to retrieve Business Support charges for, in
+    #   YYYY-MM format. You can request the current month (charges will be
+    #   estimated) or a past month (charges will be finalized).
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The linked account ID to filter results to a specific account. If
+    #   you don't specify a value, the response includes charges for all
+    #   linked accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page. Default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBusinessSupportAccountChargesRequest AWS API Documentation
+    #
+    class ListBusinessSupportAccountChargesRequest < Struct.new(
+      :billing_month,
+      :account_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the Business Support charges broken down by linked account
+    # for the specified billing month, along with account and spend totals.
+    #
+    # @!attribute [rw] billing_month
+    #   The billing month for the returned charges, in YYYY-MM format.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_estimated
+    #   Specifies whether the Support charge amount is estimated. When
+    #   false, the charge amount is finalized.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] total_support_charge
+    #   The total Business Support charge amount for all accounts in the
+    #   billing month.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_support_eligible_spend
+    #   The total Support-eligible spend from all accounts in the billing
+    #   month. This includes eligible spend from usage of Amazon Web
+    #   Services.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_count
+    #   The total number of linked accounts with Business Support charges in
+    #   the billing month.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] account_charges
+    #   The list of Business Support charges per linked account.
+    #   @return [Array<Types::BusinessSupportAccountCharge>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBusinessSupportAccountChargesResponse AWS API Documentation
+    #
+    class ListBusinessSupportAccountChargesResponse < Struct.new(
+      :billing_month,
+      :is_estimated,
+      :total_support_charge,
+      :total_support_eligible_spend,
+      :account_count,
+      :account_charges,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the optional filters used to retrieve the history of Business
+    # Support subscription contracts across accounts.
+    #
+    # @!attribute [rw] billing_month
+    #   The billing month to retrieve subscription contracts for, in YYYY-MM
+    #   format. If you don't specify a value, defaults to the current
+    #   month.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID to filter results to a specific account. If you
+    #   don't specify a value, the response includes subscription history
+    #   for all accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The start date to filter subscription contracts from.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date to filter subscription contracts to.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page. Default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBusinessSupportSubscriptionHistoryRequest AWS API Documentation
+    #
+    class ListBusinessSupportSubscriptionHistoryRequest < Struct.new(
+      :billing_month,
+      :account_id,
+      :start_date,
+      :end_date,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the list of Business Support subscription contracts that
+    # match the request filters.
+    #
+    # @!attribute [rw] subscription_contracts
+    #   The list of Business Support subscription contracts.
+    #   @return [Array<Types::BusinessSupportSubscriptionContract>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBusinessSupportSubscriptionHistoryResponse AWS API Documentation
+    #
+    class ListBusinessSupportSubscriptionHistoryResponse < Struct.new(
+      :subscription_contracts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request structure for ListEnterpriseSupportLinkedAccountCharges.
     #
     # @!attribute [rw] billing_month
@@ -1464,12 +1936,13 @@ module Aws::Billing
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   An optional linked account ID to filter results to a specific
-    #   account.
+    #   The linked account ID to filter results to a specific account. If
+    #   you don't specify a value, the response includes charges for all
+    #   linked accounts.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. Default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token

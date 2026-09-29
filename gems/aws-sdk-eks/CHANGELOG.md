@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2026-09-28)
+------------------
+
+* Feature - An optional customer provided prefix used to construct the hostname of the Argo CD server endpoint for EKS Argo CD Capability.
+
+1.178.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.177.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.176.0 (2026-09-03)
+------------------
+
+* Feature - Deprecate EncryptionConfig resources field. Amazon EKS encrypts all Kubernetes API data with envelope encryption by default for clusters running Kubernetes version 1.28 or higher, so this field no longer affects which resources are encrypted.
+
+1.175.0 (2026-08-25)
+------------------
+
+* Feature - This feature would give customers the ability to tune TerminatedPodGcThreshold configuration in an Amazon EKS cluster.
+
+1.174.0 (2026-08-19)
+------------------
+
+* Feature - Adds support for EKS cluster certificate authorities (CA)
+
 1.173.0 (2026-08-11)
 ------------------
 

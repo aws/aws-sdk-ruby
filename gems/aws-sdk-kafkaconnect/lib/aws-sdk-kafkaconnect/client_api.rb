@@ -97,6 +97,8 @@ module Aws::KafkaConnect
     ProvisionedCapacity = Shapes::StructureShape.new(name: 'ProvisionedCapacity')
     ProvisionedCapacityDescription = Shapes::StructureShape.new(name: 'ProvisionedCapacityDescription')
     ProvisionedCapacityUpdate = Shapes::StructureShape.new(name: 'ProvisionedCapacityUpdate')
+    RestartConnectorRequest = Shapes::StructureShape.new(name: 'RestartConnectorRequest')
+    RestartConnectorResponse = Shapes::StructureShape.new(name: 'RestartConnectorResponse')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     S3LocationDescription = Shapes::StructureShape.new(name: 'S3LocationDescription')
     S3LogDelivery = Shapes::StructureShape.new(name: 'S3LogDelivery')
@@ -512,6 +514,14 @@ module Aws::KafkaConnect
     ProvisionedCapacityUpdate.add_member(:worker_count, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "workerCount"))
     ProvisionedCapacityUpdate.struct_class = Types::ProvisionedCapacityUpdate
 
+    RestartConnectorRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "connectorArn"))
+    RestartConnectorRequest.add_member(:only_failed_tasks, Shapes::ShapeRef.new(shape: __boolean, location: "querystring", location_name: "onlyFailedTasks"))
+    RestartConnectorRequest.struct_class = Types::RestartConnectorRequest
+
+    RestartConnectorResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, location_name: "connectorArn"))
+    RestartConnectorResponse.add_member(:connector_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "connectorOperationArn"))
+    RestartConnectorResponse.struct_class = Types::RestartConnectorResponse
+
     S3Location.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "bucketArn"))
     S3Location.add_member(:file_key, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "fileKey"))
     S3Location.add_member(:object_version, Shapes::ShapeRef.new(shape: __string, location_name: "objectVersion"))
@@ -925,6 +935,21 @@ module Aws::KafkaConnect
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:restart_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestartConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/connectors/{connectorArn}/restart"
+        o.input = Shapes::ShapeRef.new(shape: RestartConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestartConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

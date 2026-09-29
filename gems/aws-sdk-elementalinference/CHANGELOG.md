@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2026-09-09)
+------------------
+
+* Feature - This release adds contextual metadata, a feed output type that generates a descriptive summary of your media content along with IAB taxonomy and GARM suitability classifications. It also adds feed resource policies for granting cross-account access to a feed.
+
+1.10.0 (2026-08-24)
+------------------
+
+* Feature - Added support for the GetFixture API, enabling customers to retrieve the details of a fixture from its fixture ID, and added the access role ARN to the CreateFeed, GetFeed, and UpdateFeed responses.
+
 1.9.0 (2026-08-10)
 ------------------
 

@@ -73,7 +73,7 @@ module Aws
         def domain_id: () -> ::String
         def subscription_id: () -> ::String
         def request_id: () -> ::String
-        def language_code: () -> ("en-US")
+        def language_code: () -> ("en-US" | "multi")
         def media_sample_rate_hertz: () -> ::Integer
         def media_encoding: () -> ("pcm" | "flac")
         def response_stream: () -> Types::MedicalScribeOutputStream
@@ -83,7 +83,7 @@ module Aws
                                                     session_id: ::String,
                                                     domain_id: ::String,
                                                     subscription_id: ::String,
-                                                    language_code: ("en-US"),
+                                                    language_code: ("en-US" | "multi"),
                                                     media_sample_rate_hertz: ::Integer,
                                                     media_encoding: ("pcm" | "flac"),
                                                     input_event_stream_handler: untyped,

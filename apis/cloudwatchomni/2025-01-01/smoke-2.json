@@ -1,0 +1,45 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListDomainsSuccess",
+    "operationName" : "ListDomains",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetSpaceNotFound",
+    "operationName" : "GetSpace",
+    "input" : {
+      "spaceId" : "00000000-0000-4000-8000-000000000000"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListSpacesSuccess",
+    "operationName" : "ListSpaces",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

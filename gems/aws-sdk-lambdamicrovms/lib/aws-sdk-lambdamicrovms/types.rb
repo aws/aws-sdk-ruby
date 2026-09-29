@@ -49,8 +49,7 @@ module Aws::LambdaMicrovms
     # @note CodeArtifact is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CodeArtifact corresponding to the set member.
     #
     # @!attribute [rw] uri
-    #   The URI of the code artifact, such as an Amazon S3 path or Amazon
-    #   ECR image URI.
+    #   The URI of the code artifact in Amazon S3.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-microvms-2025-09-09/CodeArtifact AWS API Documentation
@@ -238,7 +237,7 @@ module Aws::LambdaMicrovms
       :name,
       :tags,
       :client_token)
-      SENSITIVE = []
+      SENSITIVE = [:environment_variables]
       include Aws::Structure
     end
 
@@ -358,7 +357,7 @@ module Aws::LambdaMicrovms
       :tags,
       :updated_at,
       :image_version)
-      SENSITIVE = []
+      SENSITIVE = [:environment_variables]
       include Aws::Structure
     end
 
@@ -726,7 +725,7 @@ module Aws::LambdaMicrovms
       :updated_at,
       :state_reason,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:environment_variables]
       include Aws::Structure
     end
 
@@ -868,6 +867,20 @@ module Aws::LambdaMicrovms
       :max_idle_duration_seconds,
       :suspended_duration_seconds,
       :auto_resume_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # There is insufficient capacity to fulfill the request. Retry the
+    # request later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-microvms-2025-09-09/InsufficientCapacityException AWS API Documentation
+    #
+    class InsufficientCapacityException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1280,6 +1293,12 @@ module Aws::LambdaMicrovms
     #   The version of the managed MicroVM image.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The lifecycle status of the managed MicroVM image version. Valid
+    #   values: AVAILABLE (the version is available for use) or DEPRECATED
+    #   (the version is deprecated; do not use it for new MicroVM images).
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the version was created.
     #   @return [Time]
@@ -1293,6 +1312,7 @@ module Aws::LambdaMicrovms
     class ManagedMicrovmImageVersion < Struct.new(
       :image_arn,
       :image_version,
+      :status,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -1582,7 +1602,7 @@ module Aws::LambdaMicrovms
       :updated_at,
       :state_reason,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:environment_variables]
       include Aws::Structure
     end
 
@@ -1808,7 +1828,7 @@ module Aws::LambdaMicrovms
       :run_hook_payload,
       :maximum_duration_in_seconds,
       :client_token)
-      SENSITIVE = []
+      SENSITIVE = [:run_hook_payload]
       include Aws::Structure
     end
 
@@ -2163,7 +2183,7 @@ module Aws::LambdaMicrovms
       :environment_variables,
       :image_identifier,
       :client_token)
-      SENSITIVE = []
+      SENSITIVE = [:environment_variables]
       include Aws::Structure
     end
 
@@ -2276,7 +2296,7 @@ module Aws::LambdaMicrovms
       :environment_variables,
       :updated_at,
       :image_version)
-      SENSITIVE = []
+      SENSITIVE = [:environment_variables]
       include Aws::Structure
     end
 
@@ -2409,7 +2429,7 @@ module Aws::LambdaMicrovms
       :updated_at,
       :state_reason,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:environment_variables]
       include Aws::Structure
     end
 

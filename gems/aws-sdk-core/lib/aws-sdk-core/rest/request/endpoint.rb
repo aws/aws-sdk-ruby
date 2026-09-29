@@ -66,11 +66,11 @@ module Aws
 
         def timestamp(ref, value)
           case ref['timestampFormat']
-          when 'unixTimestamp' then value.to_i
+          when 'unixTimestamp' then Util.serialize_epoch_seconds(value)
           when 'rfc822' then value.utc.httpdate
           else
             # serializing as RFC 3399 date-time is the default
-            value.utc.iso8601
+            Util.serialize_date_time(value)
           end
         end
 

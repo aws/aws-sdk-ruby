@@ -2236,6 +2236,7 @@ module Aws::RDS
     DBSnapshot.add_member(:dedicated_log_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "DedicatedLogVolume"))
     DBSnapshot.add_member(:additional_storage_volumes, Shapes::ShapeRef.new(shape: AdditionalStorageVolumesList, location_name: "AdditionalStorageVolumes"))
     DBSnapshot.add_member(:snapshot_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotAvailabilityZone"))
+    DBSnapshot.add_member(:full_snapshot_size_in_bytes, Shapes::ShapeRef.new(shape: LongOptional, location_name: "FullSnapshotSizeInBytes"))
     DBSnapshot.struct_class = Types::DBSnapshot
 
     DBSnapshotAlreadyExistsFault.struct_class = Types::DBSnapshotAlreadyExistsFault

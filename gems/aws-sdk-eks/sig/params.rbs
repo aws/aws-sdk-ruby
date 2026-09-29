@@ -46,6 +46,15 @@ module Aws
       node_resources_fit: Params::node_resources_fit_config?
     }
 
+      type kube_controller_manager_config_request = {
+      pod_gc_controller_config: {
+        terminated_pod_gc_threshold: ::Integer?
+      }?,
+      horizontal_pod_autoscaler_controller_config: {
+        horizontal_pod_autoscaler_sync_period: ::String?
+      }?
+    }
+
       type node_repair_config = {
       enabled: bool?,
       max_unhealthy_node_threshold_count: ::Integer?,

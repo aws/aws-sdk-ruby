@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2026-08-31)
+------------------
+
+* Feature - Adds support for Slack bidirectional communication configuration in AWS DevOps Agent agent spaces.
+
+1.13.0 (2026-08-26)
+------------------
+
+* Feature - AWS DevOps Agent now supports trigger filter groups for Release Readiness Review, letting you control when the capability auto-triggers based on webhook events and target branches.
+
+1.12.0 (2026-08-25)
+------------------
+
+* Feature - Adds the UpdateApprovalAction API for resolving agent action approvals in AWS DevOps Agent agent spaces.
+
 1.11.0 (2026-07-09)
 ------------------
 

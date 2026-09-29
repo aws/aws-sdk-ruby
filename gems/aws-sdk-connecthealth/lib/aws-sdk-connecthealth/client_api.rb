@@ -116,10 +116,10 @@ module Aws::ConnectHealth
     S3Source = Shapes::StructureShape.new(name: 'S3Source')
     S3Sources = Shapes::ListShape.new(name: 'S3Sources')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
-    SensitiveAlphanumericString = Shapes::StringShape.new(name: 'SensitiveAlphanumericString')
     SensitiveIsoDateString = Shapes::StringShape.new(name: 'SensitiveIsoDateString')
     SensitiveMarkdownString = Shapes::StringShape.new(name: 'SensitiveMarkdownString')
     SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
+    SensitiveSectionHeaderString = Shapes::StringShape.new(name: 'SensitiveSectionHeaderString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     Specialty = Shapes::StringShape.new(name: 'Specialty')
@@ -518,7 +518,7 @@ module Aws::ConnectHealth
 
     TemplateInstructions.member = Shapes::ShapeRef.new(shape: TemplateSectionInstruction)
 
-    TemplateSectionInstruction.add_member(:section_header, Shapes::ShapeRef.new(shape: SensitiveAlphanumericString, required: true, location_name: "sectionHeader"))
+    TemplateSectionInstruction.add_member(:section_header, Shapes::ShapeRef.new(shape: SensitiveSectionHeaderString, required: true, location_name: "sectionHeader"))
     TemplateSectionInstruction.add_member(:section_instruction, Shapes::ShapeRef.new(shape: SensitiveMarkdownString, required: true, location_name: "sectionInstruction"))
     TemplateSectionInstruction.struct_class = Types::TemplateSectionInstruction
 

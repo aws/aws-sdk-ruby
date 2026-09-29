@@ -109,6 +109,13 @@ module Aws::IVSRealTime
     end
 
     class CreateIngestConfigurationResponse
+      attr_accessor access_control_allow_origin: ::String
+      attr_accessor access_control_expose_headers: ::String
+      attr_accessor cache_control: ::String
+      attr_accessor content_security_policy: ::String
+      attr_accessor strict_transport_security: ::String
+      attr_accessor x_content_type_options: ::String
+      attr_accessor x_frame_options: ::String
       attr_accessor ingest_configuration: Types::IngestConfiguration
       SENSITIVE: []
     end
@@ -894,6 +901,13 @@ module Aws::IVSRealTime
     end
 
     class UpdateIngestConfigurationResponse
+      attr_accessor access_control_allow_origin: ::String
+      attr_accessor access_control_expose_headers: ::String
+      attr_accessor cache_control: ::String
+      attr_accessor content_security_policy: ::String
+      attr_accessor strict_transport_security: ::String
+      attr_accessor x_content_type_options: ::String
+      attr_accessor x_frame_options: ::String
       attr_accessor ingest_configuration: Types::IngestConfiguration
       SENSITIVE: []
     end

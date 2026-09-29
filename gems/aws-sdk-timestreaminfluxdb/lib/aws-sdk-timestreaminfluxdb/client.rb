@@ -1777,6 +1777,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::GetDbClusterOutput#engine_type #engine_type} => String
     #   * {Types::GetDbClusterOutput#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::GetDbClusterOutput#db_parameter_group_identifier #db_parameter_group_identifier} => String
+    #   * {Types::GetDbClusterOutput#effective_db_parameter_group_identifier #effective_db_parameter_group_identifier} => String
     #   * {Types::GetDbClusterOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
     #   * {Types::GetDbClusterOutput#maintenance_schedule #maintenance_schedule} => Types::MaintenanceSchedule
     #   * {Types::GetDbClusterOutput#last_maintenance_time #last_maintenance_time} => Time
@@ -1812,6 +1813,7 @@ module Aws::TimestreamInfluxDB
     #   resp.engine_type #=> String, one of "INFLUXDB_V2", "INFLUXDB_V3_CORE", "INFLUXDB_V3_ENTERPRISE"
     #   resp.publicly_accessible #=> Boolean
     #   resp.db_parameter_group_identifier #=> String
+    #   resp.effective_db_parameter_group_identifier #=> String
     #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
     #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
     #   resp.maintenance_schedule.timezone #=> String
@@ -2981,7 +2983,7 @@ module Aws::TimestreamInfluxDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

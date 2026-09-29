@@ -21,10 +21,87 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class ChannelDescription
+      attr_accessor channel_name: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor channel_status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor channel_status_reason: ::String
+      attr_accessor channel_creation_timestamp: ::Time
+      attr_accessor service_execution_role_arn: ::String
+      attr_accessor stream_configuration_list: ::Array[Types::ChannelStreamDescription]
+      attr_accessor s3_destination_configuration: Types::S3DestinationDescription
+      attr_accessor s3_tables_destination_configuration: Types::S3TablesDestinationDescription
+      attr_accessor encryption_configuration: Types::ChannelEncryptionConfiguration
+      attr_accessor logging_configuration: Types::ChannelLoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class ChannelEncryptionConfiguration
+      attr_accessor encryption_type: ("KMS")
+      attr_accessor key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelLoggingConfiguration
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogs
+      SENSITIVE: []
+    end
+
+    class ChannelLoggingUpdateInput
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsUpdateInput
+      SENSITIVE: []
+    end
+
+    class ChannelStreamConfiguration
+      attr_accessor stream_arn: ::String
+      attr_accessor record_configuration: Types::RecordConfiguration
+      SENSITIVE: []
+    end
+
+    class ChannelStreamDescription
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_creation_timestamp: ::Time
+      attr_accessor record_configuration: Types::RecordConfiguration
+      SENSITIVE: []
+    end
+
+    class ChannelStreamIdentifier
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ChannelSummary
+      attr_accessor channel_name: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor channel_status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor channel_status_reason: ::String
+      attr_accessor channel_creation_timestamp: ::Time
+      attr_accessor channel_destination_type: ("S3" | "S3_TABLES")
+      attr_accessor streams: ::Array[Types::ChannelStreamIdentifier]
+      SENSITIVE: []
+    end
+
     class ChildShard
       attr_accessor shard_id: ::String
       attr_accessor parent_shards: ::Array[::String]
       attr_accessor hash_key_range: Types::HashKeyRange
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogs
+      attr_accessor enabled: bool
+      attr_accessor log_group_name: ::String
+      attr_accessor log_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsUpdateInput
+      attr_accessor enabled: bool
+      attr_accessor log_group_name: ::String
+      attr_accessor log_stream_name: ::String
       SENSITIVE: []
     end
 
@@ -45,6 +122,23 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class CreateChannelInput
+      attr_accessor channel_name: ::String
+      attr_accessor service_execution_role_arn: ::String
+      attr_accessor stream_configuration_list: ::Array[Types::ChannelStreamConfiguration]
+      attr_accessor s3_destination_configuration: Types::S3DestinationConfiguration
+      attr_accessor s3_tables_destination_configuration: Types::S3TablesDestinationConfiguration
+      attr_accessor encryption_configuration: Types::ChannelEncryptionConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor logging_configuration: Types::ChannelLoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateChannelOutput
+      attr_accessor channel_description: Types::ChannelDescription
+      SENSITIVE: []
+    end
+
     class CreateStreamInput
       attr_accessor stream_name: ::String
       attr_accessor shard_count: ::Integer
@@ -52,6 +146,14 @@ module Aws::Kinesis
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor warm_throughput_mi_bps: ::Integer
       attr_accessor max_record_size_in_ki_b: ::Integer
+      attr_accessor record_distribution_strategy: ("AUTO" | "USER_PARTITION_KEY")
+      SENSITIVE: []
+    end
+
+    class DeadLetterQueueS3Configuration
+      attr_accessor bucket_arn: ::String
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor error_output_prefix: ::String
       SENSITIVE: []
     end
 
@@ -60,6 +162,11 @@ module Aws::Kinesis
       attr_accessor retention_period_hours: ::Integer
       attr_accessor stream_arn: ::String
       attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelInput
+      attr_accessor channel_arn: ::String
       SENSITIVE: []
     end
 
@@ -93,6 +200,16 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class DescribeChannelInput
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelOutput
+      attr_accessor channel_description: Types::ChannelDescription
+      SENSITIVE: []
+    end
+
     class DescribeLimitsInput < Aws::EmptyStructure
     end
 
@@ -101,6 +218,8 @@ module Aws::Kinesis
       attr_accessor open_shard_count: ::Integer
       attr_accessor on_demand_stream_count: ::Integer
       attr_accessor on_demand_stream_count_limit: ::Integer
+      attr_accessor channel_count: ::Integer
+      attr_accessor channel_count_limit: ::Integer
       SENSITIVE: []
     end
 
@@ -151,6 +270,11 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class DryRunOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class EnableEnhancedMonitoringInput
       attr_accessor stream_name: ::String
       attr_accessor shard_level_metrics: ::Array[("IncomingBytes" | "IncomingRecords" | "OutgoingBytes" | "OutgoingRecords" | "WriteProvisionedThroughputExceeded" | "ReadProvisionedThroughputExceeded" | "IteratorAgeMilliseconds" | "ALL")]
@@ -187,6 +311,7 @@ module Aws::Kinesis
       attr_accessor limit: ::Integer
       attr_accessor stream_arn: ::String
       attr_accessor stream_id: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -217,6 +342,7 @@ module Aws::Kinesis
       attr_accessor timestamp: ::Time
       attr_accessor stream_arn: ::String
       attr_accessor stream_id: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -288,6 +414,19 @@ module Aws::Kinesis
 
     class LimitExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsInput
+      attr_accessor stream_filter: ::Array[Types::StreamFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsOutput
+      attr_accessor channel_summaries: ::Array[Types::ChannelSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -387,6 +526,17 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class PartitionField
+      attr_accessor transform: ("TIME_HOUR")
+      attr_accessor source_name: ::String
+      SENSITIVE: []
+    end
+
+    class PartitionSpec
+      attr_accessor partition_fields: ::Array[Types::PartitionField]
+      SENSITIVE: []
+    end
+
     class ProvisionedThroughputExceededException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -400,6 +550,7 @@ module Aws::Kinesis
       attr_accessor sequence_number_for_ordering: ::String
       attr_accessor stream_arn: ::String
       attr_accessor stream_id: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -415,6 +566,7 @@ module Aws::Kinesis
       attr_accessor stream_name: ::String
       attr_accessor stream_arn: ::String
       attr_accessor stream_id: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -456,6 +608,12 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class RecordConfiguration
+      attr_accessor record_format_type: ("GSR_JSON" | "JSON" | "STRING" | "BYTE_ARRAY")
+      attr_accessor gsr_schema_arn: ::String
+      SENSITIVE: []
+    end
+
     class RegisterStreamConsumerInput
       attr_accessor stream_arn: ::String
       attr_accessor consumer_name: ::String
@@ -486,6 +644,62 @@ module Aws::Kinesis
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class S3DestinationConfiguration
+      attr_accessor data_freshness_in_seconds: ::Integer
+      attr_accessor dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration
+      attr_accessor storage_configuration: Types::S3StorageConfiguration
+      SENSITIVE: []
+    end
+
+    class S3DestinationDescription
+      attr_accessor data_freshness_in_seconds: ::Integer
+      attr_accessor dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration
+      attr_accessor storage_configuration: Types::S3StorageConfiguration
+      SENSITIVE: []
+    end
+
+    class S3DestinationUpdateInput
+      attr_accessor data_freshness_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3StorageConfiguration
+      attr_accessor bucket_arn: ::String
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor output_key_template: ::String
+      attr_accessor storage_class: ("STANDARD" | "INTELLIGENT_TIERING" | "GLACIER_IR")
+      attr_accessor compression_type: ("NONE" | "GZIP" | "ZSTD")
+      SENSITIVE: []
+    end
+
+    class S3TablesConfiguration
+      attr_accessor table_bucket_arn: ::String
+      attr_accessor namespace: ::String
+      attr_accessor table_name: ::String
+      attr_accessor compression_type: ("NONE" | "ZSTD" | "SNAPPY")
+      attr_accessor partition_spec: Types::PartitionSpec
+      SENSITIVE: []
+    end
+
+    class S3TablesDestinationConfiguration
+      attr_accessor data_freshness_in_seconds: ::Integer
+      attr_accessor dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration
+      attr_accessor s3_tables_configuration_list: ::Array[Types::S3TablesConfiguration]
+      SENSITIVE: []
+    end
+
+    class S3TablesDestinationDescription
+      attr_accessor data_freshness_in_seconds: ::Integer
+      attr_accessor dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration
+      attr_accessor s3_tables_configuration_list: ::Array[Types::S3TablesConfiguration]
+      SENSITIVE: []
+    end
+
+    class S3TablesDestinationUpdateInput
+      attr_accessor data_freshness_in_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -575,6 +789,14 @@ module Aws::Kinesis
       attr_accessor consumer_count: ::Integer
       attr_accessor warm_throughput: Types::WarmThroughputObject
       attr_accessor max_record_size_in_ki_b: ::Integer
+      attr_accessor channel_count: ::Integer
+      attr_accessor record_distribution_strategy: ("AUTO" | "USER_PARTITION_KEY")
+      SENSITIVE: []
+    end
+
+    class StreamFilter
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_creation_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -606,6 +828,7 @@ module Aws::Kinesis
       attr_accessor stream_id: ::String
       attr_accessor shard_id: ::String
       attr_accessor starting_position: Types::StartingPosition
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -644,6 +867,19 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class UpdateChannelInput
+      attr_accessor channel_arn: ::String
+      attr_accessor s3_destination_configuration: Types::S3DestinationUpdateInput
+      attr_accessor s3_tables_destination_configuration: Types::S3TablesDestinationUpdateInput
+      attr_accessor logging_configuration: Types::ChannelLoggingUpdateInput
+      SENSITIVE: []
+    end
+
+    class UpdateChannelOutput
+      attr_accessor channel_description: Types::ChannelDescription
+      SENSITIVE: []
+    end
+
     class UpdateMaxRecordSizeInput
       attr_accessor stream_arn: ::String
       attr_accessor stream_id: ::String
@@ -673,6 +909,13 @@ module Aws::Kinesis
       attr_accessor stream_id: ::String
       attr_accessor stream_mode_details: Types::StreamModeDetails
       attr_accessor warm_throughput_mi_bps: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateStreamRecordDistributionStrategyInput
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
+      attr_accessor record_distribution_strategy: ("AUTO" | "USER_PARTITION_KEY")
       SENSITIVE: []
     end
 

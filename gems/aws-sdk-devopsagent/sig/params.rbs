@@ -8,6 +8,15 @@
 module Aws
   module DevOpsAgent
     module Params
+      type source_aws_configuration = {
+      account_id: ::String,
+      account_type: ("source"),
+      assumable_role_arn: ::String,
+      external_id: ::String?,
+      agent_elevated_role_arn: ::String?,
+      agent_elevated_role_arn_status: ("valid" | "invalid" | "pending-confirmation")?
+    }
+
       type git_hub_configuration = {
       repo_name: ::String,
       repo_id: ::String,
@@ -31,20 +40,33 @@ module Aws
       type slack_configuration = {
       workspace_id: ::String,
       workspace_name: ::String,
-      transmission_target: Params::slack_transmission_target
+      transmission_target: Params::slack_transmission_target,
+      bidirectional: {
+        role_arn: ::String,
+        enabled: bool?
+      }?
+    }
+
+      type mcp_server_grafana_configuration = {
+      endpoint: ::String,
+      organization_id: ::String?,
+      tools: Array[::String]?,
+      enabled_elevated_tools: Array[
+        {
+          name: ::String,
+          tool_classification: ("READ_ONLY" | "MUTATIVE" | "DESTRUCTIVE")?
+        }
+      ]?
     }
 
       type service_configuration = {
-      source_aws: {
-        account_id: ::String,
-        account_type: ("source"),
-        assumable_role_arn: ::String,
-        external_id: ::String?
-      }?,
+      source_aws: Params::source_aws_configuration?,
       aws: {
         assumable_role_arn: ::String,
         account_id: ::String,
-        account_type: ("monitor")
+        account_type: ("monitor"),
+        agent_elevated_role_arn: ::String?,
+        agent_elevated_role_arn_status: ("valid" | "invalid" | "pending-confirmation")?
       }?,
       github: Params::git_hub_configuration?,
       slack: Params::slack_configuration?,
@@ -61,9 +83,21 @@ module Aws
         endpoint: ::String
       }?,
       mcpserverdatadog: {
+        enabled_elevated_tools: Array[
+          {
+            name: ::String,
+            tool_classification: ("READ_ONLY" | "MUTATIVE" | "DESTRUCTIVE")?
+          }
+        ]?
       }?,
       mcpserver: {
-        tools: Array[::String]
+        tools: Array[::String],
+        tool_details: Array[
+          {
+            name: ::String,
+            tool_classification: ("READ_ONLY" | "MUTATIVE" | "DESTRUCTIVE")?
+          }
+        ]?
       }?,
       gitlab: {
         project_id: ::String,
@@ -83,22 +117,36 @@ module Aws
         project_id: ::String,
         project_name: ::String
       }?,
-      mcpservergrafana: {
-        endpoint: ::String,
-        organization_id: ::String?,
-        tools: Array[::String]?
-      }?,
+      mcpservergrafana: Params::mcp_server_grafana_configuration?,
       pagerduty: {
         services: Array[::String],
         customer_email: ::String
       }?,
       mcpserversigv4: {
-        tools: Array[::String]
+        tools: Array[::String],
+        tool_details: Array[
+          {
+            name: ::String,
+            tool_classification: ("READ_ONLY" | "MUTATIVE" | "DESTRUCTIVE")?
+          }
+        ]?
       }?,
       remoteagent: {
       }?,
       remoteagentsigv4: {
       }?
+    }
+
+      type capability_configuration = {
+      enabled: bool?,
+      trigger_filter_groups: Array[
+        {
+          events: Array[("PULL_REQUEST_READY_FOR_REVIEW" | "PULL_REQUEST_DRAFT")]?,
+          target_branches: {
+            patterns: Array[::String]
+          }?
+        }
+      ]?
     }
 
       type asset_file_content = {

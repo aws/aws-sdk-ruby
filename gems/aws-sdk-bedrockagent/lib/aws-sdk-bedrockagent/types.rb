@@ -1301,12 +1301,36 @@ module Aws::BedrockAgent
     # @!attribute [rw] audio
     #   Configuration settings for processing audio content in multimodal
     #   knowledge bases.
+    #
+    #   This field is deprecated. Use `modelConfiguration` instead.
     #   @return [Array<Types::AudioConfiguration>]
     #
     # @!attribute [rw] video
     #   Configuration settings for processing video content in multimodal
     #   knowledge bases.
+    #
+    #   This field is deprecated. Use `modelConfiguration` instead.
     #   @return [Array<Types::VideoConfiguration>]
+    #
+    # @!attribute [rw] model_configuration
+    #   Model-specific configuration for the embedding model, provided as a
+    #   JSON object. Use this field to specify settings that apply to the
+    #   embedding model that you selected, such as how audio and video files
+    #   are divided into segments.
+    #
+    #   The fields that this object accepts depend on the embedding model.
+    #   For the settings that each model accepts, see the documentation for
+    #   that model.
+    #
+    #   For an example of a [CreateKnowledgeBase][1] request that uses this
+    #   field to configure a multimodal embedding model, see the
+    #   [Examples][2] section of [CreateKnowledgeBase][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html#API_agent_CreateKnowledgeBase_Examples
+    #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/BedrockEmbeddingModelConfiguration AWS API Documentation
     #
@@ -1314,7 +1338,8 @@ module Aws::BedrockAgent
       :dimensions,
       :embedding_data_type,
       :audio,
-      :video)
+      :video,
+      :model_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2841,6 +2866,145 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to associate this VPC
+    #   configuration with.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC that the knowledge base connects through
+    #   to reach the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnets, in the VPC identified by `vpcId`, that the knowledge
+    #   base uses to connect to the resource.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_target
+    #   The private IPv4 address or DNS name of the resource you want the
+    #   knowledge base to reach. The target must be privately reachable from
+    #   inside your VPC, such as an internal load balancer or a private IP.
+    #   The following are not supported:
+    #
+    #   * Internet-facing endpoints
+    #
+    #   * Loopback addresses
+    #
+    #   * Link-local addresses
+    #
+    #   * Wildcard addresses
+    #
+    #   * Multicast addresses
+    #
+    #   * IPv6 literals
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port on which to reach the resource.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to connect to the resource. Specify `HTTP` for
+    #   plaintext or `HTTPS` for TLS. When you specify `HTTPS`, you must
+    #   also provide `tlsServerName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_mode
+    #   Controls how a domain-name `resourceTarget` is resolved. This
+    #   applies only when the target is a domain name; it has no effect for
+    #   IP-address targets, which have no name to resolve. In all cases the
+    #   resolved address must be reachable from inside your VPC. Valid
+    #   values:
+    #
+    #   * `IN_VPC` (default, recommended) – The target domain name is
+    #     resolved privately, using the DNS resolvers of the VPC, such as
+    #     private Route 53 hosted zones or on-premises DNS reachable from
+    #     the VPC. Use this for targets that are private to your VPC, such
+    #     as internal load balancers, private hosted-zone names, or
+    #     on-premises hosts.
+    #
+    #   * `PUBLIC` – The target domain name is resolved against public DNS
+    #     resolvers. Select this only when the target's domain name must be
+    #     resolved through public DNS and the resulting address is still
+    #     reachable from the VPC, an uncommon split-horizon configuration.
+    #     If you are unsure, use `IN_VPC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_header
+    #   An optional HTTP `Host` header value to send when invoking the
+    #   resource. Set this only if your resource (or an upstream router or
+    #   ingress) routes by the `Host` header and that host differs from the
+    #   target. This setting is independent of `tlsServerName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_server_name
+    #   The expected TLS server name. The service matches this value against
+    #   the Subject Alternative Names on your resource's TLS certificate
+    #   during invocation. This field is required when `protocol` is
+    #   `HTTPS`. Set it to a hostname on your certificate, such as
+    #   `app.internal.example.com`. You can use a single leftmost wildcard,
+    #   such as `*.example.com`. The value must be a hostname without a
+    #   port.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   An optional human-readable name for the VPC configuration. If you
+    #   don't specify a name, the VPC configuration has no name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description of the VPC configuration. If you don't
+    #   specify a description, the VPC configuration has no description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateVpcConfigurationRequest AWS API Documentation
+    #
+    class CreateVpcConfigurationRequest < Struct.new(
+      :knowledge_base_id,
+      :client_token,
+      :vpc_id,
+      :subnet_ids,
+      :resource_target,
+      :port,
+      :protocol,
+      :resolution_mode,
+      :host_header,
+      :tls_server_name,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration that was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the VPC configuration. Immediately after
+    #   creation this is `CREATING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateVpcConfigurationResponse AWS API Documentation
+    #
+    class CreateVpcConfigurationResponse < Struct.new(
+      :vpc_configuration_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains configurations for a query, each of which defines information
     # about example queries to help the query engine generate appropriate
     # SQL queries.
@@ -2991,6 +3155,15 @@ module Aws::BedrockAgent
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # A daily sync. The run time is system-chosen (off-peak) and not
+    # configurable.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DailySchedule AWS API Documentation
+    #
+    class DailySchedule < Aws::EmptyStructure; end
 
     # Contains details about a data source.
     #
@@ -3203,6 +3376,38 @@ module Aws::BedrockAgent
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The day of the month on which a monthly sync runs. Specify exactly one
+    # of `dayNumber` or `lastDayOfMonth`.
+    #
+    # @note DayOfMonth is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DayOfMonth is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DayOfMonth corresponding to the set member.
+    #
+    # @!attribute [rw] day_number
+    #   A specific day of the month, from 1 to 28. Values are capped at 28,
+    #   so a monthly sync runs in every month, including February.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_day_of_month
+    #   Set this option to run the monthly sync on the last calendar day of
+    #   each month.
+    #   @return [Types::LastDayOfMonth]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DayOfMonth AWS API Documentation
+    #
+    class DayOfMonth < Struct.new(
+      :day_number,
+      :last_day_of_month,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DayNumber < DayOfMonth; end
+      class LastDayOfMonth < DayOfMonth; end
+      class Unknown < DayOfMonth; end
     end
 
     # @!attribute [rw] agent_id
@@ -3659,6 +3864,42 @@ module Aws::BedrockAgent
     class DeleteResourcePolicyResponse < Struct.new(
       :resource_arn,
       :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base that owns the VPC
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteVpcConfigurationRequest AWS API Documentation
+    #
+    class DeleteVpcConfigurationRequest < Struct.new(
+      :knowledge_base_id,
+      :vpc_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the VPC configuration. Immediately after a
+    #   delete request this is `DELETING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteVpcConfigurationResponse AWS API Documentation
+    #
+    class DeleteVpcConfigurationResponse < Struct.new(
+      :vpc_configuration_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5662,6 +5903,37 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base that owns the VPC
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetVpcConfigurationRequest AWS API Documentation
+    #
+    class GetVpcConfigurationRequest < Struct.new(
+      :knowledge_base_id,
+      :vpc_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_configuration
+    #   The VPC configuration, including its connection settings, resolution
+    #   mode, and current lifecycle status.
+    #   @return [Types::VpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetVpcConfigurationResponse AWS API Documentation
+    #
+    class GetVpcConfigurationResponse < Struct.new(
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a guardrail associated with a resource.
     #
     # @!attribute [rw] guardrail_identifier
@@ -6325,7 +6597,9 @@ module Aws::BedrockAgent
     #   @return [Types::VectorKnowledgeBaseConfiguration]
     #
     # @!attribute [rw] managed_knowledge_base_configuration
-    #   Configurations for a managed knowledge base.
+    #   Contains configuration details for a knowledge base that uses a
+    #   vector store fully managed by Amazon Bedrock. Specify this object
+    #   when the knowledge base type is MANAGED.
     #   @return [Types::ManagedKnowledgeBaseConfiguration]
     #
     # @!attribute [rw] kendra_knowledge_base_configuration
@@ -6609,6 +6883,15 @@ module Aws::BedrockAgent
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The option to run the monthly sync on the last calendar day of each
+    # month.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/LastDayOfMonth AWS API Documentation
+    #
+    class LastDayOfMonth < Aws::EmptyStructure; end
 
     # Contains configurations for a Lex node in the flow. You specify a
     # Amazon Lex bot to invoke. This node takes an utterance as the input
@@ -7368,6 +7651,56 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base whose VPC configurations
+    #   you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_filter
+    #   The status to filter the results by. Only VPC configurations with
+    #   the specified status are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response returns a `nextToken`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next page of results, returned in
+    #   a previous response when more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListVpcConfigurationsRequest AWS API Documentation
+    #
+    class ListVpcConfigurationsRequest < Struct.new(
+      :knowledge_base_id,
+      :status_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of VPC configuration summaries.
+    #   @return [Array<Types::VpcConfigurationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next page of results, present
+    #   when the total number of results exceeds the maximum number of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListVpcConfigurationsResponse AWS API Documentation
+    #
+    class ListVpcConfigurationsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains configurations for the controller node of a DoWhile loop in
     # the flow.
     #
@@ -7520,13 +7853,8 @@ module Aws::BedrockAgent
     # Configurations for a managed knowledge base.
     #
     # @!attribute [rw] embedding_model_type
-    #   Choose `CUSTOM` to provide your own Bedrock embedding model ARN.
-    #   Choose `MANAGED` to use a service-managed embedding model. For more
-    #   information, see [Embedding model options][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-create.html#kb-managed-embedding-models
+    #   Choose CUSTOM to provide your own Bedrock embedding model ARN.
+    #   Choose MANAGED to use a service-managed embedding model.
     #   @return [String]
     #
     # @!attribute [rw] embedding_model_arn
@@ -7534,7 +7862,8 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] embedding_model_configuration
-    #   The configuration details for the embeddings model.
+    #   The configuration details for the embeddings model. Not required
+    #   when choosing the MANAGED embeddingModelType.
     #   @return [Types::EmbeddingModelConfiguration]
     #
     # @!attribute [rw] server_side_encryption_configuration
@@ -7542,13 +7871,20 @@ module Aws::BedrockAgent
     #   managed knowledge base.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
+    # @!attribute [rw] supplemental_data_storage_configuration
+    #   Use this object to specify the Amazon S3 location that the knowledge
+    #   base uses to process and ingest multimodal content. This field is
+    #   required when you use a native multimodal embedding model.
+    #   @return [Types::SupplementalDataStorageConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ManagedKnowledgeBaseConfiguration AWS API Documentation
     #
     class ManagedKnowledgeBaseConfiguration < Struct.new(
       :embedding_model_type,
       :embedding_model_arn,
       :embedding_model_configuration,
-      :server_side_encryption_configuration)
+      :server_side_encryption_configuration,
+      :supplemental_data_storage_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7573,12 +7909,20 @@ module Aws::BedrockAgent
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-connect-ds.html
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] sync_schedule
+    #   The recurring schedule on which the connector automatically syncs
+    #   this data source. If not specified, the data source is not synced
+    #   automatically and you start each sync yourself. Not supported for
+    #   the Custom connector.
+    #   @return [Types::SyncSchedule]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ManagedKnowledgeBaseConnectorConfiguration AWS API Documentation
     #
     class ManagedKnowledgeBaseConnectorConfiguration < Struct.new(
       :deletion_protection_configuration,
       :media_extraction_configuration,
-      :connector_parameters)
+      :connector_parameters,
+      :sync_schedule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7994,6 +8338,20 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # A monthly sync on a specified day of the month.
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month on which the monthly sync runs.
+    #   @return [Types::DayOfMonth]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MonthlySchedule AWS API Documentation
+    #
+    class MonthlySchedule < Struct.new(
+      :day_of_month)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a flow that contains multiple `LoopController` nodes in
     # a DoWhile loop.
     #
@@ -8321,9 +8679,21 @@ module Aws::BedrockAgent
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-advanced-parsing.html
     #
     # @!attribute [rw] parsing_strategy
-    #   The parsing strategy for the data source. Only `SMART_PARSING` can
-    #   be selected for managed knowledge bases. For more information, see
-    #   [Customize ingestion for managed knowledge bases][1].
+    #   The parsing strategy for the data source.
+    #
+    #   For managed knowledge bases, the strategy that you can select
+    #   depends on the embedding model that your knowledge base uses:
+    #
+    #   * If your knowledge base uses a native multimodal embedding model,
+    #     specify `MULTI_MODAL_EMBEDDINGS`. With this strategy, files are
+    #     sent directly to the embedding model instead of being parsed into
+    #     text. This is the only strategy that is supported for these
+    #     knowledge bases.
+    #
+    #   * Otherwise, specify `SMART_PARSING`.
+    #
+    #   For more information, see [Customize ingestion for managed knowledge
+    #   bases][1].
     #
     #
     #
@@ -10431,6 +10801,46 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # The recurring schedule on which a managed knowledge base connector
+    # automatically syncs its data source. Specify exactly one of `daily`,
+    # `weekly`, or `monthly`.
+    #
+    # @note SyncSchedule is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SyncSchedule is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SyncSchedule corresponding to the set member.
+    #
+    # @!attribute [rw] daily
+    #   A daily sync that runs once a day at a system-chosen off-peak time.
+    #   The run time is not configurable.
+    #   @return [Types::DailySchedule]
+    #
+    # @!attribute [rw] weekly
+    #   A weekly sync that runs once a week on the specified day of the
+    #   week.
+    #   @return [Types::WeeklySchedule]
+    #
+    # @!attribute [rw] monthly
+    #   A monthly sync that runs once a month on the specified day of the
+    #   month.
+    #   @return [Types::MonthlySchedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/SyncSchedule AWS API Documentation
+    #
+    class SyncSchedule < Struct.new(
+      :daily,
+      :weekly,
+      :monthly,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Daily < SyncSchedule; end
+      class Weekly < SyncSchedule; end
+      class Monthly < SyncSchedule; end
+      class Unknown < SyncSchedule; end
+    end
+
     # Contains a system prompt to provide context to the model or to
     # describe how it should behave. For more information, see [Create a
     # prompt using Prompt management][1].
@@ -10694,7 +11104,7 @@ module Aws::BedrockAgent
     #   @return [Types::ToolInputSchema]
     #
     # @!attribute [rw] strict
-    #   Whether to enforce strict JSON schema adherence for the tool input
+    #   Whether the tool schema is strictly enforced.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ToolSpecification AWS API Documentation
@@ -12085,6 +12495,175 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Contains the details of a VPC configuration, including its connection
+    # settings, resolution mode, and current lifecycle status.
+    #
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the VPC configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional detail about the current status, such as the cause of a
+    #   `CREATE_FAILED` or `DELETE_FAILED` status.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC that the knowledge base connects through
+    #   to reach the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnets that the knowledge base uses to connect to the resource.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_target
+    #   The private IPv4 address or DNS name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port on which the resource is reached.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to connect to the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_mode
+    #   Specifies how the resource target is resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_header
+    #   The HTTP `Host` header value sent when invoking the resource, if
+    #   configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_server_name
+    #   The expected TLS server name that the service matches against the
+    #   Subject Alternative Names on the resource's TLS certificate.
+    #   Present when `protocol` is `HTTPS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The human-readable name of the VPC configuration, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the VPC configuration, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the VPC configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the VPC configuration was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VpcConfiguration AWS API Documentation
+    #
+    class VpcConfiguration < Struct.new(
+      :vpc_configuration_id,
+      :status,
+      :status_message,
+      :vpc_id,
+      :subnet_ids,
+      :resource_target,
+      :port,
+      :protocol,
+      :resolution_mode,
+      :host_header,
+      :tls_server_name,
+      :name,
+      :description,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a VPC configuration returned by `ListVpcConfigurations`.
+    #
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the VPC configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional detail about the current status, such as the cause of a
+    #   failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC that the knowledge base connects through
+    #   to reach the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_target
+    #   The private IPv4 address or DNS name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port on which the resource is reached.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to connect to the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_mode
+    #   Specifies how the resource target is resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_header
+    #   The HTTP `Host` header value sent when invoking the resource, if
+    #   configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_server_name
+    #   The expected TLS server name that the service matches against the
+    #   Subject Alternative Names on the resource's TLS certificate.
+    #   Present when `protocol` is `HTTPS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The human-readable name of the VPC configuration, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the VPC configuration, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the VPC configuration was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VpcConfigurationSummary AWS API Documentation
+    #
+    class VpcConfigurationSummary < Struct.new(
+      :vpc_configuration_id,
+      :status,
+      :status_message,
+      :vpc_id,
+      :resource_target,
+      :port,
+      :protocol,
+      :resolution_mode,
+      :host_header,
+      :tls_server_name,
+      :name,
+      :description,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of web URLs that you want to crawl. You should be
     # authorized to crawl the URLs.
     #
@@ -12197,6 +12776,20 @@ module Aws::BedrockAgent
     #
     class WebSourceConfiguration < Struct.new(
       :url_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A weekly sync on a specified day of the week.
+    #
+    # @!attribute [rw] day_of_week
+    #   The day of the week on which the weekly sync runs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/WeeklySchedule AWS API Documentation
+    #
+    class WeeklySchedule < Struct.new(
+      :day_of_week)
       SENSITIVE = []
       include Aws::Structure
     end

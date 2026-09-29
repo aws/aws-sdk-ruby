@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.176.0 (2026-09-24)
+------------------
+
+* Feature - Fixed ListV2LoggingLevels and DeleteV2LoggingLevel documentation to include all supported target-types
+
+1.175.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.174.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.173.0 (2026-08-25)
+------------------
+
+* Feature - As part of this release, we are extending capability of AWS IoT Rules Engine to support IoT InfluxDB Action. The IoT InfluxDB action lets customers send messages from IoT sensors and applications to InfluxDB.
+
 1.172.0 (2026-07-09)
 ------------------
 

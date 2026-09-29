@@ -97,6 +97,13 @@ module Aws
 
       interface _CreateIngestConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIngestConfigurationResponse]
+        def access_control_allow_origin: () -> ::String
+        def access_control_expose_headers: () -> ::String
+        def cache_control: () -> ::String
+        def content_security_policy: () -> ::String
+        def strict_transport_security: () -> ::String
+        def x_content_type_options: () -> ::String
+        def x_frame_options: () -> ::String
         def ingest_configuration: () -> Types::IngestConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#create_ingest_configuration-instance_method
@@ -588,6 +595,13 @@ module Aws
 
       interface _UpdateIngestConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIngestConfigurationResponse]
+        def access_control_allow_origin: () -> ::String
+        def access_control_expose_headers: () -> ::String
+        def cache_control: () -> ::String
+        def content_security_policy: () -> ::String
+        def strict_transport_security: () -> ::String
+        def x_content_type_options: () -> ::String
+        def x_frame_options: () -> ::String
         def ingest_configuration: () -> Types::IngestConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#update_ingest_configuration-instance_method

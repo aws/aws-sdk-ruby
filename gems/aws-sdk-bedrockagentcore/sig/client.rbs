@@ -120,7 +120,8 @@ module Aws
                                          memory_id: ::String,
                                          records: Array[
                                            {
-                                             memory_record_id: ::String
+                                             memory_record_id: ::String,
+                                             namespace: ::String?
                                            }
                                          ]
                                        ) -> _BatchDeleteMemoryRecordsResponseSuccess
@@ -142,6 +143,7 @@ module Aws
                                                text: ::String?
                                              }?,
                                              namespaces: Array[::String]?,
+                                             source_namespaces: Array[::String]?,
                                              memory_strategy_id: ::String?,
                                              metadata: Hash[::String, {
                                                  string_value: ::String?,
@@ -222,6 +224,10 @@ module Aws
                                 role: ("ASSISTANT" | "USER" | "TOOL" | "OTHER")
                               }?,
                               blob: {
+                              }?,
+                              json: {
+                                content: {
+                                }
                               }?
                             }
                           ],
@@ -233,7 +239,10 @@ module Aws
                           ?metadata: Hash[::String, {
                               string_value: ::String?
                             }],
-                          ?extraction_mode: ("SKIP")
+                          ?extraction_mode: ("SKIP"),
+                          ?extraction_config: {
+                            namespace_variables: Hash[::String, ::String]?
+                          }
                         ) -> _CreateEventResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventResponseSuccess
 
@@ -382,7 +391,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#delete_memory_record-instance_method
       def delete_memory_record: (
                                   memory_id: ::String,
-                                  memory_record_id: ::String
+                                  memory_record_id: ::String,
+                                  ?namespace: ::String
                                 ) -> _DeleteMemoryRecordResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMemoryRecordResponseSuccess
 
@@ -596,7 +606,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_memory_record-instance_method
       def get_memory_record: (
                                memory_id: ::String,
-                               memory_record_id: ::String
+                               memory_record_id: ::String,
+                               ?namespace: ::String
                              ) -> _GetMemoryRecordResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemoryRecordResponseSuccess
 
@@ -755,6 +766,44 @@ module Aws
                                                    user_id: ::String
                                                  ) -> _GetWorkloadAccessTokenForUserIdResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkloadAccessTokenForUserIdResponseSuccess
+
+      interface _IngestDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IngestDataOutput]
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#ingest_data-instance_method
+      def ingest_data: (
+                         memory_id: ::String,
+                         source: {
+                           inline: {
+                             payload: Array[
+                               {
+                                 conversational: {
+                                   content: {
+                                     text: ::String?
+                                   },
+                                   role: ("ASSISTANT" | "USER" | "TOOL" | "OTHER")
+                                 }?,
+                                 json: {
+                                   content: {
+                                   }
+                                 }?
+                               }
+                             ]
+                           }?
+                         },
+                         content_timestamp: ::Time,
+                         actor_id: ::String,
+                         ?session_id: ::String,
+                         ?extraction_config: {
+                           namespace_variables: Hash[::String, ::String]?
+                         },
+                         ?metadata: Hash[::String, {
+                             string_value: ::String?
+                           }],
+                         ?client_token: ::String
+                       ) -> _IngestDataResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IngestDataResponseSuccess
 
       interface _InvokeAgentRuntimeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeAgentRuntimeResponse]
@@ -967,6 +1016,7 @@ module Aws
                               open_ai_model_config: {
                                 model_id: ::String,
                                 api_key_arn: ::String,
+                                api_base: ::String?,
                                 max_tokens: ::Integer?,
                                 temperature: ::Float?,
                                 top_p: ::Float?,
@@ -1387,13 +1437,20 @@ module Aws
                                     data_source_config: {
                                       cloud_watch_logs: {
                                         service_names: Array[::String],
-                                        log_group_names: Array[::String],
+                                        log_group_names: Array[::String]?,
+                                        log_group_name_prefixes: Array[::String]?,
                                         filter_config: {
                                           session_ids: Array[::String]?,
                                           time_range: {
                                             start_time: ::Time?,
                                             end_time: ::Time?
-                                          }?
+                                          }?,
+                                          session_trace_ids: Array[
+                                            {
+                                              session_id: ::String,
+                                              trace_ids: Array[::String]
+                                            }
+                                          ]?
                                         }?
                                       }?,
                                       online_evaluation_config_source: {
@@ -1438,7 +1495,15 @@ module Aws
                                     },
                                     ?tags: Hash[::String, ::String],
                                     ?kms_key_arn: ::String,
-                                    ?description: ::String
+                                    ?description: ::String,
+                                    ?output_config: {
+                                      cloud_watch_config: {
+                                        log_group_name: ::String?,
+                                        log_stream_name: ::String?,
+                                        metrics_namespace: ::String?,
+                                        result_destination: ("DEDICATED_LOG_GROUP" | "SOURCE_LOG_GROUP")?
+                                      }?
+                                    }
                                   ) -> _StartBatchEvaluationResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBatchEvaluationResponseSuccess
 

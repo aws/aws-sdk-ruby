@@ -116,6 +116,11 @@ module Aws::QuickSight
     AnonymousUserSnapshotJobResultList = Shapes::ListShape.new(name: 'AnonymousUserSnapshotJobResultList')
     AnswerId = Shapes::StringShape.new(name: 'AnswerId')
     AnswerIds = Shapes::ListShape.new(name: 'AnswerIds')
+    AppId = Shapes::StringShape.new(name: 'AppId')
+    AppName = Shapes::StringShape.new(name: 'AppName')
+    AppSummary = Shapes::StructureShape.new(name: 'AppSummary')
+    AppSummaryList = Shapes::ListShape.new(name: 'AppSummaryList')
+    AppVisibility = Shapes::StringShape.new(name: 'AppVisibility')
     AppendOperation = Shapes::StructureShape.new(name: 'AppendOperation')
     AppendedColumn = Shapes::StructureShape.new(name: 'AppendedColumn')
     AppendedColumnList = Shapes::ListShape.new(name: 'AppendedColumnList')
@@ -834,6 +839,8 @@ module Aws::QuickSight
     DeleteAgentResponse = Shapes::StructureShape.new(name: 'DeleteAgentResponse')
     DeleteAnalysisRequest = Shapes::StructureShape.new(name: 'DeleteAnalysisRequest')
     DeleteAnalysisResponse = Shapes::StructureShape.new(name: 'DeleteAnalysisResponse')
+    DeleteAppRequest = Shapes::StructureShape.new(name: 'DeleteAppRequest')
+    DeleteAppResponse = Shapes::StructureShape.new(name: 'DeleteAppResponse')
     DeleteApprovalPolicyRequest = Shapes::StructureShape.new(name: 'DeleteApprovalPolicyRequest')
     DeleteApprovalPolicyResponse = Shapes::StructureShape.new(name: 'DeleteApprovalPolicyResponse')
     DeleteBrandAssignmentRequest = Shapes::StructureShape.new(name: 'DeleteBrandAssignmentRequest')
@@ -929,6 +936,10 @@ module Aws::QuickSight
     DescribeAnalysisPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeAnalysisPermissionsResponse')
     DescribeAnalysisRequest = Shapes::StructureShape.new(name: 'DescribeAnalysisRequest')
     DescribeAnalysisResponse = Shapes::StructureShape.new(name: 'DescribeAnalysisResponse')
+    DescribeAppPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeAppPermissionsRequest')
+    DescribeAppPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeAppPermissionsResponse')
+    DescribeAppRequest = Shapes::StructureShape.new(name: 'DescribeAppRequest')
+    DescribeAppResponse = Shapes::StructureShape.new(name: 'DescribeAppResponse')
     DescribeApprovalPolicyRequest = Shapes::StructureShape.new(name: 'DescribeApprovalPolicyRequest')
     DescribeApprovalPolicyResponse = Shapes::StructureShape.new(name: 'DescribeApprovalPolicyResponse')
     DescribeAssetBundleExportJobRequest = Shapes::StructureShape.new(name: 'DescribeAssetBundleExportJobRequest')
@@ -1558,6 +1569,8 @@ module Aws::QuickSight
     ListAnalysesResponse = Shapes::StructureShape.new(name: 'ListAnalysesResponse')
     ListApprovalPoliciesRequest = Shapes::StructureShape.new(name: 'ListApprovalPoliciesRequest')
     ListApprovalPoliciesResponse = Shapes::StructureShape.new(name: 'ListApprovalPoliciesResponse')
+    ListAppsRequest = Shapes::StructureShape.new(name: 'ListAppsRequest')
+    ListAppsResponse = Shapes::StructureShape.new(name: 'ListAppsResponse')
     ListAssetBundleExportJobsRequest = Shapes::StructureShape.new(name: 'ListAssetBundleExportJobsRequest')
     ListAssetBundleExportJobsResponse = Shapes::StructureShape.new(name: 'ListAssetBundleExportJobsResponse')
     ListAssetBundleImportJobsRequest = Shapes::StructureShape.new(name: 'ListAssetBundleImportJobsRequest')
@@ -2086,6 +2099,11 @@ module Aws::QuickSight
     SearchAgentsResponse = Shapes::StructureShape.new(name: 'SearchAgentsResponse')
     SearchAnalysesRequest = Shapes::StructureShape.new(name: 'SearchAnalysesRequest')
     SearchAnalysesResponse = Shapes::StructureShape.new(name: 'SearchAnalysesResponse')
+    SearchAppsFilter = Shapes::StructureShape.new(name: 'SearchAppsFilter')
+    SearchAppsFilterList = Shapes::ListShape.new(name: 'SearchAppsFilterList')
+    SearchAppsFilterName = Shapes::StringShape.new(name: 'SearchAppsFilterName')
+    SearchAppsRequest = Shapes::StructureShape.new(name: 'SearchAppsRequest')
+    SearchAppsResponse = Shapes::StructureShape.new(name: 'SearchAppsResponse')
     SearchDashboardsRequest = Shapes::StructureShape.new(name: 'SearchDashboardsRequest')
     SearchDashboardsResponse = Shapes::StructureShape.new(name: 'SearchDashboardsResponse')
     SearchDataSetsRequest = Shapes::StructureShape.new(name: 'SearchDataSetsRequest')
@@ -2631,6 +2649,8 @@ module Aws::QuickSight
     UpdateAnalysisPermissionsResponse = Shapes::StructureShape.new(name: 'UpdateAnalysisPermissionsResponse')
     UpdateAnalysisRequest = Shapes::StructureShape.new(name: 'UpdateAnalysisRequest')
     UpdateAnalysisResponse = Shapes::StructureShape.new(name: 'UpdateAnalysisResponse')
+    UpdateAppPermissionsRequest = Shapes::StructureShape.new(name: 'UpdateAppPermissionsRequest')
+    UpdateAppPermissionsResponse = Shapes::StructureShape.new(name: 'UpdateAppPermissionsResponse')
     UpdateApplicationWithTokenExchangeGrantRequest = Shapes::StructureShape.new(name: 'UpdateApplicationWithTokenExchangeGrantRequest')
     UpdateApplicationWithTokenExchangeGrantResponse = Shapes::StructureShape.new(name: 'UpdateApplicationWithTokenExchangeGrantResponse')
     UpdateApprovalPolicyRequest = Shapes::StructureShape.new(name: 'UpdateApprovalPolicyRequest')
@@ -3155,6 +3175,16 @@ module Aws::QuickSight
     AnonymousUserSnapshotJobResultList.member = Shapes::ShapeRef.new(shape: AnonymousUserSnapshotJobResult)
 
     AnswerIds.member = Shapes::ShapeRef.new(shape: AnswerId)
+
+    AppSummary.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, location_name: "AppId"))
+    AppSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
+    AppSummary.add_member(:name, Shapes::ShapeRef.new(shape: AppName, location_name: "Name"))
+    AppSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    AppSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    AppSummary.add_member(:visibility, Shapes::ShapeRef.new(shape: AppVisibility, location_name: "Visibility"))
+    AppSummary.struct_class = Types::AppSummary
+
+    AppSummaryList.member = Shapes::ShapeRef.new(shape: AppSummary)
 
     AppendOperation.add_member(:alias, Shapes::ShapeRef.new(shape: TransformOperationAlias, required: true, location_name: "Alias"))
     AppendOperation.add_member(:first_source, Shapes::ShapeRef.new(shape: TransformOperationSource, location_name: "FirstSource"))
@@ -4274,6 +4304,118 @@ module Aws::QuickSight
     Capabilities.add_member(:create_and_update_new_relic_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateNewRelicAction"))
     Capabilities.add_member(:share_new_relic_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareNewRelicAction"))
     Capabilities.add_member(:use_new_relic_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseNewRelicAction"))
+    Capabilities.add_member(:pager_duty_agent_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "PagerDutyAgentAction"))
+    Capabilities.add_member(:create_and_update_pager_duty_agent_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdatePagerDutyAgentAction"))
+    Capabilities.add_member(:share_pager_duty_agent_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "SharePagerDutyAgentAction"))
+    Capabilities.add_member(:use_pager_duty_agent_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UsePagerDutyAgentAction"))
+    Capabilities.add_member(:visier_agent_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "VisierAgentAction"))
+    Capabilities.add_member(:create_and_update_visier_agent_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateVisierAgentAction"))
+    Capabilities.add_member(:share_visier_agent_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareVisierAgentAction"))
+    Capabilities.add_member(:use_visier_agent_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseVisierAgentAction"))
+    Capabilities.add_member(:zoom_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ZoomAction"))
+    Capabilities.add_member(:create_and_update_zoom_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateZoomAction"))
+    Capabilities.add_member(:share_zoom_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareZoomAction"))
+    Capabilities.add_member(:use_zoom_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseZoomAction"))
+    Capabilities.add_member(:snow_flake_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "SnowFlakeAction"))
+    Capabilities.add_member(:create_and_update_snow_flake_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateSnowFlakeAction"))
+    Capabilities.add_member(:share_snow_flake_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareSnowFlakeAction"))
+    Capabilities.add_member(:use_snow_flake_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseSnowFlakeAction"))
+    Capabilities.add_member(:zapier_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ZapierAction"))
+    Capabilities.add_member(:create_and_update_zapier_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateZapierAction"))
+    Capabilities.add_member(:share_zapier_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareZapierAction"))
+    Capabilities.add_member(:use_zapier_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseZapierAction"))
+    Capabilities.add_member(:airtable_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "AirtableAction"))
+    Capabilities.add_member(:create_and_update_airtable_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateAirtableAction"))
+    Capabilities.add_member(:share_airtable_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareAirtableAction"))
+    Capabilities.add_member(:use_airtable_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseAirtableAction"))
+    Capabilities.add_member(:dropbox_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "DropboxAction"))
+    Capabilities.add_member(:create_and_update_dropbox_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateDropboxAction"))
+    Capabilities.add_member(:share_dropbox_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareDropboxAction"))
+    Capabilities.add_member(:use_dropbox_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseDropboxAction"))
+    Capabilities.add_member(:gmail_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "GmailAction"))
+    Capabilities.add_member(:create_and_update_gmail_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateGmailAction"))
+    Capabilities.add_member(:share_gmail_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareGmailAction"))
+    Capabilities.add_member(:use_gmail_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseGmailAction"))
+    Capabilities.add_member(:google_analytics_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "GoogleAnalyticsAction"))
+    Capabilities.add_member(:create_and_update_google_analytics_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateGoogleAnalyticsAction"))
+    Capabilities.add_member(:share_google_analytics_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareGoogleAnalyticsAction"))
+    Capabilities.add_member(:use_google_analytics_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseGoogleAnalyticsAction"))
+    Capabilities.add_member(:google_docs_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "GoogleDocsAction"))
+    Capabilities.add_member(:create_and_update_google_docs_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateGoogleDocsAction"))
+    Capabilities.add_member(:share_google_docs_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareGoogleDocsAction"))
+    Capabilities.add_member(:use_google_docs_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseGoogleDocsAction"))
+    Capabilities.add_member(:google_drive_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "GoogleDriveAction"))
+    Capabilities.add_member(:create_and_update_google_drive_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateGoogleDriveAction"))
+    Capabilities.add_member(:share_google_drive_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareGoogleDriveAction"))
+    Capabilities.add_member(:use_google_drive_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseGoogleDriveAction"))
+    Capabilities.add_member(:google_meet_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "GoogleMeetAction"))
+    Capabilities.add_member(:create_and_update_google_meet_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateGoogleMeetAction"))
+    Capabilities.add_member(:share_google_meet_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareGoogleMeetAction"))
+    Capabilities.add_member(:use_google_meet_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseGoogleMeetAction"))
+    Capabilities.add_member(:google_sheets_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "GoogleSheetsAction"))
+    Capabilities.add_member(:create_and_update_google_sheets_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateGoogleSheetsAction"))
+    Capabilities.add_member(:share_google_sheets_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareGoogleSheetsAction"))
+    Capabilities.add_member(:use_google_sheets_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseGoogleSheetsAction"))
+    Capabilities.add_member(:google_slides_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "GoogleSlidesAction"))
+    Capabilities.add_member(:create_and_update_google_slides_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateGoogleSlidesAction"))
+    Capabilities.add_member(:share_google_slides_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareGoogleSlidesAction"))
+    Capabilities.add_member(:use_google_slides_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseGoogleSlidesAction"))
+    Capabilities.add_member(:quick_books_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "QuickBooksAction"))
+    Capabilities.add_member(:create_and_update_quick_books_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateQuickBooksAction"))
+    Capabilities.add_member(:share_quick_books_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareQuickBooksAction"))
+    Capabilities.add_member(:use_quick_books_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseQuickBooksAction"))
+    Capabilities.add_member(:figma_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "FigmaAction"))
+    Capabilities.add_member(:create_and_update_figma_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateFigmaAction"))
+    Capabilities.add_member(:share_figma_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareFigmaAction"))
+    Capabilities.add_member(:use_figma_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseFigmaAction"))
+    Capabilities.add_member(:whats_app_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "WhatsAppAction"))
+    Capabilities.add_member(:create_and_update_whats_app_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateWhatsAppAction"))
+    Capabilities.add_member(:share_whats_app_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareWhatsAppAction"))
+    Capabilities.add_member(:use_whats_app_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseWhatsAppAction"))
+    Capabilities.add_member(:google_chat_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "GoogleChatAction"))
+    Capabilities.add_member(:create_and_update_google_chat_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateGoogleChatAction"))
+    Capabilities.add_member(:share_google_chat_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareGoogleChatAction"))
+    Capabilities.add_member(:use_google_chat_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseGoogleChatAction"))
+    Capabilities.add_member(:one_note_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "OneNoteAction"))
+    Capabilities.add_member(:create_and_update_one_note_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateOneNoteAction"))
+    Capabilities.add_member(:share_one_note_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareOneNoteAction"))
+    Capabilities.add_member(:use_one_note_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseOneNoteAction"))
+    Capabilities.add_member(:shopify_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShopifyAction"))
+    Capabilities.add_member(:create_and_update_shopify_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateShopifyAction"))
+    Capabilities.add_member(:share_shopify_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareShopifyAction"))
+    Capabilities.add_member(:use_shopify_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseShopifyAction"))
+    Capabilities.add_member(:adobe_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "AdobeAction"))
+    Capabilities.add_member(:create_and_update_adobe_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateAdobeAction"))
+    Capabilities.add_member(:share_adobe_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareAdobeAction"))
+    Capabilities.add_member(:use_adobe_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseAdobeAction"))
+    Capabilities.add_member(:cisco_webex_vidcast_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CiscoWebexVidcastAction"))
+    Capabilities.add_member(:create_and_update_cisco_webex_vidcast_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateCiscoWebexVidcastAction"))
+    Capabilities.add_member(:share_cisco_webex_vidcast_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareCiscoWebexVidcastAction"))
+    Capabilities.add_member(:use_cisco_webex_vidcast_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseCiscoWebexVidcastAction"))
+    Capabilities.add_member(:cisco_webex_meetings_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CiscoWebexMeetingsAction"))
+    Capabilities.add_member(:create_and_update_cisco_webex_meetings_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateCiscoWebexMeetingsAction"))
+    Capabilities.add_member(:share_cisco_webex_meetings_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareCiscoWebexMeetingsAction"))
+    Capabilities.add_member(:use_cisco_webex_meetings_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseCiscoWebexMeetingsAction"))
+    Capabilities.add_member(:dun_and_bradstreet_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "DunAndBradstreetAction"))
+    Capabilities.add_member(:create_and_update_dun_and_bradstreet_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateDunAndBradstreetAction"))
+    Capabilities.add_member(:share_dun_and_bradstreet_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareDunAndBradstreetAction"))
+    Capabilities.add_member(:use_dun_and_bradstreet_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseDunAndBradstreetAction"))
+    Capabilities.add_member(:hg_insights_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "HGInsightsAction"))
+    Capabilities.add_member(:create_and_update_hg_insights_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateHGInsightsAction"))
+    Capabilities.add_member(:share_hg_insights_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareHGInsightsAction"))
+    Capabilities.add_member(:use_hg_insights_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseHGInsightsAction"))
+    Capabilities.add_member(:zoom_info_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ZoomInfoAction"))
+    Capabilities.add_member(:create_and_update_zoom_info_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateZoomInfoAction"))
+    Capabilities.add_member(:share_zoom_info_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareZoomInfoAction"))
+    Capabilities.add_member(:use_zoom_info_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseZoomInfoAction"))
+    Capabilities.add_member(:moodys_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "MoodysAction"))
+    Capabilities.add_member(:create_and_update_moodys_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateMoodysAction"))
+    Capabilities.add_member(:share_moodys_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareMoodysAction"))
+    Capabilities.add_member(:use_moodys_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseMoodysAction"))
+    Capabilities.add_member(:bee_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "BeeAction"))
+    Capabilities.add_member(:create_and_update_bee_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateBeeAction"))
+    Capabilities.add_member(:share_bee_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareBeeAction"))
+    Capabilities.add_member(:use_bee_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseBeeAction"))
     Capabilities.add_member(:topic, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Topic"))
     Capabilities.add_member(:edit_visual_with_q, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "EditVisualWithQ"))
     Capabilities.add_member(:build_calculated_field_with_q, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "BuildCalculatedFieldWithQ"))
@@ -6139,6 +6281,13 @@ module Aws::QuickSight
     DeleteAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DeleteAnalysisResponse.struct_class = Types::DeleteAnalysisResponse
 
+    DeleteAppRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteAppRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "AppId"))
+    DeleteAppRequest.struct_class = Types::DeleteAppRequest
+
+    DeleteAppResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteAppResponse.struct_class = Types::DeleteAppResponse
+
     DeleteApprovalPolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location: "uri", location_name: "PolicyId"))
     DeleteApprovalPolicyRequest.struct_class = Types::DeleteApprovalPolicyRequest
 
@@ -6586,6 +6735,24 @@ module Aws::QuickSight
     DescribeAnalysisResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeAnalysisResponse.struct_class = Types::DescribeAnalysisResponse
+
+    DescribeAppPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAppPermissionsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "AppId"))
+    DescribeAppPermissionsRequest.struct_class = Types::DescribeAppPermissionsRequest
+
+    DescribeAppPermissionsResponse.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, location_name: "AppId"))
+    DescribeAppPermissionsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
+    DescribeAppPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    DescribeAppPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeAppPermissionsResponse.struct_class = Types::DescribeAppPermissionsResponse
+
+    DescribeAppRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAppRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "AppId"))
+    DescribeAppRequest.struct_class = Types::DescribeAppRequest
+
+    DescribeAppResponse.add_member(:app, Shapes::ShapeRef.new(shape: AppSummary, required: true, location_name: "App"))
+    DescribeAppResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeAppResponse.struct_class = Types::DescribeAppResponse
 
     DescribeApprovalPolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location: "uri", location_name: "PolicyId"))
     DescribeApprovalPolicyRequest.struct_class = Types::DescribeApprovalPolicyRequest
@@ -8996,6 +9163,16 @@ module Aws::QuickSight
     ListApprovalPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListApprovalPoliciesResponse.struct_class = Types::ListApprovalPoliciesResponse
 
+    ListAppsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListAppsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
+    ListAppsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListAppsRequest.struct_class = Types::ListAppsRequest
+
+    ListAppsResponse.add_member(:app_summary_list, Shapes::ShapeRef.new(shape: AppSummaryList, required: true, location_name: "AppSummaryList"))
+    ListAppsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAppsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListAppsResponse.struct_class = Types::ListAppsResponse
+
     ListAssetBundleExportJobsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListAssetBundleExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListAssetBundleExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
@@ -10886,6 +11063,24 @@ module Aws::QuickSight
     SearchAnalysesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     SearchAnalysesResponse.struct_class = Types::SearchAnalysesResponse
 
+    SearchAppsFilter.add_member(:name, Shapes::ShapeRef.new(shape: SearchAppsFilterName, required: true, location_name: "Name"))
+    SearchAppsFilter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, required: true, location_name: "Operator"))
+    SearchAppsFilter.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    SearchAppsFilter.struct_class = Types::SearchAppsFilter
+
+    SearchAppsFilterList.member = Shapes::ShapeRef.new(shape: SearchAppsFilter)
+
+    SearchAppsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    SearchAppsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SearchAppsFilterList, required: true, location_name: "Filters"))
+    SearchAppsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    SearchAppsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchAppsRequest.struct_class = Types::SearchAppsRequest
+
+    SearchAppsResponse.add_member(:app_summary_list, Shapes::ShapeRef.new(shape: AppSummaryList, required: true, location_name: "AppSummaryList"))
+    SearchAppsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchAppsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    SearchAppsResponse.struct_class = Types::SearchAppsResponse
+
     SearchDashboardsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     SearchDashboardsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DashboardSearchFilterList, required: true, location_name: "Filters"))
     SearchDashboardsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -12770,6 +12965,20 @@ module Aws::QuickSight
     UpdateAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateAnalysisResponse.struct_class = Types::UpdateAnalysisResponse
 
+    UpdateAppPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateAppPermissionsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "AppId"))
+    UpdateAppPermissionsRequest.add_member(:grant_permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "GrantPermissions"))
+    UpdateAppPermissionsRequest.add_member(:revoke_permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "RevokePermissions"))
+    UpdateAppPermissionsRequest.add_member(:visibility, Shapes::ShapeRef.new(shape: AppVisibility, location_name: "Visibility"))
+    UpdateAppPermissionsRequest.struct_class = Types::UpdateAppPermissionsRequest
+
+    UpdateAppPermissionsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
+    UpdateAppPermissionsResponse.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, location_name: "AppId"))
+    UpdateAppPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    UpdateAppPermissionsResponse.add_member(:visibility, Shapes::ShapeRef.new(shape: AppVisibility, location_name: "Visibility"))
+    UpdateAppPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateAppPermissionsResponse.struct_class = Types::UpdateAppPermissionsResponse
+
     UpdateApplicationWithTokenExchangeGrantRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateApplicationWithTokenExchangeGrantRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "querystring", location_name: "namespace"))
     UpdateApplicationWithTokenExchangeGrantRequest.struct_class = Types::UpdateApplicationWithTokenExchangeGrantRequest
@@ -14517,6 +14726,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:delete_app, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApp"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/apps/{AppId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAppRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAppResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_approval_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteApprovalPolicy"
         o.http_method = "DELETE"
@@ -15187,6 +15409,32 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_app, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeApp"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/apps/{AppId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_app_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAppPermissions"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/apps/{AppId}/permissions"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAppPermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAppPermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_approval_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -16202,6 +16450,24 @@ module Aws::QuickSight
         )
       end)
 
+      api.add_operation(:list_apps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApps"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/apps"
+        o.input = Shapes::ShapeRef.new(shape: ListAppsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAppsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_asset_bundle_export_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAssetBundleExportJobs"
         o.http_method = "GET"
@@ -17119,6 +17385,24 @@ module Aws::QuickSight
         )
       end)
 
+      api.add_operation(:search_apps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchApps"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/search/apps"
+        o.input = Shapes::ShapeRef.new(shape: SearchAppsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchAppsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:search_dashboards, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchDashboards"
         o.http_method = "POST"
@@ -17552,6 +17836,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_app_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAppPermissions"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/apps/{AppId}/permissions"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAppPermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAppPermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_application_with_token_exchange_grant, Seahorse::Model::Operation.new.tap do |o|

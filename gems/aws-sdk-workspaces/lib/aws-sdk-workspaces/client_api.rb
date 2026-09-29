@@ -1950,6 +1950,7 @@ module Aws::WorkSpaces
     WorkspaceProperties.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols"))
     WorkspaceProperties.add_member(:operating_system_name, Shapes::ShapeRef.new(shape: OperatingSystemName, location_name: "OperatingSystemName"))
     WorkspaceProperties.add_member(:global_accelerator, Shapes::ShapeRef.new(shape: GlobalAcceleratorForWorkSpace, location_name: "GlobalAccelerator"))
+    WorkspaceProperties.add_member(:nested_virtualization_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "NestedVirtualizationEnabled"))
     WorkspaceProperties.struct_class = Types::WorkspaceProperties
 
     WorkspaceRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))

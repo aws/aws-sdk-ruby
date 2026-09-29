@@ -134,6 +134,11 @@ module Aws::AutoScaling
     #         spot_allocation_strategy: "XmlString",
     #         spot_instance_pools: 1,
     #         spot_max_price: "MixedInstanceSpotPrice",
+    #         distribution_segments: [
+    #           {
+    #             target_capacity_types: ["on-demand-capacity-reservation"], # accepts on-demand-capacity-reservation, capacity-block, interruptible-capacity-reservation, on-demand
+    #           },
+    #         ],
     #       },
     #     },
     #     instance_id: "XmlStringMaxLen19",
@@ -250,11 +255,15 @@ module Aws::AutoScaling
     # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
     #   The mixed instances policy. For more information, see [Auto Scaling
     #   groups with multiple instance types and purchase options][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   *Amazon EC2 Auto Scaling User Guide*. To learn how to prioritize
+    #   multiple capacity types, see [Use Distribution Segments to target
+    #   multiple capacity types][2] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html
     # @option options [String] :instance_id
     #   The ID of the instance used to base the launch configuration on. If
     #   specified, Amazon EC2 Auto Scaling uses the configuration values from

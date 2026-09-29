@@ -277,6 +277,13 @@ module Aws::EC2
       data[:image_watermarks]
     end
 
+    # The instance type specification for the AMI, which defines which
+    # instance types are compatible with this image.
+    # @return [Types::InstanceTypeSpecification]
+    def instance_type_specification
+      data[:instance_type_specification]
+    end
+
     # The location of the AMI.
     # @return [String]
     def image_location

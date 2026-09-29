@@ -652,6 +652,7 @@ module Aws::WorkspacesInstances
     #         amd_sev_snp: "enabled", # accepts enabled, disabled
     #         core_count: 1,
     #         threads_per_core: 1,
+    #         nested_virtualization: "enabled", # accepts enabled, disabled
     #       },
     #       credit_specification: {
     #         cpu_credits: "standard", # accepts standard, unlimited
@@ -1180,7 +1181,7 @@ module Aws::WorkspacesInstances
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesinstances'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

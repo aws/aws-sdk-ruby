@@ -122,6 +122,11 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_connection_on_interconnect-instance_method
       def allocate_connection_on_interconnect: (
@@ -159,6 +164,11 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_hosted_connection-instance_method
       def allocate_hosted_connection: (
@@ -205,6 +215,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_private_virtual_interface-instance_method
@@ -261,6 +273,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_public_virtual_interface-instance_method
@@ -347,6 +361,11 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#associate_connection_with_lag-instance_method
       def associate_connection_with_lag: (
@@ -354,6 +373,18 @@ module Aws
                                            lag_id: ::String
                                          ) -> _AssociateConnectionWithLagResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateConnectionWithLagResponseSuccess
+
+      interface _AssociateConnectionsToResiliencyGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateConnectionsToResiliencyGroupResult]
+        def resiliency_group_associations: () -> ::Array[Types::ResiliencyGroupAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#associate_connections_to_resiliency_group-instance_method
+      def associate_connections_to_resiliency_group: (
+                                                       connection_identifiers: Array[::String],
+                                                       resiliency_group_id: ::String,
+                                                       ?client_token: ::String
+                                                     ) -> _AssociateConnectionsToResiliencyGroupResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateConnectionsToResiliencyGroupResponseSuccess
 
       interface _AssociateHostedConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Connection]
@@ -381,6 +412,11 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#associate_hosted_connection-instance_method
       def associate_hosted_connection: (
@@ -432,6 +468,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#associate_virtual_interface-instance_method
@@ -538,6 +576,11 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_connection-instance_method
       def create_connection: (
@@ -552,7 +595,8 @@ module Aws
                                  }
                                ],
                                ?provider_name: ::String,
-                               ?request_mac_sec: bool
+                               ?request_mac_sec: bool,
+                               ?billing_mode: ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5")
                              ) -> _CreateConnectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionResponseSuccess
 
@@ -674,7 +718,12 @@ module Aws
         def mac_sec_capable: () -> bool
         def encryption_mode: () -> ::String
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
         def rate_limiter_status: () -> Types::RateLimiterStatus
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_lag-instance_method
       def create_lag: (
@@ -696,7 +745,8 @@ module Aws
                           }
                         ],
                         ?provider_name: ::String,
-                        ?request_mac_sec: bool
+                        ?request_mac_sec: bool,
+                        ?billing_mode: ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5")
                       ) -> _CreateLagResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLagResponseSuccess
 
@@ -729,6 +779,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_private_virtual_interface-instance_method
@@ -753,6 +805,8 @@ module Aws
                                                   }
                                                 ]?,
                                                 enable_site_link: bool?,
+                                                prefix_pool_allocated_count_ipv_4: ::Integer?,
+                                                prefix_pool_allocated_count_ipv_6: ::Integer?,
                                                 rate_limit: ::String?
                                               }
                                             ) -> _CreatePrivateVirtualInterfaceResponseSuccess
@@ -787,6 +841,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_public_virtual_interface-instance_method
@@ -817,6 +873,24 @@ module Aws
                                            ) -> _CreatePublicVirtualInterfaceResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePublicVirtualInterfaceResponseSuccess
 
+      interface _CreateResiliencyGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResiliencyGroupResult]
+        def resiliency_group: () -> Types::ResiliencyGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_resiliency_group-instance_method
+      def create_resiliency_group: (
+                                     resiliency_group_name: ::String,
+                                     intended_resiliency_model: ("maximum-resiliency" | "high-resiliency" | "basic-resiliency"),
+                                     ?client_token: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String?
+                                       }
+                                     ]
+                                   ) -> _CreateResiliencyGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResiliencyGroupResponseSuccess
+
       interface _CreateTransitVirtualInterfaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateTransitVirtualInterfaceResult]
         def virtual_interface: () -> Types::VirtualInterface
@@ -842,6 +916,8 @@ module Aws
                                                   }
                                                 ]?,
                                                 enable_site_link: bool?,
+                                                prefix_pool_allocated_count_ipv_4: ::Integer?,
+                                                prefix_pool_allocated_count_ipv_6: ::Integer?,
                                                 rate_limit: ::String?
                                               }
                                             ) -> _CreateTransitVirtualInterfaceResponseSuccess
@@ -887,6 +963,11 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_connection-instance_method
       def delete_connection: (
@@ -959,13 +1040,28 @@ module Aws
         def mac_sec_capable: () -> bool
         def encryption_mode: () -> ::String
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
         def rate_limiter_status: () -> Types::RateLimiterStatus
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_lag-instance_method
       def delete_lag: (
                         lag_id: ::String
                       ) -> _DeleteLagResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLagResponseSuccess
+
+      interface _DeleteResiliencyGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResiliencyGroupResult]
+        def resiliency_group: () -> Types::ResiliencyGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_resiliency_group-instance_method
+      def delete_resiliency_group: (
+                                     resiliency_group_id: ::String
+                                   ) -> _DeleteResiliencyGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResiliencyGroupResponseSuccess
 
       interface _DeleteVirtualInterfaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVirtualInterfaceResponse]
@@ -1224,6 +1320,11 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#disassociate_connection_from_lag-instance_method
       def disassociate_connection_from_lag: (
@@ -1231,6 +1332,18 @@ module Aws
                                               lag_id: ::String
                                             ) -> _DisassociateConnectionFromLagResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateConnectionFromLagResponseSuccess
+
+      interface _DisassociateConnectionsFromResiliencyGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateConnectionsFromResiliencyGroupResult]
+        def resiliency_group_associations: () -> ::Array[Types::ResiliencyGroupAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#disassociate_connections_from_resiliency_group-instance_method
+      def disassociate_connections_from_resiliency_group: (
+                                                            connection_identifiers: Array[::String],
+                                                            resiliency_group_id: ::String,
+                                                            ?client_token: ::String
+                                                          ) -> _DisassociateConnectionsFromResiliencyGroupResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateConnectionsFromResiliencyGroupResponseSuccess
 
       interface _DisassociateMacSecKeyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateMacSecKeyResponse]
@@ -1243,6 +1356,41 @@ module Aws
                                       secret_arn: ::String
                                     ) -> _DisassociateMacSecKeyResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMacSecKeyResponseSuccess
+
+      interface _GetResiliencyGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResiliencyGroupResult]
+        def resiliency_group: () -> Types::ResiliencyGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#get_resiliency_group-instance_method
+      def get_resiliency_group: (
+                                  resiliency_group_id: ::String
+                                ) -> _GetResiliencyGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResiliencyGroupResponseSuccess
+
+      interface _ListResiliencyGroupAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResiliencyGroupAssociationsResult]
+        def items: () -> ::Array[Types::ResiliencyGroupAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#list_resiliency_group_associations-instance_method
+      def list_resiliency_group_associations: (
+                                                resiliency_group_id: ::String,
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListResiliencyGroupAssociationsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResiliencyGroupAssociationsResponseSuccess
+
+      interface _ListResiliencyGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResiliencyGroupsResult]
+        def items: () -> ::Array[Types::ResiliencyGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#list_resiliency_groups-instance_method
+      def list_resiliency_groups: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListResiliencyGroupsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResiliencyGroupsResponseSuccess
 
       interface _ListVirtualInterfaceRoutesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualInterfaceRoutesResponse]
@@ -1354,6 +1502,11 @@ module Aws
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
         def rate_limiter_status: () -> Types::RateLimiterStatus
         def partner_interconnect_mac_sec_capable: () -> bool
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_connection-instance_method
       def update_connection: (
@@ -1362,6 +1515,18 @@ module Aws
                                ?encryption_mode: ::String
                              ) -> _UpdateConnectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionResponseSuccess
+
+      interface _UpdateConnectionsBillingModeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionsBillingModeResponse]
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
+        def connections: () -> ::Array[Types::Connection]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_connections_billing_mode-instance_method
+      def update_connections_billing_mode: (
+                                             connection_ids: Array[::String],
+                                             billing_mode: ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5")
+                                           ) -> _UpdateConnectionsBillingModeResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionsBillingModeResponseSuccess
 
       interface _UpdateDirectConnectGatewayResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDirectConnectGatewayResponse]
@@ -1417,7 +1582,12 @@ module Aws
         def mac_sec_capable: () -> bool
         def encryption_mode: () -> ::String
         def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+        def prefix_pool_size_ipv_4: () -> ::Integer
+        def prefix_pool_size_ipv_6: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_unallocated_count_ipv_6: () -> ::Integer
         def rate_limiter_status: () -> Types::RateLimiterStatus
+        def billing_mode: () -> ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_lag-instance_method
       def update_lag: (
@@ -1427,6 +1597,18 @@ module Aws
                         ?encryption_mode: ::String
                       ) -> _UpdateLagResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLagResponseSuccess
+
+      interface _UpdateResiliencyGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResiliencyGroupResult]
+        def resiliency_group: () -> Types::ResiliencyGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_resiliency_group-instance_method
+      def update_resiliency_group: (
+                                     resiliency_group_id: ::String,
+                                     resiliency_group_name: ::String,
+                                     ?client_token: ::String
+                                   ) -> _UpdateResiliencyGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResiliencyGroupResponseSuccess
 
       interface _UpdateVirtualInterfaceAttributesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::VirtualInterface]
@@ -1457,6 +1639,8 @@ module Aws
         def aws_logical_device_id: () -> ::String
         def tags: () -> ::Array[Types::Tag]
         def site_link_enabled: () -> bool
+        def prefix_pool_allocated_count_ipv_4: () -> ::Integer
+        def prefix_pool_allocated_count_ipv_6: () -> ::Integer
         def rate_limit: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_virtual_interface_attributes-instance_method
@@ -1465,6 +1649,8 @@ module Aws
                                                  ?mtu: ::Integer,
                                                  ?enable_site_link: bool,
                                                  ?virtual_interface_name: ::String,
+                                                 ?prefix_pool_allocated_count_ipv_4: ::Integer,
+                                                 ?prefix_pool_allocated_count_ipv_6: ::Integer,
                                                  ?rate_limit: ::String
                                                ) -> _UpdateVirtualInterfaceAttributesResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVirtualInterfaceAttributesResponseSuccess

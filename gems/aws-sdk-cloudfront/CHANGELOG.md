@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2026-09-23)
+------------------
+
+* Feature - CloudFront signers now support SHA-256 signatures via the `:hash_algorithm` option (`'SHA1'` or `'SHA256'`, defaults to `'SHA1'`). Signers also validate that the private key is RSA or ECDSA (P-256), and custom policies are now minified before signing.
+
+1.154.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.153.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.152.0 (2026-08-20)
+------------------
+
+* Feature - Added SigV4a as a supported signing protocol for Origin Access Control (OAC), enabling CloudFront to sign requests to Amazon S3 Multi-Region Access Point (S3-MRAP) origins.
+
 1.151.0 (2026-07-09)
 ------------------
 

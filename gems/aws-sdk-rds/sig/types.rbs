@@ -1658,6 +1658,7 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       attr_accessor snapshot_availability_zone: ::String
+      attr_accessor full_snapshot_size_in_bytes: ::Integer
       SENSITIVE: []
     end
 

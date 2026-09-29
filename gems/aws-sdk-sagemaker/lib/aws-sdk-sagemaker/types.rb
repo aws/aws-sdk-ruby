@@ -2768,6 +2768,64 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_name
+    #   The name or Amazon Resource Name (ARN) of the SageMaker HyperPod
+    #   cluster that contains the target node.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The unique identifier of the cluster node to which you want to
+    #   attach the network interface. The node must belong to your specified
+    #   HyperPod cluster and cannot be part of a Restricted Instance Group
+    #   (RIG).
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The unique identifier of the elastic network interface (ENI) to
+    #   attach.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AttachClusterNodeNetworkInterfaceRequest AWS API Documentation
+    #
+    class AttachClusterNodeNetworkInterfaceRequest < Struct.new(
+      :cluster_name,
+      :node_id,
+      :network_interface_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster
+    #   where the network interface attachment operation was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The unique identifier of the cluster node where your network
+    #   interface was attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The unique identifier of the elastic network interface (ENI) that
+    #   was attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The unique identifier of the network interface attachment. Use this
+    #   value to reference or detach the network interface later.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AttachClusterNodeNetworkInterfaceResponse AWS API Documentation
+    #
+    class AttachClusterNodeNetworkInterfaceResponse < Struct.new(
+      :cluster_arn,
+      :node_id,
+      :network_interface_id,
+      :attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_arn
     #   The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster
     #   containing the target node. Your cluster must use EKS as the
@@ -12222,6 +12280,12 @@ module Aws::SageMaker
     #   role should have the `AmazonS3FullAccess` permission.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the Amazon Web Services KMS key used to encrypt the data
+    #   at rest associated with the MLflow App. If you don't specify a
+    #   value, the MLflow App is not encrypted with a customer-managed key.
+    #   @return [String]
+    #
     # @!attribute [rw] model_registration_mode
     #   Whether to enable or disable automatic registration of new MLflow
     #   models to the SageMaker Model Registry. To enable automatic model
@@ -12259,6 +12323,7 @@ module Aws::SageMaker
       :name,
       :artifact_store_uri,
       :role_arn,
+      :kms_key_id,
       :model_registration_mode,
       :weekly_maintenance_window_start,
       :account_default_status,
@@ -13595,9 +13660,23 @@ module Aws::SageMaker
     #   Configuration settings for the SageMaker Partner AI App.
     #   @return [Types::PartnerAppConfig]
     #
+    # @!attribute [rw] idc_config
+    #   Specifies the Amazon Web Services IAM Identity Center configuration
+    #   for the SageMaker Partner AI App. Specify this parameter when
+    #   `AuthType` is `IDC`. Apps that use `IAM` authorization don't use
+    #   this parameter.
+    #   @return [Types::IdcConfigInput]
+    #
     # @!attribute [rw] auth_type
     #   The authorization type that users use to access the SageMaker
-    #   Partner AI App.
+    #   Partner AI App. Valid values:
+    #
+    #   * `IAM`: Users access the SageMaker Partner AI App with their Amazon
+    #     Web Services IAM identity.
+    #
+    #   * `IDC`: Users access the SageMaker Partner AI App with their Amazon
+    #     Web Services IAM Identity Center identity. Specify the Identity
+    #     Center instance to use in `IdcConfig`.
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_session_based_identity
@@ -13635,6 +13714,7 @@ module Aws::SageMaker
       :maintenance_config,
       :tier,
       :application_config,
+      :idc_config,
       :auth_type,
       :enable_iam_session_based_identity,
       :enable_auto_minor_version_upgrade,
@@ -21380,6 +21460,12 @@ module Aws::SageMaker
     #   the MLflow App uses to access the artifact store in Amazon S3.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the Amazon Web Services KMS key used to encrypt the data
+    #   at rest associated with the MLflow App. This field is absent if the
+    #   MLflow App is not encrypted with a customer-managed key.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current creation status of the described MLflow App.
     #   @return [String]
@@ -21433,6 +21519,7 @@ module Aws::SageMaker
       :artifact_store_uri,
       :mlflow_version,
       :role_arn,
+      :kms_key_id,
       :status,
       :model_registration_mode,
       :account_default_status,
@@ -23027,7 +23114,13 @@ module Aws::SageMaker
     #
     # @!attribute [rw] auth_type
     #   The authorization type that users use to access the SageMaker
-    #   Partner AI App.
+    #   Partner AI App. Valid values:
+    #
+    #   * `IAM`: Users access the SageMaker Partner AI App with their Amazon
+    #     Web Services IAM identity.
+    #
+    #   * `IDC`: Users access the SageMaker Partner AI App with their Amazon
+    #     Web Services IAM Identity Center identity.
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_session_based_identity
@@ -23059,6 +23152,14 @@ module Aws::SageMaker
     #   upgrades are available.
     #   @return [Types::AvailableUpgrade]
     #
+    # @!attribute [rw] idc_config
+    #   Contains the Amazon Web Services IAM Identity Center configuration
+    #   for the SageMaker Partner AI App, including the Identity Center
+    #   instance and the Identity Center application that SageMaker creates
+    #   for the app. The service returns this field for apps that use `IDC`
+    #   authorization.
+    #   @return [Types::IdcConfigOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePartnerAppResponse AWS API Documentation
     #
     class DescribePartnerAppResponse < Struct.new(
@@ -23080,7 +23181,8 @@ module Aws::SageMaker
       :error,
       :enable_auto_minor_version_upgrade,
       :current_version_eol_date,
-      :available_upgrade)
+      :available_upgrade,
+      :idc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28283,6 +28385,125 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Contains information about a hub content resource, including its name,
+    # version, type, associated documents, dependencies, and status, as
+    # returned by a search result.
+    #
+    # @!attribute [rw] hub_content_name
+    #   The name of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_arn
+    #   The Amazon Resource Name (ARN) of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_version
+    #   The version of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The type of hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_schema_version
+    #   The document schema version for the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_name
+    #   The name of the hub that contains the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_arn
+    #   The Amazon Resource Name (ARN) of the hub that contains the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_display_name
+    #   The display name of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_description
+    #   A description of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_markdown
+    #   A string that provides a description of the hub content. This string
+    #   can include links, tables, and standard markdown formatting.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_document
+    #   The hub content document that describes information about the hub
+    #   content such as type, associated containers, scripts, and more.
+    #   @return [String]
+    #
+    # @!attribute [rw] sage_maker_public_hub_content_arn
+    #   The Amazon Resource Name (ARN) of the public hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_min_version
+    #   The minimum version of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_status
+    #   The support status of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_search_keywords
+    #   The searchable keywords for the hub content.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] hub_content_dependencies
+    #   The location of any dependencies that the hub content has, such as
+    #   scripts, model artifacts, datasets, or notebooks.
+    #   @return [Array<Types::HubContentDependency>]
+    #
+    # @!attribute [rw] hub_content_status
+    #   The status of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The failure reason if importing hub content failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that hub content was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time of the hub content.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   Any tags associated with the hub content.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HubContent AWS API Documentation
+    #
+    class HubContent < Struct.new(
+      :hub_content_name,
+      :hub_content_arn,
+      :hub_content_version,
+      :hub_content_type,
+      :document_schema_version,
+      :hub_name,
+      :hub_arn,
+      :hub_content_display_name,
+      :hub_content_description,
+      :hub_content_markdown,
+      :hub_content_document,
+      :sage_maker_public_hub_content_arn,
+      :reference_min_version,
+      :support_status,
+      :hub_content_search_keywords,
+      :hub_content_dependencies,
+      :hub_content_status,
+      :failure_reason,
+      :creation_time,
+      :last_modified_time,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Any dependencies related to hub content, such as scripts, model
     # artifacts, datasets, or notebooks.
     #
@@ -30802,6 +31023,44 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies the Amazon Web Services IAM Identity Center configuration to
+    # use for a SageMaker Partner AI App that uses `IDC` authorization.
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the Amazon Web Services IAM Identity Center instance that
+    #   the SageMaker Partner AI App uses to authenticate users.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IdcConfigInput AWS API Documentation
+    #
+    class IdcConfigInput < Struct.new(
+      :instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the Amazon Web Services IAM Identity Center configuration of
+    # a SageMaker Partner AI App that uses `IDC` authorization.
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the Amazon Web Services IAM Identity Center instance that
+    #   the SageMaker Partner AI App uses to authenticate users.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The ARN of the Amazon Web Services IAM Identity Center application
+    #   that SageMaker creates for the SageMaker Partner AI App.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IdcConfigOutput AWS API Documentation
+    #
+    class IdcConfigOutput < Struct.new(
+      :instance_arn,
+      :application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon SageMaker Canvas application setting where you configure
     # OAuth for connecting to an external data source, such as Snowflake.
     #
@@ -32609,6 +32868,53 @@ module Aws::SageMaker
     class InstancePoolSummary < Struct.new(
       :instance_type,
       :current_instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A candidate instance type preference in an `InstancePreferences` list.
+    #
+    # @!attribute [rw] instance_type
+    #   The ML compute instance type. An instance type can appear only once
+    #   in an `InstancePreferences` list.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances to launch if this instance type is selected.
+    #   Specify the instance count for the training job in one of the
+    #   following two ways:
+    #
+    #   1.  **Per preference** – Set `InstanceCount` on every preference in
+    #       the `InstancePreferences` list and don't set
+    #       `ResourceConfig$InstanceCount`. Use this when each instance type
+    #       needs a different number of instances to deliver equivalent
+    #       compute.
+    #
+    #   2.  **One count for the job** – Set `ResourceConfig$InstanceCount`
+    #       and omit it from every preference. SageMaker applies this to all
+    #       instance types in the list.
+    #
+    #   For example, in a list of five preferences, either all five specify
+    #   `InstanceCount` or none of them do. SageMaker rejects requests that
+    #   set `InstanceCount` on only some preferences, that set it both per
+    #   preference and in `ResourceConfig`, or that omit it in both places.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] training_plan_arns
+    #   The Amazon Resource Name (ARN) of a training plan to use if this
+    #   instance type is selected. The plan's instance type must match
+    #   `InstanceType`. A preference with a training plan uses that plan's
+    #   reserved capacity; a preference without one uses on-demand capacity.
+    #   Per-preference `TrainingPlanArns` is mutually exclusive with the
+    #   job-level `TrainingPlanArn` in `ResourceConfig`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InstancePreference AWS API Documentation
+    #
+    class InstancePreference < Struct.new(
+      :instance_type,
+      :instance_count,
+      :training_plan_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44393,8 +44699,18 @@ module Aws::SageMaker
     #
     #   * `Standard`: A managed low latency data store for feature groups.
     #
+    #   * `Standard_V2`: A managed low latency data store for feature groups
+    #     that supports partial updates to individual features using the
+    #     [UpdateRecord][1] operation. Choose this storage type at feature
+    #     group creation time if your use case requires updating specific
+    #     feature values without rewriting the entire record.
+    #
     #   * `InMemory`: A managed data store for feature groups that supports
     #     very low latency retrieval.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_UpdateRecord.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OnlineStoreConfig AWS API Documentation
@@ -44421,10 +44737,23 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
     #   @return [Types::TtlDuration]
     #
+    # @!attribute [rw] storage_type
+    #   The online store storage type to migrate the feature group to. Use
+    #   this parameter to migrate an existing feature group from `Standard`
+    #   to `Standard_V2` storage format, enabling support for the
+    #   [UpdateRecord][1] operation. Migration is a one-way operation and
+    #   cannot be reversed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_UpdateRecord.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OnlineStoreConfigUpdate AWS API Documentation
     #
     class OnlineStoreConfigUpdate < Struct.new(
-      :ttl_duration)
+      :ttl_duration,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46334,13 +46663,41 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #   @return [String]
     #
+    # @!attribute [rw] instance_preferences
+    #   An ordered list of ML compute instance types for the processing job,
+    #   in priority order. Amazon SageMaker launches the job on the first
+    #   instance type in the list that has available capacity. If capacity
+    #   is insufficient, Amazon SageMaker evaluates the next instance type
+    #   in the list. Exactly one instance type is selected for the job.
+    #
+    #   `InstancePreferences` is mutually exclusive with `InstanceType`.
+    #   @return [Array<Types::ProcessingInstancePreference>]
+    #
+    # @!attribute [rw] selected_instance_type
+    #   The instance type that Amazon SageMaker selected for the job from
+    #   `InstancePreferences`. Returned by ` DescribeProcessingJob ` after
+    #   an instance type is selected. This field is read-only and isn't
+    #   accepted in `CreateProcessingJob` requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_instance_count
+    #   The number of instances of `SelectedInstanceType` that the job
+    #   launched with. The job is billed for this instance type and count.
+    #   Returned by `DescribeProcessingJob` after an instance type is
+    #   selected. This field is read-only and isn't accepted in
+    #   `CreateProcessingJob` requests.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProcessingClusterConfig AWS API Documentation
     #
     class ProcessingClusterConfig < Struct.new(
       :instance_count,
       :instance_type,
       :volume_size_in_gb,
-      :volume_kms_key_id)
+      :volume_kms_key_id,
+      :instance_preferences,
+      :selected_instance_type,
+      :selected_instance_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46391,6 +46748,46 @@ module Aws::SageMaker
       :app_managed,
       :s3_input,
       :dataset_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A candidate instance type preference in a processing
+    # `InstancePreferences` list.
+    #
+    # @!attribute [rw] instance_type
+    #   The ML compute instance type. An instance type can appear only once
+    #   in an `InstancePreferences` list.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances to launch if this instance type is selected.
+    #   Specify the instance count for the processing job in one of the
+    #   following two ways:
+    #
+    #   1.  **Per preference** – Set `InstanceCount` on every preference in
+    #       the `InstancePreferences` list and don't set
+    #       `ProcessingClusterConfig$InstanceCount`. Use this when each
+    #       instance type needs a different number of instances to deliver
+    #       equivalent compute.
+    #
+    #   2.  **One count for the job** – Set
+    #       `ProcessingClusterConfig$InstanceCount` and omit it from every
+    #       preference. Amazon SageMaker applies this to all instance types
+    #       in the list.
+    #
+    #   For example, in a list of five preferences, either all five specify
+    #   `InstanceCount` or none of them do. Amazon SageMaker rejects
+    #   requests that set `InstanceCount` on only some preferences, that set
+    #   it both per preference and in `ProcessingClusterConfig`, or that
+    #   omit it in both places.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProcessingInstancePreference AWS API Documentation
+    #
+    class ProcessingInstancePreference < Struct.new(
+      :instance_type,
+      :instance_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49507,6 +49904,35 @@ module Aws::SageMaker
     #   capacity.
     #   @return [Types::InstancePlacementConfig]
     #
+    # @!attribute [rw] instance_preferences
+    #   An ordered list of ML compute instance types for the training job,
+    #   in priority order. SageMaker launches the training job on the first
+    #   instance type in the list that has available capacity. If capacity
+    #   is insufficient, SageMaker evaluates the next instance type in the
+    #   preferred list. Exactly one instance type is selected for the job.
+    #
+    #   `InstancePreferences` is mutually exclusive with `InstanceType`,
+    #   `InstanceGroups`, `InstancePlacementConfig`, and
+    #   `EnableManagedSpotTraining`, and supports only Flexible Training
+    #   Plans (FTP) and On-Demand capacity.
+    #   @return [Array<Types::InstancePreference>]
+    #
+    # @!attribute [rw] selected_instance_type
+    #   The instance type that SageMaker selected for the job from the
+    #   provided `InstancePreferences`. The job is billed for this instance
+    #   type and count. Returned by ` DescribeTrainingJob ` after an
+    #   instance type is selected. This field is read-only and isn't
+    #   accepted in `CreateTrainingJob` requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_instance_count
+    #   The number of instances of `SelectedInstanceType` that the training
+    #   job launched with. The job is billed for this instance type and
+    #   count. Returned by `DescribeTrainingJob` after an instance type is
+    #   selected. This field is read-only and isn't accepted in
+    #   `CreateTrainingJob` requests.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig AWS API Documentation
     #
     class ResourceConfig < Struct.new(
@@ -49517,7 +49943,10 @@ module Aws::SageMaker
       :keep_alive_period_in_seconds,
       :instance_groups,
       :training_plan_arn,
-      :instance_placement_config)
+      :instance_placement_config,
+      :instance_preferences,
+      :selected_instance_type,
+      :selected_instance_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50620,6 +51049,10 @@ module Aws::SageMaker
     #   The properties of a job.
     #   @return [Types::Job]
     #
+    # @!attribute [rw] hub_content
+    #   The properties of a hub content resource.
+    #   @return [Types::HubContent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
     #
     class SearchRecord < Struct.new(
@@ -50639,7 +51072,8 @@ module Aws::SageMaker
       :hyper_parameter_tuning_job,
       :model_card,
       :model,
-      :job)
+      :job,
+      :hub_content)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52493,6 +52927,19 @@ module Aws::SageMaker
     #
     #    `MaxPendingTimeInSeconds` only increments when jobs are actively
     #   waiting for capacity in an `Active` plan.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> * `MaxPendingTimeInSeconds` takes effect only for jobs that request
+    #     accelerated computing instance types, such as instances in the
+    #     `ml.p`, `ml.g`, and `ml.trn` families. It has no effect on jobs
+    #     that request CPU-only instance types.
+    #
+    #   * If the job specifies `InstancePreferences`,
+    #     `MaxPendingTimeInSeconds` bounds the total time SageMaker spends
+    #     working through your list of instance types. It is not applied per
+    #     instance type preference, and takes effect only when the list
+    #     includes at least one accelerated computing instance type.
     #
     #    </note>
     #
@@ -58227,6 +58674,27 @@ module Aws::SageMaker
     #   Configuration settings for the SageMaker Partner AI App.
     #   @return [Types::PartnerAppConfig]
     #
+    # @!attribute [rw] idc_config
+    #   Specifies the Amazon Web Services IAM Identity Center configuration
+    #   for the SageMaker Partner AI App. Specify this parameter when
+    #   `AuthType` is `IDC`. Apps that use `IAM` authorization don't use
+    #   this parameter.
+    #   @return [Types::IdcConfigInput]
+    #
+    # @!attribute [rw] auth_type
+    #   The authorization type that users use to access the SageMaker
+    #   Partner AI App. Use this parameter to migrate an existing SageMaker
+    #   Partner AI App from `IAM` authorization to `IDC` authorization.
+    #   Valid values:
+    #
+    #   * `IAM`: Users access the SageMaker Partner AI App with their Amazon
+    #     Web Services IAM identity.
+    #
+    #   * `IDC`: Users access the SageMaker Partner AI App with their Amazon
+    #     Web Services IAM Identity Center identity. Specify the Identity
+    #     Center instance to use in `IdcConfig`.
+    #   @return [String]
+    #
     # @!attribute [rw] enable_iam_session_based_identity
     #   When set to `TRUE`, the SageMaker Partner AI App sets the Amazon Web
     #   Services IAM session name or the authenticated IAM user as the
@@ -58266,6 +58734,8 @@ module Aws::SageMaker
       :maintenance_config,
       :tier,
       :application_config,
+      :idc_config,
+      :auth_type,
       :enable_iam_session_based_identity,
       :enable_auto_minor_version_upgrade,
       :app_version,

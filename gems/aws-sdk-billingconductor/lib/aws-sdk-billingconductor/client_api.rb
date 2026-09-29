@@ -38,6 +38,7 @@ module Aws::BillingConductor
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     AttributeValueList = Shapes::ListShape.new(name: 'AttributeValueList')
     AttributesList = Shapes::ListShape.new(name: 'AttributesList')
+    AutoTransferBillingGroupCreationPreference = Shapes::StructureShape.new(name: 'AutoTransferBillingGroupCreationPreference')
     BatchAssociateResourcesToCustomLineItemInput = Shapes::StructureShape.new(name: 'BatchAssociateResourcesToCustomLineItemInput')
     BatchAssociateResourcesToCustomLineItemOutput = Shapes::StructureShape.new(name: 'BatchAssociateResourcesToCustomLineItemOutput')
     BatchDisassociateResourcesFromCustomLineItemInput = Shapes::StructureShape.new(name: 'BatchDisassociateResourcesFromCustomLineItemInput')
@@ -101,6 +102,11 @@ module Aws::BillingConductor
     CustomLineItemType = Shapes::StringShape.new(name: 'CustomLineItemType')
     CustomLineItemVersionList = Shapes::ListShape.new(name: 'CustomLineItemVersionList')
     CustomLineItemVersionListElement = Shapes::StructureShape.new(name: 'CustomLineItemVersionListElement')
+    CustomTier = Shapes::StructureShape.new(name: 'CustomTier')
+    CustomTierBeginRangeInclusive = Shapes::FloatShape.new(name: 'CustomTierBeginRangeInclusive')
+    CustomTierEndRangeExclusive = Shapes::FloatShape.new(name: 'CustomTierEndRangeExclusive')
+    CustomTierRateValue = Shapes::FloatShape.new(name: 'CustomTierRateValue')
+    CustomTiersList = Shapes::ListShape.new(name: 'CustomTiersList')
     DeleteBillingGroupInput = Shapes::StructureShape.new(name: 'DeleteBillingGroupInput')
     DeleteBillingGroupOutput = Shapes::StructureShape.new(name: 'DeleteBillingGroupOutput')
     DeleteCustomLineItemInput = Shapes::StructureShape.new(name: 'DeleteCustomLineItemInput')
@@ -118,6 +124,8 @@ module Aws::BillingConductor
     FreeTierConfig = Shapes::StructureShape.new(name: 'FreeTierConfig')
     GetBillingGroupCostReportInput = Shapes::StructureShape.new(name: 'GetBillingGroupCostReportInput')
     GetBillingGroupCostReportOutput = Shapes::StructureShape.new(name: 'GetBillingGroupCostReportOutput')
+    GetBillingTransferPreferenceInput = Shapes::StructureShape.new(name: 'GetBillingTransferPreferenceInput')
+    GetBillingTransferPreferenceOutput = Shapes::StructureShape.new(name: 'GetBillingTransferPreferenceOutput')
     GroupByAttributeName = Shapes::StringShape.new(name: 'GroupByAttributeName')
     GroupByAttributesList = Shapes::ListShape.new(name: 'GroupByAttributesList')
     Instant = Shapes::IntegerShape.new(name: 'Instant')
@@ -224,6 +232,8 @@ module Aws::BillingConductor
     UpdateBillingGroupAccountGrouping = Shapes::StructureShape.new(name: 'UpdateBillingGroupAccountGrouping')
     UpdateBillingGroupInput = Shapes::StructureShape.new(name: 'UpdateBillingGroupInput')
     UpdateBillingGroupOutput = Shapes::StructureShape.new(name: 'UpdateBillingGroupOutput')
+    UpdateBillingTransferPreferenceInput = Shapes::StructureShape.new(name: 'UpdateBillingTransferPreferenceInput')
+    UpdateBillingTransferPreferenceOutput = Shapes::StructureShape.new(name: 'UpdateBillingTransferPreferenceOutput')
     UpdateCustomLineItemChargeDetails = Shapes::StructureShape.new(name: 'UpdateCustomLineItemChargeDetails')
     UpdateCustomLineItemFlatChargeDetails = Shapes::StructureShape.new(name: 'UpdateCustomLineItemFlatChargeDetails')
     UpdateCustomLineItemInput = Shapes::StructureShape.new(name: 'UpdateCustomLineItemInput')
@@ -292,6 +302,10 @@ module Aws::BillingConductor
     AttributeValueList.member = Shapes::ShapeRef.new(shape: AttributeValue)
 
     AttributesList.member = Shapes::ShapeRef.new(shape: Attribute)
+
+    AutoTransferBillingGroupCreationPreference.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    AutoTransferBillingGroupCreationPreference.add_member(:pricing_plan_arn, Shapes::ShapeRef.new(shape: PricingPlanArn, location_name: "PricingPlanArn"))
+    AutoTransferBillingGroupCreationPreference.struct_class = Types::AutoTransferBillingGroupCreationPreference
 
     BatchAssociateResourcesToCustomLineItemInput.add_member(:target_arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, required: true, location_name: "TargetArn"))
     BatchAssociateResourcesToCustomLineItemInput.add_member(:resource_arns, Shapes::ShapeRef.new(shape: CustomLineItemBatchAssociationsList, required: true, location_name: "ResourceArns"))
@@ -424,7 +438,8 @@ module Aws::BillingConductor
     CreatePricingRuleOutput.add_member(:arn, Shapes::ShapeRef.new(shape: PricingRuleArn, location_name: "Arn"))
     CreatePricingRuleOutput.struct_class = Types::CreatePricingRuleOutput
 
-    CreateTieringInput.add_member(:free_tier, Shapes::ShapeRef.new(shape: CreateFreeTierConfig, required: true, location_name: "FreeTier"))
+    CreateTieringInput.add_member(:free_tier, Shapes::ShapeRef.new(shape: CreateFreeTierConfig, location_name: "FreeTier"))
+    CreateTieringInput.add_member(:custom_tiers, Shapes::ShapeRef.new(shape: CustomTiersList, location_name: "CustomTiers"))
     CreateTieringInput.struct_class = Types::CreateTieringInput
 
     CustomLineItemArns.member = Shapes::ShapeRef.new(shape: CustomLineItemArn)
@@ -491,6 +506,13 @@ module Aws::BillingConductor
     CustomLineItemVersionListElement.add_member(:presentation_details, Shapes::ShapeRef.new(shape: PresentationObject, location_name: "PresentationDetails"))
     CustomLineItemVersionListElement.struct_class = Types::CustomLineItemVersionListElement
 
+    CustomTier.add_member(:begin_range_inclusive, Shapes::ShapeRef.new(shape: CustomTierBeginRangeInclusive, required: true, location_name: "BeginRangeInclusive"))
+    CustomTier.add_member(:end_range_exclusive, Shapes::ShapeRef.new(shape: CustomTierEndRangeExclusive, location_name: "EndRangeExclusive"))
+    CustomTier.add_member(:rate_value, Shapes::ShapeRef.new(shape: CustomTierRateValue, required: true, location_name: "RateValue"))
+    CustomTier.struct_class = Types::CustomTier
+
+    CustomTiersList.member = Shapes::ShapeRef.new(shape: CustomTier)
+
     DeleteBillingGroupInput.add_member(:arn, Shapes::ShapeRef.new(shape: BillingGroupArn, required: true, location_name: "Arn"))
     DeleteBillingGroupInput.struct_class = Types::DeleteBillingGroupInput
 
@@ -549,6 +571,14 @@ module Aws::BillingConductor
     GetBillingGroupCostReportOutput.add_member(:billing_group_cost_report_results, Shapes::ShapeRef.new(shape: BillingGroupCostReportResultsList, location_name: "BillingGroupCostReportResults"))
     GetBillingGroupCostReportOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetBillingGroupCostReportOutput.struct_class = Types::GetBillingGroupCostReportOutput
+
+    GetBillingTransferPreferenceInput.add_member(:responsibility_transfer_arn, Shapes::ShapeRef.new(shape: ResponsibilityTransferArn, required: true, location_name: "ResponsibilityTransferArn"))
+    GetBillingTransferPreferenceInput.struct_class = Types::GetBillingTransferPreferenceInput
+
+    GetBillingTransferPreferenceOutput.add_member(:responsibility_transfer_arn, Shapes::ShapeRef.new(shape: ResponsibilityTransferArn, required: true, location_name: "ResponsibilityTransferArn"))
+    GetBillingTransferPreferenceOutput.add_member(:auto_billing_transfer_billing_group_creation, Shapes::ShapeRef.new(shape: AutoTransferBillingGroupCreationPreference, required: true, location_name: "AutoBillingTransferBillingGroupCreation"))
+    GetBillingTransferPreferenceOutput.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Instant, location_name: "LastModifiedTime", metadata: {"box" => true}))
+    GetBillingTransferPreferenceOutput.struct_class = Types::GetBillingTransferPreferenceOutput
 
     GroupByAttributesList.member = Shapes::ShapeRef.new(shape: GroupByAttributeName)
 
@@ -818,7 +848,8 @@ module Aws::BillingConductor
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    Tiering.add_member(:free_tier, Shapes::ShapeRef.new(shape: FreeTierConfig, required: true, location_name: "FreeTier"))
+    Tiering.add_member(:free_tier, Shapes::ShapeRef.new(shape: FreeTierConfig, location_name: "FreeTier"))
+    Tiering.add_member(:custom_tiers, Shapes::ShapeRef.new(shape: CustomTiersList, location_name: "CustomTiers"))
     Tiering.struct_class = Types::Tiering
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
@@ -850,6 +881,16 @@ module Aws::BillingConductor
     UpdateBillingGroupOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: BillingGroupStatusReason, location_name: "StatusReason"))
     UpdateBillingGroupOutput.add_member(:account_grouping, Shapes::ShapeRef.new(shape: UpdateBillingGroupAccountGrouping, location_name: "AccountGrouping"))
     UpdateBillingGroupOutput.struct_class = Types::UpdateBillingGroupOutput
+
+    UpdateBillingTransferPreferenceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken" => true}))
+    UpdateBillingTransferPreferenceInput.add_member(:responsibility_transfer_arn, Shapes::ShapeRef.new(shape: ResponsibilityTransferArn, required: true, location_name: "ResponsibilityTransferArn"))
+    UpdateBillingTransferPreferenceInput.add_member(:auto_billing_transfer_billing_group_creation, Shapes::ShapeRef.new(shape: AutoTransferBillingGroupCreationPreference, required: true, location_name: "AutoBillingTransferBillingGroupCreation"))
+    UpdateBillingTransferPreferenceInput.struct_class = Types::UpdateBillingTransferPreferenceInput
+
+    UpdateBillingTransferPreferenceOutput.add_member(:responsibility_transfer_arn, Shapes::ShapeRef.new(shape: ResponsibilityTransferArn, required: true, location_name: "ResponsibilityTransferArn"))
+    UpdateBillingTransferPreferenceOutput.add_member(:auto_billing_transfer_billing_group_creation, Shapes::ShapeRef.new(shape: AutoTransferBillingGroupCreationPreference, required: true, location_name: "AutoBillingTransferBillingGroupCreation"))
+    UpdateBillingTransferPreferenceOutput.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Instant, required: true, location_name: "LastModifiedTime"))
+    UpdateBillingTransferPreferenceOutput.struct_class = Types::UpdateBillingTransferPreferenceOutput
 
     UpdateCustomLineItemChargeDetails.add_member(:flat, Shapes::ShapeRef.new(shape: UpdateCustomLineItemFlatChargeDetails, location_name: "Flat"))
     UpdateCustomLineItemChargeDetails.add_member(:percentage, Shapes::ShapeRef.new(shape: UpdateCustomLineItemPercentageChargeDetails, location_name: "Percentage"))
@@ -916,7 +957,8 @@ module Aws::BillingConductor
     UpdatePricingRuleOutput.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "Operation"))
     UpdatePricingRuleOutput.struct_class = Types::UpdatePricingRuleOutput
 
-    UpdateTieringInput.add_member(:free_tier, Shapes::ShapeRef.new(shape: UpdateFreeTierConfig, required: true, location_name: "FreeTier"))
+    UpdateTieringInput.add_member(:free_tier, Shapes::ShapeRef.new(shape: UpdateFreeTierConfig, location_name: "FreeTier"))
+    UpdateTieringInput.add_member(:custom_tiers, Shapes::ShapeRef.new(shape: CustomTiersList, location_name: "CustomTiers"))
     UpdateTieringInput.struct_class = Types::UpdateTieringInput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
@@ -1157,6 +1199,19 @@ module Aws::BillingConductor
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_billing_transfer_preference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBillingTransferPreference"
+        o.http_method = "POST"
+        o.http_request_uri = "/get-billing-transfer-preference"
+        o.input = Shapes::ShapeRef.new(shape: GetBillingTransferPreferenceInput)
+        o.output = Shapes::ShapeRef.new(shape: GetBillingTransferPreferenceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_account_associations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAccountAssociations"
         o.http_method = "POST"
@@ -1388,6 +1443,20 @@ module Aws::BillingConductor
         o.http_request_uri = "/update-billing-group"
         o.input = Shapes::ShapeRef.new(shape: UpdateBillingGroupInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateBillingGroupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_billing_transfer_preference, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBillingTransferPreference"
+        o.http_method = "PUT"
+        o.http_request_uri = "/update-billing-transfer-preference"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBillingTransferPreferenceInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBillingTransferPreferenceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

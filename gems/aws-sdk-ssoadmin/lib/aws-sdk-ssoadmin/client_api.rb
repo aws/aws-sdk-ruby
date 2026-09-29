@@ -164,6 +164,7 @@ module Aws::SSOAdmin
     InstanceAccessControlAttributeConfigurationStatus = Shapes::StringShape.new(name: 'InstanceAccessControlAttributeConfigurationStatus')
     InstanceAccessControlAttributeConfigurationStatusReason = Shapes::StringShape.new(name: 'InstanceAccessControlAttributeConfigurationStatusReason')
     InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
+    InstanceIdentityStoreArn = Shapes::StringShape.new(name: 'InstanceIdentityStoreArn')
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
     InstanceMetadata = Shapes::StructureShape.new(name: 'InstanceMetadata')
     InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
@@ -675,11 +676,14 @@ module Aws::SSOAdmin
 
     DescribeInstanceResponse.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "InstanceArn"))
     DescribeInstanceResponse.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: Id, location_name: "IdentityStoreId"))
+    DescribeInstanceResponse.add_member(:identity_store_arn, Shapes::ShapeRef.new(shape: InstanceIdentityStoreArn, location_name: "IdentityStoreArn"))
     DescribeInstanceResponse.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "OwnerAccountId"))
     DescribeInstanceResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
     DescribeInstanceResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
     DescribeInstanceResponse.add_member(:status, Shapes::ShapeRef.new(shape: InstanceStatus, location_name: "Status"))
     DescribeInstanceResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
+    DescribeInstanceResponse.add_member(:primary_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "PrimaryRegion"))
+    DescribeInstanceResponse.add_member(:regions, Shapes::ShapeRef.new(shape: RegionMetadataList, location_name: "Regions"))
     DescribeInstanceResponse.add_member(:encryption_configuration_details, Shapes::ShapeRef.new(shape: EncryptionConfigurationDetails, location_name: "EncryptionConfigurationDetails"))
     DescribeInstanceResponse.add_member(:permission_sets_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PermissionSetsEnabled"))
     DescribeInstanceResponse.struct_class = Types::DescribeInstanceResponse
@@ -822,6 +826,7 @@ module Aws::SSOAdmin
 
     InstanceMetadata.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "InstanceArn"))
     InstanceMetadata.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: Id, location_name: "IdentityStoreId"))
+    InstanceMetadata.add_member(:identity_store_arn, Shapes::ShapeRef.new(shape: InstanceIdentityStoreArn, location_name: "IdentityStoreArn"))
     InstanceMetadata.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "OwnerAccountId"))
     InstanceMetadata.add_member(:name, Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
     InstanceMetadata.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))

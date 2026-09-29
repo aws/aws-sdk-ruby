@@ -92,6 +92,17 @@ module Aws
                            ) -> _AddProfileKeyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddProfileKeyResponseSuccess
 
+      interface _AssociateStreamForSegmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateStreamForSegmentsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#associate_stream_for_segments-instance_method
+      def associate_stream_for_segments: (
+                                           domain_name: ::String,
+                                           destination_arn: ::String,
+                                           destination_role_arn: ::String
+                                         ) -> _AssociateStreamForSegmentsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateStreamForSegmentsResponseSuccess
+
       interface _BatchGetCalculatedAttributeForProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCalculatedAttributeForProfileResponse]
         def errors: () -> ::Array[Types::BatchGetCalculatedAttributeForProfileError]
@@ -151,7 +162,7 @@ module Aws
         def attribute_details: () -> Types::AttributeDetails
         def conditions: () -> Types::Conditions
         def filter: () -> Types::Filter
-        def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+        def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE" | "RECENT_OCCURRENCES")
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
         def use_historical_data: () -> bool
@@ -190,7 +201,7 @@ module Aws
                                                         }
                                                       ]
                                                     },
-                                                    statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE"),
+                                                    statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE" | "RECENT_OCCURRENCES"),
                                                     ?use_historical_data: bool,
                                                     ?tags: Hash[::String, ::String]
                                                   ) -> _CreateCalculatedAttributeDefinitionResponseSuccess
@@ -660,6 +671,17 @@ module Aws
                                      ) -> _DeleteSegmentDefinitionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSegmentDefinitionResponseSuccess
 
+      interface _DeleteSegmentSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSegmentSubscriptionResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_segment_subscription-instance_method
+      def delete_segment_subscription: (
+                                         domain_name: ::String,
+                                         segment_definition_name: ::String
+                                       ) -> _DeleteSegmentSubscriptionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSegmentSubscriptionResponseSuccess
+
       interface _DeleteWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkflowResponse]
       end
@@ -680,6 +702,16 @@ module Aws
                                         domain_name: ::String
                                       ) -> _DetectProfileObjectTypeResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectProfileObjectTypeResponseSuccess
+
+      interface _DisassociateStreamForSegmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateStreamForSegmentsResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#disassociate_stream_for_segments-instance_method
+      def disassociate_stream_for_segments: (
+                                              domain_name: ::String
+                                            ) -> _DisassociateStreamForSegmentsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateStreamForSegmentsResponseSuccess
 
       interface _GetAutoMergingPreviewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAutoMergingPreviewResponse]
@@ -711,7 +743,7 @@ module Aws
         def description: () -> ::String
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
-        def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+        def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE" | "RECENT_OCCURRENCES")
         def filter: () -> Types::Filter
         def conditions: () -> Types::Conditions
         def attribute_details: () -> Types::AttributeDetails
@@ -1128,6 +1160,22 @@ module Aws
                                 ) -> _GetSegmentSnapshotResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSegmentSnapshotResponseSuccess
 
+      interface _GetSegmentSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSegmentSubscriptionResponse]
+        def status: () -> ("STARTING" | "RUNNING" | "STOPPED" | "FAILED")
+        def message: () -> ::String
+        def schedule_configuration: () -> Types::ScheduleConfiguration
+        def scheduled_executions: () -> Types::ScheduledExecutions
+        def started_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_segment_subscription-instance_method
+      def get_segment_subscription: (
+                                      domain_name: ::String,
+                                      segment_definition_name: ::String
+                                    ) -> _GetSegmentSubscriptionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSegmentSubscriptionResponseSuccess
+
       interface _GetSimilarProfilesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSimilarProfilesResponse]
         def profile_ids: () -> ::Array[::String]
@@ -1147,6 +1195,23 @@ module Aws
                                   search_value: ::String
                                 ) -> _GetSimilarProfilesResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSimilarProfilesResponseSuccess
+
+      interface _GetStreamForSegmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamForSegmentsResponse]
+        def associated_at: () -> ::Time
+        def associated_segments: () -> ::Array[Types::AssociatedSegment]
+        def domain_name: () -> ::String
+        def destination_arn: () -> ::String
+        def destination_role_arn: () -> ::String
+        def state: () -> ("RUNNING" | "UNHEALTHY" | "STOPPED")
+        def disassociated_at: () -> ::Time
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_stream_for_segments-instance_method
+      def get_stream_for_segments: (
+                                     domain_name: ::String
+                                   ) -> _GetStreamForSegmentsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamForSegmentsResponseSuccess
 
       interface _GetUploadJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetUploadJobResponse]
@@ -1528,6 +1593,20 @@ module Aws
                                     ) -> _ListSegmentDefinitionsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSegmentDefinitionsResponseSuccess
 
+      interface _ListSegmentSubscriptionEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSegmentSubscriptionEventsResponse]
+        def events: () -> ::Array[Types::SubscriptionEventItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_segment_subscription_events-instance_method
+      def list_segment_subscription_events: (
+                                              domain_name: ::String,
+                                              segment_definition_name: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListSegmentSubscriptionEventsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSegmentSubscriptionEventsResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
         def tags: () -> ::Hash[::String, ::String]
@@ -1717,6 +1796,23 @@ module Aws
                                    ) -> _PutProfileObjectTypeResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProfileObjectTypeResponseSuccess
 
+      interface _PutSegmentSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSegmentSubscriptionResponse]
+        def status: () -> ("STARTING" | "RUNNING" | "STOPPED" | "FAILED")
+        def schedule_configuration: () -> Types::ScheduleConfiguration
+        def started_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#put_segment_subscription-instance_method
+      def put_segment_subscription: (
+                                      domain_name: ::String,
+                                      segment_definition_name: ::String,
+                                      ?schedule_configuration: {
+                                        interval: ::Integer,
+                                        unit: ("HOURLY")?
+                                      }
+                                    ) -> _PutSegmentSubscriptionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSegmentSubscriptionResponseSuccess
+
       interface _SearchProfilesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchProfilesResponse]
         def items: () -> ::Array[Types::Profile]
@@ -1738,6 +1834,46 @@ module Aws
                              ?logical_operator: ("AND" | "OR")
                            ) -> _SearchProfilesResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchProfilesResponseSuccess
+
+      interface _SearchRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchRecommendationsResponse]
+        def profile_id: () -> ::String
+        def recommendations: () -> ::Array[Types::Recommendation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#search_recommendations-instance_method
+      def search_recommendations: (
+                                    domain_name: ::String,
+                                    key_name: ::String,
+                                    key_values: Array[::String],
+                                    recommender: {
+                                      name: ::String,
+                                      filters: Array[
+                                        {
+                                          name: ::String?,
+                                          values: Hash[::String, ::String]?
+                                        }
+                                      ]?,
+                                      promotional_filters: Array[
+                                        {
+                                          name: ::String?,
+                                          values: Hash[::String, ::String]?,
+                                          promotion_name: ::String?,
+                                          percent_promoted_items: ::Integer?
+                                        }
+                                      ]?
+                                    },
+                                    ?candidate_ids: Array[::String],
+                                    ?context: Hash[::String, ::String],
+                                    ?diversity: {
+                                      enabled: bool,
+                                      values: Hash[::String, ::Integer]?
+                                    },
+                                    ?metadata: {
+                                      columns: Array[::String]?
+                                    },
+                                    ?max_recommendations: ::Integer
+                                  ) -> _SearchRecommendationsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchRecommendationsResponseSuccess
 
       interface _StartRecommenderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartRecommenderResponse]
@@ -1806,7 +1942,7 @@ module Aws
         def description: () -> ::String
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
-        def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+        def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE" | "RECENT_OCCURRENCES")
         def conditions: () -> Types::Conditions
         def attribute_details: () -> Types::AttributeDetails
         def use_historical_data: () -> bool

@@ -863,6 +863,13 @@
       "max":2,
       "min":0
     },
+    "ClientRoutingPolicy":{
+      "type":"string",
+      "enum":[
+        "AVAILABILITY_ZONE_AFFINITY",
+        "ANY_AVAILABILITY_ZONE"
+      ]
+    },
     "ConflictException":{
       "type":"structure",
       "required":["message"],
@@ -1126,7 +1133,8 @@
         },
         "description":{"shape":"CreateResponderGatewayRequestDescriptionString"},
         "tags":{"shape":"TagsMap"},
-        "gatewayType":{"shape":"GatewayType"}
+        "gatewayType":{"shape":"GatewayType"},
+        "clientRoutingPolicy":{"shape":"ClientRoutingPolicy"}
       }
     },
     "CreateResponderGatewayRequestDescriptionString":{
@@ -1161,7 +1169,8 @@
         "gatewayId":{"shape":"GatewayId"},
         "status":{"shape":"ResponderGatewayStatus"},
         "listenerConfig":{"shape":"ListenerConfig"},
-        "externalInboundEndpoint":{"shape":"DomainName"}
+        "externalInboundEndpoint":{"shape":"DomainName"},
+        "clientRoutingPolicy":{"shape":"ClientRoutingPolicy"}
       }
     },
     "CustomerProvidedId":{
@@ -1776,7 +1785,8 @@
         "totalLinksCount":{"shape":"Integer"},
         "linksRequestedCount":{"shape":"Integer"},
         "gatewayType":{"shape":"GatewayType"},
-        "externalInboundEndpoint":{"shape":"DomainName"}
+        "externalInboundEndpoint":{"shape":"DomainName"},
+        "clientRoutingPolicy":{"shape":"ClientRoutingPolicy"}
       }
     },
     "GetResponderGatewayResponseDescriptionString":{
@@ -2852,7 +2862,8 @@
           "location":"uri",
           "locationName":"gatewayId"
         },
-        "description":{"shape":"UpdateResponderGatewayRequestDescriptionString"}
+        "description":{"shape":"UpdateResponderGatewayRequestDescriptionString"},
+        "clientRoutingPolicy":{"shape":"ClientRoutingPolicy"}
       }
     },
     "UpdateResponderGatewayRequestDescriptionString":{
@@ -2873,7 +2884,8 @@
       ],
       "members":{
         "gatewayId":{"shape":"GatewayId"},
-        "status":{"shape":"ResponderGatewayStatus"}
+        "status":{"shape":"ResponderGatewayStatus"},
+        "clientRoutingPolicy":{"shape":"ClientRoutingPolicy"}
       }
     },
     "ValidationException":{

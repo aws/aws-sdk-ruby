@@ -635,6 +635,11 @@ module Aws::AutoScaling
       SENSITIVE: []
     end
 
+    class DistributionSegment
+      attr_accessor target_capacity_types: ::Array[("on-demand-capacity-reservation" | "capacity-block" | "interruptible-capacity-reservation" | "on-demand")]
+      SENSITIVE: []
+    end
+
     class Ebs
       attr_accessor snapshot_id: ::String
       attr_accessor volume_size: ::Integer
@@ -858,6 +863,7 @@ module Aws::AutoScaling
       attr_accessor spot_allocation_strategy: ::String
       attr_accessor spot_instance_pools: ::Integer
       attr_accessor spot_max_price: ::String
+      attr_accessor distribution_segments: ::Array[Types::DistributionSegment]
       SENSITIVE: []
     end
 

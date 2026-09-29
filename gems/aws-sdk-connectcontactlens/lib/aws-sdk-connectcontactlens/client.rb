@@ -474,7 +474,13 @@ module Aws::ConnectContactLens
 
     # @!group API Operations
 
-    # Provides a list of analysis segments for a real-time analysis session.
+    # Provides a list of analysis segments for a real-time analysis session
+    # for voice.
+    #
+    # <note markdown="1"> Voice data is retained for 24 hours. You must invoke this API during
+    # that time.
+    #
+    #  </note>
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -528,6 +534,15 @@ module Aws::ConnectContactLens
     #   resp.segments[0].post_contact_summary.content #=> String
     #   resp.segments[0].post_contact_summary.status #=> String, one of "FAILED", "COMPLETED"
     #   resp.segments[0].post_contact_summary.failure_code #=> String, one of "QUOTA_EXCEEDED", "INSUFFICIENT_CONVERSATION_CONTENT", "FAILED_SAFETY_GUIDELINES", "INVALID_ANALYSIS_CONFIGURATION", "INTERNAL_ERROR"
+    #   resp.segments[0].extracted_information.extraction_definition_id #=> String
+    #   resp.segments[0].extracted_information.extraction_definition_name #=> String
+    #   resp.segments[0].extracted_information.extraction_definition_display_label #=> String
+    #   resp.segments[0].extracted_information.extracted_values #=> Array
+    #   resp.segments[0].extracted_information.extracted_values[0].content #=> String
+    #   resp.segments[0].extracted_information.extracted_values[0].points_of_interest #=> Array
+    #   resp.segments[0].extracted_information.extracted_values[0].points_of_interest[0].begin_offset_millis #=> Integer
+    #   resp.segments[0].extracted_information.extracted_values[0].points_of_interest[0].end_offset_millis #=> Integer
+    #   resp.segments[0].extracted_information.failure_code #=> String, one of "QUOTA_EXCEEDED", "INSUFFICIENT_CONVERSATION_CONTENT", "FAILED_SAFETY_GUIDELINES", "INTERNAL_ERROR", "MAX_PACKAGE_FEATURE_ONLY"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/ListRealtimeContactAnalysisSegments AWS API Documentation
@@ -557,7 +572,7 @@ module Aws::ConnectContactLens
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcontactlens'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

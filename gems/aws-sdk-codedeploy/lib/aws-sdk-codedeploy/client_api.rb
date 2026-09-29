@@ -110,6 +110,7 @@ module Aws::CodeDeploy
     DeploymentInfo = Shapes::StructureShape.new(name: 'DeploymentInfo')
     DeploymentIsNotInReadyStateException = Shapes::StructureShape.new(name: 'DeploymentIsNotInReadyStateException')
     DeploymentLimitExceededException = Shapes::StructureShape.new(name: 'DeploymentLimitExceededException')
+    DeploymentMode = Shapes::StringShape.new(name: 'DeploymentMode')
     DeploymentNotStartedException = Shapes::StructureShape.new(name: 'DeploymentNotStartedException')
     DeploymentOption = Shapes::StringShape.new(name: 'DeploymentOption')
     DeploymentOverview = Shapes::StructureShape.new(name: 'DeploymentOverview')
@@ -596,6 +597,7 @@ module Aws::CodeDeploy
     CreateDeploymentInput.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfiguration, location_name: "autoRollbackConfiguration"))
     CreateDeploymentInput.add_member(:update_outdated_instances_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "updateOutdatedInstancesOnly"))
     CreateDeploymentInput.add_member(:file_exists_behavior, Shapes::ShapeRef.new(shape: FileExistsBehavior, location_name: "fileExistsBehavior"))
+    CreateDeploymentInput.add_member(:deployment_mode, Shapes::ShapeRef.new(shape: DeploymentMode, location_name: "deploymentMode"))
     CreateDeploymentInput.add_member(:override_alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "overrideAlarmConfiguration"))
     CreateDeploymentInput.struct_class = Types::CreateDeploymentInput
 
@@ -717,6 +719,7 @@ module Aws::CodeDeploy
     DeploymentInfo.add_member(:load_balancer_info, Shapes::ShapeRef.new(shape: LoadBalancerInfo, location_name: "loadBalancerInfo"))
     DeploymentInfo.add_member(:additional_deployment_status_info, Shapes::ShapeRef.new(shape: AdditionalDeploymentStatusInfo, deprecated: true, location_name: "additionalDeploymentStatusInfo"))
     DeploymentInfo.add_member(:file_exists_behavior, Shapes::ShapeRef.new(shape: FileExistsBehavior, location_name: "fileExistsBehavior"))
+    DeploymentInfo.add_member(:deployment_mode, Shapes::ShapeRef.new(shape: DeploymentMode, location_name: "deploymentMode"))
     DeploymentInfo.add_member(:deployment_status_messages, Shapes::ShapeRef.new(shape: DeploymentStatusMessageList, location_name: "deploymentStatusMessages"))
     DeploymentInfo.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
     DeploymentInfo.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
@@ -1589,6 +1592,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: ApplicationLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidComputePlatformException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagsToAddException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -1616,6 +1620,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidAutoRollbackConfigException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerInfoException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFileExistsBehaviorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidComputePlatformException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAutoScalingGroupException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1623,6 +1628,8 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidIgnoreApplicationStopFailuresValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGitHubAccountTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficRoutingConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidECSServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:create_deployment_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1940,6 +1947,8 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentInstanceTypeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetFilterNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidComputePlatformException)
+        o.errors << Shapes::ShapeRef.new(shape: ApplicationDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DeploymentGroupDoesNotExistException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"
@@ -1962,6 +1971,8 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceTypeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentInstanceTypeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetFilterNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ApplicationDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DeploymentGroupDoesNotExistException)
       end)
 
       api.add_operation(:list_deployments, Seahorse::Model::Operation.new.tap do |o|

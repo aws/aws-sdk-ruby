@@ -125,6 +125,43 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
+    # Contains the authentication settings that Connect Customer uses to
+    # call an external application endpoint. The configuration includes the
+    # authentication type and credential location.
+    #
+    # @!attribute [rw] auth_type
+    #   The type of authentication used when calling the external
+    #   application.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_identifier
+    #   The ARN of the Secrets Manager secret that stores the credentials.
+    #   The secret must be accessible to Connect Customer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/AuthConfig AWS API Documentation
+    #
+    class AuthConfig < Struct.new(
+      :auth_type,
+      :credential_provider_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request conflicts with the current state of the resource. Verify
+    # the application's current state and retry the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The contact handling configuration for the application.
     #
     # @!attribute [rw] scope
@@ -210,6 +247,11 @@ module Aws::AppIntegrationsService
     #   The type of application.
     #   @return [String]
     #
+    # @!attribute [rw] auth_config
+    #   The authentication settings that Connect Customer uses when calling
+    #   the external application.
+    #   @return [Types::AuthConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -226,7 +268,8 @@ module Aws::AppIntegrationsService
       :initialization_timeout,
       :application_config,
       :iframe_config,
-      :application_type)
+      :application_type,
+      :auth_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -586,10 +629,23 @@ module Aws::AppIntegrationsService
     #   The Amazon Resource Name (ARN) of the Application.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   Specifies whether to delete the application even if it still has
+    #   application associations. If `true`, the operation removes the
+    #   application and its associations. If `false` or absent, the delete
+    #   fails when associations exist.
+    #
+    #   Setting this parameter to `true` permanently removes all of the
+    #   application's associations. Doing so might impact other resources
+    #   that rely on and reference the application. This action can't be
+    #   undone.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/DeleteApplicationRequest AWS API Documentation
     #
     class DeleteApplicationRequest < Struct.new(
-      :arn)
+      :arn,
+      :force)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -887,6 +943,11 @@ module Aws::AppIntegrationsService
     #   The type of application.
     #   @return [String]
     #
+    # @!attribute [rw] auth_config
+    #   The authentication settings that Connect Customer uses when calling
+    #   the external application.
+    #   @return [Types::AuthConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplicationResponse AWS API Documentation
     #
     class GetApplicationResponse < Struct.new(
@@ -906,7 +967,8 @@ module Aws::AppIntegrationsService
       :initialization_timeout,
       :application_config,
       :iframe_config,
-      :application_type)
+      :application_type,
+      :auth_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1601,6 +1663,11 @@ module Aws::AppIntegrationsService
     #   The type of application.
     #   @return [String]
     #
+    # @!attribute [rw] auth_config
+    #   The authentication settings that Connect Customer uses when calling
+    #   the external application.
+    #   @return [Types::AuthConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1615,7 +1682,8 @@ module Aws::AppIntegrationsService
       :initialization_timeout,
       :application_config,
       :iframe_config,
-      :application_type)
+      :application_type,
+      :auth_config)
       SENSITIVE = []
       include Aws::Structure
     end

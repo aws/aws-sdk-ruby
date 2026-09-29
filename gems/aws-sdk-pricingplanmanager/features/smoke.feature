@@ -8,18 +8,6 @@
 Feature: Smoke tests for PricingPlanManager
 
   @pricingplanmanager @smoke
-  Scenario: ListSubscriptionsSuccess
-    Given I create a 'Aws::PricingPlanManager' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_subscriptions' with params:
-      """
-{}
-      """
-    Then I expect an error was not raised
-
-  @pricingplanmanager @smoke
   Scenario: GetSubscriptionFailure
     Given I create a 'Aws::PricingPlanManager' client with config:
       """
@@ -30,3 +18,15 @@ Feature: Smoke tests for PricingPlanManager
 {"arn":"arn:aws:pricingplanmanager::123456789012:subscription/non-existent"}
       """
     Then I expect a 'Aws::PricingPlanManager::Errors::ResourceNotFoundException' was raised
+
+  @pricingplanmanager @smoke
+  Scenario: ListSubscriptionsSuccess
+    Given I create a 'Aws::PricingPlanManager' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_subscriptions' with params:
+      """
+{}
+      """
+    Then I expect an error was not raised

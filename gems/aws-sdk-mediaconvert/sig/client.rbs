@@ -226,6 +226,9 @@ module Aws
                           ]?,
                           kantar_watermark: Params::kantar_watermark_settings?,
                           motion_image_inserter: Params::motion_image_inserter?,
+                          motion_image_inserters: Array[
+                            Params::motion_image_inserter
+                          ]?,
                           nielsen_configuration: {
                             breakout_code: ::Integer?,
                             distributor_id: ::String?
@@ -581,7 +584,7 @@ module Aws
       def start_jobs_query: (
                               ?filter_list: Array[
                                 {
-                                  key: ("queue" | "status" | "fileInput" | "jobEngineVersionRequested" | "jobEngineVersionUsed" | "audioCodec" | "videoCodec")?,
+                                  key: ("queue" | "status" | "fileInput" | "jobEngineVersionRequested" | "jobEngineVersionUsed" | "audioCodec" | "videoCodec" | "errorCode")?,
                                   values: Array[::String]?
                                 }
                               ],

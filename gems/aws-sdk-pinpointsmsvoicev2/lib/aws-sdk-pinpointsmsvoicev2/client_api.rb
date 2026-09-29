@@ -31,6 +31,7 @@ module Aws::PinpointSMSVoiceV2
     AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
     AttachmentUploadErrorReason = Shapes::StringShape.new(name: 'AttachmentUploadErrorReason')
     AttachmentUrl = Shapes::StringShape.new(name: 'AttachmentUrl')
+    AvailablePhoneNumberList = Shapes::ListShape.new(name: 'AvailablePhoneNumberList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CarrierLookupInputPhoneNumberType = Shapes::StringShape.new(name: 'CarrierLookupInputPhoneNumberType')
     CarrierLookupRequest = Shapes::StructureShape.new(name: 'CarrierLookupRequest')
@@ -40,6 +41,17 @@ module Aws::PinpointSMSVoiceV2
     CarrierStatusInformationList = Shapes::ListShape.new(name: 'CarrierStatusInformationList')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchLogsDestination = Shapes::StructureShape.new(name: 'CloudWatchLogsDestination')
+    ConditionOperator = Shapes::StringShape.new(name: 'ConditionOperator')
+    ConditionValue = Shapes::StringShape.new(name: 'ConditionValue')
+    ConditionValueList = Shapes::ListShape.new(name: 'ConditionValueList')
+    ConditionalBehavior = Shapes::StructureShape.new(name: 'ConditionalBehavior')
+    ConditionalFieldBehavior = Shapes::StringShape.new(name: 'ConditionalFieldBehavior')
+    ConditionalRule = Shapes::StructureShape.new(name: 'ConditionalRule')
+    ConditionalRuleList = Shapes::ListShape.new(name: 'ConditionalRuleList')
+    ConditionalValidation = Shapes::StructureShape.new(name: 'ConditionalValidation')
+    ConditionalValidationMaxLengthInteger = Shapes::IntegerShape.new(name: 'ConditionalValidationMaxLengthInteger')
+    ConditionalValidationMinLengthInteger = Shapes::IntegerShape.new(name: 'ConditionalValidationMinLengthInteger')
+    ConditionalValidationPatternString = Shapes::StringShape.new(name: 'ConditionalValidationPatternString')
     ConfigurationSetFilter = Shapes::StructureShape.new(name: 'ConfigurationSetFilter')
     ConfigurationSetFilterList = Shapes::ListShape.new(name: 'ConfigurationSetFilterList')
     ConfigurationSetFilterName = Shapes::StringShape.new(name: 'ConfigurationSetFilterName')
@@ -193,6 +205,8 @@ module Aws::PinpointSMSVoiceV2
     EventDestinationName = Shapes::StringShape.new(name: 'EventDestinationName')
     EventType = Shapes::StringShape.new(name: 'EventType')
     EventTypeList = Shapes::ListShape.new(name: 'EventTypeList')
+    FieldCondition = Shapes::StructureShape.new(name: 'FieldCondition')
+    FieldConditionList = Shapes::ListShape.new(name: 'FieldConditionList')
     FieldPath = Shapes::StringShape.new(name: 'FieldPath')
     FieldPathList = Shapes::ListShape.new(name: 'FieldPathList')
     FieldRequirement = Shapes::StringShape.new(name: 'FieldRequirement')
@@ -220,6 +234,9 @@ module Aws::PinpointSMSVoiceV2
     KeywordMessage = Shapes::StringShape.new(name: 'KeywordMessage')
     KinesisFirehoseDestination = Shapes::StructureShape.new(name: 'KinesisFirehoseDestination')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
+    ListAvailablePhoneNumbersMaxResults = Shapes::IntegerShape.new(name: 'ListAvailablePhoneNumbersMaxResults')
+    ListAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'ListAvailablePhoneNumbersRequest')
+    ListAvailablePhoneNumbersResult = Shapes::StructureShape.new(name: 'ListAvailablePhoneNumbersResult')
     ListNotifyCountriesRequest = Shapes::StructureShape.new(name: 'ListNotifyCountriesRequest')
     ListNotifyCountriesResult = Shapes::StructureShape.new(name: 'ListNotifyCountriesResult')
     ListPoolOriginationIdentitiesRequest = Shapes::StructureShape.new(name: 'ListPoolOriginationIdentitiesRequest')
@@ -232,6 +249,7 @@ module Aws::PinpointSMSVoiceV2
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
     LogGroupArn = Shapes::StringShape.new(name: 'LogGroupArn')
+    LongMap = Shapes::MapShape.new(name: 'LongMap')
     MCCType = Shapes::StringShape.new(name: 'MCCType')
     MNCType = Shapes::StringShape.new(name: 'MNCType')
     MaxPrice = Shapes::StringShape.new(name: 'MaxPrice')
@@ -243,6 +261,7 @@ module Aws::PinpointSMSVoiceV2
     MessageId = Shapes::StringShape.new(name: 'MessageId')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     MessageTypeList = Shapes::ListShape.new(name: 'MessageTypeList')
+    MessagingLimits = Shapes::StructureShape.new(name: 'MessagingLimits')
     MonthlyLimit = Shapes::IntegerShape.new(name: 'MonthlyLimit')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptyTagList = Shapes::ListShape.new(name: 'NonEmptyTagList')
@@ -279,6 +298,10 @@ module Aws::PinpointSMSVoiceV2
     NotifyUseCaseList = Shapes::ListShape.new(name: 'NotifyUseCaseList')
     NumberCapability = Shapes::StringShape.new(name: 'NumberCapability')
     NumberCapabilityList = Shapes::ListShape.new(name: 'NumberCapabilityList')
+    NumberFilterList = Shapes::ListShape.new(name: 'NumberFilterList')
+    NumberFilterValue = Shapes::StringShape.new(name: 'NumberFilterValue')
+    NumberPreferenceItem = Shapes::StructureShape.new(name: 'NumberPreferenceItem')
+    NumberPreferenceList = Shapes::ListShape.new(name: 'NumberPreferenceList')
     NumberStatus = Shapes::StringShape.new(name: 'NumberStatus')
     NumberType = Shapes::StringShape.new(name: 'NumberType')
     OptOutListInformation = Shapes::StructureShape.new(name: 'OptOutListInformation')
@@ -317,6 +340,8 @@ module Aws::PinpointSMSVoiceV2
     PoolOriginationIdentitiesFilterList = Shapes::ListShape.new(name: 'PoolOriginationIdentitiesFilterList')
     PoolOriginationIdentitiesFilterName = Shapes::StringShape.new(name: 'PoolOriginationIdentitiesFilterName')
     PoolStatus = Shapes::StringShape.new(name: 'PoolStatus')
+    PreferenceType = Shapes::StringShape.new(name: 'PreferenceType')
+    PreferenceTypeList = Shapes::ListShape.new(name: 'PreferenceTypeList')
     PrimitiveBoolean = Shapes::BooleanShape.new(name: 'PrimitiveBoolean')
     PrimitiveLong = Shapes::IntegerShape.new(name: 'PrimitiveLong')
     ProtectConfigurationArn = Shapes::StringShape.new(name: 'ProtectConfigurationArn')
@@ -466,6 +491,7 @@ module Aws::PinpointSMSVoiceV2
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    SearchableNumberType = Shapes::StringShape.new(name: 'SearchableNumberType')
     SectionPath = Shapes::StringShape.new(name: 'SectionPath')
     SectionPathList = Shapes::ListShape.new(name: 'SectionPathList')
     SelectChoice = Shapes::StringShape.new(name: 'SelectChoice')
@@ -638,6 +664,8 @@ module Aws::PinpointSMSVoiceV2
     AssociateProtectConfigurationResult.add_member(:protect_configuration_id, Shapes::ShapeRef.new(shape: ProtectConfigurationId, required: true, location_name: "ProtectConfigurationId"))
     AssociateProtectConfigurationResult.struct_class = Types::AssociateProtectConfigurationResult
 
+    AvailablePhoneNumberList.member = Shapes::ShapeRef.new(shape: PhoneNumber)
+
     CarrierLookupRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: CarrierLookupInputPhoneNumberType, required: true, location_name: "PhoneNumber"))
     CarrierLookupRequest.struct_class = Types::CarrierLookupRequest
 
@@ -660,6 +688,25 @@ module Aws::PinpointSMSVoiceV2
     CloudWatchLogsDestination.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "IamRoleArn"))
     CloudWatchLogsDestination.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "LogGroupArn"))
     CloudWatchLogsDestination.struct_class = Types::CloudWatchLogsDestination
+
+    ConditionValueList.member = Shapes::ShapeRef.new(shape: ConditionValue)
+
+    ConditionalBehavior.add_member(:rules, Shapes::ShapeRef.new(shape: ConditionalRuleList, required: true, location_name: "Rules"))
+    ConditionalBehavior.add_member(:default_behavior, Shapes::ShapeRef.new(shape: ConditionalFieldBehavior, required: true, location_name: "DefaultBehavior"))
+    ConditionalBehavior.struct_class = Types::ConditionalBehavior
+
+    ConditionalRule.add_member(:conditions, Shapes::ShapeRef.new(shape: FieldConditionList, required: true, location_name: "Conditions"))
+    ConditionalRule.add_member(:rule_behavior, Shapes::ShapeRef.new(shape: ConditionalFieldBehavior, required: true, location_name: "RuleBehavior"))
+    ConditionalRule.add_member(:conditional_validation, Shapes::ShapeRef.new(shape: ConditionalValidation, location_name: "ConditionalValidation"))
+    ConditionalRule.struct_class = Types::ConditionalRule
+
+    ConditionalRuleList.member = Shapes::ShapeRef.new(shape: ConditionalRule)
+
+    ConditionalValidation.add_member(:min_length, Shapes::ShapeRef.new(shape: ConditionalValidationMinLengthInteger, location_name: "MinLength"))
+    ConditionalValidation.add_member(:max_length, Shapes::ShapeRef.new(shape: ConditionalValidationMaxLengthInteger, location_name: "MaxLength"))
+    ConditionalValidation.add_member(:pattern, Shapes::ShapeRef.new(shape: ConditionalValidationPatternString, location_name: "Pattern"))
+    ConditionalValidation.add_member(:allowed_values, Shapes::ShapeRef.new(shape: SelectChoiceList, location_name: "AllowedValues"))
+    ConditionalValidation.struct_class = Types::ConditionalValidation
 
     ConfigurationSetFilter.add_member(:name, Shapes::ShapeRef.new(shape: ConfigurationSetFilterName, required: true, location_name: "Name"))
     ConfigurationSetFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "Values"))
@@ -1420,6 +1467,13 @@ module Aws::PinpointSMSVoiceV2
 
     EventTypeList.member = Shapes::ShapeRef.new(shape: EventType)
 
+    FieldCondition.add_member(:depends_on_field_path, Shapes::ShapeRef.new(shape: FieldPath, required: true, location_name: "DependsOnFieldPath"))
+    FieldCondition.add_member(:operator, Shapes::ShapeRef.new(shape: ConditionOperator, required: true, location_name: "Operator"))
+    FieldCondition.add_member(:values, Shapes::ShapeRef.new(shape: ConditionValueList, location_name: "Values"))
+    FieldCondition.struct_class = Types::FieldCondition
+
+    FieldConditionList.member = Shapes::ShapeRef.new(shape: FieldCondition)
+
     FieldPathList.member = Shapes::ShapeRef.new(shape: FieldPath)
 
     FilterValueList.member = Shapes::ShapeRef.new(shape: FilterValue)
@@ -1466,6 +1520,19 @@ module Aws::PinpointSMSVoiceV2
     KinesisFirehoseDestination.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "IamRoleArn"))
     KinesisFirehoseDestination.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamArn, required: true, location_name: "DeliveryStreamArn"))
     KinesisFirehoseDestination.struct_class = Types::KinesisFirehoseDestination
+
+    ListAvailablePhoneNumbersRequest.add_member(:iso_country_code, Shapes::ShapeRef.new(shape: IsoCountryCode, required: true, location_name: "IsoCountryCode"))
+    ListAvailablePhoneNumbersRequest.add_member(:number_capabilities, Shapes::ShapeRef.new(shape: NumberCapabilityList, required: true, location_name: "NumberCapabilities"))
+    ListAvailablePhoneNumbersRequest.add_member(:number_type, Shapes::ShapeRef.new(shape: SearchableNumberType, required: true, location_name: "NumberType"))
+    ListAvailablePhoneNumbersRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId"))
+    ListAvailablePhoneNumbersRequest.add_member(:number_preference, Shapes::ShapeRef.new(shape: NumberPreferenceList, location_name: "NumberPreference"))
+    ListAvailablePhoneNumbersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAvailablePhoneNumbersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAvailablePhoneNumbersMaxResults, location_name: "MaxResults"))
+    ListAvailablePhoneNumbersRequest.struct_class = Types::ListAvailablePhoneNumbersRequest
+
+    ListAvailablePhoneNumbersResult.add_member(:available_phone_numbers, Shapes::ShapeRef.new(shape: AvailablePhoneNumberList, required: true, location_name: "AvailablePhoneNumbers"))
+    ListAvailablePhoneNumbersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAvailablePhoneNumbersResult.struct_class = Types::ListAvailablePhoneNumbersResult
 
     ListNotifyCountriesRequest.add_member(:channels, Shapes::ShapeRef.new(shape: NotifyEnabledChannelsList, location_name: "Channels"))
     ListNotifyCountriesRequest.add_member(:use_cases, Shapes::ShapeRef.new(shape: NotifyUseCaseList, location_name: "UseCases"))
@@ -1524,9 +1591,16 @@ module Aws::PinpointSMSVoiceV2
     ListTagsForResourceResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResult.struct_class = Types::ListTagsForResourceResult
 
+    LongMap.key = Shapes::ShapeRef.new(shape: String)
+    LongMap.value = Shapes::ShapeRef.new(shape: PrimitiveLong)
+
     MediaUrlList.member = Shapes::ShapeRef.new(shape: MediaUrlValue)
 
     MessageTypeList.member = Shapes::ShapeRef.new(shape: MessageType)
+
+    MessagingLimits.add_member(:rate_limits, Shapes::ShapeRef.new(shape: LongMap, location_name: "RateLimits"))
+    MessagingLimits.add_member(:daily_message_caps, Shapes::ShapeRef.new(shape: LongMap, location_name: "DailyMessageCaps"))
+    MessagingLimits.struct_class = Types::MessagingLimits
 
     NonEmptyTagList.member = Shapes::ShapeRef.new(shape: Tag)
 
@@ -1600,6 +1674,14 @@ module Aws::PinpointSMSVoiceV2
 
     NumberCapabilityList.member = Shapes::ShapeRef.new(shape: NumberCapability)
 
+    NumberFilterList.member = Shapes::ShapeRef.new(shape: NumberFilterValue)
+
+    NumberPreferenceItem.add_member(:preference_type, Shapes::ShapeRef.new(shape: PreferenceTypeList, required: true, location_name: "PreferenceType"))
+    NumberPreferenceItem.add_member(:filter, Shapes::ShapeRef.new(shape: NumberFilterList, required: true, location_name: "Filter"))
+    NumberPreferenceItem.struct_class = Types::NumberPreferenceItem
+
+    NumberPreferenceList.member = Shapes::ShapeRef.new(shape: NumberPreferenceItem)
+
     OptOutListInformation.add_member(:opt_out_list_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OptOutListArn"))
     OptOutListInformation.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListName, required: true, location_name: "OptOutListName"))
     OptOutListInformation.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
@@ -1659,6 +1741,7 @@ module Aws::PinpointSMSVoiceV2
     PhoneNumberInformation.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "DeletionProtectionEnabled"))
     PhoneNumberInformation.add_member(:pool_id, Shapes::ShapeRef.new(shape: String, location_name: "PoolId"))
     PhoneNumberInformation.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationId"))
+    PhoneNumberInformation.add_member(:messaging_limits, Shapes::ShapeRef.new(shape: MessagingLimits, location_name: "MessagingLimits"))
     PhoneNumberInformation.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTimestamp"))
     PhoneNumberInformation.struct_class = Types::PhoneNumberInformation
 
@@ -1693,6 +1776,8 @@ module Aws::PinpointSMSVoiceV2
     PoolOriginationIdentitiesFilter.struct_class = Types::PoolOriginationIdentitiesFilter
 
     PoolOriginationIdentitiesFilterList.member = Shapes::ShapeRef.new(shape: PoolOriginationIdentitiesFilter)
+
+    PreferenceTypeList.member = Shapes::ShapeRef.new(shape: PreferenceType)
 
     ProtectConfigurationCountryRuleSet.key = Shapes::ShapeRef.new(shape: IsoCountryCode)
     ProtectConfigurationCountryRuleSet.value = Shapes::ShapeRef.new(shape: ProtectConfigurationCountryRuleSetInformation)
@@ -1827,6 +1912,7 @@ module Aws::PinpointSMSVoiceV2
     RcsAgentInformation.add_member(:two_way_media_s3_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "TwoWayMediaS3Role"))
     RcsAgentInformation.add_member(:two_way_rcs_events_enabled, Shapes::ShapeRef.new(shape: RcsEventTypeList, location_name: "TwoWayRcsEventsEnabled"))
     RcsAgentInformation.add_member(:testing_agent, Shapes::ShapeRef.new(shape: TestingAgentInformation, location_name: "TestingAgent"))
+    RcsAgentInformation.add_member(:messaging_limits, Shapes::ShapeRef.new(shape: MessagingLimits, location_name: "MessagingLimits"))
     RcsAgentInformation.struct_class = Types::RcsAgentInformation
 
     RcsAgentInformationList.member = Shapes::ShapeRef.new(shape: RcsAgentInformation)
@@ -1999,6 +2085,7 @@ module Aws::PinpointSMSVoiceV2
     RegistrationFieldDefinition.add_member(:select_validation, Shapes::ShapeRef.new(shape: SelectValidation, location_name: "SelectValidation"))
     RegistrationFieldDefinition.add_member(:text_validation, Shapes::ShapeRef.new(shape: TextValidation, location_name: "TextValidation"))
     RegistrationFieldDefinition.add_member(:display_hints, Shapes::ShapeRef.new(shape: RegistrationFieldDisplayHints, required: true, location_name: "DisplayHints"))
+    RegistrationFieldDefinition.add_member(:conditional_behavior, Shapes::ShapeRef.new(shape: ConditionalBehavior, location_name: "ConditionalBehavior"))
     RegistrationFieldDefinition.struct_class = Types::RegistrationFieldDefinition
 
     RegistrationFieldDefinitionList.member = Shapes::ShapeRef.new(shape: RegistrationFieldDefinition)
@@ -2149,6 +2236,7 @@ module Aws::PinpointSMSVoiceV2
     RequestPhoneNumberRequest.add_member(:opt_out_list_name, Shapes::ShapeRef.new(shape: OptOutListNameOrArn, location_name: "OptOutListName"))
     RequestPhoneNumberRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolIdOrArn, location_name: "PoolId"))
     RequestPhoneNumberRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, location_name: "RegistrationId"))
+    RequestPhoneNumberRequest.add_member(:number_preference, Shapes::ShapeRef.new(shape: NumberPreferenceList, location_name: "NumberPreference"))
     RequestPhoneNumberRequest.add_member(:international_sending_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternationalSendingEnabled"))
     RequestPhoneNumberRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeletionProtectionEnabled"))
     RequestPhoneNumberRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -2347,6 +2435,7 @@ module Aws::PinpointSMSVoiceV2
     SenderIdInformation.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "DeletionProtectionEnabled"))
     SenderIdInformation.add_member(:registered, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "Registered"))
     SenderIdInformation.add_member(:registration_id, Shapes::ShapeRef.new(shape: String, location_name: "RegistrationId"))
+    SenderIdInformation.add_member(:messaging_limits, Shapes::ShapeRef.new(shape: MessagingLimits, location_name: "MessagingLimits"))
     SenderIdInformation.struct_class = Types::SenderIdInformation
 
     SenderIdInformationList.member = Shapes::ShapeRef.new(shape: SenderIdInformation)
@@ -3748,6 +3837,26 @@ module Aws::PinpointSMSVoiceV2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_available_phone_numbers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAvailablePhoneNumbers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAvailablePhoneNumbersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAvailablePhoneNumbersResult)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_notify_countries, Seahorse::Model::Operation.new.tap do |o|

@@ -937,6 +937,7 @@ module Aws::Transfer
     #       user_secret_id: "SecretId",
     #       trusted_host_keys: ["SftpConnectorTrustedHostKey"],
     #       max_concurrent_connections: 1,
+    #       ordered_user_secret_version_stages: ["SecretVersionStage"],
     #     },
     #     security_policy_name: "ConnectorSecurityPolicyName",
     #     egress_config: {
@@ -1384,6 +1385,9 @@ module Aws::Transfer
     #       tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
     #       set_stat_option: "DEFAULT", # accepts DEFAULT, ENABLE_NO_OP
     #       as_2_transports: ["HTTP"], # accepts HTTP
+    #       proxy_config: {
+    #         sftp_mode: "NONE", # accepts NONE, PROXY_PROTOCOL_V2_ENFORCED
+    #       },
     #     },
     #     security_policy_name: "SecurityPolicyName",
     #     tags: [
@@ -2442,6 +2446,8 @@ module Aws::Transfer
     #   resp.connector.sftp_config.trusted_host_keys #=> Array
     #   resp.connector.sftp_config.trusted_host_keys[0] #=> String
     #   resp.connector.sftp_config.max_concurrent_connections #=> Integer
+    #   resp.connector.sftp_config.ordered_user_secret_version_stages #=> Array
+    #   resp.connector.sftp_config.ordered_user_secret_version_stages[0] #=> String
     #   resp.connector.service_managed_egress_ip_addresses #=> Array
     #   resp.connector.service_managed_egress_ip_addresses[0] #=> String
     #   resp.connector.security_policy_name #=> String
@@ -2691,6 +2697,7 @@ module Aws::Transfer
     #   resp.server.protocol_details.set_stat_option #=> String, one of "DEFAULT", "ENABLE_NO_OP"
     #   resp.server.protocol_details.as_2_transports #=> Array
     #   resp.server.protocol_details.as_2_transports[0] #=> String, one of "HTTP"
+    #   resp.server.protocol_details.proxy_config.sftp_mode #=> String, one of "NONE", "PROXY_PROTOCOL_V2_ENFORCED"
     #   resp.server.domain #=> String, one of "S3", "EFS"
     #   resp.server.endpoint_details.address_allocation_ids #=> Array
     #   resp.server.endpoint_details.address_allocation_ids[0] #=> String
@@ -4976,6 +4983,7 @@ module Aws::Transfer
     #       user_secret_id: "SecretId",
     #       trusted_host_keys: ["SftpConnectorTrustedHostKey"],
     #       max_concurrent_connections: 1,
+    #       ordered_user_secret_version_stages: ["SecretVersionStage"],
     #     },
     #     security_policy_name: "ConnectorSecurityPolicyName",
     #     egress_config: {
@@ -5409,6 +5417,9 @@ module Aws::Transfer
     #       tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
     #       set_stat_option: "DEFAULT", # accepts DEFAULT, ENABLE_NO_OP
     #       as_2_transports: ["HTTP"], # accepts HTTP
+    #       proxy_config: {
+    #         sftp_mode: "NONE", # accepts NONE, PROXY_PROTOCOL_V2_ENFORCED
+    #       },
     #     },
     #     endpoint_details: {
     #       address_allocation_ids: ["AddressAllocationId"],
@@ -5769,7 +5780,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

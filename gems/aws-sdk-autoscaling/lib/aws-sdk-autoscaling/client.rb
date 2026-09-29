@@ -1079,11 +1079,15 @@ module Aws::AutoScaling
     # @option params [Types::MixedInstancesPolicy] :mixed_instances_policy
     #   The mixed instances policy. For more information, see [Auto Scaling
     #   groups with multiple instance types and purchase options][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   *Amazon EC2 Auto Scaling User Guide*. To learn how to prioritize
+    #   multiple capacity types, see [Use Distribution Segments to target
+    #   multiple capacity types][2] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html
     #
     # @option params [String] :instance_id
     #   The ID of the instance used to base the launch configuration on. If
@@ -1553,6 +1557,55 @@ module Aws::AutoScaling
     #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE, subnet-610acd08EXAMPLE", 
     #   })
     #
+    # @example Example: To create an Auto Scaling group using Distribution Segments
+    #
+    #   # This example creates an Auto Scaling group that uses Distribution Segments to prioritize On-Demand Capacity
+    #   # Reservations, Capacity Blocks, interruptible Capacity Reservations, and then On-Demand capacity.
+    #
+    #   resp = client.create_auto_scaling_group({
+    #     auto_scaling_group_name: "my-asg", 
+    #     capacity_reservation_specification: {
+    #       capacity_reservation_target: {
+    #         capacity_reservation_resource_group_arns: [
+    #           "arn:aws:resource-groups:us-east-1:123456789012:group/my-capacity-reservation-group", 
+    #         ], 
+    #       }, 
+    #     }, 
+    #     desired_capacity: 5, 
+    #     max_size: 10, 
+    #     min_size: 0, 
+    #     mixed_instances_policy: {
+    #       instances_distribution: {
+    #         distribution_segments: [
+    #           {
+    #             target_capacity_types: [
+    #               "on-demand-capacity-reservation", 
+    #               "capacity-block", 
+    #               "interruptible-capacity-reservation", 
+    #               "on-demand", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         on_demand_allocation_strategy: "prioritized", 
+    #       }, 
+    #       launch_template: {
+    #         launch_template_specification: {
+    #           launch_template_name: "my-template-for-auto-scaling", 
+    #           version: "$Default", 
+    #         }, 
+    #         overrides: [
+    #           {
+    #             instance_type: "m5.24xlarge", 
+    #           }, 
+    #           {
+    #             instance_type: "p5.48xlarge", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #     vpc_zone_identifier: "subnet-057fa0918fEXAMPLE", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_auto_scaling_group({
@@ -1652,6 +1705,11 @@ module Aws::AutoScaling
     #         spot_allocation_strategy: "XmlString",
     #         spot_instance_pools: 1,
     #         spot_max_price: "MixedInstanceSpotPrice",
+    #         distribution_segments: [
+    #           {
+    #             target_capacity_types: ["on-demand-capacity-reservation"], # accepts on-demand-capacity-reservation, capacity-block, interruptible-capacity-reservation, on-demand
+    #           },
+    #         ],
     #       },
     #     },
     #     instance_id: "XmlStringMaxLen19",
@@ -2790,6 +2848,9 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.spot_allocation_strategy #=> String
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.spot_instance_pools #=> Integer
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.spot_max_price #=> String
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.distribution_segments #=> Array
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.distribution_segments[0].target_capacity_types #=> Array
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.distribution_segments[0].target_capacity_types[0] #=> String, one of "on-demand-capacity-reservation", "capacity-block", "interruptible-capacity-reservation", "on-demand"
     #   resp.auto_scaling_groups[0].min_size #=> Integer
     #   resp.auto_scaling_groups[0].max_size #=> Integer
     #   resp.auto_scaling_groups[0].desired_capacity #=> Integer
@@ -3214,6 +3275,9 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.spot_allocation_strategy #=> String
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.spot_instance_pools #=> Integer
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.spot_max_price #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.distribution_segments #=> Array
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.distribution_segments[0].target_capacity_types #=> Array
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.distribution_segments[0].target_capacity_types[0] #=> String, one of "on-demand-capacity-reservation", "capacity-block", "interruptible-capacity-reservation", "on-demand"
     #   resp.instance_refreshes[0].rollback_details.rollback_reason #=> String
     #   resp.instance_refreshes[0].rollback_details.rollback_start_time #=> Time
     #   resp.instance_refreshes[0].rollback_details.percentage_complete_on_rollback #=> Integer
@@ -7044,6 +7108,11 @@ module Aws::AutoScaling
     #           spot_allocation_strategy: "XmlString",
     #           spot_instance_pools: 1,
     #           spot_max_price: "MixedInstanceSpotPrice",
+    #           distribution_segments: [
+    #             {
+    #               target_capacity_types: ["on-demand-capacity-reservation"], # accepts on-demand-capacity-reservation, capacity-block, interruptible-capacity-reservation, on-demand
+    #             },
+    #           ],
     #         },
     #       },
     #     },
@@ -7365,6 +7434,11 @@ module Aws::AutoScaling
     #   The mixed instances policy. For more information, see [Auto Scaling
     #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   You can remove the Distribution Segments configuration by specifying
+    #   `OnDemandBaseCapacity` or `OnDemandPercentageAboveBaseCapacity`. You
+    #   can also remove it explicitly by specifying an empty list for
+    #   `DistributionSegments`.
     #
     #
     #
@@ -7751,6 +7825,11 @@ module Aws::AutoScaling
     #         spot_allocation_strategy: "XmlString",
     #         spot_instance_pools: 1,
     #         spot_max_price: "MixedInstanceSpotPrice",
+    #         distribution_segments: [
+    #           {
+    #             target_capacity_types: ["on-demand-capacity-reservation"], # accepts on-demand-capacity-reservation, capacity-block, interruptible-capacity-reservation, on-demand
+    #           },
+    #         ],
     #       },
     #     },
     #     min_size: 1,
@@ -7825,7 +7904,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

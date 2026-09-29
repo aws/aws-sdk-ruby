@@ -1758,6 +1758,46 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector that you want to
+    #   restart.
+    #   @return [String]
+    #
+    # @!attribute [rw] only_failed_tasks
+    #   Specifies whether to restart only the connector's failed tasks. If
+    #   `true`, the operation restarts only the tasks that are currently in
+    #   a failed state, and healthy tasks continue running. If `false` or
+    #   not specified, the operation restarts the connector and all of its
+    #   tasks.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/RestartConnectorRequest AWS API Documentation
+    #
+    class RestartConnectorRequest < Struct.new(
+      :connector_arn,
+      :only_failed_tasks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_operation_arn
+    #   The Amazon Resource Name (ARN) of the connector operation created to
+    #   perform the restart.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/RestartConnectorResponse AWS API Documentation
+    #
+    class RestartConnectorResponse < Struct.new(
+      :connector_arn,
+      :connector_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The location of an object in Amazon S3.
     #
     # @!attribute [rw] bucket_arn

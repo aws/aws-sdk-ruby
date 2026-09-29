@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2026-09-16)
+------------------
+
+* Feature - This release introduces the SearchRecommendations API, which retrieves recommendations for a profile identified by a search key.
+
+1.95.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2026-08-31)
+------------------
+
+* Feature - This release introduces new APIs for segment membership events allowing segment definition membership events to be exported to a kinesis stream for downstream processing. Additionally, includes new calculated attribute statistic and 2 new segment dimension types.
+
 1.92.0 (2026-07-09)
 ------------------
 

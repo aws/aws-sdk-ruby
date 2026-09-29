@@ -130,6 +130,8 @@ module Aws::BedrockAgent
     CreatePromptResponse = Shapes::StructureShape.new(name: 'CreatePromptResponse')
     CreatePromptVersionRequest = Shapes::StructureShape.new(name: 'CreatePromptVersionRequest')
     CreatePromptVersionResponse = Shapes::StructureShape.new(name: 'CreatePromptVersionResponse')
+    CreateVpcConfigurationRequest = Shapes::StructureShape.new(name: 'CreateVpcConfigurationRequest')
+    CreateVpcConfigurationResponse = Shapes::StructureShape.new(name: 'CreateVpcConfigurationResponse')
     CreationMode = Shapes::StringShape.new(name: 'CreationMode')
     CuratedQueries = Shapes::ListShape.new(name: 'CuratedQueries')
     CuratedQuery = Shapes::StructureShape.new(name: 'CuratedQuery')
@@ -142,6 +144,7 @@ module Aws::BedrockAgent
     CustomSourceType = Shapes::StringShape.new(name: 'CustomSourceType')
     CustomTransformationConfiguration = Shapes::StructureShape.new(name: 'CustomTransformationConfiguration')
     CyclicConnectionFlowValidationDetails = Shapes::StructureShape.new(name: 'CyclicConnectionFlowValidationDetails')
+    DailySchedule = Shapes::StructureShape.new(name: 'DailySchedule')
     Data = Shapes::StringShape.new(name: 'Data')
     DataDeletionPolicy = Shapes::StringShape.new(name: 'DataDeletionPolicy')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
@@ -151,6 +154,9 @@ module Aws::BedrockAgent
     DataSourceSummary = Shapes::StructureShape.new(name: 'DataSourceSummary')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DateTimestamp = Shapes::TimestampShape.new(name: 'DateTimestamp', timestampFormat: "iso8601")
+    DayOfMonth = Shapes::UnionShape.new(name: 'DayOfMonth')
+    DayOfMonthNumber = Shapes::IntegerShape.new(name: 'DayOfMonthNumber')
+    DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
     DeleteAgentActionGroupRequest = Shapes::StructureShape.new(name: 'DeleteAgentActionGroupRequest')
     DeleteAgentActionGroupResponse = Shapes::StructureShape.new(name: 'DeleteAgentActionGroupResponse')
     DeleteAgentAliasRequest = Shapes::StructureShape.new(name: 'DeleteAgentAliasRequest')
@@ -175,6 +181,8 @@ module Aws::BedrockAgent
     DeletePromptResponse = Shapes::StructureShape.new(name: 'DeletePromptResponse')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
+    DeleteVpcConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteVpcConfigurationRequest')
+    DeleteVpcConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteVpcConfigurationResponse')
     DeletionProtectionConfiguration = Shapes::StructureShape.new(name: 'DeletionProtectionConfiguration')
     DeletionProtectionConfigurationDeletionProtectionThresholdInteger = Shapes::IntegerShape.new(name: 'DeletionProtectionConfigurationDeletionProtectionThresholdInteger')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -310,6 +318,8 @@ module Aws::BedrockAgent
     GetPromptResponse = Shapes::StructureShape.new(name: 'GetPromptResponse')
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
+    GetVpcConfigurationRequest = Shapes::StructureShape.new(name: 'GetVpcConfigurationRequest')
+    GetVpcConfigurationResponse = Shapes::StructureShape.new(name: 'GetVpcConfigurationResponse')
     GraphArn = Shapes::StringShape.new(name: 'GraphArn')
     GuardrailConfiguration = Shapes::StructureShape.new(name: 'GuardrailConfiguration')
     GuardrailIdentifier = Shapes::StringShape.new(name: 'GuardrailIdentifier')
@@ -319,6 +329,7 @@ module Aws::BedrockAgent
     HierarchicalChunkingLevelConfiguration = Shapes::StructureShape.new(name: 'HierarchicalChunkingLevelConfiguration')
     HierarchicalChunkingLevelConfigurationMaxTokensInteger = Shapes::IntegerShape.new(name: 'HierarchicalChunkingLevelConfigurationMaxTokensInteger')
     HierarchicalChunkingLevelConfigurations = Shapes::ListShape.new(name: 'HierarchicalChunkingLevelConfigurations')
+    HostHeader = Shapes::StringShape.new(name: 'HostHeader')
     HttpsUrl = Shapes::StringShape.new(name: 'HttpsUrl')
     Id = Shapes::StringShape.new(name: 'Id')
     ImageExtractionConfiguration = Shapes::StructureShape.new(name: 'ImageExtractionConfiguration')
@@ -380,6 +391,7 @@ module Aws::BedrockAgent
     KnowledgeBaseType = Shapes::StringShape.new(name: 'KnowledgeBaseType')
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
     LambdaFunctionFlowNodeConfiguration = Shapes::StructureShape.new(name: 'LambdaFunctionFlowNodeConfiguration')
+    LastDayOfMonth = Shapes::StructureShape.new(name: 'LastDayOfMonth')
     LexFlowNodeConfiguration = Shapes::StructureShape.new(name: 'LexFlowNodeConfiguration')
     ListAgentActionGroupsRequest = Shapes::StructureShape.new(name: 'ListAgentActionGroupsRequest')
     ListAgentActionGroupsResponse = Shapes::StructureShape.new(name: 'ListAgentActionGroupsResponse')
@@ -411,6 +423,9 @@ module Aws::BedrockAgent
     ListPromptsResponse = Shapes::StructureShape.new(name: 'ListPromptsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListVpcConfigurationsRequest = Shapes::StructureShape.new(name: 'ListVpcConfigurationsRequest')
+    ListVpcConfigurationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListVpcConfigurationsRequestMaxResultsInteger')
+    ListVpcConfigurationsResponse = Shapes::StructureShape.new(name: 'ListVpcConfigurationsResponse')
     LoopControllerFlowNodeConfiguration = Shapes::StructureShape.new(name: 'LoopControllerFlowNodeConfiguration')
     LoopControllerFlowNodeConfigurationMaxIterationsInteger = Shapes::IntegerShape.new(name: 'LoopControllerFlowNodeConfigurationMaxIterationsInteger')
     LoopFlowNodeConfiguration = Shapes::StructureShape.new(name: 'LoopFlowNodeConfiguration')
@@ -454,6 +469,7 @@ module Aws::BedrockAgent
     MongoDbAtlasEndpointServiceName = Shapes::StringShape.new(name: 'MongoDbAtlasEndpointServiceName')
     MongoDbAtlasFieldMapping = Shapes::StructureShape.new(name: 'MongoDbAtlasFieldMapping')
     MongoDbAtlasIndexName = Shapes::StringShape.new(name: 'MongoDbAtlasIndexName')
+    MonthlySchedule = Shapes::StructureShape.new(name: 'MonthlySchedule')
     MultipleLoopControllerNodesFlowValidationDetails = Shapes::StructureShape.new(name: 'MultipleLoopControllerNodesFlowValidationDetails')
     MultipleLoopInputNodesFlowValidationDetails = Shapes::StructureShape.new(name: 'MultipleLoopInputNodesFlowValidationDetails')
     MultipleNodeInputConnectionsFlowValidationDetails = Shapes::StructureShape.new(name: 'MultipleNodeInputConnectionsFlowValidationDetails')
@@ -496,6 +512,7 @@ module Aws::BedrockAgent
     PineconeConnectionString = Shapes::StringShape.new(name: 'PineconeConnectionString')
     PineconeFieldMapping = Shapes::StructureShape.new(name: 'PineconeFieldMapping')
     PineconeNamespace = Shapes::StringShape.new(name: 'PineconeNamespace')
+    Port = Shapes::IntegerShape.new(name: 'Port')
     PrepareAgentRequest = Shapes::StructureShape.new(name: 'PrepareAgentRequest')
     PrepareAgentResponse = Shapes::StructureShape.new(name: 'PrepareAgentResponse')
     PrepareFlowRequest = Shapes::StructureShape.new(name: 'PrepareFlowRequest')
@@ -581,6 +598,7 @@ module Aws::BedrockAgent
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
+    ResourceTarget = Shapes::StringShape.new(name: 'ResourceTarget')
     RetrievalFlowNodeConfiguration = Shapes::StructureShape.new(name: 'RetrievalFlowNodeConfiguration')
     RetrievalFlowNodeS3Configuration = Shapes::StructureShape.new(name: 'RetrievalFlowNodeS3Configuration')
     RetrievalFlowNodeServiceConfiguration = Shapes::UnionShape.new(name: 'RetrievalFlowNodeServiceConfiguration')
@@ -636,11 +654,14 @@ module Aws::BedrockAgent
     StorageFlowNodeServiceConfiguration = Shapes::UnionShape.new(name: 'StorageFlowNodeServiceConfiguration')
     String = Shapes::StringShape.new(name: 'String')
     StringValue = Shapes::StringShape.new(name: 'StringValue')
+    SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     SupplementalDataStorageConfiguration = Shapes::StructureShape.new(name: 'SupplementalDataStorageConfiguration')
     SupplementalDataStorageLocation = Shapes::StructureShape.new(name: 'SupplementalDataStorageLocation')
     SupplementalDataStorageLocationType = Shapes::StringShape.new(name: 'SupplementalDataStorageLocationType')
     SupplementalDataStorageLocations = Shapes::ListShape.new(name: 'SupplementalDataStorageLocations')
     SupportedLanguages = Shapes::StringShape.new(name: 'SupportedLanguages')
+    SyncSchedule = Shapes::UnionShape.new(name: 'SyncSchedule')
     SystemContentBlock = Shapes::UnionShape.new(name: 'SystemContentBlock')
     SystemContentBlocks = Shapes::ListShape.new(name: 'SystemContentBlocks')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -655,6 +676,7 @@ module Aws::BedrockAgent
     TextPrompt = Shapes::StringShape.new(name: 'TextPrompt')
     TextPromptTemplateConfiguration = Shapes::StructureShape.new(name: 'TextPromptTemplateConfiguration')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TlsServerName = Shapes::StringShape.new(name: 'TlsServerName')
     Tool = Shapes::UnionShape.new(name: 'Tool')
     ToolChoice = Shapes::UnionShape.new(name: 'ToolChoice')
     ToolConfiguration = Shapes::StructureShape.new(name: 'ToolConfiguration')
@@ -725,6 +747,17 @@ module Aws::BedrockAgent
     VideoExtractionConfiguration = Shapes::StructureShape.new(name: 'VideoExtractionConfiguration')
     VideoSegmentationConfiguration = Shapes::StructureShape.new(name: 'VideoSegmentationConfiguration')
     VideoSegmentationConfigurationFixedLengthDurationInteger = Shapes::IntegerShape.new(name: 'VideoSegmentationConfigurationFixedLengthDurationInteger')
+    VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
+    VpcConfigurationDescription = Shapes::StringShape.new(name: 'VpcConfigurationDescription')
+    VpcConfigurationId = Shapes::StringShape.new(name: 'VpcConfigurationId')
+    VpcConfigurationName = Shapes::StringShape.new(name: 'VpcConfigurationName')
+    VpcConfigurationStatus = Shapes::StringShape.new(name: 'VpcConfigurationStatus')
+    VpcConfigurationStatusMessage = Shapes::StringShape.new(name: 'VpcConfigurationStatusMessage')
+    VpcConfigurationSummary = Shapes::StructureShape.new(name: 'VpcConfigurationSummary')
+    VpcConfigurationSummaryList = Shapes::ListShape.new(name: 'VpcConfigurationSummaryList')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
+    VpcProtocol = Shapes::StringShape.new(name: 'VpcProtocol')
+    VpcResolutionMode = Shapes::StringShape.new(name: 'VpcResolutionMode')
     WebCrawlerConfiguration = Shapes::StructureShape.new(name: 'WebCrawlerConfiguration')
     WebCrawlerLimits = Shapes::StructureShape.new(name: 'WebCrawlerLimits')
     WebCrawlerLimitsMaxPagesInteger = Shapes::IntegerShape.new(name: 'WebCrawlerLimitsMaxPagesInteger')
@@ -732,6 +765,7 @@ module Aws::BedrockAgent
     WebDataSourceConfiguration = Shapes::StructureShape.new(name: 'WebDataSourceConfiguration')
     WebScopeType = Shapes::StringShape.new(name: 'WebScopeType')
     WebSourceConfiguration = Shapes::StructureShape.new(name: 'WebSourceConfiguration')
+    WeeklySchedule = Shapes::StructureShape.new(name: 'WeeklySchedule')
     WorkgroupArn = Shapes::StringShape.new(name: 'WorkgroupArn')
 
     APISchema.add_member(:s3, Shapes::ShapeRef.new(shape: S3Identifier, location_name: "s3"))
@@ -984,8 +1018,9 @@ module Aws::BedrockAgent
 
     BedrockEmbeddingModelConfiguration.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "dimensions"))
     BedrockEmbeddingModelConfiguration.add_member(:embedding_data_type, Shapes::ShapeRef.new(shape: EmbeddingDataType, location_name: "embeddingDataType"))
-    BedrockEmbeddingModelConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioConfigurations, location_name: "audio"))
-    BedrockEmbeddingModelConfiguration.add_member(:video, Shapes::ShapeRef.new(shape: VideoConfigurations, location_name: "video"))
+    BedrockEmbeddingModelConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioConfigurations, deprecated: true, location_name: "audio", metadata: {"deprecatedMessage" => "Use Managed Knowledge Base's modelConfiguration field. https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html", "deprecatedSince" => "2026-09-01"}))
+    BedrockEmbeddingModelConfiguration.add_member(:video, Shapes::ShapeRef.new(shape: VideoConfigurations, deprecated: true, location_name: "video", metadata: {"deprecatedMessage" => "Use Managed Knowledge Base's modelConfiguration field. https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html", "deprecatedSince" => "2026-09-01"}))
+    BedrockEmbeddingModelConfiguration.add_member(:model_configuration, Shapes::ShapeRef.new(shape: Document, location_name: "modelConfiguration"))
     BedrockEmbeddingModelConfiguration.struct_class = Types::BedrockEmbeddingModelConfiguration
 
     BedrockFoundationModelConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
@@ -1225,6 +1260,24 @@ module Aws::BedrockAgent
     CreatePromptVersionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     CreatePromptVersionResponse.struct_class = Types::CreatePromptVersionResponse
 
+    CreateVpcConfigurationRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    CreateVpcConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateVpcConfigurationRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
+    CreateVpcConfigurationRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "subnetIds"))
+    CreateVpcConfigurationRequest.add_member(:resource_target, Shapes::ShapeRef.new(shape: ResourceTarget, required: true, location_name: "resourceTarget"))
+    CreateVpcConfigurationRequest.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "port"))
+    CreateVpcConfigurationRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: VpcProtocol, required: true, location_name: "protocol"))
+    CreateVpcConfigurationRequest.add_member(:resolution_mode, Shapes::ShapeRef.new(shape: VpcResolutionMode, required: true, location_name: "resolutionMode"))
+    CreateVpcConfigurationRequest.add_member(:host_header, Shapes::ShapeRef.new(shape: HostHeader, location_name: "hostHeader"))
+    CreateVpcConfigurationRequest.add_member(:tls_server_name, Shapes::ShapeRef.new(shape: TlsServerName, location_name: "tlsServerName"))
+    CreateVpcConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: VpcConfigurationName, location_name: "name"))
+    CreateVpcConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: VpcConfigurationDescription, location_name: "description"))
+    CreateVpcConfigurationRequest.struct_class = Types::CreateVpcConfigurationRequest
+
+    CreateVpcConfigurationResponse.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: VpcConfigurationId, required: true, location_name: "vpcConfigurationId"))
+    CreateVpcConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: VpcConfigurationStatus, required: true, location_name: "status"))
+    CreateVpcConfigurationResponse.struct_class = Types::CreateVpcConfigurationResponse
+
     CuratedQueries.member = Shapes::ShapeRef.new(shape: CuratedQuery)
 
     CuratedQuery.add_member(:natural_language, Shapes::ShapeRef.new(shape: NaturalLanguageString, required: true, location_name: "naturalLanguage"))
@@ -1253,6 +1306,8 @@ module Aws::BedrockAgent
 
     CyclicConnectionFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
     CyclicConnectionFlowValidationDetails.struct_class = Types::CyclicConnectionFlowValidationDetails
+
+    DailySchedule.struct_class = Types::DailySchedule
 
     DataSource.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "knowledgeBaseId"))
     DataSource.add_member(:data_source_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "dataSourceId"))
@@ -1286,6 +1341,14 @@ module Aws::BedrockAgent
     DataSourceSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     DataSourceSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     DataSourceSummary.struct_class = Types::DataSourceSummary
+
+    DayOfMonth.add_member(:day_number, Shapes::ShapeRef.new(shape: DayOfMonthNumber, location_name: "dayNumber"))
+    DayOfMonth.add_member(:last_day_of_month, Shapes::ShapeRef.new(shape: LastDayOfMonth, location_name: "lastDayOfMonth"))
+    DayOfMonth.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DayOfMonth.add_member_subclass(:day_number, Types::DayOfMonth::DayNumber)
+    DayOfMonth.add_member_subclass(:last_day_of_month, Types::DayOfMonth::LastDayOfMonth)
+    DayOfMonth.add_member_subclass(:unknown, Types::DayOfMonth::Unknown)
+    DayOfMonth.struct_class = Types::DayOfMonth
 
     DeleteAgentActionGroupRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "agentId"))
     DeleteAgentActionGroupRequest.add_member(:agent_version, Shapes::ShapeRef.new(shape: DraftVersion, required: true, location: "uri", location_name: "agentVersion"))
@@ -1386,6 +1449,14 @@ module Aws::BedrockAgent
     DeleteResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     DeleteResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
     DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
+
+    DeleteVpcConfigurationRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    DeleteVpcConfigurationRequest.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: VpcConfigurationId, required: true, location: "uri", location_name: "vpcConfigurationId"))
+    DeleteVpcConfigurationRequest.struct_class = Types::DeleteVpcConfigurationRequest
+
+    DeleteVpcConfigurationResponse.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: VpcConfigurationId, required: true, location_name: "vpcConfigurationId"))
+    DeleteVpcConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: VpcConfigurationStatus, required: true, location_name: "status"))
+    DeleteVpcConfigurationResponse.struct_class = Types::DeleteVpcConfigurationResponse
 
     DeletionProtectionConfiguration.add_member(:deletion_protection_status, Shapes::ShapeRef.new(shape: EnabledOrDisabledState, required: true, location_name: "deletionProtectionStatus"))
     DeletionProtectionConfiguration.add_member(:deletion_protection_threshold, Shapes::ShapeRef.new(shape: DeletionProtectionConfigurationDeletionProtectionThresholdInteger, location_name: "deletionProtectionThreshold"))
@@ -1837,6 +1908,13 @@ module Aws::BedrockAgent
     GetResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
     GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
 
+    GetVpcConfigurationRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    GetVpcConfigurationRequest.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: VpcConfigurationId, required: true, location: "uri", location_name: "vpcConfigurationId"))
+    GetVpcConfigurationRequest.struct_class = Types::GetVpcConfigurationRequest
+
+    GetVpcConfigurationResponse.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, required: true, location_name: "vpcConfiguration"))
+    GetVpcConfigurationResponse.struct_class = Types::GetVpcConfigurationResponse
+
     GuardrailConfiguration.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, location_name: "guardrailIdentifier"))
     GuardrailConfiguration.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location_name: "guardrailVersion"))
     GuardrailConfiguration.struct_class = Types::GuardrailConfiguration
@@ -2012,6 +2090,8 @@ module Aws::BedrockAgent
     LambdaFunctionFlowNodeConfiguration.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: FlowLambdaArn, required: true, location_name: "lambdaArn"))
     LambdaFunctionFlowNodeConfiguration.struct_class = Types::LambdaFunctionFlowNodeConfiguration
 
+    LastDayOfMonth.struct_class = Types::LastDayOfMonth
+
     LexFlowNodeConfiguration.add_member(:bot_alias_arn, Shapes::ShapeRef.new(shape: FlowLexBotAliasArn, required: true, location_name: "botAliasArn"))
     LexFlowNodeConfiguration.add_member(:locale_id, Shapes::ShapeRef.new(shape: FlowLexBotLocaleId, required: true, location_name: "localeId"))
     LexFlowNodeConfiguration.struct_class = Types::LexFlowNodeConfiguration
@@ -2152,6 +2232,16 @@ module Aws::BedrockAgent
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListVpcConfigurationsRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    ListVpcConfigurationsRequest.add_member(:status_filter, Shapes::ShapeRef.new(shape: VpcConfigurationStatus, location: "querystring", location_name: "status"))
+    ListVpcConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListVpcConfigurationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListVpcConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListVpcConfigurationsRequest.struct_class = Types::ListVpcConfigurationsRequest
+
+    ListVpcConfigurationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: VpcConfigurationSummaryList, required: true, location_name: "items"))
+    ListVpcConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListVpcConfigurationsResponse.struct_class = Types::ListVpcConfigurationsResponse
+
     LoopControllerFlowNodeConfiguration.add_member(:continue_condition, Shapes::ShapeRef.new(shape: FlowCondition, required: true, location_name: "continueCondition"))
     LoopControllerFlowNodeConfiguration.add_member(:max_iterations, Shapes::ShapeRef.new(shape: LoopControllerFlowNodeConfigurationMaxIterationsInteger, location_name: "maxIterations"))
     LoopControllerFlowNodeConfiguration.struct_class = Types::LoopControllerFlowNodeConfiguration
@@ -2180,11 +2270,13 @@ module Aws::BedrockAgent
     ManagedKnowledgeBaseConfiguration.add_member(:embedding_model_arn, Shapes::ShapeRef.new(shape: BedrockEmbeddingModelArn, location_name: "embeddingModelArn"))
     ManagedKnowledgeBaseConfiguration.add_member(:embedding_model_configuration, Shapes::ShapeRef.new(shape: EmbeddingModelConfiguration, location_name: "embeddingModelConfiguration"))
     ManagedKnowledgeBaseConfiguration.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
+    ManagedKnowledgeBaseConfiguration.add_member(:supplemental_data_storage_configuration, Shapes::ShapeRef.new(shape: SupplementalDataStorageConfiguration, location_name: "supplementalDataStorageConfiguration"))
     ManagedKnowledgeBaseConfiguration.struct_class = Types::ManagedKnowledgeBaseConfiguration
 
     ManagedKnowledgeBaseConnectorConfiguration.add_member(:deletion_protection_configuration, Shapes::ShapeRef.new(shape: DeletionProtectionConfiguration, location_name: "deletionProtectionConfiguration"))
     ManagedKnowledgeBaseConnectorConfiguration.add_member(:media_extraction_configuration, Shapes::ShapeRef.new(shape: MediaExtractionConfiguration, location_name: "mediaExtractionConfiguration"))
     ManagedKnowledgeBaseConnectorConfiguration.add_member(:connector_parameters, Shapes::ShapeRef.new(shape: Document, location_name: "connectorParameters"))
+    ManagedKnowledgeBaseConnectorConfiguration.add_member(:sync_schedule, Shapes::ShapeRef.new(shape: SyncSchedule, location_name: "syncSchedule"))
     ManagedKnowledgeBaseConnectorConfiguration.struct_class = Types::ManagedKnowledgeBaseConnectorConfiguration
 
     MediaExtractionConfiguration.add_member(:image_extraction_configuration, Shapes::ShapeRef.new(shape: ImageExtractionConfiguration, location_name: "imageExtractionConfiguration"))
@@ -2271,6 +2363,9 @@ module Aws::BedrockAgent
     MongoDbAtlasFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
     MongoDbAtlasFieldMapping.add_member(:metadata_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "metadataField"))
     MongoDbAtlasFieldMapping.struct_class = Types::MongoDbAtlasFieldMapping
+
+    MonthlySchedule.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, required: true, location_name: "dayOfMonth"))
+    MonthlySchedule.struct_class = Types::MonthlySchedule
 
     MultipleLoopControllerNodesFlowValidationDetails.add_member(:loop_node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "loopNode"))
     MultipleLoopControllerNodesFlowValidationDetails.struct_class = Types::MultipleLoopControllerNodesFlowValidationDetails
@@ -2716,6 +2811,8 @@ module Aws::BedrockAgent
     StorageFlowNodeServiceConfiguration.add_member_subclass(:unknown, Types::StorageFlowNodeServiceConfiguration::Unknown)
     StorageFlowNodeServiceConfiguration.struct_class = Types::StorageFlowNodeServiceConfiguration
 
+    SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
+
     SupplementalDataStorageConfiguration.add_member(:storage_locations, Shapes::ShapeRef.new(shape: SupplementalDataStorageLocations, required: true, location_name: "storageLocations"))
     SupplementalDataStorageConfiguration.struct_class = Types::SupplementalDataStorageConfiguration
 
@@ -2724,6 +2821,16 @@ module Aws::BedrockAgent
     SupplementalDataStorageLocation.struct_class = Types::SupplementalDataStorageLocation
 
     SupplementalDataStorageLocations.member = Shapes::ShapeRef.new(shape: SupplementalDataStorageLocation)
+
+    SyncSchedule.add_member(:daily, Shapes::ShapeRef.new(shape: DailySchedule, location_name: "daily"))
+    SyncSchedule.add_member(:weekly, Shapes::ShapeRef.new(shape: WeeklySchedule, location_name: "weekly"))
+    SyncSchedule.add_member(:monthly, Shapes::ShapeRef.new(shape: MonthlySchedule, location_name: "monthly"))
+    SyncSchedule.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SyncSchedule.add_member_subclass(:daily, Types::SyncSchedule::Daily)
+    SyncSchedule.add_member_subclass(:weekly, Types::SyncSchedule::Weekly)
+    SyncSchedule.add_member_subclass(:monthly, Types::SyncSchedule::Monthly)
+    SyncSchedule.add_member_subclass(:unknown, Types::SyncSchedule::Unknown)
+    SyncSchedule.struct_class = Types::SyncSchedule
 
     SystemContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "text"))
     SystemContentBlock.add_member(:cache_point, Shapes::ShapeRef.new(shape: CachePointBlock, location_name: "cachePoint"))
@@ -3052,6 +3159,40 @@ module Aws::BedrockAgent
     VideoSegmentationConfiguration.add_member(:fixed_length_duration, Shapes::ShapeRef.new(shape: VideoSegmentationConfigurationFixedLengthDurationInteger, required: true, location_name: "fixedLengthDuration"))
     VideoSegmentationConfiguration.struct_class = Types::VideoSegmentationConfiguration
 
+    VpcConfiguration.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: VpcConfigurationId, required: true, location_name: "vpcConfigurationId"))
+    VpcConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: VpcConfigurationStatus, required: true, location_name: "status"))
+    VpcConfiguration.add_member(:status_message, Shapes::ShapeRef.new(shape: VpcConfigurationStatusMessage, location_name: "statusMessage"))
+    VpcConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
+    VpcConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "subnetIds"))
+    VpcConfiguration.add_member(:resource_target, Shapes::ShapeRef.new(shape: ResourceTarget, required: true, location_name: "resourceTarget"))
+    VpcConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "port"))
+    VpcConfiguration.add_member(:protocol, Shapes::ShapeRef.new(shape: VpcProtocol, required: true, location_name: "protocol"))
+    VpcConfiguration.add_member(:resolution_mode, Shapes::ShapeRef.new(shape: VpcResolutionMode, required: true, location_name: "resolutionMode"))
+    VpcConfiguration.add_member(:host_header, Shapes::ShapeRef.new(shape: HostHeader, location_name: "hostHeader"))
+    VpcConfiguration.add_member(:tls_server_name, Shapes::ShapeRef.new(shape: TlsServerName, location_name: "tlsServerName"))
+    VpcConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: VpcConfigurationName, location_name: "name"))
+    VpcConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: VpcConfigurationDescription, location_name: "description"))
+    VpcConfiguration.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    VpcConfiguration.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    VpcConfiguration.struct_class = Types::VpcConfiguration
+
+    VpcConfigurationSummary.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: VpcConfigurationId, required: true, location_name: "vpcConfigurationId"))
+    VpcConfigurationSummary.add_member(:status, Shapes::ShapeRef.new(shape: VpcConfigurationStatus, required: true, location_name: "status"))
+    VpcConfigurationSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: VpcConfigurationStatusMessage, location_name: "statusMessage"))
+    VpcConfigurationSummary.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
+    VpcConfigurationSummary.add_member(:resource_target, Shapes::ShapeRef.new(shape: ResourceTarget, required: true, location_name: "resourceTarget"))
+    VpcConfigurationSummary.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "port"))
+    VpcConfigurationSummary.add_member(:protocol, Shapes::ShapeRef.new(shape: VpcProtocol, required: true, location_name: "protocol"))
+    VpcConfigurationSummary.add_member(:resolution_mode, Shapes::ShapeRef.new(shape: VpcResolutionMode, required: true, location_name: "resolutionMode"))
+    VpcConfigurationSummary.add_member(:host_header, Shapes::ShapeRef.new(shape: HostHeader, location_name: "hostHeader"))
+    VpcConfigurationSummary.add_member(:tls_server_name, Shapes::ShapeRef.new(shape: TlsServerName, location_name: "tlsServerName"))
+    VpcConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: VpcConfigurationName, location_name: "name"))
+    VpcConfigurationSummary.add_member(:description, Shapes::ShapeRef.new(shape: VpcConfigurationDescription, location_name: "description"))
+    VpcConfigurationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    VpcConfigurationSummary.struct_class = Types::VpcConfigurationSummary
+
+    VpcConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: VpcConfigurationSummary)
+
     WebCrawlerConfiguration.add_member(:crawler_limits, Shapes::ShapeRef.new(shape: WebCrawlerLimits, location_name: "crawlerLimits"))
     WebCrawlerConfiguration.add_member(:inclusion_filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "inclusionFilters"))
     WebCrawlerConfiguration.add_member(:exclusion_filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "exclusionFilters"))
@@ -3070,6 +3211,9 @@ module Aws::BedrockAgent
 
     WebSourceConfiguration.add_member(:url_configuration, Shapes::ShapeRef.new(shape: UrlConfiguration, required: true, location_name: "urlConfiguration"))
     WebSourceConfiguration.struct_class = Types::WebSourceConfiguration
+
+    WeeklySchedule.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, required: true, location_name: "dayOfWeek"))
+    WeeklySchedule.struct_class = Types::WeeklySchedule
 
 
     # @api private
@@ -3266,6 +3410,21 @@ module Aws::BedrockAgent
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_vpc_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpcConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgebases/{knowledgeBaseId}/vpcconfigurations/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpcConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVpcConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_agent, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAgent"
         o.http_method = "DELETE"
@@ -3425,6 +3584,20 @@ module Aws::BedrockAgent
         o.http_request_uri = "/resourcepolicy/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_vpc_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpcConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/knowledgebases/{knowledgeBaseId}/vpcconfigurations/{vpcConfigurationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpcConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVpcConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -3650,6 +3823,19 @@ module Aws::BedrockAgent
         o.http_request_uri = "/resourcepolicy/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_vpc_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVpcConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/knowledgebases/{knowledgeBaseId}/vpcconfigurations/{vpcConfigurationId}"
+        o.input = Shapes::ShapeRef.new(shape: GetVpcConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVpcConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -3946,6 +4132,25 @@ module Aws::BedrockAgent
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:list_vpc_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVpcConfigurations"
+        o.http_method = "GET"
+        o.http_request_uri = "/knowledgebases/{knowledgeBaseId}/vpcconfigurations/"
+        o.input = Shapes::ShapeRef.new(shape: ListVpcConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVpcConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:prepare_agent, Seahorse::Model::Operation.new.tap do |o|

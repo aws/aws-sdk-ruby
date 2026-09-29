@@ -125,6 +125,7 @@ module Aws
                            Params::trigger
                          ],
                          ?report_configuration: Params::report_configuration,
+                         ?service_quota_checks_enabled: bool,
                          name: ::String,
                          regions: Array[::String],
                          recovery_approach: ("activeActive" | "activePassive"),
@@ -292,6 +293,19 @@ module Aws
                                                  ) -> _ListRoute53HealthChecksInRegionResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoute53HealthChecksInRegionResponseSuccess
 
+      interface _ListServiceQuotaWarningsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceQuotaWarningsResponse]
+        def service_quota_warning_summaries: () -> ::Array[Types::ServiceQuotaWarningSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#list_service_quota_warnings-instance_method
+      def list_service_quota_warnings: (
+                                         ?plan_arns: Array[::String],
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListServiceQuotaWarningsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceQuotaWarningsResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
         def resource_tags: () -> ::Hash[::String, ::String]
@@ -365,7 +379,8 @@ module Aws
                          ?triggers: Array[
                            Params::trigger
                          ],
-                         ?report_configuration: Params::report_configuration
+                         ?report_configuration: Params::report_configuration,
+                         ?service_quota_checks_enabled: bool
                        ) -> _UpdatePlanResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePlanResponseSuccess
 

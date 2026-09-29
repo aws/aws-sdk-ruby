@@ -92,7 +92,8 @@ module Aws
                                         file_name: ::String?,
                                         data: ::String?
                                       }
-                                    ]
+                                    ],
+                                    ?dry_run: bool
                                   ) -> _AddAttachmentsToSetResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddAttachmentsToSetResponseSuccess
 
@@ -105,9 +106,28 @@ module Aws
                                        ?case_id: ::String,
                                        communication_body: ::String,
                                        ?cc_email_addresses: Array[::String],
-                                       ?attachment_set_id: ::String
+                                       ?attachment_set_id: ::String,
+                                       ?upload_ids: Array[::String],
+                                       ?dry_run: bool
                                      ) -> _AddCommunicationToCaseResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddCommunicationToCaseResponseSuccess
+
+      interface _CompleteAttachmentUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CompleteAttachmentUploadResponse]
+        def upload_status: () -> ("attachment-ready" | "attachment-not-ready" | "failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#complete_attachment_upload-instance_method
+      def complete_attachment_upload: (
+                                        upload_id: ::String,
+                                        completed_uploads: Array[
+                                          {
+                                            part_index: ::Integer,
+                                            e_tag: ::String
+                                          }
+                                        ],
+                                        ?dry_run: bool
+                                      ) -> _CompleteAttachmentUploadResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompleteAttachmentUploadResponseSuccess
 
       interface _CreateCaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCaseResponse]
@@ -123,7 +143,9 @@ module Aws
                          ?cc_email_addresses: Array[::String],
                          ?language: ::String,
                          ?issue_type: ::String,
-                         ?attachment_set_id: ::String
+                         ?attachment_set_id: ::String,
+                         ?upload_ids: Array[::String],
+                         ?dry_run: bool
                        ) -> _CreateCaseResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCaseResponseSuccess
 
@@ -133,9 +155,23 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_attachment-instance_method
       def describe_attachment: (
-                                 attachment_id: ::String
+                                 attachment_id: ::String,
+                                 ?dry_run: bool
                                ) -> _DescribeAttachmentResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAttachmentResponseSuccess
+
+      interface _DescribeAttachmentUploadStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAttachmentUploadStatusResponse]
+        def upload_status: () -> ("attachment-ready" | "attachment-not-ready" | "failed")
+        def file_name: () -> ::String
+        def upload_progress: () -> Types::UploadProgress
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_attachment_upload_status-instance_method
+      def describe_attachment_upload_status: (
+                                               upload_id: ::String,
+                                               ?dry_run: bool
+                                             ) -> _DescribeAttachmentUploadStatusResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAttachmentUploadStatusResponseSuccess
 
       interface _DescribeCasesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCasesResponse]
@@ -152,7 +188,8 @@ module Aws
                             ?next_token: ::String,
                             ?max_results: ::Integer,
                             ?language: ::String,
-                            ?include_communications: bool
+                            ?include_communications: bool,
+                            ?dry_run: bool
                           ) -> _DescribeCasesResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCasesResponseSuccess
 
@@ -167,7 +204,8 @@ module Aws
                                      ?before_time: ::String,
                                      ?after_time: ::String,
                                      ?next_token: ::String,
-                                     ?max_results: ::Integer
+                                     ?max_results: ::Integer,
+                                     ?dry_run: bool
                                    ) -> _DescribeCommunicationsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCommunicationsResponseSuccess
 
@@ -181,7 +219,8 @@ module Aws
                                           issue_type: ::String,
                                           service_code: ::String,
                                           language: ::String,
-                                          category_code: ::String
+                                          category_code: ::String,
+                                          ?dry_run: bool
                                         ) -> _DescribeCreateCaseOptionsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCreateCaseOptionsResponseSuccess
 
@@ -192,7 +231,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_services-instance_method
       def describe_services: (
                                ?service_code_list: Array[::String],
-                               ?language: ::String
+                               ?language: ::String,
+                               ?dry_run: bool
                              ) -> _DescribeServicesResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServicesResponseSuccess
 
@@ -202,7 +242,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_severity_levels-instance_method
       def describe_severity_levels: (
-                                      ?language: ::String
+                                      ?language: ::String,
+                                      ?dry_run: bool
                                     ) -> _DescribeSeverityLevelsResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSeverityLevelsResponseSuccess
 
@@ -214,7 +255,8 @@ module Aws
       def describe_supported_languages: (
                                           issue_type: ::String,
                                           service_code: ::String,
-                                          category_code: ::String
+                                          category_code: ::String,
+                                          ?dry_run: bool
                                         ) -> _DescribeSupportedLanguagesResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSupportedLanguagesResponseSuccess
 
@@ -259,6 +301,39 @@ module Aws
                                            ) -> _DescribeTrustedAdvisorChecksResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrustedAdvisorChecksResponseSuccess
 
+      interface _GetAttachmentDownloadLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAttachmentDownloadLinkResponse]
+        def file_name: () -> ::String
+        def download_url: () -> Types::DownloadUrl
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#get_attachment_download_link-instance_method
+      def get_attachment_download_link: (
+                                          attachment_id: ::String,
+                                          ?dry_run: bool
+                                        ) -> _GetAttachmentDownloadLinkResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAttachmentDownloadLinkResponseSuccess
+
+      interface _GetAttachmentUploadLinksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAttachmentUploadLinksResponse]
+        def upload_id: () -> ::String
+        def part_size_bytes: () -> ::Integer
+        def total_parts: () -> ::Integer
+        def next_index: () -> ::Integer
+        def upload_urls: () -> ::Array[Types::UploadUrl]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#get_attachment_upload_links-instance_method
+      def get_attachment_upload_links: (
+                                         file_name: ::String,
+                                         ?file_size_bytes: ::Integer,
+                                         ?upload_id: ::String,
+                                         ?upload_range: {
+                                           start_index: ::Integer,
+                                           end_index: ::Integer?
+                                         },
+                                         ?dry_run: bool
+                                       ) -> _GetAttachmentUploadLinksResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAttachmentUploadLinksResponseSuccess
+
       interface _RefreshTrustedAdvisorCheckResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RefreshTrustedAdvisorCheckResponse]
         def status: () -> Types::TrustedAdvisorCheckRefreshStatus
@@ -276,7 +351,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#resolve_case-instance_method
       def resolve_case: (
-                          ?case_id: ::String
+                          ?case_id: ::String,
+                          ?dry_run: bool
                         ) -> _ResolveCaseResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResolveCaseResponseSuccess
     end

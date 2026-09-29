@@ -781,6 +781,37 @@ module Aws::Kafka
     class KafkaClusterClientAuthentication
       attr_accessor sasl_scram: Types::KafkaClusterSaslScramAuthentication
       attr_accessor mtls: Types::KafkaClusterMTLSAuthentication
+      attr_accessor sasl_o_auth_bearer: Types::KafkaClusterSaslOAuthBearerAuthentication
+      SENSITIVE: []
+    end
+
+    class KafkaClusterSaslOAuthBearerAuthentication
+      attr_accessor token_endpoint_url: ::String
+      attr_accessor client_credentials: Types::KafkaClusterOAuthClientCredentials
+      attr_accessor iam_jwt_bearer: Types::KafkaClusterOAuthIamJwtBearer
+      attr_accessor client_credentials_assertion: Types::KafkaClusterOAuthClientCredentialsAssertion
+      attr_accessor token_endpoint_authentication_method: ("POST" | "BASIC" | "NONE")
+      attr_accessor scope: ::String
+      attr_accessor token_endpoint_tls_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KafkaClusterOAuthClientCredentials
+      attr_accessor token_request_secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KafkaClusterOAuthIamJwtBearer
+      attr_accessor audience: ::String
+      attr_accessor signing_algorithm: ("RS256" | "ES384")
+      attr_accessor token_request_secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KafkaClusterOAuthClientCredentialsAssertion
+      attr_accessor audience: ::String
+      attr_accessor signing_algorithm: ("RS256" | "ES384")
+      attr_accessor token_request_secret_arn: ::String
       SENSITIVE: []
     end
 

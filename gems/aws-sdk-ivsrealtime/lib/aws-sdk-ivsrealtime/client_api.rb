@@ -340,6 +340,13 @@ module Aws::IVSRealTime
     CreateIngestConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateIngestConfigurationRequest.struct_class = Types::CreateIngestConfigurationRequest
 
+    CreateIngestConfigurationResponse.add_member(:access_control_allow_origin, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Allow-Origin"))
+    CreateIngestConfigurationResponse.add_member(:access_control_expose_headers, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Expose-Headers"))
+    CreateIngestConfigurationResponse.add_member(:cache_control, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Cache-Control"))
+    CreateIngestConfigurationResponse.add_member(:content_security_policy, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Security-Policy"))
+    CreateIngestConfigurationResponse.add_member(:strict_transport_security, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Strict-Transport-Security"))
+    CreateIngestConfigurationResponse.add_member(:x_content_type_options, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Content-Type-Options"))
+    CreateIngestConfigurationResponse.add_member(:x_frame_options, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Frame-Options"))
     CreateIngestConfigurationResponse.add_member(:ingest_configuration, Shapes::ShapeRef.new(shape: IngestConfiguration, location_name: "ingestConfiguration"))
     CreateIngestConfigurationResponse.struct_class = Types::CreateIngestConfigurationResponse
 
@@ -963,6 +970,13 @@ module Aws::IVSRealTime
     UpdateIngestConfigurationRequest.add_member(:redundant_ingest, Shapes::ShapeRef.new(shape: RedundantIngest, location_name: "redundantIngest"))
     UpdateIngestConfigurationRequest.struct_class = Types::UpdateIngestConfigurationRequest
 
+    UpdateIngestConfigurationResponse.add_member(:access_control_allow_origin, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Allow-Origin"))
+    UpdateIngestConfigurationResponse.add_member(:access_control_expose_headers, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Expose-Headers"))
+    UpdateIngestConfigurationResponse.add_member(:cache_control, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Cache-Control"))
+    UpdateIngestConfigurationResponse.add_member(:content_security_policy, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Security-Policy"))
+    UpdateIngestConfigurationResponse.add_member(:strict_transport_security, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Strict-Transport-Security"))
+    UpdateIngestConfigurationResponse.add_member(:x_content_type_options, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Content-Type-Options"))
+    UpdateIngestConfigurationResponse.add_member(:x_frame_options, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Frame-Options"))
     UpdateIngestConfigurationResponse.add_member(:ingest_configuration, Shapes::ShapeRef.new(shape: IngestConfiguration, location_name: "ingestConfiguration"))
     UpdateIngestConfigurationResponse.struct_class = Types::UpdateIngestConfigurationResponse
 
@@ -1474,8 +1488,8 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:stop_composition, Seahorse::Model::Operation.new.tap do |o|

@@ -50,6 +50,7 @@
     "GetSecurityRequirementPack": "<p>Retrieves information about a security requirement pack.</p>",
     "ImportSecurityRequirements": "<p>Imports security requirements from uploaded documents into a customer managed security requirement pack. The import process asynchronously extracts and generates structured security requirements from the provided source files.</p>",
     "InitiateProviderRegistration": "<p>Initiates the OAuth registration flow with a third-party provider. Returns a redirect URL and CSRF state token for completing the authorization.</p>",
+    "ListActorMessages": "<p>Returns a paginated list of the email MFA messages received for an actor at its server-generated email address, most recent first.</p>",
     "ListAgentSpaces": "<p>Returns a paginated list of agent space summaries in your account.</p>",
     "ListApplications": "<p>Returns a paginated list of application summaries in your account.</p>",
     "ListArtifacts": "<p>Returns a paginated list of artifact summaries for the specified agent space.</p>",
@@ -135,6 +136,18 @@
       "refs": {
         "Assets$actors": "<p>The list of actors used during penetration testing.</p>",
         "PentestJob$actors": "<p>The list of actors used during the pentest job.</p>"
+      }
+    },
+    "ActorMessage": {
+      "base": "<p>A message received at an actor's server-generated email MFA address.</p>",
+      "refs": {
+        "ActorMessageList$member": null
+      }
+    },
+    "ActorMessageList": {
+      "base": null,
+      "refs": {
+        "ListActorMessagesOutput$messages": "<p>The list of messages received for the actor, most recent first.</p>"
       }
     },
     "AddArtifactInput": {
@@ -600,6 +613,7 @@
         "BitbucketResourceCapabilities$leaveComments": "<p>Whether to post code review comments on pull requests.</p>",
         "BitbucketResourceCapabilities$remediateCode": "<p>Whether to create pull requests with automated fixes.</p>",
         "Category$isPrimary": "<p>Indicates whether this is the primary category for the task.</p>",
+        "CiCdConfiguration$enabled": "<p>Whether CI/CD pentesting is enabled for this pentest.</p>",
         "CodeReviewSettings$controlsScanning": "<p>Indicates whether controls scanning is enabled for code reviews.</p>",
         "CodeReviewSettings$generalPurposeScanning": "<p>Indicates whether general-purpose scanning is enabled for code reviews.</p>",
         "ConfluenceResourceCapabilities$fetchDocument": "<p>Whether to fetch documents from this space.</p>",
@@ -608,7 +622,21 @@
         "GitHubResourceCapabilities$leaveComments": "<p>Indicates whether the integration can leave comments on pull requests.</p>",
         "GitHubResourceCapabilities$remediateCode": "<p>Indicates whether the integration can create code remediation pull requests.</p>",
         "GitLabResourceCapabilities$leaveComments": "<p>Whether to post code review comments on merge request discussions.</p>",
-        "GitLabResourceCapabilities$remediateCode": "<p>Whether to create merge requests with automated fixes.</p>"
+        "GitLabResourceCapabilities$remediateCode": "<p>Whether to create merge requests with automated fixes.</p>",
+        "ReportFilters$annotationNotes": "<p>Whether to include reviewer annotation notes under each finding.</p>",
+        "ReportFilters$complianceReport": "<p>Whether to include the compliance-ready report additions.</p>"
+      }
+    },
+    "CaCertificatePem": {
+      "base": "<p>A PEM-encoded X.509 certificate.</p>",
+      "refs": {
+        "CaCertificateSource$inlinePem": "<p>A PEM-encoded X.509 certificate supplied inline.</p>"
+      }
+    },
+    "CaCertificateSource": {
+      "base": "<p>The source of a trusted CA certificate. Exactly one member must be set.</p>",
+      "refs": {
+        "TrustedCaCertificate$source": "<p>The source that Security Agent reads the certificate from.</p>"
       }
     },
     "Category": {
@@ -630,6 +658,17 @@
         "SelfManagedInput$certificate": "<p>The certificate for the private connection.</p>",
         "ServiceManagedInput$certificate": "<p>The certificate for the private connection.</p>",
         "UpdatePrivateConnectionCertificateInput$certificate": "<p>The PEM-encoded certificate chain for the private connection.</p>"
+      }
+    },
+    "CiCdConfiguration": {
+      "base": "<p>The configuration that enables a pentest to run as part of a CI/CD pipeline, scoped to the code changes in each pipeline run.</p>",
+      "refs": {
+        "CreatePentestInput$cicdConfiguration": "<p>The CI/CD pentesting configuration to apply to the pentest.</p>",
+        "CreatePentestOutput$cicdConfiguration": "<p>The CI/CD pentesting configuration applied to the pentest.</p>",
+        "Pentest$cicdConfiguration": "<p>The CI/CD pentesting configuration for this pentest. Present when the pentest is set up to run from a CI/CD pipeline.</p>",
+        "PentestJob$cicdConfiguration": null,
+        "UpdatePentestInput$cicdConfiguration": "<p>The updated CI/CD pentesting configuration to apply to the pentest.</p>",
+        "UpdatePentestOutput$cicdConfiguration": "<p>The CI/CD pentesting configuration applied to the pentest.</p>"
       }
     },
     "CleanUpStrategy": {
@@ -814,9 +853,16 @@
     "ConfidenceLevel": {
       "base": "<p>Finding confidence level.</p>",
       "refs": {
+        "ConfidenceLevelFilterList$member": null,
         "Finding$confidence": "<p>The confidence level of the finding. Valid values include FALSE_POSITIVE, UNCONFIRMED, LOW, MEDIUM, and HIGH.</p>",
         "FindingSummary$confidence": "<p>The confidence level of the finding.</p>",
         "ListFindingsInput$confidence": "<p>Filter findings by confidence level.</p>"
+      }
+    },
+    "ConfidenceLevelFilterList": {
+      "base": "<p>A list of confidence levels for a report filter.</p>",
+      "refs": {
+        "ReportFilters$confidenceLevels": "<p>The confidence levels to include in the report.</p>"
       }
     },
     "ConflictException": {
@@ -1242,9 +1288,16 @@
       "base": "<p>Finding status.</p>",
       "refs": {
         "Finding$status": "<p>The current status of the finding. Valid values include ACTIVE, RESOLVED, ACCEPTED, and FALSE_POSITIVE.</p>",
+        "FindingStatusFilterList$member": null,
         "FindingSummary$status": "<p>The current status of the finding.</p>",
         "ListFindingsInput$status": "<p>Filter findings by status.</p>",
         "UpdateFindingInput$status": "<p>The updated status for the finding.</p>"
+      }
+    },
+    "FindingStatusFilterList": {
+      "base": "<p>A list of finding statuses for a report filter.</p>",
+      "refs": {
+        "ReportFilters$statuses": "<p>The finding statuses to include in the report.</p>"
       }
     },
     "FindingSummary": {
@@ -1544,8 +1597,10 @@
     "JobType": {
       "base": "<p>The type of pentest job execution.</p>",
       "refs": {
-        "PentestJob$jobType": "<p>The type of the pentest job. Valid values are FULL and REVALIDATION.</p>",
-        "StartPentestJobInput$jobType": "<p>The type of pentest job to start. Valid values are FULL and REVALIDATION. When set to REVALIDATION, the selectedFindingIds parameter is required.</p>"
+        "ListPentestJobsForPentestInput$jobType": "<p>Filters the returned pentest jobs to only those of the specified job type.</p>",
+        "PentestJob$jobType": "<p>The type of the pentest job. Valid values are FULL, REVALIDATION, and CICD.</p>",
+        "PentestJobSummary$jobType": "<p>The type of the pentest job. Valid values are FULL, REVALIDATION, and CICD.</p>",
+        "StartPentestJobInput$jobType": "<p>The type of pentest job to start. Valid values are FULL, REVALIDATION, and CICD. When set to REVALIDATION, the selectedFindingIds parameter is required. When set to CICD, the scopeChanges parameter defines the code changes to test.</p>"
       }
     },
     "KmsKeyId": {
@@ -1572,6 +1627,14 @@
       "refs": {
         "AWSResources$lambdaFunctionArns": "<p>The Amazon Resource Names (ARNs) of the Lambda functions associated with the agent space.</p>"
       }
+    },
+    "ListActorMessagesInput": {
+      "base": null,
+      "refs": {}
+    },
+    "ListActorMessagesOutput": {
+      "base": null,
+      "refs": {}
     },
     "ListAgentSpacesInput": {
       "base": "<p>Input for listing agent spaces.</p>",
@@ -1812,6 +1875,7 @@
     "MaxResults": {
       "base": "<p>Maximum results for pagination.</p>",
       "refs": {
+        "ListActorMessagesInput$maxResults": "<p>The maximum number of results to return in a single call.</p>",
         "ListAgentSpacesInput$maxResults": "<p>The maximum number of results to return in a single call.</p>",
         "ListApplicationsRequest$maxResults": "<p>The maximum number of results to return in a single call.</p>",
         "ListArtifactsInput$maxResults": "<p>The maximum number of results to return in a single call.</p>",
@@ -1919,6 +1983,8 @@
     "NextToken": {
       "base": "<p>Pagination token.</p>",
       "refs": {
+        "ListActorMessagesInput$nextToken": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>",
+        "ListActorMessagesOutput$nextToken": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>",
         "ListAgentSpacesInput$nextToken": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>",
         "ListAgentSpacesOutput$nextToken": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>",
         "ListApplicationsRequest$nextToken": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the nextToken value returned from the previous request.</p>",
@@ -2187,7 +2253,51 @@
     "ReportDestination": {
       "base": "<p>Destination for publishing scan reports to an integrated document provider.</p>",
       "refs": {
-        "CreateThreatModelInput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>"
+        "CodeReview$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "CodeReviewJob$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "CreateCodeReviewInput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "CreateCodeReviewOutput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "CreatePentestInput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "CreatePentestOutput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "CreateThreatModelInput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "CreateThreatModelOutput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "Pentest$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "PentestJob$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "ThreatModel$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "ThreatModelJob$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "UpdateCodeReviewInput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "UpdateCodeReviewOutput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "UpdatePentestInput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "UpdatePentestOutput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "UpdateThreatModelInput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>",
+        "UpdateThreatModelOutput$reportDestination": "<p>The destination for publishing scan reports to an integrated document provider.</p>"
+      }
+    },
+    "ReportFilterList": {
+      "base": "<p>A bounded list of report-filter values for an open-ended filter dimension.</p>",
+      "refs": {
+        "ReportFilters$findingTypes": "<p>The finding types to include in the report.</p>"
+      }
+    },
+    "ReportFilterValue": {
+      "base": "<p>A single report-filter value for one filter dimension.</p>",
+      "refs": {
+        "ReportFilterList$member": null
+      }
+    },
+    "ReportFilters": {
+      "base": "<p>The report-generation filters applied when a pentest or code review report is exported.</p>",
+      "refs": {
+        "CodeReview$reportFilters": "<p>The report-generation filters applied when the report is exported.</p>",
+        "CreateCodeReviewInput$reportFilters": "<p>The report-generation filters applied when the report is exported.</p>",
+        "CreateCodeReviewOutput$reportFilters": "<p>The report-generation filters applied when the report is exported.</p>",
+        "CreatePentestInput$reportFilters": "<p>The report-generation filters applied when the report is exported.</p>",
+        "CreatePentestOutput$reportFilters": "<p>The report-generation filters applied when the report is exported.</p>",
+        "Pentest$reportFilters": "<p>The report-generation filters applied when the report is exported.</p>",
+        "UpdateCodeReviewInput$reportFilters": "<p>The report-generation filters applied when the report is exported.</p>",
+        "UpdateCodeReviewOutput$reportFilters": "<p>The report-generation filters applied when the report is exported.</p>",
+        "UpdatePentestInput$reportFilters": "<p>The report-generation filters applied when the report is exported.</p>",
+        "UpdatePentestOutput$reportFilters": "<p>The report-generation filters applied when the report is exported.</p>"
       }
     },
     "ResourceArn": {
@@ -2246,7 +2356,14 @@
         "Finding$riskLevel": "<p>The risk level of the finding. Valid values include UNKNOWN, INFORMATIONAL, LOW, MEDIUM, HIGH, and CRITICAL.</p>",
         "FindingSummary$riskLevel": "<p>The risk level of the finding.</p>",
         "ListFindingsInput$riskLevel": "<p>Filter findings by risk level.</p>",
+        "RiskLevelFilterList$member": null,
         "UpdateFindingInput$riskLevel": "<p>The updated risk level for the finding.</p>"
+      }
+    },
+    "RiskLevelFilterList": {
+      "base": "<p>A list of severity levels for a report filter.</p>",
+      "refs": {
+        "ReportFilters$riskLevels": "<p>The severity levels to include in the report.</p>"
       }
     },
     "RiskType": {
@@ -2254,9 +2371,16 @@
       "refs": {
         "CodeReviewJobTask$riskType": "<p>The type of security risk the task is testing for.</p>",
         "CodeReviewJobTaskSummary$riskType": "<p>The type of security risk the task is testing for.</p>",
+        "RiskTypeFilterList$member": null,
         "RiskTypeList$member": null,
         "Task$riskType": "<p>The type of security risk the task is testing for.</p>",
         "TaskSummary$riskType": "<p>The type of security risk the task is testing for.</p>"
+      }
+    },
+    "RiskTypeFilterList": {
+      "base": "<p>A list of risk types for a report filter.</p>",
+      "refs": {
+        "ReportFilters$riskTypes": "<p>The risk types to include in the report.</p>"
       }
     },
     "RiskTypeList": {
@@ -2290,6 +2414,31 @@
         "AWSResources$s3Buckets": "<p>The Amazon Resource Names (ARNs) of the S3 buckets associated with the agent space.</p>"
       }
     },
+    "ScopeChange": {
+      "base": "<p>A code change in a CI/CD pipeline run that defines what a CI/CD pentest job tests. Each scope change identifies an integrated repository and the commit range for the change.</p>",
+      "refs": {
+        "ScopeChangeList$member": null
+      }
+    },
+    "ScopeChangeList": {
+      "base": null,
+      "refs": {
+        "PentestJob$scopeChanges": "<p>The code changes that defined the scope of this CI/CD pentest job. Present only for jobs of type CICD.</p>",
+        "StartPentestJobInput$scopeChanges": "<p>The code changes that define the scope of a CI/CD pentest job. Provide this when starting a job with jobType CICD to test only the changes in the current pipeline run.</p>"
+      }
+    },
+    "ScopeDecision": {
+      "base": "<p>The scoping decision for a CI/CD pentest job, indicating whether the supplied code changes are tested.</p>",
+      "refs": {
+        "ScopeResult$decision": "<p>The scoping decision for the job's code changes.</p>"
+      }
+    },
+    "ScopeResult": {
+      "base": "<p>The outcome of scoping a CI/CD pentest job's code changes, including the decision and the reason for it.</p>",
+      "refs": {
+        "PentestJob$scopeResult": "<p>The scoping outcome for this CI/CD pentest job. Present only for jobs of type CICD.</p>"
+      }
+    },
     "SecretArn": {
       "base": "<p>Secret ARN or name for agent space AWS resources.</p>",
       "refs": {
@@ -2311,7 +2460,7 @@
     "SecurityGroupArns": {
       "base": "<p>A list of one or more security group ARNs or IDs in the customer VPC.</p>",
       "refs": {
-        "VpcConfig$securityGroupArns": "<p>The Amazon Resource Names (ARNs) of the security groups for the VPC configuration.</p>"
+        "VpcConfig$securityGroupArns": "<p>The Amazon Resource Names (ARNs) or IDs of the security groups for the VPC configuration.</p>"
       }
     },
     "SecurityRequirementArtifact": {
@@ -2456,6 +2605,24 @@
       "base": null,
       "refs": {
         "Actor$mfaForwardingAddress": "<p>Server-generated email forwarding address for receiving MFA codes.</p>"
+      }
+    },
+    "SensitiveMessageBody": {
+      "base": null,
+      "refs": {
+        "ActorMessage$body": "<p>The plain-text body of the message, containing the MFA code or verification link.</p>"
+      }
+    },
+    "SensitiveMessageSender": {
+      "base": null,
+      "refs": {
+        "ActorMessage$sender": "<p>The address the message was sent from.</p>"
+      }
+    },
+    "SensitiveMessageSubject": {
+      "base": null,
+      "refs": {
+        "ActorMessage$subject": "<p>The subject line of the message.</p>"
       }
     },
     "ServiceManagedInput": {
@@ -2659,6 +2826,8 @@
         "BatchGetThreatsInput$agentSpaceId": "<p>The unique identifier of the agent space.</p>",
         "BatchSecurityRequirementError$code": "<p>The error code.</p>",
         "BatchSecurityRequirementError$message": "<p>The error message.</p>",
+        "CaCertificateSource$artifactId": "<p>The artifact ID of an uploaded certificate file.</p>",
+        "CaCertificateSource$s3Location": "<p>The Amazon S3 location URI of a customer-staged certificate.</p>",
         "Category$name": "<p>The name of the category.</p>",
         "CloudWatchLog$logGroup": "<p>The name of the CloudWatch log group.</p>",
         "CloudWatchLog$logStream": "<p>The name of the CloudWatch log stream.</p>",
@@ -2823,6 +2992,9 @@
         "IntegrationSummary$installationId": "<p>The installation identifier from the integration provider.</p>",
         "IntegrationSummary$displayName": "<p>The display name of the integration.</p>",
         "InternalServerException$message": "<p>Error description.</p>",
+        "ListActorMessagesInput$agentSpaceId": "<p>The unique identifier of the agent space that owns the pentest.</p>",
+        "ListActorMessagesInput$pentestId": "<p>The unique identifier of the pentest that the actor belongs to.</p>",
+        "ListActorMessagesInput$actorIdentifier": "<p>The identifier of the actor whose messages to list. The identifier is case-insensitive.</p>",
         "ListCodeReviewJobTasksInput$agentSpaceId": "<p>The unique identifier of the agent space.</p>",
         "ListCodeReviewJobTasksInput$codeReviewJobId": "<p>The unique identifier of the code review job to list tasks for.</p>",
         "ListCodeReviewJobTasksInput$categoryName": "<p>Filter tasks by category name.</p>",
@@ -2861,10 +3033,12 @@
         "PentestJob$pentestId": "<p>The unique identifier of the pentest associated with the job.</p>",
         "PentestJob$title": "<p>The title of the pentest job.</p>",
         "PentestJob$overview": "<p>An overview of the pentest job results.</p>",
+        "PentestJob$reportUrl": "<p>The URL to view this pentest job's findings report in the console.</p>",
         "PentestJobIdList$member": null,
         "PentestJobSummary$pentestJobId": "<p>The unique identifier of the pentest job.</p>",
         "PentestJobSummary$pentestId": "<p>The unique identifier of the pentest associated with the job.</p>",
         "PentestJobSummary$title": "<p>The title of the pentest job.</p>",
+        "PentestJobSummary$reportUrl": "<p>The URL to view this pentest job's findings report in the console.</p>",
         "PentestSummary$pentestId": "<p>The unique identifier of the pentest.</p>",
         "PentestSummary$agentSpaceId": "<p>The unique identifier of the agent space that contains the pentest.</p>",
         "PentestSummary$title": "<p>The title of the pentest.</p>",
@@ -2874,6 +3048,12 @@
         "ReportDestination$parentId": "<p>The parent document identifier under which the report will be created.</p>",
         "ReportDestination$documentId": "<p>The existing document identifier to update instead of creating a new document.</p>",
         "ResourceNotFoundException$message": "<p>Error description.</p>",
+        "ScopeChange$integrationId": "<p>The identifier of the integration for the source-code provider that hosts the repository.</p>",
+        "ScopeChange$providerResourceId": "<p>The provider-specific identifier of the repository the change belongs to.</p>",
+        "ScopeChange$baseCommitSha": "<p>The commit SHA that the change is compared against. When omitted, the change is evaluated against the head commit alone.</p>",
+        "ScopeChange$headCommitSha": "<p>The commit SHA at the tip of the change to be tested.</p>",
+        "ScopeChange$triggerRunId": "<p>The identifier of the CI/CD pipeline run that triggered this pentest job.</p>",
+        "ScopeResult$reason": "<p>A human-readable explanation of the scoping decision.</p>",
         "SecurityRequirementPackSummary$description": "<p>A description of the security requirement pack.</p>",
         "SecurityRequirementPackSummary$vendorName": "<p>The vendor name for AWS managed packs.</p>",
         "SecurityRequirementSummary$description": "<p>A description of the security requirement.</p>",
@@ -3076,12 +3256,13 @@
     "SubnetArns": {
       "base": "<p>A list of one or more subnet ARNs or IDs in the customer VPC.</p>",
       "refs": {
-        "VpcConfig$subnetArns": "<p>The Amazon Resource Names (ARNs) of the subnets for the VPC configuration.</p>"
+        "VpcConfig$subnetArns": "<p>The Amazon Resource Names (ARNs) or IDs of the subnets for the VPC configuration.</p>"
       }
     },
     "SyntheticTimestamp_date_time": {
       "base": null,
       "refs": {
+        "ActorMessage$receivedAt": "<p>The time the message was received.</p>",
         "AgentSpace$createdAt": "<p>The date and time the agent space was created, in UTC format.</p>",
         "AgentSpace$updatedAt": "<p>The date and time the agent space was last updated, in UTC format.</p>",
         "AgentSpaceSummary$createdAt": "<p>The date and time the agent space was created, in UTC format.</p>",
@@ -3317,9 +3498,16 @@
         "CodeReviewJobTask$executionStatus": "<p>The current execution status of the task.</p>",
         "CodeReviewJobTaskSummary$executionStatus": "<p>The current execution status of the task.</p>",
         "Task$executionStatus": "<p>The current execution status of the task.</p>",
+        "TaskExecutionStatusFilterList$member": null,
         "TaskSummary$executionStatus": "<p>The current execution status of the task.</p>",
         "ThreatModelJobTask$executionStatus": "<p>The current execution status of the task.</p>",
         "ThreatModelJobTaskSummary$executionStatus": "<p>The current execution status of the task.</p>"
+      }
+    },
+    "TaskExecutionStatusFilterList": {
+      "base": "<p>A list of task execution statuses for a report filter.</p>",
+      "refs": {
+        "ReportFilters$taskStatuses": "<p>The task execution statuses to include in the report's task table.</p>"
       }
     },
     "TaskIdList": {
@@ -3534,6 +3722,19 @@
       "base": "<p>The request was denied due to request throttling.</p>",
       "refs": {}
     },
+    "TrustedCaCertificate": {
+      "base": "<p>A trust anchor used when validating a target endpoint's TLS certificate.</p>",
+      "refs": {
+        "TrustedCaCertificateList$member": null
+      }
+    },
+    "TrustedCaCertificateList": {
+      "base": null,
+      "refs": {
+        "Assets$trustedCaCertificates": "<p>The trust anchors used to validate target endpoint TLS certificates. Provide these for endpoints served by a private or internal certificate authority (CA), an intermediate CA, or a self-signed certificate.</p>",
+        "PentestJob$trustedCaCertificates": "<p>The trust anchors used to validate target endpoint TLS certificates during the pentest job.</p>"
+      }
+    },
     "UntagResourceInput": {
       "base": "<p>Input for UntagResource operation.</p>",
       "refs": {}
@@ -3736,7 +3937,7 @@
     "VpcArn": {
       "base": "<p>ARN or ID of a VPC.</p>",
       "refs": {
-        "VpcConfig$vpcArn": "<p>The Amazon Resource Name (ARN) of the VPC.</p>"
+        "VpcConfig$vpcArn": "<p>The Amazon Resource Name (ARN) or ID of the VPC.</p>"
       }
     },
     "VpcConfig": {

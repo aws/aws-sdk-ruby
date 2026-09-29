@@ -51,6 +51,8 @@ module Aws::Mgn
     Checksum = Shapes::StructureShape.new(name: 'Checksum')
     Cidr = Shapes::StringShape.new(name: 'Cidr')
     CidrBlock = Shapes::StringShape.new(name: 'CidrBlock')
+    CidrMapping = Shapes::StructureShape.new(name: 'CidrMapping')
+    CidrMappingsList = Shapes::ListShape.new(name: 'CidrMappingsList')
     ClientIdempotencyToken = Shapes::StringShape.new(name: 'ClientIdempotencyToken')
     CloudWatchLogGroupName = Shapes::StringShape.new(name: 'CloudWatchLogGroupName')
     CodeGenerationOutputFormatStatus = Shapes::StringShape.new(name: 'CodeGenerationOutputFormatStatus')
@@ -527,9 +529,11 @@ module Aws::Mgn
     VcenterClient = Shapes::StructureShape.new(name: 'VcenterClient')
     VcenterClientID = Shapes::StringShape.new(name: 'VcenterClientID')
     VcenterClientList = Shapes::ListShape.new(name: 'VcenterClientList')
+    VolumeInitializationRate = Shapes::IntegerShape.new(name: 'VolumeInitializationRate')
     VolumeType = Shapes::StringShape.new(name: 'VolumeType')
     VpcID = Shapes::StringShape.new(name: 'VpcID')
     VpcIDsFilter = Shapes::ListShape.new(name: 'VpcIDsFilter')
+    VpcProvisioningStrategy = Shapes::StringShape.new(name: 'VpcProvisioningStrategy')
     Wave = Shapes::StructureShape.new(name: 'Wave')
     WaveAggregatedStatus = Shapes::StructureShape.new(name: 'WaveAggregatedStatus')
     WaveDescription = Shapes::StringShape.new(name: 'WaveDescription')
@@ -611,6 +615,12 @@ module Aws::Mgn
     Checksum.add_member(:hash, Shapes::ShapeRef.new(shape: Hash, location_name: "hash"))
     Checksum.struct_class = Types::Checksum
 
+    CidrMapping.add_member(:original_cidr, Shapes::ShapeRef.new(shape: Cidr, required: true, location_name: "originalCidr"))
+    CidrMapping.add_member(:updated_cidr, Shapes::ShapeRef.new(shape: Cidr, required: true, location_name: "updatedCidr"))
+    CidrMapping.struct_class = Types::CidrMapping
+
+    CidrMappingsList.member = Shapes::ShapeRef.new(shape: CidrMapping)
+
     CodeGenerationOutputFormatStatusDetails.add_member(:status, Shapes::ShapeRef.new(shape: CodeGenerationOutputFormatStatus, location_name: "status"))
     CodeGenerationOutputFormatStatusDetails.add_member(:status_detail_list, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "statusDetailList"))
     CodeGenerationOutputFormatStatusDetails.struct_class = Types::CodeGenerationOutputFormatStatusDetails
@@ -688,6 +698,8 @@ module Aws::Mgn
     CreateNetworkMigrationDefinitionRequest.add_member(:target_s3_configuration, Shapes::ShapeRef.new(shape: TargetS3Configuration, required: true, location_name: "targetS3Configuration"))
     CreateNetworkMigrationDefinitionRequest.add_member(:target_network, Shapes::ShapeRef.new(shape: TargetNetwork, required: true, location_name: "targetNetwork"))
     CreateNetworkMigrationDefinitionRequest.add_member(:target_deployment, Shapes::ShapeRef.new(shape: TargetDeployment, location_name: "targetDeployment"))
+    CreateNetworkMigrationDefinitionRequest.add_member(:vpc_provisioning_strategy, Shapes::ShapeRef.new(shape: VpcProvisioningStrategy, location_name: "vpcProvisioningStrategy"))
+    CreateNetworkMigrationDefinitionRequest.add_member(:cidr_mappings, Shapes::ShapeRef.new(shape: CidrMappingsList, location_name: "cidrMappings"))
     CreateNetworkMigrationDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateNetworkMigrationDefinitionRequest.add_member(:scope_tags, Shapes::ShapeRef.new(shape: ScopeTagsMap, location_name: "scopeTags"))
     CreateNetworkMigrationDefinitionRequest.struct_class = Types::CreateNetworkMigrationDefinitionRequest
@@ -1135,6 +1147,8 @@ module Aws::Mgn
     LaunchTemplateDiskConf.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
     LaunchTemplateDiskConf.add_member(:iops, Shapes::ShapeRef.new(shape: Iops, location_name: "iops"))
     LaunchTemplateDiskConf.add_member(:throughput, Shapes::ShapeRef.new(shape: Throughput, location_name: "throughput"))
+    LaunchTemplateDiskConf.add_member(:volume_initialization_rate, Shapes::ShapeRef.new(shape: VolumeInitializationRate, location_name: "volumeInitializationRate"))
+    LaunchTemplateDiskConf.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
     LaunchTemplateDiskConf.struct_class = Types::LaunchTemplateDiskConf
 
     LaunchedInstance.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: EC2InstanceID, location_name: "ec2InstanceID"))
@@ -1603,6 +1617,8 @@ module Aws::Mgn
     NetworkMigrationDefinition.add_member(:target_s3_configuration, Shapes::ShapeRef.new(shape: TargetS3Configuration, location_name: "targetS3Configuration"))
     NetworkMigrationDefinition.add_member(:target_network, Shapes::ShapeRef.new(shape: TargetNetwork, location_name: "targetNetwork"))
     NetworkMigrationDefinition.add_member(:target_deployment, Shapes::ShapeRef.new(shape: TargetDeployment, location_name: "targetDeployment"))
+    NetworkMigrationDefinition.add_member(:vpc_provisioning_strategy, Shapes::ShapeRef.new(shape: VpcProvisioningStrategy, location_name: "vpcProvisioningStrategy"))
+    NetworkMigrationDefinition.add_member(:cidr_mappings, Shapes::ShapeRef.new(shape: CidrMappingsList, location_name: "cidrMappings"))
     NetworkMigrationDefinition.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     NetworkMigrationDefinition.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     NetworkMigrationDefinition.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -2240,6 +2256,8 @@ module Aws::Mgn
     UpdateNetworkMigrationDefinitionRequest.add_member(:target_s3_configuration, Shapes::ShapeRef.new(shape: TargetS3ConfigurationUpdate, location_name: "targetS3Configuration"))
     UpdateNetworkMigrationDefinitionRequest.add_member(:target_network, Shapes::ShapeRef.new(shape: TargetNetworkUpdate, location_name: "targetNetwork"))
     UpdateNetworkMigrationDefinitionRequest.add_member(:target_deployment, Shapes::ShapeRef.new(shape: TargetDeployment, location_name: "targetDeployment"))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:vpc_provisioning_strategy, Shapes::ShapeRef.new(shape: VpcProvisioningStrategy, location_name: "vpcProvisioningStrategy"))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:cidr_mappings, Shapes::ShapeRef.new(shape: CidrMappingsList, location_name: "cidrMappings"))
     UpdateNetworkMigrationDefinitionRequest.add_member(:scope_tags, Shapes::ShapeRef.new(shape: ScopeTagsMap, location_name: "scopeTags"))
     UpdateNetworkMigrationDefinitionRequest.struct_class = Types::UpdateNetworkMigrationDefinitionRequest
 

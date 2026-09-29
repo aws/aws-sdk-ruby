@@ -1137,7 +1137,7 @@ module Aws::WorkSpaces
     #     bundle_description: "WorkspaceBundleDescription", # required
     #     image_id: "WorkspaceImageId", # required
     #     compute_type: { # required
-    #       name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GENERALPURPOSE_4XLARGE, GENERALPURPOSE_8XLARGE, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN, GRAPHICS_G6_XLARGE, GRAPHICS_G6_2XLARGE, GRAPHICS_G6_4XLARGE, GRAPHICS_G6_8XLARGE, GRAPHICS_G6_16XLARGE, GRAPHICS_GR6_4XLARGE, GRAPHICS_GR6_8XLARGE, GRAPHICS_G6F_LARGE, GRAPHICS_G6F_XLARGE, GRAPHICS_G6F_2XLARGE, GRAPHICS_G6F_4XLARGE, GRAPHICS_GR6F_4XLARGE
+    #       name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GENERALPURPOSE_4XLARGE, GENERALPURPOSE_8XLARGE, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN, GRAPHICS_G6_XLARGE, GRAPHICS_G6_2XLARGE, GRAPHICS_G6_4XLARGE, GRAPHICS_G6_8XLARGE, GRAPHICS_G6_16XLARGE, GRAPHICS_GR6_4XLARGE, GRAPHICS_GR6_8XLARGE, GRAPHICS_G6F_LARGE, GRAPHICS_G6F_XLARGE, GRAPHICS_G6F_2XLARGE, GRAPHICS_G6F_4XLARGE, GRAPHICS_GR6F_4XLARGE, GRAPHICS_G7_2XLARGE, GRAPHICS_G7_4XLARGE, GRAPHICS_G7_8XLARGE, GRAPHICS_G7_12XLARGE
     #     },
     #     user_storage: { # required
     #       capacity: "NonEmptyString", # required
@@ -1162,7 +1162,7 @@ module Aws::WorkSpaces
     #   resp.workspace_bundle.image_id #=> String
     #   resp.workspace_bundle.root_storage.capacity #=> String
     #   resp.workspace_bundle.user_storage.capacity #=> String
-    #   resp.workspace_bundle.compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE"
+    #   resp.workspace_bundle.compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"
     #   resp.workspace_bundle.last_updated_time #=> Time
     #   resp.workspace_bundle.creation_time #=> Time
     #   resp.workspace_bundle.state #=> String, one of "AVAILABLE", "PENDING", "ERROR"
@@ -1289,13 +1289,14 @@ module Aws::WorkSpaces
     #           running_mode_auto_stop_timeout_in_minutes: 1,
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
-    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GENERALPURPOSE_4XLARGE, GENERALPURPOSE_8XLARGE, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN, GRAPHICS_G6_XLARGE, GRAPHICS_G6_2XLARGE, GRAPHICS_G6_4XLARGE, GRAPHICS_G6_8XLARGE, GRAPHICS_G6_16XLARGE, GRAPHICS_GR6_4XLARGE, GRAPHICS_GR6_8XLARGE, GRAPHICS_G6F_LARGE, GRAPHICS_G6F_XLARGE, GRAPHICS_G6F_2XLARGE, GRAPHICS_G6F_4XLARGE, GRAPHICS_GR6F_4XLARGE
+    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GENERALPURPOSE_4XLARGE, GENERALPURPOSE_8XLARGE, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN, GRAPHICS_G6_XLARGE, GRAPHICS_G6_2XLARGE, GRAPHICS_G6_4XLARGE, GRAPHICS_G6_8XLARGE, GRAPHICS_G6_16XLARGE, GRAPHICS_GR6_4XLARGE, GRAPHICS_GR6_8XLARGE, GRAPHICS_G6F_LARGE, GRAPHICS_G6F_XLARGE, GRAPHICS_G6F_2XLARGE, GRAPHICS_G6F_4XLARGE, GRAPHICS_GR6F_4XLARGE, GRAPHICS_G7_2XLARGE, GRAPHICS_G7_4XLARGE, GRAPHICS_G7_8XLARGE, GRAPHICS_G7_12XLARGE
     #           protocols: ["PCOIP"], # accepts PCOIP, WSP
     #           operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, RHEL_8, ROCKY_8
     #           global_accelerator: {
     #             mode: "ENABLED_AUTO", # required, accepts ENABLED_AUTO, DISABLED, INHERITED
     #             preferred_protocol: "TCP", # accepts TCP, NONE, INHERITED
     #           },
+    #           nested_virtualization_enabled: false,
     #         },
     #         tags: [
     #           {
@@ -1322,12 +1323,13 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.failed_requests[0].workspace_request.workspace_properties.root_volume_size_gib #=> Integer
     #   resp.failed_requests[0].workspace_request.workspace_properties.user_volume_size_gib #=> Integer
-    #   resp.failed_requests[0].workspace_request.workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE"
+    #   resp.failed_requests[0].workspace_request.workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"
     #   resp.failed_requests[0].workspace_request.workspace_properties.protocols #=> Array
     #   resp.failed_requests[0].workspace_request.workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
     #   resp.failed_requests[0].workspace_request.workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"
     #   resp.failed_requests[0].workspace_request.workspace_properties.global_accelerator.mode #=> String, one of "ENABLED_AUTO", "DISABLED", "INHERITED"
     #   resp.failed_requests[0].workspace_request.workspace_properties.global_accelerator.preferred_protocol #=> String, one of "TCP", "NONE", "INHERITED"
+    #   resp.failed_requests[0].workspace_request.workspace_properties.nested_virtualization_enabled #=> Boolean
     #   resp.failed_requests[0].workspace_request.tags #=> Array
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
@@ -1355,14 +1357,15 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.pending_requests[0].workspace_properties.root_volume_size_gib #=> Integer
     #   resp.pending_requests[0].workspace_properties.user_volume_size_gib #=> Integer
-    #   resp.pending_requests[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE"
+    #   resp.pending_requests[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"
     #   resp.pending_requests[0].workspace_properties.protocols #=> Array
     #   resp.pending_requests[0].workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
     #   resp.pending_requests[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"
     #   resp.pending_requests[0].workspace_properties.global_accelerator.mode #=> String, one of "ENABLED_AUTO", "DISABLED", "INHERITED"
     #   resp.pending_requests[0].workspace_properties.global_accelerator.preferred_protocol #=> String, one of "TCP", "NONE", "INHERITED"
+    #   resp.pending_requests[0].workspace_properties.nested_virtualization_enabled #=> Boolean
     #   resp.pending_requests[0].modification_states #=> Array
-    #   resp.pending_requests[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE", "PROTOCOL"
+    #   resp.pending_requests[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE", "PROTOCOL", "NESTED_VIRTUALIZATION"
     #   resp.pending_requests[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.pending_requests[0].related_workspaces #=> Array
     #   resp.pending_requests[0].related_workspaces[0].workspace_id #=> String
@@ -1980,7 +1983,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.describe_applications({
     #     application_ids: ["WorkSpaceApplicationId"],
-    #     compute_type_names: ["VALUE"], # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GENERALPURPOSE_4XLARGE, GENERALPURPOSE_8XLARGE, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN, GRAPHICS_G6_XLARGE, GRAPHICS_G6_2XLARGE, GRAPHICS_G6_4XLARGE, GRAPHICS_G6_8XLARGE, GRAPHICS_G6_16XLARGE, GRAPHICS_GR6_4XLARGE, GRAPHICS_GR6_8XLARGE, GRAPHICS_G6F_LARGE, GRAPHICS_G6F_XLARGE, GRAPHICS_G6F_2XLARGE, GRAPHICS_G6F_4XLARGE, GRAPHICS_GR6F_4XLARGE
+    #     compute_type_names: ["VALUE"], # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GENERALPURPOSE_4XLARGE, GENERALPURPOSE_8XLARGE, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN, GRAPHICS_G6_XLARGE, GRAPHICS_G6_2XLARGE, GRAPHICS_G6_4XLARGE, GRAPHICS_G6_8XLARGE, GRAPHICS_G6_16XLARGE, GRAPHICS_GR6_4XLARGE, GRAPHICS_GR6_8XLARGE, GRAPHICS_G6F_LARGE, GRAPHICS_G6F_XLARGE, GRAPHICS_G6F_2XLARGE, GRAPHICS_G6F_4XLARGE, GRAPHICS_GR6F_4XLARGE, GRAPHICS_G7_2XLARGE, GRAPHICS_G7_4XLARGE, GRAPHICS_G7_8XLARGE, GRAPHICS_G7_12XLARGE
     #     license_type: "LICENSED", # accepts LICENSED, UNLICENSED
     #     operating_system_names: ["AMAZON_LINUX_2"], # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, RHEL_8, ROCKY_8
     #     owner: "WorkSpaceApplicationOwner",
@@ -1999,7 +2002,7 @@ module Aws::WorkSpaces
     #   resp.applications[0].owner #=> String
     #   resp.applications[0].state #=> String, one of "PENDING", "ERROR", "AVAILABLE", "UNINSTALL_ONLY"
     #   resp.applications[0].supported_compute_type_names #=> Array
-    #   resp.applications[0].supported_compute_type_names[0] #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE"
+    #   resp.applications[0].supported_compute_type_names[0] #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"
     #   resp.applications[0].supported_operating_system_names #=> Array
     #   resp.applications[0].supported_operating_system_names[0] #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"
     #   resp.next_token #=> String
@@ -2575,7 +2578,7 @@ module Aws::WorkSpaces
     #   resp.bundles[0].image_id #=> String
     #   resp.bundles[0].root_storage.capacity #=> String
     #   resp.bundles[0].user_storage.capacity #=> String
-    #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE"
+    #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"
     #   resp.bundles[0].last_updated_time #=> Time
     #   resp.bundles[0].creation_time #=> Time
     #   resp.bundles[0].state #=> String, one of "AVAILABLE", "PENDING", "ERROR"
@@ -2930,14 +2933,15 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.workspaces[0].workspace_properties.root_volume_size_gib #=> Integer
     #   resp.workspaces[0].workspace_properties.user_volume_size_gib #=> Integer
-    #   resp.workspaces[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE"
+    #   resp.workspaces[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"
     #   resp.workspaces[0].workspace_properties.protocols #=> Array
     #   resp.workspaces[0].workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
     #   resp.workspaces[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"
     #   resp.workspaces[0].workspace_properties.global_accelerator.mode #=> String, one of "ENABLED_AUTO", "DISABLED", "INHERITED"
     #   resp.workspaces[0].workspace_properties.global_accelerator.preferred_protocol #=> String, one of "TCP", "NONE", "INHERITED"
+    #   resp.workspaces[0].workspace_properties.nested_virtualization_enabled #=> Boolean
     #   resp.workspaces[0].modification_states #=> Array
-    #   resp.workspaces[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE", "PROTOCOL"
+    #   resp.workspaces[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE", "PROTOCOL", "NESTED_VIRTUALIZATION"
     #   resp.workspaces[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.workspaces[0].related_workspaces #=> Array
     #   resp.workspaces[0].related_workspaces[0].workspace_id #=> String
@@ -3506,7 +3510,7 @@ module Aws::WorkSpaces
     #   resp = client.import_custom_workspace_image({
     #     image_name: "WorkspaceImageName", # required
     #     image_description: "WorkspaceImageDescription", # required
-    #     compute_type: "BASE", # required, accepts BASE, GRAPHICS_G4DN, GRAPHICS_G6
+    #     compute_type: "BASE", # required, accepts BASE, GRAPHICS_G4DN, GRAPHICS_G6, GRAPHICS_G7
     #     protocol: "PCOIP", # required, accepts PCOIP, DCV, BYOP
     #     image_source: { # required
     #       ec2_import_task_id: "Ec2ImportTaskId",
@@ -3747,6 +3751,12 @@ module Aws::WorkSpaces
     #
     # For available migration scenarios, details about what happens during
     # migration, and best practices, see [Migrate a WorkSpace][1].
+    #
+    # <note markdown="1"> If the source WorkSpace has nested virtualization enabled and the
+    # target bundle does not support nested virtualization, the migration
+    # fails.
+    #
+    #  </note>
     #
     #
     #
@@ -4164,13 +4174,14 @@ module Aws::WorkSpaces
     #       running_mode_auto_stop_timeout_in_minutes: 1,
     #       root_volume_size_gib: 1,
     #       user_volume_size_gib: 1,
-    #       compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GENERALPURPOSE_4XLARGE, GENERALPURPOSE_8XLARGE, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN, GRAPHICS_G6_XLARGE, GRAPHICS_G6_2XLARGE, GRAPHICS_G6_4XLARGE, GRAPHICS_G6_8XLARGE, GRAPHICS_G6_16XLARGE, GRAPHICS_GR6_4XLARGE, GRAPHICS_GR6_8XLARGE, GRAPHICS_G6F_LARGE, GRAPHICS_G6F_XLARGE, GRAPHICS_G6F_2XLARGE, GRAPHICS_G6F_4XLARGE, GRAPHICS_GR6F_4XLARGE
+    #       compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GENERALPURPOSE_4XLARGE, GENERALPURPOSE_8XLARGE, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN, GRAPHICS_G6_XLARGE, GRAPHICS_G6_2XLARGE, GRAPHICS_G6_4XLARGE, GRAPHICS_G6_8XLARGE, GRAPHICS_G6_16XLARGE, GRAPHICS_GR6_4XLARGE, GRAPHICS_GR6_8XLARGE, GRAPHICS_G6F_LARGE, GRAPHICS_G6F_XLARGE, GRAPHICS_G6F_2XLARGE, GRAPHICS_G6F_4XLARGE, GRAPHICS_GR6F_4XLARGE, GRAPHICS_G7_2XLARGE, GRAPHICS_G7_4XLARGE, GRAPHICS_G7_8XLARGE, GRAPHICS_G7_12XLARGE
     #       protocols: ["PCOIP"], # accepts PCOIP, WSP
     #       operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, RHEL_8, ROCKY_8
     #       global_accelerator: {
     #         mode: "ENABLED_AUTO", # required, accepts ENABLED_AUTO, DISABLED, INHERITED
     #         preferred_protocol: "TCP", # accepts TCP, NONE, INHERITED
     #       },
+    #       nested_virtualization_enabled: false,
     #     },
     #     data_replication: "NO_REPLICATION", # accepts NO_REPLICATION, PRIMARY_AS_SOURCE
     #   })
@@ -5150,7 +5161,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.163.0'
+      context[:gem_version] = '1.167.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

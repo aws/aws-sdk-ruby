@@ -569,8 +569,9 @@ module Aws::BedrockAgentCoreControl
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, Array<Types::BatchPutLimitEntry>] :rate_limits
-    #   Complete set of rate limits for this gateway. Replaces all existing
-    #   limits atomically.
+    #   The complete set of rate limits for this gateway. This operation
+    #   replaces all existing rate limits in a single request. If the
+    #   operation fails, no rate limits are changed.
     #
     # @return [Types::BatchPutGatewayRateLimitsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -704,6 +705,9 @@ module Aws::BedrockAgentCoreControl
     #   A map of tag keys and values to assign to the agent runtime. Tags
     #   enable you to categorize your resources in different ways, for
     #   example, by purpose, owner, or environment.
+    #
+    # @option params [String] :platform_version
+    #   The version of the runtime platform to use for the AgentCore Runtime.
     #
     # @return [Types::CreateAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -850,6 +854,7 @@ module Aws::BedrockAgentCoreControl
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     platform_version: "PlatformVersion",
     #   })
     #
     # @example Response structure
@@ -859,7 +864,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_id #=> String
     #   resp.agent_runtime_version #=> String
     #   resp.created_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntime AWS API Documentation
     #
@@ -927,7 +932,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_arn #=> String
     #   resp.agent_runtime_id #=> String
     #   resp.endpoint_name #=> String
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeEndpoint AWS API Documentation
@@ -1573,6 +1578,98 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Creates a new consent portal.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the consent portal
+    #   assumes to access the resources defined in its sources.
+    #
+    # @option params [required, Types::ConsentPortalIdpConfig] :idp_config
+    #   The identity provider configuration that the consent portal uses to
+    #   authenticate end users.
+    #
+    # @option params [required, String] :name
+    #   The name of the consent portal. The name must be unique within your
+    #   account.
+    #
+    # @option params [required, Array<Types::ConsentPortalSource>] :sources
+    #   The resources served by the consent portal. Currently, we only support
+    #   type `agentcore-gateway`.
+    #
+    # @option params [String] :description
+    #   The description of the consent portal.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to the consent portal. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #
+    # @return [Types::CreateConsentPortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConsentPortalResponse#sources #sources} => Array&lt;Types::ConsentPortalSource&gt;
+    #   * {Types::CreateConsentPortalResponse#consent_portal_arn #consent_portal_arn} => String
+    #   * {Types::CreateConsentPortalResponse#consent_portal_id #consent_portal_id} => String
+    #   * {Types::CreateConsentPortalResponse#created_at #created_at} => Time
+    #   * {Types::CreateConsentPortalResponse#description #description} => String
+    #   * {Types::CreateConsentPortalResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::CreateConsentPortalResponse#idp_config #idp_config} => Types::ConsentPortalIdpConfig
+    #   * {Types::CreateConsentPortalResponse#name #name} => String
+    #   * {Types::CreateConsentPortalResponse#portal_url #portal_url} => String
+    #   * {Types::CreateConsentPortalResponse#status #status} => String
+    #   * {Types::CreateConsentPortalResponse#status_reason #status_reason} => String
+    #   * {Types::CreateConsentPortalResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_consent_portal({
+    #     execution_role_arn: "ExecutionRoleArnType", # required
+    #     idp_config: { # required
+    #       credential_provider_arn: "OAuth2CredentialProviderArn", # required
+    #       scopes: ["AllowedScopeType"], # required
+    #       audience: "AllowedAudienceType",
+    #     },
+    #     name: "ConsentPortalNameType", # required
+    #     sources: [ # required
+    #       {
+    #         identifier: "ConsentPortalSourceIdentifierType", # required
+    #         type: "agentcore-gateway", # required, accepts agentcore-gateway
+    #       },
+    #     ],
+    #     description: "ConsentPortalDescriptionType",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sources #=> Array
+    #   resp.sources[0].identifier #=> String
+    #   resp.sources[0].type #=> String, one of "agentcore-gateway"
+    #   resp.consent_portal_arn #=> String
+    #   resp.consent_portal_id #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.idp_config.credential_provider_arn #=> String
+    #   resp.idp_config.scopes #=> Array
+    #   resp.idp_config.scopes[0] #=> String
+    #   resp.idp_config.audience #=> String
+    #   resp.name #=> String
+    #   resp.portal_url #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "FAILED"
+    #   resp.status_reason #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateConsentPortal AWS API Documentation
+    #
+    # @overload create_consent_portal(params = {})
+    # @param [Hash] params ({})
+    def create_consent_portal(params = {}, options = {})
+      req = build_request(:create_consent_portal, params)
+      req.send_request(options)
+    end
+
     # Creates a new dataset resource asynchronously. Returns immediately
     # with status CREATING. Poll `GetDataset` until status transitions to
     # ACTIVE or CREATE\_FAILED.
@@ -1637,7 +1734,7 @@ module Aws::BedrockAgentCoreControl
     #         s3_uri: "S3Uri", # required
     #       },
     #     },
-    #     schema_type: "AGENTCORE_EVALUATION_PREDEFINED_V1", # required, accepts AGENTCORE_EVALUATION_PREDEFINED_V1, AGENTCORE_EVALUATION_SIMULATED_V1, GENERIC_EVALUATION_PREDEFINED_V1
+    #     schema_type: "AGENTCORE_EVALUATION_PREDEFINED_V1", # required, accepts AGENTCORE_EVALUATION_PREDEFINED_V1, AGENTCORE_EVALUATION_SIMULATED_V1, THIRD_PARTY_EVALUATION_V1
     #     kms_key_arn: "KmsKeyArn",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -2002,6 +2099,7 @@ module Aws::BedrockAgentCoreControl
     #         streaming_configuration: {
     #           enable_response_streaming: false,
     #         },
+    #         disable_mcp_list_tools_pagination: false,
     #       },
     #     },
     #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM, NONE, AUTHENTICATE_ONLY
@@ -2123,6 +2221,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
     #   resp.protocol_configuration.mcp.session_configuration.session_timeout_in_seconds #=> Integer
     #   resp.protocol_configuration.mcp.streaming_configuration.enable_response_streaming #=> Boolean
+    #   resp.protocol_configuration.mcp.disable_mcp_list_tools_pagination #=> Boolean
     #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE", "AUTHENTICATE_ONLY"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
@@ -2213,18 +2312,20 @@ module Aws::BedrockAgentCoreControl
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :rate_limit_id
-    #   Optional customer-defined limit ID. If not provided, system generates
-    #   one.
+    #   An optional customer-defined identifier for the rate limit. If not
+    #   provided, the system generates one.
     #
     # @option params [String] :description
-    #   Optional human-readable description for this limit.
+    #   An optional human-readable description for this rate limit. If not
+    #   provided, the rate limit is created without a description.
     #
     # @option params [required, Array<String>] :dimension_keys
-    #   Ordered list of dimension names defining the scope of this limit.
-    #   Unique per gateway — no two limits can share the same dimensionKeys.
+    #   The ordered list of dimension key names that define the scope of this
+    #   rate limit. Must be unique per gateway—no two rate limits can share
+    #   the same dimension keys.
     #
     # @option params [required, Array<Types::LimitEntry>] :entries
-    #   Rule entries mapping dimension values to rate configurations.
+    #   The rule entries that map dimension values to rate configurations.
     #
     # @return [Types::CreateGatewayRateLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2677,7 +2778,12 @@ module Aws::BedrockAgentCoreControl
     #           stickiness_configuration: {
     #             identifier: "StickinessConfigurationIdentifierString", # required
     #             timeout: 1,
+    #             composite_identifier: ["CompositeIdentifierEntry"],
     #           },
+    #           static_query_parameters: {
+    #             "StaticQueryParameterName" => "StaticQueryParameterValue",
+    #           },
+    #           static_query_parameter_conflict_resolution: "CLIENT_OVERRIDE", # accepts CLIENT_OVERRIDE, STATIC_OVERRIDE
     #         },
     #         connector: {
     #           source: { # required
@@ -2841,6 +2947,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.http.passthrough.schema.source.inline_payload #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.identifier #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.timeout #=> Integer
+    #   resp.target_configuration.http.passthrough.stickiness_configuration.composite_identifier #=> Array
+    #   resp.target_configuration.http.passthrough.stickiness_configuration.composite_identifier[0] #=> String
+    #   resp.target_configuration.http.passthrough.static_query_parameters #=> Hash
+    #   resp.target_configuration.http.passthrough.static_query_parameters["StaticQueryParameterName"] #=> String
+    #   resp.target_configuration.http.passthrough.static_query_parameter_conflict_resolution #=> String, one of "CLIENT_OVERRIDE", "STATIC_OVERRIDE"
     #   resp.target_configuration.http.connector.source.connector_id #=> String
     #   resp.target_configuration.http.connector.parameters #=> Hash
     #   resp.target_configuration.http.connector.parameters["ConnectorParameterName"] #=> String
@@ -2963,6 +3074,9 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::HarnessTruncationConfiguration] :truncation
     #   The truncation configuration for managing conversation context when it
     #   exceeds model limits.
+    #
+    # @option params [Array<Types::HarnessHook>] :hooks
+    #   The lifecycle hooks to run at defined points in the agent loop.
     #
     # @option params [Integer] :max_iterations
     #   The maximum number of iterations the agent loop can execute per
@@ -3112,6 +3226,7 @@ module Aws::BedrockAgentCoreControl
     #       open_ai_model_config: {
     #         model_id: "ModelId", # required
     #         api_key_arn: "ApiKeyArn", # required
+    #         api_base: "HarnessOpenAiApiBase",
     #         max_tokens: 1,
     #         temperature: 1.0,
     #         top_p: 1.0,
@@ -3243,6 +3358,74 @@ module Aws::BedrockAgentCoreControl
     #         },
     #       },
     #     },
+    #     hooks: [
+    #       {
+    #         before_invocation: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         after_invocation: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         before_tool_call: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         after_tool_call: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
     #     max_iterations: 1,
     #     max_tokens: 1,
     #     timeout_seconds: 1,
@@ -3268,6 +3451,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.model.bedrock_model_config.api_format #=> String, one of "converse_stream", "responses", "chat_completions"
     #   resp.harness.model.open_ai_model_config.model_id #=> String
     #   resp.harness.model.open_ai_model_config.api_key_arn #=> String
+    #   resp.harness.model.open_ai_model_config.api_base #=> String
     #   resp.harness.model.open_ai_model_config.max_tokens #=> Integer
     #   resp.harness.model.open_ai_model_config.temperature #=> Float
     #   resp.harness.model.open_ai_model_config.top_p #=> Float
@@ -3395,6 +3579,31 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.memory.managed_memory_configuration.strategies[0] #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "EPISODIC"
     #   resp.harness.memory.managed_memory_configuration.event_expiry_duration #=> Integer
     #   resp.harness.memory.managed_memory_configuration.encryption_key_arn #=> String
+    #   resp.harness.hooks #=> Array
+    #   resp.harness.hooks[0].before_invocation.name #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.name #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.name #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.name #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.event_bridge.arn #=> String
     #   resp.harness.max_iterations #=> Integer
     #   resp.harness.max_tokens #=> Integer
     #   resp.harness.timeout_seconds #=> Integer
@@ -3511,6 +3720,11 @@ module Aws::BedrockAgentCoreControl
     # @option params [Array<Types::IndexedKey>] :indexed_keys
     #   Metadata keys to index for filtering. Once declared, indexed keys
     #   cannot be removed.
+    #
+    # @option params [Array<Types::NamespaceKeyEntry>] :namespace_keys
+    #   The namespace variable key definitions with optional validation rules.
+    #   Use these `namespaceKeys` in `namespaceTemplates` to control namespace
+    #   hierarchy.
     #
     # @option params [Types::StreamDeliveryResources] :stream_delivery_resources
     #   Configuration for streaming memory record data to external resources.
@@ -3837,6 +4051,15 @@ module Aws::BedrockAgentCoreControl
     #         type: "STRING", # required, accepts STRING, STRINGLIST, NUMBER
     #       },
     #     ],
+    #     namespace_keys: [
+    #       {
+    #         key: "NamespaceVariableKey", # required
+    #         validation: {
+    #           allowed_values: ["NamespaceAllowedValue"],
+    #           regex_pattern: "NamespaceRegexPattern",
+    #         },
+    #       },
+    #     ],
     #     stream_delivery_resources: {
     #       resources: [ # required
     #         {
@@ -3956,6 +4179,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.indexed_keys #=> Array
     #   resp.memory.indexed_keys[0].key #=> String
     #   resp.memory.indexed_keys[0].type #=> String, one of "STRING", "STRINGLIST", "NUMBER"
+    #   resp.memory.namespace_keys #=> Array
+    #   resp.memory.namespace_keys[0].key #=> String
+    #   resp.memory.namespace_keys[0].validation.allowed_values #=> Array
+    #   resp.memory.namespace_keys[0].validation.allowed_values[0] #=> String
+    #   resp.memory.namespace_keys[0].validation.regex_pattern #=> String
     #   resp.memory.stream_delivery_resources.resources #=> Array
     #   resp.memory.stream_delivery_resources.resources[0].kinesis.data_stream_arn #=> String
     #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations #=> Array
@@ -4346,6 +4574,10 @@ module Aws::BedrockAgentCoreControl
     #   Configuration for periodic batch evaluation clustering of insight
     #   results.
     #
+    # @option params [Types::OutputConfig] :output_config
+    #   The configuration that specifies where evaluation results should be
+    #   written for monitoring and analysis.
+    #
     # @option params [required, String] :evaluation_execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that grants permissions
     #   to read from CloudWatch logs, write evaluation results, and invoke
@@ -4405,7 +4637,8 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     data_source_config: { # required
     #       cloud_watch_logs: {
-    #         log_group_names: ["LogGroupName"], # required
+    #         log_group_names: ["LogGroupName"],
+    #         log_group_name_prefixes: ["LogGroupNamePrefix"],
     #         service_names: ["ServiceName"], # required
     #       },
     #     },
@@ -4422,6 +4655,13 @@ module Aws::BedrockAgentCoreControl
     #     clustering_config: {
     #       frequencies: ["DAILY"], # required, accepts DAILY, WEEKLY, MONTHLY
     #     },
+    #     output_config: {
+    #       cloud_watch_config: { # required
+    #         log_group_name: "OptionalLogGroupName",
+    #         metrics_namespace: "MetricsNamespace",
+    #         result_destination: "DEDICATED_LOG_GROUP", # accepts DEDICATED_LOG_GROUP, SOURCE_LOG_GROUP
+    #       },
+    #     },
     #     evaluation_execution_role_arn: "RoleArn", # required
     #     enable_on_create: false, # required
     #     tags: {
@@ -4435,6 +4675,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.online_evaluation_config_id #=> String
     #   resp.created_at #=> Time
     #   resp.output_config.cloud_watch_config.log_group_name #=> String
+    #   resp.output_config.cloud_watch_config.metrics_namespace #=> String
+    #   resp.output_config.cloud_watch_config.result_destination #=> String, one of "DEDICATED_LOG_GROUP", "SOURCE_LOG_GROUP"
     #   resp.status #=> String, one of "ACTIVE", "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING", "ERROR"
     #   resp.execution_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.failure_reason #=> String
@@ -4859,15 +5101,15 @@ module Aws::BedrockAgentCoreControl
 
     # Creates a policy within the AgentCore Policy system. Policies provide
     # real-time, deterministic control over agentic interactions with
-    # AgentCore Gateway. Using the Cedar policy language, you can define
-    # fine-grained policies that specify which interactions with Gateway
-    # tools are permitted based on input parameters and OAuth claims,
-    # ensuring agents operate within defined boundaries and business rules.
-    # The policy is validated during creation against the Cedar schema
-    # generated from the Gateway's tools' input schemas, which defines the
-    # available tools, their parameters, and expected data types. This is an
-    # asynchronous operation. Use the [GetPolicy][1] operation to poll the
-    # `status` field to track completion.
+    # AgentCore Gateway. Using Cedar or Dogwood, you can define fine-grained
+    # policies that specify which interactions with Gateway tools are
+    # permitted based on input parameters and OAuth claims, ensuring agents
+    # operate within defined boundaries and business rules. The policy is
+    # validated during creation against the Cedar schema generated from the
+    # Gateway's tools' input schemas, which defines the available tools,
+    # their parameters, and expected data types. This is an asynchronous
+    # operation. Use the [GetPolicy][1] operation to poll the `status` field
+    # to track completion.
     #
     # If the new policy is a temporal policy, creating it invalidates the
     # policy engine's active temporal sessions. For more information about
@@ -4887,10 +5129,10 @@ module Aws::BedrockAgentCoreControl
     #   cannot be changed after creation.
     #
     # @option params [required, Types::PolicyDefinition] :definition
-    #   The Cedar policy statement that defines the access control rules. This
-    #   contains the actual policy logic written in Cedar policy language,
-    #   specifying effect (permit or forbid), principals, actions, resources,
-    #   and conditions for agent behavior control.
+    #   The Cedar or Dogwood policy statement that defines the access control
+    #   rules. This contains the actual policy logic written in Cedar or
+    #   Dogwood, specifying effect (permit or forbid), principals, actions,
+    #   resources, and conditions for agent behavior control.
     #
     # @option params [String] :description
     #   A human-readable description of the policy's purpose and
@@ -5467,7 +5709,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.agent_runtime_id #=> String
     #   resp.agent_runtime_version #=> String
     #
@@ -5512,7 +5754,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.agent_runtime_id #=> String
     #   resp.endpoint_name #=> String
     #
@@ -5745,6 +5987,29 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def delete_configuration_bundle(params = {}, options = {})
       req = build_request(:delete_configuration_bundle, params)
+      req.send_request(options)
+    end
+
+    # Deletes a consent portal.
+    #
+    # @option params [required, String] :consent_portal_identifier
+    #   The identifier of the consent portal. You can specify either the
+    #   consent portal ID or its Amazon Resource Name (ARN).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_consent_portal({
+    #     consent_portal_identifier: "ConsentPortalIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteConsentPortal AWS API Documentation
+    #
+    # @overload delete_consent_portal(params = {})
+    # @param [Hash] params ({})
+    def delete_consent_portal(params = {}, options = {})
+      req = build_request(:delete_consent_portal, params)
       req.send_request(options)
     end
 
@@ -6073,6 +6338,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.model.bedrock_model_config.api_format #=> String, one of "converse_stream", "responses", "chat_completions"
     #   resp.harness.model.open_ai_model_config.model_id #=> String
     #   resp.harness.model.open_ai_model_config.api_key_arn #=> String
+    #   resp.harness.model.open_ai_model_config.api_base #=> String
     #   resp.harness.model.open_ai_model_config.max_tokens #=> Integer
     #   resp.harness.model.open_ai_model_config.temperature #=> Float
     #   resp.harness.model.open_ai_model_config.top_p #=> Float
@@ -6200,6 +6466,31 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.memory.managed_memory_configuration.strategies[0] #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "EPISODIC"
     #   resp.harness.memory.managed_memory_configuration.event_expiry_duration #=> Integer
     #   resp.harness.memory.managed_memory_configuration.encryption_key_arn #=> String
+    #   resp.harness.hooks #=> Array
+    #   resp.harness.hooks[0].before_invocation.name #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.name #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.name #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.name #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.event_bridge.arn #=> String
     #   resp.harness.max_iterations #=> Integer
     #   resp.harness.max_tokens #=> Integer
     #   resp.harness.timeout_seconds #=> Integer
@@ -6264,7 +6555,8 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Deletes an Amazon Bedrock AgentCore Memory resource.
+    # Deletes an Amazon Bedrock AgentCore Memory resource. When you delete a
+    # memory resource, it is permanently removed.
     #
     # @option params [String] :client_token
     #   A client token is used for keeping track of idempotent requests. It
@@ -6733,6 +7025,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#metadata_configuration #metadata_configuration} => Types::RuntimeMetadataConfiguration
     #   * {Types::GetAgentRuntimeResponse#filesystem_configurations #filesystem_configurations} => Array&lt;Types::FilesystemConfiguration&gt;
     #   * {Types::GetAgentRuntimeResponse#capacity_provider_configuration #capacity_provider_configuration} => Types::CapacityProviderConfiguration
+    #   * {Types::GetAgentRuntimeResponse#platform_version #platform_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6756,7 +7049,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.network_configuration.network_mode_config.subnets #=> Array
     #   resp.network_configuration.network_mode_config.subnets[0] #=> String
     #   resp.network_configuration.network_mode_config.require_service_s3_endpoint #=> Boolean
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.lifecycle_configuration.idle_runtime_session_timeout #=> Integer
     #   resp.lifecycle_configuration.max_lifetime #=> Integer
     #   resp.failure_reason #=> String
@@ -6826,6 +7119,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
     #   resp.capacity_provider_configuration.capacity_provider_arn #=> String
+    #   resp.platform_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -6873,7 +7167,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_endpoint_arn #=> String
     #   resp.agent_runtime_arn #=> String
     #   resp.description #=> String
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.failure_reason #=> String
@@ -7322,6 +7616,62 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Retrieves information about a consent portal.
+    #
+    # @option params [required, String] :consent_portal_identifier
+    #   The identifier of the consent portal. You can specify either the
+    #   consent portal ID or its Amazon Resource Name (ARN).
+    #
+    # @return [Types::GetConsentPortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConsentPortalResponse#sources #sources} => Array&lt;Types::ConsentPortalSource&gt;
+    #   * {Types::GetConsentPortalResponse#consent_portal_arn #consent_portal_arn} => String
+    #   * {Types::GetConsentPortalResponse#consent_portal_id #consent_portal_id} => String
+    #   * {Types::GetConsentPortalResponse#created_at #created_at} => Time
+    #   * {Types::GetConsentPortalResponse#description #description} => String
+    #   * {Types::GetConsentPortalResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::GetConsentPortalResponse#idp_config #idp_config} => Types::ConsentPortalIdpConfig
+    #   * {Types::GetConsentPortalResponse#name #name} => String
+    #   * {Types::GetConsentPortalResponse#portal_url #portal_url} => String
+    #   * {Types::GetConsentPortalResponse#status #status} => String
+    #   * {Types::GetConsentPortalResponse#status_reason #status_reason} => String
+    #   * {Types::GetConsentPortalResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_consent_portal({
+    #     consent_portal_identifier: "ConsentPortalIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sources #=> Array
+    #   resp.sources[0].identifier #=> String
+    #   resp.sources[0].type #=> String, one of "agentcore-gateway"
+    #   resp.consent_portal_arn #=> String
+    #   resp.consent_portal_id #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.idp_config.credential_provider_arn #=> String
+    #   resp.idp_config.scopes #=> Array
+    #   resp.idp_config.scopes[0] #=> String
+    #   resp.idp_config.audience #=> String
+    #   resp.name #=> String
+    #   resp.portal_url #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "FAILED"
+    #   resp.status_reason #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetConsentPortal AWS API Documentation
+    #
+    # @overload get_consent_portal(params = {})
+    # @param [Hash] params ({})
+    def get_consent_portal(params = {}, options = {})
+      req = build_request(:get_consent_portal, params)
+      req.send_request(options)
+    end
+
     # Retrieves dataset metadata. Use the `datasetVersion` query parameter
     # to retrieve a specific version's metadata. If absent, defaults to
     # DRAFT. For paginated example content, use `ListDatasetExamples`.
@@ -7369,7 +7719,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.draft_status #=> String, one of "MODIFIED", "UNMODIFIED"
     #   resp.failure_reason #=> String
-    #   resp.schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1", "GENERIC_EVALUATION_PREDEFINED_V1"
+    #   resp.schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1", "THIRD_PARTY_EVALUATION_V1"
     #   resp.kms_key_arn #=> String
     #   resp.example_count #=> Integer
     #   resp.download_url #=> String
@@ -7540,6 +7890,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
     #   resp.protocol_configuration.mcp.session_configuration.session_timeout_in_seconds #=> Integer
     #   resp.protocol_configuration.mcp.streaming_configuration.enable_response_streaming #=> Boolean
+    #   resp.protocol_configuration.mcp.disable_mcp_list_tools_pagination #=> Boolean
     #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE", "AUTHENTICATE_ONLY"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
@@ -7850,6 +8201,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.http.passthrough.schema.source.inline_payload #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.identifier #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.timeout #=> Integer
+    #   resp.target_configuration.http.passthrough.stickiness_configuration.composite_identifier #=> Array
+    #   resp.target_configuration.http.passthrough.stickiness_configuration.composite_identifier[0] #=> String
+    #   resp.target_configuration.http.passthrough.static_query_parameters #=> Hash
+    #   resp.target_configuration.http.passthrough.static_query_parameters["StaticQueryParameterName"] #=> String
+    #   resp.target_configuration.http.passthrough.static_query_parameter_conflict_resolution #=> String, one of "CLIENT_OVERRIDE", "STATIC_OVERRIDE"
     #   resp.target_configuration.http.connector.source.connector_id #=> String
     #   resp.target_configuration.http.connector.parameters #=> Hash
     #   resp.target_configuration.http.connector.parameters["ConnectorParameterName"] #=> String
@@ -7948,6 +8304,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.model.bedrock_model_config.api_format #=> String, one of "converse_stream", "responses", "chat_completions"
     #   resp.harness.model.open_ai_model_config.model_id #=> String
     #   resp.harness.model.open_ai_model_config.api_key_arn #=> String
+    #   resp.harness.model.open_ai_model_config.api_base #=> String
     #   resp.harness.model.open_ai_model_config.max_tokens #=> Integer
     #   resp.harness.model.open_ai_model_config.temperature #=> Float
     #   resp.harness.model.open_ai_model_config.top_p #=> Float
@@ -8075,6 +8432,31 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.memory.managed_memory_configuration.strategies[0] #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "EPISODIC"
     #   resp.harness.memory.managed_memory_configuration.event_expiry_duration #=> Integer
     #   resp.harness.memory.managed_memory_configuration.encryption_key_arn #=> String
+    #   resp.harness.hooks #=> Array
+    #   resp.harness.hooks[0].before_invocation.name #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.name #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.name #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.name #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.event_bridge.arn #=> String
     #   resp.harness.max_iterations #=> Integer
     #   resp.harness.max_tokens #=> Integer
     #   resp.harness.timeout_seconds #=> Integer
@@ -8249,6 +8631,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.indexed_keys #=> Array
     #   resp.memory.indexed_keys[0].key #=> String
     #   resp.memory.indexed_keys[0].type #=> String, one of "STRING", "STRINGLIST", "NUMBER"
+    #   resp.memory.namespace_keys #=> Array
+    #   resp.memory.namespace_keys[0].key #=> String
+    #   resp.memory.namespace_keys[0].validation.allowed_values #=> Array
+    #   resp.memory.namespace_keys[0].validation.allowed_values[0] #=> String
+    #   resp.memory.namespace_keys[0].validation.regex_pattern #=> String
     #   resp.memory.stream_delivery_resources.resources #=> Array
     #   resp.memory.stream_delivery_resources.resources[0].kinesis.data_stream_arn #=> String
     #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations #=> Array
@@ -8482,6 +8869,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.rule.session_config.session_timeout_minutes #=> Integer
     #   resp.data_source_config.cloud_watch_logs.log_group_names #=> Array
     #   resp.data_source_config.cloud_watch_logs.log_group_names[0] #=> String
+    #   resp.data_source_config.cloud_watch_logs.log_group_name_prefixes #=> Array
+    #   resp.data_source_config.cloud_watch_logs.log_group_name_prefixes[0] #=> String
     #   resp.data_source_config.cloud_watch_logs.service_names #=> Array
     #   resp.data_source_config.cloud_watch_logs.service_names[0] #=> String
     #   resp.evaluators #=> Array
@@ -8491,6 +8880,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.clustering_config.frequencies #=> Array
     #   resp.clustering_config.frequencies[0] #=> String, one of "DAILY", "WEEKLY", "MONTHLY"
     #   resp.output_config.cloud_watch_config.log_group_name #=> String
+    #   resp.output_config.cloud_watch_config.metrics_namespace #=> String
+    #   resp.output_config.cloud_watch_config.result_destination #=> String, one of "DEDICATED_LOG_GROUP", "SOURCE_LOG_GROUP"
     #   resp.evaluation_execution_role_arn #=> String
     #   resp.status #=> String, one of "ACTIVE", "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING", "ERROR"
     #   resp.execution_status #=> String, one of "ENABLED", "DISABLED"
@@ -8521,11 +8912,13 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetPaymentConnectorResponse#name #name} => String
     #   * {Types::GetPaymentConnectorResponse#description #description} => String
     #   * {Types::GetPaymentConnectorResponse#type #type} => String
+    #   * {Types::GetPaymentConnectorResponse#provision_mode #provision_mode} => String
     #   * {Types::GetPaymentConnectorResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialsProviderConfiguration&gt;
     #   * {Types::GetPaymentConnectorResponse#created_at #created_at} => Time
     #   * {Types::GetPaymentConnectorResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetPaymentConnectorResponse#status #status} => String
     #   * {Types::GetPaymentConnectorResponse#authorization_url #authorization_url} => String
+    #   * {Types::GetPaymentConnectorResponse#credentials_updated_at #credentials_updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -8540,6 +8933,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.provision_mode #=> String, one of "MANUAL", "QUICK_CREATE"
     #   resp.credential_provider_configurations #=> Array
     #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
     #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
@@ -8547,6 +8941,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.last_updated_at #=> Time
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.authorization_url #=> String
+    #   resp.credentials_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentConnector AWS API Documentation
     #
@@ -8878,7 +9273,7 @@ module Aws::BedrockAgentCoreControl
 
     # Retrieves information about a policy generation request within the
     # AgentCore Policy system. Policy generation converts natural language
-    # descriptions into Cedar policy statements using AI-powered
+    # descriptions into Dogwood policy statements using AI-powered
     # translation, enabling non-technical users to create policies.
     #
     # @option params [required, String] :policy_generation_id
@@ -9362,7 +9757,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.runtime_endpoints[0].target_version #=> String
     #   resp.runtime_endpoints[0].agent_runtime_endpoint_arn #=> String
     #   resp.runtime_endpoints[0].agent_runtime_arn #=> String
-    #   resp.runtime_endpoints[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.runtime_endpoints[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.runtime_endpoints[0].id #=> String
     #   resp.runtime_endpoints[0].description #=> String
     #   resp.runtime_endpoints[0].created_at #=> Time
@@ -9413,7 +9808,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtimes[0].agent_runtime_name #=> String
     #   resp.agent_runtimes[0].description #=> String
     #   resp.agent_runtimes[0].last_updated_at #=> Time
-    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimeVersions AWS API Documentation
@@ -9466,7 +9861,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtimes #=> Array
     #   resp.agent_runtimes[0].agent_runtime_arn #=> String
     #   resp.agent_runtimes[0].agent_runtime_version #=> String
-    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimeVersionsByCapacityProvider AWS API Documentation
@@ -9509,7 +9904,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtimes[0].agent_runtime_name #=> String
     #   resp.agent_runtimes[0].description #=> String
     #   resp.agent_runtimes[0].last_updated_at #=> Time
-    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimes AWS API Documentation
@@ -9875,6 +10270,54 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Lists all of the consent portals in your account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of consent portals to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   A token to retrieve the next page of results. Use the value returned
+    #   in a previous response to request the next page.
+    #
+    # @return [Types::ListConsentPortalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConsentPortalsResponse#consent_portals #consent_portals} => Array&lt;Types::ConsentPortalSummary&gt;
+    #   * {Types::ListConsentPortalsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_consent_portals({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.consent_portals #=> Array
+    #   resp.consent_portals[0].sources #=> Array
+    #   resp.consent_portals[0].sources[0].identifier #=> String
+    #   resp.consent_portals[0].sources[0].type #=> String, one of "agentcore-gateway"
+    #   resp.consent_portals[0].consent_portal_arn #=> String
+    #   resp.consent_portals[0].consent_portal_id #=> String
+    #   resp.consent_portals[0].created_at #=> Time
+    #   resp.consent_portals[0].description #=> String
+    #   resp.consent_portals[0].name #=> String
+    #   resp.consent_portals[0].portal_url #=> String
+    #   resp.consent_portals[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "FAILED"
+    #   resp.consent_portals[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListConsentPortals AWS API Documentation
+    #
+    # @overload list_consent_portals(params = {})
+    # @param [Hash] params ({})
+    def list_consent_portals(params = {}, options = {})
+      req = build_request(:list_consent_portals, params)
+      req.send_request(options)
+    end
+
     # Returns paginated examples from the dataset. The server embeds the
     # resolved version in the pagination token. Once pagination begins, all
     # subsequent pages are pinned to that version regardless of concurrent
@@ -10005,7 +10448,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.datasets[0].description #=> String
     #   resp.datasets[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.datasets[0].draft_status #=> String, one of "MODIFIED", "UNMODIFIED"
-    #   resp.datasets[0].schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1", "GENERIC_EVALUATION_PREDEFINED_V1"
+    #   resp.datasets[0].schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1", "THIRD_PARTY_EVALUATION_V1"
     #   resp.datasets[0].example_count #=> Integer
     #   resp.datasets[0].created_at #=> Time
     #   resp.datasets[0].updated_at #=> Time
@@ -10638,6 +11081,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_connectors[0].payment_connector_id #=> String
     #   resp.payment_connectors[0].name #=> String
     #   resp.payment_connectors[0].type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.payment_connectors[0].provision_mode #=> String, one of "MANUAL", "QUICK_CREATE"
     #   resp.payment_connectors[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.payment_connectors[0].last_updated_at #=> Time
     #   resp.next_token #=> String
@@ -10932,9 +11376,9 @@ module Aws::BedrockAgentCoreControl
 
     # Retrieves a list of generated policy assets from a policy generation
     # request within the AgentCore Policy system. This operation returns the
-    # actual Cedar policies and related artifacts produced by the AI-powered
-    # policy generation process, allowing users to review and select from
-    # multiple generated policy options.
+    # actual Dogwood policies and related artifacts produced by the
+    # AI-powered policy generation process, allowing users to review and
+    # select from multiple generated policy options.
     #
     # @option params [required, String] :policy_generation_id
     #   The unique identifier of the policy generation request whose assets
@@ -11448,6 +11892,88 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Replaces the service-managed credentials of a payment connector with
+    # newly issued credentials.
+    #
+    # Use this operation only for payment connectors with a `provisionMode`
+    # of `QUICK_CREATE`. For payment connectors with a `provisionMode` of
+    # `MANUAL`, call `UpdatePaymentCredentialProvider` instead after
+    # rotating credentials with the payment provider directly.
+    #
+    # The rotation finishes before the response is returned, and only one
+    # rotation runs at a time for a given payment connector. When it
+    # succeeds, the new credential is in effect and the payment connector
+    # stays in the `READY` state. When it fails, an error is returned, the
+    # payment connector and its existing credential are left unchanged, and
+    # you can retry the request.
+    #
+    # Rotation replaces the credential on the connector's credential
+    # provider, so every payment connector that uses that provider is
+    # affected. Replace any copy of the previous credential that you use
+    # outside AgentCore.
+    #
+    # @option params [required, String] :payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #
+    # @option params [required, String] :payment_connector_id
+    #   The unique identifier of the payment connector whose credentials you
+    #   want to rotate.
+    #
+    # @option params [required, Types::CredentialRotationConfig] :credentials_to_rotate
+    #   The credentials to rotate. Specify the member that matches the payment
+    #   connector's `type`. Each credential that you select is rotated
+    #   independently.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::RotatePaymentConnectorCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RotatePaymentConnectorCredentialsResponse#payment_connector_id #payment_connector_id} => String
+    #   * {Types::RotatePaymentConnectorCredentialsResponse#payment_manager_id #payment_manager_id} => String
+    #   * {Types::RotatePaymentConnectorCredentialsResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::RotatePaymentConnectorCredentialsResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.rotate_payment_connector_credentials({
+    #     payment_manager_id: "PaymentManagerId", # required
+    #     payment_connector_id: "PaymentConnectorId", # required
+    #     credentials_to_rotate: { # required
+    #       coinbase_cdp: {
+    #         secrets: ["API_KEY"], # required, accepts API_KEY, WALLET_SECRET
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_connector_id #=> String
+    #   resp.payment_manager_id #=> String
+    #   resp.last_updated_at #=> Time
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RotatePaymentConnectorCredentials AWS API Documentation
+    #
+    # @overload rotate_payment_connector_credentials(params = {})
+    # @param [Hash] params ({})
+    def rotate_payment_connector_credentials(params = {}, options = {})
+      req = build_request(:rotate_payment_connector_credentials, params)
+      req.send_request(options)
+    end
+
     # Sets the customer master key (CMK) for a token vault.
     #
     # @option params [String] :token_vault_id
@@ -11489,20 +12015,20 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Initiates the AI-powered generation of Cedar policies from natural
+    # Initiates the AI-powered generation of Dogwood policies from natural
     # language descriptions within the AgentCore Policy system. This feature
     # enables both technical and non-technical users to create policies by
     # describing their authorization requirements in plain English, which is
-    # then automatically translated into formal Cedar policy statements. The
-    # generation process analyzes the natural language input along with the
-    # Gateway's tool context to produce validated policy options. Generated
-    # policy assets are automatically deleted after 7 days, so you should
-    # review and create policies from the generated assets within this
-    # timeframe. Once created, policies are permanent and not subject to
-    # this expiration. Generated policies should be reviewed and tested in
-    # log-only mode before deploying to production. Use this when you want
-    # to describe policy intent naturally rather than learning Cedar syntax,
-    # though generated policies may require refinement for complex
+    # then automatically translated into formal Dogwood policy statements.
+    # The generation process analyzes the natural language input along with
+    # the Gateway's tool context to produce validated policy options.
+    # Generated policy assets are automatically deleted after 7 days, so you
+    # should review and create policies from the generated assets within
+    # this timeframe. Once created, policies are permanent and not subject
+    # to this expiration. Generated policies should be reviewed and tested
+    # in log-only mode before deploying to production. Use this when you
+    # want to describe policy intent naturally rather than learning Dogwood
+    # syntax, though generated policies may require refinement for complex
     # scenarios.
     #
     # @option params [required, String] :policy_engine_id
@@ -11517,7 +12043,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @option params [required, Types::Content] :content
     #   The natural language description of the desired policy behavior. This
-    #   content is processed by AI to generate corresponding Cedar policy
+    #   content is processed by AI to generate corresponding Dogwood policy
     #   statements that match the described intent.
     #
     # @option params [required, String] :name
@@ -11736,6 +12262,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.targets[0].target_configuration.http.passthrough.schema.source.inline_payload #=> String
     #   resp.targets[0].target_configuration.http.passthrough.stickiness_configuration.identifier #=> String
     #   resp.targets[0].target_configuration.http.passthrough.stickiness_configuration.timeout #=> Integer
+    #   resp.targets[0].target_configuration.http.passthrough.stickiness_configuration.composite_identifier #=> Array
+    #   resp.targets[0].target_configuration.http.passthrough.stickiness_configuration.composite_identifier[0] #=> String
+    #   resp.targets[0].target_configuration.http.passthrough.static_query_parameters #=> Hash
+    #   resp.targets[0].target_configuration.http.passthrough.static_query_parameters["StaticQueryParameterName"] #=> String
+    #   resp.targets[0].target_configuration.http.passthrough.static_query_parameter_conflict_resolution #=> String, one of "CLIENT_OVERRIDE", "STATIC_OVERRIDE"
     #   resp.targets[0].target_configuration.http.connector.source.connector_id #=> String
     #   resp.targets[0].target_configuration.http.connector.parameters #=> Hash
     #   resp.targets[0].target_configuration.http.connector.parameters["ConnectorParameterName"] #=> String
@@ -11911,6 +12442,10 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::CapacityProviderConfiguration] :capacity_provider_configuration
     #   The updated capacity provider configuration for the AgentCore Runtime.
     #
+    # @option params [String] :platform_version
+    #   The updated version of the runtime platform to use for the AgentCore
+    #   Runtime.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -12063,6 +12598,7 @@ module Aws::BedrockAgentCoreControl
     #     capacity_provider_configuration: {
     #       capacity_provider_arn: "CapacityProviderArn", # required
     #     },
+    #     platform_version: "PlatformVersion",
     #     client_token: "ClientToken",
     #   })
     #
@@ -12074,7 +12610,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_version #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentRuntime AWS API Documentation
     #
@@ -12133,7 +12669,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_version #=> String
     #   resp.agent_runtime_endpoint_arn #=> String
     #   resp.agent_runtime_arn #=> String
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #
@@ -12299,7 +12835,7 @@ module Aws::BedrockAgentCoreControl
     #   The updated component configurations. Creates a new version of the
     #   bundle.
     #
-    # @option params [Array<String>] :parent_version_ids
+    # @option params [required, Array<String>] :parent_version_ids
     #   A list of parent version identifiers for lineage tracking. Regular
     #   commits have a single parent. Merge commits have two parents: the
     #   target branch parent and the source branch parent. If the branch
@@ -12342,7 +12878,7 @@ module Aws::BedrockAgentCoreControl
     #         },
     #       },
     #     },
-    #     parent_version_ids: ["ConfigurationBundleVersion"],
+    #     parent_version_ids: ["ConfigurationBundleVersion"], # required
     #     branch_name: "BranchName",
     #     commit_message: "UpdateConfigurationBundleRequestCommitMessageString",
     #     created_by: {
@@ -12365,6 +12901,80 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def update_configuration_bundle(params = {}, options = {})
       req = build_request(:update_configuration_bundle, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing consent portal.
+    #
+    # @option params [required, String] :consent_portal_identifier
+    #   The identifier of the consent portal. You can specify either the
+    #   consent portal ID or its Amazon Resource Name (ARN).
+    #
+    # @option params [String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the consent portal
+    #   assumes to access the resources defined in its sources.
+    #
+    # @option params [Types::ConsentPortalIdpConfig] :idp_config
+    #   The identity provider configuration that the consent portal uses to
+    #   authenticate end users.
+    #
+    # @option params [String] :description
+    #   The description of the consent portal.
+    #
+    # @return [Types::UpdateConsentPortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConsentPortalResponse#sources #sources} => Array&lt;Types::ConsentPortalSource&gt;
+    #   * {Types::UpdateConsentPortalResponse#consent_portal_arn #consent_portal_arn} => String
+    #   * {Types::UpdateConsentPortalResponse#consent_portal_id #consent_portal_id} => String
+    #   * {Types::UpdateConsentPortalResponse#created_at #created_at} => Time
+    #   * {Types::UpdateConsentPortalResponse#description #description} => String
+    #   * {Types::UpdateConsentPortalResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::UpdateConsentPortalResponse#idp_config #idp_config} => Types::ConsentPortalIdpConfig
+    #   * {Types::UpdateConsentPortalResponse#name #name} => String
+    #   * {Types::UpdateConsentPortalResponse#portal_url #portal_url} => String
+    #   * {Types::UpdateConsentPortalResponse#status #status} => String
+    #   * {Types::UpdateConsentPortalResponse#status_reason #status_reason} => String
+    #   * {Types::UpdateConsentPortalResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_consent_portal({
+    #     consent_portal_identifier: "ConsentPortalIdentifier", # required
+    #     execution_role_arn: "ExecutionRoleArnType",
+    #     idp_config: {
+    #       credential_provider_arn: "OAuth2CredentialProviderArn", # required
+    #       scopes: ["AllowedScopeType"], # required
+    #       audience: "AllowedAudienceType",
+    #     },
+    #     description: "ConsentPortalDescriptionType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sources #=> Array
+    #   resp.sources[0].identifier #=> String
+    #   resp.sources[0].type #=> String, one of "agentcore-gateway"
+    #   resp.consent_portal_arn #=> String
+    #   resp.consent_portal_id #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.idp_config.credential_provider_arn #=> String
+    #   resp.idp_config.scopes #=> Array
+    #   resp.idp_config.scopes[0] #=> String
+    #   resp.idp_config.audience #=> String
+    #   resp.name #=> String
+    #   resp.portal_url #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "FAILED"
+    #   resp.status_reason #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateConsentPortal AWS API Documentation
+    #
+    # @overload update_consent_portal(params = {})
+    # @param [Hash] params ({})
+    def update_consent_portal(params = {}, options = {})
+      req = build_request(:update_consent_portal, params)
       req.send_request(options)
     end
 
@@ -12742,6 +13352,7 @@ module Aws::BedrockAgentCoreControl
     #         streaming_configuration: {
     #           enable_response_streaming: false,
     #         },
+    #         disable_mcp_list_tools_pagination: false,
     #       },
     #     },
     #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM, NONE, AUTHENTICATE_ONLY
@@ -12868,6 +13479,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
     #   resp.protocol_configuration.mcp.session_configuration.session_timeout_in_seconds #=> Integer
     #   resp.protocol_configuration.mcp.streaming_configuration.enable_response_streaming #=> Boolean
+    #   resp.protocol_configuration.mcp.disable_mcp_list_tools_pagination #=> Boolean
     #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE", "AUTHENTICATE_ONLY"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
@@ -12946,11 +13558,11 @@ module Aws::BedrockAgentCoreControl
     #   The unique identifier of the rate limit to update.
     #
     # @option params [String] :description
-    #   Optional human-readable description for this limit.
+    #   The updated human-readable description for this rate limit.
     #
     # @option params [required, Array<Types::LimitEntry>] :entries
-    #   Updated rule entries. key and dimensionKeys are immutable and cannot
-    #   be changed.
+    #   The updated rule entries. The dimension keys are immutable after
+    #   creation and cannot be changed.
     #
     # @return [Types::UpdateGatewayRateLimitResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13378,7 +13990,12 @@ module Aws::BedrockAgentCoreControl
     #           stickiness_configuration: {
     #             identifier: "StickinessConfigurationIdentifierString", # required
     #             timeout: 1,
+    #             composite_identifier: ["CompositeIdentifierEntry"],
     #           },
+    #           static_query_parameters: {
+    #             "StaticQueryParameterName" => "StaticQueryParameterValue",
+    #           },
+    #           static_query_parameter_conflict_resolution: "CLIENT_OVERRIDE", # accepts CLIENT_OVERRIDE, STATIC_OVERRIDE
     #         },
     #         connector: {
     #           source: { # required
@@ -13542,6 +14159,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_configuration.http.passthrough.schema.source.inline_payload #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.identifier #=> String
     #   resp.target_configuration.http.passthrough.stickiness_configuration.timeout #=> Integer
+    #   resp.target_configuration.http.passthrough.stickiness_configuration.composite_identifier #=> Array
+    #   resp.target_configuration.http.passthrough.stickiness_configuration.composite_identifier[0] #=> String
+    #   resp.target_configuration.http.passthrough.static_query_parameters #=> Hash
+    #   resp.target_configuration.http.passthrough.static_query_parameters["StaticQueryParameterName"] #=> String
+    #   resp.target_configuration.http.passthrough.static_query_parameter_conflict_resolution #=> String, one of "CLIENT_OVERRIDE", "STATIC_OVERRIDE"
     #   resp.target_configuration.http.connector.source.connector_id #=> String
     #   resp.target_configuration.http.connector.parameters #=> Hash
     #   resp.target_configuration.http.connector.parameters["ConnectorParameterName"] #=> String
@@ -13669,6 +14291,11 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::HarnessTruncationConfiguration] :truncation
     #   The truncation configuration for managing conversation context. If not
     #   specified, the existing value is retained.
+    #
+    # @option params [Array<Types::HarnessHook>] :hooks
+    #   The lifecycle hooks to run at defined points in the agent loop. If
+    #   specified, this replaces all existing hooks. If not specified, the
+    #   existing hooks are retained.
     #
     # @option params [Integer] :max_iterations
     #   The maximum number of iterations the agent loop can execute per
@@ -13820,6 +14447,7 @@ module Aws::BedrockAgentCoreControl
     #       open_ai_model_config: {
     #         model_id: "ModelId", # required
     #         api_key_arn: "ApiKeyArn", # required
+    #         api_base: "HarnessOpenAiApiBase",
     #         max_tokens: 1,
     #         temperature: 1.0,
     #         top_p: 1.0,
@@ -13953,6 +14581,74 @@ module Aws::BedrockAgentCoreControl
     #         },
     #       },
     #     },
+    #     hooks: [
+    #       {
+    #         before_invocation: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         after_invocation: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         before_tool_call: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         after_tool_call: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
     #     max_iterations: 1,
     #     max_tokens: 1,
     #     timeout_seconds: 1,
@@ -13975,6 +14671,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.model.bedrock_model_config.api_format #=> String, one of "converse_stream", "responses", "chat_completions"
     #   resp.harness.model.open_ai_model_config.model_id #=> String
     #   resp.harness.model.open_ai_model_config.api_key_arn #=> String
+    #   resp.harness.model.open_ai_model_config.api_base #=> String
     #   resp.harness.model.open_ai_model_config.max_tokens #=> Integer
     #   resp.harness.model.open_ai_model_config.temperature #=> Float
     #   resp.harness.model.open_ai_model_config.top_p #=> Float
@@ -14102,6 +14799,31 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.memory.managed_memory_configuration.strategies[0] #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "EPISODIC"
     #   resp.harness.memory.managed_memory_configuration.event_expiry_duration #=> Integer
     #   resp.harness.memory.managed_memory_configuration.encryption_key_arn #=> String
+    #   resp.harness.hooks #=> Array
+    #   resp.harness.hooks[0].before_invocation.name #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.name #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.name #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.name #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.event_bridge.arn #=> String
     #   resp.harness.max_iterations #=> Integer
     #   resp.harness.max_tokens #=> Integer
     #   resp.harness.timeout_seconds #=> Integer
@@ -14206,6 +14928,12 @@ module Aws::BedrockAgentCoreControl
     # @option params [Array<Types::IndexedKey>] :add_indexed_keys
     #   Additional metadata keys to index. Previously indexed keys cannot be
     #   removed.
+    #
+    # @option params [Array<Types::NamespaceKeyEntry>] :namespace_keys
+    #   The namespace variable key definitions with validation rules for this
+    #   memory. This value fully replaces the existing set — any key you omit
+    #   is removed. Any referenced `namespaceKey` omission will throw
+    #   ValidationException.
     #
     # @option params [Types::StreamDeliveryResources] :stream_delivery_resources
     #   Configuration for streaming memory record data to external resources.
@@ -14697,6 +15425,15 @@ module Aws::BedrockAgentCoreControl
     #         type: "STRING", # required, accepts STRING, STRINGLIST, NUMBER
     #       },
     #     ],
+    #     namespace_keys: [
+    #       {
+    #         key: "NamespaceVariableKey", # required
+    #         validation: {
+    #           allowed_values: ["NamespaceAllowedValue"],
+    #           regex_pattern: "NamespaceRegexPattern",
+    #         },
+    #       },
+    #     ],
     #     stream_delivery_resources: {
     #       resources: [ # required
     #         {
@@ -14813,6 +15550,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.indexed_keys #=> Array
     #   resp.memory.indexed_keys[0].key #=> String
     #   resp.memory.indexed_keys[0].type #=> String, one of "STRING", "STRINGLIST", "NUMBER"
+    #   resp.memory.namespace_keys #=> Array
+    #   resp.memory.namespace_keys[0].key #=> String
+    #   resp.memory.namespace_keys[0].validation.allowed_values #=> Array
+    #   resp.memory.namespace_keys[0].validation.allowed_values[0] #=> String
+    #   resp.memory.namespace_keys[0].validation.regex_pattern #=> String
     #   resp.memory.stream_delivery_resources.resources #=> Array
     #   resp.memory.stream_delivery_resources.resources[0].kinesis.data_stream_arn #=> String
     #   resp.memory.stream_delivery_resources.resources[0].kinesis.content_configurations #=> Array
@@ -15193,6 +15935,10 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::ClusteringConfig] :clustering_config
     #   The updated clustering configuration for periodic batch evaluation.
     #
+    # @option params [Types::OutputConfig] :output_config
+    #   The configuration that specifies where evaluation results should be
+    #   written for monitoring and analysis.
+    #
     # @option params [String] :evaluation_execution_role_arn
     #   The updated Amazon Resource Name (ARN) of the IAM role used for
     #   evaluation execution.
@@ -15237,7 +15983,8 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     data_source_config: {
     #       cloud_watch_logs: {
-    #         log_group_names: ["LogGroupName"], # required
+    #         log_group_names: ["LogGroupName"],
+    #         log_group_name_prefixes: ["LogGroupNamePrefix"],
     #         service_names: ["ServiceName"], # required
     #       },
     #     },
@@ -15253,6 +16000,13 @@ module Aws::BedrockAgentCoreControl
     #     ],
     #     clustering_config: {
     #       frequencies: ["DAILY"], # required, accepts DAILY, WEEKLY, MONTHLY
+    #     },
+    #     output_config: {
+    #       cloud_watch_config: { # required
+    #         log_group_name: "OptionalLogGroupName",
+    #         metrics_namespace: "MetricsNamespace",
+    #         result_destination: "DEDICATED_LOG_GROUP", # accepts DEDICATED_LOG_GROUP, SOURCE_LOG_GROUP
+    #       },
     #     },
     #     evaluation_execution_role_arn: "RoleArn",
     #     execution_status: "ENABLED", # accepts ENABLED, DISABLED
@@ -15638,9 +16392,9 @@ module Aws::BedrockAgentCoreControl
     #   policy logic.
     #
     # @option params [Types::PolicyDefinition] :definition
-    #   The new Cedar policy statement that defines the access control rules.
-    #   This replaces the existing policy definition with new logic while
-    #   maintaining the policy's identity.
+    #   The new Cedar or Dogwood policy statement that defines the access
+    #   control rules. This replaces the existing policy definition with new
+    #   logic while maintaining the policy's identity.
     #
     # @option params [String] :validation_mode
     #   The validation mode for the policy update. Determines how Cedar
@@ -16283,7 +17037,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

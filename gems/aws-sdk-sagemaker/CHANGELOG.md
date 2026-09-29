@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.395.0 (2026-09-21)
+------------------
+
+* Feature - Add support for r6i, m8i, c8i, r8i instance types in Training and Processing
+
+1.394.0 (2026-09-18)
+------------------
+
+* Feature - Adds support for the hub content resource in SageMaker Search.
+
+1.393.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.392.0 (2026-09-10)
+------------------
+
+* Feature - This release adds the ability for customers to attach customer owned Elastic Network Interfaces (ENIs) to HyperPod cluster nodes.
+
+1.391.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.390.0 (2026-09-08)
+------------------
+
+* Feature - Add support for InstancePreferences list for multiple instance type input support on SageMaker Training and Processing
+
+1.389.0 (2026-09-02)
+------------------
+
+* Feature - Amazon SageMaker Feature Store now supports the Standard V2 online store type, which enables feature-level writes to feature groups. You can select Standard V2 when creating a feature group, and update the storage type of an existing feature group via UpdateFeatureGroup.
+
+1.388.0 (2026-08-31)
+------------------
+
+* Feature - Amazon SageMaker Batch Transform now supports G6e instances, powered by NVIDIA L40S Tensor Core GPUs. G6e instances are the most cost-efficient GPU instances for deploying generative AI models and the highest-performance GPU instances for spatial computing workloads.
+
+1.387.0 (2026-08-26)
+------------------
+
+* Feature - Amazon SageMaker AI now supports ml.g7 instances for model optimization. You can now run model optimization jobs on ml.g7 instances, in supported AWS Regions.
+
+1.386.0 (2026-08-20)
+------------------
+
+* Feature - Added IAM Identity Center (IdC) support to CreatePartnerApp and UpdatePartnerApp APIs. Added Customer Managed Key (CMK) support to CreateMlflowApp and DescribeMlflowApp.
+
 1.385.0 (2026-08-14)
 ------------------
 

@@ -87,6 +87,43 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # A request to associate an S/MIME certificate with an email identity.
+    #
+    # @!attribute [rw] email_identity
+    #   The email identity, either an email address or a domain, to
+    #   associate the certificate with.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_address
+    #   The email address that the certificate applies to. This value is
+    #   required when the email identity is a domain, and the address must
+    #   belong to that domain or one of its subdomains. When the email
+    #   identity is an email address, this value is optional. If you specify
+    #   it, it must exactly match the email identity.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the Certificate Manager (ACM)
+    #   certificate to associate with the email identity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/AssociateEmailIdentityCertificateRequest AWS API Documentation
+    #
+    class AssociateEmailIdentityCertificateRequest < Struct.new(
+      :email_identity,
+      :from_address,
+      :certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/AssociateEmailIdentityCertificateResponse AWS API Documentation
+    #
+    class AssociateEmailIdentityCertificateResponse < Aws::EmptyStructure; end
+
     # Contains metadata and attachment raw content.
     #
     # @!attribute [rw] raw_content
@@ -623,6 +660,29 @@ module Aws::SESV2
     #
     class ConcurrentModificationException < Aws::EmptyStructure; end
 
+    # An object that overrides settings for a single email sending request.
+    # An override applies only to the message or messages in the request
+    # that contains it. It doesn't change your account-level settings, and
+    # it doesn't change the configuration set that the request uses.
+    #
+    # A setting that you don't override keeps the value that would
+    # otherwise apply to the message. Depending on the setting, that value
+    # comes from the configuration set that the message uses, from your
+    # account-level settings, or from the Amazon SES default.
+    #
+    # @!attribute [rw] tracking
+    #   An object that overrides the open and click tracking settings that
+    #   would otherwise apply to the message.
+    #   @return [Types::TrackingConfigurationOverrides]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ConfigurationOverrides AWS API Documentation
+    #
+    class ConfigurationOverrides < Struct.new(
+      :tracking)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # If there is already an ongoing account details update under review.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ConflictException AWS API Documentation
@@ -817,6 +877,12 @@ module Aws::SESV2
     #   that you send using the configuration set.
     #   @return [Types::ArchivingOptions]
     #
+    # @!attribute [rw] message_security_options
+    #   The message security options to apply to the configuration set, such
+    #   as the signing scheme used for messages that you send with the
+    #   configuration set.
+    #   @return [Types::MessageSecurityOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateConfigurationSetRequest AWS API Documentation
     #
     class CreateConfigurationSetRequest < Struct.new(
@@ -828,7 +894,8 @@ module Aws::SESV2
       :tags,
       :suppression_options,
       :vdm_options,
-      :archiving_options)
+      :archiving_options,
+      :message_security_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1667,6 +1734,16 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Specifies the default signing scheme, in which Amazon SES API v2
+    # doesn't apply S/MIME signing to messages sent with the configuration
+    # set.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DefaultSigningScheme AWS API Documentation
+    #
+    class DefaultSigningScheme < Aws::EmptyStructure; end
+
     # A request to delete an event destination from a configuration set.
     #
     # @!attribute [rw] configuration_set_name
@@ -2140,6 +2217,35 @@ module Aws::SESV2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # A request to remove the association between an S/MIME certificate and
+    # an email identity.
+    #
+    # @!attribute [rw] email_identity
+    #   The email identity whose certificate association you want to remove.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_address
+    #   The email address whose certificate association you want to remove.
+    #   This value is required when the email identity is a domain. When the
+    #   email identity is an email address, this value is optional.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DisassociateEmailIdentityCertificateRequest AWS API Documentation
+    #
+    class DisassociateEmailIdentityCertificateRequest < Struct.new(
+      :email_identity,
+      :from_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DisassociateEmailIdentityCertificateResponse AWS API Documentation
+    #
+    class DisassociateEmailIdentityCertificateResponse < Aws::EmptyStructure; end
 
     # An object that contains information about the DKIM authentication
     # status for an email identity.
@@ -3592,6 +3698,12 @@ module Aws::SESV2
     #   archived that you send using the configuration set.
     #   @return [Types::ArchivingOptions]
     #
+    # @!attribute [rw] message_security_options
+    #   The message security options that are applied to the configuration
+    #   set, such as the signing scheme used for messages that you send with
+    #   the configuration set.
+    #   @return [Types::MessageSecurityOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetConfigurationSetResponse AWS API Documentation
     #
     class GetConfigurationSetResponse < Struct.new(
@@ -3603,7 +3715,8 @@ module Aws::SESV2
       :tags,
       :suppression_options,
       :vdm_options,
-      :archiving_options)
+      :archiving_options,
+      :message_security_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4727,6 +4840,38 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # An object that contains information about an S/MIME certificate
+    # that's associated with an email identity.
+    #
+    # @!attribute [rw] from_address
+    #   The email address that the certificate applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate association. A status of `ACTIVE`
+    #   indicates that the certificate is ready to use for signing.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the Certificate Manager (ACM)
+    #   certificate that's associated with the email identity.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_expiry_time
+    #   The timestamp after which the certificate is no longer valid.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/IdentityCertificate AWS API Documentation
+    #
+    class IdentityCertificate < Struct.new(
+      :from_address,
+      :status,
+      :certificate_arn,
+      :certificate_expiry_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an email identity.
     #
     # @!attribute [rw] identity_type
@@ -5446,6 +5591,62 @@ module Aws::SESV2
     #
     class ListEmailIdentitiesResponse < Struct.new(
       :email_identities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A request to list the S/MIME certificates that are associated with an
+    # email identity.
+    #
+    # @!attribute [rw] email_identity
+    #   The email identity whose certificate associations you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to
+    #   `ListEmailIdentityCertificates` to indicate the position in the list
+    #   of certificates.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The number of results to show in a single call to
+    #   `ListEmailIdentityCertificates`. If the number of results is larger
+    #   than the number you specified in this parameter, then the response
+    #   includes a `NextToken` element, which you can use to obtain
+    #   additional results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListEmailIdentityCertificatesRequest AWS API Documentation
+    #
+    class ListEmailIdentityCertificatesRequest < Struct.new(
+      :email_identity,
+      :next_token,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the S/MIME certificates that are associated with an
+    # email identity.
+    #
+    # @!attribute [rw] certificates
+    #   An array that contains the certificate associations for the email
+    #   identity. Each entry includes the from address, the certificate's
+    #   status, its Amazon Resource Name (ARN), and its expiry time.
+    #   @return [Array<Types::IdentityCertificate>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there are additional certificates to
+    #   list. To view additional certificates, issue another request to
+    #   `ListEmailIdentityCertificates`, and pass this token in the
+    #   `NextToken` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListEmailIdentityCertificatesResponse AWS API Documentation
+    #
+    class ListEmailIdentityCertificatesResponse < Struct.new(
+      :certificates,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6232,6 +6433,11 @@ module Aws::SESV2
     #
     # @!attribute [rw] max_results
     #   The maximum number of results.
+    #
+    #   <note markdown="1"> If you don't specify `MaxResults`, the export returns a maximum of
+    #   1,000 results.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageInsightsDataSource AWS API Documentation
@@ -6277,6 +6483,10 @@ module Aws::SESV2
     #   The recipient's ISP (e.g., `Gmail`, `Yahoo`, etc.).
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant used when sending the message.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] last_delivery_event
     #   The last delivery-related event for the email, where the ordering is
     #   as follows: `SEND` &lt; `BOUNCE` &lt; `DELIVERY` &lt; `COMPLAINT`.
@@ -6301,6 +6511,7 @@ module Aws::SESV2
       :destination,
       :subject,
       :isp,
+      :tenant_name,
       :last_delivery_event,
       :last_engagement_event)
       SENSITIVE = [:from_email_address, :destination, :subject]
@@ -6312,6 +6523,24 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageRejected AWS API Documentation
     #
     class MessageRejected < Aws::EmptyStructure; end
+
+    # An object that defines the message-level security options that apply
+    # to messages that you send using the configuration set. Currently,
+    # these options determine whether Amazon SES API v2 adds an S/MIME
+    # signature to your messages and, if so, the format of that signature.
+    #
+    # @!attribute [rw] signing_scheme
+    #   The signing scheme that Amazon SES API v2 applies to messages sent
+    #   with the configuration set.
+    #   @return [Types::SigningScheme]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageSecurityOptions AWS API Documentation
+    #
+    class MessageSecurityOptions < Struct.new(
+      :signing_scheme)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains the name and value of a tag that you apply to an email. You
     # can use message tags when you publish email sending events.
@@ -6586,8 +6815,7 @@ module Aws::SESV2
     end
 
     # The pricing attributes that apply to your Amazon SES account,
-    # including the currently active pricing plan and any scheduled change
-    # for the next billing cycle.
+    # including the currently active pricing plan and any scheduled change.
     #
     # @!attribute [rw] current_plan
     #   The pricing plan that is currently active on your Amazon SES
@@ -6596,7 +6824,7 @@ module Aws::SESV2
     #
     # @!attribute [rw] next_plan
     #   The pricing plan that will become active at the start of the next
-    #   billing cycle, if a scheduled change has been requested. This field
+    #   monthly cycle, if a scheduled change has been requested. This field
     #   is empty when no scheduled change is pending.
     #   @return [String]
     #
@@ -6695,20 +6923,21 @@ module Aws::SESV2
     # A request to set the pricing plan for your Amazon SES account.
     #
     # @!attribute [rw] plan
-    #   The pricing plan to apply to your Amazon SES account. Can be one of
-    #   the following:
+    #   The pricing plan to apply to your Amazon SES account. For details
+    #   about each plan, see [Amazon SES Pricing][1]. Can be one of the
+    #   following:
     #
-    #   * `NONE` – No pricing plan is applied; billing follows per-feature
-    #     pricing.
+    #   * `NONE`
     #
-    #   * `ESSENTIALS` – Baseline Amazon SES capabilities and select premium
-    #     features.
+    #   * `ESSENTIALS`
     #
-    #   * `PRO` – Includes everything in `ESSENTIALS`, plus additional
-    #     premium features for growing senders.
+    #   * `PRO`
     #
-    #   * `ENTERPRISE` – Includes everything in `PRO`, plus features
-    #     intended for large-scale senders.
+    #   * `ENTERPRISE`
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/ses/pricing/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountPricingAttributesRequest AWS API Documentation
@@ -7985,6 +8214,13 @@ module Aws::SESV2
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] configuration_overrides
+    #   An object that overrides, for the messages in this request only,
+    #   settings that would otherwise apply to them. The overrides apply to
+    #   every message in the request. Each setting that you don't override
+    #   keeps the value that already applies.
+    #   @return [Types::ConfigurationOverrides]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SendBulkEmailRequest AWS API Documentation
     #
     class SendBulkEmailRequest < Struct.new(
@@ -7998,7 +8234,8 @@ module Aws::SESV2
       :bulk_email_entries,
       :configuration_set_name,
       :endpoint_id,
-      :tenant_name)
+      :tenant_name,
+      :configuration_overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8167,6 +8404,12 @@ module Aws::SESV2
     #   which will be used when a contact chooses to unsubscribe.
     #   @return [Types::ListManagementOptions]
     #
+    # @!attribute [rw] configuration_overrides
+    #   An object that overrides, for this message only, settings that would
+    #   otherwise apply to it. Each setting that you don't override keeps
+    #   the value that already applies.
+    #   @return [Types::ConfigurationOverrides]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SendEmailRequest AWS API Documentation
     #
     class SendEmailRequest < Struct.new(
@@ -8181,7 +8424,8 @@ module Aws::SESV2
       :configuration_set_name,
       :endpoint_id,
       :tenant_name,
-      :list_management_options)
+      :list_management_options,
+      :configuration_overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8265,6 +8509,57 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SendingPausedException AWS API Documentation
     #
     class SendingPausedException < Aws::EmptyStructure; end
+
+    # Specifies the signing scheme to apply to messages sent with a
+    # configuration set. This is a union type, so you specify exactly one of
+    # its members.
+    #
+    # @note SigningScheme is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SigningScheme is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SigningScheme corresponding to the set member.
+    #
+    # @!attribute [rw] default_scheme
+    #   Use the default signing behavior. When you select this option,
+    #   Amazon SES API v2 doesn't add an S/MIME signature to messages sent
+    #   with the configuration set.
+    #   @return [Types::DefaultSigningScheme]
+    #
+    # @!attribute [rw] smime_scheme
+    #   Sign messages sent with the configuration set using S/MIME. For
+    #   signing to apply, the email identity used to send a message must
+    #   have an active S/MIME certificate association.
+    #   @return [Types::SmimeSigningScheme]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SigningScheme AWS API Documentation
+    #
+    class SigningScheme < Struct.new(
+      :default_scheme,
+      :smime_scheme,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DefaultScheme < SigningScheme; end
+      class SmimeScheme < SigningScheme; end
+      class Unknown < SigningScheme; end
+    end
+
+    # Specifies that Amazon SES API v2 signs messages sent with the
+    # configuration set using S/MIME.
+    #
+    # @!attribute [rw] signature_format
+    #   The format of the S/MIME signature that Amazon SES API v2 applies to
+    #   messages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SmimeSigningScheme AWS API Documentation
+    #
+    class SmimeSigningScheme < Struct.new(
+      :signature_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An object that defines an Amazon SNS destination for email events. You
     # can use Amazon SNS to send notifications when certain email events
@@ -8968,6 +9263,80 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # An object that overrides, for a single email sending request, the
+    # engagement tracking settings that would otherwise apply. Use these
+    # overrides to turn open tracking or click tracking on or off for an
+    # individual message, for example to suppress tracking in a
+    # transactional message that you send from an account or a configuration
+    # set that has tracking enabled.
+    #
+    # Without an override, engagement tracking is determined by your
+    # account-level `EngagementMetrics` setting, which you configure using
+    # the `PutAccountVdmAttributes` operation, by the `EngagementMetrics`
+    # setting of the configuration set that the message uses, which you
+    # configure using the `PutConfigurationSetVdmOptions` operation, and by
+    # whether that configuration set has an event destination whose
+    # `MatchingEventTypes` include the `OPEN` or `CLICK` event types.
+    #
+    # For more information about tracking open and click events, see the
+    # [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/event-publishing.html
+    #
+    # @!attribute [rw] open_tracking_enabled
+    #   Specifies whether Amazon SES tracks when the recipient opens this
+    #   message. Can be one of the following:
+    #
+    #   * `ENABLED` – Amazon SES tracks opens for this message, even when
+    #     your account-level and configuration set settings don't enable
+    #     open tracking.
+    #
+    #   * `DISABLED` – Amazon SES doesn't track opens for this message,
+    #     even when your account-level or configuration set settings enable
+    #     open tracking. Amazon SES doesn't add the tracking image to the
+    #     message.
+    #
+    #   If you don't specify this value, Amazon SES uses the open tracking
+    #   setting that would otherwise apply to the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] click_tracking_enabled
+    #   Specifies whether Amazon SES tracks when the recipient clicks a link
+    #   in this message. Can be one of the following:
+    #
+    #   * `ENABLED` – Amazon SES tracks clicks for this message, even when
+    #     your account-level and configuration set settings don't enable
+    #     click tracking.
+    #
+    #   * `DISABLED` – Amazon SES doesn't track clicks for this message,
+    #     even when your account-level or configuration set settings enable
+    #     click tracking. Amazon SES doesn't rewrite the links in the
+    #     message.
+    #
+    #   If you don't specify this value, Amazon SES uses the click tracking
+    #   setting that would otherwise apply to the message.
+    #
+    #   <note markdown="1"> Enabling open or click tracking with an override doesn't create an
+    #   event destination. Amazon SES records the resulting open and click
+    #   events in VDM, where you can review them using VDM metrics and
+    #   Message Insights. To also receive these events at a destination that
+    #   you own, the configuration set that the message uses must have an
+    #   event destination that publishes open and click events.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/TrackingConfigurationOverrides AWS API Documentation
+    #
+    class TrackingConfigurationOverrides < Struct.new(
+      :open_tracking_enabled,
+      :click_tracking_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that defines the tracking options for a configuration set.
     # When you use the Amazon SES API v2 to send an email, it contains an
     # invisible image that's used to track when recipients open your email.
@@ -9056,6 +9425,34 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateConfigurationSetEventDestinationResponse AWS API Documentation
     #
     class UpdateConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
+
+    # A request to update the configuration of an existing configuration
+    # set.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_security_options
+    #   The security options that apply to the MIME message itself for
+    #   messages sent with the configuration set.
+    #   @return [Types::MessageSecurityOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateConfigurationSetRequest AWS API Documentation
+    #
+    class UpdateConfigurationSetRequest < Struct.new(
+      :configuration_set_name,
+      :message_security_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateConfigurationSetResponse AWS API Documentation
+    #
+    class UpdateConfigurationSetResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] contact_list_name
     #   The name of the contact list.

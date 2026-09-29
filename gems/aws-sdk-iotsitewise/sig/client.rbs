@@ -1366,6 +1366,7 @@ module Aws
         def start_time: () -> ::Time
         def end_time: () -> ::Time
         def request_environment_variables: () -> Types::ExecutionEnvironmentVariables
+        def request_mount_overrides: () -> Types::MountOverrides
         def execution_priority: () -> ::Integer
         def compute_node_execution_details: () -> ::Array[Types::ComputeNodeExecutionDetails]
         def next_token: () -> ::String
@@ -2342,6 +2343,11 @@ module Aws
                                       ?execution_environment_variable_overrides: {
                                         global: Hash[::String, ::String]?,
                                         compute_nodes: Hash[::String, Hash[::String, ::String]]?
+                                      },
+                                      ?execution_mount_overrides: {
+                                        compute_nodes: Hash[::String, Array[
+                                            Params::mount
+                                          ]]
                                       },
                                       ?execution_priority: ::Integer,
                                       ?client_token: ::String

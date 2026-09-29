@@ -242,6 +242,8 @@ module Aws::Odb
     ExternalIdType = Shapes::StringShape.new(name: 'ExternalIdType')
     FailoverAutonomousDatabaseInput = Shapes::StructureShape.new(name: 'FailoverAutonomousDatabaseInput')
     FailoverAutonomousDatabaseOutput = Shapes::StructureShape.new(name: 'FailoverAutonomousDatabaseOutput')
+    FlexComponentList = Shapes::ListShape.new(name: 'FlexComponentList')
+    FlexComponentSummary = Shapes::StructureShape.new(name: 'FlexComponentSummary')
     Float = Shapes::FloatShape.new(name: 'Float')
     GetAutonomousDatabaseBackupInput = Shapes::StructureShape.new(name: 'GetAutonomousDatabaseBackupInput')
     GetAutonomousDatabaseBackupOutput = Shapes::StructureShape.new(name: 'GetAutonomousDatabaseBackupOutput')
@@ -276,6 +278,7 @@ module Aws::Odb
     GiVersionList = Shapes::ListShape.new(name: 'GiVersionList')
     GiVersionSummary = Shapes::StructureShape.new(name: 'GiVersionSummary')
     GridImageType = Shapes::StringShape.new(name: 'GridImageType')
+    HardwareType = Shapes::StringShape.new(name: 'HardwareType')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
     HoursOfDay = Shapes::ListShape.new(name: 'HoursOfDay')
     IamRole = Shapes::StructureShape.new(name: 'IamRole')
@@ -353,6 +356,11 @@ module Aws::Odb
     ListExascaleDbStorageVaultsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListExascaleDbStorageVaultsInputMaxResultsInteger')
     ListExascaleDbStorageVaultsInputNextTokenString = Shapes::StringShape.new(name: 'ListExascaleDbStorageVaultsInputNextTokenString')
     ListExascaleDbStorageVaultsOutput = Shapes::StructureShape.new(name: 'ListExascaleDbStorageVaultsOutput')
+    ListFlexComponentsInput = Shapes::StructureShape.new(name: 'ListFlexComponentsInput')
+    ListFlexComponentsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListFlexComponentsInputMaxResultsInteger')
+    ListFlexComponentsInputNextTokenString = Shapes::StringShape.new(name: 'ListFlexComponentsInputNextTokenString')
+    ListFlexComponentsInputShapeString = Shapes::StringShape.new(name: 'ListFlexComponentsInputShapeString')
+    ListFlexComponentsOutput = Shapes::StructureShape.new(name: 'ListFlexComponentsOutput')
     ListGiMinorVersionsInput = Shapes::StructureShape.new(name: 'ListGiMinorVersionsInput')
     ListGiMinorVersionsInputAvailabilityZoneIdString = Shapes::StringShape.new(name: 'ListGiMinorVersionsInputAvailabilityZoneIdString')
     ListGiMinorVersionsInputAvailabilityZoneString = Shapes::StringShape.new(name: 'ListGiMinorVersionsInputAvailabilityZoneString')
@@ -1955,6 +1963,21 @@ module Aws::Odb
     FailoverAutonomousDatabaseOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     FailoverAutonomousDatabaseOutput.struct_class = Types::FailoverAutonomousDatabaseOutput
 
+    FlexComponentList.member = Shapes::ShapeRef.new(shape: FlexComponentSummary)
+
+    FlexComponentSummary.add_member(:available_core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "availableCoreCount"))
+    FlexComponentSummary.add_member(:available_db_storage_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "availableDbStorageInGBs"))
+    FlexComponentSummary.add_member(:available_local_storage_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "availableLocalStorageInGBs"))
+    FlexComponentSummary.add_member(:available_memory_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "availableMemoryInGBs"))
+    FlexComponentSummary.add_member(:compute_model, Shapes::ShapeRef.new(shape: ComputeModel, location_name: "computeModel"))
+    FlexComponentSummary.add_member(:description_summary, Shapes::ShapeRef.new(shape: String, location_name: "descriptionSummary"))
+    FlexComponentSummary.add_member(:hardware_type, Shapes::ShapeRef.new(shape: HardwareType, location_name: "hardwareType"))
+    FlexComponentSummary.add_member(:minimum_core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "minimumCoreCount"))
+    FlexComponentSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    FlexComponentSummary.add_member(:runtime_minimum_core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runtimeMinimumCoreCount"))
+    FlexComponentSummary.add_member(:shape, Shapes::ShapeRef.new(shape: String, location_name: "shape"))
+    FlexComponentSummary.struct_class = Types::FlexComponentSummary
+
     GetAutonomousDatabaseBackupInput.add_member(:autonomous_database_backup_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "autonomousDatabaseBackupId"))
     GetAutonomousDatabaseBackupInput.struct_class = Types::GetAutonomousDatabaseBackupInput
 
@@ -2224,6 +2247,15 @@ module Aws::Odb
     ListExascaleDbStorageVaultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListExascaleDbStorageVaultsOutput.add_member(:exascale_db_storage_vaults, Shapes::ShapeRef.new(shape: ExascaleDbStorageVaultList, required: true, location_name: "exascaleDbStorageVaults"))
     ListExascaleDbStorageVaultsOutput.struct_class = Types::ListExascaleDbStorageVaultsOutput
+
+    ListFlexComponentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFlexComponentsInputMaxResultsInteger, location_name: "maxResults"))
+    ListFlexComponentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListFlexComponentsInputNextTokenString, location_name: "nextToken"))
+    ListFlexComponentsInput.add_member(:shape, Shapes::ShapeRef.new(shape: ListFlexComponentsInputShapeString, location_name: "shape"))
+    ListFlexComponentsInput.struct_class = Types::ListFlexComponentsInput
+
+    ListFlexComponentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListFlexComponentsOutput.add_member(:flex_components, Shapes::ShapeRef.new(shape: FlexComponentList, required: true, location_name: "flexComponents"))
+    ListFlexComponentsOutput.struct_class = Types::ListFlexComponentsOutput
 
     ListGiMinorVersionsInput.add_member(:gi_version, Shapes::ShapeRef.new(shape: ListGiMinorVersionsInputGiVersionString, required: true, location_name: "giVersion"))
     ListGiMinorVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListGiMinorVersionsInputMaxResultsInteger, location_name: "maxResults"))
@@ -3643,6 +3675,24 @@ module Aws::Odb
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListExascaleDbStorageVaultsInput)
         o.output = Shapes::ShapeRef.new(shape: ListExascaleDbStorageVaultsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_flex_components, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFlexComponents"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFlexComponentsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListFlexComponentsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

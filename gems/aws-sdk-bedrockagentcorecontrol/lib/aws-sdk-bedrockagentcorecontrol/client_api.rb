@@ -47,6 +47,7 @@ module Aws::BedrockAgentCoreControl
     AgentSkillsDescriptor = Shapes::StructureShape.new(name: 'AgentSkillsDescriptor')
     AllowedAudience = Shapes::StringShape.new(name: 'AllowedAudience')
     AllowedAudienceList = Shapes::ListShape.new(name: 'AllowedAudienceList')
+    AllowedAudienceType = Shapes::StringShape.new(name: 'AllowedAudienceType')
     AllowedClient = Shapes::StringShape.new(name: 'AllowedClient')
     AllowedClientsList = Shapes::ListShape.new(name: 'AllowedClientsList')
     AllowedQueryParameters = Shapes::ListShape.new(name: 'AllowedQueryParameters')
@@ -140,6 +141,7 @@ module Aws::BedrockAgentCoreControl
     ClientIdType = Shapes::StringShape.new(name: 'ClientIdType')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchLogsInputConfig = Shapes::StructureShape.new(name: 'CloudWatchLogsInputConfig')
+    CloudWatchLogsInputConfigLogGroupNamePrefixesList = Shapes::ListShape.new(name: 'CloudWatchLogsInputConfigLogGroupNamePrefixesList')
     CloudWatchLogsInputConfigLogGroupNamesList = Shapes::ListShape.new(name: 'CloudWatchLogsInputConfigLogGroupNamesList')
     CloudWatchLogsInputConfigServiceNamesList = Shapes::ListShape.new(name: 'CloudWatchLogsInputConfigServiceNamesList')
     CloudWatchOutputConfig = Shapes::StructureShape.new(name: 'CloudWatchOutputConfig')
@@ -160,9 +162,14 @@ module Aws::BedrockAgentCoreControl
     CoinbaseCdpApiKeyIdType = Shapes::StringShape.new(name: 'CoinbaseCdpApiKeyIdType')
     CoinbaseCdpConfigurationInput = Shapes::StructureShape.new(name: 'CoinbaseCdpConfigurationInput')
     CoinbaseCdpConfigurationOutput = Shapes::StructureShape.new(name: 'CoinbaseCdpConfigurationOutput')
+    CoinbaseCdpRotationTargets = Shapes::StructureShape.new(name: 'CoinbaseCdpRotationTargets')
+    CoinbaseCdpSecret = Shapes::StringShape.new(name: 'CoinbaseCdpSecret')
+    CoinbaseCdpSecrets = Shapes::ListShape.new(name: 'CoinbaseCdpSecrets')
     ComponentConfiguration = Shapes::StructureShape.new(name: 'ComponentConfiguration')
     ComponentConfigurationMap = Shapes::MapShape.new(name: 'ComponentConfigurationMap')
     ComponentIdentifier = Shapes::StringShape.new(name: 'ComponentIdentifier')
+    CompositeIdentifierEntry = Shapes::StringShape.new(name: 'CompositeIdentifierEntry')
+    CompositeIdentifierList = Shapes::ListShape.new(name: 'CompositeIdentifierList')
     ComputeConfiguration = Shapes::UnionShape.new(name: 'ComputeConfiguration')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     Condition = Shapes::UnionShape.new(name: 'Condition')
@@ -194,6 +201,19 @@ module Aws::BedrockAgentCoreControl
     ConnectorSource = Shapes::StructureShape.new(name: 'ConnectorSource')
     ConnectorTargetConfiguration = Shapes::StructureShape.new(name: 'ConnectorTargetConfiguration')
     ConnectorVersion = Shapes::StringShape.new(name: 'ConnectorVersion')
+    ConsentPortalArnType = Shapes::StringShape.new(name: 'ConsentPortalArnType')
+    ConsentPortalDescriptionType = Shapes::StringShape.new(name: 'ConsentPortalDescriptionType')
+    ConsentPortalIdType = Shapes::StringShape.new(name: 'ConsentPortalIdType')
+    ConsentPortalIdentifier = Shapes::StringShape.new(name: 'ConsentPortalIdentifier')
+    ConsentPortalIdpConfig = Shapes::StructureShape.new(name: 'ConsentPortalIdpConfig')
+    ConsentPortalNameType = Shapes::StringShape.new(name: 'ConsentPortalNameType')
+    ConsentPortalSource = Shapes::StructureShape.new(name: 'ConsentPortalSource')
+    ConsentPortalSourceIdentifierType = Shapes::StringShape.new(name: 'ConsentPortalSourceIdentifierType')
+    ConsentPortalSourceType = Shapes::StringShape.new(name: 'ConsentPortalSourceType')
+    ConsentPortalSources = Shapes::ListShape.new(name: 'ConsentPortalSources')
+    ConsentPortalStatus = Shapes::StringShape.new(name: 'ConsentPortalStatus')
+    ConsentPortalSummaries = Shapes::ListShape.new(name: 'ConsentPortalSummaries')
+    ConsentPortalSummary = Shapes::StructureShape.new(name: 'ConsentPortalSummary')
     ConsolidationConfiguration = Shapes::UnionShape.new(name: 'ConsolidationConfiguration')
     ContainerConfiguration = Shapes::StructureShape.new(name: 'ContainerConfiguration')
     Content = Shapes::UnionShape.new(name: 'Content')
@@ -217,6 +237,8 @@ module Aws::BedrockAgentCoreControl
     CreateConfigurationBundleRequest = Shapes::StructureShape.new(name: 'CreateConfigurationBundleRequest')
     CreateConfigurationBundleRequestCommitMessageString = Shapes::StringShape.new(name: 'CreateConfigurationBundleRequestCommitMessageString')
     CreateConfigurationBundleResponse = Shapes::StructureShape.new(name: 'CreateConfigurationBundleResponse')
+    CreateConsentPortalRequest = Shapes::StructureShape.new(name: 'CreateConsentPortalRequest')
+    CreateConsentPortalResponse = Shapes::StructureShape.new(name: 'CreateConsentPortalResponse')
     CreateDatasetRequest = Shapes::StructureShape.new(name: 'CreateDatasetRequest')
     CreateDatasetRequestDescriptionString = Shapes::StringShape.new(name: 'CreateDatasetRequestDescriptionString')
     CreateDatasetResponse = Shapes::StructureShape.new(name: 'CreateDatasetResponse')
@@ -268,6 +290,7 @@ module Aws::BedrockAgentCoreControl
     CredentialProviderName = Shapes::StringShape.new(name: 'CredentialProviderName')
     CredentialProviderType = Shapes::StringShape.new(name: 'CredentialProviderType')
     CredentialProviderVendorType = Shapes::StringShape.new(name: 'CredentialProviderVendorType')
+    CredentialRotationConfig = Shapes::UnionShape.new(name: 'CredentialRotationConfig')
     CredentialsProviderConfiguration = Shapes::UnionShape.new(name: 'CredentialsProviderConfiguration')
     CredentialsProviderConfigurations = Shapes::ListShape.new(name: 'CredentialsProviderConfigurations')
     CustomClaimValidationType = Shapes::StructureShape.new(name: 'CustomClaimValidationType')
@@ -327,6 +350,8 @@ module Aws::BedrockAgentCoreControl
     DeleteCodeInterpreterResponse = Shapes::StructureShape.new(name: 'DeleteCodeInterpreterResponse')
     DeleteConfigurationBundleRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationBundleRequest')
     DeleteConfigurationBundleResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationBundleResponse')
+    DeleteConsentPortalRequest = Shapes::StructureShape.new(name: 'DeleteConsentPortalRequest')
+    DeleteConsentPortalResponse = Shapes::StructureShape.new(name: 'DeleteConsentPortalResponse')
     DeleteDatasetExamplesRequest = Shapes::StructureShape.new(name: 'DeleteDatasetExamplesRequest')
     DeleteDatasetExamplesRequestExampleIdsList = Shapes::ListShape.new(name: 'DeleteDatasetExamplesRequestExampleIdsList')
     DeleteDatasetExamplesResponse = Shapes::StructureShape.new(name: 'DeleteDatasetExamplesResponse')
@@ -440,6 +465,7 @@ module Aws::BedrockAgentCoreControl
     ExampleId = Shapes::StringShape.new(name: 'ExampleId')
     ExampleIdList = Shapes::ListShape.new(name: 'ExampleIdList')
     ExceptionLevel = Shapes::StringShape.new(name: 'ExceptionLevel')
+    ExecutionRoleArnType = Shapes::StringShape.new(name: 'ExecutionRoleArnType')
     ExtractionConfig = Shapes::UnionShape.new(name: 'ExtractionConfig')
     ExtractionConfiguration = Shapes::UnionShape.new(name: 'ExtractionConfiguration')
     ExtractionType = Shapes::StringShape.new(name: 'ExtractionType')
@@ -512,6 +538,8 @@ module Aws::BedrockAgentCoreControl
     GetConfigurationBundleResponse = Shapes::StructureShape.new(name: 'GetConfigurationBundleResponse')
     GetConfigurationBundleVersionRequest = Shapes::StructureShape.new(name: 'GetConfigurationBundleVersionRequest')
     GetConfigurationBundleVersionResponse = Shapes::StructureShape.new(name: 'GetConfigurationBundleVersionResponse')
+    GetConsentPortalRequest = Shapes::StructureShape.new(name: 'GetConsentPortalRequest')
+    GetConsentPortalResponse = Shapes::StructureShape.new(name: 'GetConsentPortalResponse')
     GetDatasetRequest = Shapes::StructureShape.new(name: 'GetDatasetRequest')
     GetDatasetResponse = Shapes::StructureShape.new(name: 'GetDatasetResponse')
     GetEvaluatorRequest = Shapes::StructureShape.new(name: 'GetEvaluatorRequest')
@@ -567,6 +595,8 @@ module Aws::BedrockAgentCoreControl
     GoogleOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'GoogleOauth2ProviderConfigInput')
     GoogleOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'GoogleOauth2ProviderConfigOutput')
     Harness = Shapes::StructureShape.new(name: 'Harness')
+    HarnessAfterInvocationHook = Shapes::StructureShape.new(name: 'HarnessAfterInvocationHook')
+    HarnessAfterToolCallHook = Shapes::StructureShape.new(name: 'HarnessAfterToolCallHook')
     HarnessAgentCoreBrowserConfig = Shapes::StructureShape.new(name: 'HarnessAgentCoreBrowserConfig')
     HarnessAgentCoreCodeInterpreterConfig = Shapes::StructureShape.new(name: 'HarnessAgentCoreCodeInterpreterConfig')
     HarnessAgentCoreGatewayConfig = Shapes::StructureShape.new(name: 'HarnessAgentCoreGatewayConfig')
@@ -582,6 +612,8 @@ module Aws::BedrockAgentCoreControl
     HarnessAwsSkillPaths = Shapes::ListShape.new(name: 'HarnessAwsSkillPaths')
     HarnessBedrockApiFormat = Shapes::StringShape.new(name: 'HarnessBedrockApiFormat')
     HarnessBedrockModelConfig = Shapes::StructureShape.new(name: 'HarnessBedrockModelConfig')
+    HarnessBeforeInvocationHook = Shapes::StructureShape.new(name: 'HarnessBeforeInvocationHook')
+    HarnessBeforeToolCallHook = Shapes::StructureShape.new(name: 'HarnessBeforeToolCallHook')
     HarnessBrowserArn = Shapes::StringShape.new(name: 'HarnessBrowserArn')
     HarnessCodeInterpreterArn = Shapes::StringShape.new(name: 'HarnessCodeInterpreterArn')
     HarnessDisabledMemoryConfiguration = Shapes::StructureShape.new(name: 'HarnessDisabledMemoryConfiguration')
@@ -594,11 +626,22 @@ module Aws::BedrockAgentCoreControl
     HarnessEnvironmentArtifact = Shapes::UnionShape.new(name: 'HarnessEnvironmentArtifact')
     HarnessEnvironmentProvider = Shapes::UnionShape.new(name: 'HarnessEnvironmentProvider')
     HarnessEnvironmentProviderRequest = Shapes::UnionShape.new(name: 'HarnessEnvironmentProviderRequest')
+    HarnessEventBridgeBusArn = Shapes::StringShape.new(name: 'HarnessEventBridgeBusArn')
     HarnessGatewayOutboundAuth = Shapes::UnionShape.new(name: 'HarnessGatewayOutboundAuth')
     HarnessGeminiModelConfig = Shapes::StructureShape.new(name: 'HarnessGeminiModelConfig')
+    HarnessHook = Shapes::UnionShape.new(name: 'HarnessHook')
+    HarnessHookEventBridgeTarget = Shapes::StructureShape.new(name: 'HarnessHookEventBridgeTarget')
+    HarnessHookFailureMode = Shapes::StringShape.new(name: 'HarnessHookFailureMode')
+    HarnessHookLambdaTarget = Shapes::StructureShape.new(name: 'HarnessHookLambdaTarget')
+    HarnessHookLambdaTargetTimeoutSecondsInteger = Shapes::IntegerShape.new(name: 'HarnessHookLambdaTargetTimeoutSecondsInteger')
+    HarnessHookName = Shapes::StringShape.new(name: 'HarnessHookName')
+    HarnessHookSnsTarget = Shapes::StructureShape.new(name: 'HarnessHookSnsTarget')
+    HarnessHookTarget = Shapes::UnionShape.new(name: 'HarnessHookTarget')
+    HarnessHooks = Shapes::ListShape.new(name: 'HarnessHooks')
     HarnessId = Shapes::StringShape.new(name: 'HarnessId')
     HarnessInlineFunctionConfig = Shapes::StructureShape.new(name: 'HarnessInlineFunctionConfig')
     HarnessInlineFunctionDescription = Shapes::StringShape.new(name: 'HarnessInlineFunctionDescription')
+    HarnessLambdaFunctionArn = Shapes::StringShape.new(name: 'HarnessLambdaFunctionArn')
     HarnessLiteLlmApiBase = Shapes::StringShape.new(name: 'HarnessLiteLlmApiBase')
     HarnessLiteLlmModelConfig = Shapes::StructureShape.new(name: 'HarnessLiteLlmModelConfig')
     HarnessManagedMemoryConfiguration = Shapes::StructureShape.new(name: 'HarnessManagedMemoryConfiguration')
@@ -608,6 +651,7 @@ module Aws::BedrockAgentCoreControl
     HarnessMemoryConfiguration = Shapes::UnionShape.new(name: 'HarnessMemoryConfiguration')
     HarnessModelConfiguration = Shapes::UnionShape.new(name: 'HarnessModelConfiguration')
     HarnessName = Shapes::StringShape.new(name: 'HarnessName')
+    HarnessOpenAiApiBase = Shapes::StringShape.new(name: 'HarnessOpenAiApiBase')
     HarnessOpenAiApiFormat = Shapes::StringShape.new(name: 'HarnessOpenAiApiFormat')
     HarnessOpenAiModelConfig = Shapes::StructureShape.new(name: 'HarnessOpenAiModelConfig')
     HarnessRemoteMcpConfig = Shapes::StructureShape.new(name: 'HarnessRemoteMcpConfig')
@@ -622,6 +666,7 @@ module Aws::BedrockAgentCoreControl
     HarnessSkillS3Uri = Shapes::StringShape.new(name: 'HarnessSkillS3Uri')
     HarnessSkills = Shapes::ListShape.new(name: 'HarnessSkills')
     HarnessSlidingWindowConfiguration = Shapes::StructureShape.new(name: 'HarnessSlidingWindowConfiguration')
+    HarnessSnsTopicArn = Shapes::StringShape.new(name: 'HarnessSnsTopicArn')
     HarnessStatus = Shapes::StringShape.new(name: 'HarnessStatus')
     HarnessSummaries = Shapes::ListShape.new(name: 'HarnessSummaries')
     HarnessSummarizationConfiguration = Shapes::StructureShape.new(name: 'HarnessSummarizationConfiguration')
@@ -756,6 +801,9 @@ module Aws::BedrockAgentCoreControl
     ListConfigurationBundlesRequest = Shapes::StructureShape.new(name: 'ListConfigurationBundlesRequest')
     ListConfigurationBundlesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListConfigurationBundlesRequestMaxResultsInteger')
     ListConfigurationBundlesResponse = Shapes::StructureShape.new(name: 'ListConfigurationBundlesResponse')
+    ListConsentPortalsRequest = Shapes::StructureShape.new(name: 'ListConsentPortalsRequest')
+    ListConsentPortalsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListConsentPortalsRequestMaxResultsInteger')
+    ListConsentPortalsResponse = Shapes::StructureShape.new(name: 'ListConsentPortalsResponse')
     ListDatasetExamplesRequest = Shapes::StructureShape.new(name: 'ListDatasetExamplesRequest')
     ListDatasetExamplesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDatasetExamplesRequestMaxResultsInteger')
     ListDatasetExamplesRequestNextTokenString = Shapes::StringShape.new(name: 'ListDatasetExamplesRequestNextTokenString')
@@ -828,6 +876,7 @@ module Aws::BedrockAgentCoreControl
     LlmExtractionConfig = Shapes::StructureShape.new(name: 'LlmExtractionConfig')
     LlmExtractionInstruction = Shapes::StringShape.new(name: 'LlmExtractionInstruction')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
+    LogGroupNamePrefix = Shapes::StringShape.new(name: 'LogGroupNamePrefix')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MCPGatewayConfiguration = Shapes::StructureShape.new(name: 'MCPGatewayConfiguration')
     ManagedResourceDetails = Shapes::StructureShape.new(name: 'ManagedResourceDetails')
@@ -876,6 +925,7 @@ module Aws::BedrockAgentCoreControl
     MetadataSchemaEntry = Shapes::StructureShape.new(name: 'MetadataSchemaEntry')
     MetadataSchemaList = Shapes::ListShape.new(name: 'MetadataSchemaList')
     MetadataValueType = Shapes::StringShape.new(name: 'MetadataValueType')
+    MetricsNamespace = Shapes::StringShape.new(name: 'MetricsNamespace')
     MicrosoftOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'MicrosoftOauth2ProviderConfigInput')
     MicrosoftOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'MicrosoftOauth2ProviderConfigOutput')
     ModelEntries = Shapes::ListShape.new(name: 'ModelEntries')
@@ -898,6 +948,13 @@ module Aws::BedrockAgentCoreControl
     MountPath = Shapes::StringShape.new(name: 'MountPath')
     Name = Shapes::StringShape.new(name: 'Name')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
+    NamespaceAllowedValue = Shapes::StringShape.new(name: 'NamespaceAllowedValue')
+    NamespaceAllowedValuesList = Shapes::ListShape.new(name: 'NamespaceAllowedValuesList')
+    NamespaceKeyEntry = Shapes::StructureShape.new(name: 'NamespaceKeyEntry')
+    NamespaceKeyValidation = Shapes::StructureShape.new(name: 'NamespaceKeyValidation')
+    NamespaceKeysList = Shapes::ListShape.new(name: 'NamespaceKeysList')
+    NamespaceRegexPattern = Shapes::StringShape.new(name: 'NamespaceRegexPattern')
+    NamespaceVariableKey = Shapes::StringShape.new(name: 'NamespaceVariableKey')
     NamespacesList = Shapes::ListShape.new(name: 'NamespacesList')
     NaturalLanguage = Shapes::StringShape.new(name: 'NaturalLanguage')
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
@@ -913,6 +970,7 @@ module Aws::BedrockAgentCoreControl
     OAuth2AuthorizationData = Shapes::StructureShape.new(name: 'OAuth2AuthorizationData')
     OAuth2AuthorizationDataAuthorizationUrlString = Shapes::StringShape.new(name: 'OAuth2AuthorizationDataAuthorizationUrlString')
     OAuth2AuthorizationDataUserIdString = Shapes::StringShape.new(name: 'OAuth2AuthorizationDataUserIdString')
+    OAuth2CredentialProviderArn = Shapes::StringShape.new(name: 'OAuth2CredentialProviderArn')
     OAuthCredentialProvider = Shapes::StructureShape.new(name: 'OAuthCredentialProvider')
     OAuthCredentialProviderArn = Shapes::StringShape.new(name: 'OAuthCredentialProviderArn')
     OAuthCustomParameters = Shapes::MapShape.new(name: 'OAuthCustomParameters')
@@ -941,6 +999,7 @@ module Aws::BedrockAgentCoreControl
     OpenResponsesEvaluatorModelConfigTemperatureFloat = Shapes::FloatShape.new(name: 'OpenResponsesEvaluatorModelConfigTemperatureFloat')
     OpenResponsesEvaluatorModelConfigTopPFloat = Shapes::FloatShape.new(name: 'OpenResponsesEvaluatorModelConfigTopPFloat')
     OperatingSystem = Shapes::StringShape.new(name: 'OperatingSystem')
+    OptionalLogGroupName = Shapes::StringShape.new(name: 'OptionalLogGroupName')
     OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
     OverrideType = Shapes::StringShape.new(name: 'OverrideType')
     PassthroughEndpoint = Shapes::StringShape.new(name: 'PassthroughEndpoint')
@@ -972,6 +1031,7 @@ module Aws::BedrockAgentCoreControl
     PaymentsDescription = Shapes::StringShape.new(name: 'PaymentsDescription')
     Period = Shapes::StringShape.new(name: 'Period')
     PermissionsConfiguration = Shapes::StructureShape.new(name: 'PermissionsConfiguration')
+    PlatformVersion = Shapes::StringShape.new(name: 'PlatformVersion')
     Policies = Shapes::ListShape.new(name: 'Policies')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     PolicyArn = Shapes::StringShape.new(name: 'PolicyArn')
@@ -1000,6 +1060,7 @@ module Aws::BedrockAgentCoreControl
     PolicySummary = Shapes::StructureShape.new(name: 'PolicySummary')
     PolicySummaryList = Shapes::ListShape.new(name: 'PolicySummaryList')
     PolicyValidationMode = Shapes::StringShape.new(name: 'PolicyValidationMode')
+    PortalUrlType = Shapes::StringShape.new(name: 'PortalUrlType')
     PrincipalMatchOperator = Shapes::StringShape.new(name: 'PrincipalMatchOperator')
     PrivateEndpoint = Shapes::UnionShape.new(name: 'PrivateEndpoint')
     PrivateEndpointManagedResources = Shapes::ListShape.new(name: 'PrivateEndpointManagedResources')
@@ -1065,11 +1126,14 @@ module Aws::BedrockAgentCoreControl
     ResponseType = Shapes::StringShape.new(name: 'ResponseType')
     RestApiMethod = Shapes::StringShape.new(name: 'RestApiMethod')
     RestApiMethods = Shapes::ListShape.new(name: 'RestApiMethods')
+    ResultDestination = Shapes::StringShape.new(name: 'ResultDestination')
     RetryableConflictException = Shapes::StructureShape.new(name: 'RetryableConflictException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RootVolumeConfiguration = Shapes::StructureShape.new(name: 'RootVolumeConfiguration')
     RootVolumeConfigurationFreeSpaceGiBInteger = Shapes::IntegerShape.new(name: 'RootVolumeConfigurationFreeSpaceGiBInteger')
     RootVolumeConfigurationThroughputInteger = Shapes::IntegerShape.new(name: 'RootVolumeConfigurationThroughputInteger')
+    RotatePaymentConnectorCredentialsRequest = Shapes::StructureShape.new(name: 'RotatePaymentConnectorCredentialsRequest')
+    RotatePaymentConnectorCredentialsResponse = Shapes::StructureShape.new(name: 'RotatePaymentConnectorCredentialsResponse')
     RouteToTargetAction = Shapes::UnionShape.new(name: 'RouteToTargetAction')
     RoutingDomain = Shapes::StringShape.new(name: 'RoutingDomain')
     Rule = Shapes::StructureShape.new(name: 'Rule')
@@ -1149,9 +1213,14 @@ module Aws::BedrockAgentCoreControl
     Statement = Shapes::StringShape.new(name: 'Statement')
     StaticOverride = Shapes::StructureShape.new(name: 'StaticOverride')
     StaticOverrideBundleVersionString = Shapes::StringShape.new(name: 'StaticOverrideBundleVersionString')
+    StaticQueryParameterConflictResolution = Shapes::StringShape.new(name: 'StaticQueryParameterConflictResolution')
+    StaticQueryParameterName = Shapes::StringShape.new(name: 'StaticQueryParameterName')
+    StaticQueryParameterValue = Shapes::StringShape.new(name: 'StaticQueryParameterValue')
+    StaticQueryParameters = Shapes::MapShape.new(name: 'StaticQueryParameters')
     StaticRoute = Shapes::StructureShape.new(name: 'StaticRoute')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
+    StatusReasonType = Shapes::StringShape.new(name: 'StatusReasonType')
     StatusReasons = Shapes::ListShape.new(name: 'StatusReasons')
     StickinessConfiguration = Shapes::StructureShape.new(name: 'StickinessConfiguration')
     StickinessConfigurationIdentifierString = Shapes::StringShape.new(name: 'StickinessConfigurationIdentifierString')
@@ -1261,6 +1330,8 @@ module Aws::BedrockAgentCoreControl
     UpdateConfigurationBundleRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationBundleRequest')
     UpdateConfigurationBundleRequestCommitMessageString = Shapes::StringShape.new(name: 'UpdateConfigurationBundleRequestCommitMessageString')
     UpdateConfigurationBundleResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationBundleResponse')
+    UpdateConsentPortalRequest = Shapes::StructureShape.new(name: 'UpdateConsentPortalRequest')
+    UpdateConsentPortalResponse = Shapes::StructureShape.new(name: 'UpdateConsentPortalResponse')
     UpdateDatasetExamplesRequest = Shapes::StructureShape.new(name: 'UpdateDatasetExamplesRequest')
     UpdateDatasetExamplesRequestExamplesList = Shapes::ListShape.new(name: 'UpdateDatasetExamplesRequestExamplesList')
     UpdateDatasetExamplesResponse = Shapes::StructureShape.new(name: 'UpdateDatasetExamplesResponse')
@@ -1659,15 +1730,20 @@ module Aws::BedrockAgentCoreControl
     ClaimMatchValueType.add_member_subclass(:unknown, Types::ClaimMatchValueType::Unknown)
     ClaimMatchValueType.struct_class = Types::ClaimMatchValueType
 
-    CloudWatchLogsInputConfig.add_member(:log_group_names, Shapes::ShapeRef.new(shape: CloudWatchLogsInputConfigLogGroupNamesList, required: true, location_name: "logGroupNames"))
+    CloudWatchLogsInputConfig.add_member(:log_group_names, Shapes::ShapeRef.new(shape: CloudWatchLogsInputConfigLogGroupNamesList, location_name: "logGroupNames"))
+    CloudWatchLogsInputConfig.add_member(:log_group_name_prefixes, Shapes::ShapeRef.new(shape: CloudWatchLogsInputConfigLogGroupNamePrefixesList, location_name: "logGroupNamePrefixes"))
     CloudWatchLogsInputConfig.add_member(:service_names, Shapes::ShapeRef.new(shape: CloudWatchLogsInputConfigServiceNamesList, required: true, location_name: "serviceNames"))
     CloudWatchLogsInputConfig.struct_class = Types::CloudWatchLogsInputConfig
+
+    CloudWatchLogsInputConfigLogGroupNamePrefixesList.member = Shapes::ShapeRef.new(shape: LogGroupNamePrefix)
 
     CloudWatchLogsInputConfigLogGroupNamesList.member = Shapes::ShapeRef.new(shape: LogGroupName)
 
     CloudWatchLogsInputConfigServiceNamesList.member = Shapes::ShapeRef.new(shape: ServiceName)
 
-    CloudWatchOutputConfig.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    CloudWatchOutputConfig.add_member(:log_group_name, Shapes::ShapeRef.new(shape: OptionalLogGroupName, location_name: "logGroupName"))
+    CloudWatchOutputConfig.add_member(:metrics_namespace, Shapes::ShapeRef.new(shape: MetricsNamespace, location_name: "metricsNamespace"))
+    CloudWatchOutputConfig.add_member(:result_destination, Shapes::ShapeRef.new(shape: ResultDestination, location_name: "resultDestination"))
     CloudWatchOutputConfig.struct_class = Types::CloudWatchOutputConfig
 
     ClusteringConfig.add_member(:frequencies, Shapes::ShapeRef.new(shape: ClusteringFrequencyList, required: true, location_name: "frequencies"))
@@ -1727,11 +1803,18 @@ module Aws::BedrockAgentCoreControl
     CoinbaseCdpConfigurationOutput.add_member(:wallet_secret_source, Shapes::ShapeRef.new(shape: SecretSourceType, location_name: "walletSecretSource"))
     CoinbaseCdpConfigurationOutput.struct_class = Types::CoinbaseCdpConfigurationOutput
 
+    CoinbaseCdpRotationTargets.add_member(:secrets, Shapes::ShapeRef.new(shape: CoinbaseCdpSecrets, required: true, location_name: "secrets"))
+    CoinbaseCdpRotationTargets.struct_class = Types::CoinbaseCdpRotationTargets
+
+    CoinbaseCdpSecrets.member = Shapes::ShapeRef.new(shape: CoinbaseCdpSecret)
+
     ComponentConfiguration.add_member(:configuration, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "configuration"))
     ComponentConfiguration.struct_class = Types::ComponentConfiguration
 
     ComponentConfigurationMap.key = Shapes::ShapeRef.new(shape: ComponentIdentifier)
     ComponentConfigurationMap.value = Shapes::ShapeRef.new(shape: ComponentConfiguration)
+
+    CompositeIdentifierList.member = Shapes::ShapeRef.new(shape: CompositeIdentifierEntry)
 
     ComputeConfiguration.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2Configuration, location_name: "ec2Configuration"))
     ComputeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1811,6 +1894,30 @@ module Aws::BedrockAgentCoreControl
     ConnectorTargetConfiguration.add_member(:configurations, Shapes::ShapeRef.new(shape: ConnectorConfigurations, location_name: "configurations"))
     ConnectorTargetConfiguration.struct_class = Types::ConnectorTargetConfiguration
 
+    ConsentPortalIdpConfig.add_member(:credential_provider_arn, Shapes::ShapeRef.new(shape: OAuth2CredentialProviderArn, required: true, location_name: "credentialProviderArn"))
+    ConsentPortalIdpConfig.add_member(:scopes, Shapes::ShapeRef.new(shape: AllowedScopesType, required: true, location_name: "scopes"))
+    ConsentPortalIdpConfig.add_member(:audience, Shapes::ShapeRef.new(shape: AllowedAudienceType, location_name: "audience"))
+    ConsentPortalIdpConfig.struct_class = Types::ConsentPortalIdpConfig
+
+    ConsentPortalSource.add_member(:identifier, Shapes::ShapeRef.new(shape: ConsentPortalSourceIdentifierType, required: true, location_name: "identifier"))
+    ConsentPortalSource.add_member(:type, Shapes::ShapeRef.new(shape: ConsentPortalSourceType, required: true, location_name: "type"))
+    ConsentPortalSource.struct_class = Types::ConsentPortalSource
+
+    ConsentPortalSources.member = Shapes::ShapeRef.new(shape: ConsentPortalSource)
+
+    ConsentPortalSummaries.member = Shapes::ShapeRef.new(shape: ConsentPortalSummary)
+
+    ConsentPortalSummary.add_member(:sources, Shapes::ShapeRef.new(shape: ConsentPortalSources, required: true, location_name: "sources"))
+    ConsentPortalSummary.add_member(:consent_portal_arn, Shapes::ShapeRef.new(shape: ConsentPortalArnType, required: true, location_name: "consentPortalArn"))
+    ConsentPortalSummary.add_member(:consent_portal_id, Shapes::ShapeRef.new(shape: ConsentPortalIdType, required: true, location_name: "consentPortalId"))
+    ConsentPortalSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    ConsentPortalSummary.add_member(:description, Shapes::ShapeRef.new(shape: ConsentPortalDescriptionType, location_name: "description"))
+    ConsentPortalSummary.add_member(:name, Shapes::ShapeRef.new(shape: ConsentPortalNameType, required: true, location_name: "name"))
+    ConsentPortalSummary.add_member(:portal_url, Shapes::ShapeRef.new(shape: PortalUrlType, location_name: "portalUrl"))
+    ConsentPortalSummary.add_member(:status, Shapes::ShapeRef.new(shape: ConsentPortalStatus, required: true, location_name: "status"))
+    ConsentPortalSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    ConsentPortalSummary.struct_class = Types::ConsentPortalSummary
+
     ConsolidationConfiguration.add_member(:custom_consolidation_configuration, Shapes::ShapeRef.new(shape: CustomConsolidationConfiguration, location_name: "customConsolidationConfiguration"))
     ConsolidationConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ConsolidationConfiguration.add_member_subclass(:custom_consolidation_configuration, Types::ConsolidationConfiguration::CustomConsolidationConfiguration)
@@ -1861,6 +1968,7 @@ module Aws::BedrockAgentCoreControl
     CreateAgentRuntimeRequest.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: FilesystemConfigurations, location_name: "filesystemConfigurations"))
     CreateAgentRuntimeRequest.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
     CreateAgentRuntimeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateAgentRuntimeRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
     CreateAgentRuntimeRequest.struct_class = Types::CreateAgentRuntimeRequest
 
     CreateAgentRuntimeResponse.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
@@ -1962,6 +2070,28 @@ module Aws::BedrockAgentCoreControl
     CreateConfigurationBundleResponse.add_member(:version_id, Shapes::ShapeRef.new(shape: ConfigurationBundleVersion, required: true, location_name: "versionId"))
     CreateConfigurationBundleResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     CreateConfigurationBundleResponse.struct_class = Types::CreateConfigurationBundleResponse
+
+    CreateConsentPortalRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArnType, required: true, location_name: "executionRoleArn"))
+    CreateConsentPortalRequest.add_member(:idp_config, Shapes::ShapeRef.new(shape: ConsentPortalIdpConfig, required: true, location_name: "idpConfig"))
+    CreateConsentPortalRequest.add_member(:name, Shapes::ShapeRef.new(shape: ConsentPortalNameType, required: true, location_name: "name"))
+    CreateConsentPortalRequest.add_member(:sources, Shapes::ShapeRef.new(shape: ConsentPortalSources, required: true, location_name: "sources"))
+    CreateConsentPortalRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConsentPortalDescriptionType, location_name: "description"))
+    CreateConsentPortalRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateConsentPortalRequest.struct_class = Types::CreateConsentPortalRequest
+
+    CreateConsentPortalResponse.add_member(:sources, Shapes::ShapeRef.new(shape: ConsentPortalSources, required: true, location_name: "sources"))
+    CreateConsentPortalResponse.add_member(:consent_portal_arn, Shapes::ShapeRef.new(shape: ConsentPortalArnType, required: true, location_name: "consentPortalArn"))
+    CreateConsentPortalResponse.add_member(:consent_portal_id, Shapes::ShapeRef.new(shape: ConsentPortalIdType, required: true, location_name: "consentPortalId"))
+    CreateConsentPortalResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    CreateConsentPortalResponse.add_member(:description, Shapes::ShapeRef.new(shape: ConsentPortalDescriptionType, location_name: "description"))
+    CreateConsentPortalResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArnType, required: true, location_name: "executionRoleArn"))
+    CreateConsentPortalResponse.add_member(:idp_config, Shapes::ShapeRef.new(shape: ConsentPortalIdpConfig, required: true, location_name: "idpConfig"))
+    CreateConsentPortalResponse.add_member(:name, Shapes::ShapeRef.new(shape: ConsentPortalNameType, required: true, location_name: "name"))
+    CreateConsentPortalResponse.add_member(:portal_url, Shapes::ShapeRef.new(shape: PortalUrlType, location_name: "portalUrl"))
+    CreateConsentPortalResponse.add_member(:status, Shapes::ShapeRef.new(shape: ConsentPortalStatus, required: true, location_name: "status"))
+    CreateConsentPortalResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReasonType, location_name: "statusReason"))
+    CreateConsentPortalResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    CreateConsentPortalResponse.struct_class = Types::CreateConsentPortalResponse
 
     CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "datasetName"))
@@ -2133,6 +2263,7 @@ module Aws::BedrockAgentCoreControl
     CreateHarnessRequest.add_member(:allowed_tools, Shapes::ShapeRef.new(shape: HarnessAllowedTools, location_name: "allowedTools"))
     CreateHarnessRequest.add_member(:memory, Shapes::ShapeRef.new(shape: HarnessMemoryConfiguration, location_name: "memory"))
     CreateHarnessRequest.add_member(:truncation, Shapes::ShapeRef.new(shape: HarnessTruncationConfiguration, location_name: "truncation"))
+    CreateHarnessRequest.add_member(:hooks, Shapes::ShapeRef.new(shape: HarnessHooks, location_name: "hooks"))
     CreateHarnessRequest.add_member(:max_iterations, Shapes::ShapeRef.new(shape: Integer, location_name: "maxIterations"))
     CreateHarnessRequest.add_member(:max_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "maxTokens"))
     CreateHarnessRequest.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "timeoutSeconds"))
@@ -2150,6 +2281,7 @@ module Aws::BedrockAgentCoreControl
     CreateMemoryInput.add_member(:event_expiry_duration, Shapes::ShapeRef.new(shape: CreateMemoryInputEventExpiryDurationInteger, required: true, location_name: "eventExpiryDuration"))
     CreateMemoryInput.add_member(:memory_strategies, Shapes::ShapeRef.new(shape: MemoryStrategyInputList, location_name: "memoryStrategies"))
     CreateMemoryInput.add_member(:indexed_keys, Shapes::ShapeRef.new(shape: IndexedKeysList, location_name: "indexedKeys"))
+    CreateMemoryInput.add_member(:namespace_keys, Shapes::ShapeRef.new(shape: NamespaceKeysList, location_name: "namespaceKeys"))
     CreateMemoryInput.add_member(:stream_delivery_resources, Shapes::ShapeRef.new(shape: StreamDeliveryResources, location_name: "streamDeliveryResources"))
     CreateMemoryInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateMemoryInput.struct_class = Types::CreateMemoryInput
@@ -2181,6 +2313,7 @@ module Aws::BedrockAgentCoreControl
     CreateOnlineEvaluationConfigRequest.add_member(:evaluators, Shapes::ShapeRef.new(shape: EvaluatorList, location_name: "evaluators"))
     CreateOnlineEvaluationConfigRequest.add_member(:insights, Shapes::ShapeRef.new(shape: InsightList, location_name: "insights"))
     CreateOnlineEvaluationConfigRequest.add_member(:clustering_config, Shapes::ShapeRef.new(shape: ClusteringConfig, location_name: "clusteringConfig"))
+    CreateOnlineEvaluationConfigRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "outputConfig"))
     CreateOnlineEvaluationConfigRequest.add_member(:evaluation_execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "evaluationExecutionRoleArn"))
     CreateOnlineEvaluationConfigRequest.add_member(:enable_on_create, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enableOnCreate"))
     CreateOnlineEvaluationConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -2340,6 +2473,12 @@ module Aws::BedrockAgentCoreControl
     CredentialProviderConfiguration.struct_class = Types::CredentialProviderConfiguration
 
     CredentialProviderConfigurations.member = Shapes::ShapeRef.new(shape: CredentialProviderConfiguration)
+
+    CredentialRotationConfig.add_member(:coinbase_cdp, Shapes::ShapeRef.new(shape: CoinbaseCdpRotationTargets, location_name: "coinbaseCDP"))
+    CredentialRotationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CredentialRotationConfig.add_member_subclass(:coinbase_cdp, Types::CredentialRotationConfig::CoinbaseCdp)
+    CredentialRotationConfig.add_member_subclass(:unknown, Types::CredentialRotationConfig::Unknown)
+    CredentialRotationConfig.struct_class = Types::CredentialRotationConfig
 
     CredentialsProviderConfiguration.add_member(:coinbase_cdp, Shapes::ShapeRef.new(shape: PaymentCredentialProviderConfiguration, location_name: "coinbaseCDP"))
     CredentialsProviderConfiguration.add_member(:stripe_privy, Shapes::ShapeRef.new(shape: PaymentCredentialProviderConfiguration, location_name: "stripePrivy"))
@@ -2585,6 +2724,11 @@ module Aws::BedrockAgentCoreControl
     DeleteConfigurationBundleResponse.add_member(:bundle_id, Shapes::ShapeRef.new(shape: ConfigurationBundleId, required: true, location_name: "bundleId"))
     DeleteConfigurationBundleResponse.add_member(:status, Shapes::ShapeRef.new(shape: ConfigurationBundleStatus, required: true, location_name: "status"))
     DeleteConfigurationBundleResponse.struct_class = Types::DeleteConfigurationBundleResponse
+
+    DeleteConsentPortalRequest.add_member(:consent_portal_identifier, Shapes::ShapeRef.new(shape: ConsentPortalIdentifier, required: true, location_name: "consentPortalIdentifier"))
+    DeleteConsentPortalRequest.struct_class = Types::DeleteConsentPortalRequest
+
+    DeleteConsentPortalResponse.struct_class = Types::DeleteConsentPortalResponse
 
     DeleteDatasetExamplesRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
     DeleteDatasetExamplesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -3101,6 +3245,7 @@ module Aws::BedrockAgentCoreControl
     GetAgentRuntimeResponse.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: RuntimeMetadataConfiguration, location_name: "metadataConfiguration"))
     GetAgentRuntimeResponse.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: FilesystemConfigurations, location_name: "filesystemConfigurations"))
     GetAgentRuntimeResponse.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
+    GetAgentRuntimeResponse.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
     GetAgentRuntimeResponse.struct_class = Types::GetAgentRuntimeResponse
 
     GetApiKeyCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -3214,6 +3359,23 @@ module Aws::BedrockAgentCoreControl
     GetConfigurationBundleVersionResponse.add_member(:version_created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "versionCreatedAt"))
     GetConfigurationBundleVersionResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     GetConfigurationBundleVersionResponse.struct_class = Types::GetConfigurationBundleVersionResponse
+
+    GetConsentPortalRequest.add_member(:consent_portal_identifier, Shapes::ShapeRef.new(shape: ConsentPortalIdentifier, required: true, location_name: "consentPortalIdentifier"))
+    GetConsentPortalRequest.struct_class = Types::GetConsentPortalRequest
+
+    GetConsentPortalResponse.add_member(:sources, Shapes::ShapeRef.new(shape: ConsentPortalSources, required: true, location_name: "sources"))
+    GetConsentPortalResponse.add_member(:consent_portal_arn, Shapes::ShapeRef.new(shape: ConsentPortalArnType, required: true, location_name: "consentPortalArn"))
+    GetConsentPortalResponse.add_member(:consent_portal_id, Shapes::ShapeRef.new(shape: ConsentPortalIdType, required: true, location_name: "consentPortalId"))
+    GetConsentPortalResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetConsentPortalResponse.add_member(:description, Shapes::ShapeRef.new(shape: ConsentPortalDescriptionType, location_name: "description"))
+    GetConsentPortalResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArnType, required: true, location_name: "executionRoleArn"))
+    GetConsentPortalResponse.add_member(:idp_config, Shapes::ShapeRef.new(shape: ConsentPortalIdpConfig, required: true, location_name: "idpConfig"))
+    GetConsentPortalResponse.add_member(:name, Shapes::ShapeRef.new(shape: ConsentPortalNameType, required: true, location_name: "name"))
+    GetConsentPortalResponse.add_member(:portal_url, Shapes::ShapeRef.new(shape: PortalUrlType, location_name: "portalUrl"))
+    GetConsentPortalResponse.add_member(:status, Shapes::ShapeRef.new(shape: ConsentPortalStatus, required: true, location_name: "status"))
+    GetConsentPortalResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReasonType, location_name: "statusReason"))
+    GetConsentPortalResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetConsentPortalResponse.struct_class = Types::GetConsentPortalResponse
 
     GetDatasetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
     GetDatasetRequest.add_member(:dataset_version, Shapes::ShapeRef.new(shape: DatasetVersion, location: "querystring", location_name: "datasetVersion"))
@@ -3402,11 +3564,13 @@ module Aws::BedrockAgentCoreControl
     GetPaymentConnectorResponse.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
     GetPaymentConnectorResponse.add_member(:description, Shapes::ShapeRef.new(shape: PaymentsDescription, location_name: "description"))
     GetPaymentConnectorResponse.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
+    GetPaymentConnectorResponse.add_member(:provision_mode, Shapes::ShapeRef.new(shape: PaymentConnectorProvisionMode, location_name: "provisionMode"))
     GetPaymentConnectorResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialsProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
     GetPaymentConnectorResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetPaymentConnectorResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     GetPaymentConnectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
     GetPaymentConnectorResponse.add_member(:authorization_url, Shapes::ShapeRef.new(shape: PaymentConnectorAuthorizationUrl, location_name: "authorizationUrl"))
+    GetPaymentConnectorResponse.add_member(:credentials_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "credentialsUpdatedAt"))
     GetPaymentConnectorResponse.struct_class = Types::GetPaymentConnectorResponse
 
     GetPaymentCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -3626,11 +3790,20 @@ module Aws::BedrockAgentCoreControl
     Harness.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "environmentVariables"))
     Harness.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
     Harness.add_member(:memory, Shapes::ShapeRef.new(shape: HarnessMemoryConfiguration, location_name: "memory"))
+    Harness.add_member(:hooks, Shapes::ShapeRef.new(shape: HarnessHooks, location_name: "hooks"))
     Harness.add_member(:max_iterations, Shapes::ShapeRef.new(shape: Integer, location_name: "maxIterations"))
     Harness.add_member(:max_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "maxTokens"))
     Harness.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "timeoutSeconds"))
     Harness.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     Harness.struct_class = Types::Harness
+
+    HarnessAfterInvocationHook.add_member(:name, Shapes::ShapeRef.new(shape: HarnessHookName, required: true, location_name: "name"))
+    HarnessAfterInvocationHook.add_member(:target, Shapes::ShapeRef.new(shape: HarnessHookTarget, required: true, location_name: "target"))
+    HarnessAfterInvocationHook.struct_class = Types::HarnessAfterInvocationHook
+
+    HarnessAfterToolCallHook.add_member(:name, Shapes::ShapeRef.new(shape: HarnessHookName, required: true, location_name: "name"))
+    HarnessAfterToolCallHook.add_member(:target, Shapes::ShapeRef.new(shape: HarnessHookTarget, required: true, location_name: "target"))
+    HarnessAfterToolCallHook.struct_class = Types::HarnessAfterToolCallHook
 
     HarnessAgentCoreBrowserConfig.add_member(:browser_arn, Shapes::ShapeRef.new(shape: HarnessBrowserArn, location_name: "browserArn"))
     HarnessAgentCoreBrowserConfig.struct_class = Types::HarnessAgentCoreBrowserConfig
@@ -3680,6 +3853,14 @@ module Aws::BedrockAgentCoreControl
     HarnessBedrockModelConfig.add_member(:api_format, Shapes::ShapeRef.new(shape: HarnessBedrockApiFormat, location_name: "apiFormat"))
     HarnessBedrockModelConfig.add_member(:additional_params, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParams"))
     HarnessBedrockModelConfig.struct_class = Types::HarnessBedrockModelConfig
+
+    HarnessBeforeInvocationHook.add_member(:name, Shapes::ShapeRef.new(shape: HarnessHookName, required: true, location_name: "name"))
+    HarnessBeforeInvocationHook.add_member(:target, Shapes::ShapeRef.new(shape: HarnessHookTarget, required: true, location_name: "target"))
+    HarnessBeforeInvocationHook.struct_class = Types::HarnessBeforeInvocationHook
+
+    HarnessBeforeToolCallHook.add_member(:name, Shapes::ShapeRef.new(shape: HarnessHookName, required: true, location_name: "name"))
+    HarnessBeforeToolCallHook.add_member(:target, Shapes::ShapeRef.new(shape: HarnessHookTarget, required: true, location_name: "target"))
+    HarnessBeforeToolCallHook.struct_class = Types::HarnessBeforeToolCallHook
 
     HarnessDisabledMemoryConfiguration.struct_class = Types::HarnessDisabledMemoryConfiguration
 
@@ -3735,6 +3916,41 @@ module Aws::BedrockAgentCoreControl
     HarnessGeminiModelConfig.add_member(:additional_params, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParams"))
     HarnessGeminiModelConfig.struct_class = Types::HarnessGeminiModelConfig
 
+    HarnessHook.add_member(:before_invocation, Shapes::ShapeRef.new(shape: HarnessBeforeInvocationHook, location_name: "beforeInvocation"))
+    HarnessHook.add_member(:after_invocation, Shapes::ShapeRef.new(shape: HarnessAfterInvocationHook, location_name: "afterInvocation"))
+    HarnessHook.add_member(:before_tool_call, Shapes::ShapeRef.new(shape: HarnessBeforeToolCallHook, location_name: "beforeToolCall"))
+    HarnessHook.add_member(:after_tool_call, Shapes::ShapeRef.new(shape: HarnessAfterToolCallHook, location_name: "afterToolCall"))
+    HarnessHook.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    HarnessHook.add_member_subclass(:before_invocation, Types::HarnessHook::BeforeInvocation)
+    HarnessHook.add_member_subclass(:after_invocation, Types::HarnessHook::AfterInvocation)
+    HarnessHook.add_member_subclass(:before_tool_call, Types::HarnessHook::BeforeToolCall)
+    HarnessHook.add_member_subclass(:after_tool_call, Types::HarnessHook::AfterToolCall)
+    HarnessHook.add_member_subclass(:unknown, Types::HarnessHook::Unknown)
+    HarnessHook.struct_class = Types::HarnessHook
+
+    HarnessHookEventBridgeTarget.add_member(:arn, Shapes::ShapeRef.new(shape: HarnessEventBridgeBusArn, required: true, location_name: "arn"))
+    HarnessHookEventBridgeTarget.struct_class = Types::HarnessHookEventBridgeTarget
+
+    HarnessHookLambdaTarget.add_member(:arn, Shapes::ShapeRef.new(shape: HarnessLambdaFunctionArn, required: true, location_name: "arn"))
+    HarnessHookLambdaTarget.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: HarnessHookLambdaTargetTimeoutSecondsInteger, location_name: "timeoutSeconds"))
+    HarnessHookLambdaTarget.add_member(:failure_mode, Shapes::ShapeRef.new(shape: HarnessHookFailureMode, location_name: "failureMode"))
+    HarnessHookLambdaTarget.struct_class = Types::HarnessHookLambdaTarget
+
+    HarnessHookSnsTarget.add_member(:arn, Shapes::ShapeRef.new(shape: HarnessSnsTopicArn, required: true, location_name: "arn"))
+    HarnessHookSnsTarget.struct_class = Types::HarnessHookSnsTarget
+
+    HarnessHookTarget.add_member(:lambda, Shapes::ShapeRef.new(shape: HarnessHookLambdaTarget, location_name: "lambda"))
+    HarnessHookTarget.add_member(:sns, Shapes::ShapeRef.new(shape: HarnessHookSnsTarget, location_name: "sns"))
+    HarnessHookTarget.add_member(:event_bridge, Shapes::ShapeRef.new(shape: HarnessHookEventBridgeTarget, location_name: "eventBridge"))
+    HarnessHookTarget.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    HarnessHookTarget.add_member_subclass(:lambda, Types::HarnessHookTarget::Lambda)
+    HarnessHookTarget.add_member_subclass(:sns, Types::HarnessHookTarget::Sns)
+    HarnessHookTarget.add_member_subclass(:event_bridge, Types::HarnessHookTarget::EventBridge)
+    HarnessHookTarget.add_member_subclass(:unknown, Types::HarnessHookTarget::Unknown)
+    HarnessHookTarget.struct_class = Types::HarnessHookTarget
+
+    HarnessHooks.member = Shapes::ShapeRef.new(shape: HarnessHook)
+
     HarnessInlineFunctionConfig.add_member(:description, Shapes::ShapeRef.new(shape: HarnessInlineFunctionDescription, required: true, location_name: "description"))
     HarnessInlineFunctionConfig.add_member(:input_schema, Shapes::ShapeRef.new(shape: SensitiveJson, required: true, location_name: "inputSchema"))
     HarnessInlineFunctionConfig.struct_class = Types::HarnessInlineFunctionConfig
@@ -3780,6 +3996,7 @@ module Aws::BedrockAgentCoreControl
 
     HarnessOpenAiModelConfig.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelId, required: true, location_name: "modelId"))
     HarnessOpenAiModelConfig.add_member(:api_key_arn, Shapes::ShapeRef.new(shape: ApiKeyArn, required: true, location_name: "apiKeyArn"))
+    HarnessOpenAiModelConfig.add_member(:api_base, Shapes::ShapeRef.new(shape: HarnessOpenAiApiBase, location_name: "apiBase"))
     HarnessOpenAiModelConfig.add_member(:max_tokens, Shapes::ShapeRef.new(shape: MaxTokens, location_name: "maxTokens"))
     HarnessOpenAiModelConfig.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
     HarnessOpenAiModelConfig.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
@@ -4203,6 +4420,14 @@ module Aws::BedrockAgentCoreControl
     ListConfigurationBundlesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListConfigurationBundlesResponse.struct_class = Types::ListConfigurationBundlesResponse
 
+    ListConsentPortalsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListConsentPortalsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListConsentPortalsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListConsentPortalsRequest.struct_class = Types::ListConsentPortalsRequest
+
+    ListConsentPortalsResponse.add_member(:consent_portals, Shapes::ShapeRef.new(shape: ConsentPortalSummaries, required: true, location_name: "consentPortals"))
+    ListConsentPortalsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListConsentPortalsResponse.struct_class = Types::ListConsentPortalsResponse
+
     ListDatasetExamplesRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
     ListDatasetExamplesRequest.add_member(:dataset_version, Shapes::ShapeRef.new(shape: DatasetVersion, location: "querystring", location_name: "datasetVersion"))
     ListDatasetExamplesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDatasetExamplesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
@@ -4466,6 +4691,7 @@ module Aws::BedrockAgentCoreControl
     MCPGatewayConfiguration.add_member(:search_type, Shapes::ShapeRef.new(shape: SearchType, location_name: "searchType"))
     MCPGatewayConfiguration.add_member(:session_configuration, Shapes::ShapeRef.new(shape: SessionConfiguration, location_name: "sessionConfiguration"))
     MCPGatewayConfiguration.add_member(:streaming_configuration, Shapes::ShapeRef.new(shape: StreamingConfiguration, location_name: "streamingConfiguration"))
+    MCPGatewayConfiguration.add_member(:disable_mcp_list_tools_pagination, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableMcpListToolsPagination"))
     MCPGatewayConfiguration.struct_class = Types::MCPGatewayConfiguration
 
     ManagedResourceDetails.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, location_name: "domain"))
@@ -4552,6 +4778,7 @@ module Aws::BedrockAgentCoreControl
     Memory.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     Memory.add_member(:strategies, Shapes::ShapeRef.new(shape: MemoryStrategyList, location_name: "strategies"))
     Memory.add_member(:indexed_keys, Shapes::ShapeRef.new(shape: IndexedKeysList, location_name: "indexedKeys"))
+    Memory.add_member(:namespace_keys, Shapes::ShapeRef.new(shape: NamespaceKeysList, location_name: "namespaceKeys"))
     Memory.add_member(:stream_delivery_resources, Shapes::ShapeRef.new(shape: StreamDeliveryResources, location_name: "streamDeliveryResources"))
     Memory.add_member(:managed_by_resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "managedByResourceArn"))
     Memory.struct_class = Types::Memory
@@ -4688,6 +4915,18 @@ module Aws::BedrockAgentCoreControl
     ModifyStrategyConfiguration.add_member(:self_managed_configuration, Shapes::ShapeRef.new(shape: ModifySelfManagedConfiguration, location_name: "selfManagedConfiguration"))
     ModifyStrategyConfiguration.struct_class = Types::ModifyStrategyConfiguration
 
+    NamespaceAllowedValuesList.member = Shapes::ShapeRef.new(shape: NamespaceAllowedValue)
+
+    NamespaceKeyEntry.add_member(:key, Shapes::ShapeRef.new(shape: NamespaceVariableKey, required: true, location_name: "key"))
+    NamespaceKeyEntry.add_member(:validation, Shapes::ShapeRef.new(shape: NamespaceKeyValidation, location_name: "validation"))
+    NamespaceKeyEntry.struct_class = Types::NamespaceKeyEntry
+
+    NamespaceKeyValidation.add_member(:allowed_values, Shapes::ShapeRef.new(shape: NamespaceAllowedValuesList, location_name: "allowedValues"))
+    NamespaceKeyValidation.add_member(:regex_pattern, Shapes::ShapeRef.new(shape: NamespaceRegexPattern, location_name: "regexPattern"))
+    NamespaceKeyValidation.struct_class = Types::NamespaceKeyValidation
+
+    NamespaceKeysList.member = Shapes::ShapeRef.new(shape: NamespaceKeyEntry)
+
     NamespacesList.member = Shapes::ShapeRef.new(shape: Namespace)
 
     NetworkConfiguration.add_member(:network_mode, Shapes::ShapeRef.new(shape: NetworkMode, required: true, location_name: "networkMode"))
@@ -4822,6 +5061,8 @@ module Aws::BedrockAgentCoreControl
     PassthroughTargetConfiguration.add_member(:protocol_type, Shapes::ShapeRef.new(shape: PassthroughProtocolType, required: true, location_name: "protocolType"))
     PassthroughTargetConfiguration.add_member(:schema, Shapes::ShapeRef.new(shape: HttpApiSchemaConfiguration, location_name: "schema"))
     PassthroughTargetConfiguration.add_member(:stickiness_configuration, Shapes::ShapeRef.new(shape: StickinessConfiguration, location_name: "stickinessConfiguration"))
+    PassthroughTargetConfiguration.add_member(:static_query_parameters, Shapes::ShapeRef.new(shape: StaticQueryParameters, location_name: "staticQueryParameters"))
+    PassthroughTargetConfiguration.add_member(:static_query_parameter_conflict_resolution, Shapes::ShapeRef.new(shape: StaticQueryParameterConflictResolution, location_name: "staticQueryParameterConflictResolution"))
     PassthroughTargetConfiguration.struct_class = Types::PassthroughTargetConfiguration
 
     PaymentConnectorSummaries.member = Shapes::ShapeRef.new(shape: PaymentConnectorSummary)
@@ -4829,6 +5070,7 @@ module Aws::BedrockAgentCoreControl
     PaymentConnectorSummary.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location_name: "paymentConnectorId"))
     PaymentConnectorSummary.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
     PaymentConnectorSummary.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
+    PaymentConnectorSummary.add_member(:provision_mode, Shapes::ShapeRef.new(shape: PaymentConnectorProvisionMode, location_name: "provisionMode"))
     PaymentConnectorSummary.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
     PaymentConnectorSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     PaymentConnectorSummary.struct_class = Types::PaymentConnectorSummary
@@ -5151,6 +5393,18 @@ module Aws::BedrockAgentCoreControl
     RootVolumeConfiguration.add_member(:free_space_gi_b, Shapes::ShapeRef.new(shape: RootVolumeConfigurationFreeSpaceGiBInteger, location_name: "freeSpaceGiB"))
     RootVolumeConfiguration.struct_class = Types::RootVolumeConfiguration
 
+    RotatePaymentConnectorCredentialsRequest.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location: "uri", location_name: "paymentManagerId"))
+    RotatePaymentConnectorCredentialsRequest.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location: "uri", location_name: "paymentConnectorId"))
+    RotatePaymentConnectorCredentialsRequest.add_member(:credentials_to_rotate, Shapes::ShapeRef.new(shape: CredentialRotationConfig, required: true, location_name: "credentialsToRotate"))
+    RotatePaymentConnectorCredentialsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    RotatePaymentConnectorCredentialsRequest.struct_class = Types::RotatePaymentConnectorCredentialsRequest
+
+    RotatePaymentConnectorCredentialsResponse.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location_name: "paymentConnectorId"))
+    RotatePaymentConnectorCredentialsResponse.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location_name: "paymentManagerId"))
+    RotatePaymentConnectorCredentialsResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    RotatePaymentConnectorCredentialsResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
+    RotatePaymentConnectorCredentialsResponse.struct_class = Types::RotatePaymentConnectorCredentialsResponse
+
     RouteToTargetAction.add_member(:static_route, Shapes::ShapeRef.new(shape: StaticRoute, location_name: "staticRoute"))
     RouteToTargetAction.add_member(:weighted_route, Shapes::ShapeRef.new(shape: WeightedRoute, location_name: "weightedRoute"))
     RouteToTargetAction.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -5345,6 +5599,9 @@ module Aws::BedrockAgentCoreControl
     StaticOverride.add_member(:bundle_version, Shapes::ShapeRef.new(shape: StaticOverrideBundleVersionString, required: true, location_name: "bundleVersion"))
     StaticOverride.struct_class = Types::StaticOverride
 
+    StaticQueryParameters.key = Shapes::ShapeRef.new(shape: StaticQueryParameterName)
+    StaticQueryParameters.value = Shapes::ShapeRef.new(shape: StaticQueryParameterValue)
+
     StaticRoute.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "targetName"))
     StaticRoute.struct_class = Types::StaticRoute
 
@@ -5352,6 +5609,7 @@ module Aws::BedrockAgentCoreControl
 
     StickinessConfiguration.add_member(:identifier, Shapes::ShapeRef.new(shape: StickinessConfigurationIdentifierString, required: true, location_name: "identifier"))
     StickinessConfiguration.add_member(:timeout, Shapes::ShapeRef.new(shape: StickinessTimeout, location_name: "timeout"))
+    StickinessConfiguration.add_member(:composite_identifier, Shapes::ShapeRef.new(shape: CompositeIdentifierList, location_name: "compositeIdentifier"))
     StickinessConfiguration.struct_class = Types::StickinessConfiguration
 
     StrategyConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: OverrideType, location_name: "type"))
@@ -5630,6 +5888,7 @@ module Aws::BedrockAgentCoreControl
     UpdateAgentRuntimeRequest.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "environmentVariables"))
     UpdateAgentRuntimeRequest.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: FilesystemConfigurations, location_name: "filesystemConfigurations"))
     UpdateAgentRuntimeRequest.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
+    UpdateAgentRuntimeRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
     UpdateAgentRuntimeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAgentRuntimeRequest.struct_class = Types::UpdateAgentRuntimeRequest
 
@@ -5675,7 +5934,7 @@ module Aws::BedrockAgentCoreControl
     UpdateConfigurationBundleRequest.add_member(:bundle_name, Shapes::ShapeRef.new(shape: ConfigurationBundleName, location_name: "bundleName"))
     UpdateConfigurationBundleRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConfigurationBundleDescription, location_name: "description"))
     UpdateConfigurationBundleRequest.add_member(:components, Shapes::ShapeRef.new(shape: ComponentConfigurationMap, location_name: "components"))
-    UpdateConfigurationBundleRequest.add_member(:parent_version_ids, Shapes::ShapeRef.new(shape: ConfigurationBundleVersionList, location_name: "parentVersionIds"))
+    UpdateConfigurationBundleRequest.add_member(:parent_version_ids, Shapes::ShapeRef.new(shape: ConfigurationBundleVersionList, required: true, location_name: "parentVersionIds"))
     UpdateConfigurationBundleRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName"))
     UpdateConfigurationBundleRequest.add_member(:commit_message, Shapes::ShapeRef.new(shape: UpdateConfigurationBundleRequestCommitMessageString, location_name: "commitMessage"))
     UpdateConfigurationBundleRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: VersionCreatedBySource, location_name: "createdBy"))
@@ -5687,6 +5946,26 @@ module Aws::BedrockAgentCoreControl
     UpdateConfigurationBundleResponse.add_member(:version_id, Shapes::ShapeRef.new(shape: ConfigurationBundleVersion, required: true, location_name: "versionId"))
     UpdateConfigurationBundleResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     UpdateConfigurationBundleResponse.struct_class = Types::UpdateConfigurationBundleResponse
+
+    UpdateConsentPortalRequest.add_member(:consent_portal_identifier, Shapes::ShapeRef.new(shape: ConsentPortalIdentifier, required: true, location_name: "consentPortalIdentifier"))
+    UpdateConsentPortalRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArnType, location_name: "executionRoleArn"))
+    UpdateConsentPortalRequest.add_member(:idp_config, Shapes::ShapeRef.new(shape: ConsentPortalIdpConfig, location_name: "idpConfig"))
+    UpdateConsentPortalRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConsentPortalDescriptionType, location_name: "description"))
+    UpdateConsentPortalRequest.struct_class = Types::UpdateConsentPortalRequest
+
+    UpdateConsentPortalResponse.add_member(:sources, Shapes::ShapeRef.new(shape: ConsentPortalSources, required: true, location_name: "sources"))
+    UpdateConsentPortalResponse.add_member(:consent_portal_arn, Shapes::ShapeRef.new(shape: ConsentPortalArnType, required: true, location_name: "consentPortalArn"))
+    UpdateConsentPortalResponse.add_member(:consent_portal_id, Shapes::ShapeRef.new(shape: ConsentPortalIdType, required: true, location_name: "consentPortalId"))
+    UpdateConsentPortalResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    UpdateConsentPortalResponse.add_member(:description, Shapes::ShapeRef.new(shape: ConsentPortalDescriptionType, location_name: "description"))
+    UpdateConsentPortalResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArnType, required: true, location_name: "executionRoleArn"))
+    UpdateConsentPortalResponse.add_member(:idp_config, Shapes::ShapeRef.new(shape: ConsentPortalIdpConfig, required: true, location_name: "idpConfig"))
+    UpdateConsentPortalResponse.add_member(:name, Shapes::ShapeRef.new(shape: ConsentPortalNameType, required: true, location_name: "name"))
+    UpdateConsentPortalResponse.add_member(:portal_url, Shapes::ShapeRef.new(shape: PortalUrlType, location_name: "portalUrl"))
+    UpdateConsentPortalResponse.add_member(:status, Shapes::ShapeRef.new(shape: ConsentPortalStatus, required: true, location_name: "status"))
+    UpdateConsentPortalResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReasonType, location_name: "statusReason"))
+    UpdateConsentPortalResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    UpdateConsentPortalResponse.struct_class = Types::UpdateConsentPortalResponse
 
     UpdateDatasetExamplesRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
     UpdateDatasetExamplesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -5854,6 +6133,7 @@ module Aws::BedrockAgentCoreControl
     UpdateHarnessRequest.add_member(:allowed_tools, Shapes::ShapeRef.new(shape: HarnessAllowedTools, location_name: "allowedTools"))
     UpdateHarnessRequest.add_member(:memory, Shapes::ShapeRef.new(shape: UpdatedHarnessMemoryConfiguration, location_name: "memory"))
     UpdateHarnessRequest.add_member(:truncation, Shapes::ShapeRef.new(shape: HarnessTruncationConfiguration, location_name: "truncation"))
+    UpdateHarnessRequest.add_member(:hooks, Shapes::ShapeRef.new(shape: HarnessHooks, location_name: "hooks"))
     UpdateHarnessRequest.add_member(:max_iterations, Shapes::ShapeRef.new(shape: Integer, location_name: "maxIterations"))
     UpdateHarnessRequest.add_member(:max_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "maxTokens"))
     UpdateHarnessRequest.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "timeoutSeconds"))
@@ -5869,6 +6149,7 @@ module Aws::BedrockAgentCoreControl
     UpdateMemoryInput.add_member(:memory_execution_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "memoryExecutionRoleArn"))
     UpdateMemoryInput.add_member(:memory_strategies, Shapes::ShapeRef.new(shape: ModifyMemoryStrategies, location_name: "memoryStrategies"))
     UpdateMemoryInput.add_member(:add_indexed_keys, Shapes::ShapeRef.new(shape: IndexedKeysList, location_name: "addIndexedKeys"))
+    UpdateMemoryInput.add_member(:namespace_keys, Shapes::ShapeRef.new(shape: NamespaceKeysList, location_name: "namespaceKeys"))
     UpdateMemoryInput.add_member(:stream_delivery_resources, Shapes::ShapeRef.new(shape: StreamDeliveryResources, location_name: "streamDeliveryResources"))
     UpdateMemoryInput.struct_class = Types::UpdateMemoryInput
 
@@ -5901,6 +6182,7 @@ module Aws::BedrockAgentCoreControl
     UpdateOnlineEvaluationConfigRequest.add_member(:evaluators, Shapes::ShapeRef.new(shape: EvaluatorList, location_name: "evaluators"))
     UpdateOnlineEvaluationConfigRequest.add_member(:insights, Shapes::ShapeRef.new(shape: InsightList, location_name: "insights"))
     UpdateOnlineEvaluationConfigRequest.add_member(:clustering_config, Shapes::ShapeRef.new(shape: ClusteringConfig, location_name: "clusteringConfig"))
+    UpdateOnlineEvaluationConfigRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "outputConfig"))
     UpdateOnlineEvaluationConfigRequest.add_member(:evaluation_execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "evaluationExecutionRoleArn"))
     UpdateOnlineEvaluationConfigRequest.add_member(:execution_status, Shapes::ShapeRef.new(shape: OnlineEvaluationExecutionStatus, location_name: "executionStatus"))
     UpdateOnlineEvaluationConfigRequest.struct_class = Types::UpdateOnlineEvaluationConfigRequest
@@ -6408,6 +6690,22 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_consent_portal, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConsentPortal"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/CreateConsentPortal"
+        o.input = Shapes::ShapeRef.new(shape: CreateConsentPortalRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateConsentPortalResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_dataset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDataset"
         o.http_method = "POST"
@@ -6821,6 +7119,21 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_consent_portal, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConsentPortal"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/DeleteConsentPortal"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConsentPortalRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteConsentPortalResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_dataset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataset"
         o.http_method = "DELETE"
@@ -7225,6 +7538,20 @@ module Aws::BedrockAgentCoreControl
         o.http_request_uri = "/configuration-bundles/{bundleId}/versions/{versionId}"
         o.input = Shapes::ShapeRef.new(shape: GetConfigurationBundleVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetConfigurationBundleVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_consent_portal, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConsentPortal"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/GetConsentPortal"
+        o.input = Shapes::ShapeRef.new(shape: GetConsentPortalRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetConsentPortalResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -7755,6 +8082,25 @@ module Aws::BedrockAgentCoreControl
         o.http_request_uri = "/configuration-bundles"
         o.input = Shapes::ShapeRef.new(shape: ListConfigurationBundlesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListConfigurationBundlesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_consent_portals, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConsentPortals"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/ListConsentPortals"
+        o.input = Shapes::ShapeRef.new(shape: ListConsentPortalsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListConsentPortalsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -8301,6 +8647,20 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:rotate_payment_connector_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RotatePaymentConnectorCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}/rotate-credentials"
+        o.input = Shapes::ShapeRef.new(shape: RotatePaymentConnectorCredentialsRequest)
+        o.output = Shapes::ShapeRef.new(shape: RotatePaymentConnectorCredentialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:set_token_vault_cmk, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SetTokenVaultCMK"
         o.http_method = "POST"
@@ -8464,6 +8824,21 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:update_consent_portal, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConsentPortal"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/UpdateConsentPortal"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConsentPortalRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConsentPortalResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:update_dataset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateDataset"
         o.http_method = "PUT"
@@ -8572,6 +8947,7 @@ module Aws::BedrockAgentCoreControl
         o.http_request_uri = "/harnesses/{harnessId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateHarnessRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateHarnessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

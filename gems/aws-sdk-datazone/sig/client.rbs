@@ -548,7 +548,8 @@ module Aws
                                    cluster_name: ::String
                                  }?,
                                  iam_properties: {
-                                   glue_lineage_sync_enabled: bool?
+                                   glue_lineage_sync_enabled: bool?,
+                                   role_arn: ::String?
                                  }?,
                                  redshift_properties: {
                                    storage: {
@@ -942,6 +943,7 @@ module Aws
         def deployment_properties: () -> Types::DeploymentProperties
         def user_parameters: () -> ::Array[Types::CustomParameter]
         def glossary_terms: () -> ::Array[::String]
+        def blueprint_category: () -> ("TOOLING")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
@@ -957,7 +959,8 @@ module Aws
                                           },
                                           ?user_parameters: Array[
                                             Params::custom_parameter
-                                          ]
+                                          ],
+                                          ?blueprint_category: ("TOOLING")
                                         ) -> _CreateEnvironmentBlueprintResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentBlueprintResponseSuccess
 
@@ -1110,6 +1113,7 @@ module Aws
         def domain_id: () -> ::String
         def cell_order: () -> ::Array[Types::CellInformation]
         def status: () -> ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+        def type: () -> ("DATA" | "SQL")
         def description: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -1130,6 +1134,7 @@ module Aws
                              owning_project_identifier: ::String,
                              name: ::String,
                              ?description: ::String,
+                             ?type: ("DATA" | "SQL"),
                              ?metadata: Hash[::String, ::String],
                              ?parameters: Hash[::String, ::String],
                              ?client_token: ::String
@@ -1538,7 +1543,8 @@ module Aws
       def delete_domain: (
                            identifier: ::String,
                            ?client_token: ::String,
-                           ?skip_deletion_check: bool
+                           ?skip_deletion_check: bool,
+                           ?cascade_delete: bool
                          ) -> _DeleteDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
 
@@ -2007,6 +2013,8 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def domain_version: () -> ("V1" | "V2")
         def service_role: () -> ::String
+        def failure_reasons: () -> ::Array[Types::FailureReason]
+        def delete_progress: () -> Types::DeleteProgress
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_domain-instance_method
       def get_domain: (
@@ -2094,6 +2102,7 @@ module Aws
         def deployment_properties: () -> Types::DeploymentProperties
         def user_parameters: () -> ::Array[Types::CustomParameter]
         def glossary_terms: () -> ::Array[::String]
+        def blueprint_category: () -> ("TOOLING")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
@@ -2371,6 +2380,7 @@ module Aws
         def domain_id: () -> ::String
         def cell_order: () -> ::Array[Types::CellInformation]
         def status: () -> ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+        def type: () -> ("DATA" | "SQL")
         def description: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -3009,6 +3019,7 @@ module Aws
                             ?sort_order: ("ASCENDING" | "DESCENDING"),
                             ?sort_by: ("CREATED_AT" | "UPDATED_AT"),
                             ?status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED"),
+                            ?type: ("DATA" | "SQL"),
                             ?next_token: ::String
                           ) -> _ListNotebooksResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotebooksResponseSuccess
@@ -4158,6 +4169,7 @@ module Aws
         def deployment_properties: () -> Types::DeploymentProperties
         def user_parameters: () -> ::Array[Types::CustomParameter]
         def glossary_terms: () -> ::Array[::String]
+        def blueprint_category: () -> ("TOOLING")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
@@ -4173,7 +4185,8 @@ module Aws
                                           },
                                           ?user_parameters: Array[
                                             Params::custom_parameter
-                                          ]
+                                          ],
+                                          ?blueprint_category: ("TOOLING")
                                         ) -> _UpdateEnvironmentBlueprintResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentBlueprintResponseSuccess
 
@@ -4283,6 +4296,7 @@ module Aws
         def domain_id: () -> ::String
         def cell_order: () -> ::Array[Types::CellInformation]
         def status: () -> ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+        def type: () -> ("DATA" | "SQL")
         def description: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -4308,6 +4322,7 @@ module Aws
                                {
                                }
                              ],
+                             ?type: ("DATA" | "SQL"),
                              ?metadata: Hash[::String, ::String],
                              ?parameters: Hash[::String, ::String],
                              ?environment_configuration: {

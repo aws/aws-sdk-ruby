@@ -89,6 +89,12 @@
       },
       "exception":true
     },
+    "AgUiDescriptor":{
+      "type":"structure",
+      "members":{
+        "source":{"shape":"DescriptorSource"}
+      }
+    },
     "AgentSkillsAdditionalData":{
       "type":"structure",
       "members":{
@@ -167,6 +173,12 @@
         "data":{"shape":"DescriptorData"}
       }
     },
+    "CustomMetadataDocument":{
+      "type":"structure",
+      "members":{},
+      "document":true,
+      "sensitive":true
+    },
     "DataSchemaVersion":{
       "type":"string",
       "max":255,
@@ -207,13 +219,21 @@
       "min":1,
       "pattern":"https://.*"
     },
+    "DescriptorTypeList":{
+      "type":"list",
+      "member":{"shape":"String"},
+      "max":10,
+      "min":0
+    },
     "Descriptors":{
       "type":"structure",
       "members":{
         "mcpServer":{"shape":"McpServerDescriptor"},
         "a2aAgentCard":{"shape":"A2aAgentCardDescriptor"},
         "agentSkillsDefinition":{"shape":"AgentSkillsDefinitionDescriptor"},
-        "custom":{"shape":"CustomDescriptor"}
+        "custom":{"shape":"CustomDescriptor"},
+        "http":{"shape":"HttpDescriptor"},
+        "agui":{"shape":"AgUiDescriptor"}
       }
     },
     "DiscoverableFilterValues":{
@@ -246,7 +266,8 @@
         "recordVersion":{"shape":"RegistryRecordVersion"},
         "status":{"shape":"RegistryRecordStatus"},
         "createdAt":{"shape":"DateTimestamp"},
-        "updatedAt":{"shape":"DateTimestamp"}
+        "updatedAt":{"shape":"DateTimestamp"},
+        "descriptorTypes":{"shape":"DescriptorTypeList"}
       }
     },
     "DiscoverableRegistryRecordSummaryList":{
@@ -257,6 +278,12 @@
       "type":"string",
       "max":255,
       "min":1
+    },
+    "HttpDescriptor":{
+      "type":"structure",
+      "members":{
+        "source":{"shape":"DescriptorSource"}
+      }
     },
     "InternalServerException":{
       "type":"structure",
@@ -346,7 +373,8 @@
         "MCP",
         "AGENT",
         "CUSTOM",
-        "SKILL"
+        "SKILL",
+        "GATEWAY"
       ]
     },
     "RegistryArn":{
@@ -448,7 +476,8 @@
         "recordVersion":{"shape":"RegistryRecordVersion"},
         "status":{"shape":"RegistryRecordStatus"},
         "createdAt":{"shape":"DateTimestamp"},
-        "updatedAt":{"shape":"DateTimestamp"}
+        "updatedAt":{"shape":"DateTimestamp"},
+        "customMetadata":{"shape":"CustomMetadataDocument"}
       }
     },
     "RegistryRecordSummaryList":{

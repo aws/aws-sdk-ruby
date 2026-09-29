@@ -4816,6 +4816,10 @@
         "attributes":{"shape":"BatchPutAttributeItems"}
       }
     },
+    "BlueprintCategory":{
+      "type":"string",
+      "enum":["TOOLING"]
+    },
     "Boolean":{
       "type":"boolean",
       "box":true
@@ -5915,7 +5919,8 @@
         "name":{"shape":"EnvironmentBlueprintName"},
         "description":{"shape":"Description"},
         "provisioningProperties":{"shape":"ProvisioningProperties"},
-        "userParameters":{"shape":"CustomParameterList"}
+        "userParameters":{"shape":"CustomParameterList"},
+        "blueprintCategory":{"shape":"BlueprintCategory"}
       }
     },
     "CreateEnvironmentBlueprintOutput":{
@@ -5935,6 +5940,7 @@
         "deploymentProperties":{"shape":"DeploymentProperties"},
         "userParameters":{"shape":"CustomParameterList"},
         "glossaryTerms":{"shape":"GlossaryTerms"},
+        "blueprintCategory":{"shape":"BlueprintCategory"},
         "createdAt":{"shape":"SyntheticTimestamp_date_time"},
         "updatedAt":{"shape":"SyntheticTimestamp_date_time"}
       }
@@ -6273,6 +6279,7 @@
         "owningProjectIdentifier":{"shape":"ProjectId"},
         "name":{"shape":"NotebookName"},
         "description":{"shape":"Description"},
+        "type":{"shape":"NotebookType"},
         "metadata":{"shape":"Metadata"},
         "parameters":{"shape":"Parameters"},
         "clientToken":{
@@ -6298,6 +6305,7 @@
         "domainId":{"shape":"DomainId"},
         "cellOrder":{"shape":"CellOrder"},
         "status":{"shape":"NotebookStatus"},
+        "type":{"shape":"NotebookType"},
         "description":{"shape":"Description"},
         "createdAt":{"shape":"CreatedAt"},
         "createdBy":{"shape":"CreatedBy"},
@@ -7375,6 +7383,11 @@
           "shape":"Boolean",
           "location":"querystring",
           "locationName":"skipDeletionCheck"
+        },
+        "cascadeDelete":{
+          "shape":"Boolean",
+          "location":"querystring",
+          "locationName":"cascadeDelete"
         }
       }
     },
@@ -7654,6 +7667,12 @@
     "DeleteNotebookOutput":{
       "type":"structure",
       "members":{}
+    },
+    "DeleteProgress":{
+      "type":"structure",
+      "members":{
+        "successfullyDeletedProjectCount":{"shape":"Integer"}
+      }
     },
     "DeleteProjectInput":{
       "type":"structure",
@@ -8345,7 +8364,8 @@
         "provider":{"shape":"String"},
         "provisioningProperties":{"shape":"ProvisioningProperties"},
         "createdAt":{"shape":"SyntheticTimestamp_date_time"},
-        "updatedAt":{"shape":"SyntheticTimestamp_date_time"}
+        "updatedAt":{"shape":"SyntheticTimestamp_date_time"},
+        "blueprintCategory":{"shape":"BlueprintCategory"}
       }
     },
     "EnvironmentConfig":{
@@ -8612,9 +8632,20 @@
         "message":{"shape":"String"}
       }
     },
+    "FailureReason":{
+      "type":"structure",
+      "members":{
+        "id":{"shape":"String"},
+        "message":{"shape":"String"}
+      }
+    },
     "FailureReasons":{
       "type":"list",
       "member":{"shape":"ProjectDeletionError"}
+    },
+    "FailureReasonsList":{
+      "type":"list",
+      "member":{"shape":"FailureReason"}
     },
     "FileFormat":{
       "type":"string",
@@ -9315,7 +9346,9 @@
         "lastUpdatedAt":{"shape":"UpdatedAt"},
         "tags":{"shape":"Tags"},
         "domainVersion":{"shape":"DomainVersion"},
-        "serviceRole":{"shape":"RoleArn"}
+        "serviceRole":{"shape":"RoleArn"},
+        "failureReasons":{"shape":"FailureReasonsList"},
+        "deleteProgress":{"shape":"DeleteProgress"}
       }
     },
     "GetDomainUnitInput":{
@@ -9477,6 +9510,7 @@
         "deploymentProperties":{"shape":"DeploymentProperties"},
         "userParameters":{"shape":"CustomParameterList"},
         "glossaryTerms":{"shape":"GlossaryTerms"},
+        "blueprintCategory":{"shape":"BlueprintCategory"},
         "createdAt":{"shape":"SyntheticTimestamp_date_time"},
         "updatedAt":{"shape":"SyntheticTimestamp_date_time"}
       }
@@ -10103,6 +10137,7 @@
         "domainId":{"shape":"DomainId"},
         "cellOrder":{"shape":"CellOrder"},
         "status":{"shape":"NotebookStatus"},
+        "type":{"shape":"NotebookType"},
         "description":{"shape":"Description"},
         "createdAt":{"shape":"CreatedAt"},
         "createdBy":{"shape":"CreatedBy"},
@@ -11251,7 +11286,8 @@
     "IamPropertiesInput":{
       "type":"structure",
       "members":{
-        "glueLineageSyncEnabled":{"shape":"Boolean"}
+        "glueLineageSyncEnabled":{"shape":"Boolean"},
+        "roleArn":{"shape":"RoleArn"}
       }
     },
     "IamPropertiesOutput":{
@@ -12732,6 +12768,11 @@
           "location":"querystring",
           "locationName":"status"
         },
+        "type":{
+          "shape":"NotebookType",
+          "location":"querystring",
+          "locationName":"type"
+        },
         "nextToken":{
           "shape":"PaginationToken",
           "location":"querystring",
@@ -13996,6 +14037,7 @@
         "owningProjectId":{"shape":"ProjectId"},
         "domainId":{"shape":"DomainId"},
         "status":{"shape":"NotebookStatus"},
+        "type":{"shape":"NotebookType"},
         "description":{"shape":"Description"},
         "createdAt":{"shape":"CreatedAt"},
         "createdBy":{"shape":"CreatedBy"},
@@ -14006,6 +14048,13 @@
     "NotebookSummaryList":{
       "type":"list",
       "member":{"shape":"NotebookSummary"}
+    },
+    "NotebookType":{
+      "type":"string",
+      "enum":[
+        "DATA",
+        "SQL"
+      ]
     },
     "NotificationOutput":{
       "type":"structure",
@@ -17820,7 +17869,8 @@
         },
         "description":{"shape":"String"},
         "provisioningProperties":{"shape":"ProvisioningProperties"},
-        "userParameters":{"shape":"CustomParameterList"}
+        "userParameters":{"shape":"CustomParameterList"},
+        "blueprintCategory":{"shape":"BlueprintCategory"}
       }
     },
     "UpdateEnvironmentBlueprintOutput":{
@@ -17840,6 +17890,7 @@
         "deploymentProperties":{"shape":"DeploymentProperties"},
         "userParameters":{"shape":"CustomParameterList"},
         "glossaryTerms":{"shape":"GlossaryTerms"},
+        "blueprintCategory":{"shape":"BlueprintCategory"},
         "createdAt":{"shape":"SyntheticTimestamp_date_time"},
         "updatedAt":{"shape":"SyntheticTimestamp_date_time"}
       }
@@ -18095,6 +18146,7 @@
         "status":{"shape":"NotebookStatus"},
         "name":{"shape":"NotebookName"},
         "cellOrder":{"shape":"CellOrder"},
+        "type":{"shape":"NotebookType"},
         "metadata":{"shape":"Metadata"},
         "parameters":{"shape":"Parameters"},
         "environmentConfiguration":{"shape":"EnvironmentConfig"},
@@ -18121,6 +18173,7 @@
         "domainId":{"shape":"DomainId"},
         "cellOrder":{"shape":"CellOrder"},
         "status":{"shape":"NotebookStatus"},
+        "type":{"shape":"NotebookType"},
         "description":{"shape":"Description"},
         "createdAt":{"shape":"CreatedAt"},
         "createdBy":{"shape":"CreatedBy"},

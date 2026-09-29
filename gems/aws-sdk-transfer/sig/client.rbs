@@ -157,7 +157,8 @@ module Aws
                               ?sftp_config: {
                                 user_secret_id: ::String?,
                                 trusted_host_keys: Array[::String]?,
-                                max_concurrent_connections: ::Integer?
+                                max_concurrent_connections: ::Integer?,
+                                ordered_user_secret_version_stages: Array[::String]?
                               },
                               ?security_policy_name: ::String,
                               ?egress_config: {
@@ -217,12 +218,7 @@ module Aws
                            ?post_authentication_login_banner: ::String,
                            ?pre_authentication_login_banner: ::String,
                            ?protocols: Array[("SFTP" | "FTP" | "FTPS" | "AS2")],
-                           ?protocol_details: {
-                             passive_ip: ::String?,
-                             tls_session_resumption_mode: ("DISABLED" | "ENABLED" | "ENFORCED")?,
-                             set_stat_option: ("DEFAULT" | "ENABLE_NO_OP")?,
-                             as_2_transports: Array[("HTTP")]?
-                           },
+                           ?protocol_details: Params::protocol_details,
                            ?security_policy_name: ::String,
                            ?tags: Array[
                              {
@@ -994,7 +990,8 @@ module Aws
                               ?sftp_config: {
                                 user_secret_id: ::String?,
                                 trusted_host_keys: Array[::String]?,
-                                max_concurrent_connections: ::Integer?
+                                max_concurrent_connections: ::Integer?,
+                                ordered_user_secret_version_stages: Array[::String]?
                               },
                               ?security_policy_name: ::String,
                               ?egress_config: {
@@ -1038,12 +1035,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#update_server-instance_method
       def update_server: (
                            ?certificate: ::String,
-                           ?protocol_details: {
-                             passive_ip: ::String?,
-                             tls_session_resumption_mode: ("DISABLED" | "ENABLED" | "ENFORCED")?,
-                             set_stat_option: ("DEFAULT" | "ENABLE_NO_OP")?,
-                             as_2_transports: Array[("HTTP")]?
-                           },
+                           ?protocol_details: Params::protocol_details,
                            ?endpoint_details: {
                              address_allocation_ids: Array[::String]?,
                              subnet_ids: Array[::String]?,

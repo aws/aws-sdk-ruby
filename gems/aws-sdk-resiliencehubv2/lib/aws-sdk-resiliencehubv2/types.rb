@@ -57,6 +57,33 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # Details about a CloudWatch alarm state change observed during a test
+    # run.
+    #
+    # @!attribute [rw] state
+    #   The state the alarm transitioned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_state
+    #   The state the alarm transitioned from. Absent on the initial event,
+    #   which records the alarm's state when collection began.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A human-readable explanation of the state change, as reported by
+    #   CloudWatch.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/AlarmStateChangeDetail AWS API Documentation
+    #
+    class AlarmStateChangeDetail < Struct.new(
+      :state,
+      :previous_state,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a resilience assertion for a service.
     #
     # @!attribute [rw] service_arn
@@ -401,6 +428,12 @@ module Aws::Resiliencehubv2
     #   The data recovery targets for the resilience policy.
     #   @return [Types::DataRecoveryTargets]
     #
+    # @!attribute [rw] sharing_enabled
+    #   Specifies whether cross-account sharing is enabled for the policy.
+    #   Only a delegated administrator or the management account can enable
+    #   sharing.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] kms_key_id
     #   KMS key identifier — accepts key ID, key ARN, alias name, or alias
     #   ARN.
@@ -426,6 +459,7 @@ module Aws::Resiliencehubv2
       :multi_az,
       :multi_region,
       :data_recovery,
+      :sharing_enabled,
       :kms_key_id,
       :tags,
       :client_token)
@@ -1157,6 +1191,40 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # Contains a single insight about a service's dependencies.
+    #
+    # @!attribute [rw] category
+    #   The category of the insight. Valid values:
+    #
+    #   * CROSS\_REGION - The insight relates to dependencies used across
+    #     multiple Regions.
+    #
+    #   * NEW\_DEPENDENCY - The insight relates to a recently detected
+    #     dependency.
+    #
+    #   * THIRD\_PARTY - The insight relates to a third-party dependency.
+    #
+    #   * UNEVEN\_USAGE - The insight relates to a dependency with uneven
+    #     usage across the service.
+    #
+    #   * AWS\_SERVICE - The insight relates to a dependency on an Amazon
+    #     Web Services service.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable explanation of the insight, describing the
+    #   dependency behavior or condition that was detected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/DependencyInsight AWS API Documentation
+    #
+    class DependencyInsight < Struct.new(
+      :category,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a discovered dependency.
     #
     # @!attribute [rw] dependency_id
@@ -1317,6 +1385,58 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # A label selector that filters the Kubernetes objects discovered from
+    # an Amazon EKS input source. An object must satisfy both matchLabels
+    # and matchExpressions to match the selector. A selector with neither
+    # matches every object. The selector must render to 2,048 characters or
+    # fewer in Kubernetes label selector syntax.
+    #
+    # @!attribute [rw] match_labels
+    #   The label key-value pairs that an object must have. All pairs must
+    #   match for the object to be selected.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] match_expressions
+    #   The label requirements that an object must satisfy. All requirements
+    #   in the list must match for the object to be selected.
+    #   @return [Array<Types::EksLabelSelectorRequirement>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/EksLabelSelector AWS API Documentation
+    #
+    class EksLabelSelector < Struct.new(
+      :match_labels,
+      :match_expressions)
+      SENSITIVE = [:match_labels, :match_expressions]
+      include Aws::Structure
+    end
+
+    # A single label requirement in a label selector, expressed as a key, an
+    # operator, and an optional list of values.
+    #
+    # @!attribute [rw] key
+    #   The label key that the requirement applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator that relates the label key to the values.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The label values to compare against. Specify values when the
+    #   operator is IN or NOT\_IN. Leave this empty when the operator is
+    #   EXISTS or DOES\_NOT\_EXIST.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/EksLabelSelectorRequirement AWS API Documentation
+    #
+    class EksLabelSelectorRequirement < Struct.new(
+      :key,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines an Amazon EKS cluster and its namespaces as an input source
     # for resource discovery.
     #
@@ -1328,11 +1448,18 @@ module Aws::Resiliencehubv2
     #   The list of Kubernetes namespaces within the EKS cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] label_selector
+    #   Filters discovery to the Kubernetes objects whose labels match the
+    #   selector. When omitted, all supported objects in the specified
+    #   namespaces are discovered.
+    #   @return [Types::EksLabelSelector]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/EksSource AWS API Documentation
     #
     class EksSource < Struct.new(
       :cluster_arn,
-      :namespaces)
+      :namespaces,
+      :label_selector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1534,6 +1661,73 @@ module Aws::Resiliencehubv2
       :status,
       :policy_component,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_arn
+    #   ARN identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetDependencyInsightsRequest AWS API Documentation
+    #
+    class GetDependencyInsightsRequest < Struct.new(
+      :service_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] overview
+    #   A summary of the dependency insights for the service. This field is
+    #   not returned until the status is COMPLETED.
+    #   @return [String]
+    #
+    # @!attribute [rw] insights
+    #   The list of dependency insights generated for the service. This
+    #   field is not returned until the status is COMPLETED.
+    #   @return [Array<Types::DependencyInsight>]
+    #
+    # @!attribute [rw] status
+    #   The status of the dependency insights generation. Valid values:
+    #
+    #   * IN\_PROGRESS - Insights generation is in progress.
+    #
+    #   * COMPLETED - Insights generation completed successfully.
+    #
+    #   * FAILED - Insights generation failed. See errorCode and
+    #     errorMessage for details.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the dependency insights were generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_code
+    #   The error code returned when insights generation failed. Valid
+    #   values:
+    #
+    #   * INSUFFICIENT\_DATA - There was not enough dependency data to
+    #     generate insights.
+    #
+    #   * LLM\_GENERATION\_FAILED - The insights could not be generated.
+    #
+    #   * INTERNAL\_ERROR - An internal error occurred while generating
+    #     insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message describing why insights generation failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetDependencyInsightsResponse AWS API Documentation
+    #
+    class GetDependencyInsightsResponse < Struct.new(
+      :overview,
+      :insights,
+      :status,
+      :created_at,
+      :error_code,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2224,6 +2418,11 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   The identifier of the account that owns the policies to include in
+    #   the results.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   Pagination page size.
     #   @return [Integer]
@@ -2235,6 +2434,7 @@ module Aws::Resiliencehubv2
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListPoliciesRequest AWS API Documentation
     #
     class ListPoliciesRequest < Struct.new(
+      :account_id,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -2253,6 +2453,60 @@ module Aws::Resiliencehubv2
     #
     class ListPoliciesResponse < Struct.new(
       :policy_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_arn
+    #   ARN identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_types
+    #   The type of events to include in the results.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] start_time
+    #   The start time for filtering events.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for filtering events.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListPolicyEventsRequest AWS API Documentation
+    #
+    class ListPolicyEventsRequest < Struct.new(
+      :policy_arn,
+      :event_types,
+      :start_time,
+      :end_time,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events
+    #   The list of policy events.
+    #   @return [Array<Types::PolicyEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListPolicyEventsResponse AWS API Documentation
+    #
+    class ListPolicyEventsResponse < Struct.new(
+      :events,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2422,7 +2676,7 @@ module Aws::Resiliencehubv2
     #   @return [String]
     #
     # @!attribute [rw] event_types
-    #   Filter events by type.
+    #   The type of events to include in the results.
     #   @return [Array<String>]
     #
     # @!attribute [rw] start_time
@@ -2618,7 +2872,7 @@ module Aws::Resiliencehubv2
     #   @return [String]
     #
     # @!attribute [rw] event_types
-    #   Filter events by type.
+    #   The type of events to include in the results.
     #   @return [Array<String>]
     #
     # @!attribute [rw] start_time
@@ -2731,6 +2985,50 @@ module Aws::Resiliencehubv2
     end
 
     # @!attribute [rw] test_run_id
+    #   The identifier of the test run to list dependencies for.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test run belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunDependenciesRequest AWS API Documentation
+    #
+    class ListTestRunDependenciesRequest < Struct.new(
+      :test_run_id,
+      :service_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dependencies
+    #   The list of dependencies the test run blocked.
+    #   @return [Array<Types::TestRunDependencySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunDependenciesResponse AWS API Documentation
+    #
+    class ListTestRunDependenciesResponse < Struct.new(
+      :dependencies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_id
     #   The identifier of the test run to list events for.
     #   @return [String]
     #
@@ -2779,6 +3077,57 @@ module Aws::Resiliencehubv2
     #
     class ListTestRunEventsResponse < Struct.new(
       :events,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_id
+    #   The identifier of the test run to list source events for.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test run belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The ARN of the monitoring source to list events for, such as the ARN
+    #   of a CloudWatch alarm. If the source was not monitored during the
+    #   test run, the response is an empty list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunSourceEventsRequest AWS API Documentation
+    #
+    class ListTestRunSourceEventsRequest < Struct.new(
+      :test_run_id,
+      :service_arn,
+      :source_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_source_events
+    #   The list of source events, in chronological order.
+    #   @return [Array<Types::TestRunSourceEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunSourceEventsResponse AWS API Documentation
+    #
+    class ListTestRunSourceEventsResponse < Struct.new(
+      :test_run_source_events,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3210,6 +3559,14 @@ module Aws::Resiliencehubv2
     #   The data recovery targets defined in the policy.
     #   @return [Types::DataRecoveryTargets]
     #
+    # @!attribute [rw] sharing_enabled
+    #   Specifies whether cross-account sharing is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier of the organization this policy is shared with.
+    #   @return [String]
+    #
     # @!attribute [rw] kms_key_id
     #   KMS key identifier — accepts key ID, key ARN, alias name, or alias
     #   ARN.
@@ -3241,12 +3598,204 @@ module Aws::Resiliencehubv2
       :multi_az,
       :multi_region,
       :data_recovery,
+      :sharing_enabled,
+      :organization_id,
       :kms_key_id,
       :tags,
       :associated_service_count,
       :created_at,
       :updated_at)
       SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # Contains details about the service that started using the policy, such
+    # as the account that owns the service.
+    #
+    # @!attribute [rw] service_arn
+    #   ARN identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account that owns the service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/PolicyAttachedToServiceMetadata AWS API Documentation
+    #
+    class PolicyAttachedToServiceMetadata < Struct.new(
+      :service_arn,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a policy that was deleted, including the number
+    # of services that were affected.
+    #
+    # @!attribute [rw] affected_service_count
+    #   The number of services that were using the policy when it was
+    #   deleted.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/PolicyDeletedMetadata AWS API Documentation
+    #
+    class PolicyDeletedMetadata < Struct.new(
+      :affected_service_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the service that stopped using the policy, such
+    # as the account that owns the service.
+    #
+    # @!attribute [rw] service_arn
+    #   ARN identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account that owns the service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/PolicyDetachedFromServiceMetadata AWS API Documentation
+    #
+    class PolicyDetachedFromServiceMetadata < Struct.new(
+      :service_arn,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An event on the timeline of a resilience policy.
+    #
+    # @!attribute [rw] event_id
+    #   The identifier of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The time the event occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_type
+    #   The type of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arn
+    #   ARN identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] actor
+    #   Identifies the actor that triggered an event.
+    #   @return [Types::EventActor]
+    #
+    # @!attribute [rw] event_details
+    #   The details of the event.
+    #   @return [Types::PolicyEventDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/PolicyEvent AWS API Documentation
+    #
+    class PolicyEvent < Struct.new(
+      :event_id,
+      :timestamp,
+      :event_type,
+      :policy_arn,
+      :actor,
+      :event_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the title, description, and event-specific metadata for a
+    # single event on the timeline of a resilience policy.
+    #
+    # @!attribute [rw] title
+    #   A short summary of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_metadata
+    #   The event-specific metadata, with one member populated according to
+    #   the event type.
+    #   @return [Types::PolicyEventMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/PolicyEventDetails AWS API Documentation
+    #
+    class PolicyEventDetails < Struct.new(
+      :title,
+      :description,
+      :event_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the event-specific metadata for a policy event. Exactly one
+    # member is populated, according to the event type.
+    #
+    # * policyAttachedToService — a service started using the policy.
+    #
+    # * policyDetachedFromService — a service stopped using the policy.
+    #
+    # * policySharingRevoked — cross-account sharing was disabled for the
+    #   policy.
+    #
+    # * policyDeleted — the policy was deleted.
+    #
+    # @note PolicyEventMetadata is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PolicyEventMetadata corresponding to the set member.
+    #
+    # @!attribute [rw] policy_attached_to_service
+    #   Contains details about the service that started using the policy,
+    #   such as the account that owns the service.
+    #   @return [Types::PolicyAttachedToServiceMetadata]
+    #
+    # @!attribute [rw] policy_detached_from_service
+    #   Contains details about the service that stopped using the policy,
+    #   such as the account that owns the service.
+    #   @return [Types::PolicyDetachedFromServiceMetadata]
+    #
+    # @!attribute [rw] policy_sharing_revoked
+    #   Contains details about a policy for which organization sharing was
+    #   revoked, including the number of services that were affected.
+    #   @return [Types::PolicySharingRevokedMetadata]
+    #
+    # @!attribute [rw] policy_deleted
+    #   Contains details about a policy that was deleted, including the
+    #   number of services that were affected.
+    #   @return [Types::PolicyDeletedMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/PolicyEventMetadata AWS API Documentation
+    #
+    class PolicyEventMetadata < Struct.new(
+      :policy_attached_to_service,
+      :policy_detached_from_service,
+      :policy_sharing_revoked,
+      :policy_deleted,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PolicyAttachedToService < PolicyEventMetadata; end
+      class PolicyDetachedFromService < PolicyEventMetadata; end
+      class PolicySharingRevoked < PolicyEventMetadata; end
+      class PolicyDeleted < PolicyEventMetadata; end
+      class Unknown < PolicyEventMetadata; end
+    end
+
+    # Contains details about a policy for which organization sharing was
+    # revoked, including the number of services that were affected.
+    #
+    # @!attribute [rw] affected_service_count
+    #   The number of services that were using the policy when sharing was
+    #   revoked.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/PolicySharingRevokedMetadata AWS API Documentation
+    #
+    class PolicySharingRevokedMetadata < Struct.new(
+      :affected_service_count)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3276,6 +3825,14 @@ module Aws::Resiliencehubv2
     #   The data recovery targets defined in the policy.
     #   @return [Types::DataRecoveryTargets]
     #
+    # @!attribute [rw] sharing_enabled
+    #   Specifies whether cross-account sharing is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier of the organization this policy is shared with.
+    #   @return [String]
+    #
     # @!attribute [rw] associated_service_count
     #   The number of services associated with this policy.
     #   @return [Integer]
@@ -3297,6 +3854,8 @@ module Aws::Resiliencehubv2
       :multi_az,
       :multi_region,
       :data_recovery,
+      :sharing_enabled,
+      :organization_id,
       :associated_service_count,
       :created_at,
       :updated_at)
@@ -4236,11 +4795,26 @@ module Aws::Resiliencehubv2
     #   ARN identifier.
     #   @return [String]
     #
+    # @!attribute [rw] policy_owner_account_id
+    #   The account that owns the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_source
+    #   The source of the policy.
+    #
+    #   * SELF — the policy belongs to the account that owns the service.
+    #
+    #   * CROSS\_ACCOUNT — the policy belongs to another account and was
+    #     shared with the organization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ServicePolicyAssociatedMetadata AWS API Documentation
     #
     class ServicePolicyAssociatedMetadata < Struct.new(
       :policy_name,
-      :policy_arn)
+      :policy_arn,
+      :policy_owner_account_id,
+      :policy_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4255,11 +4829,31 @@ module Aws::Resiliencehubv2
     #   ARN identifier.
     #   @return [String]
     #
+    # @!attribute [rw] policy_owner_account_id
+    #   The account that owns the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_source
+    #   The source of the policy.
+    #
+    #   * SELF — the policy belongs to the account that owns the service.
+    #
+    #   * CROSS\_ACCOUNT — the policy belongs to another account and was
+    #     shared with the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason the policy was disassociated from the service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ServicePolicyDisassociatedMetadata AWS API Documentation
     #
     class ServicePolicyDisassociatedMetadata < Struct.new(
       :policy_name,
-      :policy_arn)
+      :policy_arn,
+      :policy_owner_account_id,
+      :policy_source,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4602,6 +5196,45 @@ module Aws::Resiliencehubv2
       :value,
       :policy_name,
       :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_arn
+    #   ARN identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/StartDependencyInsightsRequest AWS API Documentation
+    #
+    class StartDependencyInsightsRequest < Struct.new(
+      :service_arn,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the dependency insights generation. Valid values:
+    #
+    #   * IN\_PROGRESS - Insights generation is in progress.
+    #
+    #   * COMPLETED - Insights generation completed successfully.
+    #
+    #   * FAILED - Insights generation failed. Call GetDependencyInsights
+    #     for the error code and message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/StartDependencyInsightsResponse AWS API Documentation
+    #
+    class StartDependencyInsightsResponse < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5468,8 +6101,8 @@ module Aws::Resiliencehubv2
     #   @return [Array<String>]
     #
     # @!attribute [rw] account_targeting
-    #   Indicates whether this test run targets a single account or multiple
-    #   accounts.
+    #   Indicates whether the test run targets resources in a single AWS
+    #   account or across multiple accounts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRun AWS API Documentation
@@ -5497,6 +6130,61 @@ module Aws::Resiliencehubv2
       :permission_model,
       :regions,
       :account_targeting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a dependency that a test run
+    # blocked, as captured when the run started.
+    #
+    # @!attribute [rw] dependency_id
+    #   The unique identifier of the dependency. Absent when the dependency
+    #   was entered manually and was not part of dependency discovery.
+    #   @return [String]
+    #
+    # @!attribute [rw] dependency_name
+    #   The name of the dependency.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name of the dependency that the test run blocked.
+    #   @return [String]
+    #
+    # @!attribute [rw] criticality
+    #   The criticality classification of the dependency when the run
+    #   started. A dependency that was not discovered has the UNKNOWN
+    #   criticality.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The origin of the dependency. A discovered dependency was found by
+    #   dependency discovery; a manual dependency was entered when the run
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The location of the dependency.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_regions
+    #   The source Regions from which the dependency was detected.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] provider
+    #   The provider of the dependency.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunDependencySummary AWS API Documentation
+    #
+    class TestRunDependencySummary < Struct.new(
+      :dependency_id,
+      :dependency_name,
+      :dns_name,
+      :criticality,
+      :source,
+      :location,
+      :source_regions,
+      :provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5621,6 +6309,84 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # A state-change event observed for a test run monitoring source.
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp when the event occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_arn
+    #   The ARN of the monitoring source the event belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The type of the event. ALARM indicates an event from a CloudWatch
+    #   alarm source; the detail member carries either the alarm state
+    #   change or a collection error.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   The event payload.
+    #   @return [Types::TestRunSourceEventDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunSourceEvent AWS API Documentation
+    #
+    class TestRunSourceEvent < Struct.new(
+      :timestamp,
+      :source_arn,
+      :event_type,
+      :detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The payload of a test run source event. Exactly one member is set.
+    #
+    # @note TestRunSourceEventDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TestRunSourceEventDetail corresponding to the set member.
+    #
+    # @!attribute [rw] alarm_state_change
+    #   A CloudWatch alarm state change.
+    #   @return [Types::AlarmStateChangeDetail]
+    #
+    # @!attribute [rw] error
+    #   An error that prevented event collection from the source.
+    #   @return [Types::TestRunSourceEventError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunSourceEventDetail AWS API Documentation
+    #
+    class TestRunSourceEventDetail < Struct.new(
+      :alarm_state_change,
+      :error,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AlarmStateChange < TestRunSourceEventDetail; end
+      class Error < TestRunSourceEventDetail; end
+      class Unknown < TestRunSourceEventDetail; end
+    end
+
+    # Describes an error that prevented event collection from a test run
+    # monitoring source.
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A human-readable description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunSourceEventError AWS API Documentation
+    #
+    class TestRunSourceEventError < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A monitoring-source snapshot captured for a test run. Exactly one
     # member is set.
     #
@@ -5722,8 +6488,8 @@ module Aws::Resiliencehubv2
     #   @return [String]
     #
     # @!attribute [rw] account_targeting
-    #   Indicates whether this test run targets a single account or multiple
-    #   accounts.
+    #   Indicates whether the test run targets resources in a single AWS
+    #   account or across multiple accounts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunSummary AWS API Documentation
@@ -6155,6 +6921,11 @@ module Aws::Resiliencehubv2
     #   The updated data recovery targets for the policy.
     #   @return [Types::DataRecoveryTargets]
     #
+    # @!attribute [rw] sharing_enabled
+    #   Specifies whether cross-account sharing is enabled for the policy.
+    #   Disabling sharing stops member services from using the policy.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/UpdatePolicyRequest AWS API Documentation
     #
     class UpdatePolicyRequest < Struct.new(
@@ -6163,7 +6934,8 @@ module Aws::Resiliencehubv2
       :availability_slo,
       :multi_az,
       :multi_region,
-      :data_recovery)
+      :data_recovery,
+      :sharing_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

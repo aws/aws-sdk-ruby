@@ -585,6 +585,13 @@ module Aws::IVSRealTime
     #
     # @return [Types::CreateIngestConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CreateIngestConfigurationResponse#access_control_allow_origin #access_control_allow_origin} => String
+    #   * {Types::CreateIngestConfigurationResponse#access_control_expose_headers #access_control_expose_headers} => String
+    #   * {Types::CreateIngestConfigurationResponse#cache_control #cache_control} => String
+    #   * {Types::CreateIngestConfigurationResponse#content_security_policy #content_security_policy} => String
+    #   * {Types::CreateIngestConfigurationResponse#strict_transport_security #strict_transport_security} => String
+    #   * {Types::CreateIngestConfigurationResponse#x_content_type_options #x_content_type_options} => String
+    #   * {Types::CreateIngestConfigurationResponse#x_frame_options #x_frame_options} => String
     #   * {Types::CreateIngestConfigurationResponse#ingest_configuration #ingest_configuration} => Types::IngestConfiguration
     #
     # @example Request syntax with placeholder values
@@ -606,6 +613,13 @@ module Aws::IVSRealTime
     #
     # @example Response structure
     #
+    #   resp.access_control_allow_origin #=> String
+    #   resp.access_control_expose_headers #=> String
+    #   resp.cache_control #=> String
+    #   resp.content_security_policy #=> String
+    #   resp.strict_transport_security #=> String
+    #   resp.x_content_type_options #=> String
+    #   resp.x_frame_options #=> String
     #   resp.ingest_configuration.name #=> String
     #   resp.ingest_configuration.arn #=> String
     #   resp.ingest_configuration.ingest_protocol #=> String, one of "RTMP", "RTMPS"
@@ -2408,6 +2422,13 @@ module Aws::IVSRealTime
     #
     # @return [Types::UpdateIngestConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::UpdateIngestConfigurationResponse#access_control_allow_origin #access_control_allow_origin} => String
+    #   * {Types::UpdateIngestConfigurationResponse#access_control_expose_headers #access_control_expose_headers} => String
+    #   * {Types::UpdateIngestConfigurationResponse#cache_control #cache_control} => String
+    #   * {Types::UpdateIngestConfigurationResponse#content_security_policy #content_security_policy} => String
+    #   * {Types::UpdateIngestConfigurationResponse#strict_transport_security #strict_transport_security} => String
+    #   * {Types::UpdateIngestConfigurationResponse#x_content_type_options #x_content_type_options} => String
+    #   * {Types::UpdateIngestConfigurationResponse#x_frame_options #x_frame_options} => String
     #   * {Types::UpdateIngestConfigurationResponse#ingest_configuration #ingest_configuration} => Types::IngestConfiguration
     #
     # @example Request syntax with placeholder values
@@ -2420,6 +2441,13 @@ module Aws::IVSRealTime
     #
     # @example Response structure
     #
+    #   resp.access_control_allow_origin #=> String
+    #   resp.access_control_expose_headers #=> String
+    #   resp.cache_control #=> String
+    #   resp.content_security_policy #=> String
+    #   resp.strict_transport_security #=> String
+    #   resp.x_content_type_options #=> String
+    #   resp.x_frame_options #=> String
     #   resp.ingest_configuration.name #=> String
     #   resp.ingest_configuration.arn #=> String
     #   resp.ingest_configuration.ingest_protocol #=> String, one of "RTMP", "RTMPS"
@@ -2533,7 +2561,7 @@ module Aws::IVSRealTime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

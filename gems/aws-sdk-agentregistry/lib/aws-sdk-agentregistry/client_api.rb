@@ -16,6 +16,7 @@ module Aws::AgentRegistry
 
     A2aAgentCardDescriptor = Shapes::StructureShape.new(name: 'A2aAgentCardDescriptor')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AgUiDescriptor = Shapes::StructureShape.new(name: 'AgUiDescriptor')
     AgentSkillsAdditionalData = Shapes::StructureShape.new(name: 'AgentSkillsAdditionalData')
     AgentSkillsDefinitionDescriptor = Shapes::StructureShape.new(name: 'AgentSkillsDefinitionDescriptor')
     AgentSkillsMdDescriptor = Shapes::StructureShape.new(name: 'AgentSkillsMdDescriptor')
@@ -26,6 +27,7 @@ module Aws::AgentRegistry
     BatchGetDiscoverableRegistryRecordRequestEntriesList = Shapes::ListShape.new(name: 'BatchGetDiscoverableRegistryRecordRequestEntriesList')
     BatchGetDiscoverableRegistryRecordResponse = Shapes::StructureShape.new(name: 'BatchGetDiscoverableRegistryRecordResponse')
     CustomDescriptor = Shapes::StructureShape.new(name: 'CustomDescriptor')
+    CustomMetadataDocument = Shapes::DocumentShape.new(name: 'CustomMetadataDocument', document: true)
     DataSchemaVersion = Shapes::StringShape.new(name: 'DataSchemaVersion')
     DateTimestamp = Shapes::TimestampShape.new(name: 'DateTimestamp', timestampFormat: "iso8601")
     Description = Shapes::StringShape.new(name: 'Description')
@@ -33,11 +35,13 @@ module Aws::AgentRegistry
     DescriptorSource = Shapes::StructureShape.new(name: 'DescriptorSource')
     DescriptorSourceFromUrl = Shapes::StructureShape.new(name: 'DescriptorSourceFromUrl')
     DescriptorSourceUrl = Shapes::StringShape.new(name: 'DescriptorSourceUrl')
+    DescriptorTypeList = Shapes::ListShape.new(name: 'DescriptorTypeList')
     Descriptors = Shapes::StructureShape.new(name: 'Descriptors')
     DiscoverableFilterValues = Shapes::ListShape.new(name: 'DiscoverableFilterValues')
     DiscoverableRegistryRecordSummary = Shapes::StructureShape.new(name: 'DiscoverableRegistryRecordSummary')
     DiscoverableRegistryRecordSummaryList = Shapes::ListShape.new(name: 'DiscoverableRegistryRecordSummaryList')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
+    HttpDescriptor = Shapes::StructureShape.new(name: 'HttpDescriptor')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListDiscoverableRegistryRecordsRequest = Shapes::StructureShape.new(name: 'ListDiscoverableRegistryRecordsRequest')
     ListDiscoverableRegistryRecordsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDiscoverableRegistryRecordsRequestMaxResultsInteger')
@@ -87,6 +91,9 @@ module Aws::AgentRegistry
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AgUiDescriptor.add_member(:source, Shapes::ShapeRef.new(shape: DescriptorSource, location_name: "source"))
+    AgUiDescriptor.struct_class = Types::AgUiDescriptor
+
     AgentSkillsAdditionalData.add_member(:skill_md, Shapes::ShapeRef.new(shape: AgentSkillsMdDescriptor, location_name: "skillMd"))
     AgentSkillsAdditionalData.struct_class = Types::AgentSkillsAdditionalData
 
@@ -126,10 +133,14 @@ module Aws::AgentRegistry
     DescriptorSourceFromUrl.add_member(:url, Shapes::ShapeRef.new(shape: DescriptorSourceUrl, required: true, location_name: "url"))
     DescriptorSourceFromUrl.struct_class = Types::DescriptorSourceFromUrl
 
+    DescriptorTypeList.member = Shapes::ShapeRef.new(shape: String)
+
     Descriptors.add_member(:mcp_server, Shapes::ShapeRef.new(shape: McpServerDescriptor, location_name: "mcpServer"))
     Descriptors.add_member(:a2a_agent_card, Shapes::ShapeRef.new(shape: A2aAgentCardDescriptor, location_name: "a2aAgentCard"))
     Descriptors.add_member(:agent_skills_definition, Shapes::ShapeRef.new(shape: AgentSkillsDefinitionDescriptor, location_name: "agentSkillsDefinition"))
     Descriptors.add_member(:custom, Shapes::ShapeRef.new(shape: CustomDescriptor, location_name: "custom"))
+    Descriptors.add_member(:http, Shapes::ShapeRef.new(shape: HttpDescriptor, location_name: "http"))
+    Descriptors.add_member(:agui, Shapes::ShapeRef.new(shape: AgUiDescriptor, location_name: "agui"))
     Descriptors.struct_class = Types::Descriptors
 
     DiscoverableFilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
@@ -145,9 +156,13 @@ module Aws::AgentRegistry
     DiscoverableRegistryRecordSummary.add_member(:status, Shapes::ShapeRef.new(shape: RegistryRecordStatus, required: true, location_name: "status"))
     DiscoverableRegistryRecordSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     DiscoverableRegistryRecordSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    DiscoverableRegistryRecordSummary.add_member(:descriptor_types, Shapes::ShapeRef.new(shape: DescriptorTypeList, location_name: "descriptorTypes"))
     DiscoverableRegistryRecordSummary.struct_class = Types::DiscoverableRegistryRecordSummary
 
     DiscoverableRegistryRecordSummaryList.member = Shapes::ShapeRef.new(shape: DiscoverableRegistryRecordSummary)
+
+    HttpDescriptor.add_member(:source, Shapes::ShapeRef.new(shape: DescriptorSource, location_name: "source"))
+    HttpDescriptor.struct_class = Types::HttpDescriptor
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -193,6 +208,7 @@ module Aws::AgentRegistry
     RegistryRecordSummary.add_member(:status, Shapes::ShapeRef.new(shape: RegistryRecordStatus, required: true, location_name: "status"))
     RegistryRecordSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     RegistryRecordSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    RegistryRecordSummary.add_member(:custom_metadata, Shapes::ShapeRef.new(shape: CustomMetadataDocument, location_name: "customMetadata"))
     RegistryRecordSummary.struct_class = Types::RegistryRecordSummary
 
     RegistryRecordSummaryList.member = Shapes::ShapeRef.new(shape: RegistryRecordSummary)

@@ -2222,17 +2222,24 @@ module Aws::PaymentCryptographyData
     # @note ReEncryptionAttributes is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] symmetric
-    #   Parameters that are required to encrypt data using symmetric keys.
+    #   Specifies the parameters required to encrypt data using symmetric
+    #   keys.
     #   @return [Types::SymmetricEncryptionAttributes]
     #
+    # @!attribute [rw] asymmetric
+    #   Specifies the parameters required to encrypt data using an
+    #   asymmetric key pair. You must specify a `PaddingType`.
+    #   @return [Types::AsymmetricEncryptionAttributes]
+    #
     # @!attribute [rw] dukpt
-    #   Parameters that are required to encrypt plaintext data using DUKPT.
+    #   Specifies the parameters required to encrypt data using DUKPT.
     #   @return [Types::DukptEncryptionAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/ReEncryptionAttributes AWS API Documentation
     #
     class ReEncryptionAttributes < Struct.new(
       :symmetric,
+      :asymmetric,
       :dukpt,
       :unknown)
       SENSITIVE = []
@@ -2240,6 +2247,7 @@ module Aws::PaymentCryptographyData
       include Aws::Structure::Union
 
       class Symmetric < ReEncryptionAttributes; end
+      class Asymmetric < ReEncryptionAttributes; end
       class Dukpt < ReEncryptionAttributes; end
       class Unknown < ReEncryptionAttributes; end
     end

@@ -608,7 +608,8 @@ module Aws
       def delete_resource_policy: (
                                     resource_arn: ::String,
                                     policy_id: ::String,
-                                    policy_hash: ::String
+                                    policy_hash: ::String,
+                                    ?deletion_mode: ("RemoveSharing" | "RollbackMigration")
                                   ) -> _DeleteResourcePolicyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
 

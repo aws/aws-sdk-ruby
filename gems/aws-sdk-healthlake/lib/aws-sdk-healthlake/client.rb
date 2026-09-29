@@ -496,8 +496,8 @@ module Aws::HealthLake
     #   CI/CD workflows, or a sample data file in Amazon S3.
     #
     # @option params [String] :kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key identifier used to
-    #   encrypt the profile content at rest.
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key identifier used to encrypt the profile content at rest.
     #
     # @option params [String] :profile_description
     #   A human-readable description of the profile's purpose.
@@ -612,6 +612,9 @@ module Aws::HealthLake
     # @option params [Types::ProfileConfiguration] :profile_configuration
     #   The profile configuration for the data store.
     #
+    # @option params [Types::BackupConfiguration] :backup_configuration
+    #   The backup configuration for the data store.
+    #
     # @return [Types::CreateFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFHIRDatastoreResponse#datastore_id #datastore_id} => String
@@ -654,6 +657,12 @@ module Aws::HealthLake
     #     },
     #     profile_configuration: {
     #       default_profiles: ["HealthLakeString"],
+    #     },
+    #     backup_configuration: {
+    #       status: "ENABLED", # accepts ENABLED, DISABLED
+    #       backup_type: "CONTINUOUS", # accepts CONTINUOUS
+    #       retention_period_in_days: 1,
+    #       backup_tags_enabled: false,
     #     },
     #   })
     #
@@ -709,7 +718,8 @@ module Aws::HealthLake
     # Delete a FHIR-enabled data store.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS-generated identifier for the data store to be deleted.
+    #   The Amazon Web Services-generated identifier for the data store to be
+    #   deleted.
     #
     # @return [Types::DeleteFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -830,6 +840,14 @@ module Aws::HealthLake
     #   resp.datastore_properties.analytics_configuration.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PAUSING", "PAUSED"
     #   resp.datastore_properties.profile_configuration.default_profiles #=> Array
     #   resp.datastore_properties.profile_configuration.default_profiles[0] #=> String
+    #   resp.datastore_properties.backup_status_info.configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.datastore_properties.backup_status_info.configuration.backup_type #=> String, one of "CONTINUOUS"
+    #   resp.datastore_properties.backup_status_info.configuration.retention_period_in_days #=> Integer
+    #   resp.datastore_properties.backup_status_info.configuration.backup_tags_enabled #=> Boolean
+    #   resp.datastore_properties.backup_status_info.backup_enabled_at #=> Time
+    #   resp.datastore_properties.backup_status_info.earliest_restore_point #=> Time
+    #   resp.datastore_properties.backup_status_info.latest_restore_point #=> Time
+    #   resp.datastore_properties.backup_status_info.scheduled_permanent_deletion_time #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1013,10 +1031,10 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Lists data transformation jobs for your AWS account. Results can be
-    # filtered by status, job name, and submit time window. Results are
-    # paginated. Use the `NextToken` parameter to retrieve additional
-    # results.
+    # Lists data transformation jobs for your Amazon Web Services account.
+    # Results can be filtered by status, job name, and submit time window.
+    # Results are paginated. Use the `NextToken` parameter to retrieve
+    # additional results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of jobs to return per page. If you don't specify a
@@ -1239,6 +1257,14 @@ module Aws::HealthLake
     #   resp.datastore_properties_list[0].analytics_configuration.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PAUSING", "PAUSED"
     #   resp.datastore_properties_list[0].profile_configuration.default_profiles #=> Array
     #   resp.datastore_properties_list[0].profile_configuration.default_profiles[0] #=> String
+    #   resp.datastore_properties_list[0].backup_status_info.configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.datastore_properties_list[0].backup_status_info.configuration.backup_type #=> String, one of "CONTINUOUS"
+    #   resp.datastore_properties_list[0].backup_status_info.configuration.retention_period_in_days #=> Integer
+    #   resp.datastore_properties_list[0].backup_status_info.configuration.backup_tags_enabled #=> Boolean
+    #   resp.datastore_properties_list[0].backup_status_info.backup_enabled_at #=> Time
+    #   resp.datastore_properties_list[0].backup_status_info.earliest_restore_point #=> Time
+    #   resp.datastore_properties_list[0].backup_status_info.latest_restore_point #=> Time
+    #   resp.datastore_properties_list[0].backup_status_info.scheduled_permanent_deletion_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListFHIRDatastores AWS API Documentation
@@ -1499,20 +1525,143 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
+    # Restore a backup-enabled data store to a point in time. Creates a new
+    # data store from the backup.
+    #
+    # @option params [required, String] :source_datastore_id
+    #   The identifier of the source data store to restore from.
+    #
+    # @option params [required, Types::RestoreConfiguration] :restore_configuration
+    #   The restore configuration specifying the type and parameters for the
+    #   restore.
+    #
+    # @option params [String] :datastore_name
+    #   The name for the restored data store.
+    #
+    # @option params [Types::SseConfiguration] :sse_configuration
+    #   The server-side encryption key configuration for the restored data
+    #   store.
+    #
+    # @option params [String] :client_token
+    #   An optional user-provided token to ensure API idempotency of the
+    #   restore.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The resource tags applied to the restored data store.
+    #
+    # @option params [Types::IdentityProviderConfiguration] :identity_provider_configuration
+    #   The identity provider configuration for the restored data store.
+    #
+    # @option params [Types::AnalyticsConfiguration] :analytics_configuration
+    #   The analytics configuration for the restored data store.
+    #
+    # @option params [Types::NlpConfiguration] :nlp_configuration
+    #   The NLP configuration for the restored data store.
+    #
+    # @option params [Types::ProfileConfiguration] :profile_configuration
+    #   The profile configuration for the restored data store.
+    #
+    # @return [Types::RestoreFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreFHIRDatastoreResponse#datastore_id #datastore_id} => String
+    #   * {Types::RestoreFHIRDatastoreResponse#datastore_arn #datastore_arn} => String
+    #   * {Types::RestoreFHIRDatastoreResponse#datastore_status #datastore_status} => String
+    #   * {Types::RestoreFHIRDatastoreResponse#datastore_endpoint #datastore_endpoint} => String
+    #
+    #
+    # @example Example: Restore a data store to a point in time
+    #
+    #   resp = client.restore_fhir_datastore({
+    #     datastore_name: "RestoredFhirDatastore", 
+    #     restore_configuration: {
+    #       continuous_backup_restore_configuration: {
+    #         restore_point_time: Time.parse("2026-08-01T00:00:00Z"), 
+    #       }, 
+    #     }, 
+    #     source_datastore_id: "source-datastore-id", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     datastore_arn: "arn:aws:healthlake:us-east-1:123456789012:datastore/fhir/restored-datastore-id", 
+    #     datastore_endpoint: "https://healthlake.us-east-1.amazonaws.com/datastore/restored-datastore-id/r4/", 
+    #     datastore_id: "restored-datastore-id", 
+    #     datastore_status: "CREATING", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_fhir_datastore({
+    #     source_datastore_id: "DatastoreId", # required
+    #     restore_configuration: { # required
+    #       continuous_backup_restore_configuration: {
+    #         restore_point_time: Time.now,
+    #       },
+    #     },
+    #     datastore_name: "DatastoreName",
+    #     sse_configuration: {
+    #       kms_encryption_config: { # required
+    #         cmk_type: "CUSTOMER_MANAGED_KMS_KEY", # required, accepts CUSTOMER_MANAGED_KMS_KEY, AWS_OWNED_KMS_KEY
+    #         kms_key_id: "EncryptionKeyID",
+    #       },
+    #     },
+    #     client_token: "ClientTokenString",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     identity_provider_configuration: {
+    #       authorization_strategy: "SMART_ON_FHIR_V1", # required, accepts SMART_ON_FHIR_V1, SMART_ON_FHIR, AWS_AUTH
+    #       fine_grained_authorization_enabled: false,
+    #       metadata: "ConfigurationMetadata",
+    #       idp_lambda_arn: "LambdaArn",
+    #     },
+    #     analytics_configuration: {
+    #       status: "ENABLED", # accepts ENABLED, ENABLING, DISABLED, DISABLING, PAUSING, PAUSED
+    #     },
+    #     nlp_configuration: {
+    #       status: "ENABLED", # accepts ENABLED, ENABLING, DISABLED, DISABLING
+    #     },
+    #     profile_configuration: {
+    #       default_profiles: ["HealthLakeString"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.datastore_id #=> String
+    #   resp.datastore_arn #=> String
+    #   resp.datastore_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED"
+    #   resp.datastore_endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/RestoreFHIRDatastore AWS API Documentation
+    #
+    # @overload restore_fhir_datastore(params = {})
+    # @param [Hash] params ({})
+    def restore_fhir_datastore(params = {}, options = {})
+      req = build_request(:restore_fhir_datastore, params)
+      req.send_request(options)
+    end
+
     # Starts an asynchronous data transformation job that converts source
     # files from Amazon Simple Storage Service (Amazon S3) and writes the
-    # output to Amazon S3 or AWS HealthLake.
+    # output to Amazon S3 or HealthLake.
     #
     # @option params [required, Types::TransformationInputDataConfig] :input_data_config
     #   The Amazon S3 location and format of the source files to transform.
     #
     # @option params [required, Types::TransformationOutputDataConfig] :output_data_config
-    #   The Amazon S3 output location and AWS Key Management Service (AWS KMS)
-    #   encryption configuration.
+    #   The Amazon S3 output location and Amazon Web Services Key Management
+    #   Service (Amazon Web Services KMS) encryption configuration.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that AWS HealthLake assumes to read from and
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity and
+    #   Access Management (IAM) role that HealthLake assumes to read from and
     #   write to the specified Amazon S3 locations.
     #
     # @option params [required, String] :client_token
@@ -1529,7 +1678,7 @@ module Aws::HealthLake
     #
     # @option params [Boolean] :drift_detection_enabled
     #   Specifies whether drift detection is enabled for this job. When
-    #   enabled, AWS HealthLake writes a drift report to the output Amazon S3
+    #   enabled, HealthLake writes a drift report to the output Amazon S3
     #   location alongside the converted files.
     #
     # @option params [Boolean] :provenance_enabled
@@ -1655,7 +1804,7 @@ module Aws::HealthLake
     #   The data store identifier.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) that grants access permission to AWS
+    #   The Amazon Resource Name (ARN) that grants access permission to
     #   HealthLake.
     #
     # @option params [String] :client_token
@@ -1668,13 +1817,13 @@ module Aws::HealthLake
     #   The validation level of the import job.
     #
     # @option params [String] :profile_id
-    #   A bounded-length string value.
+    #   The data transformation profile identifier to use for the import job.
     #
     # @option params [String] :input_format
-    #   A bounded-length string value.
+    #   The input format of the data to be imported.
     #
     # @option params [Boolean] :drift_detection_enabled
-    #   A boolean value.
+    #   Specifies whether to enable drift detection for the import job.
     #
     # @option params [Boolean] :provenance_enabled
     #   Specifies whether to enable provenance for the import job.
@@ -1853,9 +2002,64 @@ module Aws::HealthLake
     # @option params [Types::IdentityProviderConfiguration] :identity_provider_configuration
     #   The identity provider configuration for the data store.
     #
+    # @option params [Types::BackupConfiguration] :backup_configuration
+    #   The backup configuration for the data store.
+    #
     # @return [Types::UpdateFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFHIRDatastoreResponse#datastore_properties #datastore_properties} => Types::DatastoreProperties
+    #
+    #
+    # @example Example: Update a data store's name and configuration
+    #
+    #   resp = client.update_fhir_datastore({
+    #     analytics_configuration: {
+    #       status: "DISABLED", 
+    #     }, 
+    #     datastore_id: "datastore-id", 
+    #     datastore_name: "RenamedFhirDatastore", 
+    #     identity_provider_configuration: {
+    #       authorization_strategy: "SMART_ON_FHIR_V1", 
+    #       fine_grained_authorization_enabled: true, 
+    #     }, 
+    #     nlp_configuration: {
+    #       status: "ENABLED", 
+    #     }, 
+    #     profile_configuration: {
+    #       default_profiles: [
+    #         "us-core-3.1.1", 
+    #         "carin-bb-2.0.0", 
+    #       ], 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     datastore_properties: {
+    #       analytics_configuration: {
+    #         status: "PAUSING", 
+    #       }, 
+    #       datastore_arn: "arn:aws:healthlake:us-east-1:123456789012:datastore/datastore-id", 
+    #       datastore_endpoint: "https://healthlake.us-east-1.amazonaws.com/datastore/datastore-id/r4/", 
+    #       datastore_id: "datastore-id", 
+    #       datastore_name: "RenamedFhirDatastore", 
+    #       datastore_status: "UPDATING", 
+    #       datastore_type_version: "R4", 
+    #       identity_provider_configuration: {
+    #         authorization_strategy: "SMART_ON_FHIR_V1", 
+    #         fine_grained_authorization_enabled: true, 
+    #       }, 
+    #       nlp_configuration: {
+    #         status: "ENABLING", 
+    #       }, 
+    #       profile_configuration: {
+    #         default_profiles: [
+    #           "us-core-3.1.1", 
+    #           "carin-bb-2.0.0", 
+    #         ], 
+    #       }, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1876,6 +2080,12 @@ module Aws::HealthLake
     #       fine_grained_authorization_enabled: false,
     #       metadata: "ConfigurationMetadata",
     #       idp_lambda_arn: "LambdaArn",
+    #     },
+    #     backup_configuration: {
+    #       status: "ENABLED", # accepts ENABLED, DISABLED
+    #       backup_type: "CONTINUOUS", # accepts CONTINUOUS
+    #       retention_period_in_days: 1,
+    #       backup_tags_enabled: false,
     #     },
     #   })
     #
@@ -1901,6 +2111,14 @@ module Aws::HealthLake
     #   resp.datastore_properties.analytics_configuration.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PAUSING", "PAUSED"
     #   resp.datastore_properties.profile_configuration.default_profiles #=> Array
     #   resp.datastore_properties.profile_configuration.default_profiles[0] #=> String
+    #   resp.datastore_properties.backup_status_info.configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.datastore_properties.backup_status_info.configuration.backup_type #=> String, one of "CONTINUOUS"
+    #   resp.datastore_properties.backup_status_info.configuration.retention_period_in_days #=> Integer
+    #   resp.datastore_properties.backup_status_info.configuration.backup_tags_enabled #=> Boolean
+    #   resp.datastore_properties.backup_status_info.backup_enabled_at #=> Time
+    #   resp.datastore_properties.backup_status_info.earliest_restore_point #=> Time
+    #   resp.datastore_properties.backup_status_info.latest_restore_point #=> Time
+    #   resp.datastore_properties.backup_status_info.scheduled_permanent_deletion_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UpdateFHIRDatastore AWS API Documentation
     #
@@ -1980,7 +2198,7 @@ module Aws::HealthLake
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

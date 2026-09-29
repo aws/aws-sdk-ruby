@@ -46,6 +46,7 @@ module Aws::Notifications
     class AssociateManagedNotificationAccountContactRequest
       attr_accessor contact_identifier: ("ACCOUNT_PRIMARY" | "ACCOUNT_ALTERNATE_BILLING" | "ACCOUNT_ALTERNATE_OPERATIONS" | "ACCOUNT_ALTERNATE_SECURITY")
       attr_accessor managed_notification_configuration_arn: ::String
+      attr_accessor is_sensitive_events_subscribed: bool
       SENSITIVE: []
     end
 
@@ -55,6 +56,7 @@ module Aws::Notifications
     class AssociateManagedNotificationAdditionalChannelRequest
       attr_accessor channel_arn: ::String
       attr_accessor managed_notification_configuration_arn: ::String
+      attr_accessor is_sensitive_events_subscribed: bool
       SENSITIVE: []
     end
 
@@ -388,6 +390,7 @@ module Aws::Notifications
       attr_accessor next_token: ::String
       attr_accessor organizational_unit_id: ::String
       attr_accessor related_account: ::String
+      attr_accessor include_sensitive_events: bool
       SENSITIVE: []
     end
 
@@ -487,6 +490,7 @@ module Aws::Notifications
       attr_accessor channel_identifier: ::String
       attr_accessor channel_type: ("MOBILE" | "CHATBOT" | "EMAIL" | "ACCOUNT_CONTACT")
       attr_accessor override_option: ("ENABLED" | "DISABLED")
+      attr_accessor is_sensitive_events_subscribed: bool
       SENSITIVE: []
     end
 
@@ -549,6 +553,7 @@ module Aws::Notifications
       attr_accessor end_time: ::Time
       attr_accessor text_parts: ::Hash[::String, Types::TextPartValue]
       attr_accessor organizational_unit_id: ::String
+      attr_accessor attachments: ::Array[Types::NotificationEventAttachment]
       SENSITIVE: []
     end
 
@@ -602,6 +607,7 @@ module Aws::Notifications
       attr_accessor headline: ::String
       attr_accessor paragraph_summary: ::String
       attr_accessor complete_description: ::String
+      attr_accessor markup_description: ::String
       attr_accessor dimensions: ::Array[Types::Dimension]
       SENSITIVE: []
     end
@@ -640,6 +646,13 @@ module Aws::Notifications
       attr_accessor media: ::Array[Types::MediaElement]
       attr_accessor organizational_unit_id: ::String
       SENSITIVE: []
+    end
+
+    class NotificationEventAttachment
+      attr_accessor display_name: ::String
+      attr_accessor attachment_download_url: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: [:attachment_download_url]
     end
 
     class NotificationEventOverview
@@ -761,7 +774,7 @@ module Aws::Notifications
     end
 
     class TextPartValue
-      attr_accessor type: ("LOCALIZED_TEXT" | "PLAIN_TEXT" | "URL")
+      attr_accessor type: ("LOCALIZED_TEXT" | "PLAIN_TEXT" | "URL" | "PORTABLE_TEXT")
       attr_accessor display_text: ::String
       attr_accessor text_by_locale: ::Hash[("de_DE" | "en_CA" | "en_US" | "en_UK" | "es_ES" | "fr_CA" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "tr_TR" | "zh_CN" | "zh_TW"), ::String]
       attr_accessor url: ::String
@@ -797,6 +810,16 @@ module Aws::Notifications
       attr_accessor notification_configuration_arn: ::String
       attr_accessor status_summary_by_region: ::Hash[::String, Types::EventRuleStatusSummary]
       SENSITIVE: []
+    end
+
+    class UpdateManagedNotificationChannelAssociationRequest
+      attr_accessor managed_notification_configuration_arn: ::String
+      attr_accessor channel_identifier: ::String
+      attr_accessor is_sensitive_events_subscribed: bool
+      SENSITIVE: []
+    end
+
+    class UpdateManagedNotificationChannelAssociationResponse < Aws::EmptyStructure
     end
 
     class UpdateNotificationConfigurationRequest

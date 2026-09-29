@@ -25,6 +25,20 @@ module Aws
           end.to raise_error(Aws::S3::MultipartUploadError, /part failed/)
         end
 
+        it 'shuts down the internally-created executor when upload raises' do
+          client.stub_responses(:upload_part, RuntimeError.new('part failed'))
+          executor = nil
+          allow(DefaultExecutor).to receive(:new).and_wrap_original do |orig, *args, **kwargs|
+            executor = orig.call(*args, **kwargs)
+            allow(executor).to receive(:shutdown).and_call_original
+            executor
+          end
+          expect do
+            subject.upload_stream { |write_stream| write_stream << seventeen_mb }
+          end.to raise_error(Aws::S3::MultipartUploadError, /part failed/)
+          expect(executor).to have_received(:shutdown)
+        end
+
         it 'respects the thread_count option' do
           custom_thread_count = 20
           client.stub_responses(:create_multipart_upload, upload_id: 'id')

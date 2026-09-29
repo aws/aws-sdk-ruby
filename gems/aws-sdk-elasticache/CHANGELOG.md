@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2026-09-24)
+------------------
+
+* Feature - Added tagging support for ElastiCache Global DataStore.
+
+1.150.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.149.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.148.0 (2026-07-09)
 ------------------
 

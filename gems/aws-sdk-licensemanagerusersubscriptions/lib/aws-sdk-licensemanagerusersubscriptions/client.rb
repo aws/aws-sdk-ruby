@@ -687,7 +687,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #
     # @option params [String] :identity_provider_arn
     #   The Amazon Resource Name (ARN) that identifies the identity provider
@@ -1053,7 +1053,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #
     # @option params [required, Types::IdentityProvider] :identity_provider
     #   An object that specifies details for the identity provider.
@@ -1138,6 +1138,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.product_user_summaries[0].domain #=> String
     #   resp.product_user_summaries[0].subscription_start_date #=> String
     #   resp.product_user_summaries[0].subscription_end_date #=> String
+    #   resp.product_user_summaries[0].license_expiration_date #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/ListProductSubscriptions AWS API Documentation
@@ -1289,7 +1290,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #
     # @option params [Types::Settings] :settings
     #   The registered identity provider’s product related configuration
@@ -1392,7 +1393,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #
     # @option params [String] :domain
     #   The domain name of the Active Directory that contains the user for
@@ -1457,6 +1458,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.product_user_summary.domain #=> String
     #   resp.product_user_summary.subscription_start_date #=> String
     #   resp.product_user_summary.subscription_end_date #=> String
+    #   resp.product_user_summary.license_expiration_date #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/StartProductSubscription AWS API Documentation
     #
@@ -1481,7 +1483,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #
     # @option params [String] :product_user_arn
     #   The Amazon Resource Name (ARN) of the product user.
@@ -1544,6 +1546,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.product_user_summary.domain #=> String
     #   resp.product_user_summary.subscription_start_date #=> String
     #   resp.product_user_summary.subscription_end_date #=> String
+    #   resp.product_user_summary.license_expiration_date #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/StopProductSubscription AWS API Documentation
     #
@@ -1620,7 +1623,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #
     # @option params [String] :identity_provider_arn
     #   The Amazon Resource Name (ARN) of the identity provider to update.
@@ -1721,7 +1724,7 @@ module Aws::LicenseManagerUserSubscriptions
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-licensemanagerusersubscriptions'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.107.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.106.0 (2026-08-20)
+------------------
+
+* Feature - Increased the maximum allowed length from 255 to 4,096 characters to support longer access tokens.
+
 1.105.0 (2026-08-07)
 ------------------
 

@@ -2205,7 +2205,8 @@
         "propagateTags":{"shape":"DaemonPropagateTags"},
         "enableECSManagedTags":{"shape":"Boolean"},
         "enableExecuteCommand":{"shape":"Boolean"},
-        "clientToken":{"shape":"String"}
+        "clientToken":{"shape":"String"},
+        "critical":{"shape":"BoxedBoolean"}
       }
     },
     "CreateDaemonResponse":{
@@ -2231,6 +2232,7 @@
         "networkConfiguration":{"shape":"ExpressGatewayServiceNetworkConfiguration"},
         "cpu":{"shape":"String"},
         "memory":{"shape":"String"},
+        "cpuArchitecture":{"shape":"ExpressCpuArchitecture"},
         "scalingTarget":{"shape":"ExpressGatewayScalingTarget"},
         "tags":{"shape":"Tags"},
         "taskDefinitionArn":{"shape":"String"}
@@ -2342,7 +2344,8 @@
       "type":"structure",
       "members":{
         "arn":{"shape":"String"},
-        "runningCount":{"shape":"Integer"}
+        "runningCount":{"shape":"Integer"},
+        "withoutDaemonCount":{"shape":"Integer"}
       }
     },
     "DaemonCapacityProviderList":{
@@ -2440,6 +2443,7 @@
       "members":{
         "arn":{"shape":"String"},
         "runningInstanceCount":{"shape":"BoxedInteger"},
+        "withoutDaemonInstanceCount":{"shape":"BoxedInteger"},
         "drainingInstanceCount":{"shape":"BoxedInteger"}
       }
     },
@@ -2465,6 +2469,7 @@
         "arn":{"shape":"String"},
         "capacityProviders":{"shape":"DaemonDeploymentCapacityProviderList"},
         "totalRunningInstanceCount":{"shape":"BoxedInteger"},
+        "totalWithoutDaemonInstanceCount":{"shape":"BoxedInteger"},
         "totalDrainingInstanceCount":{"shape":"BoxedInteger"}
       }
     },
@@ -2590,7 +2595,8 @@
         "containerImages":{"shape":"DaemonContainerImages"},
         "propagateTags":{"shape":"DaemonPropagateTags"},
         "enableECSManagedTags":{"shape":"BoxedBoolean"},
-        "enableExecuteCommand":{"shape":"BoxedBoolean"}
+        "enableExecuteCommand":{"shape":"BoxedBoolean"},
+        "critical":{"shape":"BoxedBoolean"}
       }
     },
     "DaemonRevisionDetail":{
@@ -2598,7 +2604,8 @@
       "members":{
         "arn":{"shape":"String"},
         "capacityProviders":{"shape":"DaemonCapacityProviderList"},
-        "totalRunningCount":{"shape":"Integer"}
+        "totalRunningCount":{"shape":"Integer"},
+        "totalWithoutDaemonCount":{"shape":"Integer"}
       }
     },
     "DaemonRevisionDetailList":{
@@ -2913,7 +2920,8 @@
         "bakeTimeInMinutes":{"shape":"BoxedInteger"},
         "lifecycleHooks":{"shape":"DeploymentLifecycleHookList"},
         "linearConfiguration":{"shape":"LinearConfiguration"},
-        "canaryConfiguration":{"shape":"CanaryConfiguration"}
+        "canaryConfiguration":{"shape":"CanaryConfiguration"},
+        "earlySuccessCriteria":{"shape":"DeploymentEarlySuccessCriteria"}
       }
     },
     "DeploymentController":{
@@ -2930,6 +2938,15 @@
         "CODE_DEPLOY",
         "EXTERNAL"
       ]
+    },
+    "DeploymentEarlySuccessCriteria":{
+      "type":"structure",
+      "required":["enable"],
+      "members":{
+        "enable":{"shape":"Boolean"},
+        "healthyPercent":{"shape":"HealthyPercentInteger"},
+        "sourceServiceRevisionCleanup":{"shape":"ServiceRevisionCleanup"}
+      }
     },
     "DeploymentEphemeralStorage":{
       "type":"structure",
@@ -3524,6 +3541,13 @@
         "taskArn":{"shape":"String"}
       }
     },
+    "ExpressCpuArchitecture":{
+      "type":"string",
+      "enum":[
+        "X86_64",
+        "ARM64"
+      ]
+    },
     "ExpressGatewayContainer":{
       "type":"structure",
       "required":["image"],
@@ -3572,6 +3596,7 @@
         "taskDefinitionArn":{"shape":"String"},
         "cpu":{"shape":"String"},
         "memory":{"shape":"String"},
+        "cpuArchitecture":{"shape":"ExpressCpuArchitecture"},
         "networkConfiguration":{"shape":"ExpressGatewayServiceNetworkConfiguration"},
         "healthCheckPath":{"shape":"String"},
         "primaryContainer":{"shape":"ExpressGatewayContainer"},
@@ -3715,6 +3740,12 @@
         "UNHEALTHY",
         "UNKNOWN"
       ]
+    },
+    "HealthyPercentInteger":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":0
     },
     "HookDetails":{
       "type":"structure",
@@ -5650,6 +5681,13 @@
         "monitoring":{"shape":"MonitoringConfiguration"}
       }
     },
+    "ServiceRevisionCleanup":{
+      "type":"string",
+      "enum":[
+        "BLOCKING",
+        "DEFERRED"
+      ]
+    },
     "ServiceRevisionLoadBalancer":{
       "type":"structure",
       "members":{
@@ -6443,7 +6481,8 @@
         "deploymentConfiguration":{"shape":"DaemonDeploymentConfiguration"},
         "propagateTags":{"shape":"DaemonPropagateTags"},
         "enableECSManagedTags":{"shape":"Boolean"},
-        "enableExecuteCommand":{"shape":"Boolean"}
+        "enableExecuteCommand":{"shape":"Boolean"},
+        "critical":{"shape":"BoxedBoolean"}
       }
     },
     "UpdateDaemonResponse":{
@@ -6468,6 +6507,7 @@
         "networkConfiguration":{"shape":"ExpressGatewayServiceNetworkConfiguration"},
         "cpu":{"shape":"String"},
         "memory":{"shape":"String"},
+        "cpuArchitecture":{"shape":"ExpressCpuArchitecture"},
         "scalingTarget":{"shape":"ExpressGatewayScalingTarget"},
         "taskDefinitionArn":{"shape":"String"}
       }

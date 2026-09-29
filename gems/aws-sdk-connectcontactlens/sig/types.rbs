@@ -30,6 +30,21 @@ module Aws::ConnectContactLens
       SENSITIVE: []
     end
 
+    class ExtractedInformation
+      attr_accessor extraction_definition_id: ::String
+      attr_accessor extraction_definition_name: ::String
+      attr_accessor extraction_definition_display_label: ::String
+      attr_accessor extracted_values: ::Array[Types::ExtractedInformationValue]
+      attr_accessor failure_code: ("QUOTA_EXCEEDED" | "INSUFFICIENT_CONVERSATION_CONTENT" | "FAILED_SAFETY_GUIDELINES" | "INTERNAL_ERROR" | "MAX_PACKAGE_FEATURE_ONLY")
+      SENSITIVE: []
+    end
+
+    class ExtractedInformationValue
+      attr_accessor content: ::String
+      attr_accessor points_of_interest: ::Array[Types::PointOfInterest]
+      SENSITIVE: []
+    end
+
     class InternalServiceException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -76,6 +91,7 @@ module Aws::ConnectContactLens
       attr_accessor transcript: Types::Transcript
       attr_accessor categories: Types::Categories
       attr_accessor post_contact_summary: Types::PostContactSummary
+      attr_accessor extracted_information: Types::ExtractedInformation
       SENSITIVE: []
     end
 

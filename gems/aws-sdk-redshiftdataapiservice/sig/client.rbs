@@ -259,14 +259,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#list_databases-instance_method
       def list_databases: (
                             ?cluster_identifier: ::String,
-                            database: ::String,
+                            ?database: ::String,
                             ?secret_arn: ::String,
                             ?db_user: ::String,
                             ?next_token: ::String,
                             ?max_results: ::Integer,
                             ?workgroup_name: ::String
                           ) -> _ListDatabasesResponseSuccess
-                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatabasesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatabasesResponseSuccess
 
       interface _ListSchemasResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSchemasResponse]

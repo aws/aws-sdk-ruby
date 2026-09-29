@@ -672,7 +672,11 @@
         "INTERSTITIAL_VOD_SUCCESS",
         "INTERSTITIAL_VOD_FAILURE",
         "PRE_ADS_REQUEST_HOOK_ERROR",
-        "PRE_ADS_REQUEST_FUNCTION_ERROR"
+        "PRE_ADS_REQUEST_FUNCTION_ERROR",
+        "POST_ADS_RESPONSE_HOOK_ERROR",
+        "POST_ADS_RESPONSE_FUNCTION_ERROR",
+        "PRE_MANIFEST_INSERTION_HOOK_ERROR",
+        "PRE_MANIFEST_INSERTION_FUNCTION_ERROR"
       ]
     },
     "AdsInteractionLog":{
@@ -687,8 +691,14 @@
       "enum":[
         "RAW_ADS_RESPONSE",
         "RAW_ADS_REQUEST",
+        "RAW_BID_REQUEST",
+        "RAW_BID_RESPONSE",
         "PRE_ADS_REQUEST_HOOK_SUMMARY",
-        "PRE_ADS_REQUEST_FUNCTION_COMPLETED"
+        "PRE_ADS_REQUEST_FUNCTION_COMPLETED",
+        "POST_ADS_RESPONSE_HOOK_SUMMARY",
+        "POST_ADS_RESPONSE_FUNCTION_COMPLETED",
+        "PRE_MANIFEST_INSERTION_HOOK_SUMMARY",
+        "PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED"
       ]
     },
     "AdsPersonalizationConcurrency":{
@@ -746,6 +756,20 @@
         "DurationMillis":{"shape":"__long"}
       }
     },
+    "ApsPublisherId":{
+      "type":"string",
+      "max":36,
+      "min":1,
+      "pattern":"[a-z0-9-]+"
+    },
+    "ApsRegion":{
+      "type":"string",
+      "enum":[
+        "AMERICAS",
+        "EUROPE",
+        "ASIA_PACIFIC"
+      ]
+    },
     "AudienceMedia":{
       "type":"structure",
       "members":{
@@ -775,6 +799,39 @@
         "Value":{"shape":"__string"},
         "FillPolicy":{"shape":"FillPolicy"}
       }
+    },
+    "AwsServiceRequestConfiguration":{
+      "type":"structure",
+      "required":[
+        "Runtime",
+        "MethodType",
+        "RequestTimeoutMilliseconds",
+        "Url",
+        "TargetService",
+        "TargetRegion"
+      ],
+      "members":{
+        "Runtime":{"shape":"RuntimeType"},
+        "Output":{"shape":"__mapOf__string"},
+        "MethodType":{"shape":"MethodType"},
+        "RequestTimeoutMilliseconds":{"shape":"__integer"},
+        "Url":{"shape":"__string"},
+        "Body":{"shape":"__string"},
+        "Headers":{"shape":"__mapOf__string"},
+        "TargetService":{"shape":"AwsTargetService"},
+        "TargetRegion":{"shape":"AwsServiceRequestConfigurationTargetRegionString"}
+      }
+    },
+    "AwsServiceRequestConfigurationTargetRegionString":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "AwsTargetService":{
+      "type":"string",
+      "max":63,
+      "min":1,
+      "pattern":"[a-z0-9-]+"
     },
     "BadRequestException":{
       "type":"structure",
@@ -1565,7 +1622,9 @@
       "type":"string",
       "enum":[
         "PRE_SESSION_INITIALIZATION",
-        "PRE_ADS_REQUEST"
+        "PRE_ADS_REQUEST",
+        "POST_ADS_RESPONSE",
+        "PRE_MANIFEST_INSERTION"
       ]
     },
     "FillPolicy":{
@@ -1586,9 +1645,11 @@
         "FunctionType":{"shape":"FunctionType"},
         "Description":{"shape":"__string"},
         "HttpRequestConfiguration":{"shape":"HttpRequestConfiguration"},
+        "AwsServiceRequestConfiguration":{"shape":"AwsServiceRequestConfiguration"},
         "CustomOutputConfiguration":{"shape":"CustomOutputConfiguration"},
         "ConcurrentExecutorConfiguration":{"shape":"ConcurrentExecutorConfiguration"},
         "SequentialExecutorConfiguration":{"shape":"SequentialExecutorConfiguration"},
+        "VastRequestConfiguration":{"shape":"VastRequestConfiguration"},
         "Tags":{
           "shape":"__mapOf__string",
           "locationName":"tags"
@@ -1613,9 +1674,11 @@
       "type":"string",
       "enum":[
         "HTTP_REQUEST",
+        "AWS_SERVICE_REQUEST",
         "CUSTOM_OUTPUT",
         "CONCURRENT_EXECUTOR",
-        "SEQUENTIAL_EXECUTOR"
+        "SEQUENTIAL_EXECUTOR",
+        "VAST_REQUEST"
       ]
     },
     "GetChannelPolicyRequest":{
@@ -1695,9 +1758,11 @@
         "FunctionType":{"shape":"FunctionType"},
         "Description":{"shape":"__string"},
         "HttpRequestConfiguration":{"shape":"HttpRequestConfiguration"},
+        "AwsServiceRequestConfiguration":{"shape":"AwsServiceRequestConfiguration"},
         "CustomOutputConfiguration":{"shape":"CustomOutputConfiguration"},
         "ConcurrentExecutorConfiguration":{"shape":"ConcurrentExecutorConfiguration"},
         "SequentialExecutorConfiguration":{"shape":"SequentialExecutorConfiguration"},
+        "VastRequestConfiguration":{"shape":"VastRequestConfiguration"},
         "Tags":{
           "shape":"__mapOf__string",
           "locationName":"tags"
@@ -1746,6 +1811,7 @@
         "VideoContentSourceUrl":{"shape":"__string"},
         "AdConditioningConfiguration":{"shape":"AdConditioningConfiguration"},
         "AdDecisionServerConfiguration":{"shape":"AdDecisionServerConfiguration"},
+        "YieldOptimizationConfiguration":{"shape":"YieldOptimizationConfiguration"},
         "FunctionMapping":{"shape":"FunctionMapping"},
         "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
         "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
@@ -2249,6 +2315,12 @@
         "POST"
       ]
     },
+    "MinimumUnfilledDurationSeconds":{
+      "type":"integer",
+      "box":true,
+      "max":3600,
+      "min":6
+    },
     "Mode":{
       "type":"string",
       "enum":[
@@ -2256,6 +2328,11 @@
         "BEHIND_LIVE_EDGE",
         "AFTER_LIVE_EDGE"
       ]
+    },
+    "OpenRtbTemplateString":{
+      "type":"string",
+      "max":102400,
+      "min":1
     },
     "Operator":{
       "type":"string",
@@ -2298,6 +2375,7 @@
         "VideoContentSourceUrl":{"shape":"__string"},
         "AdConditioningConfiguration":{"shape":"AdConditioningConfiguration"},
         "AdDecisionServerConfiguration":{"shape":"AdDecisionServerConfiguration"},
+        "YieldOptimizationConfiguration":{"shape":"YieldOptimizationConfiguration"},
         "FunctionMapping":{"shape":"FunctionMapping"},
         "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
         "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
@@ -2413,9 +2491,11 @@
         "FunctionType":{"shape":"FunctionType"},
         "Description":{"shape":"__string"},
         "HttpRequestConfiguration":{"shape":"HttpRequestConfiguration"},
+        "AwsServiceRequestConfiguration":{"shape":"AwsServiceRequestConfiguration"},
         "CustomOutputConfiguration":{"shape":"CustomOutputConfiguration"},
         "ConcurrentExecutorConfiguration":{"shape":"ConcurrentExecutorConfiguration"},
         "SequentialExecutorConfiguration":{"shape":"SequentialExecutorConfiguration"},
+        "VastRequestConfiguration":{"shape":"VastRequestConfiguration"},
         "Tags":{
           "shape":"__mapOf__string",
           "locationName":"tags"
@@ -2433,9 +2513,11 @@
         "FunctionType":{"shape":"FunctionType"},
         "Description":{"shape":"__string"},
         "HttpRequestConfiguration":{"shape":"HttpRequestConfiguration"},
+        "AwsServiceRequestConfiguration":{"shape":"AwsServiceRequestConfiguration"},
         "CustomOutputConfiguration":{"shape":"CustomOutputConfiguration"},
         "ConcurrentExecutorConfiguration":{"shape":"ConcurrentExecutorConfiguration"},
         "SequentialExecutorConfiguration":{"shape":"SequentialExecutorConfiguration"},
+        "VastRequestConfiguration":{"shape":"VastRequestConfiguration"},
         "Tags":{
           "shape":"__mapOf__string",
           "locationName":"tags"
@@ -2467,6 +2549,7 @@
         "VideoContentSourceUrl":{"shape":"__string"},
         "AdConditioningConfiguration":{"shape":"AdConditioningConfiguration"},
         "AdDecisionServerConfiguration":{"shape":"AdDecisionServerConfiguration"},
+        "YieldOptimizationConfiguration":{"shape":"YieldOptimizationConfiguration"},
         "FunctionMapping":{"shape":"FunctionMapping"},
         "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
         "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
@@ -2502,6 +2585,7 @@
         "VideoContentSourceUrl":{"shape":"__string"},
         "AdConditioningConfiguration":{"shape":"AdConditioningConfiguration"},
         "AdDecisionServerConfiguration":{"shape":"AdDecisionServerConfiguration"},
+        "YieldOptimizationConfiguration":{"shape":"YieldOptimizationConfiguration"},
         "FunctionMapping":{"shape":"FunctionMapping"},
         "AdsPersonalizationTimeouts":{"shape":"AdsPersonalizationTimeouts"},
         "AdsPersonalizationConcurrency":{"shape":"AdsPersonalizationConcurrency"}
@@ -3061,6 +3145,24 @@
         "VodSourceName":{"shape":"__string"}
       }
     },
+    "VastRequestConfiguration":{
+      "type":"structure",
+      "required":[
+        "Runtime",
+        "MethodType",
+        "RequestTimeoutMilliseconds",
+        "Url"
+      ],
+      "members":{
+        "Runtime":{"shape":"RuntimeType"},
+        "Output":{"shape":"__mapOf__string"},
+        "MethodType":{"shape":"MethodType"},
+        "RequestTimeoutMilliseconds":{"shape":"__integer"},
+        "Url":{"shape":"__string"},
+        "Body":{"shape":"__string"},
+        "Headers":{"shape":"__mapOf__string"}
+      }
+    },
     "VastResponse":{
       "type":"structure",
       "members":{
@@ -3086,6 +3188,21 @@
           "locationName":"tags"
         },
         "VodSourceName":{"shape":"__string"}
+      }
+    },
+    "YieldOptimizationConfiguration":{
+      "type":"structure",
+      "required":[
+        "MinimumUnfilledDuration",
+        "PublisherId",
+        "Region",
+        "OpenRtbTemplate"
+      ],
+      "members":{
+        "MinimumUnfilledDuration":{"shape":"MinimumUnfilledDurationSeconds"},
+        "PublisherId":{"shape":"ApsPublisherId"},
+        "Region":{"shape":"ApsRegion"},
+        "OpenRtbTemplate":{"shape":"OpenRtbTemplateString"}
       }
     },
     "__adsInteractionExcludeEventTypesList":{

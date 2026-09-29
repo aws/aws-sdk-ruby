@@ -299,6 +299,7 @@ module Aws::BedrockAgent
       attr_accessor embedding_data_type: ("FLOAT32" | "BINARY")
       attr_accessor audio: ::Array[Types::AudioConfiguration]
       attr_accessor video: ::Array[Types::VideoConfiguration]
+      attr_accessor model_configuration: untyped
       SENSITIVE: []
     end
 
@@ -610,6 +611,28 @@ module Aws::BedrockAgent
       SENSITIVE: [:variants]
     end
 
+    class CreateVpcConfigurationRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor resource_target: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor resolution_mode: ("PUBLIC" | "IN_VPC")
+      attr_accessor host_header: ::String
+      attr_accessor tls_server_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVpcConfigurationResponse
+      attr_accessor vpc_configuration_id: ::String
+      attr_accessor status: ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
     class CuratedQuery
       attr_accessor natural_language: ::String
       attr_accessor sql: ::String
@@ -651,6 +674,9 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class DailySchedule < Aws::EmptyStructure
+    end
+
     class DataSource
       attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
@@ -686,6 +712,20 @@ module Aws::BedrockAgent
       attr_accessor description: ::String
       attr_accessor updated_at: ::Time
       SENSITIVE: []
+    end
+
+    class DayOfMonth
+      attr_accessor day_number: ::Integer
+      attr_accessor last_day_of_month: Types::LastDayOfMonth
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DayNumber < DayOfMonth
+      end
+      class LastDayOfMonth < DayOfMonth
+      end
+      class Unknown < DayOfMonth
+      end
     end
 
     class DeleteAgentActionGroupRequest
@@ -832,6 +872,18 @@ module Aws::BedrockAgent
     class DeleteResourcePolicyResponse
       attr_accessor resource_arn: ::String
       attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcConfigurationRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor vpc_configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcConfigurationResponse
+      attr_accessor vpc_configuration_id: ::String
+      attr_accessor status: ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -1435,6 +1487,17 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class GetVpcConfigurationRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor vpc_configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVpcConfigurationResponse
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      SENSITIVE: []
+    end
+
     class GuardrailConfiguration
       attr_accessor guardrail_identifier: ::String
       attr_accessor guardrail_version: ::String
@@ -1654,6 +1717,9 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class LastDayOfMonth < Aws::EmptyStructure
+    end
+
     class LexFlowNodeConfiguration
       attr_accessor bot_alias_arn: ::String
       attr_accessor locale_id: ::String
@@ -1856,6 +1922,20 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class ListVpcConfigurationsRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor status_filter: ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcConfigurationsResponse
+      attr_accessor items: ::Array[Types::VpcConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class LoopControllerFlowNodeConfiguration
       attr_accessor continue_condition: Types::FlowCondition
       attr_accessor max_iterations: ::Integer
@@ -1896,6 +1976,7 @@ module Aws::BedrockAgent
       attr_accessor embedding_model_arn: ::String
       attr_accessor embedding_model_configuration: Types::EmbeddingModelConfiguration
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor supplemental_data_storage_configuration: Types::SupplementalDataStorageConfiguration
       SENSITIVE: []
     end
 
@@ -1903,6 +1984,7 @@ module Aws::BedrockAgent
       attr_accessor deletion_protection_configuration: Types::DeletionProtectionConfiguration
       attr_accessor media_extraction_configuration: Types::MediaExtractionConfiguration
       attr_accessor connector_parameters: untyped
+      attr_accessor sync_schedule: Types::SyncSchedule
       SENSITIVE: []
     end
 
@@ -2023,6 +2105,11 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class MonthlySchedule
+      attr_accessor day_of_month: Types::DayOfMonth
+      SENSITIVE: []
+    end
+
     class MultipleLoopControllerNodesFlowValidationDetails
       attr_accessor loop_node: ::String
       SENSITIVE: []
@@ -2102,7 +2189,7 @@ module Aws::BedrockAgent
     end
 
     class ParsingConfiguration
-      attr_accessor parsing_strategy: ("BEDROCK_FOUNDATION_MODEL" | "BEDROCK_DATA_AUTOMATION" | "SMART_PARSING")
+      attr_accessor parsing_strategy: ("BEDROCK_FOUNDATION_MODEL" | "BEDROCK_DATA_AUTOMATION" | "SMART_PARSING" | "MULTI_MODAL_EMBEDDINGS")
       attr_accessor bedrock_foundation_model_configuration: Types::BedrockFoundationModelConfiguration
       attr_accessor bedrock_data_automation_configuration: Types::BedrockDataAutomationConfiguration
       SENSITIVE: []
@@ -2649,6 +2736,23 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class SyncSchedule
+      attr_accessor daily: Types::DailySchedule
+      attr_accessor weekly: Types::WeeklySchedule
+      attr_accessor monthly: Types::MonthlySchedule
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Daily < SyncSchedule
+      end
+      class Weekly < SyncSchedule
+      end
+      class Monthly < SyncSchedule
+      end
+      class Unknown < SyncSchedule
+      end
+    end
+
     class SystemContentBlock
       attr_accessor text: ::String
       attr_accessor cache_point: Types::CachePointBlock
@@ -3094,6 +3198,42 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class VpcConfiguration
+      attr_accessor vpc_configuration_id: ::String
+      attr_accessor status: ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor resource_target: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor resolution_mode: ("PUBLIC" | "IN_VPC")
+      attr_accessor host_header: ::String
+      attr_accessor tls_server_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class VpcConfigurationSummary
+      attr_accessor vpc_configuration_id: ::String
+      attr_accessor status: ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor resource_target: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor resolution_mode: ("PUBLIC" | "IN_VPC")
+      attr_accessor host_header: ::String
+      attr_accessor tls_server_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
     class WebCrawlerConfiguration
       attr_accessor crawler_limits: Types::WebCrawlerLimits
       attr_accessor inclusion_filters: ::Array[::String]
@@ -3118,6 +3258,11 @@ module Aws::BedrockAgent
 
     class WebSourceConfiguration
       attr_accessor url_configuration: Types::UrlConfiguration
+      SENSITIVE: []
+    end
+
+    class WeeklySchedule
+      attr_accessor day_of_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")
       SENSITIVE: []
     end
   end

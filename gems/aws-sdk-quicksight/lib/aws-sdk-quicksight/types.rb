@@ -41,6 +41,15 @@ module Aws::QuickSight
     #
     # @!attribute [rw] is_acl_enabled
     #   Specifies whether ACLs are enabled for the knowledge base.
+    #
+    #   This setting works together with the data source connector's ACL
+    #   crawling. To enforce document-level access control end to end, set
+    #   `isACLEnabled` to `true` and enable ACL crawling on the connector.
+    #   For example, for an Amazon S3 data source, set
+    #   `accessControlConfiguration.crawlAcl` to `true` in the connector
+    #   template. For more information, see `KbTemplateConfiguration`.
+    #   Enabling only one of the two settings does not produce a fully
+    #   ACL-enforced knowledge base.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccessControlConfiguration AWS API Documentation
@@ -1424,6 +1433,46 @@ module Aws::QuickSight
     #
     class AnonymousUserSnapshotJobResult < Struct.new(
       :file_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an app, including its identifier, name, and metadata.
+    #
+    # @!attribute [rw] app_id
+    #   The ID of the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name of the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time that the app was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time that the app was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] visibility
+    #   The sharing status of the app: `PUBLIC` if the app is shared
+    #   publicly, or `PRIVATE` if it is private.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AppSummary AWS API Documentation
+    #
+    class AppSummary < Struct.new(
+      :app_id,
+      :arn,
+      :name,
+      :created_time,
+      :last_updated_time,
+      :visibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6652,6 +6701,460 @@ module Aws::QuickSight
     #   The ability to use New Relic actions.
     #   @return [String]
     #
+    # @!attribute [rw] pager_duty_agent_action
+    #   The ability to perform actions using PagerDuty Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_pager_duty_agent_action
+    #   The ability to create and update PagerDuty Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_pager_duty_agent_action
+    #   The ability to share PagerDuty Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_pager_duty_agent_action
+    #   The ability to use PagerDuty Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] visier_agent_action
+    #   The ability to perform actions using Visier Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_visier_agent_action
+    #   The ability to create and update Visier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_visier_agent_action
+    #   The ability to share Visier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_visier_agent_action
+    #   The ability to use Visier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] zoom_action
+    #   The ability to perform actions using Zoom connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_zoom_action
+    #   The ability to create and update Zoom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_zoom_action
+    #   The ability to share Zoom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_zoom_action
+    #   The ability to use Zoom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] snow_flake_action
+    #   The ability to perform actions using Snowflake Cortex Agent
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_snow_flake_action
+    #   The ability to create and update Snowflake Cortex Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_snow_flake_action
+    #   The ability to share Snowflake Cortex Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_snow_flake_action
+    #   The ability to use Snowflake Cortex Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] zapier_action
+    #   The ability to perform actions using Zapier Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_zapier_action
+    #   The ability to create and update Zapier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_zapier_action
+    #   The ability to share Zapier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_zapier_action
+    #   The ability to use Zapier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] airtable_action
+    #   The ability to perform actions using Airtable connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_airtable_action
+    #   The ability to create and update Airtable actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_airtable_action
+    #   The ability to share Airtable actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_airtable_action
+    #   The ability to use Airtable actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] dropbox_action
+    #   The ability to perform actions using Dropbox connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_dropbox_action
+    #   The ability to create and update Dropbox actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_dropbox_action
+    #   The ability to share Dropbox actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_dropbox_action
+    #   The ability to use Dropbox actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] gmail_action
+    #   The ability to perform actions using Gmail connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_gmail_action
+    #   The ability to create and update Gmail actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_gmail_action
+    #   The ability to share Gmail actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_gmail_action
+    #   The ability to use Gmail actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_analytics_action
+    #   The ability to perform actions using Google Analytics connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_analytics_action
+    #   The ability to create and update Google Analytics actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_analytics_action
+    #   The ability to share Google Analytics actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_analytics_action
+    #   The ability to use Google Analytics actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_docs_action
+    #   The ability to perform actions using Google Docs connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_docs_action
+    #   The ability to create and update Google Docs actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_docs_action
+    #   The ability to share Google Docs actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_docs_action
+    #   The ability to use Google Docs actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_drive_action
+    #   The ability to perform actions using Google Drive connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_drive_action
+    #   The ability to create and update Google Drive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_drive_action
+    #   The ability to share Google Drive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_drive_action
+    #   The ability to use Google Drive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_meet_action
+    #   The ability to perform actions using Google Meet connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_meet_action
+    #   The ability to create and update Google Meet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_meet_action
+    #   The ability to share Google Meet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_meet_action
+    #   The ability to use Google Meet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_sheets_action
+    #   The ability to perform actions using Google Sheets connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_sheets_action
+    #   The ability to create and update Google Sheets actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_sheets_action
+    #   The ability to share Google Sheets actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_sheets_action
+    #   The ability to use Google Sheets actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_slides_action
+    #   The ability to perform actions using Google Slides connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_slides_action
+    #   The ability to create and update Google Slides actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_slides_action
+    #   The ability to share Google Slides actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_slides_action
+    #   The ability to use Google Slides actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_books_action
+    #   The ability to perform actions using QuickBooks connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_quick_books_action
+    #   The ability to create and update QuickBooks actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_quick_books_action
+    #   The ability to share QuickBooks actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_quick_books_action
+    #   The ability to use QuickBooks actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] figma_action
+    #   The ability to perform actions using Figma connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_figma_action
+    #   The ability to create and update Figma actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_figma_action
+    #   The ability to share Figma actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_figma_action
+    #   The ability to use Figma actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] whats_app_action
+    #   The ability to perform actions using WhatsApp connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_whats_app_action
+    #   The ability to create and update WhatsApp actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_whats_app_action
+    #   The ability to share WhatsApp actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_whats_app_action
+    #   The ability to use WhatsApp actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_chat_action
+    #   The ability to perform actions using Google Chat connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_chat_action
+    #   The ability to create and update Google Chat actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_chat_action
+    #   The ability to share Google Chat actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_chat_action
+    #   The ability to use Google Chat actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] one_note_action
+    #   The ability to perform actions using Microsoft OneNote connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_one_note_action
+    #   The ability to create and update Microsoft OneNote actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_one_note_action
+    #   The ability to share Microsoft OneNote actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_one_note_action
+    #   The ability to use Microsoft OneNote actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] shopify_action
+    #   The ability to perform actions using Shopify connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_shopify_action
+    #   The ability to create and update Shopify actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_shopify_action
+    #   The ability to share Shopify actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_shopify_action
+    #   The ability to use Shopify actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] adobe_action
+    #   The ability to perform actions using Adobe Marketing Agent
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_adobe_action
+    #   The ability to create and update Adobe Marketing Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_adobe_action
+    #   The ability to share Adobe Marketing Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_adobe_action
+    #   The ability to use Adobe Marketing Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] cisco_webex_vidcast_action
+    #   The ability to perform actions using Cisco Webex Video Messaging
+    #   Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_cisco_webex_vidcast_action
+    #   The ability to create and update Cisco Webex Video Messaging Agent
+    #   actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_cisco_webex_vidcast_action
+    #   The ability to share Cisco Webex Video Messaging Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_cisco_webex_vidcast_action
+    #   The ability to use Cisco Webex Video Messaging Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] cisco_webex_meetings_action
+    #   The ability to perform actions using Cisco Webex Meetings
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_cisco_webex_meetings_action
+    #   The ability to create and update Cisco Webex Meetings actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_cisco_webex_meetings_action
+    #   The ability to share Cisco Webex Meetings actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_cisco_webex_meetings_action
+    #   The ability to use Cisco Webex Meetings actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] dun_and_bradstreet_action
+    #   The ability to perform actions using Dun and Bradstreet connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_dun_and_bradstreet_action
+    #   The ability to create and update Dun and Bradstreet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_dun_and_bradstreet_action
+    #   The ability to share Dun and Bradstreet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_dun_and_bradstreet_action
+    #   The ability to use Dun and Bradstreet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] hg_insights_action
+    #   The ability to perform actions using HG Insights Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_hg_insights_action
+    #   The ability to create and update HG Insights Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_hg_insights_action
+    #   The ability to share HG Insights Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_hg_insights_action
+    #   The ability to use HG Insights Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] zoom_info_action
+    #   The ability to perform actions using ZoomInfo Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_zoom_info_action
+    #   The ability to create and update ZoomInfo Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_zoom_info_action
+    #   The ability to share ZoomInfo Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_zoom_info_action
+    #   The ability to use ZoomInfo Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] moodys_action
+    #   The ability to perform actions using Moody's GenAI Ready Data
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_moodys_action
+    #   The ability to create and update Moody's GenAI Ready Data actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_moodys_action
+    #   The ability to share Moody's GenAI Ready Data actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_moodys_action
+    #   The ability to use Moody's GenAI Ready Data actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] bee_action
+    #   The ability to perform actions using Bee connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_bee_action
+    #   The ability to create and update Bee actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_bee_action
+    #   The ability to share Bee actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_bee_action
+    #   The ability to use Bee actions.
+    #   @return [String]
+    #
     # @!attribute [rw] topic
     #   The ability to perform Topic-related actions.
     #   @return [String]
@@ -7024,6 +7527,118 @@ module Aws::QuickSight
       :create_and_update_new_relic_action,
       :share_new_relic_action,
       :use_new_relic_action,
+      :pager_duty_agent_action,
+      :create_and_update_pager_duty_agent_action,
+      :share_pager_duty_agent_action,
+      :use_pager_duty_agent_action,
+      :visier_agent_action,
+      :create_and_update_visier_agent_action,
+      :share_visier_agent_action,
+      :use_visier_agent_action,
+      :zoom_action,
+      :create_and_update_zoom_action,
+      :share_zoom_action,
+      :use_zoom_action,
+      :snow_flake_action,
+      :create_and_update_snow_flake_action,
+      :share_snow_flake_action,
+      :use_snow_flake_action,
+      :zapier_action,
+      :create_and_update_zapier_action,
+      :share_zapier_action,
+      :use_zapier_action,
+      :airtable_action,
+      :create_and_update_airtable_action,
+      :share_airtable_action,
+      :use_airtable_action,
+      :dropbox_action,
+      :create_and_update_dropbox_action,
+      :share_dropbox_action,
+      :use_dropbox_action,
+      :gmail_action,
+      :create_and_update_gmail_action,
+      :share_gmail_action,
+      :use_gmail_action,
+      :google_analytics_action,
+      :create_and_update_google_analytics_action,
+      :share_google_analytics_action,
+      :use_google_analytics_action,
+      :google_docs_action,
+      :create_and_update_google_docs_action,
+      :share_google_docs_action,
+      :use_google_docs_action,
+      :google_drive_action,
+      :create_and_update_google_drive_action,
+      :share_google_drive_action,
+      :use_google_drive_action,
+      :google_meet_action,
+      :create_and_update_google_meet_action,
+      :share_google_meet_action,
+      :use_google_meet_action,
+      :google_sheets_action,
+      :create_and_update_google_sheets_action,
+      :share_google_sheets_action,
+      :use_google_sheets_action,
+      :google_slides_action,
+      :create_and_update_google_slides_action,
+      :share_google_slides_action,
+      :use_google_slides_action,
+      :quick_books_action,
+      :create_and_update_quick_books_action,
+      :share_quick_books_action,
+      :use_quick_books_action,
+      :figma_action,
+      :create_and_update_figma_action,
+      :share_figma_action,
+      :use_figma_action,
+      :whats_app_action,
+      :create_and_update_whats_app_action,
+      :share_whats_app_action,
+      :use_whats_app_action,
+      :google_chat_action,
+      :create_and_update_google_chat_action,
+      :share_google_chat_action,
+      :use_google_chat_action,
+      :one_note_action,
+      :create_and_update_one_note_action,
+      :share_one_note_action,
+      :use_one_note_action,
+      :shopify_action,
+      :create_and_update_shopify_action,
+      :share_shopify_action,
+      :use_shopify_action,
+      :adobe_action,
+      :create_and_update_adobe_action,
+      :share_adobe_action,
+      :use_adobe_action,
+      :cisco_webex_vidcast_action,
+      :create_and_update_cisco_webex_vidcast_action,
+      :share_cisco_webex_vidcast_action,
+      :use_cisco_webex_vidcast_action,
+      :cisco_webex_meetings_action,
+      :create_and_update_cisco_webex_meetings_action,
+      :share_cisco_webex_meetings_action,
+      :use_cisco_webex_meetings_action,
+      :dun_and_bradstreet_action,
+      :create_and_update_dun_and_bradstreet_action,
+      :share_dun_and_bradstreet_action,
+      :use_dun_and_bradstreet_action,
+      :hg_insights_action,
+      :create_and_update_hg_insights_action,
+      :share_hg_insights_action,
+      :use_hg_insights_action,
+      :zoom_info_action,
+      :create_and_update_zoom_info_action,
+      :share_zoom_info_action,
+      :use_zoom_info_action,
+      :moodys_action,
+      :create_and_update_moodys_action,
+      :share_moodys_action,
+      :use_moodys_action,
+      :bee_action,
+      :create_and_update_bee_action,
+      :share_bee_action,
+      :use_bee_action,
       :topic,
       :edit_visual_with_q,
       :build_calculated_field_with_q,
@@ -10682,11 +11297,23 @@ module Aws::QuickSight
     #   @return [Types::AccessControlConfiguration]
     #
     # @!attribute [rw] primary_owner_arn
-    #   The Amazon Resource Name (ARN) of the primary owner for the
-    #   knowledge base. The specified user is always granted owner access,
-    #   regardless of what is specified in the `Permissions` field. If you
-    #   don't specify a primary owner, the knowledge base is created
-    #   without one.
+    #   The Amazon Resource Name (ARN) of the Amazon QuickSight user or
+    #   group to set as the primary owner of the knowledge base. The
+    #   specified principal is always granted owner access, regardless of
+    #   what is specified in the `Permissions` field.
+    #
+    #   This must be an Amazon QuickSight principal ARN, not an IAM user or
+    #   role ARN. The API caller is never assigned as the owner
+    #   automatically. If you don't specify a primary owner and don't
+    #   grant owner access in `Permissions`, the knowledge base is created
+    #   without an owner, even when you call the operation as an Amazon
+    #   QuickSight user.
+    #
+    #   When you call `CreateKnowledgeBase` as an IAM user or an assumed IAM
+    #   role, specify `PrimaryOwnerArn` (as an Amazon QuickSight principal
+    #   ARN) or an owner entry in `Permissions` so that the knowledge base
+    #   has an owner. Although optional, specifying a primary owner is
+    #   recommended.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -16298,6 +16925,35 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_id
+    #   The ID of the app that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAppRequest AWS API Documentation
+    #
+    class DeleteAppRequest < Struct.new(
+      :aws_account_id,
+      :app_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAppResponse AWS API Documentation
+    #
+    class DeleteAppResponse < Struct.new(
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] policy_id
     #   The unique identifier of the approval policy to delete.
     #   @return [String]
@@ -18381,6 +19037,84 @@ module Aws::QuickSight
     class DescribeAnalysisResponse < Struct.new(
       :analysis,
       :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_id
+    #   The ID of the app.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAppPermissionsRequest AWS API Documentation
+    #
+    class DescribeAppPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :app_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_id
+    #   The ID of the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The resource permissions for the app.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAppPermissionsResponse AWS API Documentation
+    #
+    class DescribeAppPermissionsResponse < Struct.new(
+      :app_id,
+      :arn,
+      :permissions,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_id
+    #   The ID of the app that you want to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAppRequest AWS API Documentation
+    #
+    class DescribeAppRequest < Struct.new(
+      :aws_account_id,
+      :app_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app
+    #   The information about the app.
+    #   @return [Types::AppSummary]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAppResponse AWS API Documentation
+    #
+    class DescribeAppResponse < Struct.new(
+      :app,
       :request_id)
       SENSITIVE = []
       include Aws::Structure
@@ -28754,41 +29488,123 @@ module Aws::QuickSight
     #   structure depends on the connector type of the data source
     #   referenced by `DataSourceArn`.
     #
-    #   The template must be a JSON object. The required fields vary by
-    #   connector type:
+    #   The template must be a JSON object. All connector types share the
+    #   following top-level keys. The value of `type` and the contents of
+    #   `connectionConfiguration` vary by connector type.
     #
-    #   * **Amazon S3** (`S3V2`) – Requires `connectionConfiguration` with
-    #     `bucketName`. Supports `filterConfiguration` for inclusion and
-    #     exclusion prefixes and patterns. Supports
-    #     `accessControlConfiguration` and
-    #     `deletionProtectionConfiguration`.
+    #   * `type` – (Required) The connector type of the data source. This
+    #     value identifies the connector. Valid values: `S3V2`,
+    #     `WEBCRAWLERV3`, `GOOGLEDRIVEV3`, `ONEDRIVEV3`, `SHAREPOINTV3`. For
+    #     the fields required by each connector, see the connector-specific
+    #     list that follows.
     #
-    #   * **Google Drive** (`GOOGLEDRIVEV3`) – Requires
+    #   * `connectionConfiguration` – (Required) The connection details for
+    #     the data source. The keys in this object vary by connector type;
+    #     see the connector-specific list that follows.
+    #
+    #   * `filterConfiguration` – (Optional) Rules that determine which
+    #     content is crawled, such as inclusion and exclusion prefixes,
+    #     patterns, or file-size limits.
+    #
+    #   * `accessControlConfiguration` – (Optional) Document-level access
+    #     control (ACL) settings. Supported by all connector types except
+    #     Web Crawler (`WEBCRAWLERV3`). The available fields depend on the
+    #     connector type.
+    #
+    #   * `deletionProtectionConfiguration` – (Optional) Deletion-protection
+    #     settings, supported by all connector types. Contains
+    #     `enableDeletionProtection` (Boolean) and
+    #     `deletionProtectionThreshold` (String; a value from 1 to 100).
+    #
+    #   The following list describes the valid `type` value, the
+    #   `connectionConfiguration` contents, and any connector-specific
+    #   fields for each connector type:
+    #
+    #   * **Amazon S3** (`type`: `S3V2`) – The `type` value must be `S3V2`.
+    #     `connectionConfiguration` is required and contains:
+    #
+    #     * `bucketName` – (Required) The name of the Amazon S3 bucket to
+    #       crawl. Type: String. Length: 3–63 characters. Pattern:
+    #       `^[a-z0-9][.\-a-z0-9]{1,61}[a-z0-9]$`.
+    #
+    #     * `bucketOwnerAccountId` – (Required) The ID of the AWS account
+    #       that owns the bucket. Type: String. Pattern: `^\d{12}$`.
+    #     Amazon S3 supports the following optional `filterConfiguration`
+    #     fields:
+    #
+    #     * `inclusionPrefixes` or `exclusionPrefixes` – Amazon S3 key
+    #       prefixes to include or exclude. Type: Array of String. Up to 350
+    #       items, each 1–1,024 characters.
+    #
+    #     * `inclusionPatterns` or `exclusionPatterns` – Patterns to include
+    #       or exclude objects. Type: Array of String. Up to 350 items, each
+    #       1–1,024 characters.
+    #
+    #     * `maxFileSizeInMegaBytes` – The maximum size, in MB, of a file to
+    #       ingest. Type: String. Pattern: `^\d+$`.
+    #     For Amazon S3, `accessControlConfiguration` supports the following
+    #     fields:
+    #
+    #     * `crawlAcl` – Specifies whether the connector crawls and enforces
+    #       document access control lists (ACLs). Type: Boolean. When set to
+    #       `true`, provide ACLs either in a global ACL configuration file
+    #       (`aclConfigurationFilePath`) or in per-document metadata files.
+    #
+    #     * `aclConfigurationFilePath` – The Amazon S3 URI of the global ACL
+    #       configuration file. Type: String. Length: 1–1,024 characters.
+    #       Optional. If you don't provide a global ACL configuration file,
+    #       define ACLs in per-document metadata files.
+    #
+    #     * `defaultAccessType` – The access behavior applied to Amazon S3
+    #       prefixes that are not listed in the ACL configuration. Type:
+    #       String. The only supported value is `ALLOW`.
+    #     `metadataFilesPrefix` – (Optional) The Amazon S3 prefix under
+    #     which per-document metadata files are stored. Each metadata file
+    #     describes a single source document and its indexable attributes.
+    #     This is not the global ACL configuration file. For a single global
+    #     ACL file, use
+    #     `accessControlConfiguration.aclConfigurationFilePath`. Type:
+    #     String. Length: 1–1,024 characters.
+    #
+    #   * **Google Drive** (`type`: `GOOGLEDRIVEV3`) – Requires
     #     `connectionConfiguration` with `authType` set to
     #     `SERVICE_ACCOUNT`. Supports `dataEntityConfiguration` with
     #     `crawlMyDrive`, `crawlSharedWithMe`, and `crawlSharedDrives`.
     #
-    #   * **OneDrive** (`ONEDRIVEV3`) – Requires `authType` at the template
-    #     root level set to `TWO_LEGGED_OAUTH`. Requires
+    #   * **OneDrive** (`type`: `ONEDRIVEV3`) – Requires `authType` at the
+    #     template root level set to `TWO_LEGGED_OAUTH`. Requires
     #     `connectionConfiguration` with `tenantId` in UUID format. Supports
     #     `dataEntityConfiguration` with `crawlPersonalDrives` and
     #     `crawlSharedWithMe`.
     #
-    #   * **SharePoint** (`SHAREPOINTV3`) – Requires
+    #   * **SharePoint** (`type`: `SHAREPOINTV3`) – Requires
     #     `connectionConfiguration` with `tenantId` in UUID format. Supports
     #     `dataEntityConfiguration` with `siteUrls`, `crawlFiles`, and
     #     `crawlPages`.
     #
-    #   * **Web Crawler** (`WEBCRAWLERV3`) – Requires
+    #   * **Web Crawler** (`type`: `WEBCRAWLERV3`) – Requires
     #     `connectionConfiguration` with `seedUrls` or `siteMapUrls`
     #     (mutually exclusive) and `authType`. Supports `crawlConfiguration`
     #     for crawl depth, rate limits, and scope. Supports
     #     `filterConfiguration` for file size limits and URL patterns. Valid
     #     values for `authType`: `NO_AUTH`, `BASIC_AUTH`, `FORM`, `SAML`.
     #
-    #   The optional `deletionProtectionConfiguration` object is supported
-    #   by all connector types. It contains `enableDeletionProtection` and
-    #   `deletionProtectionThreshold`.
+    #   **Enabling document-level access control for Amazon S3**
+    #
+    #   For an Amazon S3 (`S3V2`) knowledge base, document-level access
+    #   control is governed by two settings that must both be enabled:
+    #
+    #   1.  In this template, set `accessControlConfiguration.crawlAcl` to
+    #       `true`. Define ACLs either in a global ACL configuration file,
+    #       referenced by
+    #       `accessControlConfiguration.aclConfigurationFilePath`, or in
+    #       per-document metadata files. To control access for prefixes that
+    #       are not listed in the ACL file, you can also set
+    #       `accessControlConfiguration.defaultAccessType`.
+    #
+    #   2.  In the `CreateKnowledgeBase` or `UpdateKnowledgeBase` request,
+    #       set the top-level `AccessControlConfiguration.isACLEnabled` to
+    #       `true`.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KbTemplateConfiguration AWS API Documentation
@@ -30066,6 +30882,53 @@ module Aws::QuickSight
     class ListApprovalPoliciesResponse < Struct.new(
       :policies,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the apps.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single request. Valid
+    #   range is 1 to 100. If you don't specify a value, the default is 20.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAppsRequest AWS API Documentation
+    #
+    class ListAppsRequest < Struct.new(
+      :aws_account_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_summary_list
+    #   A list of app summaries.
+    #   @return [Array<Types::AppSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAppsResponse AWS API Documentation
+    #
+    class ListAppsResponse < Struct.new(
+      :app_summary_list,
+      :next_token,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38714,8 +39577,45 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The parameters that are required to connect to a S3 Knowledge Base
+    # The parameters that are required to connect to an S3 knowledge base
     # data source.
+    #
+    # **Prerequisites: Amazon S3 bucket access**
+    #
+    # Before you call `CreateKnowledgeBase` for an Amazon S3 knowledge base,
+    # an administrator must grant Amazon QuickSight access to the source S3
+    # bucket. If access has not been granted for the bucket, knowledge base
+    # creation fails.
+    #
+    # To grant access, an administrator adds the bucket in the Amazon
+    # QuickSight admin console, under Permissions, Amazon Web Services
+    # resources, Amazon S3, Select S3 buckets. This authorizes the Amazon
+    # QuickSight service role to read the bucket. The bucket can be in the
+    # same Amazon Web Services account or, when the bucket owner has
+    # authorized your account, in a different account.
+    #
+    # The service role requires at least the following permissions on the
+    # bucket:
+    #
+    # * `s3:GetObject`
+    #
+    # * `s3:ListBucket`
+    #
+    # * `s3:GetBucketLocation`
+    #
+    # * `s3:GetObjectVersion`
+    #
+    # * `s3:ListBucketVersions`
+    #
+    # For the full procedure, including cross-account buckets and
+    # KMS-encrypted buckets, see the Amazon S3 knowledge base administrator
+    # setup guide.
+    #
+    # <note markdown="1"> To grant access for a specific S3 knowledge base data source without
+    # granting account-wide S3 access, provide a custom IAM role on the data
+    # source by using `RoleArn`.
+    #
+    #  </note>
     #
     # @!attribute [rw] role_arn
     #   Use the `RoleArn` structure to override an account-wide role for a
@@ -38732,8 +39632,12 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] metadata_files_location
-    #   The location of metadata files within the S3 bucket that describe
-    #   the structure and content of the knowledge base.
+    #   The Amazon S3 location (prefix) of per-document metadata files. Each
+    #   metadata file describes a single source document and its indexable
+    #   attributes, such as title, category, and version. This is not the
+    #   global ACL configuration file. To apply a single global ACL file to
+    #   the entire knowledge base, use the access control configuration
+    #   instead.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/S3KnowledgeBaseParameters AWS API Documentation
@@ -39463,6 +40367,83 @@ module Aws::QuickSight
       :analysis_summary_list,
       :next_token,
       :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter to apply when searching for apps.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator for the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to filter on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchAppsFilter AWS API Documentation
+    #
+    class SearchAppsFilter < Struct.new(
+      :name,
+      :operator,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the apps to
+    #   search.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the search.
+    #   @return [Array<Types::SearchAppsFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single request. Valid
+    #   range is 1 to 100. If you don't specify a value, the default is 20.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchAppsRequest AWS API Documentation
+    #
+    class SearchAppsRequest < Struct.new(
+      :aws_account_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_summary_list
+    #   A list of app summaries that match the search criteria.
+    #   @return [Array<Types::AppSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchAppsResponse AWS API Documentation
+    #
+    class SearchAppsResponse < Struct.new(
+      :app_summary_list,
+      :next_token,
       :request_id)
       SENSITIVE = []
       include Aws::Structure
@@ -48117,6 +49098,73 @@ module Aws::QuickSight
       :analysis_id,
       :update_status,
       :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_id
+    #   The ID of the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_permissions
+    #   The permissions that you want to grant on the app.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] revoke_permissions
+    #   The permissions that you want to revoke from the app.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] visibility
+    #   The visibility to set for the app. Currently, only `PRIVATE` is
+    #   accepted, which removes public (anonymous) access from the app. If
+    #   you don't specify a value, the app's visibility is unchanged.
+    #   Setting an app to `PUBLIC` through this operation is not supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAppPermissionsRequest AWS API Documentation
+    #
+    class UpdateAppPermissionsRequest < Struct.new(
+      :aws_account_id,
+      :app_id,
+      :grant_permissions,
+      :revoke_permissions,
+      :visibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_id
+    #   The ID of the app.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The updated resource permissions for the app.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] visibility
+    #   The visibility of the app after the update (`PRIVATE` or `PUBLIC`).
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAppPermissionsResponse AWS API Documentation
+    #
+    class UpdateAppPermissionsResponse < Struct.new(
+      :arn,
+      :app_id,
+      :permissions,
+      :visibility,
       :request_id)
       SENSITIVE = []
       include Aws::Structure

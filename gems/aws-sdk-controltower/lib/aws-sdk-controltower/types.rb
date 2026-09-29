@@ -1596,8 +1596,14 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] target_identifier
-    #   The ARN of the organizational unit. For information on how to find
-    #   the `targetIdentifier`, see [the overview page][1].
+    #   The ARN of the target. The value depends on the target type:
+    #
+    #   * Organizational unit (OU) – Specify the ARN of the OU.
+    #
+    #   * Account – Specify the ARN of the account.
+    #
+    #   For information on how to find the `targetIdentifier`, see [the
+    #   overview page][1].
     #
     #
     #
@@ -1619,8 +1625,8 @@ module Aws::ControlTower
     #   @return [Types::EnabledControlFilter]
     #
     # @!attribute [rw] include_children
-    #   A boolean value that determines whether to include enabled controls
-    #   from child organizational units in the response.
+    #   Specifies whether to include enabled controls from child
+    #   organizational units and child accounts in the response.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListEnabledControlsInput AWS API Documentation

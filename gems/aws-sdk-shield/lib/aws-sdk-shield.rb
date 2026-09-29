@@ -54,7 +54,7 @@ module Aws::Shield
   autoload :EndpointProvider, 'aws-sdk-shield/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-shield/endpoints'
 
-  GEM_VERSION = '1.99.0'
+  GEM_VERSION = '1.101.0'
 
 end
 

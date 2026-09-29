@@ -36,8 +36,21 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
+    class BackupConfiguration
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor backup_type: ("CONTINUOUS")
+      attr_accessor retention_period_in_days: ::Integer
+      attr_accessor backup_tags_enabled: bool
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContinuousBackupRestoreConfiguration
+      attr_accessor restore_point_time: ::Time
       SENSITIVE: []
     end
 
@@ -98,6 +111,7 @@ module Aws::HealthLake
       attr_accessor analytics_configuration: Types::AnalyticsConfiguration
       attr_accessor nlp_configuration: Types::NlpConfiguration
       attr_accessor profile_configuration: Types::ProfileConfiguration
+      attr_accessor backup_configuration: Types::BackupConfiguration
       SENSITIVE: []
     end
 
@@ -137,6 +151,15 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
+    class DatastoreBackupStatus
+      attr_accessor configuration: Types::BackupConfiguration
+      attr_accessor backup_enabled_at: ::Time
+      attr_accessor earliest_restore_point: ::Time
+      attr_accessor latest_restore_point: ::Time
+      attr_accessor scheduled_permanent_deletion_time: ::Time
+      SENSITIVE: []
+    end
+
     class DatastoreFilter
       attr_accessor datastore_name: ::String
       attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED")
@@ -160,6 +183,7 @@ module Aws::HealthLake
       attr_accessor nlp_configuration: Types::NlpConfiguration
       attr_accessor analytics_configuration: Types::AnalyticsConfiguration
       attr_accessor profile_configuration: Types::ProfileConfiguration
+      attr_accessor backup_status_info: Types::DatastoreBackupStatus
       SENSITIVE: []
     end
 
@@ -504,6 +528,39 @@ module Aws::HealthLake
       SENSITIVE: []
     end
 
+    class RestoreConfiguration
+      attr_accessor continuous_backup_restore_configuration: Types::ContinuousBackupRestoreConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ContinuousBackupRestoreConfiguration < RestoreConfiguration
+      end
+      class Unknown < RestoreConfiguration
+      end
+    end
+
+    class RestoreFHIRDatastoreRequest
+      attr_accessor source_datastore_id: ::String
+      attr_accessor restore_configuration: Types::RestoreConfiguration
+      attr_accessor datastore_name: ::String
+      attr_accessor sse_configuration: Types::SseConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
+      attr_accessor analytics_configuration: Types::AnalyticsConfiguration
+      attr_accessor nlp_configuration: Types::NlpConfiguration
+      attr_accessor profile_configuration: Types::ProfileConfiguration
+      SENSITIVE: []
+    end
+
+    class RestoreFHIRDatastoreResponse
+      attr_accessor datastore_id: ::String
+      attr_accessor datastore_arn: ::String
+      attr_accessor datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor datastore_endpoint: ::String
+      SENSITIVE: []
+    end
+
     class S3Configuration
       attr_accessor s3_uri: ::String
       attr_accessor kms_key_id: ::String
@@ -696,6 +753,7 @@ module Aws::HealthLake
       attr_accessor nlp_configuration: Types::NlpConfiguration
       attr_accessor profile_configuration: Types::ProfileConfiguration
       attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
+      attr_accessor backup_configuration: Types::BackupConfiguration
       SENSITIVE: []
     end
 

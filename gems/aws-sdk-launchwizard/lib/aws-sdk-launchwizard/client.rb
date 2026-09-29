@@ -821,6 +821,8 @@ module Aws::LaunchWizard
     #   resp.workload.workload_name #=> String
     #   resp.workload.display_name #=> String
     #   resp.workload.status #=> String, one of "ACTIVE", "INACTIVE", "DISABLED", "DELETED"
+    #   resp.workload.account_constraints #=> Array
+    #   resp.workload.account_constraints[0].delegated_admin.service_principal #=> String
     #   resp.workload.description #=> String
     #   resp.workload.documentation_url #=> String
     #   resp.workload.icon_url #=> String
@@ -910,6 +912,8 @@ module Aws::LaunchWizard
     #   resp.workload_deployment_pattern.description #=> String
     #   resp.workload_deployment_pattern.status #=> String, one of "ACTIVE", "INACTIVE", "DISABLED", "DELETED"
     #   resp.workload_deployment_pattern.status_message #=> String
+    #   resp.workload_deployment_pattern.account_constraints #=> Array
+    #   resp.workload_deployment_pattern.account_constraints[0].delegated_admin.service_principal #=> String
     #   resp.workload_deployment_pattern.specifications #=> Array
     #   resp.workload_deployment_pattern.specifications[0].name #=> String
     #   resp.workload_deployment_pattern.specifications[0].description #=> String
@@ -994,6 +998,8 @@ module Aws::LaunchWizard
     #   resp.deployment_events[0].status #=> String, one of "CANCELED", "CANCELING", "COMPLETED", "CREATED", "FAILED", "IN_PROGRESS", "PENDING", "TIMED_OUT"
     #   resp.deployment_events[0].status_reason #=> String
     #   resp.deployment_events[0].timestamp #=> Time
+    #   resp.deployment_events[0].metadata #=> Hash
+    #   resp.deployment_events[0].metadata["DeploymentEventMetadataKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListDeploymentEvents AWS API Documentation
@@ -1337,6 +1343,8 @@ module Aws::LaunchWizard
     #   resp.workload_deployment_patterns[0].description #=> String
     #   resp.workload_deployment_patterns[0].status #=> String, one of "ACTIVE", "INACTIVE", "DISABLED", "DELETED"
     #   resp.workload_deployment_patterns[0].status_message #=> String
+    #   resp.workload_deployment_patterns[0].account_constraints #=> Array
+    #   resp.workload_deployment_patterns[0].account_constraints[0].delegated_admin.service_principal #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListWorkloadDeploymentPatterns AWS API Documentation
@@ -1407,6 +1415,8 @@ module Aws::LaunchWizard
     #   resp.workloads[0].workload_name #=> String
     #   resp.workloads[0].display_name #=> String
     #   resp.workloads[0].status #=> String, one of "ACTIVE", "INACTIVE", "DISABLED", "DELETED"
+    #   resp.workloads[0].account_constraints #=> Array
+    #   resp.workloads[0].account_constraints[0].delegated_admin.service_principal #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ListWorkloads AWS API Documentation
@@ -1659,7 +1669,7 @@ module Aws::LaunchWizard
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-launchwizard'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

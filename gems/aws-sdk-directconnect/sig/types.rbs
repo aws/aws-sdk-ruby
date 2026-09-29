@@ -78,6 +78,18 @@ module Aws::DirectConnect
       SENSITIVE: []
     end
 
+    class AssociateConnectionsToResiliencyGroupRequest
+      attr_accessor connection_identifiers: ::Array[::String]
+      attr_accessor resiliency_group_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateConnectionsToResiliencyGroupResult
+      attr_accessor resiliency_group_associations: ::Array[Types::ResiliencyGroupAssociation]
+      SENSITIVE: []
+    end
+
     class AssociateHostedConnectionRequest
       attr_accessor connection_id: ::String
       attr_accessor parent_connection_id: ::String
@@ -116,6 +128,13 @@ module Aws::DirectConnect
       attr_accessor type: ("virtualPrivateGateway" | "transitGateway")
       attr_accessor owner_account: ::String
       attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class AvailableBillingMode
+      attr_accessor billing_mode: ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
+      attr_accessor available_port_speeds: ::Array[::String]
+      attr_accessor included_regions: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -212,6 +231,11 @@ module Aws::DirectConnect
       attr_accessor mac_sec_keys: ::Array[Types::MacSecKey]
       attr_accessor rate_limiter_status: Types::RateLimiterStatus
       attr_accessor partner_interconnect_mac_sec_capable: bool
+      attr_accessor prefix_pool_size_ipv_4: ::Integer
+      attr_accessor prefix_pool_size_ipv_6: ::Integer
+      attr_accessor prefix_pool_unallocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_unallocated_count_ipv_6: ::Integer
+      attr_accessor billing_mode: ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       SENSITIVE: []
     end
 
@@ -240,6 +264,7 @@ module Aws::DirectConnect
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor provider_name: ::String
       attr_accessor request_mac_sec: bool
+      attr_accessor billing_mode: ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5")
       SENSITIVE: []
     end
 
@@ -303,6 +328,7 @@ module Aws::DirectConnect
       attr_accessor child_connection_tags: ::Array[Types::Tag]
       attr_accessor provider_name: ::String
       attr_accessor request_mac_sec: bool
+      attr_accessor billing_mode: ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5")
       SENSITIVE: []
     end
 
@@ -315,6 +341,19 @@ module Aws::DirectConnect
     class CreatePublicVirtualInterfaceRequest
       attr_accessor connection_id: ::String
       attr_accessor new_public_virtual_interface: Types::NewPublicVirtualInterface
+      SENSITIVE: []
+    end
+
+    class CreateResiliencyGroupRequest
+      attr_accessor resiliency_group_name: ::String
+      attr_accessor intended_resiliency_model: ("maximum-resiliency" | "high-resiliency" | "basic-resiliency")
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateResiliencyGroupResult
+      attr_accessor resiliency_group: Types::ResiliencyGroup
       SENSITIVE: []
     end
 
@@ -398,6 +437,16 @@ module Aws::DirectConnect
 
     class DeleteLagRequest
       attr_accessor lag_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResiliencyGroupRequest
+      attr_accessor resiliency_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResiliencyGroupResult
+      attr_accessor resiliency_group: Types::ResiliencyGroup
       SENSITIVE: []
     end
 
@@ -583,6 +632,7 @@ module Aws::DirectConnect
       attr_accessor owner_account: ::String
       attr_accessor direct_connect_gateway_state: ("pending" | "available" | "deleting" | "deleted")
       attr_accessor state_change_error: ::String
+      attr_accessor total_prefix_pool_allocations: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -635,6 +685,18 @@ module Aws::DirectConnect
       SENSITIVE: []
     end
 
+    class DisassociateConnectionsFromResiliencyGroupRequest
+      attr_accessor connection_identifiers: ::Array[::String]
+      attr_accessor resiliency_group_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateConnectionsFromResiliencyGroupResult
+      attr_accessor resiliency_group_associations: ::Array[Types::ResiliencyGroupAssociation]
+      SENSITIVE: []
+    end
+
     class DisassociateMacSecKeyRequest
       attr_accessor connection_id: ::String
       attr_accessor secret_arn: ::String
@@ -648,6 +710,16 @@ module Aws::DirectConnect
     end
 
     class DuplicateTagKeysException < Aws::EmptyStructure
+    end
+
+    class GetResiliencyGroupRequest
+      attr_accessor resiliency_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResiliencyGroupResult
+      attr_accessor resiliency_group: Types::ResiliencyGroup
+      SENSITIVE: []
     end
 
     class Interconnect
@@ -701,7 +773,12 @@ module Aws::DirectConnect
       attr_accessor mac_sec_capable: bool
       attr_accessor encryption_mode: ::String
       attr_accessor mac_sec_keys: ::Array[Types::MacSecKey]
+      attr_accessor prefix_pool_size_ipv_4: ::Integer
+      attr_accessor prefix_pool_size_ipv_6: ::Integer
+      attr_accessor prefix_pool_unallocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_unallocated_count_ipv_6: ::Integer
       attr_accessor rate_limiter_status: Types::RateLimiterStatus
+      attr_accessor billing_mode: ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
       SENSITIVE: []
     end
 
@@ -712,6 +789,31 @@ module Aws::DirectConnect
     end
 
     class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListResiliencyGroupAssociationsRequest
+      attr_accessor resiliency_group_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResiliencyGroupAssociationsResult
+      attr_accessor items: ::Array[Types::ResiliencyGroupAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResiliencyGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResiliencyGroupsResult
+      attr_accessor items: ::Array[Types::ResiliencyGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
     end
 
     class ListVirtualInterfaceRoutesRequest
@@ -758,6 +860,7 @@ module Aws::DirectConnect
       attr_accessor available_port_speeds: ::Array[::String]
       attr_accessor available_providers: ::Array[::String]
       attr_accessor available_mac_sec_port_speeds: ::Array[::String]
+      attr_accessor available_billing_modes: ::Array[Types::AvailableBillingMode]
       SENSITIVE: []
     end
 
@@ -798,6 +901,8 @@ module Aws::DirectConnect
       attr_accessor direct_connect_gateway_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor enable_site_link: bool
+      attr_accessor prefix_pool_allocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_allocated_count_ipv_6: ::Integer
       attr_accessor rate_limit: ::String
       SENSITIVE: []
     end
@@ -860,6 +965,8 @@ module Aws::DirectConnect
       attr_accessor direct_connect_gateway_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor enable_site_link: bool
+      attr_accessor prefix_pool_allocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_allocated_count_ipv_6: ::Integer
       attr_accessor rate_limit: ::String
       SENSITIVE: []
     end
@@ -884,6 +991,34 @@ module Aws::DirectConnect
       attr_accessor in_use: ::Integer
       attr_accessor remaining: ::Integer
       attr_accessor total_bandwidth: ::String
+      SENSITIVE: []
+    end
+
+    class ResiliencyGroup
+      attr_accessor resiliency_group_id: ::String
+      attr_accessor resiliency_group_arn: ::String
+      attr_accessor resiliency_group_name: ::String
+      attr_accessor resiliency_group_type: ("Managed")
+      attr_accessor owner_account: ::String
+      attr_accessor state: ("pending" | "available" | "deleting" | "deleted")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ResiliencyGroupAssociation
+      attr_accessor resiliency_group_id: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor state: ("associating" | "associated" | "disassociating" | "disassociated")
+      SENSITIVE: []
+    end
+
+    class ResiliencyGroupSummary
+      attr_accessor resiliency_group_id: ::String
+      attr_accessor resiliency_group_arn: ::String
+      attr_accessor resiliency_group_name: ::String
+      attr_accessor resiliency_group_type: ("Managed")
+      attr_accessor owner_account: ::String
+      attr_accessor state: ("pending" | "available" | "deleting" | "deleted")
       SENSITIVE: []
     end
 
@@ -984,6 +1119,18 @@ module Aws::DirectConnect
       SENSITIVE: []
     end
 
+    class UpdateConnectionsBillingModeRequest
+      attr_accessor connection_ids: ::Array[::String]
+      attr_accessor billing_mode: ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5")
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionsBillingModeResponse
+      attr_accessor billing_mode: ("PayAsYouGo" | "FlatRateTier1" | "FlatRateTier2" | "FlatRateTier3" | "FlatRateTier4" | "FlatRateTier5" | "PortPairFlatRateTier1" | "PortPairFlatRateTier2" | "PortPairFlatRateTier3" | "PortPairFlatRateTier4" | "PortPairFlatRateTier5")
+      attr_accessor connections: ::Array[Types::Connection]
+      SENSITIVE: []
+    end
+
     class UpdateDirectConnectGatewayAssociationRequest
       attr_accessor association_id: ::String
       attr_accessor add_allowed_prefixes_to_direct_connect_gateway: ::Array[Types::RouteFilterPrefix]
@@ -1015,11 +1162,25 @@ module Aws::DirectConnect
       SENSITIVE: []
     end
 
+    class UpdateResiliencyGroupRequest
+      attr_accessor resiliency_group_id: ::String
+      attr_accessor resiliency_group_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResiliencyGroupResult
+      attr_accessor resiliency_group: Types::ResiliencyGroup
+      SENSITIVE: []
+    end
+
     class UpdateVirtualInterfaceAttributesRequest
       attr_accessor virtual_interface_id: ::String
       attr_accessor mtu: ::Integer
       attr_accessor enable_site_link: bool
       attr_accessor virtual_interface_name: ::String
+      attr_accessor prefix_pool_allocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_allocated_count_ipv_6: ::Integer
       attr_accessor rate_limit: ::String
       SENSITIVE: []
     end
@@ -1063,6 +1224,8 @@ module Aws::DirectConnect
       attr_accessor aws_logical_device_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor site_link_enabled: bool
+      attr_accessor prefix_pool_allocated_count_ipv_4: ::Integer
+      attr_accessor prefix_pool_allocated_count_ipv_6: ::Integer
       attr_accessor rate_limit: ::String
       SENSITIVE: []
     end

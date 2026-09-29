@@ -51,7 +51,7 @@ module Aws
     }
 
       type speech_recognition_settings = {
-      speech_model_preference: ("Standard" | "Neural" | "Deepgram")?,
+      speech_model_preference: ("Standard" | "Neural" | "Deepgram" | "Advanced")?,
       speech_model_config: {
         deepgram_config: {
           api_token_secret_arn: ::String,

@@ -155,6 +155,12 @@ module Aws
                                    },
                                    ?profile_configuration: {
                                      default_profiles: Array[::String]?
+                                   },
+                                   ?backup_configuration: {
+                                     status: ("ENABLED" | "DISABLED")?,
+                                     backup_type: ("CONTINUOUS")?,
+                                     retention_period_in_days: ::Integer?,
+                                     backup_tags_enabled: bool?
                                    }
                                  ) -> _CreateFHIRDatastoreResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFHIRDatastoreResponseSuccess
@@ -367,6 +373,53 @@ module Aws
                                                ) -> _PublishDataTransformationProfileResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishDataTransformationProfileResponseSuccess
 
+      interface _RestoreFHIRDatastoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreFHIRDatastoreResponse]
+        def datastore_id: () -> ::String
+        def datastore_arn: () -> ::String
+        def datastore_status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED")
+        def datastore_endpoint: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#restore_fhir_datastore-instance_method
+      def restore_fhir_datastore: (
+                                    source_datastore_id: ::String,
+                                    restore_configuration: {
+                                      continuous_backup_restore_configuration: {
+                                        restore_point_time: ::Time?
+                                      }?
+                                    },
+                                    ?datastore_name: ::String,
+                                    ?sse_configuration: {
+                                      kms_encryption_config: {
+                                        cmk_type: ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY"),
+                                        kms_key_id: ::String?
+                                      }
+                                    },
+                                    ?client_token: ::String,
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      }
+                                    ],
+                                    ?identity_provider_configuration: {
+                                      authorization_strategy: ("SMART_ON_FHIR_V1" | "SMART_ON_FHIR" | "AWS_AUTH"),
+                                      fine_grained_authorization_enabled: bool?,
+                                      metadata: ::String?,
+                                      idp_lambda_arn: ::String?
+                                    },
+                                    ?analytics_configuration: {
+                                      status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING" | "PAUSING" | "PAUSED")?
+                                    },
+                                    ?nlp_configuration: {
+                                      status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")?
+                                    },
+                                    ?profile_configuration: {
+                                      default_profiles: Array[::String]?
+                                    }
+                                  ) -> _RestoreFHIRDatastoreResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreFHIRDatastoreResponseSuccess
+
       interface _StartDataTransformationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartDataTransformationJobResponse]
         def job_id: () -> ::String
@@ -506,6 +559,12 @@ module Aws
                                      fine_grained_authorization_enabled: bool?,
                                      metadata: ::String?,
                                      idp_lambda_arn: ::String?
+                                   },
+                                   ?backup_configuration: {
+                                     status: ("ENABLED" | "DISABLED")?,
+                                     backup_type: ("CONTINUOUS")?,
+                                     retention_period_in_days: ::Integer?,
+                                     backup_tags_enabled: bool?
                                    }
                                  ) -> _UpdateFHIRDatastoreResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFHIRDatastoreResponseSuccess

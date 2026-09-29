@@ -524,6 +524,11 @@ module Aws::Notifications
     #   `ManagedNotificationConfiguration` to associate with the Account
     #   Contact.
     #
+    # @option params [Boolean] :is_sensitive_events_subscribed
+    #   Specifies whether this contact is subscribed to sensitive events. The
+    #   `notifications:SubscribeSensitiveEvents` permission controls access to
+    #   sensitive events. Defaults to false.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -531,6 +536,7 @@ module Aws::Notifications
     #   resp = client.associate_managed_notification_account_contact({
     #     contact_identifier: "ACCOUNT_PRIMARY", # required, accepts ACCOUNT_PRIMARY, ACCOUNT_ALTERNATE_BILLING, ACCOUNT_ALTERNATE_OPERATIONS, ACCOUNT_ALTERNATE_SECURITY
     #     managed_notification_configuration_arn: "ManagedNotificationConfigurationOsArn", # required
+    #     is_sensitive_events_subscribed: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/AssociateManagedNotificationAccountContact AWS API Documentation
@@ -560,6 +566,11 @@ module Aws::Notifications
     #   `ManagedNotificationConfiguration` to associate with the additional
     #   Channel.
     #
+    # @option params [Boolean] :is_sensitive_events_subscribed
+    #   Specifies whether this channel is subscribed to sensitive events. The
+    #   `notifications:SubscribeSensitiveEvents` permission controls access to
+    #   sensitive events. Defaults to false.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -567,6 +578,7 @@ module Aws::Notifications
     #   resp = client.associate_managed_notification_additional_channel({
     #     channel_arn: "ChannelArn", # required
     #     managed_notification_configuration_arn: "ManagedNotificationConfigurationOsArn", # required
+    #     is_sensitive_events_subscribed: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/AssociateManagedNotificationAdditionalChannel AWS API Documentation
@@ -799,18 +811,17 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Deregisters a `NotificationConfiguration` in the specified Region.
+    # Deregisters a `NotificationHub` in the specified Region.
     #
     # <note markdown="1"> You can't deregister the last `NotificationHub` in the account.
-    # `NotificationEvents` stored in the deregistered
-    # `NotificationConfiguration` are no longer be visible. Recreating a new
-    # `NotificationConfiguration` in the same Region restores access to
-    # those `NotificationEvents`.
+    # `NotificationEvents` stored in the deregistered `NotificationHub` are
+    # no longer visible. Recreating a new `NotificationHub` in the same
+    # Region restores access to those `NotificationEvents`.
     #
     #  </note>
     #
     # @option params [required, String] :notification_hub_region
-    #   The `NotificationConfiguration` Region.
+    #   The `NotificationHub` Region.
     #
     # @return [Types::DeregisterNotificationHubResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1068,6 +1079,7 @@ module Aws::Notifications
     #   resp.content.message_components.headline #=> String
     #   resp.content.message_components.paragraph_summary #=> String
     #   resp.content.message_components.complete_description #=> String
+    #   resp.content.message_components.markup_description #=> String
     #   resp.content.message_components.dimensions #=> Array
     #   resp.content.message_components.dimensions[0].name #=> String
     #   resp.content.message_components.dimensions[0].value #=> String
@@ -1079,7 +1091,7 @@ module Aws::Notifications
     #   resp.content.start_time #=> Time
     #   resp.content.end_time #=> Time
     #   resp.content.text_parts #=> Hash
-    #   resp.content.text_parts["TextPartId"].type #=> String, one of "LOCALIZED_TEXT", "PLAIN_TEXT", "URL"
+    #   resp.content.text_parts["TextPartId"].type #=> String, one of "LOCALIZED_TEXT", "PLAIN_TEXT", "URL", "PORTABLE_TEXT"
     #   resp.content.text_parts["TextPartId"].display_text #=> String
     #   resp.content.text_parts["TextPartId"].text_by_locale #=> Hash
     #   resp.content.text_parts["TextPartId"].text_by_locale["LocaleCode"] #=> String
@@ -1169,6 +1181,7 @@ module Aws::Notifications
     #   resp.content.message_components.headline #=> String
     #   resp.content.message_components.paragraph_summary #=> String
     #   resp.content.message_components.complete_description #=> String
+    #   resp.content.message_components.markup_description #=> String
     #   resp.content.message_components.dimensions #=> Array
     #   resp.content.message_components.dimensions[0].name #=> String
     #   resp.content.message_components.dimensions[0].value #=> String
@@ -1201,12 +1214,16 @@ module Aws::Notifications
     #   resp.content.start_time #=> Time
     #   resp.content.end_time #=> Time
     #   resp.content.text_parts #=> Hash
-    #   resp.content.text_parts["TextPartId"].type #=> String, one of "LOCALIZED_TEXT", "PLAIN_TEXT", "URL"
+    #   resp.content.text_parts["TextPartId"].type #=> String, one of "LOCALIZED_TEXT", "PLAIN_TEXT", "URL", "PORTABLE_TEXT"
     #   resp.content.text_parts["TextPartId"].display_text #=> String
     #   resp.content.text_parts["TextPartId"].text_by_locale #=> Hash
     #   resp.content.text_parts["TextPartId"].text_by_locale["LocaleCode"] #=> String
     #   resp.content.text_parts["TextPartId"].url #=> String
     #   resp.content.organizational_unit_id #=> String
+    #   resp.content.attachments #=> Array
+    #   resp.content.attachments[0].display_name #=> String
+    #   resp.content.attachments[0].attachment_download_url #=> String
+    #   resp.content.attachments[0].content_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/GetManagedNotificationEvent AWS API Documentation
     #
@@ -1317,6 +1334,7 @@ module Aws::Notifications
     #   resp.content.message_components.headline #=> String
     #   resp.content.message_components.paragraph_summary #=> String
     #   resp.content.message_components.complete_description #=> String
+    #   resp.content.message_components.markup_description #=> String
     #   resp.content.message_components.dimensions #=> Array
     #   resp.content.message_components.dimensions[0].name #=> String
     #   resp.content.message_components.dimensions[0].value #=> String
@@ -1350,7 +1368,7 @@ module Aws::Notifications
     #   resp.content.start_time #=> Time
     #   resp.content.end_time #=> Time
     #   resp.content.text_parts #=> Hash
-    #   resp.content.text_parts["TextPartId"].type #=> String, one of "LOCALIZED_TEXT", "PLAIN_TEXT", "URL"
+    #   resp.content.text_parts["TextPartId"].type #=> String, one of "LOCALIZED_TEXT", "PLAIN_TEXT", "URL", "PORTABLE_TEXT"
     #   resp.content.text_parts["TextPartId"].display_text #=> String
     #   resp.content.text_parts["TextPartId"].text_by_locale #=> Hash
     #   resp.content.text_parts["TextPartId"].text_by_locale["LocaleCode"] #=> String
@@ -1528,6 +1546,7 @@ module Aws::Notifications
     #   resp.channel_associations[0].channel_identifier #=> String
     #   resp.channel_associations[0].channel_type #=> String, one of "MOBILE", "CHATBOT", "EMAIL", "ACCOUNT_CONTACT"
     #   resp.channel_associations[0].override_option #=> String, one of "ENABLED", "DISABLED"
+    #   resp.channel_associations[0].is_sensitive_events_subscribed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListManagedNotificationChannelAssociations AWS API Documentation
     #
@@ -1706,6 +1725,12 @@ module Aws::Notifications
     #   The Amazon Web Services account ID associated with the Managed
     #   Notification Events.
     #
+    # @option params [Boolean] :include_sensitive_events
+    #   Specifies whether to include sensitive events in the result. By
+    #   default, only non-sensitive events are returned. The
+    #   `notifications:AccessSensitiveEvents` permission controls access to
+    #   sensitive events.
+    #
     # @return [Types::ListManagedNotificationEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListManagedNotificationEventsResponse#next_token #next_token} => String
@@ -1724,6 +1749,7 @@ module Aws::Notifications
     #     next_token: "NextToken",
     #     organizational_unit_id: "OrganizationalUnitId",
     #     related_account: "AccountId",
+    #     include_sensitive_events: false,
     #   })
     #
     # @example Response structure
@@ -2190,10 +2216,10 @@ module Aws::Notifications
       req.send_request(options)
     end
 
-    # Registers a `NotificationConfiguration` in the specified Region.
+    # Registers a `NotificationHub` in the specified Region.
     #
-    # There is a maximum of one `NotificationConfiguration` per Region. You
-    # can have a maximum of 3 `NotificationHub` resources at a time.
+    # There is a maximum of one `NotificationHub` per Region. You can have a
+    # maximum of 3 `NotificationHub` resources at a time.
     #
     # @option params [required, String] :notification_hub_region
     #   The Region of the `NotificationHub`.
@@ -2354,6 +2380,46 @@ module Aws::Notifications
       req.send_request(options)
     end
 
+    # Updates the `isSensitiveEventsSubscribed` property of a particular
+    # ManagedNotification channel association.
+    #
+    # @option params [required, String] :managed_notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the
+    #   `ManagedNotificationConfiguration` whose Channel association property
+    #   you want to update.
+    #
+    # @option params [required, String] :channel_identifier
+    #   The identifier of the channel association to update. You can specify
+    #   one of the following:
+    #
+    #   * An Account contact identifier.
+    #
+    #   * A Channel ARN.
+    #
+    # @option params [Boolean] :is_sensitive_events_subscribed
+    #   Specifies whether the association is subscribed to sensitive events.
+    #   The `notifications:SubscribeSensitiveEvents` permission controls
+    #   access to sensitive events.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_managed_notification_channel_association({
+    #     managed_notification_configuration_arn: "ManagedNotificationConfigurationOsArn", # required
+    #     channel_identifier: "ManagedNotificationChannelIdentifier", # required
+    #     is_sensitive_events_subscribed: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/UpdateManagedNotificationChannelAssociation AWS API Documentation
+    #
+    # @overload update_managed_notification_channel_association(params = {})
+    # @param [Hash] params ({})
+    def update_managed_notification_channel_association(params = {}, options = {})
+      req = build_request(:update_managed_notification_channel_association, params)
+      req.send_request(options)
+    end
+
     # Updates a `NotificationConfiguration`.
     #
     # @option params [required, String] :arn
@@ -2431,7 +2497,7 @@ module Aws::Notifications
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-notifications'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

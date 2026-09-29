@@ -17,10 +17,9 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListNotificationEventsSuccess",
-    "operationName" : "ListNotificationEvents",
+    "id" : "ListNotificationHubsSuccess",
+    "operationName" : "ListNotificationHubs",
     "input" : {
-      "includeChildEvents" : true,
       "maxResults" : 3
     },
     "expectation" : {
@@ -48,9 +47,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListNotificationHubsSuccess",
-    "operationName" : "ListNotificationHubs",
+    "id" : "ListNotificationEventsSuccess",
+    "operationName" : "ListNotificationEvents",
     "input" : {
+      "includeChildEvents" : true,
       "maxResults" : 3
     },
     "expectation" : {

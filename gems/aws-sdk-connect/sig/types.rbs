@@ -8,6 +8,12 @@
 module Aws::Connect
   module Types
 
+    class AIAgent
+      attr_accessor arn: ::String
+      attr_accessor type: ("THIRD_PARTY")
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -100,6 +106,7 @@ module Aws::Connect
       attr_accessor agent_initiated_hold_duration: ::Integer
       attr_accessor state_transitions: ::Array[Types::StateTransition]
       attr_accessor voice_enhancement_mode: ("VOICE_ISOLATION" | "NOISE_SUPPRESSION" | "NONE")
+      attr_accessor active_region: ::String
       SENSITIVE: []
     end
 
@@ -501,7 +508,7 @@ module Aws::Connect
     end
 
     class Attribute
-      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "AUTO_MUTE_AGENT_ON_HOLD" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
       attr_accessor value: ::String
       SENSITIVE: []
     end
@@ -920,6 +927,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ConnectionCredentials
+      attr_accessor connection_token: ::String
+      attr_accessor expiry: ::String
+      SENSITIVE: []
+    end
+
     class ConnectionData
       attr_accessor attendee: Types::Attendee
       attr_accessor meeting: Types::Meeting
@@ -980,6 +993,16 @@ module Aws::Connect
 
     class ContactAnalysis
       attr_accessor transcript: Types::Transcript
+      SENSITIVE: []
+    end
+
+    class ContactAnalysisReference
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor arn: ::String
+      attr_accessor analytics_mode: ("PostContact" | "RealTime" | "ContactLens" | "AutomatedInteraction")
+      attr_accessor is_redacted: bool
       SENSITIVE: []
     end
 
@@ -1524,6 +1547,7 @@ module Aws::Connect
       attr_accessor review_configuration: Types::EvaluationReviewConfiguration
       attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 
@@ -1783,7 +1807,9 @@ module Aws::Connect
       attr_accessor function: ::String
       attr_accessor actions: ::Array[Types::RuleAction]
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor pre_evaluation_filters: Types::PreEvaluationFilters
       attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -1805,6 +1831,7 @@ module Aws::Connect
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
       attr_accessor allowed_flow_modules: ::Array[Types::FlowModule]
+      attr_accessor allowed_ai_agents: ::Array[Types::AIAgent]
       attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
       SENSITIVE: []
     end
@@ -2023,6 +2050,11 @@ module Aws::Connect
 
     class CrossChannelBehavior
       attr_accessor behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
+      SENSITIVE: []
+    end
+
+    class CrossChannelWorkloadBehavior
+      attr_accessor channel_workload_behavior_type: ("ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY" | "ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY" | "ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE")
       SENSITIVE: []
     end
 
@@ -2750,7 +2782,7 @@ module Aws::Connect
 
     class DescribeInstanceAttributeRequest
       attr_accessor instance_id: ::String
-      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "AUTO_MUTE_AGENT_ON_HOLD" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
       SENSITIVE: []
     end
 
@@ -3411,6 +3443,20 @@ module Aws::Connect
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
       attr_accessor latest_validation_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
       attr_accessor last_validation_time: ::Time
+      attr_accessor ai_version: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationFormAIVersionLifecycle
+      attr_accessor status: ("LATEST" | "PREVIEW" | "ACTIVE" | "DEPRECATED")
+      attr_accessor start_of_life_time: ::Time
+      attr_accessor end_of_life_time: ::Time
+      SENSITIVE: []
+    end
+
+    class EvaluationFormAIVersionSummary
+      attr_accessor ai_version_name: ::String
+      attr_accessor ai_version_lifecycle: Types::EvaluationFormAIVersionLifecycle
       SENSITIVE: []
     end
 
@@ -3431,6 +3477,7 @@ module Aws::Connect
       attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
       attr_accessor review_configuration: Types::EvaluationReviewConfiguration
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 
@@ -3496,6 +3543,12 @@ module Aws::Connect
 
     class EvaluationFormLanguageConfiguration
       attr_accessor form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")
+      SENSITIVE: []
+    end
+
+    class EvaluationFormMetricConfiguration
+      attr_accessor metric_type: ("BUSINESS_OUTCOME")
+      attr_accessor metric_name: ::String
       SENSITIVE: []
     end
 
@@ -3576,6 +3629,7 @@ module Aws::Connect
       attr_accessor enablement: Types::EvaluationFormItemEnablementConfiguration
       attr_accessor weight: ::Float
       attr_accessor scoring_configuration: Types::EvaluationFormQuestionScoringConfiguration
+      attr_accessor metric_configuration: Types::EvaluationFormMetricConfiguration
       SENSITIVE: []
     end
 
@@ -3658,6 +3712,7 @@ module Aws::Connect
       attr_accessor evaluation_form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")
       attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 
@@ -4160,6 +4215,16 @@ module Aws::Connect
       attr_accessor metric_results: ::Array[Types::ContactMetricResult]
       attr_accessor id: ::String
       attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCrossRegionRoutingRequest
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCrossRegionRoutingResponse
+      attr_accessor isolated_regions: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -5105,6 +5170,20 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ListEvaluationFormAIVersionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEvaluationFormAIVersionsResponse
+      attr_accessor ai_version_summaries: ::Array[Types::EvaluationFormAIVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListEvaluationFormVersionsRequest
       attr_accessor instance_id: ::String
       attr_accessor evaluation_form_id: ::String
@@ -5432,7 +5511,7 @@ module Aws::Connect
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor output_type: ("Raw" | "Redacted")
-      attr_accessor segment_types: ::Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary")]
+      attr_accessor segment_types: ::Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary" | "ExtractedInformation")]
       SENSITIVE: []
     end
 
@@ -5514,6 +5593,22 @@ module Aws::Connect
     class ListSecurityKeysResponse
       attr_accessor security_keys: ::Array[Types::SecurityKey]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfileAIAgentsRequest
+      attr_accessor security_profile_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfileAIAgentsResponse
+      attr_accessor allowed_ai_agents: ::Array[Types::AIAgent]
+      attr_accessor next_token: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -5826,6 +5921,7 @@ module Aws::Connect
       attr_accessor channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
       attr_accessor concurrency: ::Integer
       attr_accessor cross_channel_behavior: Types::CrossChannelBehavior
+      attr_accessor workload_type_concurrencies: ::Array[Types::WorkloadTypeConcurrency]
       SENSITIVE: []
     end
 
@@ -6332,6 +6428,20 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class PreEvaluationFilter
+      attr_accessor resource_type: ("CONTACT")
+      attr_accessor filter_type: ("TAG")
+      attr_accessor filter_key: ::String
+      attr_accessor filter_value: ::String
+      attr_accessor operator: ("EQUALS")
+      SENSITIVE: []
+    end
+
+    class PreEvaluationFilters
+      attr_accessor and_conditions: ::Array[Types::PreEvaluationFilter]
+      SENSITIVE: []
+    end
+
     class PredefinedAttribute
       attr_accessor name: ::String
       attr_accessor values: Types::PredefinedAttributeValues
@@ -6633,6 +6743,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class RealTimeContactAnalysisExtractedInformationValue
+      attr_accessor content: ::String
+      attr_accessor points_of_interest: ::Array[Types::RealTimeContactAnalysisTranscriptItemWithCharacterOffsets]
+      SENSITIVE: []
+    end
+
     class RealTimeContactAnalysisIssueDetected
       attr_accessor transcript_items: ::Array[Types::RealTimeContactAnalysisTranscriptItemWithContent]
       SENSITIVE: []
@@ -6665,6 +6781,15 @@ module Aws::Connect
       attr_accessor display_name: ::String
       attr_accessor event_type: ::String
       attr_accessor time: Types::RealTimeContactAnalysisTimeData
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisSegmentExtractedInformation
+      attr_accessor extraction_definition_id: ::String
+      attr_accessor extraction_definition_name: ::String
+      attr_accessor extraction_definition_display_label: ::String
+      attr_accessor extracted_values: ::Array[Types::RealTimeContactAnalysisExtractedInformationValue]
+      attr_accessor failure_code: ("QUOTA_EXCEEDED" | "INSUFFICIENT_CONVERSATION_CONTENT" | "FAILED_SAFETY_GUIDELINES" | "INTERNAL_ERROR" | "MAX_PACKAGE_FEATURE_ONLY")
       SENSITIVE: []
     end
 
@@ -6729,6 +6854,7 @@ module Aws::Connect
       attr_accessor event: Types::RealTimeContactAnalysisSegmentEvent
       attr_accessor attachments: Types::RealTimeContactAnalysisSegmentAttachments
       attr_accessor post_contact_summary: Types::RealTimeContactAnalysisSegmentPostContactSummary
+      attr_accessor extracted_information: Types::RealTimeContactAnalysisSegmentExtractedInformation
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -6743,6 +6869,8 @@ module Aws::Connect
       class Attachments < RealtimeContactAnalysisSegment
       end
       class PostContactSummary < RealtimeContactAnalysisSegment
+      end
+      class ExtractedInformation < RealtimeContactAnalysisSegment
       end
       class Unknown < RealtimeContactAnalysisSegment
       end
@@ -6820,6 +6948,7 @@ module Aws::Connect
       attr_accessor number: Types::NumberReference
       attr_accessor date: Types::DateReference
       attr_accessor email: Types::EmailReference
+      attr_accessor contact_analysis: Types::ContactAnalysisReference
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -6842,6 +6971,8 @@ module Aws::Connect
       class Date < ReferenceSummary
       end
       class Email < ReferenceSummary
+      end
+      class ContactAnalysis < ReferenceSummary
       end
       class Unknown < ReferenceSummary
       end
@@ -7050,6 +7181,7 @@ module Aws::Connect
       attr_accessor function: ::String
       attr_accessor actions: ::Array[Types::RuleAction]
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor pre_evaluation_filters: Types::PreEvaluationFilters
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor last_updated_by: ::String
@@ -7092,6 +7224,7 @@ module Aws::Connect
       attr_accessor action_summaries: ::Array[Types::ActionSummary]
       attr_accessor rule_capability_tiers: ::Array[("GenerativeAI")]
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor pre_evaluation_filters: Types::PreEvaluationFilters
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor last_updated_by: ::String
@@ -7912,6 +8045,8 @@ module Aws::Connect
       attr_accessor segment_attributes: ::Hash[::String, Types::SegmentAttributeValue]
       attr_accessor customer_id: ::String
       attr_accessor disconnect_on_customer_exit: ::Array[("AGENT")]
+      attr_accessor connection_types: ::Array[("WEBSOCKET" | "CONNECTION_CREDENTIALS" | "AUTHENTICATION_SESSION" | "WEBRTC_CONNECTION")]
+      attr_accessor chat_streaming_configuration: Types::ChatStreamingConfiguration
       SENSITIVE: [:customer_id]
     end
 
@@ -7920,6 +8055,9 @@ module Aws::Connect
       attr_accessor participant_id: ::String
       attr_accessor participant_token: ::String
       attr_accessor continued_from_contact_id: ::String
+      attr_accessor connection_credentials: Types::ConnectionCredentials
+      attr_accessor websocket: Types::Websocket
+      attr_accessor streaming_id: ::String
       SENSITIVE: []
     end
 
@@ -8738,6 +8876,15 @@ module Aws::Connect
     class UpdateContactTaskTemplateResponse < Aws::EmptyStructure
     end
 
+    class UpdateCrossRegionRoutingRequest
+      attr_accessor instance_id: ::String
+      attr_accessor isolated_all: bool
+      SENSITIVE: []
+    end
+
+    class UpdateCrossRegionRoutingResponse < Aws::EmptyStructure
+    end
+
     class UpdateDataTableAttributeRequest
       attr_accessor instance_id: ::String
       attr_accessor data_table_id: ::String
@@ -8815,6 +8962,7 @@ module Aws::Connect
       attr_accessor client_token: ::String
       attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 
@@ -8864,7 +9012,7 @@ module Aws::Connect
 
     class UpdateInstanceAttributeRequest
       attr_accessor instance_id: ::String
-      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
+      attr_accessor attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "AUTO_MUTE_AGENT_ON_HOLD" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
       attr_accessor value: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -9091,6 +9239,7 @@ module Aws::Connect
       attr_accessor function: ::String
       attr_accessor actions: ::Array[Types::RuleAction]
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor pre_evaluation_filters: Types::PreEvaluationFilters
       SENSITIVE: []
     end
 
@@ -9105,6 +9254,7 @@ module Aws::Connect
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
       attr_accessor allowed_flow_modules: ::Array[Types::FlowModule]
+      attr_accessor allowed_ai_agents: ::Array[Types::AIAgent]
       attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
       SENSITIVE: []
     end
@@ -9648,6 +9798,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class Websocket
+      attr_accessor url: ::String
+      attr_accessor connection_expiry: ::String
+      SENSITIVE: []
+    end
+
     class WidgetDestination
       attr_accessor widget_id: ::String
       attr_accessor profile_id: ::String
@@ -9657,6 +9813,13 @@ module Aws::Connect
     class WisdomInfo
       attr_accessor session_arn: ::String
       attr_accessor ai_agents: ::Array[Types::AiAgentInfo]
+      SENSITIVE: []
+    end
+
+    class WorkloadTypeConcurrency
+      attr_accessor workload_type: ::String
+      attr_accessor concurrency: ::Integer
+      attr_accessor cross_channel_workload_behavior: Types::CrossChannelWorkloadBehavior
       SENSITIVE: []
     end
 

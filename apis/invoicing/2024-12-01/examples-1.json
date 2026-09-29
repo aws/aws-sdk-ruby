@@ -1183,6 +1183,86 @@
         "title": "ListProcurementPortalPreferences for Coupa prefs. Second Call with the last page"
       }
     ],
+    "ListProcurementPortalSuppliers": [
+      {
+        "input": {
+          "PortalIdentifier": "KXMJQWBRNP"
+        },
+        "output": {
+          "ProcurementPortalSuppliers": [
+            {
+              "Environment": "PROD",
+              "SellerOfRecord": "AWS_INC",
+              "SupplierIdentifier": "AN01010639538"
+            },
+            {
+              "CountryCode": "DE",
+              "Environment": "PROD",
+              "SellerOfRecord": "AWS_EUROPE",
+              "SupplierIdentifier": "AN01401912735"
+            },
+            {
+              "Environment": "TEST",
+              "SellerOfRecord": "AWS_INC",
+              "SupplierIdentifier": "AN01010639538-T"
+            }
+          ]
+        },
+        "id": "example-1",
+        "title": "ListProcurementPortalSuppliers"
+      }
+    ],
+    "ListProcurementPortals": [
+      {
+        "input": {},
+        "output": {
+          "ProcurementPortals": [
+            {
+              "DefaultFeatureConfigurations": {
+                "InvoiceConfiguration": {
+                  "AttachmentTypes": [
+                    "INVOICE_PDF",
+                    "RFP_PDF"
+                  ],
+                  "DocumentTypes": [
+                    "AWS_CLOUD_INVOICE",
+                    "AWS_CLOUD_CREDIT_MEMO",
+                    "AWS_MARKETPLACE_INVOICE",
+                    "AWS_MARKETPLACE_CREDIT_MEMO",
+                    "AWS_REQUEST_FOR_PAYMENT"
+                  ]
+                }
+              },
+              "PortalDisplayName": "SAP Business Network",
+              "PortalIdentifier": "KXMJQWBRNP",
+              "PortalName": "SAP_BUSINESS_NETWORK"
+            },
+            {
+              "DefaultFeatureConfigurations": {
+                "InvoiceConfiguration": {
+                  "AttachmentTypes": [
+                    "INVOICE_PDF",
+                    "RFP_PDF"
+                  ],
+                  "DocumentTypes": [
+                    "AWS_CLOUD_INVOICE",
+                    "AWS_CLOUD_CREDIT_MEMO",
+                    "AWS_MARKETPLACE_INVOICE",
+                    "AWS_MARKETPLACE_CREDIT_MEMO",
+                    "AWS_REQUEST_FOR_PAYMENT"
+                  ]
+                }
+              },
+              "PortalDisplayName": "Coupa",
+              "PortalIdentifier": "THZVCGFLDY",
+              "PortalName": "COUPA"
+            }
+          ]
+        },
+        "id": "example-1",
+        "title": "ListProcurementPortals"
+      }
+    ],
     "ListTagsForResource": [
       {
         "input": {

@@ -12,6 +12,8 @@ module Aws::DevOpsAgent
       attr_accessor assumable_role_arn: ::String
       attr_accessor account_id: ::String
       attr_accessor account_type: ("monitor")
+      attr_accessor agent_elevated_role_arn: ::String
+      attr_accessor agent_elevated_role_arn_status: ("valid" | "invalid" | "pending-confirmation")
       SENSITIVE: []
     end
 
@@ -92,7 +94,23 @@ module Aws::DevOpsAgent
       attr_accessor updated_at: ::Time
       attr_accessor kms_key_arn: ::String
       attr_accessor agent_space_id: ::String
+      attr_accessor preferences: ::Hash[("elevatedActionsEnabled"), bool]
       SENSITIVE: [:description]
+    end
+
+    class ApprovalAction
+      attr_accessor tool_use_id: ::String
+      attr_accessor interrupt_id: ::String
+      attr_accessor approval_id: ::String
+      attr_accessor button_text: ::String
+      attr_accessor action: ("APPROVED" | "REJECTED")
+      SENSITIVE: []
+    end
+
+    class ApprovalPattern
+      attr_accessor tool: ::String
+      attr_accessor argument_pins: ::Hash[::String, ::String]
+      SENSITIVE: []
     end
 
     class Asset
@@ -239,6 +257,7 @@ module Aws::DevOpsAgent
 
     class CapabilityConfiguration
       attr_accessor enabled: bool
+      attr_accessor trigger_filter_groups: ::Array[Types::TriggerFilterGroup]
       SENSITIVE: []
     end
 
@@ -267,6 +286,7 @@ module Aws::DevOpsAgent
       attr_accessor kms_key_arn: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor preferences: ::Hash[("elevatedActionsEnabled"), bool]
       SENSITIVE: [:description]
     end
 
@@ -547,7 +567,7 @@ module Aws::DevOpsAgent
       attr_accessor agent_sub_task: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      attr_accessor execution_status: ("FAILED" | "RUNNING" | "STOPPED" | "CANCELED" | "TIMED_OUT")
+      attr_accessor execution_status: ("FAILED" | "RUNNING" | "STOPPED" | "CANCELED" | "TIMED_OUT" | "WAITING")
       attr_accessor agent_type: ::String
       attr_accessor uid: ::String
       SENSITIVE: []
@@ -1103,10 +1123,13 @@ module Aws::DevOpsAgent
 
     class MCPServerConfiguration
       attr_accessor tools: ::Array[::String]
+      attr_accessor tool_details: ::Array[Types::MCPToolDetail]
       SENSITIVE: []
     end
 
-    class MCPServerDatadogConfiguration < Aws::EmptyStructure
+    class MCPServerDatadogConfiguration
+      attr_accessor enabled_elevated_tools: ::Array[Types::MCPToolDetail]
+      SENSITIVE: []
     end
 
     class MCPServerDetails
@@ -1121,6 +1144,7 @@ module Aws::DevOpsAgent
       attr_accessor endpoint: ::String
       attr_accessor organization_id: ::String
       attr_accessor tools: ::Array[::String]
+      attr_accessor enabled_elevated_tools: ::Array[Types::MCPToolDetail]
       SENSITIVE: []
     end
 
@@ -1164,6 +1188,7 @@ module Aws::DevOpsAgent
 
     class MCPServerSigV4Configuration
       attr_accessor tools: ::Array[::String]
+      attr_accessor tool_details: ::Array[Types::MCPToolDetail]
       SENSITIVE: []
     end
 
@@ -1176,6 +1201,12 @@ module Aws::DevOpsAgent
     end
 
     class MCPServerSplunkConfiguration < Aws::EmptyStructure
+    end
+
+    class MCPToolDetail
+      attr_accessor name: ::String
+      attr_accessor tool_classification: ("READ_ONLY" | "MUTATIVE" | "DESTRUCTIVE")
+      SENSITIVE: []
     end
 
     class Message
@@ -1195,7 +1226,7 @@ module Aws::DevOpsAgent
     class NewRelicApiKeyConfig
       attr_accessor api_key: ::String
       attr_accessor account_id: ::String
-      attr_accessor region: ("US" | "EU")
+      attr_accessor region: ("US" | "EU" | "JP")
       attr_accessor application_ids: ::Array[::String]
       attr_accessor entity_guids: ::Array[::String]
       attr_accessor alert_policy_ids: ::Array[::String]
@@ -1252,6 +1283,11 @@ module Aws::DevOpsAgent
       attr_accessor exchange_parameters: ::Hash[::String, ::String]
       attr_accessor client_secret: ::String
       SENSITIVE: [:client_id, :client_secret]
+    end
+
+    class PatternFilter
+      attr_accessor patterns: ::Array[::String]
+      SENSITIVE: []
     end
 
     class PendingMessage
@@ -1407,7 +1443,7 @@ module Aws::DevOpsAgent
 
     class RegisteredNewRelicDetails
       attr_accessor account_id: ::String
-      attr_accessor region: ("US" | "EU")
+      attr_accessor region: ("US" | "EU" | "JP")
       attr_accessor description: ::String
       SENSITIVE: [:description]
     end
@@ -1444,6 +1480,8 @@ module Aws::DevOpsAgent
       attr_accessor additional_service_details: Types::AdditionalServiceDetails
       attr_accessor kms_key_arn: ::String
       attr_accessor private_connection_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -1590,6 +1628,7 @@ module Aws::DevOpsAgent
       attr_accessor current_page: ::String
       attr_accessor last_message: ::String
       attr_accessor user_action_response: ::String
+      attr_accessor approval_action: Types::ApprovalAction
       SENSITIVE: []
     end
 
@@ -1610,6 +1649,7 @@ module Aws::DevOpsAgent
       attr_accessor context: Types::SendMessageContext
       attr_accessor user_id: ::String
       attr_accessor asset_ids: ::Array[::String]
+      attr_accessor model_tier: ::String
       SENSITIVE: []
     end
 
@@ -1832,6 +1872,12 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class SlackBidirectionalConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class SlackChannel
       attr_accessor channel_name: ::String
       attr_accessor channel_id: ::String
@@ -1842,6 +1888,7 @@ module Aws::DevOpsAgent
       attr_accessor workspace_id: ::String
       attr_accessor workspace_name: ::String
       attr_accessor transmission_target: Types::SlackTransmissionTarget
+      attr_accessor bidirectional: Types::SlackBidirectionalConfiguration
       SENSITIVE: []
     end
 
@@ -1856,6 +1903,8 @@ module Aws::DevOpsAgent
       attr_accessor account_type: ("source")
       attr_accessor assumable_role_arn: ::String
       attr_accessor external_id: ::String
+      attr_accessor agent_elevated_role_arn: ::String
+      attr_accessor agent_elevated_role_arn_status: ("valid" | "invalid" | "pending-confirmation")
       SENSITIVE: []
     end
 
@@ -1877,7 +1926,7 @@ module Aws::DevOpsAgent
       attr_accessor reference: Types::ReferenceOutput
       attr_accessor task_type: ("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING")
       attr_accessor priority: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL")
-      attr_accessor status: ("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED" | "SKIPPED")
+      attr_accessor status: ("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED" | "SKIPPED" | "WAITING")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor version: ::Integer
@@ -1893,7 +1942,7 @@ module Aws::DevOpsAgent
       attr_accessor created_after: ::Time
       attr_accessor created_before: ::Time
       attr_accessor priority: ::Array[("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL")]
-      attr_accessor status: ::Array[("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED" | "SKIPPED")]
+      attr_accessor status: ::Array[("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED" | "SKIPPED" | "WAITING")]
       attr_accessor task_type: ::Array[("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING")]
       attr_accessor primary_task_id: ::String
       SENSITIVE: []
@@ -1927,6 +1976,12 @@ module Aws::DevOpsAgent
       end
     end
 
+    class TriggerFilterGroup
+      attr_accessor events: ::Array[("PULL_REQUEST_READY_FOR_REVIEW" | "PULL_REQUEST_DRAFT")]
+      attr_accessor target_branches: Types::PatternFilter
+      SENSITIVE: []
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -1941,11 +1996,30 @@ module Aws::DevOpsAgent
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor locale: ::String
+      attr_accessor preferences: ::Hash[("elevatedActionsEnabled"), bool]
       SENSITIVE: [:description]
     end
 
     class UpdateAgentSpaceOutput
       attr_accessor agent_space: Types::AgentSpace
+      SENSITIVE: []
+    end
+
+    class UpdateApprovalActionRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor approval_id: ::String
+      attr_accessor action: ("APPROVED" | "REJECTED")
+      attr_accessor final_pattern: Types::ApprovalPattern
+      attr_accessor reason: ::String
+      attr_accessor ttl_seconds: ::Integer
+      attr_accessor single_use: bool
+      SENSITIVE: []
+    end
+
+    class UpdateApprovalActionResponse
+      attr_accessor approval_id: ::String
+      attr_accessor status: ("PENDING" | "APPROVED" | "REJECTED" | "REVOKED" | "REDEEMED")
+      attr_accessor expires_at: ::Time
       SENSITIVE: []
     end
 
@@ -1995,7 +2069,7 @@ module Aws::DevOpsAgent
     class UpdateBacklogTaskRequest
       attr_accessor agent_space_id: ::String
       attr_accessor task_id: ::String
-      attr_accessor task_status: ("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED" | "SKIPPED")
+      attr_accessor task_status: ("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED" | "SKIPPED" | "WAITING")
       attr_accessor client_token: ::String
       SENSITIVE: []
     end

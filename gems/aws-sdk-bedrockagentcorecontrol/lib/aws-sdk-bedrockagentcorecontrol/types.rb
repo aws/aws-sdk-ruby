@@ -742,8 +742,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] rate_limits
-    #   Complete set of rate limits for this gateway. Replaces all existing
-    #   limits atomically.
+    #   The complete set of rate limits for this gateway. This operation
+    #   replaces all existing rate limits in a single request. If the
+    #   operation fails, no rate limits are changed.
     #   @return [Array<Types::BatchPutLimitEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BatchPutGatewayRateLimitsRequest AWS API Documentation
@@ -768,24 +769,28 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # A limit definition within a BatchPut request (rateLimitId used for
-    # upsert matching)
+    # A rate limit definition within a batch put request. If you provide a
+    # `rateLimitId`, the service uses it for upsert matching against
+    # existing rate limits.
     #
     # @!attribute [rw] rate_limit_id
-    #   Optional — if provided, used for upsert matching against existing
-    #   limits.
+    #   The unique identifier of the rate limit. If provided, the service
+    #   uses it for upsert matching against existing rate limits.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Optional human-readable description for this limit.
+    #   An optional human-readable description for this rate limit. If not
+    #   provided, the rate limit is created without a description.
     #   @return [String]
     #
     # @!attribute [rw] dimension_keys
-    #   Ordered list of dimension key names defining the scope of a limit
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit.
     #   @return [Array<String>]
     #
     # @!attribute [rw] entries
-    #   List of rule entries within a limit
+    #   The list of rule entries that map dimension values to rate
+    #   configurations.
     #   @return [Array<Types::LimitEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BatchPutLimitEntry AWS API Documentation
@@ -1263,6 +1268,13 @@ module Aws::BedrockAgentCoreControl
     #   The list of CloudWatch log group names to monitor for agent traces.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] log_group_name_prefixes
+    #   The list of CloudWatch log group name prefixes to monitor for agent
+    #   traces. Specify this instead of `logGroupNames` to match log groups
+    #   by prefix. Specify either `logGroupNames` or `logGroupNamePrefixes`,
+    #   not both. One of the two is required.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] service_names
     #   The list of service names to filter traces within the specified log
     #   groups. Used to identify relevant agent sessions.
@@ -1272,6 +1284,7 @@ module Aws::BedrockAgentCoreControl
     #
     class CloudWatchLogsInputConfig < Struct.new(
       :log_group_names,
+      :log_group_name_prefixes,
       :service_names)
       SENSITIVE = []
       include Aws::Structure
@@ -1282,13 +1295,39 @@ module Aws::BedrockAgentCoreControl
     #
     # @!attribute [rw] log_group_name
     #   The name of the CloudWatch log group where evaluation results will
-    #   be written. The log group will be created if it doesn't exist.
+    #   be written. An existing log group is used as-is; otherwise the
+    #   service creates it, which requires the evaluation execution role to
+    #   grant `logs:CreateLogGroup` on the log group. Don't specify this
+    #   value when `resultDestination` is `SOURCE_LOG_GROUP`. The name
+    #   can't be under the service-reserved
+    #   `/aws/bedrock-agentcore/evaluations/` namespace, apart from this
+    #   configuration's own service-managed default group.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_namespace
+    #   The CloudWatch metrics namespace where evaluation result metrics are
+    #   published. If you omit this value, the service publishes metrics to
+    #   `Bedrock-AgentCore/Evaluations`. This value can't begin with
+    #   `AWS/`.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_destination
+    #   The destination where evaluation results are written. Valid values:
+    #
+    #   * `DEDICATED_LOG_GROUP` (default) – Writes results to a dedicated
+    #     result log group.
+    #
+    #   * `SOURCE_LOG_GROUP` – Writes results back to the log group that the
+    #     agent traces were read from. If you use this value, don't specify
+    #     `logGroupName`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CloudWatchOutputConfig AWS API Documentation
     #
     class CloudWatchOutputConfig < Struct.new(
-      :log_group_name)
+      :log_group_name,
+      :metrics_namespace,
+      :result_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1559,6 +1598,30 @@ module Aws::BedrockAgentCoreControl
       :wallet_secret_arn,
       :wallet_secret_json_key,
       :wallet_secret_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the service-managed Coinbase CDP secrets to rotate.
+    #
+    # @!attribute [rw] secrets
+    #   The secrets to rotate. Specify at least one value. Each secret that
+    #   you specify is rotated independently.
+    #
+    #   * `API_KEY` - The API key that the payment connector uses to call
+    #     Coinbase CDP. Rotate it as routine maintenance, or if you suspect
+    #     that it is compromised.
+    #
+    #   * `WALLET_SECRET` - The wallet secret that signs transactions.
+    #     Rotate it only if it is lost or compromised. Coinbase CDP allows
+    #     one wallet secret per project, so it is replaced in place and
+    #     signing can be briefly interrupted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CoinbaseCdpRotationTargets AWS API Documentation
+    #
+    class CoinbaseCdpRotationTargets < Struct.new(
+      :secrets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1889,6 +1952,108 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The identity provider configuration used to authenticate end users to
+    # the consent portal.
+    #
+    # @!attribute [rw] credential_provider_arn
+    #   The Amazon Resource Name (ARN) of the OAuth2 credential provider
+    #   used to authenticate end users to the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] scopes
+    #   The OAuth2 scopes that the consent portal requests when
+    #   authenticating end users.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] audience
+    #   The audience value that the consent portal includes when requesting
+    #   tokens from the identity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ConsentPortalIdpConfig AWS API Documentation
+    #
+    class ConsentPortalIdpConfig < Struct.new(
+      :credential_provider_arn,
+      :scopes,
+      :audience)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource served by the consent portal.
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the source resource. For an `agentcore-gateway`
+    #   source, this is the gateway ID or its Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the source resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ConsentPortalSource AWS API Documentation
+    #
+    class ConsentPortalSource < Struct.new(
+      :identifier,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a consent portal.
+    #
+    # @!attribute [rw] sources
+    #   The resources served by the consent portal.
+    #   @return [Array<Types::ConsentPortalSource>]
+    #
+    # @!attribute [rw] consent_portal_arn
+    #   The Amazon Resource Name (ARN) of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] consent_portal_id
+    #   The unique identifier of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp for when the consent portal was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_url
+    #   The URL used to access the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp for when the consent portal was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ConsentPortalSummary AWS API Documentation
+    #
+    class ConsentPortalSummary < Struct.new(
+      :sources,
+      :consent_portal_arn,
+      :consent_portal_id,
+      :created_at,
+      :description,
+      :name,
+      :portal_url,
+      :status,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains consolidation configuration information for a memory
     # strategy.
     #
@@ -1935,7 +2100,7 @@ module Aws::BedrockAgentCoreControl
     # @!attribute [rw] raw_text
     #   The raw text content containing natural language descriptions of
     #   desired policy behavior. This text is processed by AI to generate
-    #   corresponding Cedar policy statements that match the described
+    #   corresponding Dogwood policy statements that match the described
     #   intent.
     #   @return [String]
     #
@@ -2127,6 +2292,11 @@ module Aws::BedrockAgentCoreControl
     #   example, by purpose, owner, or environment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] platform_version
+    #   The version of the runtime platform to use for the AgentCore
+    #   Runtime.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeRequest AWS API Documentation
     #
     class CreateAgentRuntimeRequest < Struct.new(
@@ -2143,7 +2313,8 @@ module Aws::BedrockAgentCoreControl
       :environment_variables,
       :filesystem_configurations,
       :capacity_provider_configuration,
-      :tags)
+      :tags,
+      :platform_version)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -2708,6 +2879,119 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the consent
+    #   portal assumes to access the resources defined in its sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_config
+    #   The identity provider configuration that the consent portal uses to
+    #   authenticate end users.
+    #   @return [Types::ConsentPortalIdpConfig]
+    #
+    # @!attribute [rw] name
+    #   The name of the consent portal. The name must be unique within your
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The resources served by the consent portal. Currently, we only
+    #   support type `agentcore-gateway`.
+    #   @return [Array<Types::ConsentPortalSource>]
+    #
+    # @!attribute [rw] description
+    #   The description of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to the consent portal. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateConsentPortalRequest AWS API Documentation
+    #
+    class CreateConsentPortalRequest < Struct.new(
+      :execution_role_arn,
+      :idp_config,
+      :name,
+      :sources,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sources
+    #   The resources served by the consent portal.
+    #   @return [Array<Types::ConsentPortalSource>]
+    #
+    # @!attribute [rw] consent_portal_arn
+    #   The Amazon Resource Name (ARN) of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] consent_portal_id
+    #   The unique identifier of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp for when the consent portal was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the consent
+    #   portal assumes to access the resources defined in its sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_config
+    #   The identity provider configuration that the consent portal uses to
+    #   authenticate end users.
+    #   @return [Types::ConsentPortalIdpConfig]
+    #
+    # @!attribute [rw] name
+    #   The name of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_url
+    #   The URL used to access the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A message that provides additional information about the current
+    #   status of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp for when the consent portal was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateConsentPortalResponse AWS API Documentation
+    #
+    class CreateConsentPortalResponse < Struct.new(
+      :sources,
+      :consent_portal_arn,
+      :consent_portal_id,
+      :created_at,
+      :description,
+      :execution_role_arn,
+      :idp_config,
+      :name,
+      :portal_url,
+      :status,
+      :status_reason,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If you don't specify this field, a
@@ -2975,21 +3259,23 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] rate_limit_id
-    #   Optional customer-defined limit ID. If not provided, system
-    #   generates one.
+    #   An optional customer-defined identifier for the rate limit. If not
+    #   provided, the system generates one.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Optional human-readable description for this limit.
+    #   An optional human-readable description for this rate limit. If not
+    #   provided, the rate limit is created without a description.
     #   @return [String]
     #
     # @!attribute [rw] dimension_keys
-    #   Ordered list of dimension names defining the scope of this limit.
-    #   Unique per gateway — no two limits can share the same dimensionKeys.
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit. Must be unique per gateway—no two rate limits can
+    #   share the same dimension keys.
     #   @return [Array<String>]
     #
     # @!attribute [rw] entries
-    #   Rule entries mapping dimension values to rate configurations.
+    #   The rule entries that map dimension values to rate configurations.
     #   @return [Array<Types::LimitEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayRateLimitRequest AWS API Documentation
@@ -3005,11 +3291,10 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # Shared fields for GatewayRateLimit responses
+    # Shared fields for `GatewayRateLimit` responses.
     #
     # @!attribute [rw] rate_limit_id
-    #   Limit identifier. Optional on Create (system-generates if not
-    #   provided by customer). Always present in responses.
+    #   The unique identifier of the created rate limit.
     #   @return [String]
     #
     # @!attribute [rw] gateway_identifier
@@ -3017,19 +3302,21 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Optional human-readable description for this limit.
+    #   The human-readable description of the rate limit.
     #   @return [String]
     #
     # @!attribute [rw] dimension_keys
-    #   Ordered list of dimension key names defining the scope of a limit
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit.
     #   @return [Array<String>]
     #
     # @!attribute [rw] entries
-    #   List of rule entries within a limit
+    #   The list of rule entries that map dimension values to rate
+    #   configurations.
     #   @return [Array<Types::LimitEntry>]
     #
     # @!attribute [rw] status
-    #   Status of a gateway limit
+    #   The current status of the rate limit.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -3686,6 +3973,10 @@ module Aws::BedrockAgentCoreControl
     #   it exceeds model limits.
     #   @return [Types::HarnessTruncationConfiguration]
     #
+    # @!attribute [rw] hooks
+    #   The lifecycle hooks to run at defined points in the agent loop.
+    #   @return [Array<Types::HarnessHook>]
+    #
     # @!attribute [rw] max_iterations
     #   The maximum number of iterations the agent loop can execute per
     #   invocation.
@@ -3722,6 +4013,7 @@ module Aws::BedrockAgentCoreControl
       :allowed_tools,
       :memory,
       :truncation,
+      :hooks,
       :max_iterations,
       :max_tokens,
       :timeout_seconds,
@@ -3785,6 +4077,12 @@ module Aws::BedrockAgentCoreControl
     #   cannot be removed.
     #   @return [Array<Types::IndexedKey>]
     #
+    # @!attribute [rw] namespace_keys
+    #   The namespace variable key definitions with optional validation
+    #   rules. Use these `namespaceKeys` in `namespaceTemplates` to control
+    #   namespace hierarchy.
+    #   @return [Array<Types::NamespaceKeyEntry>]
+    #
     # @!attribute [rw] stream_delivery_resources
     #   Configuration for streaming memory record data to external
     #   resources.
@@ -3807,6 +4105,7 @@ module Aws::BedrockAgentCoreControl
       :event_expiry_duration,
       :memory_strategies,
       :indexed_keys,
+      :namespace_keys,
       :stream_delivery_resources,
       :tags)
       SENSITIVE = [:description]
@@ -3962,6 +4261,11 @@ module Aws::BedrockAgentCoreControl
     #   results.
     #   @return [Types::ClusteringConfig]
     #
+    # @!attribute [rw] output_config
+    #   The configuration that specifies where evaluation results should be
+    #   written for monitoring and analysis.
+    #   @return [Types::OutputConfig]
+    #
     # @!attribute [rw] evaluation_execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that grants
     #   permissions to read from CloudWatch logs, write evaluation results,
@@ -3999,6 +4303,7 @@ module Aws::BedrockAgentCoreControl
       :evaluators,
       :insights,
       :clustering_config,
+      :output_config,
       :evaluation_execution_role_arn,
       :enable_on_create,
       :tags)
@@ -4484,10 +4789,10 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   The Cedar policy statement that defines the access control rules.
-    #   This contains the actual policy logic written in Cedar policy
-    #   language, specifying effect (permit or forbid), principals, actions,
-    #   resources, and conditions for agent behavior control.
+    #   The Cedar or Dogwood policy statement that defines the access
+    #   control rules. This contains the actual policy logic written in
+    #   Cedar or Dogwood, specifying effect (permit or forbid), principals,
+    #   actions, resources, and conditions for agent behavior control.
     #   @return [Types::PolicyDefinition]
     #
     # @!attribute [rw] description
@@ -4597,9 +4902,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   The Cedar policy statement that was created. This is the validated
-    #   policy definition that will be used for agent behavior control and
-    #   access decisions.
+    #   The Cedar or Dogwood policy statement that was created. This is the
+    #   validated policy definition that will be used for agent behavior
+    #   control and access decisions.
     #   @return [Types::PolicyDefinition]
     #
     # @!attribute [rw] description
@@ -4918,6 +5223,28 @@ module Aws::BedrockAgentCoreControl
       :credential_provider)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Specifies the service-managed credentials to rotate. Provide the
+    # member that matches the payment connector's `type`.
+    #
+    # @note CredentialRotationConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] coinbase_cdp
+    #   The credentials to rotate for a Coinbase CDP payment connector.
+    #   @return [Types::CoinbaseCdpRotationTargets]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CredentialRotationConfig AWS API Documentation
+    #
+    class CredentialRotationConfig < Struct.new(
+      :coinbase_cdp,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CoinbaseCdp < CredentialRotationConfig; end
+      class Unknown < CredentialRotationConfig; end
     end
 
     # The credential provider configuration for a payment connector.
@@ -5349,10 +5676,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] private_key_jwt_config
-    #   Configuration for private\_key\_jwt client authentication (RFC
-    #   7523). On Create: privateKeySource and signingAlgorithm are required
-    #   (enforced server-side). On Update: all fields are optional — only
-    #   provided fields are updated.
+    #   The private\_key\_jwt client authentication configuration for this
+    #   credential provider. When specified, the credential provider uses
+    #   JWT client assertions to authenticate with the token endpoint.
     #   @return [Types::PrivateKeyJwtConfig]
     #
     # @!attribute [rw] private_endpoint
@@ -5414,10 +5740,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Array<Types::PrivateEndpointOverride>]
     #
     # @!attribute [rw] private_key_jwt_config
-    #   Configuration for private\_key\_jwt client authentication (RFC
-    #   7523). On Create: privateKeySource and signingAlgorithm are required
-    #   (enforced server-side). On Update: all fields are optional — only
-    #   provided fields are updated.
+    #   The configuration for private\_key\_jwt client authentication used
+    #   by this OAuth2 credential provider.
     #   @return [Types::PrivateKeyJwtConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomOauth2ProviderConfigOutput AWS API Documentation
@@ -5978,6 +6302,23 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] consent_portal_identifier
+    #   The identifier of the consent portal. You can specify either the
+    #   consent portal ID or its Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteConsentPortalRequest AWS API Documentation
+    #
+    class DeleteConsentPortalRequest < Struct.new(
+      :consent_portal_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteConsentPortalResponse AWS API Documentation
+    #
+    class DeleteConsentPortalResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] dataset_id
     #   The unique identifier of the dataset.
     #   @return [String]
@@ -6146,12 +6487,11 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] rate_limit_id
-    #   Limit identifier. Optional on Create (system-generates if not
-    #   provided by customer). Always present in responses.
+    #   The unique identifier of the deleted rate limit.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Status of a gateway limit
+    #   The current status of the rate limit deletion.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteGatewayRateLimitResponse AWS API Documentation
@@ -7869,10 +8209,10 @@ module Aws::BedrockAgentCoreControl
     # allow or deny each action based on the defined policies.
     #
     # @!attribute [rw] arn
-    #   The ARN of the policy engine. The policy engine contains Cedar
-    #   policies that define fine-grained authorization rules specifying who
-    #   can perform what actions on which resources as agents interact
-    #   through the gateway.
+    #   The ARN of the policy engine. The policy engine contains Cedar or
+    #   Dogwood policies that define fine-grained authorization rules
+    #   specifying who can perform what actions on which resources as agents
+    #   interact through the gateway.
     #   @return [String]
     #
     # @!attribute [rw] mode
@@ -7925,11 +8265,11 @@ module Aws::BedrockAgentCoreControl
       class Unknown < GatewayProtocolConfiguration; end
     end
 
-    # Shared fields for GatewayRateLimit responses
+    # Contains detailed information about a gateway rate limit, including
+    # its configuration and current status.
     #
     # @!attribute [rw] rate_limit_id
-    #   Limit identifier. Optional on Create (system-generates if not
-    #   provided by customer). Always present in responses.
+    #   The unique identifier of the rate limit.
     #   @return [String]
     #
     # @!attribute [rw] gateway_identifier
@@ -7937,19 +8277,21 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Optional human-readable description for this limit.
+    #   The human-readable description of the rate limit.
     #   @return [String]
     #
     # @!attribute [rw] dimension_keys
-    #   Ordered list of dimension key names defining the scope of a limit
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit.
     #   @return [Array<String>]
     #
     # @!attribute [rw] entries
-    #   List of rule entries within a limit
+    #   The list of rule entries that map dimension values to rate
+    #   configurations.
     #   @return [Array<Types::LimitEntry>]
     #
     # @!attribute [rw] status
-    #   Status of a gateway limit
+    #   The current status of the rate limit.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -8369,6 +8711,10 @@ module Aws::BedrockAgentCoreControl
     #   The capacity provider configuration for the AgentCore Runtime.
     #   @return [Types::CapacityProviderConfiguration]
     #
+    # @!attribute [rw] platform_version
+    #   The version of the runtime platform used by the AgentCore Runtime.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeResponse AWS API Documentation
     #
     class GetAgentRuntimeResponse < Struct.new(
@@ -8392,7 +8738,8 @@ module Aws::BedrockAgentCoreControl
       :request_header_configuration,
       :metadata_configuration,
       :filesystem_configurations,
-      :capacity_provider_configuration)
+      :capacity_provider_configuration,
+      :platform_version)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -8940,6 +9287,89 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] consent_portal_identifier
+    #   The identifier of the consent portal. You can specify either the
+    #   consent portal ID or its Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetConsentPortalRequest AWS API Documentation
+    #
+    class GetConsentPortalRequest < Struct.new(
+      :consent_portal_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sources
+    #   The resources served by the consent portal.
+    #   @return [Array<Types::ConsentPortalSource>]
+    #
+    # @!attribute [rw] consent_portal_arn
+    #   The Amazon Resource Name (ARN) of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] consent_portal_id
+    #   The unique identifier of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp for when the consent portal was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the consent
+    #   portal assumes to access the resources defined in its sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_config
+    #   The identity provider configuration that the consent portal uses to
+    #   authenticate end users.
+    #   @return [Types::ConsentPortalIdpConfig]
+    #
+    # @!attribute [rw] name
+    #   The name of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_url
+    #   The URL used to access the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A message that provides additional information about the current
+    #   status of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp for when the consent portal was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetConsentPortalResponse AWS API Documentation
+    #
+    class GetConsentPortalResponse < Struct.new(
+      :sources,
+      :consent_portal_arn,
+      :consent_portal_id,
+      :created_at,
+      :description,
+      :execution_role_arn,
+      :idp_config,
+      :name,
+      :portal_url,
+      :status,
+      :status_reason,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dataset_id
     #   The unique identifier of the dataset to retrieve.
     #   @return [String]
@@ -9184,11 +9614,10 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # Shared fields for GatewayRateLimit responses
+    # Shared fields for `GatewayRateLimit` responses.
     #
     # @!attribute [rw] rate_limit_id
-    #   Limit identifier. Optional on Create (system-generates if not
-    #   provided by customer). Always present in responses.
+    #   The unique identifier of the rate limit.
     #   @return [String]
     #
     # @!attribute [rw] gateway_identifier
@@ -9196,19 +9625,21 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Optional human-readable description for this limit.
+    #   The human-readable description of the rate limit.
     #   @return [String]
     #
     # @!attribute [rw] dimension_keys
-    #   Ordered list of dimension key names defining the scope of a limit
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit.
     #   @return [Array<String>]
     #
     # @!attribute [rw] entries
-    #   List of rule entries within a limit
+    #   The list of rule entries that map dimension values to rate
+    #   configurations.
     #   @return [Array<Types::LimitEntry>]
     #
     # @!attribute [rw] status
-    #   Status of a gateway limit
+    #   The current status of the rate limit.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -9879,6 +10310,20 @@ module Aws::BedrockAgentCoreControl
     #   provider integration.
     #   @return [String]
     #
+    # @!attribute [rw] provision_mode
+    #   Specifies how the payment connector was provisioned. Payment
+    #   connectors that were created before this field was available return
+    #   `MANUAL`.
+    #
+    #   * `MANUAL` - You provided the credential provider configurations, so
+    #     you own the credentials. Rotate them with the payment provider,
+    #     then call `UpdatePaymentCredentialProvider`.
+    #
+    #   * `QUICK_CREATE` - AgentCore provisioned the credential provider for
+    #     you, so the credentials are service-managed. You can rotate them
+    #     with `RotatePaymentConnectorCredentials`.
+    #   @return [String]
+    #
     # @!attribute [rw] credential_provider_configurations
     #   The credential provider configurations for the payment connector.
     #   @return [Array<Types::CredentialsProviderConfiguration>]
@@ -9903,6 +10348,14 @@ module Aws::BedrockAgentCoreControl
     #   `PENDING_AUTHENTICATION`.
     #   @return [String]
     #
+    # @!attribute [rw] credentials_updated_at
+    #   The timestamp when the payment connector's current service-managed
+    #   credentials took effect. It is first set when the credentials are
+    #   provisioned and is updated by each rotation. This field is present
+    #   only for payment connectors with a `provisionMode` of
+    #   `QUICK_CREATE`.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentConnectorResponse AWS API Documentation
     #
     class GetPaymentConnectorResponse < Struct.new(
@@ -9910,11 +10363,13 @@ module Aws::BedrockAgentCoreControl
       :name,
       :description,
       :type,
+      :provision_mode,
       :credential_provider_configurations,
       :created_at,
       :last_updated_at,
       :status,
-      :authorization_url)
+      :authorization_url,
+      :credentials_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10435,9 +10890,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   The Cedar policy statement that defines the access control rules.
-    #   This contains the actual policy logic used for agent behavior
-    #   control and access decisions.
+    #   The Cedar or Dogwood policy statement that defines the access
+    #   control rules. This contains the actual policy logic used for agent
+    #   behavior control and access decisions.
     #   @return [Types::PolicyDefinition]
     #
     # @!attribute [rw] description
@@ -11023,6 +11478,10 @@ module Aws::BedrockAgentCoreControl
     #   memory.
     #   @return [Types::HarnessMemoryConfiguration]
     #
+    # @!attribute [rw] hooks
+    #   The lifecycle hooks configured for the harness.
+    #   @return [Array<Types::HarnessHook>]
+    #
     # @!attribute [rw] max_iterations
     #   The maximum number of iterations in the agent loop allowed before
     #   exiting per invocation.
@@ -11063,11 +11522,50 @@ module Aws::BedrockAgentCoreControl
       :environment_variables,
       :authorizer_configuration,
       :memory,
+      :hooks,
       :max_iterations,
       :max_tokens,
       :timeout_seconds,
       :failure_reason)
       SENSITIVE = [:environment_variables]
+      include Aws::Structure
+    end
+
+    # The configuration for a hook that runs after an invocation completes.
+    #
+    # @!attribute [rw] name
+    #   The name of the hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target that receives the hook event.
+    #   @return [Types::HarnessHookTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessAfterInvocationHook AWS API Documentation
+    #
+    class HarnessAfterInvocationHook < Struct.new(
+      :name,
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a hook that runs after a tool call completes.
+    #
+    # @!attribute [rw] name
+    #   The name of the hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target that receives the hook event.
+    #   @return [Types::HarnessHookTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessAfterToolCallHook AWS API Documentation
+    #
+    class HarnessAfterToolCallHook < Struct.new(
+      :name,
+      :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11281,6 +11779,44 @@ module Aws::BedrockAgentCoreControl
       :top_p,
       :api_format,
       :additional_params)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a hook that runs before an invocation begins.
+    #
+    # @!attribute [rw] name
+    #   The name of the hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target that receives the hook event.
+    #   @return [Types::HarnessHookTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessBeforeInvocationHook AWS API Documentation
+    #
+    class HarnessBeforeInvocationHook < Struct.new(
+      :name,
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a hook that runs before the agent calls a tool.
+    #
+    # @!attribute [rw] name
+    #   The name of the hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target that receives the hook event.
+    #   @return [Types::HarnessHookTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessBeforeToolCallHook AWS API Documentation
+    #
+    class HarnessBeforeToolCallHook < Struct.new(
+      :name,
+      :target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11510,6 +12046,140 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A lifecycle hook configuration. Specify one hook type.
+    #
+    # @note HarnessHook is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note HarnessHook is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of HarnessHook corresponding to the set member.
+    #
+    # @!attribute [rw] before_invocation
+    #   A hook that runs before an invocation begins.
+    #   @return [Types::HarnessBeforeInvocationHook]
+    #
+    # @!attribute [rw] after_invocation
+    #   A hook that runs after an invocation completes.
+    #   @return [Types::HarnessAfterInvocationHook]
+    #
+    # @!attribute [rw] before_tool_call
+    #   A hook that runs before the agent calls a tool.
+    #   @return [Types::HarnessBeforeToolCallHook]
+    #
+    # @!attribute [rw] after_tool_call
+    #   A hook that runs after a tool call completes.
+    #   @return [Types::HarnessAfterToolCallHook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessHook AWS API Documentation
+    #
+    class HarnessHook < Struct.new(
+      :before_invocation,
+      :after_invocation,
+      :before_tool_call,
+      :after_tool_call,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class BeforeInvocation < HarnessHook; end
+      class AfterInvocation < HarnessHook; end
+      class BeforeToolCall < HarnessHook; end
+      class AfterToolCall < HarnessHook; end
+      class Unknown < HarnessHook; end
+    end
+
+    # The configuration for an Amazon EventBridge hook target.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Amazon EventBridge event bus to send hook events to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessHookEventBridgeTarget AWS API Documentation
+    #
+    class HarnessHookEventBridgeTarget < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an AWS Lambda hook target.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Lambda function to invoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   The maximum number of seconds to wait for the Lambda function
+    #   response. The default is 60 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_mode
+    #   The behavior when the Lambda function times out, returns an error,
+    #   or returns an invalid response. The default is `DENY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessHookLambdaTarget AWS API Documentation
+    #
+    class HarnessHookLambdaTarget < Struct.new(
+      :arn,
+      :timeout_seconds,
+      :failure_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an Amazon SNS hook target.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Amazon SNS topic to publish hook events to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessHookSnsTarget AWS API Documentation
+    #
+    class HarnessHookSnsTarget < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target that receives lifecycle hook events. Specify one target
+    # type.
+    #
+    # @note HarnessHookTarget is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note HarnessHookTarget is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of HarnessHookTarget corresponding to the set member.
+    #
+    # @!attribute [rw] lambda
+    #   A Lambda hook target that invokes an AWS Lambda function
+    #   synchronously and waits for its response.
+    #   @return [Types::HarnessHookLambdaTarget]
+    #
+    # @!attribute [rw] sns
+    #   An Amazon SNS hook target that publishes the hook event without
+    #   waiting for a response.
+    #   @return [Types::HarnessHookSnsTarget]
+    #
+    # @!attribute [rw] event_bridge
+    #   An Amazon EventBridge hook target that sends the hook event without
+    #   waiting for a response.
+    #   @return [Types::HarnessHookEventBridgeTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessHookTarget AWS API Documentation
+    #
+    class HarnessHookTarget < Struct.new(
+      :lambda,
+      :sns,
+      :event_bridge,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Lambda < HarnessHookTarget; end
+      class Sns < HarnessHookTarget; end
+      class EventBridge < HarnessHookTarget; end
+      class Unknown < HarnessHookTarget; end
+    end
+
     # Configuration for an inline function tool. When the agent calls this
     # tool, the tool call is returned to the caller for external execution.
     #
@@ -11698,6 +12368,10 @@ module Aws::BedrockAgentCoreControl
     #   The ARN of your OpenAI API key on AgentCore Identity.
     #   @return [String]
     #
+    # @!attribute [rw] api_base
+    #   Optional custom endpoint URL for an OpenAI-compatible endpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] max_tokens
     #   The maximum number of tokens to allow in the generated response per
     #   model call.
@@ -11725,12 +12399,13 @@ module Aws::BedrockAgentCoreControl
     class HarnessOpenAiModelConfig < Struct.new(
       :model_id,
       :api_key_arn,
+      :api_base,
       :max_tokens,
       :temperature,
       :top_p,
       :api_format,
       :additional_params)
-      SENSITIVE = []
+      SENSITIVE = [:api_base]
       include Aws::Structure
     end
 
@@ -13002,27 +13677,30 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # A single rule entry within a limit, mapping dimension values to rate
-    # configurations
+    # A single rule entry within a rate limit that maps dimension values to
+    # rate configurations. Each entry defines the rate limits for a specific
+    # combination of dimension values.
     #
     # @!attribute [rw] dimensions
-    #   Map of dimension name to dimension value, matching the parent
-    #   limit's dimensionKeys. Keys must exactly match the dimensionKeys.
-    #   Values may be "*" as a wildcard. "*" may only appear at trailing
-    #   positions (based on dimensionKeys ordering).
+    #   A map of dimension names to dimension values for this rule entry.
+    #   Keys must match the parent rate limit's dimension keys. Values may
+    #   use `*` as a wildcard, but only in trailing positions based on the
+    #   dimension keys ordering.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] requests
-    #   Request rate limits (RPS or RPM). Limited to 1 entry for now.
+    #   The request rate limit configuration. Specifies the maximum number
+    #   of requests allowed per time period.
     #   @return [Array<Types::RateConfig>]
     #
     # @!attribute [rw] tokens
-    #   Token rate limits (TPM). Limited to 1 entry for now. — P1
+    #   The token rate limit configuration. Specifies the maximum number of
+    #   tokens allowed per time period.
     #   @return [Array<Types::RateConfig>]
     #
     # @!attribute [rw] connections
-    #   Connection rate limits (per second only). Limited to 1 entry for
-    #   now. — P2
+    #   The connection rate limit configuration. Specifies the maximum
+    #   number of concurrent connections allowed.
     #   @return [Array<Types::RateConfig>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LimitEntry AWS API Documentation
@@ -13549,6 +14227,43 @@ module Aws::BedrockAgentCoreControl
     #
     class ListConfigurationBundlesResponse < Struct.new(
       :bundles,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of consent portals to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next page of results. Use the value returned
+    #   in a previous response to request the next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListConsentPortalsRequest AWS API Documentation
+    #
+    class ListConsentPortalsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] consent_portals
+    #   The list of consent portals.
+    #   @return [Array<Types::ConsentPortalSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use in a subsequent request to retrieve the next page
+    #   of results. This value is null when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListConsentPortalsResponse AWS API Documentation
+    #
+    class ListConsentPortalsResponse < Struct.new(
+      :consent_portals,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -14463,7 +15178,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] policy_generation_assets
-    #   An array of generated policy assets including Cedar policies and
+    #   An array of generated policy assets including Dogwood policies and
     #   related artifacts from the AI-powered policy generation process.
     #   Each asset represents a different policy option or variation
     #   generated from the original natural language input.
@@ -14921,6 +15636,14 @@ module Aws::BedrockAgentCoreControl
     #   controls whether response streaming is enabled for the gateway.
     #   @return [Types::StreamingConfiguration]
     #
+    # @!attribute [rw] disable_mcp_list_tools_pagination
+    #   Specifies whether pagination is disabled for the Model Context
+    #   Protocol (MCP) `tools/list` operation. When set to `true`, the
+    #   gateway returns the complete list of tools in a single response
+    #   without a pagination cursor. When set to `false` or omitted, the
+    #   gateway returns tools in paginated responses.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/MCPGatewayConfiguration AWS API Documentation
     #
     class MCPGatewayConfiguration < Struct.new(
@@ -14928,7 +15651,8 @@ module Aws::BedrockAgentCoreControl
       :instructions,
       :search_type,
       :session_configuration,
-      :streaming_configuration)
+      :streaming_configuration,
+      :disable_mcp_list_tools_pagination)
       SENSITIVE = [:instructions]
       include Aws::Structure
     end
@@ -15115,11 +15839,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] mcp_tool_schema
-    #   The tool schema configuration for the MCP server target. Supported
-    #   only when the credential provider is configured with an
-    #   authorization code grant type. Dynamic tool
-    #   discovery/synchronization will be disabled when target is configured
-    #   with mcpToolSchema.
+    #   A static tool list for the MCP server target. It is supported for
+    #   all credential providers. Dynamic tool discovery/synchronization
+    #   will be disabled when a target is configured with mcpToolSchema.
     #   @return [Types::McpToolSchemaConfiguration]
     #
     # @!attribute [rw] listing_mode
@@ -15293,6 +16015,12 @@ module Aws::BedrockAgentCoreControl
     #   used in metadata filters.
     #   @return [Array<Types::IndexedKey>]
     #
+    # @!attribute [rw] namespace_keys
+    #   The namespace variable key definitions for this memory. Namespace
+    #   keys define custom variables used in `namespaceTemplates` with
+    #   optional validation rules.
+    #   @return [Array<Types::NamespaceKeyEntry>]
+    #
     # @!attribute [rw] stream_delivery_resources
     #   Configuration for streaming memory record data to external
     #   resources.
@@ -15320,6 +16048,7 @@ module Aws::BedrockAgentCoreControl
       :updated_at,
       :strategies,
       :indexed_keys,
+      :namespace_keys,
       :stream_delivery_resources,
       :managed_by_resource_arn)
       SENSITIVE = [:description]
@@ -15872,6 +16601,48 @@ module Aws::BedrockAgentCoreControl
       :consolidation,
       :reflection,
       :self_managed_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A namespace variable key definition with optional
+    # `NamespaceKeyValidation` rules.
+    #
+    # @!attribute [rw] key
+    #   The namespace variable key name.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation
+    #   The validation rules that constrain values for this namespace
+    #   variable at runtime (`CreateEvent` API).
+    #   @return [Types::NamespaceKeyValidation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/NamespaceKeyEntry AWS API Documentation
+    #
+    class NamespaceKeyEntry < Struct.new(
+      :key,
+      :validation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The validation rules for namespace variable values. When you specify
+    # multiple rules, the service enforces a logical `AND` across all
+    # provided key-value pairs.
+    #
+    # @!attribute [rw] allowed_values
+    #   The allowed values for this namespace variable key.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regex_pattern
+    #   A regex pattern that the namespace variable key-value must match.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/NamespaceKeyValidation AWS API Documentation
+    #
+    class NamespaceKeyValidation < Struct.new(
+      :allowed_values,
+      :regex_pattern)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16432,14 +17203,35 @@ module Aws::BedrockAgentCoreControl
     #   same target.
     #   @return [Types::StickinessConfiguration]
     #
+    # @!attribute [rw] static_query_parameters
+    #   A map of static query parameters that the gateway always appends to
+    #   the outbound URL when forwarding requests to the target. The total
+    #   outbound URL length, which includes the endpoint and the
+    #   percent-encoded query parameters, is enforced by the service.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] static_query_parameter_conflict_resolution
+    #   Controls precedence when a client request supplies a query parameter
+    #   whose name matches a configured static query parameter. If not set,
+    #   defaults to `CLIENT_OVERRIDE`:
+    #
+    #   * `CLIENT_OVERRIDE` - The client-supplied value overrides the
+    #     configured static value for that parameter name.
+    #
+    #   * `STATIC_OVERRIDE` - The configured static value is retained,
+    #     overriding the client-supplied value for that parameter name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PassthroughTargetConfiguration AWS API Documentation
     #
     class PassthroughTargetConfiguration < Struct.new(
       :endpoint,
       :protocol_type,
       :schema,
-      :stickiness_configuration)
-      SENSITIVE = []
+      :stickiness_configuration,
+      :static_query_parameters,
+      :static_query_parameter_conflict_resolution)
+      SENSITIVE = [:static_query_parameters]
       include Aws::Structure
     end
 
@@ -16458,6 +17250,19 @@ module Aws::BedrockAgentCoreControl
     #   provider integration.
     #   @return [String]
     #
+    # @!attribute [rw] provision_mode
+    #   Specifies how the payment connector was provisioned. Payment
+    #   connectors that were created before this field was available return
+    #   `MANUAL`.
+    #
+    #   * `MANUAL` - You provided the credential provider configurations, so
+    #     you own the credentials.
+    #
+    #   * `QUICK_CREATE` - AgentCore provisioned the credential provider for
+    #     you, so the credentials are service-managed and you can rotate
+    #     them with `RotatePaymentConnectorCredentials`.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the payment connector. Possible values include
     #   `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
@@ -16474,6 +17279,7 @@ module Aws::BedrockAgentCoreControl
       :payment_connector_id,
       :name,
       :type,
+      :provision_mode,
       :status,
       :last_updated_at)
       SENSITIVE = []
@@ -16675,17 +17481,17 @@ module Aws::BedrockAgentCoreControl
     end
 
     # Represents a complete policy resource within the AgentCore Policy
-    # system. Policies are ARN-able resources that contain Cedar policy
-    # statements and associated metadata for controlling agent behavior and
-    # access decisions. Each policy belongs to a policy engine and defines
-    # fine-grained authorization rules that are evaluated in real-time as
-    # agents interact with tools through Gateway. Policies use the Cedar
-    # policy language to specify who (principals based on OAuth claims like
+    # system. Policies are ARN-able resources that contain Cedar or Dogwood
+    # policy statements and associated metadata for controlling agent
+    # behavior and access decisions. Each policy belongs to a policy engine
+    # and defines fine-grained authorization rules that are evaluated in
+    # real-time as agents interact with tools through Gateway. Policies use
+    # Cedar or Dogwood to specify who (principals based on OAuth claims like
     # username, role, or scope) can perform what actions (tool calls) on
     # which resources (Gateways), with optional conditions for
     # attribute-based access control. Multiple policies can apply to a
-    # single request, with Cedar's forbid-wins semantics ensuring that
-    # security restrictions are never accidentally overridden.
+    # single request, with forbid-wins semantics ensuring that security
+    # restrictions are never accidentally overridden.
     #
     # @!attribute [rw] policy_id
     #   The unique identifier for the policy. This system-generated
@@ -16731,9 +17537,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   The Cedar policy statement that defines the access control rules.
-    #   This contains the actual policy logic used for agent behavior
-    #   control and access decisions.
+    #   The Cedar or Dogwood policy statement that defines the access
+    #   control rules. This contains the actual policy logic used for agent
+    #   behavior control and access decisions.
     #   @return [Types::PolicyDefinition]
     #
     # @!attribute [rw] description
@@ -16792,15 +17598,16 @@ module Aws::BedrockAgentCoreControl
     #   The generated policy asset information within the policy definition
     #   structure. This contains information identifying a generated policy
     #   asset from the AI-powered policy generation process within the
-    #   AgentCore Policy system. Each asset contains a Cedar policy
+    #   AgentCore Policy system. Each asset contains a Dogwood policy
     #   statement generated from natural language input, along with
     #   associated metadata and analysis findings to help users evaluate and
     #   select the most appropriate policy option.
     #   @return [Types::PolicyGenerationDetails]
     #
     # @!attribute [rw] policy
-    #   An AgentCore policy statement that defines the access control rules.
-    #   The statement can be a Cedar policy or a guardrails definition.
+    #   The Dogwood policy statement that defines the access control rules.
+    #   This policy definition can include Dogwood policies and supports
+    #   temporal conditions and information providers such as guardrails.
     #   @return [Types::PolicyStatement]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PolicyDefinition AWS API Documentation
@@ -16953,7 +17760,7 @@ module Aws::BedrockAgentCoreControl
 
     # Represents a policy generation request within the AgentCore Policy
     # system. Tracks the AI-powered conversion of natural language
-    # descriptions into Cedar policy statements, enabling users to author
+    # descriptions into Dogwood policy statements, enabling users to author
     # policies by describing authorization requirements in plain English.
     # The generation process analyzes the natural language input along with
     # the Gateway's tool context and Cedar schema to produce one or more
@@ -17024,7 +17831,7 @@ module Aws::BedrockAgentCoreControl
 
     # Represents a generated policy asset from the AI-powered policy
     # generation process within the AgentCore Policy system. Each asset
-    # contains a Cedar policy statement generated from natural language
+    # contains a Dogwood policy statement generated from natural language
     # input, along with associated metadata and analysis findings to help
     # users evaluate and select the most appropriate policy option.
     #
@@ -17046,13 +17853,13 @@ module Aws::BedrockAgentCoreControl
     #   The portion of the original natural language input that this
     #   generated policy asset addresses. This helps users understand which
     #   part of their policy description was translated into this specific
-    #   Cedar policy statement, enabling better policy selection and
+    #   Dogwood policy statement, enabling better policy selection and
     #   refinement. When a single natural language input describes multiple
     #   authorization requirements, the generation process creates separate
     #   policy assets for each requirement, with each asset's
     #   rawTextFragment showing which requirement it addresses. Use this
     #   mapping to verify that all parts of your natural language input were
-    #   correctly translated into Cedar policies.
+    #   correctly translated into Dogwood policies.
     #   @return [String]
     #
     # @!attribute [rw] findings
@@ -17075,7 +17882,7 @@ module Aws::BedrockAgentCoreControl
 
     # Represents the information identifying a generated policy asset from
     # the AI-powered policy generation process within the AgentCore Policy
-    # system. Each asset contains a Cedar policy statement generated from
+    # system. Each asset contains a Dogwood policy statement generated from
     # natural language input, along with associated metadata and analysis
     # findings to help users evaluate and select the most appropriate policy
     # option.
@@ -17157,12 +17964,13 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # An AgentCore policy statement, which supports plain Cedar policies as
-    # well as guardrails definitions.
+    # An AgentCore Cedar or Dogwood policy statement, which supports plain
+    # Cedar policies, temporal policies, and guardrails definitions.
     #
     # @!attribute [rw] statement
-    #   The body of the AgentCore policy statement. Contains the policy
-    #   logic, which can be a Cedar policy or a guardrails definition.
+    #   The body of the AgentCore Cedar or Dogwood policy statement.
+    #   Contains the policy logic, which can be a Cedar policy, a temporal
+    #   policy, or a guardrails definition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PolicyStatement AWS API Documentation
@@ -17279,10 +18087,8 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # Configuration for private\_key\_jwt client authentication (RFC 7523).
-    # On Create: privateKeySource and signingAlgorithm are required
-    # (enforced server-side). On Update: all fields are optional — only
-    # provided fields are updated.
+    # The private key configuration for private\_key\_jwt client
+    # authentication.
     #
     # @!attribute [rw] private_key_source
     #   The private key source for the JWT client assertion.
@@ -17410,7 +18216,8 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # Rate configuration for a metric (requests or tokens)
+    # Contains the rate configuration for a rate limit metric, specifying
+    # the allowed rate and time period.
     #
     # @!attribute [rw] rate
     #   The rate value for the limit. For request limits, this is the number
@@ -17420,7 +18227,11 @@ module Aws::BedrockAgentCoreControl
     #   @return [Float]
     #
     # @!attribute [rw] period
-    #   Time period for rate limiting
+    #   The time period for the rate limit. Valid values:
+    #
+    #   * `second`—Measures the rate limit over a one-second window.
+    #
+    #   * `minute`—Measures the rate limit over a one-minute window.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RateConfig AWS API Documentation
@@ -17944,6 +18755,77 @@ module Aws::BedrockAgentCoreControl
       :encrypted,
       :kms_key_id,
       :free_space_gi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the payment connector whose credentials you
+    #   want to rotate.
+    #   @return [String]
+    #
+    # @!attribute [rw] credentials_to_rotate
+    #   The credentials to rotate. Specify the member that matches the
+    #   payment connector's `type`. Each credential that you select is
+    #   rotated independently.
+    #   @return [Types::CredentialRotationConfig]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RotatePaymentConnectorCredentialsRequest AWS API Documentation
+    #
+    class RotatePaymentConnectorCredentialsRequest < Struct.new(
+      :payment_manager_id,
+      :payment_connector_id,
+      :credentials_to_rotate,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the payment connector was last updated, which is
+    #   when the rotation completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the payment connector, which is `READY` after
+    #   a successful rotation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RotatePaymentConnectorCredentialsResponse AWS API Documentation
+    #
+    class RotatePaymentConnectorCredentialsResponse < Struct.new(
+      :payment_connector_id,
+      :payment_manager_id,
+      :last_updated_at,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18780,7 +19662,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @!attribute [rw] content
     #   The natural language description of the desired policy behavior.
-    #   This content is processed by AI to generate corresponding Cedar
+    #   This content is processed by AI to generate corresponding Dogwood
     #   policy statements that match the described intent.
     #   @return [Types::Content]
     #
@@ -18922,11 +19804,18 @@ module Aws::BedrockAgentCoreControl
     #   to 86400.
     #   @return [Integer]
     #
+    # @!attribute [rw] composite_identifier
+    #   Additional headers to include in session affinity routing. When set,
+    #   requests are only considered part of the same session if both the
+    #   `identifier` and all composite identifier values match.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/StickinessConfiguration AWS API Documentation
     #
     class StickinessConfiguration < Struct.new(
       :identifier,
-      :timeout)
+      :timeout,
+      :composite_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20072,6 +20961,11 @@ module Aws::BedrockAgentCoreControl
     #   Runtime.
     #   @return [Types::CapacityProviderConfiguration]
     #
+    # @!attribute [rw] platform_version
+    #   The updated version of the runtime platform to use for the AgentCore
+    #   Runtime.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -20096,6 +20990,7 @@ module Aws::BedrockAgentCoreControl
       :environment_variables,
       :filesystem_configurations,
       :capacity_provider_configuration,
+      :platform_version,
       :client_token)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
@@ -20399,6 +21294,106 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] consent_portal_identifier
+    #   The identifier of the consent portal. You can specify either the
+    #   consent portal ID or its Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the consent
+    #   portal assumes to access the resources defined in its sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_config
+    #   The identity provider configuration that the consent portal uses to
+    #   authenticate end users.
+    #   @return [Types::ConsentPortalIdpConfig]
+    #
+    # @!attribute [rw] description
+    #   The description of the consent portal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateConsentPortalRequest AWS API Documentation
+    #
+    class UpdateConsentPortalRequest < Struct.new(
+      :consent_portal_identifier,
+      :execution_role_arn,
+      :idp_config,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sources
+    #   The resources served by the consent portal.
+    #   @return [Array<Types::ConsentPortalSource>]
+    #
+    # @!attribute [rw] consent_portal_arn
+    #   The Amazon Resource Name (ARN) of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] consent_portal_id
+    #   The unique identifier of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp for when the consent portal was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the consent
+    #   portal assumes to access the resources defined in its sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_config
+    #   The identity provider configuration that the consent portal uses to
+    #   authenticate end users.
+    #   @return [Types::ConsentPortalIdpConfig]
+    #
+    # @!attribute [rw] name
+    #   The name of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_url
+    #   The URL used to access the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A message that provides additional information about the current
+    #   status of the consent portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp for when the consent portal was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateConsentPortalResponse AWS API Documentation
+    #
+    class UpdateConsentPortalResponse < Struct.new(
+      :sources,
+      :consent_portal_arn,
+      :consent_portal_id,
+      :created_at,
+      :description,
+      :execution_role_arn,
+      :idp_config,
+      :name,
+      :portal_url,
+      :status,
+      :status_reason,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dataset_id
     #   The unique identifier of the dataset.
     #   @return [String]
@@ -20623,12 +21618,12 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Optional human-readable description for this limit.
+    #   The updated human-readable description for this rate limit.
     #   @return [String]
     #
     # @!attribute [rw] entries
-    #   Updated rule entries. key and dimensionKeys are immutable and cannot
-    #   be changed.
+    #   The updated rule entries. The dimension keys are immutable after
+    #   creation and cannot be changed.
     #   @return [Array<Types::LimitEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayRateLimitRequest AWS API Documentation
@@ -20642,11 +21637,10 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # Shared fields for GatewayRateLimit responses
+    # Shared fields for `GatewayRateLimit` responses.
     #
     # @!attribute [rw] rate_limit_id
-    #   Limit identifier. Optional on Create (system-generates if not
-    #   provided by customer). Always present in responses.
+    #   The unique identifier of the rate limit.
     #   @return [String]
     #
     # @!attribute [rw] gateway_identifier
@@ -20654,19 +21648,21 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Optional human-readable description for this limit.
+    #   The human-readable description of the rate limit.
     #   @return [String]
     #
     # @!attribute [rw] dimension_keys
-    #   Ordered list of dimension key names defining the scope of a limit
+    #   The ordered list of dimension key names that define the scope of
+    #   this rate limit.
     #   @return [Array<String>]
     #
     # @!attribute [rw] entries
-    #   List of rule entries within a limit
+    #   The list of rule entries that map dimension values to rate
+    #   configurations.
     #   @return [Array<Types::LimitEntry>]
     #
     # @!attribute [rw] status
-    #   Status of a gateway limit
+    #   The current status of the rate limit.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -21283,6 +22279,12 @@ module Aws::BedrockAgentCoreControl
     #   not specified, the existing value is retained.
     #   @return [Types::HarnessTruncationConfiguration]
     #
+    # @!attribute [rw] hooks
+    #   The lifecycle hooks to run at defined points in the agent loop. If
+    #   specified, this replaces all existing hooks. If not specified, the
+    #   existing hooks are retained.
+    #   @return [Array<Types::HarnessHook>]
+    #
     # @!attribute [rw] max_iterations
     #   The maximum number of iterations the agent loop can execute per
     #   invocation. If not specified, the existing value is retained.
@@ -21316,6 +22318,7 @@ module Aws::BedrockAgentCoreControl
       :allowed_tools,
       :memory,
       :truncation,
+      :hooks,
       :max_iterations,
       :max_tokens,
       :timeout_seconds)
@@ -21371,6 +22374,13 @@ module Aws::BedrockAgentCoreControl
     #   removed.
     #   @return [Array<Types::IndexedKey>]
     #
+    # @!attribute [rw] namespace_keys
+    #   The namespace variable key definitions with validation rules for
+    #   this memory. This value fully replaces the existing set — any key
+    #   you omit is removed. Any referenced `namespaceKey` omission will
+    #   throw ValidationException.
+    #   @return [Array<Types::NamespaceKeyEntry>]
+    #
     # @!attribute [rw] stream_delivery_resources
     #   Configuration for streaming memory record data to external
     #   resources.
@@ -21386,6 +22396,7 @@ module Aws::BedrockAgentCoreControl
       :memory_execution_role_arn,
       :memory_strategies,
       :add_indexed_keys,
+      :namespace_keys,
       :stream_delivery_resources)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -21540,6 +22551,11 @@ module Aws::BedrockAgentCoreControl
     #   The updated clustering configuration for periodic batch evaluation.
     #   @return [Types::ClusteringConfig]
     #
+    # @!attribute [rw] output_config
+    #   The configuration that specifies where evaluation results should be
+    #   written for monitoring and analysis.
+    #   @return [Types::OutputConfig]
+    #
     # @!attribute [rw] evaluation_execution_role_arn
     #   The updated Amazon Resource Name (ARN) of the IAM role used for
     #   evaluation execution.
@@ -21561,6 +22577,7 @@ module Aws::BedrockAgentCoreControl
       :evaluators,
       :insights,
       :clustering_config,
+      :output_config,
       :evaluation_execution_role_arn,
       :execution_status)
       SENSITIVE = [:description]
@@ -21973,9 +22990,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::UpdatedDescription]
     #
     # @!attribute [rw] definition
-    #   The new Cedar policy statement that defines the access control
-    #   rules. This replaces the existing policy definition with new logic
-    #   while maintaining the policy's identity.
+    #   The new Cedar or Dogwood policy statement that defines the access
+    #   control rules. This replaces the existing policy definition with new
+    #   logic while maintaining the policy's identity.
     #   @return [Types::PolicyDefinition]
     #
     # @!attribute [rw] validation_mode
@@ -22043,7 +23060,7 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   The updated Cedar policy statement.
+    #   The updated Cedar or Dogwood policy statement.
     #   @return [Types::PolicyDefinition]
     #
     # @!attribute [rw] description

@@ -810,6 +810,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Associates a Device Defender security profile with a thing group or
     # this account. Each thing group or account can have up to five security
     # profiles associated with it.
@@ -988,6 +998,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Cancels a Device Defender ML Detect mitigation action.
     #
     # Requires permission to access the
@@ -1709,6 +1729,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Use this API to define a Custom Metric published by your devices to
     # Device Defender.
     #
@@ -1780,6 +1810,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Create a dimension that you can use to limit the scope of a metric
     # used in a security profile for IoT Device Defender. For example, using
     # a `TOPIC_FILTER` dimension, you can narrow down the scope of the
@@ -3483,6 +3523,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Creates a Device Defender security profile.
     #
     # Requires permission to access the [CreateSecurityProfile][1] action.
@@ -4139,6 +4189,23 @@ module Aws::IoT
     #             latitude: "String", # required
     #             longitude: "String", # required
     #           },
+    #           influx_db: {
+    #             destination_arn: "AwsArn", # required
+    #             role_arn: "AwsArn", # required
+    #             database_name: "InfluxDBDatabaseName", # required
+    #             table_name: "InfluxDBTableName", # required
+    #             organization: "InfluxDBOrganization",
+    #             tags: {
+    #               "InfluxDBTagName" => "InfluxDBTagValue",
+    #             },
+    #             timestamp_unit: "s", # accepts s, ms, us, ns
+    #             batch_config: {
+    #               max_batch_size: 1,
+    #               max_batch_open_ms: 1,
+    #               max_batch_size_bytes: 1,
+    #               batch_across_topics: false,
+    #             },
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -4355,6 +4422,23 @@ module Aws::IoT
     #           latitude: "String", # required
     #           longitude: "String", # required
     #         },
+    #         influx_db: {
+    #           destination_arn: "AwsArn", # required
+    #           role_arn: "AwsArn", # required
+    #           database_name: "InfluxDBDatabaseName", # required
+    #           table_name: "InfluxDBTableName", # required
+    #           organization: "InfluxDBOrganization",
+    #           tags: {
+    #             "InfluxDBTagName" => "InfluxDBTagValue",
+    #           },
+    #           timestamp_unit: "s", # accepts s, ms, us, ns
+    #           batch_config: {
+    #             max_batch_size: 1,
+    #             max_batch_open_ms: 1,
+    #             max_batch_size_bytes: 1,
+    #             batch_across_topics: false,
+    #           },
+    #         },
     #       },
     #     },
     #     tags: "String",
@@ -4397,6 +4481,13 @@ module Aws::IoT
     #         vpc_id: "VpcId", # required
     #         role_arn: "AwsArn", # required
     #       },
+    #       influx_db_configuration: {
+    #         endpoint: "Url", # required
+    #         influx_db_version: "V2", # required, accepts V2, V3
+    #         secret_id: "InfluxDBSecretId", # required
+    #         secret_type: "SecretString", # accepts SecretString, SecretBinary
+    #         secret_key: "InfluxDBSecretKey",
+    #       },
     #     },
     #   })
     #
@@ -4414,6 +4505,11 @@ module Aws::IoT
     #   resp.topic_rule_destination.vpc_properties.security_groups[0] #=> String
     #   resp.topic_rule_destination.vpc_properties.vpc_id #=> String
     #   resp.topic_rule_destination.vpc_properties.role_arn #=> String
+    #   resp.topic_rule_destination.influx_db_properties.endpoint #=> String
+    #   resp.topic_rule_destination.influx_db_properties.influx_db_version #=> String, one of "V2", "V3"
+    #   resp.topic_rule_destination.influx_db_properties.secret_id #=> String
+    #   resp.topic_rule_destination.influx_db_properties.secret_type #=> String, one of "SecretString", "SecretBinary"
+    #   resp.topic_rule_destination.influx_db_properties.secret_key #=> String
     #
     # @overload create_topic_rule_destination(params = {})
     # @param [Hash] params ({})
@@ -4714,6 +4810,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Deletes a Device Defender detect custom metric.
     #
     # Requires permission to access the [DeleteCustomMetric][1] action.
@@ -4749,6 +4855,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Removes the specified dimension from your Amazon Web Services
     # accounts.
     #
@@ -5378,6 +5494,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Deletes a Device Defender security profile.
     #
     # Requires permission to access the [DeleteSecurityProfile][1] action.
@@ -5595,7 +5721,7 @@ module Aws::IoT
     #
     # @option params [required, String] :target_type
     #   The type of resource for which you are configuring logging. Must be
-    #   `THING_Group`.
+    #   `DEFAULT`, `THING_GROUP`, `CLIENT_ID`, `SOURCE_IP`, or `PRINCIPAL_ID`.
     #
     # @option params [required, String] :target_name
     #   The name of the resource for which you are configuring logging.
@@ -6179,6 +6305,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Gets information about a Device Defender detect custom metric.
     #
     # Requires permission to access the [DescribeCustomMetric][1] action.
@@ -6255,6 +6391,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Gets information about a Device Defender ML Detect mitigation action.
     #
     # Requires permission to access the
@@ -6315,6 +6461,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Provides details about a dimension that is defined in your Amazon Web
     # Services accounts.
     #
@@ -7153,6 +7309,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Gets information about a Device Defender security profile.
     #
     # Requires permission to access the [DescribeSecurityProfile][1] action.
@@ -7560,6 +7726,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Disassociates a Device Defender security profile from a thing group or
     # from this account.
     #
@@ -7724,6 +7900,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Returns a Device Defender's ML Detect Security Profile training
     # model's status.
     #
@@ -8865,6 +9051,18 @@ module Aws::IoT
     #   resp.rule.actions[0].location.timestamp.unit #=> String
     #   resp.rule.actions[0].location.latitude #=> String
     #   resp.rule.actions[0].location.longitude #=> String
+    #   resp.rule.actions[0].influx_db.destination_arn #=> String
+    #   resp.rule.actions[0].influx_db.role_arn #=> String
+    #   resp.rule.actions[0].influx_db.database_name #=> String
+    #   resp.rule.actions[0].influx_db.table_name #=> String
+    #   resp.rule.actions[0].influx_db.organization #=> String
+    #   resp.rule.actions[0].influx_db.tags #=> Hash
+    #   resp.rule.actions[0].influx_db.tags["InfluxDBTagName"] #=> String
+    #   resp.rule.actions[0].influx_db.timestamp_unit #=> String, one of "s", "ms", "us", "ns"
+    #   resp.rule.actions[0].influx_db.batch_config.max_batch_size #=> Integer
+    #   resp.rule.actions[0].influx_db.batch_config.max_batch_open_ms #=> Integer
+    #   resp.rule.actions[0].influx_db.batch_config.max_batch_size_bytes #=> Integer
+    #   resp.rule.actions[0].influx_db.batch_config.batch_across_topics #=> Boolean
     #   resp.rule.rule_disabled #=> Boolean
     #   resp.rule.aws_iot_sql_version #=> String
     #   resp.rule.error_action.dynamo_db.table_name #=> String
@@ -8995,6 +9193,18 @@ module Aws::IoT
     #   resp.rule.error_action.location.timestamp.unit #=> String
     #   resp.rule.error_action.location.latitude #=> String
     #   resp.rule.error_action.location.longitude #=> String
+    #   resp.rule.error_action.influx_db.destination_arn #=> String
+    #   resp.rule.error_action.influx_db.role_arn #=> String
+    #   resp.rule.error_action.influx_db.database_name #=> String
+    #   resp.rule.error_action.influx_db.table_name #=> String
+    #   resp.rule.error_action.influx_db.organization #=> String
+    #   resp.rule.error_action.influx_db.tags #=> Hash
+    #   resp.rule.error_action.influx_db.tags["InfluxDBTagName"] #=> String
+    #   resp.rule.error_action.influx_db.timestamp_unit #=> String, one of "s", "ms", "us", "ns"
+    #   resp.rule.error_action.influx_db.batch_config.max_batch_size #=> Integer
+    #   resp.rule.error_action.influx_db.batch_config.max_batch_open_ms #=> Integer
+    #   resp.rule.error_action.influx_db.batch_config.max_batch_size_bytes #=> Integer
+    #   resp.rule.error_action.influx_db.batch_config.batch_across_topics #=> Boolean
     #
     # @overload get_topic_rule(params = {})
     # @param [Hash] params ({})
@@ -9038,6 +9248,11 @@ module Aws::IoT
     #   resp.topic_rule_destination.vpc_properties.security_groups[0] #=> String
     #   resp.topic_rule_destination.vpc_properties.vpc_id #=> String
     #   resp.topic_rule_destination.vpc_properties.role_arn #=> String
+    #   resp.topic_rule_destination.influx_db_properties.endpoint #=> String
+    #   resp.topic_rule_destination.influx_db_properties.influx_db_version #=> String, one of "V2", "V3"
+    #   resp.topic_rule_destination.influx_db_properties.secret_id #=> String
+    #   resp.topic_rule_destination.influx_db_properties.secret_type #=> String, one of "SecretString", "SecretBinary"
+    #   resp.topic_rule_destination.influx_db_properties.secret_key #=> String
     #
     # @overload get_topic_rule_destination(params = {})
     # @param [Hash] params ({})
@@ -9088,6 +9303,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Lists the active violations for a given Device Defender security
     # profile.
     #
@@ -10153,6 +10378,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Lists your Device Defender detect custom metrics.
     #
     # Requires permission to access the [ListCustomMetrics][1] action.
@@ -10195,6 +10430,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Lists mitigation actions executions for a Device Defender ML Detect
     # Security Profile.
     #
@@ -10270,6 +10515,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # List of Device Defender ML Detect mitigation actions tasks.
     #
     # Requires permission to access the
@@ -10351,6 +10606,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # List the set of dimensions that are defined for your Amazon Web
     # Services accounts.
     #
@@ -11826,6 +12091,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Lists the Device Defender security profiles you've created. You can
     # filter security profiles by dimension or custom metric.
     #
@@ -11882,6 +12157,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Lists the Device Defender security profiles attached to a target
     # (thing group).
     #
@@ -12073,6 +12358,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Lists the targets (thing groups) associated with a given Device
     # Defender security profile.
     #
@@ -12725,6 +13020,11 @@ module Aws::IoT
     #   resp.destination_summaries[0].vpc_destination_summary.security_groups[0] #=> String
     #   resp.destination_summaries[0].vpc_destination_summary.vpc_id #=> String
     #   resp.destination_summaries[0].vpc_destination_summary.role_arn #=> String
+    #   resp.destination_summaries[0].influx_db_summary.endpoint #=> String
+    #   resp.destination_summaries[0].influx_db_summary.influx_db_version #=> String, one of "V2", "V3"
+    #   resp.destination_summaries[0].influx_db_summary.secret_id #=> String
+    #   resp.destination_summaries[0].influx_db_summary.secret_type #=> String, one of "SecretString", "SecretBinary"
+    #   resp.destination_summaries[0].influx_db_summary.secret_key #=> String
     #   resp.next_token #=> String
     #
     # @overload list_topic_rule_destinations(params = {})
@@ -12799,7 +13099,7 @@ module Aws::IoT
     #
     # @option params [String] :target_type
     #   The type of resource for which you are configuring logging. Must be
-    #   `THING_Group`.
+    #   `DEFAULT`, `THING_GROUP`, `CLIENT_ID`, `SOURCE_IP`, or `PRINCIPAL_ID`.
     #
     # @option params [String] :next_token
     #   To retrieve the next set of results, the `nextToken` value from a
@@ -12839,6 +13139,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Lists the Device Defender security profile violations discovered
     # during the given time period. You can use filters to limit the results
     # to those alerts issued for a particular security profile, behavior, or
@@ -12952,6 +13262,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Set a verification state and provide a description of that
     # verification state on a violation (detect alarm).
     #
@@ -13597,6 +13917,23 @@ module Aws::IoT
     #             latitude: "String", # required
     #             longitude: "String", # required
     #           },
+    #           influx_db: {
+    #             destination_arn: "AwsArn", # required
+    #             role_arn: "AwsArn", # required
+    #             database_name: "InfluxDBDatabaseName", # required
+    #             table_name: "InfluxDBTableName", # required
+    #             organization: "InfluxDBOrganization",
+    #             tags: {
+    #               "InfluxDBTagName" => "InfluxDBTagValue",
+    #             },
+    #             timestamp_unit: "s", # accepts s, ms, us, ns
+    #             batch_config: {
+    #               max_batch_size: 1,
+    #               max_batch_open_ms: 1,
+    #               max_batch_size_bytes: 1,
+    #               batch_across_topics: false,
+    #             },
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -13812,6 +14149,23 @@ module Aws::IoT
     #           },
     #           latitude: "String", # required
     #           longitude: "String", # required
+    #         },
+    #         influx_db: {
+    #           destination_arn: "AwsArn", # required
+    #           role_arn: "AwsArn", # required
+    #           database_name: "InfluxDBDatabaseName", # required
+    #           table_name: "InfluxDBTableName", # required
+    #           organization: "InfluxDBOrganization",
+    #           tags: {
+    #             "InfluxDBTagName" => "InfluxDBTagValue",
+    #           },
+    #           timestamp_unit: "s", # accepts s, ms, us, ns
+    #           batch_config: {
+    #             max_batch_size: 1,
+    #             max_batch_open_ms: 1,
+    #             max_batch_size_bytes: 1,
+    #             batch_across_topics: false,
+    #           },
     #         },
     #       },
     #     },
@@ -14159,6 +14513,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Starts a Device Defender ML Detect mitigation actions task.
     #
     # Requires permission to access the
@@ -15053,6 +15417,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Updates a Device Defender detect custom metric.
     #
     # Requires permission to access the [UpdateCustomMetric][1] action.
@@ -15101,6 +15475,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Updates the definition for a dimension. You cannot change the type of
     # a dimension after it is created (you can delete it and recreate it).
     #
@@ -16117,6 +16501,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Updates a Device Defender security profile.
     #
     # Requires permission to access the [UpdateSecurityProfile][1] action.
@@ -16621,6 +17015,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # <note markdown="1"> The IoT Device Defender detect feature will no longer be available to
+    # new customers starting August 31, 2026. If you would like to use the
+    # detect feature, sign up prior to August 31, 2026. To learn about
+    # alternatives to IoT Device Defender detect, see IoT Device Defender
+    # detect feature availability change in the IoT Device Defender
+    # Developer Guide. There is no change to IoT Device Defender audit
+    # availability.
+    #
+    #  </note>
+    #
     # Validates a Device Defender security profile behaviors specification.
     #
     # Requires permission to access the
@@ -16707,7 +17111,7 @@ module Aws::IoT
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.172.0'
+      context[:gem_version] = '1.176.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

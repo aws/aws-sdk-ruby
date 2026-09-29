@@ -23,6 +23,8 @@ module Aws::SESV2
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     ArchiveArn = Shapes::StringShape.new(name: 'ArchiveArn')
     ArchivingOptions = Shapes::StructureShape.new(name: 'ArchivingOptions')
+    AssociateEmailIdentityCertificateRequest = Shapes::StructureShape.new(name: 'AssociateEmailIdentityCertificateRequest')
+    AssociateEmailIdentityCertificateResponse = Shapes::StructureShape.new(name: 'AssociateEmailIdentityCertificateResponse')
     Attachment = Shapes::StructureShape.new(name: 'Attachment')
     AttachmentContentDescription = Shapes::StringShape.new(name: 'AttachmentContentDescription')
     AttachmentContentDisposition = Shapes::StringShape.new(name: 'AttachmentContentDisposition')
@@ -58,6 +60,7 @@ module Aws::SESV2
     CancelExportJobRequest = Shapes::StructureShape.new(name: 'CancelExportJobRequest')
     CancelExportJobResponse = Shapes::StructureShape.new(name: 'CancelExportJobResponse')
     CaseId = Shapes::StringShape.new(name: 'CaseId')
+    CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
     Charset = Shapes::StringShape.new(name: 'Charset')
     CloudWatchDestination = Shapes::StructureShape.new(name: 'CloudWatchDestination')
     CloudWatchDimensionConfiguration = Shapes::StructureShape.new(name: 'CloudWatchDimensionConfiguration')
@@ -66,6 +69,7 @@ module Aws::SESV2
     ComplaintFeedbackType = Shapes::StringShape.new(name: 'ComplaintFeedbackType')
     ComplaintSubType = Shapes::StringShape.new(name: 'ComplaintSubType')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ConfigurationOverrides = Shapes::StructureShape.new(name: 'ConfigurationOverrides')
     ConfigurationSetName = Shapes::StringShape.new(name: 'ConfigurationSetName')
     ConfigurationSetNameList = Shapes::ListShape.new(name: 'ConfigurationSetNameList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -119,6 +123,7 @@ module Aws::SESV2
     DedicatedIpList = Shapes::ListShape.new(name: 'DedicatedIpList')
     DedicatedIpPool = Shapes::StructureShape.new(name: 'DedicatedIpPool')
     DefaultDimensionValue = Shapes::StringShape.new(name: 'DefaultDimensionValue')
+    DefaultSigningScheme = Shapes::StructureShape.new(name: 'DefaultSigningScheme')
     DeleteConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationSetEventDestinationRequest')
     DeleteConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationSetEventDestinationResponse')
     DeleteConfigurationSetRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationSetRequest')
@@ -159,6 +164,8 @@ module Aws::SESV2
     DimensionName = Shapes::StringShape.new(name: 'DimensionName')
     DimensionValueSource = Shapes::StringShape.new(name: 'DimensionValueSource')
     Dimensions = Shapes::MapShape.new(name: 'Dimensions')
+    DisassociateEmailIdentityCertificateRequest = Shapes::StructureShape.new(name: 'DisassociateEmailIdentityCertificateRequest')
+    DisassociateEmailIdentityCertificateResponse = Shapes::StructureShape.new(name: 'DisassociateEmailIdentityCertificateResponse')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     DkimAttributes = Shapes::StructureShape.new(name: 'DkimAttributes')
     DkimSigningAttributes = Shapes::StructureShape.new(name: 'DkimSigningAttributes')
@@ -282,6 +289,9 @@ module Aws::SESV2
     HostedZone = Shapes::StringShape.new(name: 'HostedZone')
     HttpsPolicy = Shapes::StringShape.new(name: 'HttpsPolicy')
     Identity = Shapes::StringShape.new(name: 'Identity')
+    IdentityCertificate = Shapes::StructureShape.new(name: 'IdentityCertificate')
+    IdentityCertificateList = Shapes::ListShape.new(name: 'IdentityCertificateList')
+    IdentityCertificateStatus = Shapes::StringShape.new(name: 'IdentityCertificateStatus')
     IdentityInfo = Shapes::StructureShape.new(name: 'IdentityInfo')
     IdentityInfoList = Shapes::ListShape.new(name: 'IdentityInfoList')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
@@ -329,6 +339,8 @@ module Aws::SESV2
     ListDomainDeliverabilityCampaignsResponse = Shapes::StructureShape.new(name: 'ListDomainDeliverabilityCampaignsResponse')
     ListEmailIdentitiesRequest = Shapes::StructureShape.new(name: 'ListEmailIdentitiesRequest')
     ListEmailIdentitiesResponse = Shapes::StructureShape.new(name: 'ListEmailIdentitiesResponse')
+    ListEmailIdentityCertificatesRequest = Shapes::StructureShape.new(name: 'ListEmailIdentityCertificatesRequest')
+    ListEmailIdentityCertificatesResponse = Shapes::StructureShape.new(name: 'ListEmailIdentityCertificatesResponse')
     ListEmailTemplatesRequest = Shapes::StructureShape.new(name: 'ListEmailTemplatesRequest')
     ListEmailTemplatesResponse = Shapes::StructureShape.new(name: 'ListEmailTemplatesResponse')
     ListExportJobsRequest = Shapes::StructureShape.new(name: 'ListExportJobsRequest')
@@ -382,6 +394,7 @@ module Aws::SESV2
     MessageInsightsExportMaxResults = Shapes::IntegerShape.new(name: 'MessageInsightsExportMaxResults')
     MessageInsightsFilters = Shapes::StructureShape.new(name: 'MessageInsightsFilters')
     MessageRejected = Shapes::StructureShape.new(name: 'MessageRejected')
+    MessageSecurityOptions = Shapes::StructureShape.new(name: 'MessageSecurityOptions')
     MessageTag = Shapes::StructureShape.new(name: 'MessageTag')
     MessageTagList = Shapes::ListShape.new(name: 'MessageTagList')
     MessageTagName = Shapes::StringShape.new(name: 'MessageTagName')
@@ -520,6 +533,9 @@ module Aws::SESV2
     SendingStatus = Shapes::StringShape.new(name: 'SendingStatus')
     SentLast24Hours = Shapes::FloatShape.new(name: 'SentLast24Hours')
     SerialNumber = Shapes::IntegerShape.new(name: 'SerialNumber')
+    SignatureFormat = Shapes::StringShape.new(name: 'SignatureFormat')
+    SigningScheme = Shapes::UnionShape.new(name: 'SigningScheme')
+    SmimeSigningScheme = Shapes::StructureShape.new(name: 'SmimeSigningScheme')
     SnsDestination = Shapes::StructureShape.new(name: 'SnsDestination')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusCause = Shapes::StringShape.new(name: 'StatusCause')
@@ -557,6 +573,7 @@ module Aws::SESV2
     TenantInfo = Shapes::StructureShape.new(name: 'TenantInfo')
     TenantInfoList = Shapes::ListShape.new(name: 'TenantInfoList')
     TenantName = Shapes::StringShape.new(name: 'TenantName')
+    TenantNameFilterList = Shapes::ListShape.new(name: 'TenantNameFilterList')
     TenantResource = Shapes::StructureShape.new(name: 'TenantResource')
     TenantResourceList = Shapes::ListShape.new(name: 'TenantResourceList')
     TenantSuppressionAttributes = Shapes::StructureShape.new(name: 'TenantSuppressionAttributes')
@@ -572,12 +589,15 @@ module Aws::SESV2
     TopicPreference = Shapes::StructureShape.new(name: 'TopicPreference')
     TopicPreferenceList = Shapes::ListShape.new(name: 'TopicPreferenceList')
     Topics = Shapes::ListShape.new(name: 'Topics')
+    TrackingConfigurationOverrides = Shapes::StructureShape.new(name: 'TrackingConfigurationOverrides')
     TrackingOptions = Shapes::StructureShape.new(name: 'TrackingOptions')
     UnsubscribeAll = Shapes::BooleanShape.new(name: 'UnsubscribeAll')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationRequest')
     UpdateConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationResponse')
+    UpdateConfigurationSetRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetRequest')
+    UpdateConfigurationSetResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationSetResponse')
     UpdateContactListRequest = Shapes::StructureShape.new(name: 'UpdateContactListRequest')
     UpdateContactListResponse = Shapes::StructureShape.new(name: 'UpdateContactListResponse')
     UpdateContactRequest = Shapes::StructureShape.new(name: 'UpdateContactRequest')
@@ -620,6 +640,13 @@ module Aws::SESV2
 
     ArchivingOptions.add_member(:archive_arn, Shapes::ShapeRef.new(shape: ArchiveArn, location_name: "ArchiveArn"))
     ArchivingOptions.struct_class = Types::ArchivingOptions
+
+    AssociateEmailIdentityCertificateRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "EmailIdentity"))
+    AssociateEmailIdentityCertificateRequest.add_member(:from_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FromAddress"))
+    AssociateEmailIdentityCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, required: true, location_name: "CertificateArn"))
+    AssociateEmailIdentityCertificateRequest.struct_class = Types::AssociateEmailIdentityCertificateRequest
+
+    AssociateEmailIdentityCertificateResponse.struct_class = Types::AssociateEmailIdentityCertificateResponse
 
     Attachment.add_member(:raw_content, Shapes::ShapeRef.new(shape: RawAttachmentData, required: true, location_name: "RawContent"))
     Attachment.add_member(:content_disposition, Shapes::ShapeRef.new(shape: AttachmentContentDisposition, location_name: "ContentDisposition"))
@@ -711,6 +738,9 @@ module Aws::SESV2
 
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
+    ConfigurationOverrides.add_member(:tracking, Shapes::ShapeRef.new(shape: TrackingConfigurationOverrides, location_name: "Tracking"))
+    ConfigurationOverrides.struct_class = Types::ConfigurationOverrides
+
     ConfigurationSetNameList.member = Shapes::ShapeRef.new(shape: ConfigurationSetName)
 
     ConflictException.struct_class = Types::ConflictException
@@ -750,6 +780,7 @@ module Aws::SESV2
     CreateConfigurationSetRequest.add_member(:suppression_options, Shapes::ShapeRef.new(shape: SuppressionOptions, location_name: "SuppressionOptions"))
     CreateConfigurationSetRequest.add_member(:vdm_options, Shapes::ShapeRef.new(shape: VdmOptions, location_name: "VdmOptions"))
     CreateConfigurationSetRequest.add_member(:archiving_options, Shapes::ShapeRef.new(shape: ArchivingOptions, location_name: "ArchivingOptions"))
+    CreateConfigurationSetRequest.add_member(:message_security_options, Shapes::ShapeRef.new(shape: MessageSecurityOptions, location_name: "MessageSecurityOptions"))
     CreateConfigurationSetRequest.struct_class = Types::CreateConfigurationSetRequest
 
     CreateConfigurationSetResponse.struct_class = Types::CreateConfigurationSetResponse
@@ -901,6 +932,8 @@ module Aws::SESV2
     DedicatedIpPool.add_member(:scaling_mode, Shapes::ShapeRef.new(shape: ScalingMode, required: true, location_name: "ScalingMode"))
     DedicatedIpPool.struct_class = Types::DedicatedIpPool
 
+    DefaultSigningScheme.struct_class = Types::DefaultSigningScheme
+
     DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location: "uri", location_name: "ConfigurationSetName"))
     DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, required: true, location: "uri", location_name: "EventDestinationName"))
     DeleteConfigurationSetEventDestinationRequest.struct_class = Types::DeleteConfigurationSetEventDestinationRequest
@@ -997,6 +1030,12 @@ module Aws::SESV2
 
     Dimensions.key = Shapes::ShapeRef.new(shape: MetricDimensionName)
     Dimensions.value = Shapes::ShapeRef.new(shape: MetricDimensionValue)
+
+    DisassociateEmailIdentityCertificateRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "EmailIdentity"))
+    DisassociateEmailIdentityCertificateRequest.add_member(:from_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FromAddress"))
+    DisassociateEmailIdentityCertificateRequest.struct_class = Types::DisassociateEmailIdentityCertificateRequest
+
+    DisassociateEmailIdentityCertificateResponse.struct_class = Types::DisassociateEmailIdentityCertificateResponse
 
     DkimAttributes.add_member(:signing_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SigningEnabled"))
     DkimAttributes.add_member(:status, Shapes::ShapeRef.new(shape: DkimStatus, location_name: "Status"))
@@ -1195,6 +1234,7 @@ module Aws::SESV2
     GetConfigurationSetResponse.add_member(:suppression_options, Shapes::ShapeRef.new(shape: SuppressionOptions, location_name: "SuppressionOptions"))
     GetConfigurationSetResponse.add_member(:vdm_options, Shapes::ShapeRef.new(shape: VdmOptions, location_name: "VdmOptions"))
     GetConfigurationSetResponse.add_member(:archiving_options, Shapes::ShapeRef.new(shape: ArchivingOptions, location_name: "ArchivingOptions"))
+    GetConfigurationSetResponse.add_member(:message_security_options, Shapes::ShapeRef.new(shape: MessageSecurityOptions, location_name: "MessageSecurityOptions"))
     GetConfigurationSetResponse.struct_class = Types::GetConfigurationSetResponse
 
     GetContactListRequest.add_member(:contact_list_name, Shapes::ShapeRef.new(shape: ContactListName, required: true, location: "uri", location_name: "ContactListName"))
@@ -1399,6 +1439,14 @@ module Aws::SESV2
     GuardianOptions.add_member(:optimized_shared_delivery, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "OptimizedSharedDelivery"))
     GuardianOptions.struct_class = Types::GuardianOptions
 
+    IdentityCertificate.add_member(:from_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FromAddress"))
+    IdentityCertificate.add_member(:status, Shapes::ShapeRef.new(shape: IdentityCertificateStatus, location_name: "Status"))
+    IdentityCertificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "CertificateArn"))
+    IdentityCertificate.add_member(:certificate_expiry_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CertificateExpiryTime"))
+    IdentityCertificate.struct_class = Types::IdentityCertificate
+
+    IdentityCertificateList.member = Shapes::ShapeRef.new(shape: IdentityCertificate)
+
     IdentityInfo.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
     IdentityInfo.add_member(:identity_name, Shapes::ShapeRef.new(shape: Identity, location_name: "IdentityName"))
     IdentityInfo.add_member(:sending_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled"))
@@ -1534,6 +1582,15 @@ module Aws::SESV2
     ListEmailIdentitiesResponse.add_member(:email_identities, Shapes::ShapeRef.new(shape: IdentityInfoList, location_name: "EmailIdentities"))
     ListEmailIdentitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEmailIdentitiesResponse.struct_class = Types::ListEmailIdentitiesResponse
+
+    ListEmailIdentityCertificatesRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "EmailIdentity"))
+    ListEmailIdentityCertificatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEmailIdentityCertificatesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
+    ListEmailIdentityCertificatesRequest.struct_class = Types::ListEmailIdentityCertificatesRequest
+
+    ListEmailIdentityCertificatesResponse.add_member(:certificates, Shapes::ShapeRef.new(shape: IdentityCertificateList, location_name: "Certificates"))
+    ListEmailIdentityCertificatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEmailIdentityCertificatesResponse.struct_class = Types::ListEmailIdentityCertificatesResponse
 
     ListEmailTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListEmailTemplatesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "PageSize"))
@@ -1683,11 +1740,15 @@ module Aws::SESV2
     MessageInsightsFilters.add_member(:destination, Shapes::ShapeRef.new(shape: EmailAddressFilterList, location_name: "Destination"))
     MessageInsightsFilters.add_member(:subject, Shapes::ShapeRef.new(shape: EmailSubjectFilterList, location_name: "Subject"))
     MessageInsightsFilters.add_member(:isp, Shapes::ShapeRef.new(shape: IspFilterList, location_name: "Isp"))
+    MessageInsightsFilters.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantNameFilterList, location_name: "TenantName"))
     MessageInsightsFilters.add_member(:last_delivery_event, Shapes::ShapeRef.new(shape: LastDeliveryEventList, location_name: "LastDeliveryEvent"))
     MessageInsightsFilters.add_member(:last_engagement_event, Shapes::ShapeRef.new(shape: LastEngagementEventList, location_name: "LastEngagementEvent"))
     MessageInsightsFilters.struct_class = Types::MessageInsightsFilters
 
     MessageRejected.struct_class = Types::MessageRejected
+
+    MessageSecurityOptions.add_member(:signing_scheme, Shapes::ShapeRef.new(shape: SigningScheme, location_name: "SigningScheme"))
+    MessageSecurityOptions.struct_class = Types::MessageSecurityOptions
 
     MessageTag.add_member(:name, Shapes::ShapeRef.new(shape: MessageTagName, required: true, location_name: "Name"))
     MessageTag.add_member(:value, Shapes::ShapeRef.new(shape: MessageTagValue, required: true, location_name: "Value"))
@@ -1986,6 +2047,7 @@ module Aws::SESV2
     SendBulkEmailRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
     SendBulkEmailRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", metadata: {"contextParam" => {"name" => "EndpointId"}}))
     SendBulkEmailRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, location_name: "TenantName"))
+    SendBulkEmailRequest.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "ConfigurationOverrides"))
     SendBulkEmailRequest.struct_class = Types::SendBulkEmailRequest
 
     SendBulkEmailResponse.add_member(:bulk_email_entry_results, Shapes::ShapeRef.new(shape: BulkEmailEntryResultList, required: true, location_name: "BulkEmailEntryResults"))
@@ -2011,6 +2073,7 @@ module Aws::SESV2
     SendEmailRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", metadata: {"contextParam" => {"name" => "EndpointId"}}))
     SendEmailRequest.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantName, location_name: "TenantName"))
     SendEmailRequest.add_member(:list_management_options, Shapes::ShapeRef.new(shape: ListManagementOptions, location_name: "ListManagementOptions"))
+    SendEmailRequest.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "ConfigurationOverrides"))
     SendEmailRequest.struct_class = Types::SendEmailRequest
 
     SendEmailResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: OutboundMessageId, location_name: "MessageId"))
@@ -2025,6 +2088,17 @@ module Aws::SESV2
     SendingOptions.struct_class = Types::SendingOptions
 
     SendingPausedException.struct_class = Types::SendingPausedException
+
+    SigningScheme.add_member(:default_scheme, Shapes::ShapeRef.new(shape: DefaultSigningScheme, location_name: "DefaultScheme"))
+    SigningScheme.add_member(:smime_scheme, Shapes::ShapeRef.new(shape: SmimeSigningScheme, location_name: "SmimeScheme"))
+    SigningScheme.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SigningScheme.add_member_subclass(:default_scheme, Types::SigningScheme::DefaultScheme)
+    SigningScheme.add_member_subclass(:smime_scheme, Types::SigningScheme::SmimeScheme)
+    SigningScheme.add_member_subclass(:unknown, Types::SigningScheme::Unknown)
+    SigningScheme.struct_class = Types::SigningScheme
+
+    SmimeSigningScheme.add_member(:signature_format, Shapes::ShapeRef.new(shape: SignatureFormat, location_name: "SignatureFormat"))
+    SmimeSigningScheme.struct_class = Types::SmimeSigningScheme
 
     SnsDestination.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "TopicArn"))
     SnsDestination.struct_class = Types::SnsDestination
@@ -2118,6 +2192,8 @@ module Aws::SESV2
 
     TenantInfoList.member = Shapes::ShapeRef.new(shape: TenantInfo)
 
+    TenantNameFilterList.member = Shapes::ShapeRef.new(shape: TenantName)
+
     TenantResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     TenantResource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn"))
     TenantResource.struct_class = Types::TenantResource
@@ -2157,6 +2233,10 @@ module Aws::SESV2
 
     Topics.member = Shapes::ShapeRef.new(shape: Topic)
 
+    TrackingConfigurationOverrides.add_member(:open_tracking_enabled, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "OpenTrackingEnabled"))
+    TrackingConfigurationOverrides.add_member(:click_tracking_enabled, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "ClickTrackingEnabled"))
+    TrackingConfigurationOverrides.struct_class = Types::TrackingConfigurationOverrides
+
     TrackingOptions.add_member(:custom_redirect_domain, Shapes::ShapeRef.new(shape: CustomRedirectDomain, required: true, location_name: "CustomRedirectDomain"))
     TrackingOptions.add_member(:https_policy, Shapes::ShapeRef.new(shape: HttpsPolicy, location_name: "HttpsPolicy"))
     TrackingOptions.struct_class = Types::TrackingOptions
@@ -2173,6 +2253,12 @@ module Aws::SESV2
     UpdateConfigurationSetEventDestinationRequest.struct_class = Types::UpdateConfigurationSetEventDestinationRequest
 
     UpdateConfigurationSetEventDestinationResponse.struct_class = Types::UpdateConfigurationSetEventDestinationResponse
+
+    UpdateConfigurationSetRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+    UpdateConfigurationSetRequest.add_member(:message_security_options, Shapes::ShapeRef.new(shape: MessageSecurityOptions, location_name: "MessageSecurityOptions"))
+    UpdateConfigurationSetRequest.struct_class = Types::UpdateConfigurationSetRequest
+
+    UpdateConfigurationSetResponse.struct_class = Types::UpdateConfigurationSetResponse
 
     UpdateContactListRequest.add_member(:contact_list_name, Shapes::ShapeRef.new(shape: ContactListName, required: true, location: "uri", location_name: "ContactListName"))
     UpdateContactListRequest.add_member(:topics, Shapes::ShapeRef.new(shape: Topics, location_name: "Topics"))
@@ -2268,6 +2354,18 @@ module Aws::SESV2
         "signingName" => "ses",
         "uid" => "sesv2-2019-09-27",
       }
+
+      api.add_operation(:associate_email_identity_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateEmailIdentityCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/identity/certificates"
+        o.input = Shapes::ShapeRef.new(shape: AssociateEmailIdentityCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateEmailIdentityCertificateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
 
       api.add_operation(:batch_get_metric_data, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetMetricData"
@@ -2627,6 +2725,17 @@ module Aws::SESV2
         o.http_request_uri = "/v2/email/tenants/resources/delete"
         o.input = Shapes::ShapeRef.new(shape: DeleteTenantResourceAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteTenantResourceAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:disassociate_email_identity_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateEmailIdentityCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/identity/certificates/delete"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateEmailIdentityCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateEmailIdentityCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -3032,6 +3141,23 @@ module Aws::SESV2
         o.http_request_uri = "/v2/email/identities"
         o.input = Shapes::ShapeRef.new(shape: ListEmailIdentitiesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListEmailIdentitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_email_identity_certificates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEmailIdentityCertificates"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/identity/certificates/list"
+        o.input = Shapes::ShapeRef.new(shape: ListEmailIdentityCertificatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEmailIdentityCertificatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o[:pager] = Aws::Pager.new(
@@ -3561,6 +3687,17 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_configuration_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConfigurationSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/update-configuration-sets"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConfigurationSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConfigurationSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:update_configuration_set_event_destination, Seahorse::Model::Operation.new.tap do |o|

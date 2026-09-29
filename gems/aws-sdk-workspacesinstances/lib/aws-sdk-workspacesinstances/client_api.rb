@@ -107,6 +107,7 @@ module Aws::WorkspacesInstances
     ManagedInstanceRequest = Shapes::StructureShape.new(name: 'ManagedInstanceRequest')
     MarketTypeEnum = Shapes::StringShape.new(name: 'MarketTypeEnum')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    NestedVirtualizationEnum = Shapes::StringShape.new(name: 'NestedVirtualizationEnum')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -209,6 +210,7 @@ module Aws::WorkspacesInstances
     CpuOptionsRequest.add_member(:amd_sev_snp, Shapes::ShapeRef.new(shape: AmdSevSnpEnum, location_name: "AmdSevSnp"))
     CpuOptionsRequest.add_member(:core_count, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "CoreCount"))
     CpuOptionsRequest.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "ThreadsPerCore"))
+    CpuOptionsRequest.add_member(:nested_virtualization, Shapes::ShapeRef.new(shape: NestedVirtualizationEnum, location_name: "NestedVirtualization"))
     CpuOptionsRequest.struct_class = Types::CpuOptionsRequest
 
     CreateVolumeRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "AvailabilityZone"))

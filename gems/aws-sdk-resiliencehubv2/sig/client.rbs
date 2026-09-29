@@ -109,7 +109,17 @@ module Aws
                                    tf_state_file_url: ::String?,
                                    eks: {
                                      cluster_arn: ::String,
-                                     namespaces: Array[::String]
+                                     namespaces: Array[::String],
+                                     label_selector: {
+                                       match_labels: Hash[::String, ::String]?,
+                                       match_expressions: Array[
+                                         {
+                                           key: ::String,
+                                           operator: ("IN" | "NOT_IN" | "EXISTS" | "DOES_NOT_EXIST"),
+                                           values: Array[::String]?
+                                         }
+                                       ]?
+                                     }?
                                    }?,
                                    design_file_s3_url: ::String?
                                  },
@@ -141,6 +151,7 @@ module Aws
                            ?data_recovery: {
                              time_between_backups_in_minutes: ::Integer?
                            },
+                           ?sharing_enabled: bool,
                            ?kms_key_id: ::String,
                            ?tags: Hash[::String, ::String],
                            ?client_token: ::String
@@ -387,6 +398,21 @@ module Aws
                                ) -> _DeleteUserJourneyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserJourneyResponseSuccess
 
+      interface _GetDependencyInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDependencyInsightsResponse]
+        def overview: () -> ::String
+        def insights: () -> ::Array[Types::DependencyInsight]
+        def status: () -> ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def created_at: () -> ::Time
+        def error_code: () -> ("INSUFFICIENT_DATA" | "LLM_GENERATION_FAILED" | "INTERNAL_ERROR")
+        def error_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#get_dependency_insights-instance_method
+      def get_dependency_insights: (
+                                     service_arn: ::String
+                                   ) -> _GetDependencyInsightsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDependencyInsightsResponseSuccess
+
       interface _GetFailureModeFindingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFailureModeFindingResponse]
         def finding: () -> Types::Finding
@@ -596,10 +622,27 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_policies-instance_method
       def list_policies: (
+                           ?account_id: ::String,
                            ?max_results: ::Integer,
                            ?next_token: ::String
                          ) -> _ListPoliciesResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPoliciesResponseSuccess
+
+      interface _ListPolicyEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyEventsResponse]
+        def events: () -> ::Array[Types::PolicyEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_policy_events-instance_method
+      def list_policy_events: (
+                                policy_arn: ::String,
+                                ?event_types: Array[("POLICY_ATTACHED_TO_SERVICE" | "POLICY_DETACHED_FROM_SERVICE" | "POLICY_SHARING_REVOKED" | "POLICY_DELETED")],
+                                ?start_time: ::Time,
+                                ?end_time: ::Time,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListPolicyEventsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyEventsResponseSuccess
 
       interface _ListReportsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListReportsResponse]
@@ -747,6 +790,20 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListTestRunDependenciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRunDependenciesResponse]
+        def dependencies: () -> ::Array[Types::TestRunDependencySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_test_run_dependencies-instance_method
+      def list_test_run_dependencies: (
+                                        test_run_id: ::String,
+                                        service_arn: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListTestRunDependenciesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestRunDependenciesResponseSuccess
+
       interface _ListTestRunEventsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRunEventsResponse]
         def events: () -> ::Array[Types::TestRunEvent]
@@ -762,6 +819,21 @@ module Aws
                                   ?next_token: ::String
                                 ) -> _ListTestRunEventsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestRunEventsResponseSuccess
+
+      interface _ListTestRunSourceEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRunSourceEventsResponse]
+        def test_run_source_events: () -> ::Array[Types::TestRunSourceEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_test_run_source_events-instance_method
+      def list_test_run_source_events: (
+                                         test_run_id: ::String,
+                                         service_arn: ::String,
+                                         source_arn: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListTestRunSourceEventsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestRunSourceEventsResponseSuccess
 
       interface _ListTestRunSourcesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRunSourcesResponse]
@@ -854,6 +926,17 @@ module Aws
                               ]
                             ) -> _PutTestSourcesResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutTestSourcesResponseSuccess
+
+      interface _StartDependencyInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDependencyInsightsResponse]
+        def status: () -> ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#start_dependency_insights-instance_method
+      def start_dependency_insights: (
+                                       service_arn: ::String,
+                                       ?client_token: ::String
+                                     ) -> _StartDependencyInsightsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDependencyInsightsResponseSuccess
 
       interface _StartFailureModeAssessmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartFailureModeAssessmentResponse]
@@ -981,7 +1064,8 @@ module Aws
                            },
                            ?data_recovery: {
                              time_between_backups_in_minutes: ::Integer?
-                           }
+                           },
+                           ?sharing_enabled: bool
                          ) -> _UpdatePolicyResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePolicyResponseSuccess
 

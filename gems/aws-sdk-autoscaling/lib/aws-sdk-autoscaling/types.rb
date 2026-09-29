@@ -1238,11 +1238,15 @@ module Aws::AutoScaling
     # @!attribute [rw] mixed_instances_policy
     #   The mixed instances policy. For more information, see [Auto Scaling
     #   groups with multiple instance types and purchase options][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   *Amazon EC2 Auto Scaling User Guide*. To learn how to prioritize
+    #   multiple capacity types, see [Use Distribution Segments to target
+    #   multiple capacity types][2] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html
     #   @return [Types::MixedInstancesPolicy]
     #
     # @!attribute [rw] instance_id
@@ -2833,14 +2837,15 @@ module Aws::AutoScaling
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] mixed_instances_policy
-    #   Use this structure to launch multiple instance types and On-Demand
-    #   Instances and Spot Instances within a single Auto Scaling group.
+    #   Use this structure to launch multiple instance types and configure
+    #   how capacity is distributed across On-Demand, Spot, and supported
+    #   Capacity Reservation types within a single Auto Scaling group.
     #
     #   A mixed instances policy contains information that Amazon EC2 Auto
-    #   Scaling can use to launch instances and help optimize your costs.
-    #   For more information, see [Auto Scaling groups with multiple
-    #   instance types and purchase options][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   Scaling can use to launch instances, prioritize capacity types, and
+    #   help optimize your costs. For more information, see [Auto Scaling
+    #   groups with multiple instance types and purchase options][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -3022,6 +3027,44 @@ module Aws::AutoScaling
     class DisableMetricsCollectionQuery < Struct.new(
       :auto_scaling_group_name,
       :metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use this structure to specify the capacity types that Amazon EC2 Auto
+    # Scaling prioritizes when it launches instances.
+    #
+    # @!attribute [rw] target_capacity_types
+    #   The capacity types to prioritize, in order. Amazon EC2 Auto Scaling
+    #   attempts to launch instances in the priority order of the capacity
+    #   types, and within each capacity type, in the order of instance types
+    #   listed in your launch template `Overrides`.
+    #
+    #   The following lists the valid values:
+    #
+    #   on-demand-capacity-reservation
+    #
+    #   : On-Demand Capacity Reservations.
+    #
+    #   capacity-block
+    #
+    #   : Capacity Blocks.
+    #
+    #   interruptible-capacity-reservation
+    #
+    #   : Interruptible Capacity Reservations.
+    #
+    #   on-demand
+    #
+    #   : On-Demand capacity. Include this value to allow the group to fall
+    #     back to On-Demand capacity when the preceding capacity types are
+    #     unavailable.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DistributionSegment AWS API Documentation
+    #
+    class DistributionSegment < Struct.new(
+      :target_capacity_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4557,9 +4600,10 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Use this structure to specify the distribution of On-Demand Instances
-    # and Spot Instances and the allocation strategies used to fulfill
-    # On-Demand and Spot capacities for a mixed instances policy.
+    # Use this structure to specify how a mixed instances policy distributes
+    # capacity across On-Demand, Spot, and supported Capacity Reservation
+    # types, and to specify the allocation strategies that are used to
+    # fulfill the capacity.
     #
     # @!attribute [rw] on_demand_allocation_strategy
     #   The allocation strategy to apply to your On-Demand Instances when
@@ -4688,6 +4732,19 @@ module Aws::AutoScaling
     #   Valid Range: Minimum value of 0.001
     #   @return [String]
     #
+    # @!attribute [rw] distribution_segments
+    #   The Distribution Segments configuration. Each segment contains an
+    #   ordered list of capacity types to prioritize.
+    #
+    #   For more information, see [Use Distribution Segments to target
+    #   multiple capacity types][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html
+    #   @return [Array<Types::DistributionSegment>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstancesDistribution AWS API Documentation
     #
     class InstancesDistribution < Struct.new(
@@ -4696,7 +4753,8 @@ module Aws::AutoScaling
       :on_demand_percentage_above_base_capacity,
       :spot_allocation_strategy,
       :spot_instance_pools,
-      :spot_max_price)
+      :spot_max_price,
+      :distribution_segments)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5923,22 +5981,27 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Use this structure to launch multiple instance types and On-Demand
-    # Instances and Spot Instances within a single Auto Scaling group.
+    # Use this structure to launch multiple instance types and configure how
+    # capacity is distributed across On-Demand, Spot, and supported Capacity
+    # Reservation types within a single Auto Scaling group.
     #
     # A mixed instances policy contains information that Amazon EC2 Auto
-    # Scaling can use to launch instances and help optimize your costs. For
-    # more information, see [Auto Scaling groups with multiple instance
-    # types and purchase options][1] in the *Amazon EC2 Auto Scaling User
+    # Scaling can use to launch instances, prioritize capacity types, and
+    # help optimize your costs. For more information, see [Auto Scaling
+    # groups with multiple instance types and purchase options][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*. To learn how to prioritize
+    # multiple capacity types, see [Use Distribution Segments to target
+    # multiple capacity types][2] in the *Amazon EC2 Auto Scaling User
     # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html
     #
     # @!attribute [rw] launch_template
     #   One or more launch templates and the instance types (overrides) that
-    #   are used to launch EC2 instances to fulfill On-Demand and Spot
+    #   are used to launch EC2 instances to fulfill the configured
     #   capacities.
     #   @return [Types::LaunchTemplate]
     #
@@ -8593,6 +8656,11 @@ module Aws::AutoScaling
     #   The mixed instances policy. For more information, see [Auto Scaling
     #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   You can remove the Distribution Segments configuration by specifying
+    #   `OnDemandBaseCapacity` or `OnDemandPercentageAboveBaseCapacity`. You
+    #   can also remove it explicitly by specifying an empty list for
+    #   `DistributionSegments`.
     #
     #
     #

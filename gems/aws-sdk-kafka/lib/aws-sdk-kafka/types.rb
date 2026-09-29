@@ -2848,11 +2848,134 @@ module Aws::Kafka
     #   Details for mTLS client authentication.
     #   @return [Types::KafkaClusterMTLSAuthentication]
     #
+    # @!attribute [rw] sasl_o_auth_bearer
+    #   Details for SASL/OAUTHBEARER client authentication.
+    #   @return [Types::KafkaClusterSaslOAuthBearerAuthentication]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/KafkaClusterClientAuthentication AWS API Documentation
     #
     class KafkaClusterClientAuthentication < Struct.new(
       :sasl_scram,
-      :mtls)
+      :mtls,
+      :sasl_o_auth_bearer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for SASL/OAUTHBEARER client authentication.
+    #
+    # @!attribute [rw] token_endpoint_url
+    #   The HTTPS URL of the OAuth token endpoint that vends OAuth Bearer
+    #   tokens per RFC 6749.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_credentials
+    #   Details for SASL/OAUTHBEARER using standard client\_credentials
+    #   grant.
+    #   @return [Types::KafkaClusterOAuthClientCredentials]
+    #
+    # @!attribute [rw] iam_jwt_bearer
+    #   Details for SASL/OAUTHBEARER using JWT Bearer assertion grant.
+    #   @return [Types::KafkaClusterOAuthIamJwtBearer]
+    #
+    # @!attribute [rw] client_credentials_assertion
+    #   Details for SASL/OAUTHBEARER using client credentials grant with JWT
+    #   client assertion.
+    #   @return [Types::KafkaClusterOAuthClientCredentialsAssertion]
+    #
+    # @!attribute [rw] token_endpoint_authentication_method
+    #   How client credentials are sent to the identity provider. Valid
+    #   values are POST, BASIC, or NONE.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   OAuth scope to request. Included in the token request if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_endpoint_tls_certificate_arn
+    #   Secrets Manager ARN containing a custom CA certificate for the
+    #   identity provider. Required only if the identity provider uses a
+    #   private CA.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/KafkaClusterSaslOAuthBearerAuthentication AWS API Documentation
+    #
+    class KafkaClusterSaslOAuthBearerAuthentication < Struct.new(
+      :token_endpoint_url,
+      :client_credentials,
+      :iam_jwt_bearer,
+      :client_credentials_assertion,
+      :token_endpoint_authentication_method,
+      :scope,
+      :token_endpoint_tls_certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for SASL/OAUTHBEARER using standard client\_credentials grant
+    # (RFC 6749).
+    #
+    # @!attribute [rw] token_request_secret_arn
+    #   The Amazon Resource Name (ARN) of the Secrets Manager secret
+    #   containing the OAuth client credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/KafkaClusterOAuthClientCredentials AWS API Documentation
+    #
+    class KafkaClusterOAuthClientCredentials < Struct.new(
+      :token_request_secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for SASL/OAUTHBEARER using JWT Bearer assertion grant (RFC
+    # 7523).
+    #
+    # @!attribute [rw] audience
+    #   The audience for the JWT Bearer assertion.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_algorithm
+    #   The signing algorithm for the JWT Bearer assertion.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_request_secret_arn
+    #   The Amazon Resource Name (ARN) of the Secrets Manager secret
+    #   containing the signing key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/KafkaClusterOAuthIamJwtBearer AWS API Documentation
+    #
+    class KafkaClusterOAuthIamJwtBearer < Struct.new(
+      :audience,
+      :signing_algorithm,
+      :token_request_secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for SASL/OAUTHBEARER using client credentials grant with JWT
+    # client assertion (RFC 7521/7523).
+    #
+    # @!attribute [rw] audience
+    #   The audience for the JWT client assertion.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_algorithm
+    #   The signing algorithm for the JWT client assertion.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_request_secret_arn
+    #   The Amazon Resource Name (ARN) of the Secrets Manager secret
+    #   containing the signing key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/KafkaClusterOAuthClientCredentialsAssertion AWS API Documentation
+    #
+    class KafkaClusterOAuthClientCredentialsAssertion < Struct.new(
+      :audience,
+      :signing_algorithm,
+      :token_request_secret_arn)
       SENSITIVE = []
       include Aws::Structure
     end

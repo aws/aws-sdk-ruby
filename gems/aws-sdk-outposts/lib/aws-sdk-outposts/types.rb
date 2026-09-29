@@ -381,6 +381,11 @@ module Aws::Outposts
     #   The supported storage options for the catalog item.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rack_scaling_type
+    #   The rack scaling type supported by the catalog item. Valid values
+    #   are `SINGLE_RACK` and `MULTI_RACK`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CatalogItem AWS API Documentation
     #
     class CatalogItem < Struct.new(
@@ -390,7 +395,8 @@ module Aws::Outposts
       :power_kva,
       :weight_lbs,
       :supported_uplink_gbps,
-      :supported_storage)
+      :supported_storage,
+      :rack_scaling_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -607,6 +613,42 @@ module Aws::Outposts
     #
     class CreateOutpostOutput < Struct.new(
       :outpost)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] outpost_id
+    #   The ID or ARN of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_information_list
+    #   Information about the VPC used for private connectivity, including
+    #   the VPC, its subnets, and an associated VPC endpoint. You can
+    #   specify at most one entry.
+    #   @return [Array<Types::VpcInformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreatePrivateConnectivityConfigInput AWS API Documentation
+    #
+    class CreatePrivateConnectivityConfigInput < Struct.new(
+      :outpost_id,
+      :vpc_information_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] private_connectivity_config
+    #   The private connectivity configuration for the Outpost.
+    #   @return [Types::PrivateConnectivityConfig]
+    #
+    # @!attribute [rw] outpost_id
+    #   The ID of the Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreatePrivateConnectivityConfigOutput AWS API Documentation
+    #
+    class CreatePrivateConnectivityConfigOutput < Struct.new(
+      :private_connectivity_config,
+      :outpost_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1316,6 +1358,30 @@ module Aws::Outposts
     class GetOutpostSupportedInstanceTypesOutput < Struct.new(
       :instance_types,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] outpost_id
+    #   The ID or ARN of the Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetPrivateConnectivityConfigInput AWS API Documentation
+    #
+    class GetPrivateConnectivityConfigInput < Struct.new(
+      :outpost_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] private_connectivity_config
+    #   The private connectivity configuration for the Outpost.
+    #   @return [Types::PrivateConnectivityConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetPrivateConnectivityConfigOutput AWS API Documentation
+    #
+    class GetPrivateConnectivityConfigOutput < Struct.new(
+      :private_connectivity_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2389,6 +2455,18 @@ module Aws::Outposts
     #   The hardware type.
     #   @return [String]
     #
+    # @!attribute [rw] generation
+    #   The Outpost generation. Valid values are `GENERATION_1` for
+    #   first-generation rack deployments and `GENERATION_2` for
+    #   second-generation rack deployments.
+    #   @return [String]
+    #
+    # @!attribute [rw] rack_scaling_type
+    #   The rack scaling type. Valid values are `SINGLE_RACK` for
+    #   single-rack Outposts and `MULTI_RACK` for multi-rack Outposts that
+    #   can expand across multiple racks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Outpost AWS API Documentation
     #
     class Outpost < Struct.new(
@@ -2403,7 +2481,9 @@ module Aws::Outposts
       :availability_zone_id,
       :tags,
       :site_arn,
-      :supported_hardware_type)
+      :supported_hardware_type,
+      :generation,
+      :rack_scaling_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2423,6 +2503,43 @@ module Aws::Outposts
     class PricingOption < Struct.new(
       :pricing_type,
       :subscription_pricing_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the private connectivity configuration for an
+    # Outpost.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the service-linked role that
+    #   Amazon Web Services Outposts creates and uses to provision and
+    #   attach the network interfaces for private connectivity in your VPC.
+    #   The role's permissions are scoped to the specific Outpost and VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_connectivity_status
+    #   The status of private connectivity for the Outpost. Valid values are
+    #   `ENABLED` and `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_information_list
+    #   Information about the VPC used for private connectivity.
+    #   @return [Array<Types::VpcInformation>]
+    #
+    # @!attribute [rw] provisioning_role_arn
+    #   The Amazon Resource Name (ARN) of the provisioning role in your
+    #   account that Amazon Web Services Outposts uses to establish the
+    #   service link connection during Outpost installation. This field is
+    #   present only when VPC endpoint-based provisioning is configured.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/PrivateConnectivityConfig AWS API Documentation
+    #
+    class PrivateConnectivityConfig < Struct.new(
+      :role_arn,
+      :private_connectivity_status,
+      :vpc_information_list,
+      :provisioning_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2563,7 +2680,8 @@ module Aws::Outposts
     #
     # @!attribute [rw] quote_constraint_type
     #   The type of constraint. Valid values are `RACK_MAXIMUM`,
-    #   `RACK_MAX_POWER_KVA`, and `RACK_MAX_WEIGHT_LBS`.
+    #   `RACK_MAX_POWER_KVA`, `RACK_MAX_WEIGHT_LBS`, and
+    #   `RACK_SPACE_CONSTRAINED`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -3704,6 +3822,35 @@ module Aws::Outposts
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a VPC used for private connectivity, including its
+    # subnets and an associated VPC endpoint.
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC used for private connectivity.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of the subnets associated with the VPC endpoint. Currently,
+    #   only one subnet is supported.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the interface VPC endpoint for the Amazon Web Services
+    #   Outposts service. When specified, the endpoint must be in the
+    #   `available` state and the specified subnets must be associated with
+    #   it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/VpcInformation AWS API Documentation
+    #
+    class VpcInformation < Struct.new(
+      :vpc_id,
+      :subnet_ids,
+      :vpc_endpoint_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -17,10 +17,13 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListDiscoverableRegistryRecordsNonexistentFailure",
-    "operationName" : "ListDiscoverableRegistryRecords",
+    "id" : "BatchGetDiscoverableRegistryRecordNonexistentFailure",
+    "operationName" : "BatchGetDiscoverableRegistryRecord",
     "input" : {
-      "registryId" : "aaaaaaaaaaaa"
+      "entries" : [ {
+        "registryId" : "aaaaaaaaaaaa",
+        "recordIds" : [ "bbbbbbbbbbbb" ]
+      } ]
     },
     "expectation" : {
       "failure" : { }
@@ -32,13 +35,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "BatchGetDiscoverableRegistryRecordNonexistentFailure",
-    "operationName" : "BatchGetDiscoverableRegistryRecord",
+    "id" : "ListDiscoverableRegistryRecordsNonexistentFailure",
+    "operationName" : "ListDiscoverableRegistryRecords",
     "input" : {
-      "entries" : [ {
-        "registryId" : "aaaaaaaaaaaa",
-        "recordIds" : [ "bbbbbbbbbbbb" ]
-      } ]
+      "registryId" : "aaaaaaaaaaaa"
     },
     "expectation" : {
       "failure" : { }

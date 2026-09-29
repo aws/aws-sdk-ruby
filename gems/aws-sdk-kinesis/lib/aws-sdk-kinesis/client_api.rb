@@ -17,8 +17,33 @@ module Aws::Kinesis
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AddTagsToStreamInput = Shapes::StructureShape.new(name: 'AddTagsToStreamInput')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
+    BucketARN = Shapes::StringShape.new(name: 'BucketARN')
+    ChannelARN = Shapes::StringShape.new(name: 'ChannelARN')
+    ChannelCountObject = Shapes::IntegerShape.new(name: 'ChannelCountObject')
+    ChannelDescription = Shapes::StructureShape.new(name: 'ChannelDescription')
+    ChannelDestinationType = Shapes::StringShape.new(name: 'ChannelDestinationType')
+    ChannelEncryptionConfiguration = Shapes::StructureShape.new(name: 'ChannelEncryptionConfiguration')
+    ChannelEncryptionType = Shapes::StringShape.new(name: 'ChannelEncryptionType')
+    ChannelId = Shapes::StringShape.new(name: 'ChannelId')
+    ChannelLoggingConfiguration = Shapes::StructureShape.new(name: 'ChannelLoggingConfiguration')
+    ChannelLoggingUpdateInput = Shapes::StructureShape.new(name: 'ChannelLoggingUpdateInput')
+    ChannelName = Shapes::StringShape.new(name: 'ChannelName')
+    ChannelStatus = Shapes::StringShape.new(name: 'ChannelStatus')
+    ChannelStatusReason = Shapes::StringShape.new(name: 'ChannelStatusReason')
+    ChannelStreamConfiguration = Shapes::StructureShape.new(name: 'ChannelStreamConfiguration')
+    ChannelStreamConfigurationList = Shapes::ListShape.new(name: 'ChannelStreamConfigurationList')
+    ChannelStreamDescription = Shapes::StructureShape.new(name: 'ChannelStreamDescription')
+    ChannelStreamDescriptionList = Shapes::ListShape.new(name: 'ChannelStreamDescriptionList')
+    ChannelStreamIdentifier = Shapes::StructureShape.new(name: 'ChannelStreamIdentifier')
+    ChannelStreamIdentifierList = Shapes::ListShape.new(name: 'ChannelStreamIdentifierList')
+    ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
+    ChannelSummaryList = Shapes::ListShape.new(name: 'ChannelSummaryList')
     ChildShard = Shapes::StructureShape.new(name: 'ChildShard')
     ChildShardList = Shapes::ListShape.new(name: 'ChildShardList')
+    CloudWatchLogGroupName = Shapes::StringShape.new(name: 'CloudWatchLogGroupName')
+    CloudWatchLogStreamName = Shapes::StringShape.new(name: 'CloudWatchLogStreamName')
+    CloudWatchLogs = Shapes::StructureShape.new(name: 'CloudWatchLogs')
+    CloudWatchLogsUpdateInput = Shapes::StructureShape.new(name: 'CloudWatchLogsUpdateInput')
     Consumer = Shapes::StructureShape.new(name: 'Consumer')
     ConsumerARN = Shapes::StringShape.new(name: 'ConsumerARN')
     ConsumerCountObject = Shapes::IntegerShape.new(name: 'ConsumerCountObject')
@@ -26,14 +51,21 @@ module Aws::Kinesis
     ConsumerList = Shapes::ListShape.new(name: 'ConsumerList')
     ConsumerName = Shapes::StringShape.new(name: 'ConsumerName')
     ConsumerStatus = Shapes::StringShape.new(name: 'ConsumerStatus')
+    CreateChannelInput = Shapes::StructureShape.new(name: 'CreateChannelInput')
+    CreateChannelOutput = Shapes::StructureShape.new(name: 'CreateChannelOutput')
     CreateStreamInput = Shapes::StructureShape.new(name: 'CreateStreamInput')
     Data = Shapes::BlobShape.new(name: 'Data')
+    DataFreshnessInSeconds = Shapes::IntegerShape.new(name: 'DataFreshnessInSeconds')
+    DeadLetterQueueS3Configuration = Shapes::StructureShape.new(name: 'DeadLetterQueueS3Configuration')
     DecreaseStreamRetentionPeriodInput = Shapes::StructureShape.new(name: 'DecreaseStreamRetentionPeriodInput')
+    DeleteChannelInput = Shapes::StructureShape.new(name: 'DeleteChannelInput')
     DeleteResourcePolicyInput = Shapes::StructureShape.new(name: 'DeleteResourcePolicyInput')
     DeleteStreamInput = Shapes::StructureShape.new(name: 'DeleteStreamInput')
     DeregisterStreamConsumerInput = Shapes::StructureShape.new(name: 'DeregisterStreamConsumerInput')
     DescribeAccountSettingsInput = Shapes::StructureShape.new(name: 'DescribeAccountSettingsInput')
     DescribeAccountSettingsOutput = Shapes::StructureShape.new(name: 'DescribeAccountSettingsOutput')
+    DescribeChannelInput = Shapes::StructureShape.new(name: 'DescribeChannelInput')
+    DescribeChannelOutput = Shapes::StructureShape.new(name: 'DescribeChannelOutput')
     DescribeLimitsInput = Shapes::StructureShape.new(name: 'DescribeLimitsInput')
     DescribeLimitsOutput = Shapes::StructureShape.new(name: 'DescribeLimitsOutput')
     DescribeStreamConsumerInput = Shapes::StructureShape.new(name: 'DescribeStreamConsumerInput')
@@ -44,6 +76,7 @@ module Aws::Kinesis
     DescribeStreamSummaryInput = Shapes::StructureShape.new(name: 'DescribeStreamSummaryInput')
     DescribeStreamSummaryOutput = Shapes::StructureShape.new(name: 'DescribeStreamSummaryOutput')
     DisableEnhancedMonitoringInput = Shapes::StructureShape.new(name: 'DisableEnhancedMonitoringInput')
+    DryRunOperationException = Shapes::StructureShape.new(name: 'DryRunOperationException')
     EnableEnhancedMonitoringInput = Shapes::StructureShape.new(name: 'EnableEnhancedMonitoringInput')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EnhancedMetrics = Shapes::StructureShape.new(name: 'EnhancedMetrics')
@@ -51,8 +84,10 @@ module Aws::Kinesis
     EnhancedMonitoringOutput = Shapes::StructureShape.new(name: 'EnhancedMonitoringOutput')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExpectedBucketOwner = Shapes::StringShape.new(name: 'ExpectedBucketOwner')
     ExpiredIteratorException = Shapes::StructureShape.new(name: 'ExpiredIteratorException')
     ExpiredNextTokenException = Shapes::StructureShape.new(name: 'ExpiredNextTokenException')
+    GSRSchemaARN = Shapes::StringShape.new(name: 'GSRSchemaARN')
     GetRecordsInput = Shapes::StructureShape.new(name: 'GetRecordsInput')
     GetRecordsInputLimit = Shapes::IntegerShape.new(name: 'GetRecordsInputLimit')
     GetRecordsOutput = Shapes::StructureShape.new(name: 'GetRecordsOutput')
@@ -73,6 +108,9 @@ module Aws::Kinesis
     KMSThrottlingException = Shapes::StructureShape.new(name: 'KMSThrottlingException')
     KeyId = Shapes::StringShape.new(name: 'KeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListChannelsInput = Shapes::StructureShape.new(name: 'ListChannelsInput')
+    ListChannelsInputLimit = Shapes::IntegerShape.new(name: 'ListChannelsInputLimit')
+    ListChannelsOutput = Shapes::StructureShape.new(name: 'ListChannelsOutput')
     ListShardsInput = Shapes::StructureShape.new(name: 'ListShardsInput')
     ListShardsInputLimit = Shapes::IntegerShape.new(name: 'ListShardsInputLimit')
     ListShardsOutput = Shapes::StructureShape.new(name: 'ListShardsOutput')
@@ -100,7 +138,12 @@ module Aws::Kinesis
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OnDemandStreamCountLimitObject = Shapes::IntegerShape.new(name: 'OnDemandStreamCountLimitObject')
     OnDemandStreamCountObject = Shapes::IntegerShape.new(name: 'OnDemandStreamCountObject')
+    PartitionField = Shapes::StructureShape.new(name: 'PartitionField')
+    PartitionFieldList = Shapes::ListShape.new(name: 'PartitionFieldList')
     PartitionKey = Shapes::StringShape.new(name: 'PartitionKey')
+    PartitionSourceName = Shapes::StringShape.new(name: 'PartitionSourceName')
+    PartitionSpec = Shapes::StructureShape.new(name: 'PartitionSpec')
+    PartitionTransform = Shapes::StringShape.new(name: 'PartitionTransform')
     Policy = Shapes::StringShape.new(name: 'Policy')
     PositiveIntegerObject = Shapes::IntegerShape.new(name: 'PositiveIntegerObject')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
@@ -114,6 +157,9 @@ module Aws::Kinesis
     PutRecordsResultEntryList = Shapes::ListShape.new(name: 'PutRecordsResultEntryList')
     PutResourcePolicyInput = Shapes::StructureShape.new(name: 'PutResourcePolicyInput')
     Record = Shapes::StructureShape.new(name: 'Record')
+    RecordConfiguration = Shapes::StructureShape.new(name: 'RecordConfiguration')
+    RecordDistributionStrategy = Shapes::StringShape.new(name: 'RecordDistributionStrategy')
+    RecordFormatType = Shapes::StringShape.new(name: 'RecordFormatType')
     RecordList = Shapes::ListShape.new(name: 'RecordList')
     RegisterStreamConsumerInput = Shapes::StructureShape.new(name: 'RegisterStreamConsumerInput')
     RegisterStreamConsumerOutput = Shapes::StructureShape.new(name: 'RegisterStreamConsumerOutput')
@@ -122,6 +168,23 @@ module Aws::Kinesis
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetentionPeriodHours = Shapes::IntegerShape.new(name: 'RetentionPeriodHours')
+    RoleARN = Shapes::StringShape.new(name: 'RoleARN')
+    S3CompressionType = Shapes::StringShape.new(name: 'S3CompressionType')
+    S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
+    S3DestinationDescription = Shapes::StructureShape.new(name: 'S3DestinationDescription')
+    S3DestinationUpdateInput = Shapes::StructureShape.new(name: 'S3DestinationUpdateInput')
+    S3ErrorOutputPrefix = Shapes::StringShape.new(name: 'S3ErrorOutputPrefix')
+    S3OutputKeyTemplate = Shapes::StringShape.new(name: 'S3OutputKeyTemplate')
+    S3StorageClass = Shapes::StringShape.new(name: 'S3StorageClass')
+    S3StorageConfiguration = Shapes::StructureShape.new(name: 'S3StorageConfiguration')
+    S3TablesCompressionType = Shapes::StringShape.new(name: 'S3TablesCompressionType')
+    S3TablesConfiguration = Shapes::StructureShape.new(name: 'S3TablesConfiguration')
+    S3TablesConfigurationList = Shapes::ListShape.new(name: 'S3TablesConfigurationList')
+    S3TablesDestinationConfiguration = Shapes::StructureShape.new(name: 'S3TablesDestinationConfiguration')
+    S3TablesDestinationDescription = Shapes::StructureShape.new(name: 'S3TablesDestinationDescription')
+    S3TablesDestinationUpdateInput = Shapes::StructureShape.new(name: 'S3TablesDestinationUpdateInput')
+    S3TablesNamespace = Shapes::StringShape.new(name: 'S3TablesNamespace')
+    S3TablesTableName = Shapes::StringShape.new(name: 'S3TablesTableName')
     ScalingType = Shapes::StringShape.new(name: 'ScalingType')
     SequenceNumber = Shapes::StringShape.new(name: 'SequenceNumber')
     SequenceNumberRange = Shapes::StructureShape.new(name: 'SequenceNumberRange')
@@ -141,6 +204,8 @@ module Aws::Kinesis
     StreamARN = Shapes::StringShape.new(name: 'StreamARN')
     StreamDescription = Shapes::StructureShape.new(name: 'StreamDescription')
     StreamDescriptionSummary = Shapes::StructureShape.new(name: 'StreamDescriptionSummary')
+    StreamFilter = Shapes::StructureShape.new(name: 'StreamFilter')
+    StreamFilterList = Shapes::ListShape.new(name: 'StreamFilterList')
     StreamId = Shapes::StringShape.new(name: 'StreamId')
     StreamMode = Shapes::StringShape.new(name: 'StreamMode')
     StreamModeDetails = Shapes::StructureShape.new(name: 'StreamModeDetails')
@@ -153,6 +218,7 @@ module Aws::Kinesis
     SubscribeToShardEventStream = Shapes::StructureShape.new(name: 'SubscribeToShardEventStream')
     SubscribeToShardInput = Shapes::StructureShape.new(name: 'SubscribeToShardInput')
     SubscribeToShardOutput = Shapes::StructureShape.new(name: 'SubscribeToShardOutput')
+    TableBucketARN = Shapes::StringShape.new(name: 'TableBucketARN')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -164,10 +230,13 @@ module Aws::Kinesis
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateAccountSettingsInput = Shapes::StructureShape.new(name: 'UpdateAccountSettingsInput')
     UpdateAccountSettingsOutput = Shapes::StructureShape.new(name: 'UpdateAccountSettingsOutput')
+    UpdateChannelInput = Shapes::StructureShape.new(name: 'UpdateChannelInput')
+    UpdateChannelOutput = Shapes::StructureShape.new(name: 'UpdateChannelOutput')
     UpdateMaxRecordSizeInput = Shapes::StructureShape.new(name: 'UpdateMaxRecordSizeInput')
     UpdateShardCountInput = Shapes::StructureShape.new(name: 'UpdateShardCountInput')
     UpdateShardCountOutput = Shapes::StructureShape.new(name: 'UpdateShardCountOutput')
     UpdateStreamModeInput = Shapes::StructureShape.new(name: 'UpdateStreamModeInput')
+    UpdateStreamRecordDistributionStrategyInput = Shapes::StructureShape.new(name: 'UpdateStreamRecordDistributionStrategyInput')
     UpdateStreamWarmThroughputInput = Shapes::StructureShape.new(name: 'UpdateStreamWarmThroughputInput')
     UpdateStreamWarmThroughputOutput = Shapes::StructureShape.new(name: 'UpdateStreamWarmThroughputOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -182,12 +251,77 @@ module Aws::Kinesis
     AddTagsToStreamInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
     AddTagsToStreamInput.struct_class = Types::AddTagsToStreamInput
 
+    ChannelDescription.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "ChannelName"))
+    ChannelDescription.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelARN, required: true, location_name: "ChannelARN"))
+    ChannelDescription.add_member(:channel_id, Shapes::ShapeRef.new(shape: ChannelId, required: true, location_name: "ChannelId"))
+    ChannelDescription.add_member(:channel_status, Shapes::ShapeRef.new(shape: ChannelStatus, required: true, location_name: "ChannelStatus"))
+    ChannelDescription.add_member(:channel_status_reason, Shapes::ShapeRef.new(shape: ChannelStatusReason, location_name: "ChannelStatusReason"))
+    ChannelDescription.add_member(:channel_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ChannelCreationTimestamp"))
+    ChannelDescription.add_member(:service_execution_role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "ServiceExecutionRoleARN"))
+    ChannelDescription.add_member(:stream_configuration_list, Shapes::ShapeRef.new(shape: ChannelStreamDescriptionList, required: true, location_name: "StreamConfigurationList"))
+    ChannelDescription.add_member(:s3_destination_configuration, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationConfiguration"))
+    ChannelDescription.add_member(:s3_tables_destination_configuration, Shapes::ShapeRef.new(shape: S3TablesDestinationDescription, location_name: "S3TablesDestinationConfiguration"))
+    ChannelDescription.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: ChannelEncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    ChannelDescription.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: ChannelLoggingConfiguration, required: true, location_name: "LoggingConfiguration"))
+    ChannelDescription.struct_class = Types::ChannelDescription
+
+    ChannelEncryptionConfiguration.add_member(:encryption_type, Shapes::ShapeRef.new(shape: ChannelEncryptionType, required: true, location_name: "EncryptionType"))
+    ChannelEncryptionConfiguration.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, required: true, location_name: "KeyId"))
+    ChannelEncryptionConfiguration.struct_class = Types::ChannelEncryptionConfiguration
+
+    ChannelLoggingConfiguration.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogs, required: true, location_name: "CloudWatchLogs"))
+    ChannelLoggingConfiguration.struct_class = Types::ChannelLoggingConfiguration
+
+    ChannelLoggingUpdateInput.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogsUpdateInput, required: true, location_name: "CloudWatchLogs"))
+    ChannelLoggingUpdateInput.struct_class = Types::ChannelLoggingUpdateInput
+
+    ChannelStreamConfiguration.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    ChannelStreamConfiguration.add_member(:record_configuration, Shapes::ShapeRef.new(shape: RecordConfiguration, required: true, location_name: "RecordConfiguration"))
+    ChannelStreamConfiguration.struct_class = Types::ChannelStreamConfiguration
+
+    ChannelStreamConfigurationList.member = Shapes::ShapeRef.new(shape: ChannelStreamConfiguration)
+
+    ChannelStreamDescription.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    ChannelStreamDescription.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StreamCreationTimestamp"))
+    ChannelStreamDescription.add_member(:record_configuration, Shapes::ShapeRef.new(shape: RecordConfiguration, required: true, location_name: "RecordConfiguration"))
+    ChannelStreamDescription.struct_class = Types::ChannelStreamDescription
+
+    ChannelStreamDescriptionList.member = Shapes::ShapeRef.new(shape: ChannelStreamDescription)
+
+    ChannelStreamIdentifier.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    ChannelStreamIdentifier.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StreamCreationTimestamp"))
+    ChannelStreamIdentifier.struct_class = Types::ChannelStreamIdentifier
+
+    ChannelStreamIdentifierList.member = Shapes::ShapeRef.new(shape: ChannelStreamIdentifier)
+
+    ChannelSummary.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "ChannelName"))
+    ChannelSummary.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelARN, required: true, location_name: "ChannelARN"))
+    ChannelSummary.add_member(:channel_id, Shapes::ShapeRef.new(shape: ChannelId, required: true, location_name: "ChannelId"))
+    ChannelSummary.add_member(:channel_status, Shapes::ShapeRef.new(shape: ChannelStatus, required: true, location_name: "ChannelStatus"))
+    ChannelSummary.add_member(:channel_status_reason, Shapes::ShapeRef.new(shape: ChannelStatusReason, location_name: "ChannelStatusReason"))
+    ChannelSummary.add_member(:channel_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ChannelCreationTimestamp"))
+    ChannelSummary.add_member(:channel_destination_type, Shapes::ShapeRef.new(shape: ChannelDestinationType, required: true, location_name: "ChannelDestinationType"))
+    ChannelSummary.add_member(:streams, Shapes::ShapeRef.new(shape: ChannelStreamIdentifierList, required: true, location_name: "Streams"))
+    ChannelSummary.struct_class = Types::ChannelSummary
+
+    ChannelSummaryList.member = Shapes::ShapeRef.new(shape: ChannelSummary)
+
     ChildShard.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, required: true, location_name: "ShardId"))
     ChildShard.add_member(:parent_shards, Shapes::ShapeRef.new(shape: ShardIdList, required: true, location_name: "ParentShards"))
     ChildShard.add_member(:hash_key_range, Shapes::ShapeRef.new(shape: HashKeyRange, required: true, location_name: "HashKeyRange"))
     ChildShard.struct_class = Types::ChildShard
 
     ChildShardList.member = Shapes::ShapeRef.new(shape: ChildShard)
+
+    CloudWatchLogs.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Enabled"))
+    CloudWatchLogs.add_member(:log_group_name, Shapes::ShapeRef.new(shape: CloudWatchLogGroupName, location_name: "LogGroupName"))
+    CloudWatchLogs.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: CloudWatchLogStreamName, location_name: "LogStreamName"))
+    CloudWatchLogs.struct_class = Types::CloudWatchLogs
+
+    CloudWatchLogsUpdateInput.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Enabled"))
+    CloudWatchLogsUpdateInput.add_member(:log_group_name, Shapes::ShapeRef.new(shape: CloudWatchLogGroupName, location_name: "LogGroupName"))
+    CloudWatchLogsUpdateInput.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: CloudWatchLogStreamName, location_name: "LogStreamName"))
+    CloudWatchLogsUpdateInput.struct_class = Types::CloudWatchLogsUpdateInput
 
     Consumer.add_member(:consumer_name, Shapes::ShapeRef.new(shape: ConsumerName, required: true, location_name: "ConsumerName"))
     Consumer.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: ConsumerARN, required: true, location_name: "ConsumerARN"))
@@ -204,19 +338,41 @@ module Aws::Kinesis
 
     ConsumerList.member = Shapes::ShapeRef.new(shape: Consumer)
 
+    CreateChannelInput.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "ChannelName"))
+    CreateChannelInput.add_member(:service_execution_role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "ServiceExecutionRoleARN"))
+    CreateChannelInput.add_member(:stream_configuration_list, Shapes::ShapeRef.new(shape: ChannelStreamConfigurationList, required: true, location_name: "StreamConfigurationList"))
+    CreateChannelInput.add_member(:s3_destination_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "S3DestinationConfiguration"))
+    CreateChannelInput.add_member(:s3_tables_destination_configuration, Shapes::ShapeRef.new(shape: S3TablesDestinationConfiguration, location_name: "S3TablesDestinationConfiguration"))
+    CreateChannelInput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: ChannelEncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    CreateChannelInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateChannelInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: ChannelLoggingConfiguration, location_name: "LoggingConfiguration"))
+    CreateChannelInput.struct_class = Types::CreateChannelInput
+
+    CreateChannelOutput.add_member(:channel_description, Shapes::ShapeRef.new(shape: ChannelDescription, required: true, location_name: "ChannelDescription"))
+    CreateChannelOutput.struct_class = Types::CreateChannelOutput
+
     CreateStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     CreateStreamInput.add_member(:shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "ShardCount"))
     CreateStreamInput.add_member(:stream_mode_details, Shapes::ShapeRef.new(shape: StreamModeDetails, location_name: "StreamModeDetails"))
     CreateStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateStreamInput.add_member(:warm_throughput_mi_bps, Shapes::ShapeRef.new(shape: NaturalIntegerObject, location_name: "WarmThroughputMiBps"))
     CreateStreamInput.add_member(:max_record_size_in_ki_b, Shapes::ShapeRef.new(shape: MaxRecordSizeInKiB, location_name: "MaxRecordSizeInKiB"))
+    CreateStreamInput.add_member(:record_distribution_strategy, Shapes::ShapeRef.new(shape: RecordDistributionStrategy, location_name: "RecordDistributionStrategy"))
     CreateStreamInput.struct_class = Types::CreateStreamInput
+
+    DeadLetterQueueS3Configuration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
+    DeadLetterQueueS3Configuration.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: ExpectedBucketOwner, required: true, location_name: "ExpectedBucketOwner"))
+    DeadLetterQueueS3Configuration.add_member(:error_output_prefix, Shapes::ShapeRef.new(shape: S3ErrorOutputPrefix, location_name: "ErrorOutputPrefix"))
+    DeadLetterQueueS3Configuration.struct_class = Types::DeadLetterQueueS3Configuration
 
     DecreaseStreamRetentionPeriodInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     DecreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: RetentionPeriodHours, required: true, location_name: "RetentionPeriodHours"))
     DecreaseStreamRetentionPeriodInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     DecreaseStreamRetentionPeriodInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
     DecreaseStreamRetentionPeriodInput.struct_class = Types::DecreaseStreamRetentionPeriodInput
+
+    DeleteChannelInput.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelARN, required: true, location_name: "ChannelARN", metadata: {"contextParam" => {"name" => "ChannelARN"}}))
+    DeleteChannelInput.struct_class = Types::DeleteChannelInput
 
     DeleteResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN", metadata: {"contextParam" => {"name" => "ResourceARN"}}))
     DeleteResourcePolicyInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
@@ -239,12 +395,20 @@ module Aws::Kinesis
     DescribeAccountSettingsOutput.add_member(:minimum_throughput_billing_commitment, Shapes::ShapeRef.new(shape: MinimumThroughputBillingCommitmentOutput, location_name: "MinimumThroughputBillingCommitment"))
     DescribeAccountSettingsOutput.struct_class = Types::DescribeAccountSettingsOutput
 
+    DescribeChannelInput.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelARN, required: true, location_name: "ChannelARN", metadata: {"contextParam" => {"name" => "ChannelARN"}}))
+    DescribeChannelInput.struct_class = Types::DescribeChannelInput
+
+    DescribeChannelOutput.add_member(:channel_description, Shapes::ShapeRef.new(shape: ChannelDescription, required: true, location_name: "ChannelDescription"))
+    DescribeChannelOutput.struct_class = Types::DescribeChannelOutput
+
     DescribeLimitsInput.struct_class = Types::DescribeLimitsInput
 
     DescribeLimitsOutput.add_member(:shard_limit, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "ShardLimit"))
     DescribeLimitsOutput.add_member(:open_shard_count, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "OpenShardCount"))
     DescribeLimitsOutput.add_member(:on_demand_stream_count, Shapes::ShapeRef.new(shape: OnDemandStreamCountObject, required: true, location_name: "OnDemandStreamCount"))
     DescribeLimitsOutput.add_member(:on_demand_stream_count_limit, Shapes::ShapeRef.new(shape: OnDemandStreamCountLimitObject, required: true, location_name: "OnDemandStreamCountLimit"))
+    DescribeLimitsOutput.add_member(:channel_count, Shapes::ShapeRef.new(shape: ChannelCountObject, location_name: "ChannelCount"))
+    DescribeLimitsOutput.add_member(:channel_count_limit, Shapes::ShapeRef.new(shape: ChannelCountObject, location_name: "ChannelCountLimit"))
     DescribeLimitsOutput.struct_class = Types::DescribeLimitsOutput
 
     DescribeStreamConsumerInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
@@ -280,6 +444,9 @@ module Aws::Kinesis
     DisableEnhancedMonitoringInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
     DisableEnhancedMonitoringInput.struct_class = Types::DisableEnhancedMonitoringInput
 
+    DryRunOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DryRunOperationException.struct_class = Types::DryRunOperationException
+
     EnableEnhancedMonitoringInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     EnableEnhancedMonitoringInput.add_member(:shard_level_metrics, Shapes::ShapeRef.new(shape: MetricsNameList, required: true, location_name: "ShardLevelMetrics"))
     EnableEnhancedMonitoringInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
@@ -307,6 +474,7 @@ module Aws::Kinesis
     GetRecordsInput.add_member(:limit, Shapes::ShapeRef.new(shape: GetRecordsInputLimit, location_name: "Limit"))
     GetRecordsInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     GetRecordsInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
+    GetRecordsInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DryRun"))
     GetRecordsInput.struct_class = Types::GetRecordsInput
 
     GetRecordsOutput.add_member(:records, Shapes::ShapeRef.new(shape: RecordList, required: true, location_name: "Records"))
@@ -329,6 +497,7 @@ module Aws::Kinesis
     GetShardIteratorInput.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     GetShardIteratorInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     GetShardIteratorInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
+    GetShardIteratorInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DryRun"))
     GetShardIteratorInput.struct_class = Types::GetShardIteratorInput
 
     GetShardIteratorOutput.add_member(:shard_iterator, Shapes::ShapeRef.new(shape: ShardIterator, location_name: "ShardIterator"))
@@ -370,6 +539,15 @@ module Aws::Kinesis
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListChannelsInput.add_member(:stream_filter, Shapes::ShapeRef.new(shape: StreamFilterList, location_name: "StreamFilter"))
+    ListChannelsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListChannelsInputLimit, location_name: "MaxResults"))
+    ListChannelsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChannelsInput.struct_class = Types::ListChannelsInput
+
+    ListChannelsOutput.add_member(:channel_summaries, Shapes::ShapeRef.new(shape: ChannelSummaryList, required: true, location_name: "ChannelSummaries"))
+    ListChannelsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListChannelsOutput.struct_class = Types::ListChannelsOutput
 
     ListShardsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     ListShardsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -443,16 +621,26 @@ module Aws::Kinesis
     MinimumThroughputBillingCommitmentOutput.add_member(:earliest_allowed_end_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EarliestAllowedEndAt"))
     MinimumThroughputBillingCommitmentOutput.struct_class = Types::MinimumThroughputBillingCommitmentOutput
 
+    PartitionField.add_member(:transform, Shapes::ShapeRef.new(shape: PartitionTransform, required: true, location_name: "Transform"))
+    PartitionField.add_member(:source_name, Shapes::ShapeRef.new(shape: PartitionSourceName, required: true, location_name: "SourceName"))
+    PartitionField.struct_class = Types::PartitionField
+
+    PartitionFieldList.member = Shapes::ShapeRef.new(shape: PartitionField)
+
+    PartitionSpec.add_member(:partition_fields, Shapes::ShapeRef.new(shape: PartitionFieldList, required: true, location_name: "PartitionFields"))
+    PartitionSpec.struct_class = Types::PartitionSpec
+
     ProvisionedThroughputExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
 
     PutRecordInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     PutRecordInput.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
-    PutRecordInput.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, required: true, location_name: "PartitionKey"))
+    PutRecordInput.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, location_name: "PartitionKey"))
     PutRecordInput.add_member(:explicit_hash_key, Shapes::ShapeRef.new(shape: HashKey, location_name: "ExplicitHashKey"))
     PutRecordInput.add_member(:sequence_number_for_ordering, Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "SequenceNumberForOrdering"))
     PutRecordInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     PutRecordInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
+    PutRecordInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DryRun"))
     PutRecordInput.struct_class = Types::PutRecordInput
 
     PutRecordOutput.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, required: true, location_name: "ShardId"))
@@ -464,6 +652,7 @@ module Aws::Kinesis
     PutRecordsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     PutRecordsInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     PutRecordsInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
+    PutRecordsInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DryRun"))
     PutRecordsInput.struct_class = Types::PutRecordsInput
 
     PutRecordsOutput.add_member(:failed_record_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "FailedRecordCount"))
@@ -473,7 +662,7 @@ module Aws::Kinesis
 
     PutRecordsRequestEntry.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
     PutRecordsRequestEntry.add_member(:explicit_hash_key, Shapes::ShapeRef.new(shape: HashKey, location_name: "ExplicitHashKey"))
-    PutRecordsRequestEntry.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, required: true, location_name: "PartitionKey"))
+    PutRecordsRequestEntry.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, location_name: "PartitionKey"))
     PutRecordsRequestEntry.struct_class = Types::PutRecordsRequestEntry
 
     PutRecordsRequestEntryList.member = Shapes::ShapeRef.new(shape: PutRecordsRequestEntry)
@@ -494,9 +683,13 @@ module Aws::Kinesis
     Record.add_member(:sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, required: true, location_name: "SequenceNumber"))
     Record.add_member(:approximate_arrival_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApproximateArrivalTimestamp"))
     Record.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
-    Record.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, required: true, location_name: "PartitionKey"))
+    Record.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, location_name: "PartitionKey"))
     Record.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
     Record.struct_class = Types::Record
+
+    RecordConfiguration.add_member(:record_format_type, Shapes::ShapeRef.new(shape: RecordFormatType, required: true, location_name: "RecordFormatType"))
+    RecordConfiguration.add_member(:gsr_schema_arn, Shapes::ShapeRef.new(shape: GSRSchemaARN, location_name: "GSRSchemaARN"))
+    RecordConfiguration.struct_class = Types::RecordConfiguration
 
     RecordList.member = Shapes::ShapeRef.new(shape: Record)
 
@@ -520,6 +713,48 @@ module Aws::Kinesis
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    S3DestinationConfiguration.add_member(:data_freshness_in_seconds, Shapes::ShapeRef.new(shape: DataFreshnessInSeconds, location_name: "DataFreshnessInSeconds"))
+    S3DestinationConfiguration.add_member(:dead_letter_queue_s3_configuration, Shapes::ShapeRef.new(shape: DeadLetterQueueS3Configuration, location_name: "DeadLetterQueueS3Configuration"))
+    S3DestinationConfiguration.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: S3StorageConfiguration, required: true, location_name: "StorageConfiguration"))
+    S3DestinationConfiguration.struct_class = Types::S3DestinationConfiguration
+
+    S3DestinationDescription.add_member(:data_freshness_in_seconds, Shapes::ShapeRef.new(shape: DataFreshnessInSeconds, required: true, location_name: "DataFreshnessInSeconds"))
+    S3DestinationDescription.add_member(:dead_letter_queue_s3_configuration, Shapes::ShapeRef.new(shape: DeadLetterQueueS3Configuration, required: true, location_name: "DeadLetterQueueS3Configuration"))
+    S3DestinationDescription.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: S3StorageConfiguration, required: true, location_name: "StorageConfiguration"))
+    S3DestinationDescription.struct_class = Types::S3DestinationDescription
+
+    S3DestinationUpdateInput.add_member(:data_freshness_in_seconds, Shapes::ShapeRef.new(shape: DataFreshnessInSeconds, required: true, location_name: "DataFreshnessInSeconds"))
+    S3DestinationUpdateInput.struct_class = Types::S3DestinationUpdateInput
+
+    S3StorageConfiguration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
+    S3StorageConfiguration.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: ExpectedBucketOwner, required: true, location_name: "ExpectedBucketOwner"))
+    S3StorageConfiguration.add_member(:output_key_template, Shapes::ShapeRef.new(shape: S3OutputKeyTemplate, location_name: "OutputKeyTemplate"))
+    S3StorageConfiguration.add_member(:storage_class, Shapes::ShapeRef.new(shape: S3StorageClass, location_name: "StorageClass"))
+    S3StorageConfiguration.add_member(:compression_type, Shapes::ShapeRef.new(shape: S3CompressionType, required: true, location_name: "CompressionType"))
+    S3StorageConfiguration.struct_class = Types::S3StorageConfiguration
+
+    S3TablesConfiguration.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location_name: "TableBucketARN"))
+    S3TablesConfiguration.add_member(:namespace, Shapes::ShapeRef.new(shape: S3TablesNamespace, required: true, location_name: "Namespace"))
+    S3TablesConfiguration.add_member(:table_name, Shapes::ShapeRef.new(shape: S3TablesTableName, required: true, location_name: "TableName"))
+    S3TablesConfiguration.add_member(:compression_type, Shapes::ShapeRef.new(shape: S3TablesCompressionType, required: true, location_name: "CompressionType"))
+    S3TablesConfiguration.add_member(:partition_spec, Shapes::ShapeRef.new(shape: PartitionSpec, location_name: "PartitionSpec"))
+    S3TablesConfiguration.struct_class = Types::S3TablesConfiguration
+
+    S3TablesConfigurationList.member = Shapes::ShapeRef.new(shape: S3TablesConfiguration)
+
+    S3TablesDestinationConfiguration.add_member(:data_freshness_in_seconds, Shapes::ShapeRef.new(shape: DataFreshnessInSeconds, location_name: "DataFreshnessInSeconds"))
+    S3TablesDestinationConfiguration.add_member(:dead_letter_queue_s3_configuration, Shapes::ShapeRef.new(shape: DeadLetterQueueS3Configuration, required: true, location_name: "DeadLetterQueueS3Configuration"))
+    S3TablesDestinationConfiguration.add_member(:s3_tables_configuration_list, Shapes::ShapeRef.new(shape: S3TablesConfigurationList, required: true, location_name: "S3TablesConfigurationList"))
+    S3TablesDestinationConfiguration.struct_class = Types::S3TablesDestinationConfiguration
+
+    S3TablesDestinationDescription.add_member(:data_freshness_in_seconds, Shapes::ShapeRef.new(shape: DataFreshnessInSeconds, required: true, location_name: "DataFreshnessInSeconds"))
+    S3TablesDestinationDescription.add_member(:dead_letter_queue_s3_configuration, Shapes::ShapeRef.new(shape: DeadLetterQueueS3Configuration, required: true, location_name: "DeadLetterQueueS3Configuration"))
+    S3TablesDestinationDescription.add_member(:s3_tables_configuration_list, Shapes::ShapeRef.new(shape: S3TablesConfigurationList, required: true, location_name: "S3TablesConfigurationList"))
+    S3TablesDestinationDescription.struct_class = Types::S3TablesDestinationDescription
+
+    S3TablesDestinationUpdateInput.add_member(:data_freshness_in_seconds, Shapes::ShapeRef.new(shape: DataFreshnessInSeconds, required: true, location_name: "DataFreshnessInSeconds"))
+    S3TablesDestinationUpdateInput.struct_class = Types::S3TablesDestinationUpdateInput
 
     SequenceNumberRange.add_member(:starting_sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, required: true, location_name: "StartingSequenceNumber"))
     SequenceNumberRange.add_member(:ending_sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "EndingSequenceNumber"))
@@ -594,7 +829,15 @@ module Aws::Kinesis
     StreamDescriptionSummary.add_member(:consumer_count, Shapes::ShapeRef.new(shape: ConsumerCountObject, location_name: "ConsumerCount"))
     StreamDescriptionSummary.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughputObject, location_name: "WarmThroughput"))
     StreamDescriptionSummary.add_member(:max_record_size_in_ki_b, Shapes::ShapeRef.new(shape: MaxRecordSizeInKiB, location_name: "MaxRecordSizeInKiB"))
+    StreamDescriptionSummary.add_member(:channel_count, Shapes::ShapeRef.new(shape: ChannelCountObject, location_name: "ChannelCount"))
+    StreamDescriptionSummary.add_member(:record_distribution_strategy, Shapes::ShapeRef.new(shape: RecordDistributionStrategy, location_name: "RecordDistributionStrategy"))
     StreamDescriptionSummary.struct_class = Types::StreamDescriptionSummary
+
+    StreamFilter.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    StreamFilter.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamCreationTimestamp"))
+    StreamFilter.struct_class = Types::StreamFilter
+
+    StreamFilterList.member = Shapes::ShapeRef.new(shape: StreamFilter)
 
     StreamModeDetails.add_member(:stream_mode, Shapes::ShapeRef.new(shape: StreamMode, required: true, location_name: "StreamMode"))
     StreamModeDetails.struct_class = Types::StreamModeDetails
@@ -632,6 +875,7 @@ module Aws::Kinesis
     SubscribeToShardInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
     SubscribeToShardInput.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, required: true, location_name: "ShardId"))
     SubscribeToShardInput.add_member(:starting_position, Shapes::ShapeRef.new(shape: StartingPosition, required: true, location_name: "StartingPosition"))
+    SubscribeToShardInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DryRun"))
     SubscribeToShardInput.struct_class = Types::SubscribeToShardInput
 
     SubscribeToShardOutput.add_member(:event_stream, Shapes::ShapeRef.new(shape: SubscribeToShardEventStream, required: true, eventstream: true, location_name: "EventStream"))
@@ -664,6 +908,15 @@ module Aws::Kinesis
     UpdateAccountSettingsOutput.add_member(:minimum_throughput_billing_commitment, Shapes::ShapeRef.new(shape: MinimumThroughputBillingCommitmentOutput, location_name: "MinimumThroughputBillingCommitment"))
     UpdateAccountSettingsOutput.struct_class = Types::UpdateAccountSettingsOutput
 
+    UpdateChannelInput.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelARN, required: true, location_name: "ChannelARN", metadata: {"contextParam" => {"name" => "ChannelARN"}}))
+    UpdateChannelInput.add_member(:s3_destination_configuration, Shapes::ShapeRef.new(shape: S3DestinationUpdateInput, location_name: "S3DestinationConfiguration"))
+    UpdateChannelInput.add_member(:s3_tables_destination_configuration, Shapes::ShapeRef.new(shape: S3TablesDestinationUpdateInput, location_name: "S3TablesDestinationConfiguration"))
+    UpdateChannelInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: ChannelLoggingUpdateInput, location_name: "LoggingConfiguration"))
+    UpdateChannelInput.struct_class = Types::UpdateChannelInput
+
+    UpdateChannelOutput.add_member(:channel_description, Shapes::ShapeRef.new(shape: ChannelDescription, required: true, location_name: "ChannelDescription"))
+    UpdateChannelOutput.struct_class = Types::UpdateChannelOutput
+
     UpdateMaxRecordSizeInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     UpdateMaxRecordSizeInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
     UpdateMaxRecordSizeInput.add_member(:max_record_size_in_ki_b, Shapes::ShapeRef.new(shape: MaxRecordSizeInKiB, required: true, location_name: "MaxRecordSizeInKiB"))
@@ -687,6 +940,11 @@ module Aws::Kinesis
     UpdateStreamModeInput.add_member(:stream_mode_details, Shapes::ShapeRef.new(shape: StreamModeDetails, required: true, location_name: "StreamModeDetails"))
     UpdateStreamModeInput.add_member(:warm_throughput_mi_bps, Shapes::ShapeRef.new(shape: NaturalIntegerObject, location_name: "WarmThroughputMiBps"))
     UpdateStreamModeInput.struct_class = Types::UpdateStreamModeInput
+
+    UpdateStreamRecordDistributionStrategyInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
+    UpdateStreamRecordDistributionStrategyInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
+    UpdateStreamRecordDistributionStrategyInput.add_member(:record_distribution_strategy, Shapes::ShapeRef.new(shape: RecordDistributionStrategy, required: true, location_name: "RecordDistributionStrategy"))
+    UpdateStreamRecordDistributionStrategyInput.struct_class = Types::UpdateStreamRecordDistributionStrategyInput
 
     UpdateStreamWarmThroughputInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     UpdateStreamWarmThroughputInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
@@ -741,6 +999,26 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateChannel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateChannelInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateChannelOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_stream, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateStream"
         o.http_method = "POST"
@@ -760,6 +1038,19 @@ module Aws::Kinesis
         o.input = Shapes::ShapeRef.new(shape: DecreaseStreamRetentionPeriodInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteChannel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteChannelInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
@@ -810,6 +1101,19 @@ module Aws::Kinesis
         o.input = Shapes::ShapeRef.new(shape: DescribeAccountSettingsInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeAccountSettingsOutput)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:describe_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeChannel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeChannelInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeChannelOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_limits, Seahorse::Model::Operation.new.tap do |o|
@@ -907,6 +1211,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -933,6 +1238,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:increase_stream_retention_period, Seahorse::Model::Operation.new.tap do |o|
@@ -946,6 +1252,25 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_channels, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannels"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListChannelsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_shards, Seahorse::Model::Operation.new.tap do |o|
@@ -1055,6 +1380,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:put_records, Seahorse::Model::Operation.new.tap do |o|
@@ -1074,6 +1400,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1171,6 +1498,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
         o.async = true
       end)
 
@@ -1211,6 +1539,20 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:update_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateChannel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateChannelInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateChannelOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:update_max_record_size, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateMaxRecordSize"
         o.http_method = "POST"
@@ -1249,6 +1591,20 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_stream_record_distribution_strategy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStreamRecordDistributionStrategy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStreamRecordDistributionStrategyInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 

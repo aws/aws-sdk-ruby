@@ -78,6 +78,82 @@ module Aws::ConnectContactLens
       include Aws::Structure
     end
 
+    # Segment containing information extracted from the conversation. Each
+    # segment represents the results for a single extraction definition.
+    #
+    # @!attribute [rw] extraction_definition_id
+    #   The identifier of the extraction definition that produced this
+    #   result.
+    #   @return [String]
+    #
+    # @!attribute [rw] extraction_definition_name
+    #   The name of the extraction definition that produced this result.
+    #   @return [String]
+    #
+    # @!attribute [rw] extraction_definition_display_label
+    #   The display label of the extraction definition that produced this
+    #   result.
+    #   @return [String]
+    #
+    # @!attribute [rw] extracted_values
+    #   The list of values extracted from the conversation for this
+    #   extraction definition. This field is empty when a `FailureCode` is
+    #   present.
+    #   @return [Array<Types::ExtractedInformationValue>]
+    #
+    # @!attribute [rw] failure_code
+    #   If the information failed to be extracted, one of the following
+    #   failure codes occurs:
+    #
+    #   * `QUOTA_EXCEEDED`: The number of concurrent analytics jobs reached
+    #     your service quota.
+    #
+    #   * `INSUFFICIENT_CONVERSATION_CONTENT`: Information extraction
+    #     requires a conversation with at least one turn from each
+    #     participant.
+    #
+    #   * `FAILED_SAFETY_GUIDELINES`: The extracted information cannot be
+    #     provided because it failed to meet system safety guidelines.
+    #
+    #   * `INTERNAL_ERROR`: Internal system error.
+    #
+    #   * `MAX_PACKAGE_FEATURE_ONLY`: Information extraction is only
+    #     available in Amazon Connect Customer instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/ExtractedInformation AWS API Documentation
+    #
+    class ExtractedInformation < Struct.new(
+      :extraction_definition_id,
+      :extraction_definition_name,
+      :extraction_definition_display_label,
+      :extracted_values,
+      :failure_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An individual value extracted from the conversation, including its
+    # content and the locations where it was found.
+    #
+    # @!attribute [rw] content
+    #   The text content of the extracted value.
+    #   @return [String]
+    #
+    # @!attribute [rw] points_of_interest
+    #   The sections in the conversation that indicate where the extracted
+    #   value was found.
+    #   @return [Array<Types::PointOfInterest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/ExtractedInformationValue AWS API Documentation
+    #
+    class ExtractedInformationValue < Struct.new(
+      :content,
+      :points_of_interest)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request processing failed due to an error or failure with the service.
     #
     # @!attribute [rw] message
@@ -176,17 +252,14 @@ module Aws::ConnectContactLens
       include Aws::Structure
     end
 
-    # The section of the contact audio where that category rule was
-    # detected.
+    # The section of the contact audio where a match was detected.
     #
     # @!attribute [rw] begin_offset_millis
-    #   The beginning offset in milliseconds where the category rule was
-    #   detected.
+    #   The beginning offset (in milliseconds) where the match was detected.
     #   @return [Integer]
     #
     # @!attribute [rw] end_offset_millis
-    #   The ending offset in milliseconds where the category rule was
-    #   detected.
+    #   The ending offset (in milliseconds) where the match was detected.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/PointOfInterest AWS API Documentation
@@ -258,12 +331,17 @@ module Aws::ConnectContactLens
     #   Information about the post-contact summary.
     #   @return [Types::PostContactSummary]
     #
+    # @!attribute [rw] extracted_information
+    #   The extracted information from the conversation.
+    #   @return [Types::ExtractedInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/RealtimeContactAnalysisSegment AWS API Documentation
     #
     class RealtimeContactAnalysisSegment < Struct.new(
       :transcript,
       :categories,
-      :post_contact_summary)
+      :post_contact_summary,
+      :extracted_information)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -9237,6 +9237,15 @@ module Aws::CloudWatchLogs
     #   The number of log groups that were scanned by this query.
     #   @return [Float]
     #
+    # @!attribute [rw] result_count
+    #   The number of rows in the final query result set. This value
+    #   represents the total number of output rows across all pages. For
+    #   queries that include post-aggregation filters (such as `stats
+    #   count(*) by field | filter count > threshold`), this value might be
+    #   less than `recordsMatched`. It reflects only the rows that survived
+    #   all operations in the query.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryStatistics AWS API Documentation
     #
     class QueryStatistics < Struct.new(
@@ -9245,7 +9254,8 @@ module Aws::CloudWatchLogs
       :estimated_records_skipped,
       :bytes_scanned,
       :estimated_bytes_skipped,
-      :log_groups_scanned)
+      :log_groups_scanned,
+      :result_count)
       SENSITIVE = []
       include Aws::Structure
     end

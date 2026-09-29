@@ -1539,7 +1539,7 @@ module Aws::Kinesis
 
     context "ResourceARN as StreamARN test: Invalid ARN: Kinesis ARNs only support stream arn types" do
       let(:expected) do
-        {"error" => "Invalid ARN: Kinesis ARNs don't support `accesspoint` arn types."}
+        {"error" => "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream or channel"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -1880,7 +1880,7 @@ module Aws::Kinesis
 
     context "ResourceARN as ConsumerARN test: Invalid ARN: Kinesis ARNs only support stream arn/consumer arn types" do
       let(:expected) do
-        {"error" => "Invalid ARN: Kinesis ARNs don't support `accesspoint` arn types."}
+        {"error" => "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream or channel"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2121,6 +2121,224 @@ module Aws::Kinesis
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: true, use_dual_stack: false, operation_type: "data", resource_arn: "arn:aws-iso-b:kinesis:us-isob-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: Invalid ARN: unsupported resource type" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream or channel"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:298091445058:accesspoint/apu0zt8ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: Invalid ARN: Not Kinesis" do
+      let(:expected) do
+        {"error" => "Invalid ARN: The ARN was not for the Kinesis service, found: s3."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:s3:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: Invalid ARN: partitions mismatch" do
+      let(:expected) do
+        {"error" => "Partition: aws from ARN doesn't match with partition name: aws-us-gov."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-west-2:298091445058:channel/apu0zt8ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: OperationType not set" do
+      let(:expected) do
+        {"error" => "Operation Type is not set. Please contact service team for resolution."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: Missing channel id" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Missing channel id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:298091445058:channel"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: Invalid channel id (subdomains not allowed)" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Invalid channel id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8.ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: Custom Endpoint is specified" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe", endpoint: "https://example.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: endpoint targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: endpoint with fips targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: endpoint with Dual Stack enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: endpoint with Dual Stack and FIPS enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: RegionMismatch: client region should be used for endpoint region" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-west-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: Account endpoint with FIPS enabled for cn regions" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis-fips.cn-northwest-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: true, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-cn:kinesis:cn-northwest-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: Account endpoint with FIPS and DualStack enabled for cn regions" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis-fips.cn-northwest-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: true, use_dual_stack: true, operation_type: "control", resource_arn: "arn:aws-cn:kinesis:cn-northwest-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: Account endpoint targeting control operation type in ADC regions" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN as ChannelARN test: Account endpoint with fips targeting control operation type in ADC regions" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -2644,6 +2862,1535 @@ module Aws::Kinesis
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ChannelARN: endpoint targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", channel_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling describe_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          stub_responses: true
+        )
+        resp = client.describe_channel(
+          channel_arn: 'arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ChannelARN: endpoint with FIPS targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", channel_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling delete_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.delete_channel(
+          channel_arn: 'arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ChannelARN: endpoint with DualStack targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, operation_type: "control", channel_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling update_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.update_channel(
+          channel_arn: 'arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ChannelARN: endpoint with FIPS and DualStack targeting control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", channel_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling describe_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.describe_channel(
+          channel_arn: 'arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Invalid ChannelARN: ChannelARN only supports channel arn types" do
+      let(:expected) do
+        {"error" => "Invalid ARN: ChannelARN only supports `channel` arn types, found: `stream`."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "data", channel_arn: "arn:aws:kinesis:us-east-1:298091445058:stream/test-stream"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Invalid ChannelARN: ARN was not for the Kinesis service" do
+      let(:expected) do
+        {"error" => "Invalid ARN: The ARN was not for the Kinesis service, found: s3."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "data", channel_arn: "arn:aws:s3:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Invalid ChannelARN: OperationType not set" do
+      let(:expected) do
+        {"error" => "Operation Type is not set. Please contact service team for resolution."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, channel_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Invalid ChannelARN: partitions mismatch" do
+      let(:expected) do
+        {"error" => "Partition: aws from ARN doesn't match with partition name: aws-us-gov."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false, use_dual_stack: false, operation_type: "data", channel_arn: "arn:aws:kinesis:us-west-2:298091445058:channel/apu0zt8ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Invalid ChannelARN: missing channel id" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Missing channel id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "data", channel_arn: "arn:aws:kinesis:us-east-1:298091445058:channel"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Invalid ChannelARN: channel id contains a period (subdomains not allowed)" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Invalid channel id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", channel_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8.ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Invalid ChannelARN: channel id exceeds 63 character host label limit" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Invalid channel id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", channel_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Invalid ChannelARN: channel id starts with a hyphen" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Invalid channel id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", channel_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/-pu0zt8ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Invalid ChannelARN: channel id contains an invalid character" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Invalid channel id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", channel_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8_ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Invalid ChannelARN: data operation type is not supported for channel" do
+      let(:expected) do
+        {"error" => "ChannelARN does not support the `data` operation type."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "data", channel_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "AccountId test: Account Id present" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://012345678901.data-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "data", account_id: "012345678901", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling get_shard_iterator' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '012345678901'),
+          account_id_endpoint_mode: 'preferred',
+          stub_responses: true
+        )
+        resp = client.get_shard_iterator(
+          shard_id: 'shardId-000000000001',
+          shard_iterator_type: 'LATEST',
+          stream_name: 'test-stream',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "AccountId test: Account Id present with fips" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123.control-kinesis-fips.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: true, use_dual_stack: false, operation_type: "control", account_id: "123", account_id_endpoint_mode: "required"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_shards' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123'),
+          account_id_endpoint_mode: 'required',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.list_shards(
+          stream_name: 'testStream',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "AccountId test: Account Id present with dual stack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123.control-kinesis.us-west-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: true, operation_type: "control", account_id: "123", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "AccountId test: Account Id present with fips and dual stack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123.control-kinesis-fips.us-west-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: true, use_dual_stack: true, operation_type: "control", account_id: "123", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id present with streamId" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", account_id: "123", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id present with stream ARN" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://123.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream", account_id: "123", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id present with consumer ARN" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://123.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", consumer_arn: "arn:aws:kinesis:us-west-2:123:stream/testStream/consumer/test-consumer:1525898737", account_id: "123", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id present with resource ARN" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://123.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-west-2:123:stream/testStream/consumer/test-consumer:1525898737", account_id: "123", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id present and stream ARN with different accountId" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://456.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-west-2:456:stream/testStream", account_id: "123", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id present and consumer ARN with different accountId" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://456.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-west-2:456:stream/testStream/consumer/test-consumer:1525898737", account_id: "123", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id, streamId and resource ARN with different accountId" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", resource_arn: "arn:aws:kinesis:us-west-2:456:stream/testStream/consumer/test-consumer:1525898737", account_id: "123", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id with account id endpoint mode disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_shards' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123'),
+          account_id_endpoint_mode: 'disabled',
+          stub_responses: true
+        )
+        resp = client.list_shards(
+          stream_name: 'testStream',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Account Id and StreamArn with account id endpoint mode disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://456.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_arn: "arn:aws:kinesis:us-west-2:456:stream/testStream", account_id: "123", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id missing with account id endpoint mode required" do
+      let(:expected) do
+        {"error" => "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", account_id_endpoint_mode: "required"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling list_shards' do
+        client = Client.new(
+          region: 'us-west-2',
+          account_id_endpoint_mode: 'required',
+          stub_responses: true
+        )
+        expect do
+          client.list_shards(
+            stream_name: 'testStream',
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Account Id missing with account id endpoint mode required, fips and dual stack enabled" do
+      let(:expected) do
+        {"error" => "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: true, use_dual_stack: true, operation_type: "control", account_id_endpoint_mode: "required"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Account Id missing with account id endpoint mode required in ADC region" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id_endpoint_mode: "required"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Account Id present with account id endpoint mode required in ADC region" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "required"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Account Id present with account id endpoint mode preferred in ADC region" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id missing with account id endpoint mode required and endpoint override" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-pod1.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", endpoint: "https://kinesis-pod1.us-west-2.amazonaws.com", account_id_endpoint_mode: "required"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id missing with StreamArn and account id endpoint mode required" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://456.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_arn: "arn:aws:kinesis:us-west-2:456:stream/testStream", account_id_endpoint_mode: "required"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id missing with StreamId and account id endpoint mode required" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://af4lwng4k01746835071.xyz.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", stream_id: "af4lwng4k01746835071-xyz", account_id_endpoint_mode: "required"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id missing with account id endpoint mode preferred" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Account Id missing with account id endpoint mode disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "CreateStream: control operation type with AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_stream' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          stub_responses: true
+        )
+        resp = client.create_stream(
+          stream_name: 'test-stream',
+          shard_count: 1,
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateStream: control operation type with FIPS and AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_stream' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.create_stream(
+          stream_name: 'test-stream',
+          shard_count: 1,
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ListStreams: control operation type with AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_streams' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          stub_responses: true
+        )
+        resp = client.list_streams(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ListStreams: control operation type with FIPS and DualStack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-fips.us-west-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: true, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_streams' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.list_streams(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "DescribeLimits: control operation type with AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling describe_limits' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          stub_responses: true
+        )
+        resp = client.describe_limits(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "DescribeLimits: control operation type with FIPS" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling describe_limits' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.describe_limits(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "DescribeAccountSettings: control operation type with AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling describe_account_settings' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          stub_responses: true
+        )
+        resp = client.describe_account_settings(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "DescribeAccountSettings: control operation type with FIPS and DualStack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-fips.us-west-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: true, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling describe_account_settings' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.describe_account_settings(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "UpdateAccountSettings: control operation type with AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling update_account_settings' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          stub_responses: true
+        )
+        resp = client.update_account_settings(
+          minimum_throughput_billing_commitment: {status: "ENABLED"},
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "UpdateAccountSettings: control operation type with FIPS" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling update_account_settings' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.update_account_settings(
+          minimum_throughput_billing_commitment: {status: "ENABLED"},
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateStream: account id endpoint mode disabled falls back to regional endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_stream' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          stub_responses: true
+        )
+        resp = client.create_stream(
+          stream_name: 'test-stream',
+          shard_count: 1,
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ListStreams: account id endpoint mode disabled falls back to regional endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_streams' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          stub_responses: true
+        )
+        resp = client.list_streams(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "DescribeLimits: account id endpoint mode disabled falls back to regional endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling describe_limits' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          stub_responses: true
+        )
+        resp = client.describe_limits(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "DescribeAccountSettings: account id endpoint mode disabled falls back to regional endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling describe_account_settings' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          stub_responses: true
+        )
+        resp = client.describe_account_settings(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "UpdateAccountSettings: account id endpoint mode disabled falls back to regional endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling update_account_settings' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          stub_responses: true
+        )
+        resp = client.update_account_settings(
+          minimum_throughput_billing_commitment: {status: "ENABLED"},
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateStream: account id endpoint mode disabled with FIPS falls back to regional FIPS endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_stream' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.create_stream(
+          stream_name: 'test-stream',
+          shard_count: 1,
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateStream: account id endpoint mode disabled with DualStack falls back to regional DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_stream' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.create_stream(
+          stream_name: 'test-stream',
+          shard_count: 1,
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateStream: account id endpoint mode disabled with FIPS and DualStack falls back to regional FIPS DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_stream' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.create_stream(
+          stream_name: 'test-stream',
+          shard_count: 1,
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateChannel: control operation type with AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          stub_responses: true
+        )
+        resp = client.create_channel(
+          channel_name: 'test-channel',
+          service_execution_role_arn: 'arn:aws:iam::123456789012:role/test-role',
+          stream_configuration_list: [{stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream", record_configuration: {record_format_type: "JSON"}}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateChannel: control operation type with FIPS and AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.create_channel(
+          channel_name: 'test-channel',
+          service_execution_role_arn: 'arn:aws:iam::123456789012:role/test-role',
+          stream_configuration_list: [{stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream", record_configuration: {record_format_type: "JSON"}}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateChannel: control operation type with DualStack and AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.create_channel(
+          channel_name: 'test-channel',
+          service_execution_role_arn: 'arn:aws:iam::123456789012:role/test-role',
+          stream_configuration_list: [{stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream", record_configuration: {record_format_type: "JSON"}}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateChannel: control operation type with FIPS and DualStack and AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.create_channel(
+          channel_name: 'test-channel',
+          service_execution_role_arn: 'arn:aws:iam::123456789012:role/test-role',
+          stream_configuration_list: [{stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream", record_configuration: {record_format_type: "JSON"}}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateChannel: account id endpoint mode disabled falls back to regional endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          stub_responses: true
+        )
+        resp = client.create_channel(
+          channel_name: 'test-channel',
+          service_execution_role_arn: 'arn:aws:iam::123456789012:role/test-role',
+          stream_configuration_list: [{stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream", record_configuration: {record_format_type: "JSON"}}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateChannel: account id endpoint mode disabled with FIPS falls back to regional FIPS endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.create_channel(
+          channel_name: 'test-channel',
+          service_execution_role_arn: 'arn:aws:iam::123456789012:role/test-role',
+          stream_configuration_list: [{stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream", record_configuration: {record_format_type: "JSON"}}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateChannel: account id endpoint mode disabled with DualStack falls back to regional DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.create_channel(
+          channel_name: 'test-channel',
+          service_execution_role_arn: 'arn:aws:iam::123456789012:role/test-role',
+          stream_configuration_list: [{stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream", record_configuration: {record_format_type: "JSON"}}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "CreateChannel: account id endpoint mode disabled with FIPS and DualStack falls back to regional FIPS DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_channel' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.create_channel(
+          channel_name: 'test-channel',
+          service_execution_role_arn: 'arn:aws:iam::123456789012:role/test-role',
+          stream_configuration_list: [{stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream", record_configuration: {record_format_type: "JSON"}}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ListChannels: control operation type with AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_channels' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          stub_responses: true
+        )
+        resp = client.list_channels(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ListChannels: control operation type with FIPS and DualStack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-fips.us-west-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: true, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_channels' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.list_channels(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ListChannels: account id endpoint mode disabled falls back to regional endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_channels' do
+        client = Client.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          stub_responses: true
+        )
+        resp = client.list_channels(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
       end
     end
 

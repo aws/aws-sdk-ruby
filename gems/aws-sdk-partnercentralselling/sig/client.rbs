@@ -333,6 +333,7 @@ module Aws
         def customer: () -> Types::AwsOpportunityCustomer
         def project: () -> Types::AwsOpportunityProject
         def cosell_motion: () -> ::String
+        def software_revenue: () -> Types::AwsSoftwareRevenue
         def catalog: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralSelling/Client.html#get_aws_opportunity_summary-instance_method

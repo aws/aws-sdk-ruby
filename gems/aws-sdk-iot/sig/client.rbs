@@ -1088,6 +1088,13 @@ module Aws
                                                security_groups: Array[::String]?,
                                                vpc_id: ::String,
                                                role_arn: ::String
+                                             }?,
+                                             influx_db_configuration: {
+                                               endpoint: ::String,
+                                               influx_db_version: ("V2" | "V3"),
+                                               secret_id: ::String,
+                                               secret_type: ("SecretString" | "SecretBinary")?,
+                                               secret_key: ::String?
                                              }?
                                            }
                                          ) -> _CreateTopicRuleDestinationResponseSuccess

@@ -315,6 +315,14 @@ module Aws::STS
     #   `[{"ProviderArn":"arn:aws:iam::aws:contextProvider/IdentityCenter","ContextAssertion":"trusted-context-assertion"}]`
     #   @return [Array<Types::ProvidedContext>]
     #
+    # @!attribute [rw] minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleRequest AWS API Documentation
     #
     class AssumeRoleRequest < Struct.new(
@@ -329,7 +337,8 @@ module Aws::STS
       :serial_number,
       :token_code,
       :source_identity,
-      :provided_contexts)
+      :provided_contexts,
+      :minimum_session_token_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -389,13 +398,25 @@ module Aws::STS
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #   @return [String]
     #
+    # @!attribute [rw] session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size
+    #   that the returned session token consumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials
+    #   for this response.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleResponse AWS API Documentation
     #
     class AssumeRoleResponse < Struct.new(
       :credentials,
       :assumed_role_user,
       :packed_policy_size,
-      :source_identity)
+      :source_identity,
+      :session_token_utilization,
+      :session_token_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -531,6 +552,14 @@ module Aws::STS
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #   @return [Integer]
     #
+    # @!attribute [rw] minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAMLRequest AWS API Documentation
     #
     class AssumeRoleWithSAMLRequest < Struct.new(
@@ -539,7 +568,8 @@ module Aws::STS
       :saml_assertion,
       :policy_arns,
       :policy,
-      :duration_seconds)
+      :duration_seconds,
+      :minimum_session_token_size)
       SENSITIVE = [:saml_assertion]
       include Aws::Structure
     end
@@ -647,6 +677,16 @@ module Aws::STS
     #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #   @return [String]
     #
+    # @!attribute [rw] session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size
+    #   that the returned session token consumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials
+    #   for this response.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAMLResponse AWS API Documentation
     #
     class AssumeRoleWithSAMLResponse < Struct.new(
@@ -658,7 +698,9 @@ module Aws::STS
       :issuer,
       :audience,
       :name_qualifier,
-      :source_identity)
+      :source_identity,
+      :session_token_utilization,
+      :session_token_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -840,6 +882,14 @@ module Aws::STS
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #   @return [Integer]
     #
+    # @!attribute [rw] minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentityRequest AWS API Documentation
     #
     class AssumeRoleWithWebIdentityRequest < Struct.new(
@@ -849,7 +899,8 @@ module Aws::STS
       :provider_id,
       :policy_arns,
       :policy,
-      :duration_seconds)
+      :duration_seconds,
+      :minimum_session_token_size)
       SENSITIVE = [:web_identity_token]
       include Aws::Structure
     end
@@ -941,6 +992,16 @@ module Aws::STS
     #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #   @return [String]
     #
+    # @!attribute [rw] session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size
+    #   that the returned session token consumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials
+    #   for this response.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentityResponse AWS API Documentation
     #
     class AssumeRoleWithWebIdentityResponse < Struct.new(
@@ -950,7 +1011,9 @@ module Aws::STS
       :packed_policy_size,
       :provider,
       :audience,
-      :source_identity)
+      :source_identity,
+      :session_token_utilization,
+      :session_token_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -992,12 +1055,21 @@ module Aws::STS
     #   By default, the value is set to `900` seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRootRequest AWS API Documentation
     #
     class AssumeRootRequest < Struct.new(
       :target_principal,
       :task_policy_arn,
-      :duration_seconds)
+      :duration_seconds,
+      :minimum_session_token_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1032,11 +1104,23 @@ module Aws::STS
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #   @return [String]
     #
+    # @!attribute [rw] session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size
+    #   that the returned session token consumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials
+    #   for this response.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRootResponse AWS API Documentation
     #
     class AssumeRootResponse < Struct.new(
       :credentials,
-      :source_identity)
+      :source_identity,
+      :session_token_utilization,
+      :session_token_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1456,6 +1540,14 @@ module Aws::STS
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationTokenRequest AWS API Documentation
     #
     class GetFederationTokenRequest < Struct.new(
@@ -1463,7 +1555,8 @@ module Aws::STS
       :policy,
       :policy_arns,
       :duration_seconds,
-      :tags)
+      :tags,
+      :minimum_session_token_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1497,12 +1590,24 @@ module Aws::STS
     #   means the policies and tags exceeded the allowed space.
     #   @return [Integer]
     #
+    # @!attribute [rw] session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size
+    #   that the returned session token consumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials
+    #   for this response.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationTokenResponse AWS API Documentation
     #
     class GetFederationTokenResponse < Struct.new(
       :credentials,
       :federated_user,
-      :packed_policy_size)
+      :packed_policy_size,
+      :session_token_utilization,
+      :session_token_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1545,12 +1650,21 @@ module Aws::STS
     #   a sequence of six numeric digits.
     #   @return [String]
     #
+    # @!attribute [rw] minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionTokenRequest AWS API Documentation
     #
     class GetSessionTokenRequest < Struct.new(
       :duration_seconds,
       :serial_number,
-      :token_code)
+      :token_code,
+      :minimum_session_token_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1570,10 +1684,22 @@ module Aws::STS
     #    </note>
     #   @return [Types::Credentials]
     #
+    # @!attribute [rw] session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size
+    #   that the returned session token consumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials
+    #   for this response.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionTokenResponse AWS API Documentation
     #
     class GetSessionTokenResponse < Struct.new(
-      :credentials)
+      :credentials,
+      :session_token_utilization,
+      :session_token_size)
       SENSITIVE = []
       include Aws::Structure
     end

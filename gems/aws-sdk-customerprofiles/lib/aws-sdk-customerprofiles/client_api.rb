@@ -27,6 +27,10 @@ module Aws::CustomerProfiles
     AppflowIntegrationWorkflowMetrics = Shapes::StructureShape.new(name: 'AppflowIntegrationWorkflowMetrics')
     AppflowIntegrationWorkflowStep = Shapes::StructureShape.new(name: 'AppflowIntegrationWorkflowStep')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AssociateStreamForSegmentsRequest = Shapes::StructureShape.new(name: 'AssociateStreamForSegmentsRequest')
+    AssociateStreamForSegmentsResponse = Shapes::StructureShape.new(name: 'AssociateStreamForSegmentsResponse')
+    AssociatedSegment = Shapes::StructureShape.new(name: 'AssociatedSegment')
+    AssociatedSegmentsList = Shapes::ListShape.new(name: 'AssociatedSegmentsList')
     AttributeDetails = Shapes::StructureShape.new(name: 'AttributeDetails')
     AttributeDimension = Shapes::StructureShape.new(name: 'AttributeDimension')
     AttributeDimensionType = Shapes::StringShape.new(name: 'AttributeDimensionType')
@@ -152,9 +156,13 @@ module Aws::CustomerProfiles
     DeleteRecommenderSchemaResponse = Shapes::StructureShape.new(name: 'DeleteRecommenderSchemaResponse')
     DeleteSegmentDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteSegmentDefinitionRequest')
     DeleteSegmentDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteSegmentDefinitionResponse')
+    DeleteSegmentSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteSegmentSubscriptionRequest')
+    DeleteSegmentSubscriptionResponse = Shapes::StructureShape.new(name: 'DeleteSegmentSubscriptionResponse')
     DeleteWorkflowRequest = Shapes::StructureShape.new(name: 'DeleteWorkflowRequest')
     DeleteWorkflowResponse = Shapes::StructureShape.new(name: 'DeleteWorkflowResponse')
+    DestinationArnString = Shapes::StringShape.new(name: 'DestinationArnString')
     DestinationField = Shapes::StringShape.new(name: 'DestinationField')
+    DestinationRoleArn = Shapes::StringShape.new(name: 'DestinationRoleArn')
     DestinationSummary = Shapes::StructureShape.new(name: 'DestinationSummary')
     DetectProfileObjectTypeRequest = Shapes::StructureShape.new(name: 'DetectProfileObjectTypeRequest')
     DetectProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'DetectProfileObjectTypeResponse')
@@ -162,6 +170,8 @@ module Aws::CustomerProfiles
     DetectedProfileObjectTypes = Shapes::ListShape.new(name: 'DetectedProfileObjectTypes')
     Dimension = Shapes::UnionShape.new(name: 'Dimension')
     DimensionList = Shapes::ListShape.new(name: 'DimensionList')
+    DisassociateStreamForSegmentsRequest = Shapes::StructureShape.new(name: 'DisassociateStreamForSegmentsRequest')
+    DisassociateStreamForSegmentsResponse = Shapes::StructureShape.new(name: 'DisassociateStreamForSegmentsResponse')
     DiversityCapType = Shapes::StringShape.new(name: 'DiversityCapType')
     DiversityCapValue = Shapes::IntegerShape.new(name: 'DiversityCapValue')
     DiversityColumn = Shapes::StructureShape.new(name: 'DiversityColumn')
@@ -193,6 +203,8 @@ module Aws::CustomerProfiles
     EventStreamState = Shapes::StringShape.new(name: 'EventStreamState')
     EventStreamSummary = Shapes::StructureShape.new(name: 'EventStreamSummary')
     EventStreamSummaryList = Shapes::ListShape.new(name: 'EventStreamSummaryList')
+    EventSubscriptionSegmentStatus = Shapes::StringShape.new(name: 'EventSubscriptionSegmentStatus')
+    EventSubscriptionState = Shapes::StringShape.new(name: 'EventSubscriptionState')
     EventTriggerCondition = Shapes::StructureShape.new(name: 'EventTriggerCondition')
     EventTriggerConditions = Shapes::ListShape.new(name: 'EventTriggerConditions')
     EventTriggerDimension = Shapes::StructureShape.new(name: 'EventTriggerDimension')
@@ -276,8 +288,12 @@ module Aws::CustomerProfiles
     GetSegmentMembershipStatus = Shapes::IntegerShape.new(name: 'GetSegmentMembershipStatus')
     GetSegmentSnapshotRequest = Shapes::StructureShape.new(name: 'GetSegmentSnapshotRequest')
     GetSegmentSnapshotResponse = Shapes::StructureShape.new(name: 'GetSegmentSnapshotResponse')
+    GetSegmentSubscriptionRequest = Shapes::StructureShape.new(name: 'GetSegmentSubscriptionRequest')
+    GetSegmentSubscriptionResponse = Shapes::StructureShape.new(name: 'GetSegmentSubscriptionResponse')
     GetSimilarProfilesRequest = Shapes::StructureShape.new(name: 'GetSimilarProfilesRequest')
     GetSimilarProfilesResponse = Shapes::StructureShape.new(name: 'GetSimilarProfilesResponse')
+    GetStreamForSegmentsRequest = Shapes::StructureShape.new(name: 'GetStreamForSegmentsRequest')
+    GetStreamForSegmentsResponse = Shapes::StructureShape.new(name: 'GetStreamForSegmentsResponse')
     GetUploadJobPathRequest = Shapes::StructureShape.new(name: 'GetUploadJobPathRequest')
     GetUploadJobPathResponse = Shapes::StructureShape.new(name: 'GetUploadJobPathResponse')
     GetUploadJobRequest = Shapes::StructureShape.new(name: 'GetUploadJobRequest')
@@ -300,11 +316,13 @@ module Aws::CustomerProfiles
     IntegrationConfig = Shapes::StructureShape.new(name: 'IntegrationConfig')
     IntegrationList = Shapes::ListShape.new(name: 'IntegrationList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    IntervalValue = Shapes::IntegerShape.new(name: 'IntervalValue')
     JobSchedule = Shapes::StructureShape.new(name: 'JobSchedule')
     JobScheduleDayOfTheWeek = Shapes::StringShape.new(name: 'JobScheduleDayOfTheWeek')
     JobScheduleTime = Shapes::StringShape.new(name: 'JobScheduleTime')
     JobStats = Shapes::StructureShape.new(name: 'JobStats')
     KeyMap = Shapes::MapShape.new(name: 'KeyMap')
+    KeyValuesList = Shapes::ListShape.new(name: 'KeyValuesList')
     KmsArn = Shapes::StringShape.new(name: 'KmsArn')
     LayoutItem = Shapes::StructureShape.new(name: 'LayoutItem')
     LayoutList = Shapes::ListShape.new(name: 'LayoutList')
@@ -366,6 +384,8 @@ module Aws::CustomerProfiles
     ListRuleBasedMatchesResponse = Shapes::StructureShape.new(name: 'ListRuleBasedMatchesResponse')
     ListSegmentDefinitionsRequest = Shapes::StructureShape.new(name: 'ListSegmentDefinitionsRequest')
     ListSegmentDefinitionsResponse = Shapes::StructureShape.new(name: 'ListSegmentDefinitionsResponse')
+    ListSegmentSubscriptionEventsRequest = Shapes::StructureShape.new(name: 'ListSegmentSubscriptionEventsRequest')
+    ListSegmentSubscriptionEventsResponse = Shapes::StructureShape.new(name: 'ListSegmentSubscriptionEventsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUploadJobsRequest = Shapes::StructureShape.new(name: 'ListUploadJobsRequest')
@@ -445,6 +465,8 @@ module Aws::CustomerProfiles
     PutProfileObjectResponse = Shapes::StructureShape.new(name: 'PutProfileObjectResponse')
     PutProfileObjectTypeRequest = Shapes::StructureShape.new(name: 'PutProfileObjectTypeRequest')
     PutProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'PutProfileObjectTypeResponse')
+    PutSegmentSubscriptionRequest = Shapes::StructureShape.new(name: 'PutSegmentSubscriptionRequest')
+    PutSegmentSubscriptionResponse = Shapes::StructureShape.new(name: 'PutSegmentSubscriptionResponse')
     QueryResult = Shapes::StringShape.new(name: 'QueryResult')
     Range = Shapes::StructureShape.new(name: 'Range')
     RangeOverride = Shapes::StructureShape.new(name: 'RangeOverride')
@@ -453,7 +475,9 @@ module Aws::CustomerProfiles
     ReadinessStatus = Shapes::StringShape.new(name: 'ReadinessStatus')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     RecommendationDiversityConfig = Shapes::StructureShape.new(name: 'RecommendationDiversityConfig')
+    RecommendationMetadata = Shapes::StructureShape.new(name: 'RecommendationMetadata')
     Recommendations = Shapes::ListShape.new(name: 'Recommendations')
+    Recommender = Shapes::StructureShape.new(name: 'Recommender')
     RecommenderConfig = Shapes::StructureShape.new(name: 'RecommenderConfig')
     RecommenderConfigTrainingFrequencyInteger = Shapes::IntegerShape.new(name: 'RecommenderConfigTrainingFrequencyInteger')
     RecommenderContext = Shapes::MapShape.new(name: 'RecommenderContext')
@@ -496,12 +520,17 @@ module Aws::CustomerProfiles
     S3SourceProperties = Shapes::StructureShape.new(name: 'S3SourceProperties')
     SalesforceConnectorOperator = Shapes::StringShape.new(name: 'SalesforceConnectorOperator')
     SalesforceSourceProperties = Shapes::StructureShape.new(name: 'SalesforceSourceProperties')
+    ScheduleConfiguration = Shapes::StructureShape.new(name: 'ScheduleConfiguration')
+    ScheduleConfigurationUnit = Shapes::StringShape.new(name: 'ScheduleConfigurationUnit')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     ScheduleOffset = Shapes::IntegerShape.new(name: 'ScheduleOffset')
+    ScheduledExecutions = Shapes::StructureShape.new(name: 'ScheduledExecutions')
     ScheduledTriggerProperties = Shapes::StructureShape.new(name: 'ScheduledTriggerProperties')
     Scope = Shapes::StringShape.new(name: 'Scope')
     SearchProfilesRequest = Shapes::StructureShape.new(name: 'SearchProfilesRequest')
     SearchProfilesResponse = Shapes::StructureShape.new(name: 'SearchProfilesResponse')
+    SearchRecommendationsRequest = Shapes::StructureShape.new(name: 'SearchRecommendationsRequest')
+    SearchRecommendationsResponse = Shapes::StructureShape.new(name: 'SearchRecommendationsResponse')
     SegmentDefinitionArn = Shapes::StringShape.new(name: 'SegmentDefinitionArn')
     SegmentDefinitionItem = Shapes::StructureShape.new(name: 'SegmentDefinitionItem')
     SegmentDefinitionsList = Shapes::ListShape.new(name: 'SegmentDefinitionsList')
@@ -512,6 +541,7 @@ module Aws::CustomerProfiles
     SegmentSort = Shapes::StructureShape.new(name: 'SegmentSort')
     SegmentSortDataType = Shapes::StringShape.new(name: 'SegmentSortDataType')
     SegmentSortOrder = Shapes::StringShape.new(name: 'SegmentSortOrder')
+    SegmentSubscriptionStatus = Shapes::StringShape.new(name: 'SegmentSubscriptionStatus')
     SegmentType = Shapes::StringShape.new(name: 'SegmentType')
     ServiceNowConnectorOperator = Shapes::StringShape.new(name: 'ServiceNowConnectorOperator')
     ServiceNowSourceProperties = Shapes::StructureShape.new(name: 'ServiceNowSourceProperties')
@@ -541,6 +571,10 @@ module Aws::CustomerProfiles
     StopUploadJobResponse = Shapes::StructureShape.new(name: 'StopUploadJobResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringDimensionType = Shapes::StringShape.new(name: 'StringDimensionType')
+    SubscriptionEvent = Shapes::StringShape.new(name: 'SubscriptionEvent')
+    SubscriptionEventItem = Shapes::StructureShape.new(name: 'SubscriptionEventItem')
+    SubscriptionEventType = Shapes::StringShape.new(name: 'SubscriptionEventType')
+    SubscriptionEventsList = Shapes::ListShape.new(name: 'SubscriptionEventsList')
     TagArn = Shapes::StringShape.new(name: 'TagArn')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -706,6 +740,20 @@ module Aws::CustomerProfiles
     AppflowIntegrationWorkflowStep.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
     AppflowIntegrationWorkflowStep.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     AppflowIntegrationWorkflowStep.struct_class = Types::AppflowIntegrationWorkflowStep
+
+    AssociateStreamForSegmentsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    AssociateStreamForSegmentsRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArnString, required: true, location_name: "DestinationArn"))
+    AssociateStreamForSegmentsRequest.add_member(:destination_role_arn, Shapes::ShapeRef.new(shape: DestinationRoleArn, required: true, location_name: "DestinationRoleArn"))
+    AssociateStreamForSegmentsRequest.struct_class = Types::AssociateStreamForSegmentsRequest
+
+    AssociateStreamForSegmentsResponse.struct_class = Types::AssociateStreamForSegmentsResponse
+
+    AssociatedSegment.add_member(:segment_name, Shapes::ShapeRef.new(shape: name, location_name: "SegmentName"))
+    AssociatedSegment.add_member(:status, Shapes::ShapeRef.new(shape: EventSubscriptionSegmentStatus, location_name: "Status"))
+    AssociatedSegment.add_member(:message, Shapes::ShapeRef.new(shape: string1To1000, location_name: "Message"))
+    AssociatedSegment.struct_class = Types::AssociatedSegment
+
+    AssociatedSegmentsList.member = Shapes::ShapeRef.new(shape: AssociatedSegment)
 
     AttributeDetails.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, required: true, location_name: "Attributes"))
     AttributeDetails.add_member(:expression, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Expression"))
@@ -1241,6 +1289,13 @@ module Aws::CustomerProfiles
     DeleteSegmentDefinitionResponse.add_member(:message, Shapes::ShapeRef.new(shape: string1To1000, location_name: "Message"))
     DeleteSegmentDefinitionResponse.struct_class = Types::DeleteSegmentDefinitionResponse
 
+    DeleteSegmentSubscriptionRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    DeleteSegmentSubscriptionRequest.add_member(:segment_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "SegmentDefinitionName"))
+    DeleteSegmentSubscriptionRequest.struct_class = Types::DeleteSegmentSubscriptionRequest
+
+    DeleteSegmentSubscriptionResponse.add_member(:message, Shapes::ShapeRef.new(shape: string1To1000, location_name: "Message"))
+    DeleteSegmentSubscriptionResponse.struct_class = Types::DeleteSegmentSubscriptionResponse
+
     DeleteWorkflowRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     DeleteWorkflowRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: string1To255, required: true, location: "uri", location_name: "WorkflowId"))
     DeleteWorkflowRequest.struct_class = Types::DeleteWorkflowRequest
@@ -1275,6 +1330,12 @@ module Aws::CustomerProfiles
     Dimension.struct_class = Types::Dimension
 
     DimensionList.member = Shapes::ShapeRef.new(shape: Dimension)
+
+    DisassociateStreamForSegmentsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    DisassociateStreamForSegmentsRequest.struct_class = Types::DisassociateStreamForSegmentsRequest
+
+    DisassociateStreamForSegmentsResponse.add_member(:message, Shapes::ShapeRef.new(shape: string1To1000, location_name: "Message"))
+    DisassociateStreamForSegmentsResponse.struct_class = Types::DisassociateStreamForSegmentsResponse
 
     DiversityColumn.add_member(:name, Shapes::ShapeRef.new(shape: text, required: true, location_name: "Name"))
     DiversityColumn.add_member(:cap_type, Shapes::ShapeRef.new(shape: DiversityCapType, required: true, location_name: "CapType"))
@@ -1797,6 +1858,18 @@ module Aws::CustomerProfiles
     GetSegmentSnapshotResponse.add_member(:destination_uri, Shapes::ShapeRef.new(shape: string1To255, location_name: "DestinationUri"))
     GetSegmentSnapshotResponse.struct_class = Types::GetSegmentSnapshotResponse
 
+    GetSegmentSubscriptionRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetSegmentSubscriptionRequest.add_member(:segment_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "SegmentDefinitionName"))
+    GetSegmentSubscriptionRequest.struct_class = Types::GetSegmentSubscriptionRequest
+
+    GetSegmentSubscriptionResponse.add_member(:status, Shapes::ShapeRef.new(shape: SegmentSubscriptionStatus, location_name: "Status"))
+    GetSegmentSubscriptionResponse.add_member(:message, Shapes::ShapeRef.new(shape: string1To1000, location_name: "Message"))
+    GetSegmentSubscriptionResponse.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfiguration"))
+    GetSegmentSubscriptionResponse.add_member(:scheduled_executions, Shapes::ShapeRef.new(shape: ScheduledExecutions, location_name: "ScheduledExecutions"))
+    GetSegmentSubscriptionResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartedAt"))
+    GetSegmentSubscriptionResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
+    GetSegmentSubscriptionResponse.struct_class = Types::GetSegmentSubscriptionResponse
+
     GetSimilarProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
     GetSimilarProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
     GetSimilarProfilesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
@@ -1812,6 +1885,19 @@ module Aws::CustomerProfiles
     GetSimilarProfilesResponse.add_member(:confidence_score, Shapes::ShapeRef.new(shape: Double, location_name: "ConfidenceScore"))
     GetSimilarProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     GetSimilarProfilesResponse.struct_class = Types::GetSimilarProfilesResponse
+
+    GetStreamForSegmentsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetStreamForSegmentsRequest.struct_class = Types::GetStreamForSegmentsRequest
+
+    GetStreamForSegmentsResponse.add_member(:associated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "AssociatedAt"))
+    GetStreamForSegmentsResponse.add_member(:associated_segments, Shapes::ShapeRef.new(shape: AssociatedSegmentsList, location_name: "AssociatedSegments"))
+    GetStreamForSegmentsResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, location_name: "DomainName"))
+    GetStreamForSegmentsResponse.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArnString, location_name: "DestinationArn"))
+    GetStreamForSegmentsResponse.add_member(:destination_role_arn, Shapes::ShapeRef.new(shape: DestinationRoleArn, location_name: "DestinationRoleArn"))
+    GetStreamForSegmentsResponse.add_member(:state, Shapes::ShapeRef.new(shape: EventSubscriptionState, location_name: "State"))
+    GetStreamForSegmentsResponse.add_member(:disassociated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "DisassociatedAt"))
+    GetStreamForSegmentsResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: string1To255, location_name: "FailureReason"))
+    GetStreamForSegmentsResponse.struct_class = Types::GetStreamForSegmentsResponse
 
     GetUploadJobPathRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetUploadJobPathRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "JobId"))
@@ -1912,6 +1998,8 @@ module Aws::CustomerProfiles
 
     KeyMap.key = Shapes::ShapeRef.new(shape: name)
     KeyMap.value = Shapes::ShapeRef.new(shape: ObjectTypeKeyList)
+
+    KeyValuesList.member = Shapes::ShapeRef.new(shape: string1To255)
 
     LayoutItem.add_member(:layout_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "LayoutDefinitionName"))
     LayoutItem.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, required: true, location_name: "Description"))
@@ -2201,6 +2289,16 @@ module Aws::CustomerProfiles
     ListSegmentDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     ListSegmentDefinitionsResponse.add_member(:items, Shapes::ShapeRef.new(shape: SegmentDefinitionsList, location_name: "Items"))
     ListSegmentDefinitionsResponse.struct_class = Types::ListSegmentDefinitionsResponse
+
+    ListSegmentSubscriptionEventsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    ListSegmentSubscriptionEventsRequest.add_member(:segment_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "SegmentDefinitionName"))
+    ListSegmentSubscriptionEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    ListSegmentSubscriptionEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    ListSegmentSubscriptionEventsRequest.struct_class = Types::ListSegmentSubscriptionEventsRequest
+
+    ListSegmentSubscriptionEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: SubscriptionEventsList, location_name: "Events"))
+    ListSegmentSubscriptionEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    ListSegmentSubscriptionEventsResponse.struct_class = Types::ListSegmentSubscriptionEventsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TagArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -2522,6 +2620,16 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     PutProfileObjectTypeResponse.struct_class = Types::PutProfileObjectTypeResponse
 
+    PutSegmentSubscriptionRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    PutSegmentSubscriptionRequest.add_member(:segment_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "SegmentDefinitionName"))
+    PutSegmentSubscriptionRequest.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfiguration"))
+    PutSegmentSubscriptionRequest.struct_class = Types::PutSegmentSubscriptionRequest
+
+    PutSegmentSubscriptionResponse.add_member(:status, Shapes::ShapeRef.new(shape: SegmentSubscriptionStatus, location_name: "Status"))
+    PutSegmentSubscriptionResponse.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfiguration"))
+    PutSegmentSubscriptionResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartedAt"))
+    PutSegmentSubscriptionResponse.struct_class = Types::PutSegmentSubscriptionResponse
+
     Range.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "Value"))
     Range.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
     Range.add_member(:value_range, Shapes::ShapeRef.new(shape: ValueRange, location_name: "ValueRange"))
@@ -2546,7 +2654,15 @@ module Aws::CustomerProfiles
     RecommendationDiversityConfig.add_member(:values, Shapes::ShapeRef.new(shape: DiversityValuesMap, location_name: "Values"))
     RecommendationDiversityConfig.struct_class = Types::RecommendationDiversityConfig
 
+    RecommendationMetadata.add_member(:columns, Shapes::ShapeRef.new(shape: MetadataColumnsList, location_name: "Columns"))
+    RecommendationMetadata.struct_class = Types::RecommendationMetadata
+
     Recommendations.member = Shapes::ShapeRef.new(shape: Recommendation)
+
+    Recommender.add_member(:name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "Name"))
+    Recommender.add_member(:filters, Shapes::ShapeRef.new(shape: RecommenderFilters, location_name: "Filters"))
+    Recommender.add_member(:promotional_filters, Shapes::ShapeRef.new(shape: RecommenderPromotionalFilters, location_name: "PromotionalFilters"))
+    Recommender.struct_class = Types::Recommender
 
     RecommenderConfig.add_member(:events_config, Shapes::ShapeRef.new(shape: EventsConfig, location_name: "EventsConfig"))
     RecommenderConfig.add_member(:training_frequency, Shapes::ShapeRef.new(shape: RecommenderConfigTrainingFrequencyInteger, location_name: "TrainingFrequency"))
@@ -2679,6 +2795,14 @@ module Aws::CustomerProfiles
     SalesforceSourceProperties.add_member(:include_deleted_records, Shapes::ShapeRef.new(shape: boolean, location_name: "IncludeDeletedRecords"))
     SalesforceSourceProperties.struct_class = Types::SalesforceSourceProperties
 
+    ScheduleConfiguration.add_member(:interval, Shapes::ShapeRef.new(shape: IntervalValue, required: true, location_name: "Interval"))
+    ScheduleConfiguration.add_member(:unit, Shapes::ShapeRef.new(shape: ScheduleConfigurationUnit, location_name: "Unit"))
+    ScheduleConfiguration.struct_class = Types::ScheduleConfiguration
+
+    ScheduledExecutions.add_member(:next_executed_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "NextExecutedAt"))
+    ScheduledExecutions.add_member(:last_executed_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastExecutedAt"))
+    ScheduledExecutions.struct_class = Types::ScheduledExecutions
+
     ScheduledTriggerProperties.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "ScheduleExpression"))
     ScheduledTriggerProperties.add_member(:data_pull_mode, Shapes::ShapeRef.new(shape: DataPullMode, location_name: "DataPullMode"))
     ScheduledTriggerProperties.add_member(:schedule_start_time, Shapes::ShapeRef.new(shape: Date, location_name: "ScheduleStartTime"))
@@ -2700,6 +2824,21 @@ module Aws::CustomerProfiles
     SearchProfilesResponse.add_member(:items, Shapes::ShapeRef.new(shape: ProfileList, location_name: "Items"))
     SearchProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     SearchProfilesResponse.struct_class = Types::SearchProfilesResponse
+
+    SearchRecommendationsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    SearchRecommendationsRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "KeyName"))
+    SearchRecommendationsRequest.add_member(:key_values, Shapes::ShapeRef.new(shape: KeyValuesList, required: true, location_name: "KeyValues"))
+    SearchRecommendationsRequest.add_member(:recommender, Shapes::ShapeRef.new(shape: Recommender, required: true, location_name: "Recommender"))
+    SearchRecommendationsRequest.add_member(:candidate_ids, Shapes::ShapeRef.new(shape: CandidateIdList, location_name: "CandidateIds"))
+    SearchRecommendationsRequest.add_member(:context, Shapes::ShapeRef.new(shape: RecommenderContext, location_name: "Context"))
+    SearchRecommendationsRequest.add_member(:diversity, Shapes::ShapeRef.new(shape: RecommendationDiversityConfig, location_name: "Diversity"))
+    SearchRecommendationsRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: RecommendationMetadata, location_name: "Metadata"))
+    SearchRecommendationsRequest.add_member(:max_recommendations, Shapes::ShapeRef.new(shape: maxSize500, location_name: "MaxRecommendations"))
+    SearchRecommendationsRequest.struct_class = Types::SearchRecommendationsRequest
+
+    SearchRecommendationsResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, location_name: "ProfileId"))
+    SearchRecommendationsResponse.add_member(:recommendations, Shapes::ShapeRef.new(shape: Recommendations, location_name: "Recommendations"))
+    SearchRecommendationsResponse.struct_class = Types::SearchRecommendationsResponse
 
     SegmentDefinitionItem.add_member(:segment_definition_name, Shapes::ShapeRef.new(shape: name, location_name: "SegmentDefinitionName"))
     SegmentDefinitionItem.add_member(:display_name, Shapes::ShapeRef.new(shape: string1To255, location_name: "DisplayName"))
@@ -2781,6 +2920,14 @@ module Aws::CustomerProfiles
     StopUploadJobRequest.struct_class = Types::StopUploadJobRequest
 
     StopUploadJobResponse.struct_class = Types::StopUploadJobResponse
+
+    SubscriptionEventItem.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, location_name: "ProfileId"))
+    SubscriptionEventItem.add_member(:updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "UpdatedAt"))
+    SubscriptionEventItem.add_member(:event_type, Shapes::ShapeRef.new(shape: SubscriptionEventType, location_name: "EventType"))
+    SubscriptionEventItem.add_member(:event, Shapes::ShapeRef.new(shape: SubscriptionEvent, location_name: "Event"))
+    SubscriptionEventItem.struct_class = Types::SubscriptionEventItem
+
+    SubscriptionEventsList.member = Shapes::ShapeRef.new(shape: SubscriptionEventItem)
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -3046,6 +3193,19 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:associate_stream_for_segments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateStreamForSegments"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/segment-streams"
+        o.input = Shapes::ShapeRef.new(shape: AssociateStreamForSegmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateStreamForSegmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:batch_get_calculated_attribute_for_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -3464,6 +3624,19 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_segment_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSegmentSubscription"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscriptions"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSegmentSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSegmentSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_workflow, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteWorkflow"
         o.http_method = "DELETE"
@@ -3488,6 +3661,19 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:disassociate_stream_for_segments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateStreamForSegments"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{DomainName}/segment-streams"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateStreamForSegmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateStreamForSegmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_auto_merging_preview, Seahorse::Model::Operation.new.tap do |o|
@@ -3789,6 +3975,19 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_segment_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSegmentSubscription"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscriptions"
+        o.input = Shapes::ShapeRef.new(shape: GetSegmentSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSegmentSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_similar_profiles, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSimilarProfiles"
         o.http_method = "POST"
@@ -3806,6 +4005,19 @@ module Aws::CustomerProfiles
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_stream_for_segments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStreamForSegments"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/segment-streams"
+        o.input = Shapes::ShapeRef.new(shape: GetStreamForSegmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetStreamForSegmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_upload_job, Seahorse::Model::Operation.new.tap do |o|
@@ -4224,6 +4436,25 @@ module Aws::CustomerProfiles
         )
       end)
 
+      api.add_operation(:list_segment_subscription_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSegmentSubscriptionEvents"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscription-events"
+        o.input = Shapes::ShapeRef.new(shape: ListSegmentSubscriptionEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSegmentSubscriptionEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -4331,12 +4562,38 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:put_segment_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutSegmentSubscription"
+        o.http_method = "PUT"
+        o.http_request_uri = "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscriptions"
+        o.input = Shapes::ShapeRef.new(shape: PutSegmentSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutSegmentSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:search_profiles, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchProfiles"
         o.http_method = "POST"
         o.http_request_uri = "/domains/{DomainName}/profiles/search"
         o.input = Shapes::ShapeRef.new(shape: SearchProfilesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:search_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/recommendations"
+        o.input = Shapes::ShapeRef.new(shape: SearchRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchRecommendationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

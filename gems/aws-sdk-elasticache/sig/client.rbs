@@ -287,7 +287,13 @@ module Aws
       def create_global_replication_group: (
                                              global_replication_group_id_suffix: ::String,
                                              ?global_replication_group_description: ::String,
-                                             primary_replication_group_id: ::String
+                                             primary_replication_group_id: ::String,
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String?,
+                                                 value: ::String?
+                                               }
+                                             ]
                                            ) -> _CreateGlobalReplicationGroupResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalReplicationGroupResponseSuccess
 

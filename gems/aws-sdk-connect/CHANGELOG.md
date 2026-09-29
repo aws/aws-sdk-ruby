@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.283.0 (2026-09-28)
+------------------
+
+* Feature - This release adds ConnectionTypes and ChatStreamingConfiguration to StartChatContact, and ConnectionCredentials, Websocket, and StreamingId to its response, so customers can request connection information and chat streaming in the same call that starts the chat.
+
+1.282.0 (2026-09-25)
+------------------
+
+* Feature - Agent Privacy During Hold is a new privacy capability for Amazon Connect Voice that prevents agent audio from being captured in call recordings or Contact Lens conversational analytics during hold. When enabled, agents are automatically muted on entering hold and unmuted on resuming the contact
+
+1.281.0 (2026-09-18)
+------------------
+
+* Feature - This release adds the ListSecurityProfileAIAgents API and updates the CreateSecurityProfile and UpdateSecurityProfile APIs to support the AllowedAIAgents field on security profiles, allowing customers to manage the 3P AI agents associated with a security profile for Agent-to-Agent interactions.
+
+1.280.0 (2026-09-17)
+------------------
+
+* Feature - Made the replicaAlias attribute optional in the ReplicateInstance API to support Global routing for Amazon Connect Global Resiliency (ACGR) instances. This change maintains backward compatibility. When onboarding to ACGR without Global routing, you must specify a custom replicaAlias in your API call
+
+1.279.0 (2026-09-16)
+------------------
+
+* Feature - Adds support for ContactAnalysis via ListContactReferences.
+
+1.278.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.277.0 (2026-09-09)
+------------------
+
+* Feature - Add metric configuration field to evaluation forms and ListEvaluationFormAIVersions API for retrieving AI-generated evaluation form versions
+
+1.276.0 (2026-09-08)
+------------------
+
+* Feature - Releasing workload types feature. A proper launch announcement or details will follow up.
+
+1.275.0 (2026-09-03)
+------------------
+
+* Feature - This release enables TagOnCreate for Rule resource on CreateRule API. It also introduces a new field called PreEvaluationFilters to Rule resource, thereby impacting all Create, Update, Describe and Search APIs for Rules
+
+1.274.0 (2026-08-31)
+------------------
+
+* Feature - Added support for global routing on Amazon Connect Global Resiliency instances. New APIs GetCrossRegionRouting and UpdateCrossRegionRouting allow you to view and control cross-region contact routing between linked instances, so both Regions are active at all times.
+
+1.273.0 (2026-08-24)
+------------------
+
+* Feature - This release adds the ExtractedInformation segment to the ListRealtimeContactAnalysisSegmentsV2 API, enabling customers to retrieve information extracted from real-time contact analysis.
+
 1.272.0 (2026-08-17)
 ------------------
 

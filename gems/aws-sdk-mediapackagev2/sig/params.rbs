@@ -17,7 +17,11 @@ module Aws
       drm_systems: Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE" | "IRDETO")],
       role_arn: ::String,
       url: ::String,
-      certificate_arn: ::String?
+      certificate_arn: ::String?,
+      speke_version: ("V2_0" | "V2_1")?,
+      content_key_period_configuration: {
+        content_key_period_timing: ("INDEX_ONLY" | "START_END_ONLY" | "INDEX_WITH_START_END")?
+      }?
     }
 
       type encryption = {

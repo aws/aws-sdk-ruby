@@ -1162,6 +1162,7 @@ module Aws::DataZone
       attr_accessor description: ::String
       attr_accessor provisioning_properties: Types::ProvisioningProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      attr_accessor blueprint_category: ("TOOLING")
       SENSITIVE: [:description]
     end
 
@@ -1174,6 +1175,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor blueprint_category: ("TOOLING")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description]
@@ -1374,6 +1376,7 @@ module Aws::DataZone
       attr_accessor owning_project_identifier: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
@@ -1387,6 +1390,7 @@ module Aws::DataZone
       attr_accessor domain_id: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -1911,6 +1915,7 @@ module Aws::DataZone
       attr_accessor identifier: ::String
       attr_accessor client_token: ::String
       attr_accessor skip_deletion_check: bool
+      attr_accessor cascade_delete: bool
       SENSITIVE: []
     end
 
@@ -2018,6 +2023,11 @@ module Aws::DataZone
     end
 
     class DeleteNotebookOutput < Aws::EmptyStructure
+    end
+
+    class DeleteProgress
+      attr_accessor successfully_deleted_project_count: ::Integer
+      SENSITIVE: []
     end
 
     class DeleteProjectInput
@@ -2269,6 +2279,7 @@ module Aws::DataZone
       attr_accessor provisioning_properties: Types::ProvisioningProperties
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor blueprint_category: ("TOOLING")
       SENSITIVE: [:description]
     end
 
@@ -2391,6 +2402,12 @@ module Aws::DataZone
     end
 
     class FailureCause
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FailureReason
+      attr_accessor id: ::String
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -2711,6 +2728,8 @@ module Aws::DataZone
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor domain_version: ("V1" | "V2")
       attr_accessor service_role: ::String
+      attr_accessor failure_reasons: ::Array[Types::FailureReason]
+      attr_accessor delete_progress: Types::DeleteProgress
       SENSITIVE: []
     end
 
@@ -2788,6 +2807,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor blueprint_category: ("TOOLING")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description]
@@ -3098,6 +3118,7 @@ module Aws::DataZone
       attr_accessor domain_id: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -3598,6 +3619,7 @@ module Aws::DataZone
 
     class IamPropertiesInput
       attr_accessor glue_lineage_sync_enabled: bool
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
@@ -4186,6 +4208,7 @@ module Aws::DataZone
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       attr_accessor sort_by: ("CREATED_AT" | "UPDATED_AT")
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -4658,6 +4681,7 @@ module Aws::DataZone
       attr_accessor owning_project_id: ::String
       attr_accessor domain_id: ::String
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -6550,6 +6574,7 @@ module Aws::DataZone
       attr_accessor description: ::String
       attr_accessor provisioning_properties: Types::ProvisioningProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      attr_accessor blueprint_category: ("TOOLING")
       SENSITIVE: []
     end
 
@@ -6562,6 +6587,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor blueprint_category: ("TOOLING")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description]
@@ -6703,6 +6729,7 @@ module Aws::DataZone
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
       attr_accessor name: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor environment_configuration: Types::EnvironmentConfig
@@ -6717,6 +6744,7 @@ module Aws::DataZone
       attr_accessor domain_id: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String

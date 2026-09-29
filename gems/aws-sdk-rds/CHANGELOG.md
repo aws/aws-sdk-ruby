@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.323.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.322.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.321.0 (2026-08-27)
+------------------
+
+* Feature - Adding support for the full snapshot size, in bytes, of DB instance snapshots.
+
 1.320.0 (2026-07-31)
 ------------------
 

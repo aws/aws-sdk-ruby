@@ -25,6 +25,10 @@ module Aws::HealthLake
     AnalyticsConfiguration = Shapes::StructureShape.new(name: 'AnalyticsConfiguration')
     AnalyticsStatus = Shapes::StringShape.new(name: 'AnalyticsStatus')
     AuthorizationStrategy = Shapes::StringShape.new(name: 'AuthorizationStrategy')
+    BackupConfiguration = Shapes::StructureShape.new(name: 'BackupConfiguration')
+    BackupRetentionPeriodInDays = Shapes::IntegerShape.new(name: 'BackupRetentionPeriodInDays')
+    BackupStatus = Shapes::StringShape.new(name: 'BackupStatus')
+    BackupType = Shapes::StringShape.new(name: 'BackupType')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundedLengthString = Shapes::StringShape.new(name: 'BoundedLengthString')
     BoundedString = Shapes::StringShape.new(name: 'BoundedString')
@@ -34,6 +38,7 @@ module Aws::HealthLake
     CmkType = Shapes::StringShape.new(name: 'CmkType')
     ConfigurationMetadata = Shapes::StringShape.new(name: 'ConfigurationMetadata')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContinuousBackupRestoreConfiguration = Shapes::StructureShape.new(name: 'ContinuousBackupRestoreConfiguration')
     ConversationIdString = Shapes::StringShape.new(name: 'ConversationIdString')
     ConversationNotFoundException = Shapes::StructureShape.new(name: 'ConversationNotFoundException')
     CreateDataTransformationProfileRequest = Shapes::StructureShape.new(name: 'CreateDataTransformationProfileRequest')
@@ -56,6 +61,7 @@ module Aws::HealthLake
     DataTransformationTagKey = Shapes::StringShape.new(name: 'DataTransformationTagKey')
     DataTransformationTagValue = Shapes::StringShape.new(name: 'DataTransformationTagValue')
     DatastoreArn = Shapes::StringShape.new(name: 'DatastoreArn')
+    DatastoreBackupStatus = Shapes::StructureShape.new(name: 'DatastoreBackupStatus')
     DatastoreFilter = Shapes::StructureShape.new(name: 'DatastoreFilter')
     DatastoreId = Shapes::StringShape.new(name: 'DatastoreId')
     DatastoreName = Shapes::StringShape.new(name: 'DatastoreName')
@@ -144,6 +150,9 @@ module Aws::HealthLake
     PublishDataTransformationProfileRequest = Shapes::StructureShape.new(name: 'PublishDataTransformationProfileRequest')
     PublishDataTransformationProfileResponse = Shapes::StructureShape.new(name: 'PublishDataTransformationProfileResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RestoreConfiguration = Shapes::UnionShape.new(name: 'RestoreConfiguration')
+    RestoreFHIRDatastoreRequest = Shapes::StructureShape.new(name: 'RestoreFHIRDatastoreRequest')
+    RestoreFHIRDatastoreResponse = Shapes::StructureShape.new(name: 'RestoreFHIRDatastoreResponse')
     S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SampleDataS3Uri = Shapes::StringShape.new(name: 'SampleDataS3Uri')
@@ -208,8 +217,17 @@ module Aws::HealthLake
     AnalyticsConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: AnalyticsStatus, location_name: "Status"))
     AnalyticsConfiguration.struct_class = Types::AnalyticsConfiguration
 
+    BackupConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: BackupStatus, location_name: "Status"))
+    BackupConfiguration.add_member(:backup_type, Shapes::ShapeRef.new(shape: BackupType, location_name: "BackupType"))
+    BackupConfiguration.add_member(:retention_period_in_days, Shapes::ShapeRef.new(shape: BackupRetentionPeriodInDays, location_name: "RetentionPeriodInDays"))
+    BackupConfiguration.add_member(:backup_tags_enabled, Shapes::ShapeRef.new(shape: HealthLakeBoolean, location_name: "BackupTagsEnabled"))
+    BackupConfiguration.struct_class = Types::BackupConfiguration
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: HealthLakeString, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
+
+    ContinuousBackupRestoreConfiguration.add_member(:restore_point_time, Shapes::ShapeRef.new(shape: HealthLakeTimestamp, location_name: "RestorePointTime"))
+    ContinuousBackupRestoreConfiguration.struct_class = Types::ContinuousBackupRestoreConfiguration
 
     ConversationNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ConversationNotFoundException.struct_class = Types::ConversationNotFoundException
@@ -253,6 +271,7 @@ module Aws::HealthLake
     CreateFHIRDatastoreRequest.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfiguration, location_name: "AnalyticsConfiguration"))
     CreateFHIRDatastoreRequest.add_member(:nlp_configuration, Shapes::ShapeRef.new(shape: NlpConfiguration, location_name: "NlpConfiguration"))
     CreateFHIRDatastoreRequest.add_member(:profile_configuration, Shapes::ShapeRef.new(shape: ProfileConfiguration, location_name: "ProfileConfiguration"))
+    CreateFHIRDatastoreRequest.add_member(:backup_configuration, Shapes::ShapeRef.new(shape: BackupConfiguration, location_name: "BackupConfiguration"))
     CreateFHIRDatastoreRequest.struct_class = Types::CreateFHIRDatastoreRequest
 
     CreateFHIRDatastoreResponse.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
@@ -289,6 +308,13 @@ module Aws::HealthLake
     DataTransformationS3Configuration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, required: true, location_name: "KmsKeyId"))
     DataTransformationS3Configuration.struct_class = Types::DataTransformationS3Configuration
 
+    DatastoreBackupStatus.add_member(:configuration, Shapes::ShapeRef.new(shape: BackupConfiguration, location_name: "Configuration"))
+    DatastoreBackupStatus.add_member(:backup_enabled_at, Shapes::ShapeRef.new(shape: HealthLakeTimestamp, location_name: "BackupEnabledAt"))
+    DatastoreBackupStatus.add_member(:earliest_restore_point, Shapes::ShapeRef.new(shape: HealthLakeTimestamp, location_name: "EarliestRestorePoint"))
+    DatastoreBackupStatus.add_member(:latest_restore_point, Shapes::ShapeRef.new(shape: HealthLakeTimestamp, location_name: "LatestRestorePoint"))
+    DatastoreBackupStatus.add_member(:scheduled_permanent_deletion_time, Shapes::ShapeRef.new(shape: HealthLakeTimestamp, location_name: "ScheduledPermanentDeletionTime"))
+    DatastoreBackupStatus.struct_class = Types::DatastoreBackupStatus
+
     DatastoreFilter.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, location_name: "DatastoreName"))
     DatastoreFilter.add_member(:datastore_status, Shapes::ShapeRef.new(shape: DatastoreStatus, location_name: "DatastoreStatus"))
     DatastoreFilter.add_member(:created_before, Shapes::ShapeRef.new(shape: HealthLakeTimestamp, location_name: "CreatedBefore"))
@@ -309,6 +335,7 @@ module Aws::HealthLake
     DatastoreProperties.add_member(:nlp_configuration, Shapes::ShapeRef.new(shape: NlpConfiguration, location_name: "NlpConfiguration"))
     DatastoreProperties.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfiguration, location_name: "AnalyticsConfiguration"))
     DatastoreProperties.add_member(:profile_configuration, Shapes::ShapeRef.new(shape: ProfileConfiguration, location_name: "ProfileConfiguration"))
+    DatastoreProperties.add_member(:backup_status_info, Shapes::ShapeRef.new(shape: DatastoreBackupStatus, location_name: "BackupStatusInfo"))
     DatastoreProperties.struct_class = Types::DatastoreProperties
 
     DatastorePropertiesList.member = Shapes::ShapeRef.new(shape: DatastoreProperties)
@@ -563,6 +590,30 @@ module Aws::HealthLake
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: HealthLakeString, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    RestoreConfiguration.add_member(:continuous_backup_restore_configuration, Shapes::ShapeRef.new(shape: ContinuousBackupRestoreConfiguration, location_name: "ContinuousBackupRestoreConfiguration"))
+    RestoreConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RestoreConfiguration.add_member_subclass(:continuous_backup_restore_configuration, Types::RestoreConfiguration::ContinuousBackupRestoreConfiguration)
+    RestoreConfiguration.add_member_subclass(:unknown, Types::RestoreConfiguration::Unknown)
+    RestoreConfiguration.struct_class = Types::RestoreConfiguration
+
+    RestoreFHIRDatastoreRequest.add_member(:source_datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "SourceDatastoreId"))
+    RestoreFHIRDatastoreRequest.add_member(:restore_configuration, Shapes::ShapeRef.new(shape: RestoreConfiguration, required: true, location_name: "RestoreConfiguration"))
+    RestoreFHIRDatastoreRequest.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, location_name: "DatastoreName"))
+    RestoreFHIRDatastoreRequest.add_member(:sse_configuration, Shapes::ShapeRef.new(shape: SseConfiguration, location_name: "SseConfiguration"))
+    RestoreFHIRDatastoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    RestoreFHIRDatastoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    RestoreFHIRDatastoreRequest.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "IdentityProviderConfiguration"))
+    RestoreFHIRDatastoreRequest.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfiguration, location_name: "AnalyticsConfiguration"))
+    RestoreFHIRDatastoreRequest.add_member(:nlp_configuration, Shapes::ShapeRef.new(shape: NlpConfiguration, location_name: "NlpConfiguration"))
+    RestoreFHIRDatastoreRequest.add_member(:profile_configuration, Shapes::ShapeRef.new(shape: ProfileConfiguration, location_name: "ProfileConfiguration"))
+    RestoreFHIRDatastoreRequest.struct_class = Types::RestoreFHIRDatastoreRequest
+
+    RestoreFHIRDatastoreResponse.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
+    RestoreFHIRDatastoreResponse.add_member(:datastore_arn, Shapes::ShapeRef.new(shape: DatastoreArn, required: true, location_name: "DatastoreArn"))
+    RestoreFHIRDatastoreResponse.add_member(:datastore_status, Shapes::ShapeRef.new(shape: DatastoreStatus, required: true, location_name: "DatastoreStatus"))
+    RestoreFHIRDatastoreResponse.add_member(:datastore_endpoint, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "DatastoreEndpoint"))
+    RestoreFHIRDatastoreResponse.struct_class = Types::RestoreFHIRDatastoreResponse
+
     S3Configuration.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     S3Configuration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EncryptionKeyID, required: true, location_name: "KmsKeyId"))
     S3Configuration.struct_class = Types::S3Configuration
@@ -716,6 +767,7 @@ module Aws::HealthLake
     UpdateFHIRDatastoreRequest.add_member(:nlp_configuration, Shapes::ShapeRef.new(shape: NlpConfiguration, location_name: "NlpConfiguration"))
     UpdateFHIRDatastoreRequest.add_member(:profile_configuration, Shapes::ShapeRef.new(shape: ProfileConfiguration, location_name: "ProfileConfiguration"))
     UpdateFHIRDatastoreRequest.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "IdentityProviderConfiguration"))
+    UpdateFHIRDatastoreRequest.add_member(:backup_configuration, Shapes::ShapeRef.new(shape: BackupConfiguration, location_name: "BackupConfiguration"))
     UpdateFHIRDatastoreRequest.struct_class = Types::UpdateFHIRDatastoreRequest
 
     UpdateFHIRDatastoreResponse.add_member(:datastore_properties, Shapes::ShapeRef.new(shape: DatastoreProperties, required: true, location_name: "DatastoreProperties"))
@@ -1026,6 +1078,20 @@ module Aws::HealthLake
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:restore_fhir_datastore, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreFHIRDatastore"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreFHIRDatastoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreFHIRDatastoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

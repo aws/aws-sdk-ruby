@@ -791,7 +791,7 @@ module Aws::QConnect
     #         ],
     #       },
     #       orchestration_ai_agent_configuration: {
-    #         orchestration_ai_prompt_id: "UuidWithQualifier", # required
+    #         orchestration_ai_prompt_id: "UuidWithQualifier",
     #         orchestration_ai_guardrail_id: "UuidWithQualifier",
     #         tool_configurations: [
     #           {
@@ -837,8 +837,42 @@ module Aws::QConnect
     #             },
     #           },
     #         ],
+    #         multi_agent_configurations: [
+    #           {
+    #             delegate_agent_configuration: {
+    #               agent_target: { # required
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString",
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"],
+    #               },
+    #             },
+    #             handoff_agent_configuration: {
+    #               agent_target: { # required
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString",
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"],
+    #               },
+    #               audio_streaming_enabled: false,
+    #               immediate_handoff: false,
+    #             },
+    #           },
+    #         ],
     #         connect_instance_arn: "GenericArn",
     #         locale: "NonEmptyString",
+    #         input_schemas: [
+    #           {
+    #           },
+    #         ],
+    #         output_schemas: [
+    #           {
+    #           },
+    #         ],
     #       },
     #       note_taking_ai_agent_configuration: {
     #         note_taking_ai_prompt_id: "UuidWithQualifier",
@@ -989,8 +1023,23 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.audio_streaming_enabled #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.immediate_handoff #=> Boolean
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.input_schemas #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.output_schemas #=> Array
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.locale #=> String
@@ -1189,8 +1238,23 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.audio_streaming_enabled #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.immediate_handoff #=> Boolean
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.input_schemas #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.output_schemas #=> Array
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.locale #=> String
@@ -1766,6 +1830,7 @@ module Aws::QConnect
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
     #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.assistant.orchestrator_configuration_list #=> Array
     #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
@@ -1981,7 +2046,7 @@ module Aws::QConnect
     #   resources.
     #
     # For more information, see [Integrate Amazon Q in Connect with
-    # step-by-step guides][2] in the *Amazon Connect Administrator Guide*.
+    # step-by-step guides][2] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -2976,7 +3041,7 @@ module Aws::QConnect
     #   Whether the quick response is active.
     #
     # @option params [Array<String>] :channels
-    #   The Amazon Connect channels this quick response applies to.
+    #   The Connect Customer channels this quick response applies to.
     #
     # @option params [String] :language
     #   The language code value for the language in which the quick response
@@ -3064,7 +3129,7 @@ module Aws::QConnect
     end
 
     # Creates a session. A session is a contextual container used for
-    # generating recommendations. Amazon Connect creates a new Amazon Q in
+    # generating recommendations. Connect Customer creates a new Amazon Q in
     # Connect session for each contact on which Amazon Q in Connect is
     # enabled.
     #
@@ -3103,9 +3168,9 @@ module Aws::QConnect
     #   Session.
     #
     # @option params [String] :contact_arn
-    #   The Amazon Resource Name (ARN) of the email contact in Amazon Connect.
-    #   Used to retrieve email content and establish session context for
-    #   AI-powered email assistance.
+    #   The Amazon Resource Name (ARN) of the email contact in Connect
+    #   Customer. Used to retrieve email content and establish session context
+    #   for AI-powered email assistance.
     #
     # @option params [Array<Types::OrchestratorConfigurationEntry>] :orchestrator_configuration_list
     #   The list of orchestrator configurations for the session being created.
@@ -3156,6 +3221,7 @@ module Aws::QConnect
     #     ai_agent_configuration: {
     #       "MANUAL_SEARCH" => {
     #         ai_agent_id: "UuidWithQualifier", # required
+    #         enabled: false,
     #       },
     #     },
     #     contact_arn: "GenericArn",
@@ -3190,6 +3256,7 @@ module Aws::QConnect
     #   resp.session.tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.session.ai_agent_configuration #=> Hash
     #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.session.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.session.origin #=> String, one of "SYSTEM", "CUSTOMER"
     #   resp.session.orchestrator_configuration_list #=> Array
     #   resp.session.orchestrator_configuration_list[0].ai_agent_id #=> String
@@ -3509,7 +3576,7 @@ module Aws::QConnect
     #
     # For more information about content associations--what they are and
     # when they are used--see [Integrate Amazon Q in Connect with
-    # step-by-step guides][1] in the *Amazon Connect Administrator Guide*.
+    # step-by-step guides][1] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -3857,8 +3924,23 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.audio_streaming_enabled #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.immediate_handoff #=> Boolean
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.input_schemas #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.output_schemas #=> Array
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.locale #=> String
@@ -4041,6 +4123,7 @@ module Aws::QConnect
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
     #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.assistant.orchestrator_configuration_list #=> Array
     #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
@@ -4152,7 +4235,7 @@ module Aws::QConnect
     #
     # For more information about content associations--what they are and
     # when they are used--see [Integrate Amazon Q in Connect with
-    # step-by-step guides][1] in the *Amazon Connect Administrator Guide*.
+    # step-by-step guides][1] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -4575,7 +4658,7 @@ module Aws::QConnect
     #
     # @example Response structure
     #
-    #   resp.type #=> String, one of "TEXT", "TOOL_USE_RESULT"
+    #   resp.type #=> String, one of "TEXT", "TOOL_USE_RESULT", "DATA"
     #   resp.response.value.text.value #=> String
     #   resp.response.value.text.citations #=> Array
     #   resp.response.value.text.citations[0].content_id #=> String
@@ -4666,8 +4749,8 @@ module Aws::QConnect
 
     # This API will be discontinued starting June 1, 2024. To receive
     # generative responses after March 1, 2024, you will need to create a
-    # new Assistant in the Amazon Connect console and integrate the Amazon Q
-    # in Connect JavaScript library (amazon-q-connectjs) into your
+    # new Assistant in the Connect Customer console and integrate the Amazon
+    # Q in Connect JavaScript library (amazon-q-connectjs) into your
     # applications.
     #
     #  Retrieves recommendations for the specified session. To avoid
@@ -4722,7 +4805,7 @@ module Aws::QConnect
     #     max_results: 1,
     #     wait_time_seconds: 1,
     #     next_chunk_token: "NextToken",
-    #     recommendation_type: "KNOWLEDGE_CONTENT", # accepts KNOWLEDGE_CONTENT, GENERATIVE_RESPONSE, GENERATIVE_ANSWER, DETECTED_INTENT, GENERATIVE_ANSWER_CHUNK, BLOCKED_GENERATIVE_ANSWER_CHUNK, INTENT_ANSWER_CHUNK, BLOCKED_INTENT_ANSWER_CHUNK, EMAIL_RESPONSE_CHUNK, EMAIL_OVERVIEW_CHUNK, EMAIL_GENERATIVE_ANSWER_CHUNK, CASE_SUMMARIZATION_CHUNK, BLOCKED_CASE_SUMMARIZATION_CHUNK, SUGGESTED_MESSAGE, NOTES_CHUNK, BLOCKED_NOTES_CHUNK
+    #     recommendation_type: "KNOWLEDGE_CONTENT", # accepts KNOWLEDGE_CONTENT, GENERATIVE_RESPONSE, GENERATIVE_ANSWER, DETECTED_INTENT, GENERATIVE_ANSWER_CHUNK, BLOCKED_GENERATIVE_ANSWER_CHUNK, INTENT_ANSWER_CHUNK, BLOCKED_INTENT_ANSWER_CHUNK, EMAIL_RESPONSE_CHUNK, EMAIL_OVERVIEW_CHUNK, EMAIL_GENERATIVE_ANSWER_CHUNK, CASE_SUMMARIZATION_CHUNK, BLOCKED_CASE_SUMMARIZATION_CHUNK, SUGGESTED_MESSAGE, NOTES_CHUNK, BLOCKED_NOTES_CHUNK, PROACTIVE_RECOMMENDATION
     #   })
     #
     # @example Response structure
@@ -4745,7 +4828,7 @@ module Aws::QConnect
     #   resp.recommendations[0].document.excerpt.highlights[0].end_offset_exclusive #=> Integer
     #   resp.recommendations[0].relevance_score #=> Float
     #   resp.recommendations[0].relevance_level #=> String, one of "HIGH", "MEDIUM", "LOW"
-    #   resp.recommendations[0].type #=> String, one of "KNOWLEDGE_CONTENT", "GENERATIVE_RESPONSE", "GENERATIVE_ANSWER", "DETECTED_INTENT", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK", "CASE_SUMMARIZATION_CHUNK", "BLOCKED_CASE_SUMMARIZATION_CHUNK", "SUGGESTED_MESSAGE", "NOTES_CHUNK", "BLOCKED_NOTES_CHUNK"
+    #   resp.recommendations[0].type #=> String, one of "KNOWLEDGE_CONTENT", "GENERATIVE_RESPONSE", "GENERATIVE_ANSWER", "DETECTED_INTENT", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK", "CASE_SUMMARIZATION_CHUNK", "BLOCKED_CASE_SUMMARIZATION_CHUNK", "SUGGESTED_MESSAGE", "NOTES_CHUNK", "BLOCKED_NOTES_CHUNK", "PROACTIVE_RECOMMENDATION"
     #   resp.recommendations[0].data.reference.content_reference.knowledge_base_arn #=> String
     #   resp.recommendations[0].data.reference.content_reference.knowledge_base_id #=> String
     #   resp.recommendations[0].data.reference.content_reference.content_arn #=> String
@@ -4806,6 +4889,7 @@ module Aws::QConnect
     #   resp.recommendations[0].data.details.notes_data.completion #=> String
     #   resp.recommendations[0].data.details.notes_chunk_data.completion #=> String
     #   resp.recommendations[0].data.details.notes_chunk_data.next_chunk_token #=> String
+    #   resp.recommendations[0].data.details.proactive_recommendation_data.next_message_token #=> String
     #   resp.triggers #=> Array
     #   resp.triggers[0].id #=> String
     #   resp.triggers[0].type #=> String, one of "QUERY", "GENERATIVE"
@@ -4866,6 +4950,7 @@ module Aws::QConnect
     #   resp.session.tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.session.ai_agent_configuration #=> Hash
     #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.session.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.session.origin #=> String, one of "SYSTEM", "CUSTOMER"
     #   resp.session.orchestrator_configuration_list #=> Array
     #   resp.session.orchestrator_configuration_list[0].ai_agent_id #=> String
@@ -5054,8 +5139,23 @@ module Aws::QConnect
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.audio_streaming_enabled #=> Boolean
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.immediate_handoff #=> Boolean
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.input_schemas #=> Array
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.orchestration_ai_agent_configuration.output_schemas #=> Array
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.note_taking_ai_agent_configuration.locale #=> String
@@ -5248,8 +5348,23 @@ module Aws::QConnect
     #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
     #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
     #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations #=> Array
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.audio_streaming_enabled #=> Boolean
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.immediate_handoff #=> Boolean
     #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
     #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.input_schemas #=> Array
+    #   resp.ai_agent_summaries[0].configuration.orchestration_ai_agent_configuration.output_schemas #=> Array
     #   resp.ai_agent_summaries[0].configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
     #   resp.ai_agent_summaries[0].configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
     #   resp.ai_agent_summaries[0].configuration.note_taking_ai_agent_configuration.locale #=> String
@@ -5617,6 +5732,7 @@ module Aws::QConnect
     #   resp.assistant_summaries[0].capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant_summaries[0].ai_agent_configuration #=> Hash
     #   resp.assistant_summaries[0].ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant_summaries[0].ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.assistant_summaries[0].orchestrator_configuration_list #=> Array
     #   resp.assistant_summaries[0].orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant_summaries[0].orchestrator_configuration_list[0].orchestrator_use_case #=> String
@@ -5635,7 +5751,7 @@ module Aws::QConnect
     #
     # For more information about content associations--what they are and
     # when they are used--see [Integrate Amazon Q in Connect with
-    # step-by-step guides][1] in the *Amazon Connect Administrator Guide*.
+    # step-by-step guides][1] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -6249,6 +6365,9 @@ module Aws::QConnect
     #   resp.spans[0].attributes.ai_agent_version #=> Integer
     #   resp.spans[0].attributes.ai_agent_invoker #=> String
     #   resp.spans[0].attributes.ai_agent_orchestrator_use_case #=> String
+    #   resp.spans[0].attributes.interaction_mode #=> String, one of "DELEGATE", "HANDOFF"
+    #   resp.spans[0].attributes.target_agent_id #=> String
+    #   resp.spans[0].attributes.return_reason #=> String, one of "COMPLETE", "COMPLETE_WITH_ERROR", "ESCALATE", "OUT_OF_DOMAIN"
     #   resp.spans[0].attributes.request_model #=> String
     #   resp.spans[0].attributes.request_max_tokens #=> Integer
     #   resp.spans[0].attributes.temperature #=> Float
@@ -6471,8 +6590,8 @@ module Aws::QConnect
 
     # This API will be discontinued starting June 1, 2024. To receive
     # generative responses after March 1, 2024, you will need to create a
-    # new Assistant in the Amazon Connect console and integrate the Amazon Q
-    # in Connect JavaScript library (amazon-q-connectjs) into your
+    # new Assistant in the Connect Customer console and integrate the Amazon
+    # Q in Connect JavaScript library (amazon-q-connectjs) into your
     # applications.
     #
     #  Performs a manual search against the specified assistant. To retrieve
@@ -6629,6 +6748,7 @@ module Aws::QConnect
     #   resp.results[0].data.details.notes_data.completion #=> String
     #   resp.results[0].data.details.notes_chunk_data.completion #=> String
     #   resp.results[0].data.details.notes_chunk_data.next_chunk_token #=> String
+    #   resp.results[0].data.details.proactive_recommendation_data.next_message_token #=> String
     #   resp.results[0].type #=> String, one of "KNOWLEDGE_CONTENT", "INTENT_ANSWER", "GENERATIVE_ANSWER", "GENERATIVE_ANSWER_CHUNK", "BLOCKED_GENERATIVE_ANSWER_CHUNK", "INTENT_ANSWER_CHUNK", "BLOCKED_INTENT_ANSWER_CHUNK", "EMAIL_RESPONSE_CHUNK", "EMAIL_OVERVIEW_CHUNK", "EMAIL_GENERATIVE_ANSWER_CHUNK", "CASE_SUMMARIZATION_CHUNK", "BLOCKED_CASE_SUMMARIZATION_CHUNK", "NOTES", "NOTES_CHUNK", "BLOCKED_NOTES_CHUNK"
     #   resp.next_token #=> String
     #
@@ -6900,6 +7020,7 @@ module Aws::QConnect
     # @return [Types::RetrieveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RetrieveResponse#results #results} => Array&lt;Types::RetrieveResult&gt;
+    #   * {Types::RetrieveResponse#errors #errors} => Array&lt;Types::RetrieveError&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6989,6 +7110,10 @@ module Aws::QConnect
     #   resp.results[0].source_id #=> String
     #   resp.results[0].reference_type #=> String, one of "WEB_CRAWLER", "KNOWLEDGE_BASE", "BEDROCK_KB_S3", "BEDROCK_KB_WEB", "BEDROCK_KB_CONFLUENCE", "BEDROCK_KB_SALESFORCE", "BEDROCK_KB_SHAREPOINT", "BEDROCK_KB_KENDRA", "BEDROCK_KB_CUSTOM_DOCUMENT", "BEDROCK_KB_SQL"
     #   resp.results[0].content_text #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].association_id #=> String
+    #   resp.errors[0].code #=> String, one of "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "VALIDATION_ERROR", "THROTTLED", "DEPENDENCY_FAILED", "INTERNAL_SERVER_ERROR"
+    #   resp.errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/Retrieve AWS API Documentation
     #
@@ -7186,8 +7311,8 @@ module Aws::QConnect
     #   The maximum number of results to return per page.
     #
     # @option params [Hash<String,String>] :attributes
-    #   The [user-defined Amazon Connect contact attributes][1] to be resolved
-    #   when search results are returned.
+    #   The [user-defined Connect Customer contact attributes][1] to be
+    #   resolved when search results are returned.
     #
     #
     #
@@ -7391,7 +7516,7 @@ module Aws::QConnect
     #   resp = client.send_message({
     #     assistant_id: "UuidOrArn", # required
     #     session_id: "UuidOrArn", # required
-    #     type: "TEXT", # required, accepts TEXT, TOOL_USE_RESULT
+    #     type: "TEXT", # required, accepts TEXT, TOOL_USE_RESULT, DATA
     #     message: { # required
     #       value: { # required
     #         text: {
@@ -7420,6 +7545,8 @@ module Aws::QConnect
     #           },
     #           input_schema: {
     #           },
+    #         },
+    #         data: {
     #         },
     #       },
     #     },
@@ -7943,7 +8070,7 @@ module Aws::QConnect
     #         ],
     #       },
     #       orchestration_ai_agent_configuration: {
-    #         orchestration_ai_prompt_id: "UuidWithQualifier", # required
+    #         orchestration_ai_prompt_id: "UuidWithQualifier",
     #         orchestration_ai_guardrail_id: "UuidWithQualifier",
     #         tool_configurations: [
     #           {
@@ -7989,8 +8116,42 @@ module Aws::QConnect
     #             },
     #           },
     #         ],
+    #         multi_agent_configurations: [
+    #           {
+    #             delegate_agent_configuration: {
+    #               agent_target: { # required
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString",
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"],
+    #               },
+    #             },
+    #             handoff_agent_configuration: {
+    #               agent_target: { # required
+    #                 ai_agent_id: "NonEmptyString",
+    #                 application_id: "NonEmptyString",
+    #               },
+    #               instruction: {
+    #                 instruction: "String",
+    #                 examples: ["String"],
+    #               },
+    #               audio_streaming_enabled: false,
+    #               immediate_handoff: false,
+    #             },
+    #           },
+    #         ],
     #         connect_instance_arn: "GenericArn",
     #         locale: "NonEmptyString",
+    #         input_schemas: [
+    #           {
+    #           },
+    #         ],
+    #         output_schemas: [
+    #           {
+    #           },
+    #         ],
     #       },
     #       note_taking_ai_agent_configuration: {
     #         note_taking_ai_prompt_id: "UuidWithQualifier",
@@ -8137,8 +8298,23 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.title #=> String
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].annotations.destructive_hint #=> Boolean
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.tool_configurations[0].user_interaction_configuration.is_user_confirmation_required #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].delegate_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.ai_agent_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.agent_target.application_id #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.instruction #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.instruction.examples[0] #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.audio_streaming_enabled #=> Boolean
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.multi_agent_configurations[0].handoff_agent_configuration.immediate_handoff #=> Boolean
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.connect_instance_arn #=> String
     #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.locale #=> String
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.input_schemas #=> Array
+    #   resp.ai_agent.configuration.orchestration_ai_agent_configuration.output_schemas #=> Array
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_prompt_id #=> String
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.note_taking_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.note_taking_ai_agent_configuration.locale #=> String
@@ -8467,6 +8643,7 @@ module Aws::QConnect
     #     ai_agent_type: "MANUAL_SEARCH", # required, accepts MANUAL_SEARCH, ANSWER_RECOMMENDATION, SELF_SERVICE, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER, ORCHESTRATION, NOTE_TAKING, CASE_SUMMARIZATION
     #     configuration: { # required
     #       ai_agent_id: "UuidWithQualifier", # required
+    #       enabled: false,
     #     },
     #     orchestrator_use_case: "NonEmptyString",
     #   })
@@ -8486,6 +8663,7 @@ module Aws::QConnect
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
     #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.assistant.orchestrator_configuration_list #=> Array
     #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
@@ -9272,7 +9450,7 @@ module Aws::QConnect
     #   Whether the quick response is active.
     #
     # @option params [Array<String>] :channels
-    #   The Amazon Connect contact channels this quick response applies to.
+    #   The Connect Customer contact channels this quick response applies to.
     #   The supported contact channel types include `Chat`.
     #
     # @option params [String] :language
@@ -9345,9 +9523,9 @@ module Aws::QConnect
     end
 
     # Updates a session. A session is a contextual container used for
-    # generating recommendations. Amazon Connect updates the existing Amazon
-    # Q in Connect session for each contact on which Amazon Q in Connect is
-    # enabled.
+    # generating recommendations. Connect Customer updates the existing
+    # Amazon Q in Connect session for each contact on which Amazon Q in
+    # Connect is enabled.
     #
     # @option params [required, String] :assistant_id
     #   The identifier of the Amazon Q in Connect assistant. Can be either the
@@ -9413,6 +9591,7 @@ module Aws::QConnect
     #     ai_agent_configuration: {
     #       "MANUAL_SEARCH" => {
     #         ai_agent_id: "UuidWithQualifier", # required
+    #         enabled: false,
     #       },
     #     },
     #     orchestrator_configuration_list: [
@@ -9446,6 +9625,7 @@ module Aws::QConnect
     #   resp.session.tag_filter.or_conditions[0].tag_condition.value #=> String
     #   resp.session.ai_agent_configuration #=> Hash
     #   resp.session.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.session.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
     #   resp.session.origin #=> String, one of "SYSTEM", "CUSTOMER"
     #   resp.session.orchestrator_configuration_list #=> Array
     #   resp.session.orchestrator_configuration_list[0].ai_agent_id #=> String
@@ -9536,7 +9716,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,6 +3,38 @@ Unreleased Changes
 
 * Issue - Bound memory usage in `upload_stream` when the source produces data faster than parts can be uploaded.
 
+1.232.3 (2026-09-28)
+------------------
+
+* Issue - Remove `:thread_count` from transfer options even when a custom `:executor` is configured on `TransferManager`, fixing an `ArgumentError` raised on single-part `upload_file` calls.
+
+* Issue - Fix `:thread_count` being ignored by the deprecated `Object#download_file`, which always used the default thread count.
+
+1.232.2 (2026-09-25)
+------------------
+
+* Issue - Ensure the internally-created executor is shutdown on error in `TransferManager` and `Aws::S3::Object` resource methods, preventing leaked worker threads on multipart transfer failures (#3419).
+
+1.232.1 (2026-09-16)
+------------------
+
+* Issue - Return the copy response from multipart `copy_to`/`copy_from` instead of `nil` on success.
+
+1.232.0 (2026-09-11)
+------------------
+
+* Feature - Updated S3 Object Lock Default Retention documentation.
+
+1.231.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.230.0 (2026-09-08)
+------------------
+
+* Feature - Adds support for Amazon S3 Object Lock variable retention.  Existing S3 APIs that support S3 Object Lock parameters now support two new parameters EventHold and EventHoldDuration at the object level, and DefaultEventHoldDuration at the bucket level.
+
 1.229.0 (2026-08-06)
 ------------------
 

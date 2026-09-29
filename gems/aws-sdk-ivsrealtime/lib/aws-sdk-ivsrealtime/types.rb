@@ -10,6 +10,8 @@
 module Aws::IVSRealTime
   module Types
 
+    # User does not have sufficient access to perform this action.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -289,6 +291,8 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # Updating or deleting a resource can cause an inconsistent state.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -446,6 +450,62 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # @!attribute [rw] access_control_allow_origin
+    #   See [Access-Control-Allow-Origin][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_expose_headers
+    #   See [Access-Control-Expose-Headers][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_control
+    #   See [Cache-Control][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
+    #   @return [String]
+    #
+    # @!attribute [rw] content_security_policy
+    #   See [Content-Security-Policy][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
+    #   @return [String]
+    #
+    # @!attribute [rw] strict_transport_security
+    #   See [Strict-Transport-Security][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
+    #   @return [String]
+    #
+    # @!attribute [rw] x_content_type_options
+    #   See [X-Content-Type-Options][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options
+    #   @return [String]
+    #
+    # @!attribute [rw] x_frame_options
+    #   See [X-Frame-Options][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options
+    #   @return [String]
+    #
     # @!attribute [rw] ingest_configuration
     #   The IngestConfiguration that was created.
     #   @return [Types::IngestConfiguration]
@@ -453,6 +513,13 @@ module Aws::IVSRealTime
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateIngestConfigurationResponse AWS API Documentation
     #
     class CreateIngestConfigurationResponse < Struct.new(
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
       :ingest_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -1540,6 +1607,8 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # Unexpected error during processing of request.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -2509,6 +2578,8 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # Your account is pending verification.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -2759,6 +2830,8 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # Request references a resource which does not exist.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -2870,6 +2943,8 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # Request would cause a service quota to be exceeded.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #
@@ -3541,6 +3616,62 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # @!attribute [rw] access_control_allow_origin
+    #   See [Access-Control-Allow-Origin][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_expose_headers
+    #   See [Access-Control-Expose-Headers][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_control
+    #   See [Cache-Control][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
+    #   @return [String]
+    #
+    # @!attribute [rw] content_security_policy
+    #   See [Content-Security-Policy][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
+    #   @return [String]
+    #
+    # @!attribute [rw] strict_transport_security
+    #   See [Strict-Transport-Security][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
+    #   @return [String]
+    #
+    # @!attribute [rw] x_content_type_options
+    #   See [X-Content-Type-Options][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options
+    #   @return [String]
+    #
+    # @!attribute [rw] x_frame_options
+    #   See [X-Frame-Options][1] in the MDN Web Docs.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options
+    #   @return [String]
+    #
     # @!attribute [rw] ingest_configuration
     #   The updated IngestConfiguration.
     #   @return [Types::IngestConfiguration]
@@ -3548,6 +3679,13 @@ module Aws::IVSRealTime
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UpdateIngestConfigurationResponse AWS API Documentation
     #
     class UpdateIngestConfigurationResponse < Struct.new(
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
       :ingest_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -3589,6 +3727,9 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # The input fails to satisfy the constraints specified by an Amazon Web
+    # Services service.
+    #
     # @!attribute [rw] access_control_allow_origin
     #   @return [String]
     #

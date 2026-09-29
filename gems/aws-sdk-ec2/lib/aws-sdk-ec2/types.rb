@@ -2647,8 +2647,10 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a
+    #   request with the same token, the service ignores the request but
+    #   does not return an error. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -6716,6 +6718,44 @@ module Aws::EC2
     #   with the source reservation for interruptible Capacity Reservations.
     #   @return [Types::InterruptionInfo]
     #
+    # @!attribute [rw] adjustment_status
+    #   The status of the most recent modification to the Capacity
+    #   Reservation. A Capacity Reservation can have one of the following
+    #   adjustment statuses:
+    #
+    #   * `requested` - The modification was requested and is being
+    #     processed.
+    #
+    #   * `applied` - The modification was applied to the Capacity
+    #     Reservation.
+    #
+    #   * `rejected` - The modification was not applied and the Capacity
+    #     Reservation keeps its existing configuration.
+    #
+    #   This field is not returned if the Capacity Reservation has never
+    #   been modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustment_details
+    #   The configuration that the Capacity Reservation will have after the
+    #   requested adjustment is applied.
+    #   @return [Types::CapacityReservationAdjustmentDetails]
+    #
+    # @!attribute [rw] original_start_date
+    #   The start date that you originally requested for the Capacity
+    #   Reservation, in the ISO8601 format in the UTC time zone
+    #   (`YYYY-MM-DDThh:mm:ss.sssZ`). This value doesn't change when you
+    #   push out the start date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] zero_size_preference
+    #   The zero-size preference configured for the interruptible Capacity
+    #   Reservation. A value of `retain` keeps the interruptible Capacity
+    #   Reservation active at zero capacity when you reduce its allocation
+    #   to zero. A value of `default` cancels the interruptible Capacity
+    #   Reservation when you reduce its allocation to zero.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservation AWS API Documentation
     #
     class CapacityReservation < Struct.new(
@@ -6749,7 +6789,57 @@ module Aws::EC2
       :capacity_block_id,
       :interruptible,
       :interruptible_capacity_allocation,
-      :interruption_info)
+      :interruption_info,
+      :adjustment_status,
+      :adjustment_details,
+      :original_start_date,
+      :zero_size_preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration that a Capacity Reservation will have
+    # after a pending adjustment is applied.
+    #
+    # @!attribute [rw] start_date
+    #   The start date that the Capacity Reservation will have after the
+    #   adjustment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date that the Capacity Reservation will have after the
+    #   adjustment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] commitment_end_date
+    #   The date and time at which the commitment duration will expire after
+    #   the adjustment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_type
+    #   Indicates the way in which the Capacity Reservation will end after
+    #   the adjustment. Possible values are:
+    #
+    #   * `unlimited` - The Capacity Reservation remains active until you
+    #     explicitly cancel it.
+    #
+    #   * `limited` - The Capacity Reservation expires automatically at the
+    #     date and time given by `endDate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] commitment_duration
+    #   The commitment duration, in seconds, that the Capacity Reservation
+    #   will have after the adjustment.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationAdjustmentDetails AWS API Documentation
+    #
+    class CapacityReservationAdjustmentDetails < Struct.new(
+      :start_date,
+      :end_date,
+      :commitment_end_date,
+      :end_date_type,
+      :commitment_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6877,11 +6967,19 @@ module Aws::EC2
     #   Reservation before this date and time.
     #   @return [Time]
     #
+    # @!attribute [rw] commitment_duration
+    #   The commitment duration, in seconds, for the future-dated Capacity
+    #   Reservation. This is the minimum duration for which you commit to
+    #   having the Capacity Reservation in the `active` state in your
+    #   account after it has been delivered.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationCommitmentInfo AWS API Documentation
     #
     class CapacityReservationCommitmentInfo < Struct.new(
       :committed_instance_count,
-      :commitment_end_date)
+      :commitment_end_date,
+      :commitment_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7115,6 +7213,66 @@ module Aws::EC2
       :availability_zone,
       :tenancy,
       :availability_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a Capacity Reservation modification quote, which provides
+    # the terms for changing the start date or the commitment of a
+    # future-dated Capacity Reservation.
+    #
+    # @!attribute [rw] capacity_reservation_modification_quote_id
+    #   The ID of the modification quote.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation associated with the modification
+    #   quote.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The date and time at which the modification quote was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration_time
+    #   The date and time at which the modification quote expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] quote_state
+    #   The state of the modification quote itself. Possible values are:
+    #
+    #   * `active` - The quote can still be used.
+    #
+    #   * `expired` - The quote can no longer be used. A quote becomes
+    #     `expired` at its `expirationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_configuration
+    #   The configuration that the Capacity Reservation has at the time the
+    #   quote was generated.
+    #   @return [Types::ModificationQuoteCurrentConfiguration]
+    #
+    # @!attribute [rw] modification_terms
+    #   The terms of the modification, including the configuration that the
+    #   Capacity Reservation will have if you accept them by using
+    #   `ModifyCapacityReservation`.
+    #   @return [Types::ModificationTerms]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the modification quote.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationModificationQuote AWS API Documentation
+    #
+    class CapacityReservationModificationQuote < Struct.new(
+      :capacity_reservation_modification_quote_id,
+      :capacity_reservation_id,
+      :create_time,
+      :expiration_time,
+      :quote_state,
+      :current_configuration,
+      :modification_terms,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7977,6 +8135,11 @@ module Aws::EC2
     #   compliance, if applicable.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] authorization_policy_last_evaluated_time
+    #   The date and time the authorization policy was last evaluated for
+    #   the client connection, if applicable.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnConnection AWS API Documentation
     #
     class ClientVpnConnection < Struct.new(
@@ -7994,7 +8157,8 @@ module Aws::EC2
       :common_name,
       :status,
       :connection_end_time,
-      :posture_compliance_statuses)
+      :posture_compliance_statuses,
+      :authorization_policy_last_evaluated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8170,6 +8334,11 @@ module Aws::EC2
     #   The Transit Gateway configuration for the Client VPN endpoint.
     #   @return [Types::TransitGatewayConfigurationDescribeEndpointStructure]
     #
+    # @!attribute [rw] device_posture_options
+    #   The device trust providers configured for the Client VPN endpoint,
+    #   if applicable.
+    #   @return [Types::DevicePostureResponseOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint AWS API Documentation
     #
     class ClientVpnEndpoint < Struct.new(
@@ -8200,7 +8369,8 @@ module Aws::EC2
       :disconnect_on_session_timeout,
       :endpoint_ip_address_type,
       :traffic_ip_address_type,
-      :transit_gateway_configuration)
+      :transit_gateway_configuration,
+      :device_posture_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8333,6 +8503,70 @@ module Aws::EC2
     class ClientVpnRouteStatus < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a device trust provider configured for a Client VPN
+    # endpoint.
+    #
+    # @!attribute [rw] trust_provider_type
+    #   The type of the device trust provider. Possible values include:
+    #
+    #   * `crowdstrike` - CrowdStrike device trust provider.
+    #
+    #   * `jamf` - Jamf device trust provider.
+    #
+    #   * `jumpcloud` - JumpCloud device trust provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_id
+    #   The tenant ID associated with your device trust provider account.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_signing_key_url
+    #   The URL of the public signing key that is used to verify the
+    #   identity token issued by the device trust provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnTrustProvider AWS API Documentation
+    #
+    class ClientVpnTrustProvider < Struct.new(
+      :trust_provider_type,
+      :tenant_id,
+      :public_signing_key_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a device trust provider to configure for a Client VPN
+    # endpoint.
+    #
+    # @!attribute [rw] trust_provider_type
+    #   The type of the device trust provider. Possible values include:
+    #
+    #   * `crowdstrike` - CrowdStrike device trust provider.
+    #
+    #   * `jamf` - Jamf device trust provider.
+    #
+    #   * `jumpcloud` - JumpCloud device trust provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_id
+    #   The tenant ID associated with your device trust provider account.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_signing_key_url
+    #   The URL of the public signing key that is used to verify the
+    #   identity token issued by the device trust provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnTrustProviderRequest AWS API Documentation
+    #
+    class ClientVpnTrustProviderRequest < Struct.new(
+      :trust_provider_type,
+      :tenant_id,
+      :public_signing_key_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8589,12 +8823,18 @@ module Aws::EC2
     #   data is published.
     #   @return [String]
     #
+    # @!attribute [rw] include_authorization_policy_context
+    #   Specifies whether to include the authorization policy evaluation
+    #   context in the connection logs for the Client VPN endpoint.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionLogOptions AWS API Documentation
     #
     class ConnectionLogOptions < Struct.new(
       :enabled,
       :cloudwatch_log_group,
-      :cloudwatch_log_stream)
+      :cloudwatch_log_stream,
+      :include_authorization_policy_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8617,12 +8857,18 @@ module Aws::EC2
     #   connection logging data is published.
     #   @return [String]
     #
+    # @!attribute [rw] include_authorization_policy_context
+    #   Specifies whether the authorization policy evaluation context is
+    #   included in the connection logs for the Client VPN endpoint.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionLogResponseOptions AWS API Documentation
     #
     class ConnectionLogResponseOptions < Struct.new(
       :enabled,
       :cloudwatch_log_group,
-      :cloudwatch_log_stream)
+      :cloudwatch_log_stream,
+      :include_authorization_policy_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9423,6 +9669,25 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   Indicates whether to encrypt the volume copy. If the source volume
+    #   is encrypted, the service always encrypts the copy regardless of
+    #   this value. Set to `true` to encrypt a copy of an unencrypted source
+    #   volume during the copy operation. If you set `Encrypted` to `true`
+    #   but do not specify `KmsKeyId`, the service uses the default KMS key
+    #   for EBS encryption in your account.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of the KMS key to use for encryption of the volume
+    #   copy. Specify a symmetric encryption KMS key. You can specify a KMS
+    #   key using the key ID, key ARN, alias name, or alias ARN. If you set
+    #   `Encrypted` to `true` but do not specify this parameter, the service
+    #   uses the default KMS key for EBS encryption in your account. For
+    #   cross-account volume copies, this must be a KMS key in the calling
+    #   account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyVolumesRequest AWS API Documentation
     #
     class CopyVolumesRequest < Struct.new(
@@ -9434,7 +9699,9 @@ module Aws::EC2
       :tag_specifications,
       :multi_attach_enabled,
       :throughput,
-      :client_token)
+      :client_token,
+      :encrypted,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9658,8 +9925,10 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a
+    #   request with the same token, the service ignores the request but
+    #   does not return an error. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -9899,6 +10168,65 @@ module Aws::EC2
     #
     class CreateCapacityReservationCancellationQuoteResult < Struct.new(
       :capacity_reservation_cancellation_quote)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_start_date
+    #   The requested new start date for the Capacity Reservation, in the
+    #   ISO8601 format in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   The new start date must be later than the current start date and
+    #   within the cumulative 30-day pushout limit.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the date change quote.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservationDateChangeQuoteRequest AWS API Documentation
+    #
+    class CreateCapacityReservationDateChangeQuoteRequest < Struct.new(
+      :capacity_reservation_id,
+      :new_start_date,
+      :client_token,
+      :tag_specifications,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation_modification_quote
+    #   Information about the Capacity Reservation date change quote.
+    #   @return [Types::CapacityReservationModificationQuote]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservationDateChangeQuoteResult AWS API Documentation
+    #
+    class CreateCapacityReservationDateChangeQuoteResult < Struct.new(
+      :capacity_reservation_modification_quote)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10571,6 +10899,12 @@ module Aws::EC2
     #   `TransitGatewayConfiguration` and `VpcId`/`SecurityGroupIds`.
     #   @return [Types::TransitGatewayConfigurationInputStructure]
     #
+    # @!attribute [rw] device_posture_options
+    #   The device posture options for the Client VPN endpoint. Use this
+    #   parameter to specify the device trust providers that the endpoint
+    #   uses to evaluate the security posture of connecting devices.
+    #   @return [Types::DevicePostureOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointRequest AWS API Documentation
     #
     class CreateClientVpnEndpointRequest < Struct.new(
@@ -10596,7 +10930,8 @@ module Aws::EC2
       :disconnect_on_session_timeout,
       :endpoint_ip_address_type,
       :traffic_ip_address_type,
-      :transit_gateway_configuration)
+      :transit_gateway_configuration,
+      :device_posture_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11128,8 +11463,10 @@ module Aws::EC2
     #
     # @!attribute [rw] lifecycle
     #   Indicates if the instance that could not be launched was a Spot,
-    #   On-Demand, Capacity Block, or Interruptible Capacity Reservation
-    #   instance.
+    #   On-Demand, Capacity Block for ML, or interruptible Capacity
+    #   Reservation instance. If you are using `ReservedCapacityOptions`
+    #   with `on-demand-capacity-reservation` in the `ReservationTypes`
+    #   list, the value can also be `on-demand-capacity-reservation`.
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -11173,7 +11510,8 @@ module Aws::EC2
     #
     # @!attribute [rw] lifecycle
     #   Indicates if the instance that was launched is a Spot, On-Demand,
-    #   Capacity Block, or Interruptible Capacity Reservation instance.
+    #   Capacity Block for ML, or interruptible Capacity Reservation
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_ids
@@ -11674,20 +12012,54 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] snapshot_location
-    #   <note markdown="1"> Only supported for instances in Local Zones. If the source instance
-    #   is not in a Local Zone, omit this parameter.
+    #   <note markdown="1"> Only supported for instances in Local Zones and for instances on
+    #   Outposts that support local snapshots. If the source instance is not
+    #   in one of these locations, omit this parameter.
     #
     #    </note>
     #
     #   The Amazon S3 location where the snapshots will be stored.
     #
-    #   * To create local snapshots in the same Local Zone as the source
-    #     instance, specify `local`.
+    #   * To create local snapshots in the same Local Zone or on the same
+    #     Outpost as the source instance, specify `local`.
     #
     #   * To create regional snapshots in the parent Region of the Local
-    #     Zone, specify `regional` or omit this parameter.
+    #     Zone or Outpost, specify `regional`.
     #
-    #   Default: `regional`
+    #   If the source instance is in a Local Zone and you omit this
+    #   parameter, regional snapshots are created in the parent Region of
+    #   the Local Zone.
+    #
+    #   If the source instance is on an Outpost that supports local
+    #   snapshots, this parameter is required. If you omit it, the request
+    #   fails with an `InvalidParameterValue` error.
+    #
+    #   Default: `regional` (for instances in Local Zones only)
+    #   @return [String]
+    #
+    # @!attribute [rw] boot_mode_override
+    #   The boot mode of the new image, which overrides the default boot
+    #   mode. By default, if you do not specify this parameter, the new
+    #   image inherits the `boot-mode` from the source instance.
+    #
+    #   A value of `uefi` indicates that the image only supports UEFI boot
+    #   mode. You can specify this parameter only if the
+    #   `current-instance-boot-mode` of the source instance is `uefi`. To
+    #   find the `boot-mode` or `current-instance-boot-mode` of an instance,
+    #   see [DescribeInstances][1].
+    #
+    #   <note markdown="1"> The operating system contained in the AMI must be configured to
+    #   support the specified boot mode.
+    #
+    #    </note>
+    #
+    #   For more information, see [Instance launch behavior with Amazon EC2
+    #   boot modes][2] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -11755,6 +12127,7 @@ module Aws::EC2
     class CreateImageRequest < Struct.new(
       :tag_specifications,
       :snapshot_location,
+      :boot_mode_override,
       :dry_run,
       :instance_id,
       :name,
@@ -12124,6 +12497,16 @@ module Aws::EC2
     #   creation.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] zero_size_preference
+    #   Specifies the behavior for the interruptible Capacity Reservation
+    #   when you reduce its allocation to zero instances. Specify `retain`
+    #   to keep the interruptible Capacity Reservation active at zero
+    #   capacity so that you can allocate instances to it again later.
+    #   Specify `default` to cancel the interruptible Capacity Reservation
+    #   and return the capacity to your source Capacity Reservation. The
+    #   default value is `default`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInterruptibleCapacityReservationAllocationRequest AWS API Documentation
     #
     class CreateInterruptibleCapacityReservationAllocationRequest < Struct.new(
@@ -12131,7 +12514,8 @@ module Aws::EC2
       :instance_count,
       :client_token,
       :dry_run,
-      :tag_specifications)
+      :tag_specifications,
+      :zero_size_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18089,7 +18473,14 @@ module Aws::EC2
     # @!attribute [rw] vpc_endpoint_type
     #   The type of endpoint.
     #
+    #   For more information about the types of VPC endpoints, see [VPC
+    #   endpoints][1] in the *Amazon Web Services PrivateLink User Guide*.
+    #
     #   Default: Gateway
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -18112,15 +18503,21 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   (Interface and Gateway Load Balancer endpoints) The IDs of the
-    #   subnets in which to create endpoint network interfaces. For a
-    #   Gateway Load Balancer endpoint, you can specify only one subnet.
+    #   (Interface, Gateway Load Balancer endpoints, Resource,
+    #   ServiceNetwork, and Tunnel endpoints only) The IDs of the subnets in
+    #   which to create endpoint network interfaces. For a Gateway Load
+    #   Balancer endpoint, you can specify only one subnet. For a `Tunnel`
+    #   endpoint, the subnets must be in the Availability Zones of the
+    #   resource gateway associated with the shared resource configuration.
+    #   An endpoint network interface is created only in an Availability
+    #   Zone that the resource gateway is also in.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   (Interface endpoint) The IDs of the security groups to associate
-    #   with the endpoint network interfaces. If this parameter is not
-    #   specified, we use the default security group for the VPC.
+    #   (Interface, Resource, ServiceNetwork, and Tunnel endpoints only) The
+    #   IDs of the security groups to associate with the endpoint network
+    #   interfaces. If this parameter is not specified, we use the default
+    #   security group for the VPC.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ip_address_type
@@ -18170,8 +18567,29 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_configuration_arn
-    #   The Amazon Resource Name (ARN) of a resource configuration that will
-    #   be associated with the VPC endpoint of type resource.
+    #   (Resource and Tunnel endpoints only) The Amazon Resource Name (ARN)
+    #   of a resource configuration associated with the VPC endpoint. The
+    #   type of resource configuration depends on the endpoint type:
+    #
+    #   * For a Resource endpoint, you can specify a resource configuration
+    #     that is of type `SINGLE`, `GROUP`, or `ARN`. To reach a resource
+    #     that belongs to a group, specify the parent `GROUP` resource
+    #     configuration.
+    #
+    #   * For a Tunnel endpoint, you can specify a resource configuration
+    #     that is of type `CIDR`.
+    #
+    #   For more information about the types of resource configurations, see
+    #   [Types of resource configurations][1] in the *Amazon Web Services
+    #   PrivateLink User Guide*.
+    #
+    #   This request fails if a VPC endpoint owned by a different Amazon Web
+    #   Services account already exists on a resource gateway that is
+    #   enabled for `ResourceGatewayCharges` payer responsibility.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/privatelink/resource-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] service_region
@@ -19067,8 +19485,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a
+    #   request with the same token, the service ignores the request but
+    #   does not return an error. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -19168,6 +19588,38 @@ module Aws::EC2
     #
     class DeleteCarrierGatewayResult < Struct.new(
       :carrier_gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnEndpointAuthorizationPolicyRequest AWS API Documentation
+    #
+    class DeleteClientVpnEndpointAuthorizationPolicyRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current state of the authorization policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnEndpointAuthorizationPolicyResult AWS API Documentation
+    #
+    class DeleteClientVpnEndpointAuthorizationPolicyResult < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24237,6 +24689,65 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] capacity_reservation_modification_quote_ids
+    #   The IDs of the date change quotes to describe.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservationDateChangeQuotesRequest AWS API Documentation
+    #
+    class DescribeCapacityReservationDateChangeQuotesRequest < Struct.new(
+      :capacity_reservation_modification_quote_ids,
+      :max_results,
+      :next_token,
+      :dry_run,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation_modification_quotes
+    #   Information about the Capacity Reservation date change quotes.
+    #   @return [Array<Types::CapacityReservationModificationQuote>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservationDateChangeQuotesResult AWS API Documentation
+    #
+    class DescribeCapacityReservationDateChangeQuotesResult < Struct.new(
+      :capacity_reservation_modification_quotes,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] capacity_reservation_fleet_ids
     #   The IDs of the Capacity Reservation Fleets to describe.
     #   @return [Array<String>]
@@ -25823,8 +26334,10 @@ module Aws::EC2
     #
     # @!attribute [rw] lifecycle
     #   Indicates if the instance that could not be launched was a Spot,
-    #   On-Demand, Capacity Block, or Interruptible Capacity Reservation
-    #   instance.
+    #   On-Demand, Capacity Block for ML, or interruptible Capacity
+    #   Reservation instance. If you are using `ReservedCapacityOptions`
+    #   with `on-demand-capacity-reservation` in the `ReservationTypes`
+    #   list, the value can also be `on-demand-capacity-reservation`.
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -25834,7 +26347,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -25844,7 +26357,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetError AWS API Documentation
@@ -26028,7 +26541,8 @@ module Aws::EC2
     #
     # @!attribute [rw] lifecycle
     #   Indicates if the instance that was launched is a Spot, On-Demand,
-    #   Capacity Block, or Interruptible Capacity Reservation instance.
+    #   Capacity Block for ML, or interruptible Capacity Reservation
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_ids
@@ -27080,6 +27594,9 @@ module Aws::EC2
     #   * `block-device-mapping.encrypted` - A Boolean that indicates
     #     whether the Amazon EBS volume is encrypted.
     #
+    #   * `boot-mode` – The boot mode of the image (`legacy-bios` \| `uefi`
+    #     \| `uefi-preferred`).
+    #
     #   * `creation-date` - The time when the image was created, in the ISO
     #     8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
     #     example, `2021-09-29T11:04:43.305Z`. You can use a wildcard (`*`),
@@ -27125,6 +27642,18 @@ module Aws::EC2
     #
     #   * `image-type` - The image type (`machine` \| `kernel` \|
     #     `ramdisk`).
+    #
+    #   * `instance-type-specification.supported-instance-type` – The
+    #     instance types that are compatible with the AMI, as specified by
+    #     the AMI owner. Values can be individual instance types (for
+    #     example, `t3.micro`) or wildcard patterns that match multiple
+    #     instance types (for example, `t3.*`).
+    #
+    #   * `instance-type-specification.unsupported-instance-type` – The
+    #     instance types that are not compatible with the AMI, as specified
+    #     by the AMI owner. Values can be individual instance types (for
+    #     example, `t3.micro`) or wildcard patterns that match multiple
+    #     instance types (for example, `t3.*`).
     #
     #   * `is-public` - A Boolean that indicates whether the image is
     #     public.
@@ -37529,7 +38058,7 @@ module Aws::EC2
     #
     #   * `vpc-endpoint-type` - The type of VPC endpoint (`Interface` \|
     #     `Gateway` \| `GatewayLoadBalancer` \| `Resource` \|
-    #     `ServiceNetwork`).
+    #     `ServiceNetwork` \| `Tunnel`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -38344,6 +38873,44 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the device posture options for a Client VPN endpoint. Device
+    # posture options specify the device trust providers that the endpoint
+    # uses to evaluate the security posture of connecting devices.
+    #
+    # @!attribute [rw] trust_providers
+    #   The device trust providers to configure for the Client VPN endpoint.
+    #   @return [Array<Types::ClientVpnTrustProviderRequest>]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether device posture evaluation is enabled for the
+    #   Client VPN endpoint. Specify `false` to disable device posture,
+    #   which clears the configured device trust providers.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DevicePostureOptions AWS API Documentation
+    #
+    class DevicePostureOptions < Struct.new(
+      :trust_providers,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the device posture options for a Client VPN
+    # endpoint.
+    #
+    # @!attribute [rw] trust_providers
+    #   The device trust providers configured for the Client VPN endpoint.
+    #   @return [Array<Types::ClientVpnTrustProvider>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DevicePostureResponseOptions AWS API Documentation
+    #
+    class DevicePostureResponseOptions < Struct.new(
+      :trust_providers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a DHCP configuration option.
     #
     # @!attribute [rw] key
@@ -38515,8 +39082,10 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a
+    #   request with the same token, the service ignores the request but
+    #   does not return an error. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -39479,8 +40048,10 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a
+    #   request with the same token, the service ignores the request but
+    #   does not return an error. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -41596,8 +42167,10 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a
+    #   request with the same token, the service ignores the request but
+    #   does not return an error. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -44222,6 +44795,30 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the target Capacity Reservations or Capacity Reservation
+    # Resource Groups for an EC2 Fleet that launches into reserved capacity.
+    # You can specify Capacity Reservation IDs or a Capacity Reservation
+    # Resource Group ARN, but not both.
+    #
+    # @!attribute [rw] capacity_reservation_ids
+    #   The IDs of the Capacity Reservations in which to launch the
+    #   instances.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] capacity_reservation_resource_group_arns
+    #   The ARNs of the Capacity Reservation Resource Groups in which to
+    #   launch the instances.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetCapacityReservationTargetRequest AWS API Documentation
+    #
+    class FleetCapacityReservationTargetRequest < Struct.new(
+      :capacity_reservation_ids,
+      :capacity_reservation_resource_group_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an EC2 Fleet.
     #
     # @!attribute [rw] activity_status
@@ -46285,6 +46882,65 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetClientVpnEndpointAuthorizationPolicyRequest AWS API Documentation
+    #
+    class GetClientVpnEndpointAuthorizationPolicyRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The authorization policy document, written in the Cedar policy
+    #   language.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the authorization policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] shadow_mode
+    #   Specifies whether the authorization policy is evaluated in shadow
+    #   mode. Possible values include:
+    #
+    #   * `enabled` - The authorization policy is evaluated and the results
+    #     are logged, but access is not enforced.
+    #
+    #   * `disabled` - The authorization policy is enforced.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the authorization policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetClientVpnEndpointAuthorizationPolicyResult AWS API Documentation
+    #
+    class GetClientVpnEndpointAuthorizationPolicyResult < Struct.new(
+      :client_vpn_endpoint_id,
+      :policy_document,
+      :description,
+      :shadow_mode,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] pool_id
     #   The ID of the address pool.
     #   @return [String]
@@ -47084,7 +47740,7 @@ module Aws::EC2
     class GetInstanceUefiDataResult < Struct.new(
       :instance_id,
       :uefi_data)
-      SENSITIVE = []
+      SENSITIVE = [:uefi_data]
       include Aws::Structure
     end
 
@@ -51099,6 +51755,11 @@ module Aws::EC2
     #   The watermarks attached to the AMI.
     #   @return [Array<Types::ImageWatermark>]
     #
+    # @!attribute [rw] instance_type_specification
+    #   The instance type specification for the AMI, which defines which
+    #   instance types are compatible with this image.
+    #   @return [Types::InstanceTypeSpecification]
+    #
     # @!attribute [rw] image_id
     #   The ID of the AMI.
     #   @return [String]
@@ -51183,6 +51844,7 @@ module Aws::EC2
       :free_tier_eligible,
       :public_ssm_parameter_name,
       :image_watermarks,
+      :instance_type_specification,
       :image_id,
       :image_location,
       :state,
@@ -56503,8 +57165,7 @@ module Aws::EC2
     #   @return [Types::EbsStatusSummary]
     #
     # @!attribute [rw] application_status
-    #   Reports impaired functionality that stems from issues with
-    #   applications running on the instance.
+    #   Reports the application-level health status for the instance.
     #   @return [Types::ApplicationStatusSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatus AWS API Documentation
@@ -56931,6 +57592,22 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # An instance type name or wildcard pattern in an instance type
+    # specification.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type or wildcard pattern (for example, `t3.*` or
+    #   `m5.large`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeItem AWS API Documentation
+    #
+    class InstanceTypeItem < Struct.new(
+      :instance_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The instance types offered.
     #
     # @!attribute [rw] instance_type
@@ -56958,6 +57635,61 @@ module Aws::EC2
       :instance_type,
       :location_type,
       :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the instance type compatibility rules for an AMI, including
+    # lists of supported and unsupported instance type patterns.
+    #
+    # @!attribute [rw] supported_instance_types
+    #   The instance types that the AMI supports.
+    #   @return [Array<Types::InstanceTypeItem>]
+    #
+    # @!attribute [rw] unsupported_instance_types
+    #   The instance types that the AMI does not support.
+    #   @return [Array<Types::InstanceTypeItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeSpecification AWS API Documentation
+    #
+    class InstanceTypeSpecification < Struct.new(
+      :supported_instance_types,
+      :unsupported_instance_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance type specification for an AMI, which contains lists of
+    # supported and unsupported instance types that define which instance
+    # types are compatible with the AMI.
+    #
+    # @!attribute [rw] supported_instance_types
+    #   The instance types that the AMI supports. You can specify instance
+    #   type names or use wildcard patterns (for example, `t3.*`).
+    #
+    #   Constraints: Maximum 100 entries. Each entry must be 1-24 characters
+    #   and match the pattern `^[A-Za-z0-9_.*-]+$`. Consecutive wildcard
+    #   characters (`**`) are not allowed. Entries must be unique within
+    #   each list and across both lists; duplicate entries cause the request
+    #   to fail.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] unsupported_instance_types
+    #   The instance types that the AMI does not support. You can specify
+    #   instance type names or use wildcard patterns (for example, `t3.*`).
+    #
+    #   Constraints: Maximum 100 entries. Each entry must be 1-24 characters
+    #   and match the pattern `^[A-Za-z0-9_.*-]+$`. Consecutive wildcard
+    #   characters (`**`) are not allowed. Entries must be unique within
+    #   each list and across both lists; duplicate entries cause the request
+    #   to fail.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeSpecificationRequest AWS API Documentation
+    #
+    class InstanceTypeSpecificationRequest < Struct.new(
+      :supported_instance_types,
+      :unsupported_instance_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57078,6 +57810,16 @@ module Aws::EC2
     #   reservation.
     #   @return [String]
     #
+    # @!attribute [rw] zero_size_preference
+    #   Specifies how Amazon EC2 handles the interruptible Capacity
+    #   Reservation when you reduce its allocation to zero instances. A
+    #   value of `retain` keeps the interruptible Capacity Reservation
+    #   active at zero capacity so that you can allocate instances to it
+    #   again later. A value of `default` cancels the interruptible Capacity
+    #   Reservation and returns the capacity to your source Capacity
+    #   Reservation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InterruptibleCapacityAllocation AWS API Documentation
     #
     class InterruptibleCapacityAllocation < Struct.new(
@@ -57085,7 +57827,8 @@ module Aws::EC2
       :target_instance_count,
       :status,
       :interruptible_capacity_reservation_id,
-      :interruption_type)
+      :interruption_type,
+      :zero_size_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57987,6 +58730,12 @@ module Aws::EC2
     #   `delete-failed`.
     #   @return [String]
     #
+    # @!attribute [rw] state_message
+    #   A message describing the current state of the internet registry
+    #   association, including additional details such as the reason for a
+    #   failure.
+    #   @return [String]
+    #
     # @!attribute [rw] child_request_xml
     #   The XML content for the child request to be submitted to the
     #   internet registry to complete the BPKI setup.
@@ -58008,6 +58757,7 @@ module Aws::EC2
       :organization_handle,
       :description,
       :state,
+      :state_message,
       :child_request_xml,
       :tags)
       SENSITIVE = []
@@ -64079,6 +64829,84 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the configuration that a Capacity Reservation has at the
+    # time a modification quote is generated.
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances in the Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reservation_state
+    #   The current state of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The start date that the Capacity Reservation has before the quoted
+    #   modification is applied.
+    #   @return [Time]
+    #
+    # @!attribute [rw] original_start_date
+    #   The start date that the Capacity Reservation was originally
+    #   requested with. This value does not change when you push out the
+    #   start date.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModificationQuoteCurrentConfiguration AWS API Documentation
+    #
+    class ModificationQuoteCurrentConfiguration < Struct.new(
+      :instance_count,
+      :reservation_state,
+      :start_date,
+      :original_start_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the changes that a Capacity Reservation modification quote
+    # will apply to a Capacity Reservation.
+    #
+    # @!attribute [rw] new_commitment_end_date
+    #   The date and time at which the commitment duration will expire after
+    #   the modification, in the ISO8601 format in the UTC time zone
+    #   (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] new_start_date
+    #   The start date that the Capacity Reservation will have after the
+    #   modification, in the ISO8601 format in the UTC time zone
+    #   (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] new_commitment_duration
+    #   The commitment duration, in seconds, that the Capacity Reservation
+    #   will have after the modification.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModificationReservationUpdate AWS API Documentation
+    #
+    class ModificationReservationUpdate < Struct.new(
+      :new_commitment_end_date,
+      :new_start_date,
+      :new_commitment_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the terms of a Capacity Reservation modification quote.
+    #
+    # @!attribute [rw] reservation_update
+    #   The changes that will be applied to the Capacity Reservation if you
+    #   accept the modification terms.
+    #   @return [Types::ModificationReservationUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModificationTerms AWS API Documentation
+    #
+    class ModificationTerms < Struct.new(
+      :reservation_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -64279,8 +65107,10 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a
+    #   request with the same token, the service ignores the request but
+    #   does not return an error. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -64517,6 +65347,27 @@ module Aws::EC2
     #   completely idle (zero usage).
     #   @return [String]
     #
+    # @!attribute [rw] accept_modification_terms
+    #   Indicates that you accept the modification terms of the quote
+    #   identified by `QuoteId`. To apply a quoted modification, set this
+    #   parameter to `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] start_date
+    #   The new start date for the Capacity Reservation, in the ISO8601
+    #   format in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`). Applies to
+    #   future-dated Capacity Reservations only. Requires a quote from
+    #   `CreateCapacityReservationDateChangeQuote`; pass the quote ID in
+    #   `QuoteId` with `AcceptModificationTerms` set to `true`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] quote_id
+    #   The ID of the quote that describes the modification you want to
+    #   apply. Generate a quote by using
+    #   `CreateCapacityReservationDateChangeQuote`. The quote must be in the
+    #   `active` state, and each quote can be used only once.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyCapacityReservationRequest AWS API Documentation
     #
     class ModifyCapacityReservationRequest < Struct.new(
@@ -64527,7 +65378,10 @@ module Aws::EC2
       :accept,
       :dry_run,
       :additional_info,
-      :instance_match_criteria)
+      :instance_match_criteria,
+      :accept_modification_terms,
+      :start_date,
+      :quote_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -64537,10 +65391,95 @@ module Aws::EC2
     #   error.
     #   @return [Boolean]
     #
+    # @!attribute [rw] adjustment_status
+    #   The status of the requested modification. For a description of each
+    #   possible value, see the `adjustmentStatus` field of the
+    #   `CapacityReservation` data type.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustment_details
+    #   The configuration that the Capacity Reservation will have after the
+    #   adjustment is applied.
+    #   @return [Types::CapacityReservationAdjustmentDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyCapacityReservationResult AWS API Documentation
     #
     class ModifyCapacityReservationResult < Struct.new(
-      :return)
+      :return,
+      :adjustment_status,
+      :adjustment_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The authorization policy document, written in the Cedar policy
+    #   language. This parameter is required when you create the
+    #   authorization policy for a Client VPN endpoint that does not already
+    #   have one.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the authorization policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] shadow_mode
+    #   Specifies whether the authorization policy is evaluated in shadow
+    #   mode. Possible values include:
+    #
+    #   * `enabled` - The authorization policy is evaluated and the results
+    #     are logged, but access is not enforced.
+    #
+    #   * `disabled` - The authorization policy is enforced.
+    #
+    #   The default value is `disabled`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointAuthorizationPolicyRequest AWS API Documentation
+    #
+    class ModifyClientVpnEndpointAuthorizationPolicyRequest < Struct.new(
+      :client_vpn_endpoint_id,
+      :policy_document,
+      :description,
+      :shadow_mode,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current state of the authorization policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointAuthorizationPolicyResult AWS API Documentation
+    #
+    class ModifyClientVpnEndpointAuthorizationPolicyResult < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -64666,6 +65605,13 @@ module Aws::EC2
     #   option is currently not supported.
     #   @return [Types::TransitGatewayConfigurationInputStructure]
     #
+    # @!attribute [rw] device_posture_options
+    #   The device posture options for the Client VPN endpoint. Specifying
+    #   this parameter replaces the entire device posture configuration for
+    #   the endpoint. To remove all device trust providers, specify an empty
+    #   list.
+    #   @return [Types::DevicePostureOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
     #
     class ModifyClientVpnEndpointRequest < Struct.new(
@@ -64685,7 +65631,8 @@ module Aws::EC2
       :client_login_banner_options,
       :client_route_enforcement_options,
       :disconnect_on_session_timeout,
-      :transit_gateway_configuration)
+      :transit_gateway_configuration,
+      :device_posture_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -71023,6 +71970,10 @@ module Aws::EC2
     #   The maximum number of the ENA queues for each interface.
     #   @return [Integer]
     #
+    # @!attribute [rw] interface_types
+    #   The supported interface types for the network card.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkCardInfo AWS API Documentation
     #
     class NetworkCardInfo < Struct.new(
@@ -71034,7 +71985,8 @@ module Aws::EC2
       :peak_bandwidth_in_gbps,
       :default_ena_queue_count_per_interface,
       :maximum_ena_queue_count,
-      :maximum_ena_queue_count_per_interface)
+      :maximum_ena_queue_count_per_interface,
+      :interface_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -74982,7 +75934,7 @@ module Aws::EC2
       :virtualization_type,
       :sriov_net_support,
       :ena_support)
-      SENSITIVE = []
+      SENSITIVE = [:uefi_data]
       include Aws::Structure
     end
 
@@ -75714,6 +76666,45 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceImageCriteriaInAllowedImagesSettingsResult AWS API Documentation
     #
     class ReplaceImageCriteriaInAllowedImagesSettingsResult < Struct.new(
+      :return_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type_specification
+    #   The instance type specification to set on the AMI. Omit this
+    #   parameter to remove the existing instance type specification.
+    #   @return [Types::InstanceTypeSpecificationRequest]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceImageInstanceTypeSpecificationRequest AWS API Documentation
+    #
+    class ReplaceImageInstanceTypeSpecificationRequest < Struct.new(
+      :image_id,
+      :instance_type_specification,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return_value
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceImageInstanceTypeSpecificationResult AWS API Documentation
+    #
+    class ReplaceImageInstanceTypeSpecificationResult < Struct.new(
       :return_value)
       SENSITIVE = []
       include Aws::Structure
@@ -77099,24 +78090,86 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the fallback behavior for an EC2 Fleet that uses reserved
+    # capacity when the reserved capacity is not enough to meet the target
+    # capacity. If you don't specify fallback options, EC2 Fleet does not
+    # fall back to any other market type after the specified reservation
+    # types are exhausted.
+    #
+    # @!attribute [rw] market_types
+    #   The instance purchasing options to fall back to when the reserved
+    #   capacity is not enough to meet the target capacity. The only
+    #   supported value is `on-demand`, which launches On-Demand Instances
+    #   to fulfill the remaining target capacity.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedCapacityFallbackOptions AWS API Documentation
+    #
+    class ReservedCapacityFallbackOptions < Struct.new(
+      :market_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the fallback behavior for an EC2 Fleet that uses reserved
+    # capacity when the reserved capacity is not enough to meet the target
+    # capacity. If you don't specify fallback options, EC2 Fleet does not
+    # fall back to any other market type after the specified reservation
+    # types are exhausted.
+    #
+    # @!attribute [rw] market_types
+    #   The instance purchasing options to fall back to when the reserved
+    #   capacity is not enough to meet the target capacity. The only
+    #   supported value is `on-demand`, which launches On-Demand Instances
+    #   to fulfill the remaining target capacity.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedCapacityFallbackOptionsRequest AWS API Documentation
+    #
+    class ReservedCapacityFallbackOptionsRequest < Struct.new(
+      :market_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines EC2 Fleet preferences for utilizing reserved capacity when
-    # DefaultTargetCapacityType is set to `reserved-capacity`.
+    # `DefaultTargetCapacityType` is set to `reserved-capacity`. EC2 Fleet
+    # can fulfill reserved capacity using On-Demand Capacity Reservations,
+    # Capacity Blocks for ML, and interruptible Capacity Reservations.
+    #
+    # @!attribute [rw] allocation_strategy
+    #   The strategy that determines the order in which EC2 Fleet launches
+    #   instances across the reservation types that you specify. The only
+    #   supported value is `prioritized`, which launches instances in the
+    #   priority order that you specify in your launch template overrides.
+    #   If you don't specify an allocation strategy, instances are launched
+    #   in a random order.
+    #   @return [String]
     #
     # @!attribute [rw] reservation_types
     #   The types of Capacity Reservations used for fulfilling the EC2 Fleet
     #   request.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] reserved_capacity_fallback_options
+    #   The fallback behavior for the EC2 Fleet when there is not enough
+    #   reserved capacity available to meet the target capacity.
+    #   @return [Types::ReservedCapacityFallbackOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedCapacityOptions AWS API Documentation
     #
     class ReservedCapacityOptions < Struct.new(
-      :reservation_types)
+      :allocation_strategy,
+      :reservation_types,
+      :reserved_capacity_fallback_options)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Defines EC2 Fleet preferences for utilizing reserved capacity when
-    # DefaultTargetCapacityType is set to `reserved-capacity`.
+    # `DefaultTargetCapacityType` is set to `reserved-capacity`. EC2 Fleet
+    # can fulfill reserved capacity using On-Demand Capacity Reservations,
+    # Capacity Blocks for ML, and interruptible Capacity Reservations.
     #
     # <note markdown="1"> This configuration can only be used if the EC2 Fleet is of type
     # `instant`.
@@ -77127,23 +78180,52 @@ module Aws::EC2
     # `DefaultTargetCapacityType` to `reserved-capacity` in the
     # `TargetCapacitySpecification`.
     #
-    # For more information about Interruptible Capacity Reservations, see
-    # [Launch instances into an Interruptible Capacity Reservation][1] in
+    # For more information about interruptible Capacity Reservations, see
+    # [Launch instances into an interruptible Capacity Reservation][1] in
     # the *Amazon EC2 User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-launch-instances-interruptible-cr-walkthrough.html
     #
+    # @!attribute [rw] allocation_strategy
+    #   The strategy that determines the order in which EC2 Fleet launches
+    #   instances across the reservation types that you specify. The only
+    #   supported value is `prioritized`, which launches instances in the
+    #   priority order that you specify in your launch template overrides.
+    #   If you don't specify an allocation strategy, instances are launched
+    #   in a random order.
+    #   @return [String]
+    #
     # @!attribute [rw] reservation_types
     #   The types of Capacity Reservations to use for fulfilling the EC2
-    #   Fleet request.
+    #   Fleet request. This is an ordered list: EC2 Fleet attempts to launch
+    #   instances into each Capacity Reservation type in the order that you
+    #   specify them before moving on to the next type.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] capacity_reservation_target
+    #   The Capacity Reservations or Capacity Reservation Resource Groups to
+    #   use for fulfilling the EC2 Fleet request. You can specify Capacity
+    #   Reservation IDs or a Capacity Reservation Resource Group ARN, but
+    #   not both.
+    #   @return [Types::FleetCapacityReservationTargetRequest]
+    #
+    # @!attribute [rw] reserved_capacity_fallback_options
+    #   The fallback behavior for the EC2 Fleet when there is not enough
+    #   reserved capacity available to meet the target capacity. This member
+    #   takes a `ReservedCapacityFallbackOptionsRequest` structure, in which
+    #   you set `MarketTypes` to the instance purchasing options to fall
+    #   back to.
+    #   @return [Types::ReservedCapacityFallbackOptionsRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedCapacityOptionsRequest AWS API Documentation
     #
     class ReservedCapacityOptionsRequest < Struct.new(
-      :reservation_types)
+      :allocation_strategy,
+      :reservation_types,
+      :capacity_reservation_target,
+      :reserved_capacity_fallback_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -81408,7 +82490,11 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a value for a resource attribute that is a Base64-encoded
+    # binary data object.
+    #
     # @!attribute [rw] value
+    #   The attribute value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecureBlobAttributeValue AWS API Documentation
@@ -88547,12 +89633,23 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   @return [Boolean]
     #
+    # @!attribute [rw] zero_size_preference
+    #   Specifies the updated behavior for the interruptible Capacity
+    #   Reservation when you reduce its allocation to zero instances.
+    #   Specify `retain` to keep the interruptible Capacity Reservation
+    #   active at zero capacity so that you can allocate instances to it
+    #   again later. Specify `default` to cancel the interruptible Capacity
+    #   Reservation and return the capacity to your source Capacity
+    #   Reservation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateInterruptibleCapacityReservationAllocationRequest AWS API Documentation
     #
     class UpdateInterruptibleCapacityReservationAllocationRequest < Struct.new(
       :capacity_reservation_id,
       :target_instance_count,
-      :dry_run)
+      :dry_run,
+      :zero_size_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -88889,6 +89986,44 @@ module Aws::EC2
       :default_threads_per_core,
       :valid_cores,
       :valid_threads_per_core)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups to validate for association with a
+    #   single network interface. You must specify at least one ID, and each
+    #   ID must be unique. The number of IDs cannot exceed the maximum
+    #   number of security groups allowed per network interface.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ValidateSecurityGroupQuotasForInterfaceRequest AWS API Documentation
+    #
+    class ValidateSecurityGroupQuotasForInterfaceRequest < Struct.new(
+      :security_group_ids,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] valid
+    #   Specifies whether the specified security groups can be associated
+    #   with a single network interface without exceeding the quotas. If
+    #   associating the security groups would exceed a quota, the operation
+    #   returns an error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ValidateSecurityGroupQuotasForInterfaceResult AWS API Documentation
+    #
+    class ValidateSecurityGroupQuotasForInterfaceResult < Struct.new(
+      :valid)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -90012,6 +91147,14 @@ module Aws::EC2
     #   `null`.
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that owns the volume.
+    #   @return [String]
+    #
     # @!attribute [rw] volume_id
     #   The ID of the volume.
     #   @return [String]
@@ -90068,6 +91211,8 @@ module Aws::EC2
       :sse_type,
       :operator,
       :volume_initialization_rate,
+      :volume_arn,
+      :owner_id,
       :volume_id,
       :size,
       :snapshot_id,
@@ -91134,6 +92279,13 @@ module Aws::EC2
     #
     # @!attribute [rw] vpc_endpoint_type
     #   The type of endpoint.
+    #
+    #   For more information about the types of VPC endpoints, see [VPC
+    #   endpoints][1] in the *Amazon Web Services PrivateLink User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -91158,12 +92310,15 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   (Interface endpoint) The subnets for the endpoint.
+    #   (Interface, Gateway Load Balancer endpoints, Resource,
+    #   ServiceNetwork, and Tunnel endpoints only) The subnets for the
+    #   endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] groups
-    #   (Interface endpoint) Information about the security groups that are
-    #   associated with the network interface.
+    #   (Interface, Resource, ServiceNetwork, and Tunnel endpoints only)
+    #   Information about the security groups that are associated with the
+    #   network interface.
     #   @return [Array<Types::SecurityGroupIdentifier>]
     #
     # @!attribute [rw] ip_address_type
@@ -91184,7 +92339,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] network_interface_ids
-    #   (Interface endpoint) The network interfaces for the endpoint.
+    #   (Interface, Gateway Load Balancer endpoints, Resource,
+    #   ServiceNetwork, and Tunnel endpoints only) The network interfaces
+    #   for the endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dns_entries

@@ -2726,6 +2726,118 @@ module Aws::QuickSight
     #       create_and_update_new_relic_action: "DENY", # accepts DENY, ALLOW
     #       share_new_relic_action: "DENY", # accepts DENY, ALLOW
     #       use_new_relic_action: "DENY", # accepts DENY, ALLOW
+    #       pager_duty_agent_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_pager_duty_agent_action: "DENY", # accepts DENY, ALLOW
+    #       share_pager_duty_agent_action: "DENY", # accepts DENY, ALLOW
+    #       use_pager_duty_agent_action: "DENY", # accepts DENY, ALLOW
+    #       visier_agent_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_visier_agent_action: "DENY", # accepts DENY, ALLOW
+    #       share_visier_agent_action: "DENY", # accepts DENY, ALLOW
+    #       use_visier_agent_action: "DENY", # accepts DENY, ALLOW
+    #       zoom_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_zoom_action: "DENY", # accepts DENY, ALLOW
+    #       share_zoom_action: "DENY", # accepts DENY, ALLOW
+    #       use_zoom_action: "DENY", # accepts DENY, ALLOW
+    #       snow_flake_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_snow_flake_action: "DENY", # accepts DENY, ALLOW
+    #       share_snow_flake_action: "DENY", # accepts DENY, ALLOW
+    #       use_snow_flake_action: "DENY", # accepts DENY, ALLOW
+    #       zapier_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_zapier_action: "DENY", # accepts DENY, ALLOW
+    #       share_zapier_action: "DENY", # accepts DENY, ALLOW
+    #       use_zapier_action: "DENY", # accepts DENY, ALLOW
+    #       airtable_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_airtable_action: "DENY", # accepts DENY, ALLOW
+    #       share_airtable_action: "DENY", # accepts DENY, ALLOW
+    #       use_airtable_action: "DENY", # accepts DENY, ALLOW
+    #       dropbox_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_dropbox_action: "DENY", # accepts DENY, ALLOW
+    #       share_dropbox_action: "DENY", # accepts DENY, ALLOW
+    #       use_dropbox_action: "DENY", # accepts DENY, ALLOW
+    #       gmail_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_gmail_action: "DENY", # accepts DENY, ALLOW
+    #       share_gmail_action: "DENY", # accepts DENY, ALLOW
+    #       use_gmail_action: "DENY", # accepts DENY, ALLOW
+    #       google_analytics_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_analytics_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_analytics_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_analytics_action: "DENY", # accepts DENY, ALLOW
+    #       google_docs_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_docs_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_docs_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_docs_action: "DENY", # accepts DENY, ALLOW
+    #       google_drive_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_drive_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_drive_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_drive_action: "DENY", # accepts DENY, ALLOW
+    #       google_meet_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_meet_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_meet_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_meet_action: "DENY", # accepts DENY, ALLOW
+    #       google_sheets_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_sheets_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_sheets_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_sheets_action: "DENY", # accepts DENY, ALLOW
+    #       google_slides_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_slides_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_slides_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_slides_action: "DENY", # accepts DENY, ALLOW
+    #       quick_books_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_quick_books_action: "DENY", # accepts DENY, ALLOW
+    #       share_quick_books_action: "DENY", # accepts DENY, ALLOW
+    #       use_quick_books_action: "DENY", # accepts DENY, ALLOW
+    #       figma_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_figma_action: "DENY", # accepts DENY, ALLOW
+    #       share_figma_action: "DENY", # accepts DENY, ALLOW
+    #       use_figma_action: "DENY", # accepts DENY, ALLOW
+    #       whats_app_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_whats_app_action: "DENY", # accepts DENY, ALLOW
+    #       share_whats_app_action: "DENY", # accepts DENY, ALLOW
+    #       use_whats_app_action: "DENY", # accepts DENY, ALLOW
+    #       google_chat_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_chat_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_chat_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_chat_action: "DENY", # accepts DENY, ALLOW
+    #       one_note_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_one_note_action: "DENY", # accepts DENY, ALLOW
+    #       share_one_note_action: "DENY", # accepts DENY, ALLOW
+    #       use_one_note_action: "DENY", # accepts DENY, ALLOW
+    #       shopify_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_shopify_action: "DENY", # accepts DENY, ALLOW
+    #       share_shopify_action: "DENY", # accepts DENY, ALLOW
+    #       use_shopify_action: "DENY", # accepts DENY, ALLOW
+    #       adobe_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_adobe_action: "DENY", # accepts DENY, ALLOW
+    #       share_adobe_action: "DENY", # accepts DENY, ALLOW
+    #       use_adobe_action: "DENY", # accepts DENY, ALLOW
+    #       cisco_webex_vidcast_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_cisco_webex_vidcast_action: "DENY", # accepts DENY, ALLOW
+    #       share_cisco_webex_vidcast_action: "DENY", # accepts DENY, ALLOW
+    #       use_cisco_webex_vidcast_action: "DENY", # accepts DENY, ALLOW
+    #       cisco_webex_meetings_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_cisco_webex_meetings_action: "DENY", # accepts DENY, ALLOW
+    #       share_cisco_webex_meetings_action: "DENY", # accepts DENY, ALLOW
+    #       use_cisco_webex_meetings_action: "DENY", # accepts DENY, ALLOW
+    #       dun_and_bradstreet_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_dun_and_bradstreet_action: "DENY", # accepts DENY, ALLOW
+    #       share_dun_and_bradstreet_action: "DENY", # accepts DENY, ALLOW
+    #       use_dun_and_bradstreet_action: "DENY", # accepts DENY, ALLOW
+    #       hg_insights_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_hg_insights_action: "DENY", # accepts DENY, ALLOW
+    #       share_hg_insights_action: "DENY", # accepts DENY, ALLOW
+    #       use_hg_insights_action: "DENY", # accepts DENY, ALLOW
+    #       zoom_info_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_zoom_info_action: "DENY", # accepts DENY, ALLOW
+    #       share_zoom_info_action: "DENY", # accepts DENY, ALLOW
+    #       use_zoom_info_action: "DENY", # accepts DENY, ALLOW
+    #       moodys_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_moodys_action: "DENY", # accepts DENY, ALLOW
+    #       share_moodys_action: "DENY", # accepts DENY, ALLOW
+    #       use_moodys_action: "DENY", # accepts DENY, ALLOW
+    #       bee_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_bee_action: "DENY", # accepts DENY, ALLOW
+    #       share_bee_action: "DENY", # accepts DENY, ALLOW
+    #       use_bee_action: "DENY", # accepts DENY, ALLOW
     #       topic: "DENY", # accepts DENY, ALLOW
     #       edit_visual_with_q: "DENY", # accepts DENY, ALLOW
     #       build_calculated_field_with_q: "DENY", # accepts DENY, ALLOW
@@ -2934,8 +3046,7 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates a dataset. This operation doesn't support datasets that
-    # include uploaded files as a source.
+    # Creates a dataset.
     #
     # @option params [required, String] :aws_account_id
     #   The Amazon Web Services account ID.
@@ -4934,10 +5045,22 @@ module Aws::QuickSight
     #   specify this parameter, document-level ACLs are disabled.
     #
     # @option params [String] :primary_owner_arn
-    #   The Amazon Resource Name (ARN) of the primary owner for the knowledge
-    #   base. The specified user is always granted owner access, regardless of
-    #   what is specified in the `Permissions` field. If you don't specify a
-    #   primary owner, the knowledge base is created without one.
+    #   The Amazon Resource Name (ARN) of the Amazon QuickSight user or group
+    #   to set as the primary owner of the knowledge base. The specified
+    #   principal is always granted owner access, regardless of what is
+    #   specified in the `Permissions` field.
+    #
+    #   This must be an Amazon QuickSight principal ARN, not an IAM user or
+    #   role ARN. The API caller is never assigned as the owner automatically.
+    #   If you don't specify a primary owner and don't grant owner access in
+    #   `Permissions`, the knowledge base is created without an owner, even
+    #   when you call the operation as an Amazon QuickSight user.
+    #
+    #   When you call `CreateKnowledgeBase` as an IAM user or an assumed IAM
+    #   role, specify `PrimaryOwnerArn` (as an Amazon QuickSight principal
+    #   ARN) or an owner entry in `Permissions` so that the knowledge base has
+    #   an owner. Although optional, specifying a primary owner is
+    #   recommended.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to assign to the knowledge base. If you don't specify tags,
@@ -6680,6 +6803,38 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def delete_analysis(params = {}, options = {})
       req = build_request(:delete_analysis, params)
+      req.send_request(options)
+    end
+
+    # Deletes an app.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the app.
+    #
+    # @option params [required, String] :app_id
+    #   The ID of the app that you want to delete.
+    #
+    # @return [Types::DeleteAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAppResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app({
+    #     aws_account_id: "AwsAccountId", # required
+    #     app_id: "AppId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteApp AWS API Documentation
+    #
+    # @overload delete_app(params = {})
+    # @param [Hash] params ({})
+    def delete_app(params = {}, options = {})
+      req = build_request(:delete_app, params)
       req.send_request(options)
     end
 
@@ -8747,6 +8902,86 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes an app.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the app.
+    #
+    # @option params [required, String] :app_id
+    #   The ID of the app that you want to describe.
+    #
+    # @return [Types::DescribeAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppResponse#app #app} => Types::AppSummary
+    #   * {Types::DescribeAppResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app({
+    #     aws_account_id: "AwsAccountId", # required
+    #     app_id: "AppId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app.app_id #=> String
+    #   resp.app.arn #=> String
+    #   resp.app.name #=> String
+    #   resp.app.created_time #=> Time
+    #   resp.app.last_updated_time #=> Time
+    #   resp.app.visibility #=> String, one of "PRIVATE", "PUBLIC"
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeApp AWS API Documentation
+    #
+    # @overload describe_app(params = {})
+    # @param [Hash] params ({})
+    def describe_app(params = {}, options = {})
+      req = build_request(:describe_app, params)
+      req.send_request(options)
+    end
+
+    # Describes the resource permissions for an app.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the app.
+    #
+    # @option params [required, String] :app_id
+    #   The ID of the app.
+    #
+    # @return [Types::DescribeAppPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppPermissionsResponse#app_id #app_id} => String
+    #   * {Types::DescribeAppPermissionsResponse#arn #arn} => String
+    #   * {Types::DescribeAppPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourcePermission&gt;
+    #   * {Types::DescribeAppPermissionsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     app_id: "AppId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_id #=> String
+    #   resp.arn #=> String
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].principal #=> String
+    #   resp.permissions[0].actions #=> Array
+    #   resp.permissions[0].actions[0] #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAppPermissions AWS API Documentation
+    #
+    # @overload describe_app_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_app_permissions(params = {}, options = {})
+      req = build_request(:describe_app_permissions, params)
+      req.send_request(options)
+    end
+
     # Describes an approval policy in Quick Sight.
     #
     # @option params [required, String] :policy_id
@@ -9831,6 +10066,118 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.create_and_update_new_relic_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.share_new_relic_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.use_new_relic_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.pager_duty_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_pager_duty_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_pager_duty_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_pager_duty_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.visier_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_visier_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_visier_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_visier_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.zoom_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_zoom_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_zoom_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_zoom_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.snow_flake_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_snow_flake_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_snow_flake_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_snow_flake_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.zapier_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_zapier_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_zapier_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_zapier_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.airtable_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_airtable_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_airtable_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_airtable_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.dropbox_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_dropbox_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_dropbox_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_dropbox_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.gmail_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_gmail_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_gmail_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_gmail_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.google_analytics_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_google_analytics_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_google_analytics_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_google_analytics_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.google_docs_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_google_docs_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_google_docs_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_google_docs_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.google_drive_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_google_drive_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_google_drive_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_google_drive_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.google_meet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_google_meet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_google_meet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_google_meet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.google_sheets_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_google_sheets_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_google_sheets_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_google_sheets_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.google_slides_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_google_slides_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_google_slides_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_google_slides_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.quick_books_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_quick_books_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_quick_books_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_quick_books_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.figma_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_figma_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_figma_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_figma_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.whats_app_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_whats_app_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_whats_app_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_whats_app_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.google_chat_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_google_chat_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_google_chat_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_google_chat_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.one_note_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_one_note_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_one_note_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_one_note_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.shopify_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_shopify_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_shopify_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_shopify_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.adobe_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_adobe_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_adobe_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_adobe_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.cisco_webex_vidcast_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_cisco_webex_vidcast_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_cisco_webex_vidcast_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_cisco_webex_vidcast_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.cisco_webex_meetings_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_cisco_webex_meetings_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_cisco_webex_meetings_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_cisco_webex_meetings_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.dun_and_bradstreet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_dun_and_bradstreet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_dun_and_bradstreet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_dun_and_bradstreet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.hg_insights_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_hg_insights_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_hg_insights_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_hg_insights_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.zoom_info_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_zoom_info_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_zoom_info_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_zoom_info_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.moodys_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_moodys_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_moodys_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_moodys_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.bee_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_bee_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_bee_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_bee_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.topic #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.edit_visual_with_q #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.build_calculated_field_with_q #=> String, one of "DENY", "ALLOW"
@@ -10357,8 +10704,7 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Describes a dataset. This operation doesn't support datasets that
-    # include uploaded files as a source.
+    # Describes a dataset.
     #
     # @option params [required, String] :aws_account_id
     #   The Amazon Web Services account ID.
@@ -14587,6 +14933,58 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Lists the apps in an Amazon Web Services account. Results are
+    # paginated; use the `NextToken` parameter to retrieve additional
+    # results.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the apps.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single request. Valid
+    #   range is 1 to 100. If you don't specify a value, the default is 20.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @return [Types::ListAppsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAppsResponse#app_summary_list #app_summary_list} => Array&lt;Types::AppSummary&gt;
+    #   * {Types::ListAppsResponse#next_token #next_token} => String
+    #   * {Types::ListAppsResponse#request_id #request_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_apps({
+    #     aws_account_id: "AwsAccountId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_summary_list #=> Array
+    #   resp.app_summary_list[0].app_id #=> String
+    #   resp.app_summary_list[0].arn #=> String
+    #   resp.app_summary_list[0].name #=> String
+    #   resp.app_summary_list[0].created_time #=> Time
+    #   resp.app_summary_list[0].last_updated_time #=> Time
+    #   resp.app_summary_list[0].visibility #=> String, one of "PRIVATE", "PUBLIC"
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListApps AWS API Documentation
+    #
+    # @overload list_apps(params = {})
+    # @param [Hash] params ({})
+    def list_apps(params = {}, options = {})
+      req = build_request(:list_apps, params)
+      req.send_request(options)
+    end
+
     # Lists all asset bundle export jobs that have been taken place in the
     # last 14 days. Jobs created more than 14 days ago are deleted forever
     # and are not returned. If you are using the same job ID for multiple
@@ -15038,6 +15436,118 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.create_and_update_new_relic_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.share_new_relic_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.use_new_relic_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.pager_duty_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_pager_duty_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_pager_duty_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_pager_duty_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.visier_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_visier_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_visier_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_visier_agent_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.zoom_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_zoom_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_zoom_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_zoom_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.snow_flake_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_snow_flake_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_snow_flake_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_snow_flake_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.zapier_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_zapier_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_zapier_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_zapier_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.airtable_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_airtable_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_airtable_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_airtable_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.dropbox_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_dropbox_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_dropbox_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_dropbox_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.gmail_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_gmail_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_gmail_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_gmail_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.google_analytics_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_google_analytics_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_google_analytics_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_google_analytics_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.google_docs_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_google_docs_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_google_docs_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_google_docs_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.google_drive_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_google_drive_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_google_drive_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_google_drive_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.google_meet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_google_meet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_google_meet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_google_meet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.google_sheets_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_google_sheets_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_google_sheets_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_google_sheets_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.google_slides_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_google_slides_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_google_slides_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_google_slides_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.quick_books_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_quick_books_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_quick_books_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_quick_books_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.figma_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_figma_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_figma_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_figma_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.whats_app_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_whats_app_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_whats_app_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_whats_app_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.google_chat_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_google_chat_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_google_chat_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_google_chat_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.one_note_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_one_note_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_one_note_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_one_note_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.shopify_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_shopify_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_shopify_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_shopify_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.adobe_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_adobe_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_adobe_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_adobe_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.cisco_webex_vidcast_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_cisco_webex_vidcast_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_cisco_webex_vidcast_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_cisco_webex_vidcast_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.cisco_webex_meetings_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_cisco_webex_meetings_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_cisco_webex_meetings_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_cisco_webex_meetings_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.dun_and_bradstreet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_dun_and_bradstreet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_dun_and_bradstreet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_dun_and_bradstreet_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.hg_insights_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_hg_insights_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_hg_insights_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_hg_insights_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.zoom_info_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_zoom_info_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_zoom_info_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_zoom_info_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.moodys_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_moodys_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_moodys_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_moodys_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.bee_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_bee_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_bee_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_bee_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.topic #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.edit_visual_with_q #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.build_calculated_field_with_q #=> String, one of "DENY", "ALLOW"
@@ -18507,6 +19017,70 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Searches for apps in an Amazon Web Services account using the
+    # specified filters. This operation is eventually consistent; the
+    # results might not reflect very recent updates. Results are paginated;
+    # use the `NextToken` parameter to retrieve additional results.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the apps to
+    #   search.
+    #
+    # @option params [required, Array<Types::SearchAppsFilter>] :filters
+    #   The filters to apply to the search.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single request. Valid
+    #   range is 1 to 100. If you don't specify a value, the default is 20.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @return [Types::SearchAppsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchAppsResponse#app_summary_list #app_summary_list} => Array&lt;Types::AppSummary&gt;
+    #   * {Types::SearchAppsResponse#next_token #next_token} => String
+    #   * {Types::SearchAppsResponse#request_id #request_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_apps({
+    #     aws_account_id: "AwsAccountId", # required
+    #     filters: [ # required
+    #       {
+    #         name: "APP_ID", # required, accepts APP_ID, APP_NAME, DIRECT_QUICKSIGHT_SOLE_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER
+    #         operator: "StringEquals", # required, accepts StringEquals, StringLike
+    #         value: "String", # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_summary_list #=> Array
+    #   resp.app_summary_list[0].app_id #=> String
+    #   resp.app_summary_list[0].arn #=> String
+    #   resp.app_summary_list[0].name #=> String
+    #   resp.app_summary_list[0].created_time #=> Time
+    #   resp.app_summary_list[0].last_updated_time #=> Time
+    #   resp.app_summary_list[0].visibility #=> String, one of "PRIVATE", "PUBLIC"
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchApps AWS API Documentation
+    #
+    # @overload search_apps(params = {})
+    # @param [Hash] params ({})
+    def search_apps(params = {}, options = {})
+      req = build_request(:search_apps, params)
+      req.send_request(options)
+    end
+
     # Searches for dashboards that belong to a user.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
@@ -21058,6 +21632,75 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates the resource permissions for an app. You can grant or revoke
+    # permissions and, optionally, change the app's visibility.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the app.
+    #
+    # @option params [required, String] :app_id
+    #   The ID of the app.
+    #
+    # @option params [Array<Types::ResourcePermission>] :grant_permissions
+    #   The permissions that you want to grant on the app.
+    #
+    # @option params [Array<Types::ResourcePermission>] :revoke_permissions
+    #   The permissions that you want to revoke from the app.
+    #
+    # @option params [String] :visibility
+    #   The visibility to set for the app. Currently, only `PRIVATE` is
+    #   accepted, which removes public (anonymous) access from the app. If you
+    #   don't specify a value, the app's visibility is unchanged. Setting an
+    #   app to `PUBLIC` through this operation is not supported.
+    #
+    # @return [Types::UpdateAppPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAppPermissionsResponse#arn #arn} => String
+    #   * {Types::UpdateAppPermissionsResponse#app_id #app_id} => String
+    #   * {Types::UpdateAppPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourcePermission&gt;
+    #   * {Types::UpdateAppPermissionsResponse#visibility #visibility} => String
+    #   * {Types::UpdateAppPermissionsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_app_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     app_id: "AppId", # required
+    #     grant_permissions: [
+    #       {
+    #         principal: "Principal", # required
+    #         actions: ["String"], # required
+    #       },
+    #     ],
+    #     revoke_permissions: [
+    #       {
+    #         principal: "Principal", # required
+    #         actions: ["String"], # required
+    #       },
+    #     ],
+    #     visibility: "PRIVATE", # accepts PRIVATE, PUBLIC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.app_id #=> String
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].principal #=> String
+    #   resp.permissions[0].actions #=> Array
+    #   resp.permissions[0].actions[0] #=> String
+    #   resp.visibility #=> String, one of "PRIVATE", "PUBLIC"
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAppPermissions AWS API Documentation
+    #
+    # @overload update_app_permissions(params = {})
+    # @param [Hash] params ({})
+    def update_app_permissions(params = {}, options = {})
+      req = build_request(:update_app_permissions, params)
+      req.send_request(options)
+    end
+
     # Updates an Quick application with a token exchange grant. This
     # operation only supports Quick applications that are registered with
     # IAM Identity Center.
@@ -21719,6 +22362,118 @@ module Aws::QuickSight
     #       create_and_update_new_relic_action: "DENY", # accepts DENY, ALLOW
     #       share_new_relic_action: "DENY", # accepts DENY, ALLOW
     #       use_new_relic_action: "DENY", # accepts DENY, ALLOW
+    #       pager_duty_agent_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_pager_duty_agent_action: "DENY", # accepts DENY, ALLOW
+    #       share_pager_duty_agent_action: "DENY", # accepts DENY, ALLOW
+    #       use_pager_duty_agent_action: "DENY", # accepts DENY, ALLOW
+    #       visier_agent_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_visier_agent_action: "DENY", # accepts DENY, ALLOW
+    #       share_visier_agent_action: "DENY", # accepts DENY, ALLOW
+    #       use_visier_agent_action: "DENY", # accepts DENY, ALLOW
+    #       zoom_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_zoom_action: "DENY", # accepts DENY, ALLOW
+    #       share_zoom_action: "DENY", # accepts DENY, ALLOW
+    #       use_zoom_action: "DENY", # accepts DENY, ALLOW
+    #       snow_flake_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_snow_flake_action: "DENY", # accepts DENY, ALLOW
+    #       share_snow_flake_action: "DENY", # accepts DENY, ALLOW
+    #       use_snow_flake_action: "DENY", # accepts DENY, ALLOW
+    #       zapier_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_zapier_action: "DENY", # accepts DENY, ALLOW
+    #       share_zapier_action: "DENY", # accepts DENY, ALLOW
+    #       use_zapier_action: "DENY", # accepts DENY, ALLOW
+    #       airtable_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_airtable_action: "DENY", # accepts DENY, ALLOW
+    #       share_airtable_action: "DENY", # accepts DENY, ALLOW
+    #       use_airtable_action: "DENY", # accepts DENY, ALLOW
+    #       dropbox_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_dropbox_action: "DENY", # accepts DENY, ALLOW
+    #       share_dropbox_action: "DENY", # accepts DENY, ALLOW
+    #       use_dropbox_action: "DENY", # accepts DENY, ALLOW
+    #       gmail_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_gmail_action: "DENY", # accepts DENY, ALLOW
+    #       share_gmail_action: "DENY", # accepts DENY, ALLOW
+    #       use_gmail_action: "DENY", # accepts DENY, ALLOW
+    #       google_analytics_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_analytics_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_analytics_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_analytics_action: "DENY", # accepts DENY, ALLOW
+    #       google_docs_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_docs_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_docs_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_docs_action: "DENY", # accepts DENY, ALLOW
+    #       google_drive_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_drive_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_drive_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_drive_action: "DENY", # accepts DENY, ALLOW
+    #       google_meet_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_meet_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_meet_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_meet_action: "DENY", # accepts DENY, ALLOW
+    #       google_sheets_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_sheets_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_sheets_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_sheets_action: "DENY", # accepts DENY, ALLOW
+    #       google_slides_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_slides_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_slides_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_slides_action: "DENY", # accepts DENY, ALLOW
+    #       quick_books_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_quick_books_action: "DENY", # accepts DENY, ALLOW
+    #       share_quick_books_action: "DENY", # accepts DENY, ALLOW
+    #       use_quick_books_action: "DENY", # accepts DENY, ALLOW
+    #       figma_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_figma_action: "DENY", # accepts DENY, ALLOW
+    #       share_figma_action: "DENY", # accepts DENY, ALLOW
+    #       use_figma_action: "DENY", # accepts DENY, ALLOW
+    #       whats_app_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_whats_app_action: "DENY", # accepts DENY, ALLOW
+    #       share_whats_app_action: "DENY", # accepts DENY, ALLOW
+    #       use_whats_app_action: "DENY", # accepts DENY, ALLOW
+    #       google_chat_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_google_chat_action: "DENY", # accepts DENY, ALLOW
+    #       share_google_chat_action: "DENY", # accepts DENY, ALLOW
+    #       use_google_chat_action: "DENY", # accepts DENY, ALLOW
+    #       one_note_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_one_note_action: "DENY", # accepts DENY, ALLOW
+    #       share_one_note_action: "DENY", # accepts DENY, ALLOW
+    #       use_one_note_action: "DENY", # accepts DENY, ALLOW
+    #       shopify_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_shopify_action: "DENY", # accepts DENY, ALLOW
+    #       share_shopify_action: "DENY", # accepts DENY, ALLOW
+    #       use_shopify_action: "DENY", # accepts DENY, ALLOW
+    #       adobe_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_adobe_action: "DENY", # accepts DENY, ALLOW
+    #       share_adobe_action: "DENY", # accepts DENY, ALLOW
+    #       use_adobe_action: "DENY", # accepts DENY, ALLOW
+    #       cisco_webex_vidcast_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_cisco_webex_vidcast_action: "DENY", # accepts DENY, ALLOW
+    #       share_cisco_webex_vidcast_action: "DENY", # accepts DENY, ALLOW
+    #       use_cisco_webex_vidcast_action: "DENY", # accepts DENY, ALLOW
+    #       cisco_webex_meetings_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_cisco_webex_meetings_action: "DENY", # accepts DENY, ALLOW
+    #       share_cisco_webex_meetings_action: "DENY", # accepts DENY, ALLOW
+    #       use_cisco_webex_meetings_action: "DENY", # accepts DENY, ALLOW
+    #       dun_and_bradstreet_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_dun_and_bradstreet_action: "DENY", # accepts DENY, ALLOW
+    #       share_dun_and_bradstreet_action: "DENY", # accepts DENY, ALLOW
+    #       use_dun_and_bradstreet_action: "DENY", # accepts DENY, ALLOW
+    #       hg_insights_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_hg_insights_action: "DENY", # accepts DENY, ALLOW
+    #       share_hg_insights_action: "DENY", # accepts DENY, ALLOW
+    #       use_hg_insights_action: "DENY", # accepts DENY, ALLOW
+    #       zoom_info_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_zoom_info_action: "DENY", # accepts DENY, ALLOW
+    #       share_zoom_info_action: "DENY", # accepts DENY, ALLOW
+    #       use_zoom_info_action: "DENY", # accepts DENY, ALLOW
+    #       moodys_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_moodys_action: "DENY", # accepts DENY, ALLOW
+    #       share_moodys_action: "DENY", # accepts DENY, ALLOW
+    #       use_moodys_action: "DENY", # accepts DENY, ALLOW
+    #       bee_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_bee_action: "DENY", # accepts DENY, ALLOW
+    #       share_bee_action: "DENY", # accepts DENY, ALLOW
+    #       use_bee_action: "DENY", # accepts DENY, ALLOW
     #       topic: "DENY", # accepts DENY, ALLOW
     #       edit_visual_with_q: "DENY", # accepts DENY, ALLOW
     #       build_calculated_field_with_q: "DENY", # accepts DENY, ALLOW
@@ -22101,9 +22856,8 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates a dataset. This operation doesn't support datasets that
-    # include uploaded files as a source. Partial updates are not supported
-    # by this operation.
+    # Updates a dataset. Partial updates are not supported by this
+    # operation.
     #
     # @option params [required, String] :aws_account_id
     #   The Amazon Web Services account ID.
@@ -26445,7 +27199,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.195.0'
+      context[:gem_version] = '1.199.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

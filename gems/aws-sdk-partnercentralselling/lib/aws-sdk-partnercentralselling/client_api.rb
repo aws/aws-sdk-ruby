@@ -78,6 +78,7 @@ module Aws::PartnerCentralSelling
     AwsProductOptimizationsList = Shapes::ListShape.new(name: 'AwsProductOptimizationsList')
     AwsProductsList = Shapes::ListShape.new(name: 'AwsProductsList')
     AwsProductsSpendInsightsBySource = Shapes::StructureShape.new(name: 'AwsProductsSpendInsightsBySource')
+    AwsSoftwareRevenue = Shapes::StructureShape.new(name: 'AwsSoftwareRevenue')
     AwsSubmission = Shapes::StructureShape.new(name: 'AwsSubmission')
     AwsTeamMember = Shapes::StructureShape.new(name: 'AwsTeamMember')
     AwsTeamMemberFirstNameString = Shapes::StringShape.new(name: 'AwsTeamMemberFirstNameString')
@@ -573,6 +574,7 @@ module Aws::PartnerCentralSelling
     AwsOpportunitySummaryFullView.add_member(:customer, Shapes::ShapeRef.new(shape: AwsOpportunityCustomer, location_name: "Customer"))
     AwsOpportunitySummaryFullView.add_member(:project, Shapes::ShapeRef.new(shape: AwsOpportunityProject, location_name: "Project"))
     AwsOpportunitySummaryFullView.add_member(:cosell_motion, Shapes::ShapeRef.new(shape: String, location_name: "CosellMotion"))
+    AwsOpportunitySummaryFullView.add_member(:software_revenue, Shapes::ShapeRef.new(shape: AwsSoftwareRevenue, location_name: "SoftwareRevenue"))
     AwsOpportunitySummaryFullView.struct_class = Types::AwsOpportunitySummaryFullView
 
     AwsOpportunityTeamMembersList.member = Shapes::ShapeRef.new(shape: AwsTeamMember)
@@ -610,6 +612,12 @@ module Aws::PartnerCentralSelling
     AwsProductsSpendInsightsBySource.add_member(:partner, Shapes::ShapeRef.new(shape: AwsProductInsights, location_name: "Partner"))
     AwsProductsSpendInsightsBySource.add_member(:aws, Shapes::ShapeRef.new(shape: AwsProductInsights, location_name: "AWS"))
     AwsProductsSpendInsightsBySource.struct_class = Types::AwsProductsSpendInsightsBySource
+
+    AwsSoftwareRevenue.add_member(:value, Shapes::ShapeRef.new(shape: MonetaryValue, location_name: "Value"))
+    AwsSoftwareRevenue.add_member(:discount, Shapes::ShapeRef.new(shape: String, location_name: "Discount"))
+    AwsSoftwareRevenue.add_member(:effective_date, Shapes::ShapeRef.new(shape: String, location_name: "EffectiveDate"))
+    AwsSoftwareRevenue.add_member(:expiration_date, Shapes::ShapeRef.new(shape: String, location_name: "ExpirationDate"))
+    AwsSoftwareRevenue.struct_class = Types::AwsSoftwareRevenue
 
     AwsSubmission.add_member(:involvement_type, Shapes::ShapeRef.new(shape: SalesInvolvementType, required: true, location_name: "InvolvementType"))
     AwsSubmission.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
@@ -883,6 +891,7 @@ module Aws::PartnerCentralSelling
     GetAwsOpportunitySummaryResponse.add_member(:customer, Shapes::ShapeRef.new(shape: AwsOpportunityCustomer, location_name: "Customer"))
     GetAwsOpportunitySummaryResponse.add_member(:project, Shapes::ShapeRef.new(shape: AwsOpportunityProject, location_name: "Project"))
     GetAwsOpportunitySummaryResponse.add_member(:cosell_motion, Shapes::ShapeRef.new(shape: String, location_name: "CosellMotion"))
+    GetAwsOpportunitySummaryResponse.add_member(:software_revenue, Shapes::ShapeRef.new(shape: AwsSoftwareRevenue, location_name: "SoftwareRevenue"))
     GetAwsOpportunitySummaryResponse.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
     GetAwsOpportunitySummaryResponse.struct_class = Types::GetAwsOpportunitySummaryResponse
 

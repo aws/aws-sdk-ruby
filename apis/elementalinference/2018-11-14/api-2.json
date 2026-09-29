@@ -109,6 +109,23 @@
       ],
       "idempotent":true
     },
+    "DeleteFeedPolicy":{
+      "name":"DeleteFeedPolicy",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/v1/feed/{id}/policy",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteFeedPolicyRequest"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"TooManyRequestException"}
+      ],
+      "idempotent":true
+    },
     "DisassociateFeed":{
       "name":"DisassociateFeed",
       "http":{
@@ -181,6 +198,44 @@
       ],
       "readonly":true
     },
+    "GetFeedPolicy":{
+      "name":"GetFeedPolicy",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/feed/{id}/policy",
+        "responseCode":200
+      },
+      "input":{"shape":"GetFeedPolicyRequest"},
+      "output":{"shape":"GetFeedPolicyResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"TooManyRequestException"}
+      ],
+      "readonly":true
+    },
+    "GetFixture":{
+      "name":"GetFixture",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/fixtures/{fixtureId}",
+        "responseCode":200
+      },
+      "input":{"shape":"GetFixtureRequest"},
+      "output":{"shape":"GetFixtureResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"TooManyRequestException"},
+        {"shape":"GatewayTimedOutException"}
+      ],
+      "readonly":true
+    },
     "ListDictionaries":{
       "name":"ListDictionaries",
       "http":{
@@ -233,6 +288,25 @@
         {"shape":"TooManyRequestException"}
       ],
       "readonly":true
+    },
+    "PutFeedPolicy":{
+      "name":"PutFeedPolicy",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/v1/feed/{id}/policy",
+        "responseCode":200
+      },
+      "input":{"shape":"PutFeedPolicyRequest"},
+      "output":{"shape":"PutFeedPolicyResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerErrorException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"TooManyRequestException"},
+        {"shape":"ConflictException"}
+      ],
+      "idempotent":true
     },
     "SearchFixtures":{
       "name":"SearchFixtures",
@@ -427,6 +501,12 @@
       "exception":true,
       "retryable":{"throttling":false}
     },
+    "ContextualMetadataConfig":{
+      "type":"structure",
+      "members":{
+        "summaryGeneration":{"shape":"SummaryGenerationMode"}
+      }
+    },
     "CreateDictionaryRequest":{
       "type":"structure",
       "required":[
@@ -488,6 +568,7 @@
         "id":{"shape":"FeedId"},
         "dataEndpoints":{"shape":"StringList"},
         "outputs":{"shape":"GetOutputList"},
+        "accessRoleArn":{"shape":"IamRoleArn"},
         "status":{"shape":"FeedStatus"},
         "association":{"shape":"FeedAssociation"},
         "tags":{"shape":"TagMap"}
@@ -553,6 +634,17 @@
         "arn":{"shape":"DictionaryArn"},
         "id":{"shape":"DictionaryId"},
         "status":{"shape":"DictionaryStatus"}
+      }
+    },
+    "DeleteFeedPolicyRequest":{
+      "type":"structure",
+      "required":["id"],
+      "members":{
+        "id":{
+          "shape":"FeedId",
+          "location":"uri",
+          "locationName":"id"
+        }
       }
     },
     "DeleteFeedRequest":{
@@ -814,6 +906,24 @@
         "tags":{"shape":"TagMap"}
       }
     },
+    "GetFeedPolicyRequest":{
+      "type":"structure",
+      "required":["id"],
+      "members":{
+        "id":{
+          "shape":"FeedId",
+          "location":"uri",
+          "locationName":"id"
+        }
+      }
+    },
+    "GetFeedPolicyResponse":{
+      "type":"structure",
+      "required":["policy"],
+      "members":{
+        "policy":{"shape":"PolicyDocument"}
+      }
+    },
     "GetFeedRequest":{
       "type":"structure",
       "required":["id"],
@@ -841,9 +951,38 @@
         "id":{"shape":"FeedId"},
         "dataEndpoints":{"shape":"StringList"},
         "outputs":{"shape":"GetOutputList"},
+        "accessRoleArn":{"shape":"IamRoleArn"},
         "status":{"shape":"FeedStatus"},
         "association":{"shape":"FeedAssociation"},
         "tags":{"shape":"TagMap"}
+      }
+    },
+    "GetFixtureRequest":{
+      "type":"structure",
+      "required":["fixtureId"],
+      "members":{
+        "fixtureId":{
+          "shape":"FixtureId",
+          "location":"uri",
+          "locationName":"fixtureId"
+        }
+      }
+    },
+    "GetFixtureResponse":{
+      "type":"structure",
+      "required":[
+        "fixtureId",
+        "name",
+        "status",
+        "competitors"
+      ],
+      "members":{
+        "fixtureId":{"shape":"FixtureId"},
+        "name":{"shape":"String"},
+        "fixtureGroup":{"shape":"String"},
+        "scheduledStart":{"shape":"SyntheticTimestamp_date_time"},
+        "status":{"shape":"String"},
+        "competitors":{"shape":"CompetitorList"}
       }
     },
     "GetOutput":{
@@ -966,7 +1105,8 @@
       "members":{
         "cropping":{"shape":"CroppingConfig"},
         "clipping":{"shape":"ClippingConfig"},
-        "subtitling":{"shape":"SubtitlingConfig"}
+        "subtitling":{"shape":"SubtitlingConfig"},
+        "contextualMetadata":{"shape":"ContextualMetadataConfig"}
       },
       "union":true
     },
@@ -977,6 +1117,11 @@
         "DISABLED"
       ]
     },
+    "PolicyDocument":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
     "ProfanityFilterMode":{
       "type":"string",
       "enum":[
@@ -984,6 +1129,25 @@
         "CENSOR",
         "DROP"
       ]
+    },
+    "PutFeedPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "id",
+        "policy"
+      ],
+      "members":{
+        "id":{
+          "shape":"FeedId",
+          "location":"uri",
+          "locationName":"id"
+        },
+        "policy":{"shape":"PolicyDocument"}
+      }
+    },
+    "PutFeedPolicyResponse":{
+      "type":"structure",
+      "members":{}
     },
     "ResourceArn":{
       "type":"string",
@@ -1100,6 +1264,13 @@
         "dictionary":{"shape":"DictionaryId"},
         "profanityFilter":{"shape":"ProfanityFilterMode"}
       }
+    },
+    "SummaryGenerationMode":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "SyntheticTimestamp_date_time":{
       "type":"timestamp",
@@ -1275,6 +1446,7 @@
         "id":{"shape":"FeedId"},
         "dataEndpoints":{"shape":"StringList"},
         "outputs":{"shape":"GetOutputList"},
+        "accessRoleArn":{"shape":"IamRoleArn"},
         "status":{"shape":"FeedStatus"},
         "association":{"shape":"FeedAssociation"},
         "tags":{"shape":"TagMap"}

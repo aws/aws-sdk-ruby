@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.112.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2026-09-03)
+------------------
+
+* Feature - Updates Step Functions API documentation around CloudTrail, Execution name reuse and sort order of ListExecutions API
+
 1.110.0 (2026-07-09)
 ------------------
 

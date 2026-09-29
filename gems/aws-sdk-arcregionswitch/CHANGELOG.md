@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2026-09-25)
+------------------
+
+* Feature - Adds a service quota checker to Region switch to verify quota parity between your primary and standby Region, and automatically submit quota limit increases. Adds an optional EC2 Auto Scaling and ECS setting that waits for instances or tasks in the scaled-up Region to be healthy in target groups.
+
+1.24.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2026-08-20)
+------------------
+
+* Feature - Adds support for Rds switchover read replica for Oracle databases in Region switch plans
+
 1.21.0 (2026-07-22)
 ------------------
 

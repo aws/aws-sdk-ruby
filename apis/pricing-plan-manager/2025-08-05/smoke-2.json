@@ -1,19 +1,6 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListSubscriptionsSuccess",
-    "operationName" : "ListSubscriptions",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "GetSubscriptionFailure",
     "operationName" : "GetSubscription",
     "input" : {
@@ -23,6 +10,19 @@
       "failure" : {
         "errorId" : "ResourceNotFoundException"
       }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListSubscriptionsSuccess",
+    "operationName" : "ListSubscriptions",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
     },
     "config" : {
       "region" : "us-east-1",

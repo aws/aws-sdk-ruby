@@ -52,6 +52,12 @@ module Aws::Support
     CommunicationList = Shapes::ListShape.new(name: 'CommunicationList')
     CommunicationTypeOptions = Shapes::StructureShape.new(name: 'CommunicationTypeOptions')
     CommunicationTypeOptionsList = Shapes::ListShape.new(name: 'CommunicationTypeOptionsList')
+    CompleteAttachmentUploadRequest = Shapes::StructureShape.new(name: 'CompleteAttachmentUploadRequest')
+    CompleteAttachmentUploadResponse = Shapes::StructureShape.new(name: 'CompleteAttachmentUploadResponse')
+    CompletedUpload = Shapes::StructureShape.new(name: 'CompletedUpload')
+    CompletedUploadList = Shapes::ListShape.new(name: 'CompletedUploadList')
+    CoralAvailabilityThrottledResource = Shapes::StringShape.new(name: 'CoralAvailabilityThrottledResource')
+    CoralAvailabilityThrottlingReason = Shapes::StringShape.new(name: 'CoralAvailabilityThrottlingReason')
     CreateCaseRequest = Shapes::StructureShape.new(name: 'CreateCaseRequest')
     CreateCaseResponse = Shapes::StructureShape.new(name: 'CreateCaseResponse')
     Data = Shapes::BlobShape.new(name: 'Data')
@@ -60,6 +66,8 @@ module Aws::Support
     DescribeAttachmentLimitExceeded = Shapes::StructureShape.new(name: 'DescribeAttachmentLimitExceeded')
     DescribeAttachmentRequest = Shapes::StructureShape.new(name: 'DescribeAttachmentRequest')
     DescribeAttachmentResponse = Shapes::StructureShape.new(name: 'DescribeAttachmentResponse')
+    DescribeAttachmentUploadStatusRequest = Shapes::StructureShape.new(name: 'DescribeAttachmentUploadStatusRequest')
+    DescribeAttachmentUploadStatusResponse = Shapes::StructureShape.new(name: 'DescribeAttachmentUploadStatusResponse')
     DescribeCasesRequest = Shapes::StructureShape.new(name: 'DescribeCasesRequest')
     DescribeCasesResponse = Shapes::StructureShape.new(name: 'DescribeCasesResponse')
     DescribeCommunicationsRequest = Shapes::StructureShape.new(name: 'DescribeCommunicationsRequest')
@@ -83,18 +91,32 @@ module Aws::Support
     Display = Shapes::StringShape.new(name: 'Display')
     DisplayId = Shapes::StringShape.new(name: 'DisplayId')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DownloadUrl = Shapes::StructureShape.new(name: 'DownloadUrl')
+    DryRunOperationException = Shapes::StructureShape.new(name: 'DryRunOperationException')
+    ETag = Shapes::StringShape.new(name: 'ETag')
+    EndIndex = Shapes::IntegerShape.new(name: 'EndIndex')
     EndTime = Shapes::StringShape.new(name: 'EndTime')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpiryTime = Shapes::StringShape.new(name: 'ExpiryTime')
+    FieldIntegerValue = Shapes::IntegerShape.new(name: 'FieldIntegerValue')
     FileName = Shapes::StringShape.new(name: 'FileName')
+    FileSize = Shapes::IntegerShape.new(name: 'FileSize')
+    GetAttachmentDownloadLinkRequest = Shapes::StructureShape.new(name: 'GetAttachmentDownloadLinkRequest')
+    GetAttachmentDownloadLinkResponse = Shapes::StructureShape.new(name: 'GetAttachmentDownloadLinkResponse')
+    GetAttachmentUploadLinksRequest = Shapes::StructureShape.new(name: 'GetAttachmentUploadLinksRequest')
+    GetAttachmentUploadLinksResponse = Shapes::StructureShape.new(name: 'GetAttachmentUploadLinksResponse')
+    HttpsUrl = Shapes::StringShape.new(name: 'HttpsUrl')
     IncludeCommunications = Shapes::BooleanShape.new(name: 'IncludeCommunications')
     IncludeResolvedCases = Shapes::BooleanShape.new(name: 'IncludeResolvedCases')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     IssueType = Shapes::StringShape.new(name: 'IssueType')
     Language = Shapes::StringShape.new(name: 'Language')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NullableBooleanType = Shapes::BooleanShape.new(name: 'NullableBooleanType')
+    PartSizeBytes = Shapes::IntegerShape.new(name: 'PartSizeBytes')
     RecentCaseCommunications = Shapes::StructureShape.new(name: 'RecentCaseCommunications')
     RefreshTrustedAdvisorCheckRequest = Shapes::StructureShape.new(name: 'RefreshTrustedAdvisorCheckRequest')
     RefreshTrustedAdvisorCheckResponse = Shapes::StructureShape.new(name: 'RefreshTrustedAdvisorCheckResponse')
@@ -111,6 +133,7 @@ module Aws::Support
     SeverityLevelCode = Shapes::StringShape.new(name: 'SeverityLevelCode')
     SeverityLevelName = Shapes::StringShape.new(name: 'SeverityLevelName')
     SeverityLevelsList = Shapes::ListShape.new(name: 'SeverityLevelsList')
+    StartIndex = Shapes::IntegerShape.new(name: 'StartIndex')
     StartTime = Shapes::StringShape.new(name: 'StartTime')
     Status = Shapes::StringShape.new(name: 'Status')
     String = Shapes::StringShape.new(name: 'String')
@@ -122,6 +145,8 @@ module Aws::Support
     SupportedLanguage = Shapes::StructureShape.new(name: 'SupportedLanguage')
     SupportedLanguagesList = Shapes::ListShape.new(name: 'SupportedLanguagesList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    ThrottlingReason = Shapes::StructureShape.new(name: 'ThrottlingReason')
+    ThrottlingReasonList = Shapes::ListShape.new(name: 'ThrottlingReasonList')
     TimeCreated = Shapes::StringShape.new(name: 'TimeCreated')
     TrustedAdvisorCategorySpecificSummary = Shapes::StructureShape.new(name: 'TrustedAdvisorCategorySpecificSummary')
     TrustedAdvisorCheckDescription = Shapes::StructureShape.new(name: 'TrustedAdvisorCheckDescription')
@@ -136,6 +161,14 @@ module Aws::Support
     TrustedAdvisorResourceDetailList = Shapes::ListShape.new(name: 'TrustedAdvisorResourceDetailList')
     TrustedAdvisorResourcesSummary = Shapes::StructureShape.new(name: 'TrustedAdvisorResourcesSummary')
     Type = Shapes::StringShape.new(name: 'Type')
+    UploadId = Shapes::StringShape.new(name: 'UploadId')
+    UploadIdNotFound = Shapes::StructureShape.new(name: 'UploadIdNotFound')
+    UploadIds = Shapes::ListShape.new(name: 'UploadIds')
+    UploadProgress = Shapes::StructureShape.new(name: 'UploadProgress')
+    UploadRange = Shapes::StructureShape.new(name: 'UploadRange')
+    UploadStatus = Shapes::StringShape.new(name: 'UploadStatus')
+    UploadUrl = Shapes::StructureShape.new(name: 'UploadUrl')
+    UploadUrlList = Shapes::ListShape.new(name: 'UploadUrlList')
     ValidatedCategoryCode = Shapes::StringShape.new(name: 'ValidatedCategoryCode')
     ValidatedCommunicationBody = Shapes::StringShape.new(name: 'ValidatedCommunicationBody')
     ValidatedDateTime = Shapes::StringShape.new(name: 'ValidatedDateTime')
@@ -145,6 +178,7 @@ module Aws::Support
 
     AddAttachmentsToSetRequest.add_member(:attachment_set_id, Shapes::ShapeRef.new(shape: AttachmentSetId, location_name: "attachmentSetId"))
     AddAttachmentsToSetRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, required: true, location_name: "attachments"))
+    AddAttachmentsToSetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
     AddAttachmentsToSetRequest.struct_class = Types::AddAttachmentsToSetRequest
 
     AddAttachmentsToSetResponse.add_member(:attachment_set_id, Shapes::ShapeRef.new(shape: AttachmentSetId, location_name: "attachmentSetId"))
@@ -155,6 +189,8 @@ module Aws::Support
     AddCommunicationToCaseRequest.add_member(:communication_body, Shapes::ShapeRef.new(shape: CommunicationBody, required: true, location_name: "communicationBody"))
     AddCommunicationToCaseRequest.add_member(:cc_email_addresses, Shapes::ShapeRef.new(shape: CcEmailAddressList, location_name: "ccEmailAddresses"))
     AddCommunicationToCaseRequest.add_member(:attachment_set_id, Shapes::ShapeRef.new(shape: AttachmentSetId, location_name: "attachmentSetId"))
+    AddCommunicationToCaseRequest.add_member(:upload_ids, Shapes::ShapeRef.new(shape: UploadIds, location_name: "uploadIds"))
+    AddCommunicationToCaseRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
     AddCommunicationToCaseRequest.struct_class = Types::AddCommunicationToCaseRequest
 
     AddCommunicationToCaseResponse.add_member(:result, Shapes::ShapeRef.new(shape: Result, location_name: "result"))
@@ -223,6 +259,7 @@ module Aws::Support
     Communication.add_member(:body, Shapes::ShapeRef.new(shape: ValidatedCommunicationBody, location_name: "body"))
     Communication.add_member(:submitted_by, Shapes::ShapeRef.new(shape: SubmittedBy, location_name: "submittedBy"))
     Communication.add_member(:time_created, Shapes::ShapeRef.new(shape: TimeCreated, location_name: "timeCreated"))
+    Communication.add_member(:attachments, Shapes::ShapeRef.new(shape: AttachmentSet, location_name: "attachments"))
     Communication.add_member(:attachment_set, Shapes::ShapeRef.new(shape: AttachmentSet, location_name: "attachmentSet"))
     Communication.struct_class = Types::Communication
 
@@ -235,6 +272,20 @@ module Aws::Support
 
     CommunicationTypeOptionsList.member = Shapes::ShapeRef.new(shape: CommunicationTypeOptions)
 
+    CompleteAttachmentUploadRequest.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, required: true, location_name: "uploadId"))
+    CompleteAttachmentUploadRequest.add_member(:completed_uploads, Shapes::ShapeRef.new(shape: CompletedUploadList, required: true, location_name: "completedUploads"))
+    CompleteAttachmentUploadRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
+    CompleteAttachmentUploadRequest.struct_class = Types::CompleteAttachmentUploadRequest
+
+    CompleteAttachmentUploadResponse.add_member(:upload_status, Shapes::ShapeRef.new(shape: UploadStatus, required: true, location_name: "uploadStatus"))
+    CompleteAttachmentUploadResponse.struct_class = Types::CompleteAttachmentUploadResponse
+
+    CompletedUpload.add_member(:part_index, Shapes::ShapeRef.new(shape: FieldIntegerValue, required: true, location_name: "partIndex"))
+    CompletedUpload.add_member(:e_tag, Shapes::ShapeRef.new(shape: ETag, required: true, location_name: "eTag"))
+    CompletedUpload.struct_class = Types::CompletedUpload
+
+    CompletedUploadList.member = Shapes::ShapeRef.new(shape: CompletedUpload)
+
     CreateCaseRequest.add_member(:subject, Shapes::ShapeRef.new(shape: Subject, required: true, location_name: "subject"))
     CreateCaseRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode"))
     CreateCaseRequest.add_member(:severity_code, Shapes::ShapeRef.new(shape: SeverityCode, location_name: "severityCode"))
@@ -244,6 +295,8 @@ module Aws::Support
     CreateCaseRequest.add_member(:language, Shapes::ShapeRef.new(shape: Language, location_name: "language"))
     CreateCaseRequest.add_member(:issue_type, Shapes::ShapeRef.new(shape: IssueType, location_name: "issueType"))
     CreateCaseRequest.add_member(:attachment_set_id, Shapes::ShapeRef.new(shape: AttachmentSetId, location_name: "attachmentSetId"))
+    CreateCaseRequest.add_member(:upload_ids, Shapes::ShapeRef.new(shape: UploadIds, location_name: "uploadIds"))
+    CreateCaseRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
     CreateCaseRequest.struct_class = Types::CreateCaseRequest
 
     CreateCaseResponse.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "caseId"))
@@ -259,10 +312,20 @@ module Aws::Support
     DescribeAttachmentLimitExceeded.struct_class = Types::DescribeAttachmentLimitExceeded
 
     DescribeAttachmentRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location_name: "attachmentId"))
+    DescribeAttachmentRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
     DescribeAttachmentRequest.struct_class = Types::DescribeAttachmentRequest
 
     DescribeAttachmentResponse.add_member(:attachment, Shapes::ShapeRef.new(shape: Attachment, location_name: "attachment"))
     DescribeAttachmentResponse.struct_class = Types::DescribeAttachmentResponse
+
+    DescribeAttachmentUploadStatusRequest.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, required: true, location_name: "uploadId"))
+    DescribeAttachmentUploadStatusRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
+    DescribeAttachmentUploadStatusRequest.struct_class = Types::DescribeAttachmentUploadStatusRequest
+
+    DescribeAttachmentUploadStatusResponse.add_member(:upload_status, Shapes::ShapeRef.new(shape: UploadStatus, required: true, location_name: "uploadStatus"))
+    DescribeAttachmentUploadStatusResponse.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, required: true, location_name: "fileName"))
+    DescribeAttachmentUploadStatusResponse.add_member(:upload_progress, Shapes::ShapeRef.new(shape: UploadProgress, location_name: "uploadProgress"))
+    DescribeAttachmentUploadStatusResponse.struct_class = Types::DescribeAttachmentUploadStatusResponse
 
     DescribeCasesRequest.add_member(:case_id_list, Shapes::ShapeRef.new(shape: CaseIdList, location_name: "caseIdList"))
     DescribeCasesRequest.add_member(:display_id, Shapes::ShapeRef.new(shape: DisplayId, location_name: "displayId"))
@@ -273,6 +336,7 @@ module Aws::Support
     DescribeCasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     DescribeCasesRequest.add_member(:language, Shapes::ShapeRef.new(shape: Language, location_name: "language"))
     DescribeCasesRequest.add_member(:include_communications, Shapes::ShapeRef.new(shape: IncludeCommunications, location_name: "includeCommunications"))
+    DescribeCasesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
     DescribeCasesRequest.struct_class = Types::DescribeCasesRequest
 
     DescribeCasesResponse.add_member(:cases, Shapes::ShapeRef.new(shape: CaseList, location_name: "cases"))
@@ -284,6 +348,7 @@ module Aws::Support
     DescribeCommunicationsRequest.add_member(:after_time, Shapes::ShapeRef.new(shape: AfterTime, location_name: "afterTime"))
     DescribeCommunicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeCommunicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    DescribeCommunicationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
     DescribeCommunicationsRequest.struct_class = Types::DescribeCommunicationsRequest
 
     DescribeCommunicationsResponse.add_member(:communications, Shapes::ShapeRef.new(shape: CommunicationList, location_name: "communications"))
@@ -294,6 +359,7 @@ module Aws::Support
     DescribeCreateCaseOptionsRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "serviceCode"))
     DescribeCreateCaseOptionsRequest.add_member(:language, Shapes::ShapeRef.new(shape: Language, required: true, location_name: "language"))
     DescribeCreateCaseOptionsRequest.add_member(:category_code, Shapes::ShapeRef.new(shape: CategoryCode, required: true, location_name: "categoryCode"))
+    DescribeCreateCaseOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
     DescribeCreateCaseOptionsRequest.struct_class = Types::DescribeCreateCaseOptionsRequest
 
     DescribeCreateCaseOptionsResponse.add_member(:language_availability, Shapes::ShapeRef.new(shape: ValidatedLanguageAvailability, location_name: "languageAvailability"))
@@ -302,12 +368,14 @@ module Aws::Support
 
     DescribeServicesRequest.add_member(:service_code_list, Shapes::ShapeRef.new(shape: ServiceCodeList, location_name: "serviceCodeList"))
     DescribeServicesRequest.add_member(:language, Shapes::ShapeRef.new(shape: Language, location_name: "language"))
+    DescribeServicesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
     DescribeServicesRequest.struct_class = Types::DescribeServicesRequest
 
     DescribeServicesResponse.add_member(:services, Shapes::ShapeRef.new(shape: ServiceList, location_name: "services"))
     DescribeServicesResponse.struct_class = Types::DescribeServicesResponse
 
     DescribeSeverityLevelsRequest.add_member(:language, Shapes::ShapeRef.new(shape: Language, location_name: "language"))
+    DescribeSeverityLevelsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
     DescribeSeverityLevelsRequest.struct_class = Types::DescribeSeverityLevelsRequest
 
     DescribeSeverityLevelsResponse.add_member(:severity_levels, Shapes::ShapeRef.new(shape: SeverityLevelsList, location_name: "severityLevels"))
@@ -316,6 +384,7 @@ module Aws::Support
     DescribeSupportedLanguagesRequest.add_member(:issue_type, Shapes::ShapeRef.new(shape: ValidatedIssueTypeString, required: true, location_name: "issueType"))
     DescribeSupportedLanguagesRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: ValidatedServiceCode, required: true, location_name: "serviceCode"))
     DescribeSupportedLanguagesRequest.add_member(:category_code, Shapes::ShapeRef.new(shape: ValidatedCategoryCode, required: true, location_name: "categoryCode"))
+    DescribeSupportedLanguagesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
     DescribeSupportedLanguagesRequest.struct_class = Types::DescribeSupportedLanguagesRequest
 
     DescribeSupportedLanguagesResponse.add_member(:supported_languages, Shapes::ShapeRef.new(shape: SupportedLanguagesList, location_name: "supportedLanguages"))
@@ -346,6 +415,35 @@ module Aws::Support
     DescribeTrustedAdvisorChecksResponse.add_member(:checks, Shapes::ShapeRef.new(shape: TrustedAdvisorCheckList, required: true, location_name: "checks"))
     DescribeTrustedAdvisorChecksResponse.struct_class = Types::DescribeTrustedAdvisorChecksResponse
 
+    DownloadUrl.add_member(:url, Shapes::ShapeRef.new(shape: HttpsUrl, required: true, location_name: "url"))
+    DownloadUrl.add_member(:expiry_date, Shapes::ShapeRef.new(shape: ValidatedDateTime, required: true, location_name: "expiryDate"))
+    DownloadUrl.struct_class = Types::DownloadUrl
+
+    DryRunOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DryRunOperationException.struct_class = Types::DryRunOperationException
+
+    GetAttachmentDownloadLinkRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location_name: "attachmentId"))
+    GetAttachmentDownloadLinkRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
+    GetAttachmentDownloadLinkRequest.struct_class = Types::GetAttachmentDownloadLinkRequest
+
+    GetAttachmentDownloadLinkResponse.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, required: true, location_name: "fileName"))
+    GetAttachmentDownloadLinkResponse.add_member(:download_url, Shapes::ShapeRef.new(shape: DownloadUrl, required: true, location_name: "downloadUrl"))
+    GetAttachmentDownloadLinkResponse.struct_class = Types::GetAttachmentDownloadLinkResponse
+
+    GetAttachmentUploadLinksRequest.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, required: true, location_name: "fileName"))
+    GetAttachmentUploadLinksRequest.add_member(:file_size_bytes, Shapes::ShapeRef.new(shape: FileSize, location_name: "fileSizeBytes"))
+    GetAttachmentUploadLinksRequest.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, location_name: "uploadId"))
+    GetAttachmentUploadLinksRequest.add_member(:upload_range, Shapes::ShapeRef.new(shape: UploadRange, location_name: "uploadRange"))
+    GetAttachmentUploadLinksRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
+    GetAttachmentUploadLinksRequest.struct_class = Types::GetAttachmentUploadLinksRequest
+
+    GetAttachmentUploadLinksResponse.add_member(:upload_id, Shapes::ShapeRef.new(shape: UploadId, required: true, location_name: "uploadId"))
+    GetAttachmentUploadLinksResponse.add_member(:part_size_bytes, Shapes::ShapeRef.new(shape: PartSizeBytes, required: true, location_name: "partSizeBytes"))
+    GetAttachmentUploadLinksResponse.add_member(:total_parts, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "totalParts"))
+    GetAttachmentUploadLinksResponse.add_member(:next_index, Shapes::ShapeRef.new(shape: Integer, location_name: "nextIndex"))
+    GetAttachmentUploadLinksResponse.add_member(:upload_urls, Shapes::ShapeRef.new(shape: UploadUrlList, required: true, location_name: "uploadUrls"))
+    GetAttachmentUploadLinksResponse.struct_class = Types::GetAttachmentUploadLinksResponse
+
     InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InternalServerError.struct_class = Types::InternalServerError
 
@@ -360,6 +458,7 @@ module Aws::Support
     RefreshTrustedAdvisorCheckResponse.struct_class = Types::RefreshTrustedAdvisorCheckResponse
 
     ResolveCaseRequest.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "caseId"))
+    ResolveCaseRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "dryRun"))
     ResolveCaseRequest.struct_class = Types::ResolveCaseRequest
 
     ResolveCaseResponse.add_member(:initial_case_status, Shapes::ShapeRef.new(shape: CaseStatus, location_name: "initialCaseStatus"))
@@ -397,7 +496,14 @@ module Aws::Support
     SupportedLanguagesList.member = Shapes::ShapeRef.new(shape: SupportedLanguage)
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: AvailabilityErrorMessage, location_name: "message"))
+    ThrottlingException.add_member(:throttling_reasons, Shapes::ShapeRef.new(shape: ThrottlingReasonList, location_name: "throttlingReasons"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    ThrottlingReason.add_member(:reason, Shapes::ShapeRef.new(shape: CoralAvailabilityThrottlingReason, location_name: "reason"))
+    ThrottlingReason.add_member(:resource, Shapes::ShapeRef.new(shape: CoralAvailabilityThrottledResource, location_name: "resource"))
+    ThrottlingReason.struct_class = Types::ThrottlingReason
+
+    ThrottlingReasonList.member = Shapes::ShapeRef.new(shape: ThrottlingReason)
 
     TrustedAdvisorCategorySpecificSummary.add_member(:cost_optimizing, Shapes::ShapeRef.new(shape: TrustedAdvisorCostOptimizingSummary, location_name: "costOptimizing"))
     TrustedAdvisorCategorySpecificSummary.struct_class = Types::TrustedAdvisorCategorySpecificSummary
@@ -455,6 +561,26 @@ module Aws::Support
     TrustedAdvisorResourcesSummary.add_member(:resources_suppressed, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "resourcesSuppressed"))
     TrustedAdvisorResourcesSummary.struct_class = Types::TrustedAdvisorResourcesSummary
 
+    UploadIdNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UploadIdNotFound.struct_class = Types::UploadIdNotFound
+
+    UploadIds.member = Shapes::ShapeRef.new(shape: UploadId)
+
+    UploadProgress.add_member(:total_parts, Shapes::ShapeRef.new(shape: FieldIntegerValue, location_name: "totalParts"))
+    UploadProgress.add_member(:completed_parts_count, Shapes::ShapeRef.new(shape: FieldIntegerValue, location_name: "completedPartsCount"))
+    UploadProgress.struct_class = Types::UploadProgress
+
+    UploadRange.add_member(:start_index, Shapes::ShapeRef.new(shape: StartIndex, required: true, location_name: "startIndex"))
+    UploadRange.add_member(:end_index, Shapes::ShapeRef.new(shape: EndIndex, location_name: "endIndex"))
+    UploadRange.struct_class = Types::UploadRange
+
+    UploadUrl.add_member(:url, Shapes::ShapeRef.new(shape: HttpsUrl, required: true, location_name: "url"))
+    UploadUrl.add_member(:part_index, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "partIndex"))
+    UploadUrl.add_member(:expiry_date, Shapes::ShapeRef.new(shape: ValidatedDateTime, required: true, location_name: "expiryDate"))
+    UploadUrl.struct_class = Types::UploadUrl
+
+    UploadUrlList.member = Shapes::ShapeRef.new(shape: UploadUrl)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -486,6 +612,7 @@ module Aws::Support
         o.errors << Shapes::ShapeRef.new(shape: AttachmentSetExpired)
         o.errors << Shapes::ShapeRef.new(shape: AttachmentSetSizeLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: AttachmentLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:add_communication_to_case, Seahorse::Model::Operation.new.tap do |o|
@@ -498,6 +625,18 @@ module Aws::Support
         o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound)
         o.errors << Shapes::ShapeRef.new(shape: AttachmentSetIdNotFound)
         o.errors << Shapes::ShapeRef.new(shape: AttachmentSetExpired)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
+      end)
+
+      api.add_operation(:complete_attachment_upload, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CompleteAttachmentUpload"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CompleteAttachmentUploadRequest)
+        o.output = Shapes::ShapeRef.new(shape: CompleteAttachmentUploadResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: UploadIdNotFound)
       end)
 
       api.add_operation(:create_case, Seahorse::Model::Operation.new.tap do |o|
@@ -510,6 +649,7 @@ module Aws::Support
         o.errors << Shapes::ShapeRef.new(shape: CaseCreationLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: AttachmentSetIdNotFound)
         o.errors << Shapes::ShapeRef.new(shape: AttachmentSetExpired)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:describe_attachment, Seahorse::Model::Operation.new.tap do |o|
@@ -521,6 +661,18 @@ module Aws::Support
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: DescribeAttachmentLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: AttachmentIdNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
+      end)
+
+      api.add_operation(:describe_attachment_upload_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAttachmentUploadStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAttachmentUploadStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAttachmentUploadStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: UploadIdNotFound)
       end)
 
       api.add_operation(:describe_cases, Seahorse::Model::Operation.new.tap do |o|
@@ -531,6 +683,7 @@ module Aws::Support
         o.output = Shapes::ShapeRef.new(shape: DescribeCasesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -547,6 +700,7 @@ module Aws::Support
         o.output = Shapes::ShapeRef.new(shape: DescribeCommunicationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -563,6 +717,7 @@ module Aws::Support
         o.output = Shapes::ShapeRef.new(shape: DescribeCreateCaseOptionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:describe_services, Seahorse::Model::Operation.new.tap do |o|
@@ -572,6 +727,7 @@ module Aws::Support
         o.input = Shapes::ShapeRef.new(shape: DescribeServicesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeServicesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:describe_severity_levels, Seahorse::Model::Operation.new.tap do |o|
@@ -581,6 +737,7 @@ module Aws::Support
         o.input = Shapes::ShapeRef.new(shape: DescribeSeverityLevelsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSeverityLevelsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:describe_supported_languages, Seahorse::Model::Operation.new.tap do |o|
@@ -591,6 +748,7 @@ module Aws::Support
         o.output = Shapes::ShapeRef.new(shape: DescribeSupportedLanguagesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:describe_trusted_advisor_check_refresh_statuses, Seahorse::Model::Operation.new.tap do |o|
@@ -633,6 +791,28 @@ module Aws::Support
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_attachment_download_link, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAttachmentDownloadLink"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAttachmentDownloadLinkRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAttachmentDownloadLinkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AttachmentIdNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
+      end)
+
+      api.add_operation(:get_attachment_upload_links, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAttachmentUploadLinks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAttachmentUploadLinksRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAttachmentUploadLinksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: UploadIdNotFound)
+      end)
+
       api.add_operation(:refresh_trusted_advisor_check, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RefreshTrustedAdvisorCheck"
         o.http_method = "POST"
@@ -650,6 +830,7 @@ module Aws::Support
         o.output = Shapes::ShapeRef.new(shape: ResolveCaseResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
     end
 

@@ -2020,6 +2020,7 @@ module Aws::DataZone
     #       },
     #       iam_properties: {
     #         glue_lineage_sync_enabled: false,
+    #         role_arn: "RoleArn",
     #       },
     #       redshift_properties: {
     #         storage: {
@@ -3215,6 +3216,11 @@ module Aws::DataZone
     # @option params [Array<Types::CustomParameter>] :user_parameters
     #   The user parameters of this Amazon DataZone blueprint.
     #
+    # @option params [String] :blueprint_category
+    #   The category of the Amazon DataZone blueprint. The only valid value is
+    #   `TOOLING`, which creates a blueprint that provisions the tooling
+    #   resources of a project.
+    #
     # @return [Types::CreateEnvironmentBlueprintOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEnvironmentBlueprintOutput#id #id} => String
@@ -3225,6 +3231,7 @@ module Aws::DataZone
     #   * {Types::CreateEnvironmentBlueprintOutput#deployment_properties #deployment_properties} => Types::DeploymentProperties
     #   * {Types::CreateEnvironmentBlueprintOutput#user_parameters #user_parameters} => Array&lt;Types::CustomParameter&gt;
     #   * {Types::CreateEnvironmentBlueprintOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::CreateEnvironmentBlueprintOutput#blueprint_category #blueprint_category} => String
     #   * {Types::CreateEnvironmentBlueprintOutput#created_at #created_at} => Time
     #   * {Types::CreateEnvironmentBlueprintOutput#updated_at #updated_at} => Time
     #
@@ -3250,6 +3257,7 @@ module Aws::DataZone
     #         is_update_supported: false,
     #       },
     #     ],
+    #     blueprint_category: "TOOLING", # accepts TOOLING
     #   })
     #
     # @example Response structure
@@ -3271,6 +3279,7 @@ module Aws::DataZone
     #   resp.user_parameters[0].is_update_supported #=> Boolean
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
+    #   resp.blueprint_category #=> String, one of "TOOLING"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -3803,6 +3812,9 @@ module Aws::DataZone
     # @option params [String] :description
     #   The description of the notebook.
     #
+    # @option params [String] :type
+    #   The type of the notebook.
+    #
     # @option params [Hash<String,String>] :metadata
     #   The metadata for the notebook, specified as key-value pairs. You can
     #   specify up to 50 entries, with keys up to 128 characters and values up
@@ -3828,6 +3840,7 @@ module Aws::DataZone
     #   * {Types::CreateNotebookOutput#domain_id #domain_id} => String
     #   * {Types::CreateNotebookOutput#cell_order #cell_order} => Array&lt;Types::CellInformation&gt;
     #   * {Types::CreateNotebookOutput#status #status} => String
+    #   * {Types::CreateNotebookOutput#type #type} => String
     #   * {Types::CreateNotebookOutput#description #description} => String
     #   * {Types::CreateNotebookOutput#created_at #created_at} => Time
     #   * {Types::CreateNotebookOutput#created_by #created_by} => String
@@ -3850,6 +3863,7 @@ module Aws::DataZone
     #     owning_project_identifier: "ProjectId", # required
     #     name: "NotebookName", # required
     #     description: "Description",
+    #     type: "DATA", # accepts DATA, SQL
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
@@ -3867,6 +3881,7 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.cell_order #=> Array
     #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
+    #   resp.type #=> String, one of "DATA", "SQL"
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -5200,8 +5215,24 @@ module Aws::DataZone
     #   not need to pass this option.**
     #
     # @option params [Boolean] :skip_deletion_check
-    #   Specifies the optional flag to delete all child entities within the
-    #   domain.
+    #   Specifies whether to skip the check that prevents deletion of a domain
+    #   that still contains resources. When you use this parameter, Amazon
+    #   DataZone deletes the domain but might not remove its associated
+    #   resources, which can leave orphaned resources behind. To delete a
+    #   domain and fully clean up its associated resources, use
+    #   `cascadeDelete` instead. You can't use this parameter together with
+    #   `cascadeDelete`.
+    #
+    # @option params [Boolean] :cascade_delete
+    #   Specifies whether to delete the domain along with all of its
+    #   associated resources. When you use this parameter, Amazon DataZone
+    #   deletes the domain and cleanly removes its associated resources
+    #   without leaving orphaned resources behind. Amazon DataZone reports
+    #   deletion progress in the `deleteProgress` field. Amazon DataZone
+    #   reports any resources that it can't delete in the `failureReasons`
+    #   field of the `GetDomain` response. You can't use this parameter
+    #   together with `skipDeletionCheck`. If you don't specify a value, the
+    #   default is `false`.
     #
     # @return [Types::DeleteDomainOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5213,6 +5244,7 @@ module Aws::DataZone
     #     identifier: "DomainId", # required
     #     client_token: "String",
     #     skip_deletion_check: false,
+    #     cascade_delete: false,
     #   })
     #
     # @example Response structure
@@ -6845,6 +6877,8 @@ module Aws::DataZone
     #   * {Types::GetDomainOutput#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetDomainOutput#domain_version #domain_version} => String
     #   * {Types::GetDomainOutput#service_role #service_role} => String
+    #   * {Types::GetDomainOutput#failure_reasons #failure_reasons} => Array&lt;Types::FailureReason&gt;
+    #   * {Types::GetDomainOutput#delete_progress #delete_progress} => Types::DeleteProgress
     #
     # @example Request syntax with placeholder values
     #
@@ -6872,6 +6906,10 @@ module Aws::DataZone
     #   resp.tags["TagKey"] #=> String
     #   resp.domain_version #=> String, one of "V1", "V2"
     #   resp.service_role #=> String
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0].id #=> String
+    #   resp.failure_reasons[0].message #=> String
+    #   resp.delete_progress.successfully_deleted_project_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDomain AWS API Documentation
     #
@@ -7100,6 +7138,7 @@ module Aws::DataZone
     #   * {Types::GetEnvironmentBlueprintOutput#deployment_properties #deployment_properties} => Types::DeploymentProperties
     #   * {Types::GetEnvironmentBlueprintOutput#user_parameters #user_parameters} => Array&lt;Types::CustomParameter&gt;
     #   * {Types::GetEnvironmentBlueprintOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::GetEnvironmentBlueprintOutput#blueprint_category #blueprint_category} => String
     #   * {Types::GetEnvironmentBlueprintOutput#created_at #created_at} => Time
     #   * {Types::GetEnvironmentBlueprintOutput#updated_at #updated_at} => Time
     #
@@ -7129,6 +7168,7 @@ module Aws::DataZone
     #   resp.user_parameters[0].is_update_supported #=> Boolean
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
+    #   resp.blueprint_category #=> String, one of "TOOLING"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -7969,6 +8009,7 @@ module Aws::DataZone
     #   * {Types::GetNotebookOutput#domain_id #domain_id} => String
     #   * {Types::GetNotebookOutput#cell_order #cell_order} => Array&lt;Types::CellInformation&gt;
     #   * {Types::GetNotebookOutput#status #status} => String
+    #   * {Types::GetNotebookOutput#type #type} => String
     #   * {Types::GetNotebookOutput#description #description} => String
     #   * {Types::GetNotebookOutput#created_at #created_at} => Time
     #   * {Types::GetNotebookOutput#created_by #created_by} => String
@@ -7999,6 +8040,7 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.cell_order #=> Array
     #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
+    #   resp.type #=> String, one of "DATA", "SQL"
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -10048,6 +10090,7 @@ module Aws::DataZone
     #   resp.items[0].provisioning_properties.cloud_formation.template_url #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
+    #   resp.items[0].blueprint_category #=> String, one of "TOOLING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEnvironmentBlueprints AWS API Documentation
@@ -10682,6 +10725,9 @@ module Aws::DataZone
     # @option params [String] :status
     #   The status to filter notebooks by.
     #
+    # @option params [String] :type
+    #   The type to filter notebooks by.
+    #
     # @option params [String] :next_token
     #   When the number of notebooks is greater than the default value for the
     #   `MaxResults` parameter, or if you explicitly specify a value for
@@ -10706,6 +10752,7 @@ module Aws::DataZone
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     sort_by: "CREATED_AT", # accepts CREATED_AT, UPDATED_AT
     #     status: "ACTIVE", # accepts ACTIVE, ARCHIVED, SYNC_IN_PROGRESS, SYNC_FAILED
+    #     type: "DATA", # accepts DATA, SQL
     #     next_token: "PaginationToken",
     #   })
     #
@@ -10717,6 +10764,7 @@ module Aws::DataZone
     #   resp.items[0].owning_project_id #=> String
     #   resp.items[0].domain_id #=> String
     #   resp.items[0].status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
+    #   resp.items[0].type #=> String, one of "DATA", "SQL"
     #   resp.items[0].description #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].created_by #=> String
@@ -15270,6 +15318,9 @@ module Aws::DataZone
     #   The user parameters to be updated as part of the
     #   `UpdateEnvironmentBlueprint` action.
     #
+    # @option params [String] :blueprint_category
+    #   The category to update. The only valid value is `TOOLING`.
+    #
     # @return [Types::UpdateEnvironmentBlueprintOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateEnvironmentBlueprintOutput#id #id} => String
@@ -15280,6 +15331,7 @@ module Aws::DataZone
     #   * {Types::UpdateEnvironmentBlueprintOutput#deployment_properties #deployment_properties} => Types::DeploymentProperties
     #   * {Types::UpdateEnvironmentBlueprintOutput#user_parameters #user_parameters} => Array&lt;Types::CustomParameter&gt;
     #   * {Types::UpdateEnvironmentBlueprintOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::UpdateEnvironmentBlueprintOutput#blueprint_category #blueprint_category} => String
     #   * {Types::UpdateEnvironmentBlueprintOutput#created_at #created_at} => Time
     #   * {Types::UpdateEnvironmentBlueprintOutput#updated_at #updated_at} => Time
     #
@@ -15305,6 +15357,7 @@ module Aws::DataZone
     #         is_update_supported: false,
     #       },
     #     ],
+    #     blueprint_category: "TOOLING", # accepts TOOLING
     #   })
     #
     # @example Response structure
@@ -15326,6 +15379,7 @@ module Aws::DataZone
     #   resp.user_parameters[0].is_update_supported #=> Boolean
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
+    #   resp.blueprint_category #=> String, one of "TOOLING"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -15674,6 +15728,9 @@ module Aws::DataZone
     # @option params [Array<Types::CellInformation>] :cell_order
     #   The updated ordered list of cells in the notebook.
     #
+    # @option params [String] :type
+    #   The updated type of the notebook.
+    #
     # @option params [Hash<String,String>] :metadata
     #   The updated metadata for the notebook, specified as key-value pairs.
     #
@@ -15699,6 +15756,7 @@ module Aws::DataZone
     #   * {Types::UpdateNotebookOutput#domain_id #domain_id} => String
     #   * {Types::UpdateNotebookOutput#cell_order #cell_order} => Array&lt;Types::CellInformation&gt;
     #   * {Types::UpdateNotebookOutput#status #status} => String
+    #   * {Types::UpdateNotebookOutput#type #type} => String
     #   * {Types::UpdateNotebookOutput#description #description} => String
     #   * {Types::UpdateNotebookOutput#created_at #created_at} => Time
     #   * {Types::UpdateNotebookOutput#created_by #created_by} => String
@@ -15726,6 +15784,7 @@ module Aws::DataZone
     #       {
     #       },
     #     ],
+    #     type: "DATA", # accepts DATA, SQL
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
@@ -15750,6 +15809,7 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.cell_order #=> Array
     #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
+    #   resp.type #=> String, one of "DATA", "SQL"
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -16634,7 +16694,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

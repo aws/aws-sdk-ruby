@@ -2472,6 +2472,11 @@ module Aws::LexModelsV2
     #   (speech-to-speech) to be enabled when `enabled` is `true`.
     #   @return [Types::AudioFillerSettings]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The speaker diarization settings to apply when importing the bot
+    #   locale configuration.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotLocaleImportSpecification AWS API Documentation
     #
     class BotLocaleImportSpecification < Struct.new(
@@ -2483,7 +2488,8 @@ module Aws::LexModelsV2
       :speech_recognition_settings,
       :speech_detection_sensitivity,
       :unified_speech_settings,
-      :audio_filler_settings)
+      :audio_filler_settings,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3669,6 +3675,12 @@ module Aws::LexModelsV2
     #   interactions.
     #   @return [String]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The speaker diarization settings to configure for the new bot
+    #   locale. When enabled, Amazon Lex restricts speech detection to the
+    #   primary (loudest) speaker during streaming audio conversations.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocaleRequest AWS API Documentation
     #
     class CreateBotLocaleRequest < Struct.new(
@@ -3682,7 +3694,8 @@ module Aws::LexModelsV2
       :audio_filler_settings,
       :speech_recognition_settings,
       :generative_ai_settings,
-      :speech_detection_sensitivity)
+      :speech_detection_sensitivity,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3760,6 +3773,11 @@ module Aws::LexModelsV2
     #   specified for the bot locale.
     #   @return [String]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The speaker diarization settings configured for the created bot
+    #   locale.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocaleResponse AWS API Documentation
     #
     class CreateBotLocaleResponse < Struct.new(
@@ -3776,7 +3794,8 @@ module Aws::LexModelsV2
       :bot_locale_status,
       :creation_date_time,
       :generative_ai_settings,
-      :speech_detection_sensitivity)
+      :speech_detection_sensitivity,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6164,6 +6183,10 @@ module Aws::LexModelsV2
     #   for the bot locale.
     #   @return [String]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The speaker diarization settings configured for the bot locale.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotLocaleResponse AWS API Documentation
     #
     class DescribeBotLocaleResponse < Struct.new(
@@ -6187,7 +6210,8 @@ module Aws::LexModelsV2
       :bot_locale_history_events,
       :recommended_actions,
       :generative_ai_settings,
-      :speech_detection_sensitivity)
+      :speech_detection_sensitivity,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13456,6 +13480,26 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Specifies configuration that restricts speech detection to the primary
+    # (loudest) speaker during streaming audio conversations, so that speech
+    # from background speakers does not start a turn, interrupt the bot, or
+    # reach speech recognition.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether speaker diarization is enabled for the bot locale.
+    #   Set to `true` to have Amazon Lex treat speech from speakers other
+    #   than the primary speaker as non-speech. Set to `false` to disable
+    #   speaker diarization and rely on voice activity detection alone.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SpeakerDiarizationSettings AWS API Documentation
+    #
+    class SpeakerDiarizationSettings < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Subslot specifications.
     #
     # @!attribute [rw] slot_type_id
@@ -15169,6 +15213,13 @@ module Aws::LexModelsV2
     #   voice interactions.
     #   @return [String]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The updated speaker diarization settings to apply to the bot locale.
+    #   If you omit this field, Amazon Lex keeps the setting currently
+    #   stored on the bot locale. To turn speaker diarization off, set
+    #   `enabled` to `false` explicitly.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocaleRequest AWS API Documentation
     #
     class UpdateBotLocaleRequest < Struct.new(
@@ -15182,7 +15233,8 @@ module Aws::LexModelsV2
       :audio_filler_settings,
       :speech_recognition_settings,
       :generative_ai_settings,
-      :speech_detection_sensitivity)
+      :speech_detection_sensitivity,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15263,6 +15315,10 @@ module Aws::LexModelsV2
     #   the bot locale.
     #   @return [String]
     #
+    # @!attribute [rw] speaker_diarization_settings
+    #   The updated speaker diarization settings for the bot locale.
+    #   @return [Types::SpeakerDiarizationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocaleResponse AWS API Documentation
     #
     class UpdateBotLocaleResponse < Struct.new(
@@ -15282,7 +15338,8 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :recommended_actions,
       :generative_ai_settings,
-      :speech_detection_sensitivity)
+      :speech_detection_sensitivity,
+      :speaker_diarization_settings)
       SENSITIVE = []
       include Aws::Structure
     end

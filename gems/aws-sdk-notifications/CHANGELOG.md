@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2026-09-17)
+------------------
+
+* Feature - Added support for attachments on managed notification events. Added support to access and subscribe sensitive managed notification events.
+
+1.26.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.24.0 (2026-07-09)
 ------------------
 

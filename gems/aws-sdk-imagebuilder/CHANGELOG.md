@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2026-09-23)
+------------------
+
+* Feature - Documentation update for EC2 Image Builder - adds API request and response examples for all operations, improves descriptions throughout, and corrects response field patterns for image versions and workflow ARNs.
+
+1.112.0 (2026-09-14)
+------------------
+
+* Feature - This release adds a dryRun option to Image Builder create APIs (except CreateImage), structured failure context on failed images including component and distribution failure details, and step retry attempt tracking.
+
+1.111.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.110.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.109.0 (2026-07-09)
 ------------------
 

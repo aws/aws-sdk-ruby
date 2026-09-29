@@ -1684,7 +1684,7 @@ module Aws::Bedrock
     end
 
     class GetAccountDataRetentionResponse
-      attr_accessor mode: ("default" | "none" | "provider_data_share" | "inherit")
+      attr_accessor mode: ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -3155,12 +3155,12 @@ module Aws::Bedrock
     end
 
     class PutAccountDataRetentionRequest
-      attr_accessor mode: ("default" | "none" | "provider_data_share" | "inherit")
+      attr_accessor mode: ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
       SENSITIVE: []
     end
 
     class PutAccountDataRetentionResponse
-      attr_accessor mode: ("default" | "none" | "provider_data_share" | "inherit")
+      attr_accessor mode: ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end

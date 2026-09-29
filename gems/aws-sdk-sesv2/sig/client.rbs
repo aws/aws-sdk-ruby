@@ -78,6 +78,17 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AssociateEmailIdentityCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateEmailIdentityCertificateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#associate_email_identity_certificate-instance_method
+      def associate_email_identity_certificate: (
+                                                  email_identity: ::String,
+                                                  ?from_address: ::String,
+                                                  certificate_arn: ::String
+                                                ) -> _AssociateEmailIdentityCertificateResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateEmailIdentityCertificateResponseSuccess
+
       interface _BatchGetMetricDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetMetricDataResponse]
         def results: () -> ::Array[Types::MetricDataResult]
@@ -90,7 +101,7 @@ module Aws
                                        id: ::String,
                                        namespace: ("VDM"),
                                        metric: ("SEND" | "COMPLAINT" | "PERMANENT_BOUNCE" | "TRANSIENT_BOUNCE" | "OPEN" | "CLICK" | "DELIVERY" | "DELIVERY_OPEN" | "DELIVERY_CLICK" | "DELIVERY_COMPLAINT"),
-                                       dimensions: Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP"), ::String]?,
+                                       dimensions: Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP" | "TENANT_NAME"), ::String]?,
                                        start_date: ::Time,
                                        end_date: ::Time
                                      }
@@ -143,7 +154,8 @@ module Aws
                                       ?vdm_options: Params::vdm_options,
                                       ?archiving_options: {
                                         archive_arn: ::String?
-                                      }
+                                      },
+                                      ?message_security_options: Params::message_security_options
                                     ) -> _CreateConfigurationSetResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetResponseSuccess
 
@@ -319,7 +331,7 @@ module Aws
       def create_export_job: (
                                export_data_source: {
                                  metrics_data_source: {
-                                   dimensions: Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP"), Array[::String]],
+                                   dimensions: Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP" | "TENANT_NAME"), Array[::String]],
                                    namespace: ("VDM"),
                                    metrics: Array[
                                      {
@@ -550,6 +562,16 @@ module Aws
                                               ) -> _DeleteTenantResourceAssociationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTenantResourceAssociationResponseSuccess
 
+      interface _DisassociateEmailIdentityCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateEmailIdentityCertificateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#disassociate_email_identity_certificate-instance_method
+      def disassociate_email_identity_certificate: (
+                                                     email_identity: ::String,
+                                                     ?from_address: ::String
+                                                   ) -> _DisassociateEmailIdentityCertificateResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateEmailIdentityCertificateResponseSuccess
+
       interface _GetAccountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountResponse]
         def dedicated_ip_auto_warmup_enabled: () -> bool
@@ -588,6 +610,7 @@ module Aws
         def suppression_options: () -> Types::SuppressionOptions
         def vdm_options: () -> Types::VdmOptions
         def archiving_options: () -> Types::ArchivingOptions
+        def message_security_options: () -> Types::MessageSecurityOptions
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_configuration_set-instance_method
       def get_configuration_set: (
@@ -991,6 +1014,19 @@ module Aws
                                    ?page_size: ::Integer
                                  ) -> _ListEmailIdentitiesResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEmailIdentitiesResponseSuccess
+
+      interface _ListEmailIdentityCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEmailIdentityCertificatesResponse]
+        def certificates: () -> ::Array[Types::IdentityCertificate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_email_identity_certificates-instance_method
+      def list_email_identity_certificates: (
+                                              email_identity: ::String,
+                                              ?next_token: ::String,
+                                              ?page_size: ::Integer
+                                            ) -> _ListEmailIdentityCertificatesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEmailIdentityCertificatesResponseSuccess
 
       interface _ListEmailTemplatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEmailTemplatesResponse]
@@ -1463,7 +1499,13 @@ module Aws
                              ],
                              ?configuration_set_name: ::String,
                              ?endpoint_id: ::String,
-                             ?tenant_name: ::String
+                             ?tenant_name: ::String,
+                             ?configuration_overrides: {
+                               tracking: {
+                                 open_tracking_enabled: ("ENABLED" | "DISABLED")?,
+                                 click_tracking_enabled: ("ENABLED" | "DISABLED")?
+                               }?
+                             }
                            ) -> _SendBulkEmailResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendBulkEmailResponseSuccess
 
@@ -1508,6 +1550,12 @@ module Aws
                         ?list_management_options: {
                           contact_list_name: ::String,
                           topic_name: ::String?
+                        },
+                        ?configuration_overrides: {
+                          tracking: {
+                            open_tracking_enabled: ("ENABLED" | "DISABLED")?,
+                            click_tracking_enabled: ("ENABLED" | "DISABLED")?
+                          }?
                         }
                       ) -> _SendEmailResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendEmailResponseSuccess
@@ -1547,6 +1595,16 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfigurationSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#update_configuration_set-instance_method
+      def update_configuration_set: (
+                                      configuration_set_name: ::String,
+                                      ?message_security_options: Params::message_security_options
+                                    ) -> _UpdateConfigurationSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationSetResponseSuccess
 
       interface _UpdateConfigurationSetEventDestinationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfigurationSetEventDestinationResponse]

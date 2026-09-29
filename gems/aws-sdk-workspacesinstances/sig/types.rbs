@@ -66,6 +66,7 @@ module Aws::WorkspacesInstances
       attr_accessor amd_sev_snp: ("enabled" | "disabled")
       attr_accessor core_count: ::Integer
       attr_accessor threads_per_core: ::Integer
+      attr_accessor nested_virtualization: ("enabled" | "disabled")
       SENSITIVE: []
     end
 

@@ -486,7 +486,12 @@ module Aws
                         on_demand_percentage_above_base_capacity: ::Integer?,
                         spot_allocation_strategy: ::String?,
                         spot_instance_pools: ::Integer?,
-                        spot_max_price: ::String?
+                        spot_max_price: ::String?,
+                        distribution_segments: Array[
+                          {
+                            target_capacity_types: Array[("on-demand-capacity-reservation" | "capacity-block" | "interruptible-capacity-reservation" | "on-demand")]?
+                          }
+                        ]?
                       }?
                     },
                     ?min_size: ::Integer,

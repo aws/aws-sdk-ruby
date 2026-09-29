@@ -951,6 +951,19 @@ module Aws
                                            ) -> _ListExascaleDbStorageVaultsResponseSuccess
                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExascaleDbStorageVaultsResponseSuccess
 
+      interface _ListFlexComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlexComponentsOutput]
+        def next_token: () -> ::String
+        def flex_components: () -> ::Array[Types::FlexComponentSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_flex_components-instance_method
+      def list_flex_components: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?shape: ::String
+                                ) -> _ListFlexComponentsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlexComponentsResponseSuccess
+
       interface _ListGiMinorVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListGiMinorVersionsOutput]
         def next_token: () -> ::String

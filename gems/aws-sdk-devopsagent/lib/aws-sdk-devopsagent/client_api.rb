@@ -21,9 +21,21 @@ module Aws::DevOpsAgent
     AdditionalServiceRegistrationStep = Shapes::UnionShape.new(name: 'AdditionalServiceRegistrationStep')
     AgentSpace = Shapes::StructureShape.new(name: 'AgentSpace')
     AgentSpaceId = Shapes::StringShape.new(name: 'AgentSpaceId')
+    AgentSpaceIdentifier = Shapes::StringShape.new(name: 'AgentSpaceIdentifier')
     AgentSpaceList = Shapes::ListShape.new(name: 'AgentSpaceList')
     AgentSpaceName = Shapes::StringShape.new(name: 'AgentSpaceName')
+    AgentSpacePreferenceKey = Shapes::StringShape.new(name: 'AgentSpacePreferenceKey')
+    AgentSpacePreferences = Shapes::MapShape.new(name: 'AgentSpacePreferences')
     ApiKeyValue = Shapes::StringShape.new(name: 'ApiKeyValue')
+    ApprovalAction = Shapes::StructureShape.new(name: 'ApprovalAction')
+    ApprovalActionType = Shapes::StringShape.new(name: 'ApprovalActionType')
+    ApprovalArgumentPins = Shapes::MapShape.new(name: 'ApprovalArgumentPins')
+    ApprovalId = Shapes::StringShape.new(name: 'ApprovalId')
+    ApprovalPattern = Shapes::StructureShape.new(name: 'ApprovalPattern')
+    ApprovalPinKey = Shapes::StringShape.new(name: 'ApprovalPinKey')
+    ApprovalPinValue = Shapes::StringShape.new(name: 'ApprovalPinValue')
+    ApprovalReason = Shapes::StringShape.new(name: 'ApprovalReason')
+    ApprovalStatus = Shapes::StringShape.new(name: 'ApprovalStatus')
     Asset = Shapes::StructureShape.new(name: 'Asset')
     AssetContent = Shapes::UnionShape.new(name: 'AssetContent')
     AssetContentUrl = Shapes::StringShape.new(name: 'AssetContentUrl')
@@ -61,6 +73,7 @@ module Aws::DevOpsAgent
     BacklogTaskDescription = Shapes::StringShape.new(name: 'BacklogTaskDescription')
     BacklogTaskTitle = Shapes::StringShape.new(name: 'BacklogTaskTitle')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    ButtonText = Shapes::StringShape.new(name: 'ButtonText')
     CapabilityConfiguration = Shapes::StructureShape.new(name: 'CapabilityConfiguration')
     CapabilityType = Shapes::StringShape.new(name: 'CapabilityType')
     CertificateString = Shapes::StringShape.new(name: 'CertificateString')
@@ -81,6 +94,7 @@ module Aws::DevOpsAgent
     CreateAssetRequestClientTokenString = Shapes::StringShape.new(name: 'CreateAssetRequestClientTokenString')
     CreateAssetResponse = Shapes::StructureShape.new(name: 'CreateAssetResponse')
     CreateBacklogTaskRequest = Shapes::StructureShape.new(name: 'CreateBacklogTaskRequest')
+    CreateBacklogTaskRequestClientTokenString = Shapes::StringShape.new(name: 'CreateBacklogTaskRequestClientTokenString')
     CreateBacklogTaskResponse = Shapes::StructureShape.new(name: 'CreateBacklogTaskResponse')
     CreateChatRequest = Shapes::StructureShape.new(name: 'CreateChatRequest')
     CreateChatResponse = Shapes::StructureShape.new(name: 'CreateChatResponse')
@@ -166,8 +180,8 @@ module Aws::DevOpsAgent
     GitLabConfiguration = Shapes::StructureShape.new(name: 'GitLabConfiguration')
     GitLabDetails = Shapes::StructureShape.new(name: 'GitLabDetails')
     GitLabDetailsTargetUrlString = Shapes::StringShape.new(name: 'GitLabDetailsTargetUrlString')
-    GitLabDetailsTokenValueString = Shapes::StringShape.new(name: 'GitLabDetailsTokenValueString')
     GitLabTokenType = Shapes::StringShape.new(name: 'GitLabTokenType')
+    GitLabTokenValue = Shapes::StringShape.new(name: 'GitLabTokenValue')
     GithubRepoOwnerType = Shapes::StringShape.new(name: 'GithubRepoOwnerType')
     Goal = Shapes::StructureShape.new(name: 'Goal')
     GoalContent = Shapes::StructureShape.new(name: 'GoalContent')
@@ -187,6 +201,7 @@ module Aws::DevOpsAgent
     IdpClientSecret = Shapes::StringShape.new(name: 'IdpClientSecret')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InterruptId = Shapes::StringShape.new(name: 'InterruptId')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     IpAddressOrDnsName = Shapes::StringShape.new(name: 'IpAddressOrDnsName')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
@@ -290,6 +305,9 @@ module Aws::DevOpsAgent
     MCPServerSigV4ServiceDetails = Shapes::StructureShape.new(name: 'MCPServerSigV4ServiceDetails')
     MCPServerSigV4ServiceDetailsDescriptionString = Shapes::StringShape.new(name: 'MCPServerSigV4ServiceDetailsDescriptionString')
     MCPServerSplunkConfiguration = Shapes::StructureShape.new(name: 'MCPServerSplunkConfiguration')
+    MCPToolDetail = Shapes::StructureShape.new(name: 'MCPToolDetail')
+    MCPToolDetailNameString = Shapes::StringShape.new(name: 'MCPToolDetailNameString')
+    MCPToolDetailsList = Shapes::ListShape.new(name: 'MCPToolDetailsList')
     MCPToolsList = Shapes::ListShape.new(name: 'MCPToolsList')
     MCPToolsListMemberString = Shapes::StringShape.new(name: 'MCPToolsListMemberString')
     MaxIpv4AddressesPerEni = Shapes::IntegerShape.new(name: 'MaxIpv4AddressesPerEni')
@@ -298,9 +316,9 @@ module Aws::DevOpsAgent
     MonitorAccountType = Shapes::StringShape.new(name: 'MonitorAccountType')
     NewRelicAlertPolicyIds = Shapes::ListShape.new(name: 'NewRelicAlertPolicyIds')
     NewRelicAlertPolicyIdsMemberString = Shapes::StringShape.new(name: 'NewRelicAlertPolicyIdsMemberString')
+    NewRelicApiKey = Shapes::StringShape.new(name: 'NewRelicApiKey')
     NewRelicApiKeyConfig = Shapes::StructureShape.new(name: 'NewRelicApiKeyConfig')
     NewRelicApiKeyConfigAccountIdString = Shapes::StringShape.new(name: 'NewRelicApiKeyConfigAccountIdString')
-    NewRelicApiKeyConfigApiKeyString = Shapes::StringShape.new(name: 'NewRelicApiKeyConfigApiKeyString')
     NewRelicApplicationIds = Shapes::ListShape.new(name: 'NewRelicApplicationIds')
     NewRelicApplicationIdsMemberString = Shapes::StringShape.new(name: 'NewRelicApplicationIdsMemberString')
     NewRelicEntityGuids = Shapes::ListShape.new(name: 'NewRelicEntityGuids')
@@ -321,6 +339,7 @@ module Aws::DevOpsAgent
     PagerDutyScopes = Shapes::ListShape.new(name: 'PagerDutyScopes')
     PagerDutyScopesList = Shapes::ListShape.new(name: 'PagerDutyScopesList')
     PagerDutyServicesList = Shapes::ListShape.new(name: 'PagerDutyServicesList')
+    PatternFilter = Shapes::StructureShape.new(name: 'PatternFilter')
     PendingMessage = Shapes::StructureShape.new(name: 'PendingMessage')
     PendingMessages = Shapes::ListShape.new(name: 'PendingMessages')
     PortRange = Shapes::StringShape.new(name: 'PortRange')
@@ -435,6 +454,7 @@ module Aws::DevOpsAgent
     ServiceNowServiceDetails = Shapes::StructureShape.new(name: 'ServiceNowServiceDetails')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SigV4Region = Shapes::StringShape.new(name: 'SigV4Region')
+    SlackBidirectionalConfiguration = Shapes::StructureShape.new(name: 'SlackBidirectionalConfiguration')
     SlackChannel = Shapes::StructureShape.new(name: 'SlackChannel')
     SlackChannelChannelIdString = Shapes::StringShape.new(name: 'SlackChannelChannelIdString')
     SlackConfiguration = Shapes::StructureShape.new(name: 'SlackConfiguration')
@@ -465,10 +485,19 @@ module Aws::DevOpsAgent
     TaskType = Shapes::StringShape.new(name: 'TaskType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    ToolClassification = Shapes::StringShape.new(name: 'ToolClassification')
+    ToolIdentifier = Shapes::StringShape.new(name: 'ToolIdentifier')
+    ToolUseId = Shapes::StringShape.new(name: 'ToolUseId')
     Trigger = Shapes::StructureShape.new(name: 'Trigger')
     TriggerAction = Shapes::DocumentShape.new(name: 'TriggerAction', document: true)
     TriggerCondition = Shapes::UnionShape.new(name: 'TriggerCondition')
+    TriggerEvent = Shapes::StringShape.new(name: 'TriggerEvent')
+    TriggerEventList = Shapes::ListShape.new(name: 'TriggerEventList')
+    TriggerFilterGroup = Shapes::StructureShape.new(name: 'TriggerFilterGroup')
+    TriggerFilterGroups = Shapes::ListShape.new(name: 'TriggerFilterGroups')
     TriggerList = Shapes::ListShape.new(name: 'TriggerList')
+    TriggerRegexPattern = Shapes::StringShape.new(name: 'TriggerRegexPattern')
+    TriggerRegexPatternList = Shapes::ListShape.new(name: 'TriggerRegexPatternList')
     TriggerStatus = Shapes::StringShape.new(name: 'TriggerStatus')
     TriggerType = Shapes::StringShape.new(name: 'TriggerType')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -476,6 +505,9 @@ module Aws::DevOpsAgent
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAgentSpaceInput = Shapes::StructureShape.new(name: 'UpdateAgentSpaceInput')
     UpdateAgentSpaceOutput = Shapes::StructureShape.new(name: 'UpdateAgentSpaceOutput')
+    UpdateApprovalActionRequest = Shapes::StructureShape.new(name: 'UpdateApprovalActionRequest')
+    UpdateApprovalActionRequestTtlSecondsInteger = Shapes::IntegerShape.new(name: 'UpdateApprovalActionRequestTtlSecondsInteger')
+    UpdateApprovalActionResponse = Shapes::StructureShape.new(name: 'UpdateApprovalActionResponse')
     UpdateAssetFileRequest = Shapes::StructureShape.new(name: 'UpdateAssetFileRequest')
     UpdateAssetFileRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateAssetFileRequestClientTokenString')
     UpdateAssetFileResponse = Shapes::StructureShape.new(name: 'UpdateAssetFileResponse')
@@ -485,14 +517,17 @@ module Aws::DevOpsAgent
     UpdateAssociationInput = Shapes::StructureShape.new(name: 'UpdateAssociationInput')
     UpdateAssociationOutput = Shapes::StructureShape.new(name: 'UpdateAssociationOutput')
     UpdateBacklogTaskRequest = Shapes::StructureShape.new(name: 'UpdateBacklogTaskRequest')
+    UpdateBacklogTaskRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateBacklogTaskRequestClientTokenString')
     UpdateBacklogTaskResponse = Shapes::StructureShape.new(name: 'UpdateBacklogTaskResponse')
     UpdateGoalRequest = Shapes::StructureShape.new(name: 'UpdateGoalRequest')
+    UpdateGoalRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateGoalRequestClientTokenString')
     UpdateGoalResponse = Shapes::StructureShape.new(name: 'UpdateGoalResponse')
     UpdateOperatorAppIdpConfigInput = Shapes::StructureShape.new(name: 'UpdateOperatorAppIdpConfigInput')
     UpdateOperatorAppIdpConfigOutput = Shapes::StructureShape.new(name: 'UpdateOperatorAppIdpConfigOutput')
     UpdatePrivateConnectionCertificateInput = Shapes::StructureShape.new(name: 'UpdatePrivateConnectionCertificateInput')
     UpdatePrivateConnectionCertificateOutput = Shapes::StructureShape.new(name: 'UpdatePrivateConnectionCertificateOutput')
     UpdateRecommendationRequest = Shapes::StructureShape.new(name: 'UpdateRecommendationRequest')
+    UpdateRecommendationRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateRecommendationRequestClientTokenString')
     UpdateRecommendationResponse = Shapes::StructureShape.new(name: 'UpdateRecommendationResponse')
     UpdateTriggerRequest = Shapes::StructureShape.new(name: 'UpdateTriggerRequest')
     UpdateTriggerRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateTriggerRequestClientTokenString')
@@ -520,6 +555,8 @@ module Aws::DevOpsAgent
     AWSConfiguration.add_member(:assumable_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "assumableRoleArn"))
     AWSConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSConfigurationAccountIdString, required: true, location_name: "accountId"))
     AWSConfiguration.add_member(:account_type, Shapes::ShapeRef.new(shape: MonitorAccountType, required: true, location_name: "accountType"))
+    AWSConfiguration.add_member(:agent_elevated_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "agentElevatedRoleArn"))
+    AWSConfiguration.add_member(:agent_elevated_role_arn_status, Shapes::ShapeRef.new(shape: ValidationStatus, location_name: "agentElevatedRoleArnStatus"))
     AWSConfiguration.struct_class = Types::AWSConfiguration
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -572,9 +609,27 @@ module Aws::DevOpsAgent
     AgentSpace.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
     AgentSpace.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     AgentSpace.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location_name: "agentSpaceId"))
+    AgentSpace.add_member(:preferences, Shapes::ShapeRef.new(shape: AgentSpacePreferences, location_name: "preferences"))
     AgentSpace.struct_class = Types::AgentSpace
 
     AgentSpaceList.member = Shapes::ShapeRef.new(shape: AgentSpace)
+
+    AgentSpacePreferences.key = Shapes::ShapeRef.new(shape: AgentSpacePreferenceKey)
+    AgentSpacePreferences.value = Shapes::ShapeRef.new(shape: Boolean)
+
+    ApprovalAction.add_member(:tool_use_id, Shapes::ShapeRef.new(shape: ToolUseId, location_name: "toolUseId"))
+    ApprovalAction.add_member(:interrupt_id, Shapes::ShapeRef.new(shape: InterruptId, location_name: "interruptId"))
+    ApprovalAction.add_member(:approval_id, Shapes::ShapeRef.new(shape: ApprovalId, location_name: "approvalId"))
+    ApprovalAction.add_member(:button_text, Shapes::ShapeRef.new(shape: ButtonText, location_name: "buttonText"))
+    ApprovalAction.add_member(:action, Shapes::ShapeRef.new(shape: ApprovalActionType, location_name: "action"))
+    ApprovalAction.struct_class = Types::ApprovalAction
+
+    ApprovalArgumentPins.key = Shapes::ShapeRef.new(shape: ApprovalPinKey)
+    ApprovalArgumentPins.value = Shapes::ShapeRef.new(shape: ApprovalPinValue)
+
+    ApprovalPattern.add_member(:tool, Shapes::ShapeRef.new(shape: ToolIdentifier, required: true, location_name: "tool"))
+    ApprovalPattern.add_member(:argument_pins, Shapes::ShapeRef.new(shape: ApprovalArgumentPins, required: true, location_name: "argumentPins"))
+    ApprovalPattern.struct_class = Types::ApprovalPattern
 
     Asset.add_member(:asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "assetId"))
     Asset.add_member(:asset_type, Shapes::ShapeRef.new(shape: AssetType, required: true, location_name: "assetType"))
@@ -691,6 +746,7 @@ module Aws::DevOpsAgent
     AzureDevOpsConfiguration.struct_class = Types::AzureDevOpsConfiguration
 
     CapabilityConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    CapabilityConfiguration.add_member(:trigger_filter_groups, Shapes::ShapeRef.new(shape: TriggerFilterGroups, location_name: "triggerFilterGroups"))
     CapabilityConfiguration.struct_class = Types::CapabilityConfiguration
 
     ChatExecution.add_member(:execution_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "executionId"))
@@ -713,13 +769,14 @@ module Aws::DevOpsAgent
     CreateAgentSpaceInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateAgentSpaceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateAgentSpaceInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAgentSpaceInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateAgentSpaceInput.add_member(:preferences, Shapes::ShapeRef.new(shape: AgentSpacePreferences, location_name: "preferences"))
     CreateAgentSpaceInput.struct_class = Types::CreateAgentSpaceInput
 
     CreateAgentSpaceOutput.add_member(:agent_space, Shapes::ShapeRef.new(shape: AgentSpace, required: true, location_name: "agentSpace"))
     CreateAgentSpaceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateAgentSpaceOutput.struct_class = Types::CreateAgentSpaceOutput
 
-    CreateAssetFileRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    CreateAssetFileRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     CreateAssetFileRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "assetId"))
     CreateAssetFileRequest.add_member(:path, Shapes::ShapeRef.new(shape: AssetFilePath, required: true, location: "uri", location_name: "path"))
     CreateAssetFileRequest.add_member(:content, Shapes::ShapeRef.new(shape: AssetFileBody, required: true, location_name: "content"))
@@ -730,7 +787,7 @@ module Aws::DevOpsAgent
     CreateAssetFileResponse.add_member(:file, Shapes::ShapeRef.new(shape: AssetFile, required: true, location_name: "file"))
     CreateAssetFileResponse.struct_class = Types::CreateAssetFileResponse
 
-    CreateAssetRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    CreateAssetRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     CreateAssetRequest.add_member(:asset_type, Shapes::ShapeRef.new(shape: AssetType, required: true, location_name: "assetType"))
     CreateAssetRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Document, location_name: "metadata"))
     CreateAssetRequest.add_member(:content, Shapes::ShapeRef.new(shape: AssetContent, required: true, location_name: "content"))
@@ -740,19 +797,19 @@ module Aws::DevOpsAgent
     CreateAssetResponse.add_member(:asset, Shapes::ShapeRef.new(shape: Asset, required: true, location_name: "asset"))
     CreateAssetResponse.struct_class = Types::CreateAssetResponse
 
-    CreateBacklogTaskRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    CreateBacklogTaskRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     CreateBacklogTaskRequest.add_member(:reference, Shapes::ShapeRef.new(shape: ReferenceInput, location_name: "reference"))
     CreateBacklogTaskRequest.add_member(:task_type, Shapes::ShapeRef.new(shape: TaskType, required: true, location_name: "taskType"))
     CreateBacklogTaskRequest.add_member(:title, Shapes::ShapeRef.new(shape: BacklogTaskTitle, required: true, location_name: "title"))
     CreateBacklogTaskRequest.add_member(:description, Shapes::ShapeRef.new(shape: BacklogTaskDescription, location_name: "description"))
     CreateBacklogTaskRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, required: true, location_name: "priority"))
-    CreateBacklogTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateBacklogTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateBacklogTaskRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateBacklogTaskRequest.struct_class = Types::CreateBacklogTaskRequest
 
     CreateBacklogTaskResponse.add_member(:task, Shapes::ShapeRef.new(shape: Task, required: true, location_name: "task"))
     CreateBacklogTaskResponse.struct_class = Types::CreateBacklogTaskResponse
 
-    CreateChatRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    CreateChatRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     CreateChatRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, deprecated: true, location: "querystring", location_name: "userId", metadata: {"deprecatedMessage" => "userId is managed by the service and should not be provided by the caller", "deprecatedSince" => "2026-04-15"}))
     CreateChatRequest.add_member(:user_type, Shapes::ShapeRef.new(shape: UserType, location: "querystring", location_name: "userType"))
     CreateChatRequest.struct_class = Types::CreateChatRequest
@@ -779,7 +836,7 @@ module Aws::DevOpsAgent
     CreatePrivateConnectionOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreatePrivateConnectionOutput.struct_class = Types::CreatePrivateConnectionOutput
 
-    CreateTriggerRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    CreateTriggerRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     CreateTriggerRequest.add_member(:type, Shapes::ShapeRef.new(shape: TriggerType, required: true, location_name: "type"))
     CreateTriggerRequest.add_member(:condition, Shapes::ShapeRef.new(shape: TriggerCondition, required: true, location_name: "condition"))
     CreateTriggerRequest.add_member(:action, Shapes::ShapeRef.new(shape: TriggerAction, required: true, location_name: "action"))
@@ -810,14 +867,14 @@ module Aws::DevOpsAgent
 
     DeleteAgentSpaceOutput.struct_class = Types::DeleteAgentSpaceOutput
 
-    DeleteAssetFileRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    DeleteAssetFileRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     DeleteAssetFileRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "assetId"))
     DeleteAssetFileRequest.add_member(:path, Shapes::ShapeRef.new(shape: AssetFilePath, required: true, location: "uri", location_name: "path"))
     DeleteAssetFileRequest.struct_class = Types::DeleteAssetFileRequest
 
     DeleteAssetFileResponse.struct_class = Types::DeleteAssetFileResponse
 
-    DeleteAssetRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    DeleteAssetRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     DeleteAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "assetId"))
     DeleteAssetRequest.struct_class = Types::DeleteAssetRequest
 
@@ -830,7 +887,7 @@ module Aws::DevOpsAgent
     DeletePrivateConnectionOutput.add_member(:status, Shapes::ShapeRef.new(shape: PrivateConnectionStatus, required: true, location_name: "status"))
     DeletePrivateConnectionOutput.struct_class = Types::DeletePrivateConnectionOutput
 
-    DeleteTriggerRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    DeleteTriggerRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     DeleteTriggerRequest.add_member(:trigger_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "triggerId"))
     DeleteTriggerRequest.struct_class = Types::DeleteTriggerRequest
 
@@ -953,7 +1010,7 @@ module Aws::DevOpsAgent
     GetAgentSpaceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetAgentSpaceOutput.struct_class = Types::GetAgentSpaceOutput
 
-    GetAssetContentRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    GetAssetContentRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     GetAssetContentRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "assetId"))
     GetAssetContentRequest.add_member(:asset_version, Shapes::ShapeRef.new(shape: GetAssetContentRequestAssetVersionInteger, location: "querystring", location_name: "assetVersion"))
     GetAssetContentRequest.struct_class = Types::GetAssetContentRequest
@@ -962,7 +1019,7 @@ module Aws::DevOpsAgent
     GetAssetContentResponse.add_member(:version, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "version"))
     GetAssetContentResponse.struct_class = Types::GetAssetContentResponse
 
-    GetAssetFileRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    GetAssetFileRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     GetAssetFileRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "assetId"))
     GetAssetFileRequest.add_member(:path, Shapes::ShapeRef.new(shape: AssetFilePath, required: true, location: "uri", location_name: "path"))
     GetAssetFileRequest.add_member(:asset_version, Shapes::ShapeRef.new(shape: GetAssetFileRequestAssetVersionInteger, location: "querystring", location_name: "assetVersion"))
@@ -971,7 +1028,7 @@ module Aws::DevOpsAgent
     GetAssetFileResponse.add_member(:file, Shapes::ShapeRef.new(shape: AssetFile, required: true, location_name: "file"))
     GetAssetFileResponse.struct_class = Types::GetAssetFileResponse
 
-    GetAssetRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    GetAssetRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     GetAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "assetId"))
     GetAssetRequest.add_member(:asset_version, Shapes::ShapeRef.new(shape: GetAssetRequestAssetVersionInteger, location: "querystring", location_name: "assetVersion"))
     GetAssetRequest.struct_class = Types::GetAssetRequest
@@ -986,7 +1043,7 @@ module Aws::DevOpsAgent
     GetAssociationOutput.add_member(:association, Shapes::ShapeRef.new(shape: Association, required: true, location_name: "association"))
     GetAssociationOutput.struct_class = Types::GetAssociationOutput
 
-    GetBacklogTaskRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    GetBacklogTaskRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     GetBacklogTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "taskId"))
     GetBacklogTaskRequest.struct_class = Types::GetBacklogTaskRequest
 
@@ -1002,7 +1059,7 @@ module Aws::DevOpsAgent
     GetOperatorAppOutput.add_member(:idp, Shapes::ShapeRef.new(shape: IdpAuthConfiguration, location_name: "idp"))
     GetOperatorAppOutput.struct_class = Types::GetOperatorAppOutput
 
-    GetRecommendationRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    GetRecommendationRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     GetRecommendationRequest.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "recommendationId"))
     GetRecommendationRequest.add_member(:recommendation_version, Shapes::ShapeRef.new(shape: Long, location: "querystring", location_name: "recommendationVersion"))
     GetRecommendationRequest.struct_class = Types::GetRecommendationRequest
@@ -1017,7 +1074,7 @@ module Aws::DevOpsAgent
     GetServiceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetServiceOutput.struct_class = Types::GetServiceOutput
 
-    GetTriggerRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    GetTriggerRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     GetTriggerRequest.add_member(:trigger_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "triggerId"))
     GetTriggerRequest.struct_class = Types::GetTriggerRequest
 
@@ -1029,18 +1086,18 @@ module Aws::DevOpsAgent
     GitHubConfiguration.add_member(:owner, Shapes::ShapeRef.new(shape: String, required: true, location_name: "owner"))
     GitHubConfiguration.add_member(:owner_type, Shapes::ShapeRef.new(shape: GithubRepoOwnerType, required: true, location_name: "ownerType"))
     GitHubConfiguration.add_member(:instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "instanceIdentifier"))
-    GitHubConfiguration.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "runtimeRoleArn"))
+    GitHubConfiguration.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RoleArn, deprecated: true, location_name: "runtimeRoleArn", metadata: {"deprecatedMessage" => "Superseded by the ReleaseManagement association. Configure the runtime role on the ReleaseManagement association and reference it via releaseManagementAssociationId.", "deprecatedSince" => "2026-08-04"}))
     GitHubConfiguration.struct_class = Types::GitHubConfiguration
 
     GitLabConfiguration.add_member(:project_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "projectId"))
     GitLabConfiguration.add_member(:project_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "projectPath"))
     GitLabConfiguration.add_member(:instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "instanceIdentifier"))
-    GitLabConfiguration.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "runtimeRoleArn"))
+    GitLabConfiguration.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RoleArn, deprecated: true, location_name: "runtimeRoleArn", metadata: {"deprecatedMessage" => "Superseded by the ReleaseManagement association. Configure the runtime role on the ReleaseManagement association and reference it via releaseManagementAssociationId.", "deprecatedSince" => "2026-08-04"}))
     GitLabConfiguration.struct_class = Types::GitLabConfiguration
 
     GitLabDetails.add_member(:target_url, Shapes::ShapeRef.new(shape: GitLabDetailsTargetUrlString, required: true, location_name: "targetUrl"))
     GitLabDetails.add_member(:token_type, Shapes::ShapeRef.new(shape: GitLabTokenType, required: true, location_name: "tokenType"))
-    GitLabDetails.add_member(:token_value, Shapes::ShapeRef.new(shape: GitLabDetailsTokenValueString, required: true, location_name: "tokenValue"))
+    GitLabDetails.add_member(:token_value, Shapes::ShapeRef.new(shape: GitLabTokenValue, required: true, location_name: "tokenValue"))
     GitLabDetails.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
     GitLabDetails.struct_class = Types::GitLabDetails
 
@@ -1127,7 +1184,7 @@ module Aws::DevOpsAgent
     ListAgentSpacesOutput.add_member(:agent_spaces, Shapes::ShapeRef.new(shape: AgentSpaceList, required: true, location_name: "agentSpaces"))
     ListAgentSpacesOutput.struct_class = Types::ListAgentSpacesOutput
 
-    ListAssetFilesRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    ListAssetFilesRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     ListAssetFilesRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "assetId"))
     ListAssetFilesRequest.add_member(:asset_version, Shapes::ShapeRef.new(shape: ListAssetFilesRequestAssetVersionInteger, location: "querystring", location_name: "assetVersion"))
     ListAssetFilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -1146,7 +1203,7 @@ module Aws::DevOpsAgent
     ListAssetTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAssetTypesResponse.struct_class = Types::ListAssetTypesResponse
 
-    ListAssetVersionsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    ListAssetVersionsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     ListAssetVersionsRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "assetId"))
     ListAssetVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAssetVersionsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListAssetVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -1156,7 +1213,7 @@ module Aws::DevOpsAgent
     ListAssetVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAssetVersionsResponse.struct_class = Types::ListAssetVersionsResponse
 
-    ListAssetsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    ListAssetsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     ListAssetsRequest.add_member(:asset_type, Shapes::ShapeRef.new(shape: AssetType, location: "querystring", location_name: "assetType"))
     ListAssetsRequest.add_member(:updated_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "updatedAfter"))
     ListAssetsRequest.add_member(:updated_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "updatedBefore"))
@@ -1178,7 +1235,7 @@ module Aws::DevOpsAgent
     ListAssociationsOutput.add_member(:associations, Shapes::ShapeRef.new(shape: AssociationsList, required: true, location_name: "associations"))
     ListAssociationsOutput.struct_class = Types::ListAssociationsOutput
 
-    ListBacklogTasksRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    ListBacklogTasksRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     ListBacklogTasksRequest.add_member(:filter, Shapes::ShapeRef.new(shape: TaskFilter, location_name: "filter"))
     ListBacklogTasksRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListBacklogTasksRequestLimitInteger, location_name: "limit"))
     ListBacklogTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -1190,7 +1247,7 @@ module Aws::DevOpsAgent
     ListBacklogTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListBacklogTasksResponse.struct_class = Types::ListBacklogTasksResponse
 
-    ListChatsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    ListChatsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     ListChatsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, deprecated: true, location: "querystring", location_name: "userId", metadata: {"deprecatedMessage" => "userId is managed by the service and should not be provided by the caller", "deprecatedSince" => "2026-04-15"}))
     ListChatsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListChatsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListChatsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -1200,7 +1257,7 @@ module Aws::DevOpsAgent
     ListChatsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListChatsResponse.struct_class = Types::ListChatsResponse
 
-    ListExecutionsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    ListExecutionsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     ListExecutionsRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "taskId"))
     ListExecutionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Integer, location_name: "limit"))
     ListExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -1210,7 +1267,7 @@ module Aws::DevOpsAgent
     ListExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListExecutionsResponse.struct_class = Types::ListExecutionsResponse
 
-    ListGoalsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    ListGoalsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     ListGoalsRequest.add_member(:status, Shapes::ShapeRef.new(shape: GoalStatus, location_name: "status"))
     ListGoalsRequest.add_member(:goal_type, Shapes::ShapeRef.new(shape: GoalType, location_name: "goalType"))
     ListGoalsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListGoalsRequestLimitInteger, location_name: "limit"))
@@ -1221,7 +1278,7 @@ module Aws::DevOpsAgent
     ListGoalsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListGoalsResponse.struct_class = Types::ListGoalsResponse
 
-    ListJournalRecordsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    ListJournalRecordsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     ListJournalRecordsRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "executionId"))
     ListJournalRecordsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListJournalRecordsRequestLimitInteger, location_name: "limit"))
     ListJournalRecordsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -1252,7 +1309,7 @@ module Aws::DevOpsAgent
     ListPrivateConnectionsOutput.add_member(:private_connections, Shapes::ShapeRef.new(shape: PrivateConnectionSummaryList, required: true, location_name: "privateConnections"))
     ListPrivateConnectionsOutput.struct_class = Types::ListPrivateConnectionsOutput
 
-    ListRecommendationsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    ListRecommendationsRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     ListRecommendationsRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "taskId"))
     ListRecommendationsRequest.add_member(:goal_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "goalId"))
     ListRecommendationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, location_name: "status"))
@@ -1280,7 +1337,7 @@ module Aws::DevOpsAgent
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    ListTriggersRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    ListTriggersRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     ListTriggersRequest.add_member(:status, Shapes::ShapeRef.new(shape: TriggerStatus, location: "querystring", location_name: "status"))
     ListTriggersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListTriggersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListTriggersRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
@@ -1325,8 +1382,10 @@ module Aws::DevOpsAgent
     MCPServerBearerTokenConfig.struct_class = Types::MCPServerBearerTokenConfig
 
     MCPServerConfiguration.add_member(:tools, Shapes::ShapeRef.new(shape: MCPToolsList, required: true, location_name: "tools"))
+    MCPServerConfiguration.add_member(:tool_details, Shapes::ShapeRef.new(shape: MCPToolDetailsList, location_name: "toolDetails"))
     MCPServerConfiguration.struct_class = Types::MCPServerConfiguration
 
+    MCPServerDatadogConfiguration.add_member(:enabled_elevated_tools, Shapes::ShapeRef.new(shape: MCPToolDetailsList, location_name: "enabledElevatedTools"))
     MCPServerDatadogConfiguration.struct_class = Types::MCPServerDatadogConfiguration
 
     MCPServerDetails.add_member(:name, Shapes::ShapeRef.new(shape: MCPServerName, required: true, location_name: "name"))
@@ -1338,6 +1397,7 @@ module Aws::DevOpsAgent
     MCPServerGrafanaConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: MCPServerGrafanaConfigurationEndpointString, required: true, location_name: "endpoint"))
     MCPServerGrafanaConfiguration.add_member(:organization_id, Shapes::ShapeRef.new(shape: MCPServerGrafanaConfigurationOrganizationIdString, location_name: "organizationId"))
     MCPServerGrafanaConfiguration.add_member(:tools, Shapes::ShapeRef.new(shape: MCPToolsList, location_name: "tools"))
+    MCPServerGrafanaConfiguration.add_member(:enabled_elevated_tools, Shapes::ShapeRef.new(shape: MCPToolDetailsList, location_name: "enabledElevatedTools"))
     MCPServerGrafanaConfiguration.struct_class = Types::MCPServerGrafanaConfiguration
 
     MCPServerNewRelicConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: MCPServerNewRelicConfigurationAccountIdString, required: true, location_name: "accountId"))
@@ -1371,6 +1431,7 @@ module Aws::DevOpsAgent
     MCPServerSigV4AuthorizationConfig.struct_class = Types::MCPServerSigV4AuthorizationConfig
 
     MCPServerSigV4Configuration.add_member(:tools, Shapes::ShapeRef.new(shape: MCPToolsList, required: true, location_name: "tools"))
+    MCPServerSigV4Configuration.add_member(:tool_details, Shapes::ShapeRef.new(shape: MCPToolDetailsList, location_name: "toolDetails"))
     MCPServerSigV4Configuration.struct_class = Types::MCPServerSigV4Configuration
 
     MCPServerSigV4ServiceDetails.add_member(:name, Shapes::ShapeRef.new(shape: MCPServerName, required: true, location_name: "name"))
@@ -1380,6 +1441,12 @@ module Aws::DevOpsAgent
     MCPServerSigV4ServiceDetails.struct_class = Types::MCPServerSigV4ServiceDetails
 
     MCPServerSplunkConfiguration.struct_class = Types::MCPServerSplunkConfiguration
+
+    MCPToolDetail.add_member(:name, Shapes::ShapeRef.new(shape: MCPToolDetailNameString, required: true, location_name: "name"))
+    MCPToolDetail.add_member(:tool_classification, Shapes::ShapeRef.new(shape: ToolClassification, location_name: "toolClassification"))
+    MCPToolDetail.struct_class = Types::MCPToolDetail
+
+    MCPToolDetailsList.member = Shapes::ShapeRef.new(shape: MCPToolDetail)
 
     MCPToolsList.member = Shapes::ShapeRef.new(shape: MCPToolsListMemberString)
 
@@ -1393,7 +1460,7 @@ module Aws::DevOpsAgent
 
     NewRelicAlertPolicyIds.member = Shapes::ShapeRef.new(shape: NewRelicAlertPolicyIdsMemberString)
 
-    NewRelicApiKeyConfig.add_member(:api_key, Shapes::ShapeRef.new(shape: NewRelicApiKeyConfigApiKeyString, required: true, location_name: "apiKey"))
+    NewRelicApiKeyConfig.add_member(:api_key, Shapes::ShapeRef.new(shape: NewRelicApiKey, required: true, location_name: "apiKey"))
     NewRelicApiKeyConfig.add_member(:account_id, Shapes::ShapeRef.new(shape: NewRelicApiKeyConfigAccountIdString, required: true, location_name: "accountId"))
     NewRelicApiKeyConfig.add_member(:region, Shapes::ShapeRef.new(shape: NewRelicRegion, required: true, location_name: "region"))
     NewRelicApiKeyConfig.add_member(:application_ids, Shapes::ShapeRef.new(shape: NewRelicApplicationIds, location_name: "applicationIds"))
@@ -1442,6 +1509,9 @@ module Aws::DevOpsAgent
     PagerDutyScopesList.member = Shapes::ShapeRef.new(shape: String)
 
     PagerDutyServicesList.member = Shapes::ShapeRef.new(shape: String)
+
+    PatternFilter.add_member(:patterns, Shapes::ShapeRef.new(shape: TriggerRegexPatternList, required: true, location_name: "patterns"))
+    PatternFilter.struct_class = Types::PatternFilter
 
     PendingMessage.add_member(:message_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "messageId"))
     PendingMessage.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
@@ -1596,6 +1666,8 @@ module Aws::DevOpsAgent
     RegisteredService.add_member(:additional_service_details, Shapes::ShapeRef.new(shape: AdditionalServiceDetails, location_name: "additionalServiceDetails"))
     RegisteredService.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     RegisteredService.add_member(:private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, location_name: "privateConnectionName"))
+    RegisteredService.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    RegisteredService.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
     RegisteredService.struct_class = Types::RegisteredService
 
     RegisteredServiceNowDetails.add_member(:instance_url, Shapes::ShapeRef.new(shape: ServiceNowInstanceUrl, location_name: "instanceUrl"))
@@ -1698,6 +1770,7 @@ module Aws::DevOpsAgent
     SendMessageContext.add_member(:current_page, Shapes::ShapeRef.new(shape: String, location_name: "currentPage"))
     SendMessageContext.add_member(:last_message, Shapes::ShapeRef.new(shape: String, location_name: "lastMessage"))
     SendMessageContext.add_member(:user_action_response, Shapes::ShapeRef.new(shape: String, location_name: "userActionResponse"))
+    SendMessageContext.add_member(:approval_action, Shapes::ShapeRef.new(shape: ApprovalAction, location_name: "approvalAction"))
     SendMessageContext.struct_class = Types::SendMessageContext
 
     SendMessageEvents.add_member(:response_created, Shapes::ShapeRef.new(shape: SendMessageResponseCreatedEvent, event: true, location_name: "responseCreated"))
@@ -1716,12 +1789,13 @@ module Aws::DevOpsAgent
     SendMessageJsonDelta.add_member(:partial_json, Shapes::ShapeRef.new(shape: String, location_name: "partialJson"))
     SendMessageJsonDelta.struct_class = Types::SendMessageJsonDelta
 
-    SendMessageRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    SendMessageRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     SendMessageRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: ChatExecutionId, required: true, location_name: "executionId"))
     SendMessageRequest.add_member(:content, Shapes::ShapeRef.new(shape: MessageContent, required: true, location_name: "content"))
     SendMessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: SendMessageContext, location_name: "context"))
     SendMessageRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, deprecated: true, location_name: "userId", metadata: {"deprecatedMessage" => "userId is managed by the service and should not be provided by the caller", "deprecatedSince" => "2026-04-15"}))
     SendMessageRequest.add_member(:asset_ids, Shapes::ShapeRef.new(shape: AssetIdList, location_name: "assetIds"))
+    SendMessageRequest.add_member(:model_tier, Shapes::ShapeRef.new(shape: String, location_name: "modelTier"))
     SendMessageRequest.struct_class = Types::SendMessageRequest
 
     SendMessageResponse.add_member(:events, Shapes::ShapeRef.new(shape: SendMessageEvents, required: true, eventstream: true, location_name: "events"))
@@ -1870,6 +1944,10 @@ module Aws::DevOpsAgent
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    SlackBidirectionalConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    SlackBidirectionalConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    SlackBidirectionalConfiguration.struct_class = Types::SlackBidirectionalConfiguration
+
     SlackChannel.add_member(:channel_name, Shapes::ShapeRef.new(shape: String, location_name: "channelName"))
     SlackChannel.add_member(:channel_id, Shapes::ShapeRef.new(shape: SlackChannelChannelIdString, required: true, location_name: "channelId"))
     SlackChannel.struct_class = Types::SlackChannel
@@ -1877,6 +1955,7 @@ module Aws::DevOpsAgent
     SlackConfiguration.add_member(:workspace_id, Shapes::ShapeRef.new(shape: SlackConfigurationWorkspaceIdString, required: true, location_name: "workspaceId"))
     SlackConfiguration.add_member(:workspace_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "workspaceName"))
     SlackConfiguration.add_member(:transmission_target, Shapes::ShapeRef.new(shape: SlackTransmissionTarget, required: true, location_name: "transmissionTarget"))
+    SlackConfiguration.add_member(:bidirectional, Shapes::ShapeRef.new(shape: SlackBidirectionalConfiguration, location_name: "bidirectional"))
     SlackConfiguration.struct_class = Types::SlackConfiguration
 
     SlackTransmissionTarget.add_member(:ops_oncall_target, Shapes::ShapeRef.new(shape: SlackChannel, required: true, location_name: "opsOncallTarget"))
@@ -1887,6 +1966,8 @@ module Aws::DevOpsAgent
     SourceAwsConfiguration.add_member(:account_type, Shapes::ShapeRef.new(shape: SourceAccountType, required: true, location_name: "accountType"))
     SourceAwsConfiguration.add_member(:assumable_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "assumableRoleArn"))
     SourceAwsConfiguration.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    SourceAwsConfiguration.add_member(:agent_elevated_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "agentElevatedRoleArn"))
+    SourceAwsConfiguration.add_member(:agent_elevated_role_arn_status, Shapes::ShapeRef.new(shape: ValidationStatus, location_name: "agentElevatedRoleArnStatus"))
     SourceAwsConfiguration.struct_class = Types::SourceAwsConfiguration
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -1954,7 +2035,17 @@ module Aws::DevOpsAgent
     TriggerCondition.add_member_subclass(:unknown, Types::TriggerCondition::Unknown)
     TriggerCondition.struct_class = Types::TriggerCondition
 
+    TriggerEventList.member = Shapes::ShapeRef.new(shape: TriggerEvent)
+
+    TriggerFilterGroup.add_member(:events, Shapes::ShapeRef.new(shape: TriggerEventList, location_name: "events"))
+    TriggerFilterGroup.add_member(:target_branches, Shapes::ShapeRef.new(shape: PatternFilter, location_name: "targetBranches"))
+    TriggerFilterGroup.struct_class = Types::TriggerFilterGroup
+
+    TriggerFilterGroups.member = Shapes::ShapeRef.new(shape: TriggerFilterGroup)
+
     TriggerList.member = Shapes::ShapeRef.new(shape: Trigger)
+
+    TriggerRegexPatternList.member = Shapes::ShapeRef.new(shape: TriggerRegexPattern)
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: UntagResourceRequestResourceArnString, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -1966,12 +2057,27 @@ module Aws::DevOpsAgent
     UpdateAgentSpaceInput.add_member(:name, Shapes::ShapeRef.new(shape: AgentSpaceName, location_name: "name"))
     UpdateAgentSpaceInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateAgentSpaceInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
+    UpdateAgentSpaceInput.add_member(:preferences, Shapes::ShapeRef.new(shape: AgentSpacePreferences, location_name: "preferences"))
     UpdateAgentSpaceInput.struct_class = Types::UpdateAgentSpaceInput
 
     UpdateAgentSpaceOutput.add_member(:agent_space, Shapes::ShapeRef.new(shape: AgentSpace, required: true, location_name: "agentSpace"))
     UpdateAgentSpaceOutput.struct_class = Types::UpdateAgentSpaceOutput
 
-    UpdateAssetFileRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    UpdateApprovalActionRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
+    UpdateApprovalActionRequest.add_member(:approval_id, Shapes::ShapeRef.new(shape: ApprovalId, required: true, location: "uri", location_name: "approvalId"))
+    UpdateApprovalActionRequest.add_member(:action, Shapes::ShapeRef.new(shape: ApprovalActionType, required: true, location_name: "action"))
+    UpdateApprovalActionRequest.add_member(:final_pattern, Shapes::ShapeRef.new(shape: ApprovalPattern, location_name: "finalPattern"))
+    UpdateApprovalActionRequest.add_member(:reason, Shapes::ShapeRef.new(shape: ApprovalReason, location_name: "reason"))
+    UpdateApprovalActionRequest.add_member(:ttl_seconds, Shapes::ShapeRef.new(shape: UpdateApprovalActionRequestTtlSecondsInteger, location_name: "ttlSeconds"))
+    UpdateApprovalActionRequest.add_member(:single_use, Shapes::ShapeRef.new(shape: Boolean, location_name: "singleUse"))
+    UpdateApprovalActionRequest.struct_class = Types::UpdateApprovalActionRequest
+
+    UpdateApprovalActionResponse.add_member(:approval_id, Shapes::ShapeRef.new(shape: ApprovalId, required: true, location_name: "approvalId"))
+    UpdateApprovalActionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ApprovalStatus, required: true, location_name: "status"))
+    UpdateApprovalActionResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    UpdateApprovalActionResponse.struct_class = Types::UpdateApprovalActionResponse
+
+    UpdateAssetFileRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     UpdateAssetFileRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "assetId"))
     UpdateAssetFileRequest.add_member(:path, Shapes::ShapeRef.new(shape: AssetFilePath, required: true, location: "uri", location_name: "path"))
     UpdateAssetFileRequest.add_member(:content, Shapes::ShapeRef.new(shape: AssetFileBody, location_name: "content"))
@@ -1982,7 +2088,7 @@ module Aws::DevOpsAgent
     UpdateAssetFileResponse.add_member(:file, Shapes::ShapeRef.new(shape: AssetFile, required: true, location_name: "file"))
     UpdateAssetFileResponse.struct_class = Types::UpdateAssetFileResponse
 
-    UpdateAssetRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    UpdateAssetRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     UpdateAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "assetId"))
     UpdateAssetRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Document, location_name: "metadata"))
     UpdateAssetRequest.add_member(:content, Shapes::ShapeRef.new(shape: AssetContent, location_name: "content"))
@@ -2002,19 +2108,19 @@ module Aws::DevOpsAgent
     UpdateAssociationOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: GenericWebhook, location_name: "webhook"))
     UpdateAssociationOutput.struct_class = Types::UpdateAssociationOutput
 
-    UpdateBacklogTaskRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    UpdateBacklogTaskRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     UpdateBacklogTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "taskId"))
     UpdateBacklogTaskRequest.add_member(:task_status, Shapes::ShapeRef.new(shape: TaskStatus, location_name: "taskStatus"))
-    UpdateBacklogTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateBacklogTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateBacklogTaskRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateBacklogTaskRequest.struct_class = Types::UpdateBacklogTaskRequest
 
     UpdateBacklogTaskResponse.add_member(:task, Shapes::ShapeRef.new(shape: Task, required: true, location_name: "task"))
     UpdateBacklogTaskResponse.struct_class = Types::UpdateBacklogTaskResponse
 
-    UpdateGoalRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    UpdateGoalRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     UpdateGoalRequest.add_member(:goal_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "goalId"))
     UpdateGoalRequest.add_member(:evaluation_schedule, Shapes::ShapeRef.new(shape: GoalScheduleInput, location_name: "evaluationSchedule"))
-    UpdateGoalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateGoalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateGoalRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateGoalRequest.struct_class = Types::UpdateGoalRequest
 
     UpdateGoalResponse.add_member(:goal, Shapes::ShapeRef.new(shape: Goal, required: true, location_name: "goal"))
@@ -2044,17 +2150,17 @@ module Aws::DevOpsAgent
     UpdatePrivateConnectionCertificateOutput.add_member(:failure_message, Shapes::ShapeRef.new(shape: FailureMessage, location_name: "failureMessage"))
     UpdatePrivateConnectionCertificateOutput.struct_class = Types::UpdatePrivateConnectionCertificateOutput
 
-    UpdateRecommendationRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    UpdateRecommendationRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     UpdateRecommendationRequest.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "recommendationId"))
     UpdateRecommendationRequest.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, location_name: "status"))
     UpdateRecommendationRequest.add_member(:additional_context, Shapes::ShapeRef.new(shape: String, location_name: "additionalContext"))
-    UpdateRecommendationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateRecommendationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateRecommendationRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateRecommendationRequest.struct_class = Types::UpdateRecommendationRequest
 
     UpdateRecommendationResponse.add_member(:recommendation, Shapes::ShapeRef.new(shape: Recommendation, required: true, location_name: "recommendation"))
     UpdateRecommendationResponse.struct_class = Types::UpdateRecommendationResponse
 
-    UpdateTriggerRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    UpdateTriggerRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     UpdateTriggerRequest.add_member(:trigger_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "triggerId"))
     UpdateTriggerRequest.add_member(:status, Shapes::ShapeRef.new(shape: TriggerStatus, location_name: "status"))
     UpdateTriggerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateTriggerRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -2259,8 +2365,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -3227,6 +3333,26 @@ module Aws::DevOpsAgent
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateAgentSpaceInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateAgentSpaceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ContentSizeExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:update_approval_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApprovalAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/agents/agent-space/{agentSpaceId}/approvals/{approvalId}/update-action"
+        o.endpoint_pattern = {
+          "hostPrefix" => "dp.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateApprovalActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApprovalActionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ContentSizeExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

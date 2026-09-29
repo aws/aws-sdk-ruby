@@ -140,6 +140,7 @@ module Aws::Kafka
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     JmxExporter = Shapes::StructureShape.new(name: 'JmxExporter')
     JmxExporterInfo = Shapes::StructureShape.new(name: 'JmxExporterInfo')
+    JwtSigningAlgorithm = Shapes::StringShape.new(name: 'JwtSigningAlgorithm')
     KafkaCluster = Shapes::StructureShape.new(name: 'KafkaCluster')
     KafkaClusterClientAuthentication = Shapes::StructureShape.new(name: 'KafkaClusterClientAuthentication')
     KafkaClusterClientVpcConfig = Shapes::StructureShape.new(name: 'KafkaClusterClientVpcConfig')
@@ -147,6 +148,10 @@ module Aws::Kafka
     KafkaClusterEncryptionInTransit = Shapes::StructureShape.new(name: 'KafkaClusterEncryptionInTransit')
     KafkaClusterEncryptionInTransitType = Shapes::StringShape.new(name: 'KafkaClusterEncryptionInTransitType')
     KafkaClusterMTLSAuthentication = Shapes::StructureShape.new(name: 'KafkaClusterMTLSAuthentication')
+    KafkaClusterOAuthClientCredentials = Shapes::StructureShape.new(name: 'KafkaClusterOAuthClientCredentials')
+    KafkaClusterOAuthClientCredentialsAssertion = Shapes::StructureShape.new(name: 'KafkaClusterOAuthClientCredentialsAssertion')
+    KafkaClusterOAuthIamJwtBearer = Shapes::StructureShape.new(name: 'KafkaClusterOAuthIamJwtBearer')
+    KafkaClusterSaslOAuthBearerAuthentication = Shapes::StructureShape.new(name: 'KafkaClusterSaslOAuthBearerAuthentication')
     KafkaClusterSaslScramAuthentication = Shapes::StructureShape.new(name: 'KafkaClusterSaslScramAuthentication')
     KafkaClusterSaslScramMechanism = Shapes::StringShape.new(name: 'KafkaClusterSaslScramMechanism')
     KafkaClusterSummary = Shapes::StructureShape.new(name: 'KafkaClusterSummary')
@@ -253,6 +258,7 @@ module Aws::Kafka
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TargetCompressionType = Shapes::StringShape.new(name: 'TargetCompressionType')
     Tls = Shapes::StructureShape.new(name: 'Tls')
+    TokenEndpointAuthenticationMethod = Shapes::StringShape.new(name: 'TokenEndpointAuthenticationMethod')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TopicConfiguration = Shapes::StructureShape.new(name: 'TopicConfiguration')
     TopicExistsException = Shapes::StructureShape.new(name: 'TopicExistsException')
@@ -1003,6 +1009,7 @@ module Aws::Kafka
 
     KafkaClusterClientAuthentication.add_member(:sasl_scram, Shapes::ShapeRef.new(shape: KafkaClusterSaslScramAuthentication, location_name: "saslScram"))
     KafkaClusterClientAuthentication.add_member(:mtls, Shapes::ShapeRef.new(shape: KafkaClusterMTLSAuthentication, location_name: "mTLS"))
+    KafkaClusterClientAuthentication.add_member(:sasl_o_auth_bearer, Shapes::ShapeRef.new(shape: KafkaClusterSaslOAuthBearerAuthentication, location_name: "saslOAuthBearer"))
     KafkaClusterClientAuthentication.struct_class = Types::KafkaClusterClientAuthentication
 
     KafkaClusterClientVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroupIds"))
@@ -1023,6 +1030,28 @@ module Aws::Kafka
 
     KafkaClusterMTLSAuthentication.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "secretArn"))
     KafkaClusterMTLSAuthentication.struct_class = Types::KafkaClusterMTLSAuthentication
+
+    KafkaClusterOAuthClientCredentials.add_member(:token_request_secret_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "tokenRequestSecretArn"))
+    KafkaClusterOAuthClientCredentials.struct_class = Types::KafkaClusterOAuthClientCredentials
+
+    KafkaClusterOAuthClientCredentialsAssertion.add_member(:audience, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "audience"))
+    KafkaClusterOAuthClientCredentialsAssertion.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: JwtSigningAlgorithm, required: true, location_name: "signingAlgorithm"))
+    KafkaClusterOAuthClientCredentialsAssertion.add_member(:token_request_secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "tokenRequestSecretArn"))
+    KafkaClusterOAuthClientCredentialsAssertion.struct_class = Types::KafkaClusterOAuthClientCredentialsAssertion
+
+    KafkaClusterOAuthIamJwtBearer.add_member(:audience, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "audience"))
+    KafkaClusterOAuthIamJwtBearer.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: JwtSigningAlgorithm, required: true, location_name: "signingAlgorithm"))
+    KafkaClusterOAuthIamJwtBearer.add_member(:token_request_secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "tokenRequestSecretArn"))
+    KafkaClusterOAuthIamJwtBearer.struct_class = Types::KafkaClusterOAuthIamJwtBearer
+
+    KafkaClusterSaslOAuthBearerAuthentication.add_member(:token_endpoint_url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "tokenEndpointUrl"))
+    KafkaClusterSaslOAuthBearerAuthentication.add_member(:client_credentials, Shapes::ShapeRef.new(shape: KafkaClusterOAuthClientCredentials, location_name: "clientCredentials"))
+    KafkaClusterSaslOAuthBearerAuthentication.add_member(:iam_jwt_bearer, Shapes::ShapeRef.new(shape: KafkaClusterOAuthIamJwtBearer, location_name: "iamJwtBearer"))
+    KafkaClusterSaslOAuthBearerAuthentication.add_member(:client_credentials_assertion, Shapes::ShapeRef.new(shape: KafkaClusterOAuthClientCredentialsAssertion, location_name: "clientCredentialsAssertion"))
+    KafkaClusterSaslOAuthBearerAuthentication.add_member(:token_endpoint_authentication_method, Shapes::ShapeRef.new(shape: TokenEndpointAuthenticationMethod, required: true, location_name: "tokenEndpointAuthenticationMethod"))
+    KafkaClusterSaslOAuthBearerAuthentication.add_member(:scope, Shapes::ShapeRef.new(shape: __string, location_name: "scope"))
+    KafkaClusterSaslOAuthBearerAuthentication.add_member(:token_endpoint_tls_certificate_arn, Shapes::ShapeRef.new(shape: __string, location_name: "tokenEndpointTlsCertificateArn"))
+    KafkaClusterSaslOAuthBearerAuthentication.struct_class = Types::KafkaClusterSaslOAuthBearerAuthentication
 
     KafkaClusterSaslScramAuthentication.add_member(:mechanism, Shapes::ShapeRef.new(shape: KafkaClusterSaslScramMechanism, required: true, location_name: "mechanism"))
     KafkaClusterSaslScramAuthentication.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "secretArn"))

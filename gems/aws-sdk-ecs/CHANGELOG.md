@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.247.0 (2026-09-11)
+------------------
+
+* Feature - This feature adds support for setting the cpu architecture type that should be used to launch tasks for an Express Gateway Service.
+
+1.246.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.245.0 (2026-09-03)
+------------------
+
+* Feature - Adds a critical parameter to the Amazon ECS managed daemon APIs that controls whether a daemon task failure drains the container instance. Non-critical daemon failures no longer drain the instance or block instance registration.
+
+1.244.0 (2026-08-28)
+------------------
+
+* Feature - Amazon Elastic Container Service - This release adds support for early success criteria on ECS rolling deployments, letting deployment complete once a configurable percentage of tasks are healthy, with configurable BLOCKING (required) or DEFERRED (asynchronous) cleanup of previous service revisions.
+
 1.243.0 (2026-08-05)
 ------------------
 

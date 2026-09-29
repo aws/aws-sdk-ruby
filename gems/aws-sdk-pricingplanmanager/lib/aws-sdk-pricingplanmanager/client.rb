@@ -569,8 +569,8 @@ module Aws::PricingPlanManager
     #
     # <note markdown="1"> For subscriptions in the CloudFront plan family, the associated
     # resources must include exactly one Amazon CloudFront distribution and
-    # one AWS WAF web ACL. You can also include other supported resources,
-    # such as Amazon Route 53 hosted zones, and CloudFront KeyValueStores.
+    # one WAF web ACL. You can also include other supported resources, such
+    # as Amazon Route 53 hosted zones, and CloudFront KeyValueStores.
     #
     #  </note>
     #
@@ -870,12 +870,12 @@ module Aws::PricingPlanManager
     #   configuration, or a higher level if your plan tier supports it.
     #
     # @option params [required, Array<String>] :resource_arns
-    #   The ARNs of the AWS resources to include in the subscription. Specify
-    #   one or more supported resources.
+    #   The ARNs of the resources to include in the subscription. Specify one
+    #   or more supported resources.
     #
     #   <note markdown="1"> For subscriptions in the CloudFront plan family, the resources must
-    #   include exactly one Amazon CloudFront distribution and exactly one AWS
-    #   WAF web ACL. You can also include other supported resources, such as
+    #   include exactly one Amazon CloudFront distribution and exactly one WAF
+    #   web ACL. You can also include other supported resources, such as
     #   Amazon Route 53 hosted zones and CloudFront KeyValueStores.
     #
     #    </note>
@@ -884,7 +884,9 @@ module Aws::PricingPlanManager
     #   Determines whether the subscription requires explicit approval before
     #   billing starts. Set to `MANUAL` to require a separate
     #   `ApprovePaidSubscription` call, or `IMMEDIATE` to activate the
-    #   subscription right away. Defaults to `IMMEDIATE` if not specified.
+    #   subscription right away. For paid tier plans, this defaults to
+    #   `MANUAL` if not specified. For the `FREE` plan tier, only `IMMEDIATE`
+    #   is supported, and it is the default.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure that
@@ -1001,7 +1003,7 @@ module Aws::PricingPlanManager
     #
     # <note markdown="1"> For subscriptions in the CloudFront plan family, the associated
     # resources must always include exactly one Amazon CloudFront
-    # distribution and exactly one AWS WAF web ACL. You cannot remove these
+    # distribution and exactly one WAF web ACL. You cannot remove these
     # required resources.
     #
     #  </note>
@@ -1359,7 +1361,7 @@ module Aws::PricingPlanManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pricingplanmanager'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

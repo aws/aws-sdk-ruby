@@ -89,6 +89,37 @@ module Aws
       credential_provider: Params::registry_record_credential_provider_union
     }
 
+      type agent_core_runtime_source_details = {
+      protocol_configuration: {
+        server_protocol: ("HTTP" | "A2A" | "MCP" | "AGUI")?
+      }?,
+      authorizer_configuration: Params::authorizer_configuration?,
+      workload_identity_details: {
+        workload_identity_arn: ::String
+      }?
+    }
+
+      type agent_core_gateway_source_details = {
+      protocol_type: ("MCP")?,
+      authorizer_type: ::String?,
+      authorizer_configuration: Params::authorizer_configuration?,
+      workload_identity_details: {
+        workload_identity_arn: ::String
+      }?
+    }
+
+      type source_details = {
+      agentcore_runtime: Params::agent_core_runtime_source_details?,
+      agentcore_gateway: Params::agent_core_gateway_source_details?
+    }
+
+      type provenance = {
+      relation: ("DETECTED_FROM"),
+      source_id: ::String,
+      source_type: ("AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Gateway")?,
+      source_details: Params::source_details?
+    }
+
       type updated_descriptor_source = {
       optional_value: Params::descriptor_source?
     }

@@ -55,6 +55,7 @@ module Aws::ObservabilityAdmin
       attr_accessor scope: ::String
       attr_accessor source_logs_configuration: Types::SourceLogsConfiguration
       attr_accessor source_metrics_configuration: Types::SourceMetricsConfiguration
+      attr_accessor source_context_graph_configuration: Types::SourceContextGraphConfiguration
       SENSITIVE: []
     end
 
@@ -69,6 +70,7 @@ module Aws::ObservabilityAdmin
       attr_accessor failure_reason: ("TRUSTED_ACCESS_NOT_ENABLED" | "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION" | "INTERNAL_SERVER_ERROR")
       attr_accessor tag_propagation_status: ("Healthy" | "Unhealthy")
       attr_accessor tag_propagation_failure_reason: ("RoleNotAssumable" | "RoleLacksPermissions")
+      attr_accessor context_graph_status: ("Healthy" | "Unhealthy" | "Provisioning")
       attr_accessor destination_account_id: ::String
       attr_accessor destination_region: ::String
       SENSITIVE: []
@@ -110,6 +112,20 @@ module Aws::ObservabilityAdmin
 
     class CreateCentralizationRuleForOrganizationOutput
       attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetIntegrationInput
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetIntegrationOutput
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -167,8 +183,21 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class DatasetIntegrationSummary
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class DeleteCentralizationRuleForOrganizationInput
       attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetIntegrationInput
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -251,7 +280,21 @@ module Aws::ObservabilityAdmin
       attr_accessor failure_reason: ("TRUSTED_ACCESS_NOT_ENABLED" | "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION" | "INTERNAL_SERVER_ERROR")
       attr_accessor tag_propagation_status: ("Healthy" | "Unhealthy")
       attr_accessor tag_propagation_failure_reason: ("RoleNotAssumable" | "RoleLacksPermissions")
+      attr_accessor context_graph_status: ("Healthy" | "Unhealthy" | "Provisioning")
       attr_accessor centralization_rule: Types::CentralizationRule
+      SENSITIVE: []
+    end
+
+    class GetDatasetIntegrationInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatasetIntegrationOutput
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -369,6 +412,18 @@ module Aws::ObservabilityAdmin
 
     class ListCentralizationRulesForOrganizationOutput
       attr_accessor centralization_rule_summaries: ::Array[Types::CentralizationRuleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetIntegrationsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetIntegrationsOutput
+      attr_accessor dataset_integration_summaries: ::Array[Types::DatasetIntegrationSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -560,6 +615,9 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class SourceContextGraphConfiguration < Aws::EmptyStructure
+    end
+
     class SourceLogsConfiguration
       attr_accessor log_group_selection_criteria: ::String
       attr_accessor data_source_selection_criteria: ::String
@@ -720,6 +778,20 @@ module Aws::ObservabilityAdmin
 
     class UpdateCentralizationRuleForOrganizationOutput
       attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetIntegrationInput
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetIntegrationOutput
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 

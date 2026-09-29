@@ -14,10 +14,13 @@ module Aws::LaunchWizard
 
     include Seahorse::Model
 
+    AccountConstraint = Shapes::UnionShape.new(name: 'AccountConstraint')
+    AccountConstraintsList = Shapes::ListShape.new(name: 'AccountConstraintsList')
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CreateDeploymentInput = Shapes::StructureShape.new(name: 'CreateDeploymentInput')
     CreateDeploymentOutput = Shapes::StructureShape.new(name: 'CreateDeploymentOutput')
+    DelegatedAdminConstraint = Shapes::StructureShape.new(name: 'DelegatedAdminConstraint')
     DeleteDeploymentInput = Shapes::StructureShape.new(name: 'DeleteDeploymentInput')
     DeleteDeploymentOutput = Shapes::StructureShape.new(name: 'DeleteDeploymentOutput')
     DeploymentConditionalField = Shapes::StructureShape.new(name: 'DeploymentConditionalField')
@@ -26,6 +29,9 @@ module Aws::LaunchWizard
     DeploymentDataSummaryList = Shapes::ListShape.new(name: 'DeploymentDataSummaryList')
     DeploymentEventDataSummary = Shapes::StructureShape.new(name: 'DeploymentEventDataSummary')
     DeploymentEventDataSummaryList = Shapes::ListShape.new(name: 'DeploymentEventDataSummaryList')
+    DeploymentEventMetadata = Shapes::MapShape.new(name: 'DeploymentEventMetadata')
+    DeploymentEventMetadataKey = Shapes::StringShape.new(name: 'DeploymentEventMetadataKey')
+    DeploymentEventMetadataValue = Shapes::StringShape.new(name: 'DeploymentEventMetadataValue')
     DeploymentFilter = Shapes::StructureShape.new(name: 'DeploymentFilter')
     DeploymentFilterKey = Shapes::StringShape.new(name: 'DeploymentFilterKey')
     DeploymentFilterList = Shapes::ListShape.new(name: 'DeploymentFilterList')
@@ -69,6 +75,7 @@ module Aws::LaunchWizard
     ListWorkloadDeploymentPatternsOutput = Shapes::StructureShape.new(name: 'ListWorkloadDeploymentPatternsOutput')
     ListWorkloadsInput = Shapes::StructureShape.new(name: 'ListWorkloadsInput')
     ListWorkloadsOutput = Shapes::StructureShape.new(name: 'ListWorkloadsOutput')
+    ManagementAccountConstraint = Shapes::StructureShape.new(name: 'ManagementAccountConstraint')
     MaxDeploymentEventResults = Shapes::IntegerShape.new(name: 'MaxDeploymentEventResults')
     MaxDeploymentResults = Shapes::IntegerShape.new(name: 'MaxDeploymentResults')
     MaxWorkloadDeploymentPatternResults = Shapes::IntegerShape.new(name: 'MaxWorkloadDeploymentPatternResults')
@@ -76,6 +83,7 @@ module Aws::LaunchWizard
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     ResourceLimitException = Shapes::StructureShape.new(name: 'ResourceLimitException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ServicePrincipalType = Shapes::StringShape.new(name: 'ServicePrincipalType')
     SpecificationsConditionalData = Shapes::ListShape.new(name: 'SpecificationsConditionalData')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -102,6 +110,16 @@ module Aws::LaunchWizard
     WorkloadStatus = Shapes::StringShape.new(name: 'WorkloadStatus')
     WorkloadVersionName = Shapes::StringShape.new(name: 'WorkloadVersionName')
 
+    AccountConstraint.add_member(:management_account, Shapes::ShapeRef.new(shape: ManagementAccountConstraint, location_name: "managementAccount"))
+    AccountConstraint.add_member(:delegated_admin, Shapes::ShapeRef.new(shape: DelegatedAdminConstraint, location_name: "delegatedAdmin"))
+    AccountConstraint.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AccountConstraint.add_member_subclass(:management_account, Types::AccountConstraint::ManagementAccount)
+    AccountConstraint.add_member_subclass(:delegated_admin, Types::AccountConstraint::DelegatedAdmin)
+    AccountConstraint.add_member_subclass(:unknown, Types::AccountConstraint::Unknown)
+    AccountConstraint.struct_class = Types::AccountConstraint
+
+    AccountConstraintsList.member = Shapes::ShapeRef.new(shape: AccountConstraint)
+
     AllowedValues.member = Shapes::ShapeRef.new(shape: ValueString)
 
     CreateDeploymentInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
@@ -114,6 +132,9 @@ module Aws::LaunchWizard
 
     CreateDeploymentOutput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
     CreateDeploymentOutput.struct_class = Types::CreateDeploymentOutput
+
+    DelegatedAdminConstraint.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipalType, required: true, location_name: "servicePrincipal"))
+    DelegatedAdminConstraint.struct_class = Types::DelegatedAdminConstraint
 
     DeleteDeploymentInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "deploymentId"))
     DeleteDeploymentInput.struct_class = Types::DeleteDeploymentInput
@@ -157,9 +178,13 @@ module Aws::LaunchWizard
     DeploymentEventDataSummary.add_member(:status, Shapes::ShapeRef.new(shape: EventStatus, location_name: "status"))
     DeploymentEventDataSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     DeploymentEventDataSummary.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))
+    DeploymentEventDataSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: DeploymentEventMetadata, location_name: "metadata"))
     DeploymentEventDataSummary.struct_class = Types::DeploymentEventDataSummary
 
     DeploymentEventDataSummaryList.member = Shapes::ShapeRef.new(shape: DeploymentEventDataSummary)
+
+    DeploymentEventMetadata.key = Shapes::ShapeRef.new(shape: DeploymentEventMetadataKey)
+    DeploymentEventMetadata.value = Shapes::ShapeRef.new(shape: DeploymentEventMetadataValue)
 
     DeploymentFilter.add_member(:name, Shapes::ShapeRef.new(shape: DeploymentFilterKey, location_name: "name"))
     DeploymentFilter.add_member(:values, Shapes::ShapeRef.new(shape: DeploymentFilterValues, location_name: "values"))
@@ -280,6 +305,8 @@ module Aws::LaunchWizard
     ListWorkloadsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkloadsOutput.struct_class = Types::ListWorkloadsOutput
 
+    ManagementAccountConstraint.struct_class = Types::ManagementAccountConstraint
+
     ResourceLimitException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceLimitException.struct_class = Types::ResourceLimitException
 
@@ -322,6 +349,7 @@ module Aws::LaunchWizard
     WorkloadData.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
     WorkloadData.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
     WorkloadData.add_member(:status, Shapes::ShapeRef.new(shape: WorkloadStatus, location_name: "status"))
+    WorkloadData.add_member(:account_constraints, Shapes::ShapeRef.new(shape: AccountConstraintsList, location_name: "accountConstraints"))
     WorkloadData.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     WorkloadData.add_member(:documentation_url, Shapes::ShapeRef.new(shape: String, location_name: "documentationUrl"))
     WorkloadData.add_member(:icon_url, Shapes::ShapeRef.new(shape: String, location_name: "iconUrl"))
@@ -331,6 +359,7 @@ module Aws::LaunchWizard
     WorkloadDataSummary.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
     WorkloadDataSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
     WorkloadDataSummary.add_member(:status, Shapes::ShapeRef.new(shape: WorkloadStatus, location_name: "status"))
+    WorkloadDataSummary.add_member(:account_constraints, Shapes::ShapeRef.new(shape: AccountConstraintsList, location_name: "accountConstraints"))
     WorkloadDataSummary.struct_class = Types::WorkloadDataSummary
 
     WorkloadDataSummaryList.member = Shapes::ShapeRef.new(shape: WorkloadDataSummary)
@@ -343,6 +372,7 @@ module Aws::LaunchWizard
     WorkloadDeploymentPatternData.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     WorkloadDeploymentPatternData.add_member(:status, Shapes::ShapeRef.new(shape: WorkloadDeploymentPatternStatus, location_name: "status"))
     WorkloadDeploymentPatternData.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    WorkloadDeploymentPatternData.add_member(:account_constraints, Shapes::ShapeRef.new(shape: AccountConstraintsList, location_name: "accountConstraints"))
     WorkloadDeploymentPatternData.add_member(:specifications, Shapes::ShapeRef.new(shape: DeploymentSpecificationsData, location_name: "specifications"))
     WorkloadDeploymentPatternData.struct_class = Types::WorkloadDeploymentPatternData
 
@@ -354,6 +384,7 @@ module Aws::LaunchWizard
     WorkloadDeploymentPatternDataSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     WorkloadDeploymentPatternDataSummary.add_member(:status, Shapes::ShapeRef.new(shape: WorkloadDeploymentPatternStatus, location_name: "status"))
     WorkloadDeploymentPatternDataSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    WorkloadDeploymentPatternDataSummary.add_member(:account_constraints, Shapes::ShapeRef.new(shape: AccountConstraintsList, location_name: "accountConstraints"))
     WorkloadDeploymentPatternDataSummary.struct_class = Types::WorkloadDeploymentPatternDataSummary
 
     WorkloadDeploymentPatternDataSummaryList.member = Shapes::ShapeRef.new(shape: WorkloadDeploymentPatternDataSummary)

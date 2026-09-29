@@ -320,6 +320,7 @@ module Aws::Drs
     SourceProperties = Shapes::StructureShape.new(name: 'SourceProperties')
     SourceServer = Shapes::StructureShape.new(name: 'SourceServer')
     SourceServerARN = Shapes::StringShape.new(name: 'SourceServerARN')
+    SourceServerArchitecture = Shapes::StringShape.new(name: 'SourceServerArchitecture')
     SourceServerID = Shapes::StringShape.new(name: 'SourceServerID')
     SourceServerIDs = Shapes::ListShape.new(name: 'SourceServerIDs')
     SourceServersList = Shapes::ListShape.new(name: 'SourceServersList')
@@ -1387,6 +1388,7 @@ module Aws::Drs
     SourceProperties.add_member(:ram_bytes, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "ramBytes"))
     SourceProperties.add_member(:os, Shapes::ShapeRef.new(shape: OS, location_name: "os"))
     SourceProperties.add_member(:supports_nitro_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "supportsNitroInstances"))
+    SourceProperties.add_member(:architecture, Shapes::ShapeRef.new(shape: SourceServerArchitecture, location_name: "architecture"))
     SourceProperties.struct_class = Types::SourceProperties
 
     SourceServer.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))

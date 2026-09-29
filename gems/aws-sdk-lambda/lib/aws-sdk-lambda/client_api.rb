@@ -132,9 +132,11 @@ module Aws::Lambda
     DeleteFunctionUrlConfigRequest = Shapes::StructureShape.new(name: 'DeleteFunctionUrlConfigRequest')
     DeleteLayerVersionRequest = Shapes::StructureShape.new(name: 'DeleteLayerVersionRequest')
     DeleteProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'DeleteProvisionedConcurrencyConfigRequest')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     Description = Shapes::StringShape.new(name: 'Description')
     DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
     DestinationConfig = Shapes::StructureShape.new(name: 'DestinationConfig')
+    DirectS3Read = Shapes::StringShape.new(name: 'DirectS3Read')
     DocumentDBEventSourceConfig = Shapes::StructureShape.new(name: 'DocumentDBEventSourceConfig')
     DurableConfig = Shapes::StructureShape.new(name: 'DurableConfig')
     DurableExecutionAlreadyStartedException = Shapes::StructureShape.new(name: 'DurableExecutionAlreadyStartedException')
@@ -270,6 +272,8 @@ module Aws::Lambda
     GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
     GetProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigRequest')
     GetProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigResponse')
+    GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
+    GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     GetRuntimeManagementConfigRequest = Shapes::StructureShape.new(name: 'GetRuntimeManagementConfigRequest')
     GetRuntimeManagementConfigResponse = Shapes::StructureShape.new(name: 'GetRuntimeManagementConfigResponse')
     Handler = Shapes::StringShape.new(name: 'Handler')
@@ -423,6 +427,7 @@ module Aws::Lambda
     Pattern = Shapes::StringShape.new(name: 'Pattern')
     PerExecutionEnvironmentMaxConcurrency = Shapes::IntegerShape.new(name: 'PerExecutionEnvironmentMaxConcurrency')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
+    PolicyResourceArn = Shapes::StringShape.new(name: 'PolicyResourceArn')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Principal = Shapes::StringShape.new(name: 'Principal')
@@ -451,6 +456,8 @@ module Aws::Lambda
     PutFunctionScalingConfigResponse = Shapes::StructureShape.new(name: 'PutFunctionScalingConfigResponse')
     PutProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigRequest')
     PutProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigResponse')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     PutRuntimeManagementConfigRequest = Shapes::StructureShape.new(name: 'PutRuntimeManagementConfigRequest')
     PutRuntimeManagementConfigResponse = Shapes::StructureShape.new(name: 'PutRuntimeManagementConfigResponse')
     Qualifier = Shapes::StringShape.new(name: 'Qualifier')
@@ -469,16 +476,19 @@ module Aws::Lambda
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
+    ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
     ResponseStreamingInvocationType = Shapes::StringShape.new(name: 'ResponseStreamingInvocationType')
     RetentionPeriodInDays = Shapes::IntegerShape.new(name: 'RetentionPeriodInDays')
     RetryDetails = Shapes::StructureShape.new(name: 'RetryDetails')
     ReverseOrder = Shapes::BooleanShape.new(name: 'ReverseOrder')
+    RevisionId = Shapes::StringShape.new(name: 'RevisionId')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
     RuntimeVersionArn = Shapes::StringShape.new(name: 'RuntimeVersionArn')
     RuntimeVersionConfig = Shapes::StructureShape.new(name: 'RuntimeVersionConfig')
     RuntimeVersionError = Shapes::StructureShape.new(name: 'RuntimeVersionError')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
+    S3FilesConfig = Shapes::StructureShape.new(name: 'S3FilesConfig')
     S3FilesMountConnectivityException = Shapes::StructureShape.new(name: 'S3FilesMountConnectivityException')
     S3FilesMountFailureException = Shapes::StructureShape.new(name: 'S3FilesMountFailureException')
     S3FilesMountTimeoutException = Shapes::StructureShape.new(name: 'S3FilesMountTimeoutException')
@@ -1005,6 +1015,10 @@ module Aws::Lambda
     DeleteProvisionedConcurrencyConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, required: true, location: "querystring", location_name: "Qualifier"))
     DeleteProvisionedConcurrencyConfigRequest.struct_class = Types::DeleteProvisionedConcurrencyConfigRequest
 
+    DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PolicyResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    DeleteResourcePolicyRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location: "querystring", location_name: "RevisionId"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
     DestinationConfig.add_member(:on_success, Shapes::ShapeRef.new(shape: OnSuccess, location_name: "OnSuccess"))
     DestinationConfig.add_member(:on_failure, Shapes::ShapeRef.new(shape: OnFailure, location_name: "OnFailure"))
     DestinationConfig.struct_class = Types::DestinationConfig
@@ -1214,6 +1228,7 @@ module Aws::Lambda
 
     FileSystemConfig.add_member(:arn, Shapes::ShapeRef.new(shape: FileSystemArn, required: true, location_name: "Arn"))
     FileSystemConfig.add_member(:local_mount_path, Shapes::ShapeRef.new(shape: LocalMountPath, required: true, location_name: "LocalMountPath"))
+    FileSystemConfig.add_member(:s3_files_config, Shapes::ShapeRef.new(shape: S3FilesConfig, location_name: "S3FilesConfig"))
     FileSystemConfig.struct_class = Types::FileSystemConfig
 
     FileSystemConfigList.member = Shapes::ShapeRef.new(shape: FileSystemConfig)
@@ -1504,6 +1519,13 @@ module Aws::Lambda
     GetProvisionedConcurrencyConfigResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
     GetProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     GetProvisionedConcurrencyConfigResponse.struct_class = Types::GetProvisionedConcurrencyConfigResponse
+
+    GetResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PolicyResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
+
+    GetResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
+    GetResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "RevisionId"))
+    GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
 
     GetRuntimeManagementConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     GetRuntimeManagementConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: NumericLatestPublishedOrAliasQualifier, location: "querystring", location_name: "Qualifier"))
@@ -2024,6 +2046,15 @@ module Aws::Lambda
     PutProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     PutProvisionedConcurrencyConfigResponse.struct_class = Types::PutProvisionedConcurrencyConfigResponse
 
+    PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PolicyResourceArn, required: true, location: "uri", location_name: "ResourceArn"))
+    PutResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "Policy"))
+    PutResourcePolicyRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "RevisionId"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
+    PutResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "RevisionId"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
+
     PutRuntimeManagementConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     PutRuntimeManagementConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: NumericLatestPublishedOrAliasQualifier, location: "querystring", location_name: "Qualifier"))
     PutRuntimeManagementConfigRequest.add_member(:update_runtime_on, Shapes::ShapeRef.new(shape: UpdateRuntimeOn, required: true, location_name: "UpdateRuntimeOn"))
@@ -2089,6 +2120,9 @@ module Aws::Lambda
     RuntimeVersionError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
     RuntimeVersionError.add_member(:message, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Message"))
     RuntimeVersionError.struct_class = Types::RuntimeVersionError
+
+    S3FilesConfig.add_member(:direct_s3_read, Shapes::ShapeRef.new(shape: DirectS3Read, location_name: "DirectS3Read"))
+    S3FilesConfig.struct_class = Types::S3FilesConfig
 
     S3FilesMountConnectivityException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     S3FilesMountConnectivityException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -2688,6 +2722,20 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2026-07-09/resource-policy/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+      end)
+
       api.add_operation(:get_account_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAccountSettings"
         o.http_method = "GET"
@@ -2957,6 +3005,18 @@ module Aws::Lambda
         o.output = Shapes::ShapeRef.new(shape: GetProvisionedConcurrencyConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedConcurrencyConfigNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/2026-07-09/resource-policy/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3472,6 +3532,22 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2026-07-09/resource-policy/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PublicPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyLengthExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
       end)
 
       api.add_operation(:put_runtime_management_config, Seahorse::Model::Operation.new.tap do |o|

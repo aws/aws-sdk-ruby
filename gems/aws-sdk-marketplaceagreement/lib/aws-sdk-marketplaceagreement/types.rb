@@ -202,11 +202,13 @@ module Aws::MarketplaceAgreement
     #   agreement ends on its pre-defined end date), a new agreement will be
     #   created using the accepted terms on the existing agreement. In other
     #   words, the agreement will be renewed. Presence of `RenewalTerm` in
-    #   the offer document means that auto-renewal is allowed. Buyers will
-    #   have the option to accept or decline auto-renewal at the offer
-    #   acceptance/agreement creation. Buyers can also change this flag from
-    #   `True` to `False` or `False` to `True` at anytime during the
-    #   agreement's lifecycle.
+    #   the offer document means that auto-renewal is allowed. The acceptor
+    #   will have the option to accept or decline auto-renewal at the offer
+    #   acceptance/agreement creation. The acceptor can also change this
+    #   flag from `True` to `False` or `False` to `True`, within the limits
+    #   set by `LockoutPeriod` and `MaxRenewals`. Setting the flag to `True`
+    #   doesn't by itself guarantee that the agreement renews, because the
+    #   proposer can also opt out.
     #   @return [Types::RenewalTerm]
     #
     # @!attribute [rw] usage_based_pricing_term
@@ -500,6 +502,18 @@ module Aws::MarketplaceAgreement
     #   pay-as-you-go agreements, which don’t have end dates.
     #   @return [Time]
     #
+    # @!attribute [rw] last_update_time
+    #   The date and time when the agreement was last updated. An agreement
+    #   is updated when any of its attributes or accepted terms change.
+    #   Amendments, renewals, and a party changing whether the agreement
+    #   renews are all examples.
+    #
+    #   Use the `BeforeLastUpdateTime` and `AfterLastUpdateTime` filters to
+    #   search on this value, and `LastUpdateTime` as the `SortBy` value to
+    #   sort by it. Sorting by `LastUpdateTime` is supported only when
+    #   `PartyType` is `Proposer`.
+    #   @return [Time]
+    #
     # @!attribute [rw] agreement_type
     #   The type of agreement.
     #   @return [String]
@@ -526,6 +540,61 @@ module Aws::MarketplaceAgreement
     #   A list of entitlements associated with the agreement.
     #   @return [Array<Types::Entitlement>]
     #
+    # @!attribute [rw] initial_agreement_id
+    #   The unique identifier of the very first agreement in a chain of
+    #   related agreements, such as renewals or replacements. It stays the
+    #   same across all agreements in that chain, which lets you trace an
+    #   agreement back to the original. You can also use it as the
+    #   `InitialAgreementId` filter value to return every agreement in the
+    #   same chain.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time_behavior_type
+    #   The behavior of the agreement when it reaches its end date. The
+    #   field is `null` for agreements that have no end date, because those
+    #   agreements never reach an end time.
+    #
+    #   Types include:
+    #
+    #   * `RENEW` – A new agreement is created from the accepted terms of
+    #     this agreement.
+    #
+    #   * `REPLACE` – A new agreement is created from a different offer than
+    #     the one this agreement was created from. This happens, for
+    #     example, when a private offer reaches its end date and the
+    #     acceptor transitions to the public offer for the product.
+    #
+    #   * `EXPIRE` – The agreement ends and isn't renewed or replaced.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time_behavior_reason_code
+    #   The reason why the agreement doesn't renew at its end date. The
+    #   field is `null` when the agreement renews.
+    #
+    #   More than one reason can apply to the same agreement. When that
+    #   happens, the operation returns only one reason code, and
+    #   `PROPOSER_RENEW_OPTED_OUT` takes precedence over all others.
+    #
+    #   The `EnableAutoRenew` field reflects only the acceptor's
+    #   preference, and doesn't reflect the other reasons an agreement
+    #   might not renew.
+    #
+    #   Reason codes include:
+    #
+    #   * `PROPOSER_RENEW_OPTED_OUT` – The proposer opted out of renewing
+    #     the agreement.
+    #
+    #   * `ACCEPTOR_RENEW_OPTED_OUT` – The acceptor opted out of renewing
+    #     the agreement.
+    #
+    #   * `NO_RENEWAL_TERM` – The accepted terms of the agreement don't
+    #     include a renewal term, which is required for an agreement to
+    #     renew.
+    #
+    #   * `RENEWAL_LIMIT_EXHAUSTED` – The agreement reached the maximum
+    #     number of renewals allowed by its renewal term.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementViewSummary AWS API Documentation
     #
     class AgreementViewSummary < Struct.new(
@@ -533,12 +602,16 @@ module Aws::MarketplaceAgreement
       :acceptance_time,
       :start_time,
       :end_time,
+      :last_update_time,
       :agreement_type,
       :acceptor,
       :proposer,
       :proposal_summary,
       :status,
-      :entitlements)
+      :entitlements,
+      :initial_agreement_id,
+      :end_time_behavior_type,
+      :end_time_behavior_reason_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1311,8 +1384,6 @@ module Aws::MarketplaceAgreement
     #
     #   * `ACTIVE` – The terms of the agreement are active.
     #
-    #   * `ARCHIVED` – The agreement ended without a specified reason.
-    #
     #   * `CANCELLED` – The acceptor ended the agreement before the defined
     #     end date.
     #
@@ -1328,6 +1399,27 @@ module Aws::MarketplaceAgreement
     #     because of an AWS termination (for example, a payment failure).
     #   @return [String]
     #
+    # @!attribute [rw] initial_agreement_id
+    #   The unique identifier of the very first agreement in a chain of
+    #   related agreements, such as renewals or replacements. It stays the
+    #   same across all agreements in that chain, which lets you trace an
+    #   agreement back to the original. When an agreement isn't derived
+    #   from another agreement, its `InitialAgreementId` is its own
+    #   `AgreementId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time_behavior
+    #   The behavior of the agreement when it reaches its end date. For
+    #   example, whether the agreement renews, and if it doesn't, the
+    #   reason why.
+    #
+    #   This field is present for every active agreement that has an end
+    #   date. It is not present for an agreement that has no end date,
+    #   because such an agreement never reaches an end time. Pay-as-you-go
+    #   agreements are the most common example. It is also not present for
+    #   an agreement that is no longer active.
+    #   @return [Types::EndTimeBehavior]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/DescribeAgreementOutput AWS API Documentation
     #
     class DescribeAgreementOutput < Struct.new(
@@ -1340,7 +1432,9 @@ module Aws::MarketplaceAgreement
       :agreement_type,
       :estimated_charges,
       :proposal_summary,
-      :status)
+      :status,
+      :initial_agreement_id,
+      :end_time_behavior)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1414,6 +1508,73 @@ module Aws::MarketplaceAgreement
       :type,
       :url,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The behavior of an agreement when it reaches its end date. For
+    # example, whether the agreement renews, and if it doesn't, the reason
+    # why.
+    #
+    # @!attribute [rw] type
+    #   The behavior of the agreement when it reaches its end date.
+    #
+    #   Types include:
+    #
+    #   * `RENEW` – A new agreement is created from the accepted terms of
+    #     this agreement.
+    #
+    #   * `REPLACE` – A new agreement is created from a different offer than
+    #     the one this agreement was created from. This happens, for
+    #     example, when a private offer reaches its end date and the
+    #     acceptor transitions to the public offer for the product.
+    #
+    #   * `EXPIRE` – The agreement ends and isn't renewed or replaced.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   The reason why the agreement doesn't renew at its end date. The
+    #   field is `null` when the agreement renews.
+    #
+    #   More than one reason can apply to the same agreement. When that
+    #   happens, the operation returns only one reason code, and
+    #   `PROPOSER_RENEW_OPTED_OUT` takes precedence over all others.
+    #
+    #   The `EnableAutoRenew` field reflects only the acceptor's
+    #   preference, and doesn't reflect the other reasons an agreement
+    #   might not renew.
+    #
+    #   Reason codes include:
+    #
+    #   * `PROPOSER_RENEW_OPTED_OUT` – The proposer opted out of renewing
+    #     the agreement.
+    #
+    #   * `ACCEPTOR_RENEW_OPTED_OUT` – The acceptor opted out of renewing
+    #     the agreement.
+    #
+    #   * `NO_RENEWAL_TERM` – The accepted terms of the agreement don't
+    #     include a renewal term, which is required for an agreement to
+    #     renew.
+    #
+    #   * `RENEWAL_LIMIT_EXHAUSTED` – The agreement reached the maximum
+    #     number of renewals allowed by its renewal term.
+    #   @return [String]
+    #
+    # @!attribute [rw] renewal_summary
+    #   The details of the renewal that applies at the end date of the
+    #   agreement. This field is present when `Type` is `RENEW`. It is also
+    #   present when `ReasonCode` is `PROPOSER_RENEW_OPTED_OUT` or
+    #   `ACCEPTOR_RENEW_OPTED_OUT`. In those cases, it identifies the offer
+    #   that the agreement would otherwise have renewed from. The field is
+    #   `null` in all other cases.
+    #   @return [Types::RenewalSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/EndTimeBehavior AWS API Documentation
+    #
+    class EndTimeBehavior < Struct.new(
+      :type,
+      :reason_code,
+      :renewal_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1559,6 +1720,22 @@ module Aws::MarketplaceAgreement
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A fixed price increase that is applied each time the agreement renews.
+    #
+    # @!attribute [rw] value
+    #   The percentage by which the price increases at each renewal, from
+    #   `0.00` to `100.00` with up to two decimal places. A value of `0.00`
+    #   means that the agreement renews at the same price.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/FixedPercentage AWS API Documentation
+    #
+    class FixedPercentage < Struct.new(
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2539,6 +2716,42 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # A single installment in a payment schedule template. Because the start
+    # date of the renewed agreement isn't known when the offer is created,
+    # the charge date of each installment is expressed as an offset from
+    # that start date rather than as an absolute date.
+    #
+    # @!attribute [rw] charge_date_offset
+    #   The time between the start date of the renewed agreement and the
+    #   date this installment is charged. The duration is represented in the
+    #   ISO 8601 format in either whole months or whole days (for example,
+    #   `P1M` for 1 month or `P30D` for 30 days). All installments in a
+    #   schedule use the same unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_percentage
+    #   The percentage of the total contract value of the renewed agreement
+    #   that is charged in this installment. Valid values range from `0.01`
+    #   to `100.00`, with up to two decimal places.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month on which this installment is charged, from `1`
+    #   to `31`. Use this field to anchor the charge to a specific calendar
+    #   day within the month identified by `ChargeDateOffset`. This field is
+    #   supported only when `ChargeDateOffset` is expressed in months.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/PaymentScheduleEntry AWS API Documentation
+    #
+    class PaymentScheduleEntry < Struct.new(
+      :charge_date_offset,
+      :charge_percentage,
+      :day_of_month)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines an installment-based pricing model where customers are charged
     # a fixed price on different dates during the agreement validity period.
     # This is used most commonly for flexible payment schedule pricing.
@@ -2570,6 +2783,85 @@ module Aws::MarketplaceAgreement
       :schedule)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Defines the payment schedule that is applied to the renewed agreement.
+    #
+    # @!attribute [rw] schedule
+    #   The installments that make up the payment schedule of the renewed
+    #   agreement. The `ChargePercentage` values of all installments add up
+    #   to `100`.
+    #   @return [Array<Types::PaymentScheduleEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/PaymentScheduleTermTemplate AWS API Documentation
+    #
+    class PaymentScheduleTermTemplate < Struct.new(
+      :schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A range of price increase percentages that the proposer can choose
+    # from before the adjustment deadline of the agreement.
+    #
+    # `MinValue` will be less than `MaxValue`, and `DefaultValue` will fall
+    # within the range. When the proposer authorizes a single percentage
+    # instead of a range, `PriceIncrease` is a `FixedPercentage` rather than
+    # a `PercentageRange`.
+    #
+    # @!attribute [rw] min_value
+    #   The lowest percentage that the proposer can choose, from `0.00` to
+    #   `100.00` with up to two decimal places.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_value
+    #   The highest percentage that the proposer can choose, from `0.00` to
+    #   `100.00` with up to two decimal places.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The percentage that is applied if the proposer doesn't choose a
+    #   value before the adjustment deadline. Valid values range from `0.00`
+    #   to `100.00`, with up to two decimal places.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/PercentageRange AWS API Documentation
+    #
+    class PercentageRange < Struct.new(
+      :min_value,
+      :max_value,
+      :default_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The price increase that is applied each time the agreement renews.
+    # Exactly one of the following fields is set.
+    #
+    # @note PriceIncrease is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PriceIncrease corresponding to the set member.
+    #
+    # @!attribute [rw] fixed_percentage
+    #   A fixed price increase percentage that is applied at each renewal.
+    #   @return [Types::FixedPercentage]
+    #
+    # @!attribute [rw] percentage_range
+    #   A range of price increase percentages that the proposer can choose
+    #   from before the adjustment deadline of the agreement.
+    #   @return [Types::PercentageRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/PriceIncrease AWS API Documentation
+    #
+    class PriceIncrease < Struct.new(
+      :fixed_percentage,
+      :percentage_range,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class FixedPercentage < PriceIncrease; end
+      class PercentageRange < PriceIncrease; end
+      class Unknown < PriceIncrease; end
     end
 
     # Monetary amounts associated with an invoice line item group.
@@ -2882,15 +3174,34 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # The details of the renewal that applies at the end date of an
+    # agreement.
+    #
+    # @!attribute [rw] offer_id
+    #   The unique identifier of the offer that provides the terms for the
+    #   next renewal cycle. For most renewals, this is the same offer that
+    #   the agreement was created from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RenewalSummary AWS API Documentation
+    #
+    class RenewalSummary < Struct.new(
+      :offer_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines that on graceful expiration of the agreement (when the
     # agreement ends on its pre-defined end date), a new agreement will be
     # created using the accepted terms on the existing agreement. In other
-    # words, the agreement will be renewed. The presence of `RenewalTerm` in
-    # the offer document means that auto-renewal is allowed. Buyers will
+    # words, the agreement will be renewed. Presence of `RenewalTerm` in the
+    # offer document means that auto-renewal is allowed. The acceptor will
     # have the option to accept or decline auto-renewal at the offer
-    # acceptance/agreement creation. Buyers can also change this flag from
-    # `True` to `False` or `False` to `True` at anytime during the
-    # agreement's lifecycle.
+    # acceptance/agreement creation. The acceptor can also change this flag
+    # from `True` to `False` or `False` to `True`, within the limits set by
+    # `LockoutPeriod` and `MaxRenewals`. Setting the flag to `True` doesn't
+    # by itself guarantee that the agreement renews, because the proposer
+    # can also opt out.
     #
     # @!attribute [rw] type
     #   Category of the term being updated.
@@ -2905,12 +3216,62 @@ module Aws::MarketplaceAgreement
     #   term.
     #   @return [Types::RenewalTermConfiguration]
     #
+    # @!attribute [rw] lockout_period
+    #   The renewal decision deadline, measured back from the end date of
+    #   the agreement. This is the last day either party can opt in to or
+    #   opt out of the renewal. The duration is represented in the ISO 8601
+    #   format in whole days (for example, `P30D` for 30 days or `P60D` for
+    #   60 days).
+    #
+    #   The field is `null` when no renewal decision deadline is set. In
+    #   that case, either party can change the auto-renewal decision up to
+    #   the end date of the agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_renewals
+    #   The maximum number of times the agreement can be renewed. The field
+    #   is `null` when the number of renewals is unlimited.
+    #
+    #   After the agreement reaches this limit, it expires on its end date
+    #   instead of renewing.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] adjustment_deadline
+    #   The date by which the proposer must finalize the price increase for
+    #   the next renewal, measured back from the end date of the agreement.
+    #   The duration is represented in the ISO 8601 format in whole days
+    #   (for example, `P30D` for 30 days or `P60D` for 60 days).
+    #
+    #   This field applies only when `PriceIncrease` is a `PercentageRange`.
+    #   The field is `null` when `PriceIncrease` is a `FixedPercentage`,
+    #   because the price increase is already fixed and there is nothing for
+    #   the proposer to finalize. If the proposer doesn't finalize a value
+    #   by the adjustment deadline, the `DefaultValue` of the range applies.
+    #
+    #   `AdjustmentDeadline` must be greater than `LockoutPeriod`.
+    #   @return [String]
+    #
+    # @!attribute [rw] price_increase
+    #   The price increase that is applied each time the agreement renews.
+    #   The field is `null` when the price doesn't change at renewal.
+    #   @return [Types::PriceIncrease]
+    #
+    # @!attribute [rw] term_templates
+    #   Defines how specific terms change each time the agreement renews.
+    #   The field is `null` when no terms change at renewal.
+    #   @return [Array<Types::TermTemplate>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RenewalTerm AWS API Documentation
     #
     class RenewalTerm < Struct.new(
       :type,
       :id,
-      :configuration)
+      :configuration,
+      :lockout_period,
+      :max_renewals,
+      :adjustment_deadline,
+      :price_increase,
+      :term_templates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2920,7 +3281,9 @@ module Aws::MarketplaceAgreement
     #
     # @!attribute [rw] enable_auto_renew
     #   Defines whether the acceptor has chosen to auto-renew the agreement
-    #   at the end of its lifecycle. Can be set to `True` or `False`.
+    #   when it reaches its end date. Can be set to `True` or `False`. The
+    #   acceptor can change this value within the limits set by
+    #   `LockoutPeriod` and `MaxRenewals`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RenewalTermConfiguration AWS API Documentation
@@ -3092,8 +3455,8 @@ module Aws::MarketplaceAgreement
     #     are registered in the agreement token.
     #
     #   * `Status` – The current status of the agreement. Values include
-    #     `ACTIVE`, `ARCHIVED`, `CANCELLED`, `EXPIRED`, `RENEWED`,
-    #     `REPLACED`, and `TERMINATED`.
+    #     `ACTIVE`, `CANCELLED`, `EXPIRED`, `RENEWED`, `REPLACED`, and
+    #     `TERMINATED`.
     #
     #   * `BeforeEndTime` – A date used to filter agreements with a date
     #     before the `endTime` of an agreement.
@@ -3101,18 +3464,95 @@ module Aws::MarketplaceAgreement
     #   * `AfterEndTime` – A date used to filter agreements with a date
     #     after the `endTime` of an agreement.
     #
+    #   * `BeforeStartTime` – A date used to filter agreements with a date
+    #     before the `startTime` of an agreement.
+    #
+    #   * `AfterStartTime` – A date used to filter agreements with a date
+    #     after the `startTime` of an agreement.
+    #
+    #   * `BeforeLastUpdateTime` – A date used to filter agreements with a
+    #     date before the `lastUpdateTime` of an agreement.
+    #
+    #   * `AfterLastUpdateTime` – A date used to filter agreements with a
+    #     date after the `lastUpdateTime` of an agreement.
+    #
     #   * `AgreementType` – The type of agreement. Supported value includes
     #     `PurchaseAgreement`.
     #
     #   * `OfferSetId` – A unique identifier for the offer set containing
     #     this offer. All agreements created from offers in this set include
     #     this identifier as context.
+    #
+    #   * `EndTimeBehaviorType` – What happens to the agreement when it
+    #     reaches its end date. Values include `RENEW`, `REPLACE`, and
+    #     `EXPIRE`.
+    #
+    #   * `EndTimeBehaviorReasonCode` – The reason why the agreement
+    #     doesn't renew at its end date. Values include
+    #     `PROPOSER_RENEW_OPTED_OUT`, `ACCEPTOR_RENEW_OPTED_OUT`,
+    #     `NO_RENEWAL_TERM`, and `RENEWAL_LIMIT_EXHAUSTED`.
+    #
+    #   * `InitialAgreementId` – The unique identifier of the very first
+    #     agreement in a chain of related agreements. Use this filter to
+    #     return every agreement in the same chain.
+    #
+    #   * `LicenseArn` – The Amazon Resource Name (ARN) of the AWS License
+    #     Manager license associated with an entitlement granted by the
+    #     agreement.
+    #
+    #   A proposer can use any combination of the preceding filters along
+    #   with `AgreementType`, which is required.
+    #
+    #   The following filter combinations are supported when the `PartyType`
+    #   is `Acceptor`:
+    #
+    #   * `AgreementType`
+    #
+    #   * `AgreementType` + `Status`
+    #
+    #   * `AgreementType` + `EndTime`
+    #
+    #   * `AgreementType` + `Status` + `EndTime`
+    #
+    #   * `AgreementType` + `ResourceIdentifier`
+    #
+    #   * `AgreementType` + `ResourceIdentifier` + `EndTime`
+    #
+    #   * `AgreementType` + `ResourceIdentifier` + `Status`
+    #
+    #   * `AgreementType` + `ResourceIdentifier` + `Status` + `EndTime`
+    #
+    #   * `AgreementType` + `ResourceType`
+    #
+    #   * `AgreementType` + `ResourceType` + `EndTime`
+    #
+    #   * `AgreementType` + `OfferId`
+    #
+    #   * `AgreementType` + `OfferId` + `EndTime`
+    #
+    #   * `AgreementType` + `OfferId` + `Status`
+    #
+    #   * `AgreementType` + `OfferId` + `Status` + `EndTime`
+    #
+    #   * `AgreementType` + `OfferSetId`
+    #
+    #   * `AgreementType` + `OfferSetId` + `EndTime`
+    #
+    #   * `AgreementType` + `OfferSetId` + `Status`
+    #
+    #   * `AgreementType` + `OfferSetId` + `Status` + `EndTime`
+    #
+    #   <note markdown="1"> To filter by `EndTime`, you can use `BeforeEndTime`, `AfterEndTime`,
+    #   or both.
+    #
+    #    </note>
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] sort
-    #   An object that contains the `SortBy` and `SortOrder` attributes.
-    #   Only `EndTime` is supported for `SearchAgreements`. The default sort
-    #   is `EndTime` descending.
+    #   An object that contains the `SortBy` and `SortOrder` attributes. For
+    #   `SearchAgreements`, `SortBy` supports `EndTime` for both party
+    #   types, and `StartTime` and `LastUpdateTime` only when `PartyType` is
+    #   `Proposer`. The default `SortBy` value is `EndTime`.
     #   @return [Types::Sort]
     #
     # @!attribute [rw] max_results
@@ -3393,13 +3833,15 @@ module Aws::MarketplaceAgreement
     # An object that contains the `SortBy` and `SortOrder` attributes.
     #
     # @!attribute [rw] sort_by
-    #   The attribute on which the data is grouped, which can be by
-    #   `StartTime` and `EndTime`. The default value is `EndTime`.
+    #   The attribute on which the data is grouped, which can be `EndTime`,
+    #   `StartTime`, or `LastUpdateTime`. `StartTime` and `LastUpdateTime`
+    #   are supported only when `PartyType` is `Proposer`. The default value
+    #   is `EndTime`.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
     #   The sorting order, which can be `ASCENDING` or `DESCENDING`. The
-    #   default value is `DESCENDING`.
+    #   default value is `ASCENDING`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/Sort AWS API Documentation
@@ -3474,6 +3916,29 @@ module Aws::MarketplaceAgreement
       :tax_estimation)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Defines how a specific type of term changes each time the agreement
+    # renews. Exactly one of the following fields is set.
+    #
+    # @note TermTemplate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TermTemplate corresponding to the set member.
+    #
+    # @!attribute [rw] payment_schedule_term_template
+    #   Defines the payment schedule that is applied to the renewed
+    #   agreement.
+    #   @return [Types::PaymentScheduleTermTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/TermTemplate AWS API Documentation
+    #
+    class TermTemplate < Struct.new(
+      :payment_schedule_term_template,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PaymentScheduleTermTemplate < TermTemplate; end
+      class Unknown < TermTemplate; end
     end
 
     # Request was denied due to request throttling.

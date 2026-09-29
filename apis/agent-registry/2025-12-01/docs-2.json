@@ -8,14 +8,20 @@
   },
   "shapes": {
     "A2aAgentCardDescriptor": {
-      "base": "<p>Base mixin for A2A agent card descriptor content</p>",
+      "base": "<p> Descriptor that defines the content of an A2A (Agent-to-Agent) agent card registry record. The content is validated against the A2A protocol schema.</p>",
       "refs": {
-        "Descriptors$a2aAgentCard": null
+        "Descriptors$a2aAgentCard": "<p> The A2A agent card descriptor, populated when the record type is AGENT.</p>"
       }
     },
     "AccessDeniedException": {
       "base": "<p>The caller is not authorized to perform the requested action.</p>",
       "refs": {}
+    },
+    "AgUiDescriptor": {
+      "base": "<p> A descriptor for a registry record that exposes an AG-UI protocol endpoint. This descriptor is source-only: it identifies where the endpoint is located and carries no descriptor payload data or schema version.</p>",
+      "refs": {
+        "Descriptors$agui": "<p> The AG-UI descriptor, populated when the record exposes an AG-UI protocol endpoint.</p>"
+      }
     },
     "AgentSkillsAdditionalData": {
       "base": "<p> Additional data for an agent skills definition descriptor.</p>",
@@ -24,15 +30,15 @@
       }
     },
     "AgentSkillsDefinitionDescriptor": {
-      "base": "<p>Base mixin for agent skills definition descriptor content</p>",
+      "base": "<p> Descriptor that defines an agent skills registry record and its associated content.</p>",
       "refs": {
-        "Descriptors$agentSkillsDefinition": null
+        "Descriptors$agentSkillsDefinition": "<p> The agent skills definition descriptor, populated when the record type is SKILL.</p>"
       }
     },
     "AgentSkillsMdDescriptor": {
-      "base": "<p>Base mixin for agent skills markdown descriptor content</p>",
+      "base": "<p> Markdown-format descriptor containing an agent skills document.</p>",
       "refs": {
-        "AgentSkillsAdditionalData$skillMd": null
+        "AgentSkillsAdditionalData$skillMd": "<p> The agent skills markdown descriptor associated with the agent skills definition.</p>"
       }
     },
     "BatchGetDiscoverableRegistryRecordError": {
@@ -70,64 +76,78 @@
     "CustomDescriptor": {
       "base": "<p>Custom descriptor for user-defined content</p>",
       "refs": {
-        "Descriptors$custom": null
+        "Descriptors$custom": "<p> The custom descriptor, populated when the record type is CUSTOM.</p>"
+      }
+    },
+    "CustomMetadataDocument": {
+      "base": "<p>Free-form JSON document representing custom metadata on a registry record. Values may be strings or booleans (native JSON types). Key/value constraints enforced in service code.</p>",
+      "refs": {
+        "RegistryRecordSummary$customMetadata": "<p> The custom metadata attached to this registry record. Values are strings (maximum 128 characters) or booleans. This field is only present if the registry has a custom metadata schema configured.</p>"
       }
     },
     "DataSchemaVersion": {
       "base": "<p>Version of the descriptor type schema</p>",
       "refs": {
-        "A2aAgentCardDescriptor$dataSchemaVersion": null,
-        "AgentSkillsDefinitionDescriptor$dataSchemaVersion": null,
-        "AgentSkillsMdDescriptor$dataSchemaVersion": null,
-        "McpServerDescriptor$dataSchemaVersion": null,
-        "McpToolsDescriptor$dataSchemaVersion": null
+        "A2aAgentCardDescriptor$dataSchemaVersion": "<p> The schema version of the descriptor payload.</p>",
+        "AgentSkillsDefinitionDescriptor$dataSchemaVersion": "<p> The schema version of the descriptor payload.</p>",
+        "AgentSkillsMdDescriptor$dataSchemaVersion": "<p> The schema version of the descriptor payload.</p>",
+        "McpServerDescriptor$dataSchemaVersion": "<p> The schema version of the descriptor payload.</p>",
+        "McpToolsDescriptor$dataSchemaVersion": "<p>The schema version of the descriptor payload.</p>"
       }
     },
     "DateTimestamp": {
       "base": "<p>Timestamp in ISO 8601 date-time format</p>",
       "refs": {
-        "DiscoverableRegistryRecordSummary$createdAt": null,
-        "DiscoverableRegistryRecordSummary$updatedAt": null,
-        "RegistryRecordSummary$createdAt": null,
-        "RegistryRecordSummary$updatedAt": null
+        "DiscoverableRegistryRecordSummary$createdAt": "<p> The timestamp when the registry record was created.</p>",
+        "DiscoverableRegistryRecordSummary$updatedAt": "<p> The timestamp when the registry record was last updated.</p>",
+        "RegistryRecordSummary$createdAt": "<p> The timestamp when the registry record was created.</p>",
+        "RegistryRecordSummary$updatedAt": "<p> The timestamp when the registry record was last updated.</p>"
       }
     },
     "Description": {
       "base": "<p>Description of the Resource</p>",
       "refs": {
-        "DiscoverableRegistryRecordSummary$description": null,
-        "RegistryRecordSummary$description": null
+        "DiscoverableRegistryRecordSummary$description": "<p> A human-readable description of the registry record. Use this field to explain the record's purpose or content to consumers discovering it in the registry.</p>",
+        "RegistryRecordSummary$description": "<p> A human-readable description of the registry record. Use this field to explain the record's purpose or content to consumers discovering it in the registry.</p>"
       }
     },
     "DescriptorData": {
       "base": "<p>Descriptor payload data</p>",
       "refs": {
-        "A2aAgentCardDescriptor$data": null,
-        "AgentSkillsDefinitionDescriptor$data": null,
-        "AgentSkillsMdDescriptor$data": null,
-        "CustomDescriptor$data": null,
-        "McpServerDescriptor$data": null,
-        "McpToolsDescriptor$data": null
+        "A2aAgentCardDescriptor$data": "<p> The A2A agent card content, serialized as descriptor payload data.</p>",
+        "AgentSkillsDefinitionDescriptor$data": "<p> The agent skills definition content, serialized as descriptor payload data.</p>",
+        "AgentSkillsMdDescriptor$data": "<p> The agent skills markdown content, serialized as descriptor payload data.</p>",
+        "CustomDescriptor$data": "<p>The custom descriptor content, serialized as descriptor payload data.</p>",
+        "McpServerDescriptor$data": "<p> The MCP server descriptor content, serialized as descriptor payload data.</p>",
+        "McpToolsDescriptor$data": "<p>The MCP tools descriptor content, serialized as descriptor payload data.</p>"
       }
     },
     "DescriptorSource": {
       "base": "<p> The source location from which a descriptor's content was retrieved.</p>",
       "refs": {
         "A2aAgentCardDescriptor$source": "<p> The source location from which the A2A (Agent-to-Agent) agent card descriptor content was retrieved.</p>",
+        "AgUiDescriptor$source": "<p> The source location of the AG-UI protocol endpoint.</p>",
         "AgentSkillsMdDescriptor$source": "<p> The source location from which the agent skills markdown content was retrieved.</p>",
+        "HttpDescriptor$source": "<p> The source location of the HTTP endpoint.</p>",
         "McpServerDescriptor$source": "<p> The source location from which the MCP (Model Context Protocol) server descriptor content was retrieved.</p>"
       }
     },
     "DescriptorSourceFromUrl": {
-      "base": "<p>Base mixin for descriptor source from URL</p>",
+      "base": "<p> A URL-based descriptor source that identifies where descriptor content is retrieved from.</p>",
       "refs": {
-        "DescriptorSource$fromUrl": null
+        "DescriptorSource$fromUrl": "<p> The URL-based descriptor source, populated when descriptor content is synchronized from a URL.</p>"
       }
     },
     "DescriptorSourceUrl": {
       "base": "<p>URL source for descriptor content</p>",
       "refs": {
-        "DescriptorSourceFromUrl$url": null
+        "DescriptorSourceFromUrl$url": "<p> The URL from which the descriptor content is retrieved.</p>"
+      }
+    },
+    "DescriptorTypeList": {
+      "base": null,
+      "refs": {
+        "DiscoverableRegistryRecordSummary$descriptorTypes": "<p> The descriptor types that are present on this registry record. Each value corresponds to a descriptor entry key on the approved record.</p>"
       }
     },
     "Descriptors": {
@@ -160,6 +180,12 @@
         "DiscoverableFilterValues$member": null
       }
     },
+    "HttpDescriptor": {
+      "base": "<p> A descriptor for a registry record that exposes an HTTP endpoint. This descriptor is source-only: it identifies where the endpoint is located and carries no descriptor payload data or schema version.</p>",
+      "refs": {
+        "Descriptors$http": "<p> The HTTP descriptor, populated when the record exposes an HTTP endpoint.</p>"
+      }
+    },
     "InternalServerException": {
       "base": "<p>The request failed due to an unexpected internal error; the caller may retry.</p>",
       "refs": {}
@@ -187,25 +213,25 @@
     "McpServerAdditionalData": {
       "base": "<p>Additional data for an MCP server descriptor</p>",
       "refs": {
-        "McpServerDescriptor$additionalData": null
+        "McpServerDescriptor$additionalData": "<p> Additional data associated with the MCP server descriptor, such as tool definitions.</p>"
       }
     },
     "McpServerDescriptor": {
-      "base": "<p>Base mixin for MCP server descriptor content</p>",
+      "base": "<p> Descriptor that defines the content of an MCP (Model Context Protocol) server registry record, including the server definition and its tool definitions. The content is validated against the MCP protocol schema.</p>",
       "refs": {
-        "Descriptors$mcpServer": null
+        "Descriptors$mcpServer": "<p> The MCP server descriptor, populated when the record type is MCP.</p>"
       }
     },
     "McpToolsDescriptor": {
       "base": "<p>MCP tools descriptor containing tool definitions</p>",
       "refs": {
-        "McpServerAdditionalData$tools": null
+        "McpServerAdditionalData$tools": "<p>The MCP tools descriptor that defines the tools exposed by the MCP server.</p>"
       }
     },
     "MetadataFilterExpression": {
       "base": null,
       "refs": {
-        "SearchDiscoverableRegistryRecordsRequest$filters": "<p> An optional structured JSON metadata filter that narrows the search results. Supports the field-level operators <code>$eq</code>, <code>$ne</code>, and <code>$in</code>, and the logical operators <code>$and</code> and <code>$or</code> on filterable fields.</p>"
+        "SearchDiscoverableRegistryRecordsRequest$filters": "<p> An optional structured JSON metadata filter that narrows the search results. Supports the field-level operators <code>$eq</code>, <code>$ne</code>, and <code>$in</code>, and the logical operators <code>$and</code> and <code>$or</code> on filterable fields.</p> <p> You can also filter on custom metadata fields using the <code>customMetadata.{key}</code> prefix. For example, to filter by a custom metadata field: <code>{\"customMetadata.environment\": {\"$eq\": \"production\"}}</code>. Filter values must be strings, so match a boolean field on its string form: <code>{\"customMetadata.requiresApproval\": {\"$eq\": \"true\"}}</code>.</p>"
       }
     },
     "NonBlankString": {
@@ -221,45 +247,45 @@
     "RecordIdentifier": {
       "base": "<p>Record identifier that accepts either ARN or ID format</p>",
       "refs": {
-        "BatchGetDiscoverableRegistryRecordError$recordId": null,
+        "BatchGetDiscoverableRegistryRecordError$recordId": "<p> The identifier of the record that could not be retrieved, echoed from the request in the same format that you supplied (ARN or record ID).</p>",
         "RegistryRecordsEntryRecordIdsList$member": null
       }
     },
     "RecordType": {
       "base": "<p>Record type enum for registry record classification</p>",
       "refs": {
-        "DiscoverableRegistryRecordSummary$recordType": null,
-        "RegistryRecordSummary$recordType": null
+        "DiscoverableRegistryRecordSummary$recordType": "<p> The type of the registry record. <code>MCP</code> is a Model Context Protocol server record, <code>AGENT</code> is an Agent-to-Agent (A2A) agent card record, <code>SKILL</code> is an agent skills definition record, and <code>CUSTOM</code> is a record with a custom descriptor.</p>",
+        "RegistryRecordSummary$recordType": "<p> The type of the registry record. <code>MCP</code> is a Model Context Protocol server record, <code>AGENT</code> is an Agent-to-Agent (A2A) agent card record, <code>SKILL</code> is an agent skills definition record, and <code>CUSTOM</code> is a record with a custom descriptor.</p>"
       }
     },
     "RegistryArn": {
       "base": "<p>Registry Amazon Resource Name</p>",
       "refs": {
-        "DiscoverableRegistryRecordSummary$registryArn": null,
-        "RegistryRecordSummary$registryArn": null
+        "DiscoverableRegistryRecordSummary$registryArn": "<p> The Amazon Resource Name (ARN) of the parent registry that owns the record.</p>",
+        "RegistryRecordSummary$registryArn": "<p> The Amazon Resource Name (ARN) of the parent registry that owns the record.</p>"
       }
     },
     "RegistryIdentifier": {
       "base": "<p>Registry identifier that accepts either ARN or ID format</p>",
       "refs": {
-        "BatchGetDiscoverableRegistryRecordError$registryId": null,
-        "ListDiscoverableRegistryRecordsRequest$registryId": null,
-        "RegistryRecordsEntry$registryId": null,
+        "BatchGetDiscoverableRegistryRecordError$registryId": "<p> The identifier of the registry the record was requested from, echoed from the request.</p>",
+        "ListDiscoverableRegistryRecordsRequest$registryId": "<p> The identifier of the registry whose discoverable records are listed. You can provide either the full Amazon Resource Name (ARN) or the registry ID.</p>",
+        "RegistryRecordsEntry$registryId": "<p> The identifier of the registry to retrieve the records from. You can provide either the full Amazon Resource Name (ARN) or the registry ID.</p>",
         "SearchDiscoverableRegistryRecordsRequestRegistryIdsList$member": null
       }
     },
     "RegistryRecordArn": {
       "base": "<p>Registry Record Amazon Resource Name</p>",
       "refs": {
-        "DiscoverableRegistryRecordSummary$recordArn": null,
-        "RegistryRecordSummary$recordArn": null
+        "DiscoverableRegistryRecordSummary$recordArn": "<p> The Amazon Resource Name (ARN) of the registry record.</p>",
+        "RegistryRecordSummary$recordArn": "<p> The Amazon Resource Name (ARN) of the registry record.</p>"
       }
     },
     "RegistryRecordDisplayName": {
       "base": "<p>Display name for a registry record</p>",
       "refs": {
-        "DiscoverableRegistryRecordSummary$displayName": null,
-        "RegistryRecordSummary$displayName": null
+        "DiscoverableRegistryRecordSummary$displayName": "<p> The human-readable display name of the registry record.</p>",
+        "RegistryRecordSummary$displayName": "<p> The human-readable display name of the registry record.</p>"
       }
     },
     "RegistryRecordFilter": {
@@ -283,22 +309,22 @@
     "RegistryRecordId": {
       "base": "<p>Registry Record unique identifier - 12-character alphanumeric string</p>",
       "refs": {
-        "DiscoverableRegistryRecordSummary$recordId": null,
-        "RegistryRecordSummary$recordId": null
+        "DiscoverableRegistryRecordSummary$recordId": "<p> The unique identifier of the registry record.</p>",
+        "RegistryRecordSummary$recordId": "<p> The unique identifier of the registry record.</p>"
       }
     },
     "RegistryRecordName": {
       "base": "<p>Registry Record name</p>",
       "refs": {
-        "DiscoverableRegistryRecordSummary$name": null,
-        "RegistryRecordSummary$name": null
+        "DiscoverableRegistryRecordSummary$name": "<p> The name of the registry record. Names are unique within a registry.</p>",
+        "RegistryRecordSummary$name": "<p> The name of the registry record. Names are unique within a registry.</p>"
       }
     },
     "RegistryRecordStatus": {
       "base": "<p>Registry record status</p>",
       "refs": {
-        "DiscoverableRegistryRecordSummary$status": null,
-        "RegistryRecordSummary$status": null
+        "DiscoverableRegistryRecordSummary$status": "<p> The lifecycle status of the registry record. A record is <code>DRAFT</code> before it is submitted, <code>PENDING_APPROVAL</code> while awaiting curator review, and <code>APPROVED</code> once it is approved and discoverable. <code>REJECTED</code> and <code>DEPRECATED</code> records are not discoverable. The <code>CREATING</code>, <code>UPDATING</code>, <code>CREATE_FAILED</code>, and <code>UPDATE_FAILED</code> values reflect the state of an in-progress or failed asynchronous change.</p>",
+        "RegistryRecordSummary$status": "<p> The lifecycle status of the registry record. A record is <code>DRAFT</code> before it is submitted, <code>PENDING_APPROVAL</code> while awaiting curator review, and <code>APPROVED</code> once it is approved and discoverable. <code>REJECTED</code> and <code>DEPRECATED</code> records are not discoverable. The <code>CREATING</code>, <code>UPDATING</code>, <code>CREATE_FAILED</code>, and <code>UPDATE_FAILED</code> values reflect the state of an in-progress or failed asynchronous change.</p>"
       }
     },
     "RegistryRecordSummary": {
@@ -317,8 +343,8 @@
     "RegistryRecordVersion": {
       "base": "<p>Version of the registry record</p>",
       "refs": {
-        "DiscoverableRegistryRecordSummary$recordVersion": null,
-        "RegistryRecordSummary$recordVersion": null
+        "DiscoverableRegistryRecordSummary$recordVersion": "<p> The version identifier of the registry record.</p>",
+        "RegistryRecordSummary$recordVersion": "<p> The version identifier of the registry record.</p>"
       }
     },
     "RegistryRecordsEntry": {
@@ -367,6 +393,7 @@
       "base": null,
       "refs": {
         "BatchGetDiscoverableRegistryRecordError$message": "<p> An optional human-readable detail about the error. Do not parse this value programmatically.</p>",
+        "DescriptorTypeList$member": null,
         "ListDiscoverableRegistryRecordsResponse$nextToken": "<p> The pagination token to pass to a subsequent request to retrieve the next page of results. This field is absent when there are no more results.</p>",
         "ValidationException$message": null,
         "ValidationExceptionField$name": "<p>The name of the field that failed validation.</p>",

@@ -51,6 +51,7 @@ module Aws::IoT
       attr_accessor kafka: Types::KafkaAction
       attr_accessor open_search: Types::OpenSearchAction
       attr_accessor location: Types::LocationAction
+      attr_accessor influx_db: Types::InfluxDBAction
       SENSITIVE: []
     end
 
@@ -2661,6 +2662,53 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class InfluxDBAction
+      attr_accessor destination_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor organization: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor timestamp_unit: ("s" | "ms" | "us" | "ns")
+      attr_accessor batch_config: Types::InfluxDBBatchConfig
+      SENSITIVE: []
+    end
+
+    class InfluxDBBatchConfig
+      attr_accessor max_batch_size: ::Integer
+      attr_accessor max_batch_open_ms: ::Integer
+      attr_accessor max_batch_size_bytes: ::Integer
+      attr_accessor batch_across_topics: bool
+      SENSITIVE: []
+    end
+
+    class InfluxDBDestinationConfiguration
+      attr_accessor endpoint: ::String
+      attr_accessor influx_db_version: ("V2" | "V3")
+      attr_accessor secret_id: ::String
+      attr_accessor secret_type: ("SecretString" | "SecretBinary")
+      attr_accessor secret_key: ::String
+      SENSITIVE: []
+    end
+
+    class InfluxDBDestinationProperties
+      attr_accessor endpoint: ::String
+      attr_accessor influx_db_version: ("V2" | "V3")
+      attr_accessor secret_id: ::String
+      attr_accessor secret_type: ("SecretString" | "SecretBinary")
+      attr_accessor secret_key: ::String
+      SENSITIVE: []
+    end
+
+    class InfluxDBDestinationSummary
+      attr_accessor endpoint: ::String
+      attr_accessor influx_db_version: ("V2" | "V3")
+      attr_accessor secret_id: ::String
+      attr_accessor secret_type: ("SecretString" | "SecretBinary")
+      attr_accessor secret_key: ::String
+      SENSITIVE: []
+    end
+
     class InternalException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -4863,12 +4911,14 @@ module Aws::IoT
       attr_accessor status_reason: ::String
       attr_accessor http_url_properties: Types::HttpUrlDestinationProperties
       attr_accessor vpc_properties: Types::VpcDestinationProperties
+      attr_accessor influx_db_properties: Types::InfluxDBDestinationProperties
       SENSITIVE: []
     end
 
     class TopicRuleDestinationConfiguration
       attr_accessor http_url_configuration: Types::HttpUrlDestinationConfiguration
       attr_accessor vpc_configuration: Types::VpcDestinationConfiguration
+      attr_accessor influx_db_configuration: Types::InfluxDBDestinationConfiguration
       SENSITIVE: []
     end
 
@@ -4880,6 +4930,7 @@ module Aws::IoT
       attr_accessor status_reason: ::String
       attr_accessor http_url_summary: Types::HttpUrlDestinationSummary
       attr_accessor vpc_destination_summary: Types::VpcDestinationSummary
+      attr_accessor influx_db_summary: Types::InfluxDBDestinationSummary
       SENSITIVE: []
     end
 

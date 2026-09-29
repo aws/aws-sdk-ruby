@@ -34,6 +34,8 @@ module Aws::Notifications
     AssociateManagedNotificationAdditionalChannelResponse = Shapes::StructureShape.new(name: 'AssociateManagedNotificationAdditionalChannelResponse')
     AssociateOrganizationalUnitRequest = Shapes::StructureShape.new(name: 'AssociateOrganizationalUnitRequest')
     AssociateOrganizationalUnitResponse = Shapes::StructureShape.new(name: 'AssociateOrganizationalUnitResponse')
+    AttachmentContentType = Shapes::StringShape.new(name: 'AttachmentContentType')
+    AttachmentDisplayName = Shapes::StringShape.new(name: 'AttachmentDisplayName')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChannelArn = Shapes::StringShape.new(name: 'ChannelArn')
     ChannelAssociationOverrideOption = Shapes::StringShape.new(name: 'ChannelAssociationOverrideOption')
@@ -131,6 +133,7 @@ module Aws::Notifications
     LocaleCode = Shapes::StringShape.new(name: 'LocaleCode')
     ManagedNotificationChannelAssociationSummary = Shapes::StructureShape.new(name: 'ManagedNotificationChannelAssociationSummary')
     ManagedNotificationChannelAssociations = Shapes::ListShape.new(name: 'ManagedNotificationChannelAssociations')
+    ManagedNotificationChannelIdentifier = Shapes::StringShape.new(name: 'ManagedNotificationChannelIdentifier')
     ManagedNotificationChildEvent = Shapes::StructureShape.new(name: 'ManagedNotificationChildEvent')
     ManagedNotificationChildEventArn = Shapes::StringShape.new(name: 'ManagedNotificationChildEventArn')
     ManagedNotificationChildEventOverview = Shapes::StructureShape.new(name: 'ManagedNotificationChildEventOverview')
@@ -171,6 +174,8 @@ module Aws::Notifications
     NotificationConfigurations = Shapes::ListShape.new(name: 'NotificationConfigurations')
     NotificationEvent = Shapes::StructureShape.new(name: 'NotificationEvent')
     NotificationEventArn = Shapes::StringShape.new(name: 'NotificationEventArn')
+    NotificationEventAttachment = Shapes::StructureShape.new(name: 'NotificationEventAttachment')
+    NotificationEventAttachmentList = Shapes::ListShape.new(name: 'NotificationEventAttachmentList')
     NotificationEventId = Shapes::StringShape.new(name: 'NotificationEventId')
     NotificationEventOverview = Shapes::StructureShape.new(name: 'NotificationEventOverview')
     NotificationEventSummary = Shapes::StructureShape.new(name: 'NotificationEventSummary')
@@ -197,6 +202,7 @@ module Aws::Notifications
     SampleAggregationDimensionValues = Shapes::ListShape.new(name: 'SampleAggregationDimensionValues')
     SampleAggregationDimensionValuesMemberString = Shapes::StringShape.new(name: 'SampleAggregationDimensionValuesMemberString')
     SchemaVersion = Shapes::StringShape.new(name: 'SchemaVersion')
+    SensitiveUrl = Shapes::StringShape.new(name: 'SensitiveUrl')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Source = Shapes::StringShape.new(name: 'Source')
@@ -235,6 +241,8 @@ module Aws::Notifications
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateEventRuleRequest = Shapes::StructureShape.new(name: 'UpdateEventRuleRequest')
     UpdateEventRuleResponse = Shapes::StructureShape.new(name: 'UpdateEventRuleResponse')
+    UpdateManagedNotificationChannelAssociationRequest = Shapes::StructureShape.new(name: 'UpdateManagedNotificationChannelAssociationRequest')
+    UpdateManagedNotificationChannelAssociationResponse = Shapes::StructureShape.new(name: 'UpdateManagedNotificationChannelAssociationResponse')
     UpdateNotificationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateNotificationConfigurationRequest')
     UpdateNotificationConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateNotificationConfigurationResponse')
     Url = Shapes::StringShape.new(name: 'Url')
@@ -273,12 +281,14 @@ module Aws::Notifications
 
     AssociateManagedNotificationAccountContactRequest.add_member(:contact_identifier, Shapes::ShapeRef.new(shape: AccountContactType, required: true, location: "uri", location_name: "contactIdentifier"))
     AssociateManagedNotificationAccountContactRequest.add_member(:managed_notification_configuration_arn, Shapes::ShapeRef.new(shape: ManagedNotificationConfigurationOsArn, required: true, location_name: "managedNotificationConfigurationArn"))
+    AssociateManagedNotificationAccountContactRequest.add_member(:is_sensitive_events_subscribed, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSensitiveEventsSubscribed"))
     AssociateManagedNotificationAccountContactRequest.struct_class = Types::AssociateManagedNotificationAccountContactRequest
 
     AssociateManagedNotificationAccountContactResponse.struct_class = Types::AssociateManagedNotificationAccountContactResponse
 
     AssociateManagedNotificationAdditionalChannelRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location: "uri", location_name: "channelArn"))
     AssociateManagedNotificationAdditionalChannelRequest.add_member(:managed_notification_configuration_arn, Shapes::ShapeRef.new(shape: ManagedNotificationConfigurationOsArn, required: true, location_name: "managedNotificationConfigurationArn"))
+    AssociateManagedNotificationAdditionalChannelRequest.add_member(:is_sensitive_events_subscribed, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSensitiveEventsSubscribed"))
     AssociateManagedNotificationAdditionalChannelRequest.struct_class = Types::AssociateManagedNotificationAdditionalChannelRequest
 
     AssociateManagedNotificationAdditionalChannelResponse.struct_class = Types::AssociateManagedNotificationAdditionalChannelResponse
@@ -521,6 +531,7 @@ module Aws::Notifications
     ListManagedNotificationEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListManagedNotificationEventsRequest.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location: "querystring", location_name: "organizationalUnitId"))
     ListManagedNotificationEventsRequest.add_member(:related_account, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "relatedAccount"))
+    ListManagedNotificationEventsRequest.add_member(:include_sensitive_events, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeSensitiveEvents"))
     ListManagedNotificationEventsRequest.struct_class = Types::ListManagedNotificationEventsRequest
 
     ListManagedNotificationEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -592,6 +603,7 @@ module Aws::Notifications
     ManagedNotificationChannelAssociationSummary.add_member(:channel_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "channelIdentifier"))
     ManagedNotificationChannelAssociationSummary.add_member(:channel_type, Shapes::ShapeRef.new(shape: ChannelType, required: true, location_name: "channelType"))
     ManagedNotificationChannelAssociationSummary.add_member(:override_option, Shapes::ShapeRef.new(shape: ChannelAssociationOverrideOption, location_name: "overrideOption"))
+    ManagedNotificationChannelAssociationSummary.add_member(:is_sensitive_events_subscribed, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSensitiveEventsSubscribed"))
     ManagedNotificationChannelAssociationSummary.struct_class = Types::ManagedNotificationChannelAssociationSummary
 
     ManagedNotificationChannelAssociations.member = Shapes::ShapeRef.new(shape: ManagedNotificationChannelAssociationSummary)
@@ -650,6 +662,7 @@ module Aws::Notifications
     ManagedNotificationEvent.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
     ManagedNotificationEvent.add_member(:text_parts, Shapes::ShapeRef.new(shape: TextParts, required: true, location_name: "textParts"))
     ManagedNotificationEvent.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "organizationalUnitId"))
+    ManagedNotificationEvent.add_member(:attachments, Shapes::ShapeRef.new(shape: NotificationEventAttachmentList, location_name: "attachments"))
     ManagedNotificationEvent.struct_class = Types::ManagedNotificationEvent
 
     ManagedNotificationEventOverview.add_member(:arn, Shapes::ShapeRef.new(shape: ManagedNotificationEventArn, required: true, location_name: "arn"))
@@ -699,6 +712,7 @@ module Aws::Notifications
     MessageComponents.add_member(:headline, Shapes::ShapeRef.new(shape: TextPartReference, location_name: "headline"))
     MessageComponents.add_member(:paragraph_summary, Shapes::ShapeRef.new(shape: TextPartReference, location_name: "paragraphSummary"))
     MessageComponents.add_member(:complete_description, Shapes::ShapeRef.new(shape: TextPartReference, location_name: "completeDescription"))
+    MessageComponents.add_member(:markup_description, Shapes::ShapeRef.new(shape: TextPartReference, location_name: "markupDescription"))
     MessageComponents.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "dimensions"))
     MessageComponents.struct_class = Types::MessageComponents
 
@@ -733,6 +747,13 @@ module Aws::Notifications
     NotificationEvent.add_member(:media, Shapes::ShapeRef.new(shape: Media, required: true, location_name: "media"))
     NotificationEvent.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "organizationalUnitId"))
     NotificationEvent.struct_class = Types::NotificationEvent
+
+    NotificationEventAttachment.add_member(:display_name, Shapes::ShapeRef.new(shape: AttachmentDisplayName, required: true, location_name: "displayName"))
+    NotificationEventAttachment.add_member(:attachment_download_url, Shapes::ShapeRef.new(shape: SensitiveUrl, location_name: "attachmentDownloadUrl"))
+    NotificationEventAttachment.add_member(:content_type, Shapes::ShapeRef.new(shape: AttachmentContentType, required: true, location_name: "contentType"))
+    NotificationEventAttachment.struct_class = Types::NotificationEventAttachment
+
+    NotificationEventAttachmentList.member = Shapes::ShapeRef.new(shape: NotificationEventAttachment)
 
     NotificationEventOverview.add_member(:arn, Shapes::ShapeRef.new(shape: NotificationEventArn, required: true, location_name: "arn"))
     NotificationEventOverview.add_member(:notification_configuration_arn, Shapes::ShapeRef.new(shape: NotificationConfigurationArn, required: true, location_name: "notificationConfigurationArn"))
@@ -880,6 +901,13 @@ module Aws::Notifications
     UpdateEventRuleResponse.add_member(:notification_configuration_arn, Shapes::ShapeRef.new(shape: NotificationConfigurationArn, required: true, location_name: "notificationConfigurationArn"))
     UpdateEventRuleResponse.add_member(:status_summary_by_region, Shapes::ShapeRef.new(shape: StatusSummaryByRegion, required: true, location_name: "statusSummaryByRegion"))
     UpdateEventRuleResponse.struct_class = Types::UpdateEventRuleResponse
+
+    UpdateManagedNotificationChannelAssociationRequest.add_member(:managed_notification_configuration_arn, Shapes::ShapeRef.new(shape: ManagedNotificationConfigurationOsArn, required: true, location_name: "managedNotificationConfigurationArn"))
+    UpdateManagedNotificationChannelAssociationRequest.add_member(:channel_identifier, Shapes::ShapeRef.new(shape: ManagedNotificationChannelIdentifier, required: true, location_name: "channelIdentifier"))
+    UpdateManagedNotificationChannelAssociationRequest.add_member(:is_sensitive_events_subscribed, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSensitiveEventsSubscribed"))
+    UpdateManagedNotificationChannelAssociationRequest.struct_class = Types::UpdateManagedNotificationChannelAssociationRequest
+
+    UpdateManagedNotificationChannelAssociationResponse.struct_class = Types::UpdateManagedNotificationChannelAssociationResponse
 
     UpdateNotificationConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: NotificationConfigurationArn, required: true, location: "uri", location_name: "arn"))
     UpdateNotificationConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: NotificationConfigurationName, location_name: "name"))
@@ -1486,6 +1514,20 @@ module Aws::Notifications
         o.http_request_uri = "/event-rules/{arn}"
         o.input = Shapes::ShapeRef.new(shape: UpdateEventRuleRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateEventRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_managed_notification_channel_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateManagedNotificationChannelAssociation"
+        o.http_method = "PUT"
+        o.http_request_uri = "/channels/update-managed-notification-channel-association"
+        o.input = Shapes::ShapeRef.new(shape: UpdateManagedNotificationChannelAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateManagedNotificationChannelAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

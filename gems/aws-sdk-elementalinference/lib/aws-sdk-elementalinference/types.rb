@@ -169,6 +169,31 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # The output configuration settings for the contextual metadata feature.
+    # Use this structure when the feed output generates metadata that
+    # describes the media content.
+    #
+    # @!attribute [rw] summary_generation
+    #   Specifies whether Elemental Inference generates a descriptive
+    #   summary of the media content for this output.
+    #
+    #   Valid values:
+    #
+    #   * ENABLED (default) – Elemental Inference generates a descriptive
+    #     summary along with IAB taxonomy and GARM suitability
+    #     classifications.
+    #
+    #   * DISABLED – No descriptive summary is generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ContextualMetadataConfig AWS API Documentation
+    #
+    class ContextualMetadataConfig < Struct.new(
+      :summary_generation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   A user-friendly name for this dictionary.
     #   @return [String]
@@ -301,6 +326,12 @@ module Aws::ElementalInference
     #   Repeats the outputs that you specified in the request.
     #   @return [Array<Types::GetOutput>]
     #
+    # @!attribute [rw] access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that you specified in the request. This
+    #   property is absent if you didn't specify an IAM role.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the feed. After creation of the feed has
     #   succeeded, the status will be AVAILABLE.
@@ -324,6 +355,7 @@ module Aws::ElementalInference
       :id,
       :data_endpoints,
       :outputs,
+      :access_role_arn,
       :status,
       :association,
       :tags)
@@ -434,6 +466,18 @@ module Aws::ElementalInference
       :arn,
       :id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the feed whose policy you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteFeedPolicyRequest AWS API Documentation
+    #
+    class DeleteFeedPolicyRequest < Struct.new(
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -752,6 +796,30 @@ module Aws::ElementalInference
     end
 
     # @!attribute [rw] id
+    #   The ID of the feed whose policy you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFeedPolicyRequest AWS API Documentation
+    #
+    class GetFeedPolicyRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource-based policy document attached to the feed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFeedPolicyResponse AWS API Documentation
+    #
+    class GetFeedPolicyResponse < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
     #   The ID of the feed to query.
     #   @return [String]
     #
@@ -783,6 +851,14 @@ module Aws::ElementalInference
     #   An array of the outputs in the feed.
     #   @return [Array<Types::GetOutput>]
     #
+    # @!attribute [rw] access_role_arn
+    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+    #   Management (IAM) role that Elemental Inference assumes. Elemental
+    #   Inference uses this role to access resources in your account on your
+    #   behalf. This property is absent if the feed doesn't have an IAM
+    #   role.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the feed.
     #   @return [String]
@@ -805,9 +881,65 @@ module Aws::ElementalInference
       :id,
       :data_endpoints,
       :outputs,
+      :access_role_arn,
       :status,
       :association,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fixture_id
+    #   The ID of the fixture to retrieve, as returned by SearchFixtures.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFixtureRequest AWS API Documentation
+    #
+    class GetFixtureRequest < Struct.new(
+      :fixture_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fixture_id
+    #   The ID that you specified in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the fixture, as provided by the data source. For
+    #   example, the names of the two competing teams.
+    #   @return [String]
+    #
+    # @!attribute [rw] fixture_group
+    #   The group that the fixture belongs to, such as the competition,
+    #   league, or tournament. The data source doesn't provide this
+    #   information for every fixture.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_start
+    #   The scheduled start time of the fixture, as provided by the data
+    #   source. The actual start time might differ.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the fixture in its lifecycle, as provided by the data
+    #   source. For example, Scheduled or Completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] competitors
+    #   An array of the competitors (the teams or individuals) in the
+    #   fixture.
+    #   @return [Array<Types::Competitor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFixtureResponse AWS API Documentation
+    #
+    class GetFixtureResponse < Struct.new(
+      :fixture_id,
+      :name,
+      :fixture_group,
+      :scheduled_start,
+      :status,
+      :competitors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1002,12 +1134,18 @@ module Aws::ElementalInference
     #   The output config type that applies to the smart subtitling feature.
     #   @return [Types::SubtitlingConfig]
     #
+    # @!attribute [rw] contextual_metadata
+    #   The output config type that applies to the contextual metadata
+    #   feature.
+    #   @return [Types::ContextualMetadataConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/OutputConfig AWS API Documentation
     #
     class OutputConfig < Struct.new(
       :cropping,
       :clipping,
       :subtitling,
+      :contextual_metadata,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1016,8 +1154,30 @@ module Aws::ElementalInference
       class Cropping < OutputConfig; end
       class Clipping < OutputConfig; end
       class Subtitling < OutputConfig; end
+      class ContextualMetadata < OutputConfig; end
       class Unknown < OutputConfig; end
     end
+
+    # @!attribute [rw] id
+    #   The ID of the feed to attach the policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy document to attach to the feed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/PutFeedPolicyRequest AWS API Documentation
+    #
+    class PutFeedPolicyRequest < Struct.new(
+      :id,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/PutFeedPolicyResponse AWS API Documentation
+    #
+    class PutFeedPolicyResponse < Aws::EmptyStructure; end
 
     # The resource specified in the action doesn't exist.
     #
@@ -1410,6 +1570,12 @@ module Aws::ElementalInference
     #   unchanged, or you might have changed it.
     #   @return [Array<Types::GetOutput>]
     #
+    # @!attribute [rw] access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role for the feed, after the update. This property
+    #   is absent if the feed doesn't have an IAM role.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the feed.
     #   @return [String]
@@ -1431,6 +1597,7 @@ module Aws::ElementalInference
       :id,
       :data_endpoints,
       :outputs,
+      :access_role_arn,
       :status,
       :association,
       :tags)

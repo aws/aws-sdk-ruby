@@ -330,6 +330,79 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Kinesis data stream to
+    #   deliver segment membership events to. For example,
+    #   `arn:aws:kinesis:region:account-id:stream/stream-name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that allows Customer
+    #   Profiles service principal to assume the role for conducting AWS Key
+    #   Management Service (KMS) and Amazon Kinesis operations. The role
+    #   must grant the following Amazon Kinesis permissions to deliver
+    #   segment membership events to the stream:
+    #
+    #   * `kinesis:PutRecord`
+    #
+    #   * `kinesis:PutRecords`
+    #
+    #   * `kinesis:DescribeStream`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AssociateStreamForSegmentsRequest AWS API Documentation
+    #
+    class AssociateStreamForSegmentsRequest < Struct.new(
+      :domain_name,
+      :destination_arn,
+      :destination_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AssociateStreamForSegmentsResponse AWS API Documentation
+    #
+    class AssociateStreamForSegmentsResponse < Aws::EmptyStructure; end
+
+    # Represents a segment associated with a membership event stream.
+    #
+    # @!attribute [rw] segment_name
+    #   The unique name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The subscription status of the segment. The following are valid
+    #   values:
+    #
+    #   * **STARTING**: The segment is being prepared to publish membership
+    #     events.
+    #
+    #   * **RUNNING**: The segment is actively publishing membership events
+    #     to the stream.
+    #
+    #   * **STOPPED**: The segment has stopped publishing membership events.
+    #
+    #   * **FAILED**: The segment failed to publish membership events.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An optional message providing context, such as a failure reason.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AssociatedSegment AWS API Documentation
+    #
+    class AssociatedSegment < Struct.new(
+      :segment_name,
+      :status,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Mathematical expression and a list of attribute items specified in
     # that expression.
     #
@@ -360,7 +433,10 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The values to apply the DimensionType on.
+    #   The values to apply the DimensionType on. To reference a calculated
+    #   attribute or profile attribute as a dynamic value, use handlebar
+    #   notation: `{{_profile.ProfileAttributeName}}` or
+    #   `{{_calculated_attribute.CalculatedAttributeName}}`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AttributeDimension AWS API Documentation
@@ -809,7 +885,10 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The values to apply the DimensionType with.
+    #   The values to apply the DimensionType with. To reference a
+    #   calculated attribute or profile attribute as a dynamic value, use
+    #   handlebar notation: `{{_profile.ProfileAttributeName}}` or
+    #   `{{_calculated_attribute.CalculatedAttributeName}}`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] condition_overrides
@@ -2345,7 +2424,10 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The values to apply the DimensionType on.
+    #   The values to apply the DimensionType on. To reference a calculated
+    #   attribute or profile attribute as a dynamic value, use handlebar
+    #   notation: `{{_profile.ProfileAttributeName}}` or
+    #   `{{_calculated_attribute.CalculatedAttributeName}}`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DateDimension AWS API Documentation
@@ -2772,6 +2854,36 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] segment_definition_name
+    #   The unique name of the segment definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteSegmentSubscriptionRequest AWS API Documentation
+    #
+    class DeleteSegmentSubscriptionRequest < Struct.new(
+      :domain_name,
+      :segment_definition_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   A confirmation message indicating the subscription was deleted
+    #   successfully.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteSegmentSubscriptionResponse AWS API Documentation
+    #
+    class DeleteSegmentSubscriptionResponse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] workflow_id
     #   Unique identifier for the workflow.
     #   @return [String]
@@ -2898,6 +3010,31 @@ module Aws::CustomerProfiles
       class ProfileAttributes < Dimension; end
       class CalculatedAttributes < Dimension; end
       class Unknown < Dimension; end
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DisassociateStreamForSegmentsRequest AWS API Documentation
+    #
+    class DisassociateStreamForSegmentsRequest < Struct.new(
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   A confirmation message indicating the stream was disassociated
+    #   successfully.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DisassociateStreamForSegmentsResponse AWS API Documentation
+    #
+    class DisassociateStreamForSegmentsResponse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Defines a diversity constraint for a single item column, specifying a
@@ -3332,7 +3469,10 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The values to apply the DimensionType on.
+    #   The values to apply the DimensionType on. To reference a calculated
+    #   attribute or profile attribute as a dynamic value, use handlebar
+    #   notation: `{{_profile.ProfileAttributeName}}` or
+    #   `{{_calculated_attribute.CalculatedAttributeName}}`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ExtraLengthValueProfileDimension AWS API Documentation
@@ -5365,6 +5505,72 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_definition_name
+    #   The unique name of the segment definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentSubscriptionRequest AWS API Documentation
+    #
+    class GetSegmentSubscriptionRequest < Struct.new(
+      :domain_name,
+      :segment_definition_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current lifecycle status of the subscription. The following are
+    #   valid values:
+    #
+    #   * **STARTING**: Initial snapshot is in progress.
+    #
+    #   * **RUNNING**: Notifications are active and running.
+    #
+    #   * **STOPPED**: Notifications have been stopped.
+    #
+    #   * **FAILED**: Notifications failed (for example, the Amazon Kinesis
+    #     data stream became inaccessible).
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A status message providing additional context, such as a failure
+    #   reason.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_configuration
+    #   The schedule configuration for periodic membership event
+    #   notifications.
+    #   @return [Types::ScheduleConfiguration]
+    #
+    # @!attribute [rw] scheduled_executions
+    #   Information about scheduled execution timestamps.
+    #   @return [Types::ScheduledExecutions]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp of when the subscription was first started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of the most recent configuration change.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentSubscriptionResponse AWS API Documentation
+    #
+    class GetSegmentSubscriptionResponse < Struct.new(
+      :status,
+      :message,
+      :schedule_configuration,
+      :scheduled_executions,
+      :started_at,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The pagination token from the previous `GetSimilarProfiles` API
     #   call.
@@ -5446,6 +5652,78 @@ module Aws::CustomerProfiles
       :rule_level,
       :confidence_score,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetStreamForSegmentsRequest AWS API Documentation
+    #
+    class GetStreamForSegmentsRequest < Struct.new(
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associated_at
+    #   The timestamp of when the stream was associated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] associated_segments
+    #   A list of segments currently associated with the stream and their
+    #   subscription status.
+    #   @return [Array<Types::AssociatedSegment>]
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Kinesis data stream
+    #   receiving segment membership events.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role used for Amazon
+    #   Kinesis and AWS Key Management Service (KMS) operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The operational state of the destination stream. The following are
+    #   valid values:
+    #
+    #   * **RUNNING**: The stream is associated and healthy. Segment
+    #     membership events are being published.
+    #
+    #   * **UNHEALTHY**: The stream is associated but events cannot
+    #     currently be published. See `FailureReason` for details.
+    #
+    #   * **STOPPED**: The stream is no longer publishing segment membership
+    #     events.
+    #   @return [String]
+    #
+    # @!attribute [rw] disassociated_at
+    #   The timestamp of when the stream was disassociated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason why the stream is in an unhealthy state, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetStreamForSegmentsResponse AWS API Documentation
+    #
+    class GetStreamForSegmentsResponse < Struct.new(
+      :associated_at,
+      :associated_segments,
+      :domain_name,
+      :destination_arn,
+      :destination_role_arn,
+      :state,
+      :disassociated_at,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7282,6 +7560,51 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_definition_name
+    #   The unique name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of events to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call to retrieve the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListSegmentSubscriptionEventsRequest AWS API Documentation
+    #
+    class ListSegmentSubscriptionEventsRequest < Struct.new(
+      :domain_name,
+      :segment_definition_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events
+    #   A list of segment membership events.
+    #   @return [Array<Types::SubscriptionEventItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListSegmentSubscriptionEventsResponse AWS API Documentation
+    #
+    class ListSegmentSubscriptionEventsResponse < Struct.new(
+      :events,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource for which you want to view tags.
     #   @return [String]
@@ -8155,7 +8478,10 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The values to apply the DimensionType on.
+    #   The values to apply the DimensionType on. To reference a calculated
+    #   attribute or profile attribute as a dynamic value, use handlebar
+    #   notation: `{{_profile.ProfileAttributeName}}` or
+    #   `{{_calculated_attribute.CalculatedAttributeName}}`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ProfileDimension AWS API Documentation
@@ -8735,6 +9061,62 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_definition_name
+    #   The unique name of the segment definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_configuration
+    #   The optional schedule configuration that controls how often
+    #   membership snapshots are run. If not provided, the subscription
+    #   defaults to a 24-hour interval.
+    #   @return [Types::ScheduleConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutSegmentSubscriptionRequest AWS API Documentation
+    #
+    class PutSegmentSubscriptionRequest < Struct.new(
+      :domain_name,
+      :segment_definition_name,
+      :schedule_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current lifecycle status of the subscription. The following are
+    #   valid values:
+    #
+    #   * **STARTING**: Initial snapshot is in progress.
+    #
+    #   * **RUNNING**: Notifications are active and running.
+    #
+    #   * **STOPPED**: Notifications have been stopped.
+    #
+    #   * **FAILED**: Notifications failed (for example, the Amazon Kinesis
+    #     data stream became inaccessible).
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_configuration
+    #   The schedule configuration for the subscription, if configured.
+    #   @return [Types::ScheduleConfiguration]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp of when the subscription was started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutSegmentSubscriptionResponse AWS API Documentation
+    #
+    class PutSegmentSubscriptionResponse < Struct.new(
+      :status,
+      :schedule_configuration,
+      :started_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The relative time period over which data is included in the
     # aggregation.
     #
@@ -8872,6 +9254,49 @@ module Aws::CustomerProfiles
     class RecommendationDiversityConfig < Struct.new(
       :enabled,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for metadata to include in recommendation responses.
+    #
+    # @!attribute [rw] columns
+    #   A list of metadata column names from your Items dataset to include
+    #   in the recommendation response.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RecommendationMetadata AWS API Documentation
+    #
+    class RecommendationMetadata < Struct.new(
+      :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The recommender used to generate the recommendations.
+    #
+    # @!attribute [rw] name
+    #   The unique name of the recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A list of filters to apply to the returned recommendations. Filters
+    #   define criteria for including or excluding items from the
+    #   recommendation results.
+    #   @return [Array<Types::RecommenderFilter>]
+    #
+    # @!attribute [rw] promotional_filters
+    #   A list of promotional filters to apply to the recommendations.
+    #   Promotional filters allow you to promote specific items within a
+    #   configurable subset of recommendation results.
+    #   @return [Array<Types::RecommenderPromotionalFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Recommender AWS API Documentation
+    #
+    class Recommender < Struct.new(
+      :name,
+      :filters,
+      :promotional_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9525,6 +9950,48 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Configuration for scheduled segment membership event notifications.
+    #
+    # @!attribute [rw] interval
+    #   The interval between scheduled executions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unit
+    #   The unit for the interval. The following are valid values:
+    #
+    #   * **HOURLY**: The interval is measured in hours.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ScheduleConfiguration AWS API Documentation
+    #
+    class ScheduleConfiguration < Struct.new(
+      :interval,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about scheduled execution timestamps.
+    #
+    # @!attribute [rw] next_executed_at
+    #   The timestamp of the next scheduled execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_executed_at
+    #   The timestamp of the last successful scheduled execution.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ScheduledExecutions AWS API Documentation
+    #
+    class ScheduledExecutions < Struct.new(
+      :next_executed_at,
+      :last_executed_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the configuration details of a scheduled-trigger flow that
     # you define. Currently, these settings only apply to the
     # scheduled-trigger type.
@@ -9661,6 +10128,86 @@ module Aws::CustomerProfiles
       :items,
       :next_token)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   A searchable identifier of a customer profile. You can use a
+    #   predefined key, such as `_profileId`, `_phone`, or `_email`, or a
+    #   custom-defined key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_values
+    #   A list of key values. Provide one value for each field of the search
+    #   key.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] recommender
+    #   The recommender used to generate the recommendations.
+    #   @return [Types::Recommender]
+    #
+    # @!attribute [rw] candidate_ids
+    #   A list of item IDs to rank for the user. Use this when you want to
+    #   re-rank a specific set of items rather than getting recommendations
+    #   from the full item catalog. Required for personalized-ranking use
+    #   cases.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] context
+    #   The contextual metadata used to provide dynamic runtime information
+    #   to tailor recommendations.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] diversity
+    #   Runtime diversity configuration for this request. Enables
+    #   diversity-aware recommendations and optionally supplies values for
+    #   placeholder-based diversity caps configured on the recommender.
+    #   @return [Types::RecommendationDiversityConfig]
+    #
+    # @!attribute [rw] metadata
+    #   Configuration for metadata to include in recommendation responses.
+    #   @return [Types::RecommendationMetadata]
+    #
+    # @!attribute [rw] max_recommendations
+    #   The maximum number of recommendations to return. The default value
+    #   is 5.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SearchRecommendationsRequest AWS API Documentation
+    #
+    class SearchRecommendationsRequest < Struct.new(
+      :domain_name,
+      :key_name,
+      :key_values,
+      :recommender,
+      :candidate_ids,
+      :context,
+      :diversity,
+      :metadata,
+      :max_recommendations)
+      SENSITIVE = [:key_values, :context]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile for which to retrieve
+    #   recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendations
+    #   List of recommendations generated by the recommender.
+    #   @return [Array<Types::Recommendation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SearchRecommendationsResponse AWS API Documentation
+    #
+    class SearchRecommendationsResponse < Struct.new(
+      :profile_id,
+      :recommendations)
+      SENSITIVE = [:recommendations]
       include Aws::Structure
     end
 
@@ -9983,6 +10530,46 @@ module Aws::CustomerProfiles
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StopUploadJobResponse AWS API Documentation
     #
     class StopUploadJobResponse < Aws::EmptyStructure; end
+
+    # Represents a single segment membership event.
+    #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of a customer profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the membership change was detected.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event that triggered the membership change. The
+    #   following are valid values:
+    #
+    #   * **LIVE**: Real-time event triggered by a profile or calculated
+    #     attribute change (Classic segments only).
+    #
+    #   * **SCHEDULE**: Event generated during a scheduled execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] event
+    #   Whether the profile joined or left the segment. The following are
+    #   valid values:
+    #
+    #   * **JOINED**: The profile joined the segment.
+    #
+    #   * **LEFT**: The profile left the segment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SubscriptionEventItem AWS API Documentation
+    #
+    class SubscriptionEventItem < Struct.new(
+      :profile_id,
+      :updated_at,
+      :event_type,
+      :event)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you're adding tags to.

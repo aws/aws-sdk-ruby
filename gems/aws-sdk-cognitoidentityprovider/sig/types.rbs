@@ -100,6 +100,15 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class AdminDeleteSoftwareTokenRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminDeleteSoftwareTokenResponse < Aws::EmptyStructure
+    end
+
     class AdminDeleteUserAttributesRequest
       attr_accessor user_pool_id: ::String
       attr_accessor username: ::String
@@ -468,6 +477,13 @@ module Aws::CognitoIdentityProvider
     end
 
     class ChangePasswordResponse < Aws::EmptyStructure
+    end
+
+    class ClientAuthenticationResultType
+      attr_accessor access_token: ::String
+      attr_accessor expires_in: ::Integer
+      attr_accessor token_type: ::String
+      SENSITIVE: [:access_token]
     end
 
     class ClientSecretDescriptorType
@@ -928,6 +944,18 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class DescribeTermsByClientRequest
+      attr_accessor client_id: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor terms_name: ::String
+      SENSITIVE: [:client_id]
+    end
+
+    class DescribeTermsByClientResponse
+      attr_accessor terms: Types::TermsType
+      SENSITIVE: []
+    end
+
     class DescribeTermsRequest
       attr_accessor terms_id: ::String
       attr_accessor user_pool_id: ::String
@@ -1141,6 +1169,19 @@ module Aws::CognitoIdentityProvider
     class GetCSVHeaderResponse
       attr_accessor user_pool_id: ::String
       attr_accessor csv_header: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetClientTokenRequest
+      attr_accessor client_id: ::String
+      attr_accessor secret: ::String
+      attr_accessor scopes: ::Array[::String]
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:client_id, :secret]
+    end
+
+    class GetClientTokenResponse
+      attr_accessor client_authentication_result: Types::ClientAuthenticationResultType
       SENSITIVE: []
     end
 

@@ -518,11 +518,15 @@ module Aws::DevOpsAgent
     #         account_type: "source", # required, accepts source
     #         assumable_role_arn: "RoleArn", # required
     #         external_id: "String",
+    #         agent_elevated_role_arn: "RoleArn",
+    #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
     #       },
     #       aws: {
     #         assumable_role_arn: "RoleArn", # required
     #         account_id: "AWSConfigurationAccountIdString", # required
     #         account_type: "monitor", # required, accepts monitor
+    #         agent_elevated_role_arn: "RoleArn",
+    #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
     #       },
     #       github: {
     #         repo_name: "String", # required
@@ -545,6 +549,10 @@ module Aws::DevOpsAgent
     #             channel_id: "SlackChannelChannelIdString", # required
     #           },
     #         },
+    #         bidirectional: {
+    #           role_arn: "RoleArn", # required
+    #           enabled: false,
+    #         },
     #       },
     #       dynatrace: {
     #         env_id: "String", # required
@@ -559,9 +567,21 @@ module Aws::DevOpsAgent
     #         endpoint: "MCPServerNewRelicConfigurationEndpointString", # required
     #       },
     #       mcpserverdatadog: {
+    #         enabled_elevated_tools: [
+    #           {
+    #             name: "MCPToolDetailNameString", # required
+    #             tool_classification: "READ_ONLY", # accepts READ_ONLY, MUTATIVE, DESTRUCTIVE
+    #           },
+    #         ],
     #       },
     #       mcpserver: {
     #         tools: ["MCPToolsListMemberString"], # required
+    #         tool_details: [
+    #           {
+    #             name: "MCPToolDetailNameString", # required
+    #             tool_classification: "READ_ONLY", # accepts READ_ONLY, MUTATIVE, DESTRUCTIVE
+    #           },
+    #         ],
     #       },
     #       gitlab: {
     #         project_id: "String", # required
@@ -585,6 +605,12 @@ module Aws::DevOpsAgent
     #         endpoint: "MCPServerGrafanaConfigurationEndpointString", # required
     #         organization_id: "MCPServerGrafanaConfigurationOrganizationIdString",
     #         tools: ["MCPToolsListMemberString"],
+    #         enabled_elevated_tools: [
+    #           {
+    #             name: "MCPToolDetailNameString", # required
+    #             tool_classification: "READ_ONLY", # accepts READ_ONLY, MUTATIVE, DESTRUCTIVE
+    #           },
+    #         ],
     #       },
     #       pagerduty: {
     #         services: ["String"], # required
@@ -592,6 +618,12 @@ module Aws::DevOpsAgent
     #       },
     #       mcpserversigv4: {
     #         tools: ["MCPToolsListMemberString"], # required
+    #         tool_details: [
+    #           {
+    #             name: "MCPToolDetailNameString", # required
+    #             tool_classification: "READ_ONLY", # accepts READ_ONLY, MUTATIVE, DESTRUCTIVE
+    #           },
+    #         ],
     #       },
     #       remoteagent: {
     #       },
@@ -601,6 +633,14 @@ module Aws::DevOpsAgent
     #     capabilities: {
     #       "RELEASE_READINESS_REVIEW" => {
     #         enabled: false,
+    #         trigger_filter_groups: [
+    #           {
+    #             events: ["PULL_REQUEST_READY_FOR_REVIEW"], # accepts PULL_REQUEST_READY_FOR_REVIEW, PULL_REQUEST_DRAFT
+    #             target_branches: {
+    #               patterns: ["TriggerRegexPattern"], # required
+    #             },
+    #           },
+    #         ],
     #       },
     #     },
     #   })
@@ -617,9 +657,13 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.source_aws.account_type #=> String, one of "source"
     #   resp.association.configuration.source_aws.assumable_role_arn #=> String
     #   resp.association.configuration.source_aws.external_id #=> String
+    #   resp.association.configuration.source_aws.agent_elevated_role_arn #=> String
+    #   resp.association.configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
     #   resp.association.configuration.aws.assumable_role_arn #=> String
     #   resp.association.configuration.aws.account_id #=> String
     #   resp.association.configuration.aws.account_type #=> String, one of "monitor"
+    #   resp.association.configuration.aws.agent_elevated_role_arn #=> String
+    #   resp.association.configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
     #   resp.association.configuration.github.repo_name #=> String
     #   resp.association.configuration.github.repo_id #=> String
     #   resp.association.configuration.github.owner #=> String
@@ -632,6 +676,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.slack.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.slack.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.slack.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.slack.bidirectional.role_arn #=> String
+    #   resp.association.configuration.slack.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.dynatrace.env_id #=> String
     #   resp.association.configuration.dynatrace.resources #=> Array
     #   resp.association.configuration.dynatrace.resources[0] #=> String
@@ -640,8 +686,14 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.servicenow.auth_scopes[0] #=> String
     #   resp.association.configuration.mcpservernewrelic.account_id #=> String
     #   resp.association.configuration.mcpservernewrelic.endpoint #=> String
+    #   resp.association.configuration.mcpserverdatadog.enabled_elevated_tools #=> Array
+    #   resp.association.configuration.mcpserverdatadog.enabled_elevated_tools[0].name #=> String
+    #   resp.association.configuration.mcpserverdatadog.enabled_elevated_tools[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.configuration.mcpserver.tools #=> Array
     #   resp.association.configuration.mcpserver.tools[0] #=> String
+    #   resp.association.configuration.mcpserver.tool_details #=> Array
+    #   resp.association.configuration.mcpserver.tool_details[0].name #=> String
+    #   resp.association.configuration.mcpserver.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.configuration.gitlab.project_id #=> String
     #   resp.association.configuration.gitlab.project_path #=> String
     #   resp.association.configuration.gitlab.instance_identifier #=> String
@@ -654,13 +706,24 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpservergrafana.organization_id #=> String
     #   resp.association.configuration.mcpservergrafana.tools #=> Array
     #   resp.association.configuration.mcpservergrafana.tools[0] #=> String
+    #   resp.association.configuration.mcpservergrafana.enabled_elevated_tools #=> Array
+    #   resp.association.configuration.mcpservergrafana.enabled_elevated_tools[0].name #=> String
+    #   resp.association.configuration.mcpservergrafana.enabled_elevated_tools[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.configuration.pagerduty.services #=> Array
     #   resp.association.configuration.pagerduty.services[0] #=> String
     #   resp.association.configuration.pagerduty.customer_email #=> String
     #   resp.association.configuration.mcpserversigv4.tools #=> Array
     #   resp.association.configuration.mcpserversigv4.tools[0] #=> String
+    #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
+    #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
+    #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.capabilities #=> Hash
     #   resp.association.capabilities["CapabilityType"].enabled #=> Boolean
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups #=> Array
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].events #=> Array
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT"
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].target_branches.patterns #=> Array
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].target_branches.patterns[0] #=> String
     #   resp.webhook.webhook_url #=> String
     #   resp.webhook.webhook_id #=> String
     #   resp.webhook.webhook_type #=> String, one of "hmac", "apikey", "gitlab", "pagerduty"
@@ -704,6 +767,10 @@ module Aws::DevOpsAgent
     # @option params [Hash<String,String>] :tags
     #   Tags to add to the AgentSpace at creation time.
     #
+    # @option params [Hash<String,Boolean>] :preferences
+    #   The preferences to configure on the agent space. Preferences not
+    #   provided take their default values.
+    #
     # @return [Types::CreateAgentSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAgentSpaceOutput#agent_space #agent_space} => Types::AgentSpace
@@ -720,6 +787,9 @@ module Aws::DevOpsAgent
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     preferences: {
+    #       "elevatedActionsEnabled" => false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -731,6 +801,8 @@ module Aws::DevOpsAgent
     #   resp.agent_space.updated_at #=> Time
     #   resp.agent_space.kms_key_arn #=> String
     #   resp.agent_space.agent_space_id #=> String
+    #   resp.agent_space.preferences #=> Hash
+    #   resp.agent_space.preferences["AgentSpacePreferenceKey"] #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -777,7 +849,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_asset({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_type: "AssetType", # required
     #     metadata: {
     #     },
@@ -854,7 +926,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_asset_file({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_id: "ResourceId", # required
     #     path: "AssetFilePath", # required
     #     content: { # required
@@ -918,7 +990,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_backlog_task({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     reference: {
     #       system: "ReferenceInputSystemString", # required
     #       title: "ReferenceInputTitleString",
@@ -930,7 +1002,7 @@ module Aws::DevOpsAgent
     #     title: "BacklogTaskTitle", # required
     #     description: "BacklogTaskDescription",
     #     priority: "CRITICAL", # required, accepts CRITICAL, HIGH, MEDIUM, LOW, MINIMAL
-    #     client_token: "String",
+    #     client_token: "CreateBacklogTaskRequestClientTokenString",
     #   })
     #
     # @example Response structure
@@ -947,7 +1019,7 @@ module Aws::DevOpsAgent
     #   resp.task.reference.association_id #=> String
     #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
     #   resp.task.priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
-    #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED"
+    #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.task.created_at #=> Time
     #   resp.task.updated_at #=> Time
     #   resp.task.version #=> Integer
@@ -967,8 +1039,8 @@ module Aws::DevOpsAgent
     # Creates a new chat execution in the specified agent space
     #
     # @option params [required, String] :agent_space_id
-    #   Unique identifier for an agent space (allows alphanumeric characters
-    #   and hyphens; 1-64 characters)
+    #   The unique identifier for the agent space where the chat will be
+    #   created.
     #
     # @option params [String] :user_id
     #   The user identifier for the chat. This field is deprecated and will be
@@ -986,7 +1058,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_chat({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     user_id: "ResourceId",
     #     user_type: "IAM", # accepts IAM, IDC, IDP
     #   })
@@ -1117,7 +1189,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_trigger({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     type: "TriggerType", # required
     #     condition: { # required
     #       schedule: {
@@ -1185,7 +1257,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_asset({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_id: "ResourceId", # required
     #   })
     #
@@ -1214,7 +1286,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_asset_file({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_id: "ResourceId", # required
     #     path: "AssetFilePath", # required
     #   })
@@ -1272,7 +1344,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_trigger({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     trigger_id: "ResourceId", # required
     #   })
     #
@@ -1546,6 +1618,8 @@ module Aws::DevOpsAgent
     #   resp.agent_space.updated_at #=> Time
     #   resp.agent_space.kms_key_arn #=> String
     #   resp.agent_space.agent_space_id #=> String
+    #   resp.agent_space.preferences #=> Hash
+    #   resp.agent_space.preferences["AgentSpacePreferenceKey"] #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1577,7 +1651,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_asset({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_id: "ResourceId", # required
     #     asset_version: 1,
     #   })
@@ -1619,7 +1693,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_asset_content({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_id: "ResourceId", # required
     #     asset_version: 1,
     #   })
@@ -1660,7 +1734,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_asset_file({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_id: "ResourceId", # required
     #     path: "AssetFilePath", # required
     #     asset_version: 1,
@@ -1715,9 +1789,13 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.source_aws.account_type #=> String, one of "source"
     #   resp.association.configuration.source_aws.assumable_role_arn #=> String
     #   resp.association.configuration.source_aws.external_id #=> String
+    #   resp.association.configuration.source_aws.agent_elevated_role_arn #=> String
+    #   resp.association.configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
     #   resp.association.configuration.aws.assumable_role_arn #=> String
     #   resp.association.configuration.aws.account_id #=> String
     #   resp.association.configuration.aws.account_type #=> String, one of "monitor"
+    #   resp.association.configuration.aws.agent_elevated_role_arn #=> String
+    #   resp.association.configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
     #   resp.association.configuration.github.repo_name #=> String
     #   resp.association.configuration.github.repo_id #=> String
     #   resp.association.configuration.github.owner #=> String
@@ -1730,6 +1808,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.slack.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.slack.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.slack.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.slack.bidirectional.role_arn #=> String
+    #   resp.association.configuration.slack.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.dynatrace.env_id #=> String
     #   resp.association.configuration.dynatrace.resources #=> Array
     #   resp.association.configuration.dynatrace.resources[0] #=> String
@@ -1738,8 +1818,14 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.servicenow.auth_scopes[0] #=> String
     #   resp.association.configuration.mcpservernewrelic.account_id #=> String
     #   resp.association.configuration.mcpservernewrelic.endpoint #=> String
+    #   resp.association.configuration.mcpserverdatadog.enabled_elevated_tools #=> Array
+    #   resp.association.configuration.mcpserverdatadog.enabled_elevated_tools[0].name #=> String
+    #   resp.association.configuration.mcpserverdatadog.enabled_elevated_tools[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.configuration.mcpserver.tools #=> Array
     #   resp.association.configuration.mcpserver.tools[0] #=> String
+    #   resp.association.configuration.mcpserver.tool_details #=> Array
+    #   resp.association.configuration.mcpserver.tool_details[0].name #=> String
+    #   resp.association.configuration.mcpserver.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.configuration.gitlab.project_id #=> String
     #   resp.association.configuration.gitlab.project_path #=> String
     #   resp.association.configuration.gitlab.instance_identifier #=> String
@@ -1752,13 +1838,24 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpservergrafana.organization_id #=> String
     #   resp.association.configuration.mcpservergrafana.tools #=> Array
     #   resp.association.configuration.mcpservergrafana.tools[0] #=> String
+    #   resp.association.configuration.mcpservergrafana.enabled_elevated_tools #=> Array
+    #   resp.association.configuration.mcpservergrafana.enabled_elevated_tools[0].name #=> String
+    #   resp.association.configuration.mcpservergrafana.enabled_elevated_tools[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.configuration.pagerduty.services #=> Array
     #   resp.association.configuration.pagerduty.services[0] #=> String
     #   resp.association.configuration.pagerduty.customer_email #=> String
     #   resp.association.configuration.mcpserversigv4.tools #=> Array
     #   resp.association.configuration.mcpserversigv4.tools[0] #=> String
+    #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
+    #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
+    #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.capabilities #=> Hash
     #   resp.association.capabilities["CapabilityType"].enabled #=> Boolean
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups #=> Array
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].events #=> Array
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT"
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].target_branches.patterns #=> Array
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].target_branches.patterns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/GetAssociation AWS API Documentation
     #
@@ -1784,7 +1881,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_backlog_task({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     task_id: "ResourceId", # required
     #   })
     #
@@ -1802,7 +1899,7 @@ module Aws::DevOpsAgent
     #   resp.task.reference.association_id #=> String
     #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
     #   resp.task.priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
-    #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED"
+    #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.task.created_at #=> Time
     #   resp.task.updated_at #=> Time
     #   resp.task.version #=> Integer
@@ -1885,7 +1982,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_recommendation({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     recommendation_id: "ResourceId", # required
     #     recommendation_version: 1,
     #   })
@@ -1965,7 +2062,7 @@ module Aws::DevOpsAgent
     #   resp.service.additional_service_details.mcpserversplunk.description #=> String
     #   resp.service.additional_service_details.mcpserversplunk.api_key_header #=> String
     #   resp.service.additional_service_details.mcpservernewrelic.account_id #=> String
-    #   resp.service.additional_service_details.mcpservernewrelic.region #=> String, one of "US", "EU"
+    #   resp.service.additional_service_details.mcpservernewrelic.region #=> String, one of "US", "EU", "JP"
     #   resp.service.additional_service_details.mcpservernewrelic.description #=> String
     #   resp.service.additional_service_details.azuredevops.organization_name #=> String
     #   resp.service.additional_service_details.azureidentity.tenant_id #=> String
@@ -1999,6 +2096,8 @@ module Aws::DevOpsAgent
     #   resp.service.additional_service_details.remoteagentsigv4.role_arn #=> String
     #   resp.service.kms_key_arn #=> String
     #   resp.service.private_connection_name #=> String
+    #   resp.service.created_at #=> Time
+    #   resp.service.updated_at #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -2026,7 +2125,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_trigger({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     trigger_id: "ResourceId", # required
     #   })
     #
@@ -2082,6 +2181,8 @@ module Aws::DevOpsAgent
     #   resp.agent_spaces[0].updated_at #=> Time
     #   resp.agent_spaces[0].kms_key_arn #=> String
     #   resp.agent_spaces[0].agent_space_id #=> String
+    #   resp.agent_spaces[0].preferences #=> Hash
+    #   resp.agent_spaces[0].preferences["AgentSpacePreferenceKey"] #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ListAgentSpaces AWS API Documentation
     #
@@ -2121,7 +2222,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_asset_files({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_id: "ResourceId", # required
     #     asset_version: 1,
     #     next_token: "NextToken",
@@ -2210,7 +2311,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_asset_versions({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_id: "ResourceId", # required
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -2264,7 +2365,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_assets({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_type: "AssetType",
     #     updated_after: Time.now,
     #     updated_before: Time.now,
@@ -2336,9 +2437,13 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.source_aws.account_type #=> String, one of "source"
     #   resp.associations[0].configuration.source_aws.assumable_role_arn #=> String
     #   resp.associations[0].configuration.source_aws.external_id #=> String
+    #   resp.associations[0].configuration.source_aws.agent_elevated_role_arn #=> String
+    #   resp.associations[0].configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
     #   resp.associations[0].configuration.aws.assumable_role_arn #=> String
     #   resp.associations[0].configuration.aws.account_id #=> String
     #   resp.associations[0].configuration.aws.account_type #=> String, one of "monitor"
+    #   resp.associations[0].configuration.aws.agent_elevated_role_arn #=> String
+    #   resp.associations[0].configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
     #   resp.associations[0].configuration.github.repo_name #=> String
     #   resp.associations[0].configuration.github.repo_id #=> String
     #   resp.associations[0].configuration.github.owner #=> String
@@ -2351,6 +2456,8 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.slack.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.associations[0].configuration.slack.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.associations[0].configuration.slack.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.associations[0].configuration.slack.bidirectional.role_arn #=> String
+    #   resp.associations[0].configuration.slack.bidirectional.enabled #=> Boolean
     #   resp.associations[0].configuration.dynatrace.env_id #=> String
     #   resp.associations[0].configuration.dynatrace.resources #=> Array
     #   resp.associations[0].configuration.dynatrace.resources[0] #=> String
@@ -2359,8 +2466,14 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.servicenow.auth_scopes[0] #=> String
     #   resp.associations[0].configuration.mcpservernewrelic.account_id #=> String
     #   resp.associations[0].configuration.mcpservernewrelic.endpoint #=> String
+    #   resp.associations[0].configuration.mcpserverdatadog.enabled_elevated_tools #=> Array
+    #   resp.associations[0].configuration.mcpserverdatadog.enabled_elevated_tools[0].name #=> String
+    #   resp.associations[0].configuration.mcpserverdatadog.enabled_elevated_tools[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.associations[0].configuration.mcpserver.tools #=> Array
     #   resp.associations[0].configuration.mcpserver.tools[0] #=> String
+    #   resp.associations[0].configuration.mcpserver.tool_details #=> Array
+    #   resp.associations[0].configuration.mcpserver.tool_details[0].name #=> String
+    #   resp.associations[0].configuration.mcpserver.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.associations[0].configuration.gitlab.project_id #=> String
     #   resp.associations[0].configuration.gitlab.project_path #=> String
     #   resp.associations[0].configuration.gitlab.instance_identifier #=> String
@@ -2373,13 +2486,24 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.mcpservergrafana.organization_id #=> String
     #   resp.associations[0].configuration.mcpservergrafana.tools #=> Array
     #   resp.associations[0].configuration.mcpservergrafana.tools[0] #=> String
+    #   resp.associations[0].configuration.mcpservergrafana.enabled_elevated_tools #=> Array
+    #   resp.associations[0].configuration.mcpservergrafana.enabled_elevated_tools[0].name #=> String
+    #   resp.associations[0].configuration.mcpservergrafana.enabled_elevated_tools[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.associations[0].configuration.pagerduty.services #=> Array
     #   resp.associations[0].configuration.pagerduty.services[0] #=> String
     #   resp.associations[0].configuration.pagerduty.customer_email #=> String
     #   resp.associations[0].configuration.mcpserversigv4.tools #=> Array
     #   resp.associations[0].configuration.mcpserversigv4.tools[0] #=> String
+    #   resp.associations[0].configuration.mcpserversigv4.tool_details #=> Array
+    #   resp.associations[0].configuration.mcpserversigv4.tool_details[0].name #=> String
+    #   resp.associations[0].configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.associations[0].capabilities #=> Hash
     #   resp.associations[0].capabilities["CapabilityType"].enabled #=> Boolean
+    #   resp.associations[0].capabilities["CapabilityType"].trigger_filter_groups #=> Array
+    #   resp.associations[0].capabilities["CapabilityType"].trigger_filter_groups[0].events #=> Array
+    #   resp.associations[0].capabilities["CapabilityType"].trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT"
+    #   resp.associations[0].capabilities["CapabilityType"].trigger_filter_groups[0].target_branches.patterns #=> Array
+    #   resp.associations[0].capabilities["CapabilityType"].trigger_filter_groups[0].target_branches.patterns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ListAssociations AWS API Documentation
     #
@@ -2429,12 +2553,12 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_backlog_tasks({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     filter: {
     #       created_after: Time.now,
     #       created_before: Time.now,
     #       priority: ["CRITICAL"], # accepts CRITICAL, HIGH, MEDIUM, LOW, MINIMAL
-    #       status: ["PENDING_TRIAGE"], # accepts PENDING_TRIAGE, LINKED, PENDING_START, IN_PROGRESS, PENDING_CUSTOMER_APPROVAL, COMPLETED, FAILED, TIMED_OUT, CANCELED, SKIPPED
+    #       status: ["PENDING_TRIAGE"], # accepts PENDING_TRIAGE, LINKED, PENDING_START, IN_PROGRESS, PENDING_CUSTOMER_APPROVAL, COMPLETED, FAILED, TIMED_OUT, CANCELED, SKIPPED, WAITING
     #       task_type: ["INVESTIGATION"], # accepts INVESTIGATION, EVALUATION, RELEASE_READINESS_REVIEW, RELEASE_TESTING
     #       primary_task_id: "ResourceId",
     #     },
@@ -2459,7 +2583,7 @@ module Aws::DevOpsAgent
     #   resp.tasks[0].reference.association_id #=> String
     #   resp.tasks[0].task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
     #   resp.tasks[0].priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
-    #   resp.tasks[0].status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED"
+    #   resp.tasks[0].status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.tasks[0].created_at #=> Time
     #   resp.tasks[0].updated_at #=> Time
     #   resp.tasks[0].version #=> Integer
@@ -2480,8 +2604,7 @@ module Aws::DevOpsAgent
     # Retrieves a paginated list of the user's recent chat executions
     #
     # @option params [required, String] :agent_space_id
-    #   Unique identifier for an agent space (allows alphanumeric characters
-    #   and hyphens; 1-64 characters)
+    #   The unique identifier for the agent space to list chats from.
     #
     # @option params [String] :user_id
     #   The user identifier to list chats for. This field is deprecated and
@@ -2502,7 +2625,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_chats({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     user_id: "ResourceId",
     #     max_results: 1,
     #     next_token: "String",
@@ -2550,7 +2673,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_executions({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     task_id: "ResourceId", # required
     #     limit: 1,
     #     next_token: "NextToken",
@@ -2565,7 +2688,7 @@ module Aws::DevOpsAgent
     #   resp.executions[0].agent_sub_task #=> String
     #   resp.executions[0].created_at #=> Time
     #   resp.executions[0].updated_at #=> Time
-    #   resp.executions[0].execution_status #=> String, one of "FAILED", "RUNNING", "STOPPED", "CANCELED", "TIMED_OUT"
+    #   resp.executions[0].execution_status #=> String, one of "FAILED", "RUNNING", "STOPPED", "CANCELED", "TIMED_OUT", "WAITING"
     #   resp.executions[0].agent_type #=> String
     #   resp.executions[0].uid #=> String
     #   resp.next_token #=> String
@@ -2606,7 +2729,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_goals({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     status: "ACTIVE", # accepts ACTIVE, PAUSED, COMPLETE
     #     goal_type: "CUSTOMER_DEFINED", # accepts CUSTOMER_DEFINED, ONCALL_REPORT
     #     limit: 1,
@@ -2674,7 +2797,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_journal_records({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     execution_id: "ResourceId", # required
     #     limit: 1,
     #     next_token: "NextToken",
@@ -2809,7 +2932,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_recommendations({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     task_id: "ResourceId",
     #     goal_id: "ResourceId",
     #     status: "PROPOSED", # accepts PROPOSED, ACCEPTED, REJECTED, CLOSED, COMPLETED, UPDATE_IN_PROGRESS
@@ -2907,7 +3030,7 @@ module Aws::DevOpsAgent
     #   resp.services[0].additional_service_details.mcpserversplunk.description #=> String
     #   resp.services[0].additional_service_details.mcpserversplunk.api_key_header #=> String
     #   resp.services[0].additional_service_details.mcpservernewrelic.account_id #=> String
-    #   resp.services[0].additional_service_details.mcpservernewrelic.region #=> String, one of "US", "EU"
+    #   resp.services[0].additional_service_details.mcpservernewrelic.region #=> String, one of "US", "EU", "JP"
     #   resp.services[0].additional_service_details.mcpservernewrelic.description #=> String
     #   resp.services[0].additional_service_details.azuredevops.organization_name #=> String
     #   resp.services[0].additional_service_details.azureidentity.tenant_id #=> String
@@ -2941,6 +3064,8 @@ module Aws::DevOpsAgent
     #   resp.services[0].additional_service_details.remoteagentsigv4.role_arn #=> String
     #   resp.services[0].kms_key_arn #=> String
     #   resp.services[0].private_connection_name #=> String
+    #   resp.services[0].created_at #=> Time
+    #   resp.services[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ListServices AWS API Documentation
     #
@@ -3006,7 +3131,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_triggers({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     status: "TriggerStatus",
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -3193,7 +3318,7 @@ module Aws::DevOpsAgent
     #       gitlab: {
     #         target_url: "GitLabDetailsTargetUrlString", # required
     #         token_type: "personal", # required, accepts personal, group
-    #         token_value: "GitLabDetailsTokenValueString", # required
+    #         token_value: "GitLabTokenValue", # required
     #         group_id: "String",
     #       },
     #       mcpserversplunk: {
@@ -3242,9 +3367,9 @@ module Aws::DevOpsAgent
     #       mcpservernewrelic: {
     #         authorization_config: { # required
     #           api_key: {
-    #             api_key: "NewRelicApiKeyConfigApiKeyString", # required
+    #             api_key: "NewRelicApiKey", # required
     #             account_id: "NewRelicApiKeyConfigAccountIdString", # required
-    #             region: "US", # required, accepts US, EU
+    #             region: "US", # required, accepts US, EU, JP
     #             application_ids: ["NewRelicApplicationIdsMemberString"],
     #             entity_guids: ["NewRelicEntityGuidsMemberString"],
     #             alert_policy_ids: ["NewRelicAlertPolicyIdsMemberString"],
@@ -3417,6 +3542,10 @@ module Aws::DevOpsAgent
     # @option params [Array<String>] :asset_ids
     #   Optional list of asset identifiers to attach to the message
     #
+    # @option params [String] :model_tier
+    #   Optional model tier selection. Valid values: smart, balanced, fast.
+    #   Absent or unrecognized values default to balanced.
+    #
     # @return [Types::SendMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendMessageResponse#events #events} => Types::SendMessageEvents
@@ -3585,16 +3714,24 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.send_message({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     execution_id: "ChatExecutionId", # required
     #     content: "MessageContent", # required
     #     context: {
     #       current_page: "String",
     #       last_message: "String",
     #       user_action_response: "String",
+    #       approval_action: {
+    #         tool_use_id: "ToolUseId",
+    #         interrupt_id: "InterruptId",
+    #         approval_id: "ApprovalId",
+    #         button_text: "ButtonText",
+    #         action: "APPROVED", # accepts APPROVED, REJECTED
+    #       },
     #     },
     #     user_id: "ResourceId",
     #     asset_ids: ["String"],
+    #     model_tier: "String",
     #   })
     #
     # @example Response structure
@@ -3746,6 +3883,12 @@ module Aws::DevOpsAgent
     #   The updated locale for the AgentSpace, which determines the language
     #   used in agent responses.
     #
+    # @option params [Hash<String,Boolean>] :preferences
+    #   The preferences to configure on the agent space. When provided, this
+    #   replaces the full set of configured preferences; preferences not
+    #   included revert to their default values. When omitted, the current
+    #   preferences are left unchanged.
+    #
     # @return [Types::UpdateAgentSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAgentSpaceOutput#agent_space #agent_space} => Types::AgentSpace
@@ -3757,6 +3900,9 @@ module Aws::DevOpsAgent
     #     name: "AgentSpaceName",
     #     description: "Description",
     #     locale: "Locale",
+    #     preferences: {
+    #       "elevatedActionsEnabled" => false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3768,6 +3914,8 @@ module Aws::DevOpsAgent
     #   resp.agent_space.updated_at #=> Time
     #   resp.agent_space.kms_key_arn #=> String
     #   resp.agent_space.agent_space_id #=> String
+    #   resp.agent_space.preferences #=> Hash
+    #   resp.agent_space.preferences["AgentSpacePreferenceKey"] #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateAgentSpace AWS API Documentation
     #
@@ -3775,6 +3923,87 @@ module Aws::DevOpsAgent
     # @param [Hash] params ({})
     def update_agent_space(params = {}, options = {})
       req = build_request(:update_agent_space, params)
+      req.send_request(options)
+    end
+
+    # Updates an approval request with the terminal decision (APPROVED or
+    # REJECTED). A single operation handles both verbs via the action enum.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The agent space identifier — multi-tenant workspace scope. Bound from
+    #   the request URI.
+    #
+    # @option params [required, String] :approval_id
+    #   Identifier of the approval request being resolved. A UUID. Bound from
+    #   the request URI.
+    #
+    # @option params [required, String] :action
+    #   The action to take on the approval request — APPROVED or REJECTED.
+    #
+    # @option params [Types::ApprovalPattern] :final_pattern
+    #   The finalized pattern (tool + argumentPins) that scopes the approval.
+    #   Required when `action` is APPROVED; must be absent when `action`
+    #   is REJECTED. The pattern narrows, and must not widen, the invocation
+    #   originally requested by the agent. This cross-field invariant is
+    #   enforced by service-side validation.
+    #
+    # @option params [String] :reason
+    #   Optional free-text rationale for the decision. Permitted when
+    #   `action` is REJECTED; ignored when `action` is APPROVED.
+    #
+    # @option params [Integer] :ttl_seconds
+    #   Approval lifetime in seconds, starting from when the decision is
+    #   submitted. Required when `action` is APPROVED AND `singleUse` is
+    #   false; must be absent when `action` is REJECTED or when
+    #   `singleUse` is true (a single-use approval backs one executed action
+    #   and the redemption window collapses). Cross-field invariants are
+    #   enforced by service-side validation; the @range bound here is the
+    #   operation-boundary check that always applies (a maximum of 4 hours).
+    #
+    # @option params [Boolean] :single_use
+    #   Whether the approved action backs a single executed tool call (true)
+    #   or is reusable within ttlSeconds (false). Required when `action` is
+    #   APPROVED; must be absent when `action` is REJECTED. When true,
+    #   ttlSeconds must be absent (the redemption window collapses to the
+    #   single use). When false, ttlSeconds is required and bounds the reuse
+    #   window. Cross-field invariants are enforced by service-side
+    #   validation.
+    #
+    # @return [Types::UpdateApprovalActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApprovalActionResponse#approval_id #approval_id} => String
+    #   * {Types::UpdateApprovalActionResponse#status #status} => String
+    #   * {Types::UpdateApprovalActionResponse#expires_at #expires_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_approval_action({
+    #     agent_space_id: "AgentSpaceIdentifier", # required
+    #     approval_id: "ApprovalId", # required
+    #     action: "APPROVED", # required, accepts APPROVED, REJECTED
+    #     final_pattern: {
+    #       tool: "ToolIdentifier", # required
+    #       argument_pins: { # required
+    #         "ApprovalPinKey" => "ApprovalPinValue",
+    #       },
+    #     },
+    #     reason: "ApprovalReason",
+    #     ttl_seconds: 1,
+    #     single_use: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_id #=> String
+    #   resp.status #=> String, one of "PENDING", "APPROVED", "REJECTED", "REVOKED", "REDEEMED"
+    #   resp.expires_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateApprovalAction AWS API Documentation
+    #
+    # @overload update_approval_action(params = {})
+    # @param [Hash] params ({})
+    def update_approval_action(params = {}, options = {})
+      req = build_request(:update_approval_action, params)
       req.send_request(options)
     end
 
@@ -3812,7 +4041,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_asset({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_id: "ResourceId", # required
     #     metadata: {
     #     },
@@ -3890,7 +4119,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_asset_file({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     asset_id: "ResourceId", # required
     #     path: "AssetFilePath", # required
     #     content: {
@@ -3953,11 +4182,15 @@ module Aws::DevOpsAgent
     #         account_type: "source", # required, accepts source
     #         assumable_role_arn: "RoleArn", # required
     #         external_id: "String",
+    #         agent_elevated_role_arn: "RoleArn",
+    #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
     #       },
     #       aws: {
     #         assumable_role_arn: "RoleArn", # required
     #         account_id: "AWSConfigurationAccountIdString", # required
     #         account_type: "monitor", # required, accepts monitor
+    #         agent_elevated_role_arn: "RoleArn",
+    #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
     #       },
     #       github: {
     #         repo_name: "String", # required
@@ -3980,6 +4213,10 @@ module Aws::DevOpsAgent
     #             channel_id: "SlackChannelChannelIdString", # required
     #           },
     #         },
+    #         bidirectional: {
+    #           role_arn: "RoleArn", # required
+    #           enabled: false,
+    #         },
     #       },
     #       dynatrace: {
     #         env_id: "String", # required
@@ -3994,9 +4231,21 @@ module Aws::DevOpsAgent
     #         endpoint: "MCPServerNewRelicConfigurationEndpointString", # required
     #       },
     #       mcpserverdatadog: {
+    #         enabled_elevated_tools: [
+    #           {
+    #             name: "MCPToolDetailNameString", # required
+    #             tool_classification: "READ_ONLY", # accepts READ_ONLY, MUTATIVE, DESTRUCTIVE
+    #           },
+    #         ],
     #       },
     #       mcpserver: {
     #         tools: ["MCPToolsListMemberString"], # required
+    #         tool_details: [
+    #           {
+    #             name: "MCPToolDetailNameString", # required
+    #             tool_classification: "READ_ONLY", # accepts READ_ONLY, MUTATIVE, DESTRUCTIVE
+    #           },
+    #         ],
     #       },
     #       gitlab: {
     #         project_id: "String", # required
@@ -4020,6 +4269,12 @@ module Aws::DevOpsAgent
     #         endpoint: "MCPServerGrafanaConfigurationEndpointString", # required
     #         organization_id: "MCPServerGrafanaConfigurationOrganizationIdString",
     #         tools: ["MCPToolsListMemberString"],
+    #         enabled_elevated_tools: [
+    #           {
+    #             name: "MCPToolDetailNameString", # required
+    #             tool_classification: "READ_ONLY", # accepts READ_ONLY, MUTATIVE, DESTRUCTIVE
+    #           },
+    #         ],
     #       },
     #       pagerduty: {
     #         services: ["String"], # required
@@ -4027,6 +4282,12 @@ module Aws::DevOpsAgent
     #       },
     #       mcpserversigv4: {
     #         tools: ["MCPToolsListMemberString"], # required
+    #         tool_details: [
+    #           {
+    #             name: "MCPToolDetailNameString", # required
+    #             tool_classification: "READ_ONLY", # accepts READ_ONLY, MUTATIVE, DESTRUCTIVE
+    #           },
+    #         ],
     #       },
     #       remoteagent: {
     #       },
@@ -4036,6 +4297,14 @@ module Aws::DevOpsAgent
     #     capabilities: {
     #       "RELEASE_READINESS_REVIEW" => {
     #         enabled: false,
+    #         trigger_filter_groups: [
+    #           {
+    #             events: ["PULL_REQUEST_READY_FOR_REVIEW"], # accepts PULL_REQUEST_READY_FOR_REVIEW, PULL_REQUEST_DRAFT
+    #             target_branches: {
+    #               patterns: ["TriggerRegexPattern"], # required
+    #             },
+    #           },
+    #         ],
     #       },
     #     },
     #   })
@@ -4052,9 +4321,13 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.source_aws.account_type #=> String, one of "source"
     #   resp.association.configuration.source_aws.assumable_role_arn #=> String
     #   resp.association.configuration.source_aws.external_id #=> String
+    #   resp.association.configuration.source_aws.agent_elevated_role_arn #=> String
+    #   resp.association.configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
     #   resp.association.configuration.aws.assumable_role_arn #=> String
     #   resp.association.configuration.aws.account_id #=> String
     #   resp.association.configuration.aws.account_type #=> String, one of "monitor"
+    #   resp.association.configuration.aws.agent_elevated_role_arn #=> String
+    #   resp.association.configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
     #   resp.association.configuration.github.repo_name #=> String
     #   resp.association.configuration.github.repo_id #=> String
     #   resp.association.configuration.github.owner #=> String
@@ -4067,6 +4340,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.slack.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.slack.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.slack.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.slack.bidirectional.role_arn #=> String
+    #   resp.association.configuration.slack.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.dynatrace.env_id #=> String
     #   resp.association.configuration.dynatrace.resources #=> Array
     #   resp.association.configuration.dynatrace.resources[0] #=> String
@@ -4075,8 +4350,14 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.servicenow.auth_scopes[0] #=> String
     #   resp.association.configuration.mcpservernewrelic.account_id #=> String
     #   resp.association.configuration.mcpservernewrelic.endpoint #=> String
+    #   resp.association.configuration.mcpserverdatadog.enabled_elevated_tools #=> Array
+    #   resp.association.configuration.mcpserverdatadog.enabled_elevated_tools[0].name #=> String
+    #   resp.association.configuration.mcpserverdatadog.enabled_elevated_tools[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.configuration.mcpserver.tools #=> Array
     #   resp.association.configuration.mcpserver.tools[0] #=> String
+    #   resp.association.configuration.mcpserver.tool_details #=> Array
+    #   resp.association.configuration.mcpserver.tool_details[0].name #=> String
+    #   resp.association.configuration.mcpserver.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.configuration.gitlab.project_id #=> String
     #   resp.association.configuration.gitlab.project_path #=> String
     #   resp.association.configuration.gitlab.instance_identifier #=> String
@@ -4089,13 +4370,24 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpservergrafana.organization_id #=> String
     #   resp.association.configuration.mcpservergrafana.tools #=> Array
     #   resp.association.configuration.mcpservergrafana.tools[0] #=> String
+    #   resp.association.configuration.mcpservergrafana.enabled_elevated_tools #=> Array
+    #   resp.association.configuration.mcpservergrafana.enabled_elevated_tools[0].name #=> String
+    #   resp.association.configuration.mcpservergrafana.enabled_elevated_tools[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.configuration.pagerduty.services #=> Array
     #   resp.association.configuration.pagerduty.services[0] #=> String
     #   resp.association.configuration.pagerduty.customer_email #=> String
     #   resp.association.configuration.mcpserversigv4.tools #=> Array
     #   resp.association.configuration.mcpserversigv4.tools[0] #=> String
+    #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
+    #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
+    #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
     #   resp.association.capabilities #=> Hash
     #   resp.association.capabilities["CapabilityType"].enabled #=> Boolean
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups #=> Array
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].events #=> Array
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT"
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].target_branches.patterns #=> Array
+    #   resp.association.capabilities["CapabilityType"].trigger_filter_groups[0].target_branches.patterns[0] #=> String
     #   resp.webhook.webhook_url #=> String
     #   resp.webhook.webhook_id #=> String
     #   resp.webhook.webhook_type #=> String, one of "hmac", "apikey", "gitlab", "pagerduty"
@@ -4135,10 +4427,10 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_backlog_task({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     task_id: "ResourceId", # required
-    #     task_status: "PENDING_TRIAGE", # accepts PENDING_TRIAGE, LINKED, PENDING_START, IN_PROGRESS, PENDING_CUSTOMER_APPROVAL, COMPLETED, FAILED, TIMED_OUT, CANCELED, SKIPPED
-    #     client_token: "String",
+    #     task_status: "PENDING_TRIAGE", # accepts PENDING_TRIAGE, LINKED, PENDING_START, IN_PROGRESS, PENDING_CUSTOMER_APPROVAL, COMPLETED, FAILED, TIMED_OUT, CANCELED, SKIPPED, WAITING
+    #     client_token: "UpdateBacklogTaskRequestClientTokenString",
     #   })
     #
     # @example Response structure
@@ -4155,7 +4447,7 @@ module Aws::DevOpsAgent
     #   resp.task.reference.association_id #=> String
     #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
     #   resp.task.priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
-    #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED"
+    #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.task.created_at #=> Time
     #   resp.task.updated_at #=> Time
     #   resp.task.version #=> Integer
@@ -4196,12 +4488,12 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_goal({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     goal_id: "String", # required
     #     evaluation_schedule: {
     #       state: "ENABLED", # required, accepts ENABLED, DISABLED
     #     },
-    #     client_token: "String",
+    #     client_token: "UpdateGoalRequestClientTokenString",
     #   })
     #
     # @example Response structure
@@ -4350,11 +4642,11 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_recommendation({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     recommendation_id: "ResourceId", # required
     #     status: "PROPOSED", # accepts PROPOSED, ACCEPTED, REJECTED, CLOSED, COMPLETED, UPDATE_IN_PROGRESS
     #     additional_context: "String",
-    #     client_token: "String",
+    #     client_token: "UpdateRecommendationRequestClientTokenString",
     #   })
     #
     # @example Response structure
@@ -4409,7 +4701,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_trigger({
-    #     agent_space_id: "AgentSpaceId", # required
+    #     agent_space_id: "AgentSpaceIdentifier", # required
     #     trigger_id: "ResourceId", # required
     #     status: "TriggerStatus",
     #     client_token: "UpdateTriggerRequestClientTokenString",
@@ -4475,7 +4767,7 @@ module Aws::DevOpsAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devopsagent'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

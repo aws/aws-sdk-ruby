@@ -717,6 +717,26 @@ module Aws::IoT
     IndexSchema = Shapes::StringShape.new(name: 'IndexSchema')
     IndexStatus = Shapes::StringShape.new(name: 'IndexStatus')
     IndexingFilter = Shapes::StructureShape.new(name: 'IndexingFilter')
+    InfluxDBAction = Shapes::StructureShape.new(name: 'InfluxDBAction')
+    InfluxDBBatchAcrossTopics = Shapes::BooleanShape.new(name: 'InfluxDBBatchAcrossTopics')
+    InfluxDBBatchConfig = Shapes::StructureShape.new(name: 'InfluxDBBatchConfig')
+    InfluxDBDatabaseName = Shapes::StringShape.new(name: 'InfluxDBDatabaseName')
+    InfluxDBDestinationConfiguration = Shapes::StructureShape.new(name: 'InfluxDBDestinationConfiguration')
+    InfluxDBDestinationProperties = Shapes::StructureShape.new(name: 'InfluxDBDestinationProperties')
+    InfluxDBDestinationSummary = Shapes::StructureShape.new(name: 'InfluxDBDestinationSummary')
+    InfluxDBMaxBatchOpenMs = Shapes::IntegerShape.new(name: 'InfluxDBMaxBatchOpenMs')
+    InfluxDBMaxBatchSize = Shapes::IntegerShape.new(name: 'InfluxDBMaxBatchSize')
+    InfluxDBMaxBatchSizeBytes = Shapes::IntegerShape.new(name: 'InfluxDBMaxBatchSizeBytes')
+    InfluxDBOrganization = Shapes::StringShape.new(name: 'InfluxDBOrganization')
+    InfluxDBSecretId = Shapes::StringShape.new(name: 'InfluxDBSecretId')
+    InfluxDBSecretKey = Shapes::StringShape.new(name: 'InfluxDBSecretKey')
+    InfluxDBSecretType = Shapes::StringShape.new(name: 'InfluxDBSecretType')
+    InfluxDBTableName = Shapes::StringShape.new(name: 'InfluxDBTableName')
+    InfluxDBTagMap = Shapes::MapShape.new(name: 'InfluxDBTagMap')
+    InfluxDBTagName = Shapes::StringShape.new(name: 'InfluxDBTagName')
+    InfluxDBTagValue = Shapes::StringShape.new(name: 'InfluxDBTagValue')
+    InfluxDBTimestampUnit = Shapes::StringShape.new(name: 'InfluxDBTimestampUnit')
+    InfluxDBVersion = Shapes::StringShape.new(name: 'InfluxDBVersion')
     InlineDocument = Shapes::StringShape.new(name: 'InlineDocument')
     InputName = Shapes::StringShape.new(name: 'InputName')
     IntegerParameterValue = Shapes::IntegerShape.new(name: 'IntegerParameterValue')
@@ -1559,6 +1579,7 @@ module Aws::IoT
     Action.add_member(:kafka, Shapes::ShapeRef.new(shape: KafkaAction, location_name: "kafka"))
     Action.add_member(:open_search, Shapes::ShapeRef.new(shape: OpenSearchAction, location_name: "openSearch"))
     Action.add_member(:location, Shapes::ShapeRef.new(shape: LocationAction, location_name: "location"))
+    Action.add_member(:influx_db, Shapes::ShapeRef.new(shape: InfluxDBAction, location_name: "influxDB"))
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
@@ -3595,6 +3616,46 @@ module Aws::IoT
     IndexingFilter.add_member(:connectivity, Shapes::ShapeRef.new(shape: ConnectivityFilter, location_name: "connectivity"))
     IndexingFilter.struct_class = Types::IndexingFilter
 
+    InfluxDBAction.add_member(:destination_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "destinationArn"))
+    InfluxDBAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
+    InfluxDBAction.add_member(:database_name, Shapes::ShapeRef.new(shape: InfluxDBDatabaseName, required: true, location_name: "databaseName"))
+    InfluxDBAction.add_member(:table_name, Shapes::ShapeRef.new(shape: InfluxDBTableName, required: true, location_name: "tableName"))
+    InfluxDBAction.add_member(:organization, Shapes::ShapeRef.new(shape: InfluxDBOrganization, location_name: "organization"))
+    InfluxDBAction.add_member(:tags, Shapes::ShapeRef.new(shape: InfluxDBTagMap, location_name: "tags"))
+    InfluxDBAction.add_member(:timestamp_unit, Shapes::ShapeRef.new(shape: InfluxDBTimestampUnit, location_name: "timestampUnit"))
+    InfluxDBAction.add_member(:batch_config, Shapes::ShapeRef.new(shape: InfluxDBBatchConfig, location_name: "batchConfig"))
+    InfluxDBAction.struct_class = Types::InfluxDBAction
+
+    InfluxDBBatchConfig.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: InfluxDBMaxBatchSize, location_name: "maxBatchSize"))
+    InfluxDBBatchConfig.add_member(:max_batch_open_ms, Shapes::ShapeRef.new(shape: InfluxDBMaxBatchOpenMs, location_name: "maxBatchOpenMs"))
+    InfluxDBBatchConfig.add_member(:max_batch_size_bytes, Shapes::ShapeRef.new(shape: InfluxDBMaxBatchSizeBytes, location_name: "maxBatchSizeBytes"))
+    InfluxDBBatchConfig.add_member(:batch_across_topics, Shapes::ShapeRef.new(shape: InfluxDBBatchAcrossTopics, location_name: "batchAcrossTopics"))
+    InfluxDBBatchConfig.struct_class = Types::InfluxDBBatchConfig
+
+    InfluxDBDestinationConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "endpoint"))
+    InfluxDBDestinationConfiguration.add_member(:influx_db_version, Shapes::ShapeRef.new(shape: InfluxDBVersion, required: true, location_name: "influxDBVersion"))
+    InfluxDBDestinationConfiguration.add_member(:secret_id, Shapes::ShapeRef.new(shape: InfluxDBSecretId, required: true, location_name: "secretId"))
+    InfluxDBDestinationConfiguration.add_member(:secret_type, Shapes::ShapeRef.new(shape: InfluxDBSecretType, location_name: "secretType"))
+    InfluxDBDestinationConfiguration.add_member(:secret_key, Shapes::ShapeRef.new(shape: InfluxDBSecretKey, location_name: "secretKey"))
+    InfluxDBDestinationConfiguration.struct_class = Types::InfluxDBDestinationConfiguration
+
+    InfluxDBDestinationProperties.add_member(:endpoint, Shapes::ShapeRef.new(shape: Url, location_name: "endpoint"))
+    InfluxDBDestinationProperties.add_member(:influx_db_version, Shapes::ShapeRef.new(shape: InfluxDBVersion, location_name: "influxDBVersion"))
+    InfluxDBDestinationProperties.add_member(:secret_id, Shapes::ShapeRef.new(shape: InfluxDBSecretId, location_name: "secretId"))
+    InfluxDBDestinationProperties.add_member(:secret_type, Shapes::ShapeRef.new(shape: InfluxDBSecretType, location_name: "secretType"))
+    InfluxDBDestinationProperties.add_member(:secret_key, Shapes::ShapeRef.new(shape: InfluxDBSecretKey, location_name: "secretKey"))
+    InfluxDBDestinationProperties.struct_class = Types::InfluxDBDestinationProperties
+
+    InfluxDBDestinationSummary.add_member(:endpoint, Shapes::ShapeRef.new(shape: Url, location_name: "endpoint"))
+    InfluxDBDestinationSummary.add_member(:influx_db_version, Shapes::ShapeRef.new(shape: InfluxDBVersion, location_name: "influxDBVersion"))
+    InfluxDBDestinationSummary.add_member(:secret_id, Shapes::ShapeRef.new(shape: InfluxDBSecretId, location_name: "secretId"))
+    InfluxDBDestinationSummary.add_member(:secret_type, Shapes::ShapeRef.new(shape: InfluxDBSecretType, location_name: "secretType"))
+    InfluxDBDestinationSummary.add_member(:secret_key, Shapes::ShapeRef.new(shape: InfluxDBSecretKey, location_name: "secretKey"))
+    InfluxDBDestinationSummary.struct_class = Types::InfluxDBDestinationSummary
+
+    InfluxDBTagMap.key = Shapes::ShapeRef.new(shape: InfluxDBTagName)
+    InfluxDBTagMap.value = Shapes::ShapeRef.new(shape: InfluxDBTagValue)
+
     InternalException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InternalException.struct_class = Types::InternalException
 
@@ -5356,10 +5417,12 @@ module Aws::IoT
     TopicRuleDestination.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     TopicRuleDestination.add_member(:http_url_properties, Shapes::ShapeRef.new(shape: HttpUrlDestinationProperties, location_name: "httpUrlProperties"))
     TopicRuleDestination.add_member(:vpc_properties, Shapes::ShapeRef.new(shape: VpcDestinationProperties, location_name: "vpcProperties"))
+    TopicRuleDestination.add_member(:influx_db_properties, Shapes::ShapeRef.new(shape: InfluxDBDestinationProperties, location_name: "influxDBProperties"))
     TopicRuleDestination.struct_class = Types::TopicRuleDestination
 
     TopicRuleDestinationConfiguration.add_member(:http_url_configuration, Shapes::ShapeRef.new(shape: HttpUrlDestinationConfiguration, location_name: "httpUrlConfiguration"))
     TopicRuleDestinationConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcDestinationConfiguration, location_name: "vpcConfiguration"))
+    TopicRuleDestinationConfiguration.add_member(:influx_db_configuration, Shapes::ShapeRef.new(shape: InfluxDBDestinationConfiguration, location_name: "influxDBConfiguration"))
     TopicRuleDestinationConfiguration.struct_class = Types::TopicRuleDestinationConfiguration
 
     TopicRuleDestinationSummaries.member = Shapes::ShapeRef.new(shape: TopicRuleDestinationSummary)
@@ -5371,6 +5434,7 @@ module Aws::IoT
     TopicRuleDestinationSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     TopicRuleDestinationSummary.add_member(:http_url_summary, Shapes::ShapeRef.new(shape: HttpUrlDestinationSummary, location_name: "httpUrlSummary"))
     TopicRuleDestinationSummary.add_member(:vpc_destination_summary, Shapes::ShapeRef.new(shape: VpcDestinationSummary, location_name: "vpcDestinationSummary"))
+    TopicRuleDestinationSummary.add_member(:influx_db_summary, Shapes::ShapeRef.new(shape: InfluxDBDestinationSummary, location_name: "influxDBSummary"))
     TopicRuleDestinationSummary.struct_class = Types::TopicRuleDestinationSummary
 
     TopicRuleList.member = Shapes::ShapeRef.new(shape: TopicRuleListItem)

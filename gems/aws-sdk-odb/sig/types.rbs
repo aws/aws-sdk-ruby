@@ -1578,6 +1578,21 @@ module Aws::Odb
       SENSITIVE: []
     end
 
+    class FlexComponentSummary
+      attr_accessor available_core_count: ::Integer
+      attr_accessor available_db_storage_in_g_bs: ::Integer
+      attr_accessor available_local_storage_in_g_bs: ::Integer
+      attr_accessor available_memory_in_g_bs: ::Integer
+      attr_accessor compute_model: ("ECPU" | "OCPU")
+      attr_accessor description_summary: ::String
+      attr_accessor hardware_type: ("COMPUTE" | "CELL")
+      attr_accessor minimum_core_count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor runtime_minimum_core_count: ::Integer
+      attr_accessor shape: ::String
+      SENSITIVE: []
+    end
+
     class GetAutonomousDatabaseBackupInput
       attr_accessor autonomous_database_backup_id: ::String
       SENSITIVE: []
@@ -1963,6 +1978,19 @@ module Aws::Odb
     class ListExascaleDbStorageVaultsOutput
       attr_accessor next_token: ::String
       attr_accessor exascale_db_storage_vaults: ::Array[Types::ExascaleDbStorageVaultSummary]
+      SENSITIVE: []
+    end
+
+    class ListFlexComponentsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor shape: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlexComponentsOutput
+      attr_accessor next_token: ::String
+      attr_accessor flex_components: ::Array[Types::FlexComponentSummary]
       SENSITIVE: []
     end
 

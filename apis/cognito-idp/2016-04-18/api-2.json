@@ -117,6 +117,25 @@
         {"shape":"InternalErrorException"}
       ]
     },
+    "AdminDeleteSoftwareToken":{
+      "name":"AdminDeleteSoftwareToken",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminDeleteSoftwareTokenRequest"},
+      "output":{"shape":"AdminDeleteSoftwareTokenResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"UserNotConfirmedException"},
+        {"shape":"OperationNotEnabledException"},
+        {"shape":"InternalErrorException"}
+      ]
+    },
     "AdminDeleteUser":{
       "name":"AdminDeleteUser",
       "http":{
@@ -1290,6 +1309,23 @@
         {"shape":"InternalErrorException"}
       ]
     },
+    "DescribeTermsByClient":{
+      "name":"DescribeTermsByClient",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeTermsByClientRequest"},
+      "output":{"shape":"DescribeTermsByClientResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"OperationNotEnabledException"},
+        {"shape":"InternalErrorException"}
+      ]
+    },
     "DescribeUserImportJob":{
       "name":"DescribeUserImportJob",
       "http":{
@@ -1425,6 +1461,24 @@
         {"shape":"NotAuthorizedException"},
         {"shape":"OperationNotEnabledException"},
         {"shape":"InternalErrorException"}
+      ]
+    },
+    "GetClientToken":{
+      "name":"GetClientToken",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetClientTokenRequest"},
+      "output":{"shape":"GetClientTokenResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"OperationNotEnabledException"},
+        {"shape":"ForbiddenException"}
       ]
     },
     "GetDevice":{
@@ -2775,6 +2829,21 @@
       "max":365,
       "min":0
     },
+    "AdminDeleteSoftwareTokenRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Username"
+      ],
+      "members":{
+        "UserPoolId":{"shape":"UserPoolIdType"},
+        "Username":{"shape":"UsernameType"}
+      }
+    },
+    "AdminDeleteSoftwareTokenResponse":{
+      "type":"structure",
+      "members":{}
+    },
     "AdminDeleteUserAttributesRequest":{
       "type":"structure",
       "required":[
@@ -3556,6 +3625,14 @@
     "ChangePasswordResponse":{
       "type":"structure",
       "members":{}
+    },
+    "ClientAuthenticationResultType":{
+      "type":"structure",
+      "members":{
+        "AccessToken":{"shape":"TokenModelType"},
+        "ExpiresIn":{"shape":"IntegerType"},
+        "TokenType":{"shape":"StringType"}
+      }
     },
     "ClientIdType":{
       "type":"string",
@@ -4361,6 +4438,25 @@
         "RiskConfiguration":{"shape":"RiskConfigurationType"}
       }
     },
+    "DescribeTermsByClientRequest":{
+      "type":"structure",
+      "required":[
+        "ClientId",
+        "UserPoolId",
+        "TermsName"
+      ],
+      "members":{
+        "ClientId":{"shape":"ClientIdType"},
+        "UserPoolId":{"shape":"UserPoolIdType"},
+        "TermsName":{"shape":"TermsNameType"}
+      }
+    },
+    "DescribeTermsByClientResponse":{
+      "type":"structure",
+      "members":{
+        "Terms":{"shape":"TermsType"}
+      }
+    },
     "DescribeTermsRequest":{
       "type":"structure",
       "required":[
@@ -4849,6 +4945,25 @@
       "members":{
         "UserPoolId":{"shape":"UserPoolIdType"},
         "CSVHeader":{"shape":"ListOfStringTypes"}
+      }
+    },
+    "GetClientTokenRequest":{
+      "type":"structure",
+      "required":[
+        "ClientId",
+        "Secret"
+      ],
+      "members":{
+        "ClientId":{"shape":"ClientIdType"},
+        "Secret":{"shape":"ClientSecretType"},
+        "Scopes":{"shape":"ScopeListType"},
+        "ClientMetadata":{"shape":"ClientMetadataType"}
+      }
+    },
+    "GetClientTokenResponse":{
+      "type":"structure",
+      "members":{
+        "ClientAuthenticationResult":{"shape":"ClientAuthenticationResultType"}
       }
     },
     "GetDeviceRequest":{

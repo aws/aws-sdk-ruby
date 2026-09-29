@@ -26,6 +26,16 @@ module Aws
       }?
     }
 
+      type message_security_options = {
+      signing_scheme: {
+        default_scheme: {
+        }?,
+        smime_scheme: {
+          signature_format: ("DETACHED")?
+        }?
+      }?
+    }
+
       type event_destination_definition = {
       enabled: bool?,
       matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE" | "DELIVERY_DELAY" | "SUBSCRIPTION")]?,
@@ -124,6 +134,7 @@ module Aws
       destination: Array[::String]?,
       subject: Array[::String]?,
       isp: Array[::String]?,
+      tenant_name: Array[::String]?,
       last_delivery_event: Array[("SEND" | "DELIVERY" | "TRANSIENT_BOUNCE" | "PERMANENT_BOUNCE" | "UNDETERMINED_BOUNCE" | "COMPLAINT")]?,
       last_engagement_event: Array[("OPEN" | "CLICK")]?
     }

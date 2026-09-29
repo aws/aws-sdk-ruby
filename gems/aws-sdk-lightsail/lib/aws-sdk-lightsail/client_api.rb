@@ -264,6 +264,8 @@ module Aws::Lightsail
     DiskState = Shapes::StringShape.new(name: 'DiskState')
     DistributionBundle = Shapes::StructureShape.new(name: 'DistributionBundle')
     DistributionBundleList = Shapes::ListShape.new(name: 'DistributionBundleList')
+    DistributionCustomErrorResponse = Shapes::StructureShape.new(name: 'DistributionCustomErrorResponse')
+    DistributionCustomErrorResponseList = Shapes::ListShape.new(name: 'DistributionCustomErrorResponseList')
     DistributionList = Shapes::ListShape.new(name: 'DistributionList')
     DistributionMetricName = Shapes::StringShape.new(name: 'DistributionMetricName')
     DnsRecordCreationState = Shapes::StructureShape.new(name: 'DnsRecordCreationState')
@@ -393,6 +395,8 @@ module Aws::Lightsail
     GetOperationsForResourceResult = Shapes::StructureShape.new(name: 'GetOperationsForResourceResult')
     GetOperationsRequest = Shapes::StructureShape.new(name: 'GetOperationsRequest')
     GetOperationsResult = Shapes::StructureShape.new(name: 'GetOperationsResult')
+    GetProfileRequest = Shapes::StructureShape.new(name: 'GetProfileRequest')
+    GetProfileResult = Shapes::StructureShape.new(name: 'GetProfileResult')
     GetRegionsRequest = Shapes::StructureShape.new(name: 'GetRegionsRequest')
     GetRegionsResult = Shapes::StructureShape.new(name: 'GetRegionsResult')
     GetRelationalDatabaseBlueprintsRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseBlueprintsRequest')
@@ -531,6 +535,8 @@ module Aws::Lightsail
     OriginIpAddressTypeEnum = Shapes::StringShape.new(name: 'OriginIpAddressTypeEnum')
     OriginProtocolPolicyEnum = Shapes::StringShape.new(name: 'OriginProtocolPolicyEnum')
     PartnerIdList = Shapes::ListShape.new(name: 'PartnerIdList')
+    PartnerInfo = Shapes::StructureShape.new(name: 'PartnerInfo')
+    PartnerStatus = Shapes::StringShape.new(name: 'PartnerStatus')
     PasswordData = Shapes::StructureShape.new(name: 'PasswordData')
     PeerVpcRequest = Shapes::StructureShape.new(name: 'PeerVpcRequest')
     PeerVpcResult = Shapes::StructureShape.new(name: 'PeerVpcResult')
@@ -548,6 +554,7 @@ module Aws::Lightsail
     PricingUnit = Shapes::StringShape.new(name: 'PricingUnit')
     PrivateRegistryAccess = Shapes::StructureShape.new(name: 'PrivateRegistryAccess')
     PrivateRegistryAccessRequest = Shapes::StructureShape.new(name: 'PrivateRegistryAccessRequest')
+    ProfileType = Shapes::StringShape.new(name: 'ProfileType')
     PutAlarmRequest = Shapes::StructureShape.new(name: 'PutAlarmRequest')
     PutAlarmResult = Shapes::StructureShape.new(name: 'PutAlarmResult')
     PutInstancePublicPortsRequest = Shapes::StructureShape.new(name: 'PutInstancePublicPortsRequest')
@@ -655,6 +662,7 @@ module Aws::Lightsail
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TestAlarmRequest = Shapes::StructureShape.new(name: 'TestAlarmRequest')
     TestAlarmResult = Shapes::StructureShape.new(name: 'TestAlarmResult')
+    TierName = Shapes::StringShape.new(name: 'TierName')
     TimeOfDay = Shapes::StringShape.new(name: 'TimeOfDay')
     TimePeriod = Shapes::StructureShape.new(name: 'TimePeriod')
     TreatMissingData = Shapes::StringShape.new(name: 'TreatMissingData')
@@ -1275,6 +1283,9 @@ module Aws::Lightsail
     CreateDistributionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDistributionRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "certificateName"))
     CreateDistributionRequest.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: ViewerMinimumTlsProtocolVersionEnum, location_name: "viewerMinimumTlsProtocolVersion"))
+    CreateDistributionRequest.add_member(:enable_private_origin_access, Shapes::ShapeRef.new(shape: boolean, location_name: "enablePrivateOriginAccess"))
+    CreateDistributionRequest.add_member(:default_root_object, Shapes::ShapeRef.new(shape: string, location_name: "defaultRootObject"))
+    CreateDistributionRequest.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: DistributionCustomErrorResponseList, location_name: "customErrorResponses"))
     CreateDistributionRequest.struct_class = Types::CreateDistributionRequest
 
     CreateDistributionResult.add_member(:distribution, Shapes::ShapeRef.new(shape: LightsailDistribution, location_name: "distribution"))
@@ -1656,6 +1667,14 @@ module Aws::Lightsail
     DistributionBundle.struct_class = Types::DistributionBundle
 
     DistributionBundleList.member = Shapes::ShapeRef.new(shape: DistributionBundle)
+
+    DistributionCustomErrorResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: integer, location_name: "errorCode"))
+    DistributionCustomErrorResponse.add_member(:response_code, Shapes::ShapeRef.new(shape: string, location_name: "responseCode"))
+    DistributionCustomErrorResponse.add_member(:response_page_path, Shapes::ShapeRef.new(shape: string, location_name: "responsePagePath"))
+    DistributionCustomErrorResponse.add_member(:error_caching_min_ttl, Shapes::ShapeRef.new(shape: long, location_name: "errorCachingMinTTL"))
+    DistributionCustomErrorResponse.struct_class = Types::DistributionCustomErrorResponse
+
+    DistributionCustomErrorResponseList.member = Shapes::ShapeRef.new(shape: DistributionCustomErrorResponse)
 
     DistributionList.member = Shapes::ShapeRef.new(shape: LightsailDistribution)
 
@@ -2128,6 +2147,12 @@ module Aws::Lightsail
     GetOperationsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetOperationsResult.struct_class = Types::GetOperationsResult
 
+    GetProfileRequest.struct_class = Types::GetProfileRequest
+
+    GetProfileResult.add_member(:profile_type, Shapes::ShapeRef.new(shape: ProfileType, required: true, location_name: "profileType"))
+    GetProfileResult.add_member(:partner, Shapes::ShapeRef.new(shape: PartnerInfo, location_name: "partner"))
+    GetProfileResult.struct_class = Types::GetProfileResult
+
     GetRegionsRequest.add_member(:include_availability_zones, Shapes::ShapeRef.new(shape: boolean, location_name: "includeAvailabilityZones"))
     GetRegionsRequest.add_member(:include_relational_database_availability_zones, Shapes::ShapeRef.new(shape: boolean, location_name: "includeRelationalDatabaseAvailabilityZones"))
     GetRegionsRequest.struct_class = Types::GetRegionsRequest
@@ -2458,6 +2483,8 @@ module Aws::Lightsail
     LightsailDistribution.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     LightsailDistribution.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     LightsailDistribution.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: string, location_name: "viewerMinimumTlsProtocolVersion"))
+    LightsailDistribution.add_member(:default_root_object, Shapes::ShapeRef.new(shape: string, location_name: "defaultRootObject"))
+    LightsailDistribution.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: DistributionCustomErrorResponseList, location_name: "customErrorResponses"))
     LightsailDistribution.struct_class = Types::LightsailDistribution
 
     LoadBalancer.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -2628,9 +2655,15 @@ module Aws::Lightsail
     Origin.add_member(:protocol_policy, Shapes::ShapeRef.new(shape: OriginProtocolPolicyEnum, location_name: "protocolPolicy"))
     Origin.add_member(:response_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "responseTimeout"))
     Origin.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: OriginIpAddressTypeEnum, location_name: "ipAddressType"))
+    Origin.add_member(:is_private_origin_access_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "isPrivateOriginAccessEnabled"))
     Origin.struct_class = Types::Origin
 
     PartnerIdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    PartnerInfo.add_member(:enrolled_at, Shapes::ShapeRef.new(shape: IsoDate, required: true, location_name: "enrolledAt"))
+    PartnerInfo.add_member(:tier_name, Shapes::ShapeRef.new(shape: TierName, location_name: "tierName"))
+    PartnerInfo.add_member(:status, Shapes::ShapeRef.new(shape: PartnerStatus, required: true, location_name: "status"))
+    PartnerInfo.struct_class = Types::PartnerInfo
 
     PasswordData.add_member(:ciphertext, Shapes::ShapeRef.new(shape: string, location_name: "ciphertext"))
     PasswordData.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "keyPairName"))
@@ -3119,6 +3152,9 @@ module Aws::Lightsail
     UpdateDistributionRequest.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: ViewerMinimumTlsProtocolVersionEnum, location_name: "viewerMinimumTlsProtocolVersion"))
     UpdateDistributionRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "certificateName"))
     UpdateDistributionRequest.add_member(:use_default_certificate, Shapes::ShapeRef.new(shape: boolean, location_name: "useDefaultCertificate"))
+    UpdateDistributionRequest.add_member(:enable_private_origin_access, Shapes::ShapeRef.new(shape: boolean, location_name: "enablePrivateOriginAccess"))
+    UpdateDistributionRequest.add_member(:default_root_object, Shapes::ShapeRef.new(shape: string, location_name: "defaultRootObject"))
+    UpdateDistributionRequest.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: DistributionCustomErrorResponseList, location_name: "customErrorResponses"))
     UpdateDistributionRequest.struct_class = Types::UpdateDistributionRequest
 
     UpdateDistributionResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
@@ -4870,6 +4906,19 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetProfileResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 

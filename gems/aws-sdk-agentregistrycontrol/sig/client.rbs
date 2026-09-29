@@ -86,6 +86,9 @@ module Aws
       def create_registry: (
                              name: ::String,
                              ?description: ::String,
+                             ?encryption_configuration: {
+                               kms_key_arn: ::String
+                             },
                              ?discovery_configuration: {
                                authorizer_configuration: Params::authorizer_configuration?,
                                authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")?
@@ -94,6 +97,19 @@ module Aws
                              ?tags: Hash[::String, ::String],
                              ?approval_configuration: {
                                auto_approval_rules: Array[("APPROVE_ALL")]?
+                             },
+                             ?custom_metadata_schema_configuration: {
+                               default_schema: ::String?,
+                               record_type_schema_overrides: Array[
+                                 {
+                                   record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY"),
+                                   schema: ::String
+                                 }
+                               ]?
+                             },
+                             ?auto_detection_configuration: {
+                               scope: ("ORGANIZATION"),
+                               enabled: bool
                              }
                            ) -> _CreateRegistryResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRegistryResponseSuccess
@@ -109,7 +125,7 @@ module Aws
                                     name: ::String,
                                     ?display_name: ::String,
                                     ?description: ::String,
-                                    record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL"),
+                                    record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY"),
                                     descriptors: {
                                       mcp_server: {
                                         data: ::String?,
@@ -140,10 +156,21 @@ module Aws
                                       }?,
                                       custom: {
                                         data: ::String?
+                                      }?,
+                                      http: {
+                                        source: Params::descriptor_source?
+                                      }?,
+                                      agui: {
+                                        source: Params::descriptor_source?
                                       }?
                                     },
                                     ?record_version: ::String,
                                     ?client_token: ::String,
+                                    ?provenance: Array[
+                                      Params::provenance
+                                    ],
+                                    ?custom_metadata: {
+                                    },
                                     ?tags: Hash[::String, ::String]
                                   ) -> _CreateRegistryRecordResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRegistryRecordResponseSuccess
@@ -175,9 +202,12 @@ module Aws
         def registry_id: () -> ::String
         def registry_arn: () -> ::String
         def discovery_configuration: () -> Types::DiscoveryConfiguration
+        def encryption_configuration: () -> Types::EncryptionConfiguration
         def approval_configuration: () -> Types::ApprovalConfiguration
+        def custom_metadata_schema_configuration: () -> Types::CustomMetadataSchemaConfiguration
         def status: () -> ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
         def status_reason: () -> ::String
+        def auto_detection: () -> Types::AutoDetection
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
@@ -195,13 +225,18 @@ module Aws
         def name: () -> ::String
         def display_name: () -> ::String
         def description: () -> ::String
-        def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+        def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
         def descriptors: () -> Types::Descriptors
         def record_version: () -> ::String
         def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def status_reason: () -> ::String
+        def provenance: () -> ::Array[Types::Provenance]
+        def created_by_auto_detection: () -> bool
+        def created_by: () -> ::String
+        def custom_metadata: () -> untyped
+        def custom_metadata_schema_compliance_status: () -> ("COMPLIANT" | "NON_COMPLIANT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#get_registry_record-instance_method
       def get_registry_record: (
@@ -299,9 +334,12 @@ module Aws
         def registry_id: () -> ::String
         def registry_arn: () -> ::String
         def discovery_configuration: () -> Types::DiscoveryConfiguration
+        def encryption_configuration: () -> Types::EncryptionConfiguration
         def approval_configuration: () -> Types::ApprovalConfiguration
+        def custom_metadata_schema_configuration: () -> Types::CustomMetadataSchemaConfiguration
         def status: () -> ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
         def status_reason: () -> ::String
+        def auto_detection: () -> Types::AutoDetection
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
@@ -321,6 +359,23 @@ module Aws
                                optional_value: {
                                  auto_approval_rules: Array[("APPROVE_ALL")]?
                                }?
+                             },
+                             ?custom_metadata_schema_configuration: {
+                               optional_value: {
+                                 default_schema: ::String?,
+                                 record_type_schema_overrides: Array[
+                                   {
+                                     record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY"),
+                                     schema: ::String
+                                   }
+                                 ]?
+                               }?
+                             },
+                             ?auto_detection_configuration: {
+                               optional_value: {
+                                 scope: ("ORGANIZATION"),
+                                 enabled: bool
+                               }?
                              }
                            ) -> _UpdateRegistryResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRegistryResponseSuccess
@@ -333,13 +388,18 @@ module Aws
         def name: () -> ::String
         def display_name: () -> ::String
         def description: () -> ::String
-        def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+        def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
         def descriptors: () -> Types::Descriptors
         def record_version: () -> ::String
         def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def status_reason: () -> ::String
+        def provenance: () -> ::Array[Types::Provenance]
+        def created_by_auto_detection: () -> bool
+        def created_by: () -> ::String
+        def custom_metadata: () -> untyped
+        def custom_metadata_schema_compliance_status: () -> ("COMPLIANT" | "NON_COMPLIANT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#update_registry_record-instance_method
       def update_registry_record: (
@@ -352,7 +412,7 @@ module Aws
                                     ?description: {
                                       optional_value: ::String?
                                     },
-                                    ?record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL"),
+                                    ?record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY"),
                                     ?descriptors: {
                                       optional_value: {
                                         mcp_server: {
@@ -422,11 +482,28 @@ module Aws
                                               optional_value: ::String?
                                             }?
                                           }?
+                                        }?,
+                                        http: {
+                                          optional_value: {
+                                            source: Params::updated_descriptor_source?
+                                          }?
+                                        }?,
+                                        agui: {
+                                          optional_value: {
+                                            source: Params::updated_descriptor_source?
+                                          }?
                                         }?
                                       }?
                                     },
                                     ?record_version: ::String,
-                                    ?trigger_synchronization: bool
+                                    ?custom_metadata: {
+                                      optional_value: {
+                                      }?
+                                    },
+                                    ?trigger_synchronization: bool,
+                                    ?provenance: Array[
+                                      Params::provenance
+                                    ]
                                   ) -> _UpdateRegistryRecordResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRegistryRecordResponseSuccess
 

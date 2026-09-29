@@ -1,6 +1,91 @@
 Unreleased Changes
 ------------------
 
+1.653.0 (2026-09-28)
+------------------
+
+* Feature - API changes to AWS Client VPN to support device posture assessment and Cedar authorization policies
+
+1.652.0 (2026-09-22)
+------------------
+
+* Feature - Amazon EC2 now supports quote-based start date changes for future-dated Capacity Reservations
+
+1.651.0 (2026-09-18)
+------------------
+
+* Feature - This release adds documentation for the T8i instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs.
+
+1.650.0 (2026-09-17)
+------------------
+
+* Feature - Adding support for "Tunnel" VPC Endpoint
+
+1.649.0 (2026-09-16)
+------------------
+
+* Feature - Releasing new EC2 R9g and R9gd memory-optimized instances powered by AWS Graviton5 processors, with up to 25 percent better compute performance than R8g instances, faster DDR5 memory, and up to 100 Gbps network and 72 Gbps EBS bandwidth. R9gd instances additionally provide local NVMe SSD storage.
+
+1.648.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.647.0 (2026-09-10)
+------------------
+
+* Feature - The CreateImage API now supports a BootModeOverride parameter to explicitly set UEFI boot mode on a new AMI, overriding the source instance's inherited boot mode.
+
+1.646.0 (2026-09-09)
+------------------
+
+* Feature - This release adds support for sharing Amazon EBS volumes across AWS accounts using AWS Resource Access Manager (RAM). Consuming accounts can view shared volume metadata and create copies of shared volumes within the same Availability Zone, with optional re-encryption using their own KMS key.
+
+1.645.0 (2026-09-08)
+------------------
+
+* Feature - Adds the InterfaceTypes field to NetworkCardInfo in the DescribeInstanceTypes response. This field identifies the network interface types supported by each network card.
+
+1.644.0 (2026-09-04)
+------------------
+
+* Feature - Adds support for ValidateSecurityGroupQuotasForInterface, an API that specifically authorized AWS services use to validate security group rule quotas before creating an elastic network interface.
+
+1.643.0 (2026-09-02)
+------------------
+
+* Feature - This release adds support to retain interruptible Capacity Reservations in an active state when all capacity is reclaimed.
+
+1.642.0 (2026-09-01)
+------------------
+
+* Feature - Update UserData and UploadPolicy shapes to use SecureBlob
+
+1.641.0 (2026-08-27)
+------------------
+
+* Feature - EC2 allows AMI owners to define compatible instance types on their AMIs, blocking RunInstances calls automatically for launches on non-permitted instance types.
+
+1.640.0 (2026-08-26)
+------------------
+
+* Feature - Adds deleting state to possible VPC States.
+
+1.639.0 (2026-08-25)
+------------------
+
+* Feature - Fleet feature to support Capacity Reservation Resource Groups with Amazon EC2 Capacity Blocks and interruptible Capacity Reservations
+
+1.638.0 (2026-08-20)
+------------------
+
+* Feature - EC2 marks UEFI instance metadata field as sensitive.
+
+1.637.0 (2026-08-18)
+------------------
+
+* Feature - Doc release for CreateImage support for instances with local snapshots in Outpost
+
 1.636.0 (2026-08-07)
 ------------------
 

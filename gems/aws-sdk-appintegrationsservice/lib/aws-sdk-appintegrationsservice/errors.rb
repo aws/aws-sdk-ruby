@@ -28,6 +28,7 @@ module Aws::AppIntegrationsService
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {DuplicateResourceException}
   # * {InternalServiceError}
   # * {InvalidRequestException}
@@ -47,6 +48,21 @@ module Aws::AppIntegrationsService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::AppIntegrationsService::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppIntegrationsService::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -1,0 +1,1281 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::NetworkSecurityManager
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountFilter
+      attr_accessor include_all: Types::Unit
+      attr_accessor include: Types::AccountSet
+      attr_accessor exclude: Types::AccountSet
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IncludeAll < AccountFilter
+      end
+      class Include < AccountFilter
+      end
+      class Exclude < AccountFilter
+      end
+      class Unknown < AccountFilter
+      end
+    end
+
+    class AccountReference
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor email: ::String
+      SENSITIVE: [:name, :email]
+    end
+
+    class AccountSet
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor organizational_units: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AdminAccountDetails
+      attr_accessor admin_account: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor admin_scope: Types::AdminScope
+      attr_accessor status: ("ONBOARDED" | "OFFBOARDED")
+      SENSITIVE: []
+    end
+
+    class AdminAccountSummary
+      attr_accessor account_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor name: ::String
+      attr_accessor email: ::String
+      SENSITIVE: [:name, :email]
+    end
+
+    class AdminFirewallTypeScope
+      attr_accessor all_firewall_types_enabled: bool
+      attr_accessor firewall_types: ::Array[("WAF" | "SHIELD_ADVANCED")]
+      SENSITIVE: []
+    end
+
+    class AdminScope
+      attr_accessor scope_filter: Types::AdminScopeFilter
+      attr_accessor firewall_type_scope: Types::AdminFirewallTypeScope
+      SENSITIVE: []
+    end
+
+    class AdminScopeFilter
+      attr_accessor include_all: Types::Unit
+      attr_accessor include_only: Types::AdminScopeSelection
+      attr_accessor exclude_only: Types::AdminScopeSelection
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IncludeAll < AdminScopeFilter
+      end
+      class IncludeOnly < AdminScopeFilter
+      end
+      class ExcludeOnly < AdminScopeFilter
+      end
+      class Unknown < AdminScopeFilter
+      end
+    end
+
+    class AdminScopeFilterInput
+      attr_accessor include_all: Types::Unit
+      attr_accessor include_only: Types::AdminScopeSelectionInput
+      attr_accessor exclude_only: Types::AdminScopeSelectionInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IncludeAll < AdminScopeFilterInput
+      end
+      class IncludeOnly < AdminScopeFilterInput
+      end
+      class ExcludeOnly < AdminScopeFilterInput
+      end
+      class Unknown < AdminScopeFilterInput
+      end
+    end
+
+    class AdminScopeInput
+      attr_accessor scope_filter: Types::AdminScopeFilterInput
+      attr_accessor firewall_type_scope: Types::AdminFirewallTypeScope
+      SENSITIVE: []
+    end
+
+    class AdminScopeSelection
+      attr_accessor accounts: ::Array[Types::AccountReference]
+      attr_accessor organizational_units: ::Array[Types::OrganizationalUnitReference]
+      SENSITIVE: []
+    end
+
+    class AdminScopeSelectionInput
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor organizational_units: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AlbConfiguration
+      attr_accessor scheme: ("internet-facing" | "internal")
+      attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
+      SENSITIVE: []
+    end
+
+    class AssociatedPolicy
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedRule
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedScope
+      attr_accessor scope_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedTemplateOrRule
+      attr_accessor template_arn: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TemplateArn < AssociatedTemplateOrRule
+      end
+      class RuleArn < AssociatedTemplateOrRule
+      end
+      class Unknown < AssociatedTemplateOrRule
+      end
+    end
+
+    class ConfigurationIssue
+      attr_accessor configuration_name: ::String
+      attr_accessor expected_value: ::String
+      attr_accessor actual_value: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentInput
+      attr_accessor client_token: ::String
+      attr_accessor deployment_name: ::String
+      attr_accessor deployment_description: ::String
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
+      attr_accessor associated_policy_list: ::Array[Types::PolicyReference]
+      attr_accessor associated_scope_list: ::Array[Types::ScopeReference]
+      attr_accessor is_published: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentOutput
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_arn: ::String
+      attr_accessor deployment_name: ::String
+      attr_accessor deployment_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
+      attr_accessor associated_policy_list: ::Array[Types::AssociatedPolicy]
+      attr_accessor associated_scope_list: ::Array[Types::AssociatedScope]
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor deployment_coverage: ::Array[Types::DeploymentCoverageEntry]
+      attr_accessor warnings: ::Array[Types::DeploymentWarningEntry]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentSnapshotInput
+      attr_accessor deployment_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentSnapshotOutput
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_arn: ::String
+      attr_accessor deployment_name: ::String
+      attr_accessor deployment_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
+      attr_accessor associated_policy_list: ::Array[Types::AssociatedPolicy]
+      attr_accessor associated_scope_list: ::Array[Types::AssociatedScope]
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreatePolicyInput
+      attr_accessor client_token: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_description: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor associated_template_and_rule_list: ::Array[Types::TemplateOrRuleReference]
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor policy_configuration: Types::PolicyConfiguration
+      attr_accessor is_published: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePolicyOutput
+      attr_accessor policy_id: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor priority: ::Integer
+      attr_accessor associated_template_and_rule_list: ::Array[Types::AssociatedTemplateOrRule]
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor policy_configuration: Types::PolicyConfiguration
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreatePolicySnapshotInput
+      attr_accessor policy_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePolicySnapshotOutput
+      attr_accessor policy_id: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor priority: ::Integer
+      attr_accessor associated_template_and_rule_list: ::Array[Types::AssociatedTemplateOrRule]
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor policy_configuration: Types::PolicyConfiguration
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateRuleInput
+      attr_accessor client_token: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
+      attr_accessor rule_description: ::String
+      attr_accessor configuration: untyped
+      attr_accessor is_published: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRuleOutput
+      attr_accessor rule_id: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
+      attr_accessor rule_description: ::String
+      attr_accessor configuration: untyped
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateRuleSnapshotInput
+      attr_accessor rule_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRuleSnapshotOutput
+      attr_accessor rule_id: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
+      attr_accessor rule_description: ::String
+      attr_accessor configuration: untyped
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateScopeInput
+      attr_accessor client_token: ::String
+      attr_accessor scope_name: ::String
+      attr_accessor scope_description: ::String
+      attr_accessor scope_configuration: Types::ScopeConfiguration
+      attr_accessor is_published: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateScopeOutput
+      attr_accessor scope_id: ::String
+      attr_accessor scope_arn: ::String
+      attr_accessor scope_name: ::String
+      attr_accessor scope_description: ::String
+      attr_accessor scope_configuration: Types::ScopeConfiguration
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateScopeSnapshotInput
+      attr_accessor scope_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateScopeSnapshotOutput
+      attr_accessor scope_id: ::String
+      attr_accessor scope_arn: ::String
+      attr_accessor scope_name: ::String
+      attr_accessor scope_description: ::String
+      attr_accessor scope_configuration: Types::ScopeConfiguration
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateTemplateInput
+      attr_accessor client_token: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_description: ::String
+      attr_accessor associated_rule_list: ::Array[Types::RuleReference]
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor is_published: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateTemplateOutput
+      attr_accessor template_id: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor associated_rule_list: ::Array[Types::AssociatedRule]
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateTemplateSnapshotInput
+      attr_accessor template_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateTemplateSnapshotOutput
+      attr_accessor template_id: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor associated_rule_list: ::Array[Types::AssociatedRule]
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteAdminAccountRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeploymentInput
+      attr_accessor deployment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyInput
+      attr_accessor policy_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleInput
+      attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScopeInput
+      attr_accessor scope_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTemplateInput
+      attr_accessor template_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeploymentConfiguration
+      attr_accessor enable_cross_account_visibility: bool
+      SENSITIVE: []
+    end
+
+    class DeploymentCoverageEntry
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor policy_arns: ::Array[::String]
+      attr_accessor in_scope_resource_types: ::Array[("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer")]
+      SENSITIVE: []
+    end
+
+    class DeploymentSummary
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_arn: ::String
+      attr_accessor deployment_name: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeploymentWarningEntry
+      attr_accessor code: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FirewallSyncReason
+      attr_accessor missing_firewall: ::String
+      attr_accessor invalid_firewall: Types::InvalidFirewallReasons
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MissingFirewall < FirewallSyncReason
+      end
+      class InvalidFirewall < FirewallSyncReason
+      end
+      class Unknown < FirewallSyncReason
+      end
+    end
+
+    class GenerateRuleConfigurationRequest
+      attr_accessor prompt: ::String
+      attr_accessor rule_firewall_type: ("WAF")
+      attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
+      attr_accessor waf_config_data_type: ("DefaultAction" | "VisibilityConfig" | "CaptchaConfig" | "ChallengeConfig" | "CustomResponseBodies" | "LoggingConfiguration" | "DataProtectionConfig" | "AssociationConfig" | "OnSourceDDoSProtectionConfig" | "TokenDomains")
+      attr_accessor current_configuration: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:prompt]
+    end
+
+    class GenerateRuleConfigurationResponse
+      attr_accessor configuration: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class GetAdminAccountRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAdminAccountResponse
+      attr_accessor admin_account_details: Types::AdminAccountDetails
+      SENSITIVE: []
+    end
+
+    class GetDeploymentInput
+      attr_accessor deployment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentOutput
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_arn: ::String
+      attr_accessor deployment_name: ::String
+      attr_accessor deployment_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
+      attr_accessor associated_policy_list: ::Array[Types::AssociatedPolicy]
+      attr_accessor associated_scope_list: ::Array[Types::AssociatedScope]
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      attr_accessor deployment_coverage: ::Array[Types::DeploymentCoverageEntry]
+      attr_accessor warnings: ::Array[Types::DeploymentWarningEntry]
+      SENSITIVE: []
+    end
+
+    class GetPolicyInput
+      attr_accessor policy_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyOutput
+      attr_accessor policy_id: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor priority: ::Integer
+      attr_accessor associated_template_and_rule_list: ::Array[Types::AssociatedTemplateOrRule]
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor policy_configuration: Types::PolicyConfiguration
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetRuleInput
+      attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuleOutput
+      attr_accessor rule_id: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
+      attr_accessor rule_description: ::String
+      attr_accessor configuration: untyped
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetScopeInput
+      attr_accessor scope_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetScopeOutput
+      attr_accessor scope_id: ::String
+      attr_accessor scope_arn: ::String
+      attr_accessor scope_name: ::String
+      attr_accessor scope_description: ::String
+      attr_accessor scope_configuration: Types::ScopeConfiguration
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetTemplateInput
+      attr_accessor template_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetTemplateOutput
+      attr_accessor template_id: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor associated_rule_list: ::Array[Types::AssociatedRule]
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidFirewallReasons
+      attr_accessor incorrect_single_value_configurations: ::Array[Types::ConfigurationIssue]
+      attr_accessor missing_appendable_configuration_values: ::Array[Types::ConfigurationIssue]
+      attr_accessor unexpected_appendable_configuration_values: ::Array[Types::ConfigurationIssue]
+      attr_accessor incorrect_appendable_configuration_order: ::Array[Types::ConfigurationIssue]
+      attr_accessor missing_mergeable_configuration_values: ::Array[Types::ConfigurationIssue]
+      attr_accessor unexpected_mergeable_configuration_values: ::Array[Types::ConfigurationIssue]
+      SENSITIVE: []
+    end
+
+    class ListAdminAccountsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAdminAccountsResponse
+      attr_accessor next_token: ::String
+      attr_accessor admin_accounts: ::Array[Types::AdminAccountSummary]
+      SENSITIVE: []
+    end
+
+    class ListAggregateResourceSynchronizationStatusesInput
+      attr_accessor synchronization_status: ("IN_SYNC" | "OUT_OF_SYNC" | "NOT_APPLICABLE")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAggregateResourceSynchronizationStatusesOutput
+      attr_accessor next_token: ::String
+      attr_accessor resource_synchronization_statuses: ::Array[Types::ResourceSynchronizationStatusSummary]
+      SENSITIVE: []
+    end
+
+    class ListDeploymentSnapshotsInput
+      attr_accessor deployment_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentSnapshotsOutput
+      attr_accessor next_token: ::String
+      attr_accessor snapshots: ::Array[Types::DeploymentSummary]
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("ACTIVE" | "DRAFT" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsOutput
+      attr_accessor next_token: ::String
+      attr_accessor deployments: ::Array[Types::DeploymentSummary]
+      SENSITIVE: []
+    end
+
+    class ListPoliciesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("ACTIVE" | "DRAFT" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ListPoliciesOutput
+      attr_accessor next_token: ::String
+      attr_accessor policies: ::Array[Types::PolicySummary]
+      SENSITIVE: []
+    end
+
+    class ListPolicySnapshotsInput
+      attr_accessor policy_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicySnapshotsOutput
+      attr_accessor next_token: ::String
+      attr_accessor snapshots: ::Array[Types::PolicySummary]
+      SENSITIVE: []
+    end
+
+    class ListResourceAssociationsInput
+      attr_accessor resource_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceAssociationsOutput
+      attr_accessor next_token: ::String
+      attr_accessor resource_associations: ::Array[Types::ResourceAssociation]
+      SENSITIVE: []
+    end
+
+    class ListResourceSynchronizationStatusesInput
+      attr_accessor deployment_identifier: ::String
+      attr_accessor synchronization_status: ("IN_SYNC" | "OUT_OF_SYNC" | "NOT_APPLICABLE")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceSynchronizationStatusesOutput
+      attr_accessor next_token: ::String
+      attr_accessor resource_synchronization_statuses: ::Array[Types::ResourceSynchronizationStatusSummary]
+      SENSITIVE: []
+    end
+
+    class ListRuleSnapshotsInput
+      attr_accessor rule_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRuleSnapshotsOutput
+      attr_accessor next_token: ::String
+      attr_accessor snapshots: ::Array[Types::RuleSummary]
+      SENSITIVE: []
+    end
+
+    class ListRulesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("ACTIVE" | "DRAFT" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ListRulesOutput
+      attr_accessor next_token: ::String
+      attr_accessor rules: ::Array[Types::RuleSummary]
+      SENSITIVE: []
+    end
+
+    class ListScopeSnapshotsInput
+      attr_accessor scope_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScopeSnapshotsOutput
+      attr_accessor next_token: ::String
+      attr_accessor snapshots: ::Array[Types::ScopeSummary]
+      SENSITIVE: []
+    end
+
+    class ListScopesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("ACTIVE" | "DRAFT" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ListScopesOutput
+      attr_accessor next_token: ::String
+      attr_accessor scopes: ::Array[Types::ScopeSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTemplateSnapshotsInput
+      attr_accessor template_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTemplateSnapshotsOutput
+      attr_accessor next_token: ::String
+      attr_accessor snapshots: ::Array[Types::TemplateSummary]
+      SENSITIVE: []
+    end
+
+    class ListTemplatesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("ACTIVE" | "DRAFT" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ListTemplatesOutput
+      attr_accessor next_token: ::String
+      attr_accessor templates: ::Array[Types::TemplateSummary]
+      SENSITIVE: []
+    end
+
+    class NotVisibleMarker
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationalUnitReference
+      attr_accessor ou_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class OutOfSyncReasonsView
+      attr_accessor reasons: ::Hash[("WAF" | "SHIELD_ADVANCED"), Types::FirewallSyncReason]
+      attr_accessor not_visible: Types::NotVisibleMarker
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Reasons < OutOfSyncReasonsView
+      end
+      class NotVisible < OutOfSyncReasonsView
+      end
+      class Unknown < OutOfSyncReasonsView
+      end
+    end
+
+    class PolicyConfiguration
+      attr_accessor remediation_enabled: bool
+      attr_accessor resources_clean_up: bool
+      attr_accessor waf_config: Types::WafConfig
+      SENSITIVE: []
+    end
+
+    class PolicyReference
+      attr_accessor policy_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class PolicySummary
+      attr_accessor policy_id: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor has_published_version: bool
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor priority: ::Integer
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PutAdminAccountRequest
+      attr_accessor account_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor admin_scope: Types::AdminScopeInput
+      SENSITIVE: []
+    end
+
+    class PutAdminAccountResponse
+      attr_accessor admin_account_details: Types::AdminAccountDetails
+      SENSITIVE: []
+    end
+
+    class RemediationIssueDetails
+      attr_accessor issue_type: ::String
+      attr_accessor message: ::String
+      attr_accessor corrective_action: ::String
+      SENSITIVE: []
+    end
+
+    class RemediationIssuesView
+      attr_accessor issues: ::Hash[("WAF" | "SHIELD_ADVANCED"), Types::RemediationIssueDetails]
+      attr_accessor not_visible: Types::NotVisibleMarker
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Issues < RemediationIssuesView
+      end
+      class NotVisible < RemediationIssuesView
+      end
+      class Unknown < RemediationIssuesView
+      end
+    end
+
+    class ResourceAssociation
+      attr_accessor arn: ::String
+      attr_accessor resource_type: ("Rule" | "Template" | "Policy" | "Deployment" | "Scope")
+      SENSITIVE: []
+    end
+
+    class ResourceCriteria
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor alb_config: Types::AlbConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Tags < ResourceCriteria
+      end
+      class AlbConfig < ResourceCriteria
+      end
+      class Unknown < ResourceCriteria
+      end
+    end
+
+    class ResourceLogicalExpression
+      attr_accessor criteria: Types::ResourceCriteria
+      attr_accessor and: ::Array[Types::ResourceLogicalExpression]
+      attr_accessor or: ::Array[Types::ResourceLogicalExpression]
+      attr_accessor not: Types::ResourceLogicalExpression
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Criteria < ResourceLogicalExpression
+      end
+      class And < ResourceLogicalExpression
+      end
+      class Or < ResourceLogicalExpression
+      end
+      class Not < ResourceLogicalExpression
+      end
+      class Unknown < ResourceLogicalExpression
+      end
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceScope
+      attr_accessor include_all: bool
+      attr_accessor include: Types::ResourceSet
+      attr_accessor exclude: Types::ResourceSet
+      SENSITIVE: []
+    end
+
+    class ResourceSet
+      attr_accessor explicit_arns: ::Array[::String]
+      attr_accessor expression: Types::ResourceLogicalExpression
+      SENSITIVE: []
+    end
+
+    class ResourceSynchronizationStatusSummary
+      attr_accessor synchronization_status: ("IN_SYNC" | "OUT_OF_SYNC" | "NOT_APPLICABLE")
+      attr_accessor account_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor deployment_arn: ::String
+      attr_accessor resource_type: ("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer" | "AWS::WAFv2::WebACL" | "AWS::Shield::Protection" | "AWS::ShieldRegional::Protection")
+      attr_accessor updated_at: ::Time
+      attr_accessor out_of_sync_reasons: Types::OutOfSyncReasonsView
+      attr_accessor remediation_issues: Types::RemediationIssuesView
+      attr_accessor evaluated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class RuleReference
+      attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RuleSummary
+      attr_accessor rule_id: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ScopeConfiguration
+      attr_accessor account_filter: Types::AccountFilter
+      attr_accessor resource_scopes: ::Hash[("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer"), Types::ResourceScope]
+      SENSITIVE: []
+    end
+
+    class ScopeReference
+      attr_accessor scope_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ScopeSummary
+      attr_accessor scope_id: ::String
+      attr_accessor scope_arn: ::String
+      attr_accessor scope_name: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TagPolicyViolationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TemplateOrRuleReference
+      attr_accessor template_identifier: ::String
+      attr_accessor rule_identifier: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TemplateIdentifier < TemplateOrRuleReference
+      end
+      class RuleIdentifier < TemplateOrRuleReference
+      end
+      class Unknown < TemplateOrRuleReference
+      end
+    end
+
+    class TemplateSummary
+      attr_accessor template_id: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor has_published_version: bool
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class Unit < Aws::EmptyStructure
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateDeploymentInput
+      attr_accessor deployment_identifier: ::String
+      attr_accessor update_token: ::String
+      attr_accessor deployment_description: ::String
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
+      attr_accessor associated_policy_list: ::Array[Types::PolicyReference]
+      attr_accessor associated_scope_list: ::Array[Types::ScopeReference]
+      attr_accessor is_published: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDeploymentOutput
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_arn: ::String
+      attr_accessor deployment_name: ::String
+      attr_accessor deployment_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
+      attr_accessor associated_policy_list: ::Array[Types::AssociatedPolicy]
+      attr_accessor associated_scope_list: ::Array[Types::AssociatedScope]
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor deployment_coverage: ::Array[Types::DeploymentCoverageEntry]
+      attr_accessor warnings: ::Array[Types::DeploymentWarningEntry]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdatePolicyInput
+      attr_accessor policy_identifier: ::String
+      attr_accessor update_token: ::String
+      attr_accessor policy_description: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor associated_template_and_rule_list: ::Array[Types::TemplateOrRuleReference]
+      attr_accessor policy_configuration: Types::PolicyConfiguration
+      attr_accessor is_published: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePolicyOutput
+      attr_accessor policy_id: ::String
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor priority: ::Integer
+      attr_accessor associated_template_and_rule_list: ::Array[Types::AssociatedTemplateOrRule]
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor firewall_type: ("WAF" | "SHIELD_ADVANCED")
+      attr_accessor policy_configuration: Types::PolicyConfiguration
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateRuleInput
+      attr_accessor rule_identifier: ::String
+      attr_accessor update_token: ::String
+      attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
+      attr_accessor rule_description: ::String
+      attr_accessor configuration: untyped
+      attr_accessor is_published: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRuleOutput
+      attr_accessor rule_id: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor rule_type: ("CONFIGURATION" | "INSPECTION")
+      attr_accessor rule_description: ::String
+      attr_accessor configuration: untyped
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateScopeInput
+      attr_accessor scope_identifier: ::String
+      attr_accessor update_token: ::String
+      attr_accessor scope_description: ::String
+      attr_accessor scope_configuration: Types::ScopeConfiguration
+      attr_accessor is_published: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateScopeOutput
+      attr_accessor scope_id: ::String
+      attr_accessor scope_arn: ::String
+      attr_accessor scope_name: ::String
+      attr_accessor scope_description: ::String
+      attr_accessor scope_configuration: Types::ScopeConfiguration
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateTemplateInput
+      attr_accessor template_identifier: ::String
+      attr_accessor update_token: ::String
+      attr_accessor template_description: ::String
+      attr_accessor associated_rule_list: ::Array[Types::RuleReference]
+      attr_accessor is_published: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTemplateOutput
+      attr_accessor template_id: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_description: ::String
+      attr_accessor status: ("DRAFT" | "ACTIVE" | "DISABLED")
+      attr_accessor version: ::String
+      attr_accessor associated_rule_list: ::Array[Types::AssociatedRule]
+      attr_accessor update_token: ::String
+      attr_accessor is_snapshot: bool
+      attr_accessor has_published_version: bool
+      attr_accessor firewall_type: ("WAF")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("ACCOUNT_NOT_ONBOARDED" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WafConfig
+      attr_accessor existing_customer_web_acl_resolution: ("RETROFIT" | "OVERRIDE_ASSOCIATION" | "NO_REMEDIATION")
+      attr_accessor conflict_resolution: ("MERGE_WHERE_APPLICABLE")
+      SENSITIVE: []
+    end
+  end
+end

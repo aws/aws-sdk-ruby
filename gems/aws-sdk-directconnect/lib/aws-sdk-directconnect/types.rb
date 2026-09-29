@@ -262,6 +262,42 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] connection_identifiers
+    #   The IDs or ARNs of the connections to associate with the resiliency
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resiliency_group_id
+    #   The ID of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionsToResiliencyGroupRequest AWS API Documentation
+    #
+    class AssociateConnectionsToResiliencyGroupRequest < Struct.new(
+      :connection_identifiers,
+      :resiliency_group_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resiliency_group_associations
+    #   The connection associations for the resiliency group.
+    #   @return [Array<Types::ResiliencyGroupAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionsToResiliencyGroupResult AWS API Documentation
+    #
+    class AssociateConnectionsToResiliencyGroupResult < Struct.new(
+      :resiliency_group_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] connection_id
     #   The ID of the hosted connection.
     #   @return [String]
@@ -420,6 +456,31 @@ module Aws::DirectConnect
       :type,
       :owner_account,
       :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a billing mode available at an Direct Connect
+    # location.
+    #
+    # @!attribute [rw] billing_mode
+    #   The billing mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_port_speeds
+    #   The port speeds available for the billing mode.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] included_regions
+    #   The Amazon Web Services Regions included with the billing mode.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AvailableBillingMode AWS API Documentation
+    #
+    class AvailableBillingMode < Struct.new(
+      :billing_mode,
+      :available_port_speeds,
+      :included_regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -955,6 +1016,34 @@ module Aws::DirectConnect
     #   MAC Security (MACsec).
     #   @return [Boolean]
     #
+    # @!attribute [rw] prefix_pool_size_ipv_4
+    #   The total number of inbound IPv4 route prefixes you can allocate
+    #   across the virtual interfaces on the connection. Not applicable to
+    #   hosted connections or interconnects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_size_ipv_6
+    #   The total number of inbound IPv6 route prefixes you can allocate
+    #   across the virtual interfaces on the connection. Not applicable to
+    #   hosted connections or interconnects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_unallocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes in the connection prefix
+    #   pool not yet allocated to a virtual interface. Not applicable to
+    #   hosted connections or interconnects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_unallocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes in the connection prefix
+    #   pool not yet allocated to a virtual interface. Not applicable to
+    #   hosted connections or interconnects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] billing_mode
+    #   The billing mode of the connection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connection AWS API Documentation
     #
     class Connection < Struct.new(
@@ -981,7 +1070,12 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       :rate_limiter_status,
-      :partner_interconnect_mac_sec_capable)
+      :partner_interconnect_mac_sec_capable,
+      :prefix_pool_size_ipv_4,
+      :prefix_pool_size_ipv_6,
+      :prefix_pool_unallocated_count_ipv_4,
+      :prefix_pool_unallocated_count_ipv_6,
+      :billing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1071,6 +1165,10 @@ module Aws::DirectConnect
     #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACSec.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] billing_mode
+    #   The billing mode for the connection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnectionRequest AWS API Documentation
     #
     class CreateConnectionRequest < Struct.new(
@@ -1080,7 +1178,8 @@ module Aws::DirectConnect
       :lag_id,
       :tags,
       :provider_name,
-      :request_mac_sec)
+      :request_mac_sec,
+      :billing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1312,6 +1411,10 @@ module Aws::DirectConnect
     #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites
     #   @return [Boolean]
     #
+    # @!attribute [rw] billing_mode
+    #   The billing mode for the LAG.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLagRequest AWS API Documentation
     #
     class CreateLagRequest < Struct.new(
@@ -1323,7 +1426,8 @@ module Aws::DirectConnect
       :tags,
       :child_connection_tags,
       :provider_name,
-      :request_mac_sec)
+      :request_mac_sec,
+      :billing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1358,6 +1462,48 @@ module Aws::DirectConnect
     class CreatePublicVirtualInterfaceRequest < Struct.new(
       :connection_id,
       :new_public_virtual_interface)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resiliency_group_name
+    #   The name of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] intended_resiliency_model
+    #   The resiliency model that the resiliency group is intended to meet.
+    #   The valid values are `maximum-resiliency`, `high-resiliency`, and
+    #   `basic-resiliency`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate with the resiliency group.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateResiliencyGroupRequest AWS API Documentation
+    #
+    class CreateResiliencyGroupRequest < Struct.new(
+      :resiliency_group_name,
+      :intended_resiliency_model,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resiliency_group
+    #   Information about the resiliency group.
+    #   @return [Types::ResiliencyGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateResiliencyGroupResult AWS API Documentation
+    #
+    class CreateResiliencyGroupResult < Struct.new(
+      :resiliency_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1634,6 +1780,30 @@ module Aws::DirectConnect
     #
     class DeleteLagRequest < Struct.new(
       :lag_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resiliency_group_id
+    #   The ID of the resiliency group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteResiliencyGroupRequest AWS API Documentation
+    #
+    class DeleteResiliencyGroupRequest < Struct.new(
+      :resiliency_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resiliency_group
+    #   Information about the resiliency group.
+    #   @return [Types::ResiliencyGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteResiliencyGroupResult AWS API Documentation
+    #
+    class DeleteResiliencyGroupResult < Struct.new(
+      :resiliency_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2314,6 +2484,12 @@ module Aws::DirectConnect
     #   The error message if the state of an object failed to advance.
     #   @return [String]
     #
+    # @!attribute [rw] total_prefix_pool_allocations
+    #   The total number of inbound route prefixes allocated to the
+    #   attachments on the Direct Connect gateway. The count combines the
+    #   IPv4 and IPv6 address families.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tags
     #   Information about a tag.
     #   @return [Array<Types::Tag>]
@@ -2327,6 +2503,7 @@ module Aws::DirectConnect
       :owner_account,
       :direct_connect_gateway_state,
       :state_change_error,
+      :total_prefix_pool_allocations,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2568,6 +2745,42 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] connection_identifiers
+    #   The IDs or ARNs of the connections to disassociate from the
+    #   resiliency group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resiliency_group_id
+    #   The ID of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionsFromResiliencyGroupRequest AWS API Documentation
+    #
+    class DisassociateConnectionsFromResiliencyGroupRequest < Struct.new(
+      :connection_identifiers,
+      :resiliency_group_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resiliency_group_associations
+    #   The connection associations for the resiliency group.
+    #   @return [Array<Types::ResiliencyGroupAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionsFromResiliencyGroupResult AWS API Documentation
+    #
+    class DisassociateConnectionsFromResiliencyGroupResult < Struct.new(
+      :resiliency_group_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] connection_id
     #   The ID of the dedicated connection (dxcon-xxxx), interconnect
     #   (dxcon-xxxx), or LAG (dxlag-xxxx).
@@ -2617,6 +2830,30 @@ module Aws::DirectConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DuplicateTagKeysException AWS API Documentation
     #
     class DuplicateTagKeysException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] resiliency_group_id
+    #   The ID of the resiliency group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/GetResiliencyGroupRequest AWS API Documentation
+    #
+    class GetResiliencyGroupRequest < Struct.new(
+      :resiliency_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resiliency_group
+    #   Information about the resiliency group.
+    #   @return [Types::ResiliencyGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/GetResiliencyGroupResult AWS API Documentation
+    #
+    class GetResiliencyGroupResult < Struct.new(
+      :resiliency_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Information about an interconnect.
     #
@@ -2882,10 +3119,38 @@ module Aws::DirectConnect
     #   The MAC Security (MACsec) security keys associated with the LAG.
     #   @return [Array<Types::MacSecKey>]
     #
+    # @!attribute [rw] prefix_pool_size_ipv_4
+    #   The total number of inbound IPv4 route prefixes you can allocate
+    #   across the virtual interfaces on the LAG. Not applicable to LAGs
+    #   that are interconnects and support hosted connections.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_size_ipv_6
+    #   The total number of inbound IPv6 route prefixes you can allocate
+    #   across the virtual interfaces on the LAG. Not applicable to LAGs
+    #   that are interconnects and support hosted connections.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_unallocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes in the LAG prefix pool not
+    #   yet allocated to a virtual interface. Not applicable to LAGs that
+    #   are interconnects and support hosted connections.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_unallocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes in the LAG prefix pool not
+    #   yet allocated to a virtual interface. Not applicable to LAGs that
+    #   are interconnects and support hosted connections.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_limiter_status
     #   The rate limiter status for the LAG, including how many rate
     #   limiters are in use and the maximum allowed.
     #   @return [Types::RateLimiterStatus]
+    #
+    # @!attribute [rw] billing_mode
+    #   The billing mode of the LAG.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Lag AWS API Documentation
     #
@@ -2911,7 +3176,12 @@ module Aws::DirectConnect
       :mac_sec_capable,
       :encryption_mode,
       :mac_sec_keys,
-      :rate_limiter_status)
+      :prefix_pool_size_ipv_4,
+      :prefix_pool_size_ipv_6,
+      :prefix_pool_unallocated_count_ipv_4,
+      :prefix_pool_unallocated_count_ipv_6,
+      :rate_limiter_status,
+      :billing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2941,6 +3211,91 @@ module Aws::DirectConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/LimitExceededException AWS API Documentation
     #
     class LimitExceededException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] resiliency_group_id
+    #   The ID of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListResiliencyGroupAssociationsRequest AWS API Documentation
+    #
+    class ListResiliencyGroupAssociationsRequest < Struct.new(
+      :resiliency_group_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The connection associations for the resiliency group.
+    #   @return [Array<Types::ResiliencyGroupAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListResiliencyGroupAssociationsResult AWS API Documentation
+    #
+    class ListResiliencyGroupAssociationsResult < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListResiliencyGroupsRequest AWS API Documentation
+    #
+    class ListResiliencyGroupsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Summary information about the resiliency groups.
+    #   @return [Array<Types::ResiliencyGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListResiliencyGroupsResult AWS API Documentation
+    #
+    class ListResiliencyGroupsResult < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual interface.
@@ -3106,6 +3461,11 @@ module Aws::DirectConnect
     #   The available MAC Security (MACsec) port speeds for the location.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] available_billing_modes
+    #   The billing modes available at the location, including the port
+    #   speeds and Amazon Web Services Regions supported by each mode.
+    #   @return [Array<Types::AvailableBillingMode>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Location AWS API Documentation
     #
     class Location < Struct.new(
@@ -3114,7 +3474,8 @@ module Aws::DirectConnect
       :region,
       :available_port_speeds,
       :available_providers,
-      :available_mac_sec_port_speeds)
+      :available_mac_sec_port_speeds,
+      :available_billing_modes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3316,6 +3677,16 @@ module Aws::DirectConnect
     #   Indicates whether to enable or disable SiteLink.
     #   @return [Boolean]
     #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes to allocate to the virtual
+    #   interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes to allocate to the virtual
+    #   interface.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_limit
     #   The rate limit (bandwidth allocation) to apply to the virtual
     #   interface. The rate limit restricts the maximum bandwidth that the
@@ -3338,6 +3709,8 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :tags,
       :enable_site_link,
+      :prefix_pool_allocated_count_ipv_4,
+      :prefix_pool_allocated_count_ipv_6,
       :rate_limit)
       SENSITIVE = []
       include Aws::Structure
@@ -3753,6 +4126,16 @@ module Aws::DirectConnect
     #   Indicates whether to enable or disable SiteLink.
     #   @return [Boolean]
     #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes to allocate to the virtual
+    #   interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes to allocate to the virtual
+    #   interface.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_limit
     #   The rate limit (bandwidth allocation) to apply to the virtual
     #   interface. The rate limit restricts the maximum bandwidth that the
@@ -3774,6 +4157,8 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :tags,
       :enable_site_link,
+      :prefix_pool_allocated_count_ipv_4,
+      :prefix_pool_allocated_count_ipv_6,
       :rate_limit)
       SENSITIVE = []
       include Aws::Structure
@@ -3915,6 +4300,118 @@ module Aws::DirectConnect
       :in_use,
       :remaining,
       :total_bandwidth)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a resiliency group.
+    #
+    # @!attribute [rw] resiliency_group_id
+    #   The ID of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resiliency_group_arn
+    #   The Amazon Resource Name (ARN) of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resiliency_group_name
+    #   The name of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resiliency_group_type
+    #   The type of the resiliency group. The valid value is `Managed`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The ID of the Amazon Web Services account that owns the resiliency
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the resiliency group. The valid values are `pending`,
+    #   `available`, `deleting`, and `deleted`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the resiliency group.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ResiliencyGroup AWS API Documentation
+    #
+    class ResiliencyGroup < Struct.new(
+      :resiliency_group_id,
+      :resiliency_group_arn,
+      :resiliency_group_name,
+      :resiliency_group_type,
+      :owner_account,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an association between a connection and a resiliency
+    # group.
+    #
+    # @!attribute [rw] resiliency_group_id
+    #   The ID of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_arn
+    #   The Amazon Resource Name (ARN) of the associated connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the association. The valid values are `associating`,
+    #   `associated`, `disassociating`, and `disassociated`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ResiliencyGroupAssociation AWS API Documentation
+    #
+    class ResiliencyGroupAssociation < Struct.new(
+      :resiliency_group_id,
+      :connection_arn,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a resiliency group.
+    #
+    # @!attribute [rw] resiliency_group_id
+    #   The ID of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resiliency_group_arn
+    #   The Amazon Resource Name (ARN) of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resiliency_group_name
+    #   The name of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resiliency_group_type
+    #   The type of the resiliency group. The valid value is `Managed`.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The ID of the Amazon Web Services account that owns the resiliency
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the resiliency group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ResiliencyGroupSummary AWS API Documentation
+    #
+    class ResiliencyGroupSummary < Struct.new(
+      :resiliency_group_id,
+      :resiliency_group_arn,
+      :resiliency_group_name,
+      :resiliency_group_type,
+      :owner_account,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4248,6 +4745,43 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] connection_ids
+    #   The IDs of the connections to update. You can specify from 1 to 200
+    #   connections.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] billing_mode
+    #   The billing mode to apply to the specified connections. The valid
+    #   values are `PayAsYouGo`, `FlatRateTier1`, `FlatRateTier2`,
+    #   `FlatRateTier3`, `FlatRateTier4`, and `FlatRateTier5`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateConnectionsBillingModeRequest AWS API Documentation
+    #
+    class UpdateConnectionsBillingModeRequest < Struct.new(
+      :connection_ids,
+      :billing_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] billing_mode
+    #   The billing mode applied to the connections.
+    #   @return [String]
+    #
+    # @!attribute [rw] connections
+    #   The connections with the updated billing mode.
+    #   @return [Array<Types::Connection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateConnectionsBillingModeResponse AWS API Documentation
+    #
+    class UpdateConnectionsBillingModeResponse < Struct.new(
+      :billing_mode,
+      :connections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] association_id
     #   The ID of the Direct Connect gateway association.
     #   @return [String]
@@ -4346,6 +4880,41 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] resiliency_group_id
+    #   The ID of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resiliency_group_name
+    #   The new name of the resiliency group.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateResiliencyGroupRequest AWS API Documentation
+    #
+    class UpdateResiliencyGroupRequest < Struct.new(
+      :resiliency_group_id,
+      :resiliency_group_name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resiliency_group
+    #   Information about the resiliency group.
+    #   @return [Types::ResiliencyGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateResiliencyGroupResult AWS API Documentation
+    #
+    class UpdateResiliencyGroupResult < Struct.new(
+      :resiliency_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] virtual_interface_id
     #   The ID of the virtual private interface.
     #   @return [String]
@@ -4363,6 +4932,16 @@ module Aws::DirectConnect
     #   The name of the virtual private interface.
     #   @return [String]
     #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes to allocate to the virtual
+    #   interface. Not applicable to public virtual interfaces.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes to allocate to the virtual
+    #   interface. Not applicable to public virtual interfaces.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_limit
     #   The rate limit (bandwidth allocation) to apply to the virtual
     #   interface. Use this to update the bandwidth allocation on an
@@ -4376,6 +4955,8 @@ module Aws::DirectConnect
       :mtu,
       :enable_site_link,
       :virtual_interface_name,
+      :prefix_pool_allocated_count_ipv_4,
+      :prefix_pool_allocated_count_ipv_6,
       :rate_limit)
       SENSITIVE = []
       include Aws::Structure
@@ -4618,6 +5199,16 @@ module Aws::DirectConnect
     #   Indicates whether SiteLink is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_4
+    #   The number of inbound IPv4 route prefixes allocated to the virtual
+    #   interface. Not applicable to public virtual interfaces.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prefix_pool_allocated_count_ipv_6
+    #   The number of inbound IPv6 route prefixes allocated to the virtual
+    #   interface. Not applicable to public virtual interfaces.
+    #   @return [Integer]
+    #
     # @!attribute [rw] rate_limit
     #   The rate limit (bandwidth allocation) applied to the virtual
     #   interface. The value must be one of the supported bandwidth values
@@ -4666,6 +5257,8 @@ module Aws::DirectConnect
       :aws_logical_device_id,
       :tags,
       :site_link_enabled,
+      :prefix_pool_allocated_count_ipv_4,
+      :prefix_pool_allocated_count_ipv_6,
       :rate_limit)
       SENSITIVE = []
       include Aws::Structure

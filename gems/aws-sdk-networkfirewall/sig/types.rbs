@@ -543,7 +543,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_policy_arn: ::String
       attr_accessor description: ::String
-      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY")
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED")
       attr_accessor supported_availability_zones: ::Hash[::String, Types::AvailabilityZoneMetadata]
       attr_accessor transit_gateway_attachment_id: ::String
       SENSITIVE: []
@@ -893,7 +893,7 @@ module Aws::NetworkFirewall
     end
 
     class FirewallStatus
-      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY")
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED")
       attr_accessor configuration_sync_state_summary: ("PENDING" | "IN_SYNC" | "CAPACITY_CONSTRAINED")
       attr_accessor sync_states: ::Hash[::String, Types::SyncState]
       attr_accessor capacity_usage_summary: Types::CapacityUsageSummary
@@ -2096,7 +2096,7 @@ module Aws::NetworkFirewall
     end
 
     class VpcEndpointAssociationStatus
-      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY")
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED")
       attr_accessor association_sync_state: ::Hash[::String, Types::AZSyncState]
       SENSITIVE: []
     end

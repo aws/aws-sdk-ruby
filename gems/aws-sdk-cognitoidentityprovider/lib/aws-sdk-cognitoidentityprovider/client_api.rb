@@ -34,6 +34,8 @@ module Aws::CognitoIdentityProvider
     AdminCreateUserRequest = Shapes::StructureShape.new(name: 'AdminCreateUserRequest')
     AdminCreateUserResponse = Shapes::StructureShape.new(name: 'AdminCreateUserResponse')
     AdminCreateUserUnusedAccountValidityDaysType = Shapes::IntegerShape.new(name: 'AdminCreateUserUnusedAccountValidityDaysType')
+    AdminDeleteSoftwareTokenRequest = Shapes::StructureShape.new(name: 'AdminDeleteSoftwareTokenRequest')
+    AdminDeleteSoftwareTokenResponse = Shapes::StructureShape.new(name: 'AdminDeleteSoftwareTokenResponse')
     AdminDeleteUserAttributesRequest = Shapes::StructureShape.new(name: 'AdminDeleteUserAttributesRequest')
     AdminDeleteUserAttributesResponse = Shapes::StructureShape.new(name: 'AdminDeleteUserAttributesResponse')
     AdminDeleteUserRequest = Shapes::StructureShape.new(name: 'AdminDeleteUserRequest')
@@ -127,6 +129,7 @@ module Aws::CognitoIdentityProvider
     ChallengeResponsesType = Shapes::MapShape.new(name: 'ChallengeResponsesType')
     ChangePasswordRequest = Shapes::StructureShape.new(name: 'ChangePasswordRequest')
     ChangePasswordResponse = Shapes::StructureShape.new(name: 'ChangePasswordResponse')
+    ClientAuthenticationResultType = Shapes::StructureShape.new(name: 'ClientAuthenticationResultType')
     ClientIdType = Shapes::StringShape.new(name: 'ClientIdType')
     ClientMetadataType = Shapes::MapShape.new(name: 'ClientMetadataType')
     ClientNameType = Shapes::StringShape.new(name: 'ClientNameType')
@@ -218,6 +221,8 @@ module Aws::CognitoIdentityProvider
     DescribeResourceServerResponse = Shapes::StructureShape.new(name: 'DescribeResourceServerResponse')
     DescribeRiskConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeRiskConfigurationRequest')
     DescribeRiskConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeRiskConfigurationResponse')
+    DescribeTermsByClientRequest = Shapes::StructureShape.new(name: 'DescribeTermsByClientRequest')
+    DescribeTermsByClientResponse = Shapes::StructureShape.new(name: 'DescribeTermsByClientResponse')
     DescribeTermsRequest = Shapes::StructureShape.new(name: 'DescribeTermsRequest')
     DescribeTermsResponse = Shapes::StructureShape.new(name: 'DescribeTermsResponse')
     DescribeUserImportJobRequest = Shapes::StructureShape.new(name: 'DescribeUserImportJobRequest')
@@ -286,6 +291,8 @@ module Aws::CognitoIdentityProvider
     GenerateSecret = Shapes::BooleanShape.new(name: 'GenerateSecret')
     GetCSVHeaderRequest = Shapes::StructureShape.new(name: 'GetCSVHeaderRequest')
     GetCSVHeaderResponse = Shapes::StructureShape.new(name: 'GetCSVHeaderResponse')
+    GetClientTokenRequest = Shapes::StructureShape.new(name: 'GetClientTokenRequest')
+    GetClientTokenResponse = Shapes::StructureShape.new(name: 'GetClientTokenResponse')
     GetDeviceRequest = Shapes::StructureShape.new(name: 'GetDeviceRequest')
     GetDeviceResponse = Shapes::StructureShape.new(name: 'GetDeviceResponse')
     GetGroupRequest = Shapes::StructureShape.new(name: 'GetGroupRequest')
@@ -708,6 +715,12 @@ module Aws::CognitoIdentityProvider
     AdminCreateUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: UserType, location_name: "User"))
     AdminCreateUserResponse.struct_class = Types::AdminCreateUserResponse
 
+    AdminDeleteSoftwareTokenRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    AdminDeleteSoftwareTokenRequest.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
+    AdminDeleteSoftwareTokenRequest.struct_class = Types::AdminDeleteSoftwareTokenRequest
+
+    AdminDeleteSoftwareTokenResponse.struct_class = Types::AdminDeleteSoftwareTokenResponse
+
     AdminDeleteUserAttributesRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     AdminDeleteUserAttributesRequest.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
     AdminDeleteUserAttributesRequest.add_member(:user_attribute_names, Shapes::ShapeRef.new(shape: AttributeNameListType, required: true, location_name: "UserAttributeNames"))
@@ -1009,6 +1022,11 @@ module Aws::CognitoIdentityProvider
     ChangePasswordRequest.struct_class = Types::ChangePasswordRequest
 
     ChangePasswordResponse.struct_class = Types::ChangePasswordResponse
+
+    ClientAuthenticationResultType.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
+    ClientAuthenticationResultType.add_member(:expires_in, Shapes::ShapeRef.new(shape: IntegerType, location_name: "ExpiresIn"))
+    ClientAuthenticationResultType.add_member(:token_type, Shapes::ShapeRef.new(shape: StringType, location_name: "TokenType"))
+    ClientAuthenticationResultType.struct_class = Types::ClientAuthenticationResultType
 
     ClientMetadataType.key = Shapes::ShapeRef.new(shape: StringType)
     ClientMetadataType.value = Shapes::ShapeRef.new(shape: StringType)
@@ -1353,6 +1371,14 @@ module Aws::CognitoIdentityProvider
     DescribeRiskConfigurationResponse.add_member(:risk_configuration, Shapes::ShapeRef.new(shape: RiskConfigurationType, required: true, location_name: "RiskConfiguration"))
     DescribeRiskConfigurationResponse.struct_class = Types::DescribeRiskConfigurationResponse
 
+    DescribeTermsByClientRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "ClientId"))
+    DescribeTermsByClientRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    DescribeTermsByClientRequest.add_member(:terms_name, Shapes::ShapeRef.new(shape: TermsNameType, required: true, location_name: "TermsName"))
+    DescribeTermsByClientRequest.struct_class = Types::DescribeTermsByClientRequest
+
+    DescribeTermsByClientResponse.add_member(:terms, Shapes::ShapeRef.new(shape: TermsType, location_name: "Terms"))
+    DescribeTermsByClientResponse.struct_class = Types::DescribeTermsByClientResponse
+
     DescribeTermsRequest.add_member(:terms_id, Shapes::ShapeRef.new(shape: TermsIdType, required: true, location_name: "TermsId"))
     DescribeTermsRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     DescribeTermsRequest.struct_class = Types::DescribeTermsRequest
@@ -1506,6 +1532,15 @@ module Aws::CognitoIdentityProvider
     GetCSVHeaderResponse.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "UserPoolId"))
     GetCSVHeaderResponse.add_member(:csv_header, Shapes::ShapeRef.new(shape: ListOfStringTypes, location_name: "CSVHeader"))
     GetCSVHeaderResponse.struct_class = Types::GetCSVHeaderResponse
+
+    GetClientTokenRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "ClientId"))
+    GetClientTokenRequest.add_member(:secret, Shapes::ShapeRef.new(shape: ClientSecretType, required: true, location_name: "Secret"))
+    GetClientTokenRequest.add_member(:scopes, Shapes::ShapeRef.new(shape: ScopeListType, location_name: "Scopes"))
+    GetClientTokenRequest.add_member(:client_metadata, Shapes::ShapeRef.new(shape: ClientMetadataType, location_name: "ClientMetadata"))
+    GetClientTokenRequest.struct_class = Types::GetClientTokenRequest
+
+    GetClientTokenResponse.add_member(:client_authentication_result, Shapes::ShapeRef.new(shape: ClientAuthenticationResultType, location_name: "ClientAuthenticationResult"))
+    GetClientTokenResponse.struct_class = Types::GetClientTokenResponse
 
     GetDeviceRequest.add_member(:device_key, Shapes::ShapeRef.new(shape: DeviceKeyType, required: true, location_name: "DeviceKey"))
     GetDeviceRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
@@ -2774,6 +2809,22 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
+      api.add_operation(:admin_delete_software_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AdminDeleteSoftwareToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AdminDeleteSoftwareTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: AdminDeleteSoftwareTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UserNotConfirmedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:admin_delete_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AdminDeleteUser"
         o.http_method = "POST"
@@ -3793,6 +3844,20 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
+      api.add_operation(:describe_terms_by_client, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTermsByClient"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTermsByClientRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTermsByClientResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:describe_user_import_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeUserImportJob"
         o.http_method = "POST"
@@ -3908,6 +3973,21 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:get_client_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetClientToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetClientTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetClientTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
       api.add_operation(:get_device, Seahorse::Model::Operation.new.tap do |o|

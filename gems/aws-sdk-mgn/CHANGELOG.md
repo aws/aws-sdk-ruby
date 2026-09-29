@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.76.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2026-09-08)
+------------------
+
+* Feature - This release adds support for configuring the EBS volume initialization rate and delete on termination behavior in launch configuration template
+
+1.74.0 (2026-09-02)
+------------------
+
+* Feature - AWS Transform for migrations adds a second network migration option - apply your source security posture to existing VPCs. Upload a source network file with firewall rules, tag the in-scope VPCs, and AWS Transform matches source subnets to them by CIDR and generates the security groups.
+
 1.73.0 (2026-07-09)
 ------------------
 

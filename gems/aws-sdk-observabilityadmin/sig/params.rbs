@@ -18,6 +18,8 @@ module Aws
       }?,
       source_metrics_configuration: {
         metrics_selection_criteria: ::String?
+      }?,
+      source_context_graph_configuration: {
       }?
     }
 

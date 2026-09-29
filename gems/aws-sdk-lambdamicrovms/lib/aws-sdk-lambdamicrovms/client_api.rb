@@ -63,6 +63,7 @@ module Aws::LambdaMicrovms
     IdlePolicyMaxIdleDurationSecondsInteger = Shapes::IntegerShape.new(name: 'IdlePolicyMaxIdleDurationSecondsInteger')
     IdlePolicySuspendedDurationSecondsInteger = Shapes::IntegerShape.new(name: 'IdlePolicySuspendedDurationSecondsInteger')
     ImageName = Shapes::StringShape.new(name: 'ImageName')
+    InsufficientCapacityException = Shapes::StructureShape.new(name: 'InsufficientCapacityException')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
@@ -94,6 +95,7 @@ module Aws::LambdaMicrovms
     ManagedMicrovmImageSummaryList = Shapes::ListShape.new(name: 'ManagedMicrovmImageSummaryList')
     ManagedMicrovmImageVersion = Shapes::StructureShape.new(name: 'ManagedMicrovmImageVersion')
     ManagedMicrovmImageVersionList = Shapes::ListShape.new(name: 'ManagedMicrovmImageVersionList')
+    ManagedMicrovmImageVersionStatus = Shapes::StringShape.new(name: 'ManagedMicrovmImageVersionStatus')
     MicrovmHooks = Shapes::StructureShape.new(name: 'MicrovmHooks')
     MicrovmHooksResumeTimeoutInSecondsInteger = Shapes::IntegerShape.new(name: 'MicrovmHooksResumeTimeoutInSecondsInteger')
     MicrovmHooksRunTimeoutInSecondsInteger = Shapes::IntegerShape.new(name: 'MicrovmHooksRunTimeoutInSecondsInteger')
@@ -132,10 +134,10 @@ module Aws::LambdaMicrovms
     ResumeMicrovmRequest = Shapes::StructureShape.new(name: 'ResumeMicrovmRequest')
     ResumeMicrovmResponse = Shapes::StructureShape.new(name: 'ResumeMicrovmResponse')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RunHookPayload = Shapes::StringShape.new(name: 'RunHookPayload')
     RunMicrovmRequest = Shapes::StructureShape.new(name: 'RunMicrovmRequest')
     RunMicrovmRequestClientTokenString = Shapes::StringShape.new(name: 'RunMicrovmRequestClientTokenString')
     RunMicrovmRequestMaximumDurationInSecondsInteger = Shapes::IntegerShape.new(name: 'RunMicrovmRequestMaximumDurationInSecondsInteger')
-    RunMicrovmRequestRunHookPayloadString = Shapes::StringShape.new(name: 'RunMicrovmRequestRunHookPayloadString')
     RunMicrovmResponse = Shapes::StructureShape.new(name: 'RunMicrovmResponse')
     RunMicrovmResponseEndpointString = Shapes::StringShape.new(name: 'RunMicrovmResponseEndpointString')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
@@ -358,6 +360,9 @@ module Aws::LambdaMicrovms
     IdlePolicy.add_member(:auto_resume_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "autoResumeEnabled"))
     IdlePolicy.struct_class = Types::IdlePolicy
 
+    InsufficientCapacityException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    InsufficientCapacityException.struct_class = Types::InsufficientCapacityException
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -451,6 +456,7 @@ module Aws::LambdaMicrovms
 
     ManagedMicrovmImageVersion.add_member(:image_arn, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "imageArn"))
     ManagedMicrovmImageVersion.add_member(:image_version, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "imageVersion"))
+    ManagedMicrovmImageVersion.add_member(:status, Shapes::ShapeRef.new(shape: ManagedMicrovmImageVersionStatus, location_name: "status"))
     ManagedMicrovmImageVersion.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     ManagedMicrovmImageVersion.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     ManagedMicrovmImageVersion.struct_class = Types::ManagedMicrovmImageVersion
@@ -573,7 +579,7 @@ module Aws::LambdaMicrovms
     RunMicrovmRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "executionRoleArn"))
     RunMicrovmRequest.add_member(:idle_policy, Shapes::ShapeRef.new(shape: IdlePolicy, location_name: "idlePolicy"))
     RunMicrovmRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
-    RunMicrovmRequest.add_member(:run_hook_payload, Shapes::ShapeRef.new(shape: RunMicrovmRequestRunHookPayloadString, location_name: "runHookPayload"))
+    RunMicrovmRequest.add_member(:run_hook_payload, Shapes::ShapeRef.new(shape: RunHookPayload, location_name: "runHookPayload"))
     RunMicrovmRequest.add_member(:maximum_duration_in_seconds, Shapes::ShapeRef.new(shape: RunMicrovmRequestMaximumDurationInSecondsInteger, location_name: "maximumDurationInSeconds"))
     RunMicrovmRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: RunMicrovmRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     RunMicrovmRequest.struct_class = Types::RunMicrovmRequest
@@ -750,6 +756,7 @@ module Aws::LambdaMicrovms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -778,6 +785,7 @@ module Aws::LambdaMicrovms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -980,8 +988,12 @@ module Aws::LambdaMicrovms
         o.input = Shapes::ShapeRef.new(shape: ListTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
@@ -1007,6 +1019,7 @@ module Aws::LambdaMicrovms
         o.output = Shapes::ShapeRef.new(shape: RunMicrovmResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1035,8 +1048,12 @@ module Aws::LambdaMicrovms
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
@@ -1062,8 +1079,12 @@ module Aws::LambdaMicrovms
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)

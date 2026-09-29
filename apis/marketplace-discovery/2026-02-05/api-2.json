@@ -2,7 +2,10 @@
   "version":"2.0",
   "metadata":{
     "apiVersion":"2026-02-05",
-    "auth":["aws.auth#sigv4"],
+    "auth":[
+      "aws.auth#sigv4",
+      "aws.auth#sigv4a"
+    ],
     "endpointPrefix":"discovery-marketplace",
     "protocol":"rest-json",
     "protocols":["rest-json"],
@@ -192,6 +195,34 @@
       "min":1,
       "pattern":"[A-Za-z0-9_/-]+"
     },
+    "AmazonMachineImageCidrIpAddressList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "AmazonMachineImageEbsVolume":{
+      "type":"structure",
+      "required":["volumeTypes"],
+      "members":{
+        "volumeTypes":{"shape":"AmazonMachineImageEbsVolumeTypeList"},
+        "iops":{"shape":"AmazonMachineImageEbsVolumeIopsInteger"}
+      }
+    },
+    "AmazonMachineImageEbsVolumeIopsInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
+    "AmazonMachineImageEbsVolumeTypeList":{
+      "type":"list",
+      "member":{"shape":"AmazonMachineImageEbsVolumeTypeListMemberString"},
+      "max":20,
+      "min":0
+    },
+    "AmazonMachineImageEbsVolumeTypeListMemberString":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
     "AmazonMachineImageFulfillmentOption":{
       "type":"structure",
       "required":[
@@ -199,7 +230,8 @@
         "fulfillmentOptionName",
         "fulfillmentOptionType",
         "fulfillmentOptionDisplayName",
-        "operatingSystems"
+        "operatingSystems",
+        "architecture"
       ],
       "members":{
         "fulfillmentOptionId":{"shape":"String"},
@@ -210,8 +242,34 @@
         "operatingSystems":{"shape":"AmazonMachineImageOperatingSystemList"},
         "recommendation":{"shape":"AmazonMachineImageRecommendation"},
         "releaseNotes":{"shape":"String"},
-        "usageInstructions":{"shape":"String"}
+        "usageInstructions":{"shape":"String"},
+        "availableFromTime":{"shape":"Timestamp"},
+        "accessUrlTemplate":{"shape":"AmazonMachineImageFulfillmentOptionAccessUrlTemplateString"},
+        "architecture":{"shape":"AmazonMachineImageFulfillmentOptionArchitectureString"},
+        "amiAlias":{"shape":"AmazonMachineImageFulfillmentOptionAmiAliasString"},
+        "ebsVolume":{"shape":"AmazonMachineImageEbsVolume"},
+        "shortDescription":{"shape":"AmazonMachineImageFulfillmentOptionShortDescriptionString"}
       }
+    },
+    "AmazonMachineImageFulfillmentOptionAccessUrlTemplateString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "AmazonMachineImageFulfillmentOptionAmiAliasString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "AmazonMachineImageFulfillmentOptionArchitectureString":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
+    "AmazonMachineImageFulfillmentOptionShortDescriptionString":{
+      "type":"string",
+      "max":4096,
+      "min":0
     },
     "AmazonMachineImageOperatingSystem":{
       "type":"structure",
@@ -233,8 +291,28 @@
       "type":"structure",
       "required":["instanceType"],
       "members":{
-        "instanceType":{"shape":"String"}
+        "instanceType":{"shape":"String"},
+        "securityGroups":{"shape":"AmazonMachineImageSecurityGroupList"}
       }
+    },
+    "AmazonMachineImageSecurityGroup":{
+      "type":"structure",
+      "required":[
+        "protocol",
+        "fromPort",
+        "toPort",
+        "cidrIpAddresses"
+      ],
+      "members":{
+        "protocol":{"shape":"String"},
+        "fromPort":{"shape":"Integer"},
+        "toPort":{"shape":"Integer"},
+        "cidrIpAddresses":{"shape":"AmazonMachineImageCidrIpAddressList"}
+      }
+    },
+    "AmazonMachineImageSecurityGroupList":{
+      "type":"list",
+      "member":{"shape":"AmazonMachineImageSecurityGroup"}
     },
     "ApiFulfillmentOption":{
       "type":"structure",
@@ -328,8 +406,21 @@
         "fulfillmentOptionDisplayName":{"shape":"String"},
         "fulfillmentOptionVersion":{"shape":"String"},
         "releaseNotes":{"shape":"String"},
-        "usageInstructions":{"shape":"String"}
+        "usageInstructions":{"shape":"String"},
+        "availableFromTime":{"shape":"Timestamp"},
+        "shortDescription":{"shape":"CloudFormationFulfillmentOptionShortDescriptionString"},
+        "longDescription":{"shape":"CloudFormationFulfillmentOptionLongDescriptionString"}
       }
+    },
+    "CloudFormationFulfillmentOptionLongDescriptionString":{
+      "type":"string",
+      "max":8192,
+      "min":0
+    },
+    "CloudFormationFulfillmentOptionShortDescriptionString":{
+      "type":"string",
+      "max":4096,
+      "min":0
     },
     "ConfigurableUpfrontPricingTerm":{
       "type":"structure",
@@ -554,6 +645,13 @@
       "max":30,
       "min":0
     },
+    "FixedPercentage":{
+      "type":"structure",
+      "required":["percentageValue"],
+      "members":{
+        "percentageValue":{"shape":"BoundedString"}
+      }
+    },
     "FixedUpfrontPricingTerm":{
       "type":"structure",
       "required":[
@@ -646,6 +744,7 @@
       "type":"structure",
       "required":["listingId"],
       "members":{
+        "locale":{"shape":"Locale"},
         "listingId":{"shape":"ListingId"}
       }
     },
@@ -672,6 +771,7 @@
         "useCases"
       ],
       "members":{
+        "locale":{"shape":"Locale"},
         "associatedEntities":{"shape":"ListingAssociatedEntityList"},
         "badges":{"shape":"ListingBadgeList"},
         "catalog":{"shape":"Catalog"},
@@ -704,6 +804,7 @@
       "type":"structure",
       "required":["offerId"],
       "members":{
+        "locale":{"shape":"Locale"},
         "offerId":{"shape":"OfferId"}
       }
     },
@@ -719,6 +820,7 @@
         "badges"
       ],
       "members":{
+        "locale":{"shape":"Locale"},
         "offerId":{"shape":"OfferId"},
         "catalog":{"shape":"Catalog"},
         "offerName":{"shape":"NullableString"},
@@ -736,6 +838,7 @@
       "type":"structure",
       "required":["offerSetId"],
       "members":{
+        "locale":{"shape":"Locale"},
         "offerSetId":{"shape":"OfferSetId"}
       }
     },
@@ -749,6 +852,7 @@
         "associatedEntities"
       ],
       "members":{
+        "locale":{"shape":"Locale"},
         "offerSetId":{"shape":"OfferSetId"},
         "catalog":{"shape":"Catalog"},
         "offerSetName":{"shape":"NonEmptyString"},
@@ -764,6 +868,7 @@
       "type":"structure",
       "required":["offerId"],
       "members":{
+        "locale":{"shape":"Locale"},
         "offerId":{"shape":"OfferId"},
         "maxResults":{"shape":"GetOfferTermsInputMaxResultsInteger"},
         "nextToken":{"shape":"NextToken"}
@@ -779,6 +884,7 @@
       "type":"structure",
       "required":["offerTerms"],
       "members":{
+        "locale":{"shape":"Locale"},
         "offerTerms":{"shape":"OfferTermsList"},
         "nextToken":{"shape":"NextToken"}
       }
@@ -787,6 +893,7 @@
       "type":"structure",
       "required":["productId"],
       "members":{
+        "locale":{"shape":"Locale"},
         "productId":{"shape":"ProductId"}
       }
     },
@@ -806,9 +913,11 @@
         "highlights",
         "promotionalMedia",
         "resources",
-        "sellerEngagements"
+        "sellerEngagements",
+        "listingId"
       ],
       "members":{
+        "locale":{"shape":"Locale"},
         "productId":{"shape":"ProductId"},
         "catalog":{"shape":"Catalog"},
         "productName":{"shape":"NonEmptyString"},
@@ -822,7 +931,8 @@
         "highlights":{"shape":"HighlightList"},
         "promotionalMedia":{"shape":"PromotionalMediaList"},
         "resources":{"shape":"ResourceList"},
-        "sellerEngagements":{"shape":"SellerEngagementList"}
+        "sellerEngagements":{"shape":"SellerEngagementList"},
+        "listingId":{"shape":"ListingId"}
       }
     },
     "GetProductOutputLongDescriptionString":{
@@ -932,6 +1042,7 @@
       "type":"structure",
       "required":["productId"],
       "members":{
+        "locale":{"shape":"Locale"},
         "productId":{"shape":"ProductId"},
         "maxResults":{"shape":"ListFulfillmentOptionsInputMaxResultsInteger"},
         "nextToken":{"shape":"NextToken"}
@@ -947,6 +1058,7 @@
       "type":"structure",
       "required":["fulfillmentOptions"],
       "members":{
+        "locale":{"shape":"Locale"},
         "fulfillmentOptions":{"shape":"FulfillmentOptionsList"},
         "nextToken":{"shape":"NextToken"}
       }
@@ -954,6 +1066,7 @@
     "ListPurchaseOptionsInput":{
       "type":"structure",
       "members":{
+        "locale":{"shape":"Locale"},
         "filters":{"shape":"PurchaseOptionFilterList"},
         "maxResults":{"shape":"ListPurchaseOptionsInputMaxResultsInteger"},
         "nextToken":{"shape":"NextToken"}
@@ -1087,6 +1200,12 @@
       "type":"list",
       "member":{"shape":"ListingSummary"}
     },
+    "Locale":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"[^;,]+(\\s*,\\s*[^;,]+){0,1}"
+    },
     "MaxResults":{
       "type":"integer",
       "box":true,
@@ -1217,6 +1336,30 @@
       "type":"list",
       "member":{"shape":"OfferTerm"}
     },
+    "PaymentScheduleEntry":{
+      "type":"structure",
+      "required":[
+        "chargeDateOffset",
+        "chargePercentage"
+      ],
+      "members":{
+        "chargeDateOffset":{"shape":"BoundedString"},
+        "chargePercentage":{"shape":"BoundedString"},
+        "dayOfMonth":{"shape":"PaymentScheduleEntryDayOfMonthInteger"}
+      }
+    },
+    "PaymentScheduleEntryDayOfMonthInteger":{
+      "type":"integer",
+      "box":true,
+      "max":31,
+      "min":1
+    },
+    "PaymentScheduleEntryList":{
+      "type":"list",
+      "member":{"shape":"PaymentScheduleEntry"},
+      "max":200,
+      "min":1
+    },
     "PaymentScheduleTerm":{
       "type":"structure",
       "required":[
@@ -1231,6 +1374,34 @@
         "currencyCode":{"shape":"CurrencyCode"},
         "schedule":{"shape":"ScheduleList"}
       }
+    },
+    "PaymentScheduleTermTemplate":{
+      "type":"structure",
+      "required":["schedule"],
+      "members":{
+        "schedule":{"shape":"PaymentScheduleEntryList"}
+      }
+    },
+    "PercentageRange":{
+      "type":"structure",
+      "required":[
+        "minimumValue",
+        "maximumValue",
+        "defaultValue"
+      ],
+      "members":{
+        "minimumValue":{"shape":"BoundedString"},
+        "maximumValue":{"shape":"BoundedString"},
+        "defaultValue":{"shape":"BoundedString"}
+      }
+    },
+    "PriceIncrease":{
+      "type":"structure",
+      "members":{
+        "fixedPercentage":{"shape":"FixedPercentage"},
+        "percentageRange":{"shape":"PercentageRange"}
+      },
+      "union":true
     },
     "PricingModel":{
       "type":"structure",
@@ -1401,7 +1572,8 @@
       "enum":[
         "PRIVATE_PRICING",
         "FUTURE_DATED",
-        "REPLACEMENT_OFFER"
+        "REPLACEMENT_OFFER",
+        "AUTO_RENEW"
       ]
     },
     "PurchaseOptionFilter":{
@@ -1530,8 +1702,18 @@
       ],
       "members":{
         "id":{"shape":"TermId"},
-        "type":{"shape":"TermType"}
+        "type":{"shape":"TermType"},
+        "maxRenewals":{"shape":"RenewalTermMaxRenewalsInteger"},
+        "lockoutPeriod":{"shape":"BoundedString"},
+        "adjustmentDeadline":{"shape":"BoundedString"},
+        "priceIncrease":{"shape":"PriceIncrease"},
+        "termTemplates":{"shape":"TermTemplateList"}
       }
+    },
+    "RenewalTermMaxRenewalsInteger":{
+      "type":"integer",
+      "box":true,
+      "min":1
     },
     "Resource":{
       "type":"structure",
@@ -1618,15 +1800,26 @@
       "required":[
         "fulfillmentOptionId",
         "fulfillmentOptionType",
-        "fulfillmentOptionDisplayName"
+        "fulfillmentOptionDisplayName",
+        "quickLaunch"
       ],
       "members":{
         "fulfillmentOptionId":{"shape":"String"},
         "fulfillmentOptionType":{"shape":"FulfillmentOptionType"},
         "fulfillmentOptionDisplayName":{"shape":"String"},
         "fulfillmentUrl":{"shape":"String"},
-        "usageInstructions":{"shape":"String"}
+        "usageInstructions":{"shape":"String"},
+        "availableFromTime":{"shape":"Timestamp"},
+        "launchUrl":{"shape":"URL"},
+        "quickLaunch":{"shape":"SaasQuickLaunchStatus"}
       }
+    },
+    "SaasQuickLaunchStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "SageMakerAlgorithmFulfillmentOption":{
       "type":"structure",
@@ -1657,6 +1850,17 @@
         "recommendedTrainingInstanceType":{"shape":"String"}
       }
     },
+    "SageMakerModelContentTypeList":{
+      "type":"list",
+      "member":{"shape":"SageMakerModelContentTypeListMemberString"},
+      "max":50,
+      "min":0
+    },
+    "SageMakerModelContentTypeListMemberString":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
     "SageMakerModelFulfillmentOption":{
       "type":"structure",
       "required":[
@@ -1671,7 +1875,9 @@
         "fulfillmentOptionVersion":{"shape":"String"},
         "releaseNotes":{"shape":"String"},
         "usageInstructions":{"shape":"String"},
-        "recommendation":{"shape":"SageMakerModelRecommendation"}
+        "recommendation":{"shape":"SageMakerModelRecommendation"},
+        "supportedContentTypes":{"shape":"SageMakerModelContentTypeList"},
+        "supportedResponseMimeTypes":{"shape":"SageMakerModelResponseMimeTypeList"}
       }
     },
     "SageMakerModelRecommendation":{
@@ -1681,6 +1887,17 @@
         "recommendedBatchTransformInstanceType":{"shape":"String"},
         "recommendedRealtimeInferenceInstanceType":{"shape":"String"}
       }
+    },
+    "SageMakerModelResponseMimeTypeList":{
+      "type":"list",
+      "member":{"shape":"SageMakerModelResponseMimeTypeListMemberString"},
+      "max":50,
+      "min":0
+    },
+    "SageMakerModelResponseMimeTypeListMemberString":{
+      "type":"string",
+      "max":256,
+      "min":0
     },
     "ScheduleItem":{
       "type":"structure",
@@ -1713,6 +1930,7 @@
     "SearchFacetsInput":{
       "type":"structure",
       "members":{
+        "locale":{"shape":"Locale"},
         "searchText":{"shape":"SearchText"},
         "filters":{"shape":"SearchFilterList"},
         "facetTypes":{"shape":"FacetTypeList"},
@@ -1777,6 +1995,7 @@
     "SearchListingsInput":{
       "type":"structure",
       "members":{
+        "locale":{"shape":"Locale"},
         "searchText":{"shape":"SearchText"},
         "filters":{"shape":"SearchFilterList"},
         "maxResults":{"shape":"MaxResults"},
@@ -1898,6 +2117,19 @@
       "max":256,
       "min":1,
       "pattern":"[A-Za-z0-9+=;,.@\\-_]+"
+    },
+    "TermTemplate":{
+      "type":"structure",
+      "members":{
+        "paymentScheduleTermTemplate":{"shape":"PaymentScheduleTermTemplate"}
+      },
+      "union":true
+    },
+    "TermTemplateList":{
+      "type":"list",
+      "member":{"shape":"TermTemplate"},
+      "max":10,
+      "min":0
     },
     "TermType":{
       "type":"string",

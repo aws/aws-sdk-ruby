@@ -139,6 +139,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#snapshot_availability_zone-instance_method
       def snapshot_availability_zone: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#full_snapshot_size_in_bytes-instance_method
+      def full_snapshot_size_in_bytes: () -> ::Integer
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#load-instance_method

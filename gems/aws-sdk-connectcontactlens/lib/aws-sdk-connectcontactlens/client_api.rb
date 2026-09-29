@@ -21,6 +21,14 @@ module Aws::ConnectContactLens
     CharacterOffset = Shapes::IntegerShape.new(name: 'CharacterOffset')
     CharacterOffsets = Shapes::StructureShape.new(name: 'CharacterOffsets')
     ContactId = Shapes::StringShape.new(name: 'ContactId')
+    ExtractedInformation = Shapes::StructureShape.new(name: 'ExtractedInformation')
+    ExtractedInformationContent = Shapes::StringShape.new(name: 'ExtractedInformationContent')
+    ExtractedInformationFailureCode = Shapes::StringShape.new(name: 'ExtractedInformationFailureCode')
+    ExtractedInformationValue = Shapes::StructureShape.new(name: 'ExtractedInformationValue')
+    ExtractedInformationValues = Shapes::ListShape.new(name: 'ExtractedInformationValues')
+    ExtractionDefinitionDisplayLabel = Shapes::StringShape.new(name: 'ExtractionDefinitionDisplayLabel')
+    ExtractionDefinitionId = Shapes::StringShape.new(name: 'ExtractionDefinitionId')
+    ExtractionDefinitionName = Shapes::StringShape.new(name: 'ExtractionDefinitionName')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
@@ -65,6 +73,19 @@ module Aws::ConnectContactLens
     CharacterOffsets.add_member(:end_offset_char, Shapes::ShapeRef.new(shape: CharacterOffset, required: true, location_name: "EndOffsetChar"))
     CharacterOffsets.struct_class = Types::CharacterOffsets
 
+    ExtractedInformation.add_member(:extraction_definition_id, Shapes::ShapeRef.new(shape: ExtractionDefinitionId, required: true, location_name: "ExtractionDefinitionId"))
+    ExtractedInformation.add_member(:extraction_definition_name, Shapes::ShapeRef.new(shape: ExtractionDefinitionName, required: true, location_name: "ExtractionDefinitionName"))
+    ExtractedInformation.add_member(:extraction_definition_display_label, Shapes::ShapeRef.new(shape: ExtractionDefinitionDisplayLabel, location_name: "ExtractionDefinitionDisplayLabel"))
+    ExtractedInformation.add_member(:extracted_values, Shapes::ShapeRef.new(shape: ExtractedInformationValues, location_name: "ExtractedValues"))
+    ExtractedInformation.add_member(:failure_code, Shapes::ShapeRef.new(shape: ExtractedInformationFailureCode, location_name: "FailureCode"))
+    ExtractedInformation.struct_class = Types::ExtractedInformation
+
+    ExtractedInformationValue.add_member(:content, Shapes::ShapeRef.new(shape: ExtractedInformationContent, required: true, location_name: "Content"))
+    ExtractedInformationValue.add_member(:points_of_interest, Shapes::ShapeRef.new(shape: PointsOfInterest, required: true, location_name: "PointsOfInterest"))
+    ExtractedInformationValue.struct_class = Types::ExtractedInformationValue
+
+    ExtractedInformationValues.member = Shapes::ShapeRef.new(shape: ExtractedInformationValue)
+
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InternalServiceException.struct_class = Types::InternalServiceException
 
@@ -105,6 +126,7 @@ module Aws::ConnectContactLens
     RealtimeContactAnalysisSegment.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
     RealtimeContactAnalysisSegment.add_member(:categories, Shapes::ShapeRef.new(shape: Categories, location_name: "Categories"))
     RealtimeContactAnalysisSegment.add_member(:post_contact_summary, Shapes::ShapeRef.new(shape: PostContactSummary, location_name: "PostContactSummary"))
+    RealtimeContactAnalysisSegment.add_member(:extracted_information, Shapes::ShapeRef.new(shape: ExtractedInformation, location_name: "ExtractedInformation"))
     RealtimeContactAnalysisSegment.struct_class = Types::RealtimeContactAnalysisSegment
 
     RealtimeContactAnalysisSegments.member = Shapes::ShapeRef.new(shape: RealtimeContactAnalysisSegment)

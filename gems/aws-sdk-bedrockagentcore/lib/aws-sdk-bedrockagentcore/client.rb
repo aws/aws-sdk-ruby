@@ -579,6 +579,7 @@ module Aws::BedrockAgentCore
     #     records: [ # required
     #       {
     #         memory_record_id: "MemoryRecordId", # required
+    #         namespace: "Namespace",
     #       },
     #     ],
     #   })
@@ -634,6 +635,7 @@ module Aws::BedrockAgentCore
     #           text: "MemoryContentTextString",
     #         },
     #         namespaces: ["Namespace"],
+    #         source_namespaces: ["Namespace"],
     #         memory_strategy_id: "MemoryStrategyId",
     #         metadata: {
     #           "MetadataKey" => {
@@ -849,8 +851,8 @@ module Aws::BedrockAgentCore
     #   time is used.
     #
     # @option params [required, Array<Types::PayloadType>] :payload
-    #   The content payload of the event. This can include conversational data
-    #   or binary content.
+    #   The content payload of the event. This can include conversational
+    #   data, JSON data, or binary content.
     #
     # @option params [Types::Branch] :branch
     #   The branch information for this event. Branches allow for organizing
@@ -873,6 +875,11 @@ module Aws::BedrockAgentCore
     #   long-term memory extraction. If not specified, the event is processed
     #   for extraction as usual.
     #
+    # @option params [Types::ExtractionConfig] :extraction_config
+    #   The extraction configuration for long-term memory records. Use this
+    #   parameter to specify namespace variable keys and their values for
+    #   namespace substitution during extraction.
+    #
     # @return [Types::CreateEventOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEventOutput#event #event} => Types::Event
@@ -894,6 +901,10 @@ module Aws::BedrockAgentCore
     #         },
     #         blob: {
     #         },
+    #         json: {
+    #           content: { # required
+    #           },
+    #         },
     #       },
     #     ],
     #     branch: {
@@ -907,6 +918,11 @@ module Aws::BedrockAgentCore
     #       },
     #     },
     #     extraction_mode: "SKIP", # accepts SKIP
+    #     extraction_config: {
+    #       namespace_variables: {
+    #         "NamespaceVariableName" => "NamespaceVariableValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1307,6 +1323,10 @@ module Aws::BedrockAgentCore
     # @option params [required, String] :memory_record_id
     #   The identifier of the memory record to delete.
     #
+    # @option params [String] :namespace
+    #   The namespace of the memory record to delete. This value is used for
+    #   IAM condition key authorization.
+    #
     # @return [Types::DeleteMemoryRecordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteMemoryRecordOutput#memory_record_id #memory_record_id} => String
@@ -1316,6 +1336,7 @@ module Aws::BedrockAgentCore
     #   resp = client.delete_memory_record({
     #     memory_id: "MemoryId", # required
     #     memory_record_id: "MemoryRecordId", # required
+    #     namespace: "Namespace",
     #   })
     #
     # @example Response structure
@@ -1726,15 +1747,23 @@ module Aws::BedrockAgentCore
     #   resp.data_source_config.cloud_watch_logs.service_names[0] #=> String
     #   resp.data_source_config.cloud_watch_logs.log_group_names #=> Array
     #   resp.data_source_config.cloud_watch_logs.log_group_names[0] #=> String
+    #   resp.data_source_config.cloud_watch_logs.log_group_name_prefixes #=> Array
+    #   resp.data_source_config.cloud_watch_logs.log_group_name_prefixes[0] #=> String
     #   resp.data_source_config.cloud_watch_logs.filter_config.session_ids #=> Array
     #   resp.data_source_config.cloud_watch_logs.filter_config.session_ids[0] #=> String
     #   resp.data_source_config.cloud_watch_logs.filter_config.time_range.start_time #=> Time
     #   resp.data_source_config.cloud_watch_logs.filter_config.time_range.end_time #=> Time
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids #=> Array
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids[0].session_id #=> String
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids[0].trace_ids #=> Array
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids[0].trace_ids[0] #=> String
     #   resp.data_source_config.online_evaluation_config_source.online_evaluation_config_arn #=> String
     #   resp.data_source_config.online_evaluation_config_source.time_range.start_time #=> Time
     #   resp.data_source_config.online_evaluation_config_source.time_range.end_time #=> Time
     #   resp.output_config.cloud_watch_config.log_group_name #=> String
     #   resp.output_config.cloud_watch_config.log_stream_name #=> String
+    #   resp.output_config.cloud_watch_config.metrics_namespace #=> String
+    #   resp.output_config.cloud_watch_config.result_destination #=> String, one of "DEDICATED_LOG_GROUP", "SOURCE_LOG_GROUP"
     #   resp.evaluation_results.number_of_sessions_completed #=> Integer
     #   resp.evaluation_results.number_of_sessions_in_progress #=> Integer
     #   resp.evaluation_results.number_of_sessions_failed #=> Integer
@@ -2054,6 +2083,10 @@ module Aws::BedrockAgentCore
     # @option params [required, String] :memory_record_id
     #   The identifier of the memory record to retrieve.
     #
+    # @option params [String] :namespace
+    #   The namespace of the memory record to retrieve. This value is used for
+    #   IAM condition key authorization.
+    #
     # @return [Types::GetMemoryRecordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMemoryRecordOutput#memory_record #memory_record} => Types::MemoryRecord
@@ -2063,6 +2096,7 @@ module Aws::BedrockAgentCore
     #   resp = client.get_memory_record({
     #     memory_id: "MemoryId", # required
     #     memory_record_id: "MemoryRecordId", # required
+    #     namespace: "Namespace",
     #   })
     #
     # @example Response structure
@@ -2662,6 +2696,103 @@ module Aws::BedrockAgentCore
     # @param [Hash] params ({})
     def get_workload_access_token_for_user_id(params = {}, options = {})
       req = build_request(:get_workload_access_token_for_user_id, params)
+      req.send_request(options)
+    end
+
+    # Submits content directly for ingestion to generate long-term memory
+    # records in a AgentCore Memory resource.
+    #
+    # To use this operation, you must have the
+    # `bedrock-agentcore:IngestData` permission.
+    #
+    # @option params [required, String] :memory_id
+    #   The identifier of the AgentCore Memory resource to ingest content
+    #   into.
+    #
+    # @option params [required, Types::ContentSource] :source
+    #   The content to ingest. Only inline content is supported.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :content_timestamp
+    #   The timestamp of when the content occurred.
+    #
+    # @option params [required, String] :actor_id
+    #   The identifier of the actor associated with this content. An actor
+    #   represents an entity that participates in sessions and generates
+    #   content.
+    #
+    # @option params [String] :session_id
+    #   The identifier of the session that the content belongs to. If not
+    #   provided, a session identifier is generated and returned in the
+    #   response.
+    #
+    # @option params [Types::ExtractionConfig] :extraction_config
+    #   The extraction configuration for long-term memory records. Use this
+    #   parameter to specify namespace variable keys and their values for
+    #   namespace substitution during extraction.
+    #
+    # @option params [Hash<String,Types::MetadataValue>] :metadata
+    #   The key-value metadata to attach to the content.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, AgentCore ignores the request, but does not return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::IngestDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::IngestDataOutput#session_id #session_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.ingest_data({
+    #     memory_id: "MemoryId", # required
+    #     source: { # required
+    #       inline: {
+    #         payload: [ # required
+    #           {
+    #             conversational: {
+    #               content: { # required
+    #                 text: "ContentTextString",
+    #               },
+    #               role: "ASSISTANT", # required, accepts ASSISTANT, USER, TOOL, OTHER
+    #             },
+    #             json: {
+    #               content: { # required
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     content_timestamp: Time.now, # required
+    #     actor_id: "ActorId", # required
+    #     session_id: "SessionId",
+    #     extraction_config: {
+    #       namespace_variables: {
+    #         "NamespaceVariableName" => "NamespaceVariableValue",
+    #       },
+    #     },
+    #     metadata: {
+    #       "MetadataKey" => {
+    #         string_value: "MetadataValueStringValueString",
+    #       },
+    #     },
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/IngestData AWS API Documentation
+    #
+    # @overload ingest_data(params = {})
+    # @param [Hash] params ({})
+    def ingest_data(params = {}, options = {})
+      req = build_request(:ingest_data, params)
       req.send_request(options)
     end
 
@@ -3720,6 +3851,9 @@ module Aws::BedrockAgentCore
     #   handler.on_runtime_client_error_event do |event|
     #     event # => Aws::BedrockAgentCore::Types::runtimeClientError
     #   end
+    #   handler.on_hook_event_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::hookEvent
+    #   end
     #
     #   client.invoke_harness(
     #     # params inputs
@@ -3756,6 +3890,9 @@ module Aws::BedrockAgentCore
     #     stream.on_runtime_client_error_event do |event|
     #       event # => Aws::BedrockAgentCore::Types::runtimeClientError
     #     end
+    #     stream.on_hook_event_event do |event|
+    #       event # => Aws::BedrockAgentCore::Types::hookEvent
+    #     end
     #   end
     #
     #   client.invoke_harness(
@@ -3791,6 +3928,9 @@ module Aws::BedrockAgentCore
     #   end
     #   handler.on_runtime_client_error_event do |event|
     #     event # => Aws::BedrockAgentCore::Types::runtimeClientError
+    #   end
+    #   handler.on_hook_event_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::hookEvent
     #   end
     #
     #   client.invoke_harness(
@@ -3873,6 +4013,7 @@ module Aws::BedrockAgentCore
     #       open_ai_model_config: {
     #         model_id: "ModelId", # required
     #         api_key_arn: "ApiKeyArn", # required
+    #         api_base: "HarnessOpenAiApiBase",
     #         max_tokens: 1,
     #         temperature: 1.0,
     #         top_p: 1.0,
@@ -3979,7 +4120,7 @@ module Aws::BedrockAgentCore
     #
     #   # All events are available at resp.stream:
     #   resp.stream #=> Enumerator
-    #   resp.stream.event_types #=> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :validation_exception, :runtime_client_error]
+    #   resp.stream.event_types #=> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :validation_exception, :runtime_client_error, :hook_event]
     #
     #   # For :message_start event available at #on_message_start_event callback and response eventstream enumerator:
     #   event.role #=> String, one of "user", "assistant"
@@ -4008,7 +4149,7 @@ module Aws::BedrockAgentCore
     #   event.content_block_index #=> Integer
     #
     #   # For :message_stop event available at #on_message_stop_event callback and response eventstream enumerator:
-    #   event.stop_reason #=> String, one of "end_turn", "tool_use", "tool_result", "max_tokens", "stop_sequence", "content_filtered", "malformed_model_output", "malformed_tool_use", "interrupted", "partial_turn", "model_context_window_exceeded", "max_iterations_exceeded", "max_output_tokens_exceeded", "timeout_exceeded"
+    #   event.stop_reason #=> String, one of "end_turn", "tool_use", "tool_result", "max_tokens", "stop_sequence", "content_filtered", "malformed_model_output", "malformed_tool_use", "interrupted", "partial_turn", "model_context_window_exceeded", "max_iterations_exceeded", "max_output_tokens_exceeded", "timeout_exceeded", "hook_stopped"
     #
     #   # For :metadata event available at #on_metadata_event callback and response eventstream enumerator:
     #   event.usage.input_tokens #=> Integer
@@ -4030,6 +4171,13 @@ module Aws::BedrockAgentCore
     #
     #   # For :runtime_client_error event available at #on_runtime_client_error_event callback and response eventstream enumerator:
     #   event.message #=> String
+    #
+    #   # For :hook_event event available at #on_hook_event_event callback and response eventstream enumerator:
+    #   event.hook_event_id #=> String
+    #   event.name #=> String
+    #   event.type #=> String, one of "before_tool_call", "after_tool_call", "before_invocation", "after_invocation"
+    #   event.decision #=> String, one of "allow", "deny"
+    #   event.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeHarness AWS API Documentation
     #
@@ -5283,6 +5431,9 @@ module Aws::BedrockAgentCore
     # @option params [String] :description
     #   The description of the batch evaluation.
     #
+    # @option params [Types::OutputConfig] :output_config
+    #   Output destination configuration.
+    #
     # @return [Types::StartBatchEvaluationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBatchEvaluationResponse#batch_evaluation_id #batch_evaluation_id} => String
@@ -5314,13 +5465,20 @@ module Aws::BedrockAgentCore
     #     data_source_config: { # required
     #       cloud_watch_logs: {
     #         service_names: ["String"], # required
-    #         log_group_names: ["String"], # required
+    #         log_group_names: ["LogGroupName"],
+    #         log_group_name_prefixes: ["LogGroupNamePrefix"],
     #         filter_config: {
     #           session_ids: ["String"],
     #           time_range: {
     #             start_time: Time.now,
     #             end_time: Time.now,
     #           },
+    #           session_trace_ids: [
+    #             {
+    #               session_id: "String", # required
+    #               trace_ids: ["TraceId"], # required
+    #             },
+    #           ],
     #         },
     #       },
     #       online_evaluation_config_source: {
@@ -5370,6 +5528,14 @@ module Aws::BedrockAgentCore
     #     },
     #     kms_key_arn: "KmsKeyArn",
     #     description: "BatchEvaluationDescription",
+    #     output_config: {
+    #       cloud_watch_config: {
+    #         log_group_name: "OptionalLogGroupName",
+    #         log_stream_name: "LogStreamName",
+    #         metrics_namespace: "MetricsNamespace",
+    #         result_destination: "DEDICATED_LOG_GROUP", # accepts DEDICATED_LOG_GROUP, SOURCE_LOG_GROUP
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -5385,6 +5551,8 @@ module Aws::BedrockAgentCore
     #   resp.created_at #=> Time
     #   resp.output_config.cloud_watch_config.log_group_name #=> String
     #   resp.output_config.cloud_watch_config.log_stream_name #=> String
+    #   resp.output_config.cloud_watch_config.metrics_namespace #=> String
+    #   resp.output_config.cloud_watch_config.result_destination #=> String, one of "DEDICATED_LOG_GROUP", "SOURCE_LOG_GROUP"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.kms_key_arn #=> String
@@ -6415,7 +6583,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

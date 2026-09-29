@@ -10,6 +10,36 @@
 module Aws::LaunchWizard
   module Types
 
+    # A constraint on which AWS account a deployment can be initiated from.
+    # Specify one of the supported constraint types.
+    #
+    # @note AccountConstraint is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AccountConstraint corresponding to the set member.
+    #
+    # @!attribute [rw] management_account
+    #   The deployment must be initiated from the AWS Organizations
+    #   management account.
+    #   @return [Types::ManagementAccountConstraint]
+    #
+    # @!attribute [rw] delegated_admin
+    #   The deployment must be initiated from a delegated administrator
+    #   account for the specified service principal.
+    #   @return [Types::DelegatedAdminConstraint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/AccountConstraint AWS API Documentation
+    #
+    class AccountConstraint < Struct.new(
+      :management_account,
+      :delegated_admin,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ManagementAccount < AccountConstraint; end
+      class DelegatedAdmin < AccountConstraint; end
+      class Unknown < AccountConstraint; end
+    end
+
     # @!attribute [rw] workload_name
     #   The name of the workload. You can use the [ `ListWorkloads` ][1]
     #   operation to discover supported values for this parameter.
@@ -80,6 +110,23 @@ module Aws::LaunchWizard
     #
     class CreateDeploymentOutput < Struct.new(
       :deployment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The deployment must be initiated from a delegated administrator
+    # account for the specified service principal.
+    #
+    # @!attribute [rw] service_principal
+    #   The service principal for which the account must be a delegated
+    #   administrator. For example,
+    #   `stacksets.cloudformation.amazonaws.com`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/DelegatedAdminConstraint AWS API Documentation
+    #
+    class DelegatedAdminConstraint < Struct.new(
+      :service_principal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -286,6 +333,12 @@ module Aws::LaunchWizard
     #   The timestamp of the deployment event.
     #   @return [Time]
     #
+    # @!attribute [rw] metadata
+    #   A map of metadata key-value pairs associated with a deployment
+    #   event. For error detection events, contains workload context and log
+    #   excerpts used for troubleshooting.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/DeploymentEventDataSummary AWS API Documentation
     #
     class DeploymentEventDataSummary < Struct.new(
@@ -293,7 +346,8 @@ module Aws::LaunchWizard
       :description,
       :status,
       :status_reason,
-      :timestamp)
+      :timestamp,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -814,6 +868,13 @@ module Aws::LaunchWizard
       include Aws::Structure
     end
 
+    # The deployment must be initiated from the AWS Organizations management
+    # account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/ManagementAccountConstraint AWS API Documentation
+    #
+    class ManagementAccountConstraint < Aws::EmptyStructure; end
+
     # You have exceeded an Launch Wizard resource limit. For example, you
     # might have too many deployments in progress.
     #
@@ -976,6 +1037,15 @@ module Aws::LaunchWizard
     #   *You can list deployments in the `DISABLED` status.*
     #   @return [String]
     #
+    # @!attribute [rw] account_constraints
+    #   Optional list of constraints describing what kind of AWS account is
+    #   allowed to deploy this workload or deployment pattern. Within a
+    #   single list the semantics are OR: an account satisfies the list if
+    #   it satisfies any entry. Workload-level and pattern-level lists
+    #   combine with AND at deployment time. An absent or empty list at this
+    #   level means no constraint at this level.
+    #   @return [Array<Types::AccountConstraint>]
+    #
     # @!attribute [rw] description
     #   The description of a workload.
     #   @return [String]
@@ -998,6 +1068,7 @@ module Aws::LaunchWizard
       :workload_name,
       :display_name,
       :status,
+      :account_constraints,
       :description,
       :documentation_url,
       :icon_url,
@@ -1020,12 +1091,22 @@ module Aws::LaunchWizard
     #   The status of the workload.
     #   @return [String]
     #
+    # @!attribute [rw] account_constraints
+    #   Optional list of constraints describing what kind of AWS account is
+    #   allowed to deploy this workload or deployment pattern. Within a
+    #   single list the semantics are OR: an account satisfies the list if
+    #   it satisfies any entry. Workload-level and pattern-level lists
+    #   combine with AND at deployment time. An absent or empty list at this
+    #   level means no constraint at this level.
+    #   @return [Array<Types::AccountConstraint>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/WorkloadDataSummary AWS API Documentation
     #
     class WorkloadDataSummary < Struct.new(
       :workload_name,
       :display_name,
-      :status)
+      :status,
+      :account_constraints)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1064,6 +1145,15 @@ module Aws::LaunchWizard
     #   The status message of the deployment pattern.
     #   @return [String]
     #
+    # @!attribute [rw] account_constraints
+    #   Optional list of constraints describing what kind of AWS account is
+    #   allowed to deploy this workload or deployment pattern. Within a
+    #   single list the semantics are OR: an account satisfies the list if
+    #   it satisfies any entry. Workload-level and pattern-level lists
+    #   combine with AND at deployment time. An absent or empty list at this
+    #   level means no constraint at this level.
+    #   @return [Array<Types::AccountConstraint>]
+    #
     # @!attribute [rw] specifications
     #   The settings specified for the deployment. These settings define how
     #   to deploy and configure your resources created by the deployment.
@@ -1090,6 +1180,7 @@ module Aws::LaunchWizard
       :description,
       :status,
       :status_message,
+      :account_constraints,
       :specifications)
       SENSITIVE = []
       include Aws::Structure
@@ -1129,6 +1220,15 @@ module Aws::LaunchWizard
     #   A message about a workload deployment pattern's status.
     #   @return [String]
     #
+    # @!attribute [rw] account_constraints
+    #   Optional list of constraints describing what kind of AWS account is
+    #   allowed to deploy this workload or deployment pattern. Within a
+    #   single list the semantics are OR: an account satisfies the list if
+    #   it satisfies any entry. Workload-level and pattern-level lists
+    #   combine with AND at deployment time. An absent or empty list at this
+    #   level means no constraint at this level.
+    #   @return [Array<Types::AccountConstraint>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/launch-wizard-2018-05-10/WorkloadDeploymentPatternDataSummary AWS API Documentation
     #
     class WorkloadDeploymentPatternDataSummary < Struct.new(
@@ -1139,7 +1239,8 @@ module Aws::LaunchWizard
       :display_name,
       :description,
       :status,
-      :status_message)
+      :status_message,
+      :account_constraints)
       SENSITIVE = []
       include Aws::Structure
     end

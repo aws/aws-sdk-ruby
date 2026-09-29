@@ -244,13 +244,13 @@ module Aws::PricingPlanManager
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The ARNs of the AWS resources to include in the subscription.
-    #   Specify one or more supported resources.
+    #   The ARNs of the resources to include in the subscription. Specify
+    #   one or more supported resources.
     #
     #   <note markdown="1"> For subscriptions in the CloudFront plan family, the resources must
     #   include exactly one Amazon CloudFront distribution and exactly one
-    #   AWS WAF web ACL. You can also include other supported resources,
-    #   such as Amazon Route 53 hosted zones and CloudFront KeyValueStores.
+    #   WAF web ACL. You can also include other supported resources, such as
+    #   Amazon Route 53 hosted zones and CloudFront KeyValueStores.
     #
     #    </note>
     #   @return [Array<String>]
@@ -259,7 +259,9 @@ module Aws::PricingPlanManager
     #   Determines whether the subscription requires explicit approval
     #   before billing starts. Set to `MANUAL` to require a separate
     #   `ApprovePaidSubscription` call, or `IMMEDIATE` to activate the
-    #   subscription right away. Defaults to `IMMEDIATE` if not specified.
+    #   subscription right away. For paid tier plans, this defaults to
+    #   `MANUAL` if not specified. For the `FREE` plan tier, only
+    #   `IMMEDIATE` is supported, and it is the default.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -539,7 +541,7 @@ module Aws::PricingPlanManager
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The ARNs of the AWS resources covered by this subscription.
+    #   The ARNs of the resources covered by this subscription.
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_at
@@ -604,7 +606,7 @@ module Aws::PricingPlanManager
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The ARNs of the AWS resources covered by this subscription.
+    #   The ARNs of the resources covered by this subscription.
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_at

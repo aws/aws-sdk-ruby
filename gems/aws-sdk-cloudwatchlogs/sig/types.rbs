@@ -1995,6 +1995,7 @@ module Aws::CloudWatchLogs
       attr_accessor bytes_scanned: ::Float
       attr_accessor estimated_bytes_skipped: ::Float
       attr_accessor log_groups_scanned: ::Float
+      attr_accessor result_count: ::Float
       SENSITIVE: []
     end
 

@@ -1656,6 +1656,7 @@ module Aws::PartnerCentralSelling
     #   * {Types::GetAwsOpportunitySummaryResponse#customer #customer} => Types::AwsOpportunityCustomer
     #   * {Types::GetAwsOpportunitySummaryResponse#project #project} => Types::AwsOpportunityProject
     #   * {Types::GetAwsOpportunitySummaryResponse#cosell_motion #cosell_motion} => String
+    #   * {Types::GetAwsOpportunitySummaryResponse#software_revenue #software_revenue} => Types::AwsSoftwareRevenue
     #   * {Types::GetAwsOpportunitySummaryResponse#catalog #catalog} => String
     #
     # @example Request syntax with placeholder values
@@ -1682,7 +1683,7 @@ module Aws::PartnerCentralSelling
     #   resp.opportunity_team[0].email #=> String
     #   resp.opportunity_team[0].first_name #=> String
     #   resp.opportunity_team[0].last_name #=> String
-    #   resp.opportunity_team[0].business_title #=> String, one of "AWSSalesRep", "AWSAccountOwner", "WWPSPDM", "PDM", "PSM", "ISVSM"
+    #   resp.opportunity_team[0].business_title #=> String, one of "AWSSalesRep", "AWSAccountOwner", "WWPSPDM", "PDM", "PSM", "ISVSM", "Signatory"
     #   resp.insights.next_best_actions #=> String
     #   resp.insights.engagement_score #=> String, one of "High", "Medium", "Low"
     #   resp.insights.aws_products_spend_insights_by_source.partner.currency_code #=> String, one of "USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"
@@ -1751,6 +1752,11 @@ module Aws::PartnerCentralSelling
     #   resp.project.expected_customer_spend[0].estimation_url #=> String
     #   resp.project.aws_partition #=> String, one of "aws-eusc"
     #   resp.cosell_motion #=> String
+    #   resp.software_revenue.value.amount #=> String
+    #   resp.software_revenue.value.currency_code #=> String, one of "USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"
+    #   resp.software_revenue.discount #=> String
+    #   resp.software_revenue.effective_date #=> String
+    #   resp.software_revenue.expiration_date #=> String
     #   resp.catalog #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/GetAwsOpportunitySummary AWS API Documentation
@@ -2333,7 +2339,7 @@ module Aws::PartnerCentralSelling
     #   resp.payload.aws_opportunity_summary_full_view.opportunity_team[0].email #=> String
     #   resp.payload.aws_opportunity_summary_full_view.opportunity_team[0].first_name #=> String
     #   resp.payload.aws_opportunity_summary_full_view.opportunity_team[0].last_name #=> String
-    #   resp.payload.aws_opportunity_summary_full_view.opportunity_team[0].business_title #=> String, one of "AWSSalesRep", "AWSAccountOwner", "WWPSPDM", "PDM", "PSM", "ISVSM"
+    #   resp.payload.aws_opportunity_summary_full_view.opportunity_team[0].business_title #=> String, one of "AWSSalesRep", "AWSAccountOwner", "WWPSPDM", "PDM", "PSM", "ISVSM", "Signatory"
     #   resp.payload.aws_opportunity_summary_full_view.insights.next_best_actions #=> String
     #   resp.payload.aws_opportunity_summary_full_view.insights.engagement_score #=> String, one of "High", "Medium", "Low"
     #   resp.payload.aws_opportunity_summary_full_view.insights.aws_products_spend_insights_by_source.partner.currency_code #=> String, one of "USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"
@@ -2402,6 +2408,11 @@ module Aws::PartnerCentralSelling
     #   resp.payload.aws_opportunity_summary_full_view.project.expected_customer_spend[0].estimation_url #=> String
     #   resp.payload.aws_opportunity_summary_full_view.project.aws_partition #=> String, one of "aws-eusc"
     #   resp.payload.aws_opportunity_summary_full_view.cosell_motion #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.software_revenue.value.amount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.software_revenue.value.currency_code #=> String, one of "USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"
+    #   resp.payload.aws_opportunity_summary_full_view.software_revenue.discount #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.software_revenue.effective_date #=> String
+    #   resp.payload.aws_opportunity_summary_full_view.software_revenue.expiration_date #=> String
     #   resp.target_member_accounts #=> Array
     #   resp.target_member_accounts[0] #=> String
     #
@@ -4598,7 +4609,7 @@ module Aws::PartnerCentralSelling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralselling'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

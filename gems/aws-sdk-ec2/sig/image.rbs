@@ -99,6 +99,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_watermarks-instance_method
       def image_watermarks: () -> ::Array[Types::ImageWatermark]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#instance_type_specification-instance_method
+      def instance_type_specification: () -> Types::InstanceTypeSpecification
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_location-instance_method
       def image_location: () -> ::String
 

@@ -35,8 +35,10 @@ module Aws::Support
   # * {CaseCreationLimitExceeded}
   # * {CaseIdNotFound}
   # * {DescribeAttachmentLimitExceeded}
+  # * {DryRunOperationException}
   # * {InternalServerError}
   # * {ThrottlingException}
+  # * {UploadIdNotFound}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -164,6 +166,21 @@ module Aws::Support
       end
     end
 
+    class DryRunOperationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Support::Types::DryRunOperationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InternalServerError < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -184,6 +201,26 @@ module Aws::Support
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Support::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def throttling_reasons
+        @data[:throttling_reasons]
+      end
+    end
+
+    class UploadIdNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Support::Types::UploadIdNotFound] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -144,6 +144,7 @@ module Aws::DataZone
     BatchPutAttributeOutput = Shapes::StructureShape.new(name: 'BatchPutAttributeOutput')
     BatchPutAttributesMetadataInput = Shapes::StructureShape.new(name: 'BatchPutAttributesMetadataInput')
     BatchPutAttributesMetadataOutput = Shapes::StructureShape.new(name: 'BatchPutAttributesMetadataOutput')
+    BlueprintCategory = Shapes::StringShape.new(name: 'BlueprintCategory')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BusinessNameGenerationConfiguration = Shapes::StructureShape.new(name: 'BusinessNameGenerationConfiguration')
     CancelMetadataGenerationRunInput = Shapes::StructureShape.new(name: 'CancelMetadataGenerationRunInput')
@@ -349,6 +350,7 @@ module Aws::DataZone
     DeleteListingOutput = Shapes::StructureShape.new(name: 'DeleteListingOutput')
     DeleteNotebookInput = Shapes::StructureShape.new(name: 'DeleteNotebookInput')
     DeleteNotebookOutput = Shapes::StructureShape.new(name: 'DeleteNotebookOutput')
+    DeleteProgress = Shapes::StructureShape.new(name: 'DeleteProgress')
     DeleteProjectInput = Shapes::StructureShape.new(name: 'DeleteProjectInput')
     DeleteProjectMembershipInput = Shapes::StructureShape.new(name: 'DeleteProjectMembershipInput')
     DeleteProjectMembershipOutput = Shapes::StructureShape.new(name: 'DeleteProjectMembershipOutput')
@@ -457,7 +459,9 @@ module Aws::DataZone
     ExternalIdentifier = Shapes::StringShape.new(name: 'ExternalIdentifier')
     FailedQueryProcessingErrorMessages = Shapes::ListShape.new(name: 'FailedQueryProcessingErrorMessages')
     FailureCause = Shapes::StructureShape.new(name: 'FailureCause')
+    FailureReason = Shapes::StructureShape.new(name: 'FailureReason')
     FailureReasons = Shapes::ListShape.new(name: 'FailureReasons')
+    FailureReasonsList = Shapes::ListShape.new(name: 'FailureReasonsList')
     FileFormat = Shapes::StringShape.new(name: 'FileFormat')
     FileName = Shapes::StringShape.new(name: 'FileName')
     Filter = Shapes::StructureShape.new(name: 'Filter')
@@ -863,6 +867,7 @@ module Aws::DataZone
     NotebookStatus = Shapes::StringShape.new(name: 'NotebookStatus')
     NotebookSummary = Shapes::StructureShape.new(name: 'NotebookSummary')
     NotebookSummaryList = Shapes::ListShape.new(name: 'NotebookSummaryList')
+    NotebookType = Shapes::StringShape.new(name: 'NotebookType')
     NotificationOutput = Shapes::StructureShape.new(name: 'NotificationOutput')
     NotificationResource = Shapes::StructureShape.new(name: 'NotificationResource')
     NotificationResourceType = Shapes::StringShape.new(name: 'NotificationResourceType')
@@ -2280,6 +2285,7 @@ module Aws::DataZone
     CreateEnvironmentBlueprintInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateEnvironmentBlueprintInput.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, required: true, location_name: "provisioningProperties"))
     CreateEnvironmentBlueprintInput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
+    CreateEnvironmentBlueprintInput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     CreateEnvironmentBlueprintInput.struct_class = Types::CreateEnvironmentBlueprintInput
 
     CreateEnvironmentBlueprintOutput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location_name: "id"))
@@ -2290,6 +2296,7 @@ module Aws::DataZone
     CreateEnvironmentBlueprintOutput.add_member(:deployment_properties, Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: "deploymentProperties"))
     CreateEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
     CreateEnvironmentBlueprintOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    CreateEnvironmentBlueprintOutput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     CreateEnvironmentBlueprintOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     CreateEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     CreateEnvironmentBlueprintOutput.struct_class = Types::CreateEnvironmentBlueprintOutput
@@ -2454,6 +2461,7 @@ module Aws::DataZone
     CreateNotebookInput.add_member(:owning_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectIdentifier"))
     CreateNotebookInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "name"))
     CreateNotebookInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateNotebookInput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "type"))
     CreateNotebookInput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     CreateNotebookInput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
     CreateNotebookInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -2465,6 +2473,7 @@ module Aws::DataZone
     CreateNotebookOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
     CreateNotebookOutput.add_member(:cell_order, Shapes::ShapeRef.new(shape: CellOrder, required: true, location_name: "cellOrder"))
     CreateNotebookOutput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, required: true, location_name: "status"))
+    CreateNotebookOutput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "type"))
     CreateNotebookOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateNotebookOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     CreateNotebookOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
@@ -2907,6 +2916,7 @@ module Aws::DataZone
     DeleteDomainInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "identifier"))
     DeleteDomainInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteDomainInput.add_member(:skip_deletion_check, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "skipDeletionCheck"))
+    DeleteDomainInput.add_member(:cascade_delete, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "cascadeDelete"))
     DeleteDomainInput.struct_class = Types::DeleteDomainInput
 
     DeleteDomainOutput.add_member(:status, Shapes::ShapeRef.new(shape: DomainStatus, required: true, location_name: "status"))
@@ -2979,6 +2989,9 @@ module Aws::DataZone
     DeleteNotebookInput.struct_class = Types::DeleteNotebookInput
 
     DeleteNotebookOutput.struct_class = Types::DeleteNotebookOutput
+
+    DeleteProgress.add_member(:successfully_deleted_project_count, Shapes::ShapeRef.new(shape: Integer, location_name: "successfullyDeletedProjectCount"))
+    DeleteProgress.struct_class = Types::DeleteProgress
 
     DeleteProjectInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     DeleteProjectInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location: "uri", location_name: "identifier"))
@@ -3184,6 +3197,7 @@ module Aws::DataZone
     EnvironmentBlueprintSummary.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, required: true, location_name: "provisioningProperties"))
     EnvironmentBlueprintSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     EnvironmentBlueprintSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    EnvironmentBlueprintSummary.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     EnvironmentBlueprintSummary.struct_class = Types::EnvironmentBlueprintSummary
 
     EnvironmentConfig.add_member(:image_version, Shapes::ShapeRef.new(shape: String, location_name: "imageVersion"))
@@ -3297,7 +3311,13 @@ module Aws::DataZone
     FailureCause.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     FailureCause.struct_class = Types::FailureCause
 
+    FailureReason.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    FailureReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    FailureReason.struct_class = Types::FailureReason
+
     FailureReasons.member = Shapes::ShapeRef.new(shape: ProjectDeletionError)
+
+    FailureReasonsList.member = Shapes::ShapeRef.new(shape: FailureReason)
 
     Filter.add_member(:attribute, Shapes::ShapeRef.new(shape: Attribute, required: true, location_name: "attribute"))
     Filter.add_member(:value, Shapes::ShapeRef.new(shape: FilterValueString, location_name: "value"))
@@ -3575,6 +3595,8 @@ module Aws::DataZone
     GetDomainOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetDomainOutput.add_member(:domain_version, Shapes::ShapeRef.new(shape: DomainVersion, location_name: "domainVersion"))
     GetDomainOutput.add_member(:service_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "serviceRole"))
+    GetDomainOutput.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasonsList, location_name: "failureReasons"))
+    GetDomainOutput.add_member(:delete_progress, Shapes::ShapeRef.new(shape: DeleteProgress, location_name: "deleteProgress"))
     GetDomainOutput.struct_class = Types::GetDomainOutput
 
     GetDomainUnitInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -3636,6 +3658,7 @@ module Aws::DataZone
     GetEnvironmentBlueprintOutput.add_member(:deployment_properties, Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: "deploymentProperties"))
     GetEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
     GetEnvironmentBlueprintOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    GetEnvironmentBlueprintOutput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     GetEnvironmentBlueprintOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     GetEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     GetEnvironmentBlueprintOutput.struct_class = Types::GetEnvironmentBlueprintOutput
@@ -3888,6 +3911,7 @@ module Aws::DataZone
     GetNotebookOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
     GetNotebookOutput.add_member(:cell_order, Shapes::ShapeRef.new(shape: CellOrder, required: true, location_name: "cellOrder"))
     GetNotebookOutput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, required: true, location_name: "status"))
+    GetNotebookOutput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "type"))
     GetNotebookOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     GetNotebookOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     GetNotebookOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
@@ -4298,6 +4322,7 @@ module Aws::DataZone
     HyperPodPropertiesOutput.struct_class = Types::HyperPodPropertiesOutput
 
     IamPropertiesInput.add_member(:glue_lineage_sync_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "glueLineageSyncEnabled"))
+    IamPropertiesInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     IamPropertiesInput.struct_class = Types::IamPropertiesInput
 
     IamPropertiesOutput.add_member(:environment_id, Shapes::ShapeRef.new(shape: String, location_name: "environmentId"))
@@ -4749,6 +4774,7 @@ module Aws::DataZone
     ListNotebooksInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
     ListNotebooksInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortKey, location: "querystring", location_name: "sortBy"))
     ListNotebooksInput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, location: "querystring", location_name: "status"))
+    ListNotebooksInput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location: "querystring", location_name: "type"))
     ListNotebooksInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListNotebooksInput.struct_class = Types::ListNotebooksInput
 
@@ -5121,6 +5147,7 @@ module Aws::DataZone
     NotebookSummary.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
     NotebookSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
     NotebookSummary.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, required: true, location_name: "status"))
+    NotebookSummary.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "type"))
     NotebookSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     NotebookSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     NotebookSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
@@ -6655,6 +6682,7 @@ module Aws::DataZone
     UpdateEnvironmentBlueprintInput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     UpdateEnvironmentBlueprintInput.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, location_name: "provisioningProperties"))
     UpdateEnvironmentBlueprintInput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
+    UpdateEnvironmentBlueprintInput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     UpdateEnvironmentBlueprintInput.struct_class = Types::UpdateEnvironmentBlueprintInput
 
     UpdateEnvironmentBlueprintOutput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location_name: "id"))
@@ -6665,6 +6693,7 @@ module Aws::DataZone
     UpdateEnvironmentBlueprintOutput.add_member(:deployment_properties, Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: "deploymentProperties"))
     UpdateEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
     UpdateEnvironmentBlueprintOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    UpdateEnvironmentBlueprintOutput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     UpdateEnvironmentBlueprintOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     UpdateEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     UpdateEnvironmentBlueprintOutput.struct_class = Types::UpdateEnvironmentBlueprintOutput
@@ -6784,6 +6813,7 @@ module Aws::DataZone
     UpdateNotebookInput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, location_name: "status"))
     UpdateNotebookInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, location_name: "name"))
     UpdateNotebookInput.add_member(:cell_order, Shapes::ShapeRef.new(shape: CellOrder, location_name: "cellOrder"))
+    UpdateNotebookInput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "type"))
     UpdateNotebookInput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     UpdateNotebookInput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
     UpdateNotebookInput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
@@ -6796,6 +6826,7 @@ module Aws::DataZone
     UpdateNotebookOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
     UpdateNotebookOutput.add_member(:cell_order, Shapes::ShapeRef.new(shape: CellOrder, required: true, location_name: "cellOrder"))
     UpdateNotebookOutput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, required: true, location_name: "status"))
+    UpdateNotebookOutput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "type"))
     UpdateNotebookOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateNotebookOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     UpdateNotebookOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))

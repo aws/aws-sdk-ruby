@@ -87,6 +87,27 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class ConditionalBehavior
+      attr_accessor rules: ::Array[Types::ConditionalRule]
+      attr_accessor default_behavior: ::String
+      SENSITIVE: []
+    end
+
+    class ConditionalRule
+      attr_accessor conditions: ::Array[Types::FieldCondition]
+      attr_accessor rule_behavior: ::String
+      attr_accessor conditional_validation: Types::ConditionalValidation
+      SENSITIVE: []
+    end
+
+    class ConditionalValidation
+      attr_accessor min_length: ::Integer
+      attr_accessor max_length: ::Integer
+      attr_accessor pattern: ::String
+      attr_accessor allowed_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ConfigurationSetFilter
       attr_accessor name: ("event-destination-name" | "matching-event-types" | "default-message-type" | "default-sender-id" | "default-message-feedback-enabled" | "protect-configuration-id")
       attr_accessor values: ::Array[::String]
@@ -1074,6 +1095,13 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class FieldCondition
+      attr_accessor depends_on_field_path: ::String
+      attr_accessor operator: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class GetProtectConfigurationCountryRuleSetRequest
       attr_accessor protect_configuration_id: ::String
       attr_accessor number_capability: ("SMS" | "VOICE" | "MMS" | "RCS")
@@ -1122,6 +1150,23 @@ module Aws::PinpointSMSVoiceV2
     class KinesisFirehoseDestination
       attr_accessor iam_role_arn: ::String
       attr_accessor delivery_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailablePhoneNumbersRequest
+      attr_accessor iso_country_code: ::String
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE" | "MMS" | "RCS")]
+      attr_accessor number_type: ("TEN_DLC")
+      attr_accessor registration_id: ::String
+      attr_accessor number_preference: ::Array[Types::NumberPreferenceItem]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAvailablePhoneNumbersResult
+      attr_accessor available_phone_numbers: ::Array[::String]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1200,6 +1245,12 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class MessagingLimits
+      attr_accessor rate_limits: ::Hash[::String, ::Integer]
+      attr_accessor daily_message_caps: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
     class NotifyConfigurationFilter
       attr_accessor name: ("display-name" | "enabled-countries" | "enabled-channels" | "default-template" | "default-pool" | "use-case" | "status" | "deletion-protection-enabled" | "tier-upgrade-status")
       attr_accessor values: ::Array[::String]
@@ -1253,6 +1304,12 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor variables: ::Hash[::String, Types::TemplateVariableMetadata]
       attr_accessor supported_voice_ids: ::Array[("AMY" | "ASTRID" | "BIANCA" | "BRIAN" | "CAMILA" | "CARLA" | "CARMEN" | "CELINE" | "CHANTAL" | "CONCHITA" | "CRISTIANO" | "DORA" | "EMMA" | "ENRIQUE" | "EWA" | "FILIZ" | "GERAINT" | "GIORGIO" | "GWYNETH" | "HANS" | "INES" | "IVY" | "JACEK" | "JAN" | "JOANNA" | "JOEY" | "JUSTIN" | "KARL" | "KENDRA" | "KIMBERLY" | "LEA" | "LIV" | "LOTTE" | "LUCIA" | "LUPE" | "MADS" | "MAJA" | "MARLENE" | "MATHIEU" | "MATTHEW" | "MAXIM" | "MIA" | "MIGUEL" | "MIZUKI" | "NAJA" | "NICOLE" | "PENELOPE" | "RAVEENA" | "RICARDO" | "RUBEN" | "RUSSELL" | "SALLI" | "SEOYEON" | "TAKUMI" | "TATYANA" | "VICKI" | "VITORIA" | "ZEINA" | "ZHIYU")]
       attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class NumberPreferenceItem
+      attr_accessor preference_type: ::Array[("StartsWith" | "EndsWith" | "Contains" | "ExactMatch")]
+      attr_accessor filter: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1310,6 +1367,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor deletion_protection_enabled: bool
       attr_accessor pool_id: ::String
       attr_accessor registration_id: ::String
+      attr_accessor messaging_limits: Types::MessagingLimits
       attr_accessor created_timestamp: ::Time
       SENSITIVE: []
     end
@@ -1497,6 +1555,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor two_way_media_s3_role: ::String
       attr_accessor two_way_rcs_events_enabled: ::Array[::String]
       attr_accessor testing_agent: Types::TestingAgentInformation
+      attr_accessor messaging_limits: Types::MessagingLimits
       SENSITIVE: []
     end
 
@@ -1709,6 +1768,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor select_validation: Types::SelectValidation
       attr_accessor text_validation: Types::TextValidation
       attr_accessor display_hints: Types::RegistrationFieldDisplayHints
+      attr_accessor conditional_behavior: Types::ConditionalBehavior
       SENSITIVE: []
     end
 
@@ -1869,6 +1929,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor opt_out_list_name: ::String
       attr_accessor pool_id: ::String
       attr_accessor registration_id: ::String
+      attr_accessor number_preference: ::Array[Types::NumberPreferenceItem]
       attr_accessor international_sending_enabled: bool
       attr_accessor deletion_protection_enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
@@ -2105,6 +2166,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor deletion_protection_enabled: bool
       attr_accessor registered: bool
       attr_accessor registration_id: ::String
+      attr_accessor messaging_limits: Types::MessagingLimits
       SENSITIVE: []
     end
 

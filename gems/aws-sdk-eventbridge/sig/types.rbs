@@ -514,6 +514,7 @@ module Aws::EventBridge
       attr_accessor log_config: Types::LogConfig
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor managed_by: ::String
       SENSITIVE: []
     end
 
@@ -643,6 +644,7 @@ module Aws::EventBridge
       attr_accessor policy: ::String
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor managed_by: ::String
       SENSITIVE: []
     end
 

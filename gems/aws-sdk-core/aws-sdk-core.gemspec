@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('bigdecimal')
   spec.add_dependency('jmespath', '~> 1', '>= 1.6.1') # necessary for secure jmespath JSON parsing
   spec.add_dependency('logger')
+  spec.add_dependency('rexml', '~> 3.4', '>= 3.4.2') # bundled gem since Ruby 3.0; floor clears all known CVEs
 
   spec.metadata = {
     'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-core',

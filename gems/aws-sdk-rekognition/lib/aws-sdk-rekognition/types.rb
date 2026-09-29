@@ -3196,6 +3196,28 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Describes a condition that was detected in the Face Liveness video and
+    # that contributed to the confidence score returned for the session.
+    #
+    # @!attribute [rw] code
+    #   A code identifying the condition that was detected during the Face
+    #   Liveness session.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable description of the detected condition, suitable for
+    #   displaying to an end user before they retry a Face Liveness check.
+    #   Use `Code` rather than this message for programmatic decisions,
+    #   because the message text can change.
+    #   @return [String]
+    #
+    class FeedbackItem < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The predicted gender of a detected face.
     #
     # Amazon Rekognition makes gender binary (male/female) predictions based
@@ -3680,13 +3702,28 @@ module Aws::Rekognition
     #   Liveness check.
     #   @return [Types::Challenge]
     #
+    # @!attribute [rw] feedback
+    #   A list of conditions that were detected in the Face Liveness video
+    #   and that contributed to the returned `Confidence` score. Each item
+    #   contains a code and a human-readable message. Feedback is returned
+    #   only for sessions with a `Status` of `SUCCEEDED`, and the list is
+    #   empty when no such conditions were detected.
+    #   @return [Array<Types::FeedbackItem>]
+    #
+    # @!attribute [rw] metadata
+    #   Metadata about the client that streamed the video for the Face
+    #   Liveness session.
+    #   @return [Types::SessionMetadata]
+    #
     class GetFaceLivenessSessionResultsResponse < Struct.new(
       :session_id,
       :status,
       :confidence,
       :reference_image,
       :audit_images,
-      :challenge)
+      :challenge,
+      :feedback,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6830,6 +6867,26 @@ module Aws::Rekognition
     # Amazon Rekognition Developer Guide.
     #
     class ServiceQuotaExceededException < Aws::EmptyStructure; end
+
+    # Contains metadata about the client that streamed the video for a Face
+    # Liveness session.
+    #
+    # @!attribute [rw] sdk_type
+    #   The type of SDK that was used to stream the video for the Face
+    #   Liveness session.
+    #
+    #   <note markdown="1"> This value is self-reported by the client that streamed the session,
+    #   and Amazon Rekognition doesn't verify it. Don't rely on it for
+    #   authentication, authorization, or any other security decision.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    class SessionMetadata < Struct.new(
+      :sdk_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Occurs when a given sessionId is not found.
     #

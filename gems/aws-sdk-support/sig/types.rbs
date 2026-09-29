@@ -11,6 +11,7 @@ module Aws::Support
     class AddAttachmentsToSetRequest
       attr_accessor attachment_set_id: ::String
       attr_accessor attachments: ::Array[Types::Attachment]
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -25,6 +26,8 @@ module Aws::Support
       attr_accessor communication_body: ::String
       attr_accessor cc_email_addresses: ::Array[::String]
       attr_accessor attachment_set_id: ::String
+      attr_accessor upload_ids: ::Array[::String]
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -107,6 +110,7 @@ module Aws::Support
       attr_accessor body: ::String
       attr_accessor submitted_by: ::String
       attr_accessor time_created: ::String
+      attr_accessor attachments: ::Array[Types::AttachmentDetails]
       attr_accessor attachment_set: ::Array[Types::AttachmentDetails]
       SENSITIVE: []
     end
@@ -115,6 +119,24 @@ module Aws::Support
       attr_accessor type: ::String
       attr_accessor supported_hours: ::Array[Types::SupportedHour]
       attr_accessor dates_without_support: ::Array[Types::DateInterval]
+      SENSITIVE: []
+    end
+
+    class CompleteAttachmentUploadRequest
+      attr_accessor upload_id: ::String
+      attr_accessor completed_uploads: ::Array[Types::CompletedUpload]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CompleteAttachmentUploadResponse
+      attr_accessor upload_status: ("attachment-ready" | "attachment-not-ready" | "failed")
+      SENSITIVE: []
+    end
+
+    class CompletedUpload
+      attr_accessor part_index: ::Integer
+      attr_accessor e_tag: ::String
       SENSITIVE: []
     end
 
@@ -128,6 +150,8 @@ module Aws::Support
       attr_accessor language: ::String
       attr_accessor issue_type: ::String
       attr_accessor attachment_set_id: ::String
+      attr_accessor upload_ids: ::Array[::String]
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -149,11 +173,25 @@ module Aws::Support
 
     class DescribeAttachmentRequest
       attr_accessor attachment_id: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
     class DescribeAttachmentResponse
       attr_accessor attachment: Types::Attachment
+      SENSITIVE: []
+    end
+
+    class DescribeAttachmentUploadStatusRequest
+      attr_accessor upload_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DescribeAttachmentUploadStatusResponse
+      attr_accessor upload_status: ("attachment-ready" | "attachment-not-ready" | "failed")
+      attr_accessor file_name: ::String
+      attr_accessor upload_progress: Types::UploadProgress
       SENSITIVE: []
     end
 
@@ -167,6 +205,7 @@ module Aws::Support
       attr_accessor max_results: ::Integer
       attr_accessor language: ::String
       attr_accessor include_communications: bool
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -182,6 +221,7 @@ module Aws::Support
       attr_accessor after_time: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -196,6 +236,7 @@ module Aws::Support
       attr_accessor service_code: ::String
       attr_accessor language: ::String
       attr_accessor category_code: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -208,6 +249,7 @@ module Aws::Support
     class DescribeServicesRequest
       attr_accessor service_code_list: ::Array[::String]
       attr_accessor language: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -218,6 +260,7 @@ module Aws::Support
 
     class DescribeSeverityLevelsRequest
       attr_accessor language: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -230,6 +273,7 @@ module Aws::Support
       attr_accessor issue_type: ::String
       attr_accessor service_code: ::String
       attr_accessor category_code: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -279,6 +323,47 @@ module Aws::Support
       SENSITIVE: []
     end
 
+    class DownloadUrl
+      attr_accessor url: ::String
+      attr_accessor expiry_date: ::String
+      SENSITIVE: []
+    end
+
+    class DryRunOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAttachmentDownloadLinkRequest
+      attr_accessor attachment_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetAttachmentDownloadLinkResponse
+      attr_accessor file_name: ::String
+      attr_accessor download_url: Types::DownloadUrl
+      SENSITIVE: []
+    end
+
+    class GetAttachmentUploadLinksRequest
+      attr_accessor file_name: ::String
+      attr_accessor file_size_bytes: ::Integer
+      attr_accessor upload_id: ::String
+      attr_accessor upload_range: Types::UploadRange
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetAttachmentUploadLinksResponse
+      attr_accessor upload_id: ::String
+      attr_accessor part_size_bytes: ::Integer
+      attr_accessor total_parts: ::Integer
+      attr_accessor next_index: ::Integer
+      attr_accessor upload_urls: ::Array[Types::UploadUrl]
+      SENSITIVE: []
+    end
+
     class InternalServerError
       attr_accessor message: ::String
       SENSITIVE: []
@@ -302,6 +387,7 @@ module Aws::Support
 
     class ResolveCaseRequest
       attr_accessor case_id: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -339,6 +425,13 @@ module Aws::Support
 
     class ThrottlingException
       attr_accessor message: ::String
+      attr_accessor throttling_reasons: ::Array[Types::ThrottlingReason]
+      SENSITIVE: []
+    end
+
+    class ThrottlingReason
+      attr_accessor reason: ::String
+      attr_accessor resource: ::String
       SENSITIVE: []
     end
 
@@ -403,6 +496,30 @@ module Aws::Support
       attr_accessor resources_flagged: ::Integer
       attr_accessor resources_ignored: ::Integer
       attr_accessor resources_suppressed: ::Integer
+      SENSITIVE: []
+    end
+
+    class UploadIdNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UploadProgress
+      attr_accessor total_parts: ::Integer
+      attr_accessor completed_parts_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class UploadRange
+      attr_accessor start_index: ::Integer
+      attr_accessor end_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class UploadUrl
+      attr_accessor url: ::String
+      attr_accessor part_index: ::Integer
+      attr_accessor expiry_date: ::String
       SENSITIVE: []
     end
   end

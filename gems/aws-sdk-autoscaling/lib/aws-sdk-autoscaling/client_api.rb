@@ -158,6 +158,8 @@ module Aws::AutoScaling
     DetachTrafficSourcesType = Shapes::StructureShape.new(name: 'DetachTrafficSourcesType')
     DisableMetricsCollectionQuery = Shapes::StructureShape.new(name: 'DisableMetricsCollectionQuery')
     DisableScaleIn = Shapes::BooleanShape.new(name: 'DisableScaleIn')
+    DistributionSegment = Shapes::StructureShape.new(name: 'DistributionSegment')
+    DistributionSegments = Shapes::ListShape.new(name: 'DistributionSegments')
     Ebs = Shapes::StructureShape.new(name: 'Ebs')
     EbsOptimized = Shapes::BooleanShape.new(name: 'EbsOptimized')
     EnableMetricsCollectionQuery = Shapes::StructureShape.new(name: 'EnableMetricsCollectionQuery')
@@ -402,6 +404,8 @@ module Aws::AutoScaling
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
     TagsType = Shapes::StructureShape.new(name: 'TagsType')
+    TargetCapacityType = Shapes::StringShape.new(name: 'TargetCapacityType')
+    TargetCapacityTypes = Shapes::ListShape.new(name: 'TargetCapacityTypes')
     TargetGroupARNs = Shapes::ListShape.new(name: 'TargetGroupARNs')
     TargetTrackingConfiguration = Shapes::StructureShape.new(name: 'TargetTrackingConfiguration')
     TargetTrackingMetricDataQueries = Shapes::ListShape.new(name: 'TargetTrackingMetricDataQueries')
@@ -948,6 +952,11 @@ module Aws::AutoScaling
     DisableMetricsCollectionQuery.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
     DisableMetricsCollectionQuery.struct_class = Types::DisableMetricsCollectionQuery
 
+    DistributionSegment.add_member(:target_capacity_types, Shapes::ShapeRef.new(shape: TargetCapacityTypes, location_name: "TargetCapacityTypes"))
+    DistributionSegment.struct_class = Types::DistributionSegment
+
+    DistributionSegments.member = Shapes::ShapeRef.new(shape: DistributionSegment)
+
     Ebs.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "SnapshotId"))
     Ebs.add_member(:volume_size, Shapes::ShapeRef.new(shape: BlockDeviceEbsVolumeSize, location_name: "VolumeSize"))
     Ebs.add_member(:volume_type, Shapes::ShapeRef.new(shape: BlockDeviceEbsVolumeType, location_name: "VolumeType"))
@@ -1136,6 +1145,7 @@ module Aws::AutoScaling
     InstancesDistribution.add_member(:spot_allocation_strategy, Shapes::ShapeRef.new(shape: XmlString, location_name: "SpotAllocationStrategy"))
     InstancesDistribution.add_member(:spot_instance_pools, Shapes::ShapeRef.new(shape: SpotInstancePools, location_name: "SpotInstancePools"))
     InstancesDistribution.add_member(:spot_max_price, Shapes::ShapeRef.new(shape: MixedInstanceSpotPrice, location_name: "SpotMaxPrice"))
+    InstancesDistribution.add_member(:distribution_segments, Shapes::ShapeRef.new(shape: DistributionSegments, location_name: "DistributionSegments"))
     InstancesDistribution.struct_class = Types::InstancesDistribution
 
     InvalidNextToken.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
@@ -1643,6 +1653,8 @@ module Aws::AutoScaling
     TagsType.add_member(:tags, Shapes::ShapeRef.new(shape: TagDescriptionList, location_name: "Tags"))
     TagsType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     TagsType.struct_class = Types::TagsType
+
+    TargetCapacityTypes.member = Shapes::ShapeRef.new(shape: TargetCapacityType)
 
     TargetGroupARNs.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen511)
 

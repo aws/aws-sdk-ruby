@@ -25,6 +25,16 @@ module Aws
       }?
     }
 
+      type protocol_details = {
+      passive_ip: ::String?,
+      tls_session_resumption_mode: ("DISABLED" | "ENABLED" | "ENFORCED")?,
+      set_stat_option: ("DEFAULT" | "ENABLE_NO_OP")?,
+      as_2_transports: Array[("HTTP")]?,
+      proxy_config: {
+        sftp_mode: ("NONE" | "PROXY_PROTOCOL_V2_ENFORCED")?
+      }?
+    }
+
       type workflow_details = {
       on_upload: Array[
         {

@@ -640,6 +640,11 @@ module Aws::PartnerCentralSelling
     #   `Partner-led`.
     #   @return [String]
     #
+    # @!attribute [rw] software_revenue
+    #   Seller-provided PARC deal terms: commitment value, discount, and
+    #   contract dates.
+    #   @return [Types::AwsSoftwareRevenue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsOpportunitySummaryFullView AWS API Documentation
     #
     class AwsOpportunitySummaryFullView < Struct.new(
@@ -654,7 +659,8 @@ module Aws::PartnerCentralSelling
       :related_entity_ids,
       :customer,
       :project,
-      :cosell_motion)
+      :cosell_motion,
+      :software_revenue)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -792,6 +798,37 @@ module Aws::PartnerCentralSelling
     class AwsProductsSpendInsightsBySource < Struct.new(
       :partner,
       :aws)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Seller-provided PARC deal terms for the opportunity, including
+    # commitment value, discount percentage, and contract dates.
+    #
+    # @!attribute [rw] value
+    #   Specifies payments details.
+    #   @return [Types::MonetaryValue]
+    #
+    # @!attribute [rw] discount
+    #   Discount percentage offered on the software revenue. Percent
+    #   convention: 15.00 means 15%.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_date
+    #   Contract effective (start) date in YYYY-MM-DD format.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_date
+    #   Contract expiration (end) date in YYYY-MM-DD format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsSoftwareRevenue AWS API Documentation
+    #
+    class AwsSoftwareRevenue < Struct.new(
+      :value,
+      :discount,
+      :effective_date,
+      :expiration_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2308,6 +2345,11 @@ module Aws::PartnerCentralSelling
     #   `Partner-led`.
     #   @return [String]
     #
+    # @!attribute [rw] software_revenue
+    #   Seller-provided PARC deal terms: commitment value, discount, and
+    #   contract dates.
+    #   @return [Types::AwsSoftwareRevenue]
+    #
     # @!attribute [rw] catalog
     #   Specifies the catalog in which the AWS Opportunity exists. This is
     #   the environment (e.g., `AWS` or `Sandbox`) where the opportunity is
@@ -2329,6 +2371,7 @@ module Aws::PartnerCentralSelling
       :customer,
       :project,
       :cosell_motion,
+      :software_revenue,
       :catalog)
       SENSITIVE = []
       include Aws::Structure

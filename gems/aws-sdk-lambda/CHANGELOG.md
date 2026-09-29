@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.196.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.195.0 (2026-09-09)
+------------------
+
+* Feature - Updates documentation for lambda function timeout.
+
+1.194.0 (2026-09-01)
+------------------
+
+* Feature - AWS Lambda now provides configurable control over S3 direct access, allowing you to explicitly enable or disable how functions stream file reads directly from S3 buckets. This gives you flexibility to tune data access behavior based on your workload requirements, independent of memory size.
+
+1.193.0 (2026-08-20)
+------------------
+
+* Feature - Adds support for full JSON resource-based policies, enabling customers to create, retrieve, update, and delete function resource policies as complete JSON documents.
+
 1.192.0 (2026-07-30)
 ------------------
 

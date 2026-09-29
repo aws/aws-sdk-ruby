@@ -374,6 +374,10 @@ module Aws::CloudWatch
     #       sliding_window: {
     #       },
     #     },
+    #     warm_up_configuration: {
+    #       warm_up_period_duration_in_minutes: 1, # required
+    #       only_start_evaluating_after_warm_up_period_ends: false,
+    #     },
     #     evaluation_criteria: {
     #       prom_ql_criteria: {
     #         query: "Query", # required
@@ -796,6 +800,18 @@ module Aws::CloudWatch
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html
+    # @option options [Types::WarmUpConfiguration] :warm_up_configuration
+    #   The warm-up configuration for the alarm. A warm-up period delays alarm
+    #   evaluation after you create or update the alarm. The warm-up period
+    #   reduces alarm noise from missing data while a new resource or service
+    #   starts publishing metrics.
+    #
+    #   For more information, see [Alarm warm-up periods][1] in the *Amazon
+    #   CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
     # @option options [Types::EvaluationCriteria] :evaluation_criteria
     #   The evaluation criteria for the alarm. For each `PutMetricAlarm`
     #   operation, you must specify either `MetricName`, a `Metrics` array, or

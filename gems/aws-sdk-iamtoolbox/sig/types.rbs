@@ -1,0 +1,79 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IAMToolbox
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AttachedTo
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Evaluation
+      attr_accessor action: ::String
+      attr_accessor resource: ::String
+      attr_accessor context: ::Hash[::String, untyped]
+      attr_accessor evaluated_effect: ("ALLOW" | "EXPLICIT_DENY" | "IMPLICIT_DENY")
+      attr_accessor matched_policies: ::Array[Types::MatchedPolicy]
+      SENSITIVE: []
+    end
+
+    class GetRequestAuthorizationDetailsInput
+      attr_accessor authorization_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRequestAuthorizationDetailsOutput
+      attr_accessor request_context: ::Hash[::String, untyped]
+      attr_accessor evaluations: ::Array[Types::Evaluation]
+      attr_accessor policies: ::Array[Types::PolicyInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MatchedPolicy
+      attr_accessor uri: ::String
+      attr_accessor matched_statements: ::Array[Types::MatchedStatement]
+      SENSITIVE: []
+    end
+
+    class MatchedStatement
+      attr_accessor sid: ::String
+      attr_accessor evaluated_effect: ("ALLOW" | "DENY")
+      SENSITIVE: []
+    end
+
+    class PolicyInfo
+      attr_accessor type: ("IDENTITY_BASED_POLICY" | "RESOURCE_BASED_POLICY" | "PERMISSIONS_BOUNDARY" | "SESSION_POLICY" | "SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "VPC_ENDPOINT_POLICY")
+      attr_accessor inline: bool
+      attr_accessor uri: ::String
+      attr_accessor attached_to: ::Array[Types::AttachedTo]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

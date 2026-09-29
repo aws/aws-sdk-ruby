@@ -5586,6 +5586,16 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The TLS encryption configuration for destinations that present a
+    # certificate from a publicly trusted certificate authority. This type
+    # does not require any additional settings.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PublicTlsEncryptionConfiguration AWS API Documentation
+    #
+    class PublicTlsEncryptionConfiguration < Aws::EmptyStructure; end
+
     # @!attribute [rw] offering_arn
     #   The Amazon Resource Name (ARN) of the offering.
     #   @return [String]
@@ -7069,6 +7079,15 @@ module Aws::MediaConnect
     #   minimum latency, and encryption key configuration.
     #   @return [Types::SrtListenerRouterOutputConfiguration]
     #
+    # @!attribute [rw] rtmp_push
+    #   The configuration settings for a router output that pushes a stream
+    #   to a destination using the RTMP (Real-Time Messaging Protocol)
+    #   protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified.
+    #   These settings include the destination address and port, the
+    #   application and stream names, and optional TLS encryption
+    #   configuration.
+    #   @return [Types::RtmpPushRouterOutputConfiguration]
+    #
     # @!attribute [rw] srt_caller
     #   The configuration settings for a router output using the SRT (Secure
     #   Reliable Transport) protocol in caller mode, including the
@@ -7087,6 +7106,7 @@ module Aws::MediaConnect
     class RouterOutputProtocolConfiguration < Struct.new(
       :rist,
       :srt_listener,
+      :rtmp_push,
       :srt_caller,
       :rtp,
       :unknown)
@@ -7096,6 +7116,7 @@ module Aws::MediaConnect
 
       class Rist < RouterOutputProtocolConfiguration; end
       class SrtListener < RouterOutputProtocolConfiguration; end
+      class RtmpPush < RouterOutputProtocolConfiguration; end
       class SrtCaller < RouterOutputProtocolConfiguration; end
       class Rtp < RouterOutputProtocolConfiguration; end
       class Unknown < RouterOutputProtocolConfiguration; end
@@ -7152,6 +7173,56 @@ module Aws::MediaConnect
       class MediaConnectFlow < RouterOutputStreamDetails; end
       class MediaLiveInput < RouterOutputStreamDetails; end
       class Unknown < RouterOutputStreamDetails; end
+    end
+
+    # The configuration settings for a router output that pushes a stream to
+    # a destination using the RTMP (Real-Time Messaging Protocol) protocol,
+    # or RTMPS (RTMP over TLS) when TLS encryption is specified. These
+    # settings include the destination address and port, the application and
+    # stream names, and optional TLS encryption configuration.
+    #
+    # @!attribute [rw] destination_address
+    #   The IP address or hostname of the destination RTMP server that the
+    #   router output pushes the stream to. Provide only the server address;
+    #   specify the application and stream names separately.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port
+    #   The TCP port on the destination RTMP server. For RTMP, valid values
+    #   range from `1024` to `65535`. For RTMPS (RTMP over TLS), valid
+    #   values are `443` or `1024` to `65535`. RTMP typically uses port
+    #   `1935`, and RTMPS typically uses port `443`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] application_name
+    #   The name of the RTMP application on the destination server. Together
+    #   with the stream name, the application name forms the RTMP URL path,
+    #   in the pattern
+    #   `rtmp://destinationAddress/applicationName/streamName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the RTMP stream that the output publishes to the
+    #   destination application. The stream name forms the final segment of
+    #   the RTMP URL path.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_encryption
+    #   The TLS encryption settings for the output. When you specify these
+    #   settings, the output uses RTMPS (RTMP over TLS) to establish a
+    #   secure, encrypted connection to the destination server.
+    #   @return [Types::TlsEncryption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtmpPushRouterOutputConfiguration AWS API Documentation
+    #
+    class RtmpPushRouterOutputConfiguration < Struct.new(
+      :destination_address,
+      :destination_port,
+      :application_name,
+      :stream_name,
+      :tls_encryption)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The configuration settings for a Router Input using the RTP (Real-Time
@@ -8206,6 +8277,50 @@ module Aws::MediaConnect
       :timestamp)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The Transport Layer Security (TLS) encryption settings used to
+    # establish a secure connection to a destination.
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of TLS encryption to use for the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The configuration settings for the specified TLS encryption type.
+    #   @return [Types::TlsEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TlsEncryption AWS API Documentation
+    #
+    class TlsEncryption < Struct.new(
+      :encryption_type,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for TLS encryption.
+    #
+    # @note TlsEncryptionConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TlsEncryptionConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TlsEncryptionConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] public
+    #   The TLS encryption configuration that validates the destination by
+    #   using a publicly trusted certificate authority.
+    #   @return [Types::PublicTlsEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TlsEncryptionConfiguration AWS API Documentation
+    #
+    class TlsEncryptionConfiguration < Struct.new(
+      :public,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Public < TlsEncryptionConfiguration; end
+      class Unknown < TlsEncryptionConfiguration; end
     end
 
     # The request was denied due to request throttling.

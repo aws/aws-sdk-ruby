@@ -342,15 +342,7 @@ module Aws
                             ?dry_run: bool,
                             ?linked_channel_settings: Params::linked_channel_settings,
                             ?channel_security_groups: Array[::String],
-                            ?inference_settings: {
-                              feed_arn: ::String?,
-                              audio_feed_inputs: Array[
-                                {
-                                  audio_selector_name: ::String?,
-                                  feed_input: ::String?
-                                }
-                              ]?
-                            }
+                            ?inference_settings: Params::inference_settings
                           ) -> _CreateChannelResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
 
@@ -1212,15 +1204,7 @@ module Aws
                             },
                             ?linked_channel_settings: Params::linked_channel_settings,
                             ?channel_security_groups: Array[::String],
-                            ?inference_settings: {
-                              feed_arn: ::String?,
-                              audio_feed_inputs: Array[
-                                {
-                                  audio_selector_name: ::String?,
-                                  feed_input: ::String?
-                                }
-                              ]?
-                            },
+                            ?inference_settings: Params::inference_settings,
                             ?special_router_settings: {
                               router_arn: ::String?
                             }

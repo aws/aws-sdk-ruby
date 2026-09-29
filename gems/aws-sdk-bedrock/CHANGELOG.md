@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2026-09-04)
+------------------
+
+* Feature - New AWS REVIEW mode as supported data retention mode for Bedrock models
+
+1.91.0 (2026-08-24)
+------------------
+
+* Feature - Adds support for specifying an inference profile ID or ARN, or an application inference profile ARN as the target model in CreateAdvancedPromptOptimizationJob.
+
 1.90.0 (2026-07-09)
 ------------------
 

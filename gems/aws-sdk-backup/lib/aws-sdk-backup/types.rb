@@ -429,7 +429,7 @@ module Aws::Backup
       include Aws::Structure
     end
 
-    # This is a summary of jobs created or running within the most recent 30
+    # This is a summary of jobs created or running within the most recent 14
     # days.
     #
     # The returned summary may contain the following: Region, Account,
@@ -1758,7 +1758,7 @@ module Aws::Backup
     end
 
     # This is a summary of copy jobs created or running within the most
-    # recent 30 days.
+    # recent 14 days.
     #
     # The returned summary may contain the following: Region, Account,
     # State, RestourceType, MessageCategory, StartTime, EndTime, and Count
@@ -9324,7 +9324,7 @@ module Aws::Backup
     end
 
     # This is a summary of restore jobs created or running within the most
-    # recent 30 days.
+    # recent 14 days.
     #
     # The returned summary may contain the following: Region, Account,
     # State, ResourceType, MessageCategory, StartTime, EndTime, and Count of
@@ -9860,7 +9860,9 @@ module Aws::Backup
     #   @return [Array<String>]
     #
     # @!attribute [rw] selection_window_days
-    #   Accepted values are integers from 1 to 365.
+    #   Accepted values are integers from 1 to 365. If not included, the
+    #   value defaults to 30. The selection window is calculated from the
+    #   actual job execution time, not the plan's scheduled start time.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RestoreTestingRecoveryPointSelection AWS API Documentation

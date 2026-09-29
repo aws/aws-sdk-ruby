@@ -940,11 +940,18 @@ module Aws::BedrockAgentCore
     #   The time range filter for selecting sessions to evaluate.
     #   @return [Types::SessionFilterConfig]
     #
+    # @!attribute [rw] session_trace_ids
+    #   A list of session and trace ID pairs that restrict evaluation to
+    #   specific traces within a session. If specified, only the listed
+    #   traces are evaluated instead of the entire session.
+    #   @return [Array<Types::SessionTraceIds>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CloudWatchFilterConfig AWS API Documentation
     #
     class CloudWatchFilterConfig < Struct.new(
       :session_ids,
-      :time_range)
+      :time_range,
+      :session_trace_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -997,7 +1004,14 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] log_group_names
     #   The list of CloudWatch log group names to read agent traces from.
-    #   Maximum of 5 log groups.
+    #   Maximum of 10 log groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] log_group_name_prefixes
+    #   The list of CloudWatch log group name prefixes to read agent traces
+    #   from. Specify this instead of `logGroupNames` to match log groups by
+    #   prefix. Maximum of 5 prefixes. Specify either `logGroupNames` or
+    #   `logGroupNamePrefixes`, not both. One of the two is required.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter_config
@@ -1010,6 +1024,7 @@ module Aws::BedrockAgentCore
     class CloudWatchLogsSource < Struct.new(
       :service_names,
       :log_group_names,
+      :log_group_name_prefixes,
       :filter_config)
       SENSITIVE = []
       include Aws::Structure
@@ -1055,7 +1070,11 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] log_group_name
     #   The name of the CloudWatch log group where evaluation results will
-    #   be written.
+    #   be written. This value doesn't apply when `resultDestination` is
+    #   `SOURCE_LOG_GROUP`, because results are written back to the trace
+    #   source log group. The name can't be under the service-reserved
+    #   `/aws/bedrock-agentcore/evaluations/` namespace, apart from the
+    #   service-managed default group.
     #   @return [String]
     #
     # @!attribute [rw] log_stream_name
@@ -1063,11 +1082,31 @@ module Aws::BedrockAgentCore
     #   be written.
     #   @return [String]
     #
+    # @!attribute [rw] metrics_namespace
+    #   The CloudWatch metrics namespace where evaluation result metrics are
+    #   published. If you omit this value, the service publishes metrics to
+    #   `Bedrock-AgentCore/Evaluations`. This value can't begin with
+    #   `AWS/`.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_destination
+    #   The destination where evaluation results are written. Valid values:
+    #
+    #   * `DEDICATED_LOG_GROUP` (default) – Writes results to a dedicated
+    #     result log group.
+    #
+    #   * `SOURCE_LOG_GROUP` – Writes results back to the log group that the
+    #     agent traces were read from. If you use this value, don't specify
+    #     `logGroupName`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CloudWatchOutputConfig AWS API Documentation
     #
     class CloudWatchOutputConfig < Struct.new(
       :log_group_name,
-      :log_stream_name)
+      :log_stream_name,
+      :metrics_namespace,
+      :result_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1416,6 +1455,27 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # The source of the content to ingest. Only inline content is supported.
+    #
+    # @note ContentSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] inline
+    #   The content included directly in the request.
+    #   @return [Types::InlineMemoryContent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ContentSource AWS API Documentation
+    #
+    class ContentSource < Struct.new(
+      :inline,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Inline < ContentSource; end
+      class Unknown < ContentSource; end
+    end
+
     # An event that signals the start of content streaming from a command
     # execution. This event is sent when the command begins producing
     # output.
@@ -1650,7 +1710,7 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] payload
     #   The content payload of the event. This can include conversational
-    #   data or binary content.
+    #   data, JSON data, or binary content.
     #   @return [Array<Types::PayloadType>]
     #
     # @!attribute [rw] branch
@@ -1679,6 +1739,12 @@ module Aws::BedrockAgentCore
     #   processed for extraction as usual.
     #   @return [String]
     #
+    # @!attribute [rw] extraction_config
+    #   The extraction configuration for long-term memory records. Use this
+    #   parameter to specify namespace variable keys and their values for
+    #   namespace substitution during extraction.
+    #   @return [Types::ExtractionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreateEventInput AWS API Documentation
     #
     class CreateEventInput < Struct.new(
@@ -1690,7 +1756,8 @@ module Aws::BedrockAgentCore
       :branch,
       :client_token,
       :metadata,
-      :extraction_mode)
+      :extraction_mode,
+      :extraction_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2084,11 +2151,17 @@ module Aws::BedrockAgentCore
     #   The identifier of the memory record to delete.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The namespace of the memory record to delete. This value is used for
+    #   IAM condition key authorization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeleteMemoryRecordInput AWS API Documentation
     #
     class DeleteMemoryRecordInput < Struct.new(
       :memory_id,
-      :memory_record_id)
+      :memory_record_id,
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2957,6 +3030,24 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # The configuration for extraction behavior. Use this structure to
+    # specify namespace variable keys and their values for namespace
+    # substitution during long-term memory extraction.
+    #
+    # @!attribute [rw] namespace_variables
+    #   A map of `namespaceKeys` to their values. The service substitutes
+    #   these values into `namespaceTemplates` during long-term memory
+    #   extraction to control namespace hierarchy.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ExtractionConfig AWS API Documentation
+    #
+    class ExtractionConfig < Struct.new(
+      :namespace_variables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the metadata of a memory extraction job such as the message
     # identifiers that compose this job.
     #
@@ -3760,11 +3851,17 @@ module Aws::BedrockAgentCore
     #   The identifier of the memory record to retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The namespace of the memory record to retrieve. This value is used
+    #   for IAM condition key authorization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetMemoryRecordInput AWS API Documentation
     #
     class GetMemoryRecordInput < Struct.new(
       :memory_id,
-      :memory_record_id)
+      :memory_record_id,
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4671,6 +4768,43 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # A lifecycle hook event emitted in the invocation stream for visibility
+    # into hook decisions.
+    #
+    # @!attribute [rw] hook_event_id
+    #   The unique identifier for this hook event.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the hook that ran.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle hook event.
+    #   @return [String]
+    #
+    # @!attribute [rw] decision
+    #   The decision applied to the hook event. This field is present only
+    #   for blocking Lambda targets.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The optional reason for the applied decision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/HarnessHookEvent AWS API Documentation
+    #
+    class HarnessHookEvent < Struct.new(
+      :hook_event_id,
+      :name,
+      :type,
+      :decision,
+      :reason,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for an inline function tool. When the agent calls this
     # tool, the tool call is returned to the caller for external execution.
     #
@@ -4859,6 +4993,10 @@ module Aws::BedrockAgentCore
     #   The ARN of your OpenAI API key on AgentCore Identity.
     #   @return [String]
     #
+    # @!attribute [rw] api_base
+    #   Optional custom endpoint URL for an OpenAI-compatible endpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] max_tokens
     #   The maximum number of tokens to allow in the generated response per
     #   iteration.
@@ -4886,12 +5024,13 @@ module Aws::BedrockAgentCore
     class HarnessOpenAiModelConfig < Struct.new(
       :model_id,
       :api_key_arn,
+      :api_base,
       :max_tokens,
       :temperature,
       :top_p,
       :api_format,
       :additional_params)
-      SENSITIVE = []
+      SENSITIVE = [:api_base]
       include Aws::Structure
     end
 
@@ -5439,6 +5578,109 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] memory_id
+    #   The identifier of the AgentCore Memory resource to ingest content
+    #   into.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The content to ingest. Only inline content is supported.
+    #   @return [Types::ContentSource]
+    #
+    # @!attribute [rw] content_timestamp
+    #   The timestamp of when the content occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] actor_id
+    #   The identifier of the actor associated with this content. An actor
+    #   represents an entity that participates in sessions and generates
+    #   content.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The identifier of the session that the content belongs to. If not
+    #   provided, a session identifier is generated and returned in the
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] extraction_config
+    #   The extraction configuration for long-term memory records. Use this
+    #   parameter to specify namespace variable keys and their values for
+    #   namespace substitution during extraction.
+    #   @return [Types::ExtractionConfig]
+    #
+    # @!attribute [rw] metadata
+    #   The key-value metadata to attach to the content.
+    #   @return [Hash<String,Types::MetadataValue>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, AgentCore ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/IngestDataInput AWS API Documentation
+    #
+    class IngestDataInput < Struct.new(
+      :memory_id,
+      :source,
+      :content_timestamp,
+      :actor_id,
+      :session_id,
+      :extraction_config,
+      :metadata,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_id
+    #   The identifier of the session that the service ingested the content
+    #   into. This value echoes the session identifier from the request, or
+    #   the identifier that the service generated when you did not provide
+    #   one.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/IngestDataOutput AWS API Documentation
+    #
+    class IngestDataOutput < Struct.new(
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single content payload item to ingest. A payload item contains
+    # either conversational or JSON content.
+    #
+    # @note IngestPayloadType is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] conversational
+    #   The conversational content for this payload item.
+    #   @return [Types::Conversational]
+    #
+    # @!attribute [rw] json
+    #   The JSON content for this payload item.
+    #   @return [Types::MemoryJsonData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/IngestPayloadType AWS API Documentation
+    #
+    class IngestPayloadType < Struct.new(
+      :conversational,
+      :json,
+      :unknown)
+      SENSITIVE = [:json]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Conversational < IngestPayloadType; end
+      class Json < IngestPayloadType; end
+      class Unknown < IngestPayloadType; end
+    end
+
     # Inline ground truth data containing assertions, expected trajectories,
     # and per-turn expected responses.
     #
@@ -5462,6 +5704,21 @@ module Aws::BedrockAgentCore
       :assertions,
       :expected_trajectory,
       :turns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The content included directly in the request as one or more payload
+    # items.
+    #
+    # @!attribute [rw] payload
+    #   The list of content payload items to ingest.
+    #   @return [Array<Types::IngestPayloadType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InlineMemoryContent AWS API Documentation
+    #
+    class InlineMemoryContent < Struct.new(
+      :payload)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7109,6 +7366,23 @@ module Aws::BedrockAgentCore
       class Unknown < MemoryContent; end
     end
 
+    # Contains non-conversational, JSON-formatted content for an event
+    # payload. JSON payloads are extracted into long-term memory.
+    #
+    # @!attribute [rw] content
+    #   The JSON content of the payload. Accepts any JSON value, including
+    #   objects, arrays, strings, numbers, booleans, and null. The maximum
+    #   size is 100 KB.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryJsonData AWS API Documentation
+    #
+    class MemoryJsonData < Struct.new(
+      :content)
+      SENSITIVE = [:content]
+      include Aws::Structure
+    end
+
     # Filters to apply to metadata associated with a memory. Specify the
     # metadata key and value in the `left` and `right` fields and use the
     # `operator` field to define the relationship to match.
@@ -7226,10 +7500,16 @@ module Aws::BedrockAgentCore
     #   The unique ID of the memory record to be deleted.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The namespace of the memory record being deleted. This value is used
+    #   for IAM condition key authorization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecordDeleteInput AWS API Documentation
     #
     class MemoryRecordDeleteInput < Struct.new(
-      :memory_record_id)
+      :memory_record_id,
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7419,6 +7699,11 @@ module Aws::BedrockAgentCore
     #   memory record.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] source_namespaces
+    #   The namespaces of the source memory record being updated. This value
+    #   is used for IAM condition key authorization.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] memory_strategy_id
     #   The updated ID of the memory strategy that defines how this memory
     #   record is grouped.
@@ -7435,6 +7720,7 @@ module Aws::BedrockAgentCore
       :timestamp,
       :content,
       :namespaces,
+      :source_namespaces,
       :memory_strategy_id,
       :metadata)
       SENSITIVE = []
@@ -7861,6 +8147,8 @@ module Aws::BedrockAgentCore
 
     # Output destination configuration.
     #
+    # @note OutputConfig is a union - when making an API calls you must set exactly one of the members.
+    #
     # @note OutputConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OutputConfig corresponding to the set member.
     #
     # @!attribute [rw] cloud_watch_config
@@ -7894,18 +8182,26 @@ module Aws::BedrockAgentCore
     #   The binary content of the payload.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] json
+    #   The JSON content of the payload. Use this type to store
+    #   non-conversational, JSON-formatted data, such as behavioral events,
+    #   activity logs, or system events.
+    #   @return [Types::MemoryJsonData]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PayloadType AWS API Documentation
     #
     class PayloadType < Struct.new(
       :conversational,
       :blob,
+      :json,
       :unknown)
-      SENSITIVE = [:blob]
+      SENSITIVE = [:blob, :json]
       include Aws::Structure
       include Aws::Structure::Union
 
       class Conversational < PayloadType; end
       class Blob < PayloadType; end
+      class Json < PayloadType; end
       class Unknown < PayloadType; end
     end
 
@@ -9368,6 +9664,28 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # A pairing of a session with the specific trace IDs to evaluate within
+    # that session. Use this to evaluate individual traces rather than an
+    # entire session.
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session that contains the traces to
+    #   evaluate.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_ids
+    #   The list of trace IDs within the session to evaluate.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SessionTraceIds AWS API Documentation
+    #
+    class SessionTraceIds < Struct.new(
+      :session_id,
+      :trace_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The structured skill definition with a schema version and inline
     # content.
     #
@@ -9485,6 +9803,10 @@ module Aws::BedrockAgentCore
     #   The description of the batch evaluation.
     #   @return [String]
     #
+    # @!attribute [rw] output_config
+    #   Output destination configuration.
+    #   @return [Types::OutputConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartBatchEvaluationRequest AWS API Documentation
     #
     class StartBatchEvaluationRequest < Struct.new(
@@ -9496,7 +9818,8 @@ module Aws::BedrockAgentCore
       :evaluation_metadata,
       :tags,
       :kms_key_arn,
-      :description)
+      :description,
+      :output_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11350,7 +11673,8 @@ module Aws::BedrockAgentCore
           :metadata,
           :internal_server_exception,
           :validation_exception,
-          :runtime_client_error
+          :runtime_client_error,
+          :hook_event
         ]
       end
 

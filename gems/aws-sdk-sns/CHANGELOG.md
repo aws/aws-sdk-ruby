@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2026-09-17)
+------------------
+
+* Feature - SNS API reference documentation update
+
+1.120.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.119.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.118.0 (2026-07-09)
 ------------------
 

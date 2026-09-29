@@ -123,7 +123,7 @@ module Aws
         def agent_runtime_id: () -> ::String
         def agent_runtime_version: () -> ::String
         def created_at: () -> ::Time
-        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_agent_runtime-instance_method
       def create_agent_runtime: (
@@ -151,7 +151,8 @@ module Aws
                                   ?capacity_provider_configuration: {
                                     capacity_provider_arn: ::String
                                   },
-                                  ?tags: Hash[::String, ::String]
+                                  ?tags: Hash[::String, ::String],
+                                  ?platform_version: ::String
                                 ) -> _CreateAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentRuntimeResponseSuccess
 
@@ -162,7 +163,7 @@ module Aws
         def agent_runtime_arn: () -> ::String
         def agent_runtime_id: () -> ::String
         def endpoint_name: () -> ::String
-        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
         def created_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_agent_runtime_endpoint-instance_method
@@ -431,6 +432,41 @@ module Aws
                                        ) -> _CreateConfigurationBundleResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationBundleResponseSuccess
 
+      interface _CreateConsentPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConsentPortalResponse]
+        def sources: () -> ::Array[Types::ConsentPortalSource]
+        def consent_portal_arn: () -> ::String
+        def consent_portal_id: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def idp_config: () -> Types::ConsentPortalIdpConfig
+        def name: () -> ::String
+        def portal_url: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "FAILED")
+        def status_reason: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_consent_portal-instance_method
+      def create_consent_portal: (
+                                   execution_role_arn: ::String,
+                                   idp_config: {
+                                     credential_provider_arn: ::String,
+                                     scopes: Array[::String],
+                                     audience: ::String?
+                                   },
+                                   name: ::String,
+                                   sources: Array[
+                                     {
+                                       identifier: ::String,
+                                       type: ("agentcore-gateway")
+                                     }
+                                   ],
+                                   ?description: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateConsentPortalResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConsentPortalResponseSuccess
+
       interface _CreateDatasetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
         def dataset_arn: () -> ::String
@@ -444,7 +480,7 @@ module Aws
                             dataset_name: ::String,
                             ?description: ::String,
                             source: Params::data_source_type,
-                            schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "GENERIC_EVALUATION_PREDEFINED_V1"),
+                            schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "THIRD_PARTY_EVALUATION_V1"),
                             ?kms_key_arn: ::String,
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateDatasetResponseSuccess
@@ -653,6 +689,9 @@ module Aws
                             ?allowed_tools: Array[::String],
                             ?memory: Params::harness_memory_configuration,
                             ?truncation: Params::harness_truncation_configuration,
+                            ?hooks: Array[
+                              Params::harness_hook
+                            ],
                             ?max_iterations: ::Integer,
                             ?max_tokens: ::Integer,
                             ?timeout_seconds: ::Integer,
@@ -694,6 +733,15 @@ module Aws
                              {
                                key: ::String,
                                type: ("STRING" | "STRINGLIST" | "NUMBER")
+                             }
+                           ],
+                           ?namespace_keys: Array[
+                             {
+                               key: ::String,
+                               validation: {
+                                 allowed_values: Array[::String]?,
+                                 regex_pattern: ::String?
+                               }?
                              }
                            ],
                            ?stream_delivery_resources: Params::stream_delivery_resources,
@@ -739,7 +787,8 @@ module Aws
                                              rule: Params::rule,
                                              data_source_config: {
                                                cloud_watch_logs: {
-                                                 log_group_names: Array[::String],
+                                                 log_group_names: Array[::String]?,
+                                                 log_group_name_prefixes: Array[::String]?,
                                                  service_names: Array[::String]
                                                }?
                                              },
@@ -755,6 +804,13 @@ module Aws
                                              ],
                                              ?clustering_config: {
                                                frequencies: Array[("DAILY" | "WEEKLY" | "MONTHLY")]
+                                             },
+                                             ?output_config: {
+                                               cloud_watch_config: {
+                                                 log_group_name: ::String?,
+                                                 metrics_namespace: ::String?,
+                                                 result_destination: ("DEDICATED_LOG_GROUP" | "SOURCE_LOG_GROUP")?
+                                               }
                                              },
                                              evaluation_execution_role_arn: ::String,
                                              enable_on_create: bool,
@@ -959,7 +1015,7 @@ module Aws
 
       interface _DeleteAgentRuntimeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentRuntimeResponse]
-        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
         def agent_runtime_id: () -> ::String
         def agent_runtime_version: () -> ::String
       end
@@ -973,7 +1029,7 @@ module Aws
 
       interface _DeleteAgentRuntimeEndpointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentRuntimeEndpointResponse]
-        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
         def agent_runtime_id: () -> ::String
         def endpoint_name: () -> ::String
       end
@@ -1057,6 +1113,15 @@ module Aws
                                          bundle_id: ::String
                                        ) -> _DeleteConfigurationBundleResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationBundleResponseSuccess
+
+      interface _DeleteConsentPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConsentPortalResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_consent_portal-instance_method
+      def delete_consent_portal: (
+                                   consent_portal_identifier: ::String
+                                 ) -> _DeleteConsentPortalResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConsentPortalResponseSuccess
 
       interface _DeleteDatasetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDatasetResponse]
@@ -1329,7 +1394,7 @@ module Aws
         def last_updated_at: () -> ::Time
         def role_arn: () -> ::String
         def network_configuration: () -> Types::NetworkConfiguration
-        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
         def lifecycle_configuration: () -> Types::LifecycleConfiguration
         def failure_reason: () -> ::String
         def description: () -> ::String
@@ -1342,6 +1407,7 @@ module Aws
         def metadata_configuration: () -> Types::RuntimeMetadataConfiguration
         def filesystem_configurations: () -> ::Array[Types::FilesystemConfiguration]
         def capacity_provider_configuration: () -> Types::CapacityProviderConfiguration
+        def platform_version: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_agent_runtime-instance_method
       def get_agent_runtime: (
@@ -1357,7 +1423,7 @@ module Aws
         def agent_runtime_endpoint_arn: () -> ::String
         def agent_runtime_arn: () -> ::String
         def description: () -> ::String
-        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
         def failure_reason: () -> ::String
@@ -1511,6 +1577,27 @@ module Aws
                                             ) -> _GetConfigurationBundleVersionResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationBundleVersionResponseSuccess
 
+      interface _GetConsentPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConsentPortalResponse]
+        def sources: () -> ::Array[Types::ConsentPortalSource]
+        def consent_portal_arn: () -> ::String
+        def consent_portal_id: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def idp_config: () -> Types::ConsentPortalIdpConfig
+        def name: () -> ::String
+        def portal_url: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "FAILED")
+        def status_reason: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_consent_portal-instance_method
+      def get_consent_portal: (
+                                consent_portal_identifier: ::String
+                              ) -> _GetConsentPortalResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConsentPortalResponseSuccess
+
       interface _GetDatasetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDatasetResponse]
         def dataset_arn: () -> ::String
@@ -1521,7 +1608,7 @@ module Aws
         def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
         def draft_status: () -> ("MODIFIED" | "UNMODIFIED")
         def failure_reason: () -> ::String
-        def schema_type: () -> ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "GENERIC_EVALUATION_PREDEFINED_V1")
+        def schema_type: () -> ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "THIRD_PARTY_EVALUATION_V1")
         def kms_key_arn: () -> ::String
         def example_count: () -> ::Integer
         def download_url: () -> ::String
@@ -1740,11 +1827,13 @@ module Aws
         def name: () -> ::String
         def description: () -> ::String
         def type: () -> ("CoinbaseCDP" | "StripePrivy")
+        def provision_mode: () -> ("MANUAL" | "QUICK_CREATE")
         def credential_provider_configurations: () -> ::Array[Types::CredentialsProviderConfiguration]
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
         def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
         def authorization_url: () -> ::String
+        def credentials_updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_payment_connector-instance_method
       def get_payment_connector: (
@@ -2127,6 +2216,18 @@ module Aws
                                       ) -> _ListConfigurationBundlesResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationBundlesResponseSuccess
 
+      interface _ListConsentPortalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConsentPortalsResponse]
+        def consent_portals: () -> ::Array[Types::ConsentPortalSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_consent_portals-instance_method
+      def list_consent_portals: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListConsentPortalsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConsentPortalsResponseSuccess
+
       interface _ListDatasetExamplesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetExamplesResponse]
         def dataset_arn: () -> ::String
@@ -2498,6 +2599,26 @@ module Aws
                                ) -> _PutResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
 
+      interface _RotatePaymentConnectorCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RotatePaymentConnectorCredentialsResponse]
+        def payment_connector_id: () -> ::String
+        def payment_manager_id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#rotate_payment_connector_credentials-instance_method
+      def rotate_payment_connector_credentials: (
+                                                  payment_manager_id: ::String,
+                                                  payment_connector_id: ::String,
+                                                  credentials_to_rotate: {
+                                                    coinbase_cdp: {
+                                                      secrets: Array[("API_KEY" | "WALLET_SECRET")]
+                                                    }?
+                                                  },
+                                                  ?client_token: ::String
+                                                ) -> _RotatePaymentConnectorCredentialsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RotatePaymentConnectorCredentialsResponseSuccess
+
       interface _SetTokenVaultCMKResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetTokenVaultCMKResponse]
         def token_vault_id: () -> ::String
@@ -2595,7 +2716,7 @@ module Aws
         def agent_runtime_version: () -> ::String
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
-        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_agent_runtime-instance_method
       def update_agent_runtime: (
@@ -2625,6 +2746,7 @@ module Aws
                                   ?capacity_provider_configuration: {
                                     capacity_provider_arn: ::String
                                   },
+                                  ?platform_version: ::String,
                                   ?client_token: ::String
                                 ) -> _UpdateAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentRuntimeResponseSuccess
@@ -2635,7 +2757,7 @@ module Aws
         def target_version: () -> ::String
         def agent_runtime_endpoint_arn: () -> ::String
         def agent_runtime_arn: () -> ::String
-        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
       end
@@ -2707,7 +2829,7 @@ module Aws
                                              configuration: {
                                              }
                                            }],
-                                         ?parent_version_ids: Array[::String],
+                                         parent_version_ids: Array[::String],
                                          ?branch_name: ::String,
                                          ?commit_message: ::String,
                                          ?created_by: {
@@ -2717,6 +2839,34 @@ module Aws
                                          ?kms_key_arn: ::String
                                        ) -> _UpdateConfigurationBundleResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationBundleResponseSuccess
+
+      interface _UpdateConsentPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConsentPortalResponse]
+        def sources: () -> ::Array[Types::ConsentPortalSource]
+        def consent_portal_arn: () -> ::String
+        def consent_portal_id: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def idp_config: () -> Types::ConsentPortalIdpConfig
+        def name: () -> ::String
+        def portal_url: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "FAILED")
+        def status_reason: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_consent_portal-instance_method
+      def update_consent_portal: (
+                                   consent_portal_identifier: ::String,
+                                   ?execution_role_arn: ::String,
+                                   ?idp_config: {
+                                     credential_provider_arn: ::String,
+                                     scopes: Array[::String],
+                                     audience: ::String?
+                                   },
+                                   ?description: ::String
+                                 ) -> _UpdateConsentPortalResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConsentPortalResponseSuccess
 
       interface _UpdateDatasetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDatasetResponse]
@@ -2948,6 +3098,9 @@ module Aws
                               optional_value: Params::harness_memory_configuration?
                             },
                             ?truncation: Params::harness_truncation_configuration,
+                            ?hooks: Array[
+                              Params::harness_hook
+                            ],
                             ?max_iterations: ::Integer,
                             ?max_tokens: ::Integer,
                             ?timeout_seconds: ::Integer
@@ -3058,6 +3211,15 @@ module Aws
                                type: ("STRING" | "STRINGLIST" | "NUMBER")
                              }
                            ],
+                           ?namespace_keys: Array[
+                             {
+                               key: ::String,
+                               validation: {
+                                 allowed_values: Array[::String]?,
+                                 regex_pattern: ::String?
+                               }?
+                             }
+                           ],
                            ?stream_delivery_resources: Params::stream_delivery_resources
                          ) -> _UpdateMemoryResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMemoryResponseSuccess
@@ -3101,7 +3263,8 @@ module Aws
                                              ?rule: Params::rule,
                                              ?data_source_config: {
                                                cloud_watch_logs: {
-                                                 log_group_names: Array[::String],
+                                                 log_group_names: Array[::String]?,
+                                                 log_group_name_prefixes: Array[::String]?,
                                                  service_names: Array[::String]
                                                }?
                                              },
@@ -3117,6 +3280,13 @@ module Aws
                                              ],
                                              ?clustering_config: {
                                                frequencies: Array[("DAILY" | "WEEKLY" | "MONTHLY")]
+                                             },
+                                             ?output_config: {
+                                               cloud_watch_config: {
+                                                 log_group_name: ::String?,
+                                                 metrics_namespace: ::String?,
+                                                 result_destination: ("DEDICATED_LOG_GROUP" | "SOURCE_LOG_GROUP")?
+                                               }
                                              },
                                              ?evaluation_execution_role_arn: ::String,
                                              ?execution_status: ("ENABLED" | "DISABLED")

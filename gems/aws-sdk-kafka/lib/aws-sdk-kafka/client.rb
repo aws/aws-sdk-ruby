@@ -1129,6 +1129,25 @@ module Aws::Kafka
     #           mtls: {
     #             secret_arn: "__string", # required
     #           },
+    #           sasl_o_auth_bearer: {
+    #             token_endpoint_url: "__string", # required
+    #             client_credentials: {
+    #               token_request_secret_arn: "__string", # required
+    #             },
+    #             iam_jwt_bearer: {
+    #               audience: "__string", # required
+    #               signing_algorithm: "RS256", # required, accepts RS256, ES384
+    #               token_request_secret_arn: "__string",
+    #             },
+    #             client_credentials_assertion: {
+    #               audience: "__string", # required
+    #               signing_algorithm: "RS256", # required, accepts RS256, ES384
+    #               token_request_secret_arn: "__string",
+    #             },
+    #             token_endpoint_authentication_method: "POST", # required, accepts POST, BASIC, NONE
+    #             scope: "__string",
+    #             token_endpoint_tls_certificate_arn: "__string",
+    #           },
     #         },
     #         encryption_in_transit: {
     #           encryption_type: "TLS", # required, accepts TLS
@@ -2195,6 +2214,17 @@ module Aws::Kafka
     #   resp.kafka_clusters[0].client_authentication.sasl_scram.mechanism #=> String, one of "SHA256", "SHA512"
     #   resp.kafka_clusters[0].client_authentication.sasl_scram.secret_arn #=> String
     #   resp.kafka_clusters[0].client_authentication.mtls.secret_arn #=> String
+    #   resp.kafka_clusters[0].client_authentication.sasl_o_auth_bearer.token_endpoint_url #=> String
+    #   resp.kafka_clusters[0].client_authentication.sasl_o_auth_bearer.client_credentials.token_request_secret_arn #=> String
+    #   resp.kafka_clusters[0].client_authentication.sasl_o_auth_bearer.iam_jwt_bearer.audience #=> String
+    #   resp.kafka_clusters[0].client_authentication.sasl_o_auth_bearer.iam_jwt_bearer.signing_algorithm #=> String, one of "RS256", "ES384"
+    #   resp.kafka_clusters[0].client_authentication.sasl_o_auth_bearer.iam_jwt_bearer.token_request_secret_arn #=> String
+    #   resp.kafka_clusters[0].client_authentication.sasl_o_auth_bearer.client_credentials_assertion.audience #=> String
+    #   resp.kafka_clusters[0].client_authentication.sasl_o_auth_bearer.client_credentials_assertion.signing_algorithm #=> String, one of "RS256", "ES384"
+    #   resp.kafka_clusters[0].client_authentication.sasl_o_auth_bearer.client_credentials_assertion.token_request_secret_arn #=> String
+    #   resp.kafka_clusters[0].client_authentication.sasl_o_auth_bearer.token_endpoint_authentication_method #=> String, one of "POST", "BASIC", "NONE"
+    #   resp.kafka_clusters[0].client_authentication.sasl_o_auth_bearer.scope #=> String
+    #   resp.kafka_clusters[0].client_authentication.sasl_o_auth_bearer.token_endpoint_tls_certificate_arn #=> String
     #   resp.kafka_clusters[0].encryption_in_transit.encryption_type #=> String, one of "TLS"
     #   resp.kafka_clusters[0].encryption_in_transit.root_ca_certificate #=> String
     #   resp.log_delivery.replicator_log_delivery.cloud_watch_logs.enabled #=> Boolean
@@ -4346,7 +4376,7 @@ module Aws::Kafka
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

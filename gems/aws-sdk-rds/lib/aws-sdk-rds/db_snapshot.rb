@@ -337,6 +337,16 @@ module Aws::RDS
       data[:snapshot_availability_zone]
     end
 
+    # The full size of the DB snapshot, in bytes.
+    #
+    # This is not the incremental size of the snapshot. This is the full
+    # snapshot size and represents the size of all the blocks that were
+    # written to the source volume at the time the snapshot was created.
+    # @return [Integer]
+    def full_snapshot_size_in_bytes
+      data[:full_snapshot_size_in_bytes]
+    end
+
     # @!endgroup
 
     # @return [Client]

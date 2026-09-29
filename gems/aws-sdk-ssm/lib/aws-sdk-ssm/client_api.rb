@@ -291,6 +291,7 @@ module Aws::SSM
     DeleteResourceDataSyncResult = Shapes::StructureShape.new(name: 'DeleteResourceDataSyncResult')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
+    DeletionMode = Shapes::StringShape.new(name: 'DeletionMode')
     DeliveryTimedOutCount = Shapes::IntegerShape.new(name: 'DeliveryTimedOutCount')
     DeregisterManagedInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceRequest')
     DeregisterManagedInstanceResult = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceResult')
@@ -2183,6 +2184,7 @@ module Aws::SSM
     DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
     DeleteResourcePolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
     DeleteResourcePolicyRequest.add_member(:policy_hash, Shapes::ShapeRef.new(shape: PolicyHash, required: true, location_name: "PolicyHash"))
+    DeleteResourcePolicyRequest.add_member(:deletion_mode, Shapes::ShapeRef.new(shape: DeletionMode, location_name: "DeletionMode"))
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
 
     DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse

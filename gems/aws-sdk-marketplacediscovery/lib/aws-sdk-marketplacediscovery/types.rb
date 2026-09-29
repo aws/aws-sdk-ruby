@@ -23,6 +23,26 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # Contains supported Amazon EBS volume information for an AMI
+    # fulfillment option.
+    #
+    # @!attribute [rw] volume_types
+    #   The supported Amazon EBS volume types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] iops
+    #   The total number of provisioned IOPS supported.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/AmazonMachineImageEbsVolume AWS API Documentation
+    #
+    class AmazonMachineImageEbsVolume < Struct.new(
+      :volume_types,
+      :iops)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Amazon Machine Image (AMI) fulfillment option, including
     # version details, supported operating systems, and recommended instance
     # types.
@@ -64,6 +84,31 @@ module Aws::MarketplaceDiscovery
     #   Instructions on how to deploy and use this fulfillment option.
     #   @return [String]
     #
+    # @!attribute [rw] available_from_time
+    #   The date and time when the AMI became available for fulfillment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] access_url_template
+    #   The URL pattern for accessing the product when an instance is
+    #   running.
+    #   @return [String]
+    #
+    # @!attribute [rw] architecture
+    #   The architecture of the AMI, such as `x86_64`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ami_alias
+    #   The alias of the AMI associated with this fulfillment option.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_volume
+    #   The supported Amazon EBS volume configuration for the AMI.
+    #   @return [Types::AmazonMachineImageEbsVolume]
+    #
+    # @!attribute [rw] short_description
+    #   A short description of the fulfillment option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/AmazonMachineImageFulfillmentOption AWS API Documentation
     #
     class AmazonMachineImageFulfillmentOption < Struct.new(
@@ -75,7 +120,13 @@ module Aws::MarketplaceDiscovery
       :operating_systems,
       :recommendation,
       :release_notes,
-      :usage_instructions)
+      :usage_instructions,
+      :available_from_time,
+      :access_url_template,
+      :architecture,
+      :ami_alias,
+      :ebs_volume,
+      :short_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -111,10 +162,45 @@ module Aws::MarketplaceDiscovery
     #   The recommended EC2 instance type for this AMI.
     #   @return [String]
     #
+    # @!attribute [rw] security_groups
+    #   The recommended security group configurations for this AMI.
+    #   @return [Array<Types::AmazonMachineImageSecurityGroup>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/AmazonMachineImageRecommendation AWS API Documentation
     #
     class AmazonMachineImageRecommendation < Struct.new(
-      :instance_type)
+      :instance_type,
+      :security_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a recommended security group configuration for an AMI
+    # fulfillment option.
+    #
+    # @!attribute [rw] protocol
+    #   The IP protocol name, such as `tcp`.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_port
+    #   The start of the port range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The end of the port range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cidr_ip_addresses
+    #   The IP address ranges in CIDR format.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/AmazonMachineImageSecurityGroup AWS API Documentation
+    #
+    class AmazonMachineImageSecurityGroup < Struct.new(
+      :protocol,
+      :from_port,
+      :to_port,
+      :cidr_ip_addresses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -249,6 +335,19 @@ module Aws::MarketplaceDiscovery
     #   Instructions on how to deploy and use this CloudFormation template.
     #   @return [String]
     #
+    # @!attribute [rw] available_from_time
+    #   The date and time when the CloudFormation fulfillment option became
+    #   available for fulfillment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] short_description
+    #   A short description of the fulfillment option.
+    #   @return [String]
+    #
+    # @!attribute [rw] long_description
+    #   A detailed description of the fulfillment option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/CloudFormationFulfillmentOption AWS API Documentation
     #
     class CloudFormationFulfillmentOption < Struct.new(
@@ -258,7 +357,10 @@ module Aws::MarketplaceDiscovery
       :fulfillment_option_display_name,
       :fulfillment_option_version,
       :release_notes,
-      :usage_instructions)
+      :usage_instructions,
+      :available_from_time,
+      :short_description,
+      :long_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -660,6 +762,21 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # A single fixed price increase percentage applied at each renewal
+    # cycle.
+    #
+    # @!attribute [rw] percentage_value
+    #   The percentage value applied at each renewal cycle.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/FixedPercentage AWS API Documentation
+    #
+    class FixedPercentage < Struct.new(
+      :percentage_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a fixed upfront pricing term with a pre-paid amount and
     # granted entitlements.
     #
@@ -840,6 +957,14 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   A BCP 47 language tag or comma-separated priority list specifying
+    #   the preferred locale for response content. See `Locale` for
+    #   supported values, constraints, fallback behavior, and the default
+    #   locale. If omitted, the service returns content in the default
+    #   locale.
+    #   @return [String]
+    #
     # @!attribute [rw] listing_id
     #   The unique identifier of the listing to retrieve.
     #   @return [String]
@@ -847,11 +972,18 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetListingInput AWS API Documentation
     #
     class GetListingInput < Struct.new(
+      :locale,
       :listing_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   The locale of the returned content. Indicates whether the response
+    #   contains content in the requested locale, or fell back to the
+    #   default locale. See `Locale` for details.
+    #   @return [String]
+    #
     # @!attribute [rw] associated_entities
     #   The products and offers associated with this listing. Each entity
     #   contains product and offer information.
@@ -948,6 +1080,7 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetListingOutput AWS API Documentation
     #
     class GetListingOutput < Struct.new(
+      :locale,
       :associated_entities,
       :badges,
       :catalog,
@@ -972,6 +1105,14 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   A BCP 47 language tag or comma-separated priority list specifying
+    #   the preferred locale for response content. See `Locale` for
+    #   supported values, constraints, fallback behavior, and the default
+    #   locale. If omitted, the service returns content in the default
+    #   locale.
+    #   @return [String]
+    #
     # @!attribute [rw] offer_id
     #   The unique identifier of the offer to retrieve.
     #   @return [String]
@@ -979,11 +1120,18 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOfferInput AWS API Documentation
     #
     class GetOfferInput < Struct.new(
+      :locale,
       :offer_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   The locale of the returned content. Indicates whether the response
+    #   contains content in the requested locale, or fell back to the
+    #   default locale. See `Locale` for details.
+    #   @return [String]
+    #
     # @!attribute [rw] offer_id
     #   The unique identifier of the offer.
     #   @return [String]
@@ -1037,6 +1185,7 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOfferOutput AWS API Documentation
     #
     class GetOfferOutput < Struct.new(
+      :locale,
       :offer_id,
       :catalog,
       :offer_name,
@@ -1052,6 +1201,14 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   A BCP 47 language tag or comma-separated priority list specifying
+    #   the preferred locale for response content. See `Locale` for
+    #   supported values, constraints, fallback behavior, and the default
+    #   locale. If omitted, the service returns content in the default
+    #   locale.
+    #   @return [String]
+    #
     # @!attribute [rw] offer_set_id
     #   The unique identifier of the offer set to retrieve.
     #   @return [String]
@@ -1059,11 +1216,18 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOfferSetInput AWS API Documentation
     #
     class GetOfferSetInput < Struct.new(
+      :locale,
       :offer_set_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   The locale of the returned content. Indicates whether the response
+    #   contains content in the requested locale, or fell back to the
+    #   default locale. See `Locale` for details.
+    #   @return [String]
+    #
     # @!attribute [rw] offer_set_id
     #   The unique identifier of the offer set.
     #   @return [String]
@@ -1107,6 +1271,7 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOfferSetOutput AWS API Documentation
     #
     class GetOfferSetOutput < Struct.new(
+      :locale,
       :offer_set_id,
       :catalog,
       :offer_set_name,
@@ -1120,6 +1285,14 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   A BCP 47 language tag or comma-separated priority list specifying
+    #   the preferred locale for response content. See `Locale` for
+    #   supported values, constraints, fallback behavior, and the default
+    #   locale. If omitted, the service returns content in the default
+    #   locale.
+    #   @return [String]
+    #
     # @!attribute [rw] offer_id
     #   The unique identifier of the offer whose terms to retrieve.
     #   @return [String]
@@ -1137,6 +1310,7 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOfferTermsInput AWS API Documentation
     #
     class GetOfferTermsInput < Struct.new(
+      :locale,
       :offer_id,
       :max_results,
       :next_token)
@@ -1144,6 +1318,12 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   The locale of the returned content. Indicates whether the response
+    #   contains content in the requested locale, or fell back to the
+    #   default locale. See `Locale` for details.
+    #   @return [String]
+    #
     # @!attribute [rw] offer_terms
     #   The terms attached to the offer. Each element contains exactly one
     #   term type.
@@ -1157,12 +1337,21 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOfferTermsOutput AWS API Documentation
     #
     class GetOfferTermsOutput < Struct.new(
+      :locale,
       :offer_terms,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   A BCP 47 language tag or comma-separated priority list specifying
+    #   the preferred locale for response content. See `Locale` for
+    #   supported values, constraints, fallback behavior, and the default
+    #   locale. If omitted, the service returns content in the default
+    #   locale.
+    #   @return [String]
+    #
     # @!attribute [rw] product_id
     #   The unique identifier of the product to retrieve.
     #   @return [String]
@@ -1170,11 +1359,18 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetProductInput AWS API Documentation
     #
     class GetProductInput < Struct.new(
+      :locale,
       :product_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   The locale of the returned content. Indicates whether the response
+    #   contains content in the requested locale, or fell back to the
+    #   default locale. See `Locale` for details.
+    #   @return [String]
+    #
     # @!attribute [rw] product_id
     #   The unique identifier of the product.
     #   @return [String]
@@ -1237,9 +1433,14 @@ module Aws::MarketplaceDiscovery
     #   a private offer or requesting a demo.
     #   @return [Array<Types::SellerEngagement>]
     #
+    # @!attribute [rw] listing_id
+    #   The default listing identifier associated with the product.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetProductOutput AWS API Documentation
     #
     class GetProductOutput < Struct.new(
+      :locale,
       :product_id,
       :catalog,
       :product_name,
@@ -1253,7 +1454,8 @@ module Aws::MarketplaceDiscovery
       :highlights,
       :promotional_media,
       :resources,
-      :seller_engagements)
+      :seller_engagements,
+      :listing_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1410,6 +1612,14 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   A BCP 47 language tag or comma-separated priority list specifying
+    #   the preferred locale for response content. See `Locale` for
+    #   supported values, constraints, fallback behavior, and the default
+    #   locale. If omitted, the service returns content in the default
+    #   locale.
+    #   @return [String]
+    #
     # @!attribute [rw] product_id
     #   The unique identifier of the product for which to list fulfillment
     #   options.
@@ -1428,6 +1638,7 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListFulfillmentOptionsInput AWS API Documentation
     #
     class ListFulfillmentOptionsInput < Struct.new(
+      :locale,
       :product_id,
       :max_results,
       :next_token)
@@ -1435,6 +1646,66 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   A BCP 47 language tag or comma-separated priority list of language
+    #   tags that specifies the preferred locale for response content. The
+    #   field accepts a maximum of two language tags.
+    #
+    #   The service resolves a locale string to the nearest supported
+    #   locale. If no supported locale matches, the service applies the
+    #   fallback behavior described below.
+    #
+    #   * **Preferred locale** (first tag) – The locale you want the service
+    #     to return content in.
+    #
+    #   * **Fallback locale** (optional, second tag) – The service default
+    #     locale (`en-US` or `en`). The service returns content in this
+    #     locale when translated content for the preferred locale is
+    #     unavailable.
+    #
+    #   The field is optional. If omitted or null, the service returns
+    #   content in the default locale (`en-US`).
+    #
+    #   **Supported locales:**
+    #
+    #   * `en-US` – English (service default, also resolves from `en`)
+    #
+    #   * `fr` – French
+    #
+    #   * `es` – Spanish
+    #
+    #   * `ko` – Korean
+    #
+    #   * `ja` – Japanese
+    #
+    #   **Fallback behavior:**
+    #
+    #   * If translated content for the preferred locale is unavailable, the
+    #     service returns content in the default locale.
+    #
+    #   * If the preferred locale is not supported and no fallback is
+    #     provided, the service returns a `ValidationException`.
+    #
+    #   * If you provide an unsupported locale with the default locale as
+    #     fallback (for example, `xx, en-US`), the service returns content
+    #     in the default locale.
+    #
+    #   **Response locale field (Get APIs):** The `locale` field in Get API
+    #   responses indicates the locale of the returned content. You can use
+    #   this field to determine whether the response contains content in the
+    #   requested locale or the default locale.
+    #
+    #   **Examples:**
+    #
+    #   * `fr` – Request French content. If unavailable, falls back to
+    #     `en-US`.
+    #
+    #   * `fr, en-US` – Request French content with explicit fallback to
+    #     English.
+    #
+    #   * `en-US` – Request content in the default locale.
+    #   @return [String]
+    #
     # @!attribute [rw] fulfillment_options
     #   The fulfillment options available for the product. Each option
     #   describes how the buyer can deploy or access the product.
@@ -1448,12 +1719,21 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListFulfillmentOptionsOutput AWS API Documentation
     #
     class ListFulfillmentOptionsOutput < Struct.new(
+      :locale,
       :fulfillment_options,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   A BCP 47 language tag or comma-separated priority list specifying
+    #   the preferred locale for response content. See `Locale` for
+    #   supported values, constraints, fallback behavior, and the default
+    #   locale. If omitted, the service returns content in the default
+    #   locale.
+    #   @return [String]
+    #
     # @!attribute [rw] filters
     #   Filters to narrow the results. Multiple filters are combined with
     #   AND logic. Multiple values within the same filter are combined with
@@ -1473,6 +1753,7 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListPurchaseOptionsInput AWS API Documentation
     #
     class ListPurchaseOptionsInput < Struct.new(
+      :locale,
       :filters,
       :max_results,
       :next_token)
@@ -1877,6 +2158,37 @@ module Aws::MarketplaceDiscovery
       class Unknown < OfferTerm; end
     end
 
+    # A single installment entry in the renewal payment schedule.
+    #
+    # @!attribute [rw] charge_date_offset
+    #   The relative offset from the renewal agreement start date when this
+    #   installment is due, represented in ISO 8601 duration format (for
+    #   example, P1M or P30D).
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_percentage
+    #   The percentage of the increased Total Contract Value (TCV) to charge
+    #   in this installment. All entries in a schedule sum to 100.00.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_month
+    #   The optional calendar day of month on which the charge occurs. When
+    #   absent, the charge day is derived from `chargeDateOffset`. For
+    #   months with fewer days than the specified day, the charge occurs on
+    #   the last day of the month. For example, if `dayOfMonth` is 31, the
+    #   charge in April occurs on April 30.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PaymentScheduleEntry AWS API Documentation
+    #
+    class PaymentScheduleEntry < Struct.new(
+      :charge_date_offset,
+      :charge_percentage,
+      :day_of_month)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a payment schedule term with installment payments at specified
     # dates.
     #
@@ -1906,6 +2218,80 @@ module Aws::MarketplaceDiscovery
       :schedule)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A template for the payment schedule term on the renewal offer.
+    #
+    # @!attribute [rw] schedule
+    #   An ordered list of installment entries for the renewal payment
+    #   schedule.
+    #   @return [Array<Types::PaymentScheduleEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PaymentScheduleTermTemplate AWS API Documentation
+    #
+    class PaymentScheduleTermTemplate < Struct.new(
+      :schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A price increase percentage range with minimum, maximum, and default
+    # values.
+    #
+    # @!attribute [rw] minimum_value
+    #   The minimum percentage by which the price can increase at each
+    #   renewal cycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_value
+    #   The maximum percentage by which the price can increase at each
+    #   renewal cycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The percentage increase applied by default when no other value is
+    #   finalized before the adjustment deadline. Falls between
+    #   `minimumValue` and `maximumValue`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PercentageRange AWS API Documentation
+    #
+    class PercentageRange < Struct.new(
+      :minimum_value,
+      :maximum_value,
+      :default_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The pricing adjustment that applies at each renewal cycle, expressed
+    # as either a fixed percentage or a percentage range. Exactly one
+    # variant is present.
+    #
+    # @note PriceIncrease is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PriceIncrease corresponding to the set member.
+    #
+    # @!attribute [rw] fixed_percentage
+    #   A single fixed percentage applied uniformly at every renewal cycle.
+    #   @return [Types::FixedPercentage]
+    #
+    # @!attribute [rw] percentage_range
+    #   A percentage band with minimum, maximum, and default values that
+    #   bound the price increase at each renewal cycle.
+    #   @return [Types::PercentageRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PriceIncrease AWS API Documentation
+    #
+    class PriceIncrease < Struct.new(
+      :fixed_percentage,
+      :percentage_range,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class FixedPercentage < PriceIncrease; end
+      class PercentageRange < PriceIncrease; end
+      class Unknown < PriceIncrease; end
     end
 
     # A pricing model that determines how buyers are charged for a listing,
@@ -2138,8 +2524,24 @@ module Aws::MarketplaceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] filter_values
-    #   The values to filter by. Multiple values within the same filter are
-    #   combined with OR logic.
+    #   The values to filter by. Supported values depend on `filterType`:
+    #
+    #   * `PRODUCT_ID` – One or more product identifiers to filter by.
+    #
+    #   * `SELLER_OF_RECORD_PROFILE_ID` – One or more seller profile
+    #     identifiers to filter by.
+    #
+    #   * `PURCHASE_OPTION_TYPE` – One or more purchase option types to
+    #     filter by: `OFFER` or `OFFERSET`.
+    #
+    #   * `VISIBILITY_SCOPE` – The visibility scope to filter by: `PRIVATE`.
+    #
+    #   * `AVAILABILITY_STATUS` – One or more availability statuses to
+    #     filter by: `AVAILABLE` or `EXPIRED`.
+    #
+    #   To retrieve private offers and offer sets visible to you, use
+    #   `VISIBILITY_SCOPE` with `PRIVATE`. OR logic combines multiple values
+    #   within the same filter.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PurchaseOptionFilter AWS API Documentation
@@ -2298,11 +2700,43 @@ module Aws::MarketplaceDiscovery
     #   The category of the term.
     #   @return [String]
     #
+    # @!attribute [rw] max_renewals
+    #   The maximum number of renewals allowed on this offer. Absent means
+    #   unlimited renewals.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lockout_period
+    #   The duration before the agreement end date when the lockout window
+    #   begins, in ISO 8601 format (for example, P30D). Absent means no
+    #   lockout.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustment_deadline
+    #   The duration before the agreement end date by which the renewal
+    #   price is finalized, represented in ISO 8601 format (for example,
+    #   P30D). Only applicable with `PercentageRange`.
+    #   @return [String]
+    #
+    # @!attribute [rw] price_increase
+    #   The price increase applied at each renewal cycle. Absent means
+    #   identical pricing on renewal.
+    #   @return [Types::PriceIncrease]
+    #
+    # @!attribute [rw] term_templates
+    #   Structural templates defining how specific terms are reshaped on
+    #   each renewal cycle. Absent for upfront-only offers.
+    #   @return [Array<Types::TermTemplate>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/RenewalTerm AWS API Documentation
     #
     class RenewalTerm < Struct.new(
       :id,
-      :type)
+      :type,
+      :max_renewals,
+      :lockout_period,
+      :adjustment_deadline,
+      :price_increase,
+      :term_templates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2424,6 +2858,21 @@ module Aws::MarketplaceDiscovery
     #   Instructions on how to access and use this SaaS product.
     #   @return [String]
     #
+    # @!attribute [rw] available_from_time
+    #   The date and time when the SaaS product became available for
+    #   fulfillment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] launch_url
+    #   The URL that a buyer uses to launch the seller's SaaS product. This
+    #   URL is distinct from `fulfillmentUrl`, which is the seller's
+    #   software registration landing page.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_launch
+    #   Specifies whether the SaaS product supports quick-launch deployment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SaasFulfillmentOption AWS API Documentation
     #
     class SaasFulfillmentOption < Struct.new(
@@ -2431,7 +2880,10 @@ module Aws::MarketplaceDiscovery
       :fulfillment_option_type,
       :fulfillment_option_display_name,
       :fulfillment_url,
-      :usage_instructions)
+      :usage_instructions,
+      :available_from_time,
+      :launch_url,
+      :quick_launch)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2540,6 +2992,14 @@ module Aws::MarketplaceDiscovery
     #   Recommended instance types for inference with this model.
     #   @return [Types::SageMakerModelRecommendation]
     #
+    # @!attribute [rw] supported_content_types
+    #   The MIME types that this model accepts as input.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_response_mime_types
+    #   The MIME types that this model returns as output.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SageMakerModelFulfillmentOption AWS API Documentation
     #
     class SageMakerModelFulfillmentOption < Struct.new(
@@ -2549,7 +3009,9 @@ module Aws::MarketplaceDiscovery
       :fulfillment_option_version,
       :release_notes,
       :usage_instructions,
-      :recommendation)
+      :recommendation,
+      :supported_content_types,
+      :supported_response_mime_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2592,6 +3054,14 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   A BCP 47 language tag or comma-separated priority list specifying
+    #   the preferred locale for response content. See `Locale` for
+    #   supported values, constraints, fallback behavior, and the default
+    #   locale. If omitted, the service returns content in the default
+    #   locale.
+    #   @return [String]
+    #
     # @!attribute [rw] search_text
     #   The search query text to filter listings before retrieving facets.
     #   @return [String]
@@ -2615,6 +3085,7 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SearchFacetsInput AWS API Documentation
     #
     class SearchFacetsInput < Struct.new(
+      :locale,
       :search_text,
       :filters,
       :facet_types,
@@ -2670,6 +3141,14 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # @!attribute [rw] locale
+    #   A BCP 47 language tag or comma-separated priority list specifying
+    #   the preferred locale for response content. See `Locale` for
+    #   supported values, constraints, fallback behavior, and the default
+    #   locale. If omitted, the service returns content in the default
+    #   locale.
+    #   @return [String]
+    #
     # @!attribute [rw] search_text
     #   The search query text to find relevant listings.
     #   @return [String]
@@ -2702,6 +3181,7 @@ module Aws::MarketplaceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SearchListingsInput AWS API Documentation
     #
     class SearchListingsInput < Struct.new(
+      :locale,
       :search_text,
       :filters,
       :max_results,
@@ -2825,6 +3305,29 @@ module Aws::MarketplaceDiscovery
       :refund_policy)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A structural template defining how a specific term type is reshaped on
+    # each renewal cycle. Exactly one variant is present.
+    #
+    # @note TermTemplate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TermTemplate corresponding to the set member.
+    #
+    # @!attribute [rw] payment_schedule_term_template
+    #   The installment schedule used to structure payments on the renewal
+    #   offer.
+    #   @return [Types::PaymentScheduleTermTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/TermTemplate AWS API Documentation
+    #
+    class TermTemplate < Struct.new(
+      :payment_schedule_term_template,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PaymentScheduleTermTemplate < TermTemplate; end
+      class Unknown < TermTemplate; end
     end
 
     # The request was denied due to request throttling.

@@ -181,7 +181,21 @@ module Aws
                                             key: ::String?,
                                             value: ::String?
                                           }
-                                        ]
+                                        ],
+                                        ?image_configuration: {
+                                          source: {
+                                            uri: ::String?
+                                          }?,
+                                          build: {
+                                            type: ("docker" | "buildpack")?,
+                                            dockerfile_location: ::String?,
+                                            buildpack: ::String?,
+                                            architecture: ("amd64" | "arm64")?,
+                                            code_build_service_role: ::String?,
+                                            compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE")?,
+                                            timeout_in_minutes: ::Integer?
+                                          }?
+                                        }
                                       ) -> _CreateApplicationVersionResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationVersionResponseSuccess
 

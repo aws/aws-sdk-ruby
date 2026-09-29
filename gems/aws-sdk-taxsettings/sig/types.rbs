@@ -54,6 +54,7 @@ module Aws::TaxSettings
       attr_accessor belgium_additional_info: Types::BelgiumAdditionalInfo
       attr_accessor chile_additional_info: Types::ChileAdditionalInfo
       attr_accessor france_additional_info: Types::FranceAdditionalInfo
+      attr_accessor monaco_additional_info: Types::MonacoAdditionalInfo
       SENSITIVE: []
     end
 
@@ -83,6 +84,7 @@ module Aws::TaxSettings
       attr_accessor belgium_additional_info: Types::BelgiumAdditionalInfo
       attr_accessor chile_additional_info: Types::ChileAdditionalInfo
       attr_accessor france_additional_info: Types::FranceAdditionalInfo
+      attr_accessor monaco_additional_info: Types::MonacoAdditionalInfo
       SENSITIVE: []
     end
 
@@ -234,6 +236,7 @@ module Aws::TaxSettings
 
     class FranceAdditionalInfo
       attr_accessor siren_number: ::String
+      attr_accessor e_invoice_routing_code: ::String
       SENSITIVE: []
     end
 
@@ -369,6 +372,11 @@ module Aws::TaxSettings
       attr_accessor service_tax_codes: ::Array[("Consultancy" | "Digital Service And Electronic Medium" | "IT Services" | "Training Or Coaching")]
       attr_accessor tax_information_number: ::String
       attr_accessor business_registration_number: ::String
+      SENSITIVE: []
+    end
+
+    class MonacoAdditionalInfo
+      attr_accessor business_number: ::String
       SENSITIVE: []
     end
 

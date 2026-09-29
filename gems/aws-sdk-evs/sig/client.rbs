@@ -170,7 +170,7 @@ module Aws
                                   {
                                     host_name: ::String,
                                     key_name: ::String,
-                                    instance_type: ("i4i.metal" | "i7i.metal-24xl"),
+                                    instance_type: ("i4i.metal" | "i7i.metal-24xl" | "i7i.metal-48xl"),
                                     placement_group_id: ::String?,
                                     dedicated_host_id: ::String?
                                   }
@@ -216,7 +216,7 @@ module Aws
                                      host: {
                                        host_name: ::String,
                                        key_name: ::String,
-                                       instance_type: ("i4i.metal" | "i7i.metal-24xl"),
+                                       instance_type: ("i4i.metal" | "i7i.metal-24xl" | "i7i.metal-48xl"),
                                        placement_group_id: ::String?,
                                        dedicated_host_id: ::String?
                                      },
@@ -287,6 +287,15 @@ module Aws
                                         association_id: ::String
                                       ) -> _DisassociateEipFromVlanResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateEipFromVlanResponseSuccess
+
+      interface _GetAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSettingsResponse]
+        def settings: () -> ::Array[Types::AccountSetting]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Evs/Client.html#get_account_settings-instance_method
+      def get_account_settings: (
+                                ) -> _GetAccountSettingsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSettingsResponseSuccess
 
       interface _GetDepotUrlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDepotUrlResponse]
@@ -396,6 +405,21 @@ module Aws
                                   entitlement_type: ("WINDOWS_SERVER")
                                 ) -> _ListVmEntitlementsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVmEntitlementsResponseSuccess
+
+      interface _PutAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountSettingsResponse]
+        def settings: () -> ::Array[Types::AccountSetting]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Evs/Client.html#put_account_settings-instance_method
+      def put_account_settings: (
+                                  settings: Array[
+                                    {
+                                      name: ::String,
+                                      value: ::String
+                                    }
+                                  ]
+                                ) -> _PutAccountSettingsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountSettingsResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

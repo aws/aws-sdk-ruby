@@ -3505,6 +3505,10 @@ module Aws::Connect
     # @option params [Types::EvaluationFormLanguageConfiguration] :language_configuration
     #   Configuration for language settings of the evaluation form.
     #
+    # @option params [String] :ai_version
+    #   The AI version to use for the evaluation form. This specifies which AI
+    #   model version is used for automated evaluations.
+    #
     # @return [Types::CreateEvaluationFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEvaluationFormResponse#evaluation_form_id #evaluation_form_id} => String
@@ -3686,6 +3690,10 @@ module Aws::Connect
     #               },
     #             ],
     #           },
+    #           metric_configuration: {
+    #             metric_type: "BUSINESS_OUTCOME", # required, accepts BUSINESS_OUTCOME
+    #             metric_name: "EvaluationFormMetricName", # required
+    #           },
     #         },
     #       },
     #     ],
@@ -3725,6 +3733,7 @@ module Aws::Connect
     #     language_configuration: {
     #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY
     #     },
+    #     ai_version: "EvaluationFormAIVersion",
     #   })
     #
     # @example Response structure
@@ -5053,10 +5062,19 @@ module Aws::Connect
     #     media_concurrencies: [ # required
     #       {
     #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
-    #         concurrency: 1, # required
+    #         concurrency: 1,
     #         cross_channel_behavior: {
     #           behavior_type: "ROUTE_CURRENT_CHANNEL_ONLY", # required, accepts ROUTE_CURRENT_CHANNEL_ONLY, ROUTE_ANY_CHANNEL
     #         },
+    #         workload_type_concurrencies: [
+    #           {
+    #             workload_type: "WorkloadType", # required
+    #             concurrency: 1, # required
+    #             cross_channel_workload_behavior: {
+    #               channel_workload_behavior_type: "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", # accepts ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY, ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY, ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #     tags: {
@@ -5110,6 +5128,13 @@ module Aws::Connect
     # @option params [required, String] :publish_status
     #   The publish status of the rule.
     #
+    # @option params [Types::PreEvaluationFilters] :pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to be
+    #   applied to only certain resources based on the resource's attributes,
+    #   such as tags assigned to a contact. The pre-evaluation filters are
+    #   applied even before rule conditions are evaluated and are used to
+    #   enforce tag-based-access-control while applying rules.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If not provided, the Amazon Web Services
@@ -5122,6 +5147,11 @@ module Aws::Connect
     #
     #
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @return [Types::CreateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5240,7 +5270,21 @@ module Aws::Connect
     #       },
     #     ],
     #     publish_status: "DRAFT", # required, accepts DRAFT, PUBLISHED
+    #     pre_evaluation_filters: {
+    #       and_conditions: [
+    #         {
+    #           resource_type: "CONTACT", # required, accepts CONTACT
+    #           filter_type: "TAG", # required, accepts TAG
+    #           filter_key: "String", # required
+    #           filter_value: "String", # required
+    #           operator: "EQUALS", # required, accepts EQUALS
+    #         },
+    #       ],
+    #     },
     #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -5326,6 +5370,9 @@ module Aws::Connect
     # @option params [Array<Types::FlowModule>] :allowed_flow_modules
     #   A list of Flow Modules an AI Agent can invoke as a tool.
     #
+    # @option params [Array<Types::AIAgent>] :allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #
     # @option params [Types::GranularAccessControlConfiguration] :granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -5362,6 +5409,12 @@ module Aws::Connect
     #       {
     #         type: "MCP", # accepts MCP
     #         flow_module_id: "FlowModuleId",
+    #       },
+    #     ],
+    #     allowed_ai_agents: [
+    #       {
+    #         arn: "ARN",
+    #         type: "THIRD_PARTY", # accepts THIRD_PARTY
     #       },
     #     ],
     #     granular_access_control_configuration: {
@@ -5677,7 +5730,7 @@ module Aws::Connect
     #   resp = client.create_traffic_distribution_group({
     #     name: "Name128", # required
     #     description: "Description250",
-    #     instance_id: "InstanceIdOrArn", # required
+    #     instance_id: "ACGRInstanceIdOrArn", # required
     #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -8151,6 +8204,7 @@ module Aws::Connect
     #   resp.contact.agent_info.state_transitions[0].state_start_timestamp #=> Time
     #   resp.contact.agent_info.state_transitions[0].state_end_timestamp #=> Time
     #   resp.contact.agent_info.voice_enhancement_mode #=> String, one of "VOICE_ISOLATION", "NOISE_SUPPRESSION", "NONE"
+    #   resp.contact.agent_info.active_region #=> String
     #   resp.contact.initiation_timestamp #=> Time
     #   resp.contact.disconnect_timestamp #=> Time
     #   resp.contact.last_update_timestamp #=> Time
@@ -8504,6 +8558,8 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].performance_category #=> String, one of "NEEDS_IMPROVEMENT", "EXCEEDS_EXPECTATIONS"
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].min_score_percentage #=> Float
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].max_score_percentage #=> Float
+    #   resp.evaluation_form.items[0].question.metric_configuration.metric_type #=> String, one of "BUSINESS_OUTCOME"
+    #   resp.evaluation_form.items[0].question.metric_configuration.metric_name #=> String
     #   resp.evaluation_form.scoring_strategy.mode #=> String, one of "QUESTION_ONLY", "SECTION_ONLY", "POINTS_BASED"
     #   resp.evaluation_form.scoring_strategy.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.evaluation_form.scoring_strategy.score_thresholds #=> Array
@@ -8517,6 +8573,7 @@ module Aws::Connect
     #   resp.evaluation_form.review_configuration.review_notification_recipients[0].type #=> String, one of "USER_ID"
     #   resp.evaluation_form.review_configuration.review_notification_recipients[0].value.user_id #=> String
     #   resp.evaluation_form.review_configuration.eligibility_days #=> Integer
+    #   resp.evaluation_form.ai_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactEvaluation AWS API Documentation
     #
@@ -8993,6 +9050,8 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].performance_category #=> String, one of "NEEDS_IMPROVEMENT", "EXCEEDS_EXPECTATIONS"
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].min_score_percentage #=> Float
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].max_score_percentage #=> Float
+    #   resp.evaluation_form.items[0].question.metric_configuration.metric_type #=> String, one of "BUSINESS_OUTCOME"
+    #   resp.evaluation_form.items[0].question.metric_configuration.metric_name #=> String
     #   resp.evaluation_form.scoring_strategy.mode #=> String, one of "QUESTION_ONLY", "SECTION_ONLY", "POINTS_BASED"
     #   resp.evaluation_form.scoring_strategy.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.evaluation_form.scoring_strategy.score_thresholds #=> Array
@@ -9014,6 +9073,7 @@ module Aws::Connect
     #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY"
     #   resp.evaluation_form.latest_validation_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.evaluation_form.last_validation_time #=> Time
+    #   resp.evaluation_form.ai_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeEvaluationForm AWS API Documentation
     #
@@ -9271,12 +9331,12 @@ module Aws::Connect
     #
     #   resp = client.describe_instance_attribute({
     #     instance_id: "InstanceId", # required
-    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING, MULTI_PARTY_CHAT_CONFERENCE, MESSAGE_STREAMING
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, AUTO_MUTE_AGENT_ON_HOLD, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING, MULTI_PARTY_CHAT_CONFERENCE, MESSAGE_STREAMING
     #   })
     #
     # @example Response structure
     #
-    #   resp.attribute.attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING", "MULTI_PARTY_CHAT_CONFERENCE", "MESSAGE_STREAMING"
+    #   resp.attribute.attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "AUTO_MUTE_AGENT_ON_HOLD", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING", "MULTI_PARTY_CHAT_CONFERENCE", "MESSAGE_STREAMING"
     #   resp.attribute.value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceAttribute AWS API Documentation
@@ -9789,6 +9849,10 @@ module Aws::Connect
     #   resp.routing_profile.media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
     #   resp.routing_profile.media_concurrencies[0].concurrency #=> Integer
     #   resp.routing_profile.media_concurrencies[0].cross_channel_behavior.behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_ONLY", "ROUTE_ANY_CHANNEL"
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies #=> Array
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies[0].workload_type #=> String
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies[0].concurrency #=> Integer
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies[0].cross_channel_workload_behavior.channel_workload_behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", "ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY", "ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE"
     #   resp.routing_profile.default_outbound_queue_id #=> String
     #   resp.routing_profile.tags #=> Hash
     #   resp.routing_profile.tags["TagKey"] #=> String
@@ -9895,6 +9959,12 @@ module Aws::Connect
     #   resp.rule.actions[0].extract_information_action.rules_extraction_definitions #=> Array
     #   resp.rule.actions[0].extract_information_action.rules_extraction_definitions[0].identifier #=> String
     #   resp.rule.publish_status #=> String, one of "DRAFT", "PUBLISHED"
+    #   resp.rule.pre_evaluation_filters.and_conditions #=> Array
+    #   resp.rule.pre_evaluation_filters.and_conditions[0].resource_type #=> String, one of "CONTACT"
+    #   resp.rule.pre_evaluation_filters.and_conditions[0].filter_type #=> String, one of "TAG"
+    #   resp.rule.pre_evaluation_filters.and_conditions[0].filter_key #=> String
+    #   resp.rule.pre_evaluation_filters.and_conditions[0].filter_value #=> String
+    #   resp.rule.pre_evaluation_filters.and_conditions[0].operator #=> String, one of "EQUALS"
     #   resp.rule.created_time #=> Time
     #   resp.rule.last_updated_time #=> Time
     #   resp.rule.last_updated_by #=> String
@@ -11720,6 +11790,48 @@ module Aws::Connect
     # @param [Hash] params ({})
     def get_contact_metrics(params = {}, options = {})
       req = build_request(:get_contact_metrics, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the current cross-region routing configuration for an Amazon
+    # Connect Global Resiliency instance enabled for global routing. This
+    # operation returns whether cross-region routing is currently enabled or
+    # disabled (isolated) for the instance.
+    #
+    # <note markdown="1"> This operation is available only for Amazon Connect Global Resiliency
+    # instances enabled for global routing.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @return [Types::GetCrossRegionRoutingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCrossRegionRoutingResponse#isolated_regions #isolated_regions} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cross_region_routing({
+    #     instance_id: "ACGRInstanceIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.isolated_regions #=> Array
+    #   resp.isolated_regions[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCrossRegionRouting AWS API Documentation
+    #
+    # @overload get_cross_region_routing(params = {})
+    # @param [Hash] params ({})
+    def get_cross_region_routing(params = {}, options = {})
+      req = build_request(:get_cross_region_routing, params)
       req.send_request(options)
     end
 
@@ -16456,6 +16568,12 @@ module Aws::Connect
     #   resp.reference_summary_list[0].date.value #=> String
     #   resp.reference_summary_list[0].email.name #=> String
     #   resp.reference_summary_list[0].email.value #=> String
+    #   resp.reference_summary_list[0].contact_analysis.name #=> String
+    #   resp.reference_summary_list[0].contact_analysis.value #=> String
+    #   resp.reference_summary_list[0].contact_analysis.status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED"
+    #   resp.reference_summary_list[0].contact_analysis.arn #=> String
+    #   resp.reference_summary_list[0].contact_analysis.analytics_mode #=> String, one of "PostContact", "RealTime", "ContactLens", "AutomatedInteraction"
+    #   resp.reference_summary_list[0].contact_analysis.is_redacted #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactReferences AWS API Documentation
@@ -16864,6 +16982,62 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists the available AI versions for evaluation forms in the specified
+    # Connect Customer instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_interaction_type
+    #   The contact interaction type for the evaluation form.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListEvaluationFormAIVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEvaluationFormAIVersionsResponse#ai_version_summaries #ai_version_summaries} => Array&lt;Types::EvaluationFormAIVersionSummary&gt;
+    #   * {Types::ListEvaluationFormAIVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_evaluation_form_ai_versions({
+    #     instance_id: "InstanceId", # required
+    #     contact_interaction_type: "AGENT", # required, accepts AGENT, AUTOMATED, CUSTOMER
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_version_summaries #=> Array
+    #   resp.ai_version_summaries[0].ai_version_name #=> String
+    #   resp.ai_version_summaries[0].ai_version_lifecycle.status #=> String, one of "LATEST", "PREVIEW", "ACTIVE", "DEPRECATED"
+    #   resp.ai_version_summaries[0].ai_version_lifecycle.start_of_life_time #=> Time
+    #   resp.ai_version_summaries[0].ai_version_lifecycle.end_of_life_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationFormAIVersions AWS API Documentation
+    #
+    # @overload list_evaluation_form_ai_versions(params = {})
+    # @param [Hash] params ({})
+    def list_evaluation_form_ai_versions(params = {}, options = {})
+      req = build_request(:list_evaluation_form_ai_versions, params)
+      req.send_request(options)
+    end
+
     # Lists versions of an evaluation form in the specified Connect Customer
     # instance.
     #
@@ -17266,7 +17440,7 @@ module Aws::Connect
     # @example Response structure
     #
     #   resp.attributes #=> Array
-    #   resp.attributes[0].attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING", "MULTI_PARTY_CHAT_CONFERENCE", "MESSAGE_STREAMING"
+    #   resp.attributes[0].attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "AUTO_MUTE_AGENT_ON_HOLD", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING", "MULTI_PARTY_CHAT_CONFERENCE", "MESSAGE_STREAMING"
     #   resp.attributes[0].value #=> String
     #   resp.next_token #=> String
     #
@@ -18332,7 +18506,7 @@ module Aws::Connect
     #     max_results: 1,
     #     next_token: "LargeNextToken",
     #     output_type: "Raw", # required, accepts Raw, Redacted
-    #     segment_types: ["Transcript"], # required, accepts Transcript, Categories, Issues, Event, Attachments, PostContactSummary
+    #     segment_types: ["Transcript"], # required, accepts Transcript, Categories, Issues, Event, Attachments, PostContactSummary, ExtractedInformation
     #   })
     #
     # @example Response structure
@@ -18382,6 +18556,16 @@ module Aws::Connect
     #   resp.segments[0].post_contact_summary.content #=> String
     #   resp.segments[0].post_contact_summary.status #=> String, one of "FAILED", "COMPLETED"
     #   resp.segments[0].post_contact_summary.failure_code #=> String, one of "QUOTA_EXCEEDED", "INSUFFICIENT_CONVERSATION_CONTENT", "FAILED_SAFETY_GUIDELINES", "INVALID_ANALYSIS_CONFIGURATION", "INTERNAL_ERROR"
+    #   resp.segments[0].extracted_information.extraction_definition_id #=> String
+    #   resp.segments[0].extracted_information.extraction_definition_name #=> String
+    #   resp.segments[0].extracted_information.extraction_definition_display_label #=> String
+    #   resp.segments[0].extracted_information.extracted_values #=> Array
+    #   resp.segments[0].extracted_information.extracted_values[0].content #=> String
+    #   resp.segments[0].extracted_information.extracted_values[0].points_of_interest #=> Array
+    #   resp.segments[0].extracted_information.extracted_values[0].points_of_interest[0].id #=> String
+    #   resp.segments[0].extracted_information.extracted_values[0].points_of_interest[0].character_offsets.begin_offset_char #=> Integer
+    #   resp.segments[0].extracted_information.extracted_values[0].points_of_interest[0].character_offsets.end_offset_char #=> Integer
+    #   resp.segments[0].extracted_information.failure_code #=> String, one of "QUOTA_EXCEEDED", "INSUFFICIENT_CONVERSATION_CONTENT", "FAILED_SAFETY_GUIDELINES", "INTERNAL_ERROR", "MAX_PACKAGE_FEATURE_ONLY"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRealtimeContactAnalysisSegmentsV2 AWS API Documentation
@@ -18723,6 +18907,64 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_security_keys(params = {}, options = {})
       req = build_request(:list_security_keys, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the allowed AI agents in a specific security
+    # profile.
+    #
+    # @option params [required, String] :security_profile_id
+    #   The identifier for the security profle.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListSecurityProfileAIAgentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityProfileAIAgentsResponse#allowed_ai_agents #allowed_ai_agents} => Array&lt;Types::AIAgent&gt;
+    #   * {Types::ListSecurityProfileAIAgentsResponse#next_token #next_token} => String
+    #   * {Types::ListSecurityProfileAIAgentsResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListSecurityProfileAIAgentsResponse#last_modified_region #last_modified_region} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_profile_ai_agents({
+    #     security_profile_id: "SecurityProfileId", # required
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.allowed_ai_agents #=> Array
+    #   resp.allowed_ai_agents[0].arn #=> String
+    #   resp.allowed_ai_agents[0].type #=> String, one of "THIRD_PARTY"
+    #   resp.next_token #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileAIAgents AWS API Documentation
+    #
+    # @overload list_security_profile_ai_agents(params = {})
+    # @param [Hash] params ({})
+    def list_security_profile_ai_agents(params = {}, options = {})
+      req = build_request(:list_security_profile_ai_agents, params)
       req.send_request(options)
     end
 
@@ -19339,7 +19581,7 @@ module Aws::Connect
     #   resp = client.list_traffic_distribution_groups({
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     instance_id: "InstanceIdOrArn",
+    #     instance_id: "ACGRInstanceIdOrArn",
     #   })
     #
     # @example Response structure
@@ -20146,7 +20388,7 @@ module Aws::Connect
     #
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
-    # @option params [required, String] :replica_alias
+    # @option params [String] :replica_alias
     #   The alias for the replicated instance. The `ReplicaAlias` must be
     #   unique.
     #
@@ -20158,10 +20400,10 @@ module Aws::Connect
     # @example Request syntax with placeholder values
     #
     #   resp = client.replicate_instance({
-    #     instance_id: "InstanceIdOrArn", # required
+    #     instance_id: "ACGRInstanceIdOrArn", # required
     #     replica_region: "AwsRegion", # required
     #     client_token: "ClientToken",
-    #     replica_alias: "DirectoryAlias", # required
+    #     replica_alias: "DirectoryAlias",
     #   })
     #
     # @example Response structure
@@ -21508,6 +21750,7 @@ module Aws::Connect
     #   resp.evaluation_form_search_summary_list[0].contact_interaction_type #=> String, one of "AGENT", "AUTOMATED", "CUSTOMER"
     #   resp.evaluation_form_search_summary_list[0].tags #=> Hash
     #   resp.evaluation_form_search_summary_list[0].tags["TagKey"] #=> String
+    #   resp.evaluation_form_search_summary_list[0].ai_version #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -22639,6 +22882,10 @@ module Aws::Connect
     #   resp.routing_profiles[0].media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
     #   resp.routing_profiles[0].media_concurrencies[0].concurrency #=> Integer
     #   resp.routing_profiles[0].media_concurrencies[0].cross_channel_behavior.behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_ONLY", "ROUTE_ANY_CHANNEL"
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies #=> Array
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies[0].workload_type #=> String
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies[0].concurrency #=> Integer
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies[0].cross_channel_workload_behavior.channel_workload_behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", "ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY", "ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE"
     #   resp.routing_profiles[0].default_outbound_queue_id #=> String
     #   resp.routing_profiles[0].tags #=> Hash
     #   resp.routing_profiles[0].tags["TagKey"] #=> String
@@ -22805,6 +23052,12 @@ module Aws::Connect
     #   resp.rules[0].rule_capability_tiers #=> Array
     #   resp.rules[0].rule_capability_tiers[0] #=> String, one of "GenerativeAI"
     #   resp.rules[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
+    #   resp.rules[0].pre_evaluation_filters.and_conditions #=> Array
+    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].resource_type #=> String, one of "CONTACT"
+    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].filter_type #=> String, one of "TAG"
+    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].filter_key #=> String
+    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].filter_value #=> String
+    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].operator #=> String, one of "EQUALS"
     #   resp.rules[0].created_time #=> Time
     #   resp.rules[0].last_updated_time #=> Time
     #   resp.rules[0].last_updated_by #=> String
@@ -24336,6 +24589,11 @@ module Aws::Connect
     # [CreateParticipantConnection][1] with WEBSOCKET and
     # CONNECTION\_CREDENTIALS.
     #
+    # To receive connection information directly in the response, set
+    # `ConnectionTypes` on the request. To initiate real-time message
+    # streaming when the chat is created, set `ChatStreamingConfiguration`
+    # on the request. Both parameters are optional.
+    #
     # A 429 error occurs in the following situations:
     #
     # * API rate limit is exceeded. API TPS throttling returns a
@@ -24485,12 +24743,59 @@ module Aws::Connect
     #   customer ends the chat session, allowing them to continue through
     #   disconnect flows such as surveys or feedback forms.
     #
+    # @option params [Array<String>] :connection_types
+    #   The types of connection information to return in the response. This
+    #   parameter is optional.
+    #
+    #   Specify `CONNECTION_CREDENTIALS` to receive a connection token.
+    #   Specify `WEBSOCKET` to receive a websocket URL. You can specify both.
+    #   No other value returns connection information.
+    #
+    #   Request `WEBSOCKET` to get a URL the participant connects to directly.
+    #   You do not need to call [CreateParticipantConnection][1] for it.
+    #   Request `CONNECTION_CREDENTIALS` on its own and the response returns a
+    #   connection token but no websocket URL.
+    #
+    #   If you omit this parameter, the response has no connection
+    #   information.
+    #
+    #   <note markdown="1"> If the information you request cannot be returned, StartChatContact
+    #   returns an error rather than a response that omits it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #
+    # @option params [Types::ChatStreamingConfiguration] :chat_streaming_configuration
+    #   The streaming configuration, such as the Amazon SNS streaming
+    #   endpoint. Use it to initiate real-time message streaming when the chat
+    #   is created. This parameter is optional.
+    #
+    #   When you set this parameter, the response includes `StreamingId`. You
+    #   do not need to call [StartContactStreaming][1].
+    #
+    #   <note markdown="1"> This parameter starts message streaming only. The response does not
+    #   include connection information, and setting this parameter does not
+    #   remove the need to call [CreateParticipantConnection][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html
+    #   [2]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #
     # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChatContactResponse#contact_id #contact_id} => String
     #   * {Types::StartChatContactResponse#participant_id #participant_id} => String
     #   * {Types::StartChatContactResponse#participant_token #participant_token} => String
     #   * {Types::StartChatContactResponse#continued_from_contact_id #continued_from_contact_id} => String
+    #   * {Types::StartChatContactResponse#connection_credentials #connection_credentials} => Types::ConnectionCredentials
+    #   * {Types::StartChatContactResponse#websocket #websocket} => Types::Websocket
+    #   * {Types::StartChatContactResponse#streaming_id #streaming_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -24537,6 +24842,10 @@ module Aws::Connect
     #     },
     #     customer_id: "CustomerIdNonEmpty",
     #     disconnect_on_customer_exit: ["AGENT"], # accepts AGENT
+    #     connection_types: ["WEBSOCKET"], # accepts WEBSOCKET, CONNECTION_CREDENTIALS, AUTHENTICATION_SESSION, WEBRTC_CONNECTION
+    #     chat_streaming_configuration: {
+    #       streaming_endpoint_arn: "ChatStreamingEndpointARN", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -24545,6 +24854,11 @@ module Aws::Connect
     #   resp.participant_id #=> String
     #   resp.participant_token #=> String
     #   resp.continued_from_contact_id #=> String
+    #   resp.connection_credentials.connection_token #=> String
+    #   resp.connection_credentials.expiry #=> String
+    #   resp.websocket.url #=> String
+    #   resp.websocket.connection_expiry #=> String
+    #   resp.streaming_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContact AWS API Documentation
     #
@@ -24652,11 +24966,6 @@ module Aws::Connect
     # evaluation form version used for the contact evaluation corresponds to
     # the currently activated version. If no version is activated for the
     # evaluation form, the contact evaluation cannot be started.
-    #
-    # <note markdown="1"> Evaluations created through the public API do not contain answer
-    # values suggested from automation.
-    #
-    #  </note>
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Connect Customer instance. You can [find the
@@ -27779,6 +28088,49 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the cross-region routing configuration for an Amazon Connect
+    # Global Resiliency instance enabled for global routing. When invoked
+    # with `IsolatedAll` set to `true`, this operation disables cross-region
+    # routing, meaning contacts originating in one Region will no longer be
+    # routed to agents in another Region.
+    #
+    # <note markdown="1"> This operation is available only for Amazon Connect Global Resiliency
+    # instances enabled for global routing. Reporting and contact search
+    # continue to operate globally after you use this operation.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Boolean] :isolated_all
+    #   Set to `true` to disable cross-region routing for all Regions
+    #   associated with this instance. Set to `false` to re-enable
+    #   cross-region routing.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cross_region_routing({
+    #     instance_id: "ACGRInstanceIdOrArn", # required
+    #     isolated_all: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateCrossRegionRouting AWS API Documentation
+    #
+    # @overload update_cross_region_routing(params = {})
+    # @param [Hash] params ({})
+    def update_cross_region_routing(params = {}, options = {})
+      req = build_request(:update_cross_region_routing, params)
+      req.send_request(options)
+    end
+
     # Updates all properties for an attribute using all properties from
     # CreateDataTableAttribute. There are no other granular update
     # endpoints. It does not act as a patch operation - all properties must
@@ -28135,6 +28487,10 @@ module Aws::Connect
     # @option params [Types::EvaluationFormLanguageConfiguration] :language_configuration
     #   Configuration for language settings of the evaluation form.
     #
+    # @option params [String] :ai_version
+    #   The AI version to use for the evaluation form. This specifies which AI
+    #   model version is used for automated evaluations.
+    #
     # @return [Types::UpdateEvaluationFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateEvaluationFormResponse#evaluation_form_id #evaluation_form_id} => String
@@ -28320,6 +28676,10 @@ module Aws::Connect
     #               },
     #             ],
     #           },
+    #           metric_configuration: {
+    #             metric_type: "BUSINESS_OUTCOME", # required, accepts BUSINESS_OUTCOME
+    #             metric_name: "EvaluationFormMetricName", # required
+    #           },
     #         },
     #       },
     #     ],
@@ -28356,6 +28716,7 @@ module Aws::Connect
     #     language_configuration: {
     #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY
     #     },
+    #     ai_version: "EvaluationFormAIVersion",
     #   })
     #
     # @example Response structure
@@ -28632,7 +28993,7 @@ module Aws::Connect
     #
     #   resp = client.update_instance_attribute({
     #     instance_id: "InstanceId", # required
-    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING, MULTI_PARTY_CHAT_CONFERENCE, MESSAGE_STREAMING
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, AUTO_MUTE_AGENT_ON_HOLD, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING, MULTI_PARTY_CHAT_CONFERENCE, MESSAGE_STREAMING
     #     value: "InstanceAttributeValue", # required
     #     client_token: "ClientToken",
     #   })
@@ -29679,10 +30040,19 @@ module Aws::Connect
     #     media_concurrencies: [ # required
     #       {
     #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
-    #         concurrency: 1, # required
+    #         concurrency: 1,
     #         cross_channel_behavior: {
     #           behavior_type: "ROUTE_CURRENT_CHANNEL_ONLY", # required, accepts ROUTE_CURRENT_CHANNEL_ONLY, ROUTE_ANY_CHANNEL
     #         },
+    #         workload_type_concurrencies: [
+    #           {
+    #             workload_type: "WorkloadType", # required
+    #             concurrency: 1, # required
+    #             cross_channel_workload_behavior: {
+    #               channel_workload_behavior_type: "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", # accepts ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY, ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY, ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -29854,6 +30224,13 @@ module Aws::Connect
     # @option params [required, String] :publish_status
     #   The publish status of the rule.
     #
+    # @option params [Types::PreEvaluationFilters] :pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to be
+    #   applied to only certain resources based on the resource's attributes,
+    #   such as tags assigned to a contact. The pre-evaluation filters are
+    #   applied even before rule conditions are evaluated and are used to
+    #   enforce tag-based-access-control while applying rules.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -29965,6 +30342,17 @@ module Aws::Connect
     #       },
     #     ],
     #     publish_status: "DRAFT", # required, accepts DRAFT, PUBLISHED
+    #     pre_evaluation_filters: {
+    #       and_conditions: [
+    #         {
+    #           resource_type: "CONTACT", # required, accepts CONTACT
+    #           filter_type: "TAG", # required, accepts TAG
+    #           filter_key: "String", # required
+    #           filter_value: "String", # required
+    #           operator: "EQUALS", # required, accepts EQUALS
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRule AWS API Documentation
@@ -30033,6 +30421,9 @@ module Aws::Connect
     # @option params [Array<Types::FlowModule>] :allowed_flow_modules
     #   A list of Flow Modules an AI Agent can invoke as a tool
     #
+    # @option params [Array<Types::AIAgent>] :allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #
     # @option params [Types::GranularAccessControlConfiguration] :granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -30063,6 +30454,12 @@ module Aws::Connect
     #       {
     #         type: "MCP", # accepts MCP
     #         flow_module_id: "FlowModuleId",
+    #       },
+    #     ],
+    #     allowed_ai_agents: [
+    #       {
+    #         arn: "ARN",
+    #         type: "THIRD_PARTY", # accepts THIRD_PARTY
     #       },
     #     ],
     #     granular_access_control_configuration: {
@@ -31284,7 +31681,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.272.0'
+      context[:gem_version] = '1.283.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

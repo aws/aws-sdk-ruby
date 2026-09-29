@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+3.274.0 (2026-09-24)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-eventbridgev2` gem.
+
+3.273.0 (2026-09-23)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-networksecuritymanager` gem.
+
+3.272.0 (2026-09-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-cloudwatchomni` gem.
+
+3.271.0 (2026-08-25)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-iamtoolbox` gem.
+
 3.270.0 (2026-08-11)
 ------------------
 

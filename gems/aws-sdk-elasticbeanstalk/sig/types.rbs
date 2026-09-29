@@ -64,6 +64,9 @@ module Aws::ElasticBeanstalk
       attr_accessor source_build_information: Types::SourceBuildInformation
       attr_accessor build_arn: ::String
       attr_accessor source_bundle: Types::S3Location
+      attr_accessor image_source: Types::ImageSource
+      attr_accessor image_build_configuration: Types::ImageBuildConfiguration
+      attr_accessor process: bool
       attr_accessor date_created: ::Time
       attr_accessor date_updated: ::Time
       attr_accessor status: ("Processed" | "Unprocessed" | "Failed" | "Processing" | "Building")
@@ -150,6 +153,11 @@ module Aws::ElasticBeanstalk
       SENSITIVE: []
     end
 
+    class Cluster
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
     class CodeBuildNotInServiceRegionException < Aws::EmptyStructure
     end
 
@@ -232,6 +240,7 @@ module Aws::ElasticBeanstalk
       attr_accessor auto_create_application: bool
       attr_accessor process: bool
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor image_configuration: Types::ImageConfiguration
       SENSITIVE: []
     end
 
@@ -533,6 +542,7 @@ module Aws::ElasticBeanstalk
     class EnvironmentResourceDescription
       attr_accessor environment_name: ::String
       attr_accessor auto_scaling_groups: ::Array[Types::AutoScalingGroup]
+      attr_accessor cluster: Types::Cluster
       attr_accessor instances: ::Array[Types::Instance]
       attr_accessor launch_configurations: ::Array[Types::LaunchConfiguration]
       attr_accessor launch_templates: ::Array[Types::LaunchTemplate]
@@ -575,6 +585,28 @@ module Aws::ElasticBeanstalk
     class EventDescriptionsMessage
       attr_accessor events: ::Array[Types::EventDescription]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ImageBuildConfiguration
+      attr_accessor type: ("docker" | "buildpack")
+      attr_accessor dockerfile_location: ::String
+      attr_accessor buildpack: ::String
+      attr_accessor architecture: ("amd64" | "arm64")
+      attr_accessor code_build_service_role: ::String
+      attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE")
+      attr_accessor timeout_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImageConfiguration
+      attr_accessor source: Types::ImageSource
+      attr_accessor build: Types::ImageBuildConfiguration
+      SENSITIVE: []
+    end
+
+    class ImageSource
+      attr_accessor uri: ::String
       SENSITIVE: []
     end
 

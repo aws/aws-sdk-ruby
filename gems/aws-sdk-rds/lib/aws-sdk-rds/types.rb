@@ -12051,6 +12051,14 @@ module Aws::RDS
     #   a Dedicated Local Zone.
     #   @return [String]
     #
+    # @!attribute [rw] full_snapshot_size_in_bytes
+    #   The full size of the DB snapshot, in bytes.
+    #
+    #   This is not the incremental size of the snapshot. This is the full
+    #   snapshot size and represents the size of all the blocks that were
+    #   written to the source volume at the time the snapshot was created.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
     class DBSnapshot < Struct.new(
@@ -12094,7 +12102,8 @@ module Aws::RDS
       :multi_tenant,
       :dedicated_log_volume,
       :additional_storage_volumes,
-      :snapshot_availability_zone)
+      :snapshot_availability_zone,
+      :full_snapshot_size_in_bytes)
       SENSITIVE = []
       include Aws::Structure
     end

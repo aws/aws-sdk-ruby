@@ -771,7 +771,8 @@ module Aws
                                     },
                                     ?language_configuration: {
                                       form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")?
-                                    }
+                                    },
+                                    ?ai_version: ::String
                                   ) -> _CreateEvaluationFormResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEvaluationFormResponseSuccess
 
@@ -1064,13 +1065,7 @@ module Aws
                                       }
                                     ],
                                     media_concurrencies: Array[
-                                      {
-                                        channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
-                                        concurrency: ::Integer,
-                                        cross_channel_behavior: {
-                                          behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
-                                        }?
-                                      }
+                                      Params::media_concurrency
                                     ],
                                     ?tags: Hash[::String, ::String],
                                     ?agent_availability_timer: ("TIME_SINCE_LAST_ACTIVITY" | "TIME_SINCE_LAST_INBOUND")
@@ -1095,7 +1090,9 @@ module Aws
                            Params::rule_action
                          ],
                          publish_status: ("DRAFT" | "PUBLISHED"),
-                         ?client_token: ::String
+                         ?pre_evaluation_filters: Params::pre_evaluation_filters,
+                         ?client_token: ::String,
+                         ?tags: Hash[::String, ::String]
                        ) -> _CreateRuleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleResponseSuccess
 
@@ -1126,6 +1123,12 @@ module Aws
                                        {
                                          type: ("MCP")?,
                                          flow_module_id: ::String?
+                                       }
+                                     ],
+                                     ?allowed_ai_agents: Array[
+                                       {
+                                         arn: ::String?,
+                                         type: ("THIRD_PARTY")?
                                        }
                                      ],
                                      ?granular_access_control_configuration: Params::granular_access_control_configuration
@@ -1936,7 +1939,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_instance_attribute-instance_method
       def describe_instance_attribute: (
                                          instance_id: ::String,
-                                         attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
+                                         attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "AUTO_MUTE_AGENT_ON_HOLD" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
                                        ) -> _DescribeInstanceAttributeResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceAttributeResponseSuccess
 
@@ -2426,6 +2429,16 @@ module Aws
                                  ]
                                ) -> _GetContactMetricsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactMetricsResponseSuccess
+
+      interface _GetCrossRegionRoutingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCrossRegionRoutingResponse]
+        def isolated_regions: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#get_cross_region_routing-instance_method
+      def get_cross_region_routing: (
+                                      instance_id: ::String
+                                    ) -> _GetCrossRegionRoutingResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCrossRegionRoutingResponseSuccess
 
       interface _GetCurrentMetricDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCurrentMetricDataResponse]
@@ -3029,6 +3042,20 @@ module Aws
                                          ) -> _ListEntitySecurityProfilesResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitySecurityProfilesResponseSuccess
 
+      interface _ListEvaluationFormAIVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEvaluationFormAIVersionsResponse]
+        def ai_version_summaries: () -> ::Array[Types::EvaluationFormAIVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_evaluation_form_ai_versions-instance_method
+      def list_evaluation_form_ai_versions: (
+                                              instance_id: ::String,
+                                              contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER"),
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListEvaluationFormAIVersionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEvaluationFormAIVersionsResponseSuccess
+
       interface _ListEvaluationFormVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEvaluationFormVersionsResponse]
         def evaluation_form_version_summary_list: () -> ::Array[Types::EvaluationFormVersionSummary]
@@ -3351,7 +3378,7 @@ module Aws
                                                         ?max_results: ::Integer,
                                                         ?next_token: ::String,
                                                         output_type: ("Raw" | "Redacted"),
-                                                        segment_types: Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary")]
+                                                        segment_types: Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary" | "ExtractedInformation")]
                                                       ) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
 
@@ -3427,6 +3454,22 @@ module Aws
                                 ?max_results: ::Integer
                               ) -> _ListSecurityKeysResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityKeysResponseSuccess
+
+      interface _ListSecurityProfileAIAgentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityProfileAIAgentsResponse]
+        def allowed_ai_agents: () -> ::Array[Types::AIAgent]
+        def next_token: () -> ::String
+        def last_modified_time: () -> ::Time
+        def last_modified_region: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_security_profile_ai_agents-instance_method
+      def list_security_profile_ai_agents: (
+                                             security_profile_id: ::String,
+                                             instance_id: ::String,
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListSecurityProfileAIAgentsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityProfileAIAgentsResponseSuccess
 
       interface _ListSecurityProfileApplicationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityProfileApplicationsResponse]
@@ -3777,7 +3820,7 @@ module Aws
                                 instance_id: ::String,
                                 replica_region: ::String,
                                 ?client_token: ::String,
-                                replica_alias: ::String
+                                ?replica_alias: ::String
                               ) -> _ReplicateInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReplicateInstanceResponseSuccess
 
@@ -4615,6 +4658,9 @@ module Aws
         def participant_id: () -> ::String
         def participant_token: () -> ::String
         def continued_from_contact_id: () -> ::String
+        def connection_credentials: () -> Types::ConnectionCredentials
+        def websocket: () -> Types::Websocket
+        def streaming_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#start_chat_contact-instance_method
       def start_chat_contact: (
@@ -4641,7 +4687,11 @@ module Aws
                                 ?related_contact_id: ::String,
                                 ?segment_attributes: Hash[::String, Params::segment_attribute_value],
                                 ?customer_id: ::String,
-                                ?disconnect_on_customer_exit: Array[("AGENT")]
+                                ?disconnect_on_customer_exit: Array[("AGENT")],
+                                ?connection_types: Array[("WEBSOCKET" | "CONNECTION_CREDENTIALS" | "AUTHENTICATION_SESSION" | "WEBRTC_CONNECTION")],
+                                ?chat_streaming_configuration: {
+                                  streaming_endpoint_arn: ::String
+                                }
                               ) -> _StartChatContactResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartChatContactResponseSuccess
 
@@ -5378,6 +5428,16 @@ module Aws
                                         ) -> _UpdateContactTaskTemplateResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactTaskTemplateResponseSuccess
 
+      interface _UpdateCrossRegionRoutingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCrossRegionRoutingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_cross_region_routing-instance_method
+      def update_cross_region_routing: (
+                                         instance_id: ::String,
+                                         isolated_all: bool
+                                       ) -> _UpdateCrossRegionRoutingResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCrossRegionRoutingResponseSuccess
+
       interface _UpdateDataTableAttributeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataTableAttributeResponse]
         def name: () -> ::String
@@ -5484,7 +5544,8 @@ module Aws
                                     },
                                     ?language_configuration: {
                                       form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")?
-                                    }
+                                    },
+                                    ?ai_version: ::String
                                   ) -> _UpdateEvaluationFormResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEvaluationFormResponseSuccess
 
@@ -5543,7 +5604,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_instance_attribute-instance_method
       def update_instance_attribute: (
                                        instance_id: ::String,
-                                       attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING"),
+                                       attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "AUTO_MUTE_AGENT_ON_HOLD" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING"),
                                        value: ::String,
                                        ?client_token: ::String
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -5768,13 +5829,7 @@ module Aws
                                                 instance_id: ::String,
                                                 routing_profile_id: ::String,
                                                 media_concurrencies: Array[
-                                                  {
-                                                    channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
-                                                    concurrency: ::Integer,
-                                                    cross_channel_behavior: {
-                                                      behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
-                                                    }?
-                                                  }
+                                                  Params::media_concurrency
                                                 ]
                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -5815,7 +5870,8 @@ module Aws
                          actions: Array[
                            Params::rule_action
                          ],
-                         publish_status: ("DRAFT" | "PUBLISHED")
+                         publish_status: ("DRAFT" | "PUBLISHED"),
+                         ?pre_evaluation_filters: Params::pre_evaluation_filters
                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -5840,6 +5896,12 @@ module Aws
                                        {
                                          type: ("MCP")?,
                                          flow_module_id: ::String?
+                                       }
+                                     ],
+                                     ?allowed_ai_agents: Array[
+                                       {
+                                         arn: ::String?,
+                                         type: ("THIRD_PARTY")?
                                        }
                                      ],
                                      ?granular_access_control_configuration: Params::granular_access_control_configuration

@@ -1320,6 +1320,11 @@ module Aws::AutoScaling
     #         spot_allocation_strategy: "XmlString",
     #         spot_instance_pools: 1,
     #         spot_max_price: "MixedInstanceSpotPrice",
+    #         distribution_segments: [
+    #           {
+    #             target_capacity_types: ["on-demand-capacity-reservation"], # accepts on-demand-capacity-reservation, capacity-block, interruptible-capacity-reservation, on-demand
+    #           },
+    #         ],
     #       },
     #     },
     #     min_size: 1,
@@ -1379,6 +1384,11 @@ module Aws::AutoScaling
     #   The mixed instances policy. For more information, see [Auto Scaling
     #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   You can remove the Distribution Segments configuration by specifying
+    #   `OnDemandBaseCapacity` or `OnDemandPercentageAboveBaseCapacity`. You
+    #   can also remove it explicitly by specifying an empty list for
+    #   `DistributionSegments`.
     #
     #
     #

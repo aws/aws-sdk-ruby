@@ -25,12 +25,29 @@ module Aws::DevOpsAgent
     #   Account Type 'monitor' for AIDevOps monitoring.
     #   @return [String]
     #
+    # @!attribute [rw] agent_elevated_role_arn
+    #   Optional IAM role ARN to be assumed by AIDevOps for elevated
+    #   directed actions on behalf of the customer. Used for mutating
+    #   operations gated by elevatedActionsEnabled on the AgentSpace. When
+    #   not provided, only non-elevated directed actions are available for
+    #   this AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_elevated_role_arn_status
+    #   Validation status of the agentElevatedRoleArn. Updated
+    #   asynchronously after the customer registers an elevated role.
+    #   Possible values: PENDING\_CONFIRMATION (validation in progress),
+    #   VALID (role validated), INVALID (validation failed).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/AWSConfiguration AWS API Documentation
     #
     class AWSConfiguration < Struct.new(
       :assumable_role_arn,
       :account_id,
-      :account_type)
+      :account_type,
+      :agent_elevated_role_arn,
+      :agent_elevated_role_arn_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -209,6 +226,11 @@ module Aws::DevOpsAgent
     #   The unique identifier of the AgentSpace
     #   @return [String]
     #
+    # @!attribute [rw] preferences
+    #   The preferences configured on the agent space. Preferences that are
+    #   not set take their default values.
+    #   @return [Hash<String,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/AgentSpace AWS API Documentation
     #
     class AgentSpace < Struct.new(
@@ -218,8 +240,89 @@ module Aws::DevOpsAgent
       :created_at,
       :updated_at,
       :kms_key_arn,
-      :agent_space_id)
+      :agent_space_id,
+      :preferences)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # An approval decision supplied when resuming a paused agent execution.
+    # When an agent execution pauses to request approval for an elevated
+    # action, SendMessage streams an approval request carrying interrupt
+    # identifiers. This structure carries the decision back to the service —
+    # which paused tool invocation is being resumed, the opaque interrupt
+    # identifier that resumes it, the identifier of the approval request
+    # being resolved, optional display text of the control the user chose,
+    # and the action taken (APPROVED or REJECTED) — so the service can
+    # resume the paused execution. All members are optional on the wire;
+    # service-side validation is applied against the populated subset.
+    #
+    # @!attribute [rw] tool_use_id
+    #   Identifier of the specific paused tool invocation that requested
+    #   approval. Correlates the approval decision back to the paused
+    #   invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] interrupt_id
+    #   An opaque resume identifier issued by the service when an agent
+    #   execution pauses for approval. Provide it when resuming so the
+    #   service can resume the correct paused execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] approval_id
+    #   Identifier of the approval request being resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] button_text
+    #   Optional display text of the UI control the user chose (for example,
+    #   "Approve Exact", "Approve Broader", or "Reject"), provided as
+    #   auxiliary decision context.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action taken on the approval request — APPROVED or REJECTED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ApprovalAction AWS API Documentation
+    #
+    class ApprovalAction < Struct.new(
+      :tool_use_id,
+      :interrupt_id,
+      :approval_id,
+      :button_text,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Tool-invocation pattern primitive used to express both an
+    # agent-requested approval and a finalized approval. The primitive is
+    # uniform across AWS and third-party tools: a tool identifier plus a map
+    # of argument pins that narrow which invocations the pattern matches.
+    #
+    # @!attribute [rw] tool
+    #   Identifier of the tool the pattern applies to (e.g. `use\_aws` for
+    #   AWS actions, or a third-party tool name).
+    #   @return [String]
+    #
+    # @!attribute [rw] argument_pins
+    #   Argument constraints that narrow which tool invocations the pattern
+    #   matches. For AWS tools, the map must include `operation` (the IAM
+    #   action, e.g. `ec2:AuthorizeSecurityGroupIngress`) and
+    #   `resource\_arn` (the resource ARN or ARN glob); additional
+    #   narrowing arguments go in further pin keys. The same `\{tool,
+    #   argumentPins}` shape is used uniformly for AWS and third-party
+    #   tools, with tool-specific keys for third-party tools. Requests whose
+    #   argument pins are collectively too large are rejected with a
+    #   ValidationException.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ApprovalPattern AWS API Documentation
+    #
+    class ApprovalPattern < Struct.new(
+      :tool,
+      :argument_pins)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -428,7 +531,7 @@ module Aws::DevOpsAgent
     # Content for an asset sourced from an external URL.
     #
     # @!attribute [rw] url
-    #   The source URL to import asset content from
+    #   The source URL to import asset content from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/AssetSourceUrlContent AWS API Documentation
@@ -670,10 +773,17 @@ module Aws::DevOpsAgent
     #   Whether the capability is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] trigger_filter_groups
+    #   Optional trigger filter groups. Evaluated only when enabled=true;
+    #   retained while the capability is disabled, so re-enabling restores
+    #   the prior trigger behavior.
+    #   @return [Array<Types::TriggerFilterGroup>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/CapabilityConfiguration AWS API Documentation
     #
     class CapabilityConfiguration < Struct.new(
-      :enabled)
+      :enabled,
+      :trigger_filter_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -768,6 +878,11 @@ module Aws::DevOpsAgent
     #   Tags to add to the AgentSpace at creation time.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] preferences
+    #   The preferences to configure on the agent space. Preferences not
+    #   provided take their default values.
+    #   @return [Hash<String,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/CreateAgentSpaceInput AWS API Documentation
     #
     class CreateAgentSpaceInput < Struct.new(
@@ -776,7 +891,8 @@ module Aws::DevOpsAgent
       :locale,
       :kms_key_arn,
       :client_token,
-      :tags)
+      :tags,
+      :preferences)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -977,8 +1093,8 @@ module Aws::DevOpsAgent
     # Request structure for creating a new chat
     #
     # @!attribute [rw] agent_space_id
-    #   Unique identifier for an agent space (allows alphanumeric characters
-    #   and hyphens; 1-64 characters)
+    #   The unique identifier for the agent space where the chat will be
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -3034,8 +3150,7 @@ module Aws::DevOpsAgent
     # Request structure for listing chats
     #
     # @!attribute [rw] agent_space_id
-    #   Unique identifier for an agent space (allows alphanumeric characters
-    #   and hyphens; 1-64 characters)
+    #   The unique identifier for the agent space to list chats from.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -3654,21 +3769,33 @@ module Aws::DevOpsAgent
     #   List of MCP tools can be used with the association.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tool_details
+    #   List of MCP tools with their access categorization. When provided,
+    #   the tool names must match those in the tools member.
+    #   @return [Array<Types::MCPToolDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MCPServerConfiguration AWS API Documentation
     #
     class MCPServerConfiguration < Struct.new(
-      :tools)
+      :tools,
+      :tool_details)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Mixin for webhook update support.
     #
-    # @api private
+    # @!attribute [rw] enabled_elevated_tools
+    #   The subset of elevated-access tools enabled for this integration.
+    #   @return [Array<Types::MCPToolDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MCPServerDatadogConfiguration AWS API Documentation
     #
-    class MCPServerDatadogConfiguration < Aws::EmptyStructure; end
+    class MCPServerDatadogConfiguration < Struct.new(
+      :enabled_elevated_tools)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Complete service details for MCP server integration.
     #
@@ -3714,12 +3841,17 @@ module Aws::DevOpsAgent
     #   List of MCP tools that can be used.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] enabled_elevated_tools
+    #   The subset of elevated-access tools enabled for this integration.
+    #   @return [Array<Types::MCPToolDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MCPServerGrafanaConfiguration AWS API Documentation
     #
     class MCPServerGrafanaConfiguration < Struct.new(
       :endpoint,
       :organization_id,
-      :tools)
+      :tools,
+      :enabled_elevated_tools)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3886,10 +4018,16 @@ module Aws::DevOpsAgent
     #   List of MCP tools available for the association.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tool_details
+    #   List of MCP tools with their access categorization. When provided,
+    #   the tool names must match those in the tools member.
+    #   @return [Array<Types::MCPToolDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MCPServerSigV4Configuration AWS API Documentation
     #
     class MCPServerSigV4Configuration < Struct.new(
-      :tools)
+      :tools,
+      :tool_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3931,6 +4069,25 @@ module Aws::DevOpsAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MCPServerSplunkConfiguration AWS API Documentation
     #
     class MCPServerSplunkConfiguration < Aws::EmptyStructure; end
+
+    # An MCP tool together with its access categorization.
+    #
+    # @!attribute [rw] name
+    #   The name of the MCP tool.
+    #   @return [String]
+    #
+    # @!attribute [rw] tool_classification
+    #   The access categorization of the MCP tool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MCPToolDetail AWS API Documentation
+    #
+    class MCPToolDetail < Struct.new(
+      :name,
+      :tool_classification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A message in a conversation, either from the user or the assistant.
     #
@@ -4133,6 +4290,22 @@ module Aws::DevOpsAgent
       :exchange_parameters,
       :client_secret)
       SENSITIVE = [:client_id, :exchange_parameters, :client_secret]
+      include Aws::Structure
+    end
+
+    # A regex-based match condition. Passes when the value matches any
+    # pattern.
+    #
+    # @!attribute [rw] patterns
+    #   Anchored full-match regex patterns. The condition passes when the
+    #   value matches at least one pattern.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/PatternFilter AWS API Documentation
+    #
+    class PatternFilter < Struct.new(
+      :patterns)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4850,6 +5023,14 @@ module Aws::DevOpsAgent
     #   The name of the private connection used for VPC connectivity.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The timestamp when the service was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the service was last updated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/RegisteredService AWS API Documentation
     #
     class RegisteredService < Struct.new(
@@ -4859,7 +5040,9 @@ module Aws::DevOpsAgent
       :accessible_resources,
       :additional_service_details,
       :kms_key_arn,
-      :private_connection_name)
+      :private_connection_name,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5302,23 +5485,33 @@ module Aws::DevOpsAgent
     #   @return [String]
     #
     # @!attribute [rw] user_action_response
-    #   Response to a UI prompt (not a text conversation message). Operator
-    #   App SDK clients set this to the control-string sentinel
-    #   `"APPROVAL\_ACTION"` when the request is resuming a paused tool
-    #   call after an operator approval decision; in that case the
-    #   structured decision context lives on the sibling `approvalAction`
-    #   member and the chat agent reads from there. Preserved as a String
-    #   for back-compat: pre-typed-approval clients still encode arbitrary
-    #   UI-prompt responses as JSON in this field, and the chat agent parses
-    #   them out during the transition.
+    #   Response to a UI prompt (not a text conversation message). Set this
+    #   to the sentinel value `"APPROVAL\_ACTION"` when the request is
+    #   resuming a paused execution after an approval decision; in that case
+    #   the structured decision is provided on the sibling
+    #   `approvalAction` member. Preserved as a String for backward
+    #   compatibility: clients that predate the typed approval field may
+    #   still encode UI-prompt responses as JSON in this field.
     #   @return [String]
+    #
+    # @!attribute [rw] approval_action
+    #   An approval decision supplied when resuming a paused agent
+    #   execution. When an agent execution pauses to request approval for an
+    #   elevated action, SendMessage streams an approval request carrying
+    #   interrupt identifiers. To resume the paused execution, call
+    #   SendMessage again with `userActionResponse` set to
+    #   `"APPROVAL\_ACTION"` and this member populated with those
+    #   identifiers and the decision (APPROVED or REJECTED). Optional; omit
+    #   it for messages that are not resuming an approval.
+    #   @return [Types::ApprovalAction]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/SendMessageContext AWS API Documentation
     #
     class SendMessageContext < Struct.new(
       :current_page,
       :last_message,
-      :user_action_response)
+      :user_action_response,
+      :approval_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5374,6 +5567,11 @@ module Aws::DevOpsAgent
     #   Optional list of asset identifiers to attach to the message
     #   @return [Array<String>]
     #
+    # @!attribute [rw] model_tier
+    #   Optional model tier selection. Valid values: smart, balanced, fast.
+    #   Absent or unrecognized values default to balanced.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/SendMessageRequest AWS API Documentation
     #
     class SendMessageRequest < Struct.new(
@@ -5382,7 +5580,8 @@ module Aws::DevOpsAgent
       :content,
       :context,
       :user_id,
-      :asset_ids)
+      :asset_ids,
+      :model_tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5947,6 +6146,30 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Configuration for bidirectional Slack communication.
+    #
+    # @!attribute [rw] role_arn
+    #   IAM role ARN that AWS DevOps Agent assumes to exchange messages with
+    #   your Slack workspace on behalf of this association.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether bidirectional communication is enabled for this association.
+    #   When you set this value to true, you can mention the agent in a
+    #   configured Slack channel and it responds in that channel. When you
+    #   omit this value or set it to false, the agent ignores mentions and
+    #   only sends notifications.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/SlackBidirectionalConfiguration AWS API Documentation
+    #
+    class SlackBidirectionalConfiguration < Struct.new(
+      :role_arn,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a Slack channel with its ID and optional name.
     #
     # @!attribute [rw] channel_name
@@ -5980,12 +6203,19 @@ module Aws::DevOpsAgent
     #   Transmission targets for agent notifications
     #   @return [Types::SlackTransmissionTarget]
     #
+    # @!attribute [rw] bidirectional
+    #   Optional bidirectional communication configuration. Supply this
+    #   configuration and set enabled to true so you can interact with the
+    #   agent directly from Slack.
+    #   @return [Types::SlackBidirectionalConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/SlackConfiguration AWS API Documentation
     #
     class SlackConfiguration < Struct.new(
       :workspace_id,
       :workspace_name,
-      :transmission_target)
+      :transmission_target,
+      :bidirectional)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6009,8 +6239,9 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
-    # Configuration for AWS source account integration. Note: passRole check
-    # on 'assumableRoleArn' is not supported.
+    # Configuration for AWS source account integration. Setting the role
+    # ARNs on this configuration requires the caller to have at least the
+    # iam:PassRole permission (see assumableRoleArn).
     #
     # @!attribute [rw] account_id
     #   AWS Account Id corresponding to provided resources.
@@ -6022,11 +6253,33 @@ module Aws::DevOpsAgent
     #
     # @!attribute [rw] assumable_role_arn
     #   Role ARN to be assumed by AIDevOps to operate on behalf of customer.
+    #   To set this role ARN on AssociateService or UpdateAssociation, the
+    #   caller must have at least the iam:PassRole permission on
+    #   arn:aws:iam::&lt;account-id&gt;:role/* in the caller's own
+    #   account, with the condition iam:PassedToService set to
+    #   aidevops.amazonaws.com. A broader iam:PassRole grant also satisfies
+    #   this requirement.
     #   @return [String]
     #
     # @!attribute [rw] external_id
     #   External ID for additional security when assuming the role. Used to
     #   prevent the confused deputy problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_elevated_role_arn
+    #   Optional IAM role ARN to be assumed by AIDevOps for elevated
+    #   directed actions on behalf of the customer. Used for mutating
+    #   operations gated by elevatedActionsEnabled on the AgentSpace. When
+    #   not provided, only non-elevated directed actions are available for
+    #   this AWS account. Setting this role is subject to the same minimum
+    #   iam:PassRole requirement described on assumableRoleArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_elevated_role_arn_status
+    #   Validation status of the agentElevatedRoleArn. Updated
+    #   asynchronously after the customer registers an elevated role.
+    #   Possible values: PENDING\_CONFIRMATION (validation in progress),
+    #   VALID (role validated), INVALID (validation failed).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/SourceAwsConfiguration AWS API Documentation
@@ -6035,7 +6288,9 @@ module Aws::DevOpsAgent
       :account_id,
       :account_type,
       :assumable_role_arn,
-      :external_id)
+      :external_id,
+      :agent_elevated_role_arn,
+      :agent_elevated_role_arn_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6283,6 +6538,28 @@ module Aws::DevOpsAgent
       class Unknown < TriggerCondition; end
     end
 
+    # A group of trigger conditions. The group matches when ALL present
+    # conditions pass. A group cannot be empty: at least one condition must
+    # be present.
+    #
+    # @!attribute [rw] events
+    #   Passes when the webhook event is one of the listed events.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_branches
+    #   Passes when the change request target branch matches. Applicable to
+    #   RELEASE\_READINESS\_REVIEW only.
+    #   @return [Types::PatternFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/TriggerFilterGroup AWS API Documentation
+    #
+    class TriggerFilterGroup < Struct.new(
+      :events,
+      :target_branches)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to untag.
     #   @return [String]
@@ -6324,13 +6601,21 @@ module Aws::DevOpsAgent
     #   used in agent responses.
     #   @return [String]
     #
+    # @!attribute [rw] preferences
+    #   The preferences to configure on the agent space. When provided, this
+    #   replaces the full set of configured preferences; preferences not
+    #   included revert to their default values. When omitted, the current
+    #   preferences are left unchanged.
+    #   @return [Hash<String,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateAgentSpaceInput AWS API Documentation
     #
     class UpdateAgentSpaceInput < Struct.new(
       :agent_space_id,
       :name,
       :description,
-      :locale)
+      :locale,
+      :preferences)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -6346,6 +6631,112 @@ module Aws::DevOpsAgent
     #
     class UpdateAgentSpaceOutput < Struct.new(
       :agent_space)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request structure for UpdateApprovalAction. Submits the terminal
+    # decision (APPROVED or REJECTED) against an approval request,
+    # optionally carrying the finalized pattern and time-to-live when the
+    # action is APPROVED, or a free-text rationale when the action is
+    # REJECTED. Cross-field invariants between `action` and the
+    # approve-only / reject-only members are enforced by service-side
+    # validation.
+    #
+    # @!attribute [rw] agent_space_id
+    #   The agent space identifier — multi-tenant workspace scope. Bound
+    #   from the request URI.
+    #   @return [String]
+    #
+    # @!attribute [rw] approval_id
+    #   Identifier of the approval request being resolved. A UUID. Bound
+    #   from the request URI.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to take on the approval request — APPROVED or REJECTED.
+    #   @return [String]
+    #
+    # @!attribute [rw] final_pattern
+    #   The finalized pattern (tool + argumentPins) that scopes the
+    #   approval. Required when `action` is APPROVED; must be absent when
+    #   `action` is REJECTED. The pattern narrows, and must not widen, the
+    #   invocation originally requested by the agent. This cross-field
+    #   invariant is enforced by service-side validation.
+    #   @return [Types::ApprovalPattern]
+    #
+    # @!attribute [rw] reason
+    #   Optional free-text rationale for the decision. Permitted when
+    #   `action` is REJECTED; ignored when `action` is APPROVED.
+    #   @return [String]
+    #
+    # @!attribute [rw] ttl_seconds
+    #   Approval lifetime in seconds, starting from when the decision is
+    #   submitted. Required when `action` is APPROVED AND `singleUse` is
+    #   false; must be absent when `action` is REJECTED or when
+    #   `singleUse` is true (a single-use approval backs one executed
+    #   action and the redemption window collapses). Cross-field invariants
+    #   are enforced by service-side validation; the @range bound here is
+    #   the operation-boundary check that always applies (a maximum of 4
+    #   hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] single_use
+    #   Whether the approved action backs a single executed tool call (true)
+    #   or is reusable within ttlSeconds (false). Required when `action`
+    #   is APPROVED; must be absent when `action` is REJECTED. When true,
+    #   ttlSeconds must be absent (the redemption window collapses to the
+    #   single use). When false, ttlSeconds is required and bounds the reuse
+    #   window. Cross-field invariants are enforced by service-side
+    #   validation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateApprovalActionRequest AWS API Documentation
+    #
+    class UpdateApprovalActionRequest < Struct.new(
+      :agent_space_id,
+      :approval_id,
+      :action,
+      :final_pattern,
+      :reason,
+      :ttl_seconds,
+      :single_use)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure for UpdateApprovalAction. Reports the
+    # post-submission lifecycle status of the approval request and, when
+    # applicable, the absolute expiry timestamp. The status is a lifecycle
+    # state distinct from the action verb — an APPROVED submission
+    # transitions the request to APPROVED status (live, redeemable); a
+    # REJECTED submission transitions it to REJECTED status (terminal).
+    #
+    # @!attribute [rw] approval_id
+    #   Identifier of the approval request that was resolved. Echoed back so
+    #   the client can correlate the response with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Lifecycle status of the approval request immediately after
+    #   submission. Expected post-submission states are APPROVED (when the
+    #   action is APPROVED) or REJECTED (when the action is REJECTED);
+    #   PENDING is not returned from this operation, and REVOKED and
+    #   REDEEMED are reachable only via subsequent reads.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   Absolute timestamp at which the approval expires. Set when status is
+    #   APPROVED (computed as the submission time plus ttlSeconds); absent
+    #   when status is REJECTED.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateApprovalActionResponse AWS API Documentation
+    #
+    class UpdateApprovalActionResponse < Struct.new(
+      :approval_id,
+      :status,
+      :expires_at)
       SENSITIVE = []
       include Aws::Structure
     end

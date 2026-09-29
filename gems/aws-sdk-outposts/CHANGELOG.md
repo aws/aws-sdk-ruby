@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2026-09-10)
+------------------
+
+* Feature - Added fields to identify Outpost generation and rack scaling configuration on Outpost and CatalogItem resources.
+
+1.110.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.109.0 (2026-08-18)
+------------------
+
+* Feature - AWS Outposts now supports VPC Endpoint configuration in CreatePrivateConnectivityConfig, enabling scoped private connectivity with provisioning role creation for secure outpost installations
+
 1.108.0 (2026-07-31)
 ------------------
 

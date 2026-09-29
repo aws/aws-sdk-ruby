@@ -621,7 +621,7 @@ module Aws::KafkaConnect
     #
     #   resp.connector_arn #=> String
     #   resp.connector_name #=> String
-    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "RESTARTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/CreateConnector AWS API Documentation
     #
@@ -766,7 +766,7 @@ module Aws::KafkaConnect
     # @example Response structure
     #
     #   resp.connector_arn #=> String
-    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "RESTARTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DeleteConnector AWS API Documentation
     #
@@ -887,7 +887,7 @@ module Aws::KafkaConnect
     #   resp.connector_configuration["__string"] #=> String
     #   resp.connector_description #=> String
     #   resp.connector_name #=> String
-    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "RESTARTING"
     #   resp.creation_time #=> Time
     #   resp.current_version #=> String
     #   resp.kafka_cluster.apache_kafka_cluster.bootstrap_servers #=> String
@@ -954,8 +954,8 @@ module Aws::KafkaConnect
     #
     #   resp.connector_arn #=> String
     #   resp.connector_operation_arn #=> String
-    #   resp.connector_operation_state #=> String, one of "PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE"
-    #   resp.connector_operation_type #=> String, one of "UPDATE_WORKER_SETTING", "UPDATE_CONNECTOR_CONFIGURATION", "ISOLATE_CONNECTOR", "RESTORE_CONNECTOR"
+    #   resp.connector_operation_state #=> String, one of "PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "RESTART_IN_PROGRESS", "RESTART_COMPLETE", "RESTART_FAILED"
+    #   resp.connector_operation_type #=> String, one of "UPDATE_WORKER_SETTING", "UPDATE_CONNECTOR_CONFIGURATION", "ISOLATE_CONNECTOR", "RESTORE_CONNECTOR", "RESTART_CONNECTOR"
     #   resp.operation_steps #=> Array
     #   resp.operation_steps[0].step_type #=> String, one of "INITIALIZE_UPDATE", "FINALIZE_UPDATE", "UPDATE_WORKER_SETTING", "UPDATE_CONNECTOR_CONFIGURATION", "VALIDATE_UPDATE"
     #   resp.operation_steps[0].step_state #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "CANCELLED"
@@ -1117,8 +1117,8 @@ module Aws::KafkaConnect
     #
     #   resp.connector_operations #=> Array
     #   resp.connector_operations[0].connector_operation_arn #=> String
-    #   resp.connector_operations[0].connector_operation_type #=> String, one of "UPDATE_WORKER_SETTING", "UPDATE_CONNECTOR_CONFIGURATION", "ISOLATE_CONNECTOR", "RESTORE_CONNECTOR"
-    #   resp.connector_operations[0].connector_operation_state #=> String, one of "PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE"
+    #   resp.connector_operations[0].connector_operation_type #=> String, one of "UPDATE_WORKER_SETTING", "UPDATE_CONNECTOR_CONFIGURATION", "ISOLATE_CONNECTOR", "RESTORE_CONNECTOR", "RESTART_CONNECTOR"
+    #   resp.connector_operations[0].connector_operation_state #=> String, one of "PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "RESTART_IN_PROGRESS", "RESTART_COMPLETE", "RESTART_FAILED"
     #   resp.connector_operations[0].creation_time #=> Time
     #   resp.connector_operations[0].end_time #=> Time
     #   resp.next_token #=> String
@@ -1178,7 +1178,7 @@ module Aws::KafkaConnect
     #   resp.connectors[0].connector_arn #=> String
     #   resp.connectors[0].connector_description #=> String
     #   resp.connectors[0].connector_name #=> String
-    #   resp.connectors[0].connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.connectors[0].connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "RESTARTING"
     #   resp.connectors[0].creation_time #=> Time
     #   resp.connectors[0].current_version #=> String
     #   resp.connectors[0].kafka_cluster.apache_kafka_cluster.bootstrap_servers #=> String
@@ -1354,6 +1354,47 @@ module Aws::KafkaConnect
       req.send_request(options)
     end
 
+    # Restarts the specified connector. By default, this operation restarts
+    # the connector and all of its tasks. This operation is asynchronous and
+    # returns a connector operation ARN that you can pass to
+    # `DescribeConnectorOperation` to track the state of the restart.
+    #
+    # @option params [required, String] :connector_arn
+    #   The Amazon Resource Name (ARN) of the connector that you want to
+    #   restart.
+    #
+    # @option params [Boolean] :only_failed_tasks
+    #   Specifies whether to restart only the connector's failed tasks. If
+    #   `true`, the operation restarts only the tasks that are currently in a
+    #   failed state, and healthy tasks continue running. If `false` or not
+    #   specified, the operation restarts the connector and all of its tasks.
+    #
+    # @return [Types::RestartConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestartConnectorResponse#connector_arn #connector_arn} => String
+    #   * {Types::RestartConnectorResponse#connector_operation_arn #connector_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restart_connector({
+    #     connector_arn: "__string", # required
+    #     only_failed_tasks: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_arn #=> String
+    #   resp.connector_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/RestartConnector AWS API Documentation
+    #
+    # @overload restart_connector(params = {})
+    # @param [Hash] params ({})
+    def restart_connector(params = {}, options = {})
+      req = build_request(:restart_connector, params)
+      req.send_request(options)
+    end
+
     # Attaches tags to the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -1464,7 +1505,7 @@ module Aws::KafkaConnect
     # @example Response structure
     #
     #   resp.connector_arn #=> String
-    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.connector_state #=> String, one of "RUNNING", "CREATING", "UPDATING", "DELETING", "FAILED", "RESTARTING"
     #   resp.connector_operation_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/UpdateConnector AWS API Documentation
@@ -1494,7 +1535,7 @@ module Aws::KafkaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kafkaconnect'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

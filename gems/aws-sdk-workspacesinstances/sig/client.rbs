@@ -158,7 +158,8 @@ module Aws
                                          cpu_options: {
                                            amd_sev_snp: ("enabled" | "disabled")?,
                                            core_count: ::Integer?,
-                                           threads_per_core: ::Integer?
+                                           threads_per_core: ::Integer?,
+                                           nested_virtualization: ("enabled" | "disabled")?
                                          }?,
                                          credit_specification: {
                                            cpu_credits: ("standard" | "unlimited")?

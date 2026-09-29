@@ -89,6 +89,23 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class AssociateStreamForSegmentsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor destination_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateStreamForSegmentsResponse < Aws::EmptyStructure
+    end
+
+    class AssociatedSegment
+      attr_accessor segment_name: ::String
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPED" | "FAILED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class AttributeDetails
       attr_accessor attributes: ::Array[Types::AttributeItem]
       attr_accessor expression: ::String
@@ -96,7 +113,7 @@ module Aws::CustomerProfiles
     end
 
     class AttributeDimension
-      attr_accessor dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL")
+      attr_accessor dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL" | "LIST_CONTAINS" | "LIST_CONTAINS_ALL")
       attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
@@ -212,7 +229,7 @@ module Aws::CustomerProfiles
     end
 
     class CalculatedAttributeDimension
-      attr_accessor dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL")
+      attr_accessor dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL" | "LIST_CONTAINS" | "LIST_CONTAINS_ALL")
       attr_accessor values: ::Array[::String]
       attr_accessor condition_overrides: Types::ConditionOverrides
       SENSITIVE: [:condition_overrides]
@@ -293,7 +310,7 @@ module Aws::CustomerProfiles
       attr_accessor attribute_details: Types::AttributeDetails
       attr_accessor conditions: Types::Conditions
       attr_accessor filter: Types::Filter
-      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE" | "RECENT_OCCURRENCES")
       attr_accessor use_historical_data: bool
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description, :attribute_details, :conditions, :statistic]
@@ -306,7 +323,7 @@ module Aws::CustomerProfiles
       attr_accessor attribute_details: Types::AttributeDetails
       attr_accessor conditions: Types::Conditions
       attr_accessor filter: Types::Filter
-      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE" | "RECENT_OCCURRENCES")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor use_historical_data: bool
@@ -749,6 +766,17 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class DeleteSegmentSubscriptionRequest
+      attr_accessor domain_name: ::String
+      attr_accessor segment_definition_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSegmentSubscriptionResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class DeleteWorkflowRequest
       attr_accessor domain_name: ::String
       attr_accessor workflow_id: ::String
@@ -795,6 +823,16 @@ module Aws::CustomerProfiles
       end
       class Unknown < Dimension
       end
+    end
+
+    class DisassociateStreamForSegmentsRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateStreamForSegmentsResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DiversityColumn
@@ -1008,7 +1046,7 @@ module Aws::CustomerProfiles
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
-      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE" | "RECENT_OCCURRENCES")
       attr_accessor filter: Types::Filter
       attr_accessor conditions: Types::Conditions
       attr_accessor attribute_details: Types::AttributeDetails
@@ -1421,6 +1459,22 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class GetSegmentSubscriptionRequest
+      attr_accessor domain_name: ::String
+      attr_accessor segment_definition_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSegmentSubscriptionResponse
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPED" | "FAILED")
+      attr_accessor message: ::String
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration
+      attr_accessor scheduled_executions: Types::ScheduledExecutions
+      attr_accessor started_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class GetSimilarProfilesRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -1438,6 +1492,23 @@ module Aws::CustomerProfiles
       attr_accessor rule_level: ::Integer
       attr_accessor confidence_score: ::Float
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamForSegmentsRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamForSegmentsResponse
+      attr_accessor associated_at: ::Time
+      attr_accessor associated_segments: ::Array[Types::AssociatedSegment]
+      attr_accessor domain_name: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor destination_role_arn: ::String
+      attr_accessor state: ("RUNNING" | "UNHEALTHY" | "STOPPED")
+      attr_accessor disassociated_at: ::Time
+      attr_accessor failure_reason: ::String
       SENSITIVE: []
     end
 
@@ -1952,6 +2023,20 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class ListSegmentSubscriptionEventsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor segment_definition_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSegmentSubscriptionEventsResponse
+      attr_accessor events: ::Array[Types::SubscriptionEventItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -2294,6 +2379,20 @@ module Aws::CustomerProfiles
       SENSITIVE: [:description, :fields, :keys]
     end
 
+    class PutSegmentSubscriptionRequest
+      attr_accessor domain_name: ::String
+      attr_accessor segment_definition_name: ::String
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration
+      SENSITIVE: []
+    end
+
+    class PutSegmentSubscriptionResponse
+      attr_accessor status: ("STARTING" | "RUNNING" | "STOPPED" | "FAILED")
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration
+      attr_accessor started_at: ::Time
+      SENSITIVE: []
+    end
+
     class Range
       attr_accessor value: ::Integer
       attr_accessor unit: ("DAYS")
@@ -2325,6 +2424,18 @@ module Aws::CustomerProfiles
     class RecommendationDiversityConfig
       attr_accessor enabled: bool
       attr_accessor values: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
+    class RecommendationMetadata
+      attr_accessor columns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Recommender
+      attr_accessor name: ::String
+      attr_accessor filters: ::Array[Types::RecommenderFilter]
+      attr_accessor promotional_filters: ::Array[Types::RecommenderPromotionalFilter]
       SENSITIVE: []
     end
 
@@ -2470,6 +2581,18 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class ScheduleConfiguration
+      attr_accessor interval: ::Integer
+      attr_accessor unit: ("HOURLY")
+      SENSITIVE: []
+    end
+
+    class ScheduledExecutions
+      attr_accessor next_executed_at: ::Time
+      attr_accessor last_executed_at: ::Time
+      SENSITIVE: []
+    end
+
     class ScheduledTriggerProperties
       attr_accessor schedule_expression: ::String
       attr_accessor data_pull_mode: ("Incremental" | "Complete")
@@ -2496,6 +2619,25 @@ module Aws::CustomerProfiles
       attr_accessor items: ::Array[Types::Profile]
       attr_accessor next_token: ::String
       SENSITIVE: []
+    end
+
+    class SearchRecommendationsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor key_name: ::String
+      attr_accessor key_values: ::Array[::String]
+      attr_accessor recommender: Types::Recommender
+      attr_accessor candidate_ids: ::Array[::String]
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor diversity: Types::RecommendationDiversityConfig
+      attr_accessor metadata: Types::RecommendationMetadata
+      attr_accessor max_recommendations: ::Integer
+      SENSITIVE: [:key_values, :context]
+    end
+
+    class SearchRecommendationsResponse
+      attr_accessor profile_id: ::String
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      SENSITIVE: [:recommendations]
     end
 
     class SegmentDefinitionItem
@@ -2597,6 +2739,14 @@ module Aws::CustomerProfiles
     class StopUploadJobResponse < Aws::EmptyStructure
     end
 
+    class SubscriptionEventItem
+      attr_accessor profile_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor event_type: ("LIVE" | "SCHEDULE")
+      attr_accessor event: ("JOINED" | "LEFT")
+      SENSITIVE: []
+    end
+
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -2682,7 +2832,7 @@ module Aws::CustomerProfiles
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
-      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE" | "RECENT_OCCURRENCES")
       attr_accessor conditions: Types::Conditions
       attr_accessor attribute_details: Types::AttributeDetails
       attr_accessor use_historical_data: bool

@@ -415,6 +415,15 @@ module Aws::Kinesis
     #     When `true`, request parameters are validated before
     #     sending the request.
     #
+    #   @option options [String] :account_id_endpoint_mode
+    #     The account ID endpoint mode to use. This can be one of the following values:
+    #     * `preferred` - The default behavior. Use the account ID endpoint if
+    #       available, otherwise use the standard endpoint.
+    #     * `disabled` - Never use the account ID endpoint. Only use the standard
+    #       endpoint.
+    #     * `required` - Always use the account ID endpoint. If the account ID
+    #       cannot be retrieved from credentials, an error is raised.
+    #
     #   @option options [Aws::Kinesis::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to
     #     `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
@@ -544,6 +553,378 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Creates a channel that delivers records from a Kinesis data stream to
+    # a destination. A channel reads records from the specified stream and
+    # writes them to streaming tables on Apache Iceberg (Amazon S3 Tables)
+    # or to a general purpose Amazon S3 bucket.
+    #
+    # You must specify either `S3DestinationConfiguration` or
+    # `S3TablesDestinationConfiguration`, but not both.
+    #
+    # To use this operation, you must have permission to pass the specified
+    # service execution IAM role to Amazon Kinesis Data Streams (the
+    # `iam:PassRole` permission on that role).
+    #
+    # Creating a channel is an asynchronous operation. Upon receiving the
+    # request, Amazon Kinesis Data Streams returns immediately with the
+    # channel in the `CREATING` state. After provisioning is complete,
+    # Amazon Kinesis Data Streams sets the state to `ACTIVE`. You can use
+    # DescribeChannel to check the current state.
+    #
+    # This operation is only supported for data streams with the on-demand
+    # capacity mode.
+    #
+    # This operation has a call limit of 5 transactions per second (TPS) for
+    # each Amazon Web Services account. Exceeding 5 TPS results in a
+    # `LimitExceededException`.
+    #
+    # @option params [required, String] :channel_name
+    #   The name of the channel. The name is unique within your Amazon Web
+    #   Services account and Amazon Web Services Region.
+    #
+    # @option params [required, String] :service_execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that Amazon Kinesis
+    #   Data Streams assumes to write records to the destination.
+    #
+    # @option params [required, Array<Types::ChannelStreamConfiguration>] :stream_configuration_list
+    #   The source stream configuration for the channel. Currently, one stream
+    #   is supported per channel.
+    #
+    # @option params [Types::S3DestinationConfiguration] :s3_destination_configuration
+    #   The configuration for delivery to a general purpose Amazon S3 bucket.
+    #   Specify this parameter when `S3TablesDestinationConfiguration` is not
+    #   specified.
+    #
+    # @option params [Types::S3TablesDestinationConfiguration] :s3_tables_destination_configuration
+    #   The configuration for delivery to streaming tables on Apache Iceberg
+    #   in Amazon S3 Tables. Specify this parameter when
+    #   `S3DestinationConfiguration` is not specified.
+    #
+    # @option params [Types::ChannelEncryptionConfiguration] :encryption_configuration
+    #   The server-side encryption configuration that uses an Amazon Web
+    #   Services KMS key to encrypt data delivered to the destination.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A set of key-value pairs to assign to the channel. A tag consists of a
+    #   required key and an optional value.
+    #
+    # @option params [Types::ChannelLoggingConfiguration] :logging_configuration
+    #   The Amazon CloudWatch Logs configuration for the channel.
+    #
+    # @return [Types::CreateChannelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateChannelOutput#channel_description #channel_description} => Types::ChannelDescription
+    #
+    #
+    # @example Example: To create an S3 channel
+    #
+    #   resp = client.create_channel({
+    #     channel_name: "my-channel-name", 
+    #     encryption_configuration: {
+    #       encryption_type: "KMS", 
+    #       key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #     }, 
+    #     logging_configuration: {
+    #       cloud_watch_logs: {
+    #         enabled: true, 
+    #         log_group_name: "/aws/kinesis/my-channel", 
+    #         log_stream_name: "my-channel-log-stream", 
+    #       }, 
+    #     }, 
+    #     s3_destination_configuration: {
+    #       dead_letter_queue_s3_configuration: {
+    #         bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
+    #         expected_bucket_owner: "123456789012", 
+    #       }, 
+    #       storage_configuration: {
+    #         bucket_arn: "arn:aws:s3:::my-channel-bucket", 
+    #         compression_type: "ZSTD", 
+    #         expected_bucket_owner: "123456789012", 
+    #       }, 
+    #     }, 
+    #     service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
+    #     stream_configuration_list: [
+    #       {
+    #         record_configuration: {
+    #           record_format_type: "JSON", 
+    #         }, 
+    #         stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_description: {
+    #       channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
+    #       channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
+    #       channel_id: "my-channel-id", 
+    #       channel_name: "my-channel-name", 
+    #       channel_status: "CREATING", 
+    #       encryption_configuration: {
+    #         encryption_type: "KMS", 
+    #         key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       }, 
+    #       logging_configuration: {
+    #         cloud_watch_logs: {
+    #           enabled: true, 
+    #           log_group_name: "/aws/kinesis/my-channel", 
+    #           log_stream_name: "my-channel-log-stream", 
+    #         }, 
+    #       }, 
+    #       s3_destination_configuration: {
+    #         data_freshness_in_seconds: 300, 
+    #         dead_letter_queue_s3_configuration: {
+    #           bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
+    #           error_output_prefix: "kinesis-channel/errors/my-channel/my-channel-id/", 
+    #           expected_bucket_owner: "123456789012", 
+    #         }, 
+    #         storage_configuration: {
+    #           bucket_arn: "arn:aws:s3:::my-channel-bucket", 
+    #           compression_type: "ZSTD", 
+    #           expected_bucket_owner: "123456789012", 
+    #           output_key_template: "kinesis-channel/!{channel-name}/!{channel-id}/!{yyyy}/!{MM}/!{dd}/!{HH}/!{channel-name}-!{channel-id}-!{yyyy}-!{MM}-!{dd}-!{HH}-!{mm}!{extension}", 
+    #           storage_class: "STANDARD", 
+    #         }, 
+    #       }, 
+    #       service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
+    #       stream_configuration_list: [
+    #         {
+    #           record_configuration: {
+    #             record_format_type: "JSON", 
+    #           }, 
+    #           stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
+    #           stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create an S3 Tables channel
+    #
+    #   resp = client.create_channel({
+    #     channel_name: "my-channel-name", 
+    #     encryption_configuration: {
+    #       encryption_type: "KMS", 
+    #       key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #     }, 
+    #     logging_configuration: {
+    #       cloud_watch_logs: {
+    #         enabled: true, 
+    #         log_group_name: "/aws/kinesis/my-channel", 
+    #         log_stream_name: "my-channel-log-stream", 
+    #       }, 
+    #     }, 
+    #     s3_tables_destination_configuration: {
+    #       dead_letter_queue_s3_configuration: {
+    #         bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
+    #         expected_bucket_owner: "123456789012", 
+    #       }, 
+    #       s3_tables_configuration_list: [
+    #         {
+    #           compression_type: "ZSTD", 
+    #           namespace: "my_namespace", 
+    #           partition_spec: {
+    #             partition_fields: [
+    #               {
+    #                 source_name: "creation_ts", 
+    #                 transform: "TIME_HOUR", 
+    #               }, 
+    #             ], 
+    #           }, 
+    #           table_bucket_arn: "arn:aws:s3tables:us-east-1:123456789012:bucket/my-table-bucket", 
+    #           table_name: "my_table", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
+    #     stream_configuration_list: [
+    #       {
+    #         record_configuration: {
+    #           gsr_schema_arn: "arn:aws:glue:us-east-1:123456789012:schema/my-registry/my-schema", 
+    #           record_format_type: "JSON", 
+    #         }, 
+    #         stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_description: {
+    #       channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
+    #       channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
+    #       channel_id: "my-channel-id", 
+    #       channel_name: "my-channel-name", 
+    #       channel_status: "CREATING", 
+    #       encryption_configuration: {
+    #         encryption_type: "KMS", 
+    #         key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       }, 
+    #       logging_configuration: {
+    #         cloud_watch_logs: {
+    #           enabled: true, 
+    #           log_group_name: "/aws/kinesis/my-channel", 
+    #           log_stream_name: "my-channel-log-stream", 
+    #         }, 
+    #       }, 
+    #       s3_tables_destination_configuration: {
+    #         data_freshness_in_seconds: 300, 
+    #         dead_letter_queue_s3_configuration: {
+    #           bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
+    #           error_output_prefix: "kinesis-channel/errors/my-channel/my-channel-id/", 
+    #           expected_bucket_owner: "123456789012", 
+    #         }, 
+    #         s3_tables_configuration_list: [
+    #           {
+    #             compression_type: "ZSTD", 
+    #             namespace: "my_namespace", 
+    #             partition_spec: {
+    #               partition_fields: [
+    #                 {
+    #                   source_name: "creation_ts", 
+    #                   transform: "TIME_HOUR", 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #             table_bucket_arn: "arn:aws:s3tables:us-east-1:123456789012:bucket/my-table-bucket", 
+    #             table_name: "my_table", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
+    #       stream_configuration_list: [
+    #         {
+    #           record_configuration: {
+    #             gsr_schema_arn: "arn:aws:glue:us-east-1:123456789012:schema/my-registry/my-schema", 
+    #             record_format_type: "JSON", 
+    #           }, 
+    #           stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
+    #           stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_channel({
+    #     channel_name: "ChannelName", # required
+    #     service_execution_role_arn: "RoleARN", # required
+    #     stream_configuration_list: [ # required
+    #       {
+    #         stream_arn: "StreamARN", # required
+    #         record_configuration: { # required
+    #           record_format_type: "GSR_JSON", # required, accepts GSR_JSON, JSON, STRING, BYTE_ARRAY
+    #           gsr_schema_arn: "GSRSchemaARN",
+    #         },
+    #       },
+    #     ],
+    #     s3_destination_configuration: {
+    #       data_freshness_in_seconds: 1,
+    #       dead_letter_queue_s3_configuration: {
+    #         bucket_arn: "BucketARN", # required
+    #         expected_bucket_owner: "ExpectedBucketOwner", # required
+    #         error_output_prefix: "S3ErrorOutputPrefix",
+    #       },
+    #       storage_configuration: { # required
+    #         bucket_arn: "BucketARN", # required
+    #         expected_bucket_owner: "ExpectedBucketOwner", # required
+    #         output_key_template: "S3OutputKeyTemplate",
+    #         storage_class: "STANDARD", # accepts STANDARD, INTELLIGENT_TIERING, GLACIER_IR
+    #         compression_type: "NONE", # required, accepts NONE, GZIP, ZSTD
+    #       },
+    #     },
+    #     s3_tables_destination_configuration: {
+    #       data_freshness_in_seconds: 1,
+    #       dead_letter_queue_s3_configuration: { # required
+    #         bucket_arn: "BucketARN", # required
+    #         expected_bucket_owner: "ExpectedBucketOwner", # required
+    #         error_output_prefix: "S3ErrorOutputPrefix",
+    #       },
+    #       s3_tables_configuration_list: [ # required
+    #         {
+    #           table_bucket_arn: "TableBucketARN", # required
+    #           namespace: "S3TablesNamespace", # required
+    #           table_name: "S3TablesTableName", # required
+    #           compression_type: "NONE", # required, accepts NONE, ZSTD, SNAPPY
+    #           partition_spec: {
+    #             partition_fields: [ # required
+    #               {
+    #                 transform: "TIME_HOUR", # required, accepts TIME_HOUR
+    #                 source_name: "PartitionSourceName", # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     encryption_configuration: {
+    #       encryption_type: "KMS", # required, accepts KMS
+    #       key_id: "KeyId", # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     logging_configuration: {
+    #       cloud_watch_logs: { # required
+    #         enabled: false, # required
+    #         log_group_name: "CloudWatchLogGroupName",
+    #         log_stream_name: "CloudWatchLogStreamName",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_description.channel_name #=> String
+    #   resp.channel_description.channel_arn #=> String
+    #   resp.channel_description.channel_id #=> String
+    #   resp.channel_description.channel_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.channel_description.channel_status_reason #=> String
+    #   resp.channel_description.channel_creation_timestamp #=> Time
+    #   resp.channel_description.service_execution_role_arn #=> String
+    #   resp.channel_description.stream_configuration_list #=> Array
+    #   resp.channel_description.stream_configuration_list[0].stream_arn #=> String
+    #   resp.channel_description.stream_configuration_list[0].stream_creation_timestamp #=> Time
+    #   resp.channel_description.stream_configuration_list[0].record_configuration.record_format_type #=> String, one of "GSR_JSON", "JSON", "STRING", "BYTE_ARRAY"
+    #   resp.channel_description.stream_configuration_list[0].record_configuration.gsr_schema_arn #=> String
+    #   resp.channel_description.s3_destination_configuration.data_freshness_in_seconds #=> Integer
+    #   resp.channel_description.s3_destination_configuration.dead_letter_queue_s3_configuration.bucket_arn #=> String
+    #   resp.channel_description.s3_destination_configuration.dead_letter_queue_s3_configuration.expected_bucket_owner #=> String
+    #   resp.channel_description.s3_destination_configuration.dead_letter_queue_s3_configuration.error_output_prefix #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.bucket_arn #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.expected_bucket_owner #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.output_key_template #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.storage_class #=> String, one of "STANDARD", "INTELLIGENT_TIERING", "GLACIER_IR"
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.compression_type #=> String, one of "NONE", "GZIP", "ZSTD"
+    #   resp.channel_description.s3_tables_destination_configuration.data_freshness_in_seconds #=> Integer
+    #   resp.channel_description.s3_tables_destination_configuration.dead_letter_queue_s3_configuration.bucket_arn #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.dead_letter_queue_s3_configuration.expected_bucket_owner #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.dead_letter_queue_s3_configuration.error_output_prefix #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list #=> Array
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].table_bucket_arn #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].namespace #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].table_name #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].compression_type #=> String, one of "NONE", "ZSTD", "SNAPPY"
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].partition_spec.partition_fields #=> Array
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].partition_spec.partition_fields[0].transform #=> String, one of "TIME_HOUR"
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].partition_spec.partition_fields[0].source_name #=> String
+    #   resp.channel_description.encryption_configuration.encryption_type #=> String, one of "KMS"
+    #   resp.channel_description.encryption_configuration.key_id #=> String
+    #   resp.channel_description.logging_configuration.cloud_watch_logs.enabled #=> Boolean
+    #   resp.channel_description.logging_configuration.cloud_watch_logs.log_group_name #=> String
+    #   resp.channel_description.logging_configuration.cloud_watch_logs.log_stream_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateChannel AWS API Documentation
+    #
+    # @overload create_channel(params = {})
+    # @param [Hash] params ({})
+    def create_channel(params = {}, options = {})
+      req = build_request(:create_channel, params)
+      req.send_request(options)
+    end
+
     # Creates a Kinesis data stream. A stream captures and transports data
     # records that are continuously emitted from different data sources or
     # *producers*. Scale-out within a stream is explicitly supported by
@@ -647,6 +1028,24 @@ module Aws::Kinesis
     #   The maximum record size of a single record in kibibyte (KiB) that you
     #   can write to, and read from a stream.
     #
+    # @option params [String] :record_distribution_strategy
+    #   The record distribution strategy for the stream, which determines how
+    #   Amazon Kinesis Data Streams distributes records across shards. Specify
+    #   one of the following values:
+    #
+    #   * `AUTO` – Amazon Kinesis Data Streams distributes records evenly
+    #     across shards and ignores any partition key and `ExplicitHashKey`
+    #     that producers supply. Use this value for stateless workloads that
+    #     do not require partition-key ordering.
+    #
+    #   * `USER_PARTITION_KEY` – Producers must supply a partition key, which
+    #     Amazon Kinesis Data Streams uses to determine shard placement. This
+    #     is the default.
+    #
+    #   The record distribution strategy is only supported for streams that
+    #   use the on-demand capacity mode. If you do not specify this parameter,
+    #   the stream uses `USER_PARTITION_KEY`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -662,6 +1061,7 @@ module Aws::Kinesis
     #     },
     #     warm_throughput_mi_bps: 1,
     #     max_record_size_in_ki_b: 1,
+    #     record_distribution_strategy: "AUTO", # accepts AUTO, USER_PARTITION_KEY
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStream AWS API Documentation
@@ -717,6 +1117,49 @@ module Aws::Kinesis
     # @param [Hash] params ({})
     def decrease_stream_retention_period(params = {}, options = {})
       req = build_request(:decrease_stream_retention_period, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified channel. Deleting a channel stops delivery from
+    # the source stream to the destination. Data already delivered to the
+    # destination is not deleted.
+    #
+    # A stream cannot be deleted while it has active channels. Use
+    # ListChannels with a stream filter to find the channels attached to a
+    # stream before deleting it.
+    #
+    # This operation has a call limit of 5 transactions per second (TPS) for
+    # each Amazon Web Services account. Exceeding 5 TPS results in a
+    # `LimitExceededException`.
+    #
+    # @option params [required, String] :channel_arn
+    #   The Amazon Resource Name (ARN) of the channel to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a channel
+    #
+    #   resp = client.delete_channel({
+    #     channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_channel({
+    #     channel_arn: "ChannelARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteChannel AWS API Documentation
+    #
+    # @overload delete_channel(params = {})
+    # @param [Hash] params ({})
+    def delete_channel(params = {}, options = {})
+      req = build_request(:delete_channel, params)
       req.send_request(options)
     end
 
@@ -895,6 +1338,139 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Describes the specified channel, including its configuration and
+    # current status.
+    #
+    # Use this operation to verify that a channel reached the `ACTIVE` state
+    # after creation, or to diagnose a channel in the `FAILED` state by
+    # reading the `ChannelStatusReason`.
+    #
+    # This operation has a call limit of 5 transactions per second (TPS) for
+    # each Amazon Web Services account. Exceeding 5 TPS results in a
+    # `LimitExceededException`.
+    #
+    # @option params [required, String] :channel_arn
+    #   The Amazon Resource Name (ARN) of the channel to describe.
+    #
+    # @return [Types::DescribeChannelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeChannelOutput#channel_description #channel_description} => Types::ChannelDescription
+    #
+    #
+    # @example Example: To describe a channel
+    #
+    #   resp = client.describe_channel({
+    #     channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_description: {
+    #       channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
+    #       channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
+    #       channel_id: "my-channel-id", 
+    #       channel_name: "my-channel-name", 
+    #       channel_status: "ACTIVE", 
+    #       encryption_configuration: {
+    #         encryption_type: "KMS", 
+    #         key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       }, 
+    #       logging_configuration: {
+    #         cloud_watch_logs: {
+    #           enabled: true, 
+    #           log_group_name: "/aws/kinesis/my-channel", 
+    #           log_stream_name: "my-channel-log-stream", 
+    #         }, 
+    #       }, 
+    #       s3_destination_configuration: {
+    #         data_freshness_in_seconds: 300, 
+    #         dead_letter_queue_s3_configuration: {
+    #           bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
+    #           error_output_prefix: "kinesis-channel/errors/my-channel/my-channel-id/", 
+    #           expected_bucket_owner: "123456789012", 
+    #         }, 
+    #         storage_configuration: {
+    #           bucket_arn: "arn:aws:s3:::my-channel-bucket", 
+    #           compression_type: "ZSTD", 
+    #           expected_bucket_owner: "123456789012", 
+    #           output_key_template: "kinesis-channel/!{channel-name}/!{channel-id}/!{yyyy}/!{MM}/!{dd}/!{HH}/!{channel-name}-!{channel-id}-!{yyyy}-!{MM}-!{dd}-!{HH}-!{mm}!{extension}", 
+    #           storage_class: "STANDARD", 
+    #         }, 
+    #       }, 
+    #       service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
+    #       stream_configuration_list: [
+    #         {
+    #           record_configuration: {
+    #             record_format_type: "JSON", 
+    #           }, 
+    #           stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
+    #           stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_channel({
+    #     channel_arn: "ChannelARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_description.channel_name #=> String
+    #   resp.channel_description.channel_arn #=> String
+    #   resp.channel_description.channel_id #=> String
+    #   resp.channel_description.channel_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.channel_description.channel_status_reason #=> String
+    #   resp.channel_description.channel_creation_timestamp #=> Time
+    #   resp.channel_description.service_execution_role_arn #=> String
+    #   resp.channel_description.stream_configuration_list #=> Array
+    #   resp.channel_description.stream_configuration_list[0].stream_arn #=> String
+    #   resp.channel_description.stream_configuration_list[0].stream_creation_timestamp #=> Time
+    #   resp.channel_description.stream_configuration_list[0].record_configuration.record_format_type #=> String, one of "GSR_JSON", "JSON", "STRING", "BYTE_ARRAY"
+    #   resp.channel_description.stream_configuration_list[0].record_configuration.gsr_schema_arn #=> String
+    #   resp.channel_description.s3_destination_configuration.data_freshness_in_seconds #=> Integer
+    #   resp.channel_description.s3_destination_configuration.dead_letter_queue_s3_configuration.bucket_arn #=> String
+    #   resp.channel_description.s3_destination_configuration.dead_letter_queue_s3_configuration.expected_bucket_owner #=> String
+    #   resp.channel_description.s3_destination_configuration.dead_letter_queue_s3_configuration.error_output_prefix #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.bucket_arn #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.expected_bucket_owner #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.output_key_template #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.storage_class #=> String, one of "STANDARD", "INTELLIGENT_TIERING", "GLACIER_IR"
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.compression_type #=> String, one of "NONE", "GZIP", "ZSTD"
+    #   resp.channel_description.s3_tables_destination_configuration.data_freshness_in_seconds #=> Integer
+    #   resp.channel_description.s3_tables_destination_configuration.dead_letter_queue_s3_configuration.bucket_arn #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.dead_letter_queue_s3_configuration.expected_bucket_owner #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.dead_letter_queue_s3_configuration.error_output_prefix #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list #=> Array
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].table_bucket_arn #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].namespace #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].table_name #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].compression_type #=> String, one of "NONE", "ZSTD", "SNAPPY"
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].partition_spec.partition_fields #=> Array
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].partition_spec.partition_fields[0].transform #=> String, one of "TIME_HOUR"
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].partition_spec.partition_fields[0].source_name #=> String
+    #   resp.channel_description.encryption_configuration.encryption_type #=> String, one of "KMS"
+    #   resp.channel_description.encryption_configuration.key_id #=> String
+    #   resp.channel_description.logging_configuration.cloud_watch_logs.enabled #=> Boolean
+    #   resp.channel_description.logging_configuration.cloud_watch_logs.log_group_name #=> String
+    #   resp.channel_description.logging_configuration.cloud_watch_logs.log_stream_name #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * channel_active
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeChannel AWS API Documentation
+    #
+    # @overload describe_channel(params = {})
+    # @param [Hash] params ({})
+    def describe_channel(params = {}, options = {})
+      req = build_request(:describe_channel, params)
+      req.send_request(options)
+    end
+
     # Describes the shard limits and usage for the account.
     #
     # If you update your account limits, the old limits might be returned
@@ -908,6 +1484,8 @@ module Aws::Kinesis
     #   * {Types::DescribeLimitsOutput#open_shard_count #open_shard_count} => Integer
     #   * {Types::DescribeLimitsOutput#on_demand_stream_count #on_demand_stream_count} => Integer
     #   * {Types::DescribeLimitsOutput#on_demand_stream_count_limit #on_demand_stream_count_limit} => Integer
+    #   * {Types::DescribeLimitsOutput#channel_count #channel_count} => Integer
+    #   * {Types::DescribeLimitsOutput#channel_count_limit #channel_count_limit} => Integer
     #
     # @example Response structure
     #
@@ -915,6 +1493,8 @@ module Aws::Kinesis
     #   resp.open_shard_count #=> Integer
     #   resp.on_demand_stream_count #=> Integer
     #   resp.on_demand_stream_count_limit #=> Integer
+    #   resp.channel_count #=> Integer
+    #   resp.channel_count_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimits AWS API Documentation
     #
@@ -1164,6 +1744,8 @@ module Aws::Kinesis
     #   resp.stream_description_summary.warm_throughput.target_mi_bps #=> Integer
     #   resp.stream_description_summary.warm_throughput.current_mi_bps #=> Integer
     #   resp.stream_description_summary.max_record_size_in_ki_b #=> Integer
+    #   resp.stream_description_summary.channel_count #=> Integer
+    #   resp.stream_description_summary.record_distribution_strategy #=> String, one of "AUTO", "USER_PARTITION_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummary AWS API Documentation
     #
@@ -1368,12 +1950,16 @@ module Aws::Kinesis
     # iterator reaches the record with the sequence number or other
     # attribute that marks it as the last record to process.
     #
-    # Each data record can be up to 1 MiB in size, and each shard can read
-    # up to 2 MiB per second. You can ensure that your calls don't exceed
-    # the maximum supported size or throughput by using the `Limit`
-    # parameter to specify the maximum number of records that GetRecords can
-    # return. Consider your average record size when determining this limit.
-    # The maximum number of records that can be returned per call is 10,000.
+    # Each data record can be up to 1 MiB in size by default. Amazon Kinesis
+    # Data Streams supports large records up to 10 MiB in size, but the
+    # average throughput for your stream cannot exceed 1 MiB per second. For
+    # more information about how large records are handled, see [Large
+    # records][2]. Each shard can read up to 2 MiB per second. You can
+    # ensure that your calls don't exceed the maximum supported size or
+    # throughput by using the `Limit` parameter to specify the maximum
+    # number of records that GetRecords can return. Consider your average
+    # record size when determining this limit. The maximum number of records
+    # that can be returned per call is 10,000.
     #
     # The size of the data returned by GetRecords varies depending on the
     # utilization of the shard. It is recommended that consumer applications
@@ -1393,7 +1979,7 @@ module Aws::Kinesis
     # To detect whether the application is falling behind in processing, you
     # can use the `MillisBehindLatest` response attribute. You can also
     # monitor the stream using CloudWatch metrics and other mechanisms (see
-    # [Monitoring][2] in the *Amazon Kinesis Data Streams Developer Guide*).
+    # [Monitoring][3] in the *Amazon Kinesis Data Streams Developer Guide*).
     #
     # Each Amazon Kinesis record includes a value,
     # `ApproximateArrivalTimestamp`, that is set when a stream successfully
@@ -1411,7 +1997,8 @@ module Aws::Kinesis
     #
     #
     # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
-    # [2]: https://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html
+    # [2]: https://docs.aws.amazon.com/streams/latest/dev/large-records.html
+    # [3]: https://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html
     #
     # @option params [required, String] :shard_iterator
     #   The position in the shard from which you want to start sequentially
@@ -1429,6 +2016,10 @@ module Aws::Kinesis
     # @option params [String] :stream_id
     #   Not Implemented. Reserved for future use.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
     # @return [Types::GetRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecordsOutput#records #records} => Array&lt;Types::Record&gt;
@@ -1443,6 +2034,7 @@ module Aws::Kinesis
     #     limit: 1,
     #     stream_arn: "StreamARN",
     #     stream_id: "StreamId",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -1613,6 +2205,10 @@ module Aws::Kinesis
     # @option params [String] :stream_id
     #   Not Implemented. Reserved for future use.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
     # @return [Types::GetShardIteratorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetShardIteratorOutput#shard_iterator #shard_iterator} => String
@@ -1627,6 +2223,7 @@ module Aws::Kinesis
     #     timestamp: Time.now,
     #     stream_arn: "StreamARN",
     #     stream_id: "StreamId",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -1692,6 +2289,131 @@ module Aws::Kinesis
     # @param [Hash] params ({})
     def increase_stream_retention_period(params = {}, options = {})
       req = build_request(:increase_stream_retention_period, params)
+      req.send_request(options)
+    end
+
+    # Lists the channels in your account. You can filter the results by
+    # source stream. The results are paginated. Use the `NextToken` value
+    # returned in the response to retrieve additional results.
+    #
+    # Use this operation to find channels before deleting a stream, or to
+    # audit the channels configured in an Amazon Web Services Region.
+    #
+    # This operation has a call limit of 5 transactions per second (TPS) for
+    # each Amazon Web Services account. Exceeding 5 TPS results in a
+    # `LimitExceededException`.
+    #
+    # @option params [Array<Types::StreamFilter>] :stream_filter
+    #   Filters the results to channels associated with the specified streams.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of channels to return in a single call. The default
+    #   value is 100. If you specify a value greater than 100, at most 100
+    #   results are returned.
+    #
+    # @option params [String] :next_token
+    #   The pagination token returned by a previous call. Specify this token
+    #   to retrieve the next page of results.
+    #
+    # @return [Types::ListChannelsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelsOutput#channel_summaries #channel_summaries} => Array&lt;Types::ChannelSummary&gt;
+    #   * {Types::ListChannelsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list channels
+    #
+    #   resp = client.list_channels({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_summaries: [
+    #       {
+    #         channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
+    #         channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
+    #         channel_destination_type: "S3", 
+    #         channel_id: "my-channel-id", 
+    #         channel_name: "my-channel-name", 
+    #         channel_status: "ACTIVE", 
+    #         streams: [
+    #           {
+    #             stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
+    #             stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list channels filtered by stream
+    #
+    #   resp = client.list_channels({
+    #     max_results: 10, 
+    #     stream_filter: [
+    #       {
+    #         stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_summaries: [
+    #       {
+    #         channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
+    #         channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
+    #         channel_destination_type: "S3", 
+    #         channel_id: "my-channel-id", 
+    #         channel_name: "my-channel-name", 
+    #         channel_status: "ACTIVE", 
+    #         streams: [
+    #           {
+    #             stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
+    #             stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     next_token: "AAAAAgAAAAEAAAABbXktbmV4dC1wYWdlLXRva2Vu", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channels({
+    #     stream_filter: [
+    #       {
+    #         stream_arn: "StreamARN", # required
+    #         stream_creation_timestamp: Time.now,
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_summaries #=> Array
+    #   resp.channel_summaries[0].channel_name #=> String
+    #   resp.channel_summaries[0].channel_arn #=> String
+    #   resp.channel_summaries[0].channel_id #=> String
+    #   resp.channel_summaries[0].channel_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.channel_summaries[0].channel_status_reason #=> String
+    #   resp.channel_summaries[0].channel_creation_timestamp #=> Time
+    #   resp.channel_summaries[0].channel_destination_type #=> String, one of "S3", "S3_TABLES"
+    #   resp.channel_summaries[0].streams #=> Array
+    #   resp.channel_summaries[0].streams[0].stream_arn #=> String
+    #   resp.channel_summaries[0].streams[0].stream_creation_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListChannels AWS API Documentation
+    #
+    # @overload list_channels(params = {})
+    # @param [Hash] params ({})
+    def list_channels(params = {}, options = {})
+      req = build_request(:list_channels, params)
       req.send_request(options)
     end
 
@@ -2279,7 +3001,7 @@ module Aws::Kinesis
     #   base64-encoding) is added to the partition key size, the total size
     #   must not exceed the maximum record size (10 MiB).
     #
-    # @option params [required, String] :partition_key
+    # @option params [String] :partition_key
     #   Determines which shard in the stream the data record is assigned to.
     #   Partition keys are Unicode strings with a maximum length limit of 256
     #   characters for each key. Amazon Kinesis Data Streams uses the
@@ -2289,6 +3011,15 @@ module Aws::Kinesis
     #   to map associated data records to shards. As a result of this hashing
     #   mechanism, all data records with the same partition key map to the
     #   same shard within the stream.
+    #
+    #   If the stream uses the `USER_PARTITION_KEY` record distribution
+    #   strategy (the default), a partition key is required. If the stream
+    #   uses the `AUTO` record distribution strategy, the partition key is
+    #   optional and any value you provide is ignored, along with any
+    #   `ExplicitHashKey` you provide. In that case, Amazon Kinesis Data
+    #   Streams distributes the record across shards using service-managed
+    #   algorithms. For more information, see
+    #   `UpdateStreamRecordDistributionStrategy`.
     #
     # @option params [String] :explicit_hash_key
     #   The hash value used to explicitly determine the shard the data record
@@ -2308,6 +3039,10 @@ module Aws::Kinesis
     # @option params [String] :stream_id
     #   Not Implemented. Reserved for future use.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
     # @return [Types::PutRecordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutRecordOutput#shard_id #shard_id} => String
@@ -2319,11 +3054,12 @@ module Aws::Kinesis
     #   resp = client.put_record({
     #     stream_name: "StreamName",
     #     data: "data", # required
-    #     partition_key: "PartitionKey", # required
+    #     partition_key: "PartitionKey",
     #     explicit_hash_key: "HashKey",
     #     sequence_number_for_ordering: "SequenceNumber",
     #     stream_arn: "StreamARN",
     #     stream_id: "StreamId",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -2440,6 +3176,10 @@ module Aws::Kinesis
     # @option params [String] :stream_id
     #   Not Implemented. Reserved for future use.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
     # @return [Types::PutRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutRecordsOutput#failed_record_count #failed_record_count} => Integer
@@ -2453,12 +3193,13 @@ module Aws::Kinesis
     #       {
     #         data: "data", # required
     #         explicit_hash_key: "HashKey",
-    #         partition_key: "PartitionKey", # required
+    #         partition_key: "PartitionKey",
     #       },
     #     ],
     #     stream_name: "StreamName",
     #     stream_arn: "StreamARN",
     #     stream_id: "StreamId",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -3061,6 +3802,176 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Updates the data freshness interval or the Amazon CloudWatch Logs
+    # configuration of an existing channel. You cannot change the
+    # destination, source stream, record format, schema, encryption
+    # configuration, or service execution role of an existing channel. To
+    # change any other setting, delete the channel and create a new one.
+    #
+    # Updating a channel is an asynchronous operation. Upon receiving the
+    # request, Amazon Kinesis Data Streams sets the channel to the
+    # `UPDATING` state and returns immediately. After the change is applied,
+    # Amazon Kinesis Data Streams sets the channel back to the `ACTIVE`
+    # state.
+    #
+    # This operation has a call limit of 5 transactions per second (TPS) for
+    # each Amazon Web Services account. Exceeding 5 TPS results in a
+    # `LimitExceededException`.
+    #
+    # @option params [required, String] :channel_arn
+    #   The Amazon Resource Name (ARN) of the channel to update.
+    #
+    # @option params [Types::S3DestinationUpdateInput] :s3_destination_configuration
+    #   The updated configuration for a general purpose Amazon S3 destination.
+    #   Specify this parameter when the channel delivers to a general purpose
+    #   Amazon S3 bucket. Only `DataFreshnessInSeconds` can be updated.
+    #
+    # @option params [Types::S3TablesDestinationUpdateInput] :s3_tables_destination_configuration
+    #   The updated configuration for a streaming table destination. Specify
+    #   this parameter when the channel delivers to streaming tables on Apache
+    #   Iceberg in Amazon S3 Tables. Only `DataFreshnessInSeconds` can be
+    #   updated.
+    #
+    # @option params [Types::ChannelLoggingUpdateInput] :logging_configuration
+    #   The updated Amazon CloudWatch Logs configuration for the channel.
+    #
+    # @return [Types::UpdateChannelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateChannelOutput#channel_description #channel_description} => Types::ChannelDescription
+    #
+    #
+    # @example Example: To update a channel
+    #
+    #   resp = client.update_channel({
+    #     channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
+    #     logging_configuration: {
+    #       cloud_watch_logs: {
+    #         enabled: true, 
+    #         log_group_name: "/aws/kinesis/my-channel", 
+    #         log_stream_name: "my-channel-log-stream", 
+    #       }, 
+    #     }, 
+    #     s3_destination_configuration: {
+    #       data_freshness_in_seconds: 600, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_description: {
+    #       channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
+    #       channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
+    #       channel_id: "my-channel-id", 
+    #       channel_name: "my-channel-name", 
+    #       channel_status: "UPDATING", 
+    #       encryption_configuration: {
+    #         encryption_type: "KMS", 
+    #         key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       }, 
+    #       logging_configuration: {
+    #         cloud_watch_logs: {
+    #           enabled: true, 
+    #           log_group_name: "/aws/kinesis/my-channel", 
+    #           log_stream_name: "my-channel-log-stream", 
+    #         }, 
+    #       }, 
+    #       s3_destination_configuration: {
+    #         data_freshness_in_seconds: 600, 
+    #         dead_letter_queue_s3_configuration: {
+    #           bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
+    #           error_output_prefix: "kinesis-channel/errors/my-channel/my-channel-id/", 
+    #           expected_bucket_owner: "123456789012", 
+    #         }, 
+    #         storage_configuration: {
+    #           bucket_arn: "arn:aws:s3:::my-channel-bucket", 
+    #           compression_type: "ZSTD", 
+    #           expected_bucket_owner: "123456789012", 
+    #           output_key_template: "kinesis-channel/!{channel-name}/!{channel-id}/!{yyyy}/!{MM}/!{dd}/!{HH}/!{channel-name}-!{channel-id}-!{yyyy}-!{MM}-!{dd}-!{HH}-!{mm}!{extension}", 
+    #           storage_class: "STANDARD", 
+    #         }, 
+    #       }, 
+    #       service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
+    #       stream_configuration_list: [
+    #         {
+    #           record_configuration: {
+    #             record_format_type: "JSON", 
+    #           }, 
+    #           stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
+    #           stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_channel({
+    #     channel_arn: "ChannelARN", # required
+    #     s3_destination_configuration: {
+    #       data_freshness_in_seconds: 1, # required
+    #     },
+    #     s3_tables_destination_configuration: {
+    #       data_freshness_in_seconds: 1, # required
+    #     },
+    #     logging_configuration: {
+    #       cloud_watch_logs: { # required
+    #         enabled: false, # required
+    #         log_group_name: "CloudWatchLogGroupName",
+    #         log_stream_name: "CloudWatchLogStreamName",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_description.channel_name #=> String
+    #   resp.channel_description.channel_arn #=> String
+    #   resp.channel_description.channel_id #=> String
+    #   resp.channel_description.channel_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.channel_description.channel_status_reason #=> String
+    #   resp.channel_description.channel_creation_timestamp #=> Time
+    #   resp.channel_description.service_execution_role_arn #=> String
+    #   resp.channel_description.stream_configuration_list #=> Array
+    #   resp.channel_description.stream_configuration_list[0].stream_arn #=> String
+    #   resp.channel_description.stream_configuration_list[0].stream_creation_timestamp #=> Time
+    #   resp.channel_description.stream_configuration_list[0].record_configuration.record_format_type #=> String, one of "GSR_JSON", "JSON", "STRING", "BYTE_ARRAY"
+    #   resp.channel_description.stream_configuration_list[0].record_configuration.gsr_schema_arn #=> String
+    #   resp.channel_description.s3_destination_configuration.data_freshness_in_seconds #=> Integer
+    #   resp.channel_description.s3_destination_configuration.dead_letter_queue_s3_configuration.bucket_arn #=> String
+    #   resp.channel_description.s3_destination_configuration.dead_letter_queue_s3_configuration.expected_bucket_owner #=> String
+    #   resp.channel_description.s3_destination_configuration.dead_letter_queue_s3_configuration.error_output_prefix #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.bucket_arn #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.expected_bucket_owner #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.output_key_template #=> String
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.storage_class #=> String, one of "STANDARD", "INTELLIGENT_TIERING", "GLACIER_IR"
+    #   resp.channel_description.s3_destination_configuration.storage_configuration.compression_type #=> String, one of "NONE", "GZIP", "ZSTD"
+    #   resp.channel_description.s3_tables_destination_configuration.data_freshness_in_seconds #=> Integer
+    #   resp.channel_description.s3_tables_destination_configuration.dead_letter_queue_s3_configuration.bucket_arn #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.dead_letter_queue_s3_configuration.expected_bucket_owner #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.dead_letter_queue_s3_configuration.error_output_prefix #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list #=> Array
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].table_bucket_arn #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].namespace #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].table_name #=> String
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].compression_type #=> String, one of "NONE", "ZSTD", "SNAPPY"
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].partition_spec.partition_fields #=> Array
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].partition_spec.partition_fields[0].transform #=> String, one of "TIME_HOUR"
+    #   resp.channel_description.s3_tables_destination_configuration.s3_tables_configuration_list[0].partition_spec.partition_fields[0].source_name #=> String
+    #   resp.channel_description.encryption_configuration.encryption_type #=> String, one of "KMS"
+    #   resp.channel_description.encryption_configuration.key_id #=> String
+    #   resp.channel_description.logging_configuration.cloud_watch_logs.enabled #=> Boolean
+    #   resp.channel_description.logging_configuration.cloud_watch_logs.log_group_name #=> String
+    #   resp.channel_description.logging_configuration.cloud_watch_logs.log_stream_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateChannel AWS API Documentation
+    #
+    # @overload update_channel(params = {})
+    # @param [Hash] params ({})
+    def update_channel(params = {}, options = {})
+      req = build_request(:update_channel, params)
+      req.send_request(options)
+    end
+
     # This allows you to update the `MaxRecordSize` of a single record that
     # you can write to, and read from a stream. You can ingest and digest
     # single records up to 10240 KiB.
@@ -3268,11 +4179,84 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Updates the record distribution strategy for the specified Amazon
+    # Kinesis Data Streams on-demand data stream. The record distribution
+    # strategy determines how Amazon Kinesis Data Streams distributes
+    # records across the shards in a stream.
+    #
+    # <note markdown="1"> You must specify the stream using the `StreamARN` parameter.
+    #
+    #  </note>
+    #
+    # The record distribution strategy is a stream-level setting. You can
+    # switch between the following strategies at any time, and the change
+    # takes effect immediately without downtime, data loss, or disruption to
+    # producer or consumer applications:
+    #
+    # * `AUTO` – Amazon Kinesis Data Streams distributes records evenly
+    #   across shards using service-managed algorithms, and ignores any
+    #   partition key and `ExplicitHashKey` that a producer provides. Use
+    #   this strategy for stateless workloads that do not require
+    #   partition-key ordering.
+    #
+    # * `USER_PARTITION_KEY` – Producers must provide a partition key, and
+    #   Amazon Kinesis Data Streams uses the partition key to determine
+    #   shard placement. Records that share a partition key are sent to the
+    #   same shard. This is the default strategy.
+    #
+    # This operation is only supported for data streams that use the
+    # on-demand capacity mode. Provisioned capacity mode streams do not
+    # support the record distribution strategy setting. Attempting to set
+    # `AUTO` on a provisioned stream results in an
+    # `InvalidArgumentException`.
+    #
+    # New records that arrive after the change are distributed according to
+    # the new strategy. Records already in the stream keep their original
+    # shard assignments and are not redistributed.
+    #
+    # @option params [required, String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream to update.
+    #
+    # @option params [String] :stream_id
+    #   Not Implemented. Reserved for future use.
+    #
+    # @option params [required, String] :record_distribution_strategy
+    #   The record distribution strategy to apply to the stream. Specify one
+    #   of the following values:
+    #
+    #   * `AUTO` – Amazon Kinesis Data Streams distributes records evenly
+    #     across shards and ignores any partition key and `ExplicitHashKey`
+    #     that producers supply.
+    #
+    #   * `USER_PARTITION_KEY` – Producers must supply a partition key, which
+    #     Amazon Kinesis Data Streams uses to determine shard placement. This
+    #     is the default.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_stream_record_distribution_strategy({
+    #     stream_arn: "StreamARN", # required
+    #     stream_id: "StreamId",
+    #     record_distribution_strategy: "AUTO", # required, accepts AUTO, USER_PARTITION_KEY
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateStreamRecordDistributionStrategy AWS API Documentation
+    #
+    # @overload update_stream_record_distribution_strategy(params = {})
+    # @param [Hash] params ({})
+    def update_stream_record_distribution_strategy(params = {}, options = {})
+      req = build_request(:update_stream_record_distribution_strategy, params)
+      req.send_request(options)
+    end
+
     # Updates the warm throughput configuration for the specified Amazon
-    # Kinesis Data Streams on-demand data stream. This operation allows you
-    # to proactively scale your on-demand data stream to a specified
-    # throughput level, enabling better performance for sudden traffic
-    # spikes.
+    # Kinesis Data Streams on-demand data stream. Updates the warm
+    # throughput configuration for the specified on-demand data stream. Use
+    # this operation to scale your stream to a specified throughput level
+    # before anticipated traffic spikes, or to release excess capacity after
+    # traffic has decreased.
     #
     # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
     # `StreamName` parameter, or both. It is recommended that you use the
@@ -3292,6 +4276,9 @@ module Aws::Kinesis
     # capacity mode in accounts that have
     # `MinimumThroughputBillingCommitment` enabled. Provisioned capacity
     # mode streams do not support warm throughput configuration.
+    #
+    # To release excess capacity, call the API again and set the warm
+    # throughput to the same or a lower value.
     #
     # This operation has the following default limits. By default, you
     # cannot do the following:
@@ -3375,7 +4362,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -3441,10 +4428,11 @@ module Aws::Kinesis
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params                   | :delay   | :max_attempts |
-    # | ----------------- | ------------------------ | -------- | ------------- |
-    # | stream_exists     | {Client#describe_stream} | 10       | 18            |
-    # | stream_not_exists | {Client#describe_stream} | 10       | 18            |
+    # | waiter_name       | params                    | :delay   | :max_attempts |
+    # | ----------------- | ------------------------- | -------- | ------------- |
+    # | channel_active    | {Client#describe_channel} | 10       | 18            |
+    # | stream_exists     | {Client#describe_stream}  | 10       | 18            |
+    # | stream_not_exists | {Client#describe_stream}  | 10       | 18            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -3495,6 +4483,7 @@ module Aws::Kinesis
 
     def waiters
       {
+        channel_active: Waiters::ChannelActive,
         stream_exists: Waiters::StreamExists,
         stream_not_exists: Waiters::StreamNotExists
       }

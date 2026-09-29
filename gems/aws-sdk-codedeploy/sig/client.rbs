@@ -234,6 +234,7 @@ module Aws
                                },
                                ?update_outdated_instances_only: bool,
                                ?file_exists_behavior: ("DISALLOW" | "OVERWRITE" | "RETAIN"),
+                               ?deployment_mode: ("STANDARD" | "RESTART"),
                                ?override_alarm_configuration: {
                                  enabled: bool?,
                                  ignore_poll_alarm_failure: bool?,

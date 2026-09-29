@@ -124,6 +124,9 @@ module Aws
         initialization_vector: ::String?,
         padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
       }?,
+      asymmetric: {
+        padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
+      }?,
       dukpt: {
         key_serial_number: ::String,
         mode: ("ECB" | "CBC")?,

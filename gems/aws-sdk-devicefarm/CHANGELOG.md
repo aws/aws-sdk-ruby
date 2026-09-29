@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.110.0 (2026-08-21)
+------------------
+
+* Feature - Added support to CreateRemoveAccessSession for selecting a server version on the mobile WebDriver endpoint.
+
 1.109.0 (2026-08-06)
 ------------------
 

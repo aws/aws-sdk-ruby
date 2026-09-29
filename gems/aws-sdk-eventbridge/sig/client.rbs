@@ -425,6 +425,7 @@ module Aws
         def log_config: () -> Types::LogConfig
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
+        def managed_by: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridge/Client.html#describe_event_bus-instance_method
       def describe_event_bus: (

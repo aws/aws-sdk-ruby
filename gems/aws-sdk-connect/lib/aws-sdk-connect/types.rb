@@ -10,6 +10,26 @@
 module Aws::Connect
   module Types
 
+    # Information about an AI agent that a security profile allows access to
+    # for Agent-to-Agent authorization.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the AI agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the AI agent. The valid value is `THIRD_PARTY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AIAgent AWS API Documentation
+    #
+    class AIAgent < Struct.new(
+      :arn,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You do not have sufficient permissions to perform this action.
     #
     # @!attribute [rw] message
@@ -367,6 +387,13 @@ module Aws::Connect
     #   user.
     #   @return [String]
     #
+    # @!attribute [rw] active_region
+    #   The Region where the agent was active when they handled the contact.
+    #   For Amazon Connect Global Resiliency instances enabled for global
+    #   routing, this indicates the Region in which the agent's session was
+    #   established at the time of the contact.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentInfo AWS API Documentation
     #
     class AgentInfo < Struct.new(
@@ -383,7 +410,8 @@ module Aws::Connect
       :after_contact_work_end_timestamp,
       :agent_initiated_hold_duration,
       :state_transitions,
-      :voice_enhancement_mode)
+      :voice_enhancement_mode,
+      :active_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3716,6 +3744,28 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The credentials that a chat participant uses to connect to the Connect
+    # Customer Participant Service.
+    #
+    # @!attribute [rw] connection_token
+    #   The connection token used by the chat participant to call the
+    #   Connect Customer Participant Service.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry
+    #   The expiration of the token. It's specified in ISO 8601 format:
+    #   yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ConnectionCredentials AWS API Documentation
+    #
+    class ConnectionCredentials < Struct.new(
+      :connection_token,
+      :expiry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information required to join the call.
     #
     # @!attribute [rw] attendee
@@ -4056,6 +4106,47 @@ module Aws::Connect
     #
     class ContactAnalysis < Struct.new(
       :transcript)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a reference when the `referenceType` is
+    # `CONTACT_ANALYSIS`. Otherwise, null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the contact analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The location path of the contact analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the contact analysis reference type.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the contact analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] analytics_mode
+    #   The analytics mode of the contact analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_redacted
+    #   Indicates whether sensitive data has been redacted from the contact
+    #   analysis.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactAnalysisReference AWS API Documentation
+    #
+    class ContactAnalysisReference < Struct.new(
+      :name,
+      :value,
+      :status,
+      :arn,
+      :analytics_mode,
+      :is_redacted)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6376,6 +6467,11 @@ module Aws::Connect
     #   Configuration for language settings of the evaluation form.
     #   @return [Types::EvaluationFormLanguageConfiguration]
     #
+    # @!attribute [rw] ai_version
+    #   The AI version to use for the evaluation form. This specifies which
+    #   AI model version is used for automated evaluations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateEvaluationFormRequest AWS API Documentation
     #
     class CreateEvaluationFormRequest < Struct.new(
@@ -6390,7 +6486,8 @@ module Aws::Connect
       :tags,
       :review_configuration,
       :target_configuration,
-      :language_configuration)
+      :language_configuration,
+      :ai_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7574,6 +7671,14 @@ module Aws::Connect
     #   The publish status of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to
+    #   be applied to only certain resources based on the resource's
+    #   attributes, such as tags assigned to a contact. The pre-evaluation
+    #   filters are applied even before rule conditions are evaluated and
+    #   are used to enforce tag-based-access-control while applying rules.
+    #   @return [Types::PreEvaluationFilters]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If not provided, the Amazon Web Services
@@ -7588,6 +7693,12 @@ module Aws::Connect
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRuleRequest AWS API Documentation
     #
     class CreateRuleRequest < Struct.new(
@@ -7597,7 +7708,9 @@ module Aws::Connect
       :function,
       :actions,
       :publish_status,
-      :client_token)
+      :pre_evaluation_filters,
+      :client_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7687,6 +7800,10 @@ module Aws::Connect
     #   A list of Flow Modules an AI Agent can invoke as a tool.
     #   @return [Array<Types::FlowModule>]
     #
+    # @!attribute [rw] allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #   @return [Array<Types::AIAgent>]
+    #
     # @!attribute [rw] granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -7706,6 +7823,7 @@ module Aws::Connect
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
       :allowed_flow_modules,
+      :allowed_ai_agents,
       :granular_access_control_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -8617,6 +8735,23 @@ module Aws::Connect
     #
     class CrossChannelBehavior < Struct.new(
       :behavior_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the cross-channel and workload type routing behavior that
+    # allows an agent working on a contact to be offered a contact from a
+    # different channel or workload type.
+    #
+    # @!attribute [rw] channel_workload_behavior_type
+    #   Specifies the routing behavior for an agent handling their current
+    #   channel and workload type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CrossChannelWorkloadBehavior AWS API Documentation
+    #
+    class CrossChannelWorkloadBehavior < Struct.new(
+      :channel_workload_behavior_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13472,6 +13607,11 @@ module Aws::Connect
     #   evaluation form.
     #   @return [Time]
     #
+    # @!attribute [rw] ai_version
+    #   The AI version to use for the evaluation form. This specifies which
+    #   AI model version is used for automated evaluations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationForm AWS API Documentation
     #
     class EvaluationForm < Struct.new(
@@ -13494,7 +13634,66 @@ module Aws::Connect
       :target_configuration,
       :language_configuration,
       :latest_validation_status,
-      :last_validation_time)
+      :last_validation_time,
+      :ai_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the status and availability dates for an AI version,
+    # indicating when the version became active and when it reaches end of
+    # life.
+    #
+    # @!attribute [rw] status
+    #   The status of the AI version. Valid values:
+    #
+    #   * `Latest` - The most recent AI version.
+    #
+    #   * `Preview` - An AI version available for preview.
+    #
+    #   * `Active` - An AI version that is currently available.
+    #
+    #   * `Deprecated` - An AI version that is no longer recommended for
+    #     use.
+    #
+    #   * `Removed` - An AI version that is no longer available.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_of_life_time
+    #   The timestamp for when this AI version became available.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_of_life_time
+    #   The timestamp when this AI version reaches or reached end of life.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormAIVersionLifecycle AWS API Documentation
+    #
+    class EvaluationFormAIVersionLifecycle < Struct.new(
+      :status,
+      :start_of_life_time,
+      :end_of_life_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the name and lifecycle information for an AI version that you
+    # can use when creating or updating an evaluation form.
+    #
+    # @!attribute [rw] ai_version_name
+    #   The name of the AI version.
+    #   @return [String]
+    #
+    # @!attribute [rw] ai_version_lifecycle
+    #   The lifecycle information for this AI version, including its status
+    #   and availability dates.
+    #   @return [Types::EvaluationFormAIVersionLifecycle]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormAIVersionSummary AWS API Documentation
+    #
+    class EvaluationFormAIVersionSummary < Struct.new(
+      :ai_version_name,
+      :ai_version_lifecycle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13563,6 +13762,11 @@ module Aws::Connect
     #   content.
     #   @return [Types::EvaluationReviewConfiguration]
     #
+    # @!attribute [rw] ai_version
+    #   The AI version to use for the evaluation form. This specifies which
+    #   AI model version is used for automated evaluations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormContent AWS API Documentation
     #
     class EvaluationFormContent < Struct.new(
@@ -13576,7 +13780,8 @@ module Aws::Connect
       :auto_evaluation_configuration,
       :target_configuration,
       :language_configuration,
-      :review_configuration)
+      :review_configuration,
+      :ai_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13757,6 +13962,37 @@ module Aws::Connect
     #
     class EvaluationFormLanguageConfiguration < Struct.new(
       :form_language)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the metric configuration for an evaluation form
+    # question. Use this to associate a business outcome metric with a
+    # question.
+    #
+    # @!attribute [rw] metric_type
+    #   The type of metric. Currently, only `BUSINESS_OUTCOME` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric. Valid values are:
+    #
+    #   * `SALE_SUCCESS` – Sale success.
+    #
+    #   * `CSAT` – Customer satisfaction.
+    #
+    #   * `CHURN_PROPENSITY` – Churn propensity.
+    #
+    #   * `SELF_SERVICE_SUCCESS` – Self-service success.
+    #
+    #   * `PARTIAL_SELF_SERVICE_SUCCESS` – Partial self-service success.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormMetricConfiguration AWS API Documentation
+    #
+    class EvaluationFormMetricConfiguration < Struct.new(
+      :metric_type,
+      :metric_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14013,6 +14249,11 @@ module Aws::Connect
     #   The scoring configuration of the question.
     #   @return [Types::EvaluationFormQuestionScoringConfiguration]
     #
+    # @!attribute [rw] metric_configuration
+    #   The metric configuration for the question. Use this to associate a
+    #   business outcome metric with the question.
+    #   @return [Types::EvaluationFormMetricConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormQuestion AWS API Documentation
     #
     class EvaluationFormQuestion < Struct.new(
@@ -14024,7 +14265,8 @@ module Aws::Connect
       :question_type_properties,
       :enablement,
       :weight,
-      :scoring_configuration)
+      :scoring_configuration,
+      :metric_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14299,6 +14541,11 @@ module Aws::Connect
     #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] ai_version
+    #   The AI version to use for the evaluation form. This specifies which
+    #   AI model version is used for automated evaluations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSearchSummary AWS API Documentation
     #
     class EvaluationFormSearchSummary < Struct.new(
@@ -14318,7 +14565,8 @@ module Aws::Connect
       :auto_evaluation_enabled,
       :evaluation_form_language,
       :contact_interaction_type,
-      :tags)
+      :tags,
+      :ai_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16210,6 +16458,39 @@ module Aws::Connect
       :metric_results,
       :id,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCrossRegionRoutingRequest AWS API Documentation
+    #
+    class GetCrossRegionRoutingRequest < Struct.new(
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] isolated_regions
+    #   The list of Regions for which cross-region routing is currently
+    #   disabled (isolated). When a Region appears in this list, contacts
+    #   originating in that Region will not be routed to agents in other
+    #   Regions, and agents in that Region will not receive contacts from
+    #   other Regions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCrossRegionRoutingResponse AWS API Documentation
+    #
+    class GetCrossRegionRoutingResponse < Struct.new(
+      :isolated_regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22755,6 +23036,58 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] contact_interaction_type
+    #   The contact interaction type for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationFormAIVersionsRequest AWS API Documentation
+    #
+    class ListEvaluationFormAIVersionsRequest < Struct.new(
+      :instance_id,
+      :contact_interaction_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ai_version_summaries
+    #   The list of AI version summaries.
+    #   @return [Array<Types::EvaluationFormAIVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationFormAIVersionsResponse AWS API Documentation
+    #
+    class ListEvaluationFormAIVersionsResponse < Struct.new(
+      :ai_version_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] evaluation_form_id
     #   The unique identifier for the evaluation form.
     #   @return [String]
@@ -24365,6 +24698,69 @@ module Aws::Connect
     #   The maximum number of results to return per page.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileAIAgentsRequest AWS API Documentation
+    #
+    class ListSecurityProfileAIAgentsRequest < Struct.new(
+      :security_profile_id,
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] allowed_ai_agents
+    #   A list of the allowed AI agents and their types.
+    #   @return [Array<Types::AIAgent>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileAIAgentsResponse AWS API Documentation
+    #
+    class ListSecurityProfileAIAgentsResponse < Struct.new(
+      :allowed_ai_agents,
+      :next_token,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile_id
+    #   The identifier for the security profle.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileApplicationsRequest AWS API Documentation
     #
     class ListSecurityProfileApplicationsRequest < Struct.new(
@@ -25490,12 +25886,19 @@ module Aws::Connect
     #   are currently working with a contact from a Voice channel.
     #   @return [Types::CrossChannelBehavior]
     #
+    # @!attribute [rw] workload_type_concurrencies
+    #   Defines the list of workload type concurrency configurations for a
+    #   channel. When provided, enables granular concurrency control based
+    #   on workload type values.
+    #   @return [Array<Types::WorkloadTypeConcurrency>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MediaConcurrency AWS API Documentation
     #
     class MediaConcurrency < Struct.new(
       :channel,
       :concurrency,
-      :cross_channel_behavior)
+      :cross_channel_behavior,
+      :workload_type_concurrencies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27493,6 +27896,64 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A single pre-evaluation filter condition. Specifies a resource type,
+    # filter type, key, value, and operator to match against a resource
+    # attribute.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to filter on. Valid values: `CONTACT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_type
+    #   The type of filter to apply. Valid values: `TAG`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_key
+    #   The key of the attribute to filter on. For tag filters, this is the
+    #   tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_value
+    #   The value to match against. For tag filters, this is the tag value.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator for the filter condition. Valid values:
+    #   `EQUALS`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PreEvaluationFilter AWS API Documentation
+    #
+    class PreEvaluationFilter < Struct.new(
+      :resource_type,
+      :filter_type,
+      :filter_key,
+      :filter_value,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The pre-evaluation filters for a rule, that restrict a rule to be
+    # applied to only certain resources based on the resource's attributes,
+    # such as tags assigned to a contact. The pre-evaluation filters are
+    # applied even before rule conditions are evaluated and are used to
+    # enforce tag-based-access-control while applying rules.
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions that the rule evaluates together using AND
+    #   logic. All conditions must be met for the event to be evaluated by
+    #   the rule.
+    #   @return [Array<Types::PreEvaluationFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PreEvaluationFilters AWS API Documentation
+    #
+    class PreEvaluationFilters < Struct.new(
+      :and_conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a predefined attribute.
     #
     # @!attribute [rw] name
@@ -28624,6 +29085,27 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # An individual value extracted from the conversation, including its
+    # content and the locations where it was found.
+    #
+    # @!attribute [rw] content
+    #   The text content of the extracted value.
+    #   @return [String]
+    #
+    # @!attribute [rw] points_of_interest
+    #   The sections in the conversation that indicate where the extracted
+    #   value was found.
+    #   @return [Array<Types::RealTimeContactAnalysisTranscriptItemWithCharacterOffsets>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisExtractedInformationValue AWS API Documentation
+    #
+    class RealTimeContactAnalysisExtractedInformationValue < Struct.new(
+      :content,
+      :points_of_interest)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Potential issues that are detected based on an artificial intelligence
     # analysis of each turn in the conversation.
     #
@@ -28750,6 +29232,61 @@ module Aws::Connect
       :display_name,
       :event_type,
       :time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Segment containing information extracted from the conversation. Each
+    # segment represents the results for a single extraction definition.
+    #
+    # @!attribute [rw] extraction_definition_id
+    #   The identifier of the extraction definition that produced this
+    #   result.
+    #   @return [String]
+    #
+    # @!attribute [rw] extraction_definition_name
+    #   The name of the extraction definition that produced this result.
+    #   @return [String]
+    #
+    # @!attribute [rw] extraction_definition_display_label
+    #   The display label of the extraction definition that produced this
+    #   result.
+    #   @return [String]
+    #
+    # @!attribute [rw] extracted_values
+    #   The list of values extracted from the conversation for this
+    #   extraction definition. This field is empty when a `FailureCode` is
+    #   present.
+    #   @return [Array<Types::RealTimeContactAnalysisExtractedInformationValue>]
+    #
+    # @!attribute [rw] failure_code
+    #   If the information failed to be extracted, one of the following
+    #   failure codes occurs:
+    #
+    #   * `QUOTA_EXCEEDED`: The number of concurrent analytics jobs reached
+    #     your service quota.
+    #
+    #   * `INSUFFICIENT_CONVERSATION_CONTENT`: Information extraction
+    #     requires a conversation with at least one turn from each
+    #     participant.
+    #
+    #   * `FAILED_SAFETY_GUIDELINES`: The extracted information cannot be
+    #     provided because it failed to meet system safety guidelines.
+    #
+    #   * `INTERNAL_ERROR`: Internal system error.
+    #
+    #   * `MAX_PACKAGE_FEATURE_ONLY`: Information extraction is only
+    #     available in Amazon Connect Customer instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisSegmentExtractedInformation AWS API Documentation
+    #
+    class RealTimeContactAnalysisSegmentExtractedInformation < Struct.new(
+      :extraction_definition_id,
+      :extraction_definition_name,
+      :extraction_definition_display_label,
+      :extracted_values,
+      :failure_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28996,6 +29533,10 @@ module Aws::Connect
     #   Information about the post-contact summary.
     #   @return [Types::RealTimeContactAnalysisSegmentPostContactSummary]
     #
+    # @!attribute [rw] extracted_information
+    #   The extracted information from the conversation.
+    #   @return [Types::RealTimeContactAnalysisSegmentExtractedInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealtimeContactAnalysisSegment AWS API Documentation
     #
     class RealtimeContactAnalysisSegment < Struct.new(
@@ -29005,6 +29546,7 @@ module Aws::Connect
       :event,
       :attachments,
       :post_contact_summary,
+      :extracted_information,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -29016,6 +29558,7 @@ module Aws::Connect
       class Event < RealtimeContactAnalysisSegment; end
       class Attachments < RealtimeContactAnalysisSegment; end
       class PostContactSummary < RealtimeContactAnalysisSegment; end
+      class ExtractedInformation < RealtimeContactAnalysisSegment; end
       class Unknown < RealtimeContactAnalysisSegment; end
     end
 
@@ -29374,6 +29917,11 @@ module Aws::Connect
     #   Otherwise, null.
     #   @return [Types::EmailReference]
     #
+    # @!attribute [rw] contact_analysis
+    #   Information about a reference when the `referenceType` is
+    #   `CONTACT_ANALYSIS`. Otherwise, null.
+    #   @return [Types::ContactAnalysisReference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReferenceSummary AWS API Documentation
     #
     class ReferenceSummary < Struct.new(
@@ -29387,6 +29935,7 @@ module Aws::Connect
       :number,
       :date,
       :email,
+      :contact_analysis,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -29402,6 +29951,7 @@ module Aws::Connect
       class Number < ReferenceSummary; end
       class Date < ReferenceSummary; end
       class Email < ReferenceSummary; end
+      class ContactAnalysis < ReferenceSummary; end
       class Unknown < ReferenceSummary; end
     end
 
@@ -30244,6 +30794,14 @@ module Aws::Connect
     #   The publish status of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to
+    #   be applied to only certain resources based on the resource's
+    #   attributes, such as tags assigned to a contact. The pre-evaluation
+    #   filters are applied even before rule conditions are evaluated and
+    #   are used to enforce tag-based-access-control while applying rules.
+    #   @return [Types::PreEvaluationFilters]
+    #
     # @!attribute [rw] created_time
     #   The timestamp for when the rule was created.
     #   @return [Time]
@@ -30274,6 +30832,7 @@ module Aws::Connect
       :function,
       :actions,
       :publish_status,
+      :pre_evaluation_filters,
       :created_time,
       :last_updated_time,
       :last_updated_by,
@@ -30458,6 +31017,14 @@ module Aws::Connect
     #   The publish status of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to
+    #   be applied to only certain resources based on the resource's
+    #   attributes, such as tags assigned to a contact. The pre-evaluation
+    #   filters are applied even before rule conditions are evaluated and
+    #   are used to enforce tag-based-access-control while applying rules.
+    #   @return [Types::PreEvaluationFilters]
+    #
     # @!attribute [rw] created_time
     #   The timestamp for when the rule was created.
     #   @return [Time]
@@ -30487,6 +31054,7 @@ module Aws::Connect
       :action_summaries,
       :rule_capability_tiers,
       :publish_status,
+      :pre_evaluation_filters,
       :created_time,
       :last_updated_time,
       :last_updated_by,
@@ -33882,6 +34450,52 @@ module Aws::Connect
     #   disconnect flows such as surveys or feedback forms.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] connection_types
+    #   The types of connection information to return in the response. This
+    #   parameter is optional.
+    #
+    #   Specify `CONNECTION_CREDENTIALS` to receive a connection token.
+    #   Specify `WEBSOCKET` to receive a websocket URL. You can specify
+    #   both. No other value returns connection information.
+    #
+    #   Request `WEBSOCKET` to get a URL the participant connects to
+    #   directly. You do not need to call [CreateParticipantConnection][1]
+    #   for it. Request `CONNECTION_CREDENTIALS` on its own and the response
+    #   returns a connection token but no websocket URL.
+    #
+    #   If you omit this parameter, the response has no connection
+    #   information.
+    #
+    #   <note markdown="1"> If the information you request cannot be returned, StartChatContact
+    #   returns an error rather than a response that omits it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] chat_streaming_configuration
+    #   The streaming configuration, such as the Amazon SNS streaming
+    #   endpoint. Use it to initiate real-time message streaming when the
+    #   chat is created. This parameter is optional.
+    #
+    #   When you set this parameter, the response includes `StreamingId`.
+    #   You do not need to call [StartContactStreaming][1].
+    #
+    #   <note markdown="1"> This parameter starts message streaming only. The response does not
+    #   include connection information, and setting this parameter does not
+    #   remove the need to call [CreateParticipantConnection][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html
+    #   [2]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    #   @return [Types::ChatStreamingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
     #
     class StartChatContactRequest < Struct.new(
@@ -33898,7 +34512,9 @@ module Aws::Connect
       :related_contact_id,
       :segment_attributes,
       :customer_id,
-      :disconnect_on_customer_exit)
+      :disconnect_on_customer_exit,
+      :connection_types,
+      :chat_streaming_configuration)
       SENSITIVE = [:customer_id]
       include Aws::Structure
     end
@@ -33927,13 +34543,37 @@ module Aws::Connect
     #   field is populated only for persistent chats.
     #   @return [String]
     #
+    # @!attribute [rw] connection_credentials
+    #   The connection credentials for the chat participant. Returned only
+    #   when the request includes `CONNECTION_CREDENTIALS` in
+    #   `ConnectionTypes`.
+    #   @return [Types::ConnectionCredentials]
+    #
+    # @!attribute [rw] websocket
+    #   The websocket for the chat participant. Returned only when the
+    #   request includes `WEBSOCKET` in `ConnectionTypes`.
+    #   @return [Types::Websocket]
+    #
+    # @!attribute [rw] streaming_id
+    #   The identifier of the streaming configuration enabled with the chat.
+    #   Returned only when the request sets `ChatStreamingConfiguration`.
+    #   Use this value to call [StopContactStreaming][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StopContactStreaming.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactResponse AWS API Documentation
     #
     class StartChatContactResponse < Struct.new(
       :contact_id,
       :participant_id,
       :participant_token,
-      :continued_from_contact_id)
+      :continued_from_contact_id,
+      :connection_credentials,
+      :websocket,
+      :streaming_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36408,7 +37048,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_arn
-    #   The Amazon Resource Name (ARN) of the traffic distribution group.
+    #   The Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -37427,6 +38067,34 @@ module Aws::Connect
     class UpdateContactTaskTemplateResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] isolated_all
+    #   Set to `true` to disable cross-region routing for all Regions
+    #   associated with this instance. Set to `false` to re-enable
+    #   cross-region routing.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateCrossRegionRoutingRequest AWS API Documentation
+    #
+    class UpdateCrossRegionRoutingRequest < Struct.new(
+      :instance_id,
+      :isolated_all)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateCrossRegionRoutingResponse AWS API Documentation
+    #
+    class UpdateCrossRegionRoutingResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
     #   The unique identifier for the Amazon Connect instance.
     #   @return [String]
     #
@@ -37743,6 +38411,11 @@ module Aws::Connect
     #   Configuration for language settings of the evaluation form.
     #   @return [Types::EvaluationFormLanguageConfiguration]
     #
+    # @!attribute [rw] ai_version
+    #   The AI version to use for the evaluation form. This specifies which
+    #   AI model version is used for automated evaluations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateEvaluationFormRequest AWS API Documentation
     #
     class UpdateEvaluationFormRequest < Struct.new(
@@ -37759,7 +38432,8 @@ module Aws::Connect
       :as_draft,
       :client_token,
       :target_configuration,
-      :language_configuration)
+      :language_configuration,
+      :ai_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38868,6 +39542,14 @@ module Aws::Connect
     #   The publish status of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to
+    #   be applied to only certain resources based on the resource's
+    #   attributes, such as tags assigned to a contact. The pre-evaluation
+    #   filters are applied even before rule conditions are evaluated and
+    #   are used to enforce tag-based-access-control while applying rules.
+    #   @return [Types::PreEvaluationFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRuleRequest AWS API Documentation
     #
     class UpdateRuleRequest < Struct.new(
@@ -38876,7 +39558,8 @@ module Aws::Connect
       :name,
       :function,
       :actions,
-      :publish_status)
+      :publish_status,
+      :pre_evaluation_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38936,6 +39619,10 @@ module Aws::Connect
     #   A list of Flow Modules an AI Agent can invoke as a tool
     #   @return [Array<Types::FlowModule>]
     #
+    # @!attribute [rw] allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #   @return [Array<Types::AIAgent>]
+    #
     # @!attribute [rw] granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -38954,6 +39641,7 @@ module Aws::Connect
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
       :allowed_flow_modules,
+      :allowed_ai_agents,
       :granular_access_control_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -41244,6 +41932,28 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The websocket that a chat participant uses to receive messages and
+    # events for the chat.
+    #
+    # @!attribute [rw] url
+    #   The URL of the websocket.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_expiry
+    #   The expiration of the websocket URL. It's specified in ISO 8601
+    #   format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+    #   2019-11-08T02:41:28.172Z.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Websocket AWS API Documentation
+    #
+    class Websocket < Struct.new(
+      :url,
+      :connection_expiry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The destination for an outbound web notification, specifying the
     # communication widget that delivers the notification and the customer
     # profile of the recipient.
@@ -41282,6 +41992,40 @@ module Aws::Connect
     class WisdomInfo < Struct.new(
       :session_arn,
       :ai_agents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the maximum number of contacts an agent can handle
+    # simultaneously for a specific channel and workload type combination.
+    #
+    # @!attribute [rw] workload_type
+    #   The value of the workload type.
+    #   @return [String]
+    #
+    # @!attribute [rw] concurrency
+    #   The maximum number of contacts an agent can handle simultaneously
+    #   for a specific channel and workload type combination.
+    #
+    #   Valid Range for `VOICE`: Minimum value of 1. Maximum value of 1.
+    #
+    #   Valid Range for `CHAT`: Minimum value of 1. Maximum value of 10.
+    #
+    #   Valid Range for `TASK`: Minimum value of 1. Maximum value of 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cross_channel_workload_behavior
+    #   Defines the cross-channel and workload type routing behavior for
+    #   each channel and workload type combination that is enabled for this
+    #   Routing Profile.
+    #   @return [Types::CrossChannelWorkloadBehavior]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/WorkloadTypeConcurrency AWS API Documentation
+    #
+    class WorkloadTypeConcurrency < Struct.new(
+      :workload_type,
+      :concurrency,
+      :cross_channel_workload_behavior)
       SENSITIVE = []
       include Aws::Structure
     end

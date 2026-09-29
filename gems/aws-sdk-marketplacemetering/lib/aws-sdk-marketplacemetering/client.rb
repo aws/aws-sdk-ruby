@@ -488,7 +488,9 @@ module Aws::MarketplaceMetering
     # (instead of `ProductCode`) to support this feature. `BatchMeterUsage`
     # does not support `CustomerIdentifier` for new integrations. Existing
     # integrations continue to work. Review the new integration for
-    # Concurrent Agreements [here][1].
+    # Concurrent Agreements [here][1]. For additional implementation
+    # details, see [BatchMeterUsage code example with LicenseArn][2] in the
+    # *Amazon Web Services Marketplace Seller Guide*.
     #
     # To post metering records for customers, SaaS applications call
     # `BatchMeterUsage`, which is used for metering SaaS flexible
@@ -503,8 +505,11 @@ module Aws::MarketplaceMetering
     # an event. At the end of each billing cycle, a 6-hour grace period
     # applies. We accept usage records for the previous billing month until
     # 06:00 UTC on the first day of the next month. For example, you must
-    # submit March usage records before 06:00 UTC on April 1. After this
-    # grace period, we return a `TimestampOutOfBoundsException` error.
+    # submit March usage records before 06:00 UTC on April 1. On April 1 at
+    # 05:00 UTC, you can still submit records for March 31 (within the
+    # 6-hour grace period). After 06:00 UTC on April 1, March records are
+    # rejected regardless of the normal 24-hour submission window. After
+    # this grace period, we return a `TimestampOutOfBoundsException` error.
     #
     # `BatchMeterUsage` can process up to 25 `UsageRecords` at a time, and
     # each request must be less than 1 MB in size. Optionally, you can have
@@ -517,18 +522,19 @@ module Aws::MarketplaceMetering
     # should be retried.
     #
     # For Amazon Web Services Regions that support `BatchMeterUsage`, see
-    # [BatchMeterUsage Region support][2].
+    # [BatchMeterUsage Region support][3].
     #
     # <note markdown="1"> For an example of `BatchMeterUsage`, see [ BatchMeterUsage code
-    # example][3] in the *Amazon Web Services Marketplace Seller Guide*.
+    # example][4] in the *Amazon Web Services Marketplace Seller Guide*.
     #
     #  </note>
     #
     #
     #
     # [1]: https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements
-    # [2]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
-    # [3]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
+    # [2]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-licensearn-example
+    # [3]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
+    # [4]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
     #
     # @option params [required, Array<Types::UsageRecord>] :usage_records
     #   The set of `UsageRecords` to submit. `BatchMeterUsage` accepts up to
@@ -538,6 +544,18 @@ module Aws::MarketplaceMetering
     #   Product code is used to uniquely identify a product in Amazon Web
     #   Services Marketplace. The product code should be the same as the one
     #   used during the publishing of a new product.
+    #
+    #   `ProductCode` is required only for legacy integrations that use
+    #   `CustomerIdentifier`. For new integrations using `LicenseArn`
+    #   (Concurrent Agreements), do NOT include `ProductCode` at the request
+    #   level. The `LicenseArn` in each `UsageRecord` identifies both the
+    #   product and the specific agreement.
+    #
+    #    Sending metering records with both `ProductCode` and `LicenseArn` for
+    #   the same customer within the same hour will result in duplicate
+    #   billing. If you are migrating from product-based metering to
+    #   license-based metering, stop sending `ProductCode` before you start
+    #   sending `LicenseArn`.
     #
     # @return [Types::BatchMeterUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -956,7 +974,7 @@ module Aws::MarketplaceMetering
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacemetering'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

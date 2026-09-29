@@ -163,6 +163,7 @@ module Aws::SageMaker
     AppSpecification = Shapes::StructureShape.new(name: 'AppSpecification')
     AppStatus = Shapes::StringShape.new(name: 'AppStatus')
     AppType = Shapes::StringShape.new(name: 'AppType')
+    ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
     ApprovalDescription = Shapes::StringShape.new(name: 'ApprovalDescription')
     ArnOrName = Shapes::StringShape.new(name: 'ArnOrName')
     ArtifactArn = Shapes::StringShape.new(name: 'ArtifactArn')
@@ -199,6 +200,8 @@ module Aws::SageMaker
     AthenaResultCompressionType = Shapes::StringShape.new(name: 'AthenaResultCompressionType')
     AthenaResultFormat = Shapes::StringShape.new(name: 'AthenaResultFormat')
     AthenaWorkGroup = Shapes::StringShape.new(name: 'AthenaWorkGroup')
+    AttachClusterNodeNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'AttachClusterNodeNetworkInterfaceRequest')
+    AttachClusterNodeNetworkInterfaceResponse = Shapes::StructureShape.new(name: 'AttachClusterNodeNetworkInterfaceResponse')
     AttachClusterNodeVolumeRequest = Shapes::StructureShape.new(name: 'AttachClusterNodeVolumeRequest')
     AttachClusterNodeVolumeResponse = Shapes::StructureShape.new(name: 'AttachClusterNodeVolumeResponse')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
@@ -491,7 +494,9 @@ module Aws::SageMaker
     ClusterName = Shapes::StringShape.new(name: 'ClusterName')
     ClusterNameOrArn = Shapes::StringShape.new(name: 'ClusterNameOrArn')
     ClusterNetworkInterface = Shapes::StructureShape.new(name: 'ClusterNetworkInterface')
+    ClusterNetworkInterfaceAttachmentId = Shapes::StringShape.new(name: 'ClusterNetworkInterfaceAttachmentId')
     ClusterNetworkInterfaceDetails = Shapes::StructureShape.new(name: 'ClusterNetworkInterfaceDetails')
+    ClusterNetworkInterfaceId = Shapes::StringShape.new(name: 'ClusterNetworkInterfaceId')
     ClusterNodeDetails = Shapes::StructureShape.new(name: 'ClusterNodeDetails')
     ClusterNodeId = Shapes::StringShape.new(name: 'ClusterNodeId')
     ClusterNodeIds = Shapes::ListShape.new(name: 'ClusterNodeIds')
@@ -1341,6 +1346,7 @@ module Aws::SageMaker
     Horovod = Shapes::BooleanShape.new(name: 'Horovod')
     HubAccessConfig = Shapes::StructureShape.new(name: 'HubAccessConfig')
     HubArn = Shapes::StringShape.new(name: 'HubArn')
+    HubContent = Shapes::StructureShape.new(name: 'HubContent')
     HubContentArn = Shapes::StringShape.new(name: 'HubContentArn')
     HubContentDependency = Shapes::StructureShape.new(name: 'HubContentDependency')
     HubContentDependencyList = Shapes::ListShape.new(name: 'HubContentDependencyList')
@@ -1424,6 +1430,8 @@ module Aws::SageMaker
     IPAddressType = Shapes::StringShape.new(name: 'IPAddressType')
     IamIdentity = Shapes::StructureShape.new(name: 'IamIdentity')
     IamPolicyConstraints = Shapes::StructureShape.new(name: 'IamPolicyConstraints')
+    IdcConfigInput = Shapes::StructureShape.new(name: 'IdcConfigInput')
+    IdcConfigOutput = Shapes::StructureShape.new(name: 'IdcConfigOutput')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IdentityProviderOAuthSetting = Shapes::StructureShape.new(name: 'IdentityProviderOAuthSetting')
     IdentityProviderOAuthSettings = Shapes::ListShape.new(name: 'IdentityProviderOAuthSettings')
@@ -1526,6 +1534,7 @@ module Aws::SageMaker
     InputDataConfig = Shapes::ListShape.new(name: 'InputDataConfig')
     InputMode = Shapes::StringShape.new(name: 'InputMode')
     InputModes = Shapes::ListShape.new(name: 'InputModes')
+    InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     InstanceCount = Shapes::IntegerShape.new(name: 'InstanceCount')
     InstanceGroup = Shapes::StructureShape.new(name: 'InstanceGroup')
     InstanceGroupHealthCheckConfiguration = Shapes::StructureShape.new(name: 'InstanceGroupHealthCheckConfiguration')
@@ -1545,6 +1554,8 @@ module Aws::SageMaker
     InstancePoolPriority = Shapes::IntegerShape.new(name: 'InstancePoolPriority')
     InstancePoolSummary = Shapes::StructureShape.new(name: 'InstancePoolSummary')
     InstancePoolSummaryList = Shapes::ListShape.new(name: 'InstancePoolSummaryList')
+    InstancePreference = Shapes::StructureShape.new(name: 'InstancePreference')
+    InstancePreferenceList = Shapes::ListShape.new(name: 'InstancePreferenceList')
     InstanceRequirementsEniConfiguration = Shapes::StructureShape.new(name: 'InstanceRequirementsEniConfiguration')
     InstanceRequirementsEniConfigurations = Shapes::ListShape.new(name: 'InstanceRequirementsEniConfigurations')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
@@ -2268,6 +2279,8 @@ module Aws::SageMaker
     ProcessingInput = Shapes::StructureShape.new(name: 'ProcessingInput')
     ProcessingInputs = Shapes::ListShape.new(name: 'ProcessingInputs')
     ProcessingInstanceCount = Shapes::IntegerShape.new(name: 'ProcessingInstanceCount')
+    ProcessingInstancePreference = Shapes::StructureShape.new(name: 'ProcessingInstancePreference')
+    ProcessingInstancePreferenceList = Shapes::ListShape.new(name: 'ProcessingInstancePreferenceList')
     ProcessingInstanceType = Shapes::StringShape.new(name: 'ProcessingInstanceType')
     ProcessingJob = Shapes::StructureShape.new(name: 'ProcessingJob')
     ProcessingJobArn = Shapes::StringShape.new(name: 'ProcessingJobArn')
@@ -2780,6 +2793,7 @@ module Aws::SageMaker
     TrainingJobSummaries = Shapes::ListShape.new(name: 'TrainingJobSummaries')
     TrainingJobSummary = Shapes::StructureShape.new(name: 'TrainingJobSummary')
     TrainingPlanArn = Shapes::StringShape.new(name: 'TrainingPlanArn')
+    TrainingPlanArnList = Shapes::ListShape.new(name: 'TrainingPlanArnList')
     TrainingPlanArns = Shapes::ListShape.new(name: 'TrainingPlanArns')
     TrainingPlanDurationHours = Shapes::IntegerShape.new(name: 'TrainingPlanDurationHours')
     TrainingPlanDurationHoursInput = Shapes::IntegerShape.new(name: 'TrainingPlanDurationHoursInput')
@@ -3505,6 +3519,17 @@ module Aws::SageMaker
     AthenaDatasetDefinition.add_member(:output_format, Shapes::ShapeRef.new(shape: AthenaResultFormat, required: true, location_name: "OutputFormat"))
     AthenaDatasetDefinition.add_member(:output_compression, Shapes::ShapeRef.new(shape: AthenaResultCompressionType, location_name: "OutputCompression"))
     AthenaDatasetDefinition.struct_class = Types::AthenaDatasetDefinition
+
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: ClusterNetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
+    AttachClusterNodeNetworkInterfaceRequest.struct_class = Types::AttachClusterNodeNetworkInterfaceRequest
+
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: ClusterNetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:attachment_id, Shapes::ShapeRef.new(shape: ClusterNetworkInterfaceAttachmentId, required: true, location_name: "AttachmentId"))
+    AttachClusterNodeNetworkInterfaceResponse.struct_class = Types::AttachClusterNodeNetworkInterfaceResponse
 
     AttachClusterNodeVolumeRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
     AttachClusterNodeVolumeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
@@ -5063,6 +5088,7 @@ module Aws::SageMaker
     CreateMlflowAppRequest.add_member(:name, Shapes::ShapeRef.new(shape: MlflowAppName, required: true, location_name: "Name"))
     CreateMlflowAppRequest.add_member(:artifact_store_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "ArtifactStoreUri"))
     CreateMlflowAppRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateMlflowAppRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateMlflowAppRequest.add_member(:model_registration_mode, Shapes::ShapeRef.new(shape: ModelRegistrationMode, location_name: "ModelRegistrationMode"))
     CreateMlflowAppRequest.add_member(:weekly_maintenance_window_start, Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
     CreateMlflowAppRequest.add_member(:account_default_status, Shapes::ShapeRef.new(shape: AccountDefaultStatus, location_name: "AccountDefaultStatus"))
@@ -5275,6 +5301,7 @@ module Aws::SageMaker
     CreatePartnerAppRequest.add_member(:maintenance_config, Shapes::ShapeRef.new(shape: PartnerAppMaintenanceConfig, location_name: "MaintenanceConfig"))
     CreatePartnerAppRequest.add_member(:tier, Shapes::ShapeRef.new(shape: NonEmptyString64, required: true, location_name: "Tier"))
     CreatePartnerAppRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: PartnerAppConfig, location_name: "ApplicationConfig"))
+    CreatePartnerAppRequest.add_member(:idc_config, Shapes::ShapeRef.new(shape: IdcConfigInput, location_name: "IdcConfig"))
     CreatePartnerAppRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: PartnerAppAuthType, required: true, location_name: "AuthType"))
     CreatePartnerAppRequest.add_member(:enable_iam_session_based_identity, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableIamSessionBasedIdentity", metadata: {"box" => true}))
     CreatePartnerAppRequest.add_member(:enable_auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableAutoMinorVersionUpgrade", metadata: {"box" => true}))
@@ -6763,6 +6790,7 @@ module Aws::SageMaker
     DescribeMlflowAppResponse.add_member(:artifact_store_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "ArtifactStoreUri"))
     DescribeMlflowAppResponse.add_member(:mlflow_version, Shapes::ShapeRef.new(shape: MlflowVersion, location_name: "MlflowVersion"))
     DescribeMlflowAppResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    DescribeMlflowAppResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     DescribeMlflowAppResponse.add_member(:status, Shapes::ShapeRef.new(shape: MlflowAppStatus, location_name: "Status"))
     DescribeMlflowAppResponse.add_member(:model_registration_mode, Shapes::ShapeRef.new(shape: ModelRegistrationMode, location_name: "ModelRegistrationMode"))
     DescribeMlflowAppResponse.add_member(:account_default_status, Shapes::ShapeRef.new(shape: AccountDefaultStatus, location_name: "AccountDefaultStatus"))
@@ -7045,6 +7073,7 @@ module Aws::SageMaker
     DescribePartnerAppResponse.add_member(:enable_auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableAutoMinorVersionUpgrade", metadata: {"box" => true}))
     DescribePartnerAppResponse.add_member(:current_version_eol_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CurrentVersionEolDate"))
     DescribePartnerAppResponse.add_member(:available_upgrade, Shapes::ShapeRef.new(shape: AvailableUpgrade, location_name: "AvailableUpgrade"))
+    DescribePartnerAppResponse.add_member(:idc_config, Shapes::ShapeRef.new(shape: IdcConfigOutput, location_name: "IdcConfig"))
     DescribePartnerAppResponse.struct_class = Types::DescribePartnerAppResponse
 
     DescribePipelineDefinitionForExecutionRequest.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, required: true, location_name: "PipelineExecutionArn"))
@@ -8050,6 +8079,29 @@ module Aws::SageMaker
     HubAccessConfig.add_member(:hub_content_arn, Shapes::ShapeRef.new(shape: HubContentArn, required: true, location_name: "HubContentArn"))
     HubAccessConfig.struct_class = Types::HubAccessConfig
 
+    HubContent.add_member(:hub_content_name, Shapes::ShapeRef.new(shape: HubContentName, required: true, location_name: "HubContentName"))
+    HubContent.add_member(:hub_content_arn, Shapes::ShapeRef.new(shape: HubContentArn, required: true, location_name: "HubContentArn"))
+    HubContent.add_member(:hub_content_version, Shapes::ShapeRef.new(shape: HubContentVersion, required: true, location_name: "HubContentVersion"))
+    HubContent.add_member(:hub_content_type, Shapes::ShapeRef.new(shape: HubContentType, required: true, location_name: "HubContentType"))
+    HubContent.add_member(:document_schema_version, Shapes::ShapeRef.new(shape: DocumentSchemaVersion, required: true, location_name: "DocumentSchemaVersion"))
+    HubContent.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubName, required: true, location_name: "HubName"))
+    HubContent.add_member(:hub_arn, Shapes::ShapeRef.new(shape: HubArn, required: true, location_name: "HubArn"))
+    HubContent.add_member(:hub_content_display_name, Shapes::ShapeRef.new(shape: HubContentDisplayName, location_name: "HubContentDisplayName"))
+    HubContent.add_member(:hub_content_description, Shapes::ShapeRef.new(shape: HubContentDescription, location_name: "HubContentDescription"))
+    HubContent.add_member(:hub_content_markdown, Shapes::ShapeRef.new(shape: HubContentMarkdown, location_name: "HubContentMarkdown"))
+    HubContent.add_member(:hub_content_document, Shapes::ShapeRef.new(shape: HubContentDocument, location_name: "HubContentDocument"))
+    HubContent.add_member(:sage_maker_public_hub_content_arn, Shapes::ShapeRef.new(shape: SageMakerPublicHubContentArn, location_name: "SageMakerPublicHubContentArn"))
+    HubContent.add_member(:reference_min_version, Shapes::ShapeRef.new(shape: ReferenceMinVersion, location_name: "ReferenceMinVersion"))
+    HubContent.add_member(:support_status, Shapes::ShapeRef.new(shape: HubContentSupportStatus, location_name: "SupportStatus"))
+    HubContent.add_member(:hub_content_search_keywords, Shapes::ShapeRef.new(shape: HubContentSearchKeywordList, location_name: "HubContentSearchKeywords"))
+    HubContent.add_member(:hub_content_dependencies, Shapes::ShapeRef.new(shape: HubContentDependencyList, location_name: "HubContentDependencies"))
+    HubContent.add_member(:hub_content_status, Shapes::ShapeRef.new(shape: HubContentStatus, required: true, location_name: "HubContentStatus"))
+    HubContent.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    HubContent.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    HubContent.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    HubContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    HubContent.struct_class = Types::HubContent
+
     HubContentDependency.add_member(:dependency_origin_path, Shapes::ShapeRef.new(shape: DependencyOriginPath, location_name: "DependencyOriginPath"))
     HubContentDependency.add_member(:dependency_copy_path, Shapes::ShapeRef.new(shape: DependencyCopyPath, location_name: "DependencyCopyPath"))
     HubContentDependency.struct_class = Types::HubContentDependency
@@ -8285,6 +8337,13 @@ module Aws::SageMaker
     IamPolicyConstraints.add_member(:source_ip, Shapes::ShapeRef.new(shape: EnabledOrDisabled, location_name: "SourceIp"))
     IamPolicyConstraints.add_member(:vpc_source_ip, Shapes::ShapeRef.new(shape: EnabledOrDisabled, location_name: "VpcSourceIp"))
     IamPolicyConstraints.struct_class = Types::IamPolicyConstraints
+
+    IdcConfigInput.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    IdcConfigInput.struct_class = Types::IdcConfigInput
+
+    IdcConfigOutput.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
+    IdcConfigOutput.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
+    IdcConfigOutput.struct_class = Types::IdcConfigOutput
 
     IdentityProviderOAuthSetting.add_member(:data_source_name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "DataSourceName"))
     IdentityProviderOAuthSetting.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
@@ -8598,6 +8657,13 @@ module Aws::SageMaker
     InstancePoolSummary.struct_class = Types::InstancePoolSummary
 
     InstancePoolSummaryList.member = Shapes::ShapeRef.new(shape: InstancePoolSummary)
+
+    InstancePreference.add_member(:instance_type, Shapes::ShapeRef.new(shape: TrainingInstanceType, required: true, location_name: "InstanceType"))
+    InstancePreference.add_member(:instance_count, Shapes::ShapeRef.new(shape: TrainingInstanceCount, location_name: "InstanceCount", metadata: {"box" => true}))
+    InstancePreference.add_member(:training_plan_arns, Shapes::ShapeRef.new(shape: TrainingPlanArnList, location_name: "TrainingPlanArns"))
+    InstancePreference.struct_class = Types::InstancePreference
+
+    InstancePreferenceList.member = Shapes::ShapeRef.new(shape: InstancePreference)
 
     InstanceRequirementsEniConfiguration.add_member(:customer_eni, Shapes::ShapeRef.new(shape: String, location_name: "CustomerEni"))
     InstanceRequirementsEniConfiguration.add_member(:additional_enis, Shapes::ShapeRef.new(shape: AdditionalEnis, location_name: "AdditionalEnis"))
@@ -10835,6 +10901,7 @@ module Aws::SageMaker
     OnlineStoreConfig.struct_class = Types::OnlineStoreConfig
 
     OnlineStoreConfigUpdate.add_member(:ttl_duration, Shapes::ShapeRef.new(shape: TtlDuration, location_name: "TtlDuration"))
+    OnlineStoreConfigUpdate.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
     OnlineStoreConfigUpdate.struct_class = Types::OnlineStoreConfigUpdate
 
     OnlineStoreSecurityConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -11170,6 +11237,9 @@ module Aws::SageMaker
     ProcessingClusterConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: ProcessingInstanceType, location_name: "InstanceType"))
     ProcessingClusterConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: ProcessingVolumeSizeInGB, required: true, location_name: "VolumeSizeInGB"))
     ProcessingClusterConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
+    ProcessingClusterConfig.add_member(:instance_preferences, Shapes::ShapeRef.new(shape: ProcessingInstancePreferenceList, location_name: "InstancePreferences"))
+    ProcessingClusterConfig.add_member(:selected_instance_type, Shapes::ShapeRef.new(shape: ProcessingInstanceType, location_name: "SelectedInstanceType"))
+    ProcessingClusterConfig.add_member(:selected_instance_count, Shapes::ShapeRef.new(shape: ProcessingInstanceCount, location_name: "SelectedInstanceCount"))
     ProcessingClusterConfig.struct_class = Types::ProcessingClusterConfig
 
     ProcessingEnvironmentMap.key = Shapes::ShapeRef.new(shape: ProcessingEnvironmentKey)
@@ -11185,6 +11255,12 @@ module Aws::SageMaker
     ProcessingInput.struct_class = Types::ProcessingInput
 
     ProcessingInputs.member = Shapes::ShapeRef.new(shape: ProcessingInput)
+
+    ProcessingInstancePreference.add_member(:instance_type, Shapes::ShapeRef.new(shape: ProcessingInstanceType, required: true, location_name: "InstanceType"))
+    ProcessingInstancePreference.add_member(:instance_count, Shapes::ShapeRef.new(shape: ProcessingInstanceCount, location_name: "InstanceCount"))
+    ProcessingInstancePreference.struct_class = Types::ProcessingInstancePreference
+
+    ProcessingInstancePreferenceList.member = Shapes::ShapeRef.new(shape: ProcessingInstancePreference)
 
     ProcessingJob.add_member(:processing_inputs, Shapes::ShapeRef.new(shape: ProcessingInputs, location_name: "ProcessingInputs"))
     ProcessingJob.add_member(:processing_output_config, Shapes::ShapeRef.new(shape: ProcessingOutputConfig, location_name: "ProcessingOutputConfig"))
@@ -11684,6 +11760,9 @@ module Aws::SageMaker
     ResourceConfig.add_member(:instance_groups, Shapes::ShapeRef.new(shape: InstanceGroups, location_name: "InstanceGroups"))
     ResourceConfig.add_member(:training_plan_arn, Shapes::ShapeRef.new(shape: TrainingPlanArn, location_name: "TrainingPlanArn"))
     ResourceConfig.add_member(:instance_placement_config, Shapes::ShapeRef.new(shape: InstancePlacementConfig, location_name: "InstancePlacementConfig"))
+    ResourceConfig.add_member(:instance_preferences, Shapes::ShapeRef.new(shape: InstancePreferenceList, location_name: "InstancePreferences"))
+    ResourceConfig.add_member(:selected_instance_type, Shapes::ShapeRef.new(shape: TrainingInstanceType, location_name: "SelectedInstanceType"))
+    ResourceConfig.add_member(:selected_instance_count, Shapes::ShapeRef.new(shape: TrainingInstanceCount, location_name: "SelectedInstanceCount", metadata: {"box" => true}))
     ResourceConfig.struct_class = Types::ResourceConfig
 
     ResourceConfigForUpdate.add_member(:keep_alive_period_in_seconds, Shapes::ShapeRef.new(shape: KeepAlivePeriodInSeconds, required: true, location_name: "KeepAlivePeriodInSeconds"))
@@ -11844,6 +11923,7 @@ module Aws::SageMaker
     SearchRecord.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelCard, location_name: "ModelCard"))
     SearchRecord.add_member(:model, Shapes::ShapeRef.new(shape: ModelDashboardModel, location_name: "Model"))
     SearchRecord.add_member(:job, Shapes::ShapeRef.new(shape: Job, location_name: "Job"))
+    SearchRecord.add_member(:hub_content, Shapes::ShapeRef.new(shape: HubContent, location_name: "HubContent"))
     SearchRecord.struct_class = Types::SearchRecord
 
     SearchRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "Resource"))
@@ -12416,6 +12496,8 @@ module Aws::SageMaker
     TrainingJobSummary.add_member(:warm_pool_status, Shapes::ShapeRef.new(shape: WarmPoolStatus, location_name: "WarmPoolStatus"))
     TrainingJobSummary.add_member(:training_plan_arn, Shapes::ShapeRef.new(shape: TrainingPlanArn, location_name: "TrainingPlanArn"))
     TrainingJobSummary.struct_class = Types::TrainingJobSummary
+
+    TrainingPlanArnList.member = Shapes::ShapeRef.new(shape: TrainingPlanArn)
 
     TrainingPlanArns.member = Shapes::ShapeRef.new(shape: TrainingPlanArn)
 
@@ -13117,6 +13199,8 @@ module Aws::SageMaker
     UpdatePartnerAppRequest.add_member(:maintenance_config, Shapes::ShapeRef.new(shape: PartnerAppMaintenanceConfig, location_name: "MaintenanceConfig"))
     UpdatePartnerAppRequest.add_member(:tier, Shapes::ShapeRef.new(shape: NonEmptyString64, location_name: "Tier"))
     UpdatePartnerAppRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: PartnerAppConfig, location_name: "ApplicationConfig"))
+    UpdatePartnerAppRequest.add_member(:idc_config, Shapes::ShapeRef.new(shape: IdcConfigInput, location_name: "IdcConfig"))
+    UpdatePartnerAppRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: PartnerAppAuthType, location_name: "AuthType"))
     UpdatePartnerAppRequest.add_member(:enable_iam_session_based_identity, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableIamSessionBasedIdentity", metadata: {"box" => true}))
     UpdatePartnerAppRequest.add_member(:enable_auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableAutoMinorVersionUpgrade", metadata: {"box" => true}))
     UpdatePartnerAppRequest.add_member(:app_version, Shapes::ShapeRef.new(shape: MajorMinorVersion, location_name: "AppVersion"))
@@ -13420,6 +13504,16 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateTrialComponentRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateTrialComponentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:attach_cluster_node_network_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachClusterNodeNetworkInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AttachClusterNodeNetworkInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: AttachClusterNodeNetworkInterfaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)

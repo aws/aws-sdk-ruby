@@ -2048,9 +2048,9 @@ module Aws::Omics
     #
     # @!attribute [rw] role_arn
     #   The IAM role ARN that grants HealthOmics permissions to access
-    #   required AWS resources such as Amazon S3 and CloudWatch. The role
-    #   must have the same permissions required for individual `StartRun`
-    #   calls.
+    #   required Amazon Web Services resources such as Amazon S3 and
+    #   CloudWatch. The role must have the same permissions required for
+    #   individual `StartRun` calls.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2099,8 +2099,9 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] run_tags
-    #   AWS tags to associate with each workflow run. Merged with per-run
-    #   `runTags`; run-specific values take precedence when keys overlap.
+    #   Amazon Web Services tags to associate with each workflow run. Merged
+    #   with per-run `runTags`; run-specific values take precedence when
+    #   keys overlap.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] retention_mode
@@ -2112,13 +2113,13 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] workflow_owner_id
-    #   The AWS account ID of the workflow owner, used for cross-account
-    #   workflow sharing.
+    #   The Amazon Web Services account ID of the workflow owner, used for
+    #   cross-account workflow sharing.
     #   @return [String]
     #
     # @!attribute [rw] output_bucket_owner_id
-    #   The expected AWS account ID of the owner of the output S3 bucket.
-    #   Can be overridden per run.
+    #   The expected Amazon Web Services account ID of the owner of the
+    #   output S3 bucket. Can be overridden per run.
     #   @return [String]
     #
     # @!attribute [rw] workflow_version_name
@@ -2132,6 +2133,11 @@ module Aws::Omics
     #
     # @!attribute [rw] configuration_name
     #   Optional configuration name to use for the workflow run.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_policy
+    #   Optional inline policy json for scoping down permissions via a
+    #   session policy on the IAM role provided in the roleArn parameter.
     #   @return [String]
     #
     # @!attribute [rw] engine_settings
@@ -2170,6 +2176,7 @@ module Aws::Omics
       :workflow_version_name,
       :networking_mode,
       :configuration_name,
+      :session_policy,
       :engine_settings,
       :scratch_storage_mode)
       SENSITIVE = []
@@ -3059,11 +3066,12 @@ module Aws::Omics
     #   (submitting runs), `INPROGRESS` (runs executing), `STOPPING`
     #   (cancellation in progress), `PROCESSED` (all runs completed),
     #   `CANCELLED` (batch cancelled), `FAILED` (batch failed),
-    #   `RUNS_DELETING` (deleting runs), `RUNS_DELETED` (runs deleted).
+    #   `RUNS_DELETING` (deleting runs), `RUNS_DELETE_FAILED` (run deletion
+    #   failed for some or all runs), `RUNS_DELETED` (runs deleted).
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   AWS tags associated with the run batch.
+    #   Amazon Web Services tags associated with the run batch.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] total_runs
@@ -4092,6 +4100,11 @@ module Aws::Omics
     #   The engine-specific settings for the workflow run.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] session_policy
+    #   Inline policy json for scoping down permissions via a session policy
+    #   on the IAM role.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunResponse AWS API Documentation
     #
     class GetRunResponse < Struct.new(
@@ -4136,7 +4149,8 @@ module Aws::Omics
       :scratch_storage_mode,
       :configuration,
       :vpc_config,
-      :engine_settings)
+      :engine_settings,
+      :session_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5231,13 +5245,14 @@ module Aws::Omics
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] output_bucket_owner_id
-    #   The expected AWS account ID of the owner of the output S3 bucket for
-    #   this run.
+    #   The expected Amazon Web Services account ID of the owner of the
+    #   output S3 bucket for this run.
     #   @return [String]
     #
     # @!attribute [rw] run_tags
-    #   Per-run AWS tags. Merged with `defaultRunSetting.runTags`; values in
-    #   this object take precedence when keys overlap.
+    #   Per-run Amazon Web Services tags. Merged with
+    #   `defaultRunSetting.runTags`; values in this object take precedence
+    #   when keys overlap.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] engine_settings
@@ -8243,9 +8258,9 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   AWS tags to associate with the batch resource. These tags are not
-    #   inherited by individual runs. To tag individual runs, use
-    #   `defaultRunSetting.runTags`.
+    #   Amazon Web Services tags to associate with the batch resource. These
+    #   tags are not inherited by individual runs. To tag individual runs,
+    #   use `defaultRunSetting.runTags`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] default_run_setting
@@ -8288,7 +8303,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   AWS tags associated with the run batch.
+    #   Amazon Web Services tags associated with the run batch.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRunBatchResponse AWS API Documentation
@@ -8323,8 +8338,9 @@ module Aws::Omics
     #   Web Services HealthOmics, S3, Cloudwatch logs, and EC2. An example
     #   `roleArn` is
     #   `arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ`.
-    #   In this example, the AWS account ID is `123456789012` and the role
-    #   name is `omics-service-role-serviceRole-W8O1XMPL7QZ`.
+    #   In this example, the Amazon Web Services account ID is
+    #   `123456789012` and the role name is
+    #   `omics-service-role-serviceRole-W8O1XMPL7QZ`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -8484,6 +8500,11 @@ module Aws::Omics
     #   Optional configuration name to use for the workflow run.
     #   @return [String]
     #
+    # @!attribute [rw] session_policy
+    #   Optional inline policy json for scoping down permissions via a
+    #   session policy on the IAM role provided in the roleArn parameter.
+    #   @return [String]
+    #
     # @!attribute [rw] engine_settings
     #   Engine-specific settings for the workflow run. Use this field to
     #   specify configuration options that are specific to the workflow
@@ -8515,6 +8536,7 @@ module Aws::Omics
       :networking_mode,
       :scratch_storage_mode,
       :configuration_name,
+      :session_policy,
       :engine_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -9399,8 +9421,8 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # The input fails to satisfy the constraints specified by an AWS
-    # service.
+    # The input fails to satisfy the constraints specified by an Amazon Web
+    # Services service.
     #
     # @!attribute [rw] message
     #   @return [String]

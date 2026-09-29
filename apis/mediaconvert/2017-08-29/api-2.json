@@ -957,6 +957,9 @@
       },
       "errors": [
         {
+          "shape": "UnprocessableEntityException"
+        },
+        {
           "shape": "BadRequestException"
         },
         {
@@ -1311,6 +1314,13 @@
         "ANCHOR"
       ]
     },
+    "AacPassthroughControl": {
+      "type": "string",
+      "enum": [
+        "WHEN_POSSIBLE",
+        "NO_PASSTHROUGH"
+      ]
+    },
     "AacRateControlMode": {
       "type": "string",
       "enum": [
@@ -1347,6 +1357,10 @@
         "LoudnessMeasurementMode": {
           "shape": "AacLoudnessMeasurementMode",
           "locationName": "loudnessMeasurementMode"
+        },
+        "PassthroughControl": {
+          "shape": "AacPassthroughControl",
+          "locationName": "passthroughControl"
         },
         "RapInterval": {
           "shape": "__integerMin2000Max30000",
@@ -1748,6 +1762,19 @@
         "ENABLED"
       ]
     },
+    "AspectRatio": {
+      "type": "structure",
+      "members": {
+        "Denominator": {
+          "shape": "__integer",
+          "locationName": "denominator"
+        },
+        "Numerator": {
+          "shape": "__integer",
+          "locationName": "numerator"
+        }
+      }
+    },
     "AssociateCertificateRequest": {
       "type": "structure",
       "members": {
@@ -2045,6 +2072,10 @@
           "shape": "__long",
           "locationName": "bitRate"
         },
+        "ChannelLayout": {
+          "shape": "__string",
+          "locationName": "channelLayout"
+        },
         "Channels": {
           "shape": "__integer",
           "locationName": "channels"
@@ -2114,6 +2145,10 @@
           "shape": "AudioSelectorType",
           "locationName": "selectorType"
         },
+        "Smpte337Passthrough": {
+          "shape": "AudioSmpte337Passthrough",
+          "locationName": "smpte337Passthrough"
+        },
         "Streams": {
           "shape": "__listOf__integerMin1Max2147483647",
           "locationName": "streams"
@@ -2142,6 +2177,13 @@
         "HLS_RENDITION_GROUP",
         "ALL_PCM",
         "STREAM"
+      ]
+    },
+    "AudioSmpte337Passthrough": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
       ]
     },
     "AudioTypeControl": {
@@ -3421,7 +3463,8 @@
       "type": "string",
       "enum": [
         "PASSTHROUGH",
-        "NONE"
+        "NONE",
+        "MANIFEST_CUES"
       ]
     },
     "CmfcSettings": {
@@ -3517,6 +3560,7 @@
         "UNKNOWN",
         "AAC",
         "AC3",
+        "AMR",
         "EAC3",
         "FLAC",
         "MP2",
@@ -3524,8 +3568,13 @@
         "OPUS",
         "PCM",
         "VORBIS",
+        "WMA",
+        "WMA2",
+        "WMAPRO",
         "AV1",
         "AVC",
+        "DV",
+        "H263",
         "HEVC",
         "JPEG2000",
         "MJPEG",
@@ -3536,6 +3585,8 @@
         "QTRLE",
         "THEORA",
         "UNCOMPRESSED",
+        "VC1",
+        "VC3",
         "VFW",
         "VP8",
         "VP9",
@@ -3567,9 +3618,21 @@
           "shape": "ContentLightLevel",
           "locationName": "contentLightLevel"
         },
+        "DisplayAspectRatio": {
+          "shape": "AspectRatio",
+          "locationName": "displayAspectRatio"
+        },
+        "DolbyVision": {
+          "shape": "DolbyVisionMetadata",
+          "locationName": "dolbyVision"
+        },
         "FieldOrder": {
           "shape": "__string",
           "locationName": "fieldOrder"
+        },
+        "Hdr10PlusPresence": {
+          "shape": "Hdr10PlusPresence",
+          "locationName": "hdr10PlusPresence"
         },
         "Height": {
           "shape": "__integer",
@@ -3590,6 +3653,10 @@
         "Rotation": {
           "shape": "__integer",
           "locationName": "rotation"
+        },
+        "SampleAspectRatio": {
+          "shape": "AspectRatio",
+          "locationName": "sampleAspectRatio"
         },
         "ScanType": {
           "shape": "__string",
@@ -4336,7 +4403,8 @@
       "type": "string",
       "enum": [
         "CENC_V1",
-        "UNENCRYPTED_SEI"
+        "UNENCRYPTED_SEI",
+        "CENC_V1_UNENCRYPTED_HEADERS"
       ]
     },
     "DashIsoPtsOffsetHandlingForBFrames": {
@@ -4629,6 +4697,38 @@
       "enum": [
         "HDR10_NOMAP",
         "HDR10_1000"
+      ]
+    },
+    "DolbyVisionMetadata": {
+      "type": "structure",
+      "members": {
+        "BaseLayer": {
+          "shape": "DolbyVisionPresence",
+          "locationName": "baseLayer"
+        },
+        "EnhancementLayer": {
+          "shape": "DolbyVisionPresence",
+          "locationName": "enhancementLayer"
+        },
+        "Level": {
+          "shape": "__integer",
+          "locationName": "level"
+        },
+        "Profile": {
+          "shape": "__integer",
+          "locationName": "profile"
+        },
+        "Rpu": {
+          "shape": "DolbyVisionPresence",
+          "locationName": "rpu"
+        }
+      }
+    },
+    "DolbyVisionPresence": {
+      "type": "string",
+      "enum": [
+        "PRESENT",
+        "ABSENT"
       ]
     },
     "DolbyVisionProfile": {
@@ -5658,7 +5758,15 @@
         "avi",
         "mpegts",
         "mpegps",
-        "mp3"
+        "mp3",
+        "flac",
+        "asf",
+        "ogg",
+        "three_gp",
+        "three_g2",
+        "aac",
+        "ac3",
+        "eac3"
       ]
     },
     "FrameCaptureSettings": {
@@ -6870,6 +6978,12 @@
           "locationName": "targetMonitorNits"
         }
       }
+    },
+    "Hdr10PlusPresence": {
+      "type": "string",
+      "enum": [
+        "PRESENT"
+      ]
     },
     "HdrMetadata": {
       "type": "structure",
@@ -8112,6 +8226,10 @@
           "shape": "MotionImageInserter",
           "locationName": "motionImageInserter"
         },
+        "MotionImageInserters": {
+          "shape": "__listOfMotionImageInserter",
+          "locationName": "motionImageInserters"
+        },
         "NielsenConfiguration": {
           "shape": "NielsenConfiguration",
           "locationName": "nielsenConfiguration"
@@ -8252,6 +8370,10 @@
           "shape": "MotionImageInserter",
           "locationName": "motionImageInserter"
         },
+        "MotionImageInserters": {
+          "shape": "__listOfMotionImageInserter",
+          "locationName": "motionImageInserters"
+        },
         "NielsenConfiguration": {
           "shape": "NielsenConfiguration",
           "locationName": "nielsenConfiguration"
@@ -8296,7 +8418,8 @@
         "jobEngineVersionRequested",
         "jobEngineVersionUsed",
         "audioCodec",
-        "videoCodec"
+        "videoCodec",
+        "errorCode"
       ]
     },
     "JobsQueryStatus": {
@@ -8891,7 +9014,8 @@
       "type": "string",
       "enum": [
         "PASSTHROUGH",
-        "NONE"
+        "NONE",
+        "MANIFEST_CUES"
       ]
     },
     "M2tsSegmentationMarkers": {
@@ -9121,7 +9245,8 @@
       "type": "string",
       "enum": [
         "PASSTHROUGH",
-        "NONE"
+        "NONE",
+        "MANIFEST_CUES"
       ]
     },
     "M3u8Settings": {
@@ -9647,7 +9772,8 @@
       "type": "string",
       "enum": [
         "PASSTHROUGH",
-        "NONE"
+        "NONE",
+        "MANIFEST_CUES"
       ]
     },
     "MpdSettings": {
@@ -10593,12 +10719,28 @@
         }
       }
     },
+    "PassthroughSegmentationMode": {
+      "type": "string",
+      "enum": [
+        "AUTO",
+        "DURATION_BASED",
+        "GOP_COUNT"
+      ]
+    },
     "PassthroughSettings": {
       "type": "structure",
       "members": {
         "FrameControl": {
           "shape": "FrameControl",
           "locationName": "frameControl"
+        },
+        "GopsPerSegment": {
+          "shape": "__integerMin1Max100",
+          "locationName": "gopsPerSegment"
+        },
+        "SegmentationMode": {
+          "shape": "PassthroughSegmentationMode",
+          "locationName": "segmentationMode"
         },
         "VideoSelectorMode": {
           "shape": "VideoSelectorMode",
@@ -11805,20 +11947,94 @@
         "MILLISECONDS"
       ]
     },
+    "TtmlBackgroundColor": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "BLACK",
+        "WHITE",
+        "AUTO"
+      ]
+    },
     "TtmlDestinationSettings": {
       "type": "structure",
       "members": {
+        "BackgroundColor": {
+          "shape": "TtmlBackgroundColor",
+          "locationName": "backgroundColor"
+        },
+        "BackgroundOpacity": {
+          "shape": "__integerMin0Max255",
+          "locationName": "backgroundOpacity"
+        },
+        "FontColor": {
+          "shape": "TtmlFontColor",
+          "locationName": "fontColor"
+        },
+        "FontOpacity": {
+          "shape": "__integerMin0Max255",
+          "locationName": "fontOpacity"
+        },
+        "FontSize": {
+          "shape": "__integerMin0Max96",
+          "locationName": "fontSize"
+        },
+        "FontStyle": {
+          "shape": "TtmlFontStyle",
+          "locationName": "fontStyle"
+        },
+        "FontWeight": {
+          "shape": "TtmlFontWeight",
+          "locationName": "fontWeight"
+        },
         "StylePassthrough": {
           "shape": "TtmlStylePassthrough",
           "locationName": "stylePassthrough"
+        },
+        "TextDecoration": {
+          "shape": "TtmlTextDecoration",
+          "locationName": "textDecoration"
         }
       }
+    },
+    "TtmlFontColor": {
+      "type": "string",
+      "enum": [
+        "WHITE",
+        "BLACK",
+        "YELLOW",
+        "RED",
+        "GREEN",
+        "BLUE",
+        "AUTO"
+      ]
+    },
+    "TtmlFontStyle": {
+      "type": "string",
+      "enum": [
+        "NORMAL",
+        "ITALIC"
+      ]
+    },
+    "TtmlFontWeight": {
+      "type": "string",
+      "enum": [
+        "NORMAL",
+        "BOLD"
+      ]
     },
     "TtmlStylePassthrough": {
       "type": "string",
       "enum": [
         "ENABLED",
         "DISABLED"
+      ]
+    },
+    "TtmlTextDecoration": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "UNDERLINE"
       ]
     },
     "Type": {
@@ -11920,6 +12136,19 @@
         "NONE",
         "HARD"
       ]
+    },
+    "UnprocessableEntityException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "__string",
+          "locationName": "message"
+        }
+      },
+      "exception": true,
+      "error": {
+        "httpStatusCode": 422
+      }
     },
     "UntagResourceRequest": {
       "type": "structure",
@@ -12558,6 +12787,10 @@
           "shape": "ColorPrimaries",
           "locationName": "colorPrimaries"
         },
+        "DisplayAspectRatio": {
+          "shape": "AspectRatio",
+          "locationName": "displayAspectRatio"
+        },
         "FrameRate": {
           "shape": "FrameRate",
           "locationName": "frameRate"
@@ -12577,6 +12810,10 @@
         "Rotation": {
           "shape": "__integer",
           "locationName": "rotation"
+        },
+        "SampleAspectRatio": {
+          "shape": "AspectRatio",
+          "locationName": "sampleAspectRatio"
         },
         "TransferCharacteristics": {
           "shape": "TransferCharacteristics",
@@ -13126,6 +13363,10 @@
     "XavcHdIntraCbgProfileSettings": {
       "type": "structure",
       "members": {
+        "InterlaceMode": {
+          "shape": "XavcInterlaceMode",
+          "locationName": "interlaceMode"
+        },
         "XavcClass": {
           "shape": "XavcHdIntraCbgProfileClass",
           "locationName": "xavcClass"
@@ -14082,6 +14323,12 @@
       "type": "list",
       "member": {
         "shape": "JobsQueryFilter"
+      }
+    },
+    "__listOfMotionImageInserter": {
+      "type": "list",
+      "member": {
+        "shape": "MotionImageInserter"
       }
     },
     "__listOfMsSmoothAdditionalManifest": {

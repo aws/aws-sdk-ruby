@@ -45,6 +45,7 @@ module Aws::QConnect
 
     class AIAgentConfigurationData
       attr_accessor ai_agent_id: ::String
+      attr_accessor enabled: bool
       SENSITIVE: []
     end
 
@@ -249,6 +250,20 @@ module Aws::QConnect
       attr_accessor first_name: ::String
       attr_accessor last_name: ::String
       SENSITIVE: [:first_name, :last_name]
+    end
+
+    class AgentTarget
+      attr_accessor ai_agent_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AiAgentId < AgentTarget
+      end
+      class ApplicationId < AgentTarget
+      end
+      class Unknown < AgentTarget
+      end
     end
 
     class AmazonConnectGuideAssociationData
@@ -909,6 +924,7 @@ module Aws::QConnect
       attr_accessor suggested_message_data: Types::SuggestedMessageDataDetails
       attr_accessor notes_data: Types::NotesDataDetails
       attr_accessor notes_chunk_data: Types::NotesChunkDataDetails
+      attr_accessor proactive_recommendation_data: Types::ProactiveRecommendationDataDetails
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -935,6 +951,8 @@ module Aws::QConnect
       class NotesData < DataDetails
       end
       class NotesChunkData < DataDetails
+      end
+      class ProactiveRecommendationData < DataDetails
       end
       class Unknown < DataDetails
       end
@@ -975,6 +993,12 @@ module Aws::QConnect
       attr_accessor message_template_id: ::String
       attr_accessor version_number: ::Integer
       SENSITIVE: []
+    end
+
+    class DelegateAgentConfiguration
+      attr_accessor agent_target: Types::AgentTarget
+      attr_accessor instruction: Types::MultiAgentInstruction
+      SENSITIVE: [:instruction]
     end
 
     class DeleteAIAgentRequest
@@ -1406,7 +1430,7 @@ module Aws::QConnect
     end
 
     class GetNextMessageResponse
-      attr_accessor type: ("TEXT" | "TOOL_USE_RESULT")
+      attr_accessor type: ("TEXT" | "TOOL_USE_RESULT" | "DATA")
       attr_accessor response: Types::MessageOutput
       attr_accessor request_message_id: ::String
       attr_accessor conversation_state: Types::ConversationState
@@ -1433,7 +1457,7 @@ module Aws::QConnect
       attr_accessor max_results: ::Integer
       attr_accessor wait_time_seconds: ::Integer
       attr_accessor next_chunk_token: ::String
-      attr_accessor recommendation_type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK")
+      attr_accessor recommendation_type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK" | "PROACTIVE_RECOMMENDATION")
       SENSITIVE: []
     end
 
@@ -1510,6 +1534,14 @@ module Aws::QConnect
     class GuardrailWordConfig
       attr_accessor text: ::String
       SENSITIVE: [:text]
+    end
+
+    class HandoffAgentConfiguration
+      attr_accessor agent_target: Types::AgentTarget
+      attr_accessor instruction: Types::MultiAgentInstruction
+      attr_accessor audio_streaming_enabled: bool
+      attr_accessor immediate_handoff: bool
+      SENSITIVE: [:instruction]
     end
 
     class HierarchicalChunkingConfiguration
@@ -1913,12 +1945,15 @@ module Aws::QConnect
     class MessageData
       attr_accessor text: Types::TextMessage
       attr_accessor tool_use_result: Types::ToolUseResultData
+      attr_accessor data: untyped
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:data]
 
       class Text < MessageData
       end
       class ToolUseResult < MessageData
+      end
+      class Data < MessageData
       end
       class Unknown < MessageData
       end
@@ -2125,6 +2160,26 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class MultiAgentConfiguration
+      attr_accessor delegate_agent_configuration: Types::DelegateAgentConfiguration
+      attr_accessor handoff_agent_configuration: Types::HandoffAgentConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DelegateAgentConfiguration < MultiAgentConfiguration
+      end
+      class HandoffAgentConfiguration < MultiAgentConfiguration
+      end
+      class Unknown < MultiAgentConfiguration
+      end
+    end
+
+    class MultiAgentInstruction
+      attr_accessor instruction: ::String
+      attr_accessor examples: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class NoteTakingAIAgentConfiguration
       attr_accessor note_taking_ai_prompt_id: ::String
       attr_accessor note_taking_ai_guardrail_id: ::String
@@ -2180,8 +2235,11 @@ module Aws::QConnect
       attr_accessor orchestration_ai_prompt_id: ::String
       attr_accessor orchestration_ai_guardrail_id: ::String
       attr_accessor tool_configurations: ::Array[Types::ToolConfiguration]
+      attr_accessor multi_agent_configurations: ::Array[Types::MultiAgentConfiguration]
       attr_accessor connect_instance_arn: ::String
       attr_accessor locale: ::String
+      attr_accessor input_schemas: ::Array[untyped]
+      attr_accessor output_schemas: ::Array[untyped]
       SENSITIVE: []
     end
 
@@ -2204,6 +2262,11 @@ module Aws::QConnect
 
     class PreconditionFailedException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProactiveRecommendationDataDetails
+      attr_accessor next_message_token: ::String
       SENSITIVE: []
     end
 
@@ -2478,7 +2541,7 @@ module Aws::QConnect
       attr_accessor document: Types::Document
       attr_accessor relevance_score: ::Float
       attr_accessor relevance_level: ("HIGH" | "MEDIUM" | "LOW")
-      attr_accessor type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK")
+      attr_accessor type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK" | "PROACTIVE_RECOMMENDATION")
       attr_accessor data: Types::DataSummary
       SENSITIVE: []
     end
@@ -2616,6 +2679,13 @@ module Aws::QConnect
       end
     end
 
+    class RetrieveError
+      attr_accessor association_id: ::String
+      attr_accessor code: ("ACCESS_DENIED" | "RESOURCE_NOT_FOUND" | "VALIDATION_ERROR" | "THROTTLED" | "DEPENDENCY_FAILED" | "INTERNAL_SERVER_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class RetrieveRequest
       attr_accessor assistant_id: ::String
       attr_accessor retrieval_configuration: Types::RetrievalConfiguration
@@ -2625,6 +2695,7 @@ module Aws::QConnect
 
     class RetrieveResponse
       attr_accessor results: ::Array[Types::RetrieveResult]
+      attr_accessor errors: ::Array[Types::RetrieveError]
       SENSITIVE: []
     end
 
@@ -2756,7 +2827,7 @@ module Aws::QConnect
     class SendMessageRequest
       attr_accessor assistant_id: ::String
       attr_accessor session_id: ::String
-      attr_accessor type: ("TEXT" | "TOOL_USE_RESULT")
+      attr_accessor type: ("TEXT" | "TOOL_USE_RESULT" | "DATA")
       attr_accessor message: Types::MessageInput
       attr_accessor ai_agent_id: ::String
       attr_accessor conversation_context: Types::ConversationContext
@@ -2868,6 +2939,9 @@ module Aws::QConnect
       attr_accessor ai_agent_version: ::Integer
       attr_accessor ai_agent_invoker: ::String
       attr_accessor ai_agent_orchestrator_use_case: ::String
+      attr_accessor interaction_mode: ("DELEGATE" | "HANDOFF")
+      attr_accessor target_agent_id: ::String
+      attr_accessor return_reason: ("COMPLETE" | "COMPLETE_WITH_ERROR" | "ESCALATE" | "OUT_OF_DOMAIN")
       attr_accessor request_model: ::String
       attr_accessor request_max_tokens: ::Integer
       attr_accessor temperature: ::Float

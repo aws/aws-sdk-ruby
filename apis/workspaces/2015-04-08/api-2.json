@@ -1916,7 +1916,11 @@
         "GRAPHICS_G6F_XLARGE",
         "GRAPHICS_G6F_2XLARGE",
         "GRAPHICS_G6F_4XLARGE",
-        "GRAPHICS_GR6F_4XLARGE"
+        "GRAPHICS_GR6F_4XLARGE",
+        "GRAPHICS_G7_2XLARGE",
+        "GRAPHICS_G7_4XLARGE",
+        "GRAPHICS_G7_8XLARGE",
+        "GRAPHICS_G7_12XLARGE"
       ]
     },
     "ComputeList":{
@@ -3242,7 +3246,8 @@
       "enum":[
         "BASE",
         "GRAPHICS_G4DN",
-        "GRAPHICS_G6"
+        "GRAPHICS_G6",
+        "GRAPHICS_G7"
       ]
     },
     "ImageErrorMessage":{
@@ -3603,7 +3608,8 @@
         "ROOT_VOLUME",
         "USER_VOLUME",
         "COMPUTE_TYPE",
-        "PROTOCOL"
+        "PROTOCOL",
+        "NESTED_VIRTUALIZATION"
       ]
     },
     "ModificationState":{
@@ -5031,7 +5037,8 @@
         "ComputeTypeName":{"shape":"Compute"},
         "Protocols":{"shape":"ProtocolList"},
         "OperatingSystemName":{"shape":"OperatingSystemName"},
-        "GlobalAccelerator":{"shape":"GlobalAcceleratorForWorkSpace"}
+        "GlobalAccelerator":{"shape":"GlobalAcceleratorForWorkSpace"},
+        "NestedVirtualizationEnabled":{"shape":"BooleanObject"}
       }
     },
     "WorkspaceRequest":{

@@ -650,6 +650,13 @@
       "max":512,
       "pattern":"\\S+"
     },
+    "CodeVerifier":{
+      "type":"string",
+      "max":128,
+      "min":43,
+      "pattern":"^[A-Za-z0-9\\-._~]+$",
+      "sensitive":true
+    },
     "ConflictException":{
       "type":"structure",
       "members":{
@@ -826,7 +833,8 @@
       "type":"structure",
       "members":{
         "authCode":{"shape":"AuthCode"},
-        "redirectUri":{"shape":"RedirectUri"}
+        "redirectUri":{"shape":"RedirectUri"},
+        "codeVerifier":{"shape":"CodeVerifier"}
       }
     },
     "ConnectorOperator":{
@@ -2462,6 +2470,13 @@
         "CREATED"
       ]
     },
+    "PrivateKey":{
+      "type":"string",
+      "max":8192,
+      "min":1,
+      "pattern":".*",
+      "sensitive":true
+    },
     "PrivateLinkServiceName":{
       "type":"string",
       "max":512,
@@ -3091,13 +3106,11 @@
     },
     "SnowflakeConnectorProfileCredentials":{
       "type":"structure",
-      "required":[
-        "username",
-        "password"
-      ],
+      "required":["username"],
       "members":{
         "username":{"shape":"Username"},
-        "password":{"shape":"Password"}
+        "password":{"shape":"Password"},
+        "privateKey":{"shape":"PrivateKey"}
       }
     },
     "SnowflakeConnectorProfileProperties":{

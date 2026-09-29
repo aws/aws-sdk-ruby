@@ -528,6 +528,51 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Associates an Amazon Kinesis data stream to receive segment membership
+    # events for a given domain. This is a domain-level configuration that
+    # applies to all segment subscriptions within the domain. A domain can
+    # have only one associated stream at a time.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :destination_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Kinesis data stream to
+    #   deliver segment membership events to. For example,
+    #   `arn:aws:kinesis:region:account-id:stream/stream-name`.
+    #
+    # @option params [required, String] :destination_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that allows Customer
+    #   Profiles service principal to assume the role for conducting AWS Key
+    #   Management Service (KMS) and Amazon Kinesis operations. The role must
+    #   grant the following Amazon Kinesis permissions to deliver segment
+    #   membership events to the stream:
+    #
+    #   * `kinesis:PutRecord`
+    #
+    #   * `kinesis:PutRecords`
+    #
+    #   * `kinesis:DescribeStream`
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_stream_for_segments({
+    #     domain_name: "name", # required
+    #     destination_arn: "DestinationArnString", # required
+    #     destination_role_arn: "DestinationRoleArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AssociateStreamForSegments AWS API Documentation
+    #
+    # @overload associate_stream_for_segments(params = {})
+    # @param [Hash] params ({})
+    def associate_stream_for_segments(params = {}, options = {})
+      req = build_request(:associate_stream_for_segments, params)
+      req.send_request(options)
+    end
+
     # Fetch the possible attribute values given the attribute name.
     #
     # @option params [required, String] :calculated_attribute_name
@@ -877,7 +922,7 @@ module Aws::CustomerProfiles
     #         },
     #       ],
     #     },
-    #     statistic: "FIRST_OCCURRENCE", # required, accepts FIRST_OCCURRENCE, LAST_OCCURRENCE, COUNT, SUM, MINIMUM, MAXIMUM, AVERAGE, MAX_OCCURRENCE
+    #     statistic: "FIRST_OCCURRENCE", # required, accepts FIRST_OCCURRENCE, LAST_OCCURRENCE, COUNT, SUM, MINIMUM, MAXIMUM, AVERAGE, MAX_OCCURRENCE, RECENT_OCCURRENCES
     #     use_historical_data: false,
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -909,7 +954,7 @@ module Aws::CustomerProfiles
     #   resp.data.filter.groups[0].dimensions[0].attributes["attributeName"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"
     #   resp.data.filter.groups[0].dimensions[0].attributes["attributeName"].values #=> Array
     #   resp.data.filter.groups[0].dimensions[0].attributes["attributeName"].values[0] #=> String
-    #   resp.statistic #=> String, one of "FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE"
+    #   resp.statistic #=> String, one of "FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE", "RECENT_OCCURRENCES"
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.use_historical_data #=> Boolean
@@ -2160,7 +2205,7 @@ module Aws::CustomerProfiles
     #                 },
     #                 attributes: {
     #                   "string1To255" => {
-    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL, LIST_CONTAINS, LIST_CONTAINS_ALL
     #                     values: ["string1To255"], # required
     #                   },
     #                 },
@@ -2171,7 +2216,7 @@ module Aws::CustomerProfiles
     #               },
     #               calculated_attributes: {
     #                 "typeName" => {
-    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL, LIST_CONTAINS, LIST_CONTAINS_ALL
     #                   values: ["string1To255"], # required
     #                   condition_overrides: {
     #                     range: {
@@ -2427,7 +2472,7 @@ module Aws::CustomerProfiles
     #                 },
     #                 attributes: {
     #                   "string1To255" => {
-    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
+    #                     dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL, LIST_CONTAINS, LIST_CONTAINS_ALL
     #                     values: ["string1To255"], # required
     #                   },
     #                 },
@@ -2438,7 +2483,7 @@ module Aws::CustomerProfiles
     #               },
     #               calculated_attributes: {
     #                 "typeName" => {
-    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL
+    #                   dimension_type: "INCLUSIVE", # required, accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEGINS_WITH, ENDS_WITH, BEFORE, AFTER, BETWEEN, NOT_BETWEEN, ON, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, EQUAL, LIST_CONTAINS, LIST_CONTAINS_ALL
     #                   values: ["string1To255"], # required
     #                   condition_overrides: {
     #                     range: {
@@ -3068,6 +3113,39 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Deletes a segment subscription for membership events. All active event
+    # notifications for this segment are stopped.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :segment_definition_name
+    #   The unique name of the segment definition.
+    #
+    # @return [Types::DeleteSegmentSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSegmentSubscriptionResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_segment_subscription({
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteSegmentSubscription AWS API Documentation
+    #
+    # @overload delete_segment_subscription(params = {})
+    # @param [Hash] params ({})
+    def delete_segment_subscription(params = {}, options = {})
+      req = build_request(:delete_segment_subscription, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified workflow and all its corresponding resources.
     # This is an async process.
     #
@@ -3136,6 +3214,36 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def detect_profile_object_type(params = {}, options = {})
       req = build_request(:detect_profile_object_type, params)
+      req.send_request(options)
+    end
+
+    # Disassociates the Amazon Kinesis data stream configured for segment
+    # membership events. All active segment subscriptions delivering events
+    # to this stream are eventually stopped.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::DisassociateStreamForSegmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateStreamForSegmentsResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_stream_for_segments({
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DisassociateStreamForSegments AWS API Documentation
+    #
+    # @overload disassociate_stream_for_segments(params = {})
+    # @param [Hash] params ({})
+    def disassociate_stream_for_segments(params = {}, options = {})
+      req = build_request(:disassociate_stream_for_segments, params)
       req.send_request(options)
     end
 
@@ -3248,7 +3356,7 @@ module Aws::CustomerProfiles
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
-    #   resp.statistic #=> String, one of "FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE"
+    #   resp.statistic #=> String, one of "FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE", "RECENT_OCCURRENCES"
     #   resp.data.filter.include #=> String, one of "ALL", "ANY", "NONE"
     #   resp.data.filter.groups #=> Array
     #   resp.data.filter.groups[0].type #=> String, one of "ALL", "ANY", "NONE"
@@ -4546,14 +4654,14 @@ module Aws::CustomerProfiles
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.state.values #=> Array
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.billing_address.state.values[0] #=> String
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes #=> Hash
-    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["string1To255"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"
+    #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["string1To255"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL", "LIST_CONTAINS", "LIST_CONTAINS_ALL"
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["string1To255"].values #=> Array
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.attributes["string1To255"].values[0] #=> String
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.profile_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.profile_type.values #=> Array
     #   resp.segment_groups.groups[0].dimensions[0].profile_attributes.profile_type.values[0] #=> String, one of "ACCOUNT_PROFILE", "PROFILE"
     #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes #=> Hash
-    #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL"
+    #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEGINS_WITH", "ENDS_WITH", "BEFORE", "AFTER", "BETWEEN", "NOT_BETWEEN", "ON", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "EQUAL", "LIST_CONTAINS", "LIST_CONTAINS_ALL"
     #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].values #=> Array
     #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].values[0] #=> String
     #   resp.segment_groups.groups[0].dimensions[0].calculated_attributes["typeName"].condition_overrides.range.start #=> Integer
@@ -4799,6 +4907,51 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Returns the current subscription configuration, execution schedule,
+    # and status for segment membership events.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :segment_definition_name
+    #   The unique name of the segment definition.
+    #
+    # @return [Types::GetSegmentSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSegmentSubscriptionResponse#status #status} => String
+    #   * {Types::GetSegmentSubscriptionResponse#message #message} => String
+    #   * {Types::GetSegmentSubscriptionResponse#schedule_configuration #schedule_configuration} => Types::ScheduleConfiguration
+    #   * {Types::GetSegmentSubscriptionResponse#scheduled_executions #scheduled_executions} => Types::ScheduledExecutions
+    #   * {Types::GetSegmentSubscriptionResponse#started_at #started_at} => Time
+    #   * {Types::GetSegmentSubscriptionResponse#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_segment_subscription({
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "STARTING", "RUNNING", "STOPPED", "FAILED"
+    #   resp.message #=> String
+    #   resp.schedule_configuration.interval #=> Integer
+    #   resp.schedule_configuration.unit #=> String, one of "HOURLY"
+    #   resp.scheduled_executions.next_executed_at #=> Time
+    #   resp.scheduled_executions.last_executed_at #=> Time
+    #   resp.started_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentSubscription AWS API Documentation
+    #
+    # @overload get_segment_subscription(params = {})
+    # @param [Hash] params ({})
+    def get_segment_subscription(params = {}, options = {})
+      req = build_request(:get_segment_subscription, params)
+      req.send_request(options)
+    end
+
     # Returns a set of profiles that belong to the same matching group using
     # the `matchId` or `profileId`. You can also specify the type of
     # matching that you want for finding similar profiles using either
@@ -4860,6 +5013,53 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def get_similar_profiles(params = {}, options = {})
       req = build_request(:get_similar_profiles, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the segment membership event stream
+    # configured for a specific domain, including the stream state and
+    # associated segments.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::GetStreamForSegmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStreamForSegmentsResponse#associated_at #associated_at} => Time
+    #   * {Types::GetStreamForSegmentsResponse#associated_segments #associated_segments} => Array&lt;Types::AssociatedSegment&gt;
+    #   * {Types::GetStreamForSegmentsResponse#domain_name #domain_name} => String
+    #   * {Types::GetStreamForSegmentsResponse#destination_arn #destination_arn} => String
+    #   * {Types::GetStreamForSegmentsResponse#destination_role_arn #destination_role_arn} => String
+    #   * {Types::GetStreamForSegmentsResponse#state #state} => String
+    #   * {Types::GetStreamForSegmentsResponse#disassociated_at #disassociated_at} => Time
+    #   * {Types::GetStreamForSegmentsResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_stream_for_segments({
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associated_at #=> Time
+    #   resp.associated_segments #=> Array
+    #   resp.associated_segments[0].segment_name #=> String
+    #   resp.associated_segments[0].status #=> String, one of "STARTING", "RUNNING", "STOPPED", "FAILED"
+    #   resp.associated_segments[0].message #=> String
+    #   resp.domain_name #=> String
+    #   resp.destination_arn #=> String
+    #   resp.destination_role_arn #=> String
+    #   resp.state #=> String, one of "RUNNING", "UNHEALTHY", "STOPPED"
+    #   resp.disassociated_at #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetStreamForSegments AWS API Documentation
+    #
+    # @overload get_stream_for_segments(params = {})
+    # @param [Hash] params ({})
+    def get_stream_for_segments(params = {}, options = {})
+      req = build_request(:get_stream_for_segments, params)
       req.send_request(options)
     end
 
@@ -6237,6 +6437,58 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Returns the most recent membership events for a segment. Each event
+    # represents a profile that entered or exited the segment.
+    #
+    # This operation is paginated.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :segment_definition_name
+    #   The unique name of the segment definition.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of events to return per page.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from the previous call to retrieve the next page
+    #   of results.
+    #
+    # @return [Types::ListSegmentSubscriptionEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSegmentSubscriptionEventsResponse#events #events} => Array&lt;Types::SubscriptionEventItem&gt;
+    #   * {Types::ListSegmentSubscriptionEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_segment_subscription_events({
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #     max_results: 1,
+    #     next_token: "token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events #=> Array
+    #   resp.events[0].profile_id #=> String
+    #   resp.events[0].updated_at #=> Time
+    #   resp.events[0].event_type #=> String, one of "LIVE", "SCHEDULE"
+    #   resp.events[0].event #=> String, one of "JOINED", "LEFT"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListSegmentSubscriptionEvents AWS API Documentation
+    #
+    # @overload list_segment_subscription_events(params = {})
+    # @param [Hash] params ({})
+    def list_segment_subscription_events(params = {}, options = {})
+      req = build_request(:list_segment_subscription_events, params)
+      req.send_request(options)
+    end
+
     # Displays the tags associated with an Amazon Connect Customer Profiles
     # resource. In Connect Customer Profiles, domains, profile object types,
     # and integrations can be tagged.
@@ -6934,6 +7186,68 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Creates or updates a segment subscription for membership events. When
+    # a subscription is created, an initial snapshot is taken and the system
+    # begins monitoring for membership changes.
+    #
+    # You can optionally set a schedule configuration interval to control
+    # how often membership snapshots are run. The interval can be from 1 to
+    # 24 hours. If not set, the interval defaults to 24 hours. Scheduled
+    # snapshots run on a best-effort basis. If a scheduled snapshot takes
+    # longer than the configured interval, the next scheduled run does not
+    # start until the in-progress snapshot completes, so a run might be
+    # delayed or skipped and is not guaranteed to occur at exactly the
+    # requested time.
+    #
+    # For Classic segments, membership events are generated from these
+    # scheduled snapshots and also in near real-time as profile attribute
+    # changes occur. For SQL segments, membership events are generated only
+    # from the scheduled snapshots.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :segment_definition_name
+    #   The unique name of the segment definition.
+    #
+    # @option params [Types::ScheduleConfiguration] :schedule_configuration
+    #   The optional schedule configuration that controls how often membership
+    #   snapshots are run. If not provided, the subscription defaults to a
+    #   24-hour interval.
+    #
+    # @return [Types::PutSegmentSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutSegmentSubscriptionResponse#status #status} => String
+    #   * {Types::PutSegmentSubscriptionResponse#schedule_configuration #schedule_configuration} => Types::ScheduleConfiguration
+    #   * {Types::PutSegmentSubscriptionResponse#started_at #started_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_segment_subscription({
+    #     domain_name: "name", # required
+    #     segment_definition_name: "name", # required
+    #     schedule_configuration: {
+    #       interval: 1, # required
+    #       unit: "HOURLY", # accepts HOURLY
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "STARTING", "RUNNING", "STOPPED", "FAILED"
+    #   resp.schedule_configuration.interval #=> Integer
+    #   resp.schedule_configuration.unit #=> String, one of "HOURLY"
+    #   resp.started_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutSegmentSubscription AWS API Documentation
+    #
+    # @overload put_segment_subscription(params = {})
+    # @param [Hash] params ({})
+    def put_segment_subscription(params = {}, options = {})
+      req = build_request(:put_segment_subscription, params)
+      req.send_request(options)
+    end
+
     # Searches for profiles within a specific domain using one or more
     # predefined search keys (e.g., \_fullName, \_phone, \_email, \_account,
     # etc.) and/or custom-defined search keys. A search key is a data type
@@ -7102,6 +7416,132 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def search_profiles(params = {}, options = {})
       req = build_request(:search_profiles, params)
+      req.send_request(options)
+    end
+
+    # Retrieves recommendations for a profile in a specific domain. The
+    # profile is identified using a search key, which consists of a
+    # `KeyName` and a `KeyValues` list. The `KeyName` can be a predefined
+    # key (for example, `_profileId`, `_phone`, `_email`) or a
+    # custom-defined key.
+    #
+    # The search key must match exactly one profile. If no profile matches
+    # the search key, the operation returns a `ResourceNotFoundException`.
+    # If more than one profile matches the search key, the operation returns
+    # a `BadRequestException`. You can use the SearchProfiles API to review
+    # the matching profiles.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :key_name
+    #   A searchable identifier of a customer profile. You can use a
+    #   predefined key, such as `_profileId`, `_phone`, or `_email`, or a
+    #   custom-defined key.
+    #
+    # @option params [required, Array<String>] :key_values
+    #   A list of key values. Provide one value for each field of the search
+    #   key.
+    #
+    # @option params [required, Types::Recommender] :recommender
+    #   The recommender used to generate the recommendations.
+    #
+    # @option params [Array<String>] :candidate_ids
+    #   A list of item IDs to rank for the user. Use this when you want to
+    #   re-rank a specific set of items rather than getting recommendations
+    #   from the full item catalog. Required for personalized-ranking use
+    #   cases.
+    #
+    # @option params [Hash<String,String>] :context
+    #   The contextual metadata used to provide dynamic runtime information to
+    #   tailor recommendations.
+    #
+    # @option params [Types::RecommendationDiversityConfig] :diversity
+    #   Runtime diversity configuration for this request. Enables
+    #   diversity-aware recommendations and optionally supplies values for
+    #   placeholder-based diversity caps configured on the recommender.
+    #
+    # @option params [Types::RecommendationMetadata] :metadata
+    #   Configuration for metadata to include in recommendation responses.
+    #
+    # @option params [Integer] :max_recommendations
+    #   The maximum number of recommendations to return. The default value is
+    #   5.
+    #
+    # @return [Types::SearchRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchRecommendationsResponse#profile_id #profile_id} => String
+    #   * {Types::SearchRecommendationsResponse#recommendations #recommendations} => Array&lt;Types::Recommendation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_recommendations({
+    #     domain_name: "name", # required
+    #     key_name: "name", # required
+    #     key_values: ["string1To255"], # required
+    #     recommender: { # required
+    #       name: "name", # required
+    #       filters: [
+    #         {
+    #           name: "name",
+    #           values: {
+    #             "RecommenderFilterAttributeName" => "RecommenderFilterAttributeValue",
+    #           },
+    #         },
+    #       ],
+    #       promotional_filters: [
+    #         {
+    #           name: "name",
+    #           values: {
+    #             "RecommenderFilterAttributeName" => "RecommenderFilterAttributeValue",
+    #           },
+    #           promotion_name: "name",
+    #           percent_promoted_items: 1,
+    #         },
+    #       ],
+    #     },
+    #     candidate_ids: ["string1To255"],
+    #     context: {
+    #       "ContextKey" => "string1To255",
+    #     },
+    #     diversity: {
+    #       enabled: false, # required
+    #       values: {
+    #         "DiversityPlaceholderName" => 1,
+    #       },
+    #     },
+    #     metadata: {
+    #       columns: ["MetadataColumnName"],
+    #     },
+    #     max_recommendations: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #   resp.recommendations #=> Array
+    #   resp.recommendations[0].catalog_item.id #=> String
+    #   resp.recommendations[0].catalog_item.name #=> String
+    #   resp.recommendations[0].catalog_item.code #=> String
+    #   resp.recommendations[0].catalog_item.type #=> String
+    #   resp.recommendations[0].catalog_item.category #=> String
+    #   resp.recommendations[0].catalog_item.description #=> String
+    #   resp.recommendations[0].catalog_item.additional_information #=> String
+    #   resp.recommendations[0].catalog_item.image_link #=> String
+    #   resp.recommendations[0].catalog_item.link #=> String
+    #   resp.recommendations[0].catalog_item.created_at #=> Time
+    #   resp.recommendations[0].catalog_item.updated_at #=> Time
+    #   resp.recommendations[0].catalog_item.price #=> String
+    #   resp.recommendations[0].catalog_item.attributes #=> Hash
+    #   resp.recommendations[0].catalog_item.attributes["string1To255"] #=> String
+    #   resp.recommendations[0].score #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SearchRecommendations AWS API Documentation
+    #
+    # @overload search_recommendations(params = {})
+    # @param [Hash] params ({})
+    def search_recommendations(params = {}, options = {})
+      req = build_request(:search_recommendations, params)
       req.send_request(options)
     end
 
@@ -7354,7 +7794,7 @@ module Aws::CustomerProfiles
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
-    #   resp.statistic #=> String, one of "FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE"
+    #   resp.statistic #=> String, one of "FIRST_OCCURRENCE", "LAST_OCCURRENCE", "COUNT", "SUM", "MINIMUM", "MAXIMUM", "AVERAGE", "MAX_OCCURRENCE", "RECENT_OCCURRENCES"
     #   resp.conditions.range.value #=> Integer
     #   resp.conditions.range.unit #=> String, one of "DAYS"
     #   resp.conditions.range.value_range.start #=> Integer
@@ -8076,7 +8516,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

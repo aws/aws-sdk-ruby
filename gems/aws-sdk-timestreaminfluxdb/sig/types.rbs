@@ -399,6 +399,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor engine_type: ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
       attr_accessor publicly_accessible: bool
       attr_accessor db_parameter_group_identifier: ::String
+      attr_accessor effective_db_parameter_group_identifier: ::String
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       attr_accessor last_maintenance_time: ::Time

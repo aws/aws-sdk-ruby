@@ -4835,6 +4835,7 @@ module Aws::CloudWatchLogs
     #   resp.statistics.bytes_scanned #=> Float
     #   resp.statistics.estimated_bytes_skipped #=> Float
     #   resp.statistics.log_groups_scanned #=> Float
+    #   resp.statistics.result_count #=> Float
     #   resp.status #=> String, one of "Scheduled", "Running", "Complete", "Failed", "Cancelled", "Timeout", "Unknown"
     #   resp.encryption_key #=> String
     #   resp.next_token #=> String
@@ -9673,7 +9674,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.161.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

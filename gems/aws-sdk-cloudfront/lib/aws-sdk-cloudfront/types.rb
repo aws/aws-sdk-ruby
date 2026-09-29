@@ -11503,8 +11503,8 @@ module Aws::CloudFront
     #
     # @!attribute [rw] signing_protocol
     #   The signing protocol of the origin access control, which determines
-    #   how CloudFront signs (authenticates) requests. The only valid value
-    #   is `sigv4`.
+    #   how CloudFront signs (authenticates) requests. The only valid values
+    #   are `sigv4` and `sigv4a`.
     #   @return [String]
     #
     # @!attribute [rw] signing_behavior
@@ -11627,7 +11627,7 @@ module Aws::CloudFront
     # @!attribute [rw] signing_protocol
     #   The signing protocol of the origin access control. The signing
     #   protocol determines how CloudFront signs (authenticates) requests.
-    #   The only valid value is `sigv4`.
+    #   The only valid values are `sigv4` and `sigv4a`.
     #   @return [String]
     #
     # @!attribute [rw] signing_behavior
@@ -17201,8 +17201,8 @@ module Aws::CloudFront
     #   * `static-ip` - Do not specify this value unless your distribution
     #     has been enabled for this feature by the CloudFront team. If you
     #     have a use case that requires static IP addresses for a
-    #     distribution, contact CloudFront through the [Amazon Web Services
-    #     Support Center][2].
+    #     distribution, contact CloudFront through the [Amazon Web
+    #     ServicesSupport Center][2].
     #
     #   If the distribution uses the CloudFront domain name such as
     #   `d111111abcdef8.cloudfront.net`, don't set a value for this field.

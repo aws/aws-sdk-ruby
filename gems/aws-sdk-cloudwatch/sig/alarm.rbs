@@ -105,6 +105,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#evaluation_window-instance_method
       def evaluation_window: () -> Types::EvaluationWindow
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#warm_up_configuration-instance_method
+      def warm_up_configuration: () -> Types::WarmUpConfiguration
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#evaluation_criteria-instance_method
       def evaluation_criteria: () -> Types::EvaluationCriteria
 

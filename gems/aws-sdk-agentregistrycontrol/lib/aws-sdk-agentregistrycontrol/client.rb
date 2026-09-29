@@ -485,11 +485,21 @@ module Aws::AgentRegistryControl
     # @option params [String] :description
     #   The description of the registry
     #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   The optional server-side encryption configuration for the registry.
+    #   When you provide this field, the specified customer-managed Amazon Web
+    #   Services KMS key encrypts the registry's content. Omit this field to
+    #   use an Amazon Web Services-owned encryption key. You cannot change the
+    #   encryption configuration after registry creation.
+    #
     # @option params [Types::DiscoveryConfiguration] :discovery_configuration
     #   Discovery configuration for the registry
     #
     # @option params [String] :client_token
-    #   Client token for idempotency
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request, but does not return an
+    #   error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -500,6 +510,18 @@ module Aws::AgentRegistryControl
     # @option params [Types::ApprovalConfiguration] :approval_configuration
     #   Approval configuration for registry records
     #
+    # @option params [Types::CustomMetadataSchemaConfiguration] :custom_metadata_schema_configuration
+    #   The optional custom metadata schema configuration for the registry.
+    #   When provided, registry records can carry structured metadata
+    #   validated against this schema.
+    #
+    # @option params [Types::AutoDetectionConfiguration] :auto_detection_configuration
+    #   The optional auto-detection configuration for the registry. When
+    #   provided, the registry is automatically populated with resources
+    #   discovered according to the configuration. Omit this field for
+    #   registries whose records are managed exclusively through the Agent
+    #   Registry Control API.
+    #
     # @return [Types::CreateRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRegistryResponse#registry_arn #registry_arn} => String
@@ -509,6 +531,9 @@ module Aws::AgentRegistryControl
     #   resp = client.create_registry({
     #     name: "RegistryName", # required
     #     description: "Description",
+    #     encryption_configuration: {
+    #       kms_key_arn: "KmsKeyArn", # required
+    #     },
     #     discovery_configuration: {
     #       authorizer_configuration: {
     #         custom_jwt_authorizer: {
@@ -575,6 +600,19 @@ module Aws::AgentRegistryControl
     #     approval_configuration: {
     #       auto_approval_rules: ["APPROVE_ALL"], # accepts APPROVE_ALL
     #     },
+    #     custom_metadata_schema_configuration: {
+    #       default_schema: "CustomMetadataSchemaDefinition",
+    #       record_type_schema_overrides: [
+    #         {
+    #           record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY
+    #           schema: "CustomMetadataSchemaDefinition", # required
+    #         },
+    #       ],
+    #     },
+    #     auto_detection_configuration: {
+    #       scope: "ORGANIZATION", # required, accepts ORGANIZATION
+    #       enabled: false, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -624,6 +662,24 @@ module Aws::AgentRegistryControl
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Provenance>] :provenance
+    #   The provenance lineage entries for the registry record. This field is
+    #   reserved for the Amazon Web Services Agent Registry auto-detection
+    #   service principal. Requests that include this field from other callers
+    #   are rejected.
+    #
+    # @option params [Hash,Array,String,Numeric,Boolean] :custom_metadata
+    #   The custom metadata to attach to the registry record. Each key must
+    #   match a property defined in the registry's custom metadata schema.
+    #   Values can be strings (maximum 128 characters) or native JSON booleans
+    #   (`true` or `false`). Values are validated against the schema at
+    #   creation time.
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
     # @option params [Hash<String,String>] :tags
     #   Tags to associate with the registry record
     #
@@ -639,7 +695,7 @@ module Aws::AgentRegistryControl
     #     name: "RegistryRecordName", # required
     #     display_name: "RegistryRecordDisplayName",
     #     description: "Description",
-    #     record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL
+    #     record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY
     #     descriptors: { # required
     #       mcp_server: {
     #         data: "DescriptorData",
@@ -743,9 +799,201 @@ module Aws::AgentRegistryControl
     #       custom: {
     #         data: "DescriptorData",
     #       },
+    #       http: {
+    #         source: {
+    #           from_url: {
+    #             url: "DescriptorSourceUrl", # required
+    #             credential_provider_configurations: [
+    #               {
+    #                 credential_provider_type: "OAUTH", # required, accepts OAUTH, IAM
+    #                 credential_provider: { # required
+    #                   oauth_credential_provider: {
+    #                     provider_arn: "CredentialProviderArn", # required
+    #                     grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                     scopes: ["String"],
+    #                     custom_parameters: {
+    #                       "String" => "String",
+    #                     },
+    #                   },
+    #                   iam_credential_provider: {
+    #                     role_arn: "IamRoleArn",
+    #                     service: "IamSigningServiceName",
+    #                     region: "IamSigningRegion",
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       },
+    #       agui: {
+    #         source: {
+    #           from_url: {
+    #             url: "DescriptorSourceUrl", # required
+    #             credential_provider_configurations: [
+    #               {
+    #                 credential_provider_type: "OAUTH", # required, accepts OAUTH, IAM
+    #                 credential_provider: { # required
+    #                   oauth_credential_provider: {
+    #                     provider_arn: "CredentialProviderArn", # required
+    #                     grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                     scopes: ["String"],
+    #                     custom_parameters: {
+    #                       "String" => "String",
+    #                     },
+    #                   },
+    #                   iam_credential_provider: {
+    #                     role_arn: "IamRoleArn",
+    #                     service: "IamSigningServiceName",
+    #                     region: "IamSigningRegion",
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       },
     #     },
     #     record_version: "RegistryRecordVersion",
     #     client_token: "ClientToken",
+    #     provenance: [
+    #       {
+    #         relation: "DETECTED_FROM", # required, accepts DETECTED_FROM
+    #         source_id: "SourceId", # required
+    #         source_type: "AWS::BedrockAgentCore::Runtime", # accepts AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Gateway
+    #         source_details: {
+    #           agentcore_runtime: {
+    #             protocol_configuration: {
+    #               server_protocol: "HTTP", # accepts HTTP, A2A, MCP, AGUI
+    #             },
+    #             authorizer_configuration: {
+    #               custom_jwt_authorizer: {
+    #                 discovery_url: "DiscoveryUrl", # required
+    #                 allowed_audience: ["AllowedAudience"],
+    #                 allowed_clients: ["AllowedClient"],
+    #                 allowed_scopes: ["AllowedScopeType"],
+    #                 custom_claims: [
+    #                   {
+    #                     inbound_token_claim_name: "InboundTokenClaimNameType", # required
+    #                     inbound_token_claim_value_type: "STRING", # required, accepts STRING, STRING_ARRAY
+    #                     authorizing_claim_match_value: { # required
+    #                       claim_match_value: { # required
+    #                         match_value_string: "MatchValueString",
+    #                         match_value_string_list: ["MatchValueString"],
+    #                       },
+    #                       claim_match_operator: "EQUALS", # required, accepts EQUALS, CONTAINS, CONTAINS_ANY
+    #                     },
+    #                   },
+    #                 ],
+    #                 private_endpoint: {
+    #                   self_managed_lattice_resource: {
+    #                     resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #                   },
+    #                   managed_vpc_resource: {
+    #                     vpc_identifier: "VpcIdentifier", # required
+    #                     subnet_ids: ["SubnetId"], # required
+    #                     endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #                     security_group_ids: ["SecurityGroupIdentifier"],
+    #                     tags: {
+    #                       "TagKey" => "TagValue",
+    #                     },
+    #                     routing_domain: "RoutingDomain",
+    #                   },
+    #                 },
+    #                 private_endpoint_overrides: [
+    #                   {
+    #                     domain: "PrivateEndpointOverrideDomain", # required
+    #                     private_endpoint: { # required
+    #                       self_managed_lattice_resource: {
+    #                         resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #                       },
+    #                       managed_vpc_resource: {
+    #                         vpc_identifier: "VpcIdentifier", # required
+    #                         subnet_ids: ["SubnetId"], # required
+    #                         endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #                         security_group_ids: ["SecurityGroupIdentifier"],
+    #                         tags: {
+    #                           "TagKey" => "TagValue",
+    #                         },
+    #                         routing_domain: "RoutingDomain",
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             workload_identity_details: {
+    #               workload_identity_arn: "WorkloadIdentityDetailsWorkloadIdentityArnString", # required
+    #             },
+    #           },
+    #           agentcore_gateway: {
+    #             protocol_type: "MCP", # accepts MCP
+    #             authorizer_type: "String",
+    #             authorizer_configuration: {
+    #               custom_jwt_authorizer: {
+    #                 discovery_url: "DiscoveryUrl", # required
+    #                 allowed_audience: ["AllowedAudience"],
+    #                 allowed_clients: ["AllowedClient"],
+    #                 allowed_scopes: ["AllowedScopeType"],
+    #                 custom_claims: [
+    #                   {
+    #                     inbound_token_claim_name: "InboundTokenClaimNameType", # required
+    #                     inbound_token_claim_value_type: "STRING", # required, accepts STRING, STRING_ARRAY
+    #                     authorizing_claim_match_value: { # required
+    #                       claim_match_value: { # required
+    #                         match_value_string: "MatchValueString",
+    #                         match_value_string_list: ["MatchValueString"],
+    #                       },
+    #                       claim_match_operator: "EQUALS", # required, accepts EQUALS, CONTAINS, CONTAINS_ANY
+    #                     },
+    #                   },
+    #                 ],
+    #                 private_endpoint: {
+    #                   self_managed_lattice_resource: {
+    #                     resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #                   },
+    #                   managed_vpc_resource: {
+    #                     vpc_identifier: "VpcIdentifier", # required
+    #                     subnet_ids: ["SubnetId"], # required
+    #                     endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #                     security_group_ids: ["SecurityGroupIdentifier"],
+    #                     tags: {
+    #                       "TagKey" => "TagValue",
+    #                     },
+    #                     routing_domain: "RoutingDomain",
+    #                   },
+    #                 },
+    #                 private_endpoint_overrides: [
+    #                   {
+    #                     domain: "PrivateEndpointOverrideDomain", # required
+    #                     private_endpoint: { # required
+    #                       self_managed_lattice_resource: {
+    #                         resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #                       },
+    #                       managed_vpc_resource: {
+    #                         vpc_identifier: "VpcIdentifier", # required
+    #                         subnet_ids: ["SubnetId"], # required
+    #                         endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #                         security_group_ids: ["SecurityGroupIdentifier"],
+    #                         tags: {
+    #                           "TagKey" => "TagValue",
+    #                         },
+    #                         routing_domain: "RoutingDomain",
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             workload_identity_details: {
+    #               workload_identity_arn: "WorkloadIdentityDetailsWorkloadIdentityArnString", # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     custom_metadata: {
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -832,9 +1080,12 @@ module Aws::AgentRegistryControl
     #   * {Types::GetRegistryResponse#registry_id #registry_id} => String
     #   * {Types::GetRegistryResponse#registry_arn #registry_arn} => String
     #   * {Types::GetRegistryResponse#discovery_configuration #discovery_configuration} => Types::DiscoveryConfiguration
+    #   * {Types::GetRegistryResponse#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
     #   * {Types::GetRegistryResponse#approval_configuration #approval_configuration} => Types::ApprovalConfiguration
+    #   * {Types::GetRegistryResponse#custom_metadata_schema_configuration #custom_metadata_schema_configuration} => Types::CustomMetadataSchemaConfiguration
     #   * {Types::GetRegistryResponse#status #status} => String
     #   * {Types::GetRegistryResponse#status_reason #status_reason} => String
+    #   * {Types::GetRegistryResponse#auto_detection #auto_detection} => Types::AutoDetection
     #   * {Types::GetRegistryResponse#created_at #created_at} => Time
     #   * {Types::GetRegistryResponse#updated_at #updated_at} => Time
     #
@@ -887,10 +1138,19 @@ module Aws::AgentRegistryControl
     #   resp.discovery_configuration.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.discovery_configuration.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
     #   resp.discovery_configuration.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.encryption_configuration.kms_key_arn #=> String
     #   resp.approval_configuration.auto_approval_rules #=> Array
     #   resp.approval_configuration.auto_approval_rules[0] #=> String, one of "APPROVE_ALL"
+    #   resp.custom_metadata_schema_configuration.default_schema #=> String
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides #=> Array
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].schema #=> String
     #   resp.status #=> String, one of "CREATING", "READY", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.status_reason #=> String
+    #   resp.auto_detection.configuration.scope #=> String, one of "ORGANIZATION"
+    #   resp.auto_detection.configuration.enabled #=> Boolean
+    #   resp.auto_detection.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.auto_detection.status_reason #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -931,6 +1191,11 @@ module Aws::AgentRegistryControl
     #   * {Types::GetRegistryRecordResponse#created_at #created_at} => Time
     #   * {Types::GetRegistryRecordResponse#updated_at #updated_at} => Time
     #   * {Types::GetRegistryRecordResponse#status_reason #status_reason} => String
+    #   * {Types::GetRegistryRecordResponse#provenance #provenance} => Array&lt;Types::Provenance&gt;
+    #   * {Types::GetRegistryRecordResponse#created_by_auto_detection #created_by_auto_detection} => Boolean
+    #   * {Types::GetRegistryRecordResponse#created_by #created_by} => String
+    #   * {Types::GetRegistryRecordResponse#custom_metadata #custom_metadata} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::GetRegistryRecordResponse#custom_metadata_schema_compliance_status #custom_metadata_schema_compliance_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -947,7 +1212,7 @@ module Aws::AgentRegistryControl
     #   resp.name #=> String
     #   resp.display_name #=> String
     #   resp.description #=> String
-    #   resp.record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL"
+    #   resp.record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
     #   resp.descriptors.mcp_server.data #=> String
     #   resp.descriptors.mcp_server.data_schema_version #=> String
     #   resp.descriptors.mcp_server.additional_data.tools.data #=> String
@@ -995,11 +1260,119 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
     #   resp.descriptors.custom.data #=> String
+    #   resp.descriptors.http.source.from_url.url #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations #=> Array
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #   resp.descriptors.agui.source.from_url.url #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations #=> Array
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
     #   resp.record_version #=> String
     #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.status_reason #=> String
+    #   resp.provenance #=> Array
+    #   resp.provenance[0].relation #=> String, one of "DETECTED_FROM"
+    #   resp.provenance[0].source_id #=> String
+    #   resp.provenance[0].source_type #=> String, one of "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Gateway"
+    #   resp.provenance[0].source_details.agentcore_runtime.protocol_configuration.server_protocol #=> String, one of "HTTP", "A2A", "MCP", "AGUI"
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_operator #=> String, one of "EQUALS", "CONTAINS", "CONTAINS_ANY"
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].domain #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.workload_identity_details.workload_identity_arn #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.protocol_type #=> String, one of "MCP"
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_type #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_operator #=> String, one of "EQUALS", "CONTAINS", "CONTAINS_ANY"
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].domain #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.workload_identity_details.workload_identity_arn #=> String
+    #   resp.created_by_auto_detection #=> Boolean
+    #   resp.created_by #=> String
+    #   resp.custom_metadata_schema_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1093,6 +1466,10 @@ module Aws::AgentRegistryControl
     #   resp.registries[0].discovery_configuration.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
     #   resp.registries[0].status #=> String, one of "CREATING", "READY", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.registries[0].status_reason #=> String
+    #   resp.registries[0].auto_detection.configuration.scope #=> String, one of "ORGANIZATION"
+    #   resp.registries[0].auto_detection.configuration.enabled #=> Boolean
+    #   resp.registries[0].auto_detection.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.registries[0].auto_detection.status_reason #=> String
     #   resp.registries[0].created_at #=> Time
     #   resp.registries[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -1151,11 +1528,18 @@ module Aws::AgentRegistryControl
     #   resp.registry_records[0].name #=> String
     #   resp.registry_records[0].display_name #=> String
     #   resp.registry_records[0].description #=> String
-    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL"
+    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
     #   resp.registry_records[0].record_version #=> String
     #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.registry_records[0].created_at #=> Time
     #   resp.registry_records[0].updated_at #=> Time
+    #   resp.registry_records[0].created_by_auto_detection #=> Boolean
+    #   resp.registry_records[0].created_by #=> String
+    #   resp.registry_records[0].provenance_summary_list #=> Array
+    #   resp.registry_records[0].provenance_summary_list[0].relation #=> String, one of "DETECTED_FROM"
+    #   resp.registry_records[0].provenance_summary_list[0].source_id #=> String
+    #   resp.registry_records[0].provenance_summary_list[0].source_type #=> String, one of "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Gateway"
+    #   resp.registry_records[0].custom_metadata_schema_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/ListRegistryRecords AWS API Documentation
@@ -1167,10 +1551,13 @@ module Aws::AgentRegistryControl
       req.send_request(options)
     end
 
-    # List the tags on a resource
+    # Lists the tags associated with the specified Amazon Web Services Agent
+    # Registry resource. Returns the current tag key-value pairs on the
+    # resource.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of a taggable Agent Registry resource.
+    #   The Amazon Resource Name (ARN) of the resource to list tags for.
+    #   Supported resources include registries and registry records.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1240,13 +1627,19 @@ module Aws::AgentRegistryControl
       req.send_request(options)
     end
 
-    # Tag a resource with key-value pairs
+    # Adds or overwrites one or more tags for the specified Amazon Web
+    # Services Agent Registry resource. Tags are key-value pairs that you
+    # can use to categorize and manage Amazon Web Services resources. If a
+    # tag with the same key already exists on the resource, the service
+    # replaces its value with the value you specify.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of a taggable Agent Registry resource.
+    #   The Amazon Resource Name (ARN) of the resource to tag. Supported
+    #   resources include registries and registry records.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   A map of tag keys to tag values.
+    #   The tags to apply to the resource, as a map of tag keys to tag values.
+    #   Tag keys must be unique within the request.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1268,13 +1661,17 @@ module Aws::AgentRegistryControl
       req.send_request(options)
     end
 
-    # Remove tags from a resource by key
+    # Removes one or more tags from the specified Amazon Web Services Agent
+    # Registry resource. The operation removes only the tags whose keys you
+    # supply; other tags on the resource remain unchanged.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of a taggable Agent Registry resource.
+    #   The Amazon Resource Name (ARN) of the resource to remove tags from.
+    #   Supported resources include registries and registry records.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   A list of tag keys.
+    #   The keys of the tags to remove from the resource. Tags with keys not
+    #   included in this list remain on the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1318,6 +1715,19 @@ module Aws::AgentRegistryControl
     #   that move to PENDING\_APPROVAL after the update; records already in
     #   PENDING\_APPROVAL are unaffected.
     #
+    # @option params [Types::UpdatedCustomMetadataSchemaConfiguration] :custom_metadata_schema_configuration
+    #   Updated custom metadata schema configuration for the registry. Omit to
+    #   leave the existing schema unchanged. Schema evolution is additive
+    #   only: you can add properties and enum values, but you cannot remove
+    #   properties, change property types or formats, add or remove enum
+    #   constraints, or remove record type overrides.
+    #
+    # @option params [Types::UpdatedAutoDetectionConfiguration] :auto_detection_configuration
+    #   The updated auto-detection configuration for the registry, with PATCH
+    #   semantics. Omit this field to leave the current configuration
+    #   unchanged. Supply an empty wrapper to unset it. Supply `optionalValue`
+    #   to replace it.
+    #
     # @return [Types::UpdateRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRegistryResponse#name #name} => String
@@ -1325,9 +1735,12 @@ module Aws::AgentRegistryControl
     #   * {Types::UpdateRegistryResponse#registry_id #registry_id} => String
     #   * {Types::UpdateRegistryResponse#registry_arn #registry_arn} => String
     #   * {Types::UpdateRegistryResponse#discovery_configuration #discovery_configuration} => Types::DiscoveryConfiguration
+    #   * {Types::UpdateRegistryResponse#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
     #   * {Types::UpdateRegistryResponse#approval_configuration #approval_configuration} => Types::ApprovalConfiguration
+    #   * {Types::UpdateRegistryResponse#custom_metadata_schema_configuration #custom_metadata_schema_configuration} => Types::CustomMetadataSchemaConfiguration
     #   * {Types::UpdateRegistryResponse#status #status} => String
     #   * {Types::UpdateRegistryResponse#status_reason #status_reason} => String
+    #   * {Types::UpdateRegistryResponse#auto_detection #auto_detection} => Types::AutoDetection
     #   * {Types::UpdateRegistryResponse#created_at #created_at} => Time
     #   * {Types::UpdateRegistryResponse#updated_at #updated_at} => Time
     #
@@ -1404,6 +1817,23 @@ module Aws::AgentRegistryControl
     #         auto_approval_rules: ["APPROVE_ALL"], # accepts APPROVE_ALL
     #       },
     #     },
+    #     custom_metadata_schema_configuration: {
+    #       optional_value: {
+    #         default_schema: "CustomMetadataSchemaDefinition",
+    #         record_type_schema_overrides: [
+    #           {
+    #             record_type: "MCP", # required, accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY
+    #             schema: "CustomMetadataSchemaDefinition", # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     auto_detection_configuration: {
+    #       optional_value: {
+    #         scope: "ORGANIZATION", # required, accepts ORGANIZATION
+    #         enabled: false, # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1449,10 +1879,19 @@ module Aws::AgentRegistryControl
     #   resp.discovery_configuration.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.discovery_configuration.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
     #   resp.discovery_configuration.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.encryption_configuration.kms_key_arn #=> String
     #   resp.approval_configuration.auto_approval_rules #=> Array
     #   resp.approval_configuration.auto_approval_rules[0] #=> String, one of "APPROVE_ALL"
+    #   resp.custom_metadata_schema_configuration.default_schema #=> String
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides #=> Array
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
+    #   resp.custom_metadata_schema_configuration.record_type_schema_overrides[0].schema #=> String
     #   resp.status #=> String, one of "CREATING", "READY", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.status_reason #=> String
+    #   resp.auto_detection.configuration.scope #=> String, one of "ORGANIZATION"
+    #   resp.auto_detection.configuration.enabled #=> Boolean
+    #   resp.auto_detection.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.auto_detection.status_reason #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -1500,9 +1939,24 @@ module Aws::AgentRegistryControl
     #   The updated version of the registry record. Omit to leave the version
     #   unchanged.
     #
+    # @option params [Types::UpdatedCustomMetadataMap] :custom_metadata
+    #   The updated custom metadata for the registry record. Values can be
+    #   strings (maximum 128 characters) or native JSON booleans (`true` or
+    #   `false`). Omit to leave the existing metadata unchanged. Supply the
+    #   wrapper with a full replacement set to update, or with a null value to
+    #   clear all metadata.
+    #
     # @option params [Boolean] :trigger_synchronization
     #   Whether to trigger synchronization of the record's descriptor content
     #   from its source
+    #
+    # @option params [Array<Types::Provenance>] :provenance
+    #   The provenance lineage re-assertion for the registry record. This
+    #   field is reserved for the Amazon Web Services Agent Registry
+    #   auto-detection service principal. Requests that include this field
+    #   from other callers are rejected. The source identity of an existing
+    #   lineage is immutable; a re-assertion may only refresh the source
+    #   details.
     #
     # @return [Types::UpdateRegistryRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1519,6 +1973,11 @@ module Aws::AgentRegistryControl
     #   * {Types::UpdateRegistryRecordResponse#created_at #created_at} => Time
     #   * {Types::UpdateRegistryRecordResponse#updated_at #updated_at} => Time
     #   * {Types::UpdateRegistryRecordResponse#status_reason #status_reason} => String
+    #   * {Types::UpdateRegistryRecordResponse#provenance #provenance} => Array&lt;Types::Provenance&gt;
+    #   * {Types::UpdateRegistryRecordResponse#created_by_auto_detection #created_by_auto_detection} => Boolean
+    #   * {Types::UpdateRegistryRecordResponse#created_by #created_by} => String
+    #   * {Types::UpdateRegistryRecordResponse#custom_metadata #custom_metadata} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::UpdateRegistryRecordResponse#custom_metadata_schema_compliance_status #custom_metadata_schema_compliance_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1532,7 +1991,7 @@ module Aws::AgentRegistryControl
     #     description: {
     #       optional_value: "Description",
     #     },
-    #     record_type: "MCP", # accepts MCP, AGENT, CUSTOM, SKILL
+    #     record_type: "MCP", # accepts MCP, AGENT, CUSTOM, SKILL, GATEWAY
     #     descriptors: {
     #       optional_value: {
     #         mcp_server: {
@@ -1681,10 +2140,212 @@ module Aws::AgentRegistryControl
     #             },
     #           },
     #         },
+    #         http: {
+    #           optional_value: {
+    #             source: {
+    #               optional_value: {
+    #                 from_url: {
+    #                   url: "DescriptorSourceUrl", # required
+    #                   credential_provider_configurations: [
+    #                     {
+    #                       credential_provider_type: "OAUTH", # required, accepts OAUTH, IAM
+    #                       credential_provider: { # required
+    #                         oauth_credential_provider: {
+    #                           provider_arn: "CredentialProviderArn", # required
+    #                           grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                           scopes: ["String"],
+    #                           custom_parameters: {
+    #                             "String" => "String",
+    #                           },
+    #                         },
+    #                         iam_credential_provider: {
+    #                           role_arn: "IamRoleArn",
+    #                           service: "IamSigningServiceName",
+    #                           region: "IamSigningRegion",
+    #                         },
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #         agui: {
+    #           optional_value: {
+    #             source: {
+    #               optional_value: {
+    #                 from_url: {
+    #                   url: "DescriptorSourceUrl", # required
+    #                   credential_provider_configurations: [
+    #                     {
+    #                       credential_provider_type: "OAUTH", # required, accepts OAUTH, IAM
+    #                       credential_provider: { # required
+    #                         oauth_credential_provider: {
+    #                           provider_arn: "CredentialProviderArn", # required
+    #                           grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                           scopes: ["String"],
+    #                           custom_parameters: {
+    #                             "String" => "String",
+    #                           },
+    #                         },
+    #                         iam_credential_provider: {
+    #                           role_arn: "IamRoleArn",
+    #                           service: "IamSigningServiceName",
+    #                           region: "IamSigningRegion",
+    #                         },
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
     #       },
     #     },
     #     record_version: "RegistryRecordVersion",
+    #     custom_metadata: {
+    #       optional_value: {
+    #       },
+    #     },
     #     trigger_synchronization: false,
+    #     provenance: [
+    #       {
+    #         relation: "DETECTED_FROM", # required, accepts DETECTED_FROM
+    #         source_id: "SourceId", # required
+    #         source_type: "AWS::BedrockAgentCore::Runtime", # accepts AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Gateway
+    #         source_details: {
+    #           agentcore_runtime: {
+    #             protocol_configuration: {
+    #               server_protocol: "HTTP", # accepts HTTP, A2A, MCP, AGUI
+    #             },
+    #             authorizer_configuration: {
+    #               custom_jwt_authorizer: {
+    #                 discovery_url: "DiscoveryUrl", # required
+    #                 allowed_audience: ["AllowedAudience"],
+    #                 allowed_clients: ["AllowedClient"],
+    #                 allowed_scopes: ["AllowedScopeType"],
+    #                 custom_claims: [
+    #                   {
+    #                     inbound_token_claim_name: "InboundTokenClaimNameType", # required
+    #                     inbound_token_claim_value_type: "STRING", # required, accepts STRING, STRING_ARRAY
+    #                     authorizing_claim_match_value: { # required
+    #                       claim_match_value: { # required
+    #                         match_value_string: "MatchValueString",
+    #                         match_value_string_list: ["MatchValueString"],
+    #                       },
+    #                       claim_match_operator: "EQUALS", # required, accepts EQUALS, CONTAINS, CONTAINS_ANY
+    #                     },
+    #                   },
+    #                 ],
+    #                 private_endpoint: {
+    #                   self_managed_lattice_resource: {
+    #                     resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #                   },
+    #                   managed_vpc_resource: {
+    #                     vpc_identifier: "VpcIdentifier", # required
+    #                     subnet_ids: ["SubnetId"], # required
+    #                     endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #                     security_group_ids: ["SecurityGroupIdentifier"],
+    #                     tags: {
+    #                       "TagKey" => "TagValue",
+    #                     },
+    #                     routing_domain: "RoutingDomain",
+    #                   },
+    #                 },
+    #                 private_endpoint_overrides: [
+    #                   {
+    #                     domain: "PrivateEndpointOverrideDomain", # required
+    #                     private_endpoint: { # required
+    #                       self_managed_lattice_resource: {
+    #                         resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #                       },
+    #                       managed_vpc_resource: {
+    #                         vpc_identifier: "VpcIdentifier", # required
+    #                         subnet_ids: ["SubnetId"], # required
+    #                         endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #                         security_group_ids: ["SecurityGroupIdentifier"],
+    #                         tags: {
+    #                           "TagKey" => "TagValue",
+    #                         },
+    #                         routing_domain: "RoutingDomain",
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             workload_identity_details: {
+    #               workload_identity_arn: "WorkloadIdentityDetailsWorkloadIdentityArnString", # required
+    #             },
+    #           },
+    #           agentcore_gateway: {
+    #             protocol_type: "MCP", # accepts MCP
+    #             authorizer_type: "String",
+    #             authorizer_configuration: {
+    #               custom_jwt_authorizer: {
+    #                 discovery_url: "DiscoveryUrl", # required
+    #                 allowed_audience: ["AllowedAudience"],
+    #                 allowed_clients: ["AllowedClient"],
+    #                 allowed_scopes: ["AllowedScopeType"],
+    #                 custom_claims: [
+    #                   {
+    #                     inbound_token_claim_name: "InboundTokenClaimNameType", # required
+    #                     inbound_token_claim_value_type: "STRING", # required, accepts STRING, STRING_ARRAY
+    #                     authorizing_claim_match_value: { # required
+    #                       claim_match_value: { # required
+    #                         match_value_string: "MatchValueString",
+    #                         match_value_string_list: ["MatchValueString"],
+    #                       },
+    #                       claim_match_operator: "EQUALS", # required, accepts EQUALS, CONTAINS, CONTAINS_ANY
+    #                     },
+    #                   },
+    #                 ],
+    #                 private_endpoint: {
+    #                   self_managed_lattice_resource: {
+    #                     resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #                   },
+    #                   managed_vpc_resource: {
+    #                     vpc_identifier: "VpcIdentifier", # required
+    #                     subnet_ids: ["SubnetId"], # required
+    #                     endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #                     security_group_ids: ["SecurityGroupIdentifier"],
+    #                     tags: {
+    #                       "TagKey" => "TagValue",
+    #                     },
+    #                     routing_domain: "RoutingDomain",
+    #                   },
+    #                 },
+    #                 private_endpoint_overrides: [
+    #                   {
+    #                     domain: "PrivateEndpointOverrideDomain", # required
+    #                     private_endpoint: { # required
+    #                       self_managed_lattice_resource: {
+    #                         resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #                       },
+    #                       managed_vpc_resource: {
+    #                         vpc_identifier: "VpcIdentifier", # required
+    #                         subnet_ids: ["SubnetId"], # required
+    #                         endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #                         security_group_ids: ["SecurityGroupIdentifier"],
+    #                         tags: {
+    #                           "TagKey" => "TagValue",
+    #                         },
+    #                         routing_domain: "RoutingDomain",
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             workload_identity_details: {
+    #               workload_identity_arn: "WorkloadIdentityDetailsWorkloadIdentityArnString", # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1695,7 +2356,7 @@ module Aws::AgentRegistryControl
     #   resp.name #=> String
     #   resp.display_name #=> String
     #   resp.description #=> String
-    #   resp.record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL"
+    #   resp.record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
     #   resp.descriptors.mcp_server.data #=> String
     #   resp.descriptors.mcp_server.data_schema_version #=> String
     #   resp.descriptors.mcp_server.additional_data.tools.data #=> String
@@ -1743,11 +2404,119 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
     #   resp.descriptors.custom.data #=> String
+    #   resp.descriptors.http.source.from_url.url #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations #=> Array
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #   resp.descriptors.agui.source.from_url.url #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations #=> Array
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
     #   resp.record_version #=> String
     #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.status_reason #=> String
+    #   resp.provenance #=> Array
+    #   resp.provenance[0].relation #=> String, one of "DETECTED_FROM"
+    #   resp.provenance[0].source_id #=> String
+    #   resp.provenance[0].source_type #=> String, one of "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Gateway"
+    #   resp.provenance[0].source_details.agentcore_runtime.protocol_configuration.server_protocol #=> String, one of "HTTP", "A2A", "MCP", "AGUI"
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_operator #=> String, one of "EQUALS", "CONTAINS", "CONTAINS_ANY"
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].domain #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.provenance[0].source_details.agentcore_runtime.workload_identity_details.workload_identity_arn #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.protocol_type #=> String, one of "MCP"
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_type #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_operator #=> String, one of "EQUALS", "CONTAINS", "CONTAINS_ANY"
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].domain #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.provenance[0].source_details.agentcore_gateway.workload_identity_details.workload_identity_arn #=> String
+    #   resp.created_by_auto_detection #=> Boolean
+    #   resp.created_by #=> String
+    #   resp.custom_metadata_schema_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdateRegistryRecord AWS API Documentation
     #
@@ -1831,7 +2600,7 @@ module Aws::AgentRegistryControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-agentregistrycontrol'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

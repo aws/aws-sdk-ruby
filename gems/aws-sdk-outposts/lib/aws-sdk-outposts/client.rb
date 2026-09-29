@@ -656,6 +656,8 @@ module Aws::Outposts
     #   resp.outpost.tags["TagKey"] #=> String
     #   resp.outpost.site_arn #=> String
     #   resp.outpost.supported_hardware_type #=> String, one of "RACK", "SERVER"
+    #   resp.outpost.generation #=> String, one of "GENERATION_2", "GENERATION_1"
+    #   resp.outpost.rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOutpost AWS API Documentation
     #
@@ -663,6 +665,60 @@ module Aws::Outposts
     # @param [Hash] params ({})
     def create_outpost(params = {}, options = {})
       req = build_request(:create_outpost, params)
+      req.send_request(options)
+    end
+
+    # Creates the private connectivity configuration for the specified
+    # Outpost. Private connectivity establishes a service link VPN
+    # connection between the Outpost and its home Amazon Web Services Region
+    # using a VPC and subnet that you specify, which allows the service link
+    # traffic to flow through your VPC and minimizes public internet
+    # exposure.
+    #
+    # @option params [required, String] :outpost_id
+    #   The ID or ARN of the Outpost.
+    #
+    # @option params [required, Array<Types::VpcInformation>] :vpc_information_list
+    #   Information about the VPC used for private connectivity, including the
+    #   VPC, its subnets, and an associated VPC endpoint. You can specify at
+    #   most one entry.
+    #
+    # @return [Types::CreatePrivateConnectivityConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePrivateConnectivityConfigOutput#private_connectivity_config #private_connectivity_config} => Types::PrivateConnectivityConfig
+    #   * {Types::CreatePrivateConnectivityConfigOutput#outpost_id #outpost_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_private_connectivity_config({
+    #     outpost_id: "OutpostId", # required
+    #     vpc_information_list: [ # required
+    #       {
+    #         vpc_id: "VpcId",
+    #         subnet_ids: ["SubnetId"],
+    #         vpc_endpoint_id: "VpcEndpointId",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.private_connectivity_config.role_arn #=> String
+    #   resp.private_connectivity_config.private_connectivity_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.private_connectivity_config.vpc_information_list #=> Array
+    #   resp.private_connectivity_config.vpc_information_list[0].vpc_id #=> String
+    #   resp.private_connectivity_config.vpc_information_list[0].subnet_ids #=> Array
+    #   resp.private_connectivity_config.vpc_information_list[0].subnet_ids[0] #=> String
+    #   resp.private_connectivity_config.vpc_information_list[0].vpc_endpoint_id #=> String
+    #   resp.private_connectivity_config.provisioning_role_arn #=> String
+    #   resp.outpost_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreatePrivateConnectivityConfig AWS API Documentation
+    #
+    # @overload create_private_connectivity_config(params = {})
+    # @param [Hash] params ({})
+    def create_private_connectivity_config(params = {}, options = {})
+      req = build_request(:create_private_connectivity_config, params)
       req.send_request(options)
     end
 
@@ -719,7 +775,7 @@ module Aws::Outposts
     #     ],
     #     requested_constraints: [
     #       {
-    #         quote_constraint_type: "RACK_MAXIMUM", # accepts RACK_MAXIMUM, RACK_MAX_POWER_KVA, RACK_MAX_WEIGHT_LBS
+    #         quote_constraint_type: "RACK_MAXIMUM", # accepts RACK_MAXIMUM, RACK_MAX_POWER_KVA, RACK_MAX_WEIGHT_LBS, RACK_SPACE_CONSTRAINED
     #         value: "ConstraintValue",
     #       },
     #     ],
@@ -741,7 +797,7 @@ module Aws::Outposts
     #   resp.quote.requested_capacities[0].unit #=> String
     #   resp.quote.requested_capacities[0].quantity #=> Float
     #   resp.quote.requested_constraints #=> Array
-    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS"
+    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"
     #   resp.quote.requested_constraints[0].value #=> String
     #   resp.quote.requested_payment_options #=> Array
     #   resp.quote.requested_payment_options[0] #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
@@ -1158,6 +1214,7 @@ module Aws::Outposts
     #   resp.catalog_item.supported_uplink_gbps[0] #=> Integer
     #   resp.catalog_item.supported_storage #=> Array
     #   resp.catalog_item.supported_storage[0] #=> String, one of "EBS", "S3"
+    #   resp.catalog_item.rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetCatalogItem AWS API Documentation
     #
@@ -1300,6 +1357,8 @@ module Aws::Outposts
     #   resp.outpost.tags["TagKey"] #=> String
     #   resp.outpost.site_arn #=> String
     #   resp.outpost.supported_hardware_type #=> String, one of "RACK", "SERVER"
+    #   resp.outpost.generation #=> String, one of "GENERATION_2", "GENERATION_1"
+    #   resp.outpost.rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpost AWS API Documentation
     #
@@ -1467,6 +1526,41 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # Gets the private connectivity configuration for the specified Outpost.
+    #
+    # @option params [required, String] :outpost_id
+    #   The ID or ARN of the Outpost.
+    #
+    # @return [Types::GetPrivateConnectivityConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPrivateConnectivityConfigOutput#private_connectivity_config #private_connectivity_config} => Types::PrivateConnectivityConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_private_connectivity_config({
+    #     outpost_id: "OutpostId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.private_connectivity_config.role_arn #=> String
+    #   resp.private_connectivity_config.private_connectivity_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.private_connectivity_config.vpc_information_list #=> Array
+    #   resp.private_connectivity_config.vpc_information_list[0].vpc_id #=> String
+    #   resp.private_connectivity_config.vpc_information_list[0].subnet_ids #=> Array
+    #   resp.private_connectivity_config.vpc_information_list[0].subnet_ids[0] #=> String
+    #   resp.private_connectivity_config.vpc_information_list[0].vpc_endpoint_id #=> String
+    #   resp.private_connectivity_config.provisioning_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetPrivateConnectivityConfig AWS API Documentation
+    #
+    # @overload get_private_connectivity_config(params = {})
+    # @param [Hash] params ({})
+    def get_private_connectivity_config(params = {}, options = {})
+      req = build_request(:get_private_connectivity_config, params)
+      req.send_request(options)
+    end
+
     # Gets information about the specified quote.
     #
     # @option params [required, String] :quote_identifier
@@ -1495,7 +1589,7 @@ module Aws::Outposts
     #   resp.quote.requested_capacities[0].unit #=> String
     #   resp.quote.requested_capacities[0].quantity #=> Float
     #   resp.quote.requested_constraints #=> Array
-    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS"
+    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"
     #   resp.quote.requested_constraints[0].value #=> String
     #   resp.quote.requested_payment_options #=> Array
     #   resp.quote.requested_payment_options[0] #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
@@ -2018,6 +2112,7 @@ module Aws::Outposts
     #   resp.catalog_items[0].supported_uplink_gbps[0] #=> Integer
     #   resp.catalog_items[0].supported_storage #=> Array
     #   resp.catalog_items[0].supported_storage[0] #=> String, one of "EBS", "S3"
+    #   resp.catalog_items[0].rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListCatalogItems AWS API Documentation
@@ -2183,6 +2278,8 @@ module Aws::Outposts
     #   resp.outposts[0].tags["TagKey"] #=> String
     #   resp.outposts[0].site_arn #=> String
     #   resp.outposts[0].supported_hardware_type #=> String, one of "RACK", "SERVER"
+    #   resp.outposts[0].generation #=> String, one of "GENERATION_2", "GENERATION_1"
+    #   resp.outposts[0].rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListOutposts AWS API Documentation
@@ -2230,7 +2327,7 @@ module Aws::Outposts
     #   resp.quotes[0].requested_capacities[0].unit #=> String
     #   resp.quotes[0].requested_capacities[0].quantity #=> Float
     #   resp.quotes[0].requested_constraints #=> Array
-    #   resp.quotes[0].requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS"
+    #   resp.quotes[0].requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"
     #   resp.quotes[0].requested_constraints[0].value #=> String
     #   resp.quotes[0].requested_payment_options #=> Array
     #   resp.quotes[0].requested_payment_options[0] #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
@@ -2713,6 +2810,8 @@ module Aws::Outposts
     #   resp.outpost.tags["TagKey"] #=> String
     #   resp.outpost.site_arn #=> String
     #   resp.outpost.supported_hardware_type #=> String, one of "RACK", "SERVER"
+    #   resp.outpost.generation #=> String, one of "GENERATION_2", "GENERATION_1"
+    #   resp.outpost.rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UpdateOutpost AWS API Documentation
     #
@@ -2770,7 +2869,7 @@ module Aws::Outposts
     #     ],
     #     requested_constraints: [
     #       {
-    #         quote_constraint_type: "RACK_MAXIMUM", # accepts RACK_MAXIMUM, RACK_MAX_POWER_KVA, RACK_MAX_WEIGHT_LBS
+    #         quote_constraint_type: "RACK_MAXIMUM", # accepts RACK_MAXIMUM, RACK_MAX_POWER_KVA, RACK_MAX_WEIGHT_LBS, RACK_SPACE_CONSTRAINED
     #         value: "ConstraintValue",
     #       },
     #     ],
@@ -2792,7 +2891,7 @@ module Aws::Outposts
     #   resp.quote.requested_capacities[0].unit #=> String
     #   resp.quote.requested_capacities[0].quantity #=> Float
     #   resp.quote.requested_constraints #=> Array
-    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS"
+    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"
     #   resp.quote.requested_constraints[0].value #=> String
     #   resp.quote.requested_payment_options #=> Array
     #   resp.quote.requested_payment_options[0] #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
@@ -3182,7 +3281,7 @@ module Aws::Outposts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -28,11 +28,20 @@ module Aws::Support
     #   attachment, such as `troubleshoot-screenshot.png`.
     #   @return [Array<Types::Attachment>]
     #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually adding
+    #   the attachments. When set to `true`, the request is validated but no
+    #   attachments are stored, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSetRequest AWS API Documentation
     #
     class AddAttachmentsToSetRequest < Struct.new(
       :attachment_set_id,
-      :attachments)
+      :attachments,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63,7 +72,7 @@ module Aws::Support
     # @!attribute [rw] case_id
     #   The support case ID requested or returned in the call. The case ID
     #   is an alphanumeric string formatted as shown in this example:
-    #   case-*12345678910-2013-c4c1d2bf33c5cf47*
+    #   case-*12345678910-exen-2025-c4c1d2bf33c5cf47*
     #   @return [String]
     #
     # @!attribute [rw] communication_body
@@ -77,8 +86,27 @@ module Aws::Support
     #
     # @!attribute [rw] attachment_set_id
     #   The ID of a set of one or more attachments for the communication to
-    #   add to the case. Create the set by calling AddAttachmentsToSet
+    #   add to the case. Create the set by calling AddAttachmentsToSet. Each
+    #   attachment in the set must be 5 MB or smaller. To attach files
+    #   larger than 5 MB, use `uploadIds`.
     #   @return [String]
+    #
+    # @!attribute [rw] upload_ids
+    #   A list of upload IDs that identify attachments to add to the case.
+    #   Each `uploadId` is returned by the GetAttachmentUploadLinks
+    #   operation. The upload must reach the `attachment-ready` state by
+    #   calling CompleteAttachmentUpload before it can be passed here. Use
+    #   `uploadIds` to attach files of any supported size, including files
+    #   larger than 5 MB.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually adding
+    #   the communication to the case. When set to `true`, the request is
+    #   validated but the communication isn't added, and the operation
+    #   returns a `DryRunOperationException`. When omitted or set to
+    #   `false`, the request runs normally.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddCommunicationToCaseRequest AWS API Documentation
     #
@@ -86,7 +114,9 @@ module Aws::Support
       :case_id,
       :communication_body,
       :cc_email_addresses,
-      :attachment_set_id)
+      :attachment_set_id,
+      :upload_ids,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -246,7 +276,7 @@ module Aws::Support
     #
     # * **caseId** - The support case ID requested or returned in the call.
     #   The case ID is an alphanumeric string formatted as shown in this
-    #   example: case-*12345678910-2013-c4c1d2bf33c5cf47*.
+    #   example: case-*12345678910-exen-2025-c4c1d2bf33c5cf47*.
     #
     # * **categoryCode** - The category of problem for the support case.
     #   Corresponds to the `CategoryCode` values returned by a call to
@@ -257,9 +287,11 @@ module Aws::Support
     #
     # * **language** - The language in which Amazon Web Services Support
     #   handles the case. Amazon Web Services Support currently supports
-    #   Chinese (“zh”), English ("en"), Japanese ("ja") and Korean
-    #   (“ko”). You must specify the ISO 639-1 code for the `language`
-    #   parameter if you want support in that language.
+    #   Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese
+    #   ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"),
+    #   Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
+    #   code for the `language` parameter if you want support in that
+    #   language.
     #
     # * **nextToken** - A resumption point for pagination.
     #
@@ -304,7 +336,7 @@ module Aws::Support
     # @!attribute [rw] case_id
     #   The support case ID requested or returned in the call. The case ID
     #   is an alphanumeric string formatted as shown in this example:
-    #   case-*12345678910-2013-c4c1d2bf33c5cf47*
+    #   case-*12345678910-exen-2025-c4c1d2bf33c5cf47*
     #   @return [String]
     #
     # @!attribute [rw] display_id
@@ -378,9 +410,10 @@ module Aws::Support
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
     #   Amazon Web Services Support currently supports Chinese (“zh”),
-    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
-    #   specify the ISO 639-1 code for the `language` parameter if you want
-    #   support in that language.
+    #   English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish
+    #   ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+    #   Turkish ("tr"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CaseDetails AWS API Documentation
@@ -445,7 +478,7 @@ module Aws::Support
     # @!attribute [rw] case_id
     #   The support case ID requested or returned in the call. The case ID
     #   is an alphanumeric string formatted as shown in this example:
-    #   case-*12345678910-2013-c4c1d2bf33c5cf47*
+    #   case-*12345678910-exen-2025-c4c1d2bf33c5cf47*
     #   @return [String]
     #
     # @!attribute [rw] body
@@ -466,8 +499,22 @@ module Aws::Support
     #   The time the communication was created.
     #   @return [String]
     #
+    # @!attribute [rw] attachments
+    #   Information about all attachments on the case communication. This
+    #   includes attachments added through `AddAttachmentsToSet` and
+    #   attachments uploaded through `GetAttachmentUploadLinks`.
+    #
+    #   Use this field to enumerate every attachment on the communication.
+    #   To download an attachment listed in this field, use
+    #   GetAttachmentDownloadLink. `GetAttachmentDownloadLink` returns a
+    #   presigned URL that works for attachments of any size.
+    #   @return [Array<Types::AttachmentDetails>]
+    #
     # @!attribute [rw] attachment_set
-    #   Information about the attachments to the case communication.
+    #   Information about the attachments to the case communication that are
+    #   5 MB or smaller. This field doesn't include attachments larger than
+    #   5 MB. To enumerate every attachment on the communication, including
+    #   attachments larger than 5 MB, use the `attachments` field instead.
     #   @return [Array<Types::AttachmentDetails>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/Communication AWS API Documentation
@@ -477,6 +524,7 @@ module Aws::Support
       :body,
       :submitted_by,
       :time_created,
+      :attachments,
       :attachment_set)
       SENSITIVE = []
       include Aws::Structure
@@ -521,6 +569,72 @@ module Aws::Support
       :type,
       :supported_hours,
       :dates_without_support)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] upload_id
+    #   The identifier associated with the upload to complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] completed_uploads
+    #   The list of parts being reported as completed in this call. Each
+    #   entry must contain the `partIndex` of an uploaded part and the
+    #   `ETag` returned by Amazon S3 when that part was uploaded.
+    #   @return [Array<Types::CompletedUpload>]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually
+    #   completing the upload. When set to `true`, the request is validated
+    #   but the upload isn't finalized, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CompleteAttachmentUploadRequest AWS API Documentation
+    #
+    class CompleteAttachmentUploadRequest < Struct.new(
+      :upload_id,
+      :completed_uploads,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] upload_status
+    #   The status of the multipart upload after the operation finalizes the
+    #   attachment. Valid values: `attachment-ready`,
+    #   `attachment-not-ready`, and `failed`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CompleteAttachmentUploadResponse AWS API Documentation
+    #
+    class CompleteAttachmentUploadResponse < Struct.new(
+      :upload_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a single uploaded part of a multipart attachment upload.
+    # Pass a list of `CompletedUpload` objects to CompleteAttachmentUpload
+    # to finalize the upload.
+    #
+    # @!attribute [rw] part_index
+    #   The index of the uploaded part. This is the same `partIndex` value
+    #   returned for the corresponding entry in the `uploadUrls` field of
+    #   the `GetAttachmentUploadLinks` response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] e_tag
+    #   The ETag returned in the response headers when the part was uploaded
+    #   to Amazon S3. The `ETag` value identifies the part contents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CompletedUpload AWS API Documentation
+    #
+    class CompletedUpload < Struct.new(
+      :part_index,
+      :e_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -592,9 +706,10 @@ module Aws::Support
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
     #   Amazon Web Services Support currently supports Chinese (“zh”),
-    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
-    #   specify the ISO 639-1 code for the `language` parameter if you want
-    #   support in that language.
+    #   English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish
+    #   ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+    #   Turkish ("tr"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #   @return [String]
     #
     # @!attribute [rw] issue_type
@@ -605,8 +720,26 @@ module Aws::Support
     #
     # @!attribute [rw] attachment_set_id
     #   The ID of a set of one or more attachments for the case. Create the
-    #   set by using the AddAttachmentsToSet operation.
+    #   set by using the AddAttachmentsToSet operation. Each attachment in
+    #   the set must be 5 MB or smaller. To attach files larger than 5 MB,
+    #   use `uploadIds`.
     #   @return [String]
+    #
+    # @!attribute [rw] upload_ids
+    #   A list of upload IDs that identify attachments to add to the case.
+    #   Each `uploadId` is returned by the GetAttachmentUploadLinks
+    #   operation. The upload must reach the `attachment-ready` state by
+    #   calling CompleteAttachmentUpload before it can be passed here. Use
+    #   `uploadIds` to attach files of any supported size, including files
+    #   larger than 5 MB.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually creating
+    #   the case. When set to `true`, the request is validated but no case
+    #   is created, and the operation returns a `DryRunOperationException`.
+    #   When omitted or set to `false`, the request runs normally.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCaseRequest AWS API Documentation
     #
@@ -619,7 +752,9 @@ module Aws::Support
       :cc_email_addresses,
       :language,
       :issue_type,
-      :attachment_set_id)
+      :attachment_set_id,
+      :upload_ids,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -630,7 +765,7 @@ module Aws::Support
     # @!attribute [rw] case_id
     #   The support case ID requested or returned in the call. The case ID
     #   is an alphanumeric string in the following format:
-    #   case-*12345678910-2013-c4c1d2bf33c5cf47*
+    #   case-*12345678910-exen-2025-c4c1d2bf33c5cf47*
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCaseResponse AWS API Documentation
@@ -682,12 +817,25 @@ module Aws::Support
     # @!attribute [rw] attachment_id
     #   The ID of the attachment to return. Attachment IDs are returned by
     #   the DescribeCommunications operation.
+    #
+    #   If the specified attachment is larger than 5 MB, this operation
+    #   returns `InvalidParameterValueException`. To download attachments
+    #   larger than 5 MB, use GetAttachmentDownloadLink.
     #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually
+    #   retrieving the attachment. When set to `true`, the request is
+    #   validated but no attachment content is returned, and the operation
+    #   returns a `DryRunOperationException`. When omitted or set to
+    #   `false`, the request runs normally.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachmentRequest AWS API Documentation
     #
     class DescribeAttachmentRequest < Struct.new(
-      :attachment_id)
+      :attachment_id,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -712,6 +860,52 @@ module Aws::Support
       include Aws::Structure
     end
 
+    # @!attribute [rw] upload_id
+    #   The unique identifier for the upload. The `uploadId` is returned by
+    #   GetAttachmentUploadLinks when you initiate the upload.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually returning
+    #   upload status. When set to `true`, the request is validated but no
+    #   status is returned, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachmentUploadStatusRequest AWS API Documentation
+    #
+    class DescribeAttachmentUploadStatusRequest < Struct.new(
+      :upload_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] upload_status
+    #   The current status of the multipart upload. Valid values:
+    #   `attachment-ready`, `attachment-not-ready`, and `failed`.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_name
+    #   The name of the file being uploaded, including the file extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] upload_progress
+    #   The progress of the multipart upload, including the total number of
+    #   parts and the number of parts that have been successfully uploaded.
+    #   @return [Types::UploadProgress]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachmentUploadStatusResponse AWS API Documentation
+    #
+    class DescribeAttachmentUploadStatusResponse < Struct.new(
+      :upload_status,
+      :file_name,
+      :upload_progress)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] case_id_list
     #   A list of ID numbers of the support cases you want returned. The
     #   maximum number of cases is 100.
@@ -724,13 +918,13 @@ module Aws::Support
     #
     # @!attribute [rw] after_time
     #   The start date for a filtered date search on support case
-    #   communications. Case communications are available for 12 months
+    #   communications. Case communications are available for 24 months
     #   after creation.
     #   @return [String]
     #
     # @!attribute [rw] before_time
     #   The end date for a filtered date search on support case
-    #   communications. Case communications are available for 12 months
+    #   communications. Case communications are available for 24 months
     #   after creation.
     #   @return [String]
     #
@@ -751,14 +945,23 @@ module Aws::Support
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
     #   Amazon Web Services Support currently supports Chinese (“zh”),
-    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
-    #   specify the ISO 639-1 code for the `language` parameter if you want
-    #   support in that language.
+    #   English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish
+    #   ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+    #   Turkish ("tr"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #   @return [String]
     #
     # @!attribute [rw] include_communications
     #   Specifies whether to include communications in the `DescribeCases`
     #   response. By default, communications are included.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually returning
+    #   case data. When set to `true`, the request is validated but no cases
+    #   are returned, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCasesRequest AWS API Documentation
@@ -772,7 +975,8 @@ module Aws::Support
       :next_token,
       :max_results,
       :language,
-      :include_communications)
+      :include_communications,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -804,18 +1008,18 @@ module Aws::Support
     # @!attribute [rw] case_id
     #   The support case ID requested or returned in the call. The case ID
     #   is an alphanumeric string formatted as shown in this example:
-    #   case-*12345678910-2013-c4c1d2bf33c5cf47*
+    #   case-*12345678910-exen-2025-c4c1d2bf33c5cf47*
     #   @return [String]
     #
     # @!attribute [rw] before_time
     #   The end date for a filtered date search on support case
-    #   communications. Case communications are available for 12 months
+    #   communications. Case communications are available for 24 months
     #   after creation.
     #   @return [String]
     #
     # @!attribute [rw] after_time
     #   The start date for a filtered date search on support case
-    #   communications. Case communications are available for 12 months
+    #   communications. Case communications are available for 24 months
     #   after creation.
     #   @return [String]
     #
@@ -827,6 +1031,14 @@ module Aws::Support
     #   The maximum number of results to return before paginating.
     #   @return [Integer]
     #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually returning
+    #   communications. When set to `true`, the request is validated but no
+    #   communications are returned, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCommunicationsRequest AWS API Documentation
     #
     class DescribeCommunicationsRequest < Struct.new(
@@ -834,7 +1046,8 @@ module Aws::Support
       :before_time,
       :after_time,
       :next_token,
-      :max_results)
+      :max_results,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -872,9 +1085,10 @@ module Aws::Support
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
     #   Amazon Web Services Support currently supports Chinese (“zh”),
-    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
-    #   specify the ISO 639-1 code for the `language` parameter if you want
-    #   support in that language.
+    #   English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish
+    #   ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+    #   Turkish ("tr"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #   @return [String]
     #
     # @!attribute [rw] category_code
@@ -884,13 +1098,22 @@ module Aws::Support
     #   codes.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually returning
+    #   case option data. When set to `true`, the request is validated but
+    #   no options are returned, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCreateCaseOptionsRequest AWS API Documentation
     #
     class DescribeCreateCaseOptionsRequest < Struct.new(
       :issue_type,
       :service_code,
       :language,
-      :category_code)
+      :category_code,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -928,16 +1151,26 @@ module Aws::Support
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
     #   Amazon Web Services Support currently supports Chinese (“zh”),
-    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
-    #   specify the ISO 639-1 code for the `language` parameter if you want
-    #   support in that language.
+    #   English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish
+    #   ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+    #   Turkish ("tr"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually returning
+    #   the list of services. When set to `true`, the request is validated
+    #   but no services are returned, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeServicesRequest AWS API Documentation
     #
     class DescribeServicesRequest < Struct.new(
       :service_code_list,
-      :language)
+      :language,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -960,15 +1193,25 @@ module Aws::Support
     # @!attribute [rw] language
     #   The language in which Amazon Web Services Support handles the case.
     #   Amazon Web Services Support currently supports Chinese (“zh”),
-    #   English ("en"), Japanese ("ja") and Korean (“ko”). You must
-    #   specify the ISO 639-1 code for the `language` parameter if you want
-    #   support in that language.
+    #   English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish
+    #   ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+    #   Turkish ("tr"). You must specify the ISO 639-1 code for the
+    #   `language` parameter if you want support in that language.
     #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually returning
+    #   severity levels. When set to `true`, the request is validated but no
+    #   severity levels are returned, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSeverityLevelsRequest AWS API Documentation
     #
     class DescribeSeverityLevelsRequest < Struct.new(
-      :language)
+      :language,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1007,12 +1250,21 @@ module Aws::Support
     #   codes.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually returning
+    #   supported languages. When set to `true`, the request is validated
+    #   but no languages are returned, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSupportedLanguagesRequest AWS API Documentation
     #
     class DescribeSupportedLanguagesRequest < Struct.new(
       :issue_type,
       :service_code,
-      :category_code)
+      :category_code,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1200,6 +1452,180 @@ module Aws::Support
       include Aws::Structure
     end
 
+    # A presigned URL for downloading an attachment, along with the date and
+    # time the URL expires. Returned by GetAttachmentDownloadLink.
+    #
+    # @!attribute [rw] url
+    #   The presigned HTTPS URL that you can use to download the attachment.
+    #   Download URLs are served from
+    #   `downloadv1.attachments.support.{region}.amazonaws.com`. The
+    #   `downloadv1` prefix is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_date
+    #   The date and time, in ISO-8601 format, when the presigned URL
+    #   expires. Download the attachment before this time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DownloadUrl AWS API Documentation
+    #
+    class DownloadUrl < Struct.new(
+      :url,
+      :expiry_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was valid, but the operation wasn't performed because
+    # `dryRun` was set to `true`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DryRunOperationException AWS API Documentation
+    #
+    class DryRunOperationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment_id
+    #   The unique identifier of the attachment for which to retrieve a
+    #   download link. Attachment IDs are returned in the
+    #   `AttachmentDetails` objects in the `attachments` field of a
+    #   Communication returned by DescribeCommunications or DescribeCases.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually returning
+    #   a download link. When set to `true`, the request is validated but no
+    #   URL is returned, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/GetAttachmentDownloadLinkRequest AWS API Documentation
+    #
+    class GetAttachmentDownloadLinkRequest < Struct.new(
+      :attachment_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_name
+    #   The name of the attachment file, including the file extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] download_url
+    #   The presigned download URL and the date and time the URL expires.
+    #   @return [Types::DownloadUrl]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/GetAttachmentDownloadLinkResponse AWS API Documentation
+    #
+    class GetAttachmentDownloadLinkResponse < Struct.new(
+      :file_name,
+      :download_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_name
+    #   The name of the file to upload, including the file extension. This
+    #   value is required when you initiate a new upload.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_size_bytes
+    #   The total size of the file in bytes. The service uses this value to
+    #   calculate the total number of parts and the size of each part.
+    #   Required when you initiate a new upload (when `uploadId` isn't
+    #   provided). Valid range: 1 to 157,286,400 bytes (approximately 150
+    #   MB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upload_id
+    #   The unique identifier of an in-progress multipart upload, returned
+    #   by a previous call to `GetAttachmentUploadLinks`. Specify `uploadId`
+    #   to retrieve additional presigned upload URLs for an upload that has
+    #   already been initiated. Required when `fileSizeBytes` isn't
+    #   provided. Length: 1 to 2,048 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] upload_range
+    #   The range of part indexes for which to return presigned upload URLs.
+    #   Use this parameter to page through the upload URLs for a large file
+    #   across multiple calls. If you omit this parameter, the service
+    #   determines the range to return.
+    #   @return [Types::UploadRange]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually
+    #   generating upload URLs. When set to `true`, the request is validated
+    #   but no URLs are returned, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/GetAttachmentUploadLinksRequest AWS API Documentation
+    #
+    class GetAttachmentUploadLinksRequest < Struct.new(
+      :file_name,
+      :file_size_bytes,
+      :upload_id,
+      :upload_range,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] upload_id
+    #   The unique identifier for the multipart upload. Use this value in
+    #   subsequent calls to `GetAttachmentUploadLinks`,
+    #   DescribeAttachmentUploadStatus, and CompleteAttachmentUpload, and to
+    #   attach the upload to a case through the `uploadIds` parameter on
+    #   CreateCase or AddCommunicationToCase.
+    #   @return [String]
+    #
+    # @!attribute [rw] part_size_bytes
+    #   The size, in bytes, of each part. Split the file into parts of this
+    #   size before you upload them to the presigned URLs. For an upload
+    #   with `n` total parts, parts 1 through `n` - 1 are exactly this size;
+    #   the last part may be smaller. Maximum: 104,857,600 bytes
+    #   (approximately 100 MB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_parts
+    #   The total number of parts that the file is split into. Upload one
+    #   part to each presigned URL.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_index
+    #   The next part index to request presigned URLs for. If all upload
+    #   URLs for the file have been returned, this field is `null`. Use this
+    #   value as the `startIndex` in `uploadRange` on a subsequent call to
+    #   `GetAttachmentUploadLinks` to retrieve the next batch of upload
+    #   URLs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upload_urls
+    #   The list of presigned upload URLs for the requested range of parts.
+    #   The list contains at most 10 URLs per call. Upload each part to its
+    #   corresponding URL by using HTTP `PUT` before the URL expires.
+    #   @return [Array<Types::UploadUrl>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/GetAttachmentUploadLinksResponse AWS API Documentation
+    #
+    class GetAttachmentUploadLinksResponse < Struct.new(
+      :upload_id,
+      :part_size_bytes,
+      :total_parts,
+      :next_index,
+      :upload_urls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal server error occurred.
     #
     # @!attribute [rw] message
@@ -1268,13 +1694,22 @@ module Aws::Support
     # @!attribute [rw] case_id
     #   The support case ID requested or returned in the call. The case ID
     #   is an alphanumeric string formatted as shown in this example:
-    #   case-*12345678910-2013-c4c1d2bf33c5cf47*
+    #   case-*12345678910-exen-2025-c4c1d2bf33c5cf47*
     #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request without actually resolving
+    #   the case. When set to `true`, the request is validated but the case
+    #   isn't resolved, and the operation returns a
+    #   `DryRunOperationException`. When omitted or set to `false`, the
+    #   request runs normally.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/ResolveCaseRequest AWS API Documentation
     #
     class ResolveCaseRequest < Struct.new(
-      :case_id)
+      :case_id,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1437,10 +1872,34 @@ module Aws::Support
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] throttling_reasons
+    #   A list of one or more reasons that the request was throttled.
+    #   @return [Array<Types::ThrottlingReason>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
-      :message)
+      :message,
+      :throttling_reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about why a request was throttled.
+    #
+    # @!attribute [rw] reason
+    #   The reason that the request was throttled.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource that caused the request to be throttled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/ThrottlingReason AWS API Documentation
+    #
+    class ThrottlingReason < Struct.new(
+      :reason,
+      :resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1721,6 +2180,96 @@ module Aws::Support
       :resources_flagged,
       :resources_ignored,
       :resources_suppressed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified `uploadId` couldn't be located.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/UploadIdNotFound AWS API Documentation
+    #
+    class UploadIdNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The progress of a multipart attachment upload, returned by
+    # DescribeAttachmentUploadStatus.
+    #
+    # @!attribute [rw] total_parts
+    #   The total number of parts that the file is split into.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] completed_parts_count
+    #   The number of parts that have been successfully uploaded.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/UploadProgress AWS API Documentation
+    #
+    class UploadProgress < Struct.new(
+      :total_parts,
+      :completed_parts_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The range of part indexes for which to return presigned upload URLs
+    # from GetAttachmentUploadLinks.
+    #
+    # @!attribute [rw] start_index
+    #   The starting part index of the range, inclusive. Part indexes start
+    #   at 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_index
+    #   The ending part index of the range, exclusive. The range is
+    #   half-open: `startIndex` is inclusive and `endIndex` is exclusive.
+    #   For example, a range with `startIndex` of 1 and `endIndex` of 4
+    #   requests URLs for parts 1, 2, and 3. The range size (`endIndex` -
+    #   `startIndex`) must not exceed 10. If you omit `endIndex`, the
+    #   service defaults to `startIndex` + 10, capped by the total number of
+    #   parts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/UploadRange AWS API Documentation
+    #
+    class UploadRange < Struct.new(
+      :start_index,
+      :end_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A presigned URL for uploading a single part of a multipart attachment
+    # upload, along with the part index and the date and time the URL
+    # expires. Returned by GetAttachmentUploadLinks.
+    #
+    # @!attribute [rw] url
+    #   The presigned HTTPS URL that you use to upload a single part with
+    #   HTTP `PUT`. Upload URLs are served from
+    #   `uploadv1.attachments.support.{region}.amazonaws.com`. The
+    #   `uploadv1` prefix is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] part_index
+    #   The index of the part that this URL uploads.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expiry_date
+    #   The date and time, in ISO-8601 format, when the presigned URL
+    #   expires. Upload the part before this time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/UploadUrl AWS API Documentation
+    #
+    class UploadUrl < Struct.new(
+      :url,
+      :part_index,
+      :expiry_date)
       SENSITIVE = []
       include Aws::Structure
     end

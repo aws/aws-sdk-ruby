@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2026-09-23)
+------------------
+
+* Feature - Amazon Kinesis Data Streams now supports service managed record distribution for on demand streams. Set the record distribution strategy to AUTO to evenly distribute records across shards. Configure it at stream creation with CreateStream or update anytime with UpdateStreamRecordDistributionStrategy
+
+1.108.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.107.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.106.0 (2026-09-01)
+------------------
+
+* Feature - Amazon Kinesis Data Streams now supports a dry run feature for data-plane APIs to validate the permissions and request parameters. If all checks complete successfully, the API returns a 'DryRunOperationException', confirming the request would have succeeded without the 'DryRun' parameter.
+
+1.105.0 (2026-08-31)
+------------------
+
+* Feature - Adds support for data delivery to Amazon S3 Tables (Apache Iceberg) and general purpose Amazon S3 buckets with new CreateChannel, UpdateChannel, DeleteChannel, DescribeChannel, and ListChannels APIs for Amazon Kinesis Data Streams.
+
+1.104.0 (2026-08-21)
+------------------
+
+* Feature - Generate account endpoint for Kinesis Data Streams requests when the account ID is available
+
 1.103.0 (2026-07-09)
 ------------------
 

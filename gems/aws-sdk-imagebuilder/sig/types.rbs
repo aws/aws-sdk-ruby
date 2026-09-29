@@ -113,6 +113,15 @@ module Aws::Imagebuilder
       SENSITIVE: []
     end
 
+    class ComponentFailureContext
+      attr_accessor component_arn: ::String
+      attr_accessor phase_name: ::String
+      attr_accessor step_name: ::String
+      attr_accessor action: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
     class ComponentParameter
       attr_accessor name: ::String
       attr_accessor value: ::Array[::String]
@@ -254,6 +263,7 @@ module Aws::Imagebuilder
       attr_accessor target_repository: Types::TargetContainerRepository
       attr_accessor kms_key_id: ::String
       attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -271,6 +281,7 @@ module Aws::Imagebuilder
       attr_accessor distributions: ::Array[Types::Distribution]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -299,6 +310,7 @@ module Aws::Imagebuilder
       attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
       attr_accessor execution_role: ::String
       attr_accessor logging_configuration: Types::PipelineLoggingConfiguration
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -322,6 +334,7 @@ module Aws::Imagebuilder
       attr_accessor ami_tags: ::Hash[::String, ::String]
       attr_accessor ami_watermarks: ::Array[::String]
       attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -373,6 +386,7 @@ module Aws::Imagebuilder
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor placement: Types::Placement
       attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -393,6 +407,7 @@ module Aws::Imagebuilder
       attr_accessor resource_selection: Types::LifecyclePolicyResourceSelection
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -593,6 +608,12 @@ module Aws::Imagebuilder
       attr_accessor date_updated: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DistributionFailureContext
+      attr_accessor error_message: ::String
+      attr_accessor region_failures: ::Array[Types::RegionFailure]
       SENSITIVE: []
     end
 
@@ -867,6 +888,8 @@ module Aws::Imagebuilder
       attr_accessor end_time: ::String
       attr_accessor on_failure: ::String
       attr_accessor timeout_seconds: ::Integer
+      attr_accessor attempt_number: ::Integer
+      attr_accessor max_attempts: ::Integer
       SENSITIVE: []
     end
 
@@ -909,6 +932,17 @@ module Aws::Imagebuilder
     class ImageAggregation
       attr_accessor image_build_version_arn: ::String
       attr_accessor severity_counts: Types::SeverityCounts
+      SENSITIVE: []
+    end
+
+    class ImageFailureContext
+      attr_accessor image_status: ("PENDING" | "CREATING" | "BUILDING" | "TESTING" | "DISTRIBUTING" | "INTEGRATING" | "AVAILABLE" | "CANCELLED" | "FAILED" | "DEPRECATED" | "DELETED" | "DISABLED")
+      attr_accessor workflow_execution_id: ::String
+      attr_accessor workflow_arn: ::String
+      attr_accessor step_execution_id: ::String
+      attr_accessor failed_step: ::String
+      attr_accessor component_failure: Types::ComponentFailureContext
+      attr_accessor distribution_failure: Types::DistributionFailureContext
       SENSITIVE: []
     end
 
@@ -1035,6 +1069,7 @@ module Aws::Imagebuilder
     class ImageState
       attr_accessor status: ("PENDING" | "CREATING" | "BUILDING" | "TESTING" | "DISTRIBUTING" | "INTEGRATING" | "AVAILABLE" | "CANCELLED" | "FAILED" | "DEPRECATED" | "DELETED" | "DISABLED")
       attr_accessor reason: ::String
+      attr_accessor failure_context: Types::ImageFailureContext
       SENSITIVE: []
     end
 
@@ -1810,6 +1845,15 @@ module Aws::Imagebuilder
       SENSITIVE: []
     end
 
+    class RegionFailure
+      attr_accessor region: ::String
+      attr_accessor status: ("FAILED" | "CANCELLED" | "TIMED_OUT")
+      attr_accessor image_configuration_step: ("ASSOCIATE_LICENSES" | "UPDATE_LAUNCH_TEMPLATES" | "PUT_SSM_PARAMETERS" | "UPDATE_FAST_LAUNCH_CONFIGURATIONS" | "EXPORT_AMI")
+      attr_accessor error_message: ::String
+      attr_accessor target_account_id: ::String
+      SENSITIVE: []
+    end
+
     class RegisterImageOptions
       attr_accessor secure_boot_enabled: bool
       attr_accessor uefi_data: ::String
@@ -2203,6 +2247,8 @@ module Aws::Imagebuilder
       attr_accessor outputs: ::String
       attr_accessor start_time: ::String
       attr_accessor end_time: ::String
+      attr_accessor attempt_number: ::Integer
+      attr_accessor max_attempts: ::Integer
       SENSITIVE: []
     end
 

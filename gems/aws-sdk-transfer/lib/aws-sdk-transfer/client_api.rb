@@ -273,6 +273,8 @@ module Aws::Transfer
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     ProtocolDetails = Shapes::StructureShape.new(name: 'ProtocolDetails')
     Protocols = Shapes::ListShape.new(name: 'Protocols')
+    ProxyConfig = Shapes::StructureShape.new(name: 'ProxyConfig')
+    ProxyMode = Shapes::StringShape.new(name: 'ProxyMode')
     Resource = Shapes::StringShape.new(name: 'Resource')
     ResourceExistsException = Shapes::StructureShape.new(name: 'ResourceExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -293,6 +295,8 @@ module Aws::Transfer
     S3VersionId = Shapes::StringShape.new(name: 'S3VersionId')
     SecondaryGids = Shapes::ListShape.new(name: 'SecondaryGids')
     SecretId = Shapes::StringShape.new(name: 'SecretId')
+    SecretVersionStage = Shapes::StringShape.new(name: 'SecretVersionStage')
+    SecretVersionStageList = Shapes::ListShape.new(name: 'SecretVersionStageList')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SecurityPolicyName = Shapes::StringShape.new(name: 'SecurityPolicyName')
@@ -1274,9 +1278,13 @@ module Aws::Transfer
     ProtocolDetails.add_member(:tls_session_resumption_mode, Shapes::ShapeRef.new(shape: TlsSessionResumptionMode, location_name: "TlsSessionResumptionMode"))
     ProtocolDetails.add_member(:set_stat_option, Shapes::ShapeRef.new(shape: SetStatOption, location_name: "SetStatOption"))
     ProtocolDetails.add_member(:as_2_transports, Shapes::ShapeRef.new(shape: As2Transports, location_name: "As2Transports"))
+    ProtocolDetails.add_member(:proxy_config, Shapes::ShapeRef.new(shape: ProxyConfig, location_name: "ProxyConfig"))
     ProtocolDetails.struct_class = Types::ProtocolDetails
 
     Protocols.member = Shapes::ShapeRef.new(shape: Protocol)
+
+    ProxyConfig.add_member(:sftp_mode, Shapes::ShapeRef.new(shape: ProxyMode, location_name: "SftpMode"))
+    ProxyConfig.struct_class = Types::ProxyConfig
 
     ResourceExistsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
     ResourceExistsException.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
@@ -1309,6 +1317,8 @@ module Aws::Transfer
 
     SecondaryGids.member = Shapes::ShapeRef.new(shape: PosixId)
 
+    SecretVersionStageList.member = Shapes::ShapeRef.new(shape: SecretVersionStage)
+
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     SecurityPolicyNames.member = Shapes::ShapeRef.new(shape: SecurityPolicyName)
@@ -1336,6 +1346,7 @@ module Aws::Transfer
     SftpConnectorConfig.add_member(:user_secret_id, Shapes::ShapeRef.new(shape: SecretId, location_name: "UserSecretId"))
     SftpConnectorConfig.add_member(:trusted_host_keys, Shapes::ShapeRef.new(shape: SftpConnectorTrustedHostKeyList, location_name: "TrustedHostKeys"))
     SftpConnectorConfig.add_member(:max_concurrent_connections, Shapes::ShapeRef.new(shape: MaxConcurrentConnections, location_name: "MaxConcurrentConnections"))
+    SftpConnectorConfig.add_member(:ordered_user_secret_version_stages, Shapes::ShapeRef.new(shape: SecretVersionStageList, location_name: "OrderedUserSecretVersionStages"))
     SftpConnectorConfig.struct_class = Types::SftpConnectorConfig
 
     SftpConnectorConnectionDetails.add_member(:host_key, Shapes::ShapeRef.new(shape: SftpConnectorHostKey, location_name: "HostKey"))

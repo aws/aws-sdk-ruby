@@ -1240,6 +1240,25 @@ module Aws::ECS
     #   request. It must be unique and is case sensitive. Up to 36 ASCII
     #   characters in the range of 33-126 (inclusive) are allowed.
     #
+    # @option params [Boolean] :critical
+    #   If the `critical` parameter of a daemon is `true`, and the daemon task
+    #   fails, stops, or becomes unhealthy, Amazon ECS drains the container
+    #   instance and stops the other tasks running on it. If the `critical`
+    #   parameter is `false`, the daemon task failure doesn't affect the
+    #   other tasks on the instance. The default value is `true`.
+    #
+    #   A non-critical daemon doesn't block instance registration. The
+    #   container instance becomes active and continues to run your other
+    #   tasks, whether the daemon task fails during scale-out or during a
+    #   deployment.
+    #
+    #   Amazon ECS emits an EventBridge event when a daemon task fails to
+    #   start, for both critical and non-critical daemons.
+    #
+    #   Daemon task launch failures during a deployment are still counted by
+    #   the deployment circuit breaker. The circuit breaker can roll back an
+    #   unstable target revision.
+    #
     # @return [Types::CreateDaemonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDaemonResponse#daemon_arn #daemon_arn} => String
@@ -1299,6 +1318,7 @@ module Aws::ECS
     #     enable_ecs_managed_tags: false,
     #     enable_execute_command: false,
     #     client_token: "String",
+    #     critical: false,
     #   })
     #
     # @example Response structure
@@ -1426,6 +1446,26 @@ module Aws::ECS
     #   determines the memory allocation for each task in the Express service.
     #   The default value for an express service is 512 MiB.
     #
+    # @option params [String] :cpu_architecture
+    #   The CPU architecture that the tasks in the Express service run on.
+    #   Amazon ECS applies this value to the task definition revision that it
+    #   registers for the service. If you don't specify a value, the default
+    #   is `X86_64`.
+    #
+    #   Valid values:
+    #
+    #   * `X86_64` - The x86 64-bit architecture.
+    #
+    #   * `ARM64` - The 64-bit ARM architecture.
+    #
+    #   Make sure that the container image that you specify supports the
+    #   architecture that you choose. The operating system family for an
+    #   Express service is always `LINUX`.
+    #
+    #   You can't specify `cpuArchitecture` when you also specify
+    #   `taskDefinitionArn`, because this value applies only to a task
+    #   definition that Amazon ECS registers on your behalf.
+    #
     # @option params [Types::ExpressGatewayScalingTarget] :scaling_target
     #   The auto-scaling configuration for the Express service. This defines
     #   how the service automatically adjusts the number of running tasks
@@ -1452,8 +1492,8 @@ module Aws::ECS
     #   task definition must also have `FARGATE` compatibility.
     #
     #   If you provide a task definition ARN, you cannot also specify
-    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`, or
-    #   `memory`.
+    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`,
+    #   `memory`, or `cpuArchitecture`.
     #
     # @return [Types::CreateExpressGatewayServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1498,6 +1538,7 @@ module Aws::ECS
     #     },
     #     cpu: "String",
     #     memory: "String",
+    #     cpu_architecture: "X86_64", # accepts X86_64, ARM64
     #     scaling_target: {
     #       min_task_count: 1,
     #       max_task_count: 1,
@@ -1529,6 +1570,7 @@ module Aws::ECS
     #   resp.service.active_configurations[0].task_definition_arn #=> String
     #   resp.service.active_configurations[0].cpu #=> String
     #   resp.service.active_configurations[0].memory #=> String
+    #   resp.service.active_configurations[0].cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.service.active_configurations[0].network_configuration.security_groups #=> Array
     #   resp.service.active_configurations[0].network_configuration.security_groups[0] #=> String
     #   resp.service.active_configurations[0].network_configuration.subnets #=> Array
@@ -2497,6 +2539,11 @@ module Aws::ECS
     #         canary_percent: 1.0,
     #         canary_bake_time_in_minutes: 1,
     #       },
+    #       early_success_criteria: {
+    #         enable: false, # required
+    #         healthy_percent: 1,
+    #         source_service_revision_cleanup: "BLOCKING", # accepts BLOCKING, DEFERRED
+    #       },
     #     },
     #     placement_constraints: [
     #       {
@@ -2685,6 +2732,9 @@ module Aws::ECS
     #   resp.service.deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.canary_configuration.canary_percent #=> Float
     #   resp.service.deployment_configuration.canary_configuration.canary_bake_time_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.early_success_criteria.enable #=> Boolean
+    #   resp.service.deployment_configuration.early_success_criteria.healthy_percent #=> Integer
+    #   resp.service.deployment_configuration.early_success_criteria.source_service_revision_cleanup #=> String, one of "BLOCKING", "DEFERRED"
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -3761,6 +3811,7 @@ module Aws::ECS
     #   resp.service.active_configurations[0].task_definition_arn #=> String
     #   resp.service.active_configurations[0].cpu #=> String
     #   resp.service.active_configurations[0].memory #=> String
+    #   resp.service.active_configurations[0].cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.service.active_configurations[0].network_configuration.security_groups #=> Array
     #   resp.service.active_configurations[0].network_configuration.security_groups[0] #=> String
     #   resp.service.active_configurations[0].network_configuration.subnets #=> Array
@@ -3927,6 +3978,9 @@ module Aws::ECS
     #   resp.service.deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.canary_configuration.canary_percent #=> Float
     #   resp.service.deployment_configuration.canary_configuration.canary_bake_time_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.early_success_criteria.enable #=> Boolean
+    #   resp.service.deployment_configuration.early_success_criteria.healthy_percent #=> Integer
+    #   resp.service.deployment_configuration.early_success_criteria.source_service_revision_cleanup #=> String, one of "BLOCKING", "DEFERRED"
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -5554,7 +5608,9 @@ module Aws::ECS
     #   resp.daemon.current_revisions[0].capacity_providers #=> Array
     #   resp.daemon.current_revisions[0].capacity_providers[0].arn #=> String
     #   resp.daemon.current_revisions[0].capacity_providers[0].running_count #=> Integer
+    #   resp.daemon.current_revisions[0].capacity_providers[0].without_daemon_count #=> Integer
     #   resp.daemon.current_revisions[0].total_running_count #=> Integer
+    #   resp.daemon.current_revisions[0].total_without_daemon_count #=> Integer
     #   resp.daemon.deployment_arn #=> String
     #   resp.daemon.created_at #=> Time
     #   resp.daemon.updated_at #=> Time
@@ -5673,16 +5729,20 @@ module Aws::ECS
     #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers #=> Array
     #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers[0].arn #=> String
     #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers[0].running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers[0].without_daemon_instance_count #=> Integer
     #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers[0].draining_instance_count #=> Integer
     #   resp.daemon_deployments[0].target_daemon_revision.total_running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].target_daemon_revision.total_without_daemon_instance_count #=> Integer
     #   resp.daemon_deployments[0].target_daemon_revision.total_draining_instance_count #=> Integer
     #   resp.daemon_deployments[0].source_daemon_revisions #=> Array
     #   resp.daemon_deployments[0].source_daemon_revisions[0].arn #=> String
     #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers #=> Array
     #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers[0].arn #=> String
     #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers[0].running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers[0].without_daemon_instance_count #=> Integer
     #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers[0].draining_instance_count #=> Integer
     #   resp.daemon_deployments[0].source_daemon_revisions[0].total_running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].source_daemon_revisions[0].total_without_daemon_instance_count #=> Integer
     #   resp.daemon_deployments[0].source_daemon_revisions[0].total_draining_instance_count #=> Integer
     #   resp.daemon_deployments[0].circuit_breaker.failure_count #=> Integer
     #   resp.daemon_deployments[0].circuit_breaker.status #=> String, one of "TRIGGERED", "MONITORING", "MONITORING_COMPLETE", "DISABLED"
@@ -5795,6 +5855,7 @@ module Aws::ECS
     #   resp.daemon_revisions[0].propagate_tags #=> String, one of "DAEMON", "NONE"
     #   resp.daemon_revisions[0].enable_ecs_managed_tags #=> Boolean
     #   resp.daemon_revisions[0].enable_execute_command #=> Boolean
+    #   resp.daemon_revisions[0].critical #=> Boolean
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -6042,6 +6103,7 @@ module Aws::ECS
     #   resp.service.active_configurations[0].task_definition_arn #=> String
     #   resp.service.active_configurations[0].cpu #=> String
     #   resp.service.active_configurations[0].memory #=> String
+    #   resp.service.active_configurations[0].cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.service.active_configurations[0].network_configuration.security_groups #=> Array
     #   resp.service.active_configurations[0].network_configuration.security_groups[0] #=> String
     #   resp.service.active_configurations[0].network_configuration.subnets #=> Array
@@ -6282,6 +6344,9 @@ module Aws::ECS
     #   resp.service_deployments[0].deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
     #   resp.service_deployments[0].deployment_configuration.canary_configuration.canary_percent #=> Float
     #   resp.service_deployments[0].deployment_configuration.canary_configuration.canary_bake_time_in_minutes #=> Integer
+    #   resp.service_deployments[0].deployment_configuration.early_success_criteria.enable #=> Boolean
+    #   resp.service_deployments[0].deployment_configuration.early_success_criteria.healthy_percent #=> Integer
+    #   resp.service_deployments[0].deployment_configuration.early_success_criteria.source_service_revision_cleanup #=> String, one of "BLOCKING", "DEFERRED"
     #   resp.service_deployments[0].rollback.reason #=> String
     #   resp.service_deployments[0].rollback.started_at #=> Time
     #   resp.service_deployments[0].rollback.service_revision_arn #=> String
@@ -6806,6 +6871,9 @@ module Aws::ECS
     #   resp.services[0].deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
     #   resp.services[0].deployment_configuration.canary_configuration.canary_percent #=> Float
     #   resp.services[0].deployment_configuration.canary_configuration.canary_bake_time_in_minutes #=> Integer
+    #   resp.services[0].deployment_configuration.early_success_criteria.enable #=> Boolean
+    #   resp.services[0].deployment_configuration.early_success_criteria.healthy_percent #=> Integer
+    #   resp.services[0].deployment_configuration.early_success_criteria.source_service_revision_cleanup #=> String, one of "BLOCKING", "DEFERRED"
     #   resp.services[0].task_sets #=> Array
     #   resp.services[0].task_sets[0].id #=> String
     #   resp.services[0].task_sets[0].task_set_arn #=> String
@@ -14553,6 +14621,25 @@ module Aws::ECS
     #   tasks in the daemon. If `false`, the execute command functionality is
     #   turned off.
     #
+    # @option params [Boolean] :critical
+    #   If the `critical` parameter of a daemon is `true`, and the daemon task
+    #   fails, stops, or becomes unhealthy, Amazon ECS drains the container
+    #   instance and stops the other tasks running on it. If the `critical`
+    #   parameter is `false`, the daemon task failure doesn't affect the
+    #   other tasks on the instance. The default value is `true`.
+    #
+    #   A non-critical daemon doesn't block instance registration. The
+    #   container instance becomes active and continues to run your other
+    #   tasks, whether the daemon task fails during scale-out or during a
+    #   deployment.
+    #
+    #   Amazon ECS emits an EventBridge event when a daemon task fails to
+    #   start, for both critical and non-critical daemons.
+    #
+    #   Daemon task launch failures during a deployment are still counted by
+    #   the deployment circuit breaker. The circuit breaker can roll back an
+    #   unstable target revision.
+    #
     # @return [Types::UpdateDaemonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDaemonResponse#daemon_arn #daemon_arn} => String
@@ -14604,6 +14691,7 @@ module Aws::ECS
     #     propagate_tags: "DAEMON", # accepts DAEMON, NONE
     #     enable_ecs_managed_tags: false,
     #     enable_execute_command: false,
+    #     critical: false,
     #   })
     #
     # @example Response structure
@@ -14662,6 +14750,27 @@ module Aws::ECS
     # @option params [String] :memory
     #   The amount of memory (in MiB) used by the task.
     #
+    # @option params [String] :cpu_architecture
+    #   The CPU architecture that the tasks in the Express service run on.
+    #   Amazon ECS applies this value to the task definition revision that it
+    #   registers for the service. If you don't specify a value, the service
+    #   keeps the architecture that it currently runs on.
+    #
+    #   Valid values:
+    #
+    #   * `X86_64` - The x86 64-bit architecture.
+    #
+    #   * `ARM64` - The 64-bit ARM architecture.
+    #
+    #   Changing the architecture starts a new deployment that replaces the
+    #   running tasks. Make sure that the container image that the service
+    #   uses supports the architecture that you choose. The operating system
+    #   family for an Express service is always `LINUX`.
+    #
+    #   You can't specify `cpuArchitecture` when you also specify
+    #   `taskDefinitionArn`, because this value applies only to a task
+    #   definition that Amazon ECS registers on your behalf.
+    #
     # @option params [Types::ExpressGatewayScalingTarget] :scaling_target
     #   The auto-scaling configuration for the Express service.
     #
@@ -14676,8 +14785,8 @@ module Aws::ECS
     #   task definition must also have `FARGATE` compatibility.
     #
     #   If you provide a task definition ARN, you cannot also specify
-    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`, or
-    #   `memory`.
+    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`,
+    #   `memory`, or `cpuArchitecture`.
     #
     # @return [Types::UpdateExpressGatewayServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14720,6 +14829,7 @@ module Aws::ECS
     #     },
     #     cpu: "String",
     #     memory: "String",
+    #     cpu_architecture: "X86_64", # accepts X86_64, ARM64
     #     scaling_target: {
     #       min_task_count: 1,
     #       max_task_count: 1,
@@ -14742,6 +14852,7 @@ module Aws::ECS
     #   resp.service.target_configuration.task_definition_arn #=> String
     #   resp.service.target_configuration.cpu #=> String
     #   resp.service.target_configuration.memory #=> String
+    #   resp.service.target_configuration.cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.service.target_configuration.network_configuration.security_groups #=> Array
     #   resp.service.target_configuration.network_configuration.security_groups[0] #=> String
     #   resp.service.target_configuration.network_configuration.subnets #=> Array
@@ -15390,6 +15501,11 @@ module Aws::ECS
     #         canary_percent: 1.0,
     #         canary_bake_time_in_minutes: 1,
     #       },
+    #       early_success_criteria: {
+    #         enable: false, # required
+    #         healthy_percent: 1,
+    #         source_service_revision_cleanup: "BLOCKING", # accepts BLOCKING, DEFERRED
+    #       },
     #     },
     #     availability_zone_rebalancing: "ENABLED", # accepts ENABLED, DISABLED
     #     network_configuration: {
@@ -15596,6 +15712,9 @@ module Aws::ECS
     #   resp.service.deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.canary_configuration.canary_percent #=> Float
     #   resp.service.deployment_configuration.canary_configuration.canary_bake_time_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.early_success_criteria.enable #=> Boolean
+    #   resp.service.deployment_configuration.early_success_criteria.healthy_percent #=> Integer
+    #   resp.service.deployment_configuration.early_success_criteria.source_service_revision_cleanup #=> String, one of "BLOCKING", "DEFERRED"
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -16247,7 +16366,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.243.0'
+      context[:gem_version] = '1.247.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

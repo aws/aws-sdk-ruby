@@ -764,6 +764,7 @@ module Aws::ElastiCache
     CreateGlobalReplicationGroupMessage.add_member(:global_replication_group_id_suffix, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupIdSuffix"))
     CreateGlobalReplicationGroupMessage.add_member(:global_replication_group_description, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupDescription"))
     CreateGlobalReplicationGroupMessage.add_member(:primary_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PrimaryReplicationGroupId"))
+    CreateGlobalReplicationGroupMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateGlobalReplicationGroupMessage.struct_class = Types::CreateGlobalReplicationGroupMessage
 
     CreateGlobalReplicationGroupResult.add_member(:global_replication_group, Shapes::ShapeRef.new(shape: GlobalReplicationGroup, location_name: "GlobalReplicationGroup"))
@@ -2095,6 +2096,8 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
       end)
 
       api.add_operation(:authorize_cache_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|
@@ -2245,6 +2248,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
@@ -2947,6 +2951,8 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: ServerlessCacheSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
       end)
 
       api.add_operation(:modify_cache_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -3149,6 +3155,8 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidServerlessCacheSnapshotStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
         o.errors << Shapes::ShapeRef.new(shape: TagNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
       end)
 
       api.add_operation(:reset_cache_parameter_group, Seahorse::Model::Operation.new.tap do |o|

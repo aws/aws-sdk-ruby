@@ -160,6 +160,11 @@ module Aws
       canary_configuration: {
         canary_percent: ::Float?,
         canary_bake_time_in_minutes: ::Integer?
+      }?,
+      early_success_criteria: {
+        enable: bool,
+        healthy_percent: ::Integer?,
+        source_service_revision_cleanup: ("BLOCKING" | "DEFERRED")?
       }?
     }
 

@@ -3116,6 +3116,26 @@ module Aws::ECS
     #   characters in the range of 33-126 (inclusive) are allowed.
     #   @return [String]
     #
+    # @!attribute [rw] critical
+    #   If the `critical` parameter of a daemon is `true`, and the daemon
+    #   task fails, stops, or becomes unhealthy, Amazon ECS drains the
+    #   container instance and stops the other tasks running on it. If the
+    #   `critical` parameter is `false`, the daemon task failure doesn't
+    #   affect the other tasks on the instance. The default value is `true`.
+    #
+    #   A non-critical daemon doesn't block instance registration. The
+    #   container instance becomes active and continues to run your other
+    #   tasks, whether the daemon task fails during scale-out or during a
+    #   deployment.
+    #
+    #   Amazon ECS emits an EventBridge event when a daemon task fails to
+    #   start, for both critical and non-critical daemons.
+    #
+    #   Daemon task launch failures during a deployment are still counted by
+    #   the deployment circuit breaker. The circuit breaker can roll back an
+    #   unstable target revision.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateDaemonRequest AWS API Documentation
     #
     class CreateDaemonRequest < Struct.new(
@@ -3128,7 +3148,8 @@ module Aws::ECS
       :propagate_tags,
       :enable_ecs_managed_tags,
       :enable_execute_command,
-      :client_token)
+      :client_token,
+      :critical)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3268,6 +3289,27 @@ module Aws::ECS
     #   service. The default value for an express service is 512 MiB.
     #   @return [String]
     #
+    # @!attribute [rw] cpu_architecture
+    #   The CPU architecture that the tasks in the Express service run on.
+    #   Amazon ECS applies this value to the task definition revision that
+    #   it registers for the service. If you don't specify a value, the
+    #   default is `X86_64`.
+    #
+    #   Valid values:
+    #
+    #   * `X86_64` - The x86 64-bit architecture.
+    #
+    #   * `ARM64` - The 64-bit ARM architecture.
+    #
+    #   Make sure that the container image that you specify supports the
+    #   architecture that you choose. The operating system family for an
+    #   Express service is always `LINUX`.
+    #
+    #   You can't specify `cpuArchitecture` when you also specify
+    #   `taskDefinitionArn`, because this value applies only to a task
+    #   definition that Amazon ECS registers on your behalf.
+    #   @return [String]
+    #
     # @!attribute [rw] scaling_target
     #   The auto-scaling configuration for the Express service. This defines
     #   how the service automatically adjusts the number of running tasks
@@ -3296,8 +3338,8 @@ module Aws::ECS
     #   task definition must also have `FARGATE` compatibility.
     #
     #   If you provide a task definition ARN, you cannot also specify
-    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`, or
-    #   `memory`.
+    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`,
+    #   `memory`, or `cpuArchitecture`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateExpressGatewayServiceRequest AWS API Documentation
@@ -3313,6 +3355,7 @@ module Aws::ECS
       :network_configuration,
       :cpu,
       :memory,
+      :cpu_architecture,
       :scaling_target,
       :tags,
       :task_definition_arn)
@@ -4138,11 +4181,20 @@ module Aws::ECS
     #   The number of daemon tasks running on this capacity provider.
     #   @return [Integer]
     #
+    # @!attribute [rw] without_daemon_count
+    #   The number of instances on this capacity provider that are running
+    #   without the daemon task. This applies to daemons that aren't
+    #   critical, where the instance remains available for your other tasks
+    #   even if the daemon task can't start or stops. These instances
+    #   aren't included in `runningCount`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DaemonCapacityProvider AWS API Documentation
     #
     class DaemonCapacityProvider < Struct.new(
       :arn,
-      :running_count)
+      :running_count,
+      :without_daemon_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4502,6 +4554,14 @@ module Aws::ECS
     #   provider.
     #   @return [Integer]
     #
+    # @!attribute [rw] without_daemon_instance_count
+    #   The number of instances on this capacity provider that are running
+    #   without the daemon task. This applies to daemons that aren't
+    #   critical, where the instance remains available for your other tasks
+    #   even if the daemon task can't start or stops. These instances
+    #   aren't included in `runningInstanceCount`.
+    #   @return [Integer]
+    #
     # @!attribute [rw] draining_instance_count
     #   The number of instances being drained on this capacity provider
     #   during the deployment.
@@ -4512,6 +4572,7 @@ module Aws::ECS
     class DaemonDeploymentCapacityProvider < Struct.new(
       :arn,
       :running_instance_count,
+      :without_daemon_instance_count,
       :draining_instance_count)
       SENSITIVE = []
       include Aws::Structure
@@ -4564,6 +4625,12 @@ module Aws::ECS
     #   revision.
     #   @return [Integer]
     #
+    # @!attribute [rw] total_without_daemon_instance_count
+    #   The total number of instances running without the daemon task for
+    #   this revision, across all capacity providers. These instances
+    #   aren't included in `totalRunningInstanceCount`.
+    #   @return [Integer]
+    #
     # @!attribute [rw] total_draining_instance_count
     #   The total number of instances being drained for this revision during
     #   the deployment.
@@ -4575,6 +4642,7 @@ module Aws::ECS
       :arn,
       :capacity_providers,
       :total_running_instance_count,
+      :total_without_daemon_instance_count,
       :total_draining_instance_count)
       SENSITIVE = []
       include Aws::Structure
@@ -4803,6 +4871,15 @@ module Aws::ECS
     #   the daemon tasks.
     #   @return [Boolean]
     #
+    # @!attribute [rw] critical
+    #   If the `critical` parameter of this daemon revision is `true`, and
+    #   the daemon task fails, stops, or becomes unhealthy, Amazon ECS
+    #   drains the container instance and stops the other tasks running on
+    #   it. If the parameter is `false`, the daemon task failure doesn't
+    #   affect the other tasks on the instance, and doesn't block instance
+    #   registration. The default value is `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DaemonRevision AWS API Documentation
     #
     class DaemonRevision < Struct.new(
@@ -4814,7 +4891,8 @@ module Aws::ECS
       :container_images,
       :propagate_tags,
       :enable_ecs_managed_tags,
-      :enable_execute_command)
+      :enable_execute_command,
+      :critical)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4834,12 +4912,19 @@ module Aws::ECS
     #   The total number of daemon tasks running for this revision.
     #   @return [Integer]
     #
+    # @!attribute [rw] total_without_daemon_count
+    #   The total number of instances running without the daemon task for
+    #   this revision, across all capacity providers. These instances
+    #   aren't included in `totalRunningCount`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DaemonRevisionDetail AWS API Documentation
     #
     class DaemonRevisionDetail < Struct.new(
       :arn,
       :capacity_providers,
-      :total_running_count)
+      :total_running_count,
+      :total_without_daemon_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5984,6 +6069,14 @@ module Aws::ECS
     #   remaining traffic after a bake period.
     #   @return [Types::CanaryConfiguration]
     #
+    # @!attribute [rw] early_success_criteria
+    #   The early success criteria configuration for a rolling deployment.
+    #   With early success criteria, you can configure an Amazon ECS
+    #   deployment to complete faster. Amazon ECS declares a deployment
+    #   successful once a target percentage of tasks are healthy, instead of
+    #   waiting for the service to fully stabilize.
+    #   @return [Types::DeploymentEarlySuccessCriteria]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration AWS API Documentation
     #
     class DeploymentConfiguration < Struct.new(
@@ -5995,7 +6088,8 @@ module Aws::ECS
       :bake_time_in_minutes,
       :lifecycle_hooks,
       :linear_configuration,
-      :canary_configuration)
+      :canary_configuration,
+      :early_success_criteria)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6097,6 +6191,63 @@ module Aws::ECS
     #
     class DeploymentController < Struct.new(
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> You can use early success criteria only with
+    # rolling deployment
+    # strategy.
+    #
+    #  </note>
+    #
+    #  The configuration that determines when a rolling update deployment is
+    # considered successful. Early success criteria defines the percentage
+    # of tasks that must be healthy before a deployment completes. It also
+    # controls whether Amazon ECS must remove the previous tasks before a
+    # deployment completes.
+    #
+    # @!attribute [rw] enable
+    #   Specifies whether to use the early success criteria for the service
+    #   deployment. When set to `false`, the deployment uses the default
+    #   behavior, where Amazon ECS considers the deployment successful when
+    #   the target service revision fully stabilizes and the previous tasks
+    #   are removed. The default value is `false`.
+    #
+    #   When set to `true`, Amazon ECS monitors the deployment to meet early
+    #   success criteria. You must also specify `healthyPercent` and
+    #   `sourceServiceRevisionCleanup`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] healthy_percent
+    #   The percentage of healthy tasks that the target service revision
+    #   must reach before Amazon ECS considers the deployment successful.
+    #   This percentage is relative to the service's `desiredCount` and
+    #   must be an integer between `0` and `100`. This value must be greater
+    #   than or equal to the `minimumHealthyPercent` value.
+    #
+    #   After this percentage of tasks is healthy and the bake time elapses,
+    #   Amazon ECS completes the deployment. Amazon ECS continues to scale
+    #   the target service revision to 100 percent in the background.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_service_revision_cleanup
+    #   The time when Amazon ECS removes the source revisions' tasks
+    #   relative to deployment completion. The valid values are:
+    #
+    #   * `BLOCKING`—Amazon ECS removes the previous tasks before it marks
+    #     the deployment as successful.
+    #
+    #   * `DEFERRED`—Amazon ECS marks the deployment successful, and then
+    #     removes the previous tasks in the background.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentEarlySuccessCriteria AWS API Documentation
+    #
+    class DeploymentEarlySuccessCriteria < Struct.new(
+      :enable,
+      :healthy_percent,
+      :source_service_revision_cleanup)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7898,6 +8049,26 @@ module Aws::ECS
     #   The memory allocation for tasks in this service revision.
     #   @return [String]
     #
+    # @!attribute [rw] cpu_architecture
+    #   The CPU architecture that the tasks in this service revision run on.
+    #   This is the architecture from the task definition that the service
+    #   revision uses, so it reflects the default or the previously
+    #   configured architecture when the request that created the revision
+    #   didn't specify one.
+    #
+    #   Valid values:
+    #
+    #   * `X86_64` - The x86 64-bit architecture.
+    #
+    #   * `ARM64` - The 64-bit ARM architecture.
+    #
+    #   This value isn't returned when the task definition for the service
+    #   revision doesn't specify a runtime platform. Because the
+    #   architecture comes from each service revision's own task
+    #   definition, revisions of the same service can report different
+    #   architectures.
+    #   @return [String]
+    #
     # @!attribute [rw] network_configuration
     #   The network configuration for tasks in this service revision.
     #   @return [Types::ExpressGatewayServiceNetworkConfiguration]
@@ -7931,6 +8102,7 @@ module Aws::ECS
       :task_definition_arn,
       :cpu,
       :memory,
+      :cpu_architecture,
       :network_configuration,
       :health_check_path,
       :primary_container,
@@ -12240,10 +12412,11 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The protocol used for the port mapping. Valid values are `tcp` and
-    #   `udp`. The default is `tcp`. `protocol` is immutable in a Service
-    #   Connect service. Updating this field requires a service deletion and
-    #   redeployment.
+    #   The protocol that's used for the port mapping. Valid values are
+    #   `tcp` and `udp` (case-sensitive). The default is `tcp`. Amazon ECS
+    #   treats any other specified value as `tcp`. `protocol` is immutable
+    #   in a Service Connect service. To update this field, you must delete
+    #   and redeploy the service.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -18729,6 +18902,26 @@ module Aws::ECS
     #   is turned off.
     #   @return [Boolean]
     #
+    # @!attribute [rw] critical
+    #   If the `critical` parameter of a daemon is `true`, and the daemon
+    #   task fails, stops, or becomes unhealthy, Amazon ECS drains the
+    #   container instance and stops the other tasks running on it. If the
+    #   `critical` parameter is `false`, the daemon task failure doesn't
+    #   affect the other tasks on the instance. The default value is `true`.
+    #
+    #   A non-critical daemon doesn't block instance registration. The
+    #   container instance becomes active and continues to run your other
+    #   tasks, whether the daemon task fails during scale-out or during a
+    #   deployment.
+    #
+    #   Amazon ECS emits an EventBridge event when a daemon task fails to
+    #   start, for both critical and non-critical daemons.
+    #
+    #   Daemon task launch failures during a deployment are still counted by
+    #   the deployment circuit breaker. The circuit breaker can roll back an
+    #   unstable target revision.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateDaemonRequest AWS API Documentation
     #
     class UpdateDaemonRequest < Struct.new(
@@ -18738,7 +18931,8 @@ module Aws::ECS
       :deployment_configuration,
       :propagate_tags,
       :enable_ecs_managed_tags,
-      :enable_execute_command)
+      :enable_execute_command,
+      :critical)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18813,6 +19007,28 @@ module Aws::ECS
     #   The amount of memory (in MiB) used by the task.
     #   @return [String]
     #
+    # @!attribute [rw] cpu_architecture
+    #   The CPU architecture that the tasks in the Express service run on.
+    #   Amazon ECS applies this value to the task definition revision that
+    #   it registers for the service. If you don't specify a value, the
+    #   service keeps the architecture that it currently runs on.
+    #
+    #   Valid values:
+    #
+    #   * `X86_64` - The x86 64-bit architecture.
+    #
+    #   * `ARM64` - The 64-bit ARM architecture.
+    #
+    #   Changing the architecture starts a new deployment that replaces the
+    #   running tasks. Make sure that the container image that the service
+    #   uses supports the architecture that you choose. The operating system
+    #   family for an Express service is always `LINUX`.
+    #
+    #   You can't specify `cpuArchitecture` when you also specify
+    #   `taskDefinitionArn`, because this value applies only to a task
+    #   definition that Amazon ECS registers on your behalf.
+    #   @return [String]
+    #
     # @!attribute [rw] scaling_target
     #   The auto-scaling configuration for the Express service.
     #   @return [Types::ExpressGatewayScalingTarget]
@@ -18828,8 +19044,8 @@ module Aws::ECS
     #   task definition must also have `FARGATE` compatibility.
     #
     #   If you provide a task definition ARN, you cannot also specify
-    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`, or
-    #   `memory`.
+    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`,
+    #   `memory`, or `cpuArchitecture`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateExpressGatewayServiceRequest AWS API Documentation
@@ -18843,6 +19059,7 @@ module Aws::ECS
       :network_configuration,
       :cpu,
       :memory,
+      :cpu_architecture,
       :scaling_target,
       :task_definition_arn)
       SENSITIVE = []

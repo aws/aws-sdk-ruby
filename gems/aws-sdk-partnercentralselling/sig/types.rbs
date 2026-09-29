@@ -137,6 +137,7 @@ module Aws::PartnerCentralSelling
       attr_accessor customer: Types::AwsOpportunityCustomer
       attr_accessor project: Types::AwsOpportunityProject
       attr_accessor cosell_motion: ::String
+      attr_accessor software_revenue: Types::AwsSoftwareRevenue
       SENSITIVE: []
     end
 
@@ -174,6 +175,14 @@ module Aws::PartnerCentralSelling
       SENSITIVE: []
     end
 
+    class AwsSoftwareRevenue
+      attr_accessor value: Types::MonetaryValue
+      attr_accessor discount: ::String
+      attr_accessor effective_date: ::String
+      attr_accessor expiration_date: ::String
+      SENSITIVE: []
+    end
+
     class AwsSubmission
       attr_accessor involvement_type: ("For Visibility Only" | "Co-Sell")
       attr_accessor visibility: ("Full" | "Limited")
@@ -184,7 +193,7 @@ module Aws::PartnerCentralSelling
       attr_accessor email: ::String
       attr_accessor first_name: ::String
       attr_accessor last_name: ::String
-      attr_accessor business_title: ("AWSSalesRep" | "AWSAccountOwner" | "WWPSPDM" | "PDM" | "PSM" | "ISVSM")
+      attr_accessor business_title: ("AWSSalesRep" | "AWSAccountOwner" | "WWPSPDM" | "PDM" | "PSM" | "ISVSM" | "Signatory")
       SENSITIVE: [:email, :first_name, :last_name]
     end
 
@@ -490,6 +499,7 @@ module Aws::PartnerCentralSelling
       attr_accessor customer: Types::AwsOpportunityCustomer
       attr_accessor project: Types::AwsOpportunityProject
       attr_accessor cosell_motion: ::String
+      attr_accessor software_revenue: Types::AwsSoftwareRevenue
       attr_accessor catalog: ::String
       SENSITIVE: []
     end

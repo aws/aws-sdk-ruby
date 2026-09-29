@@ -3799,7 +3799,7 @@ module Aws::Backup
     end
 
     # This is a request for a summary of backup jobs created or running
-    # within the most recent 30 days. You can include parameters AccountID,
+    # within the most recent 14 days. You can include parameters AccountID,
     # State, ResourceType, MessageCategory, AggregationPeriod, MaxResults,
     # or NextToken to filter results.
     #
@@ -4404,7 +4404,7 @@ module Aws::Backup
     end
 
     # This request obtains a list of copy jobs created or running within the
-    # the most recent 30 days. You can include parameters AccountID, State,
+    # the most recent 14 days. You can include parameters AccountID, State,
     # ResourceType, MessageCategory, AggregationPeriod, MaxResults, or
     # NextToken to filter results.
     #
@@ -5484,7 +5484,7 @@ module Aws::Backup
     end
 
     # This request obtains a summary of restore jobs created or running
-    # within the the most recent 30 days. You can include parameters
+    # within the the most recent 14 days. You can include parameters
     # AccountID, State, ResourceType, AggregationPeriod, MaxResults, or
     # NextToken to filter results.
     #
@@ -5915,7 +5915,7 @@ module Aws::Backup
     end
 
     # This is a request for a summary of scan jobs created or running within
-    # the most recent 30 days.
+    # the most recent 14 days.
     #
     # @option params [String] :account_id
     #   Returns the job count for the specified account.
@@ -7870,7 +7870,7 @@ module Aws::Backup
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

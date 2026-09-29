@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2026-09-25)
+------------------
+
+* Feature - Release shapes for the proactive agentic recommendations and the multi-knowledge base search features. Increases the maximum length of QuickResponseContent.
+
+1.62.0 (2026-09-18)
+------------------
+
+* Feature - Amazon Connect AI Agents now support multi-agent orchestration and structured JSON input and output messaging for orchestration agents.
+
+1.61.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.59.0 (2026-07-09)
 ------------------
 

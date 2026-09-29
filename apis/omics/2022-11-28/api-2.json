@@ -2567,6 +2567,7 @@
         "FAILED",
         "PROCESSED",
         "RUNS_DELETING",
+        "RUNS_DELETE_FAILED",
         "RUNS_DELETED"
       ],
       "max":64,
@@ -3306,6 +3307,7 @@
         "workflowVersionName":{"shape":"WorkflowVersionName"},
         "networkingMode":{"shape":"NetworkingMode"},
         "configurationName":{"shape":"ConfigurationName"},
+        "sessionPolicy":{"shape":"SessionPolicy"},
         "engineSettings":{"shape":"EngineSettings"},
         "scratchStorageMode":{"shape":"ScratchStorageMode"}
       }
@@ -4516,7 +4518,8 @@
         "scratchStorageMode":{"shape":"ScratchStorageMode"},
         "configuration":{"shape":"ConfigurationDetails"},
         "vpcConfig":{"shape":"VpcConfigResponse"},
-        "engineSettings":{"shape":"EngineSettings"}
+        "engineSettings":{"shape":"EngineSettings"},
+        "sessionPolicy":{"shape":"SessionPolicy"}
       }
     },
     "GetRunResponsePriorityInteger":{
@@ -7255,6 +7258,12 @@
       },
       "exception":true
     },
+    "SessionPolicy":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\t\\n\\r]+"
+    },
     "ShareDetails":{
       "type":"structure",
       "members":{
@@ -7628,6 +7637,7 @@
         "networkingMode":{"shape":"NetworkingMode"},
         "scratchStorageMode":{"shape":"ScratchStorageMode"},
         "configurationName":{"shape":"ConfigurationName"},
+        "sessionPolicy":{"shape":"SessionPolicy"},
         "engineSettings":{"shape":"EngineSettings"}
       }
     },

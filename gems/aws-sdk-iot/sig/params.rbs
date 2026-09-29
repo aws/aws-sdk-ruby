@@ -270,6 +270,22 @@ module Aws
       longitude: ::String
     }
 
+      type influx_db_action = {
+      destination_arn: ::String,
+      role_arn: ::String,
+      database_name: ::String,
+      table_name: ::String,
+      organization: ::String?,
+      tags: Hash[::String, ::String]?,
+      timestamp_unit: ("s" | "ms" | "us" | "ns")?,
+      batch_config: {
+        max_batch_size: ::Integer?,
+        max_batch_open_ms: ::Integer?,
+        max_batch_size_bytes: ::Integer?,
+        batch_across_topics: bool?
+      }?
+    }
+
       type action = {
       dynamo_db: Params::dynamo_db_action?,
       dynamo_d_bv_2: {
@@ -360,7 +376,8 @@ module Aws
         type: ::String,
         id: ::String
       }?,
-      location: Params::location_action?
+      location: Params::location_action?,
+      influx_db: Params::influx_db_action?
     }
 
       type topic_rule_payload = {

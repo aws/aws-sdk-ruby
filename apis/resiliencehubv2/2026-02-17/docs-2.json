@@ -22,6 +22,7 @@
     "DeleteTest": "<p>Deletes a test.</p>",
     "DeleteTestSources": "<p>Removes monitoring sources from a test. The operation is transactional and idempotent — removing a source that is not attached is a no-op.</p>",
     "DeleteUserJourney": "<p>Deletes a user journey.</p>",
+    "GetDependencyInsights": "<p>Retrieves the dependency insights generated for a service. The response reports the current generation status; insights are populated once generation has completed. If generation failed, the response includes an error code, whose possible values are listed under the response's errorCode field, and a message describing the cause. To use this operation, you must have the <code>resiliencehub:GetDependencyInsights</code> permission on the service.</p>",
     "GetFailureModeFinding": "<p>Retrieves a finding by findingId.</p>",
     "GetPolicy": "<p>Retrieves a resilience policy by ARN.</p>",
     "GetService": "<p>Retrieves a service by ARN.</p>",
@@ -38,6 +39,7 @@
     "ListFailureModeFindings": "<p>List findings.</p>",
     "ListInputSources": "<p>Lists input sources for a service.</p>",
     "ListPolicies": "<p>Lists resilience policies.</p>",
+    "ListPolicyEvents": "<p>Lists events for a resilience policy, including services that started or stopped using it, changes to cross-account sharing, and deletion of the policy.</p>",
     "ListReports": "<p>List reports for a service, or all reports owned by the account if serviceArn is not provided.</p>",
     "ListResolvedTestRunTargetResources": "<p>Lists the AWS resources that AWS Fault Injection Service (AWS FIS) resolved as targets for a test run.</p>",
     "ListResources": "<p>List resources.</p>",
@@ -48,7 +50,9 @@
     "ListSystemEvents": "<p>Lists events for a system.</p>",
     "ListSystems": "<p>Lists systems.</p>",
     "ListTagsForResource": "<p>Lists the tags for a resource.</p>",
+    "ListTestRunDependencies": "<p>Lists the dependencies that a test run blocked. Each dependency reflects the discovered classification captured when the run started, so results do not change if a dependency is reclassified after the run.</p>",
     "ListTestRunEvents": "<p>Lists the events in a test run's timeline.</p>",
+    "ListTestRunSourceEvents": "<p>Lists the state-change events observed for a test run monitoring source. Events are returned for one source per call, in chronological order.</p>",
     "ListTestRunSources": "<p>Lists the monitoring source snapshots captured for a test run, optionally filtered by type.</p>",
     "ListTestRuns": "<p>Lists the runs of a test, or all test runs for a service.</p>",
     "ListTestSources": "<p>Lists the monitoring sources attached to a test, optionally filtered by type.</p>",
@@ -56,6 +60,7 @@
     "ListTests": "<p>Lists the tests configured for a service.</p>",
     "ListUserJourneys": "<p>Lists user journeys for a system.</p>",
     "PutTestSources": "<p>Adds or updates the monitoring sources on a test. The operation is transactional — either every source is written or the call fails and nothing is written.</p>",
+    "StartDependencyInsights": "<p>Starts generating dependency insights for a service. Generation runs asynchronously; the response returns the initial status, and you retrieve the results with GetDependencyInsights. To use this operation, you must have the <code>resiliencehub:StartDependencyInsights</code> permission on the service.</p>",
     "StartFailureModeAssessment": "<p>Starts a failure mode assessment.</p>",
     "StartTestRun": "<p>Starts a run of a test. Each run scopes to the current resources in the service and produces a pass or fail outcome.</p>",
     "StopTestRun": "<p>Stops an in-progress test run.</p>",
@@ -79,7 +84,10 @@
     "AccountId": {
       "base": null,
       "refs": {
+        "ListPoliciesRequest$accountId": "<p>The identifier of the account that owns the policies to include in the results.</p>",
         "ListServicesRequest$accountId": "<p>Filter services by AWS account ID.</p>",
+        "PolicyAttachedToServiceMetadata$accountId": "<p>The account that owns the service.</p>",
+        "PolicyDetachedFromServiceMetadata$accountId": "<p>The account that owns the service.</p>",
         "Service$accountId": "<p>The AWS account ID that owns the service.</p>",
         "ServiceSummary$accountId": "<p>Displayed only if caller has access.</p>"
       }
@@ -87,8 +95,8 @@
     "AccountTargeting": {
       "base": "<p>Whether a test run targets resources in a single AWS account or across multiple accounts.</p>",
       "refs": {
-        "TestRun$accountTargeting": "<p>Indicates whether this test run targets a single account or multiple accounts.</p>",
-        "TestRunSummary$accountTargeting": "<p>Indicates whether this test run targets a single account or multiple accounts.</p>"
+        "TestRun$accountTargeting": "<p>Indicates whether the test run targets resources in a single AWS account or across multiple accounts.</p>",
+        "TestRunSummary$accountTargeting": "<p>Indicates whether the test run targets resources in a single AWS account or across multiple accounts.</p>"
       }
     },
     "Achievability": {
@@ -112,6 +120,25 @@
       "base": null,
       "refs": {
         "EventActor$type": "<p>The type of actor, either USER or SYSTEM.</p>"
+      }
+    },
+    "AlarmState": {
+      "base": "<p>The state of a CloudWatch alarm.</p>",
+      "refs": {
+        "AlarmStateChangeDetail$state": "<p>The state the alarm transitioned to.</p>",
+        "AlarmStateChangeDetail$previousState": "<p>The state the alarm transitioned from. Absent on the initial event, which records the alarm's state when collection began.</p>"
+      }
+    },
+    "AlarmStateChangeDetail": {
+      "base": "<p>Details about a CloudWatch alarm state change observed during a test run.</p>",
+      "refs": {
+        "TestRunSourceEventDetail$alarmStateChange": "<p>A CloudWatch alarm state change.</p>"
+      }
+    },
+    "AlarmStateChangeDetailReasonString": {
+      "base": null,
+      "refs": {
+        "AlarmStateChangeDetail$reason": "<p>A human-readable explanation of the state change, as reported by CloudWatch.</p>"
       }
     },
     "Arn": {
@@ -152,6 +179,7 @@
         "ExperimentArnList$member": null,
         "ExperimentDetails$experimentArn": "<p>The ARN of the AWS FIS experiment.</p>",
         "FindingSummary$serviceArn": null,
+        "GetDependencyInsightsRequest$serviceArn": null,
         "GetFailureModeFindingRequest$serviceArn": null,
         "GetPolicyRequest$policyArn": null,
         "GetServiceRequest$serviceArn": null,
@@ -168,6 +196,7 @@
         "ListFailureModeAssessmentsRequest$serviceArn": null,
         "ListFailureModeFindingsRequest$serviceArn": null,
         "ListInputSourcesRequest$serviceArn": null,
+        "ListPolicyEventsRequest$policyArn": null,
         "ListReportsRequest$serviceArn": "<p>Optional. If not provided, lists all reports owned by the account.</p>",
         "ListResolvedTestRunTargetResourcesRequest$serviceArn": "<p>The ARN of the service the test run belongs to.</p>",
         "ListResourcesRequest$serviceArn": null,
@@ -178,7 +207,9 @@
         "ListServicesRequest$policyArn": null,
         "ListSystemEventsRequest$systemArn": null,
         "ListTagsForResourceRequest$resourceArn": null,
+        "ListTestRunDependenciesRequest$serviceArn": "<p>The ARN of the service the test run belongs to.</p>",
         "ListTestRunEventsRequest$serviceArn": "<p>The ARN of the service the test run belongs to.</p>",
+        "ListTestRunSourceEventsRequest$serviceArn": "<p>The ARN of the service the test run belongs to.</p>",
         "ListTestRunSourcesRequest$serviceArn": "<p>The ARN of the service the test run belongs to.</p>",
         "ListTestRunsRequest$serviceArn": "<p>The ARN of the service to list test runs for.</p>",
         "ListTestSourcesRequest$serviceArn": "<p>The ARN of the service the test belongs to.</p>",
@@ -186,6 +217,9 @@
         "ListUserJourneysRequest$systemArn": null,
         "LoggingConfiguration$cloudWatchLogGroupArn": "<p>The ARN of the CloudWatch Logs log group for log delivery.</p>",
         "Policy$policyArn": null,
+        "PolicyAttachedToServiceMetadata$serviceArn": null,
+        "PolicyDetachedFromServiceMetadata$serviceArn": null,
+        "PolicyEvent$policyArn": null,
         "PolicySummary$policyArn": null,
         "PutTestSourcesRequest$serviceArn": "<p>The ARN of the service the test belongs to.</p>",
         "ReportGenerationResult$serviceArn": "<p>The service this report was generated for.</p>",
@@ -200,6 +234,7 @@
         "ServiceSummary$policyArn": null,
         "ServiceSystemAssociatedMetadata$systemArn": null,
         "ServiceSystemDisassociatedMetadata$systemArn": null,
+        "StartDependencyInsightsRequest$serviceArn": null,
         "StartFailureModeAssessmentRequest$serviceArn": null,
         "StartFailureModeAssessmentResponse$serviceArn": null,
         "StartTestRunRequest$serviceArn": "<p>The ARN of the service the test belongs to.</p>",
@@ -398,12 +433,16 @@
     "Boolean": {
       "base": null,
       "refs": {
+        "CreatePolicyRequest$sharingEnabled": "<p>Specifies whether cross-account sharing is enabled for the policy. Only a delegated administrator or the management account can enable sharing.</p>",
         "CreateSystemRequest$sharingEnabled": "<p>Indicates whether cross-account sharing is enabled for the system.</p>",
         "ImportAppRequest$skipManuallyAddedResources": "<p>Whether to skip manually added resources during import.</p>",
         "ListResourcesRequest$billable": "<p>Specifies whether to filter non-billable resources. When true (the default), the operation returns only billable resources.</p>",
+        "Policy$sharingEnabled": "<p>Specifies whether cross-account sharing is enabled.</p>",
+        "PolicySummary$sharingEnabled": "<p>Specifies whether cross-account sharing is enabled.</p>",
         "Service$rerunAssessment": "<p>Indicates whether the assessment should be rerun.</p>",
         "System$sharingEnabled": "<p>Indicates whether cross-account sharing is enabled.</p>",
         "TestTemplateParameter$required": "<p>Indicates whether the parameter is required.</p>",
+        "UpdatePolicyRequest$sharingEnabled": "<p>Specifies whether cross-account sharing is enabled for the policy. Disabling sharing stops member services from using the policy.</p>",
         "UpdateSystemRequest$sharingEnabled": "<p>Whether cross-account sharing is enabled for the system.</p>"
       }
     },
@@ -420,6 +459,7 @@
         "CreateUserJourneyRequest$clientToken": null,
         "ImportAppRequest$clientToken": null,
         "ImportPolicyRequest$clientToken": null,
+        "StartDependencyInsightsRequest$clientToken": null,
         "StartFailureModeAssessmentRequest$clientToken": null
       }
     },
@@ -639,9 +679,10 @@
       "refs": {}
     },
     "DependencyCriticality": {
-      "base": null,
+      "base": "<p>The criticality classification of a dependency.</p>",
       "refs": {
         "DependencySummary$criticality": "<p>The criticality level of the dependency.</p>",
+        "TestRunDependencySummary$criticality": "<p>The criticality classification of the dependency when the run started. A dependency that was not discovered has the UNKNOWN criticality.</p>",
         "UpdateDependencyRequest$criticality": "<p>The updated criticality level of the dependency.</p>",
         "UpdateDependencyResponse$criticality": "<p>The criticality level of the dependency.</p>"
       }
@@ -676,6 +717,37 @@
       "base": null,
       "refs": {
         "DependencyDiscoveryConfig$status": "<p>The current status of dependency discovery.</p>"
+      }
+    },
+    "DependencyInsight": {
+      "base": "<p>Contains a single insight about a service's dependencies.</p>",
+      "refs": {
+        "DependencyInsightsList$member": null
+      }
+    },
+    "DependencyInsightDescriptionString": {
+      "base": null,
+      "refs": {
+        "DependencyInsight$description": "<p>A human-readable explanation of the insight, describing the dependency behavior or condition that was detected.</p>"
+      }
+    },
+    "DependencyInsightsErrorCode": {
+      "base": null,
+      "refs": {
+        "GetDependencyInsightsResponse$errorCode": "<p>The error code returned when insights generation failed. Valid values:</p> <ul> <li> <p>INSUFFICIENT_DATA - There was not enough dependency data to generate insights.</p> </li> <li> <p>LLM_GENERATION_FAILED - The insights could not be generated.</p> </li> <li> <p>INTERNAL_ERROR - An internal error occurred while generating insights.</p> </li> </ul>"
+      }
+    },
+    "DependencyInsightsList": {
+      "base": null,
+      "refs": {
+        "GetDependencyInsightsResponse$insights": "<p>The list of dependency insights generated for the service. This field is not returned until the status is COMPLETED.</p>"
+      }
+    },
+    "DependencyInsightsStatus": {
+      "base": null,
+      "refs": {
+        "GetDependencyInsightsResponse$status": "<p>The status of the dependency insights generation. Valid values:</p> <ul> <li> <p>IN_PROGRESS - Insights generation is in progress.</p> </li> <li> <p>COMPLETED - Insights generation completed successfully.</p> </li> <li> <p>FAILED - Insights generation failed. See errorCode and errorMessage for details.</p> </li> </ul>",
+        "StartDependencyInsightsResponse$status": "<p>The status of the dependency insights generation. Valid values:</p> <ul> <li> <p>IN_PROGRESS - Insights generation is in progress.</p> </li> <li> <p>COMPLETED - Insights generation completed successfully.</p> </li> <li> <p>FAILED - Insights generation failed. Call GetDependencyInsights for the error code and message.</p> </li> </ul>"
       }
     },
     "DependencySummary": {
@@ -720,6 +792,56 @@
       "base": "<p>Contains the effective resilience policy values for a service.</p>",
       "refs": {
         "Service$effectivePolicyValues": "<p>The effective policy values for the service.</p>"
+      }
+    },
+    "EksLabelKey": {
+      "base": "<p>A Kubernetes label key. It can include an optional DNS subdomain prefix.</p>",
+      "refs": {
+        "EksLabelSelectorMatchLabelsMap$key": null,
+        "EksLabelSelectorRequirement$key": "<p>The label key that the requirement applies to.</p>"
+      }
+    },
+    "EksLabelSelector": {
+      "base": "<p>A label selector that filters the Kubernetes objects discovered from an Amazon EKS input source. An object must satisfy both matchLabels and matchExpressions to match the selector. A selector with neither matches every object. The selector must render to 2,048 characters or fewer in Kubernetes label selector syntax.</p>",
+      "refs": {
+        "EksSource$labelSelector": "<p>Filters discovery to the Kubernetes objects whose labels match the selector. When omitted, all supported objects in the specified namespaces are discovered.</p>"
+      }
+    },
+    "EksLabelSelectorMatchExpressionsList": {
+      "base": null,
+      "refs": {
+        "EksLabelSelector$matchExpressions": "<p>The label requirements that an object must satisfy. All requirements in the list must match for the object to be selected.</p>"
+      }
+    },
+    "EksLabelSelectorMatchLabelsMap": {
+      "base": "<p>Specifies Kubernetes labels as a map of label keys to values.</p>",
+      "refs": {
+        "EksLabelSelector$matchLabels": "<p>The label key-value pairs that an object must have. All pairs must match for the object to be selected.</p>"
+      }
+    },
+    "EksLabelSelectorOperator": {
+      "base": "<p>The operator that a label selector requirement applies to its key and values.</p> <ul> <li> <p>IN — the key's value must be one of the specified values.</p> </li> <li> <p>NOT_IN — the key's value must not be one of the specified values.</p> </li> <li> <p>EXISTS — the key must be present, regardless of its value.</p> </li> <li> <p>DOES_NOT_EXIST — the key must not be present.</p> </li> </ul>",
+      "refs": {
+        "EksLabelSelectorRequirement$operator": "<p>The operator that relates the label key to the values.</p>"
+      }
+    },
+    "EksLabelSelectorRequirement": {
+      "base": "<p>A single label requirement in a label selector, expressed as a key, an operator, and an optional list of values.</p>",
+      "refs": {
+        "EksLabelSelectorMatchExpressionsList$member": null
+      }
+    },
+    "EksLabelSelectorRequirementValuesList": {
+      "base": null,
+      "refs": {
+        "EksLabelSelectorRequirement$values": "<p>The label values to compare against. Specify values when the operator is IN or NOT_IN. Leave this empty when the operator is EXISTS or DOES_NOT_EXIST.</p>"
+      }
+    },
+    "EksLabelValue": {
+      "base": "<p>A Kubernetes label value. This value can be empty.</p>",
+      "refs": {
+        "EksLabelSelectorMatchLabelsMap$value": null,
+        "EksLabelSelectorRequirementValuesList$member": null
       }
     },
     "EksNamespace": {
@@ -793,7 +915,6 @@
         "CreatePolicyRequest$name": null,
         "CreateServiceRequest$name": null,
         "CreateSystemRequest$name": null,
-        "CreateTestRequest$roleName": "<p>The name of the IAM execution role to use when running the test.</p>",
         "DisasterRecoverySource$policyName": null,
         "Policy$name": null,
         "PolicySummary$name": null,
@@ -803,15 +924,13 @@
         "System$name": null,
         "SystemSummary$name": null,
         "TargetSource$policyName": null,
-        "Test$roleName": "<p>The name of the IAM execution role used to run the test.</p>",
-        "TestRun$roleName": "<p>The IAM execution role name snapshotted from the test when the run was started.</p>",
-        "TestRunPolicySnapshot$name": "<p>The name of the policy.</p>",
-        "UpdateTestRequest$roleName": "<p>The updated IAM execution role name.</p>"
+        "TestRunPolicySnapshot$name": "<p>The name of the policy.</p>"
       }
     },
     "EventActor": {
       "base": "<p>Identifies the actor that triggered an event.</p>",
       "refs": {
+        "PolicyEvent$actor": null,
         "ServiceEvent$actor": "<p>The actor that triggered the event.</p>",
         "SystemEvent$actor": "<p>The actor that triggered the event.</p>"
       }
@@ -896,6 +1015,26 @@
         "Finding$serviceFunctions": "<p>The service functions associated with the finding.</p>"
       }
     },
+    "GetDependencyInsightsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "GetDependencyInsightsResponse": {
+      "base": null,
+      "refs": {}
+    },
+    "GetDependencyInsightsResponseErrorMessageString": {
+      "base": null,
+      "refs": {
+        "GetDependencyInsightsResponse$errorMessage": "<p>A message describing why insights generation failed.</p>"
+      }
+    },
+    "GetDependencyInsightsResponseOverviewString": {
+      "base": null,
+      "refs": {
+        "GetDependencyInsightsResponse$overview": "<p>A summary of the dependency insights for the service. This field is not returned until the status is COMPLETED.</p>"
+      }
+    },
     "GetFailureModeFindingRequest": {
       "base": null,
       "refs": {}
@@ -969,7 +1108,11 @@
     "IamRoleName": {
       "base": "<p>IAM role name (supports up to 64 characters per IAM limits).</p>",
       "refs": {
-        "PermissionModel$invokerRoleName": null
+        "CreateTestRequest$roleName": "<p>The name of the IAM execution role to use when running the test.</p>",
+        "PermissionModel$invokerRoleName": null,
+        "Test$roleName": "<p>The name of the IAM execution role used to run the test.</p>",
+        "TestRun$roleName": "<p>The IAM execution role name snapshotted from the test when the run was started.</p>",
+        "UpdateTestRequest$roleName": "<p>The updated IAM execution role name.</p>"
       }
     },
     "ImportAppRequest": {
@@ -1035,12 +1178,20 @@
         "ListInputSourcesRequest$type": "<p>Filter input sources by type.</p>"
       }
     },
+    "InsightsCategory": {
+      "base": null,
+      "refs": {
+        "DependencyInsight$category": "<p>The category of the insight. Valid values:</p> <ul> <li> <p>CROSS_REGION - The insight relates to dependencies used across multiple Regions.</p> </li> <li> <p>NEW_DEPENDENCY - The insight relates to a recently detected dependency.</p> </li> <li> <p>THIRD_PARTY - The insight relates to a third-party dependency.</p> </li> <li> <p>UNEVEN_USAGE - The insight relates to a dependency with uneven usage across the service.</p> </li> <li> <p>AWS_SERVICE - The insight relates to a dependency on an Amazon Web Services service.</p> </li> </ul>"
+      }
+    },
     "Integer": {
       "base": null,
       "refs": {
         "AssessmentSummary$totalFindings": "<p>The total number of findings generated by the assessment.</p>",
         "AssessmentSummary$billableAssessmentUnitCount": "<p>The number of billable assessment units consumed by the assessment.</p>",
         "Policy$associatedServiceCount": "<p>The number of services associated with this policy.</p>",
+        "PolicyDeletedMetadata$affectedServiceCount": "<p>The number of services that were using the policy when it was deleted.</p>",
+        "PolicySharingRevokedMetadata$affectedServiceCount": "<p>The number of services that were using the policy when sharing was revoked.</p>",
         "PolicySummary$associatedServiceCount": "<p>The number of services associated with this policy.</p>",
         "Service$openFindingsCount": "<p>The number of open findings for the service.</p>",
         "Service$resolvedFindingsCount": "<p>The number of resolved findings for the service.</p>",
@@ -1126,6 +1277,14 @@
       "base": null,
       "refs": {}
     },
+    "ListPolicyEventsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListPolicyEventsResponse": {
+      "base": null,
+      "refs": {}
+    },
     "ListReportsRequest": {
       "base": null,
       "refs": {}
@@ -1206,11 +1365,27 @@
       "base": null,
       "refs": {}
     },
+    "ListTestRunDependenciesRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListTestRunDependenciesResponse": {
+      "base": null,
+      "refs": {}
+    },
     "ListTestRunEventsRequest": {
       "base": null,
       "refs": {}
     },
     "ListTestRunEventsResponse": {
+      "base": null,
+      "refs": {}
+    },
+    "ListTestRunSourceEventsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListTestRunSourceEventsResponse": {
       "base": null,
       "refs": {}
     },
@@ -1297,6 +1472,7 @@
         "ListFailureModeFindingsRequest$maxResults": null,
         "ListInputSourcesRequest$maxResults": null,
         "ListPoliciesRequest$maxResults": null,
+        "ListPolicyEventsRequest$maxResults": null,
         "ListReportsRequest$maxResults": null,
         "ListResolvedTestRunTargetResourcesRequest$maxResults": null,
         "ListResourcesRequest$maxResults": null,
@@ -1306,7 +1482,9 @@
         "ListServicesRequest$maxResults": null,
         "ListSystemEventsRequest$maxResults": null,
         "ListSystemsRequest$maxResults": null,
+        "ListTestRunDependenciesRequest$maxResults": null,
         "ListTestRunEventsRequest$maxResults": null,
+        "ListTestRunSourceEventsRequest$maxResults": null,
         "ListTestRunSourcesRequest$maxResults": null,
         "ListTestRunsRequest$maxResults": null,
         "ListTestSourcesRequest$maxResults": null,
@@ -1387,6 +1565,8 @@
         "ListInputSourcesResponse$nextToken": null,
         "ListPoliciesRequest$nextToken": null,
         "ListPoliciesResponse$nextToken": null,
+        "ListPolicyEventsRequest$nextToken": null,
+        "ListPolicyEventsResponse$nextToken": null,
         "ListReportsRequest$nextToken": null,
         "ListReportsResponse$nextToken": null,
         "ListResolvedTestRunTargetResourcesRequest$nextToken": null,
@@ -1405,8 +1585,12 @@
         "ListSystemEventsResponse$nextToken": null,
         "ListSystemsRequest$nextToken": null,
         "ListSystemsResponse$nextToken": null,
+        "ListTestRunDependenciesRequest$nextToken": null,
+        "ListTestRunDependenciesResponse$nextToken": null,
         "ListTestRunEventsRequest$nextToken": null,
         "ListTestRunEventsResponse$nextToken": null,
+        "ListTestRunSourceEventsRequest$nextToken": null,
+        "ListTestRunSourceEventsResponse$nextToken": null,
         "ListTestRunSourcesRequest$nextToken": null,
         "ListTestRunSourcesResponse$nextToken": null,
         "ListTestRunsRequest$nextToken": null,
@@ -1446,6 +1630,8 @@
     "OrganizationId": {
       "base": null,
       "refs": {
+        "Policy$organizationId": "<p>The identifier of the organization this policy is shared with.</p>",
+        "PolicySummary$organizationId": "<p>The identifier of the organization this policy is shared with.</p>",
         "Service$organizationId": "<p>The AWS Organizations identifier for the service.</p>",
         "ServiceSummary$organizationId": "<p>Displayed only if caller has access.</p>",
         "System$organizationId": "<p>The AWS Organizations identifier for the system.</p>",
@@ -1499,11 +1685,78 @@
         "UpdatePolicyResponse$policy": "<p>The updated policy.</p>"
       }
     },
+    "PolicyAttachedToServiceMetadata": {
+      "base": "<p>Contains details about the service that started using the policy, such as the account that owns the service.</p>",
+      "refs": {
+        "PolicyEventMetadata$policyAttachedToService": "<p>Contains details about the service that started using the policy, such as the account that owns the service.</p>"
+      }
+    },
     "PolicyComponent": {
       "base": null,
       "refs": {
         "Finding$policyComponent": "<p>The policy component associated with the finding.</p>",
         "FindingSummary$policyComponent": "<p>The policy component associated with the finding.</p>"
+      }
+    },
+    "PolicyDeletedMetadata": {
+      "base": "<p>Contains details about a policy that was deleted, including the number of services that were affected.</p>",
+      "refs": {
+        "PolicyEventMetadata$policyDeleted": "<p>Contains details about a policy that was deleted, including the number of services that were affected.</p>"
+      }
+    },
+    "PolicyDetachedFromServiceMetadata": {
+      "base": "<p>Contains details about the service that stopped using the policy, such as the account that owns the service.</p>",
+      "refs": {
+        "PolicyEventMetadata$policyDetachedFromService": "<p>Contains details about the service that stopped using the policy, such as the account that owns the service.</p>"
+      }
+    },
+    "PolicyDisassociationReason": {
+      "base": null,
+      "refs": {
+        "ServicePolicyDisassociatedMetadata$reason": "<p>The reason the policy was disassociated from the service.</p>"
+      }
+    },
+    "PolicyEvent": {
+      "base": "<p>An event on the timeline of a resilience policy.</p>",
+      "refs": {
+        "PolicyEventList$member": null
+      }
+    },
+    "PolicyEventDetails": {
+      "base": "<p>Contains the title, description, and event-specific metadata for a single event on the timeline of a resilience policy.</p>",
+      "refs": {
+        "PolicyEvent$eventDetails": "<p>The details of the event.</p>"
+      }
+    },
+    "PolicyEventList": {
+      "base": null,
+      "refs": {
+        "ListPolicyEventsResponse$events": "<p>The list of policy events.</p>"
+      }
+    },
+    "PolicyEventMetadata": {
+      "base": "<p>Contains the event-specific metadata for a policy event. Exactly one member is populated, according to the event type.</p> <ul> <li> <p>policyAttachedToService — a service started using the policy.</p> </li> <li> <p>policyDetachedFromService — a service stopped using the policy.</p> </li> <li> <p>policySharingRevoked — cross-account sharing was disabled for the policy.</p> </li> <li> <p>policyDeleted — the policy was deleted.</p> </li> </ul>",
+      "refs": {
+        "PolicyEventDetails$eventMetadata": "<p>The event-specific metadata, with one member populated according to the event type.</p>"
+      }
+    },
+    "PolicyEventType": {
+      "base": null,
+      "refs": {
+        "PolicyEvent$eventType": "<p>The type of the event.</p>",
+        "PolicyEventTypeList$member": null
+      }
+    },
+    "PolicyEventTypeList": {
+      "base": null,
+      "refs": {
+        "ListPolicyEventsRequest$eventTypes": "<p>The type of events to include in the results.</p>"
+      }
+    },
+    "PolicySharingRevokedMetadata": {
+      "base": "<p>Contains details about a policy for which organization sharing was revoked, including the number of services that were affected.</p>",
+      "refs": {
+        "PolicyEventMetadata$policySharingRevoked": "<p>Contains details about a policy for which organization sharing was revoked, including the number of services that were affected.</p>"
       }
     },
     "PolicySummary": {
@@ -1522,6 +1775,8 @@
       "base": null,
       "refs": {
         "DisasterRecoverySource$source": "<p>Indicates whether the value comes from the service's own account or a cross-account policy.</p>",
+        "ServicePolicyAssociatedMetadata$policySource": "<p>The source of the policy.</p> <ul> <li> <p>SELF — the policy belongs to the account that owns the service.</p> </li> <li> <p>CROSS_ACCOUNT — the policy belongs to another account and was shared with the organization.</p> </li> </ul>",
+        "ServicePolicyDisassociatedMetadata$policySource": "<p>The source of the policy.</p> <ul> <li> <p>SELF — the policy belongs to the account that owns the service.</p> </li> <li> <p>CROSS_ACCOUNT — the policy belongs to another account and was shared with the organization.</p> </li> </ul>",
         "SloSource$source": "<p>Indicates whether the value comes from the service's own account or a cross-account policy.</p>",
         "TargetSource$source": "<p>Indicates whether the value comes from the service's own account or a cross-account policy.</p>"
       }
@@ -1567,6 +1822,7 @@
         "Service$regions": "<p>The Regions where the service operates.</p>",
         "ServiceSummary$regions": "<p>The Regions where the service operates.</p>",
         "TestRun$regions": "<p>The Regions snapshotted from the service when the run was started.</p>",
+        "TestRunDependencySummary$sourceRegions": "<p>The source Regions from which the dependency was detected.</p>",
         "UpdateServiceRequest$regions": "<p>The updated AWS Regions where the service operates.</p>"
       }
     },
@@ -1840,7 +2096,7 @@
     "ServiceEventTypeList": {
       "base": null,
       "refs": {
-        "ListServiceEventsRequest$eventTypes": "<p>Filter events by type.</p>"
+        "ListServiceEventsRequest$eventTypes": "<p>The type of events to include in the results.</p>"
       }
     },
     "ServiceFunction": {
@@ -2044,6 +2300,14 @@
         "ListFailureModeAssessmentsRequest$sortOrder": "<p>The sort order for results.</p>"
       }
     },
+    "StartDependencyInsightsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "StartDependencyInsightsResponse": {
+      "base": null,
+      "refs": {}
+    },
     "StartFailureModeAssessmentRequest": {
       "base": null,
       "refs": {}
@@ -2123,6 +2387,8 @@
         "ObservabilityAlarmSummary$alarmName": "<p>The name of the CloudWatch alarm.</p>",
         "ObservabilityAlarmSummary$region": "<p>The Region of the CloudWatch alarm.</p>",
         "ObservabilityAlarmSummary$accountId": "<p>The account ID that owns the CloudWatch alarm.</p>",
+        "PolicyEventDetails$title": "<p>A short summary of the event.</p>",
+        "PolicyEventDetails$description": "<p>A description of the event.</p>",
         "Resource$identifier": "<p>The identifier of the resource.</p>",
         "Resource$resourceType": "<p>The type of the resource.</p>",
         "ResourceDiscoveryStatus$errorMessage": "<p>A message describing the error if resource discovery failed.</p>",
@@ -2149,7 +2415,9 @@
         "ServiceFunctionUpdatedMetadata$serviceFunctionId": "<p>The identifier of the service function.</p>",
         "ServiceFunctionUpdatedMetadata$serviceFunctionName": "<p>The name of the service function.</p>",
         "ServicePolicyAssociatedMetadata$policyName": "<p>The name of the associated policy.</p>",
+        "ServicePolicyAssociatedMetadata$policyOwnerAccountId": "<p>The account that owns the policy.</p>",
         "ServicePolicyDisassociatedMetadata$policyName": "<p>The name of the disassociated policy.</p>",
+        "ServicePolicyDisassociatedMetadata$policyOwnerAccountId": "<p>The account that owns the policy.</p>",
         "ServiceQuotaExceededException$message": null,
         "ServiceReference$serviceId": "<p>The identifier of the referenced service.</p>",
         "ServiceReference$serviceName": "<p>The name of the referenced service.</p>",
@@ -2295,7 +2563,7 @@
     "SystemEventTypeList": {
       "base": null,
       "refs": {
-        "ListSystemEventsRequest$eventTypes": "<p>Filter events by type.</p>"
+        "ListSystemEventsRequest$eventTypes": "<p>The type of events to include in the results.</p>"
       }
     },
     "SystemId": {
@@ -2466,6 +2734,48 @@
         "GetTestRunResponse$testRun": "<p>The requested test run.</p>"
       }
     },
+    "TestRunDependencySource": {
+      "base": "<p>The origin of a blocked dependency.</p>",
+      "refs": {
+        "TestRunDependencySummary$source": "<p>The origin of the dependency. A discovered dependency was found by dependency discovery; a manual dependency was entered when the run started.</p>"
+      }
+    },
+    "TestRunDependencySummary": {
+      "base": "<p>Contains summary information about a dependency that a test run blocked, as captured when the run started.</p>",
+      "refs": {
+        "TestRunDependencySummaryList$member": null
+      }
+    },
+    "TestRunDependencySummaryDependencyNameString": {
+      "base": null,
+      "refs": {
+        "TestRunDependencySummary$dependencyName": "<p>The name of the dependency.</p>"
+      }
+    },
+    "TestRunDependencySummaryDnsNameString": {
+      "base": null,
+      "refs": {
+        "TestRunDependencySummary$dnsName": "<p>The DNS name of the dependency that the test run blocked.</p>"
+      }
+    },
+    "TestRunDependencySummaryList": {
+      "base": null,
+      "refs": {
+        "ListTestRunDependenciesResponse$dependencies": "<p>The list of dependencies the test run blocked.</p>"
+      }
+    },
+    "TestRunDependencySummaryLocationString": {
+      "base": null,
+      "refs": {
+        "TestRunDependencySummary$location": "<p>The location of the dependency.</p>"
+      }
+    },
+    "TestRunDependencySummaryProviderString": {
+      "base": null,
+      "refs": {
+        "TestRunDependencySummary$provider": "<p>The provider of the dependency.</p>"
+      }
+    },
     "TestRunEvent": {
       "base": "<p>A single event in a test run's timeline.</p>",
       "refs": {
@@ -2520,7 +2830,9 @@
         "GetTestRunRequest$testRunId": "<p>The identifier of the test run to retrieve.</p>",
         "ListReportsRequest$testRunId": null,
         "ListResolvedTestRunTargetResourcesRequest$testRunId": "<p>The identifier of the test run to list resolved target resources for.</p>",
+        "ListTestRunDependenciesRequest$testRunId": "<p>The identifier of the test run to list dependencies for.</p>",
         "ListTestRunEventsRequest$testRunId": "<p>The identifier of the test run to list events for.</p>",
+        "ListTestRunSourceEventsRequest$testRunId": "<p>The identifier of the test run to list source events for.</p>",
         "ListTestRunSourcesRequest$testRunId": "<p>The identifier of the test run to list sources for.</p>",
         "ReportGenerationResult$testRunId": null,
         "StartTestRunResponse$testRunId": "<p>The identifier of the started test run.</p>",
@@ -2546,6 +2858,55 @@
       "base": "<p>A snapshot of the report configuration captured onto a test run from the service when the run was started.</p>",
       "refs": {
         "TestRun$reportConfiguration": "<p>The report configuration snapshotted from the service when the run was started.</p>"
+      }
+    },
+    "TestRunSourceArn": {
+      "base": "<p>The ARN of a test run monitoring source, such as a CloudWatch alarm.</p>",
+      "refs": {
+        "ListTestRunSourceEventsRequest$sourceArn": "<p>The ARN of the monitoring source to list events for, such as the ARN of a CloudWatch alarm. If the source was not monitored during the test run, the response is an empty list.</p>",
+        "TestRunSourceEvent$sourceArn": "<p>The ARN of the monitoring source the event belongs to.</p>"
+      }
+    },
+    "TestRunSourceEvent": {
+      "base": "<p>A state-change event observed for a test run monitoring source.</p>",
+      "refs": {
+        "TestRunSourceEventList$member": null
+      }
+    },
+    "TestRunSourceEventDetail": {
+      "base": "<p>The payload of a test run source event. Exactly one member is set.</p>",
+      "refs": {
+        "TestRunSourceEvent$detail": "<p>The event payload.</p>"
+      }
+    },
+    "TestRunSourceEventError": {
+      "base": "<p>Describes an error that prevented event collection from a test run monitoring source.</p>",
+      "refs": {
+        "TestRunSourceEventDetail$error": "<p>An error that prevented event collection from the source.</p>"
+      }
+    },
+    "TestRunSourceEventErrorCode": {
+      "base": "<p>The cause of a source event collection error.</p>",
+      "refs": {
+        "TestRunSourceEventError$errorCode": "<p>The error code.</p>"
+      }
+    },
+    "TestRunSourceEventErrorErrorMessageString": {
+      "base": null,
+      "refs": {
+        "TestRunSourceEventError$errorMessage": "<p>A human-readable description of the error.</p>"
+      }
+    },
+    "TestRunSourceEventList": {
+      "base": null,
+      "refs": {
+        "ListTestRunSourceEventsResponse$testRunSourceEvents": "<p>The list of source events, in chronological order.</p>"
+      }
+    },
+    "TestRunSourceEventType": {
+      "base": "<p>The type of a test run source event. ALARM indicates an event produced from a CloudWatch alarm source.</p>",
+      "refs": {
+        "TestRunSourceEvent$eventType": "<p>The type of the event. ALARM indicates an event from a CloudWatch alarm source; the detail member carries either the alarm state change or a collection error.</p>"
       }
     },
     "TestRunSourceSummary": {
@@ -2699,11 +3060,14 @@
         "DependencySummary$lastDetectedTime": "<p>The timestamp when the dependency was last detected.</p>",
         "Finding$updatedAt": "<p>The timestamp when the finding was last updated.</p>",
         "FindingSummary$updatedAt": "<p>The timestamp when the finding was last updated.</p>",
+        "GetDependencyInsightsResponse$createdAt": "<p>The timestamp when the dependency insights were generated.</p>",
         "InputSourceSummary$createdAt": "<p>The timestamp when the input source was created.</p>",
         "ListDependenciesRequest$queryRangeStartTime": "<p>The start time for the dependency query range.</p>",
         "ListDependenciesRequest$queryRangeEndTime": "<p>The end time for the dependency query range.</p>",
         "ListFailureModeAssessmentsRequest$startedAfter": "<p>Specifies that only assessments that started at or after this timestamp appear in the results.</p>",
         "ListFailureModeAssessmentsRequest$endedBefore": "<p>Specifies that only assessments that ended at or before this timestamp appear in the results.</p>",
+        "ListPolicyEventsRequest$startTime": "<p>The start time for filtering events.</p>",
+        "ListPolicyEventsRequest$endTime": "<p>The end time for filtering events.</p>",
         "ListServiceEventsRequest$startTime": "<p>The start time for filtering events.</p>",
         "ListServiceEventsRequest$endTime": "<p>The end time for filtering events.</p>",
         "ListSystemEventsRequest$startTime": "<p>The start time for filtering events.</p>",
@@ -2713,6 +3077,7 @@
         "ObservabilityAlarmSummary$createdAt": "<p>The timestamp when the source was configured.</p>",
         "Policy$createdAt": "<p>The timestamp when the policy was created.</p>",
         "Policy$updatedAt": "<p>The timestamp when the policy was last updated.</p>",
+        "PolicyEvent$timestamp": "<p>The time the event occurred.</p>",
         "PolicySummary$createdAt": "<p>The timestamp when the policy was created.</p>",
         "PolicySummary$updatedAt": "<p>The timestamp when the policy was last updated.</p>",
         "QueryDataPoint$timestamp": "<p>The timestamp of the data point.</p>",
@@ -2738,6 +3103,7 @@
         "TestRun$startedAt": "<p>The timestamp when the test run started.</p>",
         "TestRun$endedAt": "<p>The timestamp when the test run ended.</p>",
         "TestRunEvent$timestamp": "<p>The timestamp when the event occurred.</p>",
+        "TestRunSourceEvent$timestamp": "<p>The timestamp when the event occurred.</p>",
         "TestRunSummary$startedAt": "<p>The timestamp when the test run started.</p>",
         "TestRunSummary$endedAt": "<p>The timestamp when the test run ended.</p>",
         "TestSummary$creationTime": "<p>The timestamp when the test was created.</p>",
@@ -2903,10 +3269,12 @@
         "Finding$findingId": "<p>The unique identifier of the finding.</p>",
         "FindingSummary$findingId": "<p>The unique identifier of the finding.</p>",
         "GetFailureModeFindingRequest$findingId": "<p>The unique identifier of the finding to retrieve.</p>",
+        "PolicyEvent$eventId": "<p>The identifier of the event.</p>",
         "ReportGenerationResult$assessmentId": "<p>Present for FAILURE_MODE reports.</p>",
         "ServiceEvent$eventId": "<p>The unique identifier of the event.</p>",
         "StartFailureModeAssessmentResponse$assessmentId": "<p>The unique identifier of the started assessment.</p>",
         "SystemEvent$eventId": "<p>The unique identifier of the event.</p>",
+        "TestRunDependencySummary$dependencyId": "<p>The unique identifier of the dependency. Absent when the dependency was entered manually and was not part of dependency discovery.</p>",
         "UpdateAssertionRequest$assertionId": "<p>The unique identifier of the assertion to update.</p>",
         "UpdateDependencyRequest$dependencyId": "<p>The identifier of the dependency to update.</p>",
         "UpdateDependencyResponse$dependencyId": "<p>The identifier of the updated dependency.</p>",

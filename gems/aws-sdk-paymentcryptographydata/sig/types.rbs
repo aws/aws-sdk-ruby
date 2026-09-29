@@ -656,11 +656,14 @@ module Aws::PaymentCryptographyData
 
     class ReEncryptionAttributes
       attr_accessor symmetric: Types::SymmetricEncryptionAttributes
+      attr_accessor asymmetric: Types::AsymmetricEncryptionAttributes
       attr_accessor dukpt: Types::DukptEncryptionAttributes
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Symmetric < ReEncryptionAttributes
+      end
+      class Asymmetric < ReEncryptionAttributes
       end
       class Dukpt < ReEncryptionAttributes
       end

@@ -237,6 +237,11 @@ module Aws::LambdaMicrovms
       SENSITIVE: []
     end
 
+    class InsufficientCapacityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       attr_accessor retry_after_seconds: ::Integer
@@ -368,6 +373,7 @@ module Aws::LambdaMicrovms
     class ManagedMicrovmImageVersion
       attr_accessor image_arn: ::String
       attr_accessor image_version: ::String
+      attr_accessor status: ("AVAILABLE" | "DEPRECATED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -509,7 +515,7 @@ module Aws::LambdaMicrovms
       attr_accessor run_hook_payload: ::String
       attr_accessor maximum_duration_in_seconds: ::Integer
       attr_accessor client_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:run_hook_payload]
     end
 
     class RunMicrovmResponse

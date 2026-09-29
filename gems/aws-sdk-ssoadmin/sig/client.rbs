@@ -431,11 +431,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstanceResponse]
         def instance_arn: () -> ::String
         def identity_store_id: () -> ::String
+        def identity_store_arn: () -> ::String
         def owner_account_id: () -> ::String
         def name: () -> ::String
         def created_date: () -> ::Time
         def status: () -> ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "ACTIVE")
         def status_reason: () -> ::String
+        def primary_region: () -> ::String
+        def regions: () -> ::Array[Types::RegionMetadata]
         def encryption_configuration_details: () -> Types::EncryptionConfigurationDetails
         def permission_sets_enabled: () -> bool
       end

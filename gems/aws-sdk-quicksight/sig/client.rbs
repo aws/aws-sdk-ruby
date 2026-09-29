@@ -1138,6 +1138,17 @@ module Aws
                            ) -> _DeleteAnalysisResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAnalysisResponseSuccess
 
+      interface _DeleteAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppResponse]
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_app-instance_method
+      def delete_app: (
+                        aws_account_id: ::String,
+                        app_id: ::String
+                      ) -> _DeleteAppResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppResponseSuccess
+
       interface _DeleteApprovalPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApprovalPolicyResponse]
       end
@@ -1773,6 +1784,32 @@ module Aws
                                            analysis_id: ::String
                                          ) -> _DescribeAnalysisPermissionsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAnalysisPermissionsResponseSuccess
+
+      interface _DescribeAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppResponse]
+        def app: () -> Types::AppSummary
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_app-instance_method
+      def describe_app: (
+                          aws_account_id: ::String,
+                          app_id: ::String
+                        ) -> _DescribeAppResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppResponseSuccess
+
+      interface _DescribeAppPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppPermissionsResponse]
+        def app_id: () -> ::String
+        def arn: () -> ::String
+        def permissions: () -> ::Array[Types::ResourcePermission]
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_app_permissions-instance_method
+      def describe_app_permissions: (
+                                      aws_account_id: ::String,
+                                      app_id: ::String
+                                    ) -> _DescribeAppPermissionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppPermissionsResponseSuccess
 
       interface _DescribeApprovalPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApprovalPolicyResponse]
@@ -2879,6 +2916,20 @@ module Aws
                                   ) -> _ListApprovalPoliciesResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApprovalPoliciesResponseSuccess
 
+      interface _ListAppsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppsResponse]
+        def app_summary_list: () -> ::Array[Types::AppSummary]
+        def next_token: () -> ::String
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_apps-instance_method
+      def list_apps: (
+                       aws_account_id: ::String,
+                       ?max_results: ::Integer,
+                       ?next_token: ::String
+                     ) -> _ListAppsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppsResponseSuccess
+
       interface _ListAssetBundleExportJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetBundleExportJobsResponse]
         def asset_bundle_export_job_summary_list: () -> ::Array[Types::AssetBundleExportJobSummary]
@@ -3690,6 +3741,27 @@ module Aws
                              ?max_results: ::Integer
                            ) -> _SearchAnalysesResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAnalysesResponseSuccess
+
+      interface _SearchAppsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchAppsResponse]
+        def app_summary_list: () -> ::Array[Types::AppSummary]
+        def next_token: () -> ::String
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#search_apps-instance_method
+      def search_apps: (
+                         aws_account_id: ::String,
+                         filters: Array[
+                           {
+                             name: ("APP_ID" | "APP_NAME" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"),
+                             operator: ("StringEquals" | "StringLike"),
+                             value: ::String
+                           }
+                         ],
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _SearchAppsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAppsResponseSuccess
 
       interface _SearchDashboardsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchDashboardsResponse]
@@ -4574,6 +4646,34 @@ module Aws
                                          ]
                                        ) -> _UpdateAnalysisPermissionsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAnalysisPermissionsResponseSuccess
+
+      interface _UpdateAppPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppPermissionsResponse]
+        def arn: () -> ::String
+        def app_id: () -> ::String
+        def permissions: () -> ::Array[Types::ResourcePermission]
+        def visibility: () -> ("PRIVATE" | "PUBLIC")
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_app_permissions-instance_method
+      def update_app_permissions: (
+                                    aws_account_id: ::String,
+                                    app_id: ::String,
+                                    ?grant_permissions: Array[
+                                      {
+                                        principal: ::String,
+                                        actions: Array[::String]
+                                      }
+                                    ],
+                                    ?revoke_permissions: Array[
+                                      {
+                                        principal: ::String,
+                                        actions: Array[::String]
+                                      }
+                                    ],
+                                    ?visibility: ("PRIVATE" | "PUBLIC")
+                                  ) -> _UpdateAppPermissionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppPermissionsResponseSuccess
 
       interface _UpdateApplicationWithTokenExchangeGrantResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationWithTokenExchangeGrantResponse]

@@ -463,7 +463,7 @@ module Aws
                                           origin_access_control_config: {
                                             name: ::String,
                                             description: ::String?,
-                                            signing_protocol: ("sigv4"),
+                                            signing_protocol: ("sigv4" | "sigv4a"),
                                             signing_behavior: ("never" | "always" | "no-override"),
                                             origin_access_control_origin_type: ("s3" | "mediastore" | "mediapackagev2" | "lambda")
                                           }
@@ -2064,7 +2064,7 @@ module Aws
                                           origin_access_control_config: {
                                             name: ::String,
                                             description: ::String?,
-                                            signing_protocol: ("sigv4"),
+                                            signing_protocol: ("sigv4" | "sigv4a"),
                                             signing_behavior: ("never" | "always" | "no-override"),
                                             origin_access_control_origin_type: ("s3" | "mediastore" | "mediapackagev2" | "lambda")
                                           },

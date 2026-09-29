@@ -125,6 +125,7 @@ module Aws::DeviceFarm
       attr_accessor billing_method: ("METERED" | "UNMETERED")
       attr_accessor vpce_configuration_arns: ::Array[::String]
       attr_accessor device_proxy: Types::DeviceProxy
+      attr_accessor parameters: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

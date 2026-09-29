@@ -2310,6 +2310,7 @@ module Aws::CloudWatchLogs
     QueryStatistics.add_member(:bytes_scanned, Shapes::ShapeRef.new(shape: StatsValue, location_name: "bytesScanned"))
     QueryStatistics.add_member(:estimated_bytes_skipped, Shapes::ShapeRef.new(shape: StatsValue, location_name: "estimatedBytesSkipped"))
     QueryStatistics.add_member(:log_groups_scanned, Shapes::ShapeRef.new(shape: StatsValue, location_name: "logGroupsScanned"))
+    QueryStatistics.add_member(:result_count, Shapes::ShapeRef.new(shape: StatsValue, location_name: "resultCount"))
     QueryStatistics.struct_class = Types::QueryStatistics
 
     RecordField.add_member(:name, Shapes::ShapeRef.new(shape: FieldHeader, location_name: "name"))

@@ -18,8 +18,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetEnvironment_ResourceNotFoundException",
-    "operationName" : "GetEnvironment",
+    "id" : "ListEnvironmentVlans_ResourceNotFoundException",
+    "operationName" : "ListEnvironmentVlans",
     "input" : {
       "environmentId" : "env-a1B2c3D4e5"
     },
@@ -35,8 +35,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListEnvironmentVlans_ResourceNotFoundException",
-    "operationName" : "ListEnvironmentVlans",
+    "id" : "GetEnvironment_ResourceNotFoundException",
+    "operationName" : "GetEnvironment",
     "input" : {
       "environmentId" : "env-a1B2c3D4e5"
     },

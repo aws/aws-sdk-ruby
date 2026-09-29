@@ -507,7 +507,7 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].name #=> String
     #   resp.registry_records[0].description #=> String
     #   resp.registry_records[0].display_name #=> String
-    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL"
+    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
     #   resp.registry_records[0].descriptors.mcp_server.data #=> String
     #   resp.registry_records[0].descriptors.mcp_server.data_schema_version #=> String
     #   resp.registry_records[0].descriptors.mcp_server.additional_data.tools.data #=> String
@@ -522,6 +522,8 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].descriptors.agent_skills_definition.additional_data.skill_md.data_schema_version #=> String
     #   resp.registry_records[0].descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.url #=> String
     #   resp.registry_records[0].descriptors.custom.data #=> String
+    #   resp.registry_records[0].descriptors.http.source.from_url.url #=> String
+    #   resp.registry_records[0].descriptors.agui.source.from_url.url #=> String
     #   resp.registry_records[0].record_version #=> String
     #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.registry_records[0].created_at #=> Time
@@ -545,7 +547,9 @@ module Aws::AgentRegistry
     # optionally filter and paginate the results.
     #
     # @option params [required, String] :registry_id
-    #   Registry identifier that accepts either ARN or ID format
+    #   The identifier of the registry whose discoverable records are listed.
+    #   You can provide either the full Amazon Resource Name (ARN) or the
+    #   registry ID.
     #
     # @option params [Integer] :max_results
     #   The maximum number of records to return in a single page. Valid values
@@ -588,11 +592,13 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].name #=> String
     #   resp.registry_records[0].description #=> String
     #   resp.registry_records[0].display_name #=> String
-    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL"
+    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
     #   resp.registry_records[0].record_version #=> String
     #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.registry_records[0].created_at #=> Time
     #   resp.registry_records[0].updated_at #=> Time
+    #   resp.registry_records[0].descriptor_types #=> Array
+    #   resp.registry_records[0].descriptor_types[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/ListDiscoverableRegistryRecords AWS API Documentation
@@ -625,6 +631,13 @@ module Aws::AgentRegistry
     #   results. Supports the field-level operators `$eq`, `$ne`, and `$in`,
     #   and the logical operators `$and` and `$or` on filterable fields.
     #
+    #   You can also filter on custom metadata fields using the
+    #   `customMetadata.{key}` prefix. For example, to filter by a custom
+    #   metadata field: `{"customMetadata.environment": {"$eq":
+    #   "production"}}`. Filter values must be strings, so match a boolean
+    #   field on its string form: `{"customMetadata.requiresApproval": {"$eq":
+    #   "true"}}`.
+    #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
     #   serialized using the same format as its surroundings and requires no
@@ -653,7 +666,7 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].name #=> String
     #   resp.registry_records[0].description #=> String
     #   resp.registry_records[0].display_name #=> String
-    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL"
+    #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
     #   resp.registry_records[0].descriptors.mcp_server.data #=> String
     #   resp.registry_records[0].descriptors.mcp_server.data_schema_version #=> String
     #   resp.registry_records[0].descriptors.mcp_server.additional_data.tools.data #=> String
@@ -668,6 +681,8 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].descriptors.agent_skills_definition.additional_data.skill_md.data_schema_version #=> String
     #   resp.registry_records[0].descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.url #=> String
     #   resp.registry_records[0].descriptors.custom.data #=> String
+    #   resp.registry_records[0].descriptors.http.source.from_url.url #=> String
+    #   resp.registry_records[0].descriptors.agui.source.from_url.url #=> String
     #   resp.registry_records[0].record_version #=> String
     #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
     #   resp.registry_records[0].created_at #=> Time
@@ -700,7 +715,7 @@ module Aws::AgentRegistry
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-agentregistry'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

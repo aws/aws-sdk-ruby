@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2026-09-24)
+------------------
+
+* Feature - This release adds Create, Get, Update, and DeleteResourceMetricsConfiguration to enable detailed metric collection for an AWS resource, and adds UpdateOTelEnrichment plus include and exclude filters on StartOTelEnrichment so you can choose which metric namespaces CloudWatch enriches.
+
+1.148.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.146.0 (2026-08-21)
+------------------
+
+* Feature - Allows customers to specify an initial warm up period to wait for metrics to arrive when creating metric or log alarms
+
 1.145.0 (2026-07-22)
 ------------------
 

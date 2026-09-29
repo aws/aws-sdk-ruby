@@ -10,6 +10,33 @@
 module Aws::Evs
   module Types
 
+    # A regional account-level EVS setting, represented as a name and value
+    # pair.
+    #
+    # @!attribute [rw] name
+    #   The name of the EVS setting. Valid values are:
+    #
+    #   * `vcfPortedCoreCount` (type: numeric string) - The total number of
+    #     VCF license cores ported to Amazon EVS for the account in that
+    #     Region. The maximum value is 1,000,000 cores. This setting value
+    #     is shared with Broadcom for record-keeping.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the EVS setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/AccountSetting AWS API Documentation
+    #
+    class AccountSetting < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   <note markdown="1"> This parameter is not used in Amazon EVS
     #   currently. If you supply
@@ -1168,6 +1195,30 @@ module Aws::Evs
       include Aws::Structure
     end
 
+    # The request for the GetAccountSettings operation.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/GetAccountSettingsRequest AWS API Documentation
+    #
+    class GetAccountSettingsRequest < Aws::EmptyStructure; end
+
+    # The response for the GetAccountSettings operation.
+    #
+    # @!attribute [rw] settings
+    #   A list of regional account-level EVS settings for the account. EVS
+    #   settings that have never been explicitly set are omitted from the
+    #   response.
+    #   @return [Array<Types::AccountSetting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/GetAccountSettingsResponse AWS API Documentation
+    #
+    class GetAccountSettingsResponse < Struct.new(
+      :settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] environment_id
     #   The unique ID of the Amazon EVS environment to get the depot URL
     #   for.
@@ -1848,6 +1899,36 @@ module Aws::Evs
     #
     class NetworkInterface < Struct.new(
       :network_interface_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request for the PutAccountSettings operation.
+    #
+    # @!attribute [rw] settings
+    #   A list of regional account-level EVS settings to create or update.
+    #   Only the settings included in this list are modified.
+    #   @return [Array<Types::AccountSetting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/PutAccountSettingsRequest AWS API Documentation
+    #
+    class PutAccountSettingsRequest < Struct.new(
+      :settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response for the PutAccountSettings operation.
+    #
+    # @!attribute [rw] settings
+    #   A list of regional account-level EVS settings, and their values,
+    #   that were modified in this request.
+    #   @return [Array<Types::AccountSetting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/PutAccountSettingsResponse AWS API Documentation
+    #
+    class PutAccountSettingsResponse < Struct.new(
+      :settings)
       SENSITIVE = []
       include Aws::Structure
     end

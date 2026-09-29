@@ -11659,7 +11659,25 @@ module Aws::Bedrock
     # optimization job, including the model ID and inference parameters.
     #
     # @!attribute [rw] model_id
-    #   The ID of the model to use for optimization.
+    #   The model to use for optimization. The value depends on the resource
+    #   that you use:
+    #
+    #   * If you use a base model, specify the model ID or its ARN. For a
+    #     list of model IDs, see [Models at a glance][1] in the Amazon
+    #     Bedrock User Guide.
+    #
+    #   * If you use a cross-Region (system-defined) inference profile,
+    #     specify the inference profile ID or its ARN. For a list of
+    #     inference profile IDs, see [Supported Regions and models for
+    #     inference profiles][2] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use an application inference profile, specify its full ARN,
+    #     including the account ID and Region.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
     #   @return [String]
     #
     # @!attribute [rw] inference_config
@@ -13070,7 +13088,7 @@ module Aws::Bedrock
     #
     #   The following example would return data sources with an animals
     #   attribute that is a list containing a cat member (for example,
-    #   `["dog", "cat"]`): `"listContains": { "key": "animals", "value":
+    #   `["dog", "cat"] `): `"listContains": { "key": "animals", "value":
     #   "cat" }`
     #   @return [Types::FilterAttribute]
     #

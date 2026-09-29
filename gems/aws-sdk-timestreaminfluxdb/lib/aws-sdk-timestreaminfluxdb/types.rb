@@ -1798,6 +1798,16 @@ module Aws::TimestreamInfluxDB
     #   The ID of the DB parameter group assigned to your DB cluster.
     #   @return [String]
     #
+    # @!attribute [rw] effective_db_parameter_group_identifier
+    #   The ID of the DB parameter group actually applied to your DB
+    #   cluster. When the service applies optimized defaults, it creates a
+    #   service-managed DB parameter group and this field reflects that
+    #   group, while dbParameterGroupIdentifier reflects the
+    #   customer-provided DB parameter group. When no service-managed DB
+    #   parameter group is applied, this value matches
+    #   dbParameterGroupIdentifier.
+    #   @return [String]
+    #
     # @!attribute [rw] log_delivery_configuration
     #   Configuration for sending InfluxDB engine logs to send to specified
     #   S3 bucket.
@@ -1867,6 +1877,7 @@ module Aws::TimestreamInfluxDB
       :engine_type,
       :publicly_accessible,
       :db_parameter_group_identifier,
+      :effective_db_parameter_group_identifier,
       :log_delivery_configuration,
       :maintenance_schedule,
       :last_maintenance_time,

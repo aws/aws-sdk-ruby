@@ -36,8 +36,11 @@ module Aws::ObservabilityAdmin
     Conditions = Shapes::ListShape.new(name: 'Conditions')
     ConfigurationSummary = Shapes::StructureShape.new(name: 'ConfigurationSummary')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContextGraphStatus = Shapes::StringShape.new(name: 'ContextGraphStatus')
     CreateCentralizationRuleForOrganizationInput = Shapes::StructureShape.new(name: 'CreateCentralizationRuleForOrganizationInput')
     CreateCentralizationRuleForOrganizationOutput = Shapes::StructureShape.new(name: 'CreateCentralizationRuleForOrganizationOutput')
+    CreateDatasetIntegrationInput = Shapes::StructureShape.new(name: 'CreateDatasetIntegrationInput')
+    CreateDatasetIntegrationOutput = Shapes::StructureShape.new(name: 'CreateDatasetIntegrationOutput')
     CreateS3TableIntegrationInput = Shapes::StructureShape.new(name: 'CreateS3TableIntegrationInput')
     CreateS3TableIntegrationOutput = Shapes::StructureShape.new(name: 'CreateS3TableIntegrationOutput')
     CreateTelemetryPipelineInput = Shapes::StructureShape.new(name: 'CreateTelemetryPipelineInput')
@@ -49,7 +52,10 @@ module Aws::ObservabilityAdmin
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceFilterString = Shapes::StringShape.new(name: 'DataSourceFilterString')
     DataSources = Shapes::ListShape.new(name: 'DataSources')
+    DatasetIntegrationSummaries = Shapes::ListShape.new(name: 'DatasetIntegrationSummaries')
+    DatasetIntegrationSummary = Shapes::StructureShape.new(name: 'DatasetIntegrationSummary')
     DeleteCentralizationRuleForOrganizationInput = Shapes::StructureShape.new(name: 'DeleteCentralizationRuleForOrganizationInput')
+    DeleteDatasetIntegrationInput = Shapes::StructureShape.new(name: 'DeleteDatasetIntegrationInput')
     DeleteS3TableIntegrationInput = Shapes::StructureShape.new(name: 'DeleteS3TableIntegrationInput')
     DeleteTelemetryPipelineInput = Shapes::StructureShape.new(name: 'DeleteTelemetryPipelineInput')
     DeleteTelemetryPipelineOutput = Shapes::StructureShape.new(name: 'DeleteTelemetryPipelineOutput')
@@ -74,6 +80,8 @@ module Aws::ObservabilityAdmin
     Filters = Shapes::ListShape.new(name: 'Filters')
     GetCentralizationRuleForOrganizationInput = Shapes::StructureShape.new(name: 'GetCentralizationRuleForOrganizationInput')
     GetCentralizationRuleForOrganizationOutput = Shapes::StructureShape.new(name: 'GetCentralizationRuleForOrganizationOutput')
+    GetDatasetIntegrationInput = Shapes::StructureShape.new(name: 'GetDatasetIntegrationInput')
+    GetDatasetIntegrationOutput = Shapes::StructureShape.new(name: 'GetDatasetIntegrationOutput')
     GetS3TableIntegrationInput = Shapes::StructureShape.new(name: 'GetS3TableIntegrationInput')
     GetS3TableIntegrationOutput = Shapes::StructureShape.new(name: 'GetS3TableIntegrationOutput')
     GetTelemetryEnrichmentStatusOutput = Shapes::StructureShape.new(name: 'GetTelemetryEnrichmentStatusOutput')
@@ -100,6 +108,9 @@ module Aws::ObservabilityAdmin
     ListCentralizationRulesForOrganizationInputRuleNamePrefixString = Shapes::StringShape.new(name: 'ListCentralizationRulesForOrganizationInputRuleNamePrefixString')
     ListCentralizationRulesForOrganizationMaxResults = Shapes::IntegerShape.new(name: 'ListCentralizationRulesForOrganizationMaxResults')
     ListCentralizationRulesForOrganizationOutput = Shapes::StructureShape.new(name: 'ListCentralizationRulesForOrganizationOutput')
+    ListDatasetIntegrationsInput = Shapes::StructureShape.new(name: 'ListDatasetIntegrationsInput')
+    ListDatasetIntegrationsMaxResults = Shapes::IntegerShape.new(name: 'ListDatasetIntegrationsMaxResults')
+    ListDatasetIntegrationsOutput = Shapes::StructureShape.new(name: 'ListDatasetIntegrationsOutput')
     ListResourceTelemetryForOrganizationInput = Shapes::StructureShape.new(name: 'ListResourceTelemetryForOrganizationInput')
     ListResourceTelemetryForOrganizationMaxResults = Shapes::IntegerShape.new(name: 'ListResourceTelemetryForOrganizationMaxResults')
     ListResourceTelemetryForOrganizationOutput = Shapes::StructureShape.new(name: 'ListResourceTelemetryForOrganizationOutput')
@@ -167,6 +178,7 @@ module Aws::ObservabilityAdmin
     SingleHeaderNameString = Shapes::StringShape.new(name: 'SingleHeaderNameString')
     Sinks = Shapes::ListShape.new(name: 'Sinks')
     Source = Shapes::StructureShape.new(name: 'Source')
+    SourceContextGraphConfiguration = Shapes::StructureShape.new(name: 'SourceContextGraphConfiguration')
     SourceFilterString = Shapes::StringShape.new(name: 'SourceFilterString')
     SourceLogsConfiguration = Shapes::StructureShape.new(name: 'SourceLogsConfiguration')
     SourceMetricsConfiguration = Shapes::StructureShape.new(name: 'SourceMetricsConfiguration')
@@ -211,10 +223,13 @@ module Aws::ObservabilityAdmin
     TelemetryType = Shapes::StringShape.new(name: 'TelemetryType')
     TestTelemetryPipelineInput = Shapes::StructureShape.new(name: 'TestTelemetryPipelineInput')
     TestTelemetryPipelineOutput = Shapes::StructureShape.new(name: 'TestTelemetryPipelineOutput')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateCentralizationRuleForOrganizationInput = Shapes::StructureShape.new(name: 'UpdateCentralizationRuleForOrganizationInput')
     UpdateCentralizationRuleForOrganizationOutput = Shapes::StructureShape.new(name: 'UpdateCentralizationRuleForOrganizationOutput')
+    UpdateDatasetIntegrationInput = Shapes::StructureShape.new(name: 'UpdateDatasetIntegrationInput')
+    UpdateDatasetIntegrationOutput = Shapes::StructureShape.new(name: 'UpdateDatasetIntegrationOutput')
     UpdateTelemetryPipelineInput = Shapes::StructureShape.new(name: 'UpdateTelemetryPipelineInput')
     UpdateTelemetryPipelineOutput = Shapes::StructureShape.new(name: 'UpdateTelemetryPipelineOutput')
     UpdateTelemetryRuleForOrganizationInput = Shapes::StructureShape.new(name: 'UpdateTelemetryRuleForOrganizationInput')
@@ -268,6 +283,7 @@ module Aws::ObservabilityAdmin
     CentralizationRuleSource.add_member(:scope, Shapes::ShapeRef.new(shape: SourceFilterString, location_name: "Scope"))
     CentralizationRuleSource.add_member(:source_logs_configuration, Shapes::ShapeRef.new(shape: SourceLogsConfiguration, location_name: "SourceLogsConfiguration"))
     CentralizationRuleSource.add_member(:source_metrics_configuration, Shapes::ShapeRef.new(shape: SourceMetricsConfiguration, location_name: "SourceMetricsConfiguration"))
+    CentralizationRuleSource.add_member(:source_context_graph_configuration, Shapes::ShapeRef.new(shape: SourceContextGraphConfiguration, location_name: "SourceContextGraphConfiguration"))
     CentralizationRuleSource.struct_class = Types::CentralizationRuleSource
 
     CentralizationRuleSummaries.member = Shapes::ShapeRef.new(shape: CentralizationRuleSummary)
@@ -282,6 +298,7 @@ module Aws::ObservabilityAdmin
     CentralizationRuleSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: CentralizationFailureReason, location_name: "FailureReason"))
     CentralizationRuleSummary.add_member(:tag_propagation_status, Shapes::ShapeRef.new(shape: TagPropagationStatus, location_name: "TagPropagationStatus"))
     CentralizationRuleSummary.add_member(:tag_propagation_failure_reason, Shapes::ShapeRef.new(shape: TagPropagationFailureReason, location_name: "TagPropagationFailureReason"))
+    CentralizationRuleSummary.add_member(:context_graph_status, Shapes::ShapeRef.new(shape: ContextGraphStatus, location_name: "ContextGraphStatus"))
     CentralizationRuleSummary.add_member(:destination_account_id, Shapes::ShapeRef.new(shape: String, location_name: "DestinationAccountId"))
     CentralizationRuleSummary.add_member(:destination_region, Shapes::ShapeRef.new(shape: Region, location_name: "DestinationRegion"))
     CentralizationRuleSummary.struct_class = Types::CentralizationRuleSummary
@@ -314,6 +331,16 @@ module Aws::ObservabilityAdmin
 
     CreateCentralizationRuleForOrganizationOutput.add_member(:rule_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RuleArn"))
     CreateCentralizationRuleForOrganizationOutput.struct_class = Types::CreateCentralizationRuleForOrganizationOutput
+
+    CreateDatasetIntegrationInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "RoleArn"))
+    CreateDatasetIntegrationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMapInput, location_name: "Tags"))
+    CreateDatasetIntegrationInput.struct_class = Types::CreateDatasetIntegrationInput
+
+    CreateDatasetIntegrationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "Arn"))
+    CreateDatasetIntegrationOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "RoleArn"))
+    CreateDatasetIntegrationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    CreateDatasetIntegrationOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    CreateDatasetIntegrationOutput.struct_class = Types::CreateDatasetIntegrationOutput
 
     CreateS3TableIntegrationInput.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, required: true, location_name: "Encryption"))
     CreateS3TableIntegrationInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "RoleArn"))
@@ -353,8 +380,19 @@ module Aws::ObservabilityAdmin
 
     DataSources.member = Shapes::ShapeRef.new(shape: DataSource)
 
+    DatasetIntegrationSummaries.member = Shapes::ShapeRef.new(shape: DatasetIntegrationSummary)
+
+    DatasetIntegrationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "Arn"))
+    DatasetIntegrationSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RoleArn"))
+    DatasetIntegrationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    DatasetIntegrationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    DatasetIntegrationSummary.struct_class = Types::DatasetIntegrationSummary
+
     DeleteCentralizationRuleForOrganizationInput.add_member(:rule_identifier, Shapes::ShapeRef.new(shape: RuleIdentifier, required: true, location_name: "RuleIdentifier"))
     DeleteCentralizationRuleForOrganizationInput.struct_class = Types::DeleteCentralizationRuleForOrganizationInput
+
+    DeleteDatasetIntegrationInput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "Arn"))
+    DeleteDatasetIntegrationInput.struct_class = Types::DeleteDatasetIntegrationInput
 
     DeleteS3TableIntegrationInput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "Arn"))
     DeleteS3TableIntegrationInput.struct_class = Types::DeleteS3TableIntegrationInput
@@ -418,8 +456,18 @@ module Aws::ObservabilityAdmin
     GetCentralizationRuleForOrganizationOutput.add_member(:failure_reason, Shapes::ShapeRef.new(shape: CentralizationFailureReason, location_name: "FailureReason"))
     GetCentralizationRuleForOrganizationOutput.add_member(:tag_propagation_status, Shapes::ShapeRef.new(shape: TagPropagationStatus, location_name: "TagPropagationStatus"))
     GetCentralizationRuleForOrganizationOutput.add_member(:tag_propagation_failure_reason, Shapes::ShapeRef.new(shape: TagPropagationFailureReason, location_name: "TagPropagationFailureReason"))
+    GetCentralizationRuleForOrganizationOutput.add_member(:context_graph_status, Shapes::ShapeRef.new(shape: ContextGraphStatus, location_name: "ContextGraphStatus"))
     GetCentralizationRuleForOrganizationOutput.add_member(:centralization_rule, Shapes::ShapeRef.new(shape: CentralizationRule, location_name: "CentralizationRule"))
     GetCentralizationRuleForOrganizationOutput.struct_class = Types::GetCentralizationRuleForOrganizationOutput
+
+    GetDatasetIntegrationInput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "Arn"))
+    GetDatasetIntegrationInput.struct_class = Types::GetDatasetIntegrationInput
+
+    GetDatasetIntegrationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "Arn"))
+    GetDatasetIntegrationOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RoleArn"))
+    GetDatasetIntegrationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    GetDatasetIntegrationOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    GetDatasetIntegrationOutput.struct_class = Types::GetDatasetIntegrationOutput
 
     GetS3TableIntegrationInput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "Arn"))
     GetS3TableIntegrationInput.struct_class = Types::GetS3TableIntegrationInput
@@ -506,6 +554,14 @@ module Aws::ObservabilityAdmin
     ListCentralizationRulesForOrganizationOutput.add_member(:centralization_rule_summaries, Shapes::ShapeRef.new(shape: CentralizationRuleSummaries, location_name: "CentralizationRuleSummaries"))
     ListCentralizationRulesForOrganizationOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCentralizationRulesForOrganizationOutput.struct_class = Types::ListCentralizationRulesForOrganizationOutput
+
+    ListDatasetIntegrationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDatasetIntegrationsMaxResults, location_name: "MaxResults"))
+    ListDatasetIntegrationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDatasetIntegrationsInput.struct_class = Types::ListDatasetIntegrationsInput
+
+    ListDatasetIntegrationsOutput.add_member(:dataset_integration_summaries, Shapes::ShapeRef.new(shape: DatasetIntegrationSummaries, required: true, location_name: "DatasetIntegrationSummaries"))
+    ListDatasetIntegrationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDatasetIntegrationsOutput.struct_class = Types::ListDatasetIntegrationsOutput
 
     ListResourceTelemetryForOrganizationInput.add_member(:account_identifiers, Shapes::ShapeRef.new(shape: AccountIdentifiers, location_name: "AccountIdentifiers"))
     ListResourceTelemetryForOrganizationInput.add_member(:resource_identifier_prefix, Shapes::ShapeRef.new(shape: ResourceIdentifierPrefix, location_name: "ResourceIdentifierPrefix"))
@@ -656,6 +712,8 @@ module Aws::ObservabilityAdmin
     Source.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     Source.struct_class = Types::Source
 
+    SourceContextGraphConfiguration.struct_class = Types::SourceContextGraphConfiguration
+
     SourceLogsConfiguration.add_member(:log_group_selection_criteria, Shapes::ShapeRef.new(shape: LogsFilterString, location_name: "LogGroupSelectionCriteria"))
     SourceLogsConfiguration.add_member(:data_source_selection_criteria, Shapes::ShapeRef.new(shape: DataSourceFilterString, location_name: "DataSourceSelectionCriteria"))
     SourceLogsConfiguration.add_member(:encrypted_log_group_strategy, Shapes::ShapeRef.new(shape: EncryptedLogGroupStrategy, required: true, location_name: "EncryptedLogGroupStrategy"))
@@ -798,6 +856,16 @@ module Aws::ObservabilityAdmin
     UpdateCentralizationRuleForOrganizationOutput.add_member(:rule_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RuleArn"))
     UpdateCentralizationRuleForOrganizationOutput.struct_class = Types::UpdateCentralizationRuleForOrganizationOutput
 
+    UpdateDatasetIntegrationInput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "Arn"))
+    UpdateDatasetIntegrationInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "RoleArn"))
+    UpdateDatasetIntegrationInput.struct_class = Types::UpdateDatasetIntegrationInput
+
+    UpdateDatasetIntegrationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "Arn"))
+    UpdateDatasetIntegrationOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "RoleArn"))
+    UpdateDatasetIntegrationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    UpdateDatasetIntegrationOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    UpdateDatasetIntegrationOutput.struct_class = Types::UpdateDatasetIntegrationOutput
+
     UpdateTelemetryPipelineInput.add_member(:pipeline_identifier, Shapes::ShapeRef.new(shape: TelemetryPipelineIdentifier, required: true, location_name: "PipelineIdentifier"))
     UpdateTelemetryPipelineInput.add_member(:configuration, Shapes::ShapeRef.new(shape: TelemetryPipelineConfiguration, required: true, location_name: "Configuration"))
     UpdateTelemetryPipelineInput.struct_class = Types::UpdateTelemetryPipelineInput
@@ -878,6 +946,19 @@ module Aws::ObservabilityAdmin
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:create_dataset_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDatasetIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateDatasetIntegration"
+        o.input = Shapes::ShapeRef.new(shape: CreateDatasetIntegrationInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateDatasetIntegrationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:create_s3_table_integration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateS3TableIntegration"
         o.http_method = "POST"
@@ -947,6 +1028,19 @@ module Aws::ObservabilityAdmin
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:delete_dataset_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDatasetIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteDatasetIntegration"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDatasetIntegrationInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:delete_s3_table_integration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteS3TableIntegration"
         o.http_method = "POST"
@@ -1007,6 +1101,19 @@ module Aws::ObservabilityAdmin
         o.http_request_uri = "/GetCentralizationRuleForOrganization"
         o.input = Shapes::ShapeRef.new(shape: GetCentralizationRuleForOrganizationInput)
         o.output = Shapes::ShapeRef.new(shape: GetCentralizationRuleForOrganizationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_dataset_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDatasetIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetDatasetIntegration"
+        o.input = Shapes::ShapeRef.new(shape: GetDatasetIntegrationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDatasetIntegrationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1107,6 +1214,24 @@ module Aws::ObservabilityAdmin
         o.http_request_uri = "/ListCentralizationRulesForOrganization"
         o.input = Shapes::ShapeRef.new(shape: ListCentralizationRulesForOrganizationInput)
         o.output = Shapes::ShapeRef.new(shape: ListCentralizationRulesForOrganizationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_dataset_integrations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDatasetIntegrations"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListDatasetIntegrations"
+        o.input = Shapes::ShapeRef.new(shape: ListDatasetIntegrationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListDatasetIntegrationsOutput)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1358,6 +1483,19 @@ module Aws::ObservabilityAdmin
         o.input = Shapes::ShapeRef.new(shape: UpdateCentralizationRuleForOrganizationInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateCentralizationRuleForOrganizationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_dataset_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDatasetIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateDatasetIntegration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDatasetIntegrationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDatasetIntegrationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

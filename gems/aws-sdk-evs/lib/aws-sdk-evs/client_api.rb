@@ -14,6 +14,8 @@ module Aws::Evs
 
     include Seahorse::Model
 
+    AccountSetting = Shapes::StructureShape.new(name: 'AccountSetting')
+    AccountSettingList = Shapes::ListShape.new(name: 'AccountSettingList')
     AllocationId = Shapes::StringShape.new(name: 'AllocationId')
     ApplianceFqdn = Shapes::StringShape.new(name: 'ApplianceFqdn')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -70,6 +72,8 @@ module Aws::Evs
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     EsxVersion = Shapes::StringShape.new(name: 'EsxVersion')
     EsxVersionList = Shapes::ListShape.new(name: 'EsxVersionList')
+    GetAccountSettingsRequest = Shapes::StructureShape.new(name: 'GetAccountSettingsRequest')
+    GetAccountSettingsResponse = Shapes::StructureShape.new(name: 'GetAccountSettingsResponse')
     GetDepotUrlRequest = Shapes::StructureShape.new(name: 'GetDepotUrlRequest')
     GetDepotUrlResponse = Shapes::StructureShape.new(name: 'GetDepotUrlResponse')
     GetEnvironmentRequest = Shapes::StructureShape.new(name: 'GetEnvironmentRequest')
@@ -113,6 +117,8 @@ module Aws::Evs
     NetworkInterfaceList = Shapes::ListShape.new(name: 'NetworkInterfaceList')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PlacementGroupId = Shapes::StringShape.new(name: 'PlacementGroupId')
+    PutAccountSettingsRequest = Shapes::StructureShape.new(name: 'PutAccountSettingsRequest')
+    PutAccountSettingsResponse = Shapes::StructureShape.new(name: 'PutAccountSettingsResponse')
     RequestTagMap = Shapes::MapShape.new(name: 'RequestTagMap')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponseTagMap = Shapes::MapShape.new(name: 'ResponseTagMap')
@@ -125,6 +131,8 @@ module Aws::Evs
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     ServiceAccessSecurityGroups = Shapes::StructureShape.new(name: 'ServiceAccessSecurityGroups')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SettingName = Shapes::StringShape.new(name: 'SettingName')
+    SettingValue = Shapes::StringShape.new(name: 'SettingValue')
     SolutionKey = Shapes::StringShape.new(name: 'SolutionKey')
     StateDetails = Shapes::StringShape.new(name: 'StateDetails')
     String = Shapes::StringShape.new(name: 'String')
@@ -161,6 +169,12 @@ module Aws::Evs
     VmIdList = Shapes::ListShape.new(name: 'VmIdList')
     VmName = Shapes::StringShape.new(name: 'VmName')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+
+    AccountSetting.add_member(:name, Shapes::ShapeRef.new(shape: SettingName, required: true, location_name: "name"))
+    AccountSetting.add_member(:value, Shapes::ShapeRef.new(shape: SettingValue, required: true, location_name: "value"))
+    AccountSetting.struct_class = Types::AccountSetting
+
+    AccountSettingList.member = Shapes::ShapeRef.new(shape: AccountSetting)
 
     AssociateEipToVlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     AssociateEipToVlanRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentId"))
@@ -348,6 +362,11 @@ module Aws::Evs
 
     EsxVersionList.member = Shapes::ShapeRef.new(shape: String)
 
+    GetAccountSettingsRequest.struct_class = Types::GetAccountSettingsRequest
+
+    GetAccountSettingsResponse.add_member(:settings, Shapes::ShapeRef.new(shape: AccountSettingList, location_name: "settings"))
+    GetAccountSettingsResponse.struct_class = Types::GetAccountSettingsResponse
+
     GetDepotUrlRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentId"))
     GetDepotUrlRequest.add_member(:rotate, Shapes::ShapeRef.new(shape: Boolean, location_name: "rotate"))
     GetDepotUrlRequest.struct_class = Types::GetDepotUrlRequest
@@ -484,6 +503,12 @@ module Aws::Evs
     NetworkInterface.struct_class = Types::NetworkInterface
 
     NetworkInterfaceList.member = Shapes::ShapeRef.new(shape: NetworkInterface)
+
+    PutAccountSettingsRequest.add_member(:settings, Shapes::ShapeRef.new(shape: AccountSettingList, required: true, location_name: "settings"))
+    PutAccountSettingsRequest.struct_class = Types::PutAccountSettingsRequest
+
+    PutAccountSettingsResponse.add_member(:settings, Shapes::ShapeRef.new(shape: AccountSettingList, location_name: "settings"))
+    PutAccountSettingsResponse.struct_class = Types::PutAccountSettingsResponse
 
     RequestTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     RequestTagMap.value = Shapes::ShapeRef.new(shape: TagValue)
@@ -734,6 +759,17 @@ module Aws::Evs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_account_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAccountSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccountSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_depot_url, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDepotUrl"
         o.http_method = "POST"
@@ -851,6 +887,17 @@ module Aws::Evs
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_account_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAccountSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

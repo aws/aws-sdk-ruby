@@ -8,6 +8,20 @@
 module Aws::LaunchWizard
   module Types
 
+    class AccountConstraint
+      attr_accessor management_account: Types::ManagementAccountConstraint
+      attr_accessor delegated_admin: Types::DelegatedAdminConstraint
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ManagementAccount < AccountConstraint
+      end
+      class DelegatedAdmin < AccountConstraint
+      end
+      class Unknown < AccountConstraint
+      end
+    end
+
     class CreateDeploymentInput
       attr_accessor workload_name: ::String
       attr_accessor deployment_pattern_name: ::String
@@ -20,6 +34,11 @@ module Aws::LaunchWizard
 
     class CreateDeploymentOutput
       attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DelegatedAdminConstraint
+      attr_accessor service_principal: ::String
       SENSITIVE: []
     end
 
@@ -74,6 +93,7 @@ module Aws::LaunchWizard
       attr_accessor status: ("CANCELED" | "CANCELING" | "COMPLETED" | "CREATED" | "FAILED" | "IN_PROGRESS" | "PENDING" | "TIMED_OUT")
       attr_accessor status_reason: ::String
       attr_accessor timestamp: ::Time
+      attr_accessor metadata: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -231,6 +251,9 @@ module Aws::LaunchWizard
       SENSITIVE: []
     end
 
+    class ManagementAccountConstraint < Aws::EmptyStructure
+    end
+
     class ResourceLimitException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -283,6 +306,7 @@ module Aws::LaunchWizard
       attr_accessor workload_name: ::String
       attr_accessor display_name: ::String
       attr_accessor status: ("ACTIVE" | "INACTIVE" | "DISABLED" | "DELETED")
+      attr_accessor account_constraints: ::Array[Types::AccountConstraint]
       attr_accessor description: ::String
       attr_accessor documentation_url: ::String
       attr_accessor icon_url: ::String
@@ -294,6 +318,7 @@ module Aws::LaunchWizard
       attr_accessor workload_name: ::String
       attr_accessor display_name: ::String
       attr_accessor status: ("ACTIVE" | "INACTIVE" | "DISABLED" | "DELETED")
+      attr_accessor account_constraints: ::Array[Types::AccountConstraint]
       SENSITIVE: []
     end
 
@@ -306,6 +331,7 @@ module Aws::LaunchWizard
       attr_accessor description: ::String
       attr_accessor status: ("ACTIVE" | "INACTIVE" | "DISABLED" | "DELETED")
       attr_accessor status_message: ::String
+      attr_accessor account_constraints: ::Array[Types::AccountConstraint]
       attr_accessor specifications: ::Array[Types::DeploymentSpecificationsField]
       SENSITIVE: []
     end
@@ -319,6 +345,7 @@ module Aws::LaunchWizard
       attr_accessor description: ::String
       attr_accessor status: ("ACTIVE" | "INACTIVE" | "DISABLED" | "DELETED")
       attr_accessor status_message: ::String
+      attr_accessor account_constraints: ::Array[Types::AccountConstraint]
       SENSITIVE: []
     end
   end

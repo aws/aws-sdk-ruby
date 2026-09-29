@@ -306,6 +306,25 @@ module Aws
                                      }?,
                                      mtls: {
                                        secret_arn: ::String
+                                     }?,
+                                     sasl_o_auth_bearer: {
+                                       token_endpoint_url: ::String,
+                                       client_credentials: {
+                                         token_request_secret_arn: ::String
+                                       }?,
+                                       iam_jwt_bearer: {
+                                         audience: ::String,
+                                         signing_algorithm: ("RS256" | "ES384"),
+                                         token_request_secret_arn: ::String?
+                                       }?,
+                                       client_credentials_assertion: {
+                                         audience: ::String,
+                                         signing_algorithm: ("RS256" | "ES384"),
+                                         token_request_secret_arn: ::String?
+                                       }?,
+                                       token_endpoint_authentication_method: ("POST" | "BASIC" | "NONE"),
+                                       scope: ::String?,
+                                       token_endpoint_tls_certificate_arn: ::String?
                                      }?
                                    }?,
                                    encryption_in_transit: {

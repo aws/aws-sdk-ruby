@@ -343,6 +343,16 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class AppSummary
+      attr_accessor app_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor visibility: ("PRIVATE" | "PUBLIC")
+      SENSITIVE: []
+    end
+
     class AppendOperation
       attr_accessor alias: ::String
       attr_accessor first_source: Types::TransformOperationSource
@@ -1594,6 +1604,118 @@ module Aws::QuickSight
       attr_accessor create_and_update_new_relic_action: ("DENY" | "ALLOW")
       attr_accessor share_new_relic_action: ("DENY" | "ALLOW")
       attr_accessor use_new_relic_action: ("DENY" | "ALLOW")
+      attr_accessor pager_duty_agent_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_pager_duty_agent_action: ("DENY" | "ALLOW")
+      attr_accessor share_pager_duty_agent_action: ("DENY" | "ALLOW")
+      attr_accessor use_pager_duty_agent_action: ("DENY" | "ALLOW")
+      attr_accessor visier_agent_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_visier_agent_action: ("DENY" | "ALLOW")
+      attr_accessor share_visier_agent_action: ("DENY" | "ALLOW")
+      attr_accessor use_visier_agent_action: ("DENY" | "ALLOW")
+      attr_accessor zoom_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_zoom_action: ("DENY" | "ALLOW")
+      attr_accessor share_zoom_action: ("DENY" | "ALLOW")
+      attr_accessor use_zoom_action: ("DENY" | "ALLOW")
+      attr_accessor snow_flake_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_snow_flake_action: ("DENY" | "ALLOW")
+      attr_accessor share_snow_flake_action: ("DENY" | "ALLOW")
+      attr_accessor use_snow_flake_action: ("DENY" | "ALLOW")
+      attr_accessor zapier_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_zapier_action: ("DENY" | "ALLOW")
+      attr_accessor share_zapier_action: ("DENY" | "ALLOW")
+      attr_accessor use_zapier_action: ("DENY" | "ALLOW")
+      attr_accessor airtable_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_airtable_action: ("DENY" | "ALLOW")
+      attr_accessor share_airtable_action: ("DENY" | "ALLOW")
+      attr_accessor use_airtable_action: ("DENY" | "ALLOW")
+      attr_accessor dropbox_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_dropbox_action: ("DENY" | "ALLOW")
+      attr_accessor share_dropbox_action: ("DENY" | "ALLOW")
+      attr_accessor use_dropbox_action: ("DENY" | "ALLOW")
+      attr_accessor gmail_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_gmail_action: ("DENY" | "ALLOW")
+      attr_accessor share_gmail_action: ("DENY" | "ALLOW")
+      attr_accessor use_gmail_action: ("DENY" | "ALLOW")
+      attr_accessor google_analytics_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_google_analytics_action: ("DENY" | "ALLOW")
+      attr_accessor share_google_analytics_action: ("DENY" | "ALLOW")
+      attr_accessor use_google_analytics_action: ("DENY" | "ALLOW")
+      attr_accessor google_docs_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_google_docs_action: ("DENY" | "ALLOW")
+      attr_accessor share_google_docs_action: ("DENY" | "ALLOW")
+      attr_accessor use_google_docs_action: ("DENY" | "ALLOW")
+      attr_accessor google_drive_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_google_drive_action: ("DENY" | "ALLOW")
+      attr_accessor share_google_drive_action: ("DENY" | "ALLOW")
+      attr_accessor use_google_drive_action: ("DENY" | "ALLOW")
+      attr_accessor google_meet_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_google_meet_action: ("DENY" | "ALLOW")
+      attr_accessor share_google_meet_action: ("DENY" | "ALLOW")
+      attr_accessor use_google_meet_action: ("DENY" | "ALLOW")
+      attr_accessor google_sheets_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_google_sheets_action: ("DENY" | "ALLOW")
+      attr_accessor share_google_sheets_action: ("DENY" | "ALLOW")
+      attr_accessor use_google_sheets_action: ("DENY" | "ALLOW")
+      attr_accessor google_slides_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_google_slides_action: ("DENY" | "ALLOW")
+      attr_accessor share_google_slides_action: ("DENY" | "ALLOW")
+      attr_accessor use_google_slides_action: ("DENY" | "ALLOW")
+      attr_accessor quick_books_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_quick_books_action: ("DENY" | "ALLOW")
+      attr_accessor share_quick_books_action: ("DENY" | "ALLOW")
+      attr_accessor use_quick_books_action: ("DENY" | "ALLOW")
+      attr_accessor figma_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_figma_action: ("DENY" | "ALLOW")
+      attr_accessor share_figma_action: ("DENY" | "ALLOW")
+      attr_accessor use_figma_action: ("DENY" | "ALLOW")
+      attr_accessor whats_app_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_whats_app_action: ("DENY" | "ALLOW")
+      attr_accessor share_whats_app_action: ("DENY" | "ALLOW")
+      attr_accessor use_whats_app_action: ("DENY" | "ALLOW")
+      attr_accessor google_chat_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_google_chat_action: ("DENY" | "ALLOW")
+      attr_accessor share_google_chat_action: ("DENY" | "ALLOW")
+      attr_accessor use_google_chat_action: ("DENY" | "ALLOW")
+      attr_accessor one_note_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_one_note_action: ("DENY" | "ALLOW")
+      attr_accessor share_one_note_action: ("DENY" | "ALLOW")
+      attr_accessor use_one_note_action: ("DENY" | "ALLOW")
+      attr_accessor shopify_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_shopify_action: ("DENY" | "ALLOW")
+      attr_accessor share_shopify_action: ("DENY" | "ALLOW")
+      attr_accessor use_shopify_action: ("DENY" | "ALLOW")
+      attr_accessor adobe_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_adobe_action: ("DENY" | "ALLOW")
+      attr_accessor share_adobe_action: ("DENY" | "ALLOW")
+      attr_accessor use_adobe_action: ("DENY" | "ALLOW")
+      attr_accessor cisco_webex_vidcast_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_cisco_webex_vidcast_action: ("DENY" | "ALLOW")
+      attr_accessor share_cisco_webex_vidcast_action: ("DENY" | "ALLOW")
+      attr_accessor use_cisco_webex_vidcast_action: ("DENY" | "ALLOW")
+      attr_accessor cisco_webex_meetings_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_cisco_webex_meetings_action: ("DENY" | "ALLOW")
+      attr_accessor share_cisco_webex_meetings_action: ("DENY" | "ALLOW")
+      attr_accessor use_cisco_webex_meetings_action: ("DENY" | "ALLOW")
+      attr_accessor dun_and_bradstreet_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_dun_and_bradstreet_action: ("DENY" | "ALLOW")
+      attr_accessor share_dun_and_bradstreet_action: ("DENY" | "ALLOW")
+      attr_accessor use_dun_and_bradstreet_action: ("DENY" | "ALLOW")
+      attr_accessor hg_insights_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_hg_insights_action: ("DENY" | "ALLOW")
+      attr_accessor share_hg_insights_action: ("DENY" | "ALLOW")
+      attr_accessor use_hg_insights_action: ("DENY" | "ALLOW")
+      attr_accessor zoom_info_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_zoom_info_action: ("DENY" | "ALLOW")
+      attr_accessor share_zoom_info_action: ("DENY" | "ALLOW")
+      attr_accessor use_zoom_info_action: ("DENY" | "ALLOW")
+      attr_accessor moodys_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_moodys_action: ("DENY" | "ALLOW")
+      attr_accessor share_moodys_action: ("DENY" | "ALLOW")
+      attr_accessor use_moodys_action: ("DENY" | "ALLOW")
+      attr_accessor bee_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_bee_action: ("DENY" | "ALLOW")
+      attr_accessor share_bee_action: ("DENY" | "ALLOW")
+      attr_accessor use_bee_action: ("DENY" | "ALLOW")
       attr_accessor topic: ("DENY" | "ALLOW")
       attr_accessor edit_visual_with_q: ("DENY" | "ALLOW")
       attr_accessor build_calculated_field_with_q: ("DENY" | "ALLOW")
@@ -3905,6 +4027,17 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DeleteAppRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppResponse
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class DeleteApprovalPolicyRequest
       attr_accessor policy_id: ::String
       SENSITIVE: []
@@ -4536,6 +4669,32 @@ module Aws::QuickSight
     class DescribeAnalysisResponse
       attr_accessor analysis: Types::Analysis
       attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppPermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppPermissionsResponse
+      attr_accessor app_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor permissions: ::Array[Types::ResourcePermission]
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppResponse
+      attr_accessor app: Types::AppSummary
       attr_accessor request_id: ::String
       SENSITIVE: []
     end
@@ -7601,6 +7760,20 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ListAppsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppsResponse
+      attr_accessor app_summary_list: ::Array[Types::AppSummary]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class ListAssetBundleExportJobsRequest
       attr_accessor aws_account_id: ::String
       attr_accessor next_token: ::String
@@ -10049,6 +10222,28 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class SearchAppsFilter
+      attr_accessor name: ("APP_ID" | "APP_NAME" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER")
+      attr_accessor operator: ("StringEquals" | "StringLike")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SearchAppsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor filters: ::Array[Types::SearchAppsFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchAppsResponse
+      attr_accessor app_summary_list: ::Array[Types::AppSummary]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class SearchDashboardsRequest
       attr_accessor aws_account_id: ::String
       attr_accessor filters: ::Array[Types::DashboardSearchFilter]
@@ -12284,6 +12479,24 @@ module Aws::QuickSight
       attr_accessor analysis_id: ::String
       attr_accessor update_status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
       attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppPermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor app_id: ::String
+      attr_accessor grant_permissions: ::Array[Types::ResourcePermission]
+      attr_accessor revoke_permissions: ::Array[Types::ResourcePermission]
+      attr_accessor visibility: ("PRIVATE" | "PUBLIC")
+      SENSITIVE: []
+    end
+
+    class UpdateAppPermissionsResponse
+      attr_accessor arn: ::String
+      attr_accessor app_id: ::String
+      attr_accessor permissions: ::Array[Types::ResourcePermission]
+      attr_accessor visibility: ("PRIVATE" | "PUBLIC")
       attr_accessor request_id: ::String
       SENSITIVE: []
     end

@@ -269,7 +269,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_arn
@@ -839,7 +839,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #   @return [String]
     #
     # @!attribute [rw] identity_provider
@@ -1020,6 +1020,17 @@ module Aws::LicenseManagerUserSubscriptions
     #   The end date of a subscription.
     #   @return [String]
     #
+    # @!attribute [rw] license_expiration_date
+    #   The expiration date of the license associated with this
+    #   subscription, in ISO 8601 UTC format (for example,
+    #   `2025-03-15T00:00:00Z`).
+    #
+    #   This field applies only to subscriptions that use license server
+    #   endpoints, such as Remote Desktop Services (RDS) Subscriber Access
+    #   License (SAL). It returns `null` for products that don't use
+    #   license-based subscriptions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/ProductUserSummary AWS API Documentation
     #
     class ProductUserSummary < Struct.new(
@@ -1031,7 +1042,8 @@ module Aws::LicenseManagerUserSubscriptions
       :status_message,
       :domain,
       :subscription_start_date,
-      :subscription_end_date)
+      :subscription_end_date,
+      :license_expiration_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1063,7 +1075,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -1213,7 +1225,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -1262,7 +1274,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #   @return [String]
     #
     # @!attribute [rw] product_user_arn
@@ -1364,7 +1376,7 @@ module Aws::LicenseManagerUserSubscriptions
     #
     #   Valid values: `VISUAL_STUDIO_ENTERPRISE` \|
     #   `VISUAL_STUDIO_PROFESSIONAL` \| `OFFICE_PROFESSIONAL_PLUS` \|
-    #   `REMOTE_DESKTOP_SERVICES`
+    #   `OFFICE_STANDARD` \| `REMOTE_DESKTOP_SERVICES`
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_arn

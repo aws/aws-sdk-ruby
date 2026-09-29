@@ -9,6 +9,16 @@ module Aws
   module Kinesis
     module Waiters
 
+      class ChannelActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    channel_arn: ::String
+                  ) -> Client::_DescribeChannelResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeChannelResponseSuccess
+      end
+
       class StreamExists
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void

@@ -692,7 +692,7 @@ module Aws
         def arn: () -> ::String
         def uuid: () -> ::String
         def name: () -> ::String
-        def status: () -> ("CREATING" | "PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETED")
+        def status: () -> ("CREATING" | "PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETE_FAILED" | "RUNS_DELETED")
         def tags: () -> ::Hash[::String, ::String]
         def total_runs: () -> ::Integer
         def default_run_setting: () -> Types::DefaultRunSetting
@@ -933,6 +933,7 @@ module Aws
         def configuration: () -> Types::ConfigurationDetails
         def vpc_config: () -> Types::VpcConfigResponse
         def engine_settings: () -> untyped
+        def session_policy: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_run-instance_method
       def get_run: (
@@ -1226,7 +1227,7 @@ module Aws
       def list_batch: (
                         ?max_items: ::Integer,
                         ?starting_token: ::String,
-                        ?status: ("CREATING" | "PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETED"),
+                        ?status: ("CREATING" | "PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETE_FAILED" | "RUNS_DELETED"),
                         ?name: ::String,
                         ?run_group_id: ::String
                       ) -> _ListBatchResponseSuccess
@@ -1773,6 +1774,7 @@ module Aws
                        ?networking_mode: ("RESTRICTED" | "VPC"),
                        ?scratch_storage_mode: ("LOCAL" | "SHARED"),
                        ?configuration_name: ::String,
+                       ?session_policy: ::String,
                        ?engine_settings: {
                        }
                      ) -> _StartRunResponseSuccess
@@ -1782,7 +1784,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::StartRunBatchResponse]
         def id: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETED")
+        def status: () -> ("CREATING" | "PENDING" | "SUBMITTING" | "INPROGRESS" | "STOPPING" | "CANCELLED" | "FAILED" | "PROCESSED" | "RUNS_DELETING" | "RUNS_DELETE_FAILED" | "RUNS_DELETED")
         def uuid: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -1813,6 +1815,7 @@ module Aws
                                workflow_version_name: ::String?,
                                networking_mode: ("RESTRICTED" | "VPC")?,
                                configuration_name: ::String?,
+                               session_policy: ::String?,
                                engine_settings: {
                                }?,
                                scratch_storage_mode: ("LOCAL" | "SHARED")?

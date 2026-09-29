@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2026-09-28)
+------------------
+
+* Feature - Run automated penetration tests directly from your CI-CD pipeline to scan code changes before they ship, gating deployments on the findings
+
+1.17.0 (2026-09-25)
+------------------
+
+* Feature - This release adds the ListActorMessages operation, which returns the multi-factor authentication messages received at an actor's server-generated email address
+
+1.16.0 (2026-09-24)
+------------------
+
+* Feature - Added support for Confluence export, enabling customers to publish security findings to Confluence pages.
+
+1.15.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2026-08-24)
+------------------
+
+* Feature - Adding private and self-signed certificate configuration support for penetration tests
+
 1.12.0 (2026-08-13)
 ------------------
 

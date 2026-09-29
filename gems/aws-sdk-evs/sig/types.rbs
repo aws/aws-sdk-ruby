@@ -8,6 +8,12 @@
 module Aws::Evs
   module Types
 
+    class AccountSetting
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class AssociateEipToVlanRequest
       attr_accessor client_token: ::String
       attr_accessor environment_id: ::String
@@ -236,6 +242,14 @@ module Aws::Evs
       SENSITIVE: []
     end
 
+    class GetAccountSettingsRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountSettingsResponse
+      attr_accessor settings: ::Array[Types::AccountSetting]
+      SENSITIVE: []
+    end
+
     class GetDepotUrlRequest
       attr_accessor environment_id: ::String
       attr_accessor rotate: bool
@@ -271,7 +285,7 @@ module Aws::Evs
       attr_accessor host_name: ::String
       attr_accessor ip_address: ::String
       attr_accessor key_name: ::String
-      attr_accessor instance_type: ("i4i.metal" | "i7i.metal-24xl")
+      attr_accessor instance_type: ("i4i.metal" | "i7i.metal-24xl" | "i7i.metal-48xl")
       attr_accessor placement_group_id: ::String
       attr_accessor dedicated_host_id: ::String
       attr_accessor created_at: ::Time
@@ -286,7 +300,7 @@ module Aws::Evs
     class HostInfoForCreate
       attr_accessor host_name: ::String
       attr_accessor key_name: ::String
-      attr_accessor instance_type: ("i4i.metal" | "i7i.metal-24xl")
+      attr_accessor instance_type: ("i4i.metal" | "i7i.metal-24xl" | "i7i.metal-48xl")
       attr_accessor placement_group_id: ::String
       attr_accessor dedicated_host_id: ::String
       SENSITIVE: []
@@ -314,7 +328,7 @@ module Aws::Evs
     end
 
     class InstanceTypeEsxVersionsInfo
-      attr_accessor instance_type: ("i4i.metal" | "i7i.metal-24xl")
+      attr_accessor instance_type: ("i4i.metal" | "i7i.metal-24xl" | "i7i.metal-48xl")
       attr_accessor esx_versions: ::Array[::String]
       SENSITIVE: []
     end
@@ -409,6 +423,16 @@ module Aws::Evs
 
     class NetworkInterface
       attr_accessor network_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingsRequest
+      attr_accessor settings: ::Array[Types::AccountSetting]
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingsResponse
+      attr_accessor settings: ::Array[Types::AccountSetting]
       SENSITIVE: []
     end
 
@@ -512,7 +536,7 @@ module Aws::Evs
       attr_accessor vcf_version: ("VCF-5.2.1" | "VCF-5.2.2" | "SELF_DEPLOYED")
       attr_accessor status: ::String
       attr_accessor default_esx_version: ::String
-      attr_accessor instance_types: ::Array[("i4i.metal" | "i7i.metal-24xl")]
+      attr_accessor instance_types: ::Array[("i4i.metal" | "i7i.metal-24xl" | "i7i.metal-48xl")]
       SENSITIVE: []
     end
 

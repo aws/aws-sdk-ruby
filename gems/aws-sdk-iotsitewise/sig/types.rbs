@@ -782,6 +782,7 @@ module Aws::IoTSiteWise
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor execution_environment_variables: ::Hash[::String, ::String]
+      attr_accessor execution_mounts: ::Array[Types::Mount]
       SENSITIVE: [:execution_environment_variables]
     end
 
@@ -823,9 +824,11 @@ module Aws::IoTSiteWise
       attr_accessor task_execution_role: ::String
       attr_accessor processing_type: ("GENERIC_COMPUTE_PROCESSING" | "HARDWARE_ACCELERATED_PROCESSING")
       attr_accessor processing_unit: ("UNITS_2" | "UNITS_4" | "UNITS_8" | "UNITS_12" | "UNITS_16" | "UNITS_24" | "UNITS_32" | "UNITS_36" | "UNITS_48" | "UNITS_60" | "UNITS_64" | "UNITS_72" | "UNITS_84" | "UNITS_96")
+      attr_accessor ephemeral_storage_configuration: Types::EphemeralStorageConfiguration
       attr_accessor command: ::Array[::String]
       attr_accessor timeout_seconds: ::Integer
       attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor mounts: ::Array[Types::Mount]
       SENSITIVE: [:ecr_uri, :task_execution_role, :command, :environment_variables]
     end
 
@@ -1848,6 +1851,7 @@ module Aws::IoTSiteWise
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor request_environment_variables: Types::ExecutionEnvironmentVariables
+      attr_accessor request_mount_overrides: Types::MountOverrides
       attr_accessor execution_priority: ::Integer
       attr_accessor compute_node_execution_details: ::Array[Types::ComputeNodeExecutionDetails]
       attr_accessor next_token: ::String
@@ -2088,6 +2092,12 @@ module Aws::IoTSiteWise
     class EnrichmentTrimSettings
       attr_accessor start_time: Types::TimeInNanos
       attr_accessor end_time: Types::TimeInNanos
+      SENSITIVE: []
+    end
+
+    class EphemeralStorageConfiguration
+      attr_accessor storage_class: ("STANDARD_1" | "STANDARD_2" | "THROUGHPUT_1" | "THROUGHPUT_2")
+      attr_accessor storage_size_in_gi_b: ::Integer
       SENSITIVE: []
     end
 
@@ -3081,6 +3091,30 @@ module Aws::IoTSiteWise
       SENSITIVE: []
     end
 
+    class Mount
+      attr_accessor name: ::String
+      attr_accessor relative_path: ::String
+      attr_accessor source: Types::MountSource
+      attr_accessor storage_type: ("SHARED_STORAGE")
+      SENSITIVE: []
+    end
+
+    class MountOverrides
+      attr_accessor compute_nodes: ::Hash[::String, ::Array[Types::Mount]]
+      SENSITIVE: []
+    end
+
+    class MountSource
+      attr_accessor s3_access_point: Types::S3AccessPointSource
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3AccessPoint < MountSource
+      end
+      class Unknown < MountSource
+      end
+    end
+
     class Mp4 < Aws::EmptyStructure
     end
 
@@ -3377,6 +3411,12 @@ module Aws::IoTSiteWise
       SENSITIVE: []
     end
 
+    class S3AccessPointSource
+      attr_accessor access_point_arn: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
     class SearchFilters
       attr_accessor time_series_ids: ::Array[::String]
       attr_accessor dataset_ids: ::Array[::String]
@@ -3439,6 +3479,7 @@ module Aws::IoTSiteWise
       attr_accessor workspace_name: ::String
       attr_accessor pipeline_name: ::String
       attr_accessor execution_environment_variable_overrides: Types::ExecutionEnvironmentVariables
+      attr_accessor execution_mount_overrides: Types::MountOverrides
       attr_accessor execution_priority: ::Integer
       attr_accessor client_token: ::String
       SENSITIVE: [:execution_environment_variable_overrides]

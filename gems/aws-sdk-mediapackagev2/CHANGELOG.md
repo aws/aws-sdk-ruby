@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2026-09-23)
+------------------
+
+* Feature - This release adds support for signalling start and end in the ContentKeyPeriod element in key request from MediaPackageV2
+
+1.72.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2026-09-09)
+------------------
+
+* Feature - Dynamic Multiview enables viewers to watch multiple live video streams in a single combined output. Viewers can select from 6 preset tiled layouts. Create MediaPackage channels with Input Type MULTIVIEW and configure Available Layouts and Available Sources. See the API Documentation for details.
+
 1.70.0 (2026-08-07)
 ------------------
 

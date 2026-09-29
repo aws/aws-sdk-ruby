@@ -322,9 +322,7 @@ module Aws::States
 
     # @!attribute [rw] name
     #   The name of the activity to create. This name must be unique for
-    #   your Amazon Web Services account and region for 90 days. For more
-    #   information, see [ Limits Related to State Machine Executions][1] in
-    #   the *Step Functions Developer Guide*.
+    #   your Amazon Web Services account and region.
     #
     #   A name must *not* contain:
     #
@@ -344,10 +342,6 @@ module Aws::States
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3720,10 +3714,13 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Optional name of the execution. This name must be unique for your
-    #   Amazon Web Services account, Region, and state machine for 90 days.
-    #   For more information, see [ Limits Related to State Machine
-    #   Executions][1] in the *Step Functions Developer Guide*.
+    #   Optional name of the execution. For STANDARD workflows, this name
+    #   must be unique for your Amazon Web Services account, region, and
+    #   state machine. If a previous execution with the same name exists,
+    #   you can reuse the name 90 days after it closes. For EXPRESS
+    #   workflows, execution names can be reused immediately. For more
+    #   information, see [ Limits Related to State Machine Executions][1] in
+    #   the *Step Functions Developer Guide*.
     #
     #   If you don't provide a name for the execution, Step Functions
     #   automatically generates a universally unique identifier (UUID) as

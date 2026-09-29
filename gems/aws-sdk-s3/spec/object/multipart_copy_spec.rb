@@ -69,6 +69,21 @@ module Aws
         it 'raises an error on invalid targets' do
           expect { object.copy_to(:target) }.to raise_error(ArgumentError)
         end
+
+        it 'does not return nil when a single-shot copy succeeds' do
+          resp = object.copy_to('target-bucket/target-key')
+
+          expect(resp).not_to be_nil
+        end
+
+        it 'does not return nil when a multipart copy succeeds' do
+          client.stub_responses(:head_object, client.stub_data(:head_object, content_length: 50 * 1024 * 1024))
+          client.stub_responses(:create_multipart_upload, upload_id: 'upload-id')
+
+          resp = object.copy_to('target-bucket/target-key', multipart_copy: true)
+
+          expect(resp).not_to be_nil
+        end
       end
 
       describe '#copy_from' do

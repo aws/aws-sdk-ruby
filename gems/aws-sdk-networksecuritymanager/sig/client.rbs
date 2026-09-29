@@ -1,0 +1,937 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NetworkSecurityManager
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeploymentOutput]
+        def deployment_id: () -> ::String
+        def deployment_arn: () -> ::String
+        def deployment_name: () -> ::String
+        def deployment_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def deployment_configuration: () -> Types::DeploymentConfiguration
+        def associated_policy_list: () -> ::Array[Types::AssociatedPolicy]
+        def associated_scope_list: () -> ::Array[Types::AssociatedScope]
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def deployment_coverage: () -> ::Array[Types::DeploymentCoverageEntry]
+        def warnings: () -> ::Array[Types::DeploymentWarningEntry]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_deployment-instance_method
+      def create_deployment: (
+                               ?client_token: ::String,
+                               deployment_name: ::String,
+                               ?deployment_description: ::String,
+                               deployment_configuration: {
+                                 enable_cross_account_visibility: bool
+                               },
+                               associated_policy_list: Array[
+                                 {
+                                   policy_identifier: ::String
+                                 }
+                               ],
+                               associated_scope_list: Array[
+                                 {
+                                   scope_identifier: ::String
+                                 }
+                               ],
+                               ?is_published: bool,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentResponseSuccess
+
+      interface _CreateDeploymentSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeploymentSnapshotOutput]
+        def deployment_id: () -> ::String
+        def deployment_arn: () -> ::String
+        def deployment_name: () -> ::String
+        def deployment_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def deployment_configuration: () -> Types::DeploymentConfiguration
+        def associated_policy_list: () -> ::Array[Types::AssociatedPolicy]
+        def associated_scope_list: () -> ::Array[Types::AssociatedScope]
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_deployment_snapshot-instance_method
+      def create_deployment_snapshot: (
+                                        deployment_identifier: ::String,
+                                        ?client_token: ::String,
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _CreateDeploymentSnapshotResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentSnapshotResponseSuccess
+
+      interface _CreatePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePolicyOutput]
+        def policy_id: () -> ::String
+        def policy_arn: () -> ::String
+        def policy_name: () -> ::String
+        def policy_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def priority: () -> ::Integer
+        def associated_template_and_rule_list: () -> ::Array[Types::AssociatedTemplateOrRule]
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED")
+        def policy_configuration: () -> Types::PolicyConfiguration
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_policy-instance_method
+      def create_policy: (
+                           ?client_token: ::String,
+                           policy_name: ::String,
+                           ?policy_description: ::String,
+                           priority: ::Integer,
+                           ?associated_template_and_rule_list: Array[
+                             {
+                               template_identifier: ::String?,
+                               rule_identifier: ::String?
+                             }
+                           ],
+                           firewall_type: ("WAF" | "SHIELD_ADVANCED"),
+                           policy_configuration: Params::policy_configuration,
+                           ?is_published: bool,
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreatePolicyResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyResponseSuccess
+
+      interface _CreatePolicySnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePolicySnapshotOutput]
+        def policy_id: () -> ::String
+        def policy_arn: () -> ::String
+        def policy_name: () -> ::String
+        def policy_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def priority: () -> ::Integer
+        def associated_template_and_rule_list: () -> ::Array[Types::AssociatedTemplateOrRule]
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED")
+        def policy_configuration: () -> Types::PolicyConfiguration
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_policy_snapshot-instance_method
+      def create_policy_snapshot: (
+                                    policy_identifier: ::String,
+                                    ?client_token: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreatePolicySnapshotResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicySnapshotResponseSuccess
+
+      interface _CreateRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleOutput]
+        def rule_id: () -> ::String
+        def rule_arn: () -> ::String
+        def rule_name: () -> ::String
+        def firewall_type: () -> ("WAF")
+        def rule_type: () -> ("CONFIGURATION" | "INSPECTION")
+        def rule_description: () -> ::String
+        def configuration: () -> untyped
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_rule-instance_method
+      def create_rule: (
+                         ?client_token: ::String,
+                         rule_name: ::String,
+                         firewall_type: ("WAF"),
+                         rule_type: ("CONFIGURATION" | "INSPECTION"),
+                         ?rule_description: ::String,
+                         configuration: {
+                         },
+                         ?is_published: bool,
+                         ?tags: Hash[::String, ::String]
+                       ) -> _CreateRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleResponseSuccess
+
+      interface _CreateRuleSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleSnapshotOutput]
+        def rule_id: () -> ::String
+        def rule_arn: () -> ::String
+        def rule_name: () -> ::String
+        def firewall_type: () -> ("WAF")
+        def rule_type: () -> ("CONFIGURATION" | "INSPECTION")
+        def rule_description: () -> ::String
+        def configuration: () -> untyped
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_rule_snapshot-instance_method
+      def create_rule_snapshot: (
+                                  rule_identifier: ::String,
+                                  ?client_token: ::String,
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _CreateRuleSnapshotResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleSnapshotResponseSuccess
+
+      interface _CreateScopeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScopeOutput]
+        def scope_id: () -> ::String
+        def scope_arn: () -> ::String
+        def scope_name: () -> ::String
+        def scope_description: () -> ::String
+        def scope_configuration: () -> Types::ScopeConfiguration
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_scope-instance_method
+      def create_scope: (
+                          ?client_token: ::String,
+                          scope_name: ::String,
+                          ?scope_description: ::String,
+                          scope_configuration: Params::scope_configuration,
+                          ?is_published: bool,
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateScopeResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScopeResponseSuccess
+
+      interface _CreateScopeSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScopeSnapshotOutput]
+        def scope_id: () -> ::String
+        def scope_arn: () -> ::String
+        def scope_name: () -> ::String
+        def scope_description: () -> ::String
+        def scope_configuration: () -> Types::ScopeConfiguration
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_scope_snapshot-instance_method
+      def create_scope_snapshot: (
+                                   scope_identifier: ::String,
+                                   ?client_token: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateScopeSnapshotResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScopeSnapshotResponseSuccess
+
+      interface _CreateTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTemplateOutput]
+        def template_id: () -> ::String
+        def template_arn: () -> ::String
+        def template_name: () -> ::String
+        def template_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def associated_rule_list: () -> ::Array[Types::AssociatedRule]
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def firewall_type: () -> ("WAF")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_template-instance_method
+      def create_template: (
+                             ?client_token: ::String,
+                             template_name: ::String,
+                             ?template_description: ::String,
+                             associated_rule_list: Array[
+                               {
+                                 rule_identifier: ::String
+                               }
+                             ],
+                             firewall_type: ("WAF"),
+                             ?is_published: bool,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTemplateResponseSuccess
+
+      interface _CreateTemplateSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTemplateSnapshotOutput]
+        def template_id: () -> ::String
+        def template_arn: () -> ::String
+        def template_name: () -> ::String
+        def template_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def associated_rule_list: () -> ::Array[Types::AssociatedRule]
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def firewall_type: () -> ("WAF")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#create_template_snapshot-instance_method
+      def create_template_snapshot: (
+                                      template_identifier: ::String,
+                                      ?client_token: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateTemplateSnapshotResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTemplateSnapshotResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#delete_admin_account-instance_method
+      def delete_admin_account: (
+                                  account_id: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#delete_deployment-instance_method
+      def delete_deployment: (
+                               deployment_identifier: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#delete_policy-instance_method
+      def delete_policy: (
+                           policy_identifier: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#delete_rule-instance_method
+      def delete_rule: (
+                         rule_identifier: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#delete_scope-instance_method
+      def delete_scope: (
+                          scope_identifier: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#delete_template-instance_method
+      def delete_template: (
+                             template_identifier: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GenerateRuleConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateRuleConfigurationResponse]
+        def configuration: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#generate_rule_configuration-instance_method
+      def generate_rule_configuration: (
+                                         prompt: ::String,
+                                         rule_firewall_type: ("WAF"),
+                                         rule_type: ("CONFIGURATION" | "INSPECTION"),
+                                         ?waf_config_data_type: ("DefaultAction" | "VisibilityConfig" | "CaptchaConfig" | "ChallengeConfig" | "CustomResponseBodies" | "LoggingConfiguration" | "DataProtectionConfig" | "AssociationConfig" | "OnSourceDDoSProtectionConfig" | "TokenDomains"),
+                                         ?current_configuration: ::String,
+                                         ?client_token: ::String
+                                       ) -> _GenerateRuleConfigurationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateRuleConfigurationResponseSuccess
+
+      interface _GetAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAdminAccountResponse]
+        def admin_account_details: () -> Types::AdminAccountDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#get_admin_account-instance_method
+      def get_admin_account: (
+                               account_id: ::String
+                             ) -> _GetAdminAccountResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAdminAccountResponseSuccess
+
+      interface _GetDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentOutput]
+        def deployment_id: () -> ::String
+        def deployment_arn: () -> ::String
+        def deployment_name: () -> ::String
+        def deployment_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def deployment_configuration: () -> Types::DeploymentConfiguration
+        def associated_policy_list: () -> ::Array[Types::AssociatedPolicy]
+        def associated_scope_list: () -> ::Array[Types::AssociatedScope]
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def updated_at: () -> ::Time
+        def deployment_coverage: () -> ::Array[Types::DeploymentCoverageEntry]
+        def warnings: () -> ::Array[Types::DeploymentWarningEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#get_deployment-instance_method
+      def get_deployment: (
+                            deployment_identifier: ::String
+                          ) -> _GetDeploymentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentResponseSuccess
+
+      interface _GetPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyOutput]
+        def policy_id: () -> ::String
+        def policy_arn: () -> ::String
+        def policy_name: () -> ::String
+        def policy_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def priority: () -> ::Integer
+        def associated_template_and_rule_list: () -> ::Array[Types::AssociatedTemplateOrRule]
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED")
+        def policy_configuration: () -> Types::PolicyConfiguration
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#get_policy-instance_method
+      def get_policy: (
+                        policy_identifier: ::String
+                      ) -> _GetPolicyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyResponseSuccess
+
+      interface _GetRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRuleOutput]
+        def rule_id: () -> ::String
+        def rule_arn: () -> ::String
+        def rule_name: () -> ::String
+        def firewall_type: () -> ("WAF")
+        def rule_type: () -> ("CONFIGURATION" | "INSPECTION")
+        def rule_description: () -> ::String
+        def configuration: () -> untyped
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#get_rule-instance_method
+      def get_rule: (
+                      rule_identifier: ::String
+                    ) -> _GetRuleResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRuleResponseSuccess
+
+      interface _GetScopeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetScopeOutput]
+        def scope_id: () -> ::String
+        def scope_arn: () -> ::String
+        def scope_name: () -> ::String
+        def scope_description: () -> ::String
+        def scope_configuration: () -> Types::ScopeConfiguration
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#get_scope-instance_method
+      def get_scope: (
+                       scope_identifier: ::String
+                     ) -> _GetScopeResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScopeResponseSuccess
+
+      interface _GetTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateOutput]
+        def template_id: () -> ::String
+        def template_arn: () -> ::String
+        def template_name: () -> ::String
+        def template_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def associated_rule_list: () -> ::Array[Types::AssociatedRule]
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def firewall_type: () -> ("WAF")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#get_template-instance_method
+      def get_template: (
+                          template_identifier: ::String
+                        ) -> _GetTemplateResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateResponseSuccess
+
+      interface _ListAdminAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAdminAccountsResponse]
+        def next_token: () -> ::String
+        def admin_accounts: () -> ::Array[Types::AdminAccountSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_admin_accounts-instance_method
+      def list_admin_accounts: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListAdminAccountsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAdminAccountsResponseSuccess
+
+      interface _ListAggregateResourceSynchronizationStatusesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAggregateResourceSynchronizationStatusesOutput]
+        def next_token: () -> ::String
+        def resource_synchronization_statuses: () -> ::Array[Types::ResourceSynchronizationStatusSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_aggregate_resource_synchronization_statuses-instance_method
+      def list_aggregate_resource_synchronization_statuses: (
+                                                              ?synchronization_status: ("IN_SYNC" | "OUT_OF_SYNC" | "NOT_APPLICABLE"),
+                                                              ?max_results: ::Integer,
+                                                              ?next_token: ::String
+                                                            ) -> _ListAggregateResourceSynchronizationStatusesResponseSuccess
+                                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAggregateResourceSynchronizationStatusesResponseSuccess
+
+      interface _ListDeploymentSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentSnapshotsOutput]
+        def next_token: () -> ::String
+        def snapshots: () -> ::Array[Types::DeploymentSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_deployment_snapshots-instance_method
+      def list_deployment_snapshots: (
+                                       deployment_identifier: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListDeploymentSnapshotsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentSnapshotsResponseSuccess
+
+      interface _ListDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentsOutput]
+        def next_token: () -> ::String
+        def deployments: () -> ::Array[Types::DeploymentSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_deployments-instance_method
+      def list_deployments: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              ?status: ("ACTIVE" | "DRAFT" | "DISABLED")
+                            ) -> _ListDeploymentsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentsResponseSuccess
+
+      interface _ListPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPoliciesOutput]
+        def next_token: () -> ::String
+        def policies: () -> ::Array[Types::PolicySummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_policies-instance_method
+      def list_policies: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?status: ("ACTIVE" | "DRAFT" | "DISABLED")
+                         ) -> _ListPoliciesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPoliciesResponseSuccess
+
+      interface _ListPolicySnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicySnapshotsOutput]
+        def next_token: () -> ::String
+        def snapshots: () -> ::Array[Types::PolicySummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_policy_snapshots-instance_method
+      def list_policy_snapshots: (
+                                   policy_identifier: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListPolicySnapshotsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicySnapshotsResponseSuccess
+
+      interface _ListResourceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceAssociationsOutput]
+        def next_token: () -> ::String
+        def resource_associations: () -> ::Array[Types::ResourceAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_resource_associations-instance_method
+      def list_resource_associations: (
+                                        resource_identifier: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListResourceAssociationsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceAssociationsResponseSuccess
+
+      interface _ListResourceSynchronizationStatusesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceSynchronizationStatusesOutput]
+        def next_token: () -> ::String
+        def resource_synchronization_statuses: () -> ::Array[Types::ResourceSynchronizationStatusSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_resource_synchronization_statuses-instance_method
+      def list_resource_synchronization_statuses: (
+                                                    deployment_identifier: ::String,
+                                                    ?synchronization_status: ("IN_SYNC" | "OUT_OF_SYNC" | "NOT_APPLICABLE"),
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _ListResourceSynchronizationStatusesResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceSynchronizationStatusesResponseSuccess
+
+      interface _ListRuleSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleSnapshotsOutput]
+        def next_token: () -> ::String
+        def snapshots: () -> ::Array[Types::RuleSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_rule_snapshots-instance_method
+      def list_rule_snapshots: (
+                                 rule_identifier: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListRuleSnapshotsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleSnapshotsResponseSuccess
+
+      interface _ListRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRulesOutput]
+        def next_token: () -> ::String
+        def rules: () -> ::Array[Types::RuleSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_rules-instance_method
+      def list_rules: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String,
+                        ?status: ("ACTIVE" | "DRAFT" | "DISABLED")
+                      ) -> _ListRulesResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRulesResponseSuccess
+
+      interface _ListScopeSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScopeSnapshotsOutput]
+        def next_token: () -> ::String
+        def snapshots: () -> ::Array[Types::ScopeSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_scope_snapshots-instance_method
+      def list_scope_snapshots: (
+                                  scope_identifier: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListScopeSnapshotsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScopeSnapshotsResponseSuccess
+
+      interface _ListScopesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScopesOutput]
+        def next_token: () -> ::String
+        def scopes: () -> ::Array[Types::ScopeSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_scopes-instance_method
+      def list_scopes: (
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?status: ("ACTIVE" | "DRAFT" | "DISABLED")
+                       ) -> _ListScopesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScopesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTemplateSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTemplateSnapshotsOutput]
+        def next_token: () -> ::String
+        def snapshots: () -> ::Array[Types::TemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_template_snapshots-instance_method
+      def list_template_snapshots: (
+                                     template_identifier: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListTemplateSnapshotsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTemplateSnapshotsResponseSuccess
+
+      interface _ListTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTemplatesOutput]
+        def next_token: () -> ::String
+        def templates: () -> ::Array[Types::TemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#list_templates-instance_method
+      def list_templates: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?status: ("ACTIVE" | "DRAFT" | "DISABLED")
+                          ) -> _ListTemplatesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTemplatesResponseSuccess
+
+      interface _PutAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAdminAccountResponse]
+        def admin_account_details: () -> Types::AdminAccountDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#put_admin_account-instance_method
+      def put_admin_account: (
+                               account_id: ::String,
+                               priority: ::Integer,
+                               ?admin_scope: {
+                                 scope_filter: {
+                                   include_all: {
+                                   }?,
+                                   include_only: {
+                                     accounts: Array[::String]?,
+                                     organizational_units: Array[::String]?
+                                   }?,
+                                   exclude_only: {
+                                     accounts: Array[::String]?,
+                                     organizational_units: Array[::String]?
+                                   }?
+                                 }?,
+                                 firewall_type_scope: {
+                                   all_firewall_types_enabled: bool?,
+                                   firewall_types: Array[("WAF" | "SHIELD_ADVANCED")]?
+                                 }?
+                               }
+                             ) -> _PutAdminAccountResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAdminAccountResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeploymentOutput]
+        def deployment_id: () -> ::String
+        def deployment_arn: () -> ::String
+        def deployment_name: () -> ::String
+        def deployment_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def deployment_configuration: () -> Types::DeploymentConfiguration
+        def associated_policy_list: () -> ::Array[Types::AssociatedPolicy]
+        def associated_scope_list: () -> ::Array[Types::AssociatedScope]
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def deployment_coverage: () -> ::Array[Types::DeploymentCoverageEntry]
+        def warnings: () -> ::Array[Types::DeploymentWarningEntry]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#update_deployment-instance_method
+      def update_deployment: (
+                               deployment_identifier: ::String,
+                               update_token: ::String,
+                               ?deployment_description: ::String,
+                               ?deployment_configuration: {
+                                 enable_cross_account_visibility: bool
+                               },
+                               ?associated_policy_list: Array[
+                                 {
+                                   policy_identifier: ::String
+                                 }
+                               ],
+                               ?associated_scope_list: Array[
+                                 {
+                                   scope_identifier: ::String
+                                 }
+                               ],
+                               is_published: bool,
+                               ?client_token: ::String
+                             ) -> _UpdateDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeploymentResponseSuccess
+
+      interface _UpdatePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePolicyOutput]
+        def policy_id: () -> ::String
+        def policy_arn: () -> ::String
+        def policy_name: () -> ::String
+        def policy_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def priority: () -> ::Integer
+        def associated_template_and_rule_list: () -> ::Array[Types::AssociatedTemplateOrRule]
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def firewall_type: () -> ("WAF" | "SHIELD_ADVANCED")
+        def policy_configuration: () -> Types::PolicyConfiguration
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#update_policy-instance_method
+      def update_policy: (
+                           policy_identifier: ::String,
+                           update_token: ::String,
+                           ?policy_description: ::String,
+                           ?priority: ::Integer,
+                           ?associated_template_and_rule_list: Array[
+                             {
+                               template_identifier: ::String?,
+                               rule_identifier: ::String?
+                             }
+                           ],
+                           ?policy_configuration: Params::policy_configuration,
+                           is_published: bool,
+                           ?client_token: ::String
+                         ) -> _UpdatePolicyResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePolicyResponseSuccess
+
+      interface _UpdateRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuleOutput]
+        def rule_id: () -> ::String
+        def rule_arn: () -> ::String
+        def rule_name: () -> ::String
+        def firewall_type: () -> ("WAF")
+        def rule_type: () -> ("CONFIGURATION" | "INSPECTION")
+        def rule_description: () -> ::String
+        def configuration: () -> untyped
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#update_rule-instance_method
+      def update_rule: (
+                         rule_identifier: ::String,
+                         update_token: ::String,
+                         ?rule_type: ("CONFIGURATION" | "INSPECTION"),
+                         ?rule_description: ::String,
+                         ?configuration: {
+                         },
+                         is_published: bool,
+                         ?client_token: ::String
+                       ) -> _UpdateRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleResponseSuccess
+
+      interface _UpdateScopeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScopeOutput]
+        def scope_id: () -> ::String
+        def scope_arn: () -> ::String
+        def scope_name: () -> ::String
+        def scope_description: () -> ::String
+        def scope_configuration: () -> Types::ScopeConfiguration
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#update_scope-instance_method
+      def update_scope: (
+                          scope_identifier: ::String,
+                          update_token: ::String,
+                          ?scope_description: ::String,
+                          ?scope_configuration: Params::scope_configuration,
+                          is_published: bool,
+                          ?client_token: ::String
+                        ) -> _UpdateScopeResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScopeResponseSuccess
+
+      interface _UpdateTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTemplateOutput]
+        def template_id: () -> ::String
+        def template_arn: () -> ::String
+        def template_name: () -> ::String
+        def template_description: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "DISABLED")
+        def version: () -> ::String
+        def associated_rule_list: () -> ::Array[Types::AssociatedRule]
+        def update_token: () -> ::String
+        def is_snapshot: () -> bool
+        def has_published_version: () -> bool
+        def firewall_type: () -> ("WAF")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkSecurityManager/Client.html#update_template-instance_method
+      def update_template: (
+                             template_identifier: ::String,
+                             update_token: ::String,
+                             ?template_description: ::String,
+                             ?associated_rule_list: Array[
+                               {
+                                 rule_identifier: ::String
+                               }
+                             ],
+                             is_published: bool,
+                             ?client_token: ::String
+                           ) -> _UpdateTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTemplateResponseSuccess
+    end
+  end
+end
+

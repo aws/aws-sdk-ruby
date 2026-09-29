@@ -197,6 +197,7 @@ module Aws::ECS
     DeploymentConfiguration = Shapes::StructureShape.new(name: 'DeploymentConfiguration')
     DeploymentController = Shapes::StructureShape.new(name: 'DeploymentController')
     DeploymentControllerType = Shapes::StringShape.new(name: 'DeploymentControllerType')
+    DeploymentEarlySuccessCriteria = Shapes::StructureShape.new(name: 'DeploymentEarlySuccessCriteria')
     DeploymentEphemeralStorage = Shapes::StructureShape.new(name: 'DeploymentEphemeralStorage')
     DeploymentLifecycleHook = Shapes::StructureShape.new(name: 'DeploymentLifecycleHook')
     DeploymentLifecycleHookAction = Shapes::StringShape.new(name: 'DeploymentLifecycleHookAction')
@@ -280,6 +281,7 @@ module Aws::ECS
     ExecuteCommandLogging = Shapes::StringShape.new(name: 'ExecuteCommandLogging')
     ExecuteCommandRequest = Shapes::StructureShape.new(name: 'ExecuteCommandRequest')
     ExecuteCommandResponse = Shapes::StructureShape.new(name: 'ExecuteCommandResponse')
+    ExpressCpuArchitecture = Shapes::StringShape.new(name: 'ExpressCpuArchitecture')
     ExpressGatewayContainer = Shapes::StructureShape.new(name: 'ExpressGatewayContainer')
     ExpressGatewayRepositoryCredentials = Shapes::StructureShape.new(name: 'ExpressGatewayRepositoryCredentials')
     ExpressGatewayScalingTarget = Shapes::StructureShape.new(name: 'ExpressGatewayScalingTarget')
@@ -304,6 +306,7 @@ module Aws::ECS
     GpuIds = Shapes::ListShape.new(name: 'GpuIds')
     HealthCheck = Shapes::StructureShape.new(name: 'HealthCheck')
     HealthStatus = Shapes::StringShape.new(name: 'HealthStatus')
+    HealthyPercentInteger = Shapes::IntegerShape.new(name: 'HealthyPercentInteger')
     HookDetails = Shapes::DocumentShape.new(name: 'HookDetails', document: true)
     HostEntry = Shapes::StructureShape.new(name: 'HostEntry')
     HostEntryList = Shapes::ListShape.new(name: 'HostEntryList')
@@ -533,6 +536,7 @@ module Aws::ECS
     ServiceRegistries = Shapes::ListShape.new(name: 'ServiceRegistries')
     ServiceRegistry = Shapes::StructureShape.new(name: 'ServiceRegistry')
     ServiceRevision = Shapes::StructureShape.new(name: 'ServiceRevision')
+    ServiceRevisionCleanup = Shapes::StringShape.new(name: 'ServiceRevisionCleanup')
     ServiceRevisionLoadBalancer = Shapes::StructureShape.new(name: 'ServiceRevisionLoadBalancer')
     ServiceRevisionLoadBalancers = Shapes::ListShape.new(name: 'ServiceRevisionLoadBalancers')
     ServiceRevisionOverrides = Shapes::StructureShape.new(name: 'ServiceRevisionOverrides')
@@ -1004,6 +1008,7 @@ module Aws::ECS
     CreateDaemonRequest.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableECSManagedTags"))
     CreateDaemonRequest.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
     CreateDaemonRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    CreateDaemonRequest.add_member(:critical, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "critical"))
     CreateDaemonRequest.struct_class = Types::CreateDaemonRequest
 
     CreateDaemonResponse.add_member(:daemon_arn, Shapes::ShapeRef.new(shape: String, location_name: "daemonArn"))
@@ -1022,6 +1027,7 @@ module Aws::ECS
     CreateExpressGatewayServiceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: ExpressGatewayServiceNetworkConfiguration, location_name: "networkConfiguration"))
     CreateExpressGatewayServiceRequest.add_member(:cpu, Shapes::ShapeRef.new(shape: String, location_name: "cpu"))
     CreateExpressGatewayServiceRequest.add_member(:memory, Shapes::ShapeRef.new(shape: String, location_name: "memory"))
+    CreateExpressGatewayServiceRequest.add_member(:cpu_architecture, Shapes::ShapeRef.new(shape: ExpressCpuArchitecture, location_name: "cpuArchitecture"))
     CreateExpressGatewayServiceRequest.add_member(:scaling_target, Shapes::ShapeRef.new(shape: ExpressGatewayScalingTarget, location_name: "scalingTarget"))
     CreateExpressGatewayServiceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateExpressGatewayServiceRequest.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
@@ -1097,6 +1103,7 @@ module Aws::ECS
 
     DaemonCapacityProvider.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     DaemonCapacityProvider.add_member(:running_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningCount"))
+    DaemonCapacityProvider.add_member(:without_daemon_count, Shapes::ShapeRef.new(shape: Integer, location_name: "withoutDaemonCount"))
     DaemonCapacityProvider.struct_class = Types::DaemonCapacityProvider
 
     DaemonCapacityProviderList.member = Shapes::ShapeRef.new(shape: DaemonCapacityProvider)
@@ -1169,6 +1176,7 @@ module Aws::ECS
 
     DaemonDeploymentCapacityProvider.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     DaemonDeploymentCapacityProvider.add_member(:running_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "runningInstanceCount"))
+    DaemonDeploymentCapacityProvider.add_member(:without_daemon_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "withoutDaemonInstanceCount"))
     DaemonDeploymentCapacityProvider.add_member(:draining_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "drainingInstanceCount"))
     DaemonDeploymentCapacityProvider.struct_class = Types::DaemonDeploymentCapacityProvider
 
@@ -1184,6 +1192,7 @@ module Aws::ECS
     DaemonDeploymentRevisionDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     DaemonDeploymentRevisionDetail.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: DaemonDeploymentCapacityProviderList, location_name: "capacityProviders"))
     DaemonDeploymentRevisionDetail.add_member(:total_running_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "totalRunningInstanceCount"))
+    DaemonDeploymentRevisionDetail.add_member(:total_without_daemon_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "totalWithoutDaemonInstanceCount"))
     DaemonDeploymentRevisionDetail.add_member(:total_draining_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "totalDrainingInstanceCount"))
     DaemonDeploymentRevisionDetail.struct_class = Types::DaemonDeploymentRevisionDetail
 
@@ -1235,11 +1244,13 @@ module Aws::ECS
     DaemonRevision.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: DaemonPropagateTags, location_name: "propagateTags"))
     DaemonRevision.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enableECSManagedTags"))
     DaemonRevision.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enableExecuteCommand"))
+    DaemonRevision.add_member(:critical, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "critical"))
     DaemonRevision.struct_class = Types::DaemonRevision
 
     DaemonRevisionDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     DaemonRevisionDetail.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: DaemonCapacityProviderList, location_name: "capacityProviders"))
     DaemonRevisionDetail.add_member(:total_running_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalRunningCount"))
+    DaemonRevisionDetail.add_member(:total_without_daemon_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalWithoutDaemonCount"))
     DaemonRevisionDetail.struct_class = Types::DaemonRevisionDetail
 
     DaemonRevisionDetailList.member = Shapes::ShapeRef.new(shape: DaemonRevisionDetail)
@@ -1408,10 +1419,16 @@ module Aws::ECS
     DeploymentConfiguration.add_member(:lifecycle_hooks, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookList, location_name: "lifecycleHooks"))
     DeploymentConfiguration.add_member(:linear_configuration, Shapes::ShapeRef.new(shape: LinearConfiguration, location_name: "linearConfiguration"))
     DeploymentConfiguration.add_member(:canary_configuration, Shapes::ShapeRef.new(shape: CanaryConfiguration, location_name: "canaryConfiguration"))
+    DeploymentConfiguration.add_member(:early_success_criteria, Shapes::ShapeRef.new(shape: DeploymentEarlySuccessCriteria, location_name: "earlySuccessCriteria"))
     DeploymentConfiguration.struct_class = Types::DeploymentConfiguration
 
     DeploymentController.add_member(:type, Shapes::ShapeRef.new(shape: DeploymentControllerType, required: true, location_name: "type"))
     DeploymentController.struct_class = Types::DeploymentController
+
+    DeploymentEarlySuccessCriteria.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
+    DeploymentEarlySuccessCriteria.add_member(:healthy_percent, Shapes::ShapeRef.new(shape: HealthyPercentInteger, location_name: "healthyPercent"))
+    DeploymentEarlySuccessCriteria.add_member(:source_service_revision_cleanup, Shapes::ShapeRef.new(shape: ServiceRevisionCleanup, location_name: "sourceServiceRevisionCleanup"))
+    DeploymentEarlySuccessCriteria.struct_class = Types::DeploymentEarlySuccessCriteria
 
     DeploymentEphemeralStorage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     DeploymentEphemeralStorage.struct_class = Types::DeploymentEphemeralStorage
@@ -1703,6 +1720,7 @@ module Aws::ECS
     ExpressGatewayServiceConfiguration.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
     ExpressGatewayServiceConfiguration.add_member(:cpu, Shapes::ShapeRef.new(shape: String, location_name: "cpu"))
     ExpressGatewayServiceConfiguration.add_member(:memory, Shapes::ShapeRef.new(shape: String, location_name: "memory"))
+    ExpressGatewayServiceConfiguration.add_member(:cpu_architecture, Shapes::ShapeRef.new(shape: ExpressCpuArchitecture, location_name: "cpuArchitecture"))
     ExpressGatewayServiceConfiguration.add_member(:network_configuration, Shapes::ShapeRef.new(shape: ExpressGatewayServiceNetworkConfiguration, location_name: "networkConfiguration"))
     ExpressGatewayServiceConfiguration.add_member(:health_check_path, Shapes::ShapeRef.new(shape: String, location_name: "healthCheckPath"))
     ExpressGatewayServiceConfiguration.add_member(:primary_container, Shapes::ShapeRef.new(shape: ExpressGatewayContainer, location_name: "primaryContainer"))
@@ -3065,6 +3083,7 @@ module Aws::ECS
     UpdateDaemonRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: DaemonPropagateTags, location_name: "propagateTags"))
     UpdateDaemonRequest.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableECSManagedTags"))
     UpdateDaemonRequest.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
+    UpdateDaemonRequest.add_member(:critical, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "critical"))
     UpdateDaemonRequest.struct_class = Types::UpdateDaemonRequest
 
     UpdateDaemonResponse.add_member(:daemon_arn, Shapes::ShapeRef.new(shape: String, location_name: "daemonArn"))
@@ -3082,6 +3101,7 @@ module Aws::ECS
     UpdateExpressGatewayServiceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: ExpressGatewayServiceNetworkConfiguration, location_name: "networkConfiguration"))
     UpdateExpressGatewayServiceRequest.add_member(:cpu, Shapes::ShapeRef.new(shape: String, location_name: "cpu"))
     UpdateExpressGatewayServiceRequest.add_member(:memory, Shapes::ShapeRef.new(shape: String, location_name: "memory"))
+    UpdateExpressGatewayServiceRequest.add_member(:cpu_architecture, Shapes::ShapeRef.new(shape: ExpressCpuArchitecture, location_name: "cpuArchitecture"))
     UpdateExpressGatewayServiceRequest.add_member(:scaling_target, Shapes::ShapeRef.new(shape: ExpressGatewayScalingTarget, location_name: "scalingTarget"))
     UpdateExpressGatewayServiceRequest.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
     UpdateExpressGatewayServiceRequest.struct_class = Types::UpdateExpressGatewayServiceRequest

@@ -478,30 +478,30 @@ module Aws::Batch
     # `PENDING`, or `RUNNABLE` state are cancelled and the job status is
     # updated to `FAILED`.
     #
-    # <note markdown="1"> A `PENDING` job is canceled after all dependency jobs are completed.
-    # Therefore, it may take longer than expected to cancel a job in
+    # <note markdown="1"> A `PENDING` job is cancelled after all dependency jobs are completed.
+    # Therefore, it might take longer than expected to cancel a job in
     # `PENDING` status.
     #
     #  When you try to cancel an array parent job in `PENDING`, Batch
-    # attempts to cancel all child jobs. The array parent job is canceled
+    # attempts to cancel all child jobs. The array parent job is cancelled
     # when all child jobs are completed.
     #
     #  </note>
     #
     # Jobs that progressed to the `STARTING` or `RUNNING` state aren't
-    # canceled. However, the API operation still succeeds, even if no job is
-    # canceled. These jobs must be terminated with the TerminateJob
-    # operation.
+    # cancelled. However, the API operation still succeeds, even if no job
+    # is cancelled. These jobs must be terminated with the TerminateJob or
+    # TerminateJobs operation.
     #
     # @option params [required, String] :job_id
     #   The Batch job ID of the job to cancel.
     #
     # @option params [required, String] :reason
-    #   A message to attach to the job that explains the reason for canceling
+    #   A message to attach to the job that explains the reason for cancelling
     #   it. This message is returned by future DescribeJobs operations on the
     #   job. It is also recorded in the Batch activity logs.
     #
-    #   This parameter has as limit of 1024 characters.
+    #   This parameter has a limit of 1024 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -532,6 +532,98 @@ module Aws::Batch
     # @param [Hash] params ({})
     def cancel_job(params = {}, options = {})
       req = build_request(:cancel_job, params)
+      req.send_request(options)
+    end
+
+    # Cancels up to 50 jobs in an Batch job queue. This is a bulk version of
+    # CancelJob. Jobs that are in a `SUBMITTED`, `PENDING`, or `RUNNABLE`
+    # state are cancelled and the job status is updated to `FAILED`.
+    #
+    # <note markdown="1"> A `PENDING` job is cancelled after all dependency jobs are completed.
+    # Therefore, it might take longer than expected to cancel a job in
+    # `PENDING` status.
+    #
+    #  When you try to cancel an array parent job in `PENDING`, Batch
+    # attempts to cancel all child jobs. The array parent job is cancelled
+    # when all child jobs are completed.
+    #
+    #  </note>
+    #
+    # Jobs that progressed to the `STARTING` or `RUNNING` state aren't
+    # cancelled. These jobs must be terminated with the TerminateJob or
+    # TerminateJobs operation.
+    #
+    # Batch reports the result for each job individually in the response.
+    # Jobs that were processed successfully are reported in the `successful`
+    # list. Jobs that encountered errors are reported in the `errors` list.
+    # The response returns an HTTP status code of `200` even when some jobs
+    # encountered errors, so check the `errors` list. Jobs that can't be
+    # found are treated as successfully processed.
+    #
+    # @option params [required, Array<String>] :jobs
+    #   An array of up to 50 Batch job IDs of the jobs to cancel.
+    #
+    # @option params [required, String] :reason
+    #   A message to attach to the job that explains the reason for cancelling
+    #   it. This message is returned by future DescribeJobs operations on the
+    #   job. It is also recorded in the Batch activity logs.
+    #
+    #   This parameter has a limit of 1024 characters.
+    #
+    # @return [Types::CancelJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelJobsResponse#successful #successful} => Array&lt;String&gt;
+    #   * {Types::CancelJobsResponse#errors #errors} => Array&lt;Types::CancelJobsErrorDetail&gt;
+    #
+    #
+    # @example Example: To cancel multiple jobs
+    #
+    #   # This example cancels the jobs with the specified job IDs.
+    #
+    #   resp = client.cancel_jobs({
+    #     jobs: [
+    #       "1d828f65-7a4d-42e8-996d-3b900ed59dc4", 
+    #       "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #     ], 
+    #     reason: "Cancelling jobs.", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #       {
+    #         code: "ServerException", 
+    #         job: "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #         message: "Failed to read job state. Please retry this job.", 
+    #       }, 
+    #     ], 
+    #     successful: [
+    #       "1d828f65-7a4d-42e8-996d-3b900ed59dc4", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_jobs({
+    #     jobs: ["String"], # required
+    #     reason: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].job #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobs AWS API Documentation
+    #
+    # @overload cancel_jobs(params = {})
+    # @param [Hash] params ({})
+    def cancel_jobs(params = {}, options = {})
+      req = build_request(:cancel_jobs, params)
       req.send_request(options)
     end
 
@@ -709,6 +801,11 @@ module Aws::Batch
     # @option params [String] :context
     #   Reserved.
     #
+    # @option params [Types::EcsSettings] :ecs_settings
+    #   The Amazon ECS settings for the compute environment. These settings
+    #   control CloudWatch Container Insights collection for the compute
+    #   environment.
+    #
     # @return [Types::CreateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateComputeEnvironmentResponse#compute_environment_name #compute_environment_name} => String
@@ -801,6 +898,131 @@ module Aws::Batch
     #     compute_environment_name: "M4Spot", 
     #   }
     #
+    # @example Example: To create an ECS Managed Instances compute environment
+    #
+    #   # This example creates a managed compute environment that uses ECS Managed Instances.
+    #
+    #   resp = client.create_compute_environment({
+    #     type: "MANAGED", 
+    #     compute_environment_name: "my-managed-instances-ce", 
+    #     compute_resources: {
+    #       type: "ECS_MANAGED_INSTANCES", 
+    #       managed_instances_provider: {
+    #         infrastructure_role_arn: "arn:aws:iam::123456789012:role/ecsInfrastructureRole", 
+    #         instance_launch_template: {
+    #           ec2_instance_profile_arn: "arn:aws:iam::123456789012:instance-profile/ecsInstanceProfile", 
+    #           network_configuration: {
+    #             security_groups: [
+    #               "sg-abcde012", 
+    #             ], 
+    #             subnets: [
+    #               "subnet-abcde012", 
+    #               "subnet-bcde012a", 
+    #             ], 
+    #           }, 
+    #         }, 
+    #       }, 
+    #       maxv_cpus: 256, 
+    #     }, 
+    #     state: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     compute_environment_arn: "arn:aws:batch:us-east-1:123456789012:compute-environment/my-managed-instances-ce", 
+    #     compute_environment_name: "my-managed-instances-ce", 
+    #   }
+    #
+    # @example Example: To create an ECS Managed Instances Spot compute environment
+    #
+    #   # This example creates a Spot-backed ECS Managed Instances compute environment constrained to specific instance types.
+    #
+    #   resp = client.create_compute_environment({
+    #     type: "MANAGED", 
+    #     compute_environment_name: "my-spot-managed-instances-ce", 
+    #     compute_resources: {
+    #       type: "ECS_MANAGED_INSTANCES", 
+    #       managed_instances_provider: {
+    #         infrastructure_role_arn: "arn:aws:iam::123456789012:role/ecsInfrastructureRole", 
+    #         instance_launch_template: {
+    #           capacity_option_type: "SPOT", 
+    #           ec2_instance_profile_arn: "arn:aws:iam::123456789012:instance-profile/ecsInstanceProfile", 
+    #           instance_requirements: {
+    #             allowed_instance_types: [
+    #               "m5.large", 
+    #               "m5.xlarge", 
+    #               "m6i.large", 
+    #               "m6i.xlarge", 
+    #             ], 
+    #           }, 
+    #           network_configuration: {
+    #             security_groups: [
+    #               "sg-abcde012", 
+    #             ], 
+    #             subnets: [
+    #               "subnet-abcde012", 
+    #               "subnet-bcde012a", 
+    #             ], 
+    #           }, 
+    #         }, 
+    #       }, 
+    #       maxv_cpus: 1000, 
+    #     }, 
+    #     state: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     compute_environment_arn: "arn:aws:batch:us-east-1:123456789012:compute-environment/my-spot-managed-instances-ce", 
+    #     compute_environment_name: "my-spot-managed-instances-ce", 
+    #   }
+    #
+    # @example Example: To create an ECS Managed Instances compute environment with capacity reservations
+    #
+    #   # This example creates an ECS Managed Instances compute environment that targets On-Demand Capacity Reservations for
+    #   # predictable capacity.
+    #
+    #   resp = client.create_compute_environment({
+    #     type: "MANAGED", 
+    #     compute_environment_name: "my-reserved-managed-instances-ce", 
+    #     compute_resources: {
+    #       type: "ECS_MANAGED_INSTANCES", 
+    #       managed_instances_provider: {
+    #         infrastructure_role_arn: "arn:aws:iam::123456789012:role/ecsInfrastructureRole", 
+    #         instance_launch_template: {
+    #           capacity_reservations: {
+    #             reservation_group_arn: "arn:aws:ec2:us-east-1:123456789012:capacity-reservation-group/my-reservation-group", 
+    #             reservation_preference: "RESERVATIONS_FIRST", 
+    #           }, 
+    #           ec2_instance_profile_arn: "arn:aws:iam::123456789012:instance-profile/ecsInstanceProfile", 
+    #           instance_requirements: {
+    #             allowed_instance_types: [
+    #               "m5.xlarge", 
+    #               "m5.2xlarge", 
+    #             ], 
+    #           }, 
+    #           network_configuration: {
+    #             security_groups: [
+    #               "sg-abcde012", 
+    #             ], 
+    #             subnets: [
+    #               "subnet-abcde012", 
+    #               "subnet-bcde012a", 
+    #             ], 
+    #           }, 
+    #         }, 
+    #       }, 
+    #       maxv_cpus: 512, 
+    #     }, 
+    #     state: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     compute_environment_arn: "arn:aws:batch:us-east-1:123456789012:compute-environment/my-reserved-managed-instances-ce", 
+    #     compute_environment_name: "my-reserved-managed-instances-ce", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_compute_environment({
@@ -809,7 +1031,7 @@ module Aws::Batch
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #     unmanagedv_cpus: 1,
     #     compute_resources: {
-    #       type: "EC2", # required, accepts EC2, SPOT, FARGATE, FARGATE_SPOT
+    #       type: "EC2", # required, accepts EC2, SPOT, FARGATE, FARGATE_SPOT, ECS_MANAGED_INSTANCES
     #       allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, BEST_FIT_PROGRESSIVE_ORDERED, SPOT_CAPACITY_OPTIMIZED, SPOT_PRICE_CAPACITY_OPTIMIZED, SPOT_CAPACITY_OPTIMIZED_PRIORITIZED
     #       minv_cpus: 1,
     #       maxv_cpus: 1, # required
@@ -852,6 +1074,40 @@ module Aws::Batch
     #       scaling_policy: {
     #         min_scale_down_delay_minutes: 1,
     #       },
+    #       managed_instances_provider: {
+    #         propagate_tags: "String",
+    #         infrastructure_role_arn: "String", # required
+    #         instance_launch_template: { # required
+    #           ec2_instance_profile_arn: "String", # required
+    #           network_configuration: { # required
+    #             subnets: ["String"], # required
+    #             security_groups: ["String"], # required
+    #           },
+    #           instance_requirements: {
+    #             allowed_instance_types: ["String"],
+    #           },
+    #           capacity_option_type: "String",
+    #           storage_configuration: {
+    #             storage_size_gi_b: 1,
+    #           },
+    #           monitoring: "String",
+    #           fips_enabled: false,
+    #           capacity_reservations: {
+    #             reservation_group_arn: "String",
+    #             reservation_preference: "String",
+    #           },
+    #           instance_metadata_tags_propagation: false,
+    #           local_storage_configuration: {
+    #             use_local_storage: false,
+    #           },
+    #         },
+    #         infrastructure_optimization: {
+    #           scale_in_after: 1,
+    #         },
+    #       },
+    #       capacity_tags: {
+    #         "TagKey" => "TagValue",
+    #       },
     #     },
     #     service_role: "String",
     #     tags: {
@@ -862,6 +1118,9 @@ module Aws::Batch
     #       kubernetes_namespace: "String", # required
     #     },
     #     context: "String",
+    #     ecs_settings: {
+    #       container_insights: "ENABLED", # accepts ENABLED, ENHANCED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
@@ -1106,6 +1365,55 @@ module Aws::Batch
     #     job_queue_name: "HighPriority", 
     #   }
     #
+    # @example Example: To create a job queue with an ECS Managed Instances compute environment
+    #
+    #   # This example creates a job queue called ManagedInstancesQueue that uses an ECS Managed Instances compute environment.
+    #
+    #   resp = client.create_job_queue({
+    #     compute_environment_order: [
+    #       {
+    #         compute_environment: "my-managed-instances-ce", 
+    #         order: 1, 
+    #       }, 
+    #     ], 
+    #     job_queue_name: "ManagedInstancesQueue", 
+    #     priority: 10, 
+    #     state: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_queue_arn: "arn:aws:batch:us-east-1:123456789012:job-queue/ManagedInstancesQueue", 
+    #     job_queue_name: "ManagedInstancesQueue", 
+    #   }
+    #
+    # @example Example: To create a job queue with On-Demand and Spot ECS Managed Instances compute environments
+    #
+    #   # This example creates a job queue that uses both On-Demand and Spot ECS Managed Instances compute environments. On-Demand
+    #   # environments must be ordered before Spot environments.
+    #
+    #   resp = client.create_job_queue({
+    #     compute_environment_order: [
+    #       {
+    #         compute_environment: "my-managed-instances-ce", 
+    #         order: 1, 
+    #       }, 
+    #       {
+    #         compute_environment: "my-spot-managed-instances-ce", 
+    #         order: 2, 
+    #       }, 
+    #     ], 
+    #     job_queue_name: "ManagedInstancesMixedQueue", 
+    #     priority: 5, 
+    #     state: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_queue_arn: "arn:aws:batch:us-east-1:123456789012:job-queue/ManagedInstancesMixedQueue", 
+    #     job_queue_name: "ManagedInstancesMixedQueue", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_job_queue({
@@ -1125,7 +1433,7 @@ module Aws::Batch
     #         service_environment: "String", # required
     #       },
     #     ],
-    #     job_queue_type: "EKS", # accepts EKS, ECS, ECS_FARGATE, SAGEMAKER_TRAINING
+    #     job_queue_type: "EKS", # accepts EKS, ECS, ECS_FARGATE, SAGEMAKER_TRAINING, ECS_MANAGED_INSTANCES
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1720,7 +2028,7 @@ module Aws::Batch
     #   resp.compute_environments[0].state #=> String, one of "ENABLED", "DISABLED"
     #   resp.compute_environments[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "DELETED", "VALID", "INVALID"
     #   resp.compute_environments[0].status_reason #=> String
-    #   resp.compute_environments[0].compute_resources.type #=> String, one of "EC2", "SPOT", "FARGATE", "FARGATE_SPOT"
+    #   resp.compute_environments[0].compute_resources.type #=> String, one of "EC2", "SPOT", "FARGATE", "FARGATE_SPOT", "ECS_MANAGED_INSTANCES"
     #   resp.compute_environments[0].compute_resources.allocation_strategy #=> String, one of "BEST_FIT", "BEST_FIT_PROGRESSIVE", "BEST_FIT_PROGRESSIVE_ORDERED", "SPOT_CAPACITY_OPTIMIZED", "SPOT_PRICE_CAPACITY_OPTIMIZED", "SPOT_CAPACITY_OPTIMIZED_PRIORITIZED"
     #   resp.compute_environments[0].compute_resources.minv_cpus #=> Integer
     #   resp.compute_environments[0].compute_resources.maxv_cpus #=> Integer
@@ -1756,6 +2064,26 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].batch_image_status #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_kubernetes_version #=> String
     #   resp.compute_environments[0].compute_resources.scaling_policy.min_scale_down_delay_minutes #=> Integer
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.propagate_tags #=> String
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.infrastructure_role_arn #=> String
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.ec2_instance_profile_arn #=> String
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.network_configuration.subnets #=> Array
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.network_configuration.subnets[0] #=> String
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.network_configuration.security_groups #=> Array
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types #=> Array
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.capacity_option_type #=> String
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.monitoring #=> String
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.instance_metadata_tags_propagation #=> Boolean
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.instance_launch_template.local_storage_configuration.use_local_storage #=> Boolean
+    #   resp.compute_environments[0].compute_resources.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
+    #   resp.compute_environments[0].compute_resources.capacity_tags #=> Hash
+    #   resp.compute_environments[0].compute_resources.capacity_tags["TagKey"] #=> String
     #   resp.compute_environments[0].service_role #=> String
     #   resp.compute_environments[0].update_policy.terminate_jobs_on_update #=> Boolean
     #   resp.compute_environments[0].update_policy.job_execution_timeout_minutes #=> Integer
@@ -1764,6 +2092,7 @@ module Aws::Batch
     #   resp.compute_environments[0].container_orchestration_type #=> String, one of "ECS", "EKS"
     #   resp.compute_environments[0].uuid #=> String
     #   resp.compute_environments[0].context #=> String
+    #   resp.compute_environments[0].ecs_settings.container_insights #=> String, one of "ENABLED", "ENHANCED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments AWS API Documentation
@@ -2185,6 +2514,7 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].s3files_volume_configuration.transit_encryption_port #=> Integer
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].s3files_volume_configuration.access_point_arn #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].enable_execute_command #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].network_mode #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.service_account_name #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.host_network #=> Boolean
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.dns_policy #=> String
@@ -2264,7 +2594,7 @@ module Aws::Batch
     #   resp.job_definitions[0].tags["TagKey"] #=> String
     #   resp.job_definitions[0].propagate_tags #=> Boolean
     #   resp.job_definitions[0].platform_capabilities #=> Array
-    #   resp.job_definitions[0].platform_capabilities[0] #=> String, one of "EC2", "FARGATE"
+    #   resp.job_definitions[0].platform_capabilities[0] #=> String, one of "EC2", "FARGATE", "MANAGED_INSTANCES"
     #   resp.job_definitions[0].ecs_properties.task_properties #=> Array
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers #=> Array
     #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].command #=> Array
@@ -2344,6 +2674,7 @@ module Aws::Batch
     #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].s3files_volume_configuration.transit_encryption_port #=> Integer
     #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].s3files_volume_configuration.access_point_arn #=> String
     #   resp.job_definitions[0].ecs_properties.task_properties[0].enable_execute_command #=> Boolean
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].network_mode #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.service_account_name #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.host_network #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.dns_policy #=> String
@@ -2521,7 +2852,7 @@ module Aws::Batch
     #   resp.job_queues[0].service_environment_order #=> Array
     #   resp.job_queues[0].service_environment_order[0].order #=> Integer
     #   resp.job_queues[0].service_environment_order[0].service_environment #=> String
-    #   resp.job_queues[0].job_queue_type #=> String, one of "EKS", "ECS", "ECS_FARGATE", "SAGEMAKER_TRAINING"
+    #   resp.job_queues[0].job_queue_type #=> String, one of "EKS", "ECS", "ECS_FARGATE", "SAGEMAKER_TRAINING", "ECS_MANAGED_INSTANCES"
     #   resp.job_queues[0].tags #=> Hash
     #   resp.job_queues[0].tags["TagKey"] #=> String
     #   resp.job_queues[0].job_state_time_limit_actions #=> Array
@@ -2888,6 +3219,7 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].s3files_volume_configuration.transit_encryption_port #=> Integer
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].s3files_volume_configuration.access_point_arn #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].enable_execute_command #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].network_mode #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.service_account_name #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.host_network #=> Boolean
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.dns_policy #=> String
@@ -2973,7 +3305,7 @@ module Aws::Batch
     #   resp.jobs[0].tags["TagKey"] #=> String
     #   resp.jobs[0].propagate_tags #=> Boolean
     #   resp.jobs[0].platform_capabilities #=> Array
-    #   resp.jobs[0].platform_capabilities[0] #=> String, one of "EC2", "FARGATE"
+    #   resp.jobs[0].platform_capabilities[0] #=> String, one of "EC2", "FARGATE", "MANAGED_INSTANCES"
     #   resp.jobs[0].eks_properties.pod_properties.service_account_name #=> String
     #   resp.jobs[0].eks_properties.pod_properties.host_network #=> Boolean
     #   resp.jobs[0].eks_properties.pod_properties.dns_policy #=> String
@@ -3158,6 +3490,7 @@ module Aws::Batch
     #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].s3files_volume_configuration.transit_encryption_port #=> Integer
     #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].s3files_volume_configuration.access_point_arn #=> String
     #   resp.jobs[0].ecs_properties.task_properties[0].enable_execute_command #=> Boolean
+    #   resp.jobs[0].ecs_properties.task_properties[0].network_mode #=> String
     #   resp.jobs[0].is_cancelled #=> Boolean
     #   resp.jobs[0].is_terminated #=> Boolean
     #   resp.jobs[0].consumable_resource_properties.consumable_resource_list #=> Array
@@ -3802,6 +4135,8 @@ module Aws::Batch
     #   resp.job_summary_list[0].node_properties.num_nodes #=> Integer
     #   resp.job_summary_list[0].node_properties.node_index #=> Integer
     #   resp.job_summary_list[0].job_definition #=> String
+    #   resp.job_summary_list[0].is_cancelled #=> Boolean
+    #   resp.job_summary_list[0].is_terminated #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobs AWS API Documentation
@@ -4197,6 +4532,7 @@ module Aws::Batch
     #   resp.job_summary_list[0].status_reason #=> String
     #   resp.job_summary_list[0].started_at #=> Integer
     #   resp.job_summary_list[0].stopped_at #=> Integer
+    #   resp.job_summary_list[0].is_terminated #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListServiceJobs AWS API Documentation
@@ -4381,7 +4717,12 @@ module Aws::Batch
     # @option params [Array<String>] :platform_capabilities
     #   The platform capabilities required by the job definition. If no value
     #   is specified, it defaults to `EC2`. To run the job on Fargate
-    #   resources, specify `FARGATE`.
+    #   resources, specify `FARGATE`. To run the job on Amazon ECS Managed
+    #   Instances, specify `MANAGED_INSTANCES`.
+    #
+    #   Jobs with the `MANAGED_INSTANCES` platform capability must use
+    #   `ecsProperties` (not `containerProperties`) and do not support
+    #   multi-node parallel jobs.
     #
     #   <note markdown="1"> If the job runs on Amazon EKS resources, then you must not specify
     #   `platformCapabilities`.
@@ -4473,6 +4814,168 @@ module Aws::Batch
     #   {
     #     job_definition_arn: "arn:aws:batch:us-east-1:012345678910:job-definition/sleep30:1", 
     #     job_definition_name: "sleep30", 
+    #     revision: 1, 
+    #   }
+    #
+    # @example Example: To register a job definition on ECS Managed Instances
+    #
+    #   # This example registers a job definition that runs on ECS Managed Instances using ecsProperties with the
+    #   # MANAGED_INSTANCES platform capability.
+    #
+    #   resp = client.register_job_definition({
+    #     type: "container", 
+    #     ecs_properties: {
+    #       task_properties: [
+    #         {
+    #           containers: [
+    #             {
+    #               name: "main", 
+    #               command: [
+    #                 "echo", 
+    #                 "hello managed instances", 
+    #               ], 
+    #               image: "public.ecr.aws/amazonlinux/amazonlinux:2023", 
+    #               resource_requirements: [
+    #                 {
+    #                   type: "VCPU", 
+    #                   value: "1", 
+    #                 }, 
+    #                 {
+    #                   type: "MEMORY", 
+    #                   value: "1024", 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #           ], 
+    #           execution_role_arn: "arn:aws:iam::123456789012:role/ecsTaskExecutionRole", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     job_definition_name: "my-managed-instances-job-def", 
+    #     platform_capabilities: [
+    #       "MANAGED_INSTANCES", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_definition_arn: "arn:aws:batch:us-east-1:123456789012:job-definition/my-managed-instances-job-def:1", 
+    #     job_definition_name: "my-managed-instances-job-def", 
+    #     revision: 1, 
+    #   }
+    #
+    # @example Example: To register a GPU job definition on ECS Managed Instances
+    #
+    #   # This example registers a job definition that requests GPU resources on ECS Managed Instances.
+    #
+    #   resp = client.register_job_definition({
+    #     type: "container", 
+    #     ecs_properties: {
+    #       task_properties: [
+    #         {
+    #           containers: [
+    #             {
+    #               name: "main", 
+    #               command: [
+    #                 "nvidia-smi", 
+    #               ], 
+    #               image: "123456789012.dkr.ecr.us-east-1.amazonaws.com/my-gpu-image:latest", 
+    #               resource_requirements: [
+    #                 {
+    #                   type: "VCPU", 
+    #                   value: "4", 
+    #                 }, 
+    #                 {
+    #                   type: "MEMORY", 
+    #                   value: "16384", 
+    #                 }, 
+    #                 {
+    #                   type: "GPU", 
+    #                   value: "1", 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #           ], 
+    #           execution_role_arn: "arn:aws:iam::123456789012:role/ecsTaskExecutionRole", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     job_definition_name: "my-gpu-managed-instances-job-def", 
+    #     platform_capabilities: [
+    #       "MANAGED_INSTANCES", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_definition_arn: "arn:aws:batch:us-east-1:123456789012:job-definition/my-gpu-managed-instances-job-def:1", 
+    #     job_definition_name: "my-gpu-managed-instances-job-def", 
+    #     revision: 1, 
+    #   }
+    #
+    # @example Example: To register a multi-container job definition on ECS Managed Instances
+    #
+    #   # This example registers a job definition with a main container and a sidecar logging container on ECS Managed Instances.
+    #
+    #   resp = client.register_job_definition({
+    #     type: "container", 
+    #     ecs_properties: {
+    #       task_properties: [
+    #         {
+    #           containers: [
+    #             {
+    #               name: "main", 
+    #               command: [
+    #                 "echo", 
+    #                 "processing data", 
+    #               ], 
+    #               essential: true, 
+    #               image: "public.ecr.aws/amazonlinux/amazonlinux:2023", 
+    #               resource_requirements: [
+    #                 {
+    #                   type: "VCPU", 
+    #                   value: "2", 
+    #                 }, 
+    #                 {
+    #                   type: "MEMORY", 
+    #                   value: "4096", 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #             {
+    #               name: "sidecar", 
+    #               command: [
+    #                 "echo", 
+    #                 "logging sidecar", 
+    #               ], 
+    #               essential: false, 
+    #               image: "public.ecr.aws/amazonlinux/amazonlinux:2023", 
+    #               resource_requirements: [
+    #                 {
+    #                   type: "VCPU", 
+    #                   value: "1", 
+    #                 }, 
+    #                 {
+    #                   type: "MEMORY", 
+    #                   value: "512", 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #           ], 
+    #           execution_role_arn: "arn:aws:iam::123456789012:role/ecsTaskExecutionRole", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     job_definition_name: "my-sidecar-managed-instances-job-def", 
+    #     platform_capabilities: [
+    #       "MANAGED_INSTANCES", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     job_definition_arn: "arn:aws:batch:us-east-1:123456789012:job-definition/my-sidecar-managed-instances-job-def:1", 
+    #     job_definition_name: "my-sidecar-managed-instances-job-def", 
     #     revision: 1, 
     #   }
     #
@@ -4861,6 +5364,7 @@ module Aws::Batch
     #                   },
     #                 ],
     #                 enable_execute_command: false,
+    #                 network_mode: "String",
     #               },
     #             ],
     #           },
@@ -5013,7 +5517,7 @@ module Aws::Batch
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     platform_capabilities: ["EC2"], # accepts EC2, FARGATE
+    #     platform_capabilities: ["EC2"], # accepts EC2, FARGATE, MANAGED_INSTANCES
     #     eks_properties: {
     #       pod_properties: {
     #         service_account_name: "String",
@@ -5269,6 +5773,7 @@ module Aws::Batch
     #             },
     #           ],
     #           enable_execute_command: false,
+    #           network_mode: "String",
     #         },
     #       ],
     #     },
@@ -5942,11 +6447,11 @@ module Aws::Batch
     #   The Batch job ID of the job to terminate.
     #
     # @option params [required, String] :reason
-    #   A message to attach to the job that explains the reason for canceling
-    #   it. This message is returned by future DescribeJobs operations on the
-    #   job. It is also recorded in the Batch activity logs.
+    #   A message to attach to the job that explains the reason for
+    #   terminating it. This message is returned by future DescribeJobs
+    #   operations on the job. It is also recorded in the Batch activity logs.
     #
-    #   This parameter has as limit of 1024 characters.
+    #   This parameter has a limit of 1024 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5980,6 +6485,85 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Terminates up to 50 jobs in a job queue. This is a bulk version of
+    # TerminateJob. Jobs that are in the `STARTING` or `RUNNING` state are
+    # terminated, which causes them to transition to `FAILED`. Jobs that
+    # have not progressed to the `STARTING` state are cancelled.
+    #
+    # Batch reports the result for each job individually in the response.
+    # Jobs that were processed successfully are reported in the `successful`
+    # list. Jobs that encountered errors are reported in the `errors` list.
+    # The response returns an HTTP status code of `200` even when some jobs
+    # encountered errors, so check the `errors` list. Jobs that can't be
+    # found are treated as successfully processed.
+    #
+    # @option params [required, Array<String>] :jobs
+    #   An array of up to 50 Batch job IDs of the jobs to terminate.
+    #
+    # @option params [required, String] :reason
+    #   A message to attach to the job that explains the reason for
+    #   terminating it. This message is returned by future DescribeJobs
+    #   operations on the job. It is also recorded in the Batch activity logs.
+    #
+    #   This parameter has a limit of 1024 characters.
+    #
+    # @return [Types::TerminateJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TerminateJobsResponse#successful #successful} => Array&lt;String&gt;
+    #   * {Types::TerminateJobsResponse#errors #errors} => Array&lt;Types::TerminateJobsErrorDetail&gt;
+    #
+    #
+    # @example Example: To terminate multiple jobs
+    #
+    #   # This example terminates the jobs with the specified job IDs.
+    #
+    #   resp = client.terminate_jobs({
+    #     jobs: [
+    #       "61e743ed-35e4-48da-b2de-5c8333821c84", 
+    #       "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #     ], 
+    #     reason: "Terminating jobs.", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #       {
+    #         code: "ServerException", 
+    #         job: "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #         message: "Failed to read job state. Please retry this job.", 
+    #       }, 
+    #     ], 
+    #     successful: [
+    #       "61e743ed-35e4-48da-b2de-5c8333821c84", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_jobs({
+    #     jobs: ["String"], # required
+    #     reason: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].job #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobs AWS API Documentation
+    #
+    # @overload terminate_jobs(params = {})
+    # @param [Hash] params ({})
+    def terminate_jobs(params = {}, options = {})
+      req = build_request(:terminate_jobs, params)
+      req.send_request(options)
+    end
+
     # Terminates a service job in a job queue.
     #
     # @option params [required, String] :job_id
@@ -5987,7 +6571,7 @@ module Aws::Batch
     #
     # @option params [required, String] :reason
     #   A message to attach to the service job that explains the reason for
-    #   canceling it. This message is returned by `DescribeServiceJob`
+    #   terminating it. This message is returned by `DescribeServiceJob`
     #   operations on the service job.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -6005,6 +6589,82 @@ module Aws::Batch
     # @param [Hash] params ({})
     def terminate_service_job(params = {}, options = {})
       req = build_request(:terminate_service_job, params)
+      req.send_request(options)
+    end
+
+    # Terminates up to 50 service jobs in a job queue. This is a bulk
+    # version of TerminateServiceJob.
+    #
+    # Batch reports the result for each service job individually in the
+    # response. Service jobs that were processed successfully are reported
+    # in the `successful` list. Service jobs that encountered errors are
+    # reported in the `errors` list. The response returns an HTTP status
+    # code of `200` even when some service jobs encountered errors, so check
+    # the `errors` list. Service jobs that can't be found are treated as
+    # successfully processed.
+    #
+    # @option params [required, Array<String>] :jobs
+    #   An array of up to 50 service job IDs of the service jobs to terminate.
+    #
+    # @option params [required, String] :reason
+    #   A message to attach to the service job that explains the reason for
+    #   terminating it. This message is returned by `DescribeServiceJob`
+    #   operations on the service job.
+    #
+    # @return [Types::TerminateServiceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TerminateServiceJobsResponse#successful #successful} => Array&lt;String&gt;
+    #   * {Types::TerminateServiceJobsResponse#errors #errors} => Array&lt;Types::TerminateServiceJobsErrorDetail&gt;
+    #
+    #
+    # @example Example: To terminate multiple service jobs
+    #
+    #   # This example terminates the specified service jobs with a reason.
+    #
+    #   resp = client.terminate_service_jobs({
+    #     jobs: [
+    #       "a4d6c728-8ee8-4c65-8e2a-9a5e8f4b7c3d", 
+    #       "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #     ], 
+    #     reason: "Job terminated by user request", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #       {
+    #         code: "ServerException", 
+    #         job: "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #         message: "Failed to read job state. Please retry this job.", 
+    #       }, 
+    #     ], 
+    #     successful: [
+    #       "a4d6c728-8ee8-4c65-8e2a-9a5e8f4b7c3d", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_service_jobs({
+    #     jobs: ["String"], # required
+    #     reason: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].job #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateServiceJobs AWS API Documentation
+    #
+    # @overload terminate_service_jobs(params = {})
+    # @param [Hash] params ({})
+    def terminate_service_jobs(params = {}, options = {})
+      req = build_request(:terminate_service_jobs, params)
       req.send_request(options)
     end
 
@@ -6152,6 +6812,11 @@ module Aws::Batch
     # @option params [String] :context
     #   Reserved.
     #
+    # @option params [Types::EcsSettings] :ecs_settings
+    #   The Amazon ECS settings for the compute environment. These settings
+    #   control CloudWatch Container Insights collection for the compute
+    #   environment.
+    #
     # @return [Types::UpdateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateComputeEnvironmentResponse#compute_environment_name #compute_environment_name} => String
@@ -6218,10 +6883,42 @@ module Aws::Batch
     #         },
     #       ],
     #       update_to_latest_image_version: false,
-    #       type: "EC2", # accepts EC2, SPOT, FARGATE, FARGATE_SPOT
+    #       type: "EC2", # accepts EC2, SPOT, FARGATE, FARGATE_SPOT, ECS_MANAGED_INSTANCES
     #       image_id: "String",
     #       scaling_policy: {
     #         min_scale_down_delay_minutes: 1,
+    #       },
+    #       managed_instances_provider: {
+    #         propagate_tags: "String",
+    #         infrastructure_role_arn: "String",
+    #         instance_launch_template: {
+    #           ec2_instance_profile_arn: "String",
+    #           network_configuration: {
+    #             subnets: ["String"], # required
+    #             security_groups: ["String"], # required
+    #           },
+    #           instance_requirements: {
+    #             allowed_instance_types: ["String"],
+    #           },
+    #           storage_configuration: {
+    #             storage_size_gi_b: 1,
+    #           },
+    #           monitoring: "String",
+    #           capacity_reservations: {
+    #             reservation_group_arn: "String",
+    #             reservation_preference: "String",
+    #           },
+    #           instance_metadata_tags_propagation: false,
+    #           local_storage_configuration: {
+    #             use_local_storage: false,
+    #           },
+    #         },
+    #         infrastructure_optimization: {
+    #           scale_in_after: 1,
+    #         },
+    #       },
+    #       capacity_tags: {
+    #         "TagKey" => "TagValue",
     #       },
     #     },
     #     service_role: "String",
@@ -6230,6 +6927,9 @@ module Aws::Batch
     #       job_execution_timeout_minutes: 1,
     #     },
     #     context: "String",
+    #     ecs_settings: {
+    #       container_insights: "ENABLED", # accepts ENABLED, ENHANCED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
@@ -6664,7 +7364,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.147.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

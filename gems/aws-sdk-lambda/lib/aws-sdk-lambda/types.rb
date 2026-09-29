@@ -1809,9 +1809,12 @@ module Aws::Lambda
     #
     # @!attribute [rw] timeout
     #   The amount of time (in seconds) that Lambda allows a function to run
-    #   before stopping it. The default is 3 seconds. The maximum allowed
-    #   value is 900 seconds. For more information, see [Lambda execution
-    #   environment][1].
+    #   before stopping it. The default is 3 seconds, and the maximum
+    #   allowed value is 900 seconds. For functions using Lambda Managed
+    #   Instances, asynchronous invocations and event source mapping
+    #   invocations (except Amazon MQ and Amazon DocumentDB) support a
+    #   maximum allowed value of 5,400 seconds (90 minutes). For more
+    #   information, see [Lambda execution environment][1].
     #
     #
     #
@@ -2457,6 +2460,29 @@ module Aws::Lambda
     class DeleteProvisionedConcurrencyConfigRequest < Struct.new(
       :function_name,
       :qualifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Lambda resource you want to
+    #   delete the policy from. You can use a qualified or an unqualified
+    #   ARN. The value must be a complete ARN, and the operation does not
+    #   accept wildcard characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID that the existing policy must match for the deletion
+    #   to proceed. If the revision ID doesn't match, the operation fails
+    #   with a `PreconditionFailedException` error. To retrieve the current
+    #   revision ID, use the GetResourcePolicy operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3609,7 +3635,7 @@ module Aws::Lambda
     end
 
     # Details about the connection between a Lambda function and an [Amazon
-    # EFS file system][1] or an [Amazon S3 Files file system][1].
+    # EFS file system][1] or an [Amazon S3 file system][1].
     #
     #
     #
@@ -3625,11 +3651,20 @@ module Aws::Lambda
     #   with `/mnt/`.
     #   @return [String]
     #
+    # @!attribute [rw] s3_files_config
+    #   The configuration for how your function accesses data on an Amazon
+    #   S3 file system. Valid only when the file system access point ARN is
+    #   an Amazon S3 Files access point. If you specify a different access
+    #   point type (for example, Amazon Elastic File System), the operation
+    #   returns an `InvalidParameterException`.
+    #   @return [Types::S3FilesConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FileSystemConfig AWS API Documentation
     #
     class FileSystemConfig < Struct.new(
       :arn,
-      :local_mount_path)
+      :local_mount_path,
+      :s3_files_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4003,7 +4038,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] file_system_configs
     #   Connection settings for an [Amazon EFS file system][1] or an [Amazon
-    #   S3 Files file system][1].
+    #   S3 file system][1].
     #
     #
     #
@@ -5347,6 +5382,41 @@ module Aws::Lambda
       :status,
       :status_reason,
       :last_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Lambda resource you want to
+    #   retrieve the policy for. You can use a qualified or an unqualified
+    #   ARN. The value must be a complete ARN, and the operation does not
+    #   accept wildcard characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource-based policy attached to the Lambda resource you
+    #   specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the policy. Pass this value as the `RevisionId`
+    #   in a PutResourcePolicy or DeleteResourcePolicy request. Doing so
+    #   ensures the operation acts on the expected version of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :policy,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7707,10 +7777,10 @@ module Aws::Lambda
     #
     # @!attribute [rw] maximum_pollers
     #   The maximum number of event pollers this event source can scale up
-    #   to. For Amazon SQS events source mappings, default is 200, and
-    #   minimum value allowed is 2. For Amazon MSK and self-managed Apache
-    #   Kafka event source mappings, default is 200, and minimum value
-    #   allowed is 1.
+    #   to. For Amazon SQS event source mappings, the accepted range is
+    #   between 2 and 10,000, with a default of 200. For Amazon MSK and
+    #   self-managed Apache Kafka event source mappings, the accepted range
+    #   is between 1 and 2,000, with a default of 200.
     #   @return [Integer]
     #
     # @!attribute [rw] poller_group_name
@@ -7733,15 +7803,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The resource-based policy you tried to add to the Lambda function
-    # would grant public access to it, and your account's
-    # `BlockPublicAccess` setting prevents public access. For more
-    # information about blocking public access to Lambda functions, see
-    # [Block public access to Lambda resources][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#access-control-block-public-access
+    # The resource-based policy you tried to add to the Lambda resource
+    # would grant public access to it, which isn't allowed.
     #
     # @!attribute [rw] type
     #   The exception type.
@@ -8293,6 +8356,61 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Lambda resource you want to
+    #   add the policy to. You can use a qualified or an unqualified ARN.
+    #   The value must be a complete ARN, and the operation does not accept
+    #   wildcard characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy document you want to add to your Lambda resource. This is
+    #   formatted as a JSON string.
+    #
+    #   For more information, see [Working with resource-based policies in
+    #   Lambda][1] in the *Lambda Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID that the existing policy must match for the
+    #   replacement to proceed. If the revision ID doesn't match, the
+    #   operation fails with a `PreconditionFailedException` error. To
+    #   retrieve the current revision ID, use the GetResourcePolicy
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource-based policy that Lambda adds to the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the policy that Lambda adds to your Lambda
+    #   resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :policy,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] function_name
     #   The name or ARN of the Lambda function.
     #
@@ -8662,6 +8780,37 @@ module Aws::Lambda
       :error_code,
       :message)
       SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
+    # Setting controls how your function accesses data from an Amazon S3
+    # file system.
+    #
+    # @!attribute [rw] direct_s3_read
+    #   Specifies if a function reads from the file system for the lowest
+    #   latency, or through Amazon S3 Files feature "direct Amazon S3
+    #   bucket reads" for the highest throughput. Valid values:
+    #
+    #   * `AUTO` (default) – Direct reads are active for functions you
+    #     configure with 512 MB or more of memory.
+    #
+    #   * `ENABLED` – Enforces all reads are directly from the Amazon S3
+    #     bucket, regardless of available memory (less than 512 MB).
+    #
+    #   * `DISABLED` – Routes all reads through the file system, regardless
+    #     of memory configuration.
+    #
+    #   To use direct reads, you must grant the execution role the
+    #   `s3:GetObject` and `s3:GetObjectVersion` permissions. If a direct
+    #   read fails, Lambda automatically falls back to reading through the
+    #   file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/S3FilesConfig AWS API Documentation
+    #
+    class S3FilesConfig < Struct.new(
+      :direct_s3_read)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9940,9 +10089,12 @@ module Aws::Lambda
     #
     # @!attribute [rw] timeout
     #   The amount of time (in seconds) that Lambda allows a function to run
-    #   before stopping it. The default is 3 seconds. The maximum allowed
-    #   value is 900 seconds. For more information, see [Lambda execution
-    #   environment][1].
+    #   before stopping it. The default is 3 seconds, and the maximum
+    #   allowed value is 900 seconds. For functions using Lambda Managed
+    #   Instances, asynchronous invocations and event source mapping
+    #   invocations (except Amazon MQ and Amazon DocumentDB) support a
+    #   maximum allowed value of 5,400 seconds (90 minutes). For more
+    #   information, see [Lambda execution environment][1].
     #
     #
     #

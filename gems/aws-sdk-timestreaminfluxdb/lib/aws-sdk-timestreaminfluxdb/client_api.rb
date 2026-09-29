@@ -572,6 +572,7 @@ module Aws::TimestreamInfluxDB
     GetDbClusterOutput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     GetDbClusterOutput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     GetDbClusterOutput.add_member(:db_parameter_group_identifier, Shapes::ShapeRef.new(shape: DbParameterGroupIdentifier, location_name: "dbParameterGroupIdentifier"))
+    GetDbClusterOutput.add_member(:effective_db_parameter_group_identifier, Shapes::ShapeRef.new(shape: DbParameterGroupIdentifier, location_name: "effectiveDbParameterGroupIdentifier"))
     GetDbClusterOutput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
     GetDbClusterOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     GetDbClusterOutput.add_member(:last_maintenance_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastMaintenanceTime"))

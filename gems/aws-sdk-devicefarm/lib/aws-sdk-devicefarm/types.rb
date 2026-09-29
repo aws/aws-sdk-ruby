@@ -529,13 +529,25 @@ module Aws::DeviceFarm
     #   access session.
     #   @return [Types::DeviceProxy]
     #
+    # @!attribute [rw] parameters
+    #   The name-value string pairs that specify additional settings for the
+    #   remote access session.
+    #
+    #   * `appium:version`: The major version of the Appium server to use
+    #     for the session (for example, 2 or 3). The service may reject the
+    #     selected version if it is not available for the selected device.
+    #
+    #   ^
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionConfiguration AWS API Documentation
     #
     class CreateRemoteAccessSessionConfiguration < Struct.new(
       :auxiliary_apps,
       :billing_method,
       :vpce_configuration_arns,
-      :device_proxy)
+      :device_proxy,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -672,13 +684,12 @@ module Aws::DeviceFarm
     end
 
     # @!attribute [rw] url
-    #   A signed URL, expiring in CreateTestGridUrlRequest$expiresInSeconds
-    #   seconds, to be passed to a `RemoteWebDriver`.
+    #   A signed URL, expiring in the time specified by the
+    #   `CreateTestGridUrlRequest`, to be passed to a `RemoteWebDriver`.
     #   @return [String]
     #
     # @!attribute [rw] expires
-    #   The number of seconds the URL from CreateTestGridUrlResult$url stays
-    #   active.
+    #   The number of seconds the URL stays active from creation.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateTestGridUrlResult AWS API Documentation
@@ -5045,6 +5056,9 @@ module Aws::DeviceFarm
 
     # Represents a sample of performance data.
     #
+    # Device Farm does not support performance data samples during test
+    # executions.
+    #
     # @!attribute [rw] arn
     #   The sample's ARN.
     #   @return [String]
@@ -5326,27 +5340,6 @@ module Aws::DeviceFarm
     #   The test's parameters, such as test framework parameters and
     #   fixture settings. Parameters are represented by name-value pairs of
     #   strings.
-    #
-    #   For all tests:
-    #
-    #   * `app_performance_monitoring`: Performance monitoring is enabled by
-    #     default. Set this parameter to false to disable it.
-    #
-    #   ^
-    #
-    #   For Appium tests (all types):
-    #
-    #   * appium\_version: The Appium version. Currently supported values
-    #     are 1.6.5 (and later), latest, and default.
-    #
-    #     * latest runs the latest Appium version supported by Device Farm
-    #       (1.9.1).
-    #
-    #     * For default, Device Farm selects a compatible version of Appium
-    #       for the device. The current behavior is to run 1.7.2 on Android
-    #       devices and iOS 9 and earlier and 1.7.2 for iOS 10 and later.
-    #
-    #     * This behavior is subject to change.
     #
     #   For fuzz tests (Android only):
     #

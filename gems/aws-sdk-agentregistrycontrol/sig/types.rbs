@@ -20,6 +20,31 @@ module Aws::AgentRegistryControl
       SENSITIVE: []
     end
 
+    class AgUiDescriptor
+      attr_accessor source: Types::DescriptorSource
+      SENSITIVE: []
+    end
+
+    class AgentCoreGatewaySourceDetails
+      attr_accessor protocol_type: ("MCP")
+      attr_accessor authorizer_type: ::String
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
+      SENSITIVE: []
+    end
+
+    class AgentCoreRuntimeProtocolConfiguration
+      attr_accessor server_protocol: ("HTTP" | "A2A" | "MCP" | "AGUI")
+      SENSITIVE: []
+    end
+
+    class AgentCoreRuntimeSourceDetails
+      attr_accessor protocol_configuration: Types::AgentCoreRuntimeProtocolConfiguration
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
+      SENSITIVE: []
+    end
+
     class AgentSkillsAdditionalData
       attr_accessor skill_md: Types::AgentSkillsMdDescriptor
       SENSITIVE: []
@@ -61,6 +86,19 @@ module Aws::AgentRegistryControl
       SENSITIVE: []
     end
 
+    class AutoDetection
+      attr_accessor configuration: Types::AutoDetectionConfiguration
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class AutoDetectionConfiguration
+      attr_accessor scope: ("ORGANIZATION")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class ClaimMatchValueType
       attr_accessor match_value_string: ::String
       attr_accessor match_value_string_list: ::Array[::String]
@@ -85,12 +123,14 @@ module Aws::AgentRegistryControl
       attr_accessor name: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
       attr_accessor descriptors: Types::Descriptors
       attr_accessor record_version: ::String
       attr_accessor client_token: ::String
+      attr_accessor provenance: ::Array[Types::Provenance]
+      attr_accessor custom_metadata: untyped
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:description]
+      SENSITIVE: [:description, :custom_metadata]
     end
 
     class CreateRegistryRecordResponse
@@ -102,11 +142,14 @@ module Aws::AgentRegistryControl
     class CreateRegistryRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       attr_accessor discovery_configuration: Types::DiscoveryConfiguration
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor approval_configuration: Types::ApprovalConfiguration
-      SENSITIVE: [:description]
+      attr_accessor custom_metadata_schema_configuration: Types::CustomMetadataSchemaConfiguration
+      attr_accessor auto_detection_configuration: Types::AutoDetectionConfiguration
+      SENSITIVE: [:description, :custom_metadata_schema_configuration]
     end
 
     class CreateRegistryResponse
@@ -135,6 +178,12 @@ module Aws::AgentRegistryControl
       attr_accessor private_endpoint: Types::PrivateEndpoint
       attr_accessor private_endpoint_overrides: ::Array[Types::PrivateEndpointOverride]
       SENSITIVE: []
+    end
+
+    class CustomMetadataSchemaConfiguration
+      attr_accessor default_schema: ::String
+      attr_accessor record_type_schema_overrides: ::Array[Types::RecordTypeSchemaOverride]
+      SENSITIVE: [:default_schema]
     end
 
     class DeleteRegistryRecordRequest
@@ -172,12 +221,19 @@ module Aws::AgentRegistryControl
       attr_accessor a2a_agent_card: Types::A2aAgentCardDescriptor
       attr_accessor agent_skills_definition: Types::AgentSkillsDefinitionDescriptor
       attr_accessor custom: Types::CustomDescriptor
+      attr_accessor http: Types::HttpDescriptor
+      attr_accessor agui: Types::AgUiDescriptor
       SENSITIVE: []
     end
 
     class DiscoveryConfiguration
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
       attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -194,14 +250,19 @@ module Aws::AgentRegistryControl
       attr_accessor name: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
       attr_accessor descriptors: Types::Descriptors
       attr_accessor record_version: ::String
       attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor status_reason: ::String
-      SENSITIVE: [:description]
+      attr_accessor provenance: ::Array[Types::Provenance]
+      attr_accessor created_by_auto_detection: bool
+      attr_accessor created_by: ::String
+      attr_accessor custom_metadata: untyped
+      attr_accessor custom_metadata_schema_compliance_status: ("COMPLIANT" | "NON_COMPLIANT")
+      SENSITIVE: [:description, :custom_metadata]
     end
 
     class GetRegistryRequest
@@ -215,12 +276,20 @@ module Aws::AgentRegistryControl
       attr_accessor registry_id: ::String
       attr_accessor registry_arn: ::String
       attr_accessor discovery_configuration: Types::DiscoveryConfiguration
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       attr_accessor approval_configuration: Types::ApprovalConfiguration
+      attr_accessor custom_metadata_schema_configuration: Types::CustomMetadataSchemaConfiguration
       attr_accessor status: ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
       attr_accessor status_reason: ::String
+      attr_accessor auto_detection: Types::AutoDetection
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      SENSITIVE: [:description]
+      SENSITIVE: [:description, :custom_metadata_schema_configuration]
+    end
+
+    class HttpDescriptor
+      attr_accessor source: Types::DescriptorSource
+      SENSITIVE: []
     end
 
     class InternalServerException
@@ -314,6 +383,27 @@ module Aws::AgentRegistryControl
       SENSITIVE: []
     end
 
+    class Provenance
+      attr_accessor relation: ("DETECTED_FROM")
+      attr_accessor source_id: ::String
+      attr_accessor source_type: ("AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Gateway")
+      attr_accessor source_details: Types::SourceDetails
+      SENSITIVE: []
+    end
+
+    class ProvenanceSummary
+      attr_accessor relation: ("DETECTED_FROM")
+      attr_accessor source_id: ::String
+      attr_accessor source_type: ("AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Gateway")
+      SENSITIVE: []
+    end
+
+    class RecordTypeSchemaOverride
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
+      attr_accessor schema: ::String
+      SENSITIVE: [:schema]
+    end
+
     class RegistryFilter
       attr_accessor name: ("status" | "discoveryConfiguration.authorizerType")
       attr_accessor values: ::Array[::String]
@@ -368,11 +458,15 @@ module Aws::AgentRegistryControl
       attr_accessor name: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
       attr_accessor record_version: ::String
       attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor created_by_auto_detection: bool
+      attr_accessor created_by: ::String
+      attr_accessor provenance_summary_list: ::Array[Types::ProvenanceSummary]
+      attr_accessor custom_metadata_schema_compliance_status: ("COMPLIANT" | "NON_COMPLIANT")
       SENSITIVE: [:description]
     end
 
@@ -384,6 +478,7 @@ module Aws::AgentRegistryControl
       attr_accessor discovery_configuration: Types::DiscoveryConfiguration
       attr_accessor status: ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
       attr_accessor status_reason: ::String
+      attr_accessor auto_detection: Types::AutoDetection
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description]
@@ -408,6 +503,20 @@ module Aws::AgentRegistryControl
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class SourceDetails
+      attr_accessor agentcore_runtime: Types::AgentCoreRuntimeSourceDetails
+      attr_accessor agentcore_gateway: Types::AgentCoreGatewaySourceDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AgentcoreRuntime < SourceDetails
+      end
+      class AgentcoreGateway < SourceDetails
+      end
+      class Unknown < SourceDetails
+      end
     end
 
     class SubmitRegistryRecordForApprovalRequest
@@ -454,10 +563,12 @@ module Aws::AgentRegistryControl
       attr_accessor name: ::String
       attr_accessor display_name: Types::UpdatedDisplayName
       attr_accessor description: Types::UpdatedDescription
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
       attr_accessor descriptors: Types::UpdatedDescriptors
       attr_accessor record_version: ::String
+      attr_accessor custom_metadata: Types::UpdatedCustomMetadataMap
       attr_accessor trigger_synchronization: bool
+      attr_accessor provenance: ::Array[Types::Provenance]
       SENSITIVE: []
     end
 
@@ -468,14 +579,19 @@ module Aws::AgentRegistryControl
       attr_accessor name: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
-      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL")
+      attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
       attr_accessor descriptors: Types::Descriptors
       attr_accessor record_version: ::String
       attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor status_reason: ::String
-      SENSITIVE: [:description]
+      attr_accessor provenance: ::Array[Types::Provenance]
+      attr_accessor created_by_auto_detection: bool
+      attr_accessor created_by: ::String
+      attr_accessor custom_metadata: untyped
+      attr_accessor custom_metadata_schema_compliance_status: ("COMPLIANT" | "NON_COMPLIANT")
+      SENSITIVE: [:description, :custom_metadata]
     end
 
     class UpdateRegistryRecordStatusRequest
@@ -502,6 +618,8 @@ module Aws::AgentRegistryControl
       attr_accessor description: Types::UpdatedDescription
       attr_accessor discovery_configuration: Types::UpdatedDiscoveryConfiguration
       attr_accessor approval_configuration: Types::UpdatedApprovalConfiguration
+      attr_accessor custom_metadata_schema_configuration: Types::UpdatedCustomMetadataSchemaConfiguration
+      attr_accessor auto_detection_configuration: Types::UpdatedAutoDetectionConfiguration
       SENSITIVE: []
     end
 
@@ -511,12 +629,15 @@ module Aws::AgentRegistryControl
       attr_accessor registry_id: ::String
       attr_accessor registry_arn: ::String
       attr_accessor discovery_configuration: Types::DiscoveryConfiguration
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       attr_accessor approval_configuration: Types::ApprovalConfiguration
+      attr_accessor custom_metadata_schema_configuration: Types::CustomMetadataSchemaConfiguration
       attr_accessor status: ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
       attr_accessor status_reason: ::String
+      attr_accessor auto_detection: Types::AutoDetection
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      SENSITIVE: [:description]
+      SENSITIVE: [:description, :custom_metadata_schema_configuration]
     end
 
     class UpdatedA2aAgentCardDescriptor
@@ -527,6 +648,16 @@ module Aws::AgentRegistryControl
     class UpdatedA2aAgentCardDescriptorFields
       attr_accessor data: Types::UpdatedDescriptorData
       attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion
+      attr_accessor source: Types::UpdatedDescriptorSource
+      SENSITIVE: []
+    end
+
+    class UpdatedAgUiDescriptor
+      attr_accessor optional_value: Types::UpdatedAgUiDescriptorFields
+      SENSITIVE: []
+    end
+
+    class UpdatedAgUiDescriptorFields
       attr_accessor source: Types::UpdatedDescriptorSource
       SENSITIVE: []
     end
@@ -575,6 +706,11 @@ module Aws::AgentRegistryControl
       SENSITIVE: []
     end
 
+    class UpdatedAutoDetectionConfiguration
+      attr_accessor optional_value: Types::AutoDetectionConfiguration
+      SENSITIVE: []
+    end
+
     class UpdatedCustomDescriptor
       attr_accessor optional_value: Types::UpdatedCustomDescriptorFields
       SENSITIVE: []
@@ -583,6 +719,16 @@ module Aws::AgentRegistryControl
     class UpdatedCustomDescriptorFields
       attr_accessor data: Types::UpdatedDescriptorData
       SENSITIVE: []
+    end
+
+    class UpdatedCustomMetadataMap
+      attr_accessor optional_value: untyped
+      SENSITIVE: [:optional_value]
+    end
+
+    class UpdatedCustomMetadataSchemaConfiguration
+      attr_accessor optional_value: Types::CustomMetadataSchemaConfiguration
+      SENSITIVE: [:optional_value]
     end
 
     class UpdatedDataSchemaVersion
@@ -615,6 +761,8 @@ module Aws::AgentRegistryControl
       attr_accessor a2a_agent_card: Types::UpdatedA2aAgentCardDescriptor
       attr_accessor agent_skills_definition: Types::UpdatedAgentSkillsDefinitionDescriptor
       attr_accessor custom: Types::UpdatedCustomDescriptor
+      attr_accessor http: Types::UpdatedHttpDescriptor
+      attr_accessor agui: Types::UpdatedAgUiDescriptor
       SENSITIVE: []
     end
 
@@ -625,6 +773,16 @@ module Aws::AgentRegistryControl
 
     class UpdatedDisplayName
       attr_accessor optional_value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatedHttpDescriptor
+      attr_accessor optional_value: Types::UpdatedHttpDescriptorFields
+      SENSITIVE: []
+    end
+
+    class UpdatedHttpDescriptorFields
+      attr_accessor source: Types::UpdatedDescriptorSource
       SENSITIVE: []
     end
 
@@ -672,6 +830,11 @@ module Aws::AgentRegistryControl
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkloadIdentityDetails
+      attr_accessor workload_identity_arn: ::String
       SENSITIVE: []
     end
   end

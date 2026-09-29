@@ -1113,6 +1113,61 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Deletes a user's registered time-based one-time password (TOTP)
+    # multi-factor authentication (MFA) factor, also known as a software
+    # token. After this operation, the user can no longer sign in with TOTP
+    # MFA, and can register a new TOTP factor with `AssociateSoftwareToken`.
+    # Use this operation when a user loses access to their TOTP-generating
+    # device, for example, a lost or reset phone, and needs to register a
+    # new one.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool where you want to delete the user's software
+    #   token.
+    #
+    # @option params [required, String] :username
+    #   The name of the user that you want to query or modify. The value of
+    #   this parameter is typically your user's username, but it can be any
+    #   of their alias attributes. If `username` isn't an alias attribute in
+    #   your user pool, this value must be the `sub` of a local user or the
+    #   username of a user from a third-party IdP.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_delete_software_token({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     username: "UsernameType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteSoftwareToken AWS API Documentation
+    #
+    # @overload admin_delete_software_token(params = {})
+    # @param [Hash] params ({})
+    def admin_delete_software_token(params = {}, options = {})
+      req = build_request(:admin_delete_software_token, params)
+      req.send_request(options)
+    end
+
     # Deletes a user profile in your user pool.
     #
     # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
@@ -2026,10 +2081,6 @@ module Aws::CognitoIdentityProvider
     #
     #   The `ProviderName` should be set to `Cognito` for users in Cognito
     #   user pools.
-    #
-    #   All attributes in the DestinationUser profile must be mutable. If you
-    #   have assigned the user any immutable custom attributes, the operation
-    #   won't succeed.
     #
     # @option params [required, Types::ProviderUserIdentifierType] :source_user
     #   An external IdP account for a user who doesn't exist yet in the user
@@ -7583,6 +7634,80 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Returns details for the terms documents that are associated with an
+    # app client, identified by the app client ID, user pool ID, and terms
+    # name. For more information, see [Terms documents][1].
+    #
+    # To call `DescribeTermsByClient`, you must have the
+    # `cognito-idp:DescribeTermsByClient` Identity and Access Management
+    # (IAM) permission. This operation additionally validates your
+    # permission for `cognito-idp:DescribeTerms`, the action for . As a
+    # result, an IAM policy that denies `cognito-idp:DescribeTerms` also
+    # denies requests to `DescribeTermsByClient`.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][2]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][3]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html#managed-login-terms-documents
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [3]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :client_id
+    #   The ID of the app client that the terms documents are associated with.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the terms documents that you
+    #   want to describe.
+    #
+    # @option params [required, String] :terms_name
+    #   The name of the terms documents that you want to describe.
+    #
+    # @return [Types::DescribeTermsByClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTermsByClientResponse#terms #terms} => Types::TermsType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_terms_by_client({
+    #     client_id: "ClientIdType", # required
+    #     user_pool_id: "UserPoolIdType", # required
+    #     terms_name: "TermsNameType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.terms.terms_id #=> String
+    #   resp.terms.user_pool_id #=> String
+    #   resp.terms.client_id #=> String
+    #   resp.terms.terms_name #=> String
+    #   resp.terms.terms_source #=> String, one of "LINK"
+    #   resp.terms.enforcement #=> String, one of "NONE"
+    #   resp.terms.links #=> Hash
+    #   resp.terms.links["LanguageIdType"] #=> String
+    #   resp.terms.creation_date #=> Time
+    #   resp.terms.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeTermsByClient AWS API Documentation
+    #
+    # @overload describe_terms_by_client(params = {})
+    # @param [Hash] params ({})
+    def describe_terms_by_client(params = {}, options = {})
+      req = build_request(:describe_terms_by_client, params)
+      req.send_request(options)
+    end
+
     # Describes a user import job. For more information about user CSV
     # import, see [Importing users from a CSV file][1].
     #
@@ -7880,6 +8005,14 @@ module Aws::CognitoIdentityProvider
 
     # Given a user pool domain name, returns information about the domain
     # configuration.
+    #
+    # <note markdown="1"> This operation doesn't return results when you query a prefix domain
+    # in a secondary Region. Prefix domains are Region-specific and can only
+    # be described in the Region where they were created. To describe a
+    # prefix domain for a replica user pool, make the request to the primary
+    # Region's endpoint.
+    #
+    #  </note>
     #
     # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
     # in requests for this API operation. For this operation, you must use
@@ -8200,6 +8333,137 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def get_csv_header(params = {}, options = {})
       req = build_request(:get_csv_header, params)
+      req.send_request(options)
+    end
+
+    # Issues an access token for machine-to-machine (M2M) authorization.
+    # Your app client provides its client ID and secret, and receives an
+    # access token that authorizes requests to your resource servers.
+    # `GetClientToken` provides the same functionality as the OAuth2
+    # client-credentials grant; both authorize an application rather than a
+    # user.
+    #
+    # To use this operation, you must configure the app client with a client
+    # secret and enable the `ALLOW_CLIENT_TOKEN_AUTH` authentication flow.
+    # The `ALLOW_CLIENT_TOKEN_AUTH` flow is mutually exclusive with user
+    # authentication flows. It must be the only authentication flow that you
+    # configure for the app client. For more information, see [Scopes, M2M,
+    # and resource servers][1].
+    #
+    # <note markdown="1"> Amazon Cognito doesn't evaluate Identity and Access Management (IAM)
+    # policies in requests for this API operation. For this operation, you
+    # can't use IAM credentials to authorize requests, and you can't grant
+    # IAM permissions in policies. For more information about authorization
+    # models in Amazon Cognito, see [Using the Amazon Cognito user pools API
+    # and user pool endpoints][2].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :client_id
+    #   The ID of the app client that requests the access token. The app
+    #   client must have a client secret and the `ALLOW_CLIENT_TOKEN_AUTH`
+    #   authentication flow.
+    #
+    # @option params [required, String] :secret
+    #   An active secret for the app client.
+    #
+    # @option params [Array<String>] :scopes
+    #   The custom scopes to authorize in the access token, in the format
+    #   `resource-server-identifier/scope-name`. Each scope must belong to a
+    #   resource server in your user pool. If you don't specify any scopes,
+    #   Amazon Cognito authorizes the scopes that are configured for the app
+    #   client.
+    #
+    # @option params [Hash<String,String>] :client_metadata
+    #   A map of custom key-value pairs that you can provide as input for any
+    #   custom workflows that this action triggers. You create custom
+    #   workflows by assigning Lambda functions to user pool triggers.
+    #
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains a
+    #   `clientMetadata` attribute that provides the data that you assigned to
+    #   the ClientMetadata parameter in your request. In your function code,
+    #   you can process the `clientMetadata` value to enhance your workflow
+    #   for your specific needs.
+    #
+    #   To review the Lambda trigger types that Amazon Cognito invokes at
+    #   runtime with API requests, see [ Connecting API actions to Lambda
+    #   triggers][1] in the *Amazon Cognito Developer Guide*.
+    #
+    #   <note markdown="1"> When you use the `ClientMetadata` parameter, note that Amazon Cognito
+    #   won't do the following:
+    #
+    #    * Store the `ClientMetadata` value. This data is available only to
+    #     Lambda triggers that are assigned to a user pool to support custom
+    #     workflows. If your user pool configuration doesn't include
+    #     triggers, the `ClientMetadata` parameter serves no purpose.
+    #
+    #   * Validate the `ClientMetadata` value.
+    #
+    #   * Encrypt the `ClientMetadata` value. Don't send sensitive
+    #     information in this parameter.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event
+    #
+    # @return [Types::GetClientTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetClientTokenResponse#client_authentication_result #client_authentication_result} => Types::ClientAuthenticationResultType
+    #
+    #
+    # @example Example: Example – Get an access token for machine-to-machine authorization
+    #
+    #   # The following example gets an access token for the app client 1example23456789 with the custom scope
+    #   # solar-system-data/asteroids.add.
+    #
+    #   resp = client.get_client_token({
+    #     client_id: "1example23456789", 
+    #     scopes: [
+    #       "solar-system-data/asteroids.add", 
+    #     ], 
+    #     secret: "exampleClientSecret123EXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_authentication_result: {
+    #       access_token: "eyJra456defEXAMPLE", 
+    #       expires_in: 3600, 
+    #       token_type: "Bearer", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_client_token({
+    #     client_id: "ClientIdType", # required
+    #     secret: "ClientSecretType", # required
+    #     scopes: ["ScopeType"],
+    #     client_metadata: {
+    #       "StringType" => "StringType",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_authentication_result.access_token #=> String
+    #   resp.client_authentication_result.expires_in #=> Integer
+    #   resp.client_authentication_result.token_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetClientToken AWS API Documentation
+    #
+    # @overload get_client_token(params = {})
+    # @param [Hash] params ({})
+    def get_client_token(params = {}, options = {})
+      req = build_request(:get_client_token, params)
       req.send_request(options)
     end
 
@@ -14418,7 +14682,7 @@ module Aws::CognitoIdentityProvider
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.149.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

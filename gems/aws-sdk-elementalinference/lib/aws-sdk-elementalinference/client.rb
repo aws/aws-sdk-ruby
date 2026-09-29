@@ -563,6 +563,9 @@ module Aws::ElementalInference
     #             dictionary: "DictionaryId",
     #             profanity_filter: "DISABLED", # accepts DISABLED, CENSOR, DROP
     #           },
+    #           contextual_metadata: {
+    #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         description: "ResourceDescription",
@@ -683,6 +686,7 @@ module Aws::ElementalInference
     #   * {Types::CreateFeedResponse#id #id} => String
     #   * {Types::CreateFeedResponse#data_endpoints #data_endpoints} => Array&lt;String&gt;
     #   * {Types::CreateFeedResponse#outputs #outputs} => Array&lt;Types::GetOutput&gt;
+    #   * {Types::CreateFeedResponse#access_role_arn #access_role_arn} => String
     #   * {Types::CreateFeedResponse#status #status} => String
     #   * {Types::CreateFeedResponse#association #association} => Types::FeedAssociation
     #   * {Types::CreateFeedResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -719,6 +723,9 @@ module Aws::ElementalInference
     #             dictionary: "DictionaryId",
     #             profanity_filter: "DISABLED", # accepts DISABLED, CENSOR, DROP
     #           },
+    #           contextual_metadata: {
+    #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         description: "ResourceDescription",
@@ -749,9 +756,11 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.height #=> Integer
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
+    #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
+    #   resp.access_role_arn #=> String
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "ACTIVE", "UPDATING", "DELETING", "DELETED", "ARCHIVED"
     #   resp.association.associated_resource_name #=> String
     #   resp.tags #=> Hash
@@ -833,6 +842,30 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def delete_feed(params = {}, options = {})
       req = build_request(:delete_feed, params)
+      req.send_request(options)
+    end
+
+    # Deletes the resource-based policy attached to the specified feed.
+    # After you delete the policy, the operation revokes the cross-account
+    # access that the policy granted.
+    #
+    # @option params [required, String] :id
+    #   The ID of the feed whose policy you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_feed_policy({
+    #     id: "FeedId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteFeedPolicy AWS API Documentation
+    #
+    # @overload delete_feed_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_feed_policy(params = {}, options = {})
+      req = build_request(:delete_feed_policy, params)
       req.send_request(options)
     end
 
@@ -965,6 +998,7 @@ module Aws::ElementalInference
     #   * {Types::GetFeedResponse#id #id} => String
     #   * {Types::GetFeedResponse#data_endpoints #data_endpoints} => Array&lt;String&gt;
     #   * {Types::GetFeedResponse#outputs #outputs} => Array&lt;Types::GetOutput&gt;
+    #   * {Types::GetFeedResponse#access_role_arn #access_role_arn} => String
     #   * {Types::GetFeedResponse#status #status} => String
     #   * {Types::GetFeedResponse#association #association} => Types::FeedAssociation
     #   * {Types::GetFeedResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -995,9 +1029,11 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.height #=> Integer
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
+    #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
+    #   resp.access_role_arn #=> String
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "ACTIVE", "UPDATING", "DELETING", "DELETED", "ARCHIVED"
     #   resp.association.associated_resource_name #=> String
     #   resp.tags #=> Hash
@@ -1014,6 +1050,76 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def get_feed(params = {}, options = {})
       req = build_request(:get_feed, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the resource-based policy attached to the specified feed.
+    #
+    # @option params [required, String] :id
+    #   The ID of the feed whose policy you want to retrieve.
+    #
+    # @return [Types::GetFeedPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFeedPolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_feed_policy({
+    #     id: "FeedId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFeedPolicy AWS API Documentation
+    #
+    # @overload get_feed_policy(params = {})
+    # @param [Hash] params ({})
+    def get_feed_policy(params = {}, options = {})
+      req = build_request(:get_feed_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the specified fixture (a sports event,
+    # such as a specific basketball game). You obtain a fixtureId from
+    # SearchFixtures, or from the clipping output of a feed.
+    #
+    # @option params [required, String] :fixture_id
+    #   The ID of the fixture to retrieve, as returned by SearchFixtures.
+    #
+    # @return [Types::GetFixtureResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFixtureResponse#fixture_id #fixture_id} => String
+    #   * {Types::GetFixtureResponse#name #name} => String
+    #   * {Types::GetFixtureResponse#fixture_group #fixture_group} => String
+    #   * {Types::GetFixtureResponse#scheduled_start #scheduled_start} => Time
+    #   * {Types::GetFixtureResponse#status #status} => String
+    #   * {Types::GetFixtureResponse#competitors #competitors} => Array&lt;Types::Competitor&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_fixture({
+    #     fixture_id: "FixtureId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fixture_id #=> String
+    #   resp.name #=> String
+    #   resp.fixture_group #=> String
+    #   resp.scheduled_start #=> Time
+    #   resp.status #=> String
+    #   resp.competitors #=> Array
+    #   resp.competitors[0].name #=> String
+    #   resp.competitors[0].is_home #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFixture AWS API Documentation
+    #
+    # @overload get_fixture(params = {})
+    # @param [Hash] params ({})
+    def get_fixture(params = {}, options = {})
+      req = build_request(:get_fixture, params)
       req.send_request(options)
     end
 
@@ -1143,6 +1249,33 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Attaches or replaces a resource-based policy on the specified feed. A
+    # resource-based policy grants cross-account access to the feed.
+    #
+    # @option params [required, String] :id
+    #   The ID of the feed to attach the policy to.
+    #
+    # @option params [required, String] :policy
+    #   The resource-based policy document to attach to the feed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_feed_policy({
+    #     id: "FeedId", # required
+    #     policy: "PolicyDocument", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/PutFeedPolicy AWS API Documentation
+    #
+    # @overload put_feed_policy(params = {})
+    # @param [Hash] params ({})
+    def put_feed_policy(params = {}, options = {})
+      req = build_request(:put_feed_policy, params)
       req.send_request(options)
     end
 
@@ -1396,6 +1529,7 @@ module Aws::ElementalInference
     #   * {Types::UpdateFeedResponse#id #id} => String
     #   * {Types::UpdateFeedResponse#data_endpoints #data_endpoints} => Array&lt;String&gt;
     #   * {Types::UpdateFeedResponse#outputs #outputs} => Array&lt;Types::GetOutput&gt;
+    #   * {Types::UpdateFeedResponse#access_role_arn #access_role_arn} => String
     #   * {Types::UpdateFeedResponse#status #status} => String
     #   * {Types::UpdateFeedResponse#association #association} => Types::FeedAssociation
     #   * {Types::UpdateFeedResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -1433,6 +1567,9 @@ module Aws::ElementalInference
     #             dictionary: "DictionaryId",
     #             profanity_filter: "DISABLED", # accepts DISABLED, CENSOR, DROP
     #           },
+    #           contextual_metadata: {
+    #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         description: "ResourceDescription",
@@ -1461,9 +1598,11 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.height #=> Integer
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
+    #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
+    #   resp.access_role_arn #=> String
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "ACTIVE", "UPDATING", "DELETING", "DELETED", "ARCHIVED"
     #   resp.association.associated_resource_name #=> String
     #   resp.tags #=> Hash
@@ -1496,7 +1635,7 @@ module Aws::ElementalInference
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elementalinference'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

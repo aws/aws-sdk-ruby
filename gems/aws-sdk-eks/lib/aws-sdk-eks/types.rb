@@ -183,6 +183,76 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_id
+    #   The ID of the certificate authority to activate as the cluster's
+    #   signing certificate authority. This certificate authority must
+    #   already exist on the cluster and have a `distributionStatus` of
+    #   `COMPLETE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ActivateCertificateAuthorityRequest AWS API Documentation
+    #
+    class ActivateCertificateAuthorityRequest < Struct.new(
+      :cluster_name,
+      :certificate_authority_id,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing the asynchronous update that promotes the
+    #   certificate authority to be the cluster's signer.
+    #   @return [Types::Update]
+    #
+    # @!attribute [rw] certificate_authority
+    #   Summary information about the certificate authority that is being
+    #   activated.
+    #   @return [Types::CertificateAuthoritySummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ActivateCertificateAuthorityResponse AWS API Documentation
+    #
+    class ActivateCertificateAuthorityResponse < Struct.new(
+      :update,
+      :certificate_authority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the certificate authority that is currently signing
+    # certificates for the cluster.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the certificate authority that is currently
+    #   signing certificates for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] activated_by
+    #   The entity that activated the current signing certificate authority,
+    #   either `CUSTOMER` or `EKS`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ActiveCertificateAuthority AWS API Documentation
+    #
+    class ActiveCertificateAuthority < Struct.new(
+      :id,
+      :activated_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An Amazon EKS add-on. For more information, see [Amazon EKS
     # add-ons][1] in the *Amazon EKS User Guide*.
     #
@@ -617,13 +687,21 @@ module Aws::EKS
     #   endpoints.
     #   @return [Types::ArgoCdNetworkAccessConfigRequest]
     #
+    # @!attribute [rw] endpoint_prefix
+    #   An optional prefix used to construct the hostname of the Argo CD
+    #   server endpoint. If not specified, Amazon EKS automatically
+    #   generates the endpoint. This value can't be changed after the
+    #   capability is created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ArgoCdConfigRequest AWS API Documentation
     #
     class ArgoCdConfigRequest < Struct.new(
       :namespace,
       :aws_idc,
       :rbac_role_mappings,
-      :network_access)
+      :network_access,
+      :endpoint_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -659,6 +737,11 @@ module Aws::EKS
     #   web interface and API.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_prefix
+    #   The prefix that was configured for the hostname of the Argo CD
+    #   server endpoint when the capability was created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ArgoCdConfigResponse AWS API Documentation
     #
     class ArgoCdConfigResponse < Struct.new(
@@ -666,7 +749,8 @@ module Aws::EKS
       :aws_idc,
       :rbac_role_mappings,
       :network_access,
-      :server_url)
+      :server_url,
+      :endpoint_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1275,10 +1359,207 @@ module Aws::EKS
     #   of the `kubeconfig` file for your cluster.
     #   @return [String]
     #
+    # @!attribute [rw] active
+    #   An object identifying the certificate authority that is currently
+    #   signing certificates for the cluster.
+    #   @return [Types::ActiveCertificateAuthority]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Certificate AWS API Documentation
     #
     class Certificate < Struct.new(
+      :data,
+      :active)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing a certificate authority (CA) for an Amazon EKS
+    # cluster.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the certificate authority.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the certificate
+    #   authority was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The entity that created the certificate authority. Certificate
+    #   authorities that you create are `CUSTOMER`; those that Amazon EKS
+    #   provisions on your behalf, such as a cluster's initial certificate
+    #   authority, are `EKS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] activated_at
+    #   The Unix epoch timestamp in seconds for when the certificate
+    #   authority was last activated as the cluster's signer. This value is
+    #   absent if the certificate authority has never been activated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] activated_by
+    #   The entity that most recently activated the certificate authority. A
+    #   value of `EKS` indicates that Amazon EKS activated it automatically;
+    #   `CUSTOMER` indicates that you activated it.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_status
+    #   The signing status of the certificate authority. `IN_USE` means the
+    #   certificate authority is currently signing certificates for the
+    #   cluster, `ACTIVATING` means it's being promoted to the signer, and
+    #   `NOT_USED` means it's trusted by the cluster (for example, a
+    #   successor CA during a rotation, or a retired outgoing CA) but isn't
+    #   the signer.
+    #   @return [String]
+    #
+    # @!attribute [rw] distribution_status
+    #   The distribution status of the certificate authority, which tracks
+    #   whether Amazon EKS has distributed its trust to the Amazon Web
+    #   Services managed components in your cluster (the control plane,
+    #   Amazon EKS Auto Mode instances, and Amazon Web Services Fargate
+    #   nodes). Valid values are `IN_PROGRESS`, `COMPLETE`, `FAILED`, and
+    #   `DELETING`. A successor CA can only be activated after its
+    #   distribution status is `COMPLETE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] validity
+    #   The validity period of the certificate authority's certificate.
+    #   @return [Types::CertificateAuthorityValidity]
+    #
+    # @!attribute [rw] scheduled_events
+    #   The scheduled auto-activation events for the certificate authority,
+    #   computed from its validity period.
+    #   @return [Types::CertificateAuthorityScheduledEvents]
+    #
+    # @!attribute [rw] rollback_available
+    #   Indicates whether CA rollback is still available for this
+    #   certificate authority. After you activate a successor CA, rollback
+    #   lets you revert to the outgoing CA for a limited period while you
+    #   finish updating any worker nodes or clients that were missed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] data
+    #   The Base64-encoded public certificate of the certificate authority.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CertificateAuthority AWS API Documentation
+    #
+    class CertificateAuthority < Struct.new(
+      :id,
+      :created_at,
+      :created_by,
+      :activated_at,
+      :activated_by,
+      :signing_status,
+      :distribution_status,
+      :validity,
+      :scheduled_events,
+      :rollback_available,
       :data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scheduled events during which Amazon EKS may automatically
+    # activate a certificate authority, computed from its validity period.
+    # These events help ensure that a cluster's signing certificate
+    # authority is rotated before its certificate expires.
+    #
+    # @!attribute [rw] first_auto_activation
+    #   The earliest Unix epoch timestamp in seconds at which Amazon EKS may
+    #   automatically activate this certificate authority.
+    #   @return [Time]
+    #
+    # @!attribute [rw] final_auto_activation
+    #   The Unix epoch timestamp in seconds by which Amazon EKS will
+    #   automatically activate this certificate authority if you haven't
+    #   already activated it.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CertificateAuthorityScheduledEvents AWS API Documentation
+    #
+    class CertificateAuthorityScheduledEvents < Struct.new(
+      :first_auto_activation,
+      :final_auto_activation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a certificate authority (CA) for an Amazon
+    # EKS cluster, returned by [ `ListCertificateAuthorities` ][1] and the
+    # certificate-authority write operations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListCertificateAuthorities.html
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the certificate authority.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the certificate
+    #   authority was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The entity that created the certificate authority, either `CUSTOMER`
+    #   or `EKS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] activated_at
+    #   The Unix epoch timestamp in seconds for when the certificate
+    #   authority was last activated. This value is absent if the
+    #   certificate authority has never been activated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] activated_by
+    #   The entity that most recently activated the certificate authority,
+    #   either `CUSTOMER` or `EKS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_status
+    #   The signing status of the certificate authority: `IN_USE`,
+    #   `ACTIVATING`, or `NOT_USED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] distribution_status
+    #   The distribution status of the certificate authority: `IN_PROGRESS`,
+    #   `COMPLETE`, `FAILED`, or `DELETING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CertificateAuthoritySummary AWS API Documentation
+    #
+    class CertificateAuthoritySummary < Struct.new(
+      :id,
+      :created_at,
+      :created_by,
+      :activated_at,
+      :activated_by,
+      :signing_status,
+      :distribution_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The validity period of a certificate authority's certificate.
+    #
+    # @!attribute [rw] not_before
+    #   The Unix epoch timestamp in seconds for the start of the certificate
+    #   authority's validity period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_after
+    #   The Unix epoch timestamp in seconds for the end of the certificate
+    #   authority's validity period.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CertificateAuthorityValidity AWS API Documentation
+    #
+    class CertificateAuthorityValidity < Struct.new(
+      :not_before,
+      :not_after)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2398,6 +2679,47 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCertificateAuthorityRequest AWS API Documentation
+    #
+    class CreateCertificateAuthorityRequest < Struct.new(
+      :cluster_name,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing the asynchronous update that adds the
+    #   certificate authority to the cluster's trust bundle.
+    #   @return [Types::Update]
+    #
+    # @!attribute [rw] certificate_authority
+    #   Summary information about the certificate authority that was
+    #   created, including its ID and initial signing and distribution
+    #   status.
+    #   @return [Types::CertificateAuthoritySummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCertificateAuthorityResponse AWS API Documentation
+    #
+    class CreateCertificateAuthorityResponse < Struct.new(
+      :update,
+      :certificate_authority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The unique name to give to your cluster. The name can contain only
     #   alphanumeric characters (case-sensitive), hyphens, and underscores.
@@ -3292,6 +3614,53 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_id
+    #   The ID of the certificate authority to delete. You can't delete the
+    #   certificate authority that's currently signing certificates for the
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCertificateAuthorityRequest AWS API Documentation
+    #
+    class DeleteCertificateAuthorityRequest < Struct.new(
+      :cluster_name,
+      :certificate_authority_id,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing the asynchronous update that removes the
+    #   certificate authority from the cluster's trust bundle.
+    #   @return [Types::Update]
+    #
+    # @!attribute [rw] certificate_authority
+    #   Summary information about the certificate authority that is being
+    #   deleted.
+    #   @return [Types::CertificateAuthoritySummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCertificateAuthorityResponse AWS API Documentation
+    #
+    class DeleteCertificateAuthorityResponse < Struct.new(
+      :update,
+      :certificate_authority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the cluster to delete.
     #   @return [String]
@@ -3738,6 +4107,36 @@ module Aws::EKS
     #
     class DescribeCapabilityResponse < Struct.new(
       :capability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_id
+    #   The ID of the certificate authority to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeCertificateAuthorityRequest AWS API Documentation
+    #
+    class DescribeCertificateAuthorityRequest < Struct.new(
+      :cluster_name,
+      :certificate_authority_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_authority
+    #   An object containing detailed information about the certificate
+    #   authority.
+    #   @return [Types::CertificateAuthority]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeCertificateAuthorityResponse AWS API Documentation
+    #
+    class DescribeCertificateAuthorityResponse < Struct.new(
+      :certificate_authority)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4333,6 +4732,10 @@ module Aws::EKS
     # The encryption configuration for the cluster.
     #
     # @!attribute [rw] resources
+    #   Amazon EKS encrypts all Kubernetes API data with envelope encryption
+    #   by default for clusters running Kubernetes version 1.28 or higher,
+    #   so this field no longer affects which resources are encrypted.
+    #
     #   Specifies the resources to be encrypted. The only supported value is
     #   `secrets`.
     #   @return [Array<String>]
@@ -4903,6 +5306,44 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Constraints for an integer parameter specifying allowed range.
+    #
+    # @!attribute [rw] min
+    #   The minimum allowed value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum allowed value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/IntegerConstraints AWS API Documentation
+    #
+    class IntegerConstraints < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An integer parameter configuration with default value and constraints.
+    #
+    # @!attribute [rw] default_value
+    #   The default value for the integer parameter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] constraints
+    #   The constraints for the integer parameter.
+    #   @return [Types::IntegerConstraints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/IntegerParameterConfig AWS API Documentation
+    #
+    class IntegerParameterConfig < Struct.new(
+      :default_value,
+      :constraints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An integer range constraint specifying minimum and maximum allowed
     # values.
     #
@@ -5190,6 +5631,10 @@ module Aws::EKS
     # The configuration for the Kubernetes controller manager on an Amazon
     # EKS cluster.
     #
+    # @!attribute [rw] pod_gc_controller_config
+    #   The pod garbage collection controller configuration.
+    #   @return [Types::PodGcControllerConfigRequest]
+    #
     # @!attribute [rw] horizontal_pod_autoscaler_controller_config
     #   The horizontal pod autoscaler controller configuration.
     #   @return [Types::HorizontalPodAutoscalerControllerConfigRequest]
@@ -5197,6 +5642,7 @@ module Aws::EKS
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeControllerManagerConfigRequest AWS API Documentation
     #
     class KubeControllerManagerConfigRequest < Struct.new(
+      :pod_gc_controller_config,
       :horizontal_pod_autoscaler_controller_config)
       SENSITIVE = []
       include Aws::Structure
@@ -5205,6 +5651,10 @@ module Aws::EKS
     # The Kubernetes controller manager configuration for an Amazon EKS
     # cluster.
     #
+    # @!attribute [rw] pod_gc_controller_config
+    #   The pod garbage collection controller configuration.
+    #   @return [Types::PodGcControllerConfigResponse]
+    #
     # @!attribute [rw] horizontal_pod_autoscaler_controller_config
     #   The horizontal pod autoscaler controller configuration.
     #   @return [Types::HorizontalPodAutoscalerControllerConfigResponse]
@@ -5212,6 +5662,7 @@ module Aws::EKS
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeControllerManagerConfigResponse AWS API Documentation
     #
     class KubeControllerManagerConfigResponse < Struct.new(
+      :pod_gc_controller_config,
       :horizontal_pod_autoscaler_controller_config)
       SENSITIVE = []
       include Aws::Structure
@@ -5219,6 +5670,11 @@ module Aws::EKS
 
     # The Kubernetes controller manager version-specific configuration
     # defaults and constraints.
+    #
+    # @!attribute [rw] pod_gc_controller_config
+    #   The pod garbage collection controller configuration with default
+    #   value and constraints.
+    #   @return [Types::PodGcControllerVersionConfig]
     #
     # @!attribute [rw] horizontal_pod_autoscaler_controller_config
     #   The horizontal pod autoscaler controller configuration with default
@@ -5228,6 +5684,7 @@ module Aws::EKS
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubeControllerManagerVersionConfig AWS API Documentation
     #
     class KubeControllerManagerVersionConfig < Struct.new(
+      :pod_gc_controller_config,
       :horizontal_pod_autoscaler_controller_config)
       SENSITIVE = []
       include Aws::Structure
@@ -5795,6 +6252,70 @@ module Aws::EKS
     #
     class ListCapabilitiesResponse < Struct.new(
       :capabilities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value. If you don't specify a value, the default is 100
+    #   results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request,
+    #   where `maxResults` was used and the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   results that returned the `nextToken` value. This value is null when
+    #   there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListCertificateAuthoritiesRequest AWS API Documentation
+    #
+    class ListCertificateAuthoritiesRequest < Struct.new(
+      :cluster_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_authorities
+    #   A list of certificate authority summary objects, each containing
+    #   basic information about a certificate authority, including its ID,
+    #   signing status, and distribution status.
+    #   @return [Array<Types::CertificateAuthoritySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `ListCertificateAuthorities` request. When the results of a
+    #   `ListCertificateAuthorities` request exceed `maxResults`, you can
+    #   use this value to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is used
+    #   only to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListCertificateAuthoritiesResponse AWS API Documentation
+    #
+    class ListCertificateAuthoritiesResponse < Struct.new(
+      :certificate_authorities,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -7217,6 +7738,53 @@ module Aws::EKS
       :control_plane_placement,
       :etcd_instance_type,
       :etcd_placement)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The pod garbage collection controller configuration for the Kubernetes
+    # controller manager.
+    #
+    # @!attribute [rw] terminated_pod_gc_threshold
+    #   The number of terminated pods that can exist before the garbage
+    #   collector starts deleting them.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/PodGcControllerConfigRequest AWS API Documentation
+    #
+    class PodGcControllerConfigRequest < Struct.new(
+      :terminated_pod_gc_threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The pod garbage collection controller configuration for the Kubernetes
+    # controller manager.
+    #
+    # @!attribute [rw] terminated_pod_gc_threshold
+    #   The number of terminated pods that can exist before the garbage
+    #   collector starts deleting them.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/PodGcControllerConfigResponse AWS API Documentation
+    #
+    class PodGcControllerConfigResponse < Struct.new(
+      :terminated_pod_gc_threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The pod garbage collection controller version configuration.
+    #
+    # @!attribute [rw] terminated_pod_gc_threshold
+    #   The terminated pod garbage collection threshold configuration with
+    #   default value and constraints.
+    #   @return [Types::IntegerParameterConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/PodGcControllerVersionConfig AWS API Documentation
+    #
+    class PodGcControllerVersionConfig < Struct.new(
+      :terminated_pod_gc_threshold)
       SENSITIVE = []
       include Aws::Structure
     end

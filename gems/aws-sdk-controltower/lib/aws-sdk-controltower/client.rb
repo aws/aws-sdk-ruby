@@ -1256,8 +1256,14 @@ module Aws::ControlTower
     # [1]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
     #
     # @option params [String] :target_identifier
-    #   The ARN of the organizational unit. For information on how to find the
-    #   `targetIdentifier`, see [the overview page][1].
+    #   The ARN of the target. The value depends on the target type:
+    #
+    #   * Organizational unit (OU) – Specify the ARN of the OU.
+    #
+    #   * Account – Specify the ARN of the account.
+    #
+    #   For information on how to find the `targetIdentifier`, see [the
+    #   overview page][1].
     #
     #
     #
@@ -1275,8 +1281,8 @@ module Aws::ControlTower
     #   the types of control operations to view.
     #
     # @option params [Boolean] :include_children
-    #   A boolean value that determines whether to include enabled controls
-    #   from child organizational units in the response.
+    #   Specifies whether to include enabled controls from child
+    #   organizational units and child accounts in the response.
     #
     # @return [Types::ListEnabledControlsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1797,7 +1803,7 @@ module Aws::ControlTower
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

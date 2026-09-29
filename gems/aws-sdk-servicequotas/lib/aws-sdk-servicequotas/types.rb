@@ -1071,12 +1071,26 @@ module Aws::ServiceQuotas
     #   Services account.
     #   @return [String]
     #
+    # @!attribute [rw] adjustable_at_level
+    #   Specifies the level at which you can request an increase for this
+    #   quota:
+    #
+    #   * `ACCOUNT` – You can request an increase only at the account level.
+    #
+    #   * `PER_RESOURCE` – You can request an increase only for an
+    #     individual resource.
+    #
+    #   * `ALL` – You can request an increase at either the account level or
+    #     for an individual resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/QuotaContextInfo AWS API Documentation
     #
     class QuotaContextInfo < Struct.new(
       :context_scope,
       :context_scope_type,
-      :context_id)
+      :context_id,
+      :adjustable_at_level)
       SENSITIVE = []
       include Aws::Structure
     end

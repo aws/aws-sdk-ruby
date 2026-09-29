@@ -614,18 +614,20 @@ module Aws::Route53Resolver
     #   exclusive with the top-level `FirewallDomainListId` and
     #   `DnsThreatProtection` fields. Use one of:
     #
-    #   * `FirewallAdvancedContentCategory` — match an AWS-managed content
-    #     category (for example, `VIOLENCE_AND_HATE_SPEECH`).
+    #   * `FirewallAdvancedContentCategory` — match an Amazon Web
+    #     Services-managed content category (for example,
+    #     `VIOLENCE_AND_HATE_SPEECH`).
     #
-    #   * `FirewallAdvancedThreatCategory` — match an AWS-managed advanced
-    #     threat category (for example, `PHISHING`).
+    #   * `FirewallAdvancedThreatCategory` — match an Amazon Web
+    #     Services-managed advanced threat category (for example,
+    #     `PHISHING`).
     #
     #   * `DnsThreatProtection` — match a built-in DNS Firewall Advanced
     #     threat detector (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
     #
     #   * `PartnerThreatProtection` — match a third-party threat feed
-    #     delivered through AWS Marketplace. The selected partner must be an
-    #     active subscription on the calling account.
+    #     delivered through Amazon Web Services Marketplace. The selected
+    #     partner must be an active subscription on the calling account.
     #
     #   To enumerate the values supported in your account, call
     #   ListFirewallRuleTypes.
@@ -883,18 +885,20 @@ module Aws::Route53Resolver
     #   exclusive with the top-level `FirewallDomainListId` and
     #   `DnsThreatProtection` fields. Use one of:
     #
-    #   * `FirewallAdvancedContentCategory` — match an AWS-managed content
-    #     category (for example, `VIOLENCE_AND_HATE_SPEECH`).
+    #   * `FirewallAdvancedContentCategory` — match an Amazon Web
+    #     Services-managed content category (for example,
+    #     `VIOLENCE_AND_HATE_SPEECH`).
     #
-    #   * `FirewallAdvancedThreatCategory` — match an AWS-managed advanced
-    #     threat category (for example, `PHISHING`).
+    #   * `FirewallAdvancedThreatCategory` — match an Amazon Web
+    #     Services-managed advanced threat category (for example,
+    #     `PHISHING`).
     #
     #   * `DnsThreatProtection` — match a built-in DNS Firewall Advanced
     #     threat detector (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
     #
     #   * `PartnerThreatProtection` — match a third-party threat feed
-    #     delivered through AWS Marketplace. The selected partner must be an
-    #     active subscription on the calling account.
+    #     delivered through Amazon Web Services Marketplace. The selected
+    #     partner must be an active subscription on the calling account.
     #
     #   To enumerate the values supported in your account, call
     #   ListFirewallRuleTypes.
@@ -1049,11 +1053,33 @@ module Aws::Route53Resolver
     #   least two.
     #
     #    </note>
+    #
+    #   We recommend using [VPC Resolver on Outposts][1] to create endpoints
+    #   on Outposts Racks.
+    #
+    #   Outposts subnets with [Local Network Interface (LNI)][2] enabled are
+    #   not compatible with Route 53 Resolver endpoints. If you enable LNI
+    #   on a subnet that contains Route 53 Resolver endpoint elastic network
+    #   interfaces (ENIs), those ENIs will stop functioning. For more
+    #   information, see [Subnet compatibility for Resolver endpoints][3] in
+    #   the *Amazon Route 53 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/outpost-resolver-getting-started.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/server-userguide/local-network-interface.html
+    #   [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver.html#best-practices-resolver-subnet-compatibility
     #   @return [Array<Types::IpAddressRequest>]
     #
     # @!attribute [rw] outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
     #   you must also specify a value for the `PreferredInstanceType`.
+    #
+    #   <note markdown="1"> Resolver endpoints on Outposts are supported on first-generation
+    #   Outposts only. Inbound and outbound Resolver endpoints aren't
+    #   supported on second-generation Outposts.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] preferred_instance_type
@@ -2409,17 +2435,17 @@ module Aws::Route53Resolver
     #   union — exactly one of its members will be populated. Possible
     #   members are:
     #
-    #   * `FirewallAdvancedContentCategory` — an AWS-managed content
-    #     category (for example, `VIOLENCE_AND_HATE_SPEECH`).
+    #   * `FirewallAdvancedContentCategory` — an Amazon Web Services-managed
+    #     content category (for example, `VIOLENCE_AND_HATE_SPEECH`).
     #
-    #   * `FirewallAdvancedThreatCategory` — an AWS-managed advanced threat
-    #     category (for example, `PHISHING`).
+    #   * `FirewallAdvancedThreatCategory` — an Amazon Web Services-managed
+    #     advanced threat category (for example, `PHISHING`).
     #
     #   * `DnsThreatProtection` — a built-in DNS Firewall Advanced threat
     #     detector (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
     #
     #   * `PartnerThreatProtection` — a third-party threat feed delivered
-    #     through AWS Marketplace.
+    #     through Amazon Web Services Marketplace.
     #
     #   To enumerate the values supported in your account, call
     #   ListFirewallRuleTypes.
@@ -2430,8 +2456,8 @@ module Aws::Route53Resolver
     #
     #   * `CREATING` — DNS Firewall is provisioning the rule. Rules created
     #     with the `PartnerThreatProtection` rule type begin in this state
-    #     while DNS Firewall verifies the calling account's AWS Marketplace
-    #     entitlement.
+    #     while DNS Firewall verifies the calling account's Amazon Web
+    #     Services Marketplace entitlement.
     #
     #   * `COMPLETE` — The rule is provisioned and enforcing matches.
     #
@@ -2709,22 +2735,23 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] partner_threat_protection
     #   Configures the rule to match a third-party threat feed delivered
-    #   through AWS Marketplace. The calling account must hold an active
-    #   subscription to the partner product named in `Partner`; if the
-    #   subscription is missing or revoked, the rule is created with
-    #   `Status` `CREATION_FAILED` and cannot be modified — only deleted.
-    #   See PartnerThreatProtectionConfig.
+    #   through Amazon Web Services Marketplace. The calling account must
+    #   hold an active subscription to the partner product named in
+    #   `Partner`; if the subscription is missing or revoked, the rule is
+    #   created with `Status` `CREATION_FAILED` and cannot be modified —
+    #   only deleted. See PartnerThreatProtectionConfig.
     #   @return [Types::PartnerThreatProtectionConfig]
     #
     # @!attribute [rw] firewall_advanced_content_category
-    #   Configures the rule to match an AWS-managed content category (for
-    #   example, `VIOLENCE_AND_HATE_SPEECH`). See
+    #   Configures the rule to match an Amazon Web Services-managed content
+    #   category (for example, `VIOLENCE_AND_HATE_SPEECH`). See
     #   FirewallAdvancedContentCategoryConfig.
     #   @return [Types::FirewallAdvancedContentCategoryConfig]
     #
     # @!attribute [rw] firewall_advanced_threat_category
-    #   Configures the rule to match an AWS-managed advanced threat category
-    #   (for example, `PHISHING`). See FirewallAdvancedThreatCategoryConfig.
+    #   Configures the rule to match an Amazon Web Services-managed advanced
+    #   threat category (for example, `PHISHING`). See
+    #   FirewallAdvancedThreatCategoryConfig.
     #   @return [Types::FirewallAdvancedThreatCategoryConfig]
     #
     # @!attribute [rw] dns_threat_protection
@@ -2768,10 +2795,10 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] subscription_info
     #   For rule types that require an external subscription (today, only
-    #   the `PartnerThreatProtection` variant), describes the AWS
-    #   Marketplace product that backs the rule type. Absent for rule types
-    #   that are managed by AWS and do not require a separate subscription.
-    #   See SubscriptionInfo.
+    #   the `PartnerThreatProtection` variant), describes the Amazon Web
+    #   Services Marketplace product that backs the rule type. Absent for
+    #   rule types that are managed by Amazon Web Services and do not
+    #   require a separate subscription. See SubscriptionInfo.
     #   @return [Types::SubscriptionInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallRuleTypeDefinition AWS API Documentation
@@ -3323,6 +3350,22 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet that contains the IP address.
+    #
+    #   We recommend using [VPC Resolver on Outposts][1] to create endpoints
+    #   on Outposts Racks.
+    #
+    #   Outposts subnets with [Local Network Interface (LNI)][2] enabled are
+    #   not compatible with Route 53 Resolver endpoints. If you enable LNI
+    #   on a subnet that contains Route 53 Resolver endpoint elastic network
+    #   interfaces (ENIs), those ENIs will stop functioning. For more
+    #   information, see [Subnet compatibility for Resolver endpoints][3] in
+    #   the *Amazon Route 53 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/outpost-resolver-getting-started.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/server-userguide/local-network-interface.html
+    #   [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver.html#best-practices-resolver-subnet-compatibility
     #   @return [String]
     #
     # @!attribute [rw] ip
@@ -3422,9 +3465,22 @@ module Aws::Route53Resolver
     #   The ID of the subnet that includes the IP address that you want to
     #   update. To get this ID, use [GetResolverEndpoint][1].
     #
+    #   We recommend using [VPC Resolver on Outposts][2] to create endpoints
+    #   on Outposts Racks.
+    #
+    #   Outposts subnets with [Local Network Interface (LNI)][3] enabled are
+    #   not compatible with Route 53 Resolver endpoints. If you enable LNI
+    #   on a subnet that contains Route 53 Resolver endpoint elastic network
+    #   interfaces (ENIs), those ENIs will stop functioning. For more
+    #   information, see [Subnet compatibility for Resolver endpoints][4] in
+    #   the *Amazon Route 53 Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/outpost-resolver-getting-started.html
+    #   [3]: https://docs.aws.amazon.com/outposts/latest/server-userguide/local-network-interface.html
+    #   [4]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver.html#best-practices-resolver-subnet-compatibility
     #   @return [String]
     #
     # @!attribute [rw] ip
@@ -4736,13 +4792,14 @@ module Aws::Route53Resolver
     # the partners available in your account, call ListFirewallRuleTypes
     # with `RuleType` set to `PartnerThreatProtection` — each returned
     # FirewallRuleTypeDefinition includes a SubscriptionInfo identifying the
-    # AWS Marketplace product that backs it.
+    # Amazon Web Services Marketplace product that backs it.
     #
     # @!attribute [rw] partner
     #   The identifier of the partner threat-protection product, exactly as
     #   returned in the `Value` field of a FirewallRuleTypeDefinition with
     #   `RuleType` set to `PartnerThreatProtection`. The calling account
-    #   must hold an active AWS Marketplace subscription to this product.
+    #   must hold an active Amazon Web Services Marketplace subscription to
+    #   this product.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/PartnerThreatProtectionConfig AWS API Documentation
@@ -5696,21 +5753,22 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # Identifies the AWS Marketplace product that backs a partner-managed
-    # rule type. Returned as part of FirewallRuleTypeDefinition when the
-    # rule type variant requires an active customer subscription to the
-    # named product.
+    # Identifies the Amazon Web Services Marketplace product that backs a
+    # partner-managed rule type. Returned as part of
+    # FirewallRuleTypeDefinition when the rule type variant requires an
+    # active customer subscription to the named product.
     #
     # @!attribute [rw] vendor_name
-    #   The name of the AWS Marketplace seller (vendor) that publishes the
-    #   partner threat-protection product (for example, `Palo Alto
-    #   Networks`).
+    #   The name of the Amazon Web Services Marketplace seller (vendor) that
+    #   publishes the partner threat-protection product (for example, `Palo
+    #   Alto Networks`).
     #   @return [String]
     #
     # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier of the partner
-    #   threat-protection product. Use this value to verify or manage the
-    #   calling account's subscription in AWS Marketplace.
+    #   The Amazon Web Services Marketplace product identifier of the
+    #   partner threat-protection product. Use this value to verify or
+    #   manage the calling account's subscription in Amazon Web Services
+    #   Marketplace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/SubscriptionInfo AWS API Documentation
@@ -6189,18 +6247,20 @@ module Aws::Route53Resolver
     #   exclusive with the top-level `FirewallDomainListId` and
     #   `DnsThreatProtection` fields. Use one of:
     #
-    #   * `FirewallAdvancedContentCategory` — match an AWS-managed content
-    #     category (for example, `VIOLENCE_AND_HATE_SPEECH`).
+    #   * `FirewallAdvancedContentCategory` — match an Amazon Web
+    #     Services-managed content category (for example,
+    #     `VIOLENCE_AND_HATE_SPEECH`).
     #
-    #   * `FirewallAdvancedThreatCategory` — match an AWS-managed advanced
-    #     threat category (for example, `PHISHING`).
+    #   * `FirewallAdvancedThreatCategory` — match an Amazon Web
+    #     Services-managed advanced threat category (for example,
+    #     `PHISHING`).
     #
     #   * `DnsThreatProtection` — match a built-in DNS Firewall Advanced
     #     threat detector (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
     #
     #   * `PartnerThreatProtection` — match a third-party threat feed
-    #     delivered through AWS Marketplace. The selected partner must be an
-    #     active subscription on the calling account.
+    #     delivered through Amazon Web Services Marketplace. The selected
+    #     partner must be an active subscription on the calling account.
     #
     #   To enumerate the values supported in your account, call
     #   ListFirewallRuleTypes.
@@ -6454,18 +6514,20 @@ module Aws::Route53Resolver
     #   exclusive with the top-level `FirewallDomainListId` and
     #   `DnsThreatProtection` fields. Use one of:
     #
-    #   * `FirewallAdvancedContentCategory` — match an AWS-managed content
-    #     category (for example, `VIOLENCE_AND_HATE_SPEECH`).
+    #   * `FirewallAdvancedContentCategory` — match an Amazon Web
+    #     Services-managed content category (for example,
+    #     `VIOLENCE_AND_HATE_SPEECH`).
     #
-    #   * `FirewallAdvancedThreatCategory` — match an AWS-managed advanced
-    #     threat category (for example, `PHISHING`).
+    #   * `FirewallAdvancedThreatCategory` — match an Amazon Web
+    #     Services-managed advanced threat category (for example,
+    #     `PHISHING`).
     #
     #   * `DnsThreatProtection` — match a built-in DNS Firewall Advanced
     #     threat detector (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
     #
     #   * `PartnerThreatProtection` — match a third-party threat feed
-    #     delivered through AWS Marketplace. The selected partner must be an
-    #     active subscription on the calling account.
+    #     delivered through Amazon Web Services Marketplace. The selected
+    #     partner must be an active subscription on the calling account.
     #
     #   To enumerate the values supported in your account, call
     #   ListFirewallRuleTypes.

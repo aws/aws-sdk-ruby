@@ -411,17 +411,20 @@ module Aws
         # A bounded queue prevents the source from reading ahead without limit when it
         # produces data faster than parts can be uploaded.
         executor = DefaultExecutor.new(max_threads: thread_count, max_queue: thread_count)
-        uploader = MultipartStreamUploader.new(
-          client: client,
-          executor: executor,
-          tempfile: upload_opts.delete(:tempfile),
-          part_size: upload_opts.delete(:part_size)
-        )
-        Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
-          uploader.upload(upload_opts, &block)
+        begin
+          uploader = MultipartStreamUploader.new(
+            client: client,
+            executor: executor,
+            tempfile: upload_opts.delete(:tempfile),
+            part_size: upload_opts.delete(:part_size)
+          )
+          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+            uploader.upload(upload_opts, &block)
+          end
+          true
+        ensure
+          executor.shutdown
         end
-        executor.shutdown
-        true
       end
       deprecated(:upload_stream, use: 'Aws::S3::TransferManager#upload_stream', version: 'next major version')
 
@@ -485,17 +488,20 @@ module Aws
       def upload_file(source, options = {})
         upload_opts = options.merge(bucket: bucket_name, key: key)
         executor = DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
-        uploader = FileUploader.new(
-          client: client,
-          executor: executor,
-          multipart_threshold: upload_opts.delete(:multipart_threshold)
-        )
-        response = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
-          uploader.upload(source, upload_opts)
+        begin
+          uploader = FileUploader.new(
+            client: client,
+            executor: executor,
+            multipart_threshold: upload_opts.delete(:multipart_threshold)
+          )
+          response = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+            uploader.upload(source, upload_opts)
+          end
+          yield response if block_given?
+          true
+        ensure
+          executor.shutdown
         end
-        yield response if block_given?
-        executor.shutdown
-        true
       end
       deprecated(:upload_file, use: 'Aws::S3::TransferManager#upload_file', version: 'next major version')
 
@@ -566,13 +572,16 @@ module Aws
       # @see Client#head_object
       def download_file(destination, options = {})
         download_opts = options.merge(bucket: bucket_name, key: key)
-        executor = DefaultExecutor.new(max_threads: download_opts.delete([:thread_count]))
-        downloader = FileDownloader.new(client: client, executor: executor)
-        Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
-          downloader.download(destination, download_opts)
+        executor = DefaultExecutor.new(max_threads: download_opts.delete(:thread_count))
+        begin
+          downloader = FileDownloader.new(client: client, executor: executor)
+          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+            downloader.download(destination, download_opts)
+          end
+          true
+        ensure
+          executor.shutdown
         end
-        executor.shutdown
-        true
       end
       deprecated(:download_file, use: 'Aws::S3::TransferManager#download_file', version: 'next major version')
 

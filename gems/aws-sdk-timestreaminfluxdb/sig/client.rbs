@@ -641,6 +641,7 @@ module Aws
         def engine_type: () -> ("INFLUXDB_V2" | "INFLUXDB_V3_CORE" | "INFLUXDB_V3_ENTERPRISE")
         def publicly_accessible: () -> bool
         def db_parameter_group_identifier: () -> ::String
+        def effective_db_parameter_group_identifier: () -> ::String
         def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
         def maintenance_schedule: () -> Types::MaintenanceSchedule
         def last_maintenance_time: () -> ::Time

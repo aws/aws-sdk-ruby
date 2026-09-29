@@ -359,6 +359,24 @@
         {"shape":"AccessDeniedException"}
       ]
     },
+    "GetDependencyInsights":{
+      "name":"GetDependencyInsights",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v2/get-dependency-insights",
+        "responseCode":200
+      },
+      "input":{"shape":"GetDependencyInsightsRequest"},
+      "output":{"shape":"GetDependencyInsightsResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"}
+      ],
+      "readonly":true
+    },
     "GetFailureModeFinding":{
       "name":"GetFailureModeFinding",
       "http":{
@@ -630,6 +648,23 @@
       ],
       "readonly":true
     },
+    "ListPolicyEvents":{
+      "name":"ListPolicyEvents",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v2/list-policy-events",
+        "responseCode":200
+      },
+      "input":{"shape":"ListPolicyEventsRequest"},
+      "output":{"shape":"ListPolicyEventsResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"}
+      ],
+      "readonly":true
+    },
     "ListReports":{
       "name":"ListReports",
       "http":{
@@ -799,6 +834,23 @@
       ],
       "readonly":true
     },
+    "ListTestRunDependencies":{
+      "name":"ListTestRunDependencies",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v2/test-runs/{testRunId}/dependencies",
+        "responseCode":200
+      },
+      "input":{"shape":"ListTestRunDependenciesRequest"},
+      "output":{"shape":"ListTestRunDependenciesResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"}
+      ],
+      "readonly":true
+    },
     "ListTestRunEvents":{
       "name":"ListTestRunEvents",
       "http":{
@@ -808,6 +860,23 @@
       },
       "input":{"shape":"ListTestRunEventsRequest"},
       "output":{"shape":"ListTestRunEventsResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"}
+      ],
+      "readonly":true
+    },
+    "ListTestRunSourceEvents":{
+      "name":"ListTestRunSourceEvents",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v2/test-runs/{testRunId}/source-events",
+        "responseCode":200
+      },
+      "input":{"shape":"ListTestRunSourceEventsRequest"},
+      "output":{"shape":"ListTestRunSourceEventsResponse"},
       "errors":[
         {"shape":"InternalServerException"},
         {"shape":"ResourceNotFoundException"},
@@ -932,6 +1001,24 @@
         {"shape":"ValidationException"},
         {"shape":"ConflictException"},
         {"shape":"ServiceQuotaExceededException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "StartDependencyInsights":{
+      "name":"StartDependencyInsights",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v2/start-dependency-insights",
+        "responseCode":202
+      },
+      "input":{"shape":"StartDependencyInsightsRequest"},
+      "output":{"shape":"StartDependencyInsightsResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"ConflictException"},
+        {"shape":"ThrottlingException"},
         {"shape":"AccessDeniedException"}
       ]
     },
@@ -1226,6 +1313,28 @@
         "SYSTEM"
       ]
     },
+    "AlarmState":{
+      "type":"string",
+      "enum":[
+        "OK",
+        "ALARM",
+        "INSUFFICIENT_DATA"
+      ]
+    },
+    "AlarmStateChangeDetail":{
+      "type":"structure",
+      "required":["state"],
+      "members":{
+        "state":{"shape":"AlarmState"},
+        "previousState":{"shape":"AlarmState"},
+        "reason":{"shape":"AlarmStateChangeDetailReasonString"}
+      }
+    },
+    "AlarmStateChangeDetailReasonString":{
+      "type":"string",
+      "max":1023,
+      "min":0
+    },
     "Arn":{
       "type":"string",
       "min":31,
@@ -1493,6 +1602,7 @@
         "multiAz":{"shape":"MultiAzTargets"},
         "multiRegion":{"shape":"MultiRegionTargets"},
         "dataRecovery":{"shape":"DataRecoveryTargets"},
+        "sharingEnabled":{"shape":"Boolean"},
         "kmsKeyId":{"shape":"KmsKeyId"},
         "tags":{"shape":"TagMap"},
         "clientToken":{
@@ -1640,7 +1750,7 @@
         "testTemplateArn":{"shape":"ServiceOwnedArn"},
         "loggingConfiguration":{"shape":"LoggingConfiguration"},
         "stopConditions":{"shape":"StopConditionList"},
-        "roleName":{"shape":"EntityName"},
+        "roleName":{"shape":"IamRoleName"},
         "parameters":{"shape":"TestParameters"}
       }
     },
@@ -1920,6 +2030,44 @@
         "DISABLED"
       ]
     },
+    "DependencyInsight":{
+      "type":"structure",
+      "required":[
+        "category",
+        "description"
+      ],
+      "members":{
+        "category":{"shape":"InsightsCategory"},
+        "description":{"shape":"DependencyInsightDescriptionString"}
+      }
+    },
+    "DependencyInsightDescriptionString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "DependencyInsightsErrorCode":{
+      "type":"string",
+      "enum":[
+        "INSUFFICIENT_DATA",
+        "LLM_GENERATION_FAILED",
+        "INTERNAL_ERROR"
+      ]
+    },
+    "DependencyInsightsList":{
+      "type":"list",
+      "member":{"shape":"DependencyInsight"},
+      "max":5,
+      "min":0
+    },
+    "DependencyInsightsStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "COMPLETED",
+        "FAILED"
+      ]
+    },
     "DependencySummary":{
       "type":"structure",
       "required":[
@@ -1989,6 +2137,67 @@
         "dataRecoveryTimeBetweenBackups":{"shape":"TargetSource"}
       }
     },
+    "EksLabelKey":{
+      "type":"string",
+      "max":317,
+      "min":1,
+      "pattern":"([a-z0-9]([-a-z0-9.]*[a-z0-9])?/)?[A-Za-z0-9]([-A-Za-z0-9_.]*[A-Za-z0-9])?"
+    },
+    "EksLabelSelector":{
+      "type":"structure",
+      "members":{
+        "matchLabels":{"shape":"EksLabelSelectorMatchLabelsMap"},
+        "matchExpressions":{"shape":"EksLabelSelectorMatchExpressionsList"}
+      }
+    },
+    "EksLabelSelectorMatchExpressionsList":{
+      "type":"list",
+      "member":{"shape":"EksLabelSelectorRequirement"},
+      "max":20,
+      "min":0,
+      "sensitive":true
+    },
+    "EksLabelSelectorMatchLabelsMap":{
+      "type":"map",
+      "key":{"shape":"EksLabelKey"},
+      "value":{"shape":"EksLabelValue"},
+      "max":20,
+      "min":0,
+      "sensitive":true
+    },
+    "EksLabelSelectorOperator":{
+      "type":"string",
+      "enum":[
+        "IN",
+        "NOT_IN",
+        "EXISTS",
+        "DOES_NOT_EXIST"
+      ]
+    },
+    "EksLabelSelectorRequirement":{
+      "type":"structure",
+      "required":[
+        "key",
+        "operator"
+      ],
+      "members":{
+        "key":{"shape":"EksLabelKey"},
+        "operator":{"shape":"EksLabelSelectorOperator"},
+        "values":{"shape":"EksLabelSelectorRequirementValuesList"}
+      }
+    },
+    "EksLabelSelectorRequirementValuesList":{
+      "type":"list",
+      "member":{"shape":"EksLabelValue"},
+      "max":20,
+      "min":0
+    },
+    "EksLabelValue":{
+      "type":"string",
+      "max":63,
+      "min":0,
+      "pattern":"([A-Za-z0-9]([-A-Za-z0-9_.]*[A-Za-z0-9])?)?"
+    },
     "EksNamespace":{
       "type":"string",
       "max":63,
@@ -2003,7 +2212,8 @@
       ],
       "members":{
         "clusterArn":{"shape":"Arn"},
-        "namespaces":{"shape":"EksSourceNamespacesList"}
+        "namespaces":{"shape":"EksSourceNamespacesList"},
+        "labelSelector":{"shape":"EksLabelSelector"}
       }
     },
     "EksSourceNamespacesList":{
@@ -2144,6 +2354,39 @@
       "type":"list",
       "member":{"shape":"EntityId"},
       "max":20,
+      "min":0
+    },
+    "GetDependencyInsightsRequest":{
+      "type":"structure",
+      "required":["serviceArn"],
+      "members":{
+        "serviceArn":{
+          "shape":"Arn",
+          "location":"querystring",
+          "locationName":"serviceArn"
+        }
+      }
+    },
+    "GetDependencyInsightsResponse":{
+      "type":"structure",
+      "required":["status"],
+      "members":{
+        "overview":{"shape":"GetDependencyInsightsResponseOverviewString"},
+        "insights":{"shape":"DependencyInsightsList"},
+        "status":{"shape":"DependencyInsightsStatus"},
+        "createdAt":{"shape":"Timestamp"},
+        "errorCode":{"shape":"DependencyInsightsErrorCode"},
+        "errorMessage":{"shape":"GetDependencyInsightsResponseErrorMessageString"}
+      }
+    },
+    "GetDependencyInsightsResponseErrorMessageString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "GetDependencyInsightsResponseOverviewString":{
+      "type":"string",
+      "max":4096,
       "min":0
     },
     "GetFailureModeFindingRequest":{
@@ -2436,6 +2679,16 @@
         "MONITORING"
       ]
     },
+    "InsightsCategory":{
+      "type":"string",
+      "enum":[
+        "CROSS_REGION",
+        "NEW_DEPENDENCY",
+        "THIRD_PARTY",
+        "UNEVEN_USAGE",
+        "AWS_SERVICE"
+      ]
+    },
     "Integer":{
       "type":"integer",
       "box":true
@@ -2667,6 +2920,11 @@
     "ListPoliciesRequest":{
       "type":"structure",
       "members":{
+        "accountId":{
+          "shape":"AccountId",
+          "location":"querystring",
+          "locationName":"accountId"
+        },
         "maxResults":{
           "shape":"MaxResults",
           "location":"querystring",
@@ -2684,6 +2942,50 @@
       "required":["policySummaries"],
       "members":{
         "policySummaries":{"shape":"PolicySummaryList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListPolicyEventsRequest":{
+      "type":"structure",
+      "required":["policyArn"],
+      "members":{
+        "policyArn":{
+          "shape":"Arn",
+          "location":"querystring",
+          "locationName":"policyArn"
+        },
+        "eventTypes":{
+          "shape":"PolicyEventTypeList",
+          "location":"querystring",
+          "locationName":"eventTypes"
+        },
+        "startTime":{
+          "shape":"Timestamp",
+          "location":"querystring",
+          "locationName":"startTime"
+        },
+        "endTime":{
+          "shape":"Timestamp",
+          "location":"querystring",
+          "locationName":"endTime"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListPolicyEventsResponse":{
+      "type":"structure",
+      "required":["events"],
+      "members":{
+        "events":{"shape":"PolicyEventList"},
         "nextToken":{"shape":"NextToken"}
       }
     },
@@ -3054,6 +3356,43 @@
         "tags":{"shape":"TagMap"}
       }
     },
+    "ListTestRunDependenciesRequest":{
+      "type":"structure",
+      "required":[
+        "testRunId",
+        "serviceArn"
+      ],
+      "members":{
+        "testRunId":{
+          "shape":"TestRunId",
+          "location":"uri",
+          "locationName":"testRunId"
+        },
+        "serviceArn":{
+          "shape":"Arn",
+          "location":"querystring",
+          "locationName":"serviceArn"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListTestRunDependenciesResponse":{
+      "type":"structure",
+      "required":["dependencies"],
+      "members":{
+        "dependencies":{"shape":"TestRunDependencySummaryList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
     "ListTestRunEventsRequest":{
       "type":"structure",
       "required":[
@@ -3098,6 +3437,49 @@
       "required":["events"],
       "members":{
         "events":{"shape":"TestRunEventList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListTestRunSourceEventsRequest":{
+      "type":"structure",
+      "required":[
+        "testRunId",
+        "serviceArn",
+        "sourceArn"
+      ],
+      "members":{
+        "testRunId":{
+          "shape":"TestRunId",
+          "location":"uri",
+          "locationName":"testRunId"
+        },
+        "serviceArn":{
+          "shape":"Arn",
+          "location":"querystring",
+          "locationName":"serviceArn"
+        },
+        "sourceArn":{
+          "shape":"TestRunSourceArn",
+          "location":"querystring",
+          "locationName":"sourceArn"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListTestRunSourceEventsResponse":{
+      "type":"structure",
+      "required":["testRunSourceEvents"],
+      "members":{
+        "testRunSourceEvents":{"shape":"TestRunSourceEventList"},
         "nextToken":{"shape":"NextToken"}
       }
     },
@@ -3461,11 +3843,20 @@
         "multiAz":{"shape":"MultiAzTargets"},
         "multiRegion":{"shape":"MultiRegionTargets"},
         "dataRecovery":{"shape":"DataRecoveryTargets"},
+        "sharingEnabled":{"shape":"Boolean"},
+        "organizationId":{"shape":"OrganizationId"},
         "kmsKeyId":{"shape":"KmsKeyId"},
         "tags":{"shape":"TagMap"},
         "associatedServiceCount":{"shape":"Integer"},
         "createdAt":{"shape":"Timestamp"},
         "updatedAt":{"shape":"Timestamp"}
+      }
+    },
+    "PolicyAttachedToServiceMetadata":{
+      "type":"structure",
+      "members":{
+        "serviceArn":{"shape":"Arn"},
+        "accountId":{"shape":"AccountId"}
       }
     },
     "PolicyComponent":{
@@ -3476,6 +3867,93 @@
         "MULTI_REGION_DISASTER_RECOVERY",
         "DATA_RECOVERY"
       ]
+    },
+    "PolicyDeletedMetadata":{
+      "type":"structure",
+      "members":{
+        "affectedServiceCount":{"shape":"Integer"}
+      }
+    },
+    "PolicyDetachedFromServiceMetadata":{
+      "type":"structure",
+      "members":{
+        "serviceArn":{"shape":"Arn"},
+        "accountId":{"shape":"AccountId"}
+      }
+    },
+    "PolicyDisassociationReason":{
+      "type":"string",
+      "enum":[
+        "REPLACED_BY_UPDATE",
+        "SHARING_REVOKED",
+        "POLICY_DELETED"
+      ]
+    },
+    "PolicyEvent":{
+      "type":"structure",
+      "required":[
+        "eventId",
+        "timestamp",
+        "eventType",
+        "policyArn",
+        "actor",
+        "eventDetails"
+      ],
+      "members":{
+        "eventId":{"shape":"Uuid"},
+        "timestamp":{"shape":"Timestamp"},
+        "eventType":{"shape":"PolicyEventType"},
+        "policyArn":{"shape":"Arn"},
+        "actor":{"shape":"EventActor"},
+        "eventDetails":{"shape":"PolicyEventDetails"}
+      }
+    },
+    "PolicyEventDetails":{
+      "type":"structure",
+      "required":[
+        "title",
+        "description"
+      ],
+      "members":{
+        "title":{"shape":"String"},
+        "description":{"shape":"String"},
+        "eventMetadata":{"shape":"PolicyEventMetadata"}
+      }
+    },
+    "PolicyEventList":{
+      "type":"list",
+      "member":{"shape":"PolicyEvent"}
+    },
+    "PolicyEventMetadata":{
+      "type":"structure",
+      "members":{
+        "policyAttachedToService":{"shape":"PolicyAttachedToServiceMetadata"},
+        "policyDetachedFromService":{"shape":"PolicyDetachedFromServiceMetadata"},
+        "policySharingRevoked":{"shape":"PolicySharingRevokedMetadata"},
+        "policyDeleted":{"shape":"PolicyDeletedMetadata"}
+      },
+      "union":true
+    },
+    "PolicyEventType":{
+      "type":"string",
+      "enum":[
+        "POLICY_ATTACHED_TO_SERVICE",
+        "POLICY_DETACHED_FROM_SERVICE",
+        "POLICY_SHARING_REVOKED",
+        "POLICY_DELETED"
+      ]
+    },
+    "PolicyEventTypeList":{
+      "type":"list",
+      "member":{"shape":"PolicyEventType"},
+      "max":4,
+      "min":0
+    },
+    "PolicySharingRevokedMetadata":{
+      "type":"structure",
+      "members":{
+        "affectedServiceCount":{"shape":"Integer"}
+      }
     },
     "PolicySummary":{
       "type":"structure",
@@ -3490,6 +3968,8 @@
         "multiAz":{"shape":"MultiAzTargets"},
         "multiRegion":{"shape":"MultiRegionTargets"},
         "dataRecovery":{"shape":"DataRecoveryTargets"},
+        "sharingEnabled":{"shape":"Boolean"},
+        "organizationId":{"shape":"OrganizationId"},
         "associatedServiceCount":{"shape":"Integer"},
         "createdAt":{"shape":"Timestamp"},
         "updatedAt":{"shape":"Timestamp"}
@@ -4053,14 +4533,19 @@
       "type":"structure",
       "members":{
         "policyName":{"shape":"String"},
-        "policyArn":{"shape":"Arn"}
+        "policyArn":{"shape":"Arn"},
+        "policyOwnerAccountId":{"shape":"String"},
+        "policySource":{"shape":"PolicyValueSource"}
       }
     },
     "ServicePolicyDisassociatedMetadata":{
       "type":"structure",
       "members":{
         "policyName":{"shape":"String"},
-        "policyArn":{"shape":"Arn"}
+        "policyArn":{"shape":"Arn"},
+        "policyOwnerAccountId":{"shape":"String"},
+        "policySource":{"shape":"PolicyValueSource"},
+        "reason":{"shape":"PolicyDisassociationReason"}
       }
     },
     "ServiceQuotaExceededException":{
@@ -4214,6 +4699,24 @@
         "ASC",
         "DESC"
       ]
+    },
+    "StartDependencyInsightsRequest":{
+      "type":"structure",
+      "required":["serviceArn"],
+      "members":{
+        "serviceArn":{"shape":"Arn"},
+        "clientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "StartDependencyInsightsResponse":{
+      "type":"structure",
+      "required":["status"],
+      "members":{
+        "status":{"shape":"DependencyInsightsStatus"}
+      }
     },
     "StartFailureModeAssessmentRequest":{
       "type":"structure",
@@ -4596,7 +5099,7 @@
         "actions":{"shape":"TestActionList"},
         "loggingConfiguration":{"shape":"LoggingConfiguration"},
         "stopConditions":{"shape":"StopConditionList"},
-        "roleName":{"shape":"EntityName"},
+        "roleName":{"shape":"IamRoleName"},
         "parameters":{"shape":"TestParameters"},
         "totalTestRuns":{"shape":"Integer"},
         "successfulTestRuns":{"shape":"Integer"},
@@ -4619,7 +5122,10 @@
       "type":"list",
       "member":{"shape":"TestAction"}
     },
-    "TestId":{"type":"string"},
+    "TestId":{
+      "type":"string",
+      "min":1
+    },
     "TestParameters":{
       "type":"map",
       "key":{"shape":"ParameterKey"},
@@ -4649,7 +5155,7 @@
         "errorMessage":{"shape":"String"},
         "stopConditions":{"shape":"StopConditionList"},
         "loggingConfiguration":{"shape":"LoggingConfiguration"},
-        "roleName":{"shape":"EntityName"},
+        "roleName":{"shape":"IamRoleName"},
         "testTemplateArn":{"shape":"ServiceOwnedArn"},
         "reportConfiguration":{"shape":"TestRunReportConfiguration"},
         "policy":{"shape":"TestRunPolicySnapshot"},
@@ -4660,6 +5166,58 @@
         "regions":{"shape":"RegionList"},
         "accountTargeting":{"shape":"AccountTargeting"}
       }
+    },
+    "TestRunDependencySource":{
+      "type":"string",
+      "enum":[
+        "DISCOVERED",
+        "MANUAL"
+      ]
+    },
+    "TestRunDependencySummary":{
+      "type":"structure",
+      "required":[
+        "dependencyName",
+        "dnsName",
+        "criticality",
+        "source"
+      ],
+      "members":{
+        "dependencyId":{"shape":"Uuid"},
+        "dependencyName":{"shape":"TestRunDependencySummaryDependencyNameString"},
+        "dnsName":{"shape":"TestRunDependencySummaryDnsNameString"},
+        "criticality":{"shape":"DependencyCriticality"},
+        "source":{"shape":"TestRunDependencySource"},
+        "location":{"shape":"TestRunDependencySummaryLocationString"},
+        "sourceRegions":{"shape":"RegionList"},
+        "provider":{"shape":"TestRunDependencySummaryProviderString"}
+      }
+    },
+    "TestRunDependencySummaryDependencyNameString":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "TestRunDependencySummaryDnsNameString":{
+      "type":"string",
+      "max":253,
+      "min":1
+    },
+    "TestRunDependencySummaryList":{
+      "type":"list",
+      "member":{"shape":"TestRunDependencySummary"},
+      "max":100,
+      "min":0
+    },
+    "TestRunDependencySummaryLocationString":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "TestRunDependencySummaryProviderString":{
+      "type":"string",
+      "max":1024,
+      "min":1
     },
     "TestRunEvent":{
       "type":"structure",
@@ -4715,7 +5273,10 @@
       "max":2048,
       "min":1
     },
-    "TestRunId":{"type":"string"},
+    "TestRunId":{
+      "type":"string",
+      "min":1
+    },
     "TestRunObservabilityAlarmSummary":{
       "type":"structure",
       "required":[
@@ -4748,6 +5309,68 @@
       "members":{
         "reportOutput":{"shape":"ReportOutputConfigurationList"}
       }
+    },
+    "TestRunSourceArn":{
+      "type":"string",
+      "max":1024,
+      "min":31,
+      "pattern":"arn:aws[a-zA-Z-]*:[a-z][a-z0-9-]*:[a-z]{2}(-[a-z]+)+-\\d{1}:\\d{12}:.+"
+    },
+    "TestRunSourceEvent":{
+      "type":"structure",
+      "required":[
+        "timestamp",
+        "sourceArn",
+        "eventType",
+        "detail"
+      ],
+      "members":{
+        "timestamp":{"shape":"Timestamp"},
+        "sourceArn":{"shape":"TestRunSourceArn"},
+        "eventType":{"shape":"TestRunSourceEventType"},
+        "detail":{"shape":"TestRunSourceEventDetail"}
+      }
+    },
+    "TestRunSourceEventDetail":{
+      "type":"structure",
+      "members":{
+        "alarmStateChange":{"shape":"AlarmStateChangeDetail"},
+        "error":{"shape":"TestRunSourceEventError"}
+      },
+      "union":true
+    },
+    "TestRunSourceEventError":{
+      "type":"structure",
+      "required":[
+        "errorCode",
+        "errorMessage"
+      ],
+      "members":{
+        "errorCode":{"shape":"TestRunSourceEventErrorCode"},
+        "errorMessage":{"shape":"TestRunSourceEventErrorErrorMessageString"}
+      }
+    },
+    "TestRunSourceEventErrorCode":{
+      "type":"string",
+      "enum":[
+        "ACCESS_DENIED",
+        "INTERNAL_ERROR"
+      ]
+    },
+    "TestRunSourceEventErrorErrorMessageString":{
+      "type":"string",
+      "max":2048,
+      "min":0
+    },
+    "TestRunSourceEventList":{
+      "type":"list",
+      "member":{"shape":"TestRunSourceEvent"},
+      "max":100,
+      "min":0
+    },
+    "TestRunSourceEventType":{
+      "type":"string",
+      "enum":["ALARM"]
     },
     "TestRunSourceSummary":{
       "type":"structure",
@@ -5082,7 +5705,8 @@
         "availabilitySlo":{"shape":"AvailabilitySlo"},
         "multiAz":{"shape":"MultiAzTargets"},
         "multiRegion":{"shape":"MultiRegionTargets"},
-        "dataRecovery":{"shape":"DataRecoveryTargets"}
+        "dataRecovery":{"shape":"DataRecoveryTargets"},
+        "sharingEnabled":{"shape":"Boolean"}
       }
     },
     "UpdatePolicyResponse":{
@@ -5161,7 +5785,7 @@
         "serviceArn":{"shape":"Arn"},
         "loggingConfiguration":{"shape":"LoggingConfiguration"},
         "stopConditions":{"shape":"StopConditionList"},
-        "roleName":{"shape":"EntityName"},
+        "roleName":{"shape":"IamRoleName"},
         "parameters":{"shape":"TestParameters"}
       }
     },

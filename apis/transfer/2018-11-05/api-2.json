@@ -3286,7 +3286,8 @@
         "PassiveIp":{"shape":"PassiveIp"},
         "TlsSessionResumptionMode":{"shape":"TlsSessionResumptionMode"},
         "SetStatOption":{"shape":"SetStatOption"},
-        "As2Transports":{"shape":"As2Transports"}
+        "As2Transports":{"shape":"As2Transports"},
+        "ProxyConfig":{"shape":"ProxyConfig"}
       }
     },
     "Protocols":{
@@ -3294,6 +3295,19 @@
       "member":{"shape":"Protocol"},
       "max":4,
       "min":1
+    },
+    "ProxyConfig":{
+      "type":"structure",
+      "members":{
+        "SftpMode":{"shape":"ProxyMode"}
+      }
+    },
+    "ProxyMode":{
+      "type":"string",
+      "enum":[
+        "NONE",
+        "PROXY_PROTOCOL_V2_ENFORCED"
+      ]
     },
     "Resource":{"type":"string"},
     "ResourceExistsException":{
@@ -3417,6 +3431,17 @@
     "SecretId":{
       "type":"string",
       "max":2048,
+      "min":1
+    },
+    "SecretVersionStage":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "SecretVersionStageList":{
+      "type":"list",
+      "member":{"shape":"SecretVersionStage"},
+      "max":2,
       "min":1
     },
     "SecurityGroupId":{
@@ -3544,7 +3569,8 @@
       "members":{
         "UserSecretId":{"shape":"SecretId"},
         "TrustedHostKeys":{"shape":"SftpConnectorTrustedHostKeyList"},
-        "MaxConcurrentConnections":{"shape":"MaxConcurrentConnections"}
+        "MaxConcurrentConnections":{"shape":"MaxConcurrentConnections"},
+        "OrderedUserSecretVersionStages":{"shape":"SecretVersionStageList"}
       }
     },
     "SftpConnectorConnectionDetails":{

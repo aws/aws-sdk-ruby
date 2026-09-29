@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.197.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.196.0 (2026-09-09)
+------------------
+
+* Feature - MediaLive now supports Manual Style Control for vertical caption positioning in TTML, WebVTT, and Embedded captions, Contextual Metadata Enrichment via Elemental Inference, and an Output Usage field on MediaPackage v2 for Dynamic Multiview validation.
+
+1.195.0 (2026-09-02)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports AB forensic video watermarking
+
+1.194.0 (2026-08-19)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports video cropping and output positioning. Use cropRectangle and outputPositionRectangle to position the encoded video within the output frame, with the surrounding area filled with black.
+
+1.193.0 (2026-08-18)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports SCTE-35 marker passthrough without IDR frame insertion for CMAF Ingest, MediaPackage V2, and transport stream outputs.
+
 1.192.0 (2026-08-10)
 ------------------
 

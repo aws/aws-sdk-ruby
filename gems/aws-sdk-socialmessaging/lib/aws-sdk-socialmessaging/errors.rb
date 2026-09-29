@@ -29,6 +29,7 @@ module Aws::SocialMessaging
   # ## Error Classes
   # * {AccessDeniedByMetaException}
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {DependencyException}
   # * {InternalServiceException}
   # * {InvalidParametersException}
@@ -63,6 +64,21 @@ module Aws::SocialMessaging
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SocialMessaging::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SocialMessaging::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

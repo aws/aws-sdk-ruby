@@ -8,13 +8,18 @@ require 'openssl'
 module Aws
   module CloudFront
     module Signer
+      # @api private
+      SUPPORTED_HASH_ALGORITHMS = %w[SHA1 SHA256].freeze
+
       # @option options [String] :key_pair_id
       # @option options [String] :private_key
       # @option options [String] :private_key_path
+      # @option options [String] :hash_algorithm ('SHA1') 'SHA1' or 'SHA256'
       def initialize(options = {})
         @key_pair_id = key_pair_id(options)
-        @cipher = OpenSSL::Digest.new('SHA1')
-        @private_key = OpenSSL::PKey.read(private_key(options))
+        @hash_algorithm = hash_algorithm(options)
+        @cipher = OpenSSL::Digest.new(@hash_algorithm)
+        @private_key = load_private_key(private_key(options))
       end
 
       private
@@ -78,7 +83,7 @@ module Aws
       def signature(params = {})
         signature_content = {}
         if params[:policy]
-          policy = params[:policy].gsub('/\s/s', '')
+          policy = params[:policy].gsub(/\s/, '')
           signature_content['Policy'] = encode(policy)
         elsif params[:resource] && params[:expires]
           policy = canned_policy(params[:resource], params[:expires])
@@ -90,12 +95,18 @@ module Aws
 
         signature_content['Signature'] = encode(sign_policy(policy))
         signature_content['Key-Pair-Id'] = @key_pair_id
+        # omitted for SHA1 to keep existing signed URLs and cookies unchanged
+        signature_content['Hash-Algorithm'] = @hash_algorithm if @hash_algorithm == 'SHA256'
         signature_content
       end
 
       # create the signature string with policy signed
       def sign_policy(policy)
         @private_key.sign(@cipher, policy)
+      rescue OpenSSL::PKey::PKeyError => e
+        msg = "failed to sign with #{@hash_algorithm}: #{e.message}"
+        msg += ", consider `hash_algorithm: 'SHA256'`" if @hash_algorithm == 'SHA1'
+        raise ArgumentError, msg
       end
 
       # create canned policy that used for signing
@@ -121,6 +132,16 @@ module Aws
         options[:key_pair_id]
       end
 
+      def hash_algorithm(options)
+        algorithm = (options[:hash_algorithm] || 'SHA1').to_s.upcase
+        unless SUPPORTED_HASH_ALGORITHMS.include?(algorithm)
+          msg = ":hash_algorithm must be one of #{SUPPORTED_HASH_ALGORITHMS.join(', ')}"
+          raise ArgumentError, msg
+        end
+
+        algorithm
+      end
+
       def private_key(options)
         if options[:private_key]
           options[:private_key]
@@ -130,6 +151,23 @@ module Aws
           msg = ':private_key or :private_key_path should be provided'
           raise ArgumentError, msg
         end
+      end
+
+      def load_private_key(pem)
+        key = OpenSSL::PKey.read(pem)
+        case key
+        when OpenSSL::PKey::RSA
+          key
+        when OpenSSL::PKey::EC
+          curve = key.group.curve_name
+          raise ArgumentError, "unsupported ECDSA curve `#{curve}', must be prime256v1" unless curve == 'prime256v1'
+
+          key
+        else
+          raise ArgumentError, "unsupported private key type #{key.class}, must be RSA or ECDSA"
+        end
+      rescue OpenSSL::PKey::PKeyError
+        raise ArgumentError, 'invalid private key, must be a PEM-encoded RSA or ECDSA private key'
       end
     end
   end

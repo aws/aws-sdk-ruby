@@ -1987,6 +1987,7 @@ module Aws::RDS
     #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.full_snapshot_size_in_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -8351,6 +8352,7 @@ module Aws::RDS
     #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.full_snapshot_size_in_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -11131,6 +11133,7 @@ module Aws::RDS
     #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.full_snapshot_size_in_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -16016,6 +16019,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_snapshots[0].additional_storage_volumes[0].storage_type #=> String
     #   resp.db_snapshots[0].snapshot_availability_zone #=> String
+    #   resp.db_snapshots[0].full_snapshot_size_in_bytes #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -23735,6 +23739,7 @@ module Aws::RDS
     #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.full_snapshot_size_in_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -34495,7 +34500,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.320.0'
+      context[:gem_version] = '1.323.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

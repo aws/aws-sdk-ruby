@@ -188,6 +188,10 @@ module Aws::IoT
     #   updates from an MQTT message to an Amazon Location tracker resource.
     #   @return [Types::LocationAction]
     #
+    # @!attribute [rw] influx_db
+    #   Write data to an InfluxDB database.
+    #   @return [Types::InfluxDBAction]
+    #
     class Action < Struct.new(
       :dynamo_db,
       :dynamo_d_bv_2,
@@ -211,7 +215,8 @@ module Aws::IoT
       :http,
       :kafka,
       :open_search,
-      :location)
+      :location,
+      :influx_db)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5593,7 +5598,8 @@ module Aws::IoT
 
     # @!attribute [rw] target_type
     #   The type of resource for which you are configuring logging. Must be
-    #   `THING_Group`.
+    #   `DEFAULT`, `THING_GROUP`, `CLIENT_ID`, `SOURCE_IP`, or
+    #   `PRINCIPAL_ID`.
     #   @return [String]
     #
     # @!attribute [rw] target_name
@@ -9377,6 +9383,242 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The InfluxDB rule action converts the message payload into InfluxDB
+    # line protocol. It writes the result to a table in an InfluxDB
+    # database. The database can be an Amazon Timestream for InfluxDB
+    # instance or a self-managed InfluxDB cluster.
+    #
+    # The action connects to InfluxDB through an InfluxDB topic rule
+    # destination, which must be in the `ENABLED` state before the action
+    # can write data.
+    #
+    # @!attribute [rw] destination_arn
+    #   The ARN of the InfluxDB topic rule destination that identifies the
+    #   InfluxDB instance to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that grants permission to retrieve the InfluxDB
+    #   API token from Amazon Web Services Secrets Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the InfluxDB database to write to. In InfluxDB 2, this
+    #   is the name of the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table to write the data point to. This is the
+    #   measurement name of the InfluxDB line protocol record.
+    #
+    #   Accepts substitution templates.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization
+    #   The name of the InfluxDB organization that owns the database.
+    #
+    #   A write to an InfluxDB 2 instance fails if this value isn't set.
+    #   This value isn't used when the destination is an InfluxDB 3
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The set of tags to write with each data point. Tags are the indexed
+    #   metadata of an InfluxDB data point.
+    #
+    #   Tag names and tag values accept substitution templates. A tag name
+    #   can't use the `@{...}` per-element form. A tag name must resolve to
+    #   the same value for every element of an array payload.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] timestamp_unit
+    #   The precision of the timestamp written with each data point. Valid
+    #   values are `s` (seconds), `ms` (milliseconds), `us` (microseconds),
+    #   and `ns` (nanoseconds).
+    #
+    #   If omitted, the topic rule action uses `ms`.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_config
+    #   The batching configuration for the action. When present, IoT
+    #   collects data points from multiple messages and writes them to
+    #   InfluxDB in a single request.
+    #
+    #   If omitted, each message is written to InfluxDB in its own request.
+    #   @return [Types::InfluxDBBatchConfig]
+    #
+    class InfluxDBAction < Struct.new(
+      :destination_arn,
+      :role_arn,
+      :database_name,
+      :table_name,
+      :organization,
+      :tags,
+      :timestamp_unit,
+      :batch_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The batching configuration of an InfluxDB rule action. IoT closes a
+    # batch and writes it to InfluxDB when the first of the configured
+    # limits is reached.
+    #
+    # @!attribute [rw] max_batch_size
+    #   The maximum number of data points to collect in a batch.
+    #
+    #   If you don't specify a value, this limit doesn't apply. IoT then
+    #   closes each batch when another configured limit is reached.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_batch_open_ms
+    #   The maximum length of time, in milliseconds, to keep a batch open
+    #   before writing it to InfluxDB.
+    #
+    #   If you don't specify a value, this limit doesn't apply. IoT then
+    #   closes each batch when another configured limit is reached.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_batch_size_bytes
+    #   The maximum size of a batch, in bytes, before IoT writes it to
+    #   InfluxDB.
+    #
+    #   If you don't specify a value, this limit doesn't apply. IoT then
+    #   closes each batch when another configured limit is reached.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] batch_across_topics
+    #   Specifies whether to collect data points from different topics into
+    #   the same batch.
+    #
+    #   If omitted or `false`, IoT batches data points for each topic
+    #   separately.
+    #   @return [Boolean]
+    #
+    class InfluxDBBatchConfig < Struct.new(
+      :max_batch_size,
+      :max_batch_open_ms,
+      :max_batch_size_bytes,
+      :batch_across_topics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of an InfluxDB topic rule destination.
+    #
+    # @!attribute [rw] endpoint
+    #   The URL of the InfluxDB instance to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] influx_db_version
+    #   The major version of the InfluxDB instance. Valid values are `V2`
+    #   and `V3`.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_id
+    #   The ARN or name of the Amazon Web Services Secrets Manager secret
+    #   that contains the InfluxDB API token.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_type
+    #   The type of the secret that contains the InfluxDB API token. Valid
+    #   values are `SecretString` and `SecretBinary`.
+    #
+    #   If omitted, IoT reads the secret as a string.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_key
+    #   The key to read from the secret value when the secret contains a
+    #   JSON object. If omitted, IoT uses the entire secret value as the
+    #   InfluxDB API token.
+    #   @return [String]
+    #
+    class InfluxDBDestinationConfiguration < Struct.new(
+      :endpoint,
+      :influx_db_version,
+      :secret_id,
+      :secret_type,
+      :secret_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of an existing InfluxDB topic rule destination, as
+    # returned by `CreateTopicRuleDestination` and
+    # `GetTopicRuleDestination`.
+    #
+    # @!attribute [rw] endpoint
+    #   The URL of the InfluxDB instance that the destination writes to.
+    #   @return [String]
+    #
+    # @!attribute [rw] influx_db_version
+    #   The major version of the InfluxDB instance. Valid values are `V2`
+    #   and `V3`.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_id
+    #   The ARN or name of the Amazon Web Services Secrets Manager secret
+    #   that contains the InfluxDB API token.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_type
+    #   The type of the secret that contains the InfluxDB API token. Valid
+    #   values are `SecretString` and `SecretBinary`.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_key
+    #   The key that is read from the secret value when the secret contains
+    #   a JSON object.
+    #   @return [String]
+    #
+    class InfluxDBDestinationProperties < Struct.new(
+      :endpoint,
+      :influx_db_version,
+      :secret_id,
+      :secret_type,
+      :secret_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an InfluxDB topic rule destination, as returned by
+    # `ListTopicRuleDestinations`. For the full set of destination
+    # properties, see `InfluxDBDestinationProperties`.
+    #
+    # @!attribute [rw] endpoint
+    #   The URL of the InfluxDB instance that the destination writes to.
+    #   @return [String]
+    #
+    # @!attribute [rw] influx_db_version
+    #   The major version of the InfluxDB instance. Valid values are `V2`
+    #   and `V3`.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_id
+    #   The ARN or name of the Amazon Web Services Secrets Manager secret
+    #   that contains the InfluxDB API token.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_type
+    #   The type of the secret that contains the InfluxDB API token. Valid
+    #   values are `SecretString` and `SecretBinary`.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_key
+    #   The key that is read from the secret value when the secret contains
+    #   a JSON object.
+    #   @return [String]
+    #
+    class InfluxDBDestinationSummary < Struct.new(
+      :endpoint,
+      :influx_db_version,
+      :secret_id,
+      :secret_type,
+      :secret_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An unexpected error has occurred.
     #
     # @!attribute [rw] message
@@ -13098,7 +13340,8 @@ module Aws::IoT
 
     # @!attribute [rw] target_type
     #   The type of resource for which you are configuring logging. Must be
-    #   `THING_Group`.
+    #   `DEFAULT`, `THING_GROUP`, `CLIENT_ID`, `SOURCE_IP`, or
+    #   `PRINCIPAL_ID`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -17194,6 +17437,11 @@ module Aws::IoT
     #   Properties of the virtual private cloud (VPC) connection.
     #   @return [Types::VpcDestinationProperties]
     #
+    # @!attribute [rw] influx_db_properties
+    #   The properties of an InfluxDB topic rule destination, as returned by
+    #   `CreateTopicRuleDestination` and `GetTopicRuleDestination`.
+    #   @return [Types::InfluxDBDestinationProperties]
+    #
     class TopicRuleDestination < Struct.new(
       :arn,
       :status,
@@ -17201,7 +17449,8 @@ module Aws::IoT
       :last_updated_at,
       :status_reason,
       :http_url_properties,
-      :vpc_properties)
+      :vpc_properties,
+      :influx_db_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17216,9 +17465,15 @@ module Aws::IoT
     #   Configuration of the virtual private cloud (VPC) connection.
     #   @return [Types::VpcDestinationConfiguration]
     #
+    # @!attribute [rw] influx_db_configuration
+    #   The configuration of an InfluxDB topic rule destination, which you
+    #   specify when you call `CreateTopicRuleDestination`.
+    #   @return [Types::InfluxDBDestinationConfiguration]
+    #
     class TopicRuleDestinationConfiguration < Struct.new(
       :http_url_configuration,
-      :vpc_configuration)
+      :vpc_configuration,
+      :influx_db_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17282,6 +17537,11 @@ module Aws::IoT
     #   Information about the virtual private cloud (VPC) connection.
     #   @return [Types::VpcDestinationSummary]
     #
+    # @!attribute [rw] influx_db_summary
+    #   A summary of an InfluxDB topic rule destination, as returned by
+    #   `ListTopicRuleDestinations`.
+    #   @return [Types::InfluxDBDestinationSummary]
+    #
     class TopicRuleDestinationSummary < Struct.new(
       :arn,
       :status,
@@ -17289,7 +17549,8 @@ module Aws::IoT
       :last_updated_at,
       :status_reason,
       :http_url_summary,
-      :vpc_destination_summary)
+      :vpc_destination_summary,
+      :influx_db_summary)
       SENSITIVE = []
       include Aws::Structure
     end

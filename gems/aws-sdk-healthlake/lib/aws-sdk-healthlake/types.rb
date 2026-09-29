@@ -107,6 +107,35 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
+    # The backup configuration for the data store.
+    #
+    # @!attribute [rw] status
+    #   The backup status of the data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_type
+    #   The type of backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_period_in_days
+    #   The number of days backup data is retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] backup_tags_enabled
+    #   Specifies whether tags are included in backups.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/BackupConfiguration AWS API Documentation
+    #
+    class BackupConfiguration < Struct.new(
+      :status,
+      :backup_type,
+      :retention_period_in_days,
+      :backup_tags_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The data store is in a transition state and the user requested action
     # cannot be performed.
     #
@@ -118,6 +147,21 @@ module Aws::HealthLake
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for continuous backup (point-in-time) restore.
+    #
+    # @!attribute [rw] restore_point_time
+    #   The point in time to restore the data store to, specified as a UTC
+    #   timestamp.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ContinuousBackupRestoreConfiguration AWS API Documentation
+    #
+    class ContinuousBackupRestoreConfiguration < Struct.new(
+      :restore_point_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -152,8 +196,8 @@ module Aws::HealthLake
     #   @return [Types::CreateDataTransformationProfileSource]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key identifier used to
-    #   encrypt the profile content at rest.
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key identifier used to encrypt the profile content at rest.
     #   @return [String]
     #
     # @!attribute [rw] profile_description
@@ -327,6 +371,10 @@ module Aws::HealthLake
     #   The profile configuration for the data store.
     #   @return [Types::ProfileConfiguration]
     #
+    # @!attribute [rw] backup_configuration
+    #   The backup configuration for the data store.
+    #   @return [Types::BackupConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateFHIRDatastoreRequest AWS API Documentation
     #
     class CreateFHIRDatastoreRequest < Struct.new(
@@ -339,7 +387,8 @@ module Aws::HealthLake
       :identity_provider_configuration,
       :analytics_configuration,
       :nlp_configuration,
-      :profile_configuration)
+      :profile_configuration,
+      :backup_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -357,7 +406,7 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] datastore_endpoint
-    #   The AWS endpoint created for the data store.
+    #   The Amazon Web Services endpoint created for the data store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateFHIRDatastoreResponse AWS API Documentation
@@ -466,13 +515,14 @@ module Aws::HealthLake
     # including the output location and encryption settings.
     #
     # @!attribute [rw] s3_uri
-    #   The Amazon S3 URI where AWS HealthLake writes the converted output
+    #   The Amazon S3 URI where HealthLake writes the converted output
     #   files.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS Key Management Service (AWS KMS) key identifier used to
-    #   encrypt the transformation job output written to Amazon S3.
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key identifier used to encrypt the transformation job output
+    #   written to Amazon S3.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DataTransformationS3Configuration AWS API Documentation
@@ -480,6 +530,41 @@ module Aws::HealthLake
     class DataTransformationS3Configuration < Struct.new(
       :s3_uri,
       :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The backup status information for the data store.
+    #
+    # @!attribute [rw] configuration
+    #   The backup configuration for the data store.
+    #   @return [Types::BackupConfiguration]
+    #
+    # @!attribute [rw] backup_enabled_at
+    #   The time backup was enabled on the data store.
+    #   @return [Time]
+    #
+    # @!attribute [rw] earliest_restore_point
+    #   The earliest point in time the data store can be restored to.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_restore_point
+    #   The latest point in time the data store can be restored to.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scheduled_permanent_deletion_time
+    #   The time the retained backup data is scheduled for permanent
+    #   deletion.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DatastoreBackupStatus AWS API Documentation
+    #
+    class DatastoreBackupStatus < Struct.new(
+      :configuration,
+      :backup_enabled_at,
+      :earliest_restore_point,
+      :latest_restore_point,
+      :scheduled_permanent_deletion_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -544,7 +629,7 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] datastore_endpoint
-    #   The AWS endpoint for the data store.
+    #   The Amazon Web Services endpoint for the data store.
     #   @return [String]
     #
     # @!attribute [rw] sse_configuration
@@ -577,6 +662,10 @@ module Aws::HealthLake
     #   The profile configuration for the data store.
     #   @return [Types::ProfileConfiguration]
     #
+    # @!attribute [rw] backup_status_info
+    #   The backup status information for the data store.
+    #   @return [Types::DatastoreBackupStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DatastoreProperties AWS API Documentation
     #
     class DatastoreProperties < Struct.new(
@@ -593,7 +682,8 @@ module Aws::HealthLake
       :error_cause,
       :nlp_configuration,
       :analytics_configuration,
-      :profile_configuration)
+      :profile_configuration,
+      :backup_status_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -638,7 +728,8 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_id
-    #   The AWS-generated identifier for the data store to be deleted.
+    #   The Amazon Web Services-generated identifier for the data store to
+    #   be deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DeleteFHIRDatastoreRequest AWS API Documentation
@@ -650,11 +741,11 @@ module Aws::HealthLake
     end
 
     # @!attribute [rw] datastore_id
-    #   The AWS-generated ID for the deleted data store.
+    #   The Amazon Web Services-generated ID for the deleted data store.
     #   @return [String]
     #
     # @!attribute [rw] datastore_arn
-    #   The Amazon Resource Name (ARN) that grants access permission to AWS
+    #   The Amazon Resource Name (ARN) that grants access permission to
     #   HealthLake.
     #   @return [String]
     #
@@ -663,7 +754,7 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] datastore_endpoint
-    #   The AWS endpoint of the data store to be deleted.
+    #   The Amazon Web Services endpoint of the data store to be deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DeleteFHIRDatastoreResponse AWS API Documentation
@@ -995,8 +1086,8 @@ module Aws::HealthLake
     #     includes `create`, `read`, `update`, `delete`, and `search`
     #     permissions.
     #
-    #   * `AWS_AUTH` – The default HealthLake authorization strategy; not
-    #     affiliated with SMART on FHIR.
+    #   * `Amazon Web Services_AUTH` – The default HealthLake authorization
+    #     strategy; not affiliated with SMART on FHIR.
     #
     #    </note>
     #   @return [String]
@@ -1093,8 +1184,8 @@ module Aws::HealthLake
     #   @return [Types::JobProgressReport]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) that grants AWS HealthLake access to
-    #   the input data.
+    #   The Amazon Resource Name (ARN) that grants HealthLake access to the
+    #   input data.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1132,8 +1223,8 @@ module Aws::HealthLake
     # @note InputDataConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of InputDataConfig corresponding to the set member.
     #
     # @!attribute [rw] s3_uri
-    #   The `S3Uri` is the user-specified S3 location of the FHIR data to be
-    #   imported into AWS HealthLake.
+    #   The `S3Uri` is the user-specified Amazon S3 location of the FHIR
+    #   data to be imported into HealthLake.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/InputDataConfig AWS API Documentation
@@ -1166,11 +1257,11 @@ module Aws::HealthLake
     # The progress report for the import job.
     #
     # @!attribute [rw] total_number_of_scanned_files
-    #   The number of files scanned from the S3 input bucket.
+    #   The number of files scanned from the Amazon S3 input bucket.
     #   @return [Integer]
     #
     # @!attribute [rw] total_size_of_scanned_files_in_mb
-    #   The size (in MB) of files scanned from the S3 input bucket.
+    #   The size (in MB) of files scanned from the Amazon S3 input bucket.
     #   @return [Float]
     #
     # @!attribute [rw] total_number_of_imported_files
@@ -1178,7 +1269,7 @@ module Aws::HealthLake
     #   @return [Integer]
     #
     # @!attribute [rw] total_number_of_resources_scanned
-    #   The number of resources scanned from the S3 input bucket.
+    #   The number of resources scanned from the Amazon S3 input bucket.
     #   @return [Integer]
     #
     # @!attribute [rw] total_number_of_resources_imported
@@ -1190,16 +1281,18 @@ module Aws::HealthLake
     #   @return [Integer]
     #
     # @!attribute [rw] total_number_of_files_read_with_customer_error
-    #   The number of files that failed to be read from the S3 input bucket
-    #   due to customer error.
+    #   The number of files that failed to be read from the Amazon S3 input
+    #   bucket due to customer error.
     #   @return [Integer]
     #
     # @!attribute [rw] total_number_of_scanned_non_fhir_files
-    #   The number of non-FHIR files scanned from the S3 input bucket.
+    #   The number of non-FHIR files scanned from the Amazon S3 input
+    #   bucket.
     #   @return [Integer]
     #
     # @!attribute [rw] total_size_of_scanned_non_fhir_files_in_mb
-    #   The size (in MB) of non-FHIR files scanned from the S3 input bucket.
+    #   The size (in MB) of non-FHIR files scanned from the Amazon S3 input
+    #   bucket.
     #   @return [Float]
     #
     # @!attribute [rw] total_number_of_imported_non_fhir_files
@@ -1207,7 +1300,8 @@ module Aws::HealthLake
     #   @return [Integer]
     #
     # @!attribute [rw] total_number_of_non_fhir_resources_scanned
-    #   The number of non-FHIR resources scanned from the S3 input bucket.
+    #   The number of non-FHIR resources scanned from the Amazon S3 input
+    #   bucket.
     #   @return [Integer]
     #
     # @!attribute [rw] total_number_of_non_fhir_resources_imported
@@ -1219,8 +1313,8 @@ module Aws::HealthLake
     #   @return [Integer]
     #
     # @!attribute [rw] total_number_of_non_fhir_files_read_with_customer_error
-    #   The number of non-FHIR files that failed to be read from the S3
-    #   input bucket due to customer error.
+    #   The number of non-FHIR files that failed to be read from the Amazon
+    #   S3 input bucket due to customer error.
     #   @return [Integer]
     #
     # @!attribute [rw] throughput
@@ -1266,8 +1360,8 @@ module Aws::HealthLake
     end
 
     # The customer-managed-key (CMK) used when creating a data store. If a
-    # customer-owned key is not specified, an AWS-owned key is used for
-    # encryption.
+    # customer-owned key is not specified, an Amazon Web Services-owned key
+    # is used for encryption.
     #
     # @!attribute [rw] cmk_type
     #   The type of customer-managed-key (CMK) used for encryption.
@@ -1824,16 +1918,128 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # The configuration of the S3 bucket for either an import or export job.
-    # This includes assigning access permissions.
+    # Specifies the type and parameters for the restore operation.
+    #
+    # @note RestoreConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] continuous_backup_restore_configuration
+    #   Configuration for restoring from continuous backup to a specific
+    #   point in time.
+    #   @return [Types::ContinuousBackupRestoreConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/RestoreConfiguration AWS API Documentation
+    #
+    class RestoreConfiguration < Struct.new(
+      :continuous_backup_restore_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ContinuousBackupRestoreConfiguration < RestoreConfiguration; end
+      class Unknown < RestoreConfiguration; end
+    end
+
+    # @!attribute [rw] source_datastore_id
+    #   The identifier of the source data store to restore from.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_configuration
+    #   The restore configuration specifying the type and parameters for the
+    #   restore.
+    #   @return [Types::RestoreConfiguration]
+    #
+    # @!attribute [rw] datastore_name
+    #   The name for the restored data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_configuration
+    #   The server-side encryption key configuration for the restored data
+    #   store.
+    #   @return [Types::SseConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   An optional user-provided token to ensure API idempotency of the
+    #   restore.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The resource tags applied to the restored data store.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] identity_provider_configuration
+    #   The identity provider configuration for the restored data store.
+    #   @return [Types::IdentityProviderConfiguration]
+    #
+    # @!attribute [rw] analytics_configuration
+    #   The analytics configuration for the restored data store.
+    #   @return [Types::AnalyticsConfiguration]
+    #
+    # @!attribute [rw] nlp_configuration
+    #   The NLP configuration for the restored data store.
+    #   @return [Types::NlpConfiguration]
+    #
+    # @!attribute [rw] profile_configuration
+    #   The profile configuration for the restored data store.
+    #   @return [Types::ProfileConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/RestoreFHIRDatastoreRequest AWS API Documentation
+    #
+    class RestoreFHIRDatastoreRequest < Struct.new(
+      :source_datastore_id,
+      :restore_configuration,
+      :datastore_name,
+      :sse_configuration,
+      :client_token,
+      :tags,
+      :identity_provider_configuration,
+      :analytics_configuration,
+      :nlp_configuration,
+      :profile_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] datastore_id
+    #   The restored data store identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] datastore_arn
+    #   The Amazon Resource Name (ARN) for the restored data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] datastore_status
+    #   The restored data store status.
+    #   @return [String]
+    #
+    # @!attribute [rw] datastore_endpoint
+    #   The AWS endpoint for the restored data store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/RestoreFHIRDatastoreResponse AWS API Documentation
+    #
+    class RestoreFHIRDatastoreResponse < Struct.new(
+      :datastore_id,
+      :datastore_arn,
+      :datastore_status,
+      :datastore_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the Amazon S3 bucket for either an import or
+    # export job. This includes assigning access permissions.
     #
     # @!attribute [rw] s3_uri
-    #   The `S3Uri` is the user-specified S3 location of the FHIR data to be
-    #   imported into AWS HealthLake.
+    #   The `S3Uri` is the user-specified Amazon S3 location of the FHIR
+    #   data to be imported into HealthLake.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Key Management Service (KMS) key ID used to access the S3
+    #   The Key Management Service (KMS) key ID used to access the Amazon S3
     #   bucket.
     #   @return [String]
     #
@@ -1899,14 +2105,14 @@ module Aws::HealthLake
     #   @return [Types::TransformationInputDataConfig]
     #
     # @!attribute [rw] output_data_config
-    #   The Amazon S3 output location and AWS Key Management Service (AWS
-    #   KMS) encryption configuration.
+    #   The Amazon S3 output location and Amazon Web Services Key Management
+    #   Service (Amazon Web Services KMS) encryption configuration.
     #   @return [Types::TransformationOutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that AWS HealthLake assumes to read from and
-    #   write to the specified Amazon S3 locations.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) role that HealthLake assumes to read
+    #   from and write to the specified Amazon S3 locations.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -1927,8 +2133,8 @@ module Aws::HealthLake
     #
     # @!attribute [rw] drift_detection_enabled
     #   Specifies whether drift detection is enabled for this job. When
-    #   enabled, AWS HealthLake writes a drift report to the output Amazon
-    #   S3 location alongside the converted files.
+    #   enabled, HealthLake writes a drift report to the output Amazon S3
+    #   location alongside the converted files.
     #   @return [Boolean]
     #
     # @!attribute [rw] provenance_enabled
@@ -2050,7 +2256,7 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) that grants access permission to AWS
+    #   The Amazon Resource Name (ARN) that grants access permission to
     #   HealthLake.
     #   @return [String]
     #
@@ -2066,15 +2272,16 @@ module Aws::HealthLake
     #   @return [String]
     #
     # @!attribute [rw] profile_id
-    #   A bounded-length string value.
+    #   The data transformation profile identifier to use for the import
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] input_format
-    #   A bounded-length string value.
+    #   The input format of the data to be imported.
     #   @return [String]
     #
     # @!attribute [rw] drift_detection_enabled
-    #   A boolean value.
+    #   Specifies whether to enable drift detection for the import job.
     #   @return [Boolean]
     #
     # @!attribute [rw] provenance_enabled
@@ -2268,9 +2475,9 @@ module Aws::HealthLake
     #   @return [Types::TransformationOutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants AWS HealthLake access to the
-    #   specified Amazon S3 locations. AWS HealthLake assumes this role to
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) role that grants HealthLake access to
+    #   the specified Amazon S3 locations. HealthLake assumes this role to
     #   read input files and write output files.
     #   @return [String]
     #
@@ -2302,8 +2509,8 @@ module Aws::HealthLake
     #
     # @!attribute [rw] drift_detection_enabled
     #   Specifies whether drift detection is enabled for this job. When
-    #   enabled, AWS HealthLake writes a drift report to the output Amazon
-    #   S3 location alongside the converted files.
+    #   enabled, HealthLake writes a drift report to the output Amazon S3
+    #   location alongside the converted files.
     #   @return [Boolean]
     #
     # @!attribute [rw] provenance_enabled
@@ -2388,8 +2595,8 @@ module Aws::HealthLake
     # transformation job.
     #
     # @!attribute [rw] s3_configuration
-    #   The Amazon S3 output location and AWS Key Management Service (AWS
-    #   KMS) encryption configuration.
+    #   The Amazon S3 output location and Amazon Web Services Key Management
+    #   Service (Amazon Web Services KMS) encryption configuration.
     #   @return [Types::DataTransformationS3Configuration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/TransformationOutputDataConfig AWS API Documentation
@@ -2400,8 +2607,9 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # You are not authorized to make this request. Verify that your AWS
-    # credentials are valid and that you have the required permissions.
+    # You are not authorized to make this request. Verify that your Amazon
+    # Web Services credentials are valid and that you have the required
+    # permissions.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2535,6 +2743,10 @@ module Aws::HealthLake
     #   The identity provider configuration for the data store.
     #   @return [Types::IdentityProviderConfiguration]
     #
+    # @!attribute [rw] backup_configuration
+    #   The backup configuration for the data store.
+    #   @return [Types::BackupConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UpdateFHIRDatastoreRequest AWS API Documentation
     #
     class UpdateFHIRDatastoreRequest < Struct.new(
@@ -2543,7 +2755,8 @@ module Aws::HealthLake
       :analytics_configuration,
       :nlp_configuration,
       :profile_configuration,
-      :identity_provider_configuration)
+      :identity_provider_configuration,
+      :backup_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

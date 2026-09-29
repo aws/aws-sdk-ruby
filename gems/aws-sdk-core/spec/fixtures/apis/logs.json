@@ -3265,7 +3265,7 @@
     "ServiceUnavailableException":{
       "type":"structure",
       "members":{
-        "foo":{"shape":"Value"} // custom
+        "foo":{"shape":"Value"}
       },
       "exception":true,
       "fault":true

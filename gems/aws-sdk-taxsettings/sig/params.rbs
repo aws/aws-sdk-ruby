@@ -113,7 +113,11 @@ module Aws
         business_activity: ::String?
       }?,
       france_additional_info: {
-        siren_number: ::String
+        siren_number: ::String,
+        e_invoice_routing_code: ::String?
+      }?,
+      monaco_additional_info: {
+        business_number: ::String
       }?
     }
 

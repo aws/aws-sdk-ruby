@@ -2471,6 +2471,12 @@ module Aws::RedshiftServerless
     #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
     #   @return [String]
     #
+    # @!attribute [rw] s3_table_publish_status
+    #   The current Amazon S3 Tables log-publishing status for the
+    #   namespace. Not returned when S3 Tables publishing has never been
+    #   configured for the namespace.
+    #   @return [Types::S3TablePublishStatus]
+    #
     # @!attribute [rw] status
     #   The status of the namespace.
     #   @return [String]
@@ -2492,6 +2498,7 @@ module Aws::RedshiftServerless
       :namespace_arn,
       :namespace_id,
       :namespace_name,
+      :s3_table_publish_status,
       :status)
       SENSITIVE = [:admin_username]
       include Aws::Structure
@@ -3050,6 +3057,45 @@ module Aws::RedshiftServerless
     #
     class RestoreTableFromSnapshotResponse < Struct.new(
       :table_restore_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the state of Amazon S3 Tables system-table log publishing
+    # for a namespace.
+    #
+    # @!attribute [rw] enabled_all
+    #   `true` when the namespace is enrolled in every current and future
+    #   system table rather than an explicit list of tables.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_ingestion_times
+    #   A map of system table name to the time that table last received
+    #   data, as an ISO-8601 timestamp. A table that has not yet been
+    #   ingested is absent from the map. Use it to judge data freshness.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] s3_table_granularity
+    #   The scope currently in effect. Values are `namespace` or `account`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_table_namespace
+    #   The identifier of the namespace in the S3 table bucket that holds
+    #   the published tables.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_tables
+    #   The system tables currently being published.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/S3TablePublishStatus AWS API Documentation
+    #
+    class S3TablePublishStatus < Struct.new(
+      :enabled_all,
+      :last_ingestion_times,
+      :s3_table_granularity,
+      :s3_table_namespace,
+      :s3_tables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3856,6 +3902,14 @@ module Aws::RedshiftServerless
     #   encrypt your data.
     #   @return [String]
     #
+    # @!attribute [rw] log_destination_type
+    #   The destination for the log data. Valid values are `s3table` and
+    #   `cloudwatch`.
+    #
+    #   Set this to `s3table` to manage Amazon S3 Tables system-table
+    #   publishing for the namespace.
+    #   @return [String]
+    #
     # @!attribute [rw] log_exports
     #   The types of logs the namespace can export. The export types are
     #   `userlog`, `connectionlog`, and `useractivitylog`.
@@ -3874,6 +3928,45 @@ module Aws::RedshiftServerless
     #   namespace once it is created.
     #   @return [String]
     #
+    # @!attribute [rw] s3_table_action
+    #   Whether to enable or disable Amazon S3 Tables publishing. Valid
+    #   values are `Enable` and `Disable`, matched case-insensitively.
+    #
+    #   When omitted, defaults to `Enable`. Valid only when
+    #   `logDestinationType` is `s3table`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_table_granularity
+    #   The scope of the Amazon S3 Tables destination. Valid values are
+    #   `namespace` and `account`, matched case-insensitively. `namespace`
+    #   scopes the published tables to this namespace; `account` scopes them
+    #   to the Amazon Web Services account.
+    #
+    #   Required when enabling. Omitting this parameter or passing a blank
+    #   value fails with `ValidationException`. Valid only when
+    #   `logDestinationType` is `s3table`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_table_kms_key_id
+    #   The identifier of the Key Management Service key used to encrypt the
+    #   published Amazon S3 Tables data. When omitted, the data is encrypted
+    #   with SSE-S3 (Amazon S3 managed keys).
+    #
+    #   Valid only when `logDestinationType` is `s3table`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_table_names
+    #   The system tables to publish (on enable) or to stop publishing (on
+    #   disable). Each value is either a system table view name that begins
+    #   with `sys_` or the keyword `all`.
+    #
+    #   Omitting this parameter, passing an empty list, or including `all`
+    #   each select every current and future system table. Each name must be
+    #   1-128 characters, and the list can contain up to 256 names.
+    #
+    #   Valid only when `logDestinationType` is `s3table`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateNamespaceRequest AWS API Documentation
     #
     class UpdateNamespaceRequest < Struct.new(
@@ -3883,9 +3976,14 @@ module Aws::RedshiftServerless
       :default_iam_role_arn,
       :iam_roles,
       :kms_key_id,
+      :log_destination_type,
       :log_exports,
       :manage_admin_password,
-      :namespace_name)
+      :namespace_name,
+      :s3_table_action,
+      :s3_table_granularity,
+      :s3_table_kms_key_id,
+      :s3_table_names)
       SENSITIVE = [:admin_user_password, :admin_username]
       include Aws::Structure
     end

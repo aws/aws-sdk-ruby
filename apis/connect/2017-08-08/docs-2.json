@@ -175,6 +175,7 @@
     "GetAttachedFile": "<p>Provides a pre-signed URL for download of an approved attached file. This API also returns metadata about the attached file. It will only return a downloadURL if the status of the attached file is <code>APPROVED</code>.</p>",
     "GetContactAttributes": "<p>Retrieves the contact attributes for the specified contact.</p>",
     "GetContactMetrics": "<p>Retrieves contact metric data for a specified contact.</p> <p> <b>Use cases</b> </p> <p>Following are common use cases for position in queue and estimated wait time:</p> <ul> <li> <p>Customer-Facing Wait Time Announcements - Display or announce the estimated wait time and position in queue to customers before or during their queue experience. </p> </li> <li> <p>Callback Offerings - Offer customers a callback option when the estimated wait time or position in queue exceeds a defined threshold. </p> </li> <li> <p>Queue Routing Decisions - Route incoming contacts to less congested queues by comparing estimated wait time and position in queue across multiple queues. </p> </li> <li> <p>Self-Service Deflection - Redirect customers to self-service options like chatbots or FAQs when estimated wait time is high or position in queue is unfavorable. </p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>Metrics are only available while the contact is actively in queue.</p> </li> <li> <p>For more information, see the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html\">Position in queue</a> metric in the <i>Connect Customer Administrator Guide</i>. </p> </li> </ul> <p> <b>Endpoints</b>: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Connect Customer endpoints and quotas</a>.</p>",
+    "GetCrossRegionRouting": "<p>Retrieves the current cross-region routing configuration for an Amazon Connect Global Resiliency instance enabled for global routing. This operation returns whether cross-region routing is currently enabled or disabled (isolated) for the instance.</p> <note> <p>This operation is available only for Amazon Connect Global Resiliency instances enabled for global routing.</p> </note>",
     "GetCurrentMetricData": "<p>Gets the real-time metric data from the specified Connect Customer instance.</p> <p>For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html\">Metrics definitions</a> in the <i>Connect Customer Administrator Guide</i>.</p> <note> <p>When you make a successful API request, you can expect the following metric values in the response:</p> <ol> <li> <p> <b>Metric value is null</b>: The calculation cannot be performed due to divide by zero or insufficient data</p> </li> <li> <p> <b>Metric value is a number (including 0) of defined type</b>: The number provided is the calculation result</p> </li> <li> <p> <b>MetricResult list is empty</b>: The request cannot find any data in the system</p> </li> </ol> <p>The following guidelines can help you work with the API:</p> <ul> <li> <p>Each dimension in the metric response must contain a value</p> </li> <li> <p>Each item in MetricResult must include all requested metrics</p> </li> <li> <p>If the response is slow due to large result sets, try these approaches:</p> <ul> <li> <p>Add filters to reduce the amount of data returned</p> </li> </ul> </li> </ul> </note>",
     "GetCurrentUserData": "<p>Gets the real-time active user data from the specified Connect Customer instance. </p>",
     "GetEffectiveHoursOfOperations": "<p>Get the hours of operations with the effective override applied.</p>",
@@ -211,6 +212,7 @@
     "ListDataTables": "<p>Lists all data tables for the specified Amazon Connect instance. Returns summary information for each table including basic metadata and modification details.</p>",
     "ListDefaultVocabularies": "<p>Lists the default vocabularies for the specified Connect Customer instance.</p>",
     "ListEntitySecurityProfiles": "<p> Lists all security profiles attached to a Q in Connect AIAgent Entity in an Amazon Connect instance. </p>",
+    "ListEvaluationFormAIVersions": "<p>Lists the available AI versions for evaluation forms in the specified Connect Customer instance.</p>",
     "ListEvaluationFormVersions": "<p>Lists versions of an evaluation form in the specified Connect Customer instance.</p>",
     "ListEvaluationForms": "<p>Lists evaluation forms in the specified Connect Customer instance.</p>",
     "ListExtractionDefinitions": "<p>Lists extraction definitions in the specified Connect Customer instance.</p>",
@@ -239,6 +241,7 @@
     "ListRoutingProfiles": "<p>Provides summary information about the routing profiles for the specified Connect Customer instance.</p> <p>For more information about routing profiles, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html\">Routing Profiles</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html\">Create a Routing Profile</a> in the <i>Connect Customer Administrator Guide</i>.</p>",
     "ListRules": "<p>List all rules for the specified Connect Customer instance.</p>",
     "ListSecurityKeys": "<p>This API is in preview release for Connect Customer and is subject to change.</p> <p>Returns a paginated list of all security keys associated with the instance.</p>",
+    "ListSecurityProfileAIAgents": "<p>Returns a list of the allowed AI agents in a specific security profile.</p>",
     "ListSecurityProfileApplications": "<p>Returns a list of third-party applications or MCP Servers in a specific security profile.</p>",
     "ListSecurityProfileFlowModules": "<p> A list of Flow Modules an AI Agent can invoke as a tool </p>",
     "ListSecurityProfilePermissions": "<p>Lists the permissions granted to a security profile.</p> <p>For information about security profiles, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html\">Security Profiles</a> in the <i>Connect Customer Administrator Guide</i>. For a mapping of the API name and user interface name of the security profile permissions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html\">List of security profile permissions</a>. </p>",
@@ -300,9 +303,9 @@
     "SendOutboundWebNotification": "<p>Sends an outbound web notification to a customer's web browser for outbound campaigns. For more information about outbound campaigns, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-outbound-campaigns.html\">Set up Connect Customer outbound campaigns</a>.</p> <note> <p>Only the Connect Customer outbound campaigns service principal is allowed to assume a role in your account and call this API.</p> </note>",
     "StartAssistantContact": "<p>Starts a chat contact with an AI agent.</p> <p>Use the returned <code>ParticipantToken</code> with the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> operation.</p> <p>For more information about chat, see the following topics in the <i>Connect Customer Administrator Guide</i>: </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Connect Customer</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a> </p> </li> </ul>",
     "StartAttachedFileUpload": "<p>Provides a pre-signed Amazon S3 URL in response for uploading your content.</p> <important> <p>You may only use this API to upload attachments to a <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Connect Customer Case</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Connect Customer Email</a>, or <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Connect Customer Task</a>. </p> </important>",
-    "StartChatContact": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Connect Customer Participant Service.</p> <p>When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p> <p>A 429 error occurs in the following situations:</p> <ul> <li> <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code> exception.</p> </li> <li> <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active chats</a> is exceeded. Active chat throttling returns a <code>LimitExceededException</code>.</p> </li> </ul> <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your account may not support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support. </p> <p>For more information about chat, see the following topics in the <i>Connect Customer Administrator Guide</i>: </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Connect Customer</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a> </p> </li> </ul>",
+    "StartChatContact": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Connect Customer Participant Service.</p> <p>When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p> <p>To receive connection information directly in the response, set <code>ConnectionTypes</code> on the request. To initiate real-time message streaming when the chat is created, set <code>ChatStreamingConfiguration</code> on the request. Both parameters are optional.</p> <p>A 429 error occurs in the following situations:</p> <ul> <li> <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code> exception.</p> </li> <li> <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active chats</a> is exceeded. Active chat throttling returns a <code>LimitExceededException</code>.</p> </li> </ul> <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your account may not support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support. </p> <p>For more information about chat, see the following topics in the <i>Connect Customer Administrator Guide</i>: </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Connect Customer</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a> </p> </li> </ul>",
     "StartContactConversationalAnalyticsJob": "<p>Starts a Contact Lens post-call analytics job for the specified contact. This API runs Conversational Analytics post-contact analysis on a voice recording that is already attached to the contact, generating transcription, sentiment analysis, redaction, and summarization results based on the provided configuration.</p> <important> <p>A voice recording must already be attached to the contact before calling this API. Use <code>CreateAttachedFile</code> to attach a recording from an S3 source URI.</p> </important> <note> <p>For example, you can call <code>CreateContact</code>, then <code>CreateAttachedFile</code>, then <code>StartContactConversationalAnalyticsJob</code> to create a contact, attach a recording, and run post-call analytics.</p> </note>",
-    "StartContactEvaluation": "<p>Starts an empty evaluation in the specified Connect Customer instance, using the given evaluation form for the particular contact. The evaluation form version used for the contact evaluation corresponds to the currently activated version. If no version is activated for the evaluation form, the contact evaluation cannot be started. </p> <note> <p>Evaluations created through the public API do not contain answer values suggested from automation.</p> </note>",
+    "StartContactEvaluation": "<p>Starts an empty evaluation in the specified Connect Customer instance, using the given evaluation form for the particular contact. The evaluation form version used for the contact evaluation corresponds to the currently activated version. If no version is activated for the evaluation form, the contact evaluation cannot be started. </p>",
     "StartContactMediaProcessing": "<p> Enables in-flight message processing for an ongoing chat session. Message processing will stay active for the rest of the chat, even if an individual contact segment ends. </p>",
     "StartContactRecording": "<p>Starts recording the contact: </p> <ul> <li> <p>If the API is called <i>before</i> the agent joins the call, recording starts when the agent joins the call.</p> </li> <li> <p>If the API is called <i>after</i> the agent joins the call, recording starts at the time of the API call.</p> </li> </ul> <p>StartContactRecording is a one-time action. For example, if you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend and resume it, such as when collecting sensitive information (for example, a credit card number), use SuspendContactRecording and ResumeContactRecording.</p> <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording behavior</a> block.</p> <p>Only voice recordings are supported at this time.</p>",
     "StartContactStreaming": "<p> Initiates real-time message streaming for a new chat contact.</p> <p> For more information about message streaming, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html\">Enable real-time chat message streaming</a> in the <i>Connect Customer Administrator Guide</i>.</p> <p>For more information about chat, see the following topics in the <i>Connect Customer Administrator Guide</i>: </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Connect Customer</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a> </p> </li> </ul>",
@@ -342,6 +345,7 @@
     "UpdateContactRoutingData": "<p>Updates routing priority and age on the contact (<b>QueuePriority</b> and <b>QueueTimeAdjustmentInSeconds</b>). These properties can be used to change a customer's position in the queue. For example, you can move a contact to the back of the queue by setting a lower routing priority relative to other contacts in queue; or you can move a contact to the front of the queue by increasing the routing age which will make the contact look artificially older and therefore higher up in the first-in-first-out routing order. Note that adjusting the routing age of a contact affects only its position in queue, and not its actual queue wait time as reported through metrics. These properties can also be updated by using <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/change-routing-priority.html\">the Set routing priority / age flow block</a>.</p> <note> <p>Either <b>QueuePriority</b> or <b>QueueTimeAdjustmentInSeconds</b> should be provided within the request body, but not both.</p> </note>",
     "UpdateContactSchedule": "<p>Updates the scheduled time of a task contact that is already scheduled.</p>",
     "UpdateContactTaskTemplate": "<p>Updates the task template association on an existing task contact. You can update the task template on a contact before assignment to support tasks that are created without a template (for example <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-rules.html\">Rules</a> or <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-disconnect-flow.html\">disconnect flows</a>) or change the agent interaction form to represent the latest task data (for example an initial request that was submitted as a refund gets updated to an account cancellation and requires a new template).</p> <p>This operation can only be used with task contacts that are in progress and not connected to an agent. A task template can be updated a maximum of 5 times per contact.</p> <p>The task's references must be compatible with the fields of the target task template. If the target template has a required field, the task must have a corresponding reference with a matching name and compatible type. The following task template field types map to reference types:</p> <ul> <li> <p> <code>TEXT</code>, <code>TEXT_AREA</code>, <code>BOOLEAN</code>, and <code>SINGLE_SELECT</code> map to references of type <code>STRING</code>.</p> </li> <li> <p> <code>NUMBER</code> maps to references of type <code>NUMBER</code>.</p> </li> <li> <p> <code>DATE_TIME</code> maps to references of type <code>DATE</code>.</p> </li> <li> <p> <code>URL</code> maps to references of type <code>URL</code>.</p> </li> <li> <p> <code>EMAIL</code> maps to references of type <code>EMAIL</code>.</p> </li> </ul> <p>References corresponding to <code>TEXT</code> fields must be fewer than 512 characters. <code>TEXT_AREA</code> fields must be fewer than 4,096 characters. <code>BOOLEAN</code> fields must have a value of <code>true</code> or <code>false</code>.</p> <p>An <code>InvalidRequestException</code> occurs when <code>UpdateContactTaskTemplate</code> is called on a connected or terminated task, when it is called on non-task contacts, and when the task contact already uses the provided task template. A <code>PropertyValidationException</code> occurs when the task's references conflict with the task template's fields, for example if the task is missing a reference that matches a required field, or if the task has a reference that matches a required field's name but not its datatype.</p>",
+    "UpdateCrossRegionRouting": "<p>Updates the cross-region routing configuration for an Amazon Connect Global Resiliency instance enabled for global routing. When invoked with <code>IsolatedAll</code> set to <code>true</code>, this operation disables cross-region routing, meaning contacts originating in one Region will no longer be routed to agents in another Region.</p> <note> <p>This operation is available only for Amazon Connect Global Resiliency instances enabled for global routing. Reporting and contact search continue to operate globally after you use this operation.</p> </note>",
     "UpdateDataTableAttribute": "<p>Updates all properties for an attribute using all properties from CreateDataTableAttribute. There are no other granular update endpoints. It does not act as a patch operation - all properties must be provided. System managed attributes are not mutable by customers. Changing an attribute's validation does not invalidate existing values since validation only runs when values are created or updated.</p>",
     "UpdateDataTableMetadata": "<p>Updates the metadata properties of a data table. Accepts all fields similar to CreateDataTable, except for fields and tags. There are no other granular update endpoints. It does not act as a patch operation - all properties must be provided or defaults will be used. Fields follow the same requirements as CreateDataTable.</p>",
     "UpdateDataTablePrimaryValues": "<p>Updates the primary values for a record. This operation affects all existing values that are currently associated to the record and its primary values. Users that have restrictions on attributes and/or primary values are not authorized to use this endpoint. The combination of new primary values must be unique within the table.</p>",
@@ -397,9 +401,57 @@
     "UpdateWorkspaceVisibility": "<p>Updates the visibility setting of a workspace, controlling whether it is available to all users, assigned users only, or none.</p>"
   },
   "shapes": {
+    "ACGRInstanceArn": {
+      "base": null,
+      "refs": {
+        "TrafficDistributionGroup$InstanceArn": "<p>The Amazon Resource Name (ARN).</p>",
+        "TrafficDistributionGroupSummary$InstanceArn": "<p>The Amazon Resource Name (ARN) of the instance.</p>"
+      }
+    },
+    "ACGRInstanceIdOrArn": {
+      "base": null,
+      "refs": {
+        "CreateTrafficDistributionGroupRequest$InstanceId": "<p>The identifier of the Connect Customer instance that has been replicated. You can find the <code>instanceId</code> in the ARN of the instance.</p>",
+        "GetCrossRegionRoutingRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+        "ListTrafficDistributionGroupsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+        "ReplicateInstanceRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. You can provide the <code>InstanceId</code>, or the entire ARN.</p>",
+        "UpdateCrossRegionRoutingRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>"
+      }
+    },
+    "ACGRTrafficDistributionGroupArn": {
+      "base": null,
+      "refs": {
+        "CreateTrafficDistributionGroupResponse$Arn": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>",
+        "GetTrafficDistributionResponse$Arn": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>",
+        "TrafficDistributionGroup$Arn": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>",
+        "TrafficDistributionGroupSummary$Arn": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>"
+      }
+    },
+    "ACGRTrafficDistributionGroupId": {
+      "base": null,
+      "refs": {
+        "CreateTrafficDistributionGroupResponse$Id": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN of the traffic distribution group.</p>",
+        "GetTrafficDistributionResponse$Id": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>",
+        "TrafficDistributionGroup$Id": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>",
+        "TrafficDistributionGroupSummary$Id": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>"
+      }
+    },
+    "AIAgent": {
+      "base": "<p>Information about an AI agent that a security profile allows access to for Agent-to-Agent authorization.</p>",
+      "refs": {
+        "AllowedAIAgents$member": null
+      }
+    },
+    "AIAgentType": {
+      "base": "<p>The type of the AI agent.</p>",
+      "refs": {
+        "AIAgent$Type": "<p>The type of the AI agent. The valid value is <code>THIRD_PARTY</code>.</p>"
+      }
+    },
     "ARN": {
       "base": null,
       "refs": {
+        "AIAgent$Arn": "<p>The Amazon Resource Name (ARN) of the AI agent.</p>",
         "ActivateEvaluationFormResponse$EvaluationFormArn": "<p>The Amazon Resource Name (ARN) for the evaluation form resource.</p>",
         "AgentHierarchyGroup$Arn": "<p>The Amazon Resource Name (ARN) of the group.</p>",
         "AgentStatus$AgentStatusARN": "<p>The Amazon Resource Name (ARN) of the agent status.</p>",
@@ -423,6 +475,7 @@
         "ClaimedPhoneNumberSummary$SourcePhoneNumberArn": "<p>The claimed phone number ARN that was previously imported from the external service, such as Amazon Web Services End User Messaging. If it is from Amazon Web Services End User Messaging, it looks like the ARN of the phone number that was imported from Amazon Web Services End User Messaging.</p>",
         "CompleteAttachedFileUploadRequest$AssociatedResourceArn": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>, and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Task</a>.</p> <note> <p>This value must be a valid ARN.</p> </note>",
         "Contact$Arn": "<p>The Amazon Resource Name (ARN) for the contact.</p>",
+        "ContactAnalysisReference$Arn": "<p>The Amazon Resource Name (ARN) of the contact analysis reference.</p>",
         "ContactFlow$Arn": "<p>The Amazon Resource Name (ARN) of the flow.</p>",
         "ContactFlowModule$Arn": "<p>The Amazon Resource Name (ARN).</p>",
         "ContactFlowModuleAliasInfo$ContactFlowModuleArn": "<p>The Amazon Resource Name (ARN) of the flow module.</p>",
@@ -677,6 +730,7 @@
     "ActiveRegion": {
       "base": null,
       "refs": {
+        "AgentInfo$ActiveRegion": "<p>The Region where the agent was active when they handled the contact. For Amazon Connect Global Resiliency instances enabled for global routing, this indicates the Region in which the agent's session was established at the time of the contact.</p>",
         "GlobalResiliencyMetadata$ActiveRegion": "<p>The current AWS region in which the contact is active. This indicates where the contact is being processed in real-time.</p>"
       }
     },
@@ -1071,6 +1125,14 @@
         "EmailAddressMetadata$AliasConfigurations": "<p>A list of alias configurations for this email address, showing which email addresses forward to this primary address. Each configuration contains the email address ID of an alias that forwards emails to this address.</p>"
       }
     },
+    "AllowedAIAgents": {
+      "base": null,
+      "refs": {
+        "CreateSecurityProfileRequest$AllowedAIAgents": "<p>A list of AI agents that the security profile will give access to.</p>",
+        "ListSecurityProfileAIAgentsResponse$AllowedAIAgents": "<p>A list of the allowed AI agents and their types.</p>",
+        "UpdateSecurityProfileRequest$AllowedAIAgents": "<p>A list of AI agents that the security profile will give access to.</p>"
+      }
+    },
     "AllowedAccessControlTags": {
       "base": null,
       "refs": {
@@ -1157,7 +1219,8 @@
     "AnalyticsMode": {
       "base": null,
       "refs": {
-        "AnalyticsModes$member": null
+        "AnalyticsModes$member": null,
+        "ContactAnalysisReference$AnalyticsMode": "<p>The analytics mode of the contact analysis.</p>"
       }
     },
     "AnalyticsModes": {
@@ -1759,6 +1822,7 @@
       "base": null,
       "refs": {
         "Distribution$Region": "<p>The Amazon Web Services Region where the traffic is distributed.</p>",
+        "IsolatedRegionsList$member": null,
         "ReplicateInstanceRequest$ReplicaRegion": "<p>The Amazon Web Services Region where to replicate the Connect Customer instance.</p>",
         "ReplicationConfiguration$SourceRegion": "<p>The Amazon Web Services Region where the source Connect Customer instance was created. This is the Region where the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html\">ReplicateInstance</a> API was called to start the replication process.</p>",
         "ReplicationStatusSummary$Region": "<p>The Amazon Web Services Region. This can be either the source or the replica Region, depending where it appears in the summary list.</p>",
@@ -2001,6 +2065,7 @@
         "TrafficDistributionGroupSummary$IsDefault": "<p>Whether this is the default traffic distribution group created during instance replication. The default traffic distribution group cannot be deleted by the <code>DeleteTrafficDistributionGroup</code> API. The default traffic distribution group is deleted as part of the process for deleting a replica.</p>",
         "UpdateAgentStatusRequest$ResetOrderNumber": "<p>A number indicating the reset order of the agent status.</p>",
         "UpdateAuthenticationProfileRequest$SessionInactivityHandlingEnabled": "<p>Determines if automatic logout on user inactivity is enabled.</p>",
+        "UpdateCrossRegionRoutingRequest$IsolatedAll": "<p>Set to <code>true</code> to disable cross-region routing for all Regions associated with this instance. Set to <code>false</code> to re-enable cross-region routing.</p>",
         "UpdateDataTableAttributeRequest$Primary": "<p>Whether the attribute should be treated as a primary key. Converting to primary attribute requires existing values to maintain uniqueness.</p>",
         "Validation$IgnoreCase": "<p>Boolean that defaults to false. Applies to text lists and text primary attributes. When true, enforces case-insensitive uniqueness for primary attributes and allows case-insensitive lookups.</p>",
         "ValidationEnum$Strict": "<p>Boolean that defaults to false. When true, only values specified in the enum list are allowed. When false, custom values beyond the enumerated list are permitted.</p>"
@@ -2117,6 +2182,12 @@
         "UserData$ActiveSlotsByChannel": "<p> A map of active slots by channel. The key is a channel name. The value is an integer: the number of active slots. </p>"
       }
     },
+    "ChannelWorkloadBehaviorType": {
+      "base": null,
+      "refs": {
+        "CrossChannelWorkloadBehavior$ChannelWorkloadBehaviorType": "<p>Specifies the routing behavior for an agent handling their current channel and workload type.</p>"
+      }
+    },
     "Channels": {
       "base": null,
       "refs": {
@@ -2192,6 +2263,7 @@
       "base": "<p>The streaming configuration, such as the Amazon SNS streaming endpoint.</p>",
       "refs": {
         "NewSessionDetails$StreamingConfiguration": null,
+        "StartChatContactRequest$ChatStreamingConfiguration": "<p>The streaming configuration, such as the Amazon SNS streaming endpoint. Use it to initiate real-time message streaming when the chat is created. This parameter is optional.</p> <p>When you set this parameter, the response includes <code>StreamingId</code>. You do not need to call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html\">StartContactStreaming</a>.</p> <note> <p>This parameter starts message streaming only. The response does not include connection information, and setting this parameter does not remove the need to call <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a>.</p> </note>",
         "StartContactStreamingRequest$ChatStreamingConfiguration": "<p>The streaming configuration, such as the Amazon SNS streaming endpoint.</p>"
       }
     },
@@ -2393,10 +2465,28 @@
       "base": "<p>Operation cannot be performed at this time as there is a conflict with another operation or contact state.</p>",
       "refs": {}
     },
+    "ConnectionCredentials": {
+      "base": "<p>The credentials that a chat participant uses to connect to the Connect Customer Participant Service.</p>",
+      "refs": {
+        "StartChatContactResponse$ConnectionCredentials": "<p>The connection credentials for the chat participant. Returned only when the request includes <code>CONNECTION_CREDENTIALS</code> in <code>ConnectionTypes</code>.</p>"
+      }
+    },
     "ConnectionData": {
       "base": "<p>Information required to join the call.</p>",
       "refs": {
         "StartWebRTCContactResponse$ConnectionData": "<p>Information required for the client application (mobile application or website) to connect to the call.</p>"
+      }
+    },
+    "ConnectionType": {
+      "base": null,
+      "refs": {
+        "ConnectionTypeList$member": null
+      }
+    },
+    "ConnectionTypeList": {
+      "base": null,
+      "refs": {
+        "StartChatContactRequest$ConnectionTypes": "<p>The types of connection information to return in the response. This parameter is optional.</p> <p>Specify <code>CONNECTION_CREDENTIALS</code> to receive a connection token. Specify <code>WEBSOCKET</code> to receive a websocket URL. You can specify both. No other value returns connection information.</p> <p>Request <code>WEBSOCKET</code> to get a URL the participant connects to directly. You do not need to call <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> for it. Request <code>CONNECTION_CREDENTIALS</code> on its own and the response returns a connection token but no websocket URL.</p> <p>If you omit this parameter, the response has no connection information.</p> <note> <p>If the information you request cannot be returned, StartChatContact returns an error rather than a response that omits it.</p> </note>"
       }
     },
     "Contact": {
@@ -2409,6 +2499,12 @@
       "base": "<p>A structure that defines search criteria for contacts using analysis outputs from Connect Customer Contact Lens.</p>",
       "refs": {
         "SearchCriteria$ContactAnalysis": "<p>Search criteria based on analysis outputs from Connect Customer Contact Lens.</p>"
+      }
+    },
+    "ContactAnalysisReference": {
+      "base": "<p>Information about a reference when the <code>referenceType</code> is <code>CONTACT_ANALYSIS</code>. Otherwise, null.</p>",
+      "refs": {
+        "ReferenceSummary$ContactAnalysis": null
       }
     },
     "ContactConfiguration": {
@@ -2975,7 +3071,8 @@
       "base": null,
       "refs": {
         "EvaluationFormSearchSummary$ContactInteractionType": "<p>The contact interaction type for this evaluation form.</p>",
-        "EvaluationFormTargetConfiguration$ContactInteractionType": "<p>The contact interaction type for this evaluation form.</p>"
+        "EvaluationFormTargetConfiguration$ContactInteractionType": "<p>The contact interaction type for this evaluation form.</p>",
+        "ListEvaluationFormAIVersionsRequest$ContactInteractionType": "<p>The contact interaction type for the evaluation form.</p>"
       }
     },
     "ContactMediaProcessingFailureMode": {
@@ -3572,6 +3669,12 @@
       "base": "<p>Defines the cross-channel routing behavior that allows an agent working on a contact in one channel to be offered a contact from a different channel.</p>",
       "refs": {
         "MediaConcurrency$CrossChannelBehavior": "<p>Defines the cross-channel routing behavior for each channel that is enabled for this Routing Profile. For example, this allows you to offer an agent a different contact from another channel when they are currently working with a contact from a Voice channel.</p>"
+      }
+    },
+    "CrossChannelWorkloadBehavior": {
+      "base": "<p>Defines the cross-channel and workload type routing behavior that allows an agent working on a contact to be offered a contact from a different channel or workload type.</p>",
+      "refs": {
+        "WorkloadTypeConcurrency$CrossChannelWorkloadBehavior": "<p>Defines the cross-channel and workload type routing behavior for each channel and workload type combination that is enabled for this Routing Profile.</p>"
       }
     },
     "CurrentMetric": {
@@ -5393,6 +5496,41 @@
         "DescribeEvaluationFormResponse$EvaluationForm": "<p>Information about the evaluation form.</p>"
       }
     },
+    "EvaluationFormAIVersion": {
+      "base": null,
+      "refs": {
+        "CreateEvaluationFormRequest$AIVersion": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>",
+        "EvaluationForm$AIVersion": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>",
+        "EvaluationFormAIVersionSummary$AIVersionName": "<p>The name of the AI version.</p>",
+        "EvaluationFormContent$AIVersion": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>",
+        "EvaluationFormSearchSummary$AIVersion": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>",
+        "UpdateEvaluationFormRequest$AIVersion": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>"
+      }
+    },
+    "EvaluationFormAIVersionLifecycle": {
+      "base": "<p>Contains the status and availability dates for an AI version, indicating when the version became active and when it reaches end of life.</p>",
+      "refs": {
+        "EvaluationFormAIVersionSummary$AIVersionLifecycle": "<p>The lifecycle information for this AI version, including its status and availability dates.</p>"
+      }
+    },
+    "EvaluationFormAIVersionStatus": {
+      "base": null,
+      "refs": {
+        "EvaluationFormAIVersionLifecycle$Status": "<p>The status of the AI version. Valid values:</p> <ul> <li> <p> <code>Latest</code> - The most recent AI version.</p> </li> <li> <p> <code>Preview</code> - An AI version available for preview.</p> </li> <li> <p> <code>Active</code> - An AI version that is currently available.</p> </li> <li> <p> <code>Deprecated</code> - An AI version that is no longer recommended for use.</p> </li> <li> <p> <code>Removed</code> - An AI version that is no longer available.</p> </li> </ul>"
+      }
+    },
+    "EvaluationFormAIVersionSummary": {
+      "base": "<p>Contains the name and lifecycle information for an AI version that you can use when creating or updating an evaluation form.</p>",
+      "refs": {
+        "EvaluationFormAIVersionSummaryList$member": null
+      }
+    },
+    "EvaluationFormAIVersionSummaryList": {
+      "base": null,
+      "refs": {
+        "ListEvaluationFormAIVersionsResponse$AIVersionSummaries": "<p>The list of AI version summaries.</p>"
+      }
+    },
     "EvaluationFormAutoEvaluationConfiguration": {
       "base": "<p>The automatic evaluation configuration of an evaluation form.</p>",
       "refs": {
@@ -5541,6 +5679,24 @@
         "EvaluationForm$LanguageConfiguration": "<p>Configuration for language settings of this evaluation form.</p>",
         "EvaluationFormContent$LanguageConfiguration": "<p>Configuration for language settings of this evaluation form content.</p>",
         "UpdateEvaluationFormRequest$LanguageConfiguration": "<p>Configuration for language settings of the evaluation form.</p>"
+      }
+    },
+    "EvaluationFormMetricConfiguration": {
+      "base": "<p>Information about the metric configuration for an evaluation form question. Use this to associate a business outcome metric with a question.</p>",
+      "refs": {
+        "EvaluationFormQuestion$MetricConfiguration": "<p>The metric configuration for the question. Use this to associate a business outcome metric with the question.</p>"
+      }
+    },
+    "EvaluationFormMetricName": {
+      "base": null,
+      "refs": {
+        "EvaluationFormMetricConfiguration$MetricName": "<p>The name of the metric. Valid values are:</p> <ul> <li> <p> <code>SALE_SUCCESS</code> – Sale success.</p> </li> <li> <p> <code>CSAT</code> – Customer satisfaction.</p> </li> <li> <p> <code>CHURN_PROPENSITY</code> – Churn propensity.</p> </li> <li> <p> <code>SELF_SERVICE_SUCCESS</code> – Self-service success.</p> </li> <li> <p> <code>PARTIAL_SELF_SERVICE_SUCCESS</code> – Partial self-service success.</p> </li> </ul>"
+      }
+    },
+    "EvaluationFormMetricType": {
+      "base": null,
+      "refs": {
+        "EvaluationFormMetricConfiguration$MetricType": "<p>The type of metric. Currently, only <code>BUSINESS_OUTCOME</code> is supported.</p>"
       }
     },
     "EvaluationFormMultiSelectQuestionAutomation": {
@@ -6336,7 +6492,8 @@
     "ExtractionDefinitionDisplayLabel": {
       "base": null,
       "refs": {
-        "ExtractionDefinitionDisplay$Label": "<p>The label displayed in the agent workspace for this extraction definition.</p>"
+        "ExtractionDefinitionDisplay$Label": "<p>The label displayed in the agent workspace for this extraction definition.</p>",
+        "RealTimeContactAnalysisSegmentExtractedInformation$ExtractionDefinitionDisplayLabel": "<p>The display label of the extraction definition that produced this result.</p>"
       }
     },
     "ExtractionDefinitionId": {
@@ -6347,6 +6504,7 @@
         "DescribeExtractionDefinitionRequest$ExtractionDefinitionId": "<p>The identifier of the extraction definition to describe.</p>",
         "ExtractionDefinition$ExtractionDefinitionId": "<p>The identifier of the extraction definition.</p>",
         "ExtractionDefinitionSummary$ExtractionDefinitionId": "<p>The identifier of the extraction definition.</p>",
+        "RealTimeContactAnalysisSegmentExtractedInformation$ExtractionDefinitionId": "<p>The identifier of the extraction definition that produced this result.</p>",
         "UpdateExtractionDefinitionRequest$ExtractionDefinitionId": "<p>The identifier of the extraction definition to update.</p>"
       }
     },
@@ -6356,6 +6514,7 @@
         "CreateExtractionDefinitionRequest$Name": "<p>A unique name of the extraction definition.</p>",
         "ExtractionDefinition$Name": "<p>The name of the extraction definition.</p>",
         "ExtractionDefinitionSummary$Name": "<p>The name of the extraction definition.</p>",
+        "RealTimeContactAnalysisSegmentExtractedInformation$ExtractionDefinitionName": "<p>The name of the extraction definition that produced this result.</p>",
         "UpdateExtractionDefinitionRequest$Name": "<p>The name of the extraction definition.</p>"
       }
     },
@@ -6681,6 +6840,14 @@
       "refs": {}
     },
     "GetContactMetricsResponse": {
+      "base": null,
+      "refs": {}
+    },
+    "GetCrossRegionRoutingRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "GetCrossRegionRoutingResponse": {
       "base": null,
       "refs": {}
     },
@@ -7246,6 +7413,7 @@
       "base": null,
       "refs": {
         "AttachedFile$CreationTime": "<p>The time of Creation of the file resource as an ISO timestamp. It's specified in ISO 8601 format: <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example, <code>2024-05-03T02:41:28.172Z</code>.</p>",
+        "ConnectionCredentials$Expiry": "<p>The expiration of the token. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>",
         "CreateAttachedFileResponse$CreationTime": "<p>The time of Creation of the file resource as an ISO timestamp. It's specified in ISO 8601 format: <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example, <code>2024-05-03T02:41:28.172Z</code>.</p>",
         "DescribeEmailAddressResponse$CreateTimestamp": "<p>The email address creation timestamp in ISO 8601 Datetime.</p>",
         "DescribeEmailAddressResponse$ModifiedTimestamp": "<p>The email address last modification timestamp in ISO 8601 Datetime.</p>",
@@ -7254,7 +7422,8 @@
         "GetAttachedFileResponse$CreationTime": "<p>The time of Creation of the file resource as an ISO timestamp. It's specified in ISO 8601 format: <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example, <code>2024-05-03T02:41:28.172Z</code>.</p>",
         "ParticipantTokenCredentials$Expiry": "<p>The expiration of the token. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>",
         "StartAttachedFileUploadResponse$CreationTime": "<p>The time of Creation of the file resource as an ISO timestamp. It's specified in ISO 8601 format: <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example, <code>2024-05-03T02:41:28.172Z</code>.</p>",
-        "UploadUrlMetadata$UrlExpiry": "<p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example, <code>2019-11-08T02:41:28.172Z</code>.</p>"
+        "UploadUrlMetadata$UrlExpiry": "<p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example, <code>2019-11-08T02:41:28.172Z</code>.</p>",
+        "Websocket$ConnectionExpiry": "<p>The expiration of the websocket URL. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>"
       }
     },
     "IdempotencyException": {
@@ -7371,13 +7540,6 @@
       "base": "<p>The Connect Customer instance.</p>",
       "refs": {
         "DescribeInstanceResponse$Instance": "<p>The name of the instance.</p>"
-      }
-    },
-    "InstanceArn": {
-      "base": null,
-      "refs": {
-        "TrafficDistributionGroup$InstanceArn": "<p>The Amazon Resource Name (ARN).</p>",
-        "TrafficDistributionGroupSummary$InstanceArn": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>"
       }
     },
     "InstanceAttributeType": {
@@ -7596,6 +7758,7 @@
         "ListDataTablesRequest$InstanceId": "<p>The unique identifier for the Amazon Connect instance whose data tables should be listed.</p>",
         "ListDefaultVocabulariesRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListEntitySecurityProfilesRequest$InstanceId": "<p> The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance. </p>",
+        "ListEvaluationFormAIVersionsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListEvaluationFormVersionsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListEvaluationFormsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListExtractionDefinitionsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
@@ -7624,6 +7787,7 @@
         "ListRoutingProfilesRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListRulesRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListSecurityKeysRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+        "ListSecurityProfileAIAgentsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListSecurityProfileApplicationsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListSecurityProfileFlowModulesRequest$InstanceId": "<p> The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListSecurityProfilePermissionsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
@@ -7777,7 +7941,6 @@
       "refs": {
         "CreateContactFlowModuleAliasRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "CreateTestCaseRequest$InstanceId": "<p>The identifier of the Amazon Connect instance.</p>",
-        "CreateTrafficDistributionGroupRequest$InstanceId": "<p>The identifier of the Connect Customer instance that has been replicated. You can find the <code>instanceId</code> in the ARN of the instance.</p>",
         "DeleteContactFlowModuleAliasRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "DeleteTestCaseRequest$InstanceId": "<p>The identifier of the Amazon Connect instance.</p>",
         "DescribeContactFlowModuleAliasRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
@@ -7785,8 +7948,6 @@
         "GetContactMetricsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "GetContactMetricsRequest$ContactId": "<p>The identifier of the contact in this instance of Connect Customer. </p>",
         "ListContactFlowModuleAliasesRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
-        "ListTrafficDistributionGroupsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
-        "ReplicateInstanceRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. You can provide the <code>InstanceId</code>, or the entire ARN.</p>",
         "SearchResourceTagsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can find the instanceId in the Amazon Resource Name (ARN) of the instance.</p>",
         "SearchTestCasesRequest$InstanceId": "<p>The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.</p>",
         "SearchViewsRequest$InstanceId": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
@@ -7986,6 +8147,12 @@
       "base": null,
       "refs": {
         "PredefinedAttributeConfiguration$IsReadOnly": "<p>A boolean flag used to indicate whether a predefined attribute should be displayed in the Connect Customer admin website.</p>"
+      }
+    },
+    "IsolatedRegionsList": {
+      "base": null,
+      "refs": {
+        "GetCrossRegionRoutingResponse$IsolatedRegions": "<p>The list of Regions for which cross-region routing is currently disabled (isolated). When a Region appears in this list, contacts originating in that Region will not be routed to agents in other Regions, and agents in that Region will not receive contacts from other Regions.</p>"
       }
     },
     "IvrRecordingTrack": {
@@ -8298,6 +8465,14 @@
       "base": null,
       "refs": {}
     },
+    "ListEvaluationFormAIVersionsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListEvaluationFormAIVersionsResponse": {
+      "base": null,
+      "refs": {}
+    },
     "ListEvaluationFormVersionsRequest": {
       "base": null,
       "refs": {}
@@ -8542,6 +8717,14 @@
       "base": null,
       "refs": {}
     },
+    "ListSecurityProfileAIAgentsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListSecurityProfileAIAgentsResponse": {
+      "base": null,
+      "refs": {}
+    },
     "ListSecurityProfileApplicationsRequest": {
       "base": null,
       "refs": {}
@@ -8747,7 +8930,6 @@
       "refs": {
         "ListInstanceStorageConfigsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListInstancesRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
-        "ListTrafficDistributionGroupUsersRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListTrafficDistributionGroupsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "SearchAvailablePhoneNumbersRequest$MaxResults": "<p>The maximum number of results to return per page.</p>"
       }
@@ -8764,6 +8946,7 @@
         "ListChildHoursOfOperationsRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
         "ListDefaultVocabulariesRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListEntitySecurityProfilesRequest$MaxResults": "<p> The maximum number of results to return per page. The default MaxResult size is 100. </p>",
+        "ListEvaluationFormAIVersionsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListEvaluationFormVersionsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListEvaluationFormsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListExtractionDefinitionsRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
@@ -8830,11 +9013,13 @@
         "ListQueuesRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
         "ListQuickConnectsRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
         "ListRoutingProfilesRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
+        "ListSecurityProfileAIAgentsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListSecurityProfileApplicationsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListSecurityProfileFlowModulesRequest$MaxResults": "<p> The maximum number of results to return per page. The default MaxResult size is 100. </p>",
         "ListSecurityProfilePermissionsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListSecurityProfilesRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
         "ListTestCasesRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
+        "ListTrafficDistributionGroupUsersRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListUserHierarchyGroupsRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
         "ListUserNotificationsRequest$MaxResults": "<p>The maximum number of results to return per page. Valid range is 1-1000.</p>",
         "ListUsersRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
@@ -9469,6 +9654,8 @@
         "ListDataTableValuesResponse$NextToken": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>",
         "ListDataTablesRequest$NextToken": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>",
         "ListDataTablesResponse$NextToken": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>",
+        "ListEvaluationFormAIVersionsRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+        "ListEvaluationFormAIVersionsResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
         "ListEvaluationFormVersionsRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
         "ListEvaluationFormVersionsResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
         "ListEvaluationFormsRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
@@ -9521,6 +9708,8 @@
         "ListRulesResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
         "ListSecurityKeysRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
         "ListSecurityKeysResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
+        "ListSecurityProfileAIAgentsRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+        "ListSecurityProfileAIAgentsResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
         "ListSecurityProfileApplicationsRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
         "ListSecurityProfileApplicationsResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
         "ListSecurityProfileFlowModulesRequest$NextToken": "<p> The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
@@ -9746,6 +9935,7 @@
       "base": null,
       "refs": {
         "ChatContactMetrics$MultiParty": "<p>A boolean flag indicating whether multiparty chat or supervisor barge were enabled on this contact.</p>",
+        "ContactAnalysisReference$IsRedacted": "<p>Indicates whether sensitive data has been redacted from the contact analysis.</p>",
         "ParticipantMetrics$ConversationAbandon": "<p>A boolean flag indicating whether the chat conversation was abandoned by a Participant.</p>"
       }
     },
@@ -10166,6 +10356,7 @@
     "ParticipantToken": {
       "base": null,
       "refs": {
+        "ConnectionCredentials$ConnectionToken": "<p>The connection token used by the chat participant to call the Connect Customer Participant Service.</p>",
         "ParticipantTokenCredentials$ParticipantToken": "<p>The token used by the chat participant to call <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a>. The participant token is valid for the lifetime of a chat participant. </p>",
         "StartAssistantContactResponse$ParticipantToken": "<p>The token that the chat participant uses with the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> operation. The token remains valid for the lifetime of the chat participant.</p>",
         "StartChatContactResponse$ParticipantToken": "<p>The token used by the chat participant to call <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a>. The participant token is valid for the lifetime of a chat participant.</p>",
@@ -10479,11 +10670,56 @@
         "DisconnectDetails$PotentialDisconnectIssue": "<p>Indicates the potential disconnection issues for a call. This field is not populated if the service does not detect potential issues.</p>"
       }
     },
+    "PreEvaluationFilter": {
+      "base": "<p>A single pre-evaluation filter condition. Specifies a resource type, filter type, key, value, and operator to match against a resource attribute.</p>",
+      "refs": {
+        "PreEvaluationFilterList$member": null
+      }
+    },
+    "PreEvaluationFilterList": {
+      "base": null,
+      "refs": {
+        "PreEvaluationFilters$AndConditions": "<p>A list of conditions that the rule evaluates together using AND logic. All conditions must be met for the event to be evaluated by the rule.</p>"
+      }
+    },
+    "PreEvaluationFilterOperator": {
+      "base": null,
+      "refs": {
+        "PreEvaluationFilter$Operator": "<p>The comparison operator for the filter condition. Valid values: <code>EQUALS</code>.</p>"
+      }
+    },
+    "PreEvaluationFilterResourceType": {
+      "base": null,
+      "refs": {
+        "PreEvaluationFilter$ResourceType": "<p>The type of resource to filter on. Valid values: <code>CONTACT</code>.</p>"
+      }
+    },
+    "PreEvaluationFilterType": {
+      "base": null,
+      "refs": {
+        "PreEvaluationFilter$FilterType": "<p>The type of filter to apply. Valid values: <code>TAG</code>.</p>"
+      }
+    },
+    "PreEvaluationFilters": {
+      "base": "<p>The pre-evaluation filters for a rule, that restrict a rule to be applied to only certain resources based on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>",
+      "refs": {
+        "CreateRuleRequest$PreEvaluationFilters": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>",
+        "Rule$PreEvaluationFilters": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>",
+        "RuleSearchSummary$PreEvaluationFilters": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>",
+        "UpdateRuleRequest$PreEvaluationFilters": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>"
+      }
+    },
     "PreSignedAttachmentUrl": {
       "base": null,
       "refs": {
         "EmailAttachment$S3Url": "<p>The pre-signed URLs for the S3 bucket where the email attachment is stored.</p>",
         "TaskAttachment$S3Url": "<p>The pre-signed URLs for the S3 bucket where the task attachment is stored.</p>"
+      }
+    },
+    "PreSignedConnectionUrl": {
+      "base": null,
+      "refs": {
+        "Websocket$Url": "<p>The URL of the websocket.</p>"
       }
     },
     "PredefinedAttribute": {
@@ -11236,6 +11472,30 @@
         "RealTimeContactAnalysisSegmentEvent$EventType": "<p>Type of the event. For example, <code>application/vnd.amazonaws.connect.event.participant.left</code>.</p>"
       }
     },
+    "RealTimeContactAnalysisExtractedInformationContent": {
+      "base": null,
+      "refs": {
+        "RealTimeContactAnalysisExtractedInformationValue$Content": "<p>The text content of the extracted value.</p>"
+      }
+    },
+    "RealTimeContactAnalysisExtractedInformationFailureCode": {
+      "base": null,
+      "refs": {
+        "RealTimeContactAnalysisSegmentExtractedInformation$FailureCode": "<p>If the information failed to be extracted, one of the following failure codes occurs:</p> <ul> <li> <p> <code>QUOTA_EXCEEDED</code>: The number of concurrent analytics jobs reached your service quota.</p> </li> <li> <p> <code>INSUFFICIENT_CONVERSATION_CONTENT</code>: Information extraction requires a conversation with at least one turn from each participant.</p> </li> <li> <p> <code>FAILED_SAFETY_GUIDELINES</code>: The extracted information cannot be provided because it failed to meet system safety guidelines.</p> </li> <li> <p> <code>INTERNAL_ERROR</code>: Internal system error.</p> </li> <li> <p> <code>MAX_PACKAGE_FEATURE_ONLY</code>: Information extraction is only available in Amazon Connect Customer instances.</p> </li> </ul>"
+      }
+    },
+    "RealTimeContactAnalysisExtractedInformationValue": {
+      "base": "<p>An individual value extracted from the conversation, including its content and the locations where it was found.</p>",
+      "refs": {
+        "RealTimeContactAnalysisExtractedInformationValues$member": null
+      }
+    },
+    "RealTimeContactAnalysisExtractedInformationValues": {
+      "base": null,
+      "refs": {
+        "RealTimeContactAnalysisSegmentExtractedInformation$ExtractedValues": "<p>The list of values extracted from the conversation for this extraction definition. This field is empty when a <code>FailureCode</code> is present.</p>"
+      }
+    },
     "RealTimeContactAnalysisId256": {
       "base": null,
       "refs": {
@@ -11323,6 +11583,12 @@
       "base": "<p>Segment type describing a contact event.</p>",
       "refs": {
         "RealtimeContactAnalysisSegment$Event": null
+      }
+    },
+    "RealTimeContactAnalysisSegmentExtractedInformation": {
+      "base": "<p>Segment containing information extracted from the conversation. Each segment represents the results for a single extraction definition.</p>",
+      "refs": {
+        "RealtimeContactAnalysisSegment$ExtractedInformation": "<p>The extracted information from the conversation.</p>"
       }
     },
     "RealTimeContactAnalysisSegmentIssues": {
@@ -11415,6 +11681,7 @@
     "RealTimeContactAnalysisTranscriptItemsWithCharacterOffsets": {
       "base": null,
       "refs": {
+        "RealTimeContactAnalysisExtractedInformationValue$PointsOfInterest": "<p>The sections in the conversation that indicate where the extracted value was found.</p>",
         "RealTimeContactAnalysisPointOfInterest$TranscriptItems": "<p>List of the transcript items (segments) that are associated with a given point of interest. </p>"
       }
     },
@@ -11584,6 +11851,7 @@
       "base": null,
       "refs": {
         "AttachmentReference$Name": "<p>Identifier of the attachment reference.</p>",
+        "ContactAnalysisReference$Name": "<p>Identifier of the contact analysis reference.</p>",
         "ContactReferences$key": null,
         "DateReference$Name": "<p>Identifier of the date reference.</p>",
         "EmailMessageReference$Name": "<p>The name of the email message reference</p>",
@@ -11597,6 +11865,7 @@
       "base": null,
       "refs": {
         "AttachmentReference$Status": "<p>Status of the attachment reference type.</p>",
+        "ContactAnalysisReference$Status": "<p>Status of the contact analysis reference type.</p>",
         "Reference$Status": "<p>Status of the attachment reference type.</p>"
       }
     },
@@ -11635,6 +11904,7 @@
       "base": null,
       "refs": {
         "AttachmentReference$Value": "<p>The location path of the attachment reference.</p>",
+        "ContactAnalysisReference$Value": "<p>The location path of the contact analysis reference.</p>",
         "DateReference$Value": "<p>A valid date.</p>",
         "EmailReference$Value": "<p>A valid email address.</p>",
         "NumberReference$Value": "<p>A valid number.</p>",
@@ -11685,6 +11955,7 @@
         "ListQueueQuickConnectsResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
         "ListRoutingProfileManualAssignmentQueuesResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
         "ListRoutingProfileQueuesResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
+        "ListSecurityProfileAIAgentsResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
         "ListSecurityProfileApplicationsResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
         "ListSecurityProfileFlowModulesResponse$LastModifiedRegion": "<p> The Region that flow module was last modified in. </p>",
         "ListSecurityProfilePermissionsResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
@@ -12774,6 +13045,7 @@
         "CreateSecurityProfileResponse$SecurityProfileId": "<p>The identifier for the security profle.</p>",
         "DeleteSecurityProfileRequest$SecurityProfileId": "<p>The identifier for the security profle.</p>",
         "DescribeSecurityProfileRequest$SecurityProfileId": "<p>The identifier for the security profle.</p>",
+        "ListSecurityProfileAIAgentsRequest$SecurityProfileId": "<p>The identifier for the security profle.</p>",
         "ListSecurityProfileApplicationsRequest$SecurityProfileId": "<p>The identifier for the security profle.</p>",
         "ListSecurityProfileFlowModulesRequest$SecurityProfileId": "<p> The identifier for the security profile. </p>",
         "ListSecurityProfilePermissionsRequest$SecurityProfileId": "<p>The identifier for the security profle.</p>",
@@ -13363,6 +13635,7 @@
     "StreamingId": {
       "base": null,
       "refs": {
+        "StartChatContactResponse$StreamingId": "<p>The identifier of the streaming configuration enabled with the chat. Returned only when the request sets <code>ChatStreamingConfiguration</code>. Use this value to call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StopContactStreaming.html\">StopContactStreaming</a>.</p>",
         "StartContactStreamingResponse$StreamingId": "<p>The identifier of the streaming configuration enabled. </p>",
         "StopContactStreamingRequest$StreamingId": "<p>The identifier of the streaming configuration enabled. </p>"
       }
@@ -13402,6 +13675,8 @@
         "MetricFilterValueList$member": null,
         "MetricGroupingList$member": null,
         "NumberCondition$FieldName": "<p>The name of the field in the number condition.</p>",
+        "PreEvaluationFilter$FilterKey": "<p>The key of the attribute to filter on. For tag filters, this is the tag key.</p>",
+        "PreEvaluationFilter$FilterValue": "<p>The value to match against. For tag filters, this is the tag value.</p>",
         "PrimaryValue$Value": "<p>The actual value for the primary attribute. Must be provided as a string regardless of the attribute's value type. Primary values cannot be expressions and must be explicitly specified.</p>",
         "PrimaryValueResponse$Value": "<p>The value's value.</p>",
         "PropertyValidationExceptionProperty$PropertyPath": "<p>The full property path.</p>",
@@ -13663,6 +13938,7 @@
         "CreateQueueRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
         "CreateQuickConnectRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
         "CreateRoutingProfileRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
+        "CreateRuleRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
         "CreateSecurityProfileRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
         "CreateTestCaseRequest$Tags": "<p>The tags used to organize, track, or control access for this resource.</p>",
         "CreateTrafficDistributionGroupRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
@@ -14269,6 +14545,8 @@
         "EvaluationForm$CreatedTime": "<p>The timestamp for when the evaluation form was created.</p>",
         "EvaluationForm$LastModifiedTime": "<p>The timestamp for when the evaluation form was last updated.</p>",
         "EvaluationForm$LastValidationTime": "<p>The timestamp when the most recent validation was started for this evaluation form.</p>",
+        "EvaluationFormAIVersionLifecycle$StartOfLifeTime": "<p>The timestamp for when this AI version became available.</p>",
+        "EvaluationFormAIVersionLifecycle$EndOfLifeTime": "<p>The timestamp when this AI version reaches or reached end of life.</p>",
         "EvaluationFormSearchSummary$CreatedTime": "<p>When the evaluation form was created.</p>",
         "EvaluationFormSearchSummary$LastModifiedTime": "<p>When the evaluation form was last changed.</p>",
         "EvaluationFormSearchSummary$LastActivatedTime": "<p>When the evaluation format was last activated.</p>",
@@ -14309,6 +14587,7 @@
         "ListQueueQuickConnectsResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",
         "ListRoutingProfileManualAssignmentQueuesResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",
         "ListRoutingProfileQueuesResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",
+        "ListSecurityProfileAIAgentsResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",
         "ListSecurityProfileApplicationsResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",
         "ListSecurityProfileFlowModulesResponse$LastModifiedTime": "<p> The time the flow module was last modified. </p>",
         "ListSecurityProfilePermissionsResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",
@@ -14394,23 +14673,10 @@
         "DescribeTrafficDistributionGroupResponse$TrafficDistributionGroup": "<p>Information about the traffic distribution group.</p>"
       }
     },
-    "TrafficDistributionGroupArn": {
-      "base": null,
-      "refs": {
-        "CreateTrafficDistributionGroupResponse$Arn": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>",
-        "GetTrafficDistributionResponse$Arn": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>",
-        "TrafficDistributionGroup$Arn": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>",
-        "TrafficDistributionGroupSummary$Arn": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>"
-      }
-    },
     "TrafficDistributionGroupId": {
       "base": null,
       "refs": {
-        "CreateTrafficDistributionGroupResponse$Id": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN of the traffic distribution group.</p>",
-        "GetTrafficDistributionResponse$Id": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>",
-        "GlobalResiliencyMetadata$TrafficDistributionGroupId": "<p>The identifier of the traffic distribution group.</p>",
-        "TrafficDistributionGroup$Id": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>",
-        "TrafficDistributionGroupSummary$Id": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>"
+        "GlobalResiliencyMetadata$TrafficDistributionGroupId": "<p>The identifier of the traffic distribution group.</p>"
       }
     },
     "TrafficDistributionGroupIdOrArn": {
@@ -14662,6 +14928,14 @@
       "refs": {}
     },
     "UpdateContactTaskTemplateResponse": {
+      "base": null,
+      "refs": {}
+    },
+    "UpdateCrossRegionRoutingRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "UpdateCrossRegionRoutingResponse": {
       "base": null,
       "refs": {}
     },
@@ -15737,6 +16011,12 @@
         "SendOutboundWebNotificationRequest$SessionId": "<p>A unique identifier for the customer's web session to which the notification is being sent.</p>"
       }
     },
+    "Websocket": {
+      "base": "<p>The websocket that a chat participant uses to receive messages and events for the chat.</p>",
+      "refs": {
+        "StartChatContactResponse$Websocket": "<p>The websocket for the chat participant. Returned only when the request includes <code>WEBSOCKET</code> in <code>ConnectionTypes</code>.</p>"
+      }
+    },
     "WeekdayOccurrenceInteger": {
       "base": null,
       "refs": {
@@ -15765,6 +16045,30 @@
       "base": "<p>Information about Connect Customer Wisdom.</p>",
       "refs": {
         "Contact$WisdomInfo": "<p>Information about Connect Customer Wisdom.</p>"
+      }
+    },
+    "WorkloadType": {
+      "base": null,
+      "refs": {
+        "WorkloadTypeConcurrency$WorkloadType": "<p>The value of the workload type.</p>"
+      }
+    },
+    "WorkloadTypeConcurrencies": {
+      "base": null,
+      "refs": {
+        "MediaConcurrency$WorkloadTypeConcurrencies": "<p>Defines the list of workload type concurrency configurations for a channel. When provided, enables granular concurrency control based on workload type values.</p>"
+      }
+    },
+    "WorkloadTypeConcurrency": {
+      "base": "<p>Defines the maximum number of contacts an agent can handle simultaneously for a specific channel and workload type combination.</p>",
+      "refs": {
+        "WorkloadTypeConcurrencies$member": null
+      }
+    },
+    "WorkloadTypeConcurrencyType": {
+      "base": null,
+      "refs": {
+        "WorkloadTypeConcurrency$Concurrency": "<p>The maximum number of contacts an agent can handle simultaneously for a specific channel and workload type combination.</p> <p>Valid Range for <code>VOICE</code>: Minimum value of 1. Maximum value of 1.</p> <p>Valid Range for <code>CHAT</code>: Minimum value of 1. Maximum value of 10.</p> <p>Valid Range for <code>TASK</code>: Minimum value of 1. Maximum value of 10.</p>"
       }
     },
     "Workspace": {

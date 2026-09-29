@@ -253,6 +253,7 @@ module Aws::Redshift
       attr_accessor lakehouse_registration_status: ::String
       attr_accessor catalog_arn: ::String
       attr_accessor extra_compute_for_automatic_optimization: ::String
+      attr_accessor logging_publish_status: Types::LoggingPublishStatus
       SENSITIVE: []
     end
 
@@ -1377,6 +1378,8 @@ module Aws::Redshift
 
     class DisableLoggingMessage
       attr_accessor cluster_identifier: ::String
+      attr_accessor log_destination_type: ("s3" | "cloudwatch" | "s3table")
+      attr_accessor log_exports: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1416,8 +1419,10 @@ module Aws::Redshift
       attr_accessor cluster_identifier: ::String
       attr_accessor bucket_name: ::String
       attr_accessor s3_key_prefix: ::String
-      attr_accessor log_destination_type: ("s3" | "cloudwatch")
+      attr_accessor log_destination_type: ("s3" | "cloudwatch" | "s3table")
       attr_accessor log_exports: ::Array[::String]
+      attr_accessor s3_table_kms_key_id: ::String
+      attr_accessor s3_table_granularity: ::String
       SENSITIVE: []
     end
 
@@ -1913,6 +1918,11 @@ module Aws::Redshift
       SENSITIVE: []
     end
 
+    class LoggingPublishStatus
+      attr_accessor s3_tables: Types::S3TablePublishStatus
+      SENSITIVE: []
+    end
+
     class LoggingStatus
       attr_accessor logging_enabled: bool
       attr_accessor bucket_name: ::String
@@ -1920,8 +1930,9 @@ module Aws::Redshift
       attr_accessor last_successful_delivery_time: ::Time
       attr_accessor last_failure_time: ::Time
       attr_accessor last_failure_message: ::String
-      attr_accessor log_destination_type: ("s3" | "cloudwatch")
+      attr_accessor log_destination_type: ("s3" | "cloudwatch" | "s3table")
       attr_accessor log_exports: ::Array[::String]
+      attr_accessor s3_tables: Types::S3TablePublishStatus
       SENSITIVE: []
     end
 
@@ -2754,6 +2765,15 @@ module Aws::Redshift
       end
       class Unknown < S3AccessGrantsScopeUnion
       end
+    end
+
+    class S3TablePublishStatus
+      attr_accessor s3_tables: ::Array[::String]
+      attr_accessor s3_table_namespace: ::String
+      attr_accessor s3_table_granularity: ::String
+      attr_accessor enabled_all: bool
+      attr_accessor last_ingestion_times: ::Hash[::String, ::String]
+      SENSITIVE: []
     end
 
     class SNSInvalidTopicFault < Aws::EmptyStructure

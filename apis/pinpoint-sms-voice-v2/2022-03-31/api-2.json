@@ -1096,6 +1096,24 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "ListAvailablePhoneNumbers":{
+      "name":"ListAvailablePhoneNumbers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListAvailablePhoneNumbersRequest"},
+      "output":{"shape":"ListAvailablePhoneNumbersResult"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"}
+      ],
+      "readonly":true
+    },
     "ListNotifyCountries":{
       "name":"ListNotifyCountries",
       "http":{
@@ -1939,7 +1957,7 @@
     },
     "AttachmentBody":{
       "type":"blob",
-      "max":1572864,
+      "max":6990508,
       "min":1
     },
     "AttachmentStatus":{
@@ -1960,6 +1978,12 @@
       "max":2048,
       "min":1,
       "pattern":"\\S+"
+    },
+    "AvailablePhoneNumberList":{
+      "type":"list",
+      "member":{"shape":"PhoneNumber"},
+      "max":10,
+      "min":0
     },
     "Boolean":{
       "type":"boolean",
@@ -2034,6 +2058,82 @@
         "IamRoleArn":{"shape":"IamRoleArn"},
         "LogGroupArn":{"shape":"LogGroupArn"}
       }
+    },
+    "ConditionOperator":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[A-Za-z0-9_]+"
+    },
+    "ConditionValue":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "ConditionValueList":{
+      "type":"list",
+      "member":{"shape":"ConditionValue"},
+      "max":20,
+      "min":0
+    },
+    "ConditionalBehavior":{
+      "type":"structure",
+      "required":[
+        "Rules",
+        "DefaultBehavior"
+      ],
+      "members":{
+        "Rules":{"shape":"ConditionalRuleList"},
+        "DefaultBehavior":{"shape":"ConditionalFieldBehavior"}
+      }
+    },
+    "ConditionalFieldBehavior":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[A-Za-z0-9_]+"
+    },
+    "ConditionalRule":{
+      "type":"structure",
+      "required":[
+        "Conditions",
+        "RuleBehavior"
+      ],
+      "members":{
+        "Conditions":{"shape":"FieldConditionList"},
+        "RuleBehavior":{"shape":"ConditionalFieldBehavior"},
+        "ConditionalValidation":{"shape":"ConditionalValidation"}
+      }
+    },
+    "ConditionalRuleList":{
+      "type":"list",
+      "member":{"shape":"ConditionalRule"},
+      "max":20,
+      "min":1
+    },
+    "ConditionalValidation":{
+      "type":"structure",
+      "members":{
+        "MinLength":{"shape":"ConditionalValidationMinLengthInteger"},
+        "MaxLength":{"shape":"ConditionalValidationMaxLengthInteger"},
+        "Pattern":{"shape":"ConditionalValidationPatternString"},
+        "AllowedValues":{"shape":"SelectChoiceList"}
+      }
+    },
+    "ConditionalValidationMaxLengthInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
+    "ConditionalValidationMinLengthInteger":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
+    "ConditionalValidationPatternString":{
+      "type":"string",
+      "max":2048,
+      "min":1
     },
     "ConfigurationSetFilter":{
       "type":"structure",
@@ -3694,6 +3794,24 @@
       "max":52,
       "min":1
     },
+    "FieldCondition":{
+      "type":"structure",
+      "required":[
+        "DependsOnFieldPath",
+        "Operator"
+      ],
+      "members":{
+        "DependsOnFieldPath":{"shape":"FieldPath"},
+        "Operator":{"shape":"ConditionOperator"},
+        "Values":{"shape":"ConditionValueList"}
+      }
+    },
+    "FieldConditionList":{
+      "type":"list",
+      "member":{"shape":"FieldCondition"},
+      "max":5,
+      "min":1
+    },
     "FieldPath":{
       "type":"string",
       "max":100,
@@ -3906,6 +4024,37 @@
         "ZH_TW"
       ]
     },
+    "ListAvailablePhoneNumbersMaxResults":{
+      "type":"integer",
+      "box":true,
+      "max":10,
+      "min":1
+    },
+    "ListAvailablePhoneNumbersRequest":{
+      "type":"structure",
+      "required":[
+        "IsoCountryCode",
+        "NumberCapabilities",
+        "NumberType"
+      ],
+      "members":{
+        "IsoCountryCode":{"shape":"IsoCountryCode"},
+        "NumberCapabilities":{"shape":"NumberCapabilityList"},
+        "NumberType":{"shape":"SearchableNumberType"},
+        "RegistrationId":{"shape":"RegistrationIdOrArn"},
+        "NumberPreference":{"shape":"NumberPreferenceList"},
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"ListAvailablePhoneNumbersMaxResults"}
+      }
+    },
+    "ListAvailablePhoneNumbersResult":{
+      "type":"structure",
+      "required":["AvailablePhoneNumbers"],
+      "members":{
+        "AvailablePhoneNumbers":{"shape":"AvailablePhoneNumberList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "ListNotifyCountriesRequest":{
       "type":"structure",
       "members":{
@@ -4017,6 +4166,11 @@
       "min":20,
       "pattern":"arn:\\S+"
     },
+    "LongMap":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"PrimitiveLong"}
+    },
     "MCCType":{
       "type":"string",
       "max":3,
@@ -4084,6 +4238,13 @@
       "member":{"shape":"MessageType"},
       "max":2,
       "min":0
+    },
+    "MessagingLimits":{
+      "type":"structure",
+      "members":{
+        "RateLimits":{"shape":"LongMap"},
+        "DailyMessageCaps":{"shape":"LongMap"}
+      }
     },
     "MonthlyLimit":{
       "type":"long",
@@ -4383,6 +4544,35 @@
       "max":4,
       "min":1
     },
+    "NumberFilterList":{
+      "type":"list",
+      "member":{"shape":"NumberFilterValue"},
+      "max":10,
+      "min":1
+    },
+    "NumberFilterValue":{
+      "type":"string",
+      "max":16,
+      "min":2,
+      "pattern":"\\+?[0-9]{1,15}"
+    },
+    "NumberPreferenceItem":{
+      "type":"structure",
+      "required":[
+        "PreferenceType",
+        "Filter"
+      ],
+      "members":{
+        "PreferenceType":{"shape":"PreferenceTypeList"},
+        "Filter":{"shape":"NumberFilterList"}
+      }
+    },
+    "NumberPreferenceList":{
+      "type":"list",
+      "member":{"shape":"NumberPreferenceItem"},
+      "max":1,
+      "min":1
+    },
     "NumberStatus":{
       "type":"string",
       "enum":[
@@ -4595,6 +4785,7 @@
         "DeletionProtectionEnabled":{"shape":"PrimitiveBoolean"},
         "PoolId":{"shape":"String"},
         "RegistrationId":{"shape":"String"},
+        "MessagingLimits":{"shape":"MessagingLimits"},
         "CreatedTimestamp":{"shape":"Timestamp"}
       }
     },
@@ -4729,6 +4920,21 @@
         "ACTIVE",
         "DELETING"
       ]
+    },
+    "PreferenceType":{
+      "type":"string",
+      "enum":[
+        "StartsWith",
+        "EndsWith",
+        "Contains",
+        "ExactMatch"
+      ]
+    },
+    "PreferenceTypeList":{
+      "type":"list",
+      "member":{"shape":"PreferenceType"},
+      "max":1,
+      "min":1
     },
     "PrimitiveBoolean":{"type":"boolean"},
     "PrimitiveLong":{"type":"long"},
@@ -5099,7 +5305,8 @@
         "TwoWayMediaS3KeyPrefix":{"shape":"TwoWayMediaS3KeyPrefix"},
         "TwoWayMediaS3Role":{"shape":"IamRoleArn"},
         "TwoWayRcsEventsEnabled":{"shape":"RcsEventTypeList"},
-        "TestingAgent":{"shape":"TestingAgentInformation"}
+        "TestingAgent":{"shape":"TestingAgentInformation"},
+        "MessagingLimits":{"shape":"MessagingLimits"}
       }
     },
     "RcsAgentInformationList":{
@@ -5634,7 +5841,8 @@
         "FieldRequirement":{"shape":"FieldRequirement"},
         "SelectValidation":{"shape":"SelectValidation"},
         "TextValidation":{"shape":"TextValidation"},
-        "DisplayHints":{"shape":"RegistrationFieldDisplayHints"}
+        "DisplayHints":{"shape":"RegistrationFieldDisplayHints"},
+        "ConditionalBehavior":{"shape":"ConditionalBehavior"}
       }
     },
     "RegistrationFieldDefinitionList":{
@@ -6002,6 +6210,7 @@
         "OptOutListName":{"shape":"OptOutListNameOrArn"},
         "PoolId":{"shape":"PoolIdOrArn"},
         "RegistrationId":{"shape":"RegistrationIdOrArn"},
+        "NumberPreference":{"shape":"NumberPreferenceList"},
         "InternationalSendingEnabled":{"shape":"Boolean"},
         "DeletionProtectionEnabled":{"shape":"Boolean"},
         "Tags":{"shape":"TagList"},
@@ -6128,6 +6337,10 @@
         "message",
         "rcs-agent"
       ]
+    },
+    "SearchableNumberType":{
+      "type":"string",
+      "enum":["TEN_DLC"]
     },
     "SectionPath":{
       "type":"string",
@@ -6424,7 +6637,8 @@
         "MonthlyLeasingPrice":{"shape":"String"},
         "DeletionProtectionEnabled":{"shape":"PrimitiveBoolean"},
         "Registered":{"shape":"PrimitiveBoolean"},
-        "RegistrationId":{"shape":"String"}
+        "RegistrationId":{"shape":"String"},
+        "MessagingLimits":{"shape":"MessagingLimits"}
       }
     },
     "SenderIdInformationList":{

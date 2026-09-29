@@ -259,6 +259,9 @@ module Aws::DeviceFarm
     RecurringChargeFrequency = Shapes::StringShape.new(name: 'RecurringChargeFrequency')
     RecurringCharges = Shapes::ListShape.new(name: 'RecurringCharges')
     RemoteAccessEndpoints = Shapes::StructureShape.new(name: 'RemoteAccessEndpoints')
+    RemoteAccessParameterKey = Shapes::StringShape.new(name: 'RemoteAccessParameterKey')
+    RemoteAccessParameterValue = Shapes::StringShape.new(name: 'RemoteAccessParameterValue')
+    RemoteAccessParameters = Shapes::MapShape.new(name: 'RemoteAccessParameters')
     RemoteAccessSession = Shapes::StructureShape.new(name: 'RemoteAccessSession')
     RemoteAccessSessions = Shapes::ListShape.new(name: 'RemoteAccessSessions')
     RenewOfferingRequest = Shapes::StructureShape.new(name: 'RenewOfferingRequest')
@@ -464,6 +467,7 @@ module Aws::DeviceFarm
     CreateRemoteAccessSessionConfiguration.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
     CreateRemoteAccessSessionConfiguration.add_member(:vpce_configuration_arns, Shapes::ShapeRef.new(shape: AmazonResourceNames, location_name: "vpceConfigurationArns"))
     CreateRemoteAccessSessionConfiguration.add_member(:device_proxy, Shapes::ShapeRef.new(shape: DeviceProxy, location_name: "deviceProxy"))
+    CreateRemoteAccessSessionConfiguration.add_member(:parameters, Shapes::ShapeRef.new(shape: RemoteAccessParameters, location_name: "parameters"))
     CreateRemoteAccessSessionConfiguration.struct_class = Types::CreateRemoteAccessSessionConfiguration
 
     CreateRemoteAccessSessionRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
@@ -1177,6 +1181,9 @@ module Aws::DeviceFarm
     RemoteAccessEndpoints.add_member(:remote_driver_endpoint, Shapes::ShapeRef.new(shape: SensitiveURL, location_name: "remoteDriverEndpoint"))
     RemoteAccessEndpoints.add_member(:interactive_endpoint, Shapes::ShapeRef.new(shape: SensitiveURL, location_name: "interactiveEndpoint"))
     RemoteAccessEndpoints.struct_class = Types::RemoteAccessEndpoints
+
+    RemoteAccessParameters.key = Shapes::ShapeRef.new(shape: RemoteAccessParameterKey)
+    RemoteAccessParameters.value = Shapes::ShapeRef.new(shape: RemoteAccessParameterValue)
 
     RemoteAccessSession.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
     RemoteAccessSession.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))

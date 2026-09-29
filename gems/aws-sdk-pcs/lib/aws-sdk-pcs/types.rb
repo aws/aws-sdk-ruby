@@ -574,11 +574,20 @@ module Aws::PCS
     #   settings.
     #   @return [Array<Types::SlurmCustomSetting>]
     #
+    # @!attribute [rw] gres_custom_settings
+    #   The additional Slurm `gres.conf` records for the compute node group.
+    #   Each item is a map of `gres.conf` attribute names to values that
+    #   describes one `gres.conf` record, such as a GPU topology, MIG, MPS,
+    #   or custom GRES entry. PCS adds the `NodeName=` prefix and merges
+    #   these records with the GPU record it derives from the instance type.
+    #   @return [Array<Hash<String,String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ComputeNodeGroupSlurmConfiguration AWS API Documentation
     #
     class ComputeNodeGroupSlurmConfiguration < Struct.new(
       :scale_down_idle_time_in_seconds,
-      :slurm_custom_settings)
+      :slurm_custom_settings,
+      :gres_custom_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -598,11 +607,20 @@ module Aws::PCS
     #   settings.
     #   @return [Array<Types::SlurmCustomSetting>]
     #
+    # @!attribute [rw] gres_custom_settings
+    #   The additional Slurm `gres.conf` records for the compute node group.
+    #   Each item is a map of `gres.conf` attribute names to values that
+    #   describes one `gres.conf` record, such as a GPU topology, MIG, MPS,
+    #   or custom GRES entry. PCS adds the `NodeName=` prefix and merges
+    #   these records with the GPU record it derives from the instance type.
+    #   @return [Array<Hash<String,String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ComputeNodeGroupSlurmConfigurationRequest AWS API Documentation
     #
     class ComputeNodeGroupSlurmConfigurationRequest < Struct.new(
       :scale_down_idle_time_in_seconds,
-      :slurm_custom_settings)
+      :slurm_custom_settings,
+      :gres_custom_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2030,7 +2048,7 @@ module Aws::PCS
     #   see [Updating the scheduler version on a cluster][1] and [Slurm
     #   versions in PCS][2] in the *PCS User Guide*.
     #
-    #   Valid Values: `23.11 | 24.05 | 24.11 | 25.05 | 25.11`
+    #   Valid Values: `23.11 | 24.05 | 24.11 | 25.05 | 25.11 | 26.05`
     #
     #
     #
@@ -2059,7 +2077,7 @@ module Aws::PCS
     #   manage cluster scaling and job scheduling. For more information, see
     #   [Slurm versions in PCS][1] in the *PCS User Guide*.
     #
-    #   Valid Values: `24.11 | 25.05 | 25.11`
+    #   Valid Values: `24.11 | 25.05 | 25.11 | 26.05`
     #
     #
     #
@@ -2638,11 +2656,20 @@ module Aws::PCS
     #   settings.
     #   @return [Array<Types::SlurmCustomSetting>]
     #
+    # @!attribute [rw] gres_custom_settings
+    #   The additional Slurm `gres.conf` records for the compute node group.
+    #   Each item is a map of `gres.conf` attribute names to values that
+    #   describes one `gres.conf` record, such as a GPU topology, MIG, MPS,
+    #   or custom GRES entry. PCS adds the `NodeName=` prefix and merges
+    #   these records with the GPU record it derives from the instance type.
+    #   @return [Array<Hash<String,String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateComputeNodeGroupSlurmConfigurationRequest AWS API Documentation
     #
     class UpdateComputeNodeGroupSlurmConfigurationRequest < Struct.new(
       :scale_down_idle_time_in_seconds,
-      :slurm_custom_settings)
+      :slurm_custom_settings,
+      :gres_custom_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2752,7 +2779,7 @@ module Aws::PCS
     #   and update paths, see [Updating the scheduler version on a
     #   cluster][1] in the *PCS User Guide*.
     #
-    #   Valid Values: `24.05 | 24.11 | 25.05 | 25.11`
+    #   Valid Values: `24.05 | 24.11 | 25.05 | 25.11 | 26.05`
     #
     #
     #

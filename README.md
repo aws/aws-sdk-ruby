@@ -426,6 +426,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Multi-party Approval                              | Aws::MPA                                 | aws-sdk-mpa                                 | 2022-07-26  |
 | AWS Network Firewall                                  | Aws::NetworkFirewall                     | aws-sdk-networkfirewall                     | 2020-11-12  |
 | AWS Network Manager                                   | Aws::NetworkManager                      | aws-sdk-networkmanager                      | 2019-07-05  |
+| AWS Network Security Manager Customer API             | Aws::NetworkSecurityManager              | aws-sdk-networksecuritymanager              | 2025-10-30  |
 | AWS Organizations                                     | Aws::Organizations                       | aws-sdk-organizations                       | 2016-11-28  |
 | AWS Outposts                                          | Aws::Outposts                            | aws-sdk-outposts                            | 2019-12-03  |
 | AWS Parallel Computing Service                        | Aws::PCS                                 | aws-sdk-pcs                                 | 2023-02-10  |
@@ -563,6 +564,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon EventBridge                                    | Aws::EventBridge                         | aws-sdk-eventbridge                         | 2015-10-07  |
 | Amazon EventBridge Pipes                              | Aws::Pipes                               | aws-sdk-pipes                               | 2015-10-07  |
 | Amazon EventBridge Scheduler                          | Aws::Scheduler                           | aws-sdk-scheduler                           | 2021-06-30  |
+| Amazon EventBridgeV2                                  | Aws::EventBridgeV2                       | aws-sdk-eventbridgev2                       | 2025-05-15  |
 | Amazon FSx                                            | Aws::FSx                                 | aws-sdk-fsx                                 | 2018-03-01  |
 | Amazon Forecast Query Service                         | Aws::ForecastQueryService                | aws-sdk-forecastqueryservice                | 2018-06-26  |
 | Amazon Forecast Service                               | Aws::ForecastService                     | aws-sdk-forecastservice                     | 2018-06-26  |
@@ -683,6 +685,7 @@ RubyGems.org page under "LINKS" section.
 | Braket                                                | Aws::Braket                              | aws-sdk-braket                              | 2019-09-01  |
 | CloudWatch Observability Access Manager               | Aws::OAM                                 | aws-sdk-oam                                 | 2022-06-10  |
 | CloudWatch Observability Admin Service                | Aws::ObservabilityAdmin                  | aws-sdk-observabilityadmin                  | 2018-05-10  |
+| CloudWatch Omni                                       | Aws::CloudWatchOmni                      | aws-sdk-cloudwatchomni                      | 2025-01-01  |
 | CloudWatch RUM                                        | Aws::CloudWatchRUM                       | aws-sdk-cloudwatchrum                       | 2018-05-10  |
 | CodeArtifact                                          | Aws::CodeArtifact                        | aws-sdk-codeartifact                        | 2018-09-22  |
 | Compute Optimizer Automation                          | Aws::ComputeOptimizerAutomation          | aws-sdk-computeoptimizerautomation          | 2025-09-22  |
@@ -698,6 +701,7 @@ RubyGems.org page under "LINKS" section.
 | FinSpace User Environment Management service          | Aws::Finspace                            | aws-sdk-finspace                            | 2021-03-12  |
 | Firewall Management Service                           | Aws::FMS                                 | aws-sdk-fms                                 | 2018-01-01  |
 | IAM Roles Anywhere                                    | Aws::RolesAnywhere                       | aws-sdk-rolesanywhere                       | 2018-05-10  |
+| IAM Toolbox (Preview)                                 | Aws::IAMToolbox                          | aws-sdk-iamtoolbox                          | 2018-05-10  |
 | Inspector Scan                                        | Aws::InspectorScan                       | aws-sdk-inspectorscan                       | 2023-08-08  |
 | Inspector2                                            | Aws::Inspector2                          | aws-sdk-inspector2                          | 2020-06-08  |
 | Interconnect                                          | Aws::Interconnect                        | aws-sdk-interconnect                        | 2022-07-26  |

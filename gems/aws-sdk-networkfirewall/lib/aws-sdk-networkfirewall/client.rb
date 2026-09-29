@@ -1192,7 +1192,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
-    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
@@ -2382,7 +2382,7 @@ module Aws::NetworkFirewall
     #   resp.vpc_endpoint_association.tags #=> Array
     #   resp.vpc_endpoint_association.tags[0].key #=> String
     #   resp.vpc_endpoint_association.tags[0].value #=> String
-    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
@@ -2518,7 +2518,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
-    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
@@ -3032,7 +3032,7 @@ module Aws::NetworkFirewall
     #   resp.vpc_endpoint_association.tags #=> Array
     #   resp.vpc_endpoint_association.tags[0].key #=> String
     #   resp.vpc_endpoint_association.tags[0].value #=> String
-    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
@@ -3173,7 +3173,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
-    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.subnet_id #=> String
@@ -3232,7 +3232,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_arn #=> String
     #   resp.firewall_policy_arn #=> String
     #   resp.description #=> String
-    #   resp.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.supported_availability_zones #=> Hash
     #   resp.supported_availability_zones["AvailabilityZone"].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
     #   resp.transit_gateway_attachment_id #=> String
@@ -4090,7 +4090,7 @@ module Aws::NetworkFirewall
     #   resp.vpc_endpoint_association.tags #=> Array
     #   resp.vpc_endpoint_association.tags[0].key #=> String
     #   resp.vpc_endpoint_association.tags[0].value #=> String
-    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
     #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
@@ -7464,7 +7464,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

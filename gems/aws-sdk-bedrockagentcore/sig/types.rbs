@@ -311,6 +311,7 @@ module Aws::BedrockAgentCore
     class CloudWatchFilterConfig
       attr_accessor session_ids: ::Array[::String]
       attr_accessor time_range: Types::SessionFilterConfig
+      attr_accessor session_trace_ids: ::Array[Types::SessionTraceIds]
       SENSITIVE: []
     end
 
@@ -329,6 +330,7 @@ module Aws::BedrockAgentCore
     class CloudWatchLogsSource
       attr_accessor service_names: ::Array[::String]
       attr_accessor log_group_names: ::Array[::String]
+      attr_accessor log_group_name_prefixes: ::Array[::String]
       attr_accessor filter_config: Types::CloudWatchFilterConfig
       SENSITIVE: []
     end
@@ -345,6 +347,8 @@ module Aws::BedrockAgentCore
     class CloudWatchOutputConfig
       attr_accessor log_group_name: ::String
       attr_accessor log_stream_name: ::String
+      attr_accessor metrics_namespace: ::String
+      attr_accessor result_destination: ("DEDICATED_LOG_GROUP" | "SOURCE_LOG_GROUP")
       SENSITIVE: []
     end
 
@@ -444,6 +448,17 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class ContentSource
+      attr_accessor inline: Types::InlineMemoryContent
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Inline < ContentSource
+      end
+      class Unknown < ContentSource
+      end
+    end
+
     class ContentStartEvent < Aws::EmptyStructure
     end
 
@@ -511,6 +526,7 @@ module Aws::BedrockAgentCore
       attr_accessor client_token: ::String
       attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
       attr_accessor extraction_mode: ("SKIP")
+      attr_accessor extraction_config: Types::ExtractionConfig
       SENSITIVE: []
     end
 
@@ -635,6 +651,7 @@ module Aws::BedrockAgentCore
     class DeleteMemoryRecordInput
       attr_accessor memory_id: ::String
       attr_accessor memory_record_id: ::String
+      attr_accessor namespace: ::String
       SENSITIVE: []
     end
 
@@ -878,6 +895,11 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class ExtractionConfig
+      attr_accessor namespace_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class ExtractionJob
       attr_accessor job_id: ::String
       SENSITIVE: []
@@ -1099,6 +1121,7 @@ module Aws::BedrockAgentCore
     class GetMemoryRecordInput
       attr_accessor memory_id: ::String
       attr_accessor memory_record_id: ::String
+      attr_accessor namespace: ::String
       SENSITIVE: []
     end
 
@@ -1408,6 +1431,16 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class HarnessHookEvent
+      attr_accessor hook_event_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("before_tool_call" | "after_tool_call" | "before_invocation" | "after_invocation")
+      attr_accessor decision: ("allow" | "deny")
+      attr_accessor reason: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
     class HarnessInlineFunctionConfig
       attr_accessor description: ::String
       attr_accessor input_schema: untyped
@@ -1438,7 +1471,7 @@ module Aws::BedrockAgentCore
     end
 
     class HarnessMessageStopEvent
-      attr_accessor stop_reason: ("end_turn" | "tool_use" | "tool_result" | "max_tokens" | "stop_sequence" | "content_filtered" | "malformed_model_output" | "malformed_tool_use" | "interrupted" | "partial_turn" | "model_context_window_exceeded" | "max_iterations_exceeded" | "max_output_tokens_exceeded" | "timeout_exceeded")
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "tool_result" | "max_tokens" | "stop_sequence" | "content_filtered" | "malformed_model_output" | "malformed_tool_use" | "interrupted" | "partial_turn" | "model_context_window_exceeded" | "max_iterations_exceeded" | "max_output_tokens_exceeded" | "timeout_exceeded" | "hook_stopped")
       attr_accessor event_type: untyped
       SENSITIVE: []
     end
@@ -1473,12 +1506,13 @@ module Aws::BedrockAgentCore
     class HarnessOpenAiModelConfig
       attr_accessor model_id: ::String
       attr_accessor api_key_arn: ::String
+      attr_accessor api_base: ::String
       attr_accessor max_tokens: ::Integer
       attr_accessor temperature: ::Float
       attr_accessor top_p: ::Float
       attr_accessor api_format: ("chat_completions" | "responses")
       attr_accessor additional_params: untyped
-      SENSITIVE: []
+      SENSITIVE: [:api_base]
     end
 
     class HarnessReasoningContentBlock
@@ -1691,10 +1725,46 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class IngestDataInput
+      attr_accessor memory_id: ::String
+      attr_accessor source: Types::ContentSource
+      attr_accessor content_timestamp: ::Time
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor extraction_config: Types::ExtractionConfig
+      attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class IngestDataOutput
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class IngestPayloadType
+      attr_accessor conversational: Types::Conversational
+      attr_accessor json: Types::MemoryJsonData
+      attr_accessor unknown: untyped
+      SENSITIVE: [:json]
+
+      class Conversational < IngestPayloadType
+      end
+      class Json < IngestPayloadType
+      end
+      class Unknown < IngestPayloadType
+      end
+    end
+
     class InlineGroundTruth
       attr_accessor assertions: ::Array[Types::EvaluationContent]
       attr_accessor expected_trajectory: Types::EvaluationExpectedTrajectory
       attr_accessor turns: ::Array[Types::GroundTruthTurn]
+      SENSITIVE: []
+    end
+
+    class InlineMemoryContent
+      attr_accessor payload: ::Array[Types::IngestPayloadType]
       SENSITIVE: []
     end
 
@@ -2149,6 +2219,11 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class MemoryJsonData
+      attr_accessor content: untyped
+      SENSITIVE: [:content]
+    end
+
     class MemoryMetadataFilterExpression
       attr_accessor left: Types::MemoryRecordLeftExpression
       attr_accessor operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS" | "BEFORE" | "AFTER" | "CONTAINS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS")
@@ -2178,6 +2253,7 @@ module Aws::BedrockAgentCore
 
     class MemoryRecordDeleteInput
       attr_accessor memory_record_id: ::String
+      attr_accessor namespace: ::String
       SENSITIVE: []
     end
 
@@ -2248,6 +2324,7 @@ module Aws::BedrockAgentCore
       attr_accessor timestamp: ::Time
       attr_accessor content: Types::MemoryContent
       attr_accessor namespaces: ::Array[::String]
+      attr_accessor source_namespaces: ::Array[::String]
       attr_accessor memory_strategy_id: ::String
       attr_accessor metadata: ::Hash[::String, Types::MemoryRecordMetadataValue]
       SENSITIVE: []
@@ -2383,12 +2460,15 @@ module Aws::BedrockAgentCore
     class PayloadType
       attr_accessor conversational: Types::Conversational
       attr_accessor blob: untyped
+      attr_accessor json: Types::MemoryJsonData
       attr_accessor unknown: untyped
-      SENSITIVE: [:blob]
+      SENSITIVE: [:blob, :json]
 
       class Conversational < PayloadType
       end
       class Blob < PayloadType
+      end
+      class Json < PayloadType
       end
       class Unknown < PayloadType
       end
@@ -2843,6 +2923,12 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class SessionTraceIds
+      attr_accessor session_id: ::String
+      attr_accessor trace_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class SkillDefinition
       attr_accessor schema_version: ::String
       attr_accessor inline_content: ::String
@@ -2871,6 +2957,7 @@ module Aws::BedrockAgentCore
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor kms_key_arn: ::String
       attr_accessor description: ::String
+      attr_accessor output_config: Types::OutputConfig
       SENSITIVE: []
     end
 
@@ -3373,7 +3460,7 @@ module Aws::BedrockAgentCore
     end
 
     class InvokeHarnessStreamOutput < Enumerator[untyped, untyped]
-      def event_types: () -> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :validation_exception, :runtime_client_error]
+      def event_types: () -> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :validation_exception, :runtime_client_error, :hook_event]
     end
   end
 end

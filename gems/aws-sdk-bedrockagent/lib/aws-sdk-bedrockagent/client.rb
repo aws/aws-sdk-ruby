@@ -601,11 +601,20 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Creates an agent that orchestrates interactions between foundation
+    # <note markdown="1"> Amazon Bedrock Agents (now Amazon Bedrock Agents
+    # Classic) is no longer
+    # open to new customers. For capabilities similar to Bedrock Agents
+    # Classic, explore Amazon Bedrock AgentCore. Existing customers can
+    # continue to use the service as normal. For more information, see
+    # [Amazon Bedrock Agents Classic availability change][1].
+    #
+    #  </note>
+    #
+    #  Creates an agent that orchestrates interactions between foundation
     # models, data sources, software applications, user conversations, and
     # APIs to carry out tasks to help customers.
     #
-    # * Specify the following fields for security purposes.
+    #  * Specify the following fields for security purposes.
     #
     #   * `agentResourceRoleArn` – The Amazon Resource Name (ARN) of the
     #     role with permissions to invoke API operations on an agent.
@@ -619,11 +628,11 @@ module Aws::BedrockAgent
     #     begins a new session.
     # * To enable your agent to retain conversational context across
     #   multiple sessions, include a `memoryConfiguration` object. For more
-    #   information, see [Configure memory][1].
+    #   information, see [Configure memory][2].
     #
     # * To override the default prompt behavior for agent orchestration and
     #   to use advanced prompts, include a `promptOverrideConfiguration`
-    #   object. For more information, see [Advanced prompts][2].
+    #   object. For more information, see [Advanced prompts][3].
     #
     # * If your agent fails to be created, the response returns a list of
     #   `failureReasons` alongside a list of `recommendedActions` for you to
@@ -635,8 +644,9 @@ module Aws::BedrockAgent
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #
     # @option params [required, String] :agent_name
     #   A name for the agent that you create.
@@ -1243,6 +1253,20 @@ module Aws::BedrockAgent
     #         },
     #         connector_parameters: {
     #         },
+    #         sync_schedule: {
+    #           daily: {
+    #           },
+    #           weekly: {
+    #             day_of_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #           },
+    #           monthly: {
+    #             day_of_month: { # required
+    #               day_number: 1,
+    #               last_day_of_month: {
+    #               },
+    #             },
+    #           },
+    #         },
     #       },
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
@@ -1382,7 +1406,7 @@ module Aws::BedrockAgent
     #         ],
     #       },
     #       parsing_configuration: {
-    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION, SMART_PARSING
+    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION, SMART_PARSING, MULTI_MODAL_EMBEDDINGS
     #         bedrock_foundation_model_configuration: {
     #           model_arn: "BedrockModelArn", # required
     #           parsing_prompt: {
@@ -1419,6 +1443,8 @@ module Aws::BedrockAgent
     #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.image_extraction_configuration.image_extraction_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.audio_extraction_configuration.audio_extraction_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.video_extraction_configuration.video_extraction_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.sync_schedule.weekly.day_of_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.sync_schedule.monthly.day_of_month.day_number #=> Integer
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -1483,7 +1509,7 @@ module Aws::BedrockAgent
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations #=> Array
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].transformation_function.transformation_lambda_configuration.lambda_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].step_to_apply #=> String, one of "POST_CHUNKING"
-    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING"
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING", "MULTI_MODAL_EMBEDDINGS"
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_modality #=> String, one of "MULTIMODAL"
@@ -2346,6 +2372,8 @@ module Aws::BedrockAgent
     #                 },
     #               },
     #             ],
+    #             model_configuration: {
+    #             },
     #           },
     #         },
     #         supplemental_data_storage_configuration: {
@@ -2380,10 +2408,22 @@ module Aws::BedrockAgent
     #                 },
     #               },
     #             ],
+    #             model_configuration: {
+    #             },
     #           },
     #         },
     #         server_side_encryption_configuration: {
     #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #         supplemental_data_storage_configuration: {
+    #           storage_locations: [ # required
+    #             {
+    #               type: "S3", # required, accepts S3
+    #               s3_location: {
+    #                 uri: "S3BucketUri", # required
+    #               },
+    #             },
+    #           ],
     #         },
     #       },
     #       kendra_knowledge_base_configuration: {
@@ -2561,6 +2601,9 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video #=> Array
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video[0].segmentation_configuration.fixed_length_duration #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].type #=> String, one of "S3"
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].s3_location.uri #=> String
     #   resp.knowledge_base.knowledge_base_configuration.kendra_knowledge_base_configuration.kendra_index_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.type #=> String, one of "REDSHIFT"
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configurations #=> Array
@@ -2991,6 +3034,134 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def create_prompt_version(params = {}, options = {})
       req = build_request(:create_prompt_version, params)
+      req.send_request(options)
+    end
+
+    # Creates a VPC configuration that lets a knowledge base connect to a
+    # resource in your private VPC. This operation is asynchronous: it
+    # returns a `vpcConfigurationId` with status `CREATING`. Poll
+    # `GetVpcConfiguration` until the status becomes `CREATED` or
+    # `CREATE_FAILED`.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base to associate this VPC
+    #   configuration with.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request but does not return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :vpc_id
+    #   The identifier of the VPC that the knowledge base connects through to
+    #   reach the resource.
+    #
+    # @option params [required, Array<String>] :subnet_ids
+    #   The subnets, in the VPC identified by `vpcId`, that the knowledge base
+    #   uses to connect to the resource.
+    #
+    # @option params [required, String] :resource_target
+    #   The private IPv4 address or DNS name of the resource you want the
+    #   knowledge base to reach. The target must be privately reachable from
+    #   inside your VPC, such as an internal load balancer or a private IP.
+    #   The following are not supported:
+    #
+    #   * Internet-facing endpoints
+    #
+    #   * Loopback addresses
+    #
+    #   * Link-local addresses
+    #
+    #   * Wildcard addresses
+    #
+    #   * Multicast addresses
+    #
+    #   * IPv6 literals
+    #
+    # @option params [required, Integer] :port
+    #   The port on which to reach the resource.
+    #
+    # @option params [required, String] :protocol
+    #   The protocol used to connect to the resource. Specify `HTTP` for
+    #   plaintext or `HTTPS` for TLS. When you specify `HTTPS`, you must also
+    #   provide `tlsServerName`.
+    #
+    # @option params [required, String] :resolution_mode
+    #   Controls how a domain-name `resourceTarget` is resolved. This applies
+    #   only when the target is a domain name; it has no effect for IP-address
+    #   targets, which have no name to resolve. In all cases the resolved
+    #   address must be reachable from inside your VPC. Valid values:
+    #
+    #   * `IN_VPC` (default, recommended) – The target domain name is resolved
+    #     privately, using the DNS resolvers of the VPC, such as private Route
+    #     53 hosted zones or on-premises DNS reachable from the VPC. Use this
+    #     for targets that are private to your VPC, such as internal load
+    #     balancers, private hosted-zone names, or on-premises hosts.
+    #
+    #   * `PUBLIC` – The target domain name is resolved against public DNS
+    #     resolvers. Select this only when the target's domain name must be
+    #     resolved through public DNS and the resulting address is still
+    #     reachable from the VPC, an uncommon split-horizon configuration. If
+    #     you are unsure, use `IN_VPC`.
+    #
+    # @option params [String] :host_header
+    #   An optional HTTP `Host` header value to send when invoking the
+    #   resource. Set this only if your resource (or an upstream router or
+    #   ingress) routes by the `Host` header and that host differs from the
+    #   target. This setting is independent of `tlsServerName`.
+    #
+    # @option params [String] :tls_server_name
+    #   The expected TLS server name. The service matches this value against
+    #   the Subject Alternative Names on your resource's TLS certificate
+    #   during invocation. This field is required when `protocol` is `HTTPS`.
+    #   Set it to a hostname on your certificate, such as
+    #   `app.internal.example.com`. You can use a single leftmost wildcard,
+    #   such as `*.example.com`. The value must be a hostname without a port.
+    #
+    # @option params [String] :name
+    #   An optional human-readable name for the VPC configuration. If you
+    #   don't specify a name, the VPC configuration has no name.
+    #
+    # @option params [String] :description
+    #   An optional description of the VPC configuration. If you don't
+    #   specify a description, the VPC configuration has no description.
+    #
+    # @return [Types::CreateVpcConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcConfigurationResponse#vpc_configuration_id #vpc_configuration_id} => String
+    #   * {Types::CreateVpcConfigurationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_configuration({
+    #     knowledge_base_id: "Id", # required
+    #     client_token: "ClientToken",
+    #     vpc_id: "VpcId", # required
+    #     subnet_ids: ["SubnetId"], # required
+    #     resource_target: "ResourceTarget", # required
+    #     port: 1, # required
+    #     protocol: "HTTP", # required, accepts HTTP, HTTPS
+    #     resolution_mode: "PUBLIC", # required, accepts PUBLIC, IN_VPC
+    #     host_header: "HostHeader",
+    #     tls_server_name: "TlsServerName",
+    #     name: "VpcConfigurationName",
+    #     description: "VpcConfigurationDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_configuration_id #=> String
+    #   resp.status #=> String, one of "CREATING", "CREATED", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateVpcConfiguration AWS API Documentation
+    #
+    # @overload create_vpc_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_configuration(params = {}, options = {})
+      req = build_request(:create_vpc_configuration, params)
       req.send_request(options)
     end
 
@@ -3486,6 +3657,44 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
+    # Deletes a VPC configuration. This operation is asynchronous: it
+    # returns status `DELETING`. Poll `GetVpcConfiguration` until it returns
+    # a `ResourceNotFoundException`, indicating the configuration is
+    # deleted. Delete requests are idempotent and safe to retry.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base that owns the VPC
+    #   configuration.
+    #
+    # @option params [required, String] :vpc_configuration_id
+    #   The unique identifier of the VPC configuration to delete.
+    #
+    # @return [Types::DeleteVpcConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVpcConfigurationResponse#vpc_configuration_id #vpc_configuration_id} => String
+    #   * {Types::DeleteVpcConfigurationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_configuration({
+    #     knowledge_base_id: "Id", # required
+    #     vpc_configuration_id: "VpcConfigurationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_configuration_id #=> String
+    #   resp.status #=> String, one of "CREATING", "CREATED", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteVpcConfiguration AWS API Documentation
+    #
+    # @overload delete_vpc_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_configuration(params = {}, options = {})
+      req = build_request(:delete_vpc_configuration, params)
+      req.send_request(options)
+    end
+
     # Disassociates an agent collaborator.
     #
     # @option params [required, String] :agent_id
@@ -3920,6 +4129,8 @@ module Aws::BedrockAgent
     #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.image_extraction_configuration.image_extraction_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.audio_extraction_configuration.audio_extraction_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.video_extraction_configuration.video_extraction_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.sync_schedule.weekly.day_of_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.sync_schedule.monthly.day_of_month.day_number #=> Integer
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -3984,7 +4195,7 @@ module Aws::BedrockAgent
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations #=> Array
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].transformation_function.transformation_lambda_configuration.lambda_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].step_to_apply #=> String, one of "POST_CHUNKING"
-    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING"
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING", "MULTI_MODAL_EMBEDDINGS"
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_modality #=> String, one of "MULTIMODAL"
@@ -4520,6 +4731,9 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video #=> Array
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video[0].segmentation_configuration.fixed_length_duration #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].type #=> String, one of "S3"
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].s3_location.uri #=> String
     #   resp.knowledge_base.knowledge_base_configuration.kendra_knowledge_base_configuration.kendra_index_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.type #=> String, one of "REDSHIFT"
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configurations #=> Array
@@ -4802,6 +5016,56 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def get_resource_policy(params = {}, options = {})
       req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Returns the details and current status of a single VPC configuration.
+    # Use this operation to poll for the outcome of an asynchronous create
+    # or delete.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base that owns the VPC
+    #   configuration.
+    #
+    # @option params [required, String] :vpc_configuration_id
+    #   The unique identifier of the VPC configuration to retrieve.
+    #
+    # @return [Types::GetVpcConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVpcConfigurationResponse#vpc_configuration #vpc_configuration} => Types::VpcConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vpc_configuration({
+    #     knowledge_base_id: "Id", # required
+    #     vpc_configuration_id: "VpcConfigurationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_configuration.vpc_configuration_id #=> String
+    #   resp.vpc_configuration.status #=> String, one of "CREATING", "CREATED", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.vpc_configuration.status_message #=> String
+    #   resp.vpc_configuration.vpc_id #=> String
+    #   resp.vpc_configuration.subnet_ids #=> Array
+    #   resp.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.vpc_configuration.resource_target #=> String
+    #   resp.vpc_configuration.port #=> Integer
+    #   resp.vpc_configuration.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.vpc_configuration.resolution_mode #=> String, one of "PUBLIC", "IN_VPC"
+    #   resp.vpc_configuration.host_header #=> String
+    #   resp.vpc_configuration.tls_server_name #=> String
+    #   resp.vpc_configuration.name #=> String
+    #   resp.vpc_configuration.description #=> String
+    #   resp.vpc_configuration.created_at #=> Time
+    #   resp.vpc_configuration.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetVpcConfiguration AWS API Documentation
+    #
+    # @overload get_vpc_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_vpc_configuration(params = {}, options = {})
+      req = build_request(:get_vpc_configuration, params)
       req.send_request(options)
     end
 
@@ -5775,6 +6039,69 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
+    # Returns a paginated list of the VPC configurations for a knowledge
+    # base. You can optionally filter by status. Use the `nextToken`
+    # parameter to retrieve additional results.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier of the knowledge base whose VPC configurations
+    #   you want to list.
+    #
+    # @option params [String] :status_filter
+    #   The status to filter the results by. Only VPC configurations with the
+    #   specified status are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response returns a `nextToken`.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to retrieve the next page of results, returned in a
+    #   previous response when more results are available.
+    #
+    # @return [Types::ListVpcConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcConfigurationsResponse#items #items} => Array&lt;Types::VpcConfigurationSummary&gt;
+    #   * {Types::ListVpcConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_configurations({
+    #     knowledge_base_id: "Id", # required
+    #     status_filter: "CREATING", # accepts CREATING, CREATED, DELETING, CREATE_FAILED, DELETE_FAILED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].vpc_configuration_id #=> String
+    #   resp.items[0].status #=> String, one of "CREATING", "CREATED", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.items[0].status_message #=> String
+    #   resp.items[0].vpc_id #=> String
+    #   resp.items[0].resource_target #=> String
+    #   resp.items[0].port #=> Integer
+    #   resp.items[0].protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.items[0].resolution_mode #=> String, one of "PUBLIC", "IN_VPC"
+    #   resp.items[0].host_header #=> String
+    #   resp.items[0].tls_server_name #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListVpcConfigurations AWS API Documentation
+    #
+    # @overload list_vpc_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_configurations(params = {}, options = {})
+      req = build_request(:list_vpc_configurations, params)
+      req.send_request(options)
+    end
+
     # Creates a `DRAFT` version of the agent that can be used for internal
     # testing.
     #
@@ -6736,6 +7063,20 @@ module Aws::BedrockAgent
     #         },
     #         connector_parameters: {
     #         },
+    #         sync_schedule: {
+    #           daily: {
+    #           },
+    #           weekly: {
+    #             day_of_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #           },
+    #           monthly: {
+    #             day_of_month: { # required
+    #               day_number: 1,
+    #               last_day_of_month: {
+    #               },
+    #             },
+    #           },
+    #         },
     #       },
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
@@ -6875,7 +7216,7 @@ module Aws::BedrockAgent
     #         ],
     #       },
     #       parsing_configuration: {
-    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION, SMART_PARSING
+    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION, SMART_PARSING, MULTI_MODAL_EMBEDDINGS
     #         bedrock_foundation_model_configuration: {
     #           model_arn: "BedrockModelArn", # required
     #           parsing_prompt: {
@@ -6912,6 +7253,8 @@ module Aws::BedrockAgent
     #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.image_extraction_configuration.image_extraction_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.audio_extraction_configuration.audio_extraction_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.video_extraction_configuration.video_extraction_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.sync_schedule.weekly.day_of_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.data_source.data_source_configuration.managed_knowledge_base_connector_configuration.sync_schedule.monthly.day_of_month.day_number #=> Integer
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -6976,7 +7319,7 @@ module Aws::BedrockAgent
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations #=> Array
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].transformation_function.transformation_lambda_configuration.lambda_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].step_to_apply #=> String, one of "POST_CHUNKING"
-    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING"
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING", "MULTI_MODAL_EMBEDDINGS"
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_modality #=> String, one of "MULTIMODAL"
@@ -7589,6 +7932,8 @@ module Aws::BedrockAgent
     #                 },
     #               },
     #             ],
+    #             model_configuration: {
+    #             },
     #           },
     #         },
     #         supplemental_data_storage_configuration: {
@@ -7623,10 +7968,22 @@ module Aws::BedrockAgent
     #                 },
     #               },
     #             ],
+    #             model_configuration: {
+    #             },
     #           },
     #         },
     #         server_side_encryption_configuration: {
     #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #         supplemental_data_storage_configuration: {
+    #           storage_locations: [ # required
+    #             {
+    #               type: "S3", # required, accepts S3
+    #               s3_location: {
+    #                 uri: "S3BucketUri", # required
+    #               },
+    #             },
+    #           ],
     #         },
     #       },
     #       kendra_knowledge_base_configuration: {
@@ -7801,6 +8158,9 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video #=> Array
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video[0].segmentation_configuration.fixed_length_duration #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].type #=> String, one of "S3"
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].s3_location.uri #=> String
     #   resp.knowledge_base.knowledge_base_configuration.kendra_knowledge_base_configuration.kendra_index_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.type #=> String, one of "REDSHIFT"
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configurations #=> Array
@@ -8456,7 +8816,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

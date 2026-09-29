@@ -67,16 +67,17 @@ module Aws::EKS
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name             | params                            | :delay   | :max_attempts |
-  # | ----------------------- | --------------------------------- | -------- | ------------- |
-  # | addon_active            | {Client#describe_addon}           | 10       | 60            |
-  # | addon_deleted           | {Client#describe_addon}           | 10       | 60            |
-  # | cluster_active          | {Client#describe_cluster}         | 30       | 40            |
-  # | cluster_deleted         | {Client#describe_cluster}         | 30       | 40            |
-  # | fargate_profile_active  | {Client#describe_fargate_profile} | 10       | 60            |
-  # | fargate_profile_deleted | {Client#describe_fargate_profile} | 30       | 60            |
-  # | nodegroup_active        | {Client#describe_nodegroup}       | 30       | 80            |
-  # | nodegroup_deleted       | {Client#describe_nodegroup}       | 30       | 40            |
+  # | waiter_name                           | params                            | :delay   | :max_attempts |
+  # | ------------------------------------- | --------------------------------- | -------- | ------------- |
+  # | addon_active                          | {Client#describe_addon}           | 10       | 60            |
+  # | addon_deleted                         | {Client#describe_addon}           | 10       | 60            |
+  # | certificate_authority_update_complete | {Client#describe_update}          | 30       | 40            |
+  # | cluster_active                        | {Client#describe_cluster}         | 30       | 40            |
+  # | cluster_deleted                       | {Client#describe_cluster}         | 30       | 40            |
+  # | fargate_profile_active                | {Client#describe_fargate_profile} | 10       | 60            |
+  # | fargate_profile_deleted               | {Client#describe_fargate_profile} | 30       | 60            |
+  # | nodegroup_active                      | {Client#describe_nodegroup}       | 30       | 80            |
+  # | nodegroup_deleted                     | {Client#describe_nodegroup}       | 30       | 40            |
   #
   module Waiters
 
@@ -164,6 +165,56 @@ module Aws::EKS
 
       # @option (see Client#describe_addon)
       # @return (see Client#describe_addon)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class CertificateAuthorityUpdateComplete
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_update,
+            acceptors: [
+              {
+                "expected" => "Failed",
+                "matcher" => "path",
+                "state" => "failure",
+                "argument" => "update.status"
+              },
+              {
+                "expected" => "Cancelled",
+                "matcher" => "path",
+                "state" => "failure",
+                "argument" => "update.status"
+              },
+              {
+                "expected" => "Successful",
+                "matcher" => "path",
+                "state" => "success",
+                "argument" => "update.status"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_update)
+      # @return (see Client#describe_update)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

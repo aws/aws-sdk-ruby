@@ -401,6 +401,7 @@ module Aws::ECS
       attr_accessor enable_ecs_managed_tags: bool
       attr_accessor enable_execute_command: bool
       attr_accessor client_token: ::String
+      attr_accessor critical: bool
       SENSITIVE: []
     end
 
@@ -423,6 +424,7 @@ module Aws::ECS
       attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration
       attr_accessor cpu: ::String
       attr_accessor memory: ::String
+      attr_accessor cpu_architecture: ("X86_64" | "ARM64")
       attr_accessor scaling_target: Types::ExpressGatewayScalingTarget
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor task_definition_arn: ::String
@@ -516,6 +518,7 @@ module Aws::ECS
     class DaemonCapacityProvider
       attr_accessor arn: ::String
       attr_accessor running_count: ::Integer
+      attr_accessor without_daemon_count: ::Integer
       SENSITIVE: []
     end
 
@@ -594,6 +597,7 @@ module Aws::ECS
     class DaemonDeploymentCapacityProvider
       attr_accessor arn: ::String
       attr_accessor running_instance_count: ::Integer
+      attr_accessor without_daemon_instance_count: ::Integer
       attr_accessor draining_instance_count: ::Integer
       SENSITIVE: []
     end
@@ -609,6 +613,7 @@ module Aws::ECS
       attr_accessor arn: ::String
       attr_accessor capacity_providers: ::Array[Types::DaemonDeploymentCapacityProvider]
       attr_accessor total_running_instance_count: ::Integer
+      attr_accessor total_without_daemon_instance_count: ::Integer
       attr_accessor total_draining_instance_count: ::Integer
       SENSITIVE: []
     end
@@ -666,6 +671,7 @@ module Aws::ECS
       attr_accessor propagate_tags: ("DAEMON" | "NONE")
       attr_accessor enable_ecs_managed_tags: bool
       attr_accessor enable_execute_command: bool
+      attr_accessor critical: bool
       SENSITIVE: []
     end
 
@@ -673,6 +679,7 @@ module Aws::ECS
       attr_accessor arn: ::String
       attr_accessor capacity_providers: ::Array[Types::DaemonCapacityProvider]
       attr_accessor total_running_count: ::Integer
+      attr_accessor total_without_daemon_count: ::Integer
       SENSITIVE: []
     end
 
@@ -889,11 +896,19 @@ module Aws::ECS
       attr_accessor lifecycle_hooks: ::Array[Types::DeploymentLifecycleHook]
       attr_accessor linear_configuration: Types::LinearConfiguration
       attr_accessor canary_configuration: Types::CanaryConfiguration
+      attr_accessor early_success_criteria: Types::DeploymentEarlySuccessCriteria
       SENSITIVE: []
     end
 
     class DeploymentController
       attr_accessor type: ("ECS" | "CODE_DEPLOY" | "EXTERNAL")
+      SENSITIVE: []
+    end
+
+    class DeploymentEarlySuccessCriteria
+      attr_accessor enable: bool
+      attr_accessor healthy_percent: ::Integer
+      attr_accessor source_service_revision_cleanup: ("BLOCKING" | "DEFERRED")
       SENSITIVE: []
     end
 
@@ -1275,6 +1290,7 @@ module Aws::ECS
       attr_accessor task_definition_arn: ::String
       attr_accessor cpu: ::String
       attr_accessor memory: ::String
+      attr_accessor cpu_architecture: ("X86_64" | "ARM64")
       attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration
       attr_accessor health_check_path: ::String
       attr_accessor primary_container: Types::ExpressGatewayContainer
@@ -2890,6 +2906,7 @@ module Aws::ECS
       attr_accessor propagate_tags: ("DAEMON" | "NONE")
       attr_accessor enable_ecs_managed_tags: bool
       attr_accessor enable_execute_command: bool
+      attr_accessor critical: bool
       SENSITIVE: []
     end
 
@@ -2911,6 +2928,7 @@ module Aws::ECS
       attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration
       attr_accessor cpu: ::String
       attr_accessor memory: ::String
+      attr_accessor cpu_architecture: ("X86_64" | "ARM64")
       attr_accessor scaling_target: Types::ExpressGatewayScalingTarget
       attr_accessor task_definition_arn: ::String
       SENSITIVE: []

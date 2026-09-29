@@ -133,6 +133,24 @@ module Aws
                           ) -> _CreateOutpostResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOutpostResponseSuccess
 
+      interface _CreatePrivateConnectivityConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePrivateConnectivityConfigOutput]
+        def private_connectivity_config: () -> Types::PrivateConnectivityConfig
+        def outpost_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#create_private_connectivity_config-instance_method
+      def create_private_connectivity_config: (
+                                                outpost_id: ::String,
+                                                vpc_information_list: Array[
+                                                  {
+                                                    vpc_id: ::String?,
+                                                    subnet_ids: Array[::String]?,
+                                                    vpc_endpoint_id: ::String?
+                                                  }
+                                                ]
+                                              ) -> _CreatePrivateConnectivityConfigResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePrivateConnectivityConfigResponseSuccess
+
       interface _CreateQuoteResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateQuoteOutput]
         def quote: () -> Types::Quote
@@ -150,7 +168,7 @@ module Aws
                           ],
                           ?requested_constraints: Array[
                             {
-                              quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS")?,
+                              quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS" | "RACK_SPACE_CONSTRAINED")?,
                               value: ::String?
                             }
                           ],
@@ -340,6 +358,16 @@ module Aws
                                                   ?next_token: ::String
                                                 ) -> _GetOutpostSupportedInstanceTypesResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOutpostSupportedInstanceTypesResponseSuccess
+
+      interface _GetPrivateConnectivityConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPrivateConnectivityConfigOutput]
+        def private_connectivity_config: () -> Types::PrivateConnectivityConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_private_connectivity_config-instance_method
+      def get_private_connectivity_config: (
+                                             outpost_id: ::String
+                                           ) -> _GetPrivateConnectivityConfigResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPrivateConnectivityConfigResponseSuccess
 
       interface _GetQuoteResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetQuoteOutput]
@@ -653,7 +681,7 @@ module Aws
                           ],
                           ?requested_constraints: Array[
                             {
-                              quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS")?,
+                              quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS" | "RACK_SPACE_CONSTRAINED")?,
                               value: ::String?
                             }
                           ],

@@ -656,7 +656,7 @@ module Aws
         def firewall_arn: () -> ::String
         def firewall_policy_arn: () -> ::String
         def description: () -> ::String
-        def status: () -> ("PROVISIONING" | "DELETING" | "READY")
+        def status: () -> ("PROVISIONING" | "DELETING" | "READY" | "FAILED")
         def supported_availability_zones: () -> ::Hash[::String, Types::AvailabilityZoneMetadata]
         def transit_gateway_attachment_id: () -> ::String
       end

@@ -67,12 +67,75 @@ module Aws::Kinesis
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name       | params                   | :delay   | :max_attempts |
-  # | ----------------- | ------------------------ | -------- | ------------- |
-  # | stream_exists     | {Client#describe_stream} | 10       | 18            |
-  # | stream_not_exists | {Client#describe_stream} | 10       | 18            |
+  # | waiter_name       | params                    | :delay   | :max_attempts |
+  # | ----------------- | ------------------------- | -------- | ------------- |
+  # | channel_active    | {Client#describe_channel} | 10       | 18            |
+  # | stream_exists     | {Client#describe_stream}  | 10       | 18            |
+  # | stream_not_exists | {Client#describe_stream}  | 10       | 18            |
   #
   module Waiters
+
+    class ChannelActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (18)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 18,
+          delay: 10,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_channel,
+            acceptors: [
+              {
+                "expected" => "ACTIVE",
+                "matcher" => "path",
+                "state" => "success",
+                "argument" => "channel_description.channel_status"
+              },
+              {
+                "expected" => "CREATING",
+                "matcher" => "path",
+                "state" => "retry",
+                "argument" => "channel_description.channel_status"
+              },
+              {
+                "expected" => "UPDATING",
+                "matcher" => "path",
+                "state" => "retry",
+                "argument" => "channel_description.channel_status"
+              },
+              {
+                "expected" => "DELETING",
+                "matcher" => "path",
+                "state" => "failure",
+                "argument" => "channel_description.channel_status"
+              },
+              {
+                "expected" => "FAILED",
+                "matcher" => "path",
+                "state" => "failure",
+                "argument" => "channel_description.channel_status"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_channel)
+      # @return (see Client#describe_channel)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     class StreamExists
 

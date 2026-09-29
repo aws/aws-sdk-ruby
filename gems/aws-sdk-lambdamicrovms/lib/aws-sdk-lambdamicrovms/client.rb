@@ -1114,6 +1114,7 @@ module Aws::LambdaMicrovms
     #   resp.items #=> Array
     #   resp.items[0].image_arn #=> String
     #   resp.items[0].image_version #=> String
+    #   resp.items[0].status #=> String, one of "AVAILABLE", "DEPRECATED"
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
     #
@@ -1554,7 +1555,7 @@ module Aws::LambdaMicrovms
     #         log_stream: "CloudWatchLoggingLogStreamString",
     #       },
     #     },
-    #     run_hook_payload: "RunMicrovmRequestRunHookPayloadString",
+    #     run_hook_payload: "RunHookPayload",
     #     maximum_duration_in_seconds: 1,
     #     client_token: "RunMicrovmRequestClientTokenString",
     #   })
@@ -1985,7 +1986,7 @@ module Aws::LambdaMicrovms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambdamicrovms'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
