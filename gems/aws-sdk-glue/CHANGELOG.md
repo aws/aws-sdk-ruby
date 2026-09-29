@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.278.0 (2026-09-29)
+------------------
+
+* Feature - Add support for Glue system-managed materialized views.
+
 1.277.0 (2026-09-28)
 ------------------
 

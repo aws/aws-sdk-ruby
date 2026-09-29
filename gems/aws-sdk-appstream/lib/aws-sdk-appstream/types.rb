@@ -4889,6 +4889,10 @@ module Aws::AppStream
     #   Accelerated instance families.
     #   @return [String]
     #
+    # @!attribute [rw] image_software_metadata
+    #   The software metadata associated with the image.
+    #   @return [Types::ImageSoftwareMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -4914,7 +4918,8 @@ module Aws::AppStream
       :dynamic_app_providers_enabled,
       :image_shared_with_others,
       :managed_software_included,
-      :image_type)
+      :image_type,
+      :image_software_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5183,6 +5188,22 @@ module Aws::AppStream
     class ImagePermissions < Struct.new(
       :allow_fleet,
       :allow_image_builder)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the software metadata for an image, such as the installed
+    # NVIDIA GRID driver version.
+    #
+    # @!attribute [rw] nvidia_grid_driver_version
+    #   The version of the NVIDIA GRID driver installed on the image. This
+    #   field is empty if no NVIDIA GRID driver is installed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageSoftwareMetadata AWS API Documentation
+    #
+    class ImageSoftwareMetadata < Struct.new(
+      :nvidia_grid_driver_version)
       SENSITIVE = []
       include Aws::Structure
     end

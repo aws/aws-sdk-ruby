@@ -348,6 +348,7 @@ module Aws::RDS
       attr_accessor target_storage_type: ::String
       attr_accessor target_allocated_storage: ::Integer
       attr_accessor target_storage_throughput: ::Integer
+      attr_accessor target_resource_configurations: ::Array[Types::TargetResourceConfiguration]
       SENSITIVE: []
     end
 
@@ -4458,6 +4459,12 @@ module Aws::RDS
       attr_accessor state: ("REGISTERING" | "AVAILABLE" | "UNAVAILABLE" | "UNUSED")
       attr_accessor reason: ("UNREACHABLE" | "CONNECTION_FAILED" | "AUTH_FAILURE" | "PENDING_PROXY_CAPACITY" | "INVALID_REPLICATION_STATE" | "PROMOTED")
       attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class TargetResourceConfiguration
+      attr_accessor source_arn: ::String
+      attr_accessor target_kms_key_id: ::String
       SENSITIVE: []
     end
 

@@ -2999,6 +2999,9 @@ module Aws::Inspector2
     SeverityCounts.add_member(:medium, Shapes::ShapeRef.new(shape: Long, location_name: "medium"))
     SeverityCounts.add_member(:high, Shapes::ShapeRef.new(shape: Long, location_name: "high"))
     SeverityCounts.add_member(:critical, Shapes::ShapeRef.new(shape: Long, location_name: "critical"))
+    SeverityCounts.add_member(:low, Shapes::ShapeRef.new(shape: Long, location_name: "low"))
+    SeverityCounts.add_member(:informational, Shapes::ShapeRef.new(shape: Long, location_name: "informational"))
+    SeverityCounts.add_member(:untriaged, Shapes::ShapeRef.new(shape: Long, location_name: "untriaged"))
     SeverityCounts.struct_class = Types::SeverityCounts
 
     SortCriteria.add_member(:field, Shapes::ShapeRef.new(shape: SortField, required: true, location_name: "field"))

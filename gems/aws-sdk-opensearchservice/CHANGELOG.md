@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2026-09-29)
+------------------
+
+* Feature - Amazon OpenSearch Service now supports advisory pre-validations for domain config changes. Non-critical checks now surface as warnings you can acknowledge (via the new AcceptedWarnings parameter) and proceed, instead of hard-blocking. Severity is reported in change-progress and dry-run results.
+
 1.110.0 (2026-09-11)
 ------------------
 

@@ -8409,6 +8409,7 @@ module Aws::Glue
 
     class ViewDefinition
       attr_accessor is_protected: bool
+      attr_accessor is_managed: bool
       attr_accessor definer: ::String
       attr_accessor view_version_id: ::Integer
       attr_accessor view_version_token: ::String
@@ -8424,6 +8425,7 @@ module Aws::Glue
 
     class ViewDefinitionInput
       attr_accessor is_protected: bool
+      attr_accessor is_managed: bool
       attr_accessor definer: ::String
       attr_accessor representations: ::Array[Types::ViewRepresentationInput]
       attr_accessor view_version_id: ::Integer

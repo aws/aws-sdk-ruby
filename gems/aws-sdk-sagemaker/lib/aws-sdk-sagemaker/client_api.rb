@@ -2808,6 +2808,7 @@ module Aws::SageMaker
     TrainingPlanFilterName = Shapes::StringShape.new(name: 'TrainingPlanFilterName')
     TrainingPlanFilters = Shapes::ListShape.new(name: 'TrainingPlanFilters')
     TrainingPlanName = Shapes::StringShape.new(name: 'TrainingPlanName')
+    TrainingPlanNameOrArn = Shapes::StringShape.new(name: 'TrainingPlanNameOrArn')
     TrainingPlanOffering = Shapes::StructureShape.new(name: 'TrainingPlanOffering')
     TrainingPlanOfferingId = Shapes::StringShape.new(name: 'TrainingPlanOfferingId')
     TrainingPlanOfferings = Shapes::ListShape.new(name: 'TrainingPlanOfferings')
@@ -7285,7 +7286,7 @@ module Aws::SageMaker
     DescribeTrainingPlanExtensionHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeTrainingPlanExtensionHistoryResponse.struct_class = Types::DescribeTrainingPlanExtensionHistoryResponse
 
-    DescribeTrainingPlanRequest.add_member(:training_plan_name, Shapes::ShapeRef.new(shape: TrainingPlanName, required: true, location_name: "TrainingPlanName"))
+    DescribeTrainingPlanRequest.add_member(:training_plan_name, Shapes::ShapeRef.new(shape: TrainingPlanNameOrArn, required: true, location_name: "TrainingPlanName"))
     DescribeTrainingPlanRequest.struct_class = Types::DescribeTrainingPlanRequest
 
     DescribeTrainingPlanResponse.add_member(:training_plan_arn, Shapes::ShapeRef.new(shape: TrainingPlanArn, required: true, location_name: "TrainingPlanArn"))

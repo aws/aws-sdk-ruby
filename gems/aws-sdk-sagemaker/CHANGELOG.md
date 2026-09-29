@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.396.0 (2026-09-29)
+------------------
+
+* Feature - Adds support for cpu flex type instances on SageMaker Training and Processing. Also contains minor updates to DescribeTrainingPlan to support ARN inputs.
+
 1.395.0 (2026-09-21)
 ------------------
 

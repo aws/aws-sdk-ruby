@@ -141,6 +141,7 @@ module Aws::RDS
     CustomEngineName = Shapes::StringShape.new(name: 'CustomEngineName')
     CustomEngineVersion = Shapes::StringShape.new(name: 'CustomEngineVersion')
     CustomEngineVersionStatus = Shapes::StringShape.new(name: 'CustomEngineVersionStatus')
+    DBAndClusterArn = Shapes::StringShape.new(name: 'DBAndClusterArn')
     DBCluster = Shapes::StructureShape.new(name: 'DBCluster')
     DBClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBClusterAlreadyExistsFault', error: {"code" => "DBClusterAlreadyExistsFault", "httpStatusCode" => 400, "senderFault" => true})
     DBClusterAssociatedRole = Shapes::StructureShape.new(name: 'DBClusterAssociatedRole')
@@ -773,6 +774,8 @@ module Aws::RDS
     TargetHealth = Shapes::StructureShape.new(name: 'TargetHealth')
     TargetHealthReason = Shapes::StringShape.new(name: 'TargetHealthReason')
     TargetList = Shapes::ListShape.new(name: 'TargetList')
+    TargetResourceConfiguration = Shapes::StructureShape.new(name: 'TargetResourceConfiguration')
+    TargetResourceConfigurationList = Shapes::ListShape.new(name: 'TargetResourceConfigurationList')
     TargetRole = Shapes::StringShape.new(name: 'TargetRole')
     TargetState = Shapes::StringShape.new(name: 'TargetState')
     TargetStorageType = Shapes::StringShape.new(name: 'TargetStorageType')
@@ -1087,6 +1090,7 @@ module Aws::RDS
     CreateBlueGreenDeploymentRequest.add_member(:target_storage_type, Shapes::ShapeRef.new(shape: TargetStorageType, location_name: "TargetStorageType"))
     CreateBlueGreenDeploymentRequest.add_member(:target_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "TargetAllocatedStorage"))
     CreateBlueGreenDeploymentRequest.add_member(:target_storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "TargetStorageThroughput"))
+    CreateBlueGreenDeploymentRequest.add_member(:target_resource_configurations, Shapes::ShapeRef.new(shape: TargetResourceConfigurationList, location_name: "TargetResourceConfigurations"))
     CreateBlueGreenDeploymentRequest.struct_class = Types::CreateBlueGreenDeploymentRequest
 
     CreateBlueGreenDeploymentResponse.add_member(:blue_green_deployment, Shapes::ShapeRef.new(shape: BlueGreenDeployment, location_name: "BlueGreenDeployment"))
@@ -4509,6 +4513,12 @@ module Aws::RDS
     TargetHealth.struct_class = Types::TargetHealth
 
     TargetList.member = Shapes::ShapeRef.new(shape: DBProxyTarget)
+
+    TargetResourceConfiguration.add_member(:source_arn, Shapes::ShapeRef.new(shape: DBAndClusterArn, required: true, location_name: "SourceArn"))
+    TargetResourceConfiguration.add_member(:target_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyIdOrArn, location_name: "TargetKmsKeyId"))
+    TargetResourceConfiguration.struct_class = Types::TargetResourceConfiguration
+
+    TargetResourceConfigurationList.member = Shapes::ShapeRef.new(shape: TargetResourceConfiguration, location_name: "TargetResourceConfiguration")
 
     TenantDatabase.add_member(:tenant_database_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "TenantDatabaseCreateTime"))
     TenantDatabase.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceIdentifier"))

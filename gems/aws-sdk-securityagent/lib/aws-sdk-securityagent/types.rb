@@ -435,6 +435,116 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # Connection details for an Azure DevOps integration.
+    #
+    # @!attribute [rw] code
+    #   The OAuth 2.0 authorization code returned to your redirect URL after
+    #   the connection is authorized.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The CSRF state value returned by `InitiateProviderRegistration` and
+    #   echoed back on the authorization redirect.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_name
+    #   The name of the Azure DevOps organization to connect, for example
+    #   `my-org`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/AzureDevOpsIntegrationInput AWS API Documentation
+    #
+    class AzureDevOpsIntegrationInput < Struct.new(
+      :code,
+      :state,
+      :organization_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata for an integrated Azure DevOps repository.
+    #
+    # @!attribute [rw] name
+    #   Name of the resource e.g. repository name, etc.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_resource_id
+    #   Provider Id of the resource e.g. GitHub repository id, etc.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization
+    #   The name of the Azure DevOps organization that owns the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] project
+    #   The name of the Azure DevOps project that contains the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_id
+    #   The GUID of the Azure DevOps project that contains the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_type
+    #   Defines the visibility level of provider resources. PRIVATE
+    #   indicates restricted access, while PUBLIC indicates open access.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/AzureDevOpsRepositoryMetadata AWS API Documentation
+    #
+    class AzureDevOpsRepositoryMetadata < Struct.new(
+      :name,
+      :provider_resource_id,
+      :organization,
+      :project,
+      :project_id,
+      :access_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Azure DevOps repository integrated as a resource.
+    #
+    # @!attribute [rw] name
+    #   Name of the resource e.g. repository name, etc.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization
+    #   The name of the Azure DevOps organization that owns the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] project
+    #   The name of the Azure DevOps project that contains the repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/AzureDevOpsRepositoryResource AWS API Documentation
+    #
+    class AzureDevOpsRepositoryResource < Struct.new(
+      :name,
+      :organization,
+      :project)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Capabilities for an integrated Azure DevOps repository.
+    #
+    # @!attribute [rw] leave_comments
+    #   Whether to post code review comments on pull requests.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] remediate_code
+    #   Whether to create pull requests with automated fixes.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/AzureDevOpsResourceCapabilities AWS API Documentation
+    #
+    class AzureDevOpsResourceCapabilities < Struct.new(
+      :leave_comments,
+      :remediate_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a successfully created security
     # requirement.
     #
@@ -1351,6 +1461,34 @@ module Aws::SecurityAgent
     class BatchUpdateSecurityRequirementsOutput < Struct.new(
       :updated_security_requirement_names,
       :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Connection details for a self-managed Bitbucket Data Center
+    # integration.
+    #
+    # @!attribute [rw] target_url
+    #   The HTTPS URL of your Bitbucket Data Center instance, for example
+    #   `https://bitbucket.example.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The OAuth 2.0 authorization code returned to your redirect URL after
+    #   the connection is authorized.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The CSRF state value returned by `InitiateProviderRegistration` and
+    #   echoed back on the authorization redirect.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BitbucketDataCenterIntegrationInput AWS API Documentation
+    #
+    class BitbucketDataCenterIntegrationInput < Struct.new(
+      :target_url,
+      :code,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2465,7 +2603,7 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] provider
-    #   The integration provider. Currently, only GITHUB is supported.
+    #   The integration provider.
     #   @return [String]
     #
     # @!attribute [rw] input
@@ -4237,6 +4375,11 @@ module Aws::SecurityAgent
     #   absent for SaaS integrations.
     #   @return [String]
     #
+    # @!attribute [rw] webhook_url
+    #   The payload URL of the integration's webhook, once it has been
+    #   created. The signing secret is never returned on a read.
+    #   @return [String]
+    #
     # @!attribute [rw] private_connection_name
     #   The name of the private connection used to reach the integration's
     #   self-hosted instance over private networking, if one is configured.
@@ -4252,6 +4395,7 @@ module Aws::SecurityAgent
       :display_name,
       :kms_key_id,
       :target_url,
+      :webhook_url,
       :private_connection_name)
       SENSITIVE = []
       include Aws::Structure
@@ -4639,15 +4783,37 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] provider
-    #   The provider to initiate registration with. Currently, only GITHUB
-    #   is supported.
+    #   The provider to initiate registration with.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_url
+    #   The HTTPS URL of a self-managed provider instance. Omit for SaaS
+    #   providers.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_name
+    #   The name of the organization to connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client ID of the OAuth application registered on your
+    #   self-managed provider instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The client secret of the OAuth application registered on your
+    #   self-managed provider instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/InitiateProviderRegistrationInput AWS API Documentation
     #
     class InitiateProviderRegistrationInput < Struct.new(
-      :provider)
-      SENSITIVE = []
+      :provider,
+      :target_url,
+      :organization_name,
+      :client_id,
+      :client_secret)
+      SENSITIVE = [:client_secret]
       include Aws::Structure
     end
 
@@ -4737,6 +4903,10 @@ module Aws::SecurityAgent
     #   A Confluence document (page) integrated as a resource.
     #   @return [Types::ConfluenceDocumentResource]
     #
+    # @!attribute [rw] azure_dev_ops_repository
+    #   The Azure DevOps repository resource information.
+    #   @return [Types::AzureDevOpsRepositoryResource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegratedResource AWS API Documentation
     #
     class IntegratedResource < Struct.new(
@@ -4744,6 +4914,7 @@ module Aws::SecurityAgent
       :gitlab_repository,
       :bitbucket_repository,
       :confluence_document,
+      :azure_dev_ops_repository,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -4753,6 +4924,7 @@ module Aws::SecurityAgent
       class GitlabRepository < IntegratedResource; end
       class BitbucketRepository < IntegratedResource; end
       class ConfluenceDocument < IntegratedResource; end
+      class AzureDevOpsRepository < IntegratedResource; end
       class Unknown < IntegratedResource; end
     end
 
@@ -4797,6 +4969,10 @@ module Aws::SecurityAgent
     #   Metadata for an integrated Confluence document.
     #   @return [Types::ConfluenceDocumentMetadata]
     #
+    # @!attribute [rw] azure_dev_ops_repository
+    #   The Azure DevOps repository metadata.
+    #   @return [Types::AzureDevOpsRepositoryMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegratedResourceMetadata AWS API Documentation
     #
     class IntegratedResourceMetadata < Struct.new(
@@ -4804,6 +4980,7 @@ module Aws::SecurityAgent
       :gitlab_repository,
       :bitbucket_repository,
       :confluence_document,
+      :azure_dev_ops_repository,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -4813,6 +4990,7 @@ module Aws::SecurityAgent
       class GitlabRepository < IntegratedResourceMetadata; end
       class BitbucketRepository < IntegratedResourceMetadata; end
       class ConfluenceDocument < IntegratedResourceMetadata; end
+      class AzureDevOpsRepository < IntegratedResourceMetadata; end
       class Unknown < IntegratedResourceMetadata; end
     end
 
@@ -4897,6 +5075,11 @@ module Aws::SecurityAgent
     #   absent for SaaS integrations.
     #   @return [String]
     #
+    # @!attribute [rw] webhook_url
+    #   The payload URL of the integration's webhook, once it has been
+    #   created. The signing secret is never returned on a read.
+    #   @return [String]
+    #
     # @!attribute [rw] private_connection_name
     #   The name of the private connection used to reach the integration's
     #   self-hosted instance over private networking, if one is configured.
@@ -4911,6 +5094,7 @@ module Aws::SecurityAgent
       :provider_type,
       :display_name,
       :target_url,
+      :webhook_url,
       :private_connection_name)
       SENSITIVE = []
       include Aws::Structure
@@ -6842,6 +7026,15 @@ module Aws::SecurityAgent
     #   The configuration for a Confluence integration.
     #   @return [Types::ConfluenceIntegrationInput]
     #
+    # @!attribute [rw] azure_dev_ops
+    #   The Azure DevOps-specific input for creating an integration.
+    #   @return [Types::AzureDevOpsIntegrationInput]
+    #
+    # @!attribute [rw] bitbucket_data_center
+    #   The Bitbucket Data Center-specific input for creating an
+    #   integration.
+    #   @return [Types::BitbucketDataCenterIntegrationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ProviderInput AWS API Documentation
     #
     class ProviderInput < Struct.new(
@@ -6849,6 +7042,8 @@ module Aws::SecurityAgent
       :gitlab,
       :bitbucket,
       :confluence,
+      :azure_dev_ops,
+      :bitbucket_data_center,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -6858,6 +7053,8 @@ module Aws::SecurityAgent
       class Gitlab < ProviderInput; end
       class Bitbucket < ProviderInput; end
       class Confluence < ProviderInput; end
+      class AzureDevOps < ProviderInput; end
+      class BitbucketDataCenter < ProviderInput; end
       class Unknown < ProviderInput; end
     end
 
@@ -6885,6 +7082,10 @@ module Aws::SecurityAgent
     #   Capabilities for an integrated Confluence space.
     #   @return [Types::ConfluenceResourceCapabilities]
     #
+    # @!attribute [rw] azure_dev_ops
+    #   The Azure DevOps-specific resource capabilities.
+    #   @return [Types::AzureDevOpsResourceCapabilities]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ProviderResourceCapabilities AWS API Documentation
     #
     class ProviderResourceCapabilities < Struct.new(
@@ -6892,6 +7093,7 @@ module Aws::SecurityAgent
       :gitlab,
       :bitbucket,
       :confluence,
+      :azure_dev_ops,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -6901,6 +7103,7 @@ module Aws::SecurityAgent
       class Gitlab < ProviderResourceCapabilities; end
       class Bitbucket < ProviderResourceCapabilities; end
       class Confluence < ProviderResourceCapabilities; end
+      class AzureDevOps < ProviderResourceCapabilities; end
       class Unknown < ProviderResourceCapabilities; end
     end
 
@@ -8887,6 +9090,52 @@ module Aws::SecurityAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateIntegratedResourcesOutput AWS API Documentation
     #
     class UpdateIntegratedResourcesOutput < Aws::EmptyStructure; end
+
+    # Input for creating or rotating an integration's webhook.
+    #
+    # @!attribute [rw] integration_id
+    #   The ID of the integration whose webhook you want to create or
+    #   rotate.
+    #   @return [String]
+    #
+    # @!attribute [rw] webhook_action
+    #   The action to perform on the integration's webhook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateIntegrationInput AWS API Documentation
+    #
+    class UpdateIntegrationInput < Struct.new(
+      :integration_id,
+      :webhook_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the UpdateIntegration operation.
+    #
+    # @!attribute [rw] integration_id
+    #   The ID of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] webhook_url
+    #   The payload URL to configure on your provider instance. Returned
+    #   when a webhook is created; unchanged by a rotate.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret
+    #   The HMAC signing secret for the webhook. Returned only once, in this
+    #   response; it is never returned again.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateIntegrationOutput AWS API Documentation
+    #
+    class UpdateIntegrationOutput < Struct.new(
+      :integration_id,
+      :webhook_url,
+      :secret)
+      SENSITIVE = [:secret]
+      include Aws::Structure
+    end
 
     # Input for updating an existing pentest.
     #

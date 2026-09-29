@@ -2706,6 +2706,12 @@ module Aws::OpenSearchService
     #   resp.change_progress_status.last_updated_time #=> Time
     #   resp.change_progress_status.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
     #   resp.change_progress_status.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.change_progress_status.validation_failures #=> Array
+    #   resp.change_progress_status.validation_failures[0].code #=> String
+    #   resp.change_progress_status.validation_failures[0].message #=> String
+    #   resp.change_progress_status.validation_failures[0].severity #=> String, one of "Critical", "Warning"
+    #   resp.change_progress_status.accepted_warnings #=> Array
+    #   resp.change_progress_status.accepted_warnings[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainChangeProgress AWS API Documentation
     #
@@ -3269,6 +3275,9 @@ module Aws::OpenSearchService
     #   resp.dry_run_progress_status.validation_failures #=> Array
     #   resp.dry_run_progress_status.validation_failures[0].code #=> String
     #   resp.dry_run_progress_status.validation_failures[0].message #=> String
+    #   resp.dry_run_progress_status.validation_failures[0].severity #=> String, one of "Critical", "Warning"
+    #   resp.dry_run_progress_status.accepted_warnings #=> Array
+    #   resp.dry_run_progress_status.accepted_warnings[0] #=> String
     #   resp.dry_run_config.domain_id #=> String
     #   resp.dry_run_config.domain_name #=> String
     #   resp.dry_run_config.arn #=> String
@@ -6270,6 +6279,20 @@ module Aws::OpenSearchService
     #   The engine mode for the domain. The engine mode can't be changed
     #   after the domain is created. For valid values, see `EngineMode`.
     #
+    # @option params [Array<String>] :accepted_warnings
+    #   A list of advisory warning codes to accept for this configuration
+    #   change. By default, any advisory warning blocks the change. Include
+    #   the code of each warning you want to accept so the change can proceed.
+    #   You can find warning codes in the`ValidationFailures` list returned by
+    #   `DescribeDomainChangeProgress`and `DescribeDryRunProgress`. Critical
+    #   validation failures cannot be accepted and always block the change. If
+    #   you omit this parameter or pass an empty list, all warnings block the
+    #   change. For more information, see [Validating a domain update][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check
+    #
     # @return [Types::UpdateDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigResponse#domain_config #domain_config} => Types::DomainConfig
@@ -6446,6 +6469,7 @@ module Aws::OpenSearchService
     #     },
     #     use_case: "SEARCH", # accepts SEARCH, VECTOR, OBSERVABILITY, MIXED
     #     engine_mode: "GENERAL", # accepts GENERAL, OPTIMIZED
+    #     accepted_warnings: ["String"],
     #   })
     #
     # @example Response structure
@@ -6686,6 +6710,9 @@ module Aws::OpenSearchService
     #   resp.dry_run_progress_status.validation_failures #=> Array
     #   resp.dry_run_progress_status.validation_failures[0].code #=> String
     #   resp.dry_run_progress_status.validation_failures[0].message #=> String
+    #   resp.dry_run_progress_status.validation_failures[0].severity #=> String, one of "Critical", "Warning"
+    #   resp.dry_run_progress_status.accepted_warnings #=> Array
+    #   resp.dry_run_progress_status.accepted_warnings[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfig AWS API Documentation
     #
@@ -7094,7 +7121,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

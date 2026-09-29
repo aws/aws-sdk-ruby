@@ -258,6 +258,7 @@ module Aws::AppStream
     ImageList = Shapes::ListShape.new(name: 'ImageList')
     ImagePermissions = Shapes::StructureShape.new(name: 'ImagePermissions')
     ImageSharedWithOthers = Shapes::StringShape.new(name: 'ImageSharedWithOthers')
+    ImageSoftwareMetadata = Shapes::StructureShape.new(name: 'ImageSoftwareMetadata')
     ImageState = Shapes::StringShape.new(name: 'ImageState')
     ImageStateChangeReason = Shapes::StructureShape.new(name: 'ImageStateChangeReason')
     ImageStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageStateChangeReasonCode')
@@ -290,6 +291,7 @@ module Aws::AppStream
     Metadata = Shapes::MapShape.new(name: 'Metadata')
     Name = Shapes::StringShape.new(name: 'Name')
     NetworkAccessConfiguration = Shapes::StructureShape.new(name: 'NetworkAccessConfiguration')
+    NvidiaGridDriverVersion = Shapes::StringShape.new(name: 'NvidiaGridDriverVersion')
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     OrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'OrganizationalUnitDistinguishedName')
     OrganizationalUnitDistinguishedNamesList = Shapes::ListShape.new(name: 'OrganizationalUnitDistinguishedNamesList')
@@ -1311,6 +1313,7 @@ module Aws::AppStream
     Image.add_member(:image_shared_with_others, Shapes::ShapeRef.new(shape: ImageSharedWithOthers, location_name: "ImageSharedWithOthers"))
     Image.add_member(:managed_software_included, Shapes::ShapeRef.new(shape: Boolean, location_name: "ManagedSoftwareIncluded"))
     Image.add_member(:image_type, Shapes::ShapeRef.new(shape: ImageType, location_name: "ImageType"))
+    Image.add_member(:image_software_metadata, Shapes::ShapeRef.new(shape: ImageSoftwareMetadata, location_name: "ImageSoftwareMetadata"))
     Image.struct_class = Types::Image
 
     ImageBuilder.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
@@ -1347,6 +1350,9 @@ module Aws::AppStream
     ImagePermissions.add_member(:allow_fleet, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "allowFleet"))
     ImagePermissions.add_member(:allow_image_builder, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "allowImageBuilder"))
     ImagePermissions.struct_class = Types::ImagePermissions
+
+    ImageSoftwareMetadata.add_member(:nvidia_grid_driver_version, Shapes::ShapeRef.new(shape: NvidiaGridDriverVersion, location_name: "nvidiaGridDriverVersion"))
+    ImageSoftwareMetadata.struct_class = Types::ImageSoftwareMetadata
 
     ImageStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ImageStateChangeReasonCode, location_name: "Code"))
     ImageStateChangeReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))

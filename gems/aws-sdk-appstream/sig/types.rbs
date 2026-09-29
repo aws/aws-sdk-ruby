@@ -1150,6 +1150,7 @@ module Aws::AppStream
       attr_accessor image_shared_with_others: ("TRUE" | "FALSE")
       attr_accessor managed_software_included: bool
       attr_accessor image_type: ("CUSTOM" | "NATIVE" | "BYOL")
+      attr_accessor image_software_metadata: Types::ImageSoftwareMetadata
       SENSITIVE: []
     end
 
@@ -1187,6 +1188,11 @@ module Aws::AppStream
     class ImagePermissions
       attr_accessor allow_fleet: bool
       attr_accessor allow_image_builder: bool
+      SENSITIVE: []
+    end
+
+    class ImageSoftwareMetadata
+      attr_accessor nvidia_grid_driver_version: ::String
       SENSITIVE: []
     end
 

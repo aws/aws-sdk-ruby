@@ -565,6 +565,7 @@ module Aws::ElementalInference
     #           },
     #           contextual_metadata: {
     #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #             extended_analysis: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -725,6 +726,7 @@ module Aws::ElementalInference
     #           },
     #           contextual_metadata: {
     #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #             extended_analysis: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -757,6 +759,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
     #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.outputs[0].output_config.contextual_metadata.extended_analysis #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -1030,6 +1033,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
     #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.outputs[0].output_config.contextual_metadata.extended_analysis #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -1569,6 +1573,7 @@ module Aws::ElementalInference
     #           },
     #           contextual_metadata: {
     #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #             extended_analysis: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -1599,6 +1604,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
     #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.outputs[0].output_config.contextual_metadata.extended_analysis #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -1635,7 +1641,7 @@ module Aws::ElementalInference
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elementalinference'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

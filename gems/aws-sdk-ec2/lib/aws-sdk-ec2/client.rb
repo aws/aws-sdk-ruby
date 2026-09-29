@@ -6654,6 +6654,7 @@ module Aws::EC2
     #   resp.capacity_reservation.adjustment_details.commitment_duration #=> Integer
     #   resp.capacity_reservation.original_start_date #=> Time
     #   resp.capacity_reservation.zero_size_preference #=> String, one of "retain", "default"
+    #   resp.capacity_reservation.launch_status #=> String, one of "launchable", "unlaunchable"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservation AWS API Documentation
     #
@@ -6780,6 +6781,7 @@ module Aws::EC2
     #   resp.source_capacity_reservation.adjustment_details.commitment_duration #=> Integer
     #   resp.source_capacity_reservation.original_start_date #=> Time
     #   resp.source_capacity_reservation.zero_size_preference #=> String, one of "retain", "default"
+    #   resp.source_capacity_reservation.launch_status #=> String, one of "launchable", "unlaunchable"
     #   resp.destination_capacity_reservation.capacity_reservation_id #=> String
     #   resp.destination_capacity_reservation.owner_id #=> String
     #   resp.destination_capacity_reservation.capacity_reservation_arn #=> String
@@ -6834,6 +6836,7 @@ module Aws::EC2
     #   resp.destination_capacity_reservation.adjustment_details.commitment_duration #=> Integer
     #   resp.destination_capacity_reservation.original_start_date #=> Time
     #   resp.destination_capacity_reservation.zero_size_preference #=> String, one of "retain", "default"
+    #   resp.destination_capacity_reservation.launch_status #=> String, one of "launchable", "unlaunchable"
     #   resp.instance_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservationBySplitting AWS API Documentation
@@ -28684,6 +28687,7 @@ module Aws::EC2
     #   resp.capacity_reservations[0].adjustment_details.commitment_duration #=> Integer
     #   resp.capacity_reservations[0].original_start_date #=> Time
     #   resp.capacity_reservations[0].zero_size_preference #=> String, one of "retain", "default"
+    #   resp.capacity_reservations[0].launch_status #=> String, one of "launchable", "unlaunchable"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservations AWS API Documentation
     #
@@ -69494,6 +69498,7 @@ module Aws::EC2
     #   resp.source_capacity_reservation.adjustment_details.commitment_duration #=> Integer
     #   resp.source_capacity_reservation.original_start_date #=> Time
     #   resp.source_capacity_reservation.zero_size_preference #=> String, one of "retain", "default"
+    #   resp.source_capacity_reservation.launch_status #=> String, one of "launchable", "unlaunchable"
     #   resp.destination_capacity_reservation.capacity_reservation_id #=> String
     #   resp.destination_capacity_reservation.owner_id #=> String
     #   resp.destination_capacity_reservation.capacity_reservation_arn #=> String
@@ -69548,6 +69553,7 @@ module Aws::EC2
     #   resp.destination_capacity_reservation.adjustment_details.commitment_duration #=> Integer
     #   resp.destination_capacity_reservation.original_start_date #=> Time
     #   resp.destination_capacity_reservation.zero_size_preference #=> String, one of "retain", "default"
+    #   resp.destination_capacity_reservation.launch_status #=> String, one of "launchable", "unlaunchable"
     #   resp.instance_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveCapacityReservationInstances AWS API Documentation
@@ -70019,6 +70025,7 @@ module Aws::EC2
     #   resp.capacity_reservation.adjustment_details.commitment_duration #=> Integer
     #   resp.capacity_reservation.original_start_date #=> Time
     #   resp.capacity_reservation.zero_size_preference #=> String, one of "retain", "default"
+    #   resp.capacity_reservation.launch_status #=> String, one of "launchable", "unlaunchable"
     #   resp.capacity_blocks #=> Array
     #   resp.capacity_blocks[0].capacity_block_id #=> String
     #   resp.capacity_blocks[0].ultraserver_type #=> String
@@ -77918,7 +77925,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.653.0'
+      context[:gem_version] = '1.654.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

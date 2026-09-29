@@ -3027,6 +3027,13 @@ module Aws::ElastiCache
     #   IPv6-only subnets. If not specified, defaults to `ipv4`, unless all
     #   provided subnets are IPv6-only, in which case it defaults to `ipv6`.
     #
+    # @option params [String] :connection_type
+    #   The connection type for the serverless cache. Must be either `vpc` \|
+    #   `public`. Use `vpc` to access the cache through a VPC endpoint, or
+    #   `public` to access the cache over the internet. If not specified,
+    #   defaults to `vpc`. This value cannot be changed after the serverless
+    #   cache is created. Setting this to `public` requires Valkey 9 or above.
+    #
     # @return [Types::CreateServerlessCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServerlessCacheResponse#serverless_cache #serverless_cache} => Types::ServerlessCache
@@ -3063,6 +3070,7 @@ module Aws::ElastiCache
     #     snapshot_retention_limit: 1,
     #     daily_snapshot_time: "String",
     #     network_type: "ipv4", # accepts ipv4, ipv6, dual_stack
+    #     connection_type: "vpc", # accepts vpc, public
     #   })
     #
     # @example Response structure
@@ -3094,6 +3102,7 @@ module Aws::ElastiCache
     #   resp.serverless_cache.snapshot_retention_limit #=> Integer
     #   resp.serverless_cache.daily_snapshot_time #=> String
     #   resp.serverless_cache.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_cache.connection_type #=> String, one of "vpc", "public"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCache AWS API Documentation
     #
@@ -4358,6 +4367,7 @@ module Aws::ElastiCache
     #   resp.serverless_cache.snapshot_retention_limit #=> Integer
     #   resp.serverless_cache.daily_snapshot_time #=> String
     #   resp.serverless_cache.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_cache.connection_type #=> String, one of "vpc", "public"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteServerlessCache AWS API Documentation
     #
@@ -7940,6 +7950,7 @@ module Aws::ElastiCache
     #   resp.serverless_caches[0].snapshot_retention_limit #=> Integer
     #   resp.serverless_caches[0].daily_snapshot_time #=> String
     #   resp.serverless_caches[0].network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_caches[0].connection_type #=> String, one of "vpc", "public"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServerlessCaches AWS API Documentation
     #
@@ -10481,6 +10492,7 @@ module Aws::ElastiCache
     #   resp.serverless_cache.snapshot_retention_limit #=> Integer
     #   resp.serverless_cache.daily_snapshot_time #=> String
     #   resp.serverless_cache.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.serverless_cache.connection_type #=> String, one of "vpc", "public"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyServerlessCache AWS API Documentation
     #
@@ -11582,7 +11594,7 @@ module Aws::ElastiCache
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.152.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

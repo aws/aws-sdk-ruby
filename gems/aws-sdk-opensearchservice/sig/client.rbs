@@ -1527,7 +1527,8 @@ module Aws
                                     end_time: ::Time?
                                   },
                                   ?use_case: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED"),
-                                  ?engine_mode: ("GENERAL" | "OPTIMIZED")
+                                  ?engine_mode: ("GENERAL" | "OPTIMIZED"),
+                                  ?accepted_warnings: Array[::String]
                                 ) -> _UpdateDomainConfigResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainConfigResponseSuccess
 

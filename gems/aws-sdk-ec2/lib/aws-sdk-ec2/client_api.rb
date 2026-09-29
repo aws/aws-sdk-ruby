@@ -410,6 +410,7 @@ module Aws::EC2
     CapacityReservationIdSet = Shapes::ListShape.new(name: 'CapacityReservationIdSet')
     CapacityReservationInfo = Shapes::StructureShape.new(name: 'CapacityReservationInfo')
     CapacityReservationInstancePlatform = Shapes::StringShape.new(name: 'CapacityReservationInstancePlatform')
+    CapacityReservationLaunchStatus = Shapes::StringShape.new(name: 'CapacityReservationLaunchStatus')
     CapacityReservationModificationQuote = Shapes::StructureShape.new(name: 'CapacityReservationModificationQuote')
     CapacityReservationModificationQuoteId = Shapes::StringShape.new(name: 'CapacityReservationModificationQuoteId')
     CapacityReservationModificationQuoteIdSet = Shapes::ListShape.new(name: 'CapacityReservationModificationQuoteIdSet')
@@ -5602,6 +5603,7 @@ module Aws::EC2
     CapacityReservation.add_member(:adjustment_details, Shapes::ShapeRef.new(shape: CapacityReservationAdjustmentDetails, location_name: "adjustmentDetails"))
     CapacityReservation.add_member(:original_start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "originalStartDate"))
     CapacityReservation.add_member(:zero_size_preference, Shapes::ShapeRef.new(shape: ZeroSizePreference, location_name: "zeroSizePreference"))
+    CapacityReservation.add_member(:launch_status, Shapes::ShapeRef.new(shape: CapacityReservationLaunchStatus, location_name: "launchStatus"))
     CapacityReservation.struct_class = Types::CapacityReservation
 
     CapacityReservationAdjustmentDetails.add_member(:start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startDate"))

@@ -5156,6 +5156,11 @@ module Aws::SESV2
     # A request to obtain a list of configuration sets for your Amazon SES
     # account in the current Amazon Web Services Region.
     #
+    # @!attribute [rw] filter
+    #   An object that contains filters to apply when listing configuration
+    #   sets. You can filter by configuration set name.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to `ListConfigurationSets` to
     #   indicate the position in the list of configuration sets.
@@ -5171,6 +5176,7 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListConfigurationSetsRequest AWS API Documentation
     #
     class ListConfigurationSetsRequest < Struct.new(
+      :filter,
       :next_token,
       :page_size)
       SENSITIVE = []
@@ -5547,6 +5553,12 @@ module Aws::SESV2
     # you've already verified, identities that are unverified, and
     # identities that were verified in the past, but are no longer verified.
     #
+    # @!attribute [rw] filter
+    #   An object that contains filters to apply when listing email
+    #   identities. You can filter by identity name, identity type, or
+    #   verification status.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to `ListEmailIdentities` to
     #   indicate the position in the list of identities.
@@ -5565,6 +5577,7 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListEmailIdentitiesRequest AWS API Documentation
     #
     class ListEmailIdentitiesRequest < Struct.new(
+      :filter,
       :next_token,
       :page_size)
       SENSITIVE = []
@@ -6223,6 +6236,11 @@ module Aws::SESV2
     # Represents a request to list all tenants associated with your account
     # in the current Amazon Web Services Region.
     #
+    # @!attribute [rw] filter
+    #   An object that contains filters to apply when listing tenants. You
+    #   can filter by tenant name or sending status.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to `ListTenants` to indicate
     #   the position in the list of tenants.
@@ -6238,6 +6256,7 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListTenantsRequest AWS API Documentation
     #
     class ListTenantsRequest < Struct.new(
+      :filter,
       :next_token,
       :page_size)
       SENSITIVE = []
@@ -9075,13 +9094,26 @@ module Aws::SESV2
     #   The date and time when the tenant was created.
     #   @return [Time]
     #
+    # @!attribute [rw] sending_status
+    #   The sending status for a reputation entity. This can be one of the
+    #   following:
+    #
+    #   * `ENABLED` – Sending is allowed for this entity.
+    #
+    #   * `DISABLED` – Sending is prevented for this entity.
+    #
+    #   * `REINSTATED` – Sending is allowed even if there are active
+    #     reputation findings.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/TenantInfo AWS API Documentation
     #
     class TenantInfo < Struct.new(
       :tenant_name,
       :tenant_id,
       :tenant_arn,
-      :created_timestamp)
+      :created_timestamp,
+      :sending_status)
       SENSITIVE = []
       include Aws::Structure
     end

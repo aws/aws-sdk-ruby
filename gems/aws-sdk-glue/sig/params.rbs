@@ -1790,6 +1790,7 @@ module Aws
 
       type view_definition_input = {
       is_protected: bool?,
+      is_managed: bool?,
       definer: ::String?,
       representations: Array[
         {

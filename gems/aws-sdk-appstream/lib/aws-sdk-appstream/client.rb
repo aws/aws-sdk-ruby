@@ -2366,6 +2366,7 @@ module Aws::AppStream
     #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.image.managed_software_included #=> Boolean
     #   resp.image.image_type #=> String, one of "CUSTOM", "NATIVE", "BYOL"
+    #   resp.image.image_software_metadata.nvidia_grid_driver_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImportedImage AWS API Documentation
     #
@@ -2835,6 +2836,7 @@ module Aws::AppStream
     #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.image.managed_software_included #=> Boolean
     #   resp.image.image_type #=> String, one of "CUSTOM", "NATIVE", "BYOL"
+    #   resp.image.image_software_metadata.nvidia_grid_driver_version #=> String
     #   resp.can_update_image #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUpdatedImage AWS API Documentation
@@ -3130,6 +3132,7 @@ module Aws::AppStream
     #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.image.managed_software_included #=> Boolean
     #   resp.image.image_type #=> String, one of "CUSTOM", "NATIVE", "BYOL"
+    #   resp.image.image_software_metadata.nvidia_grid_driver_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage AWS API Documentation
     #
@@ -4058,6 +4061,7 @@ module Aws::AppStream
     #   resp.images[0].image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.images[0].managed_software_included #=> Boolean
     #   resp.images[0].image_type #=> String, one of "CUSTOM", "NATIVE", "BYOL"
+    #   resp.images[0].image_software_metadata.nvidia_grid_driver_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
@@ -6476,7 +6480,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

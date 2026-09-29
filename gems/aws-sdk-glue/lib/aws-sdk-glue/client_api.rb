@@ -8729,6 +8729,7 @@ module Aws::Glue
     VersionMismatchException.struct_class = Types::VersionMismatchException
 
     ViewDefinition.add_member(:is_protected, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsProtected"))
+    ViewDefinition.add_member(:is_managed, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsManaged"))
     ViewDefinition.add_member(:definer, Shapes::ShapeRef.new(shape: ArnString, location_name: "Definer"))
     ViewDefinition.add_member(:view_version_id, Shapes::ShapeRef.new(shape: TableVersionId, location_name: "ViewVersionId"))
     ViewDefinition.add_member(:view_version_token, Shapes::ShapeRef.new(shape: HashString, location_name: "ViewVersionToken"))
@@ -8742,6 +8743,7 @@ module Aws::Glue
     ViewDefinition.struct_class = Types::ViewDefinition
 
     ViewDefinitionInput.add_member(:is_protected, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsProtected"))
+    ViewDefinitionInput.add_member(:is_managed, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsManaged"))
     ViewDefinitionInput.add_member(:definer, Shapes::ShapeRef.new(shape: ArnString, location_name: "Definer"))
     ViewDefinitionInput.add_member(:representations, Shapes::ShapeRef.new(shape: ViewRepresentationInputList, location_name: "Representations"))
     ViewDefinitionInput.add_member(:view_version_id, Shapes::ShapeRef.new(shape: TableVersionId, location_name: "ViewVersionId"))

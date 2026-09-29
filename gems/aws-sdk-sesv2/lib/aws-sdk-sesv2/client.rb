@@ -3507,6 +3507,10 @@ module Aws::SESV2
     # email. When you apply a configuration set to an email, all of the
     # rules in that configuration set are applied to the email.
     #
+    # @option params [Hash<String,String>] :filter
+    #   An object that contains filters to apply when listing configuration
+    #   sets. You can filter by configuration set name.
+    #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListConfigurationSets` to
     #   indicate the position in the list of configuration sets.
@@ -3527,6 +3531,9 @@ module Aws::SESV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configuration_sets({
+    #     filter: {
+    #       "CONFIGURATION_SET_NAME_CONTAINS" => "ConfigurationSetFilterValue",
+    #     },
     #     next_token: "NextToken",
     #     page_size: 1,
     #   })
@@ -3900,6 +3907,11 @@ module Aws::SESV2
     # verified as well as those that aren't. This operation returns
     # identities that are associated with Amazon SES and Amazon Pinpoint.
     #
+    # @option params [Hash<String,String>] :filter
+    #   An object that contains filters to apply when listing email
+    #   identities. You can filter by identity name, identity type, or
+    #   verification status.
+    #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListEmailIdentities` to
     #   indicate the position in the list of identities.
@@ -3923,6 +3935,9 @@ module Aws::SESV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_email_identities({
+    #     filter: {
+    #       "IDENTITY_NAME_CONTAINS" => "IdentityFilterValue",
+    #     },
     #     next_token: "NextToken",
     #     page_size: 1,
     #   })
@@ -4591,6 +4606,10 @@ module Aws::SESV2
     # This operation returns basic information about each tenant, such as
     # tenant name, ID, ARN, and creation timestamp.
     #
+    # @option params [Hash<String,String>] :filter
+    #   An object that contains filters to apply when listing tenants. You can
+    #   filter by tenant name or sending status.
+    #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListTenants` to indicate the
     #   position in the list of tenants.
@@ -4611,6 +4630,9 @@ module Aws::SESV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tenants({
+    #     filter: {
+    #       "TENANT_NAME_CONTAINS" => "ListTenantsFilterValue",
+    #     },
     #     next_token: "NextToken",
     #     page_size: 1,
     #   })
@@ -4622,6 +4644,7 @@ module Aws::SESV2
     #   resp.tenants[0].tenant_id #=> String
     #   resp.tenants[0].tenant_arn #=> String
     #   resp.tenants[0].created_timestamp #=> Time
+    #   resp.tenants[0].sending_status #=> String, one of "ENABLED", "REINSTATED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListTenants AWS API Documentation
@@ -6664,7 +6687,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -47,6 +47,11 @@ module Aws::SecurityAgent
     AuthCode = Shapes::StringShape.new(name: 'AuthCode')
     Authentication = Shapes::StructureShape.new(name: 'Authentication')
     AuthenticationProviderType = Shapes::StringShape.new(name: 'AuthenticationProviderType')
+    AzureDevOpsIntegrationInput = Shapes::StructureShape.new(name: 'AzureDevOpsIntegrationInput')
+    AzureDevOpsOrganization = Shapes::StringShape.new(name: 'AzureDevOpsOrganization')
+    AzureDevOpsRepositoryMetadata = Shapes::StructureShape.new(name: 'AzureDevOpsRepositoryMetadata')
+    AzureDevOpsRepositoryResource = Shapes::StructureShape.new(name: 'AzureDevOpsRepositoryResource')
+    AzureDevOpsResourceCapabilities = Shapes::StructureShape.new(name: 'AzureDevOpsResourceCapabilities')
     BatchCreateSecurityRequirementResult = Shapes::StructureShape.new(name: 'BatchCreateSecurityRequirementResult')
     BatchCreateSecurityRequirementResultList = Shapes::ListShape.new(name: 'BatchCreateSecurityRequirementResultList')
     BatchCreateSecurityRequirementsInput = Shapes::StructureShape.new(name: 'BatchCreateSecurityRequirementsInput')
@@ -95,6 +100,7 @@ module Aws::SecurityAgent
     BatchSecurityRequirementErrors = Shapes::ListShape.new(name: 'BatchSecurityRequirementErrors')
     BatchUpdateSecurityRequirementsInput = Shapes::StructureShape.new(name: 'BatchUpdateSecurityRequirementsInput')
     BatchUpdateSecurityRequirementsOutput = Shapes::StructureShape.new(name: 'BatchUpdateSecurityRequirementsOutput')
+    BitbucketDataCenterIntegrationInput = Shapes::StructureShape.new(name: 'BitbucketDataCenterIntegrationInput')
     BitbucketInstallationId = Shapes::StringShape.new(name: 'BitbucketInstallationId')
     BitbucketIntegrationInput = Shapes::StructureShape.new(name: 'BitbucketIntegrationInput')
     BitbucketRepositoryMetadata = Shapes::StructureShape.new(name: 'BitbucketRepositoryMetadata')
@@ -110,6 +116,8 @@ module Aws::SecurityAgent
     CertificateChain = Shapes::StringShape.new(name: 'CertificateChain')
     CiCdConfiguration = Shapes::StructureShape.new(name: 'CiCdConfiguration')
     CleanUpStrategy = Shapes::StringShape.new(name: 'CleanUpStrategy')
+    ClientId = Shapes::StringShape.new(name: 'ClientId')
+    ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     CloudWatchLog = Shapes::StructureShape.new(name: 'CloudWatchLog')
     CodeLocation = Shapes::StructureShape.new(name: 'CodeLocation')
     CodeLocationList = Shapes::ListShape.new(name: 'CodeLocationList')
@@ -506,6 +514,8 @@ module Aws::SecurityAgent
     UpdateFindingOutput = Shapes::StructureShape.new(name: 'UpdateFindingOutput')
     UpdateIntegratedResourcesInput = Shapes::StructureShape.new(name: 'UpdateIntegratedResourcesInput')
     UpdateIntegratedResourcesOutput = Shapes::StructureShape.new(name: 'UpdateIntegratedResourcesOutput')
+    UpdateIntegrationInput = Shapes::StructureShape.new(name: 'UpdateIntegrationInput')
+    UpdateIntegrationOutput = Shapes::StructureShape.new(name: 'UpdateIntegrationOutput')
     UpdatePentestInput = Shapes::StructureShape.new(name: 'UpdatePentestInput')
     UpdatePentestOutput = Shapes::StructureShape.new(name: 'UpdatePentestOutput')
     UpdatePrivateConnectionCertificateInput = Shapes::StructureShape.new(name: 'UpdatePrivateConnectionCertificateInput')
@@ -538,6 +548,8 @@ module Aws::SecurityAgent
     VpcArn = Shapes::StringShape.new(name: 'VpcArn')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     VpcConfigs = Shapes::ListShape.new(name: 'VpcConfigs')
+    WebhookAction = Shapes::StringShape.new(name: 'WebhookAction')
+    WebhookSecret = Shapes::StringShape.new(name: 'WebhookSecret')
 
     AWSResources.add_member(:vpcs, Shapes::ShapeRef.new(shape: VpcConfigs, location_name: "vpcs"))
     AWSResources.add_member(:log_groups, Shapes::ShapeRef.new(shape: LogGroupArns, location_name: "logGroups"))
@@ -640,6 +652,28 @@ module Aws::SecurityAgent
     Authentication.add_member(:provider_type, Shapes::ShapeRef.new(shape: AuthenticationProviderType, location_name: "providerType"))
     Authentication.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     Authentication.struct_class = Types::Authentication
+
+    AzureDevOpsIntegrationInput.add_member(:code, Shapes::ShapeRef.new(shape: AuthCode, required: true, location_name: "code"))
+    AzureDevOpsIntegrationInput.add_member(:state, Shapes::ShapeRef.new(shape: CsrfState, required: true, location_name: "state"))
+    AzureDevOpsIntegrationInput.add_member(:organization_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "organizationName"))
+    AzureDevOpsIntegrationInput.struct_class = Types::AzureDevOpsIntegrationInput
+
+    AzureDevOpsRepositoryMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ProviderResourceName, required: true, location_name: "name"))
+    AzureDevOpsRepositoryMetadata.add_member(:provider_resource_id, Shapes::ShapeRef.new(shape: ProviderResourceId, required: true, location_name: "providerResourceId"))
+    AzureDevOpsRepositoryMetadata.add_member(:organization, Shapes::ShapeRef.new(shape: AzureDevOpsOrganization, required: true, location_name: "organization"))
+    AzureDevOpsRepositoryMetadata.add_member(:project, Shapes::ShapeRef.new(shape: String, location_name: "project"))
+    AzureDevOpsRepositoryMetadata.add_member(:project_id, Shapes::ShapeRef.new(shape: String, location_name: "projectId"))
+    AzureDevOpsRepositoryMetadata.add_member(:access_type, Shapes::ShapeRef.new(shape: AccessType, location_name: "accessType"))
+    AzureDevOpsRepositoryMetadata.struct_class = Types::AzureDevOpsRepositoryMetadata
+
+    AzureDevOpsRepositoryResource.add_member(:name, Shapes::ShapeRef.new(shape: ProviderResourceName, required: true, location_name: "name"))
+    AzureDevOpsRepositoryResource.add_member(:organization, Shapes::ShapeRef.new(shape: AzureDevOpsOrganization, required: true, location_name: "organization"))
+    AzureDevOpsRepositoryResource.add_member(:project, Shapes::ShapeRef.new(shape: String, location_name: "project"))
+    AzureDevOpsRepositoryResource.struct_class = Types::AzureDevOpsRepositoryResource
+
+    AzureDevOpsResourceCapabilities.add_member(:leave_comments, Shapes::ShapeRef.new(shape: Boolean, location_name: "leaveComments"))
+    AzureDevOpsResourceCapabilities.add_member(:remediate_code, Shapes::ShapeRef.new(shape: Boolean, location_name: "remediateCode"))
+    AzureDevOpsResourceCapabilities.struct_class = Types::AzureDevOpsResourceCapabilities
 
     BatchCreateSecurityRequirementResult.add_member(:pack_id, Shapes::ShapeRef.new(shape: SecurityRequirementPackId, required: true, location_name: "packId"))
     BatchCreateSecurityRequirementResult.add_member(:name, Shapes::ShapeRef.new(shape: SecurityRequirementName, required: true, location_name: "name"))
@@ -836,6 +870,11 @@ module Aws::SecurityAgent
     BatchUpdateSecurityRequirementsOutput.add_member(:updated_security_requirement_names, Shapes::ShapeRef.new(shape: SecurityRequirementNameList, required: true, location_name: "updatedSecurityRequirementNames"))
     BatchUpdateSecurityRequirementsOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchSecurityRequirementErrors, required: true, location_name: "errors"))
     BatchUpdateSecurityRequirementsOutput.struct_class = Types::BatchUpdateSecurityRequirementsOutput
+
+    BitbucketDataCenterIntegrationInput.add_member(:target_url, Shapes::ShapeRef.new(shape: TargetUrl, required: true, location_name: "targetUrl"))
+    BitbucketDataCenterIntegrationInput.add_member(:code, Shapes::ShapeRef.new(shape: AuthCode, required: true, location_name: "code"))
+    BitbucketDataCenterIntegrationInput.add_member(:state, Shapes::ShapeRef.new(shape: CsrfState, required: true, location_name: "state"))
+    BitbucketDataCenterIntegrationInput.struct_class = Types::BitbucketDataCenterIntegrationInput
 
     BitbucketIntegrationInput.add_member(:installation_id, Shapes::ShapeRef.new(shape: BitbucketInstallationId, required: true, location_name: "installationId"))
     BitbucketIntegrationInput.add_member(:workspace, Shapes::ShapeRef.new(shape: BitbucketWorkspace, required: true, location_name: "workspace"))
@@ -1474,6 +1513,7 @@ module Aws::SecurityAgent
     GetIntegrationOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
     GetIntegrationOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     GetIntegrationOutput.add_member(:target_url, Shapes::ShapeRef.new(shape: TargetUrl, location_name: "targetUrl"))
+    GetIntegrationOutput.add_member(:webhook_url, Shapes::ShapeRef.new(shape: String, location_name: "webhookUrl"))
     GetIntegrationOutput.add_member(:private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, location_name: "privateConnectionName"))
     GetIntegrationOutput.struct_class = Types::GetIntegrationOutput
 
@@ -1558,6 +1598,10 @@ module Aws::SecurityAgent
     ImportSource.struct_class = Types::ImportSource
 
     InitiateProviderRegistrationInput.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, required: true, location_name: "provider"))
+    InitiateProviderRegistrationInput.add_member(:target_url, Shapes::ShapeRef.new(shape: TargetUrl, location_name: "targetUrl"))
+    InitiateProviderRegistrationInput.add_member(:organization_name, Shapes::ShapeRef.new(shape: String, location_name: "organizationName"))
+    InitiateProviderRegistrationInput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "clientId"))
+    InitiateProviderRegistrationInput.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecret, location_name: "clientSecret"))
     InitiateProviderRegistrationInput.struct_class = Types::InitiateProviderRegistrationInput
 
     InitiateProviderRegistrationOutput.add_member(:redirect_to, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "redirectTo"))
@@ -1579,11 +1623,13 @@ module Aws::SecurityAgent
     IntegratedResource.add_member(:gitlab_repository, Shapes::ShapeRef.new(shape: GitLabRepositoryResource, location_name: "gitlabRepository"))
     IntegratedResource.add_member(:bitbucket_repository, Shapes::ShapeRef.new(shape: BitbucketRepositoryResource, location_name: "bitbucketRepository"))
     IntegratedResource.add_member(:confluence_document, Shapes::ShapeRef.new(shape: ConfluenceDocumentResource, location_name: "confluenceDocument"))
+    IntegratedResource.add_member(:azure_dev_ops_repository, Shapes::ShapeRef.new(shape: AzureDevOpsRepositoryResource, location_name: "azureDevOpsRepository"))
     IntegratedResource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     IntegratedResource.add_member_subclass(:github_repository, Types::IntegratedResource::GithubRepository)
     IntegratedResource.add_member_subclass(:gitlab_repository, Types::IntegratedResource::GitlabRepository)
     IntegratedResource.add_member_subclass(:bitbucket_repository, Types::IntegratedResource::BitbucketRepository)
     IntegratedResource.add_member_subclass(:confluence_document, Types::IntegratedResource::ConfluenceDocument)
+    IntegratedResource.add_member_subclass(:azure_dev_ops_repository, Types::IntegratedResource::AzureDevOpsRepository)
     IntegratedResource.add_member_subclass(:unknown, Types::IntegratedResource::Unknown)
     IntegratedResource.struct_class = Types::IntegratedResource
 
@@ -1597,11 +1643,13 @@ module Aws::SecurityAgent
     IntegratedResourceMetadata.add_member(:gitlab_repository, Shapes::ShapeRef.new(shape: GitLabRepositoryMetadata, location_name: "gitlabRepository"))
     IntegratedResourceMetadata.add_member(:bitbucket_repository, Shapes::ShapeRef.new(shape: BitbucketRepositoryMetadata, location_name: "bitbucketRepository"))
     IntegratedResourceMetadata.add_member(:confluence_document, Shapes::ShapeRef.new(shape: ConfluenceDocumentMetadata, location_name: "confluenceDocument"))
+    IntegratedResourceMetadata.add_member(:azure_dev_ops_repository, Shapes::ShapeRef.new(shape: AzureDevOpsRepositoryMetadata, location_name: "azureDevOpsRepository"))
     IntegratedResourceMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     IntegratedResourceMetadata.add_member_subclass(:github_repository, Types::IntegratedResourceMetadata::GithubRepository)
     IntegratedResourceMetadata.add_member_subclass(:gitlab_repository, Types::IntegratedResourceMetadata::GitlabRepository)
     IntegratedResourceMetadata.add_member_subclass(:bitbucket_repository, Types::IntegratedResourceMetadata::BitbucketRepository)
     IntegratedResourceMetadata.add_member_subclass(:confluence_document, Types::IntegratedResourceMetadata::ConfluenceDocument)
+    IntegratedResourceMetadata.add_member_subclass(:azure_dev_ops_repository, Types::IntegratedResourceMetadata::AzureDevOpsRepository)
     IntegratedResourceMetadata.add_member_subclass(:unknown, Types::IntegratedResourceMetadata::Unknown)
     IntegratedResourceMetadata.struct_class = Types::IntegratedResourceMetadata
 
@@ -1626,6 +1674,7 @@ module Aws::SecurityAgent
     IntegrationSummary.add_member(:provider_type, Shapes::ShapeRef.new(shape: ProviderType, required: true, location_name: "providerType"))
     IntegrationSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "displayName"))
     IntegrationSummary.add_member(:target_url, Shapes::ShapeRef.new(shape: TargetUrl, location_name: "targetUrl"))
+    IntegrationSummary.add_member(:webhook_url, Shapes::ShapeRef.new(shape: String, location_name: "webhookUrl"))
     IntegrationSummary.add_member(:private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, location_name: "privateConnectionName"))
     IntegrationSummary.struct_class = Types::IntegrationSummary
 
@@ -2037,11 +2086,15 @@ module Aws::SecurityAgent
     ProviderInput.add_member(:gitlab, Shapes::ShapeRef.new(shape: GitLabIntegrationInput, location_name: "gitlab"))
     ProviderInput.add_member(:bitbucket, Shapes::ShapeRef.new(shape: BitbucketIntegrationInput, location_name: "bitbucket"))
     ProviderInput.add_member(:confluence, Shapes::ShapeRef.new(shape: ConfluenceIntegrationInput, location_name: "confluence"))
+    ProviderInput.add_member(:azure_dev_ops, Shapes::ShapeRef.new(shape: AzureDevOpsIntegrationInput, location_name: "azureDevOps"))
+    ProviderInput.add_member(:bitbucket_data_center, Shapes::ShapeRef.new(shape: BitbucketDataCenterIntegrationInput, location_name: "bitbucketDataCenter"))
     ProviderInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderInput.add_member_subclass(:github, Types::ProviderInput::Github)
     ProviderInput.add_member_subclass(:gitlab, Types::ProviderInput::Gitlab)
     ProviderInput.add_member_subclass(:bitbucket, Types::ProviderInput::Bitbucket)
     ProviderInput.add_member_subclass(:confluence, Types::ProviderInput::Confluence)
+    ProviderInput.add_member_subclass(:azure_dev_ops, Types::ProviderInput::AzureDevOps)
+    ProviderInput.add_member_subclass(:bitbucket_data_center, Types::ProviderInput::BitbucketDataCenter)
     ProviderInput.add_member_subclass(:unknown, Types::ProviderInput::Unknown)
     ProviderInput.struct_class = Types::ProviderInput
 
@@ -2049,11 +2102,13 @@ module Aws::SecurityAgent
     ProviderResourceCapabilities.add_member(:gitlab, Shapes::ShapeRef.new(shape: GitLabResourceCapabilities, location_name: "gitlab"))
     ProviderResourceCapabilities.add_member(:bitbucket, Shapes::ShapeRef.new(shape: BitbucketResourceCapabilities, location_name: "bitbucket"))
     ProviderResourceCapabilities.add_member(:confluence, Shapes::ShapeRef.new(shape: ConfluenceResourceCapabilities, location_name: "confluence"))
+    ProviderResourceCapabilities.add_member(:azure_dev_ops, Shapes::ShapeRef.new(shape: AzureDevOpsResourceCapabilities, location_name: "azureDevOps"))
     ProviderResourceCapabilities.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderResourceCapabilities.add_member_subclass(:github, Types::ProviderResourceCapabilities::Github)
     ProviderResourceCapabilities.add_member_subclass(:gitlab, Types::ProviderResourceCapabilities::Gitlab)
     ProviderResourceCapabilities.add_member_subclass(:bitbucket, Types::ProviderResourceCapabilities::Bitbucket)
     ProviderResourceCapabilities.add_member_subclass(:confluence, Types::ProviderResourceCapabilities::Confluence)
+    ProviderResourceCapabilities.add_member_subclass(:azure_dev_ops, Types::ProviderResourceCapabilities::AzureDevOps)
     ProviderResourceCapabilities.add_member_subclass(:unknown, Types::ProviderResourceCapabilities::Unknown)
     ProviderResourceCapabilities.struct_class = Types::ProviderResourceCapabilities
 
@@ -2537,6 +2592,15 @@ module Aws::SecurityAgent
     UpdateIntegratedResourcesInput.struct_class = Types::UpdateIntegratedResourcesInput
 
     UpdateIntegratedResourcesOutput.struct_class = Types::UpdateIntegratedResourcesOutput
+
+    UpdateIntegrationInput.add_member(:integration_id, Shapes::ShapeRef.new(shape: IntegrationId, required: true, location_name: "integrationId"))
+    UpdateIntegrationInput.add_member(:webhook_action, Shapes::ShapeRef.new(shape: WebhookAction, required: true, location_name: "webhookAction"))
+    UpdateIntegrationInput.struct_class = Types::UpdateIntegrationInput
+
+    UpdateIntegrationOutput.add_member(:integration_id, Shapes::ShapeRef.new(shape: IntegrationId, required: true, location_name: "integrationId"))
+    UpdateIntegrationOutput.add_member(:webhook_url, Shapes::ShapeRef.new(shape: String, location_name: "webhookUrl"))
+    UpdateIntegrationOutput.add_member(:secret, Shapes::ShapeRef.new(shape: WebhookSecret, location_name: "secret"))
+    UpdateIntegrationOutput.struct_class = Types::UpdateIntegrationOutput
 
     UpdatePentestInput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pentestId"))
     UpdatePentestInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
@@ -3722,6 +3786,20 @@ module Aws::SecurityAgent
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateIntegration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIntegrationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIntegrationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

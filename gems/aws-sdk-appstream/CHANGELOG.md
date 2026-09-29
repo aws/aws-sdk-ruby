@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2026-09-29)
+------------------
+
+* Feature - Add support for NVIDIA GRID driver version metadata in Workspace Applications image responses through the new ImageSoftwareMetadata field.
+
 1.142.0 (2026-09-11)
 ------------------
 

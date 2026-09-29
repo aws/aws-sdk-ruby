@@ -33778,6 +33778,10 @@ module Aws::Glue
     #   understand the guarantees provided, if any.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_managed
+    #   Specifies whether the materialized view is managed by Glue.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] definer
     #   The definer of a view in SQL.
     #   @return [String]
@@ -33829,6 +33833,7 @@ module Aws::Glue
     #
     class ViewDefinition < Struct.new(
       :is_protected,
+      :is_managed,
       :definer,
       :view_version_id,
       :view_version_token,
@@ -33851,6 +33856,10 @@ module Aws::Glue
     #   query planning. However, setting this flag does not guarantee that
     #   the engine will comply. Refer to the engine's documentation to
     #   understand the guarantees provided, if any.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_managed
+    #   Specifies whether the materialized view is managed by Glue.
     #   @return [Boolean]
     #
     # @!attribute [rw] definer
@@ -33906,6 +33915,7 @@ module Aws::Glue
     #
     class ViewDefinitionInput < Struct.new(
       :is_protected,
+      :is_managed,
       :definer,
       :representations,
       :view_version_id,

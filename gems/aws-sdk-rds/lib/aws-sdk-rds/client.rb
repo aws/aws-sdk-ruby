@@ -2249,6 +2249,26 @@ module Aws::RDS
     #
     #   This setting doesn't apply to Amazon Aurora blue/green deployments.
     #
+    # @option params [Array<Types::TargetResourceConfiguration>] :target_resource_configurations
+    #   Specifies resource-level configuration overrides for the green
+    #   environment.
+    #
+    #   Each entry identifies a resource in the blue environment by its Amazon
+    #   Resource Name (ARN). It defines the desired configuration for the
+    #   corresponding resource in the green environment. Any resource that you
+    #   don't include in this parameter retains the same configuration as its
+    #   counterpart in the blue environment.
+    #
+    #   Use this parameter when one or more resources in the green environment
+    #   require a different configuration than what they have in the blue
+    #   environment.
+    #
+    #   Constraints:
+    #
+    #   * You can't specify the same `SourceArn` in more than one entry.
+    #
+    #   ^
+    #
     # @return [Types::CreateBlueGreenDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBlueGreenDeploymentResponse#blue_green_deployment #blue_green_deployment} => Types::BlueGreenDeployment
@@ -2395,6 +2415,12 @@ module Aws::RDS
     #     target_storage_type: "TargetStorageType",
     #     target_allocated_storage: 1,
     #     target_storage_throughput: 1,
+    #     target_resource_configurations: [
+    #       {
+    #         source_arn: "DBAndClusterArn", # required
+    #         target_kms_key_id: "KmsKeyIdOrArn",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -34500,7 +34526,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.323.0'
+      context[:gem_version] = '1.324.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

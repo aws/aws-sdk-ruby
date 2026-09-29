@@ -1073,7 +1073,8 @@ module Aws::BedrockAgentRuntime
 
     class FoundationModelConfiguration
       attr_accessor bedrock_foundation_model_configuration: Types::BedrockFoundationModelConfiguration
-      attr_accessor type: ("BEDROCK_FOUNDATION_MODEL")
+      attr_accessor mantle_foundation_model_configuration: Types::MantleFoundationModelConfiguration
+      attr_accessor type: ("BEDROCK_FOUNDATION_MODEL" | "MANTLE_FOUNDATION_MODEL")
       SENSITIVE: []
     end
 
@@ -1814,6 +1815,17 @@ module Aws::BedrockAgentRuntime
     class ManagedSearchRerankingConfiguration
       attr_accessor bedrock_reranking_configuration: Types::ManagedSearchBedrockRerankingConfiguration
       attr_accessor type: ("BEDROCK_RERANKING_MODEL")
+      SENSITIVE: []
+    end
+
+    class MantleFoundationModelConfiguration
+      attr_accessor model_configuration: Types::MantleFoundationModelModelConfiguration
+      SENSITIVE: []
+    end
+
+    class MantleFoundationModelModelConfiguration
+      attr_accessor model_arn: ::String
+      attr_accessor project_id: ::String
       SENSITIVE: []
     end
 

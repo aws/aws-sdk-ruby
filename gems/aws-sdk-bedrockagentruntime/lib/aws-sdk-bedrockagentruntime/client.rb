@@ -726,7 +726,13 @@ module Aws::BedrockAgentRuntime
     #             model_arn: "BedrockModelArn", # required
     #           },
     #         },
-    #         type: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL
+    #         mantle_foundation_model_configuration: {
+    #           model_configuration: { # required
+    #             model_arn: "BedrockModelArn", # required
+    #             project_id: "MantleProjectId",
+    #           },
+    #         },
+    #         type: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL, MANTLE_FOUNDATION_MODEL
     #       },
     #       foundation_model_type: "CUSTOM", # accepts CUSTOM, MANAGED
     #       max_agent_iteration: 1,
@@ -8467,7 +8473,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -81,8 +81,10 @@ module Aws
 
       interface _CreateGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupResponse]
-        def group_id: () -> ::String
         def identity_store_id: () -> ::String
+        def group_id: () -> ::String
+        def group_arn: () -> ::String
+        def revision: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#create_group-instance_method
       def create_group: (
@@ -94,8 +96,9 @@ module Aws
 
       interface _CreateGroupMembershipResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupMembershipResponse]
-        def membership_id: () -> ::String
         def identity_store_id: () -> ::String
+        def membership_id: () -> ::String
+        def membership_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#create_group_membership-instance_method
       def create_group_membership: (
@@ -111,6 +114,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
         def identity_store_id: () -> ::String
         def user_id: () -> ::String
+        def user_arn: () -> ::String
+        def revision: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#create_user-instance_method
       def create_user: (
@@ -185,7 +190,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#delete_group-instance_method
       def delete_group: (
                           identity_store_id: ::String,
-                          group_id: ::String
+                          group_id: ::String,
+                          ?revision: ::String
                         ) -> _DeleteGroupResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGroupResponseSuccess
 
@@ -205,13 +211,17 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#delete_user-instance_method
       def delete_user: (
                          identity_store_id: ::String,
-                         user_id: ::String
+                         user_id: ::String,
+                         ?revision: ::String
                        ) -> _DeleteUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserResponseSuccess
 
       interface _DescribeGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGroupResponse]
+        def identity_store_id: () -> ::String
         def group_id: () -> ::String
+        def group_arn: () -> ::String
+        def revision: () -> ::String
         def display_name: () -> ::String
         def external_ids: () -> ::Array[Types::ExternalId]
         def description: () -> ::String
@@ -219,7 +229,6 @@ module Aws
         def updated_at: () -> ::Time
         def created_by: () -> ::String
         def updated_by: () -> ::String
-        def identity_store_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#describe_group-instance_method
       def describe_group: (
@@ -232,6 +241,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGroupMembershipResponse]
         def identity_store_id: () -> ::String
         def membership_id: () -> ::String
+        def membership_arn: () -> ::String
         def group_id: () -> ::String
         def member_id: () -> Types::MemberId
         def created_at: () -> ::Time
@@ -246,10 +256,24 @@ module Aws
                                      ) -> _DescribeGroupMembershipResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGroupMembershipResponseSuccess
 
+      interface _DescribeIdentityStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIdentityStoreResponse]
+        def identity_store_id: () -> ::String
+        def identity_store_arn: () -> ::String
+        def network_configuration: () -> Types::NetworkConfigurationDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#describe_identity_store-instance_method
+      def describe_identity_store: (
+                                     identity_store_id: ::String
+                                   ) -> _DescribeIdentityStoreResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIdentityStoreResponseSuccess
+
       interface _DescribeUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUserResponse]
         def identity_store_id: () -> ::String
         def user_id: () -> ::String
+        def user_arn: () -> ::String
+        def revision: () -> ::String
         def user_name: () -> ::String
         def external_ids: () -> ::Array[Types::ExternalId]
         def name: () -> Types::Name
@@ -285,8 +309,9 @@ module Aws
 
       interface _GetGroupIdResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupIdResponse]
-        def group_id: () -> ::String
         def identity_store_id: () -> ::String
+        def group_id: () -> ::String
+        def group_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#get_group_id-instance_method
       def get_group_id: (
@@ -297,8 +322,9 @@ module Aws
 
       interface _GetGroupMembershipIdResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupMembershipIdResponse]
-        def membership_id: () -> ::String
         def identity_store_id: () -> ::String
+        def membership_id: () -> ::String
+        def membership_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#get_group_membership_id-instance_method
       def get_group_membership_id: (
@@ -314,6 +340,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetUserIdResponse]
         def identity_store_id: () -> ::String
         def user_id: () -> ::String
+        def user_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#get_user_id-instance_method
       def get_user_id: (
@@ -385,6 +412,18 @@ module Aws
                        ) -> _ListGroupsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsResponseSuccess
 
+      interface _ListIdentityStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdentityStoresResponse]
+        def identity_stores: () -> ::Array[Types::IdentityStore]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#list_identity_stores-instance_method
+      def list_identity_stores: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListIdentityStoresResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentityStoresResponseSuccess
+
       interface _ListUsersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersResponse]
         def users: () -> ::Array[Types::User]
@@ -407,6 +446,10 @@ module Aws
 
       interface _UpdateGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGroupResponse]
+        def identity_store_id: () -> ::String
+        def group_id: () -> ::String
+        def group_arn: () -> ::String
+        def revision: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#update_group-instance_method
       def update_group: (
@@ -417,12 +460,34 @@ module Aws
                               attribute_path: ::String,
                               attribute_value: untyped?
                             }
-                          ]
+                          ],
+                          ?revision: ::String
                         ) -> _UpdateGroupResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupResponseSuccess
 
+      interface _UpdateIdentityStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIdentityStoreResponse]
+        def identity_store_id: () -> ::String
+        def identity_store_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#update_identity_store-instance_method
+      def update_identity_store: (
+                                   identity_store_id: ::String,
+                                   ?network_configuration: {
+                                     vpce_access_required: bool,
+                                     api_restrict_source_vpcs: Array[::String]?,
+                                     api_allow_source_ips: Array[::String]?,
+                                     scim_allow_source_ips: Array[::String]?
+                                   }
+                                 ) -> _UpdateIdentityStoreResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdentityStoreResponseSuccess
+
       interface _UpdateUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]
+        def identity_store_id: () -> ::String
+        def user_id: () -> ::String
+        def user_arn: () -> ::String
+        def revision: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#update_user-instance_method
       def update_user: (
@@ -433,7 +498,8 @@ module Aws
                              attribute_path: ::String,
                              attribute_value: untyped?
                            }
-                         ]
+                         ],
+                         ?revision: ::String
                        ) -> _UpdateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
     end

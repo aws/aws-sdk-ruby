@@ -43,10 +43,15 @@ module Aws::MediaTailor
     AwsServiceRequestConfigurationTargetRegionString = Shapes::StringShape.new(name: 'AwsServiceRequestConfigurationTargetRegionString')
     AwsTargetService = Shapes::StringShape.new(name: 'AwsTargetService')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BeaconEventType = Shapes::StringShape.new(name: 'BeaconEventType')
+    BeaconEventTypeList = Shapes::ListShape.new(name: 'BeaconEventTypeList')
+    BeaconingConfiguration = Shapes::StructureShape.new(name: 'BeaconingConfiguration')
     Bumper = Shapes::StructureShape.new(name: 'Bumper')
     CdnConfiguration = Shapes::StructureShape.new(name: 'CdnConfiguration')
     Channel = Shapes::StructureShape.new(name: 'Channel')
     ChannelState = Shapes::StringShape.new(name: 'ChannelState')
+    ClientSideBeaconingConfiguration = Shapes::StructureShape.new(name: 'ClientSideBeaconingConfiguration')
+    ClientSideBeaconingMode = Shapes::StringShape.new(name: 'ClientSideBeaconingMode')
     ClipRange = Shapes::StructureShape.new(name: 'ClipRange')
     CompressionMethod = Shapes::StringShape.new(name: 'CompressionMethod')
     ConcurrentExecutorConfiguration = Shapes::StructureShape.new(name: 'ConcurrentExecutorConfiguration')
@@ -358,6 +363,11 @@ module Aws::MediaTailor
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
 
+    BeaconEventTypeList.member = Shapes::ShapeRef.new(shape: BeaconEventType)
+
+    BeaconingConfiguration.add_member(:client_side, Shapes::ShapeRef.new(shape: ClientSideBeaconingConfiguration, location_name: "ClientSide"))
+    BeaconingConfiguration.struct_class = Types::BeaconingConfiguration
+
     Bumper.add_member(:end_url, Shapes::ShapeRef.new(shape: __string, location_name: "EndUrl"))
     Bumper.add_member(:start_url, Shapes::ShapeRef.new(shape: __string, location_name: "StartUrl"))
     Bumper.struct_class = Types::Bumper
@@ -379,6 +389,10 @@ module Aws::MediaTailor
     Channel.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfigurationForChannel, required: true, location_name: "LogConfiguration"))
     Channel.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "Audiences"))
     Channel.struct_class = Types::Channel
+
+    ClientSideBeaconingConfiguration.add_member(:reporting_mode, Shapes::ShapeRef.new(shape: ClientSideBeaconingMode, required: true, location_name: "ReportingMode"))
+    ClientSideBeaconingConfiguration.add_member(:additional_event_types, Shapes::ShapeRef.new(shape: BeaconEventTypeList, location_name: "AdditionalEventTypes"))
+    ClientSideBeaconingConfiguration.struct_class = Types::ClientSideBeaconingConfiguration
 
     ClipRange.add_member(:end_offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "EndOffsetMillis", metadata: {"box" => true}))
     ClipRange.add_member(:start_offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "StartOffsetMillis"))
@@ -774,6 +788,7 @@ module Aws::MediaTailor
     GetPlaybackConfigurationResponse.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
     GetPlaybackConfigurationResponse.add_member(:ads_personalization_timeouts, Shapes::ShapeRef.new(shape: AdsPersonalizationTimeouts, location_name: "AdsPersonalizationTimeouts"))
     GetPlaybackConfigurationResponse.add_member(:ads_personalization_concurrency, Shapes::ShapeRef.new(shape: AdsPersonalizationConcurrency, location_name: "AdsPersonalizationConcurrency"))
+    GetPlaybackConfigurationResponse.add_member(:beaconing_configuration, Shapes::ShapeRef.new(shape: BeaconingConfiguration, location_name: "BeaconingConfiguration"))
     GetPlaybackConfigurationResponse.struct_class = Types::GetPlaybackConfigurationResponse
 
     GetPrefetchScheduleRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
@@ -964,6 +979,7 @@ module Aws::MediaTailor
     PlaybackConfiguration.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
     PlaybackConfiguration.add_member(:ads_personalization_timeouts, Shapes::ShapeRef.new(shape: AdsPersonalizationTimeouts, location_name: "AdsPersonalizationTimeouts"))
     PlaybackConfiguration.add_member(:ads_personalization_concurrency, Shapes::ShapeRef.new(shape: AdsPersonalizationConcurrency, location_name: "AdsPersonalizationConcurrency"))
+    PlaybackConfiguration.add_member(:beaconing_configuration, Shapes::ShapeRef.new(shape: BeaconingConfiguration, location_name: "BeaconingConfiguration"))
     PlaybackConfiguration.struct_class = Types::PlaybackConfiguration
 
     PreRollAdDecisionServerConfiguration.add_member(:vast_response, Shapes::ShapeRef.new(shape: PreRollVastResponse, location_name: "VastResponse"))
@@ -1048,6 +1064,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationRequest.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
     PutPlaybackConfigurationRequest.add_member(:ads_personalization_timeouts, Shapes::ShapeRef.new(shape: AdsPersonalizationTimeouts, location_name: "AdsPersonalizationTimeouts"))
     PutPlaybackConfigurationRequest.add_member(:ads_personalization_concurrency, Shapes::ShapeRef.new(shape: AdsPersonalizationConcurrency, location_name: "AdsPersonalizationConcurrency"))
+    PutPlaybackConfigurationRequest.add_member(:beaconing_configuration, Shapes::ShapeRef.new(shape: BeaconingConfiguration, location_name: "BeaconingConfiguration"))
     PutPlaybackConfigurationRequest.struct_class = Types::PutPlaybackConfigurationRequest
 
     PutPlaybackConfigurationResponse.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
@@ -1078,6 +1095,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationResponse.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
     PutPlaybackConfigurationResponse.add_member(:ads_personalization_timeouts, Shapes::ShapeRef.new(shape: AdsPersonalizationTimeouts, location_name: "AdsPersonalizationTimeouts"))
     PutPlaybackConfigurationResponse.add_member(:ads_personalization_concurrency, Shapes::ShapeRef.new(shape: AdsPersonalizationConcurrency, location_name: "AdsPersonalizationConcurrency"))
+    PutPlaybackConfigurationResponse.add_member(:beaconing_configuration, Shapes::ShapeRef.new(shape: BeaconingConfiguration, location_name: "BeaconingConfiguration"))
     PutPlaybackConfigurationResponse.struct_class = Types::PutPlaybackConfigurationResponse
 
     RecurringConsumption.add_member(:retrieved_ad_expiration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "RetrievedAdExpirationSeconds"))

@@ -27,6 +27,21 @@
       "useAccountIdRouting" : true
     }
   }, {
+    "id" : "DescribeDBInstancesFailure",
+    "operationName" : "DescribeDBInstances",
+    "input" : {
+      "DBInstanceIdentifier" : "fake-id"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "DescribeDBEngineVersionsSuccess",
     "operationName" : "DescribeDBEngineVersions",
     "input" : { },
@@ -45,36 +60,6 @@
     "input" : { },
     "expectation" : {
       "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "DescribeDBInstancesFailure",
-    "operationName" : "DescribeDBInstances",
-    "input" : {
-      "DBInstanceIdentifier" : "fake-id"
-    },
-    "expectation" : {
-      "failure" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "DescribeDBInstancesFailure",
-    "operationName" : "DescribeDBInstances",
-    "input" : {
-      "DBInstanceIdentifier" : "fake-id"
-    },
-    "expectation" : {
-      "failure" : { }
     },
     "config" : {
       "region" : "us-west-2",
@@ -133,6 +118,21 @@
     "input" : { },
     "expectation" : {
       "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "DescribeDBInstancesFailure",
+    "operationName" : "DescribeDBInstances",
+    "input" : {
+      "DBInstanceIdentifier" : "fake-id"
+    },
+    "expectation" : {
+      "failure" : { }
     },
     "config" : {
       "region" : "us-west-2",

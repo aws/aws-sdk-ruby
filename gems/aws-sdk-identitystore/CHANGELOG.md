@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2026-09-29)
+------------------
+
+* Feature - Add support for network access controls to restrict Identity Store API and SCIM access to trusted networks, optimistic locking for users and groups via resource revisions, and resource ARNs as identifiers in requests.
+
 1.74.0 (2026-09-11)
 ------------------
 

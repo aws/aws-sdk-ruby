@@ -4760,6 +4760,7 @@ module Aws::Glue
     #       },
     #       view_definition: {
     #         is_protected: false,
+    #         is_managed: false,
     #         definer: "ArnString",
     #         representations: [
     #           {
@@ -11527,6 +11528,7 @@ module Aws::Glue
     #   resp.table.federated_table.connection_name #=> String
     #   resp.table.federated_table.connection_type #=> String
     #   resp.table.view_definition.is_protected #=> Boolean
+    #   resp.table.view_definition.is_managed #=> Boolean
     #   resp.table.view_definition.definer #=> String
     #   resp.table.view_definition.view_version_id #=> Integer
     #   resp.table.view_definition.view_version_token #=> String
@@ -11809,6 +11811,7 @@ module Aws::Glue
     #   resp.table_version.table.federated_table.connection_name #=> String
     #   resp.table_version.table.federated_table.connection_type #=> String
     #   resp.table_version.table.view_definition.is_protected #=> Boolean
+    #   resp.table_version.table.view_definition.is_managed #=> Boolean
     #   resp.table_version.table.view_definition.definer #=> String
     #   resp.table_version.table.view_definition.view_version_id #=> Integer
     #   resp.table_version.table.view_definition.view_version_token #=> String
@@ -12015,6 +12018,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.federated_table.connection_name #=> String
     #   resp.table_versions[0].table.federated_table.connection_type #=> String
     #   resp.table_versions[0].table.view_definition.is_protected #=> Boolean
+    #   resp.table_versions[0].table.view_definition.is_managed #=> Boolean
     #   resp.table_versions[0].table.view_definition.definer #=> String
     #   resp.table_versions[0].table.view_definition.view_version_id #=> Integer
     #   resp.table_versions[0].table.view_definition.view_version_token #=> String
@@ -12264,6 +12268,7 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.connection_name #=> String
     #   resp.table_list[0].federated_table.connection_type #=> String
     #   resp.table_list[0].view_definition.is_protected #=> Boolean
+    #   resp.table_list[0].view_definition.is_managed #=> Boolean
     #   resp.table_list[0].view_definition.definer #=> String
     #   resp.table_list[0].view_definition.view_version_id #=> Integer
     #   resp.table_list[0].view_definition.view_version_token #=> String
@@ -13051,6 +13056,7 @@ module Aws::Glue
     #   resp.table.federated_table.connection_name #=> String
     #   resp.table.federated_table.connection_type #=> String
     #   resp.table.view_definition.is_protected #=> Boolean
+    #   resp.table.view_definition.is_managed #=> Boolean
     #   resp.table.view_definition.definer #=> String
     #   resp.table.view_definition.view_version_id #=> Integer
     #   resp.table.view_definition.view_version_token #=> String
@@ -17516,6 +17522,7 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.connection_name #=> String
     #   resp.table_list[0].federated_table.connection_type #=> String
     #   resp.table_list[0].view_definition.is_protected #=> Boolean
+    #   resp.table_list[0].view_definition.is_managed #=> Boolean
     #   resp.table_list[0].view_definition.definer #=> String
     #   resp.table_list[0].view_definition.view_version_id #=> Integer
     #   resp.table_list[0].view_definition.view_version_token #=> String
@@ -20831,6 +20838,7 @@ module Aws::Glue
     #       },
     #       view_definition: {
     #         is_protected: false,
+    #         is_managed: false,
     #         definer: "ArnString",
     #         representations: [
     #           {
@@ -21277,7 +21285,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.277.0'
+      context[:gem_version] = '1.278.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1125,6 +1125,7 @@ module Aws::Transfer
       attr_accessor passive_ip: ::String
       attr_accessor tls_session_resumption_mode: ("DISABLED" | "ENABLED" | "ENFORCED")
       attr_accessor set_stat_option: ("DEFAULT" | "ENABLE_NO_OP")
+      attr_accessor sftp_ports: ::Array[Types::SftpPortWithOptions]
       attr_accessor as_2_transports: ::Array[("HTTP")]
       attr_accessor proxy_config: Types::ProxyConfig
       SENSITIVE: []
@@ -1205,6 +1206,12 @@ module Aws::Transfer
 
     class SftpConnectorConnectionDetails
       attr_accessor host_key: ::String
+      SENSITIVE: []
+    end
+
+    class SftpPortWithOptions
+      attr_accessor sftp_port: ::Integer
+      attr_accessor communication_mode: ("CLIENT_TALK_FIRST" | "SERVER_TALK_FIRST")
       SENSITIVE: []
     end
 

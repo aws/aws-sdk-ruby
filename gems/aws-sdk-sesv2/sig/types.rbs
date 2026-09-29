@@ -1141,6 +1141,7 @@ module Aws::SESV2
     end
 
     class ListConfigurationSetsRequest
+      attr_accessor filter: ::Hash[("CONFIGURATION_SET_NAME_CONTAINS"), ::String]
       attr_accessor next_token: ::String
       attr_accessor page_size: ::Integer
       SENSITIVE: []
@@ -1236,6 +1237,7 @@ module Aws::SESV2
     end
 
     class ListEmailIdentitiesRequest
+      attr_accessor filter: ::Hash[("IDENTITY_NAME_CONTAINS" | "IDENTITY_TYPE" | "VERIFICATION_STATUS"), ::String]
       attr_accessor next_token: ::String
       attr_accessor page_size: ::Integer
       SENSITIVE: []
@@ -1397,6 +1399,7 @@ module Aws::SESV2
     end
 
     class ListTenantsRequest
+      attr_accessor filter: ::Hash[("TENANT_NAME_CONTAINS" | "SENDING_STATUS"), ::String]
       attr_accessor next_token: ::String
       attr_accessor page_size: ::Integer
       SENSITIVE: []
@@ -2041,6 +2044,7 @@ module Aws::SESV2
       attr_accessor tenant_id: ::String
       attr_accessor tenant_arn: ::String
       attr_accessor created_timestamp: ::Time
+      attr_accessor sending_status: ("ENABLED" | "REINSTATED" | "DISABLED")
       SENSITIVE: []
     end
 

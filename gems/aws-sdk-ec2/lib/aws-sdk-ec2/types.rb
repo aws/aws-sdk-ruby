@@ -6756,6 +6756,22 @@ module Aws::EC2
     #   Reservation when you reduce its allocation to zero.
     #   @return [String]
     #
+    # @!attribute [rw] launch_status
+    #   <note markdown="1"> Only supported for UltraServers.
+    #
+    #    </note>
+    #
+    #   Indicates whether you can launch instances into the Capacity
+    #   Reservation. A Capacity Reservation can have the following launch
+    #   statuses:
+    #
+    #   * `launchable` - You can launch instances into the Capacity
+    #     Reservation.
+    #
+    #   * `unlaunchable` - You can't launch instances into the Capacity
+    #     Reservation. For example, the Capacity Reservation is not active.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservation AWS API Documentation
     #
     class CapacityReservation < Struct.new(
@@ -6793,7 +6809,8 @@ module Aws::EC2
       :adjustment_status,
       :adjustment_details,
       :original_start_date,
-      :zero_size_preference)
+      :zero_size_preference,
+      :launch_status)
       SENSITIVE = []
       include Aws::Structure
     end
