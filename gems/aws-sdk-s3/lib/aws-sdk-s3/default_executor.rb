@@ -20,7 +20,7 @@ module Aws
         @max_threads = options[:max_threads] || DEFAULT_MAX_THREADS
         @max_queue = options[:max_queue] || 0
         @state = RUNNING
-        @queue = @max_queue.zero? ? Queue.new : SizedQueue.new(@max_queue) # 0 is unbounded
+        @queue = @max_queue.zero? ? Queue.new : SizedQueue.new(@max_queue)
         @pool = []
         @mutex = Mutex.new
         @fatal_error = nil
@@ -36,12 +36,10 @@ module Aws
 
           ensure_worker_available
         end
-        # Pushed outside the mutex because a bounded queue blocks the caller when
-        # full and holding the lock while parked would deadlock #shutdown and #kill.
+        # Outside the mutex so a caller blocked on a full queue can't hold up #shutdown or #kill.
         @queue.push([args, block])
         true
       rescue ClosedQueueError
-        # shutdown or kill happened while parked on a full queue
         raise RejectedExecutionError
       end
 
@@ -52,7 +50,7 @@ module Aws
       def kill
         @mutex.synchronize do
           @state = SHUTDOWN
-          @queue.close # wakes any producer parked on a full queue
+          @queue.close
           @pool.each(&:kill)
           @pool.clear
           @queue.clear
@@ -71,13 +69,11 @@ module Aws
           return true if @state == SHUTDOWN
 
           @state = SHUTTING_DOWN
-          # Closing wakes parked producers and lets workers drain remaining tasks
-          # before exiting without pushing sentinels onto a queue that may be full.
+          # Close rather than push sentinels, which could block on a full queue.
           @queue.close
         end
 
-        # Snapshot under the lock and repeat, since a dying worker may swap in a
-        # replacement while joining.
+        # Repeat until empty: a dying worker can add a replacement while we join.
         deadline = Time.now + timeout if timeout
         until (threads = @mutex.synchronize { @pool.select(&:alive?) }).empty?
           threads.each do |thread|
@@ -87,9 +83,7 @@ module Aws
             begin
               thread.join(remaining && [remaining, 0].max)
             rescue Exception # rubocop:disable Lint/RescueException
-              # A worker that died re-raises here; it was recorded by #replace_worker
-              # and is raised below once the remaining workers have finished.
-              nil
+              nil # recorded by #replace_worker and raised below
             end
           end
           break if deadline && Time.now >= deadline
@@ -100,8 +94,6 @@ module Aws
           @pool.clear
           @state = SHUTDOWN
         end
-        # Dead workers are replaced rather than joined, so surface the first
-        # error that killed one for callers whose tasks do not rescue it.
         raise @fatal_error if @fatal_error
 
         true
@@ -123,9 +115,7 @@ module Aws
             block.call(*args)
           end
         rescue Exception => e # rubocop:disable Lint/RescueException
-          # A task raised something it did not rescue. Replace this worker
-          # before it dies so queued tasks still drain, otherwise a
-          # producer parked on a full queue waits forever.
+          # Replace this worker so queued tasks still run.
           replace_worker(e)
           raise
         end

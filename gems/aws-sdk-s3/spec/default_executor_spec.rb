@@ -80,7 +80,7 @@ module Aws
         end
 
         it 'replaces a worker killed by a task so a parked producer is not stranded' do
-          # Read by threads at creation, so set before the first post spawns a worker.
+          # Threads copy this at creation.
           previous = Thread.report_on_exception
           Thread.report_on_exception = false
           ran = Queue.new
@@ -120,8 +120,7 @@ module Aws
           ran = Queue.new
           executor.post { raise NoMemoryError, 'worker died' }
           executor.post { ran << :after }
-          # Once the queued task has run on the replacement, the dead worker is out
-          # of the pool, so shutdown cannot pick the error up by joining it.
+          # Wait for the replacement so the error can only come from #shutdown, not a join.
           expect(ran.pop).to eq(:after)
           expect { executor.shutdown }.to raise_error(NoMemoryError, 'worker died')
         ensure

@@ -187,8 +187,6 @@ module Aws
           client.stub_responses(:upload_part, etag: 'etag')
           executor = DefaultExecutor.new
           calls = 0
-          # Simulate a concurrent shutdown closing the queue: the second post is
-          # rejected the way DefaultExecutor#post now raises on a closed queue.
           allow(executor).to receive(:post).and_wrap_original do |original, *args, &blk|
             calls += 1
             raise DefaultExecutor::RejectedExecutionError if calls == 2

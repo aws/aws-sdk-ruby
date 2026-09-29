@@ -408,8 +408,6 @@ module Aws
       def upload_stream(options = {}, &block)
         upload_opts = options.merge(bucket: bucket_name, key: key)
         thread_count = upload_opts.delete(:thread_count) || DefaultExecutor::DEFAULT_MAX_THREADS
-        # A bounded queue prevents the source from reading ahead without limit when it
-        # produces data faster than parts can be uploaded.
         executor = DefaultExecutor.new(max_threads: thread_count, max_queue: thread_count)
         begin
           uploader = MultipartStreamUploader.new(

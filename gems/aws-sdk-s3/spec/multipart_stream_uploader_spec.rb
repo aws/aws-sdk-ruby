@@ -176,8 +176,6 @@ module Aws
           client.stub_responses(:upload_part, etag: 'etag')
           executor = DefaultExecutor.new
           calls = 0
-          # Simulate a concurrent shutdown closing the queue: the second post is
-          # rejected the way DefaultExecutor#post now raises on a closed queue.
           allow(executor).to receive(:post).and_wrap_original do |original, *args, &blk|
             calls += 1
             raise DefaultExecutor::RejectedExecutionError if calls == 2
@@ -192,7 +190,7 @@ module Aws
             uploader.upload(params) do |write_stream|
               15.times { write_stream << one_mb }
             rescue Errno::EPIPE
-              # producer stops writing once the read end is closed
+              # ignore
             end
           end.to raise_error(S3::MultipartUploadError)
         end
@@ -228,8 +226,7 @@ module Aws
               30.times { write_stream << one_mb }
             end
 
-            # at most max_queue queued + max_threads in flight + 1 being read.
-            # without a bounded queue all 30 parts are read into memory up front.
+            # max_queue queued + max_threads uploading + 1 being read
             expect(peak_buffered).to be <= (num_threads * 2) + 1
           end
 

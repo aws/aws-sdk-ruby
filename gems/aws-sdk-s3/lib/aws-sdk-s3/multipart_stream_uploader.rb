@@ -126,9 +126,7 @@ module Aws
             temp_io
           end
         else
-          # Read into a single right-sized buffer. IO.copy_stream into a StringIO grows
-          # the backing string geometrically (an 8MB buffer for a 5MB part) and discards
-          # the intermediates, fragmenting the heap across concurrent parts.
+          # A single sized read; copy_stream into a StringIO grows by doubling and fragments the heap.
           data = read_pipe.read(@part_size)
           data.nil? ? nil : StringIO.new(data)
         end
@@ -151,7 +149,7 @@ module Aws
               resp = @client.upload_part(part)
               completed_part = create_completed_part(resp, part)
               completed.push(completed_part)
-            # Any failure must abort; otherwise the upload completes without this part.
+            # Any error, or the upload completes without this part.
             rescue Exception => e # rubocop:disable Lint/RescueException
               mutex.synchronize do
                 errors.push(e)
@@ -161,13 +159,9 @@ module Aws
               clear_body(body)
               completion_queue << :done
             end
-            # Count only successfully queued parts; a failed post never runs the
-            # block, so it never pushes :done and must not be waited on below.
             queued_parts += 1
           rescue StandardError => e
-            # The executor rejected the task (e.g. shut down mid-stream). Record
-            # the error and close the read end so the producer block stops writing
-            # instead of blocking forever on a full pipe, letting the abort run.
+            # Rejected by the executor. Closing the pipe stops the producer so the upload can abort.
             mutex.synchronize do
               errors.push(e)
               read_pipe.close_read unless read_pipe.closed?
