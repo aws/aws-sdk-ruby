@@ -75,12 +75,7 @@ module Aws
           format = QueryExtension.timestamp_format(shape)
           format = 'date-time' if format == :default
 
-          case format
-          when 'epoch-seconds' then value.to_i.to_s
-          when 'http-date' then value.utc.httpdate
-          when 'date-time' then value.utc.iso8601
-          else raise ArgumentError, "unsupported Query timestamp format: #{format.inspect}"
-          end
+          Smithy::Schema::Utils.serialize_timestamp(value, format).to_s
         end
 
         def set(name, value, result)

@@ -118,6 +118,25 @@ module Aws
 
           expect(parse(result)).to eq('Hi.1' => ['A'], 'Hi.2' => ['B'])
         end
+
+        it 'preserves milliseconds in timestamp parameters' do
+          structure = Smithy::Schema::Shapes::StructureShape.new
+          member = Smithy::Schema::Shapes::MemberShape.new(
+            target: Smithy::Schema::Shapes::TimestampShape.new,
+            name: 'Timestamp',
+            traits: { 'smithy.api#timestampFormat' => 'epoch-seconds' }
+          )
+          structure.add_member(:timestamp, member)
+          result = ParamList.new
+
+          described_class.new.build(
+            structure,
+            { timestamp: Time.at(1_700_000_000, 123_456_789, :nanosecond) },
+            result
+          )
+
+          expect(parse(result)).to eq('Timestamp' => ['1700000000.123'])
+        end
       end
     end
   end

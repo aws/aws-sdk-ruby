@@ -50,13 +50,9 @@ module Aws
           end
 
           def timestamp(ref, value)
-            case SCHEMA_EXTENSION.timestamp_format(ref)
-            when 'epoch-seconds' then value.to_i
-            when 'http-date' then value.utc.httpdate
-            else
-              # default to date-time
-              value.utc.iso8601
-            end
+            format = SCHEMA_EXTENSION.timestamp_format(ref)
+            format = 'date-time' if format == :default
+            Smithy::Schema::Utils.serialize_timestamp(value, format)
           end
 
           def apply_querystring_params(uri, params, static_query, metadata) # rubocop:disable Metrics/AbcSize

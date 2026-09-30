@@ -145,7 +145,7 @@ module Aws
           expect(creds.access_key_id).to eq('akid')
           expect(creds.secret_access_key).to eq('secret')
           expect(creds.session_token).to eq('token')
-          expect(provider.expiration.to_s).to eq(expiration.to_s)
+          expect(provider.expiration).to be_within(0.001).of(expiration)
         end
 
         it 'calls before_refresh with self' do
@@ -201,7 +201,7 @@ module Aws
             expect(creds.access_key_id).to eq('akid')
             expect(creds.secret_access_key).to eq('secret')
             expect(creds.session_token).to eq('token')
-            expect(provider.expiration.to_s).to eq(expiration.to_s)
+            expect(provider.expiration).to be_within(0.001).of(expiration)
           end
         end
       end

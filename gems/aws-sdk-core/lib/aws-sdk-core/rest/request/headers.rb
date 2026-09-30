@@ -64,13 +64,9 @@ module Aws
           end
 
           def timestamp(ref, value)
-            case SCHEMA_EXTENSION.timestamp_format(ref)
-            when 'date-time' then value.utc.iso8601
-            when 'epoch-seconds' then value.to_i
-            else
-              # default to http-date
-              value.utc.httpdate
-            end
+            format = SCHEMA_EXTENSION.timestamp_format(ref)
+            format = 'http-date' if format == :default
+            Smithy::Schema::Utils.serialize_timestamp(value, format)
           end
 
           def default(headers, header_name, value)

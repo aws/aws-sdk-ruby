@@ -72,13 +72,8 @@ module Aws
 
           def timestamp(ref, value)
             trait = 'smithy.api#timestampFormat'
-            case ref.traits[trait] || ref.target.traits[trait]
-            when 'epoch-seconds' then value.to_i
-            when 'http-date' then value.utc.httpdate
-            else
-              # default to date-time
-              value.utc.iso8601
-            end
+            format = ref.traits[trait] || ref.target.traits[trait] || 'date-time'
+            Smithy::Schema::Utils.serialize_timestamp(value, format)
           end
 
           def query_value(member_ref, value)
