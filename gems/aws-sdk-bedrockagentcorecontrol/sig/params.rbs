@@ -556,6 +556,16 @@ module Aws
       credential_provider: Params::credential_provider?
     }
 
+      type certificate_configuration = {
+      s3: {
+        uri: ::String,
+        bucket_owner_account_id: ::String?
+      }?,
+      secrets_manager: {
+        secret_arn: ::String
+      }?
+    }
+
       type harness_agent_core_runtime_environment_request = {
       lifecycle_configuration: {
         idle_runtime_session_timeout: ::Integer?,

@@ -2879,6 +2879,13 @@ module Aws::DynamoDB
     #   resp.export_description.incremental_export_specification.export_from_time #=> Time
     #   resp.export_description.incremental_export_specification.export_to_time #=> Time
     #   resp.export_description.incremental_export_specification.export_view_type #=> String, one of "NEW_IMAGE", "NEW_AND_OLD_IMAGES"
+    #   resp.export_description.filter_specification.filter_expression #=> String
+    #   resp.export_description.filter_specification.projection_expression #=> String
+    #   resp.export_description.filter_specification.key_condition_expression #=> String
+    #   resp.export_description.filter_specification.expression_attribute_names #=> Hash
+    #   resp.export_description.filter_specification.expression_attribute_names["ExpressionAttributeNameVariable"] #=> String
+    #   resp.export_description.filter_specification.expression_attribute_values #=> Hash
+    #   resp.export_description.filter_specification.expression_attribute_values["ExpressionAttributeValueVariable"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4010,6 +4017,11 @@ module Aws::DynamoDB
     #   Optional object containing the parameters specific to an incremental
     #   export.
     #
+    # @option params [Types::FilterSpecification] :filter_specification
+    #   The criteria used to filter which items are included in the
+    #   point-in-time export. When you specify this parameter, only items that
+    #   match the key conditions and filter expressions are exported.
+    #
     # @return [Types::ExportTableToPointInTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExportTableToPointInTimeOutput#export_description #export_description} => Types::ExportDescription
@@ -4031,6 +4043,17 @@ module Aws::DynamoDB
     #       export_from_time: Time.now,
     #       export_to_time: Time.now,
     #       export_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, NEW_AND_OLD_IMAGES
+    #     },
+    #     filter_specification: {
+    #       filter_expression: "ConditionExpression",
+    #       projection_expression: "ProjectionExpression",
+    #       key_condition_expression: "KeyExpression",
+    #       expression_attribute_names: {
+    #         "ExpressionAttributeNameVariable" => "AttributeName",
+    #       },
+    #       expression_attribute_values: {
+    #         "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #       },
     #     },
     #   })
     #
@@ -4059,6 +4082,13 @@ module Aws::DynamoDB
     #   resp.export_description.incremental_export_specification.export_from_time #=> Time
     #   resp.export_description.incremental_export_specification.export_to_time #=> Time
     #   resp.export_description.incremental_export_specification.export_view_type #=> String, one of "NEW_IMAGE", "NEW_AND_OLD_IMAGES"
+    #   resp.export_description.filter_specification.filter_expression #=> String
+    #   resp.export_description.filter_specification.projection_expression #=> String
+    #   resp.export_description.filter_specification.key_condition_expression #=> String
+    #   resp.export_description.filter_specification.expression_attribute_names #=> Hash
+    #   resp.export_description.filter_specification.expression_attribute_names["ExpressionAttributeNameVariable"] #=> String
+    #   resp.export_description.filter_specification.expression_attribute_values #=> Hash
+    #   resp.export_description.filter_specification.expression_attribute_values["ExpressionAttributeValueVariable"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportTableToPointInTime AWS API Documentation
     #
@@ -9277,7 +9307,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.174.0'
+      context[:gem_version] = '1.175.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

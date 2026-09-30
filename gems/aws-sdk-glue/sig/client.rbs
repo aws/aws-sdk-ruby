@@ -546,7 +546,8 @@ module Aws
                             },
                             ?configuration: ::String,
                             ?crawler_security_configuration: ::String,
-                            ?tags: Hash[::String, ::String]
+                            ?tags: Hash[::String, ::String],
+                            ?catalog_id: ::String
                           ) -> _CreateCrawlerResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCrawlerResponseSuccess
 
@@ -1211,7 +1212,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#delete_column_statistics_task_settings-instance_method
       def delete_column_statistics_task_settings: (
                                                     database_name: ::String,
-                                                    table_name: ::String
+                                                    table_name: ::String,
+                                                    ?catalog_id: ::String
                                                   ) -> _DeleteColumnStatisticsTaskSettingsResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteColumnStatisticsTaskSettingsResponseSuccess
 
@@ -1812,7 +1814,8 @@ module Aws
                                              database_name: ::String,
                                              table_name: ::String,
                                              ?max_results: ::Integer,
-                                             ?next_token: ::String
+                                             ?next_token: ::String,
+                                             ?catalog_id: ::String
                                            ) -> _GetColumnStatisticsTaskRunsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetColumnStatisticsTaskRunsResponseSuccess
 
@@ -1823,7 +1826,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_column_statistics_task_settings-instance_method
       def get_column_statistics_task_settings: (
                                                  database_name: ::String,
-                                                 table_name: ::String
+                                                 table_name: ::String,
+                                                 ?catalog_id: ::String
                                                ) -> _GetColumnStatisticsTaskSettingsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetColumnStatisticsTaskSettingsResponseSuccess
 
@@ -4007,7 +4011,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#start_column_statistics_task_run_schedule-instance_method
       def start_column_statistics_task_run_schedule: (
                                                        database_name: ::String,
-                                                       table_name: ::String
+                                                       table_name: ::String,
+                                                       ?catalog_id: ::String
                                                      ) -> _StartColumnStatisticsTaskRunScheduleResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartColumnStatisticsTaskRunScheduleResponseSuccess
 
@@ -4227,7 +4232,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#stop_column_statistics_task_run-instance_method
       def stop_column_statistics_task_run: (
                                              database_name: ::String,
-                                             table_name: ::String
+                                             table_name: ::String,
+                                             ?catalog_id: ::String
                                            ) -> _StopColumnStatisticsTaskRunResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopColumnStatisticsTaskRunResponseSuccess
 
@@ -4237,7 +4243,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#stop_column_statistics_task_run_schedule-instance_method
       def stop_column_statistics_task_run_schedule: (
                                                       database_name: ::String,
-                                                      table_name: ::String
+                                                      table_name: ::String,
+                                                      ?catalog_id: ::String
                                                     ) -> _StopColumnStatisticsTaskRunScheduleResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopColumnStatisticsTaskRunScheduleResponseSuccess
 
@@ -4495,7 +4502,8 @@ module Aws
                               account_id: ::String?
                             },
                             ?configuration: ::String,
-                            ?crawler_security_configuration: ::String
+                            ?crawler_security_configuration: ::String,
+                            ?catalog_id: ::String
                           ) -> _UpdateCrawlerResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCrawlerResponseSuccess
 

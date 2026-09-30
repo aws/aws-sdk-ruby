@@ -917,6 +917,7 @@ module Aws::GuardDuty
       attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
+      attr_accessor managed_by: ("GUARDDUTY_POLICY")
       SENSITIVE: []
     end
 
@@ -932,6 +933,7 @@ module Aws::GuardDuty
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       attr_accessor additional_configuration: ::Array[Types::DetectorAdditionalConfigurationResult]
+      attr_accessor managed_by: ("GUARDDUTY_POLICY")
       SENSITIVE: []
     end
 
@@ -2198,6 +2200,7 @@ module Aws::GuardDuty
       attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
+      attr_accessor managed_by: ("GUARDDUTY_POLICY")
       SENSITIVE: []
     end
 
@@ -2220,6 +2223,7 @@ module Aws::GuardDuty
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       attr_accessor additional_configuration: ::Array[Types::MemberAdditionalConfigurationResult]
+      attr_accessor managed_by: ("GUARDDUTY_POLICY")
       SENSITIVE: []
     end
 

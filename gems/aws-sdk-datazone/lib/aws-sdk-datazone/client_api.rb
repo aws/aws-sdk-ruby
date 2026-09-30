@@ -868,6 +868,7 @@ module Aws::DataZone
     NotebookSummary = Shapes::StructureShape.new(name: 'NotebookSummary')
     NotebookSummaryList = Shapes::ListShape.new(name: 'NotebookSummaryList')
     NotebookType = Shapes::StringShape.new(name: 'NotebookType')
+    NotificationConfig = Shapes::StructureShape.new(name: 'NotificationConfig')
     NotificationOutput = Shapes::StructureShape.new(name: 'NotificationOutput')
     NotificationResource = Shapes::StructureShape.new(name: 'NotificationResource')
     NotificationResourceType = Shapes::StringShape.new(name: 'NotificationResourceType')
@@ -875,6 +876,8 @@ module Aws::DataZone
     NotificationSubjects = Shapes::ListShape.new(name: 'NotificationSubjects')
     NotificationType = Shapes::StringShape.new(name: 'NotificationType')
     NotificationsList = Shapes::ListShape.new(name: 'NotificationsList')
+    NotifyOnState = Shapes::StringShape.new(name: 'NotifyOnState')
+    NotifyOnStates = Shapes::ListShape.new(name: 'NotifyOnStates')
     OAuth2ClientApplication = Shapes::StructureShape.new(name: 'OAuth2ClientApplication')
     OAuth2ClientApplicationAWSManagedClientApplicationReferenceString = Shapes::StringShape.new(name: 'OAuth2ClientApplicationAWSManagedClientApplicationReferenceString')
     OAuth2ClientApplicationUserManagedClientApplicationClientIdString = Shapes::StringShape.new(name: 'OAuth2ClientApplicationUserManagedClientApplicationClientIdString')
@@ -3946,6 +3949,7 @@ module Aws::DataZone
     GetNotebookRunOutput.add_member(:timeout_configuration, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfiguration"))
     GetNotebookRunOutput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
     GetNotebookRunOutput.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfig, location_name: "storageConfiguration"))
+    GetNotebookRunOutput.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "notificationConfiguration"))
     GetNotebookRunOutput.add_member(:trigger_source, Shapes::ShapeRef.new(shape: TriggerSource, location_name: "triggerSource"))
     GetNotebookRunOutput.add_member(:error, Shapes::ShapeRef.new(shape: NotebookRunError, location_name: "error"))
     GetNotebookRunOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
@@ -5157,6 +5161,9 @@ module Aws::DataZone
 
     NotebookSummaryList.member = Shapes::ShapeRef.new(shape: NotebookSummary)
 
+    NotificationConfig.add_member(:notify_on, Shapes::ShapeRef.new(shape: NotifyOnStates, required: true, location_name: "notifyOn"))
+    NotificationConfig.struct_class = Types::NotificationConfig
+
     NotificationOutput.add_member(:identifier, Shapes::ShapeRef.new(shape: TaskId, required: true, location_name: "identifier"))
     NotificationOutput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainIdentifier"))
     NotificationOutput.add_member(:type, Shapes::ShapeRef.new(shape: NotificationType, required: true, location_name: "type"))
@@ -5178,6 +5185,8 @@ module Aws::DataZone
     NotificationSubjects.member = Shapes::ShapeRef.new(shape: String)
 
     NotificationsList.member = Shapes::ShapeRef.new(shape: NotificationOutput)
+
+    NotifyOnStates.member = Shapes::ShapeRef.new(shape: NotifyOnState)
 
     OAuth2ClientApplication.add_member(:user_managed_client_application_client_id, Shapes::ShapeRef.new(shape: OAuth2ClientApplicationUserManagedClientApplicationClientIdString, location_name: "userManagedClientApplicationClientId"))
     OAuth2ClientApplication.add_member(:a_ws_managed_client_application_reference, Shapes::ShapeRef.new(shape: OAuth2ClientApplicationAWSManagedClientApplicationReferenceString, location_name: "aWSManagedClientApplicationReference"))
@@ -6176,6 +6185,7 @@ module Aws::DataZone
     StartNotebookRunInput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfig, location_name: "computeConfiguration"))
     StartNotebookRunInput.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfig, location_name: "networkConfiguration"))
     StartNotebookRunInput.add_member(:timeout_configuration, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfiguration"))
+    StartNotebookRunInput.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "notificationConfiguration"))
     StartNotebookRunInput.add_member(:trigger_source, Shapes::ShapeRef.new(shape: TriggerSource, location_name: "triggerSource"))
     StartNotebookRunInput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     StartNotebookRunInput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
@@ -6196,6 +6206,7 @@ module Aws::DataZone
     StartNotebookRunOutput.add_member(:timeout_configuration, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfiguration"))
     StartNotebookRunOutput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
     StartNotebookRunOutput.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfig, location_name: "storageConfiguration"))
+    StartNotebookRunOutput.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "notificationConfiguration"))
     StartNotebookRunOutput.add_member(:trigger_source, Shapes::ShapeRef.new(shape: TriggerSource, location_name: "triggerSource"))
     StartNotebookRunOutput.add_member(:error, Shapes::ShapeRef.new(shape: NotebookRunError, location_name: "error"))
     StartNotebookRunOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))

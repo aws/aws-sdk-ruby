@@ -2136,6 +2136,7 @@ module Aws::ECS
 
     class ResolvedConfiguration
       attr_accessor load_balancers: ::Array[Types::ServiceRevisionLoadBalancer]
+      attr_accessor vpc_lattice_configurations: ::Array[Types::ServiceRevisionVpcLatticeConfiguration]
       SENSITIVE: []
     end
 
@@ -2488,6 +2489,12 @@ module Aws::ECS
       attr_accessor pending_task_count: ::Integer
       attr_accessor requested_test_traffic_weight: ::Float
       attr_accessor requested_production_traffic_weight: ::Float
+      SENSITIVE: []
+    end
+
+    class ServiceRevisionVpcLatticeConfiguration
+      attr_accessor target_group_arn: ::String
+      attr_accessor production_listener_rule: ::String
       SENSITIVE: []
     end
 
@@ -3065,10 +3072,18 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class VpcLatticeAdvancedConfiguration
+      attr_accessor alternate_target_group_arn: ::String
+      attr_accessor production_listener_rule: ::String
+      attr_accessor test_listener_rule: ::String
+      SENSITIVE: []
+    end
+
     class VpcLatticeConfiguration
       attr_accessor role_arn: ::String
       attr_accessor target_group_arn: ::String
       attr_accessor port_name: ::String
+      attr_accessor advanced_configuration: Types::VpcLatticeAdvancedConfiguration
       SENSITIVE: []
     end
   end

@@ -377,13 +377,21 @@ module Aws
       }
     }
 
+      type cluster_orchestrator_slurm_config = {
+      slurm_config_strategy: ("Overwrite" | "Managed" | "Merge")?,
+      accounting_database: {
+        endpoint: ::String,
+        port: ::Integer?,
+        name: ::String?,
+        secret_arn: ::String
+      }?
+    }
+
       type cluster_orchestrator = {
       eks: {
         cluster_arn: ::String
       }?,
-      slurm: {
-        slurm_config_strategy: ("Overwrite" | "Managed" | "Merge")?
-      }?
+      slurm: Params::cluster_orchestrator_slurm_config?
     }
 
       type scheduler_config = {

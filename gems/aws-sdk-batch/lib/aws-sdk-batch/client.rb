@@ -560,6 +560,11 @@ module Aws::Batch
     # encountered errors, so check the `errors` list. Jobs that can't be
     # found are treated as successfully processed.
     #
+    # This operation requires `batch:CancelJob` permission for each job in
+    # the request. There is no separate `batch:CancelJobs` IAM action. If a
+    # caller's IAM policy grants `batch:CancelJob`, they can use both the
+    # singular CancelJob and bulk `CancelJobs` operations.
+    #
     # @option params [required, Array<String>] :jobs
     #   An array of up to 50 Batch job IDs of the jobs to cancel.
     #
@@ -794,9 +799,16 @@ module Aws::Batch
     #   environment.
     #
     #   <note markdown="1"> To create a compute environment that uses EKS resources, the caller
-    #   must have permissions to call `eks:DescribeCluster`.
+    #   must have permissions to call `eks:DescribeCluster`. Additional Amazon
+    #   EKS permissions are required for Batch to manage an access entry on
+    #   the cluster; see [Amazon EKS access entry authentication][1] in the
+    #   *Batch User Guide*.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
     #
     # @option params [String] :context
     #   Reserved.
@@ -1116,6 +1128,10 @@ module Aws::Batch
     #     eks_configuration: {
     #       eks_cluster_arn: "String", # required
     #       kubernetes_namespace: "String", # required
+    #       access_entry: {
+    #         desired_state: "ENABLED", # required, accepts ENABLED, DISABLED, INHERIT_FROM_CLUSTER
+    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #       },
     #     },
     #     context: "String",
     #     ecs_settings: {
@@ -2089,6 +2105,8 @@ module Aws::Batch
     #   resp.compute_environments[0].update_policy.job_execution_timeout_minutes #=> Integer
     #   resp.compute_environments[0].eks_configuration.eks_cluster_arn #=> String
     #   resp.compute_environments[0].eks_configuration.kubernetes_namespace #=> String
+    #   resp.compute_environments[0].eks_configuration.access_entry.desired_state #=> String, one of "ENABLED", "DISABLED", "INHERIT_FROM_CLUSTER"
+    #   resp.compute_environments[0].eks_configuration.access_entry.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.compute_environments[0].container_orchestration_type #=> String, one of "ECS", "EKS"
     #   resp.compute_environments[0].uuid #=> String
     #   resp.compute_environments[0].context #=> String
@@ -6497,6 +6515,11 @@ module Aws::Batch
     # encountered errors, so check the `errors` list. Jobs that can't be
     # found are treated as successfully processed.
     #
+    # This operation requires `batch:TerminateJob` permission for each job
+    # in the request. There is no separate `batch:TerminateJobs` IAM action.
+    # If a caller's IAM policy grants `batch:TerminateJob`, they can use
+    # both the singular TerminateJob and bulk `TerminateJobs` operations.
+    #
     # @option params [required, Array<String>] :jobs
     #   An array of up to 50 Batch job IDs of the jobs to terminate.
     #
@@ -6602,6 +6625,12 @@ module Aws::Batch
     # code of `200` even when some service jobs encountered errors, so check
     # the `errors` list. Service jobs that can't be found are treated as
     # successfully processed.
+    #
+    # This operation requires `batch:TerminateServiceJob` permission for
+    # each service job in the request. There is no separate
+    # `batch:TerminateServiceJobs` IAM action. If a caller's IAM policy
+    # grants `batch:TerminateServiceJob`, they can use both the singular
+    # `TerminateServiceJob` and bulk `TerminateServiceJobs` operations.
     #
     # @option params [required, Array<String>] :jobs
     #   An array of up to 50 service job IDs of the service jobs to terminate.
@@ -6817,6 +6846,18 @@ module Aws::Batch
     #   control CloudWatch Container Insights collection for the compute
     #   environment.
     #
+    # @option params [Types::EksConfigurationUpdate] :eks_configuration
+    #   Updates the Amazon EKS configuration for the compute environment. Only
+    #   specify this parameter if the compute environment's
+    #   `containerOrchestrationType` is `EKS`. Currently, the `accessEntry`
+    #   setting is the only Amazon EKS configuration that you can change after
+    #   the compute environment is created. For more information, see [Amazon
+    #   EKS access entry authentication][1] in the *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
+    #
     # @return [Types::UpdateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateComputeEnvironmentResponse#compute_environment_name #compute_environment_name} => String
@@ -6929,6 +6970,12 @@ module Aws::Batch
     #     context: "String",
     #     ecs_settings: {
     #       container_insights: "ENABLED", # accepts ENABLED, ENHANCED, DISABLED
+    #     },
+    #     eks_configuration: {
+    #       access_entry: {
+    #         desired_state: "ENABLED", # required, accepts ENABLED, DISABLED, INHERIT_FROM_CLUSTER
+    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #       },
     #     },
     #   })
     #
@@ -7364,7 +7411,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.153.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

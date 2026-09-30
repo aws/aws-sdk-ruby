@@ -672,6 +672,7 @@ module Aws::DynamoDB
       attr_accessor item_count: ::Integer
       attr_accessor export_type: ("FULL_EXPORT" | "INCREMENTAL_EXPORT")
       attr_accessor incremental_export_specification: Types::IncrementalExportSpecification
+      attr_accessor filter_specification: Types::FilterSpecification
       SENSITIVE: []
     end
 
@@ -699,6 +700,7 @@ module Aws::DynamoDB
       attr_accessor export_format: ("DYNAMODB_JSON" | "ION")
       attr_accessor export_type: ("FULL_EXPORT" | "INCREMENTAL_EXPORT")
       attr_accessor incremental_export_specification: Types::IncrementalExportSpecification
+      attr_accessor filter_specification: Types::FilterSpecification
       SENSITIVE: []
     end
 
@@ -710,6 +712,15 @@ module Aws::DynamoDB
     class FailureException
       attr_accessor exception_name: ::String
       attr_accessor exception_description: ::String
+      SENSITIVE: []
+    end
+
+    class FilterSpecification
+      attr_accessor filter_expression: ::String
+      attr_accessor projection_expression: ::String
+      attr_accessor key_condition_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      attr_accessor expression_attribute_values: ::Hash[::String, Types::AttributeValue]
       SENSITIVE: []
     end
 

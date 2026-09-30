@@ -457,6 +457,7 @@ module Aws::CloudWatchLogs
       attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY")
       attr_accessor output_format: ("json" | "plain" | "w3c" | "raw" | "parquet")
       attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration
+      attr_accessor role_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -1773,6 +1774,7 @@ module Aws::CloudWatchLogs
       attr_accessor output_format: ("json" | "plain" | "w3c" | "raw" | "parquet")
       attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration
       attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY")
+      attr_accessor role_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end

@@ -1001,6 +1001,7 @@ module Aws::Glue
     #   resp.crawlers[0].crawler_security_configuration #=> String
     #   resp.crawlers[0].lake_formation_configuration.use_lake_formation_credentials #=> Boolean
     #   resp.crawlers[0].lake_formation_configuration.account_id #=> String
+    #   resp.crawlers[0].catalog_id #=> String
     #   resp.crawlers_not_found #=> Array
     #   resp.crawlers_not_found[0] #=> String
     #
@@ -2458,7 +2459,7 @@ module Aws::Glue
     #     schedule: "CronExpression",
     #     column_name_list: ["NameString"],
     #     sample_size: 1.0,
-    #     catalog_id: "NameString",
+    #     catalog_id: "CatalogIdString",
     #     security_configuration: "NameString",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -2648,6 +2649,11 @@ module Aws::Glue
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog in which to store the crawler's output. If
+    #   none is supplied, the Amazon Web Services account ID is used by
+    #   default.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2746,6 +2752,7 @@ module Aws::Glue
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     catalog_id: "CatalogIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawler AWS API Documentation
@@ -5475,6 +5482,10 @@ module Aws::Glue
     # @option params [required, String] :table_name
     #   The name of the table for which to delete column statistics.
     #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5482,6 +5493,7 @@ module Aws::Glue
     #   resp = client.delete_column_statistics_task_settings({
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
+    #     catalog_id: "CatalogIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsTaskSettings AWS API Documentation
@@ -7904,6 +7916,10 @@ module Aws::Glue
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
     #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #
     # @return [Types::GetColumnStatisticsTaskRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetColumnStatisticsTaskRunsResponse#column_statistics_task_runs #column_statistics_task_runs} => Array&lt;Types::ColumnStatisticsTaskRun&gt;
@@ -7918,6 +7934,7 @@ module Aws::Glue
     #     table_name: "NameString", # required
     #     max_results: 1,
     #     next_token: "Token",
+    #     catalog_id: "CatalogIdString",
     #   })
     #
     # @example Response structure
@@ -7962,6 +7979,10 @@ module Aws::Glue
     # @option params [required, String] :table_name
     #   The name of the table for which to retrieve column statistics.
     #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #
     # @return [Types::GetColumnStatisticsTaskSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetColumnStatisticsTaskSettingsResponse#column_statistics_task_settings #column_statistics_task_settings} => Types::ColumnStatisticsTaskSettings
@@ -7971,6 +7992,7 @@ module Aws::Glue
     #   resp = client.get_column_statistics_task_settings({
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
+    #     catalog_id: "CatalogIdString",
     #   })
     #
     # @example Response structure
@@ -8270,6 +8292,7 @@ module Aws::Glue
     #   resp.crawler.crawler_security_configuration #=> String
     #   resp.crawler.lake_formation_configuration.use_lake_formation_credentials #=> Boolean
     #   resp.crawler.lake_formation_configuration.account_id #=> String
+    #   resp.crawler.catalog_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawler AWS API Documentation
     #
@@ -8431,6 +8454,7 @@ module Aws::Glue
     #   resp.crawlers[0].crawler_security_configuration #=> String
     #   resp.crawlers[0].lake_formation_configuration.use_lake_formation_credentials #=> Boolean
     #   resp.crawlers[0].lake_formation_configuration.account_id #=> String
+    #   resp.crawlers[0].catalog_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlers AWS API Documentation
@@ -10288,7 +10312,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_materialized_view_refresh_task_run({
-    #     catalog_id: "NameString", # required
+    #     catalog_id: "CatalogIdString", # required
     #     materialized_view_refresh_task_run_id: "UUIDv4", # required
     #   })
     #
@@ -15197,7 +15221,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_materialized_view_refresh_task_runs({
-    #     catalog_id: "NameString", # required
+    #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString",
     #     table_name: "NameString",
     #     max_results: 1,
@@ -17686,7 +17710,7 @@ module Aws::Glue
     #     column_name_list: ["NameString"],
     #     role: "NameString", # required
     #     sample_size: 1.0,
-    #     catalog_id: "NameString",
+    #     catalog_id: "CatalogIdString",
     #     security_configuration: "NameString",
     #   })
     #
@@ -17712,6 +17736,10 @@ module Aws::Glue
     #   The name of the table for which to start a column statistic task run
     #   schedule.
     #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -17719,6 +17747,7 @@ module Aws::Glue
     #   resp = client.start_column_statistics_task_run_schedule({
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
+    #     catalog_id: "CatalogIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRunSchedule AWS API Documentation
@@ -18483,7 +18512,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_materialized_view_refresh_task_run({
-    #     catalog_id: "NameString", # required
+    #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
     #     full_refresh: false,
@@ -18582,6 +18611,10 @@ module Aws::Glue
     # @option params [required, String] :table_name
     #   The name of the table.
     #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -18589,6 +18622,7 @@ module Aws::Glue
     #   resp = client.stop_column_statistics_task_run({
     #     database_name: "DatabaseName", # required
     #     table_name: "NameString", # required
+    #     catalog_id: "CatalogIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRun AWS API Documentation
@@ -18609,6 +18643,10 @@ module Aws::Glue
     #   The name of the table for which to stop a column statistic task run
     #   schedule.
     #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -18616,6 +18654,7 @@ module Aws::Glue
     #   resp = client.stop_column_statistics_task_run_schedule({
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
+    #     catalog_id: "CatalogIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunSchedule AWS API Documentation
@@ -18690,7 +18729,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_materialized_view_refresh_task_run({
-    #     catalog_id: "NameString", # required
+    #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
     #   })
@@ -19474,7 +19513,7 @@ module Aws::Glue
     #     schedule: "CronExpression",
     #     column_name_list: ["NameString"],
     #     sample_size: 1.0,
-    #     catalog_id: "NameString",
+    #     catalog_id: "CatalogIdString",
     #     security_configuration: "NameString",
     #   })
     #
@@ -19639,6 +19678,10 @@ module Aws::Glue
     #   The name of the `SecurityConfiguration` structure to be used by this
     #   crawler.
     #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog in which to store the crawler's output. If
+    #   you omit this value, the existing value on the crawler is preserved.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -19734,6 +19777,7 @@ module Aws::Glue
     #     },
     #     configuration: "CrawlerConfiguration",
     #     crawler_security_configuration: "CrawlerSecurityConfiguration",
+    #     catalog_id: "CatalogIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawler AWS API Documentation
@@ -21285,7 +21329,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.278.0'
+      context[:gem_version] = '1.279.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

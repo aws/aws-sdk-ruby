@@ -322,11 +322,7 @@ module Aws
                               Params::service_volume_configuration
                             ],
                             ?vpc_lattice_configurations: Array[
-                              {
-                                role_arn: ::String,
-                                target_group_arn: ::String,
-                                port_name: ::String
-                              }
+                              Params::vpc_lattice_configuration
                             ],
                             ?monitoring: {
                               metric_configurations: Array[
@@ -1885,11 +1881,7 @@ module Aws
                               Params::service_volume_configuration
                             ],
                             ?vpc_lattice_configurations: Array[
-                              {
-                                role_arn: ::String,
-                                target_group_arn: ::String,
-                                port_name: ::String
-                              }
+                              Params::vpc_lattice_configuration
                             ],
                             ?monitoring: {
                               metric_configurations: Array[

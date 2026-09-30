@@ -843,6 +843,9 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
     #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
+    #   resp.accelerator.ip_sets[0].ip_address_details #=> Array
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].ip_address #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].network_zone #=> String
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
@@ -1084,6 +1087,9 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
     #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
+    #   resp.accelerator.ip_sets[0].ip_address_details #=> Array
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].ip_address #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].network_zone #=> String
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
@@ -1801,6 +1807,9 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
     #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
+    #   resp.accelerator.ip_sets[0].ip_address_details #=> Array
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].ip_address #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].network_zone #=> String
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
@@ -1914,6 +1923,9 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
     #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
+    #   resp.accelerator.ip_sets[0].ip_address_details #=> Array
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].ip_address #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].network_zone #=> String
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
@@ -2139,6 +2151,9 @@ module Aws::GlobalAccelerator
     #   resp.accelerators[0].ip_sets[0].ip_addresses #=> Array
     #   resp.accelerators[0].ip_sets[0].ip_addresses[0] #=> String
     #   resp.accelerators[0].ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
+    #   resp.accelerators[0].ip_sets[0].ip_address_details #=> Array
+    #   resp.accelerators[0].ip_sets[0].ip_address_details[0].ip_address #=> String
+    #   resp.accelerators[0].ip_sets[0].ip_address_details[0].network_zone #=> String
     #   resp.accelerators[0].dns_name #=> String
     #   resp.accelerators[0].status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerators[0].created_time #=> Time
@@ -2371,6 +2386,9 @@ module Aws::GlobalAccelerator
     #   resp.accelerators[0].ip_sets[0].ip_addresses #=> Array
     #   resp.accelerators[0].ip_sets[0].ip_addresses[0] #=> String
     #   resp.accelerators[0].ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
+    #   resp.accelerators[0].ip_sets[0].ip_address_details #=> Array
+    #   resp.accelerators[0].ip_sets[0].ip_address_details[0].ip_address #=> String
+    #   resp.accelerators[0].ip_sets[0].ip_address_details[0].network_zone #=> String
     #   resp.accelerators[0].dns_name #=> String
     #   resp.accelerators[0].status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerators[0].created_time #=> Time
@@ -3056,6 +3074,9 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
     #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
+    #   resp.accelerator.ip_sets[0].ip_address_details #=> Array
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].ip_address #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].network_zone #=> String
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
@@ -3287,6 +3308,9 @@ module Aws::GlobalAccelerator
     #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
     #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
     #   resp.accelerator.ip_sets[0].ip_address_family #=> String, one of "IPv4", "IPv6"
+    #   resp.accelerator.ip_sets[0].ip_address_details #=> Array
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].ip_address #=> String
+    #   resp.accelerator.ip_sets[0].ip_address_details[0].network_zone #=> String
     #   resp.accelerator.dns_name #=> String
     #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
     #   resp.accelerator.created_time #=> Time
@@ -3329,10 +3353,8 @@ module Aws::GlobalAccelerator
     #   Update the prefix for the location in the Amazon S3 bucket for the
     #   flow logs. Attribute is required if `FlowLogsEnabled` is `true`.
     #
-    #   If you don’t specify a prefix, the flow logs are stored in the root of
-    #   the bucket. If you specify slash (/) for the S3 bucket prefix, the log
-    #   file bucket folder structure will include a double slash (//), like
-    #   the following:
+    #   If you specify slash (/) for the S3 bucket prefix, the log file bucket
+    #   folder structure will include a double slash (//), like the following:
     #
     #   DOC-EXAMPLE-BUCKET//AWSLogs/aws\_account\_id
     #
@@ -3675,7 +3697,7 @@ module Aws::GlobalAccelerator
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

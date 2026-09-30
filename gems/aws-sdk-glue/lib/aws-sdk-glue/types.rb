@@ -5236,6 +5236,10 @@ module Aws::Glue
     #   for the crawler instead of the IAM role credentials.
     #   @return [Types::LakeFormationConfiguration]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which the crawler's output is stored.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawler AWS API Documentation
     #
     class Crawler < Struct.new(
@@ -5258,7 +5262,8 @@ module Aws::Glue
       :version,
       :configuration,
       :crawler_security_configuration,
-      :lake_formation_configuration)
+      :lake_formation_configuration,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5808,6 +5813,12 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which to store the crawler's output.
+    #   If none is supplied, the Amazon Web Services account ID is used by
+    #   default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawlerRequest AWS API Documentation
     #
     class CreateCrawlerRequest < Struct.new(
@@ -5825,7 +5836,8 @@ module Aws::Glue
       :lake_formation_configuration,
       :configuration,
       :crawler_security_configuration,
-      :tags)
+      :tags,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9989,11 +10001,17 @@ module Aws::Glue
     #   The name of the table for which to delete column statistics.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsTaskSettingsRequest AWS API Documentation
     #
     class DeleteColumnStatisticsTaskSettingsRequest < Struct.new(
       :database_name,
-      :table_name)
+      :table_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13570,13 +13588,19 @@ module Aws::Glue
     #   A continuation token, if this is a continuation call.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRunsRequest AWS API Documentation
     #
     class GetColumnStatisticsTaskRunsRequest < Struct.new(
       :database_name,
       :table_name,
       :max_results,
-      :next_token)
+      :next_token,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13606,11 +13630,17 @@ module Aws::Glue
     #   The name of the table for which to retrieve column statistics.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskSettingsRequest AWS API Documentation
     #
     class GetColumnStatisticsTaskSettingsRequest < Struct.new(
       :database_name,
-      :table_name)
+      :table_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29143,11 +29173,17 @@ module Aws::Glue
     #   schedule.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRunScheduleRequest AWS API Documentation
     #
     class StartColumnStatisticsTaskRunScheduleRequest < Struct.new(
       :database_name,
-      :table_name)
+      :table_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30068,11 +30104,17 @@ module Aws::Glue
     #   The name of the table.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunRequest AWS API Documentation
     #
     class StopColumnStatisticsTaskRunRequest < Struct.new(
       :database_name,
-      :table_name)
+      :table_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30090,11 +30132,17 @@ module Aws::Glue
     #   schedule.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunScheduleRequest AWS API Documentation
     #
     class StopColumnStatisticsTaskRunScheduleRequest < Struct.new(
       :database_name,
-      :table_name)
+      :table_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32291,6 +32339,12 @@ module Aws::Glue
     #   crawler.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which to store the crawler's output.
+    #   If you omit this value, the existing value on the crawler is
+    #   preserved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerRequest AWS API Documentation
     #
     class UpdateCrawlerRequest < Struct.new(
@@ -32307,7 +32361,8 @@ module Aws::Glue
       :lineage_configuration,
       :lake_formation_configuration,
       :configuration,
-      :crawler_security_configuration)
+      :crawler_security_configuration,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end

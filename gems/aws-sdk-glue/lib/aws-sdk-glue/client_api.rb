@@ -2983,6 +2983,7 @@ module Aws::Glue
     Crawler.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
     Crawler.add_member(:crawler_security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "CrawlerSecurityConfiguration"))
     Crawler.add_member(:lake_formation_configuration, Shapes::ShapeRef.new(shape: LakeFormationConfiguration, location_name: "LakeFormationConfiguration"))
+    Crawler.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     Crawler.struct_class = Types::Crawler
 
     CrawlerHistory.add_member(:crawl_id, Shapes::ShapeRef.new(shape: CrawlId, location_name: "CrawlId"))
@@ -3074,7 +3075,7 @@ module Aws::Glue
     CreateColumnStatisticsTaskSettingsRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: CronExpression, location_name: "Schedule"))
     CreateColumnStatisticsTaskSettingsRequest.add_member(:column_name_list, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "ColumnNameList"))
     CreateColumnStatisticsTaskSettingsRequest.add_member(:sample_size, Shapes::ShapeRef.new(shape: SampleSizePercentage, location_name: "SampleSize"))
-    CreateColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, location_name: "CatalogID"))
+    CreateColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogID"))
     CreateColumnStatisticsTaskSettingsRequest.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     CreateColumnStatisticsTaskSettingsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateColumnStatisticsTaskSettingsRequest.struct_class = Types::CreateColumnStatisticsTaskSettingsRequest
@@ -3104,6 +3105,7 @@ module Aws::Glue
     CreateCrawlerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
     CreateCrawlerRequest.add_member(:crawler_security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "CrawlerSecurityConfiguration"))
     CreateCrawlerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateCrawlerRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateCrawlerRequest.struct_class = Types::CreateCrawlerRequest
 
     CreateCrawlerResponse.struct_class = Types::CreateCrawlerResponse
@@ -3893,6 +3895,7 @@ module Aws::Glue
 
     DeleteColumnStatisticsTaskSettingsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     DeleteColumnStatisticsTaskSettingsRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    DeleteColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogID"))
     DeleteColumnStatisticsTaskSettingsRequest.struct_class = Types::DeleteColumnStatisticsTaskSettingsRequest
 
     DeleteColumnStatisticsTaskSettingsResponse.struct_class = Types::DeleteColumnStatisticsTaskSettingsResponse
@@ -4658,6 +4661,7 @@ module Aws::Glue
     GetColumnStatisticsTaskRunsRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
     GetColumnStatisticsTaskRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     GetColumnStatisticsTaskRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetColumnStatisticsTaskRunsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogID"))
     GetColumnStatisticsTaskRunsRequest.struct_class = Types::GetColumnStatisticsTaskRunsRequest
 
     GetColumnStatisticsTaskRunsResponse.add_member(:column_statistics_task_runs, Shapes::ShapeRef.new(shape: ColumnStatisticsTaskRunsList, location_name: "ColumnStatisticsTaskRuns"))
@@ -4666,6 +4670,7 @@ module Aws::Glue
 
     GetColumnStatisticsTaskSettingsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetColumnStatisticsTaskSettingsRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    GetColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogID"))
     GetColumnStatisticsTaskSettingsRequest.struct_class = Types::GetColumnStatisticsTaskSettingsRequest
 
     GetColumnStatisticsTaskSettingsResponse.add_member(:column_statistics_task_settings, Shapes::ShapeRef.new(shape: ColumnStatisticsTaskSettings, location_name: "ColumnStatisticsTaskSettings"))
@@ -5058,7 +5063,7 @@ module Aws::Glue
     GetMappingResponse.add_member(:mapping, Shapes::ShapeRef.new(shape: MappingList, required: true, location_name: "Mapping"))
     GetMappingResponse.struct_class = Types::GetMappingResponse
 
-    GetMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "CatalogId"))
+    GetMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "CatalogId"))
     GetMaterializedViewRefreshTaskRunRequest.add_member(:materialized_view_refresh_task_run_id, Shapes::ShapeRef.new(shape: UUIDv4, required: true, location_name: "MaterializedViewRefreshTaskRunId"))
     GetMaterializedViewRefreshTaskRunRequest.struct_class = Types::GetMaterializedViewRefreshTaskRunRequest
 
@@ -6331,7 +6336,7 @@ module Aws::Glue
     ListMLTransformsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListMLTransformsResponse.struct_class = Types::ListMLTransformsResponse
 
-    ListMaterializedViewRefreshTaskRunsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "CatalogId"))
+    ListMaterializedViewRefreshTaskRunsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "CatalogId"))
     ListMaterializedViewRefreshTaskRunsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
     ListMaterializedViewRefreshTaskRunsRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TableName"))
     ListMaterializedViewRefreshTaskRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -7772,7 +7777,7 @@ module Aws::Glue
     StartColumnStatisticsTaskRunRequest.add_member(:column_name_list, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "ColumnNameList"))
     StartColumnStatisticsTaskRunRequest.add_member(:role, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Role"))
     StartColumnStatisticsTaskRunRequest.add_member(:sample_size, Shapes::ShapeRef.new(shape: SampleSizePercentage, location_name: "SampleSize"))
-    StartColumnStatisticsTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, location_name: "CatalogID"))
+    StartColumnStatisticsTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogID"))
     StartColumnStatisticsTaskRunRequest.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     StartColumnStatisticsTaskRunRequest.struct_class = Types::StartColumnStatisticsTaskRunRequest
 
@@ -7781,6 +7786,7 @@ module Aws::Glue
 
     StartColumnStatisticsTaskRunScheduleRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     StartColumnStatisticsTaskRunScheduleRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    StartColumnStatisticsTaskRunScheduleRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogID"))
     StartColumnStatisticsTaskRunScheduleRequest.struct_class = Types::StartColumnStatisticsTaskRunScheduleRequest
 
     StartColumnStatisticsTaskRunScheduleResponse.struct_class = Types::StartColumnStatisticsTaskRunScheduleResponse
@@ -7868,7 +7874,7 @@ module Aws::Glue
     StartMLLabelingSetGenerationTaskRunResponse.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TaskRunId"))
     StartMLLabelingSetGenerationTaskRunResponse.struct_class = Types::StartMLLabelingSetGenerationTaskRunResponse
 
-    StartMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "CatalogId"))
+    StartMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "CatalogId"))
     StartMaterializedViewRefreshTaskRunRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     StartMaterializedViewRefreshTaskRunRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
     StartMaterializedViewRefreshTaskRunRequest.add_member(:full_refresh, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "FullRefresh"))
@@ -7957,12 +7963,14 @@ module Aws::Glue
 
     StopColumnStatisticsTaskRunRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "DatabaseName"))
     StopColumnStatisticsTaskRunRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    StopColumnStatisticsTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogID"))
     StopColumnStatisticsTaskRunRequest.struct_class = Types::StopColumnStatisticsTaskRunRequest
 
     StopColumnStatisticsTaskRunResponse.struct_class = Types::StopColumnStatisticsTaskRunResponse
 
     StopColumnStatisticsTaskRunScheduleRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     StopColumnStatisticsTaskRunScheduleRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    StopColumnStatisticsTaskRunScheduleRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogID"))
     StopColumnStatisticsTaskRunScheduleRequest.struct_class = Types::StopColumnStatisticsTaskRunScheduleRequest
 
     StopColumnStatisticsTaskRunScheduleResponse.struct_class = Types::StopColumnStatisticsTaskRunScheduleResponse
@@ -7977,7 +7985,7 @@ module Aws::Glue
 
     StopCrawlerScheduleResponse.struct_class = Types::StopCrawlerScheduleResponse
 
-    StopMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "CatalogId"))
+    StopMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "CatalogId"))
     StopMaterializedViewRefreshTaskRunRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     StopMaterializedViewRefreshTaskRunRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
     StopMaterializedViewRefreshTaskRunRequest.struct_class = Types::StopMaterializedViewRefreshTaskRunRequest
@@ -8400,7 +8408,7 @@ module Aws::Glue
     UpdateColumnStatisticsTaskSettingsRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: CronExpression, location_name: "Schedule"))
     UpdateColumnStatisticsTaskSettingsRequest.add_member(:column_name_list, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "ColumnNameList"))
     UpdateColumnStatisticsTaskSettingsRequest.add_member(:sample_size, Shapes::ShapeRef.new(shape: SampleSizePercentage, location_name: "SampleSize"))
-    UpdateColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, location_name: "CatalogID"))
+    UpdateColumnStatisticsTaskSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogID"))
     UpdateColumnStatisticsTaskSettingsRequest.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
     UpdateColumnStatisticsTaskSettingsRequest.struct_class = Types::UpdateColumnStatisticsTaskSettingsRequest
 
@@ -8427,6 +8435,7 @@ module Aws::Glue
     UpdateCrawlerRequest.add_member(:lake_formation_configuration, Shapes::ShapeRef.new(shape: LakeFormationConfiguration, location_name: "LakeFormationConfiguration"))
     UpdateCrawlerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CrawlerConfiguration, location_name: "Configuration"))
     UpdateCrawlerRequest.add_member(:crawler_security_configuration, Shapes::ShapeRef.new(shape: CrawlerSecurityConfiguration, location_name: "CrawlerSecurityConfiguration"))
+    UpdateCrawlerRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateCrawlerRequest.struct_class = Types::UpdateCrawlerRequest
 
     UpdateCrawlerResponse.struct_class = Types::UpdateCrawlerResponse

@@ -541,6 +541,8 @@ module Aws::ECS
     ServiceRevisionLoadBalancers = Shapes::ListShape.new(name: 'ServiceRevisionLoadBalancers')
     ServiceRevisionOverrides = Shapes::StructureShape.new(name: 'ServiceRevisionOverrides')
     ServiceRevisionSummary = Shapes::StructureShape.new(name: 'ServiceRevisionSummary')
+    ServiceRevisionVpcLatticeConfiguration = Shapes::StructureShape.new(name: 'ServiceRevisionVpcLatticeConfiguration')
+    ServiceRevisionVpcLatticeConfigurations = Shapes::ListShape.new(name: 'ServiceRevisionVpcLatticeConfigurations')
     ServiceRevisions = Shapes::ListShape.new(name: 'ServiceRevisions')
     ServiceRevisionsSummaryList = Shapes::ListShape.new(name: 'ServiceRevisionsSummaryList')
     ServiceVolumeConfiguration = Shapes::StructureShape.new(name: 'ServiceVolumeConfiguration')
@@ -655,6 +657,7 @@ module Aws::ECS
     VolumeFrom = Shapes::StructureShape.new(name: 'VolumeFrom')
     VolumeFromList = Shapes::ListShape.new(name: 'VolumeFromList')
     VolumeList = Shapes::ListShape.new(name: 'VolumeList')
+    VpcLatticeAdvancedConfiguration = Shapes::StructureShape.new(name: 'VpcLatticeAdvancedConfiguration')
     VpcLatticeConfiguration = Shapes::StructureShape.new(name: 'VpcLatticeConfiguration')
     VpcLatticeConfigurations = Shapes::ListShape.new(name: 'VpcLatticeConfigurations')
 
@@ -2416,6 +2419,7 @@ module Aws::ECS
     RequiresAttributes.member = Shapes::ShapeRef.new(shape: Attribute)
 
     ResolvedConfiguration.add_member(:load_balancers, Shapes::ShapeRef.new(shape: ServiceRevisionLoadBalancers, location_name: "loadBalancers"))
+    ResolvedConfiguration.add_member(:vpc_lattice_configurations, Shapes::ShapeRef.new(shape: ServiceRevisionVpcLatticeConfigurations, location_name: "vpcLatticeConfigurations"))
     ResolvedConfiguration.struct_class = Types::ResolvedConfiguration
 
     Resource.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -2721,6 +2725,12 @@ module Aws::ECS
     ServiceRevisionSummary.add_member(:requested_test_traffic_weight, Shapes::ShapeRef.new(shape: Double, location_name: "requestedTestTrafficWeight", metadata: {"box" => true}))
     ServiceRevisionSummary.add_member(:requested_production_traffic_weight, Shapes::ShapeRef.new(shape: Double, location_name: "requestedProductionTrafficWeight", metadata: {"box" => true}))
     ServiceRevisionSummary.struct_class = Types::ServiceRevisionSummary
+
+    ServiceRevisionVpcLatticeConfiguration.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "targetGroupArn"))
+    ServiceRevisionVpcLatticeConfiguration.add_member(:production_listener_rule, Shapes::ShapeRef.new(shape: String, location_name: "productionListenerRule"))
+    ServiceRevisionVpcLatticeConfiguration.struct_class = Types::ServiceRevisionVpcLatticeConfiguration
+
+    ServiceRevisionVpcLatticeConfigurations.member = Shapes::ShapeRef.new(shape: ServiceRevisionVpcLatticeConfiguration)
 
     ServiceRevisions.member = Shapes::ShapeRef.new(shape: ServiceRevision)
 
@@ -3209,9 +3219,15 @@ module Aws::ECS
 
     VolumeList.member = Shapes::ShapeRef.new(shape: Volume)
 
+    VpcLatticeAdvancedConfiguration.add_member(:alternate_target_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "alternateTargetGroupArn"))
+    VpcLatticeAdvancedConfiguration.add_member(:production_listener_rule, Shapes::ShapeRef.new(shape: String, location_name: "productionListenerRule"))
+    VpcLatticeAdvancedConfiguration.add_member(:test_listener_rule, Shapes::ShapeRef.new(shape: String, location_name: "testListenerRule"))
+    VpcLatticeAdvancedConfiguration.struct_class = Types::VpcLatticeAdvancedConfiguration
+
     VpcLatticeConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "roleArn"))
     VpcLatticeConfiguration.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetGroupArn"))
     VpcLatticeConfiguration.add_member(:port_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "portName"))
+    VpcLatticeConfiguration.add_member(:advanced_configuration, Shapes::ShapeRef.new(shape: VpcLatticeAdvancedConfiguration, location_name: "advancedConfiguration"))
     VpcLatticeConfiguration.struct_class = Types::VpcLatticeConfiguration
 
     VpcLatticeConfigurations.member = Shapes::ShapeRef.new(shape: VpcLatticeConfiguration)

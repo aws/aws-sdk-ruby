@@ -138,6 +138,7 @@ module Aws
       interface _GetContactInformationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetContactInformationResponse]
         def contact_information: () -> Types::ContactInformation
+        def verification_status: () -> ("PENDING" | "VERIFIED" | "UNVERIFIED" | "NOT_SUPPORTED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Account/Client.html#get_contact_information-instance_method
       def get_contact_information: (
@@ -241,6 +242,16 @@ module Aws
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _SendPhoneNumberVerificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendPhoneNumberVerificationResponse]
+        def status: () -> ("PENDING" | "VERIFIED" | "UNVERIFIED" | "NOT_SUPPORTED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Account/Client.html#send_phone_number_verification-instance_method
+      def send_phone_number_verification: (
+                                            ?account_id: ::String
+                                          ) -> _SendPhoneNumberVerificationResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendPhoneNumberVerificationResponseSuccess
+
       interface _StartPrimaryEmailUpdateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartPrimaryEmailUpdateResponse]
         def status: () -> ("PENDING" | "ACCEPTED" | "COMPLETED" | "FAILED")
@@ -251,6 +262,17 @@ module Aws
                                         primary_email: ::String
                                       ) -> _StartPrimaryEmailUpdateResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPrimaryEmailUpdateResponseSuccess
+
+      interface _VerifyPhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifyPhoneNumberResponse]
+        def status: () -> ("PENDING" | "VERIFIED" | "UNVERIFIED" | "NOT_SUPPORTED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Account/Client.html#verify_phone_number-instance_method
+      def verify_phone_number: (
+                                 ?account_id: ::String,
+                                 otp: ::String
+                               ) -> _VerifyPhoneNumberResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyPhoneNumberResponseSuccess
     end
   end
 end

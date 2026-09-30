@@ -176,7 +176,11 @@ module Aws
                                         ?tags: Hash[::String, ::String],
                                         ?eks_configuration: {
                                           eks_cluster_arn: ::String,
-                                          kubernetes_namespace: ::String
+                                          kubernetes_namespace: ::String,
+                                          access_entry: {
+                                            desired_state: ("ENABLED" | "DISABLED" | "INHERIT_FROM_CLUSTER"),
+                                            status: ("ACTIVE" | "INACTIVE")?
+                                          }?
                                         },
                                         ?context: ::String,
                                         ?ecs_settings: {
@@ -922,6 +926,12 @@ module Aws
                                         ?context: ::String,
                                         ?ecs_settings: {
                                           container_insights: ("ENABLED" | "ENHANCED" | "DISABLED")?
+                                        },
+                                        ?eks_configuration: {
+                                          access_entry: {
+                                            desired_state: ("ENABLED" | "DISABLED" | "INHERIT_FROM_CLUSTER"),
+                                            status: ("ACTIVE" | "INACTIVE")?
+                                          }?
                                         }
                                       ) -> _UpdateComputeEnvironmentResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateComputeEnvironmentResponseSuccess

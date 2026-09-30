@@ -518,6 +518,16 @@ module Aws::S3Vectors
     #   encryption configuration of the vector bucket.
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] index_mode
+    #   The mode that determines how the vector index processes queries.
+    #
+    #   Valid values:
+    #
+    #   * `CLASSIC` - Applies metadata filters during the vector search.
+    #
+    #   * `ENHANCED` - Applies metadata filters before the vector search.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/Index AWS API Documentation
     #
     class Index < Struct.new(
@@ -529,7 +539,8 @@ module Aws::S3Vectors
       :dimension,
       :distance_metric,
       :metadata_configuration,
-      :encryption_configuration)
+      :encryption_configuration,
+      :index_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -978,6 +989,33 @@ module Aws::S3Vectors
     end
 
     # @!attribute [rw] vector_bucket_name
+    #   The name of the vector bucket to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] vector_bucket_arn
+    #   The Amazon Resource Name (ARN) of the vector bucket to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_index_mode
+    #   The default mode to assign to new vector indexes in the vector
+    #   bucket. This change doesn't affect existing vector indexes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/PutVectorBucketDefaultIndexModeInput AWS API Documentation
+    #
+    class PutVectorBucketDefaultIndexModeInput < Struct.new(
+      :vector_bucket_name,
+      :vector_bucket_arn,
+      :default_index_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/PutVectorBucketDefaultIndexModeOutput AWS API Documentation
+    #
+    class PutVectorBucketDefaultIndexModeOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] vector_bucket_name
     #   The name of the vector bucket.
     #   @return [String]
     #
@@ -1102,6 +1140,19 @@ module Aws::S3Vectors
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-metadata-filtering.html
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] query_mode
+    #   The mode to use to process the query. If you don't specify a query
+    #   mode, the operation uses the mode that's currently configured for
+    #   the vector index.
+    #
+    #   Valid values:
+    #
+    #   * `CLASSIC` - Applies metadata filters during the vector search. You
+    #     can't specify `CLASSIC` for an `ENHANCED` index.
+    #
+    #   * `ENHANCED` - Applies metadata filters before the vector search.
+    #   @return [String]
+    #
     # @!attribute [rw] return_metadata
     #   Indicates whether to include metadata in the response. The default
     #   value is `false`.
@@ -1126,6 +1177,7 @@ module Aws::S3Vectors
       :top_k,
       :query_vector,
       :filter,
+      :query_mode,
       :return_metadata,
       :return_distance,
       :next_token)
@@ -1269,6 +1321,45 @@ module Aws::S3Vectors
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] vector_bucket_name
+    #   The name of the vector bucket that contains the vector index.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the vector index to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_arn
+    #   The Amazon Resource Name (ARN) of the vector index to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_mode
+    #   The new mode for the vector index.
+    #
+    #   Valid values:
+    #
+    #   * `CLASSIC` - Applies metadata filters during the vector search. You
+    #     can specify `CLASSIC` only for a vector index in a vector bucket
+    #     created before September 30, 2026.
+    #
+    #   * `ENHANCED` - Applies metadata filters before the vector search.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/UpdateIndexModeInput AWS API Documentation
+    #
+    class UpdateIndexModeInput < Struct.new(
+      :vector_bucket_name,
+      :index_name,
+      :index_arn,
+      :index_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/UpdateIndexModeOutput AWS API Documentation
+    #
+    class UpdateIndexModeOutput < Aws::EmptyStructure; end
+
     # The requested action isn't valid.
     #
     # @!attribute [rw] message
@@ -1330,13 +1421,20 @@ module Aws::S3Vectors
     #   The encryption configuration for the vector bucket.
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] default_index_mode
+    #   The mode that is automatically assigned to new vector indexes in the
+    #   vector bucket. Changing the default index mode doesn't affect
+    #   existing vector indexes.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/VectorBucket AWS API Documentation
     #
     class VectorBucket < Struct.new(
       :vector_bucket_name,
       :vector_bucket_arn,
       :creation_time,
-      :encryption_configuration)
+      :encryption_configuration,
+      :default_index_mode)
       SENSITIVE = []
       include Aws::Structure
     end

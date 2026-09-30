@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.397.0 (2026-09-30)
+------------------
+
+* Feature - This feature enables customers to modify their accounting database via API.
+
 1.396.0 (2026-09-29)
 ------------------
 

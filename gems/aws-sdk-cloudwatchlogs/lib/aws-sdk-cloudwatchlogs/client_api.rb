@@ -1067,6 +1067,7 @@ module Aws::CloudWatchLogs
     DeliveryDestination.add_member(:delivery_destination_type, Shapes::ShapeRef.new(shape: DeliveryDestinationType, location_name: "deliveryDestinationType"))
     DeliveryDestination.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "outputFormat"))
     DeliveryDestination.add_member(:delivery_destination_configuration, Shapes::ShapeRef.new(shape: DeliveryDestinationConfiguration, location_name: "deliveryDestinationConfiguration"))
+    DeliveryDestination.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
     DeliveryDestination.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DeliveryDestination.struct_class = Types::DeliveryDestination
 
@@ -2140,6 +2141,7 @@ module Aws::CloudWatchLogs
     PutDeliveryDestinationRequest.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "outputFormat"))
     PutDeliveryDestinationRequest.add_member(:delivery_destination_configuration, Shapes::ShapeRef.new(shape: DeliveryDestinationConfiguration, location_name: "deliveryDestinationConfiguration"))
     PutDeliveryDestinationRequest.add_member(:delivery_destination_type, Shapes::ShapeRef.new(shape: DeliveryDestinationType, location_name: "deliveryDestinationType"))
+    PutDeliveryDestinationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
     PutDeliveryDestinationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PutDeliveryDestinationRequest.struct_class = Types::PutDeliveryDestinationRequest
 

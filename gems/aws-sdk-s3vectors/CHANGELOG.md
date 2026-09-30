@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2026-09-30)
+------------------
+
+* Feature - Amazon S3 Vectors now supports metadata prefiltering, providing higher recall on filtered queries.
+
 1.22.0 (2026-09-11)
 ------------------
 

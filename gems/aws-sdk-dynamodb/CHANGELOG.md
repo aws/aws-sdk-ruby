@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.175.0 (2026-09-30)
+------------------
+
+* Feature - Adds support for filtering exported table data using FilterExpression, ProjectionExpression and KeyConditionExpression with ExportTableToPointInTime.
+
 1.174.0 (2026-09-11)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.233.0 (2026-09-30)
+------------------
+
+* Feature - Amazon S3 adds a new optional S3 Inventory field, IntelligentTieringReferenceDate, reporting the reference date S3 Intelligent-Tiering uses to evaluate an object's tier-transition eligibility. The value is populated for objects in the Intelligent-Tiering storage class and left blank for others.
+
 1.232.3 (2026-09-28)
 ------------------
 

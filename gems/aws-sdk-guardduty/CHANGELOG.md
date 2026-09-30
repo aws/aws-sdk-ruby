@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2026-09-30)
+------------------
+
+* Feature - GuardDuty AWS Organizations policy integration. GetDetector and GetMemberDetectors now show whether a GuardDuty policy manages a feature.
+
 1.164.0 (2026-09-28)
 ------------------
 

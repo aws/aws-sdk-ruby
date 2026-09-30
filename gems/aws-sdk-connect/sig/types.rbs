@@ -20,7 +20,7 @@ module Aws::Connect
     end
 
     class ActionSummary
-      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION")
+      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION" | "SEND_IN_APP_NOTIFICATION")
       SENSITIVE: []
     end
 
@@ -7190,7 +7190,7 @@ module Aws::Connect
     end
 
     class RuleAction
-      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION")
+      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION" | "SEND_IN_APP_NOTIFICATION")
       attr_accessor task_action: Types::TaskActionDefinition
       attr_accessor event_bridge_action: Types::EventBridgeActionDefinition
       attr_accessor assign_contact_category_action: Types::AssignContactCategoryActionDefinition
@@ -7201,6 +7201,7 @@ module Aws::Connect
       attr_accessor end_associated_tasks_action: Types::EndAssociatedTasksActionDefinition
       attr_accessor submit_auto_evaluation_action: Types::SubmitAutoEvaluationActionDefinition
       attr_accessor extract_information_action: Types::ExtractInformationActionDefinition
+      attr_accessor send_in_app_notification_action: Types::SendInAppNotificationActionDefinition
       SENSITIVE: []
     end
 
@@ -7892,6 +7893,14 @@ module Aws::Connect
     class SendChatIntegrationEventResponse
       attr_accessor initial_contact_id: ::String
       attr_accessor new_chat_created: bool
+      SENSITIVE: []
+    end
+
+    class SendInAppNotificationActionDefinition
+      attr_accessor content: ::Hash[("en_US" | "de_DE" | "es_ES" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "zh_CN" | "zh_TW"), ::String]
+      attr_accessor recipient: Types::NotificationRecipientType
+      attr_accessor exclusion: Types::NotificationRecipientType
+      attr_accessor priority: ("HIGH" | "LOW")
       SENSITIVE: []
     end
 

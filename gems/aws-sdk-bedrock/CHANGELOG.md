@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2026-09-30)
+------------------
+
+* Feature - Amazon Bedrock Automated Reasoning policies now accept Unicode letters in identifier names such as type names, type value names, and variable names. You can now author policies in non-English languages using accented or non-Latin characters.
+
 1.94.0 (2026-09-11)
 ------------------
 

@@ -106,6 +106,7 @@ module Aws::Account
 
     class GetContactInformationResponse
       attr_accessor contact_information: Types::ContactInformation
+      attr_accessor verification_status: ("PENDING" | "VERIFIED" | "UNVERIFIED" | "NOT_SUPPORTED")
       SENSITIVE: []
     end
 
@@ -213,6 +214,16 @@ module Aws::Account
       SENSITIVE: []
     end
 
+    class SendPhoneNumberVerificationRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendPhoneNumberVerificationResponse
+      attr_accessor status: ("PENDING" | "VERIFIED" | "UNVERIFIED" | "NOT_SUPPORTED")
+      SENSITIVE: []
+    end
+
     class StartPrimaryEmailUpdateRequest
       attr_accessor account_id: ::String
       attr_accessor primary_email: ::String
@@ -241,6 +252,17 @@ module Aws::Account
       attr_accessor name: ::String
       attr_accessor message: ::String
       SENSITIVE: [:message]
+    end
+
+    class VerifyPhoneNumberRequest
+      attr_accessor account_id: ::String
+      attr_accessor otp: ::String
+      SENSITIVE: [:otp]
+    end
+
+    class VerifyPhoneNumberResponse
+      attr_accessor status: ("PENDING" | "VERIFIED" | "UNVERIFIED" | "NOT_SUPPORTED")
+      SENSITIVE: []
     end
   end
 end

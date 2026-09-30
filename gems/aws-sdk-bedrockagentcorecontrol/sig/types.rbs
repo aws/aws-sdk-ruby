@@ -339,6 +339,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class CertificateConfiguration
+      attr_accessor s3: Types::S3CertificateConfiguration
+      attr_accessor secrets_manager: Types::SecretsManagerCertificateConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < CertificateConfiguration
+      end
+      class SecretsManager < CertificateConfiguration
+      end
+      class Unknown < CertificateConfiguration
+      end
+    end
+
     class CertificateLocation
       attr_accessor secrets_manager: Types::SecretsManagerLocation
       attr_accessor unknown: untyped
@@ -963,6 +977,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
       attr_accessor metadata_configuration: Types::MetadataConfiguration
       attr_accessor private_endpoint: Types::PrivateEndpoint
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 
@@ -983,6 +998,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor private_endpoint_managed_resources: ::Array[Types::ManagedResourceDetails]
       attr_accessor authorization_data: Types::AuthorizationData
       attr_accessor protocol_type: ("MCP" | "HTTP")
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 
@@ -1636,6 +1652,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class DeleteConfigurationBundleResponse
+      attr_accessor bundle_arn: ::String
       attr_accessor bundle_id: ::String
       attr_accessor status: ("ACTIVE" | "CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: []
@@ -2271,6 +2288,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor private_endpoint_managed_resources: ::Array[Types::ManagedResourceDetails]
       attr_accessor authorization_data: Types::AuthorizationData
       attr_accessor protocol_type: ("MCP" | "HTTP")
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 
@@ -2629,6 +2647,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor private_endpoint_managed_resources: ::Array[Types::ManagedResourceDetails]
       attr_accessor authorization_data: Types::AuthorizationData
       attr_accessor protocol_type: ("MCP" | "HTTP")
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 
@@ -5216,6 +5235,12 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class S3CertificateConfiguration
+      attr_accessor uri: ::String
+      attr_accessor bucket_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
     class S3Configuration
       attr_accessor uri: ::String
       attr_accessor bucket_owner_account_id: ::String
@@ -5283,6 +5308,11 @@ module Aws::BedrockAgentCoreControl
     class SecretReference
       attr_accessor secret_id: ::String
       attr_accessor json_key: ::String
+      SENSITIVE: []
+    end
+
+    class SecretsManagerCertificateConfiguration
+      attr_accessor secret_arn: ::String
       SENSITIVE: []
     end
 
@@ -6064,6 +6094,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
       attr_accessor metadata_configuration: Types::MetadataConfiguration
       attr_accessor private_endpoint: Types::PrivateEndpoint
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 
@@ -6084,6 +6115,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor private_endpoint_managed_resources: ::Array[Types::ManagedResourceDetails]
       attr_accessor authorization_data: Types::AuthorizationData
       attr_accessor protocol_type: ("MCP" | "HTTP")
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 

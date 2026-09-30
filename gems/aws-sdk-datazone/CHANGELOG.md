@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2026-09-30)
+------------------
+
+* Feature - Support for setting notebook run notification configurations
+
 1.92.0 (2026-09-24)
 ------------------
 

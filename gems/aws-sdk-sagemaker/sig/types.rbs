@@ -1227,6 +1227,14 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ClusterAccountingDatabase
+      attr_accessor endpoint: ::String
+      attr_accessor port: ::Integer
+      attr_accessor name: ::String
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
     class ClusterAutoPatchConfig
       attr_accessor patching_strategy: ("WhenIdle" | "WhenAllIdle")
       attr_accessor patch_schedule: Types::ClusterPatchSchedule
@@ -1527,6 +1535,7 @@ module Aws::SageMaker
 
     class ClusterOrchestratorSlurmConfig
       attr_accessor slurm_config_strategy: ("Overwrite" | "Managed" | "Merge")
+      attr_accessor accounting_database: Types::ClusterAccountingDatabase
       SENSITIVE: []
     end
 
@@ -3149,6 +3158,13 @@ module Aws::SageMaker
       attr_accessor s3_data_source: Types::S3DataSource
       attr_accessor file_system_data_source: Types::FileSystemDataSource
       attr_accessor dataset_source: Types::DatasetSource
+      SENSITIVE: []
+    end
+
+    class DatabaseConfigurationMetadata
+      attr_accessor rollback_status: ("NotApplicable" | "Reverted" | "RevertFailed")
+      attr_accessor advisory: ::String
+      attr_accessor failure_message: ::String
       SENSITIVE: []
     end
 
@@ -5871,6 +5887,8 @@ module Aws::SageMaker
       attr_accessor instance_group: Types::InstanceGroupMetadata
       attr_accessor instance_group_scaling: Types::InstanceGroupScalingMetadata
       attr_accessor instance: Types::InstanceMetadata
+      attr_accessor database_configuration: Types::DatabaseConfigurationMetadata
+      attr_accessor slurm_health: Types::SlurmHealthMetadata
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -5881,6 +5899,10 @@ module Aws::SageMaker
       class InstanceGroupScaling < EventMetadata
       end
       class Instance < EventMetadata
+      end
+      class DatabaseConfiguration < EventMetadata
+      end
+      class SlurmHealth < EventMetadata
       end
       class Unknown < EventMetadata
       end
@@ -10976,6 +10998,13 @@ module Aws::SageMaker
 
     class ShuffleConfig
       attr_accessor seed: ::Integer
+      SENSITIVE: []
+    end
+
+    class SlurmHealthMetadata
+      attr_accessor component: ("Slurmdbd")
+      attr_accessor status: ("Healthy" | "Unhealthy")
+      attr_accessor reason: ("DaemonDown" | "DaemonDisabled" | "DbUnreachable")
       SENSITIVE: []
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.248.0 (2026-09-30)
+------------------
+
+* Feature - Releasing VPCL for BlueGreen ecs deployments.
+
 1.247.0 (2026-09-11)
 ------------------
 

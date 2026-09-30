@@ -428,6 +428,11 @@ module Aws::SageMaker
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ClusterAccountingDatabase = Shapes::StructureShape.new(name: 'ClusterAccountingDatabase')
+    ClusterAccountingDatabaseEndpoint = Shapes::StringShape.new(name: 'ClusterAccountingDatabaseEndpoint')
+    ClusterAccountingDatabaseName = Shapes::StringShape.new(name: 'ClusterAccountingDatabaseName')
+    ClusterAccountingDatabasePort = Shapes::IntegerShape.new(name: 'ClusterAccountingDatabasePort')
+    ClusterAccountingDatabaseSecretArn = Shapes::StringShape.new(name: 'ClusterAccountingDatabaseSecretArn')
     ClusterArn = Shapes::StringShape.new(name: 'ClusterArn')
     ClusterAutoPatchConfig = Shapes::StructureShape.new(name: 'ClusterAutoPatchConfig')
     ClusterAutoPatchConfigDetails = Shapes::StructureShape.new(name: 'ClusterAutoPatchConfigDetails')
@@ -794,6 +799,8 @@ module Aws::SageMaker
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceName = Shapes::StringShape.new(name: 'DataSourceName')
     Database = Shapes::StringShape.new(name: 'Database')
+    DatabaseConfigurationMetadata = Shapes::StructureShape.new(name: 'DatabaseConfigurationMetadata')
+    DatabaseConfigurationRollbackStatus = Shapes::StringShape.new(name: 'DatabaseConfigurationRollbackStatus')
     DatasetDefinition = Shapes::StructureShape.new(name: 'DatasetDefinition')
     DatasetSource = Shapes::StructureShape.new(name: 'DatasetSource')
     DebugHookConfig = Shapes::StructureShape.new(name: 'DebugHookConfig')
@@ -2572,6 +2579,10 @@ module Aws::SageMaker
     SingleSignOnApplicationArn = Shapes::StringShape.new(name: 'SingleSignOnApplicationArn')
     SingleSignOnUserIdentifier = Shapes::StringShape.new(name: 'SingleSignOnUserIdentifier')
     SkipModelValidation = Shapes::StringShape.new(name: 'SkipModelValidation')
+    SlurmHealthComponent = Shapes::StringShape.new(name: 'SlurmHealthComponent')
+    SlurmHealthMetadata = Shapes::StructureShape.new(name: 'SlurmHealthMetadata')
+    SlurmHealthReason = Shapes::StringShape.new(name: 'SlurmHealthReason')
+    SlurmHealthStatus = Shapes::StringShape.new(name: 'SlurmHealthStatus')
     SnsTopicArn = Shapes::StringShape.new(name: 'SnsTopicArn')
     SoftwareUpdateStatus = Shapes::StringShape.new(name: 'SoftwareUpdateStatus')
     SortActionsBy = Shapes::StringShape.new(name: 'SortActionsBy')
@@ -4085,6 +4096,12 @@ module Aws::SageMaker
     ClarifyTextConfig.add_member(:granularity, Shapes::ShapeRef.new(shape: ClarifyTextGranularity, required: true, location_name: "Granularity"))
     ClarifyTextConfig.struct_class = Types::ClarifyTextConfig
 
+    ClusterAccountingDatabase.add_member(:endpoint, Shapes::ShapeRef.new(shape: ClusterAccountingDatabaseEndpoint, required: true, location_name: "Endpoint"))
+    ClusterAccountingDatabase.add_member(:port, Shapes::ShapeRef.new(shape: ClusterAccountingDatabasePort, location_name: "Port"))
+    ClusterAccountingDatabase.add_member(:name, Shapes::ShapeRef.new(shape: ClusterAccountingDatabaseName, location_name: "Name"))
+    ClusterAccountingDatabase.add_member(:secret_arn, Shapes::ShapeRef.new(shape: ClusterAccountingDatabaseSecretArn, required: true, location_name: "SecretArn"))
+    ClusterAccountingDatabase.struct_class = Types::ClusterAccountingDatabase
+
     ClusterAutoPatchConfig.add_member(:patching_strategy, Shapes::ShapeRef.new(shape: ClusterPatchingStrategy, required: true, location_name: "PatchingStrategy"))
     ClusterAutoPatchConfig.add_member(:patch_schedule, Shapes::ShapeRef.new(shape: ClusterPatchSchedule, location_name: "PatchSchedule"))
     ClusterAutoPatchConfig.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "DeploymentConfig"))
@@ -4345,6 +4362,7 @@ module Aws::SageMaker
     ClusterOrchestratorEksConfig.struct_class = Types::ClusterOrchestratorEksConfig
 
     ClusterOrchestratorSlurmConfig.add_member(:slurm_config_strategy, Shapes::ShapeRef.new(shape: ClusterSlurmConfigStrategy, location_name: "SlurmConfigStrategy"))
+    ClusterOrchestratorSlurmConfig.add_member(:accounting_database, Shapes::ShapeRef.new(shape: ClusterAccountingDatabase, location_name: "AccountingDatabase"))
     ClusterOrchestratorSlurmConfig.struct_class = Types::ClusterOrchestratorSlurmConfig
 
     ClusterPartitionNames.member = Shapes::ShapeRef.new(shape: ClusterPartitionName)
@@ -5635,6 +5653,11 @@ module Aws::SageMaker
     DataSource.add_member(:file_system_data_source, Shapes::ShapeRef.new(shape: FileSystemDataSource, location_name: "FileSystemDataSource"))
     DataSource.add_member(:dataset_source, Shapes::ShapeRef.new(shape: DatasetSource, location_name: "DatasetSource"))
     DataSource.struct_class = Types::DataSource
+
+    DatabaseConfigurationMetadata.add_member(:rollback_status, Shapes::ShapeRef.new(shape: DatabaseConfigurationRollbackStatus, location_name: "RollbackStatus"))
+    DatabaseConfigurationMetadata.add_member(:advisory, Shapes::ShapeRef.new(shape: String, location_name: "Advisory"))
+    DatabaseConfigurationMetadata.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
+    DatabaseConfigurationMetadata.struct_class = Types::DatabaseConfigurationMetadata
 
     DatasetDefinition.add_member(:athena_dataset_definition, Shapes::ShapeRef.new(shape: AthenaDatasetDefinition, location_name: "AthenaDatasetDefinition"))
     DatasetDefinition.add_member(:redshift_dataset_definition, Shapes::ShapeRef.new(shape: RedshiftDatasetDefinition, location_name: "RedshiftDatasetDefinition"))
@@ -7800,11 +7823,15 @@ module Aws::SageMaker
     EventMetadata.add_member(:instance_group, Shapes::ShapeRef.new(shape: InstanceGroupMetadata, location_name: "InstanceGroup"))
     EventMetadata.add_member(:instance_group_scaling, Shapes::ShapeRef.new(shape: InstanceGroupScalingMetadata, location_name: "InstanceGroupScaling"))
     EventMetadata.add_member(:instance, Shapes::ShapeRef.new(shape: InstanceMetadata, location_name: "Instance"))
+    EventMetadata.add_member(:database_configuration, Shapes::ShapeRef.new(shape: DatabaseConfigurationMetadata, location_name: "DatabaseConfiguration"))
+    EventMetadata.add_member(:slurm_health, Shapes::ShapeRef.new(shape: SlurmHealthMetadata, location_name: "SlurmHealth"))
     EventMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EventMetadata.add_member_subclass(:cluster, Types::EventMetadata::Cluster)
     EventMetadata.add_member_subclass(:instance_group, Types::EventMetadata::InstanceGroup)
     EventMetadata.add_member_subclass(:instance_group_scaling, Types::EventMetadata::InstanceGroupScaling)
     EventMetadata.add_member_subclass(:instance, Types::EventMetadata::Instance)
+    EventMetadata.add_member_subclass(:database_configuration, Types::EventMetadata::DatabaseConfiguration)
+    EventMetadata.add_member_subclass(:slurm_health, Types::EventMetadata::SlurmHealth)
     EventMetadata.add_member_subclass(:unknown, Types::EventMetadata::Unknown)
     EventMetadata.struct_class = Types::EventMetadata
 
@@ -12041,6 +12068,11 @@ module Aws::SageMaker
 
     ShuffleConfig.add_member(:seed, Shapes::ShapeRef.new(shape: Seed, required: true, location_name: "Seed", metadata: {"box" => true}))
     ShuffleConfig.struct_class = Types::ShuffleConfig
+
+    SlurmHealthMetadata.add_member(:component, Shapes::ShapeRef.new(shape: SlurmHealthComponent, required: true, location_name: "Component"))
+    SlurmHealthMetadata.add_member(:status, Shapes::ShapeRef.new(shape: SlurmHealthStatus, required: true, location_name: "Status"))
+    SlurmHealthMetadata.add_member(:reason, Shapes::ShapeRef.new(shape: SlurmHealthReason, location_name: "Reason"))
+    SlurmHealthMetadata.struct_class = Types::SlurmHealthMetadata
 
     SourceAlgorithm.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
     SourceAlgorithm.add_member(:model_data_source, Shapes::ShapeRef.new(shape: ModelDataSource, location_name: "ModelDataSource"))

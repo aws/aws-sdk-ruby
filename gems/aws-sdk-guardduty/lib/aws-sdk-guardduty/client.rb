@@ -4078,6 +4078,8 @@ module Aws::GuardDuty
     #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
     #   resp.features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].additional_configuration[0].updated_at #=> Time
+    #   resp.features[0].additional_configuration[0].managed_by #=> String, one of "GUARDDUTY_POLICY"
+    #   resp.features[0].managed_by #=> String, one of "GUARDDUTY_POLICY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector AWS API Documentation
     #
@@ -5462,6 +5464,8 @@ module Aws::GuardDuty
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].updated_at #=> Time
+    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].managed_by #=> String, one of "GUARDDUTY_POLICY"
+    #   resp.member_data_source_configurations[0].features[0].managed_by #=> String, one of "GUARDDUTY_POLICY"
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].result #=> String
@@ -9736,7 +9740,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

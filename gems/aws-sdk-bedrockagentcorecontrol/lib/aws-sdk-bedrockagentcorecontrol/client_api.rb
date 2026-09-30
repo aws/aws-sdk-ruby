@@ -133,7 +133,12 @@ module Aws::BedrockAgentCoreControl
     CategoricalScaleDefinitions = Shapes::ListShape.new(name: 'CategoricalScaleDefinitions')
     CedarPolicy = Shapes::StructureShape.new(name: 'CedarPolicy')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
+    CertificateBucketOwnerAccountId = Shapes::StringShape.new(name: 'CertificateBucketOwnerAccountId')
+    CertificateConfiguration = Shapes::UnionShape.new(name: 'CertificateConfiguration')
+    CertificateConfigurationList = Shapes::ListShape.new(name: 'CertificateConfigurationList')
     CertificateLocation = Shapes::UnionShape.new(name: 'CertificateLocation')
+    CertificateS3Uri = Shapes::StringShape.new(name: 'CertificateS3Uri')
+    CertificateSecretArn = Shapes::StringShape.new(name: 'CertificateSecretArn')
     Certificates = Shapes::ListShape.new(name: 'Certificates')
     ClaimMatchOperatorType = Shapes::StringShape.new(name: 'ClaimMatchOperatorType')
     ClaimMatchValueType = Shapes::UnionShape.new(name: 'ClaimMatchValueType')
@@ -1143,6 +1148,7 @@ module Aws::BedrockAgentCoreControl
     RuntimeQualifier = Shapes::StringShape.new(name: 'RuntimeQualifier')
     RuntimeTargetConfiguration = Shapes::StructureShape.new(name: 'RuntimeTargetConfiguration')
     S3BucketUri = Shapes::StringShape.new(name: 'S3BucketUri')
+    S3CertificateConfiguration = Shapes::StructureShape.new(name: 'S3CertificateConfiguration')
     S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
     S3FilesAccessPointArn = Shapes::StringShape.new(name: 'S3FilesAccessPointArn')
     S3FilesAccessPointConfiguration = Shapes::StructureShape.new(name: 'S3FilesAccessPointConfiguration')
@@ -1174,6 +1180,7 @@ module Aws::BedrockAgentCoreControl
     SecretJsonKeyType = Shapes::StringShape.new(name: 'SecretJsonKeyType')
     SecretReference = Shapes::StructureShape.new(name: 'SecretReference')
     SecretSourceType = Shapes::StringShape.new(name: 'SecretSourceType')
+    SecretsManagerCertificateConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerCertificateConfiguration')
     SecretsManagerLocation = Shapes::StructureShape.new(name: 'SecretsManagerLocation')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIdentifier = Shapes::StringShape.new(name: 'SecurityGroupIdentifier')
@@ -1714,6 +1721,16 @@ module Aws::BedrockAgentCoreControl
     Certificate.add_member(:location, Shapes::ShapeRef.new(shape: CertificateLocation, required: true, location_name: "location"))
     Certificate.struct_class = Types::Certificate
 
+    CertificateConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: S3CertificateConfiguration, location_name: "s3"))
+    CertificateConfiguration.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManagerCertificateConfiguration, location_name: "secretsManager"))
+    CertificateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CertificateConfiguration.add_member_subclass(:s3, Types::CertificateConfiguration::S3)
+    CertificateConfiguration.add_member_subclass(:secrets_manager, Types::CertificateConfiguration::SecretsManager)
+    CertificateConfiguration.add_member_subclass(:unknown, Types::CertificateConfiguration::Unknown)
+    CertificateConfiguration.struct_class = Types::CertificateConfiguration
+
+    CertificateConfigurationList.member = Shapes::ShapeRef.new(shape: CertificateConfiguration)
+
     CertificateLocation.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManagerLocation, location_name: "secretsManager"))
     CertificateLocation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CertificateLocation.add_member_subclass(:secrets_manager, Types::CertificateLocation::SecretsManager)
@@ -2218,6 +2235,7 @@ module Aws::BedrockAgentCoreControl
     CreateGatewayTargetRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, location_name: "credentialProviderConfigurations"))
     CreateGatewayTargetRequest.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
     CreateGatewayTargetRequest.add_member(:private_endpoint, Shapes::ShapeRef.new(shape: PrivateEndpoint, location_name: "privateEndpoint"))
+    CreateGatewayTargetRequest.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     CreateGatewayTargetRequest.struct_class = Types::CreateGatewayTargetRequest
 
     CreateGatewayTargetResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "gatewayArn"))
@@ -2236,6 +2254,7 @@ module Aws::BedrockAgentCoreControl
     CreateGatewayTargetResponse.add_member(:private_endpoint_managed_resources, Shapes::ShapeRef.new(shape: PrivateEndpointManagedResources, location_name: "privateEndpointManagedResources"))
     CreateGatewayTargetResponse.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationData, location_name: "authorizationData"))
     CreateGatewayTargetResponse.add_member(:protocol_type, Shapes::ShapeRef.new(shape: TargetProtocolType, location_name: "protocolType"))
+    CreateGatewayTargetResponse.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     CreateGatewayTargetResponse.struct_class = Types::CreateGatewayTargetResponse
 
     CreateHarnessEndpointRequest.add_member(:harness_id, Shapes::ShapeRef.new(shape: HarnessId, required: true, location: "uri", location_name: "harnessId"))
@@ -2721,6 +2740,7 @@ module Aws::BedrockAgentCoreControl
     DeleteConfigurationBundleRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: ConfigurationBundleId, required: true, location: "uri", location_name: "bundleId"))
     DeleteConfigurationBundleRequest.struct_class = Types::DeleteConfigurationBundleRequest
 
+    DeleteConfigurationBundleResponse.add_member(:bundle_arn, Shapes::ShapeRef.new(shape: ConfigurationBundleArn, required: true, location_name: "bundleArn"))
     DeleteConfigurationBundleResponse.add_member(:bundle_id, Shapes::ShapeRef.new(shape: ConfigurationBundleId, required: true, location_name: "bundleId"))
     DeleteConfigurationBundleResponse.add_member(:status, Shapes::ShapeRef.new(shape: ConfigurationBundleStatus, required: true, location_name: "status"))
     DeleteConfigurationBundleResponse.struct_class = Types::DeleteConfigurationBundleResponse
@@ -3199,6 +3219,7 @@ module Aws::BedrockAgentCoreControl
     GatewayTarget.add_member(:private_endpoint_managed_resources, Shapes::ShapeRef.new(shape: PrivateEndpointManagedResources, location_name: "privateEndpointManagedResources"))
     GatewayTarget.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationData, location_name: "authorizationData"))
     GatewayTarget.add_member(:protocol_type, Shapes::ShapeRef.new(shape: TargetProtocolType, location_name: "protocolType"))
+    GatewayTarget.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     GatewayTarget.struct_class = Types::GatewayTarget
 
     GatewayTargetList.member = Shapes::ShapeRef.new(shape: GatewayTarget)
@@ -3495,6 +3516,7 @@ module Aws::BedrockAgentCoreControl
     GetGatewayTargetResponse.add_member(:private_endpoint_managed_resources, Shapes::ShapeRef.new(shape: PrivateEndpointManagedResources, location_name: "privateEndpointManagedResources"))
     GetGatewayTargetResponse.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationData, location_name: "authorizationData"))
     GetGatewayTargetResponse.add_member(:protocol_type, Shapes::ShapeRef.new(shape: TargetProtocolType, location_name: "protocolType"))
+    GetGatewayTargetResponse.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     GetGatewayTargetResponse.struct_class = Types::GetGatewayTargetResponse
 
     GetHarnessEndpointRequest.add_member(:harness_id, Shapes::ShapeRef.new(shape: HarnessId, required: true, location: "uri", location_name: "harnessId"))
@@ -5426,6 +5448,10 @@ module Aws::BedrockAgentCoreControl
     RuntimeTargetConfiguration.add_member(:schema, Shapes::ShapeRef.new(shape: HttpApiSchemaConfiguration, location_name: "schema"))
     RuntimeTargetConfiguration.struct_class = Types::RuntimeTargetConfiguration
 
+    S3CertificateConfiguration.add_member(:uri, Shapes::ShapeRef.new(shape: CertificateS3Uri, required: true, location_name: "uri"))
+    S3CertificateConfiguration.add_member(:bucket_owner_account_id, Shapes::ShapeRef.new(shape: CertificateBucketOwnerAccountId, location_name: "bucketOwnerAccountId"))
+    S3CertificateConfiguration.struct_class = Types::S3CertificateConfiguration
+
     S3Configuration.add_member(:uri, Shapes::ShapeRef.new(shape: S3BucketUri, location_name: "uri"))
     S3Configuration.add_member(:bucket_owner_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "bucketOwnerAccountId"))
     S3Configuration.struct_class = Types::S3Configuration
@@ -5480,6 +5506,9 @@ module Aws::BedrockAgentCoreControl
     SecretReference.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "secretId"))
     SecretReference.add_member(:json_key, Shapes::ShapeRef.new(shape: SecretJsonKeyType, required: true, location_name: "jsonKey"))
     SecretReference.struct_class = Types::SecretReference
+
+    SecretsManagerCertificateConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: CertificateSecretArn, required: true, location_name: "secretArn"))
+    SecretsManagerCertificateConfiguration.struct_class = Types::SecretsManagerCertificateConfiguration
 
     SecretsManagerLocation.add_member(:secret_arn, Shapes::ShapeRef.new(shape: ToolSecretArn, required: true, location_name: "secretArn"))
     SecretsManagerLocation.struct_class = Types::SecretsManagerLocation
@@ -5936,7 +5965,7 @@ module Aws::BedrockAgentCoreControl
     UpdateConfigurationBundleRequest.add_member(:components, Shapes::ShapeRef.new(shape: ComponentConfigurationMap, location_name: "components"))
     UpdateConfigurationBundleRequest.add_member(:parent_version_ids, Shapes::ShapeRef.new(shape: ConfigurationBundleVersionList, required: true, location_name: "parentVersionIds"))
     UpdateConfigurationBundleRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName"))
-    UpdateConfigurationBundleRequest.add_member(:commit_message, Shapes::ShapeRef.new(shape: UpdateConfigurationBundleRequestCommitMessageString, location_name: "commitMessage"))
+    UpdateConfigurationBundleRequest.add_member(:commit_message, Shapes::ShapeRef.new(shape: UpdateConfigurationBundleRequestCommitMessageString, required: true, location_name: "commitMessage"))
     UpdateConfigurationBundleRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: VersionCreatedBySource, location_name: "createdBy"))
     UpdateConfigurationBundleRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     UpdateConfigurationBundleRequest.struct_class = Types::UpdateConfigurationBundleRequest
@@ -6089,6 +6118,7 @@ module Aws::BedrockAgentCoreControl
     UpdateGatewayTargetRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, location_name: "credentialProviderConfigurations"))
     UpdateGatewayTargetRequest.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
     UpdateGatewayTargetRequest.add_member(:private_endpoint, Shapes::ShapeRef.new(shape: PrivateEndpoint, location_name: "privateEndpoint"))
+    UpdateGatewayTargetRequest.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     UpdateGatewayTargetRequest.struct_class = Types::UpdateGatewayTargetRequest
 
     UpdateGatewayTargetResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "gatewayArn"))
@@ -6107,6 +6137,7 @@ module Aws::BedrockAgentCoreControl
     UpdateGatewayTargetResponse.add_member(:private_endpoint_managed_resources, Shapes::ShapeRef.new(shape: PrivateEndpointManagedResources, location_name: "privateEndpointManagedResources"))
     UpdateGatewayTargetResponse.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationData, location_name: "authorizationData"))
     UpdateGatewayTargetResponse.add_member(:protocol_type, Shapes::ShapeRef.new(shape: TargetProtocolType, location_name: "protocolType"))
+    UpdateGatewayTargetResponse.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     UpdateGatewayTargetResponse.struct_class = Types::UpdateGatewayTargetResponse
 
     UpdateHarnessEndpointRequest.add_member(:harness_id, Shapes::ShapeRef.new(shape: HarnessId, required: true, location: "uri", location_name: "harnessId"))

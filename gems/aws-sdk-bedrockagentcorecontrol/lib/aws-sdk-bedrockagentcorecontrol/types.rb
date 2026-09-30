@@ -1197,6 +1197,41 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A reference to a private certificate authority (CA) certificate that
+    # the gateway uses to verify TLS connections to the target endpoint. Use
+    # this when the target presents a certificate issued by a private CA
+    # that is not trusted by default. Specify exactly one certificate
+    # source. The configuration is a reference only and never contains the
+    # certificate content.
+    #
+    # @note CertificateConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CertificateConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CertificateConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   The Amazon S3 location of the PEM-encoded private CA certificate.
+    #   @return [Types::S3CertificateConfiguration]
+    #
+    # @!attribute [rw] secrets_manager
+    #   The Amazon Web Services Secrets Manager location of the PEM-encoded
+    #   private CA certificate.
+    #   @return [Types::SecretsManagerCertificateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CertificateConfiguration AWS API Documentation
+    #
+    class CertificateConfiguration < Struct.new(
+      :s3,
+      :secrets_manager,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < CertificateConfiguration; end
+      class SecretsManager < CertificateConfiguration; end
+      class Unknown < CertificateConfiguration; end
+    end
+
     # The location from which to retrieve a certificate.
     #
     # @note CertificateLocation is a union - when making an API calls you must set exactly one of the members.
@@ -3737,6 +3772,15 @@ module Aws::BedrockAgentCoreControl
     #   to connect the gateway to private resources in your VPC.
     #   @return [Types::PrivateEndpoint]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   gateway target. Use this to have the gateway trust a private CA when
+    #   it establishes TLS connections to the target endpoint. Provide each
+    #   certificate by reference to an Amazon S3 object or an Amazon Web
+    #   Services Secrets Manager secret. You can specify only one
+    #   certificate authority configuration in this list.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayTargetRequest AWS API Documentation
     #
     class CreateGatewayTargetRequest < Struct.new(
@@ -3747,7 +3791,8 @@ module Aws::BedrockAgentCoreControl
       :target_configuration,
       :credential_provider_configurations,
       :metadata_configuration,
-      :private_endpoint)
+      :private_endpoint,
+      :certificate_configurations)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -3820,6 +3865,11 @@ module Aws::BedrockAgentCoreControl
     #   The protocol type of the created gateway target.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   gateway target.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayTargetResponse AWS API Documentation
     #
     class CreateGatewayTargetResponse < Struct.new(
@@ -3838,7 +3888,8 @@ module Aws::BedrockAgentCoreControl
       :private_endpoint,
       :private_endpoint_managed_resources,
       :authorization_data,
-      :protocol_type)
+      :protocol_type,
+      :certificate_configurations)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -6285,6 +6336,10 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] bundle_arn
+    #   The Amazon Resource Name (ARN) of the deleted configuration bundle.
+    #   @return [String]
+    #
     # @!attribute [rw] bundle_id
     #   The unique identifier of the deleted configuration bundle.
     #   @return [String]
@@ -6296,6 +6351,7 @@ module Aws::BedrockAgentCoreControl
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteConfigurationBundleResponse AWS API Documentation
     #
     class DeleteConfigurationBundleResponse < Struct.new(
+      :bundle_arn,
       :bundle_id,
       :status)
       SENSITIVE = []
@@ -8500,6 +8556,11 @@ module Aws::BedrockAgentCoreControl
     #   The protocol type of the gateway target.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   gateway target.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GatewayTarget AWS API Documentation
     #
     class GatewayTarget < Struct.new(
@@ -8518,7 +8579,8 @@ module Aws::BedrockAgentCoreControl
       :private_endpoint,
       :private_endpoint_managed_resources,
       :authorization_data,
-      :protocol_type)
+      :protocol_type,
+      :certificate_configurations)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -9971,6 +10033,11 @@ module Aws::BedrockAgentCoreControl
     #   The protocol type of the gateway target.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   gateway target.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayTargetResponse AWS API Documentation
     #
     class GetGatewayTargetResponse < Struct.new(
@@ -9989,7 +10056,8 @@ module Aws::BedrockAgentCoreControl
       :private_endpoint,
       :private_endpoint_managed_resources,
       :authorization_data,
-      :protocol_type)
+      :protocol_type,
+      :certificate_configurations)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -18932,6 +19000,28 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A reference to a PEM-encoded private CA certificate stored as an
+    # Amazon S3 object.
+    #
+    # @!attribute [rw] uri
+    #   The URI of the Amazon S3 object that contains the PEM-encoded
+    #   certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_owner_account_id
+    #   The account ID of the Amazon S3 bucket owner. This ID is used for
+    #   cross-account access to the bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/S3CertificateConfiguration AWS API Documentation
+    #
+    class S3CertificateConfiguration < Struct.new(
+      :uri,
+      :bucket_owner_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon S3 configuration for a gateway. This structure defines how
     # the gateway accesses files in Amazon S3.
     #
@@ -19193,6 +19283,22 @@ module Aws::BedrockAgentCoreControl
     class SecretReference < Struct.new(
       :secret_id,
       :json_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reference to a PEM-encoded private CA certificate stored in an
+    # Amazon Web Services Secrets Manager secret.
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the PEM-encoded certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SecretsManagerCertificateConfiguration AWS API Documentation
+    #
+    class SecretsManagerCertificateConfiguration < Struct.new(
+      :secret_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22043,6 +22149,17 @@ module Aws::BedrockAgentCoreControl
     #   to connect the gateway to private resources in your VPC.
     #   @return [Types::PrivateEndpoint]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   gateway target. Use this to have the gateway trust a private CA when
+    #   it establishes TLS connections to the target endpoint. Provide each
+    #   certificate by reference to an Amazon S3 object or an Amazon Web
+    #   Services Secrets Manager secret. You can specify only one
+    #   certificate authority configuration in this list. To remove a
+    #   previously configured certificate authority, omit this field on
+    #   update.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayTargetRequest AWS API Documentation
     #
     class UpdateGatewayTargetRequest < Struct.new(
@@ -22053,7 +22170,8 @@ module Aws::BedrockAgentCoreControl
       :target_configuration,
       :credential_provider_configurations,
       :metadata_configuration,
-      :private_endpoint)
+      :private_endpoint,
+      :certificate_configurations)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -22127,6 +22245,11 @@ module Aws::BedrockAgentCoreControl
     #   The protocol type of the updated gateway target.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   gateway target.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayTargetResponse AWS API Documentation
     #
     class UpdateGatewayTargetResponse < Struct.new(
@@ -22145,7 +22268,8 @@ module Aws::BedrockAgentCoreControl
       :private_endpoint,
       :private_endpoint_managed_resources,
       :authorization_data,
-      :protocol_type)
+      :protocol_type,
+      :certificate_configurations)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end

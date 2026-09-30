@@ -3290,10 +3290,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] cpu_architecture
-    #   The CPU architecture that the tasks in the Express service run on.
-    #   Amazon ECS applies this value to the task definition revision that
-    #   it registers for the service. If you don't specify a value, the
-    #   default is `X86_64`.
+    #   The CPU architecture that the task runs on. If you don't specify a
+    #   value, the default is `X86_64`.
     #
     #   Valid values:
     #
@@ -3301,13 +3299,12 @@ module Aws::ECS
     #
     #   * `ARM64` - The 64-bit ARM architecture.
     #
-    #   Make sure that the container image that you specify supports the
-    #   architecture that you choose. The operating system family for an
-    #   Express service is always `LINUX`.
+    #   Ensure that the container image you specify supports the
+    #   architecture you choose. The operating system family for an Express
+    #   service is always `LINUX`.
     #
-    #   You can't specify `cpuArchitecture` when you also specify
-    #   `taskDefinitionArn`, because this value applies only to a task
-    #   definition that Amazon ECS registers on your behalf.
+    #   You can't specify `cpuArchitecture` together with
+    #   `taskDefinitionArn`.
     #   @return [String]
     #
     # @!attribute [rw] scaling_target
@@ -8050,11 +8047,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] cpu_architecture
-    #   The CPU architecture that the tasks in this service revision run on.
-    #   This is the architecture from the task definition that the service
-    #   revision uses, so it reflects the default or the previously
-    #   configured architecture when the request that created the revision
-    #   didn't specify one.
+    #   The CPU architecture that the task runs on.
     #
     #   Valid values:
     #
@@ -8062,11 +8055,9 @@ module Aws::ECS
     #
     #   * `ARM64` - The 64-bit ARM architecture.
     #
-    #   This value isn't returned when the task definition for the service
-    #   revision doesn't specify a runtime platform. Because the
-    #   architecture comes from each service revision's own task
-    #   definition, revisions of the same service can report different
-    #   architectures.
+    #   Different service revisions can report different architectures. This
+    #   value isn't returned when the service uses a customer-provided task
+    #   definition that doesn't specify a CPU architecture.
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
@@ -13763,10 +13754,17 @@ module Aws::ECS
     #   and which listener rules direct traffic to them.
     #   @return [Array<Types::ServiceRevisionLoadBalancer>]
     #
+    # @!attribute [rw] vpc_lattice_configurations
+    #   The resolved VPC Lattice configuration for the service revision.
+    #   This includes information about which target groups serve traffic
+    #   and which listener rules direct traffic to them.
+    #   @return [Array<Types::ServiceRevisionVpcLatticeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResolvedConfiguration AWS API Documentation
     #
     class ResolvedConfiguration < Struct.new(
-      :load_balancers)
+      :load_balancers,
+      :vpc_lattice_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16242,6 +16240,30 @@ module Aws::ECS
       :pending_task_count,
       :requested_test_traffic_weight,
       :requested_production_traffic_weight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resolved VPC Lattice configuration for a service revision. This
+    # includes information about which target groups serve traffic and which
+    # listener rules direct traffic to them.
+    #
+    # @!attribute [rw] target_group_arn
+    #   The Amazon Resource Name (ARN) of the target group associated with
+    #   the service revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] production_listener_rule
+    #   The Amazon Resource Name (ARN) of the production listener rule or
+    #   listener that directs traffic to the target group associated with
+    #   the service revision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRevisionVpcLatticeConfiguration AWS API Documentation
+    #
+    class ServiceRevisionVpcLatticeConfiguration < Struct.new(
+      :target_group_arn,
+      :production_listener_rule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19008,10 +19030,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] cpu_architecture
-    #   The CPU architecture that the tasks in the Express service run on.
-    #   Amazon ECS applies this value to the task definition revision that
-    #   it registers for the service. If you don't specify a value, the
-    #   service keeps the architecture that it currently runs on.
+    #   The CPU architecture that the task runs on. If you don't specify a
+    #   value, the service keeps its current architecture.
     #
     #   Valid values:
     #
@@ -19020,13 +19040,12 @@ module Aws::ECS
     #   * `ARM64` - The 64-bit ARM architecture.
     #
     #   Changing the architecture starts a new deployment that replaces the
-    #   running tasks. Make sure that the container image that the service
-    #   uses supports the architecture that you choose. The operating system
-    #   family for an Express service is always `LINUX`.
+    #   running tasks. Ensure that the container image you specify supports
+    #   the architecture you choose. The operating system family for an
+    #   Express service is always `LINUX`.
     #
-    #   You can't specify `cpuArchitecture` when you also specify
-    #   `taskDefinitionArn`, because this value applies only to a task
-    #   definition that Amazon ECS registers on your behalf.
+    #   You can't specify `cpuArchitecture` together with
+    #   `taskDefinitionArn`.
     #   @return [String]
     #
     # @!attribute [rw] scaling_target
@@ -19938,6 +19957,42 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The advanced settings for VPC Lattice used in blue/green deployments.
+    # Specify the alternate target group and listener rules required for
+    # traffic shifting during blue/green deployments. For more information,
+    # see [Required resources for Amazon ECS blue/green deployments][1] in
+    # the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html
+    #
+    # @!attribute [rw] alternate_target_group_arn
+    #   The Amazon Resource Name (ARN) of the alternate target group
+    #   associated with the VPC Lattice Configuration for Amazon ECS
+    #   blue/green deployments.
+    #   @return [String]
+    #
+    # @!attribute [rw] production_listener_rule
+    #   The Amazon Resource Name (ARN) that identifies the production
+    #   listener rule or listener for routing production traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_listener_rule
+    #   The Amazon Resource Name (ARN) that identifies the test listener
+    #   rule or listener for routing test traffic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VpcLatticeAdvancedConfiguration AWS API Documentation
+    #
+    class VpcLatticeAdvancedConfiguration < Struct.new(
+      :alternate_target_group_arn,
+      :production_listener_rule,
+      :test_listener_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The VPC Lattice configuration for your service that holds the
     # information for the target group(s) Amazon ECS tasks will be
     # registered to.
@@ -19960,12 +20015,26 @@ module Aws::ECS
     #   task definition.
     #   @return [String]
     #
+    # @!attribute [rw] advanced_configuration
+    #   The advanced settings for VPC Lattice used in blue/green
+    #   deployments. Specify the alternate target group and listener rules
+    #   required for traffic shifting during blue/green deployments. For
+    #   more information, see [Required resources for Amazon ECS blue/green
+    #   deployments][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-deployment-implementation.html
+    #   @return [Types::VpcLatticeAdvancedConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VpcLatticeConfiguration AWS API Documentation
     #
     class VpcLatticeConfiguration < Struct.new(
       :role_arn,
       :target_group_arn,
-      :port_name)
+      :port_name,
+      :advanced_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

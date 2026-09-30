@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.150.0 (2026-09-30)
+------------------
+
+* Feature - Add support for policy operations on the GUARDDUTY POLICY policy type.
+
 1.149.0 (2026-09-11)
 ------------------
 

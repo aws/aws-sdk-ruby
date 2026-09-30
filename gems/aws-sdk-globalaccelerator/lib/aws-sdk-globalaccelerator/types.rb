@@ -1316,10 +1316,9 @@ module Aws::GlobalAccelerator
     #   The prefix for the location in the Amazon S3 bucket for the flow
     #   logs. Attribute is required if `FlowLogsEnabled` is `true`.
     #
-    #   If you don’t specify a prefix, the flow logs are stored in the root
-    #   of the bucket. If you specify slash (/) for the S3 bucket prefix,
-    #   the log file bucket folder structure will include a double slash
-    #   (//), like the following:
+    #   If you specify slash (/) for the S3 bucket prefix, the log file
+    #   bucket folder structure will include a double slash (//), like the
+    #   following:
     #
     #   DOC-EXAMPLE-BUCKET//AWSLogs/aws\_account\_id
     #   @return [String]
@@ -2317,6 +2316,26 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # Detailed information for the IP addresses assigned to the Global
+    # Accelerator.
+    #
+    # @!attribute [rw] ip_address
+    #   The static IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_zone
+    #   The network zone that the specified IP address is located on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/IpAddressDetail AWS API Documentation
+    #
+    class IpAddressDetail < Struct.new(
+      :ip_address,
+      :network_zone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type for the set of IP addresses for an accelerator.
     #
     # @!attribute [rw] ip_family
@@ -2332,12 +2351,19 @@ module Aws::GlobalAccelerator
     #   The types of IP addresses included in this IP set.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_details
+    #   The array of IP addresses in the IP address set, with detailed
+    #   information about the IP addresses. An IP address set can have a
+    #   maximum of two IP addresses.
+    #   @return [Array<Types::IpAddressDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/IpSet AWS API Documentation
     #
     class IpSet < Struct.new(
       :ip_family,
       :ip_addresses,
-      :ip_address_family)
+      :ip_address_family,
+      :ip_address_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3460,10 +3486,9 @@ module Aws::GlobalAccelerator
     #   Update the prefix for the location in the Amazon S3 bucket for the
     #   flow logs. Attribute is required if `FlowLogsEnabled` is `true`.
     #
-    #   If you don’t specify a prefix, the flow logs are stored in the root
-    #   of the bucket. If you specify slash (/) for the S3 bucket prefix,
-    #   the log file bucket folder structure will include a double slash
-    #   (//), like the following:
+    #   If you specify slash (/) for the S3 bucket prefix, the log file
+    #   bucket folder structure will include a double slash (//), like the
+    #   following:
     #
     #   DOC-EXAMPLE-BUCKET//AWSLogs/aws\_account\_id
     #   @return [String]

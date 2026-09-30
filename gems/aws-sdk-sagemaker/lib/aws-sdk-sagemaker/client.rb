@@ -3062,6 +3062,12 @@ module Aws::SageMaker
     #       },
     #       slurm: {
     #         slurm_config_strategy: "Overwrite", # accepts Overwrite, Managed, Merge
+    #         accounting_database: {
+    #           endpoint: "ClusterAccountingDatabaseEndpoint", # required
+    #           port: 1,
+    #           name: "ClusterAccountingDatabaseName",
+    #           secret_arn: "ClusterAccountingDatabaseSecretArn", # required
+    #         },
     #       },
     #     },
     #     node_recovery: "Automatic", # accepts Automatic, None
@@ -15267,6 +15273,10 @@ module Aws::SageMaker
     #   resp.vpc_config.subnets[0] #=> String
     #   resp.orchestrator.eks.cluster_arn #=> String
     #   resp.orchestrator.slurm.slurm_config_strategy #=> String, one of "Overwrite", "Managed", "Merge"
+    #   resp.orchestrator.slurm.accounting_database.endpoint #=> String
+    #   resp.orchestrator.slurm.accounting_database.port #=> Integer
+    #   resp.orchestrator.slurm.accounting_database.name #=> String
+    #   resp.orchestrator.slurm.accounting_database.secret_arn #=> String
     #   resp.tiered_storage_config.mode #=> String, one of "Enable", "Disable"
     #   resp.tiered_storage_config.instance_memory_allocation_percentage #=> Integer
     #   resp.node_recovery #=> String, one of "Automatic", "None"
@@ -15346,6 +15356,12 @@ module Aws::SageMaker
     #   resp.event_details.event_details.event_metadata.instance.failure_message #=> String
     #   resp.event_details.event_details.event_metadata.instance.lcs_execution_state #=> String
     #   resp.event_details.event_details.event_metadata.instance.node_logical_id #=> String
+    #   resp.event_details.event_details.event_metadata.database_configuration.rollback_status #=> String, one of "NotApplicable", "Reverted", "RevertFailed"
+    #   resp.event_details.event_details.event_metadata.database_configuration.advisory #=> String
+    #   resp.event_details.event_details.event_metadata.database_configuration.failure_message #=> String
+    #   resp.event_details.event_details.event_metadata.slurm_health.component #=> String, one of "Slurmdbd"
+    #   resp.event_details.event_details.event_metadata.slurm_health.status #=> String, one of "Healthy", "Unhealthy"
+    #   resp.event_details.event_details.event_metadata.slurm_health.reason #=> String, one of "DaemonDown", "DaemonDisabled", "DbUnreachable"
     #   resp.event_details.description #=> String
     #   resp.event_details.event_level #=> String, one of "Info", "Warn", "Error"
     #
@@ -30821,6 +30837,12 @@ module Aws::SageMaker
     #       },
     #       slurm: {
     #         slurm_config_strategy: "Overwrite", # accepts Overwrite, Managed, Merge
+    #         accounting_database: {
+    #           endpoint: "ClusterAccountingDatabaseEndpoint", # required
+    #           port: 1,
+    #           name: "ClusterAccountingDatabaseName",
+    #           secret_arn: "ClusterAccountingDatabaseSecretArn", # required
+    #         },
     #       },
     #     },
     #   })
@@ -34760,7 +34782,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.396.0'
+      context[:gem_version] = '1.397.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

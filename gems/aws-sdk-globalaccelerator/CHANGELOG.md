@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2026-09-30)
+------------------
+
+* Feature - IpSets now include the Network Zone for each Static IP address.
+
 1.96.0 (2026-09-11)
 ------------------
 

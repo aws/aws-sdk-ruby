@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2026-09-30)
+------------------
+
+* Feature - Enablement for Bedrock PaymentManager logs via Observability Admin Telemetry Rule
+
 1.40.0 (2026-09-22)
 ------------------
 

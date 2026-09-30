@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.279.0 (2026-09-30)
+------------------
+
+* Feature - Enable Catalog ID for crawler, column statistics and materialized views.
+
 1.278.0 (2026-09-29)
 ------------------
 

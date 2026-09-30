@@ -1247,6 +1247,7 @@ module Aws::Glue
       attr_accessor configuration: ::String
       attr_accessor crawler_security_configuration: ::String
       attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -1393,6 +1394,7 @@ module Aws::Glue
       attr_accessor configuration: ::String
       attr_accessor crawler_security_configuration: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -2343,6 +2345,7 @@ module Aws::Glue
     class DeleteColumnStatisticsTaskSettingsRequest
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -3339,6 +3342,7 @@ module Aws::Glue
       attr_accessor table_name: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -3351,6 +3355,7 @@ module Aws::Glue
     class GetColumnStatisticsTaskSettingsRequest
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -7204,6 +7209,7 @@ module Aws::Glue
     class StartColumnStatisticsTaskRunScheduleRequest
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -7436,6 +7442,7 @@ module Aws::Glue
     class StopColumnStatisticsTaskRunRequest
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -7445,6 +7452,7 @@ module Aws::Glue
     class StopColumnStatisticsTaskRunScheduleRequest
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -8005,6 +8013,7 @@ module Aws::Glue
       attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration
       attr_accessor configuration: ::String
       attr_accessor crawler_security_configuration: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 

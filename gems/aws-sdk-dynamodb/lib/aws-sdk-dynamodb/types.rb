@@ -3825,6 +3825,12 @@ module Aws::DynamoDB
     #   export.
     #   @return [Types::IncrementalExportSpecification]
     #
+    # @!attribute [rw] filter_specification
+    #   The filter criteria applied to the export. When present, only items
+    #   that match the specified key conditions and filter expressions are
+    #   included in the export output.
+    #   @return [Types::FilterSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportDescription AWS API Documentation
     #
     class ExportDescription < Struct.new(
@@ -3848,7 +3854,8 @@ module Aws::DynamoDB
       :billed_size_bytes,
       :item_count,
       :export_type,
-      :incremental_export_specification)
+      :incremental_export_specification,
+      :filter_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3971,6 +3978,12 @@ module Aws::DynamoDB
     #   export.
     #   @return [Types::IncrementalExportSpecification]
     #
+    # @!attribute [rw] filter_specification
+    #   The criteria used to filter which items are included in the
+    #   point-in-time export. When you specify this parameter, only items
+    #   that match the key conditions and filter expressions are exported.
+    #   @return [Types::FilterSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportTableToPointInTimeInput AWS API Documentation
     #
     class ExportTableToPointInTimeInput < Struct.new(
@@ -3984,7 +3997,8 @@ module Aws::DynamoDB
       :s3_sse_kms_key_id,
       :export_format,
       :export_type,
-      :incremental_export_specification)
+      :incremental_export_specification,
+      :filter_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4016,6 +4030,66 @@ module Aws::DynamoDB
     class FailureException < Struct.new(
       :exception_name,
       :exception_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the filter criteria used to limit which items are included in
+    # an export. If you don't include this parameter, all items and
+    # attributes are exported.
+    #
+    # @!attribute [rw] filter_expression
+    #   A condition that filters which items are included in the export.
+    #   This parameter uses the same syntax as `FilterExpression` in `Query`
+    #   and `Scan`. If you don't provide `KeyConditionExpression`, this
+    #   expression can also reference key attributes. If you don't specify
+    #   this parameter, all items are included in the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] projection_expression
+    #   The attributes you want to retrieve for items included in the
+    #   export. Separate attribute names in the expression with commas. If
+    #   you don't specify this parameter, all attributes are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_condition_expression
+    #   A condition expression that filters items by key values. The
+    #   expression must test equality on a single partition key value and
+    #   can optionally compare a sort key value. This parameter uses the
+    #   same syntax as `KeyConditionExpression` in `Query`. When you provide
+    #   this parameter, `FilterExpression` can only reference non-key
+    #   attributes. If you don't specify this parameter, all items are
+    #   eligible for export.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression_attribute_names
+    #   One or more substitution tokens for attribute names in an
+    #   expression. For more information, see [Expression Attribute
+    #   Names][1] in the Amazon DynamoDB Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] expression_attribute_values
+    #   One or more values that can be substituted in an expression. For
+    #   more information, see [Expression Attribute Values][1] in the Amazon
+    #   DynamoDB Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeValues.html
+    #   @return [Hash<String,Types::AttributeValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/FilterSpecification AWS API Documentation
+    #
+    class FilterSpecification < Struct.new(
+      :filter_expression,
+      :projection_expression,
+      :key_condition_expression,
+      :expression_attribute_names,
+      :expression_attribute_values)
       SENSITIVE = []
       include Aws::Structure
     end
