@@ -140,7 +140,7 @@ module Aws
       end
 
       def upload_with_executor(pending, completed, options)
-        upload_attempts = 0
+        queued_parts = 0
         completion_queue = Queue.new
         abort_upload = false
         errors = []
@@ -149,25 +149,33 @@ module Aws
         while (part = pending.shift)
           break if abort_upload
 
-          upload_attempts += 1
-          @executor.post(part) do |p|
-            Thread.current[:net_http_override_body_stream_chunk] = @http_chunk_size if @http_chunk_size
-            update_progress(progress, p)
-            resp = @client.upload_part(p)
-            completed_part = { etag: resp.etag, part_number: p[:part_number] }
-            apply_part_checksum(resp, completed_part)
-            completed.push(completed_part)
+          begin
+            @executor.post(part) do |p|
+              Thread.current[:net_http_override_body_stream_chunk] = @http_chunk_size if @http_chunk_size
+              update_progress(progress, p)
+              resp = @client.upload_part(p)
+              completed_part = { etag: resp.etag, part_number: p[:part_number] }
+              apply_part_checksum(resp, completed_part)
+              completed.push(completed_part)
+            # Any error, or the upload completes without this part.
+            rescue Exception => e # rubocop:disable Lint/RescueException
+              abort_upload = true
+              errors << e
+            ensure
+              p[:body].close
+              Thread.current[:net_http_override_body_stream_chunk] = nil if @http_chunk_size
+              completion_queue << :done
+            end
+            queued_parts += 1
           rescue StandardError => e
+            # Rejected by the executor; abort rather than orphan the upload.
             abort_upload = true
             errors << e
-          ensure
-            p[:body].close
-            Thread.current[:net_http_override_body_stream_chunk] = nil if @http_chunk_size
-            completion_queue << :done
+            break
           end
         end
 
-        upload_attempts.times { completion_queue.pop }
+        queued_parts.times { completion_queue.pop }
         errors
       end
 

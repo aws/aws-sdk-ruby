@@ -113,18 +113,22 @@ module Aws
       def read_to_part_body(read_pipe)
         return if read_pipe.closed?
 
-        temp_io = @tempfile ? Tempfile.new('aws-sdk-s3-upload_stream') : StringIO.new(String.new)
-        temp_io.binmode
-        bytes_copied = IO.copy_stream(read_pipe, temp_io, @part_size)
-        temp_io.rewind
-        if bytes_copied.zero?
-          if temp_io.is_a?(Tempfile)
+        if @tempfile
+          temp_io = Tempfile.new('aws-sdk-s3-upload_stream')
+          temp_io.binmode
+          bytes_copied = IO.copy_stream(read_pipe, temp_io, @part_size)
+          temp_io.rewind
+          if bytes_copied.zero?
             temp_io.close
             temp_io.unlink
+            nil
+          else
+            temp_io
           end
-          nil
         else
-          temp_io
+          # A single sized read; copy_stream into a StringIO grows by doubling and fragments the heap.
+          data = read_pipe.read(@part_size)
+          data.nil? ? nil : StringIO.new(data)
         end
       end
 
@@ -139,20 +143,31 @@ module Aws
           end
           break unless part_body || current_part_num == 1
 
-          queued_parts += 1
-          @executor.post(part_body, current_part_num, options) do |body, num, opts|
-            part = opts.merge(body: body, part_number: num)
-            resp = @client.upload_part(part)
-            completed_part = create_completed_part(resp, part)
-            completed.push(completed_part)
+          begin
+            @executor.post(part_body, current_part_num, options) do |body, num, opts|
+              part = opts.merge(body: body, part_number: num)
+              resp = @client.upload_part(part)
+              completed_part = create_completed_part(resp, part)
+              completed.push(completed_part)
+            # Any error, or the upload completes without this part.
+            rescue Exception => e # rubocop:disable Lint/RescueException
+              mutex.synchronize do
+                errors.push(e)
+                read_pipe.close_read unless read_pipe.closed?
+              end
+            ensure
+              clear_body(body)
+              completion_queue << :done
+            end
+            queued_parts += 1
           rescue StandardError => e
+            # Rejected by the executor. Closing the pipe stops the producer so the upload can abort.
             mutex.synchronize do
               errors.push(e)
               read_pipe.close_read unless read_pipe.closed?
             end
-          ensure
-            clear_body(body)
-            completion_queue << :done
+            clear_body(part_body)
+            break
           end
         end
         queued_parts.times { completion_queue.pop }
