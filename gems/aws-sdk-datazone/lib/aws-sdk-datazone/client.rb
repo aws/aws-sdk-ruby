@@ -8159,6 +8159,7 @@ module Aws::DataZone
     #   * {Types::GetNotebookRunOutput#timeout_configuration #timeout_configuration} => Types::TimeoutConfig
     #   * {Types::GetNotebookRunOutput#environment_configuration #environment_configuration} => Types::EnvironmentConfig
     #   * {Types::GetNotebookRunOutput#storage_configuration #storage_configuration} => Types::StorageConfig
+    #   * {Types::GetNotebookRunOutput#notification_configuration #notification_configuration} => Types::NotificationConfig
     #   * {Types::GetNotebookRunOutput#trigger_source #trigger_source} => Types::TriggerSource
     #   * {Types::GetNotebookRunOutput#error #error} => Types::NotebookRunError
     #   * {Types::GetNotebookRunOutput#created_at #created_at} => Time
@@ -8202,6 +8203,8 @@ module Aws::DataZone
     #   resp.environment_configuration.package_config.package_specification #=> String
     #   resp.storage_configuration.project_s3_path #=> String
     #   resp.storage_configuration.kms_key_arn #=> String
+    #   resp.notification_configuration.notify_on #=> Array
+    #   resp.notification_configuration.notify_on[0] #=> String, one of "SUCCEEDED", "FAILED", "STOPPED", "QUEUED", "STARTING", "RUNNING", "STOPPING"
     #   resp.trigger_source.type #=> String, one of "MANUAL", "SCHEDULED", "WORKFLOW"
     #   resp.trigger_source.name #=> String
     #   resp.error.message #=> String
@@ -13827,6 +13830,10 @@ module Aws::DataZone
     #   The timeout configuration for the notebook run. The default timeout is
     #   720 minutes (12 hours) and the maximum is 1440 minutes (24 hours).
     #
+    # @option params [Types::NotificationConfig] :notification_configuration
+    #   The notification configuration for the notebook run. Use this to
+    #   specify the notebook run states that trigger notifications.
+    #
     # @option params [Types::TriggerSource] :trigger_source
     #   The source that triggered the notebook run.
     #
@@ -13863,6 +13870,7 @@ module Aws::DataZone
     #   * {Types::StartNotebookRunOutput#timeout_configuration #timeout_configuration} => Types::TimeoutConfig
     #   * {Types::StartNotebookRunOutput#environment_configuration #environment_configuration} => Types::EnvironmentConfig
     #   * {Types::StartNotebookRunOutput#storage_configuration #storage_configuration} => Types::StorageConfig
+    #   * {Types::StartNotebookRunOutput#notification_configuration #notification_configuration} => Types::NotificationConfig
     #   * {Types::StartNotebookRunOutput#trigger_source #trigger_source} => Types::TriggerSource
     #   * {Types::StartNotebookRunOutput#error #error} => Types::NotebookRunError
     #   * {Types::StartNotebookRunOutput#created_at #created_at} => Time
@@ -13891,6 +13899,9 @@ module Aws::DataZone
     #     },
     #     timeout_configuration: {
     #       run_timeout_in_minutes: 1,
+    #     },
+    #     notification_configuration: {
+    #       notify_on: ["SUCCEEDED"], # required, accepts SUCCEEDED, FAILED, STOPPED, QUEUED, STARTING, RUNNING, STOPPING
     #     },
     #     trigger_source: {
     #       type: "MANUAL", # accepts MANUAL, SCHEDULED, WORKFLOW
@@ -13932,6 +13943,8 @@ module Aws::DataZone
     #   resp.environment_configuration.package_config.package_specification #=> String
     #   resp.storage_configuration.project_s3_path #=> String
     #   resp.storage_configuration.kms_key_arn #=> String
+    #   resp.notification_configuration.notify_on #=> Array
+    #   resp.notification_configuration.notify_on[0] #=> String, one of "SUCCEEDED", "FAILED", "STOPPED", "QUEUED", "STARTING", "RUNNING", "STOPPING"
     #   resp.trigger_source.type #=> String, one of "MANUAL", "SCHEDULED", "WORKFLOW"
     #   resp.trigger_source.name #=> String
     #   resp.error.message #=> String
@@ -16694,7 +16707,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -441,7 +441,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_integration-instance_method
       def create_integration: (
-                                provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE"),
+                                provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS"),
                                 input: {
                                   github: {
                                     code: ::String,
@@ -467,6 +467,16 @@ module Aws
                                     code: ::String,
                                     state: ::String,
                                     site_url: ::String
+                                  }?,
+                                  azure_dev_ops: {
+                                    code: ::String,
+                                    state: ::String,
+                                    organization_name: ::String
+                                  }?,
+                                  bitbucket_data_center: {
+                                    target_url: ::String,
+                                    code: ::String,
+                                    state: ::String
                                   }?
                                 },
                                 integration_display_name: ::String,
@@ -844,11 +854,12 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIntegrationOutput]
         def integration_id: () -> ::String
         def installation_id: () -> ::String
-        def provider: () -> ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
+        def provider: () -> ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
         def provider_type: () -> ("SOURCE_CODE" | "DOCUMENTATION")
         def display_name: () -> ::String
         def kms_key_id: () -> ::String
         def target_url: () -> ::String
+        def webhook_url: () -> ::String
         def private_connection_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#get_integration-instance_method
@@ -903,7 +914,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#initiate_provider_registration-instance_method
       def initiate_provider_registration: (
-                                            provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
+                                            provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS"),
+                                            ?target_url: ::String,
+                                            ?organization_name: ::String,
+                                            ?client_id: ::String,
+                                            ?client_secret: ::String
                                           ) -> _InitiateProviderRegistrationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiateProviderRegistrationResponseSuccess
 
@@ -1060,7 +1075,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#list_integrations-instance_method
       def list_integrations: (
                                ?filter: {
-                                 provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")?,
+                                 provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")?,
                                  provider_type: ("SOURCE_CODE" | "DOCUMENTATION")?
                                },
                                ?next_token: ::String,
@@ -1496,6 +1511,11 @@ module Aws
                                                  page_id: ::String,
                                                  title: ::String?,
                                                  space_title: ::String?
+                                               }?,
+                                               azure_dev_ops_repository: {
+                                                 name: ::String,
+                                                 organization: ::String,
+                                                 project: ::String?
                                                }?
                                              },
                                              capabilities: {
@@ -1515,12 +1535,29 @@ module Aws
                                                  fetch_document: bool?,
                                                  create_document: bool?,
                                                  update_document: bool?
+                                               }?,
+                                               azure_dev_ops: {
+                                                 leave_comments: bool?,
+                                                 remediate_code: bool?
                                                }?
                                              }?
                                            }
                                          ]
                                        ) -> _UpdateIntegratedResourcesResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntegratedResourcesResponseSuccess
+
+      interface _UpdateIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIntegrationOutput]
+        def integration_id: () -> ::String
+        def webhook_url: () -> ::String
+        def secret: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_integration-instance_method
+      def update_integration: (
+                                integration_id: ::String,
+                                webhook_action: ("CREATE_IF_ABSENT" | "ROTATE")
+                              ) -> _UpdateIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntegrationResponseSuccess
 
       interface _UpdatePentestResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePentestOutput]

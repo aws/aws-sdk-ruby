@@ -479,7 +479,17 @@ module Aws
                             int: ::String?,
                             float: ::String?,
                             string: ::String?,
-                            path: ::String?
+                            path: ::String?,
+                            bool: ::String?,
+                            range_expr: ::String?,
+                            string_list: Array[::String]?,
+                            path_list: Array[::String]?,
+                            int_list: Array[::String]?,
+                            float_list: Array[::String]?,
+                            bool_list: Array[::String]?,
+                            int_list_list: Array[
+                              Array[::String]
+                            ]?
                           }],
                         ?attachments: {
                           manifests: Array[

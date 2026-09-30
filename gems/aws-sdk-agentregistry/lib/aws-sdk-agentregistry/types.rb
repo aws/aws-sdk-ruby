@@ -685,12 +685,12 @@ module Aws::AgentRegistry
     #   results. Supports the field-level operators `$eq`, `$ne`, and `$in`,
     #   and the logical operators `$and` and `$or` on filterable fields.
     #
-    #   You can also filter on custom metadata fields using the
+    #   Specifies additional filtering on custom metadata fields using the
     #   `customMetadata.{key}` prefix. For example, to filter by a custom
     #   metadata field: `{"customMetadata.environment": {"$eq":
-    #   "production"}}`. Filter values must be strings, so match a boolean
-    #   field on its string form: `{"customMetadata.requiresApproval":
-    #   {"$eq": "true"}}`.
+    #   "production"}}`. For a Boolean field, you can also use a native JSON
+    #   boolean value, for example: `{"customMetadata.requiresApproval":
+    #   {"$eq": true}}`.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/SearchDiscoverableRegistryRecordsRequest AWS API Documentation

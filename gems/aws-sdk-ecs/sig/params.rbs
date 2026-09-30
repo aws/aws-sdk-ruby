@@ -272,6 +272,17 @@ module Aws
       propagate_tags: ("TASK_DEFINITION" | "SERVICE" | "NONE")?
     }
 
+      type vpc_lattice_configuration = {
+      role_arn: ::String,
+      target_group_arn: ::String,
+      port_name: ::String,
+      advanced_configuration: {
+        alternate_target_group_arn: ::String?,
+        production_listener_rule: ::String?,
+        test_listener_rule: ::String?
+      }?
+    }
+
       type task_override = {
       container_overrides: Array[
         Params::container_override

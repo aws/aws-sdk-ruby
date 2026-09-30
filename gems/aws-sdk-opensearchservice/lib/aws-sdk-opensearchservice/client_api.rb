@@ -25,6 +25,7 @@ module Aws::OpenSearchService
     AWSServicePrincipal = Shapes::StringShape.new(name: 'AWSServicePrincipal')
     AcceptInboundConnectionRequest = Shapes::StructureShape.new(name: 'AcceptInboundConnectionRequest')
     AcceptInboundConnectionResponse = Shapes::StructureShape.new(name: 'AcceptInboundConnectionResponse')
+    AcceptedWarningsList = Shapes::ListShape.new(name: 'AcceptedWarningsList')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessPoliciesStatus = Shapes::StructureShape.new(name: 'AccessPoliciesStatus')
     ActionSeverity = Shapes::StringShape.new(name: 'ActionSeverity')
@@ -633,6 +634,7 @@ module Aws::OpenSearchService
     VPCOptions = Shapes::StructureShape.new(name: 'VPCOptions')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationFailure = Shapes::StructureShape.new(name: 'ValidationFailure')
+    ValidationFailureSeverity = Shapes::StringShape.new(name: 'ValidationFailureSeverity')
     ValidationFailures = Shapes::ListShape.new(name: 'ValidationFailures')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VersionList = Shapes::ListShape.new(name: 'VersionList')
@@ -681,6 +683,8 @@ module Aws::OpenSearchService
 
     AcceptInboundConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: InboundConnection, location_name: "Connection"))
     AcceptInboundConnectionResponse.struct_class = Types::AcceptInboundConnectionResponse
+
+    AcceptedWarningsList.member = Shapes::ShapeRef.new(shape: String)
 
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
@@ -958,6 +962,8 @@ module Aws::OpenSearchService
     ChangeProgressStatusDetails.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "LastUpdatedTime"))
     ChangeProgressStatusDetails.add_member(:config_change_status, Shapes::ShapeRef.new(shape: ConfigChangeStatus, location_name: "ConfigChangeStatus"))
     ChangeProgressStatusDetails.add_member(:initiated_by, Shapes::ShapeRef.new(shape: InitiatedBy, location_name: "InitiatedBy"))
+    ChangeProgressStatusDetails.add_member(:validation_failures, Shapes::ShapeRef.new(shape: ValidationFailures, location_name: "ValidationFailures"))
+    ChangeProgressStatusDetails.add_member(:accepted_warnings, Shapes::ShapeRef.new(shape: AcceptedWarningsList, location_name: "AcceptedWarnings"))
     ChangeProgressStatusDetails.struct_class = Types::ChangeProgressStatusDetails
 
     CloudWatchDirectQueryDataSource.add_member(:role_arn, Shapes::ShapeRef.new(shape: DirectQueryDataSourceRoleArn, required: true, location_name: "RoleArn"))
@@ -1538,6 +1544,7 @@ module Aws::OpenSearchService
     DryRunProgressStatus.add_member(:creation_date, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CreationDate"))
     DryRunProgressStatus.add_member(:update_date, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UpdateDate"))
     DryRunProgressStatus.add_member(:validation_failures, Shapes::ShapeRef.new(shape: ValidationFailures, location_name: "ValidationFailures"))
+    DryRunProgressStatus.add_member(:accepted_warnings, Shapes::ShapeRef.new(shape: AcceptedWarningsList, location_name: "AcceptedWarnings"))
     DryRunProgressStatus.struct_class = Types::DryRunProgressStatus
 
     DryRunResults.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "DeploymentType"))
@@ -2502,6 +2509,7 @@ module Aws::OpenSearchService
     UpdateDomainConfigRequest.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseRequestOptions, location_name: "AutomatedSnapshotPauseOptions"))
     UpdateDomainConfigRequest.add_member(:use_case, Shapes::ShapeRef.new(shape: DomainUseCase, location_name: "UseCase"))
     UpdateDomainConfigRequest.add_member(:engine_mode, Shapes::ShapeRef.new(shape: EngineMode, location_name: "EngineMode"))
+    UpdateDomainConfigRequest.add_member(:accepted_warnings, Shapes::ShapeRef.new(shape: AcceptedWarningsList, location_name: "AcceptedWarnings"))
     UpdateDomainConfigRequest.struct_class = Types::UpdateDomainConfigRequest
 
     UpdateDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: DomainConfig, required: true, location_name: "DomainConfig"))
@@ -2609,6 +2617,7 @@ module Aws::OpenSearchService
 
     ValidationFailure.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
     ValidationFailure.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ValidationFailure.add_member(:severity, Shapes::ShapeRef.new(shape: ValidationFailureSeverity, location_name: "Severity"))
     ValidationFailure.struct_class = Types::ValidationFailure
 
     ValidationFailures.member = Shapes::ShapeRef.new(shape: ValidationFailure)

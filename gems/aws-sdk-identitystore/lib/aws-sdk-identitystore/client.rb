@@ -486,6 +486,10 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [String] :display_name
     #   A string containing the name of the group. This value is commonly
     #   displayed when the group is referenced. `Administrator` and
@@ -497,8 +501,10 @@ module Aws::IdentityStore
     #
     # @return [Types::CreateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateGroupResponse#group_id #group_id} => String
     #   * {Types::CreateGroupResponse#identity_store_id #identity_store_id} => String
+    #   * {Types::CreateGroupResponse#group_id #group_id} => String
+    #   * {Types::CreateGroupResponse#group_arn #group_arn} => String
+    #   * {Types::CreateGroupResponse#revision #revision} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -510,8 +516,10 @@ module Aws::IdentityStore
     #
     # @example Response structure
     #
-    #   resp.group_id #=> String
     #   resp.identity_store_id #=> String
+    #   resp.group_id #=> String
+    #   resp.group_arn #=> String
+    #   resp.revision #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateGroup AWS API Documentation
     #
@@ -529,8 +537,16 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, String] :group_id
     #   The identifier for a group in the identity store.
+    #
+    #   You can specify the group by ID or by Amazon Resource Name (ARN). For
+    #   example, group ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE22222` or group ARN
+    #   `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     #
     # @option params [required, Types::MemberId] :member_id
     #   An object that contains the identifier of a group member. Setting the
@@ -539,8 +555,9 @@ module Aws::IdentityStore
     #
     # @return [Types::CreateGroupMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateGroupMembershipResponse#membership_id #membership_id} => String
     #   * {Types::CreateGroupMembershipResponse#identity_store_id #identity_store_id} => String
+    #   * {Types::CreateGroupMembershipResponse#membership_id #membership_id} => String
+    #   * {Types::CreateGroupMembershipResponse#membership_arn #membership_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -554,8 +571,9 @@ module Aws::IdentityStore
     #
     # @example Response structure
     #
-    #   resp.membership_id #=> String
     #   resp.identity_store_id #=> String
+    #   resp.membership_id #=> String
+    #   resp.membership_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateGroupMembership AWS API Documentation
     #
@@ -570,6 +588,10 @@ module Aws::IdentityStore
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
+    #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
     #
     # @option params [String] :user_name
     #   A unique string used to identify the user. The length limit is 128
@@ -651,6 +673,8 @@ module Aws::IdentityStore
     #
     #   * {Types::CreateUserResponse#identity_store_id #identity_store_id} => String
     #   * {Types::CreateUserResponse#user_id #user_id} => String
+    #   * {Types::CreateUserResponse#user_arn #user_arn} => String
+    #   * {Types::CreateUserResponse#revision #revision} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -725,6 +749,8 @@ module Aws::IdentityStore
     #
     #   resp.identity_store_id #=> String
     #   resp.user_id #=> String
+    #   resp.user_arn #=> String
+    #   resp.revision #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateUser AWS API Documentation
     #
@@ -740,8 +766,23 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, String] :group_id
     #   The identifier for a group in the identity store.
+    #
+    #   You can specify the group by ID or by Amazon Resource Name (ARN). For
+    #   example, group ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE22222` or group ARN
+    #   `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
+    #
+    # @option params [String] :revision
+    #   The expected current revision of the group. When you provide this
+    #   value, the group is deleted only if it matches the current revision of
+    #   the group in the identity store. If the value doesn't match, the
+    #   operation fails with a `ConflictException`. If you don't provide this
+    #   value, the group is deleted regardless of its current revision.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -750,6 +791,7 @@ module Aws::IdentityStore
     #   resp = client.delete_group({
     #     identity_store_id: "IdentityStoreId", # required
     #     group_id: "ResourceId", # required
+    #     revision: "ResourceRevision",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteGroup AWS API Documentation
@@ -766,8 +808,17 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, String] :membership_id
     #   The identifier for a `GroupMembership` in an identity store.
+    #
+    #   You can specify the group membership by ID or by Amazon Resource Name
+    #   (ARN). For example, membership ID
+    #   `a1b2c3d4-5678-90ab-cdef-EXAMPLE33333` or membership ARN
+    #   `arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -792,8 +843,23 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, String] :user_id
     #   The identifier for a user in the identity store.
+    #
+    #   You can specify the user by ID or by Amazon Resource Name (ARN). For
+    #   example, user ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111` or user ARN
+    #   `arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
+    #
+    # @option params [String] :revision
+    #   The expected current revision of the user. When you provide this
+    #   value, the user is deleted only if it matches the current revision of
+    #   the user in the identity store. If the value doesn't match, the
+    #   operation fails with a `ConflictException`. If you don't provide this
+    #   value, the user is deleted regardless of its current revision.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -802,6 +868,7 @@ module Aws::IdentityStore
     #   resp = client.delete_user({
     #     identity_store_id: "IdentityStoreId", # required
     #     user_id: "ResourceId", # required
+    #     revision: "ResourceRevision",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DeleteUser AWS API Documentation
@@ -834,12 +901,23 @@ module Aws::IdentityStore
     #   lower case letters. This value is generated at the time that a new
     #   identity store is created.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, String] :group_id
     #   The identifier for a group in the identity store.
     #
+    #   You can specify the group by ID or by Amazon Resource Name (ARN). For
+    #   example, group ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE22222` or group ARN
+    #   `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
+    #
     # @return [Types::DescribeGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeGroupResponse#identity_store_id #identity_store_id} => String
     #   * {Types::DescribeGroupResponse#group_id #group_id} => String
+    #   * {Types::DescribeGroupResponse#group_arn #group_arn} => String
+    #   * {Types::DescribeGroupResponse#revision #revision} => String
     #   * {Types::DescribeGroupResponse#display_name #display_name} => String
     #   * {Types::DescribeGroupResponse#external_ids #external_ids} => Array&lt;Types::ExternalId&gt;
     #   * {Types::DescribeGroupResponse#description #description} => String
@@ -847,7 +925,6 @@ module Aws::IdentityStore
     #   * {Types::DescribeGroupResponse#updated_at #updated_at} => Time
     #   * {Types::DescribeGroupResponse#created_by #created_by} => String
     #   * {Types::DescribeGroupResponse#updated_by #updated_by} => String
-    #   * {Types::DescribeGroupResponse#identity_store_id #identity_store_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -858,7 +935,10 @@ module Aws::IdentityStore
     #
     # @example Response structure
     #
+    #   resp.identity_store_id #=> String
     #   resp.group_id #=> String
+    #   resp.group_arn #=> String
+    #   resp.revision #=> String
     #   resp.display_name #=> String
     #   resp.external_ids #=> Array
     #   resp.external_ids[0].issuer #=> String
@@ -868,7 +948,6 @@ module Aws::IdentityStore
     #   resp.updated_at #=> Time
     #   resp.created_by #=> String
     #   resp.updated_by #=> String
-    #   resp.identity_store_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeGroup AWS API Documentation
     #
@@ -896,13 +975,23 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, String] :membership_id
     #   The identifier for a `GroupMembership` in an identity store.
+    #
+    #   You can specify the group membership by ID or by Amazon Resource Name
+    #   (ARN). For example, membership ID
+    #   `a1b2c3d4-5678-90ab-cdef-EXAMPLE33333` or membership ARN
+    #   `arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333`.
     #
     # @return [Types::DescribeGroupMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeGroupMembershipResponse#identity_store_id #identity_store_id} => String
     #   * {Types::DescribeGroupMembershipResponse#membership_id #membership_id} => String
+    #   * {Types::DescribeGroupMembershipResponse#membership_arn #membership_arn} => String
     #   * {Types::DescribeGroupMembershipResponse#group_id #group_id} => String
     #   * {Types::DescribeGroupMembershipResponse#member_id #member_id} => Types::MemberId
     #   * {Types::DescribeGroupMembershipResponse#created_at #created_at} => Time
@@ -921,6 +1010,7 @@ module Aws::IdentityStore
     #
     #   resp.identity_store_id #=> String
     #   resp.membership_id #=> String
+    #   resp.membership_arn #=> String
     #   resp.group_id #=> String
     #   resp.member_id.user_id #=> String
     #   resp.created_at #=> Time
@@ -934,6 +1024,49 @@ module Aws::IdentityStore
     # @param [Hash] params ({})
     def describe_group_membership(params = {}, options = {})
       req = build_request(:describe_group_membership, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about the specified identity store, including its
+    # Amazon Resource Name (ARN) and network configuration.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
+    # @return [Types::DescribeIdentityStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeIdentityStoreResponse#identity_store_id #identity_store_id} => String
+    #   * {Types::DescribeIdentityStoreResponse#identity_store_arn #identity_store_arn} => String
+    #   * {Types::DescribeIdentityStoreResponse#network_configuration #network_configuration} => Types::NetworkConfigurationDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_identity_store({
+    #     identity_store_id: "IdentityStoreId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_store_id #=> String
+    #   resp.identity_store_arn #=> String
+    #   resp.network_configuration.vpce_access_required #=> Boolean
+    #   resp.network_configuration.api_restrict_source_vpcs #=> Array
+    #   resp.network_configuration.api_restrict_source_vpcs[0] #=> String
+    #   resp.network_configuration.api_allow_source_ips #=> Array
+    #   resp.network_configuration.api_allow_source_ips[0] #=> String
+    #   resp.network_configuration.scim_allow_source_ips #=> Array
+    #   resp.network_configuration.scim_allow_source_ips[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeIdentityStore AWS API Documentation
+    #
+    # @overload describe_identity_store(params = {})
+    # @param [Hash] params ({})
+    def describe_identity_store(params = {}, options = {})
+      req = build_request(:describe_identity_store, params)
       req.send_request(options)
     end
 
@@ -958,8 +1091,16 @@ module Aws::IdentityStore
     #   lower case letters. This value is generated at the time that a new
     #   identity store is created.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, String] :user_id
     #   The identifier for a user in the identity store.
+    #
+    #   You can specify the user by ID or by Amazon Resource Name (ARN). For
+    #   example, user ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111` or user ARN
+    #   `arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
     #
     # @option params [Array<String>] :extensions
     #   A collection of extension names indicating what extensions the service
@@ -970,6 +1111,8 @@ module Aws::IdentityStore
     #
     #   * {Types::DescribeUserResponse#identity_store_id #identity_store_id} => String
     #   * {Types::DescribeUserResponse#user_id #user_id} => String
+    #   * {Types::DescribeUserResponse#user_arn #user_arn} => String
+    #   * {Types::DescribeUserResponse#revision #revision} => String
     #   * {Types::DescribeUserResponse#user_name #user_name} => String
     #   * {Types::DescribeUserResponse#external_ids #external_ids} => Array&lt;Types::ExternalId&gt;
     #   * {Types::DescribeUserResponse#name #name} => Types::Name
@@ -1007,6 +1150,8 @@ module Aws::IdentityStore
     #
     #   resp.identity_store_id #=> String
     #   resp.user_id #=> String
+    #   resp.user_arn #=> String
+    #   resp.revision #=> String
     #   resp.user_name #=> String
     #   resp.external_ids #=> Array
     #   resp.external_ids[0].issuer #=> String
@@ -1086,6 +1231,10 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, Types::AlternateIdentifier] :alternate_identifier
     #   A unique identifier for a user or group that is not the primary
     #   identifier. This value can be an identifier from an external identity
@@ -1095,8 +1244,9 @@ module Aws::IdentityStore
     #
     # @return [Types::GetGroupIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetGroupIdResponse#group_id #group_id} => String
     #   * {Types::GetGroupIdResponse#identity_store_id #identity_store_id} => String
+    #   * {Types::GetGroupIdResponse#group_id #group_id} => String
+    #   * {Types::GetGroupIdResponse#group_arn #group_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1116,8 +1266,9 @@ module Aws::IdentityStore
     #
     # @example Response structure
     #
-    #   resp.group_id #=> String
     #   resp.identity_store_id #=> String
+    #   resp.group_id #=> String
+    #   resp.group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetGroupId AWS API Documentation
     #
@@ -1144,8 +1295,16 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, String] :group_id
     #   The identifier for a group in the identity store.
+    #
+    #   You can specify the group by ID or by Amazon Resource Name (ARN). For
+    #   example, group ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE22222` or group ARN
+    #   `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     #
     # @option params [required, Types::MemberId] :member_id
     #   An object that contains the identifier of a group member. Setting the
@@ -1154,8 +1313,9 @@ module Aws::IdentityStore
     #
     # @return [Types::GetGroupMembershipIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetGroupMembershipIdResponse#membership_id #membership_id} => String
     #   * {Types::GetGroupMembershipIdResponse#identity_store_id #identity_store_id} => String
+    #   * {Types::GetGroupMembershipIdResponse#membership_id #membership_id} => String
+    #   * {Types::GetGroupMembershipIdResponse#membership_arn #membership_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1169,8 +1329,9 @@ module Aws::IdentityStore
     #
     # @example Response structure
     #
-    #   resp.membership_id #=> String
     #   resp.identity_store_id #=> String
+    #   resp.membership_id #=> String
+    #   resp.membership_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetGroupMembershipId AWS API Documentation
     #
@@ -1197,6 +1358,10 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, Types::AlternateIdentifier] :alternate_identifier
     #   A unique identifier for a user or group that is not the primary
     #   identifier. This value can be an identifier from an external identity
@@ -1208,6 +1373,7 @@ module Aws::IdentityStore
     #
     #   * {Types::GetUserIdResponse#identity_store_id #identity_store_id} => String
     #   * {Types::GetUserIdResponse#user_id #user_id} => String
+    #   * {Types::GetUserIdResponse#user_arn #user_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1229,6 +1395,7 @@ module Aws::IdentityStore
     #
     #   resp.identity_store_id #=> String
     #   resp.user_id #=> String
+    #   resp.user_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetUserId AWS API Documentation
     #
@@ -1256,11 +1423,19 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, Types::MemberId] :member_id
     #   An object containing the identifier of a group member.
     #
     # @option params [required, Array<String>] :group_ids
     #   A list of identifiers for groups in the identity store.
+    #
+    #   You can specify each group by ID or by Amazon Resource Name (ARN). For
+    #   example, group ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE22222` or group ARN
+    #   `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     #
     # @return [Types::IsMemberInGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1310,8 +1485,16 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, String] :group_id
     #   The identifier for a group in the identity store.
+    #
+    #   You can specify the group by ID or by Amazon Resource Name (ARN). For
+    #   example, group ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE22222` or group ARN
+    #   `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request. This
@@ -1323,8 +1506,8 @@ module Aws::IdentityStore
     #   ListGroupMemberships` API operations. This value is generated by the
     #   identity store service. It is returned in the API response if the
     #   total results are more than the size of one page. This token is also
-    #   returned when it is used in the API request to search for the next
-    #   page.
+    #   returned when it is used in the API request to retrieve the next page
+    #   of results.
     #
     # @return [Types::ListGroupMembershipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1347,6 +1530,7 @@ module Aws::IdentityStore
     #   resp.group_memberships #=> Array
     #   resp.group_memberships[0].identity_store_id #=> String
     #   resp.group_memberships[0].membership_id #=> String
+    #   resp.group_memberships[0].membership_arn #=> String
     #   resp.group_memberships[0].group_id #=> String
     #   resp.group_memberships[0].member_id.user_id #=> String
     #   resp.group_memberships[0].created_at #=> Time
@@ -1382,6 +1566,10 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, Types::MemberId] :member_id
     #   An object that contains the identifier of a group member. Setting the
     #   `UserID` field to the specific identifier for a user indicates that
@@ -1389,17 +1577,16 @@ module Aws::IdentityStore
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in the ` ListUsers` and `ListGroups` requests to
-    #   specify how many results to return in one page. The length limit is 50
-    #   characters.
+    #   parameter is used in all `List` requests to specify how many results
+    #   to return in one page.
     #
     # @option params [String] :next_token
     #   The pagination token used for the `ListUsers`, `ListGroups`, and `
     #   ListGroupMemberships` API operations. This value is generated by the
     #   identity store service. It is returned in the API response if the
     #   total results are more than the size of one page. This token is also
-    #   returned when it is used in the API request to search for the next
-    #   page.
+    #   returned when it is used in the API request to retrieve the next page
+    #   of results.
     #
     # @return [Types::ListGroupMembershipsForMemberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1424,6 +1611,7 @@ module Aws::IdentityStore
     #   resp.group_memberships #=> Array
     #   resp.group_memberships[0].identity_store_id #=> String
     #   resp.group_memberships[0].membership_id #=> String
+    #   resp.group_memberships[0].membership_arn #=> String
     #   resp.group_memberships[0].group_id #=> String
     #   resp.group_memberships[0].member_id.user_id #=> String
     #   resp.group_memberships[0].created_at #=> Time
@@ -1463,18 +1651,21 @@ module Aws::IdentityStore
     #   lower case letters. This value is generated at the time that a new
     #   identity store is created.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in the ` ListUsers` and `ListGroups` requests to
-    #   specify how many results to return in one page. The length limit is 50
-    #   characters.
+    #   parameter is used in all `List` requests to specify how many results
+    #   to return in one page.
     #
     # @option params [String] :next_token
     #   The pagination token used for the `ListUsers` and `ListGroups` API
     #   operations. This value is generated by the identity store service. It
     #   is returned in the API response if the total results are more than the
     #   size of one page. This token is also returned when it is used in the
-    #   API request to search for the next page.
+    #   API request to retrieve the next page of results.
     #
     # @option params [Array<Types::Filter>] :filters
     #   A list of `Filter` objects, which is used in the `ListUsers` and `
@@ -1504,7 +1695,10 @@ module Aws::IdentityStore
     # @example Response structure
     #
     #   resp.groups #=> Array
+    #   resp.groups[0].identity_store_id #=> String
     #   resp.groups[0].group_id #=> String
+    #   resp.groups[0].group_arn #=> String
+    #   resp.groups[0].revision #=> String
     #   resp.groups[0].display_name #=> String
     #   resp.groups[0].external_ids #=> Array
     #   resp.groups[0].external_ids[0].issuer #=> String
@@ -1514,7 +1708,6 @@ module Aws::IdentityStore
     #   resp.groups[0].updated_at #=> Time
     #   resp.groups[0].created_by #=> String
     #   resp.groups[0].updated_by #=> String
-    #   resp.groups[0].identity_store_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroups AWS API Documentation
@@ -1523,6 +1716,57 @@ module Aws::IdentityStore
     # @param [Hash] params ({})
     def list_groups(params = {}, options = {})
       req = build_request(:list_groups, params)
+      req.send_request(options)
+    end
+
+    # Lists the identity stores that you have access to. This operation
+    # returns only the identity store ID and Amazon Resource Name (ARN) of
+    # each identity store. To obtain additional information about an
+    # identity store, call `DescribeIdentityStore`.
+    #
+    # This operation returns results in paginated form. Use the `NextToken`
+    # parameter to retrieve additional pages of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per request. This parameter is
+    #   used in all ` List` operations to specify how many results to return
+    #   on one page. If you don't specify a value, the operation uses a
+    #   default page size.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used for the `ListIdentityStores` API operation.
+    #   This value is generated by the identity store service. It is returned
+    #   in the API response if the total results are more than the size of one
+    #   page. This token is also returned when it is used in the API request
+    #   to retrieve the next page of results.
+    #
+    # @return [Types::ListIdentityStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIdentityStoresResponse#identity_stores #identity_stores} => Array&lt;Types::IdentityStore&gt;
+    #   * {Types::ListIdentityStoresResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_identity_stores({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_stores #=> Array
+    #   resp.identity_stores[0].identity_store_id #=> String
+    #   resp.identity_stores[0].identity_store_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListIdentityStores AWS API Documentation
+    #
+    # @overload list_identity_stores(params = {})
+    # @param [Hash] params ({})
+    def list_identity_stores(params = {}, options = {})
+      req = build_request(:list_identity_stores, params)
       req.send_request(options)
     end
 
@@ -1548,6 +1792,10 @@ module Aws::IdentityStore
     #   lower case letters. This value is generated at the time that a new
     #   identity store is created.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [Array<String>] :extensions
     #   A collection of extension names indicating what extensions the service
     #   should retrieve alongside other user attributes.
@@ -1555,16 +1803,15 @@ module Aws::IdentityStore
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in the ` ListUsers` and `ListGroups` requests to
-    #   specify how many results to return in one page. The length limit is 50
-    #   characters.
+    #   parameter is used in all `List` requests to specify how many results
+    #   to return in one page.
     #
     # @option params [String] :next_token
     #   The pagination token used for the `ListUsers` and `ListGroups` API
     #   operations. This value is generated by the identity store service. It
     #   is returned in the API response if the total results are more than the
     #   size of one page. This token is also returned when it is used in the
-    #   API request to search for the next page.
+    #   API request to retrieve the next page of results.
     #
     # @option params [Array<Types::Filter>] :filters
     #   A list of `Filter` objects, which is used in the `ListUsers` and `
@@ -1597,6 +1844,8 @@ module Aws::IdentityStore
     #   resp.users #=> Array
     #   resp.users[0].identity_store_id #=> String
     #   resp.users[0].user_id #=> String
+    #   resp.users[0].user_arn #=> String
+    #   resp.users[0].revision #=> String
     #   resp.users[0].user_name #=> String
     #   resp.users[0].external_ids #=> Array
     #   resp.users[0].external_ids[0].issuer #=> String
@@ -1667,8 +1916,16 @@ module Aws::IdentityStore
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, String] :group_id
     #   The identifier for a group in the identity store.
+    #
+    #   You can specify the group by ID or by Amazon Resource Name (ARN). For
+    #   example, group ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE22222` or group ARN
+    #   `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     #
     # @option params [required, Array<Types::AttributeOperation>] :operations
     #   A list of `AttributeOperation` objects to apply to the requested
@@ -1680,7 +1937,20 @@ module Aws::IdentityStore
     #
     #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [String] :revision
+    #   The expected current revision of the group. When you provide this
+    #   value, the update is applied only if it matches the current revision
+    #   of the group in the identity store, which prevents you from
+    #   overwriting concurrent changes. If the value doesn't match, the
+    #   operation fails with a `ConflictException`. If you don't provide this
+    #   value, the update is applied unconditionally.
+    #
+    # @return [Types::UpdateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGroupResponse#identity_store_id #identity_store_id} => String
+    #   * {Types::UpdateGroupResponse#group_id #group_id} => String
+    #   * {Types::UpdateGroupResponse#group_arn #group_arn} => String
+    #   * {Types::UpdateGroupResponse#revision #revision} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1693,7 +1963,15 @@ module Aws::IdentityStore
     #         attribute_value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #       },
     #     ],
+    #     revision: "ResourceRevision",
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_store_id #=> String
+    #   resp.group_id #=> String
+    #   resp.group_arn #=> String
+    #   resp.revision #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UpdateGroup AWS API Documentation
     #
@@ -1704,14 +1982,76 @@ module Aws::IdentityStore
       req.send_request(options)
     end
 
+    # Updates the configuration of the specified identity store, including
+    # its network configuration.
+    #
+    # @option params [required, String] :identity_store_id
+    #   The globally unique identifier for the identity store.
+    #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
+    # @option params [Types::NetworkConfiguration] :network_configuration
+    #   The network configuration to apply to the identity store. This
+    #   controls whether access through a virtual private cloud (VPC) endpoint
+    #   is required and the source VPCs and IP addresses that are allowed to
+    #   access the identity store.
+    #
+    #   When you provide `NetworkConfiguration` in a request, the service
+    #   performs a full replacement of the identity store's current network
+    #   configuration with the values you specify. Any values that you omit
+    #   are cleared. To preserve or change the allowed source VPCs or IP
+    #   address ranges, include the complete set of values that you want in
+    #   the request. To clear a list, omit it; an empty list is not accepted.
+    #
+    # @return [Types::UpdateIdentityStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIdentityStoreResponse#identity_store_id #identity_store_id} => String
+    #   * {Types::UpdateIdentityStoreResponse#identity_store_arn #identity_store_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_identity_store({
+    #     identity_store_id: "IdentityStoreId", # required
+    #     network_configuration: {
+    #       vpce_access_required: false, # required
+    #       api_restrict_source_vpcs: ["VpcIdType"],
+    #       api_allow_source_ips: ["IpCidrType"],
+    #       scim_allow_source_ips: ["IpCidrType"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_store_id #=> String
+    #   resp.identity_store_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UpdateIdentityStore AWS API Documentation
+    #
+    # @overload update_identity_store(params = {})
+    # @param [Hash] params ({})
+    def update_identity_store(params = {}, options = {})
+      req = build_request(:update_identity_store, params)
+      req.send_request(options)
+    end
+
     # Updates the specified user metadata and attributes in the specified
     # identity store.
     #
     # @option params [required, String] :identity_store_id
     #   The globally unique identifier for the identity store.
     #
+    #   You can specify the identity store by ID or by Amazon Resource Name
+    #   (ARN). For example, identity store ID `d-1234567890` or identity store
+    #   ARN `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
+    #
     # @option params [required, String] :user_id
     #   The identifier for a user in the identity store.
+    #
+    #   You can specify the user by ID or by Amazon Resource Name (ARN). For
+    #   example, user ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111` or user ARN
+    #   `arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
     #
     # @option params [required, Array<Types::AttributeOperation>] :operations
     #   A list of `AttributeOperation` objects to apply to the requested user.
@@ -1723,7 +2063,20 @@ module Aws::IdentityStore
     #
     #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [String] :revision
+    #   The expected current revision of the user. When you provide this
+    #   value, the update is applied only if it matches the current revision
+    #   of the user in the identity store, which prevents you from overwriting
+    #   concurrent changes. If the value doesn't match, the operation fails
+    #   with a `ConflictException`. If you don't provide this value, the
+    #   update is applied unconditionally.
+    #
+    # @return [Types::UpdateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateUserResponse#identity_store_id #identity_store_id} => String
+    #   * {Types::UpdateUserResponse#user_id #user_id} => String
+    #   * {Types::UpdateUserResponse#user_arn #user_arn} => String
+    #   * {Types::UpdateUserResponse#revision #revision} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1736,7 +2089,15 @@ module Aws::IdentityStore
     #         attribute_value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #       },
     #     ],
+    #     revision: "ResourceRevision",
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_store_id #=> String
+    #   resp.user_id #=> String
+    #   resp.user_arn #=> String
+    #   resp.revision #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UpdateUser AWS API Documentation
     #
@@ -1765,7 +2126,7 @@ module Aws::IdentityStore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-identitystore'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

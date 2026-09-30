@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.654.0 (2026-09-29)
+------------------
+
+* Feature - Adds the LaunchStatus field to CapacityReservation in the DescribeCapacityReservations response. This field indicates whether you can currently launch instances into an UltraServer.
+
 1.653.0 (2026-09-28)
 ------------------
 

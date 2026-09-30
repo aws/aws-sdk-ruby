@@ -1269,6 +1269,9 @@ module Aws::Transfer
     #     CloudWatch Logs, so that you can determine when the client is making
     #     a `SETSTAT` call.
     #
+    #   * To specify which ports your Transfer Family server listens to, use
+    #     the `SftpPorts` parameter.
+    #
     #   * To determine whether your Transfer Family server resumes recent,
     #     negotiated sessions through a unique session ID, use the
     #     `TlsSessionResumptionMode` parameter.
@@ -1384,6 +1387,12 @@ module Aws::Transfer
     #       passive_ip: "PassiveIp",
     #       tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
     #       set_stat_option: "DEFAULT", # accepts DEFAULT, ENABLE_NO_OP
+    #       sftp_ports: [
+    #         {
+    #           sftp_port: 1, # required
+    #           communication_mode: "CLIENT_TALK_FIRST", # accepts CLIENT_TALK_FIRST, SERVER_TALK_FIRST
+    #         },
+    #       ],
     #       as_2_transports: ["HTTP"], # accepts HTTP
     #       proxy_config: {
     #         sftp_mode: "NONE", # accepts NONE, PROXY_PROTOCOL_V2_ENFORCED
@@ -2695,6 +2704,9 @@ module Aws::Transfer
     #   resp.server.protocol_details.passive_ip #=> String
     #   resp.server.protocol_details.tls_session_resumption_mode #=> String, one of "DISABLED", "ENABLED", "ENFORCED"
     #   resp.server.protocol_details.set_stat_option #=> String, one of "DEFAULT", "ENABLE_NO_OP"
+    #   resp.server.protocol_details.sftp_ports #=> Array
+    #   resp.server.protocol_details.sftp_ports[0].sftp_port #=> Integer
+    #   resp.server.protocol_details.sftp_ports[0].communication_mode #=> String, one of "CLIENT_TALK_FIRST", "SERVER_TALK_FIRST"
     #   resp.server.protocol_details.as_2_transports #=> Array
     #   resp.server.protocol_details.as_2_transports[0] #=> String, one of "HTTP"
     #   resp.server.protocol_details.proxy_config.sftp_mode #=> String, one of "NONE", "PROXY_PROTOCOL_V2_ENFORCED"
@@ -5154,6 +5166,9 @@ module Aws::Transfer
     #     CloudWatch Logs, so that you can determine when the client is making
     #     a `SETSTAT` call.
     #
+    #   * To specify which ports your Transfer Family server listens to, use
+    #     the `SftpPorts` parameter.
+    #
     #   * To determine whether your Transfer Family server resumes recent,
     #     negotiated sessions through a unique session ID, use the
     #     `TlsSessionResumptionMode` parameter.
@@ -5416,6 +5431,12 @@ module Aws::Transfer
     #       passive_ip: "PassiveIp",
     #       tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
     #       set_stat_option: "DEFAULT", # accepts DEFAULT, ENABLE_NO_OP
+    #       sftp_ports: [
+    #         {
+    #           sftp_port: 1, # required
+    #           communication_mode: "CLIENT_TALK_FIRST", # accepts CLIENT_TALK_FIRST, SERVER_TALK_FIRST
+    #         },
+    #       ],
     #       as_2_transports: ["HTTP"], # accepts HTTP
     #       proxy_config: {
     #         sftp_mode: "NONE", # accepts NONE, PROXY_PROTOCOL_V2_ENFORCED
@@ -5780,7 +5801,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

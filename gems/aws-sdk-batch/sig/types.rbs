@@ -668,6 +668,12 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class EksAccessEntry
+      attr_accessor desired_state: ("ENABLED" | "DISABLED" | "INHERIT_FROM_CLUSTER")
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
     class EksAttemptContainerDetail
       attr_accessor name: ::String
       attr_accessor container_id: ::String
@@ -692,6 +698,12 @@ module Aws::Batch
     class EksConfiguration
       attr_accessor eks_cluster_arn: ::String
       attr_accessor kubernetes_namespace: ::String
+      attr_accessor access_entry: Types::EksAccessEntry
+      SENSITIVE: []
+    end
+
+    class EksConfigurationUpdate
+      attr_accessor access_entry: Types::EksAccessEntry
       SENSITIVE: []
     end
 
@@ -1818,6 +1830,7 @@ module Aws::Batch
       attr_accessor update_policy: Types::UpdatePolicy
       attr_accessor context: ::String
       attr_accessor ecs_settings: Types::EcsSettings
+      attr_accessor eks_configuration: Types::EksConfigurationUpdate
       SENSITIVE: []
     end
 

@@ -446,6 +446,9 @@ module Aws::BedrockAgentRuntime
     ManagedSearchConfigurationNumberOfResultsInteger = Shapes::IntegerShape.new(name: 'ManagedSearchConfigurationNumberOfResultsInteger')
     ManagedSearchRerankingConfiguration = Shapes::StructureShape.new(name: 'ManagedSearchRerankingConfiguration')
     ManagedSearchRerankingConfigurationType = Shapes::StringShape.new(name: 'ManagedSearchRerankingConfigurationType')
+    MantleFoundationModelConfiguration = Shapes::StructureShape.new(name: 'MantleFoundationModelConfiguration')
+    MantleFoundationModelModelConfiguration = Shapes::StructureShape.new(name: 'MantleFoundationModelModelConfiguration')
+    MantleProjectId = Shapes::StringShape.new(name: 'MantleProjectId')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxTokens = Shapes::IntegerShape.new(name: 'MaxTokens')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
@@ -1549,6 +1552,7 @@ module Aws::BedrockAgentRuntime
     FlowTraceNodeOutputNextList.member = Shapes::ShapeRef.new(shape: FlowTraceNodeOutputNext)
 
     FoundationModelConfiguration.add_member(:bedrock_foundation_model_configuration, Shapes::ShapeRef.new(shape: BedrockFoundationModelConfiguration, location_name: "bedrockFoundationModelConfiguration"))
+    FoundationModelConfiguration.add_member(:mantle_foundation_model_configuration, Shapes::ShapeRef.new(shape: MantleFoundationModelConfiguration, location_name: "mantleFoundationModelConfiguration"))
     FoundationModelConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: FoundationModelConfigurationType, required: true, location_name: "type"))
     FoundationModelConfiguration.struct_class = Types::FoundationModelConfiguration
 
@@ -2128,6 +2132,13 @@ module Aws::BedrockAgentRuntime
     ManagedSearchRerankingConfiguration.add_member(:bedrock_reranking_configuration, Shapes::ShapeRef.new(shape: ManagedSearchBedrockRerankingConfiguration, location_name: "bedrockRerankingConfiguration"))
     ManagedSearchRerankingConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ManagedSearchRerankingConfigurationType, required: true, location_name: "type"))
     ManagedSearchRerankingConfiguration.struct_class = Types::ManagedSearchRerankingConfiguration
+
+    MantleFoundationModelConfiguration.add_member(:model_configuration, Shapes::ShapeRef.new(shape: MantleFoundationModelModelConfiguration, required: true, location_name: "modelConfiguration"))
+    MantleFoundationModelConfiguration.struct_class = Types::MantleFoundationModelConfiguration
+
+    MantleFoundationModelModelConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
+    MantleFoundationModelModelConfiguration.add_member(:project_id, Shapes::ShapeRef.new(shape: MantleProjectId, location_name: "projectId"))
+    MantleFoundationModelModelConfiguration.struct_class = Types::MantleFoundationModelModelConfiguration
 
     Memories.member = Shapes::ShapeRef.new(shape: Memory)
 

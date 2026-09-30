@@ -269,13 +269,19 @@ module Aws::Deadline
     #   The log configuration for the worker's assigned session.
     #   @return [Types::LogConfiguration]
     #
+    # @!attribute [rw] metadata
+    #   Key-value hints that the service provides to guide how the session
+    #   runs. This value is used by the worker agent.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AssignedSession AWS API Documentation
     #
     class AssignedSession < Struct.new(
       :queue_id,
       :job_id,
       :session_actions,
-      :log_configuration)
+      :log_configuration,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3536,7 +3542,7 @@ module Aws::Deadline
       include Aws::Structure
     end
 
-    # The time stamp in date-time format.
+    # The timestamp in date-time format.
     #
     # @!attribute [rw] name
     #   The name of the date-time field to filter on.
@@ -4057,13 +4063,25 @@ module Aws::Deadline
     #   The template used for the environment.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] extensions
+    #   The Open Job Description extensions that the environment uses. This
+    #   value is used by the worker agent.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resolved_symbol_table
+    #   The resolved symbol table for the environment's expressions,
+    #   serialized as JSON. This value is used by the worker agent.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/EnvironmentDetailsEntity AWS API Documentation
     #
     class EnvironmentDetailsEntity < Struct.new(
       :job_id,
       :environment_id,
       :schema_version,
-      :template)
+      :template,
+      :extensions,
+      :resolved_symbol_table)
       SENSITIVE = [:template]
       include Aws::Structure
     end
@@ -4443,6 +4461,21 @@ module Aws::Deadline
       :principal_type,
       :identity_store_id,
       :membership_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Software that the service installs on worker hosts in a
+    # service-managed fleet.
+    #
+    # @!attribute [rw] name
+    #   The name of the software add-on. The supported value is `docker`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/FleetSoftwareAddOn AWS API Documentation
+    #
+    class FleetSoftwareAddOn < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6738,6 +6771,11 @@ module Aws::Deadline
     #   The schema version.
     #   @return [String]
     #
+    # @!attribute [rw] extensions
+    #   The Open Job Description extensions that the job template uses. This
+    #   value is used by the worker agent.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] path_mapping_rules
     #   The path mapping rules.
     #   @return [Array<Types::PathMappingRule>]
@@ -6752,6 +6790,7 @@ module Aws::Deadline
       :queue_role_arn,
       :parameters,
       :schema_version,
+      :extensions,
       :path_mapping_rules)
       SENSITIVE = [:parameters, :path_mapping_rules]
       include Aws::Structure
@@ -6960,6 +6999,41 @@ module Aws::Deadline
     #   A file system path represented as a string.
     #   @return [String]
     #
+    # @!attribute [rw] bool
+    #   A boolean value represented as a string. Accepted values are `true`,
+    #   `false`, `yes`, `no`, `on`, `off`, `1`, and `0`, case-insensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] range_expr
+    #   An Open Job Description range expression represented as a string,
+    #   such as `1-10:2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] string_list
+    #   A list of UTF-8 strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] path_list
+    #   A list of file system paths, each represented as a string.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] int_list
+    #   A list of signed integers, each represented as a string.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] float_list
+    #   A list of double precision IEEE-754 floating point numbers, each
+    #   represented as a string.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] bool_list
+    #   A list of boolean values, each represented as a string.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] int_list_list
+    #   A list of lists of signed integers, each represented as a string.
+    #   @return [Array<Array<String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/JobParameter AWS API Documentation
     #
     class JobParameter < Struct.new(
@@ -6967,6 +7041,14 @@ module Aws::Deadline
       :float,
       :string,
       :path,
+      :bool,
+      :range_expr,
+      :string_list,
+      :path_list,
+      :int_list,
+      :float_list,
+      :bool_list,
+      :int_list_list,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -6976,6 +7058,14 @@ module Aws::Deadline
       class Float < JobParameter; end
       class String < JobParameter; end
       class Path < JobParameter; end
+      class Bool < JobParameter; end
+      class RangeExpr < JobParameter; end
+      class StringList < JobParameter; end
+      class PathList < JobParameter; end
+      class IntList < JobParameter; end
+      class FloatList < JobParameter; end
+      class BoolList < JobParameter; end
+      class IntListList < JobParameter; end
       class Unknown < JobParameter; end
     end
 
@@ -10453,6 +10543,11 @@ module Aws::Deadline
     #   fleet.
     #   @return [Array<Types::FleetAttributeCapability>]
     #
+    # @!attribute [rw] software_add_ons
+    #   The software add-ons that the service installs on worker hosts when
+    #   they launch.
+    #   @return [Array<Types::FleetSoftwareAddOn>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ServiceManagedEc2InstanceCapabilities AWS API Documentation
     #
     class ServiceManagedEc2InstanceCapabilities < Struct.new(
@@ -10465,7 +10560,8 @@ module Aws::Deadline
       :allowed_instance_types,
       :excluded_instance_types,
       :custom_amounts,
-      :custom_attributes)
+      :custom_attributes,
+      :software_add_ons)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10765,7 +10861,7 @@ module Aws::Deadline
     #   @return [Time]
     #
     # @!attribute [rw] timezone
-    #   The timezone to use for the statistics. Use UTC notation such as
+    #   The time zone to use for the statistics. Use UTC notation such as
     #   "UTC+8."
     #   @return [String]
     #
@@ -11027,6 +11123,16 @@ module Aws::Deadline
     #   The dependencies for a step.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] extensions
+    #   The Open Job Description extensions that the step uses. This value
+    #   is used by the worker agent.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resolved_symbol_table
+    #   The resolved symbol table for the step's expressions, serialized as
+    #   JSON. This value is used by the worker agent.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/StepDetailsEntity AWS API Documentation
     #
     class StepDetailsEntity < Struct.new(
@@ -11034,7 +11140,9 @@ module Aws::Deadline
       :step_id,
       :schema_version,
       :template,
-      :dependencies)
+      :dependencies,
+      :extensions,
+      :resolved_symbol_table)
       SENSITIVE = [:template]
       include Aws::Structure
     end

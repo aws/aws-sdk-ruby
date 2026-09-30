@@ -2227,7 +2227,7 @@ module Aws::SecurityAgent
     # for code review and remediation.
     #
     # @option params [required, String] :provider
-    #   The integration provider. Currently, only GITHUB is supported.
+    #   The integration provider.
     #
     # @option params [required, Types::ProviderInput] :input
     #   The provider-specific input required to create the integration.
@@ -2254,7 +2254,7 @@ module Aws::SecurityAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_integration({
-    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE
+    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS
     #     input: { # required
     #       github: {
     #         code: "AuthCode", # required
@@ -2280,6 +2280,16 @@ module Aws::SecurityAgent
     #         code: "AuthCode", # required
     #         state: "CsrfState", # required
     #         site_url: "ConfluenceSiteUrl", # required
+    #       },
+    #       azure_dev_ops: {
+    #         code: "AuthCode", # required
+    #         state: "CsrfState", # required
+    #         organization_name: "String", # required
+    #       },
+    #       bitbucket_data_center: {
+    #         target_url: "TargetUrl", # required
+    #         code: "AuthCode", # required
+    #         state: "CsrfState", # required
     #       },
     #     },
     #     integration_display_name: "String", # required
@@ -3475,6 +3485,7 @@ module Aws::SecurityAgent
     #   * {Types::GetIntegrationOutput#display_name #display_name} => String
     #   * {Types::GetIntegrationOutput#kms_key_id #kms_key_id} => String
     #   * {Types::GetIntegrationOutput#target_url #target_url} => String
+    #   * {Types::GetIntegrationOutput#webhook_url #webhook_url} => String
     #   * {Types::GetIntegrationOutput#private_connection_name #private_connection_name} => String
     #
     # @example Request syntax with placeholder values
@@ -3487,11 +3498,12 @@ module Aws::SecurityAgent
     #
     #   resp.integration_id #=> String
     #   resp.installation_id #=> String
-    #   resp.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE"
+    #   resp.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS"
     #   resp.provider_type #=> String, one of "SOURCE_CODE", "DOCUMENTATION"
     #   resp.display_name #=> String
     #   resp.kms_key_id #=> String
     #   resp.target_url #=> String
+    #   resp.webhook_url #=> String
     #   resp.private_connection_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GetIntegration AWS API Documentation
@@ -3601,8 +3613,22 @@ module Aws::SecurityAgent
     # authorization.
     #
     # @option params [required, String] :provider
-    #   The provider to initiate registration with. Currently, only GITHUB is
-    #   supported.
+    #   The provider to initiate registration with.
+    #
+    # @option params [String] :target_url
+    #   The HTTPS URL of a self-managed provider instance. Omit for SaaS
+    #   providers.
+    #
+    # @option params [String] :organization_name
+    #   The name of the organization to connect.
+    #
+    # @option params [String] :client_id
+    #   The client ID of the OAuth application registered on your self-managed
+    #   provider instance.
+    #
+    # @option params [String] :client_secret
+    #   The client secret of the OAuth application registered on your
+    #   self-managed provider instance.
     #
     # @return [Types::InitiateProviderRegistrationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3612,7 +3638,11 @@ module Aws::SecurityAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.initiate_provider_registration({
-    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE
+    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS
+    #     target_url: "TargetUrl",
+    #     organization_name: "String",
+    #     client_id: "ClientId",
+    #     client_secret: "ClientSecret",
     #   })
     #
     # @example Response structure
@@ -4194,6 +4224,12 @@ module Aws::SecurityAgent
     #   resp.integrated_resource_summaries[0].resource.confluence_document.page_id #=> String
     #   resp.integrated_resource_summaries[0].resource.confluence_document.title #=> String
     #   resp.integrated_resource_summaries[0].resource.confluence_document.space_title #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.name #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.provider_resource_id #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.organization #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.project #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.project_id #=> String
+    #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.access_type #=> String, one of "PRIVATE", "PUBLIC"
     #   resp.integrated_resource_summaries[0].capabilities.github.leave_comments #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.github.remediate_code #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.gitlab.leave_comments #=> Boolean
@@ -4203,6 +4239,8 @@ module Aws::SecurityAgent
     #   resp.integrated_resource_summaries[0].capabilities.confluence.fetch_document #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.confluence.create_document #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.confluence.update_document #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.leave_comments #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.remediate_code #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListIntegratedResources AWS API Documentation
@@ -4240,7 +4278,7 @@ module Aws::SecurityAgent
     #
     #   resp = client.list_integrations({
     #     filter: {
-    #       provider: "GITHUB", # accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE
+    #       provider: "GITHUB", # accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS
     #       provider_type: "SOURCE_CODE", # accepts SOURCE_CODE, DOCUMENTATION
     #     },
     #     next_token: "NextToken",
@@ -4252,10 +4290,11 @@ module Aws::SecurityAgent
     #   resp.integration_summaries #=> Array
     #   resp.integration_summaries[0].integration_id #=> String
     #   resp.integration_summaries[0].installation_id #=> String
-    #   resp.integration_summaries[0].provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE"
+    #   resp.integration_summaries[0].provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS"
     #   resp.integration_summaries[0].provider_type #=> String, one of "SOURCE_CODE", "DOCUMENTATION"
     #   resp.integration_summaries[0].display_name #=> String
     #   resp.integration_summaries[0].target_url #=> String
+    #   resp.integration_summaries[0].webhook_url #=> String
     #   resp.integration_summaries[0].private_connection_name #=> String
     #   resp.next_token #=> String
     #
@@ -5724,6 +5763,11 @@ module Aws::SecurityAgent
     #             title: "String",
     #             space_title: "String",
     #           },
+    #           azure_dev_ops_repository: {
+    #             name: "ProviderResourceName", # required
+    #             organization: "AzureDevOpsOrganization", # required
+    #             project: "String",
+    #           },
     #         },
     #         capabilities: {
     #           github: {
@@ -5743,6 +5787,10 @@ module Aws::SecurityAgent
     #             create_document: false,
     #             update_document: false,
     #           },
+    #           azure_dev_ops: {
+    #             leave_comments: false,
+    #             remediate_code: false,
+    #           },
     #         },
     #       },
     #     ],
@@ -5754,6 +5802,44 @@ module Aws::SecurityAgent
     # @param [Hash] params ({})
     def update_integrated_resources(params = {}, options = {})
       req = build_request(:update_integrated_resources, params)
+      req.send_request(options)
+    end
+
+    # Creates an integration's webhook, or rotates the HMAC signing secret
+    # of an existing one. The secret is returned only once, in this
+    # response, and cannot be retrieved again.
+    #
+    # @option params [required, String] :integration_id
+    #   The ID of the integration whose webhook you want to create or rotate.
+    #
+    # @option params [required, String] :webhook_action
+    #   The action to perform on the integration's webhook.
+    #
+    # @return [Types::UpdateIntegrationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIntegrationOutput#integration_id #integration_id} => String
+    #   * {Types::UpdateIntegrationOutput#webhook_url #webhook_url} => String
+    #   * {Types::UpdateIntegrationOutput#secret #secret} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_integration({
+    #     integration_id: "IntegrationId", # required
+    #     webhook_action: "CREATE_IF_ABSENT", # required, accepts CREATE_IF_ABSENT, ROTATE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_id #=> String
+    #   resp.webhook_url #=> String
+    #   resp.secret #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateIntegration AWS API Documentation
+    #
+    # @overload update_integration(params = {})
+    # @param [Hash] params ({})
+    def update_integration(params = {}, options = {})
+      req = build_request(:update_integration, params)
       req.send_request(options)
     end
 
@@ -6534,7 +6620,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

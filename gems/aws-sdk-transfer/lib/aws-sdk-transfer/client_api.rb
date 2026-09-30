@@ -38,6 +38,7 @@ module Aws::Transfer
     CertificateStatusType = Shapes::StringShape.new(name: 'CertificateStatusType')
     CertificateType = Shapes::StringShape.new(name: 'CertificateType')
     CertificateUsageType = Shapes::StringShape.new(name: 'CertificateUsageType')
+    CommunicationMode = Shapes::StringShape.new(name: 'CommunicationMode')
     CompressionEnum = Shapes::StringShape.new(name: 'CompressionEnum')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectorEgressConfig = Shapes::UnionShape.new(name: 'ConnectorEgressConfig')
@@ -323,6 +324,8 @@ module Aws::Transfer
     SftpConnectorTrustedHostKey = Shapes::StringShape.new(name: 'SftpConnectorTrustedHostKey')
     SftpConnectorTrustedHostKeyList = Shapes::ListShape.new(name: 'SftpConnectorTrustedHostKeyList')
     SftpPort = Shapes::IntegerShape.new(name: 'SftpPort')
+    SftpPortWithOptions = Shapes::StructureShape.new(name: 'SftpPortWithOptions')
+    SftpPorts = Shapes::ListShape.new(name: 'SftpPorts')
     SigningAlg = Shapes::StringShape.new(name: 'SigningAlg')
     SourceFileLocation = Shapes::StringShape.new(name: 'SourceFileLocation')
     SourceIp = Shapes::StringShape.new(name: 'SourceIp')
@@ -1277,6 +1280,7 @@ module Aws::Transfer
     ProtocolDetails.add_member(:passive_ip, Shapes::ShapeRef.new(shape: PassiveIp, location_name: "PassiveIp"))
     ProtocolDetails.add_member(:tls_session_resumption_mode, Shapes::ShapeRef.new(shape: TlsSessionResumptionMode, location_name: "TlsSessionResumptionMode"))
     ProtocolDetails.add_member(:set_stat_option, Shapes::ShapeRef.new(shape: SetStatOption, location_name: "SetStatOption"))
+    ProtocolDetails.add_member(:sftp_ports, Shapes::ShapeRef.new(shape: SftpPorts, location_name: "SftpPorts"))
     ProtocolDetails.add_member(:as_2_transports, Shapes::ShapeRef.new(shape: As2Transports, location_name: "As2Transports"))
     ProtocolDetails.add_member(:proxy_config, Shapes::ShapeRef.new(shape: ProxyConfig, location_name: "ProxyConfig"))
     ProtocolDetails.struct_class = Types::ProtocolDetails
@@ -1353,6 +1357,12 @@ module Aws::Transfer
     SftpConnectorConnectionDetails.struct_class = Types::SftpConnectorConnectionDetails
 
     SftpConnectorTrustedHostKeyList.member = Shapes::ShapeRef.new(shape: SftpConnectorTrustedHostKey)
+
+    SftpPortWithOptions.add_member(:sftp_port, Shapes::ShapeRef.new(shape: SftpPort, required: true, location_name: "SftpPort"))
+    SftpPortWithOptions.add_member(:communication_mode, Shapes::ShapeRef.new(shape: CommunicationMode, location_name: "CommunicationMode"))
+    SftpPortWithOptions.struct_class = Types::SftpPortWithOptions
+
+    SftpPorts.member = Shapes::ShapeRef.new(shape: SftpPortWithOptions)
 
     SshPublicKey.add_member(:date_imported, Shapes::ShapeRef.new(shape: DateImported, required: true, location_name: "DateImported"))
     SshPublicKey.add_member(:ssh_public_key_body, Shapes::ShapeRef.new(shape: SshPublicKeyBody, required: true, location_name: "SshPublicKeyBody"))

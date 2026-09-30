@@ -51,6 +51,7 @@ module Aws::S3Vectors
     GetVectorsOutputList = Shapes::ListShape.new(name: 'GetVectorsOutputList')
     Index = Shapes::StructureShape.new(name: 'Index')
     IndexArn = Shapes::StringShape.new(name: 'IndexArn')
+    IndexMode = Shapes::StringShape.new(name: 'IndexMode')
     IndexName = Shapes::StringShape.new(name: 'IndexName')
     IndexSummary = Shapes::StructureShape.new(name: 'IndexSummary')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -86,6 +87,8 @@ module Aws::S3Vectors
     NonFilterableMetadataKeys = Shapes::ListShape.new(name: 'NonFilterableMetadataKeys')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     PutInputVector = Shapes::StructureShape.new(name: 'PutInputVector')
+    PutVectorBucketDefaultIndexModeInput = Shapes::StructureShape.new(name: 'PutVectorBucketDefaultIndexModeInput')
+    PutVectorBucketDefaultIndexModeOutput = Shapes::StructureShape.new(name: 'PutVectorBucketDefaultIndexModeOutput')
     PutVectorBucketPolicyInput = Shapes::StructureShape.new(name: 'PutVectorBucketPolicyInput')
     PutVectorBucketPolicyOutput = Shapes::StructureShape.new(name: 'PutVectorBucketPolicyOutput')
     PutVectorsInput = Shapes::StructureShape.new(name: 'PutVectorsInput')
@@ -113,6 +116,8 @@ module Aws::S3Vectors
     TopK = Shapes::IntegerShape.new(name: 'TopK')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateIndexModeInput = Shapes::StructureShape.new(name: 'UpdateIndexModeInput')
+    UpdateIndexModeOutput = Shapes::StructureShape.new(name: 'UpdateIndexModeOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -239,6 +244,7 @@ module Aws::S3Vectors
     Index.add_member(:distance_metric, Shapes::ShapeRef.new(shape: DistanceMetric, required: true, location_name: "distanceMetric"))
     Index.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
     Index.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    Index.add_member(:index_mode, Shapes::ShapeRef.new(shape: IndexMode, location_name: "indexMode"))
     Index.struct_class = Types::Index
 
     IndexSummary.add_member(:vector_bucket_name, Shapes::ShapeRef.new(shape: VectorBucketName, required: true, location_name: "vectorBucketName"))
@@ -327,6 +333,13 @@ module Aws::S3Vectors
     PutInputVector.add_member(:metadata, Shapes::ShapeRef.new(shape: VectorMetadata, location_name: "metadata"))
     PutInputVector.struct_class = Types::PutInputVector
 
+    PutVectorBucketDefaultIndexModeInput.add_member(:vector_bucket_name, Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
+    PutVectorBucketDefaultIndexModeInput.add_member(:vector_bucket_arn, Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn"))
+    PutVectorBucketDefaultIndexModeInput.add_member(:default_index_mode, Shapes::ShapeRef.new(shape: IndexMode, required: true, location_name: "defaultIndexMode"))
+    PutVectorBucketDefaultIndexModeInput.struct_class = Types::PutVectorBucketDefaultIndexModeInput
+
+    PutVectorBucketDefaultIndexModeOutput.struct_class = Types::PutVectorBucketDefaultIndexModeOutput
+
     PutVectorBucketPolicyInput.add_member(:vector_bucket_name, Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
     PutVectorBucketPolicyInput.add_member(:vector_bucket_arn, Shapes::ShapeRef.new(shape: VectorBucketArn, location_name: "vectorBucketArn"))
     PutVectorBucketPolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: VectorBucketPolicy, required: true, location_name: "policy"))
@@ -355,6 +368,7 @@ module Aws::S3Vectors
     QueryVectorsInput.add_member(:top_k, Shapes::ShapeRef.new(shape: TopK, required: true, location_name: "topK"))
     QueryVectorsInput.add_member(:query_vector, Shapes::ShapeRef.new(shape: VectorData, required: true, location_name: "queryVector"))
     QueryVectorsInput.add_member(:filter, Shapes::ShapeRef.new(shape: Document, location_name: "filter"))
+    QueryVectorsInput.add_member(:query_mode, Shapes::ShapeRef.new(shape: IndexMode, location_name: "queryMode"))
     QueryVectorsInput.add_member(:return_metadata, Shapes::ShapeRef.new(shape: Boolean, location_name: "returnMetadata"))
     QueryVectorsInput.add_member(:return_distance, Shapes::ShapeRef.new(shape: Boolean, location_name: "returnDistance"))
     QueryVectorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: QueryVectorsNextToken, location_name: "nextToken"))
@@ -396,6 +410,14 @@ module Aws::S3Vectors
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
+    UpdateIndexModeInput.add_member(:vector_bucket_name, Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
+    UpdateIndexModeInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
+    UpdateIndexModeInput.add_member(:index_arn, Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn"))
+    UpdateIndexModeInput.add_member(:index_mode, Shapes::ShapeRef.new(shape: IndexMode, required: true, location_name: "indexMode"))
+    UpdateIndexModeInput.struct_class = Types::UpdateIndexModeInput
+
+    UpdateIndexModeOutput.struct_class = Types::UpdateIndexModeOutput
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.struct_class = Types::ValidationException
@@ -410,6 +432,7 @@ module Aws::S3Vectors
     VectorBucket.add_member(:vector_bucket_arn, Shapes::ShapeRef.new(shape: VectorBucketArn, required: true, location_name: "vectorBucketArn"))
     VectorBucket.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
     VectorBucket.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    VectorBucket.add_member(:default_index_mode, Shapes::ShapeRef.new(shape: IndexMode, location_name: "defaultIndexMode"))
     VectorBucket.struct_class = Types::VectorBucket
 
     VectorBucketSummary.add_member(:vector_bucket_name, Shapes::ShapeRef.new(shape: VectorBucketName, required: true, location_name: "vectorBucketName"))
@@ -681,6 +704,21 @@ module Aws::S3Vectors
         )
       end)
 
+      api.add_operation(:put_vector_bucket_default_index_mode, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutVectorBucketDefaultIndexMode"
+        o.http_method = "POST"
+        o.http_request_uri = "/PutVectorBucketDefaultIndexMode"
+        o.input = Shapes::ShapeRef.new(shape: PutVectorBucketDefaultIndexModeInput)
+        o.output = Shapes::ShapeRef.new(shape: PutVectorBucketDefaultIndexModeOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:put_vector_bucket_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutVectorBucketPolicy"
         o.http_method = "POST"
@@ -770,6 +808,21 @@ module Aws::S3Vectors
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_index_mode, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIndexMode"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateIndexMode"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIndexModeInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIndexModeOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
     end
 

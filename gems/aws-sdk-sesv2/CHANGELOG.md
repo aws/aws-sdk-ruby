@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2026-09-29)
+------------------
+
+* Feature - Added Filter support for ListTenants, ListEmailIdentities, and ListConfigurationSets APIs.
+
 1.110.0 (2026-09-17)
 ------------------
 

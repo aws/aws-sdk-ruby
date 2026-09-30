@@ -579,10 +579,27 @@ module Aws::Account
     #   with an Amazon Web Services account.
     #   @return [Types::ContactInformation]
     #
+    # @!attribute [rw] verification_status
+    #   The verification status of the phone number in the primary contact
+    #   information associated with an Amazon Web Services account. Valid
+    #   values:
+    #
+    #   * `PENDING` – A one-time passcode has been sent and is waiting to be
+    #     submitted.
+    #
+    #   * `VERIFIED` – The phone number has been verified.
+    #
+    #   * `UNVERIFIED` – The phone number has not been verified.
+    #
+    #   * `NOT_SUPPORTED` – Phone number verification isn't available for
+    #     this account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetContactInformationResponse AWS API Documentation
     #
     class GetContactInformationResponse < Struct.new(
-      :contact_information)
+      :contact_information,
+      :verification_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1151,6 +1168,71 @@ module Aws::Account
     end
 
     # @!attribute [rw] account_id
+    #   Specifies the 12 digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation.
+    #
+    #   If you do not specify this parameter, it defaults to the Amazon Web
+    #   Services account of the identity used to call the operation.
+    #
+    #   To use this parameter, the caller must be an identity in the
+    #   [organization's management account][1] or a delegated administrator
+    #   account, and the specified account ID must be a member account in
+    #   the same organization. The organization must have [all features
+    #   enabled][2], and the organization must have [trusted access][3]
+    #   enabled for the Account Management service, and optionally a
+    #   [delegated administrator][4] account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, then don't specify this parameter, and call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/SendPhoneNumberVerificationRequest AWS API Documentation
+    #
+    class SendPhoneNumberVerificationRequest < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The verification status of the phone number in the primary contact
+    #   information after the one-time passcode is sent. Valid values:
+    #
+    #   * `PENDING` – A one-time passcode has been sent and is waiting to be
+    #     submitted.
+    #
+    #   * `VERIFIED` – The phone number has been verified.
+    #
+    #   * `UNVERIFIED` – The phone number has not been verified.
+    #
+    #   * `NOT_SUPPORTED` – Phone number verification isn't available for
+    #     this account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/SendPhoneNumberVerificationResponse AWS API Documentation
+    #
+    class SendPhoneNumberVerificationResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
     #   Specifies the 12-digit account ID number of the Amazon Web Services
     #   account that you want to access or modify with this operation. To
     #   use this parameter, the caller must be an identity in the
@@ -1265,6 +1347,78 @@ module Aws::Account
       :name,
       :message)
       SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   Specifies the 12 digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation.
+    #
+    #   If you do not specify this parameter, it defaults to the Amazon Web
+    #   Services account of the identity used to call the operation.
+    #
+    #   To use this parameter, the caller must be an identity in the
+    #   [organization's management account][1] or a delegated administrator
+    #   account, and the specified account ID must be a member account in
+    #   the same organization. The organization must have [all features
+    #   enabled][2], and the organization must have [trusted access][3]
+    #   enabled for the Account Management service, and optionally a
+    #   [delegated administrator][4] account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, then don't specify this parameter, and call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
+    #   @return [String]
+    #
+    # @!attribute [rw] otp
+    #   The one-time passcode sent to the phone number in the primary
+    #   contact information by the `SendPhoneNumberVerification` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/VerifyPhoneNumberRequest AWS API Documentation
+    #
+    class VerifyPhoneNumberRequest < Struct.new(
+      :account_id,
+      :otp)
+      SENSITIVE = [:otp]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The verification status of the phone number in the primary contact
+    #   information after the submitted one-time passcode is evaluated.
+    #   Valid values:
+    #
+    #   * `PENDING` – A one-time passcode has been sent and is waiting to be
+    #     submitted.
+    #
+    #   * `VERIFIED` – The phone number has been verified.
+    #
+    #   * `UNVERIFIED` – The phone number has not been verified.
+    #
+    #   * `NOT_SUPPORTED` – Phone number verification isn't available for
+    #     this account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/VerifyPhoneNumberResponse AWS API Documentation
+    #
+    class VerifyPhoneNumberResponse < Struct.new(
+      :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 

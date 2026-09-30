@@ -120,6 +120,36 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class AzureDevOpsIntegrationInput
+      attr_accessor code: ::String
+      attr_accessor state: ::String
+      attr_accessor organization_name: ::String
+      SENSITIVE: []
+    end
+
+    class AzureDevOpsRepositoryMetadata
+      attr_accessor name: ::String
+      attr_accessor provider_resource_id: ::String
+      attr_accessor organization: ::String
+      attr_accessor project: ::String
+      attr_accessor project_id: ::String
+      attr_accessor access_type: ("PRIVATE" | "PUBLIC")
+      SENSITIVE: []
+    end
+
+    class AzureDevOpsRepositoryResource
+      attr_accessor name: ::String
+      attr_accessor organization: ::String
+      attr_accessor project: ::String
+      SENSITIVE: []
+    end
+
+    class AzureDevOpsResourceCapabilities
+      attr_accessor leave_comments: bool
+      attr_accessor remediate_code: bool
+      SENSITIVE: []
+    end
+
     class BatchCreateSecurityRequirementResult
       attr_accessor pack_id: ::String
       attr_accessor name: ::String
@@ -397,6 +427,13 @@ module Aws::SecurityAgent
     class BatchUpdateSecurityRequirementsOutput
       attr_accessor updated_security_requirement_names: ::Array[::String]
       attr_accessor errors: ::Array[Types::BatchSecurityRequirementError]
+      SENSITIVE: []
+    end
+
+    class BitbucketDataCenterIntegrationInput
+      attr_accessor target_url: ::String
+      attr_accessor code: ::String
+      attr_accessor state: ::String
       SENSITIVE: []
     end
 
@@ -685,7 +722,7 @@ module Aws::SecurityAgent
     end
 
     class CreateIntegrationInput
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
       attr_accessor input: Types::ProviderInput
       attr_accessor integration_display_name: ::String
       attr_accessor kms_key_id: ::String
@@ -1148,11 +1185,12 @@ module Aws::SecurityAgent
     class GetIntegrationOutput
       attr_accessor integration_id: ::String
       attr_accessor installation_id: ::String
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
       attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION")
       attr_accessor display_name: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor target_url: ::String
+      attr_accessor webhook_url: ::String
       attr_accessor private_connection_name: ::String
       SENSITIVE: []
     end
@@ -1269,8 +1307,12 @@ module Aws::SecurityAgent
     end
 
     class InitiateProviderRegistrationInput
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
-      SENSITIVE: []
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
+      attr_accessor target_url: ::String
+      attr_accessor organization_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
     end
 
     class InitiateProviderRegistrationOutput
@@ -1297,6 +1339,7 @@ module Aws::SecurityAgent
       attr_accessor gitlab_repository: Types::GitLabRepositoryResource
       attr_accessor bitbucket_repository: Types::BitbucketRepositoryResource
       attr_accessor confluence_document: Types::ConfluenceDocumentResource
+      attr_accessor azure_dev_ops_repository: Types::AzureDevOpsRepositoryResource
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1307,6 +1350,8 @@ module Aws::SecurityAgent
       class BitbucketRepository < IntegratedResource
       end
       class ConfluenceDocument < IntegratedResource
+      end
+      class AzureDevOpsRepository < IntegratedResource
       end
       class Unknown < IntegratedResource
       end
@@ -1323,6 +1368,7 @@ module Aws::SecurityAgent
       attr_accessor gitlab_repository: Types::GitLabRepositoryMetadata
       attr_accessor bitbucket_repository: Types::BitbucketRepositoryMetadata
       attr_accessor confluence_document: Types::ConfluenceDocumentMetadata
+      attr_accessor azure_dev_ops_repository: Types::AzureDevOpsRepositoryMetadata
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1333,6 +1379,8 @@ module Aws::SecurityAgent
       class BitbucketRepository < IntegratedResourceMetadata
       end
       class ConfluenceDocument < IntegratedResourceMetadata
+      end
+      class AzureDevOpsRepository < IntegratedResourceMetadata
       end
       class Unknown < IntegratedResourceMetadata
       end
@@ -1346,7 +1394,7 @@ module Aws::SecurityAgent
     end
 
     class IntegrationFilter
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
       attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION")
       attr_accessor unknown: untyped
       SENSITIVE: []
@@ -1362,10 +1410,11 @@ module Aws::SecurityAgent
     class IntegrationSummary
       attr_accessor integration_id: ::String
       attr_accessor installation_id: ::String
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
       attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION")
       attr_accessor display_name: ::String
       attr_accessor target_url: ::String
+      attr_accessor webhook_url: ::String
       attr_accessor private_connection_name: ::String
       SENSITIVE: []
     end
@@ -1883,6 +1932,8 @@ module Aws::SecurityAgent
       attr_accessor gitlab: Types::GitLabIntegrationInput
       attr_accessor bitbucket: Types::BitbucketIntegrationInput
       attr_accessor confluence: Types::ConfluenceIntegrationInput
+      attr_accessor azure_dev_ops: Types::AzureDevOpsIntegrationInput
+      attr_accessor bitbucket_data_center: Types::BitbucketDataCenterIntegrationInput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1894,6 +1945,10 @@ module Aws::SecurityAgent
       end
       class Confluence < ProviderInput
       end
+      class AzureDevOps < ProviderInput
+      end
+      class BitbucketDataCenter < ProviderInput
+      end
       class Unknown < ProviderInput
       end
     end
@@ -1903,6 +1958,7 @@ module Aws::SecurityAgent
       attr_accessor gitlab: Types::GitLabResourceCapabilities
       attr_accessor bitbucket: Types::BitbucketResourceCapabilities
       attr_accessor confluence: Types::ConfluenceResourceCapabilities
+      attr_accessor azure_dev_ops: Types::AzureDevOpsResourceCapabilities
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1913,6 +1969,8 @@ module Aws::SecurityAgent
       class Bitbucket < ProviderResourceCapabilities
       end
       class Confluence < ProviderResourceCapabilities
+      end
+      class AzureDevOps < ProviderResourceCapabilities
       end
       class Unknown < ProviderResourceCapabilities
       end
@@ -2422,6 +2480,19 @@ module Aws::SecurityAgent
     end
 
     class UpdateIntegratedResourcesOutput < Aws::EmptyStructure
+    end
+
+    class UpdateIntegrationInput
+      attr_accessor integration_id: ::String
+      attr_accessor webhook_action: ("CREATE_IF_ABSENT" | "ROTATE")
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationOutput
+      attr_accessor integration_id: ::String
+      attr_accessor webhook_url: ::String
+      attr_accessor secret: ::String
+      SENSITIVE: [:secret]
     end
 
     class UpdatePentestInput

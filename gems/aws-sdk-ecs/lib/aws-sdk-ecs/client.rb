@@ -1447,10 +1447,8 @@ module Aws::ECS
     #   The default value for an express service is 512 MiB.
     #
     # @option params [String] :cpu_architecture
-    #   The CPU architecture that the tasks in the Express service run on.
-    #   Amazon ECS applies this value to the task definition revision that it
-    #   registers for the service. If you don't specify a value, the default
-    #   is `X86_64`.
+    #   The CPU architecture that the task runs on. If you don't specify a
+    #   value, the default is `X86_64`.
     #
     #   Valid values:
     #
@@ -1458,13 +1456,12 @@ module Aws::ECS
     #
     #   * `ARM64` - The 64-bit ARM architecture.
     #
-    #   Make sure that the container image that you specify supports the
-    #   architecture that you choose. The operating system family for an
-    #   Express service is always `LINUX`.
+    #   Ensure that the container image you specify supports the architecture
+    #   you choose. The operating system family for an Express service is
+    #   always `LINUX`.
     #
-    #   You can't specify `cpuArchitecture` when you also specify
-    #   `taskDefinitionArn`, because this value applies only to a task
-    #   definition that Amazon ECS registers on your behalf.
+    #   You can't specify `cpuArchitecture` together with
+    #   `taskDefinitionArn`.
     #
     # @option params [Types::ExpressGatewayScalingTarget] :scaling_target
     #   The auto-scaling configuration for the Express service. This defines
@@ -2664,6 +2661,11 @@ module Aws::ECS
     #         role_arn: "IAMRoleArn", # required
     #         target_group_arn: "String", # required
     #         port_name: "String", # required
+    #         advanced_configuration: {
+    #           alternate_target_group_arn: "String",
+    #           production_listener_rule: "String",
+    #           test_listener_rule: "String",
+    #         },
     #       },
     #     ],
     #     monitoring: {
@@ -2857,6 +2859,9 @@ module Aws::ECS
     #   resp.service.deployments[0].vpc_lattice_configurations[0].role_arn #=> String
     #   resp.service.deployments[0].vpc_lattice_configurations[0].target_group_arn #=> String
     #   resp.service.deployments[0].vpc_lattice_configurations[0].port_name #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].advanced_configuration.test_listener_rule #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -4103,6 +4108,9 @@ module Aws::ECS
     #   resp.service.deployments[0].vpc_lattice_configurations[0].role_arn #=> String
     #   resp.service.deployments[0].vpc_lattice_configurations[0].target_group_arn #=> String
     #   resp.service.deployments[0].vpc_lattice_configurations[0].port_name #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].advanced_configuration.test_listener_rule #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -6575,9 +6583,15 @@ module Aws::ECS
     #   resp.service_revisions[0].vpc_lattice_configurations[0].role_arn #=> String
     #   resp.service_revisions[0].vpc_lattice_configurations[0].target_group_arn #=> String
     #   resp.service_revisions[0].vpc_lattice_configurations[0].port_name #=> String
+    #   resp.service_revisions[0].vpc_lattice_configurations[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.service_revisions[0].vpc_lattice_configurations[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.service_revisions[0].vpc_lattice_configurations[0].advanced_configuration.test_listener_rule #=> String
     #   resp.service_revisions[0].resolved_configuration.load_balancers #=> Array
     #   resp.service_revisions[0].resolved_configuration.load_balancers[0].target_group_arn #=> String
     #   resp.service_revisions[0].resolved_configuration.load_balancers[0].production_listener_rule #=> String
+    #   resp.service_revisions[0].resolved_configuration.vpc_lattice_configurations #=> Array
+    #   resp.service_revisions[0].resolved_configuration.vpc_lattice_configurations[0].target_group_arn #=> String
+    #   resp.service_revisions[0].resolved_configuration.vpc_lattice_configurations[0].production_listener_rule #=> String
     #   resp.service_revisions[0].ecs_managed_resources.ingress_paths #=> Array
     #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].access_type #=> String, one of "PUBLIC", "PRIVATE"
     #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].endpoint #=> String
@@ -6996,6 +7010,9 @@ module Aws::ECS
     #   resp.services[0].deployments[0].vpc_lattice_configurations[0].role_arn #=> String
     #   resp.services[0].deployments[0].vpc_lattice_configurations[0].target_group_arn #=> String
     #   resp.services[0].deployments[0].vpc_lattice_configurations[0].port_name #=> String
+    #   resp.services[0].deployments[0].vpc_lattice_configurations[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.services[0].deployments[0].vpc_lattice_configurations[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.services[0].deployments[0].vpc_lattice_configurations[0].advanced_configuration.test_listener_rule #=> String
     #   resp.services[0].role_arn #=> String
     #   resp.services[0].events #=> Array
     #   resp.services[0].events[0].id #=> String
@@ -14751,10 +14768,8 @@ module Aws::ECS
     #   The amount of memory (in MiB) used by the task.
     #
     # @option params [String] :cpu_architecture
-    #   The CPU architecture that the tasks in the Express service run on.
-    #   Amazon ECS applies this value to the task definition revision that it
-    #   registers for the service. If you don't specify a value, the service
-    #   keeps the architecture that it currently runs on.
+    #   The CPU architecture that the task runs on. If you don't specify a
+    #   value, the service keeps its current architecture.
     #
     #   Valid values:
     #
@@ -14763,13 +14778,12 @@ module Aws::ECS
     #   * `ARM64` - The 64-bit ARM architecture.
     #
     #   Changing the architecture starts a new deployment that replaces the
-    #   running tasks. Make sure that the container image that the service
-    #   uses supports the architecture that you choose. The operating system
-    #   family for an Express service is always `LINUX`.
+    #   running tasks. Ensure that the container image you specify supports
+    #   the architecture you choose. The operating system family for an
+    #   Express service is always `LINUX`.
     #
-    #   You can't specify `cpuArchitecture` when you also specify
-    #   `taskDefinitionArn`, because this value applies only to a task
-    #   definition that Amazon ECS registers on your behalf.
+    #   You can't specify `cpuArchitecture` together with
+    #   `taskDefinitionArn`.
     #
     # @option params [Types::ExpressGatewayScalingTarget] :scaling_target
     #   The auto-scaling configuration for the Express service.
@@ -15644,6 +15658,11 @@ module Aws::ECS
     #         role_arn: "IAMRoleArn", # required
     #         target_group_arn: "String", # required
     #         port_name: "String", # required
+    #         advanced_configuration: {
+    #           alternate_target_group_arn: "String",
+    #           production_listener_rule: "String",
+    #           test_listener_rule: "String",
+    #         },
     #       },
     #     ],
     #     monitoring: {
@@ -15837,6 +15856,9 @@ module Aws::ECS
     #   resp.service.deployments[0].vpc_lattice_configurations[0].role_arn #=> String
     #   resp.service.deployments[0].vpc_lattice_configurations[0].target_group_arn #=> String
     #   resp.service.deployments[0].vpc_lattice_configurations[0].port_name #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].advanced_configuration.alternate_target_group_arn #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].advanced_configuration.production_listener_rule #=> String
+    #   resp.service.deployments[0].vpc_lattice_configurations[0].advanced_configuration.test_listener_rule #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -16366,7 +16388,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.247.0'
+      context[:gem_version] = '1.248.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2611,6 +2611,14 @@ module Aws::BedrockAgentCoreControl
     #   The private endpoint configuration for the gateway target. Use this to
     #   connect the gateway to private resources in your VPC.
     #
+    # @option params [Array<Types::CertificateConfiguration>] :certificate_configurations
+    #   The private certificate authority (CA) configurations for the gateway
+    #   target. Use this to have the gateway trust a private CA when it
+    #   establishes TLS connections to the target endpoint. Provide each
+    #   certificate by reference to an Amazon S3 object or an Amazon Web
+    #   Services Secrets Manager secret. You can specify only one certificate
+    #   authority configuration in this list.
+    #
     # @return [Types::CreateGatewayTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGatewayTargetResponse#gateway_arn #gateway_arn} => String
@@ -2629,6 +2637,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreateGatewayTargetResponse#private_endpoint_managed_resources #private_endpoint_managed_resources} => Array&lt;Types::ManagedResourceDetails&gt;
     #   * {Types::CreateGatewayTargetResponse#authorization_data #authorization_data} => Types::AuthorizationData
     #   * {Types::CreateGatewayTargetResponse#protocol_type #protocol_type} => String
+    #   * {Types::CreateGatewayTargetResponse#certificate_configurations #certificate_configurations} => Array&lt;Types::CertificateConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2868,6 +2877,17 @@ module Aws::BedrockAgentCoreControl
     #         routing_domain: "RoutingDomain",
     #       },
     #     },
+    #     certificate_configurations: [
+    #       {
+    #         s3: {
+    #           uri: "CertificateS3Uri", # required
+    #           bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #         },
+    #         secrets_manager: {
+    #           secret_arn: "CertificateSecretArn", # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3003,6 +3023,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorization_data.oauth2.authorization_url #=> String
     #   resp.authorization_data.oauth2.user_id #=> String
     #   resp.protocol_type #=> String, one of "MCP", "HTTP"
+    #   resp.certificate_configurations #=> Array
+    #   resp.certificate_configurations[0].s3.uri #=> String
+    #   resp.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayTarget AWS API Documentation
     #
@@ -5967,6 +5991,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @return [Types::DeleteConfigurationBundleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DeleteConfigurationBundleResponse#bundle_arn #bundle_arn} => String
     #   * {Types::DeleteConfigurationBundleResponse#bundle_id #bundle_id} => String
     #   * {Types::DeleteConfigurationBundleResponse#status #status} => String
     #
@@ -5978,6 +6003,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @example Response structure
     #
+    #   resp.bundle_arn #=> String
     #   resp.bundle_id #=> String
     #   resp.status #=> String, one of "ACTIVE", "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #
@@ -8116,6 +8142,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetGatewayTargetResponse#private_endpoint_managed_resources #private_endpoint_managed_resources} => Array&lt;Types::ManagedResourceDetails&gt;
     #   * {Types::GetGatewayTargetResponse#authorization_data #authorization_data} => Types::AuthorizationData
     #   * {Types::GetGatewayTargetResponse#protocol_type #protocol_type} => String
+    #   * {Types::GetGatewayTargetResponse#certificate_configurations #certificate_configurations} => Array&lt;Types::CertificateConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -8257,6 +8284,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorization_data.oauth2.authorization_url #=> String
     #   resp.authorization_data.oauth2.user_id #=> String
     #   resp.protocol_type #=> String, one of "MCP", "HTTP"
+    #   resp.certificate_configurations #=> Array
+    #   resp.certificate_configurations[0].s3.uri #=> String
+    #   resp.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayTarget AWS API Documentation
     #
@@ -12318,6 +12349,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.targets[0].authorization_data.oauth2.authorization_url #=> String
     #   resp.targets[0].authorization_data.oauth2.user_id #=> String
     #   resp.targets[0].protocol_type #=> String, one of "MCP", "HTTP"
+    #   resp.targets[0].certificate_configurations #=> Array
+    #   resp.targets[0].certificate_configurations[0].s3.uri #=> String
+    #   resp.targets[0].certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.targets[0].certificate_configurations[0].secrets_manager.secret_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SynchronizeGatewayTargets AWS API Documentation
     #
@@ -12846,7 +12881,7 @@ module Aws::BedrockAgentCoreControl
     #   The branch name for this version. If not specified, inherits the
     #   parent's branch or defaults to `mainline`.
     #
-    # @option params [String] :commit_message
+    # @option params [required, String] :commit_message
     #   A commit message describing the changes in this version.
     #
     # @option params [Types::VersionCreatedBySource] :created_by
@@ -12880,7 +12915,7 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     parent_version_ids: ["ConfigurationBundleVersion"], # required
     #     branch_name: "BranchName",
-    #     commit_message: "UpdateConfigurationBundleRequestCommitMessageString",
+    #     commit_message: "UpdateConfigurationBundleRequestCommitMessageString", # required
     #     created_by: {
     #       name: "String", # required
     #       arn: "String",
@@ -13823,6 +13858,15 @@ module Aws::BedrockAgentCoreControl
     #   The private endpoint configuration for the gateway target. Use this to
     #   connect the gateway to private resources in your VPC.
     #
+    # @option params [Array<Types::CertificateConfiguration>] :certificate_configurations
+    #   The private certificate authority (CA) configurations for the gateway
+    #   target. Use this to have the gateway trust a private CA when it
+    #   establishes TLS connections to the target endpoint. Provide each
+    #   certificate by reference to an Amazon S3 object or an Amazon Web
+    #   Services Secrets Manager secret. You can specify only one certificate
+    #   authority configuration in this list. To remove a previously
+    #   configured certificate authority, omit this field on update.
+    #
     # @return [Types::UpdateGatewayTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGatewayTargetResponse#gateway_arn #gateway_arn} => String
@@ -13841,6 +13885,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdateGatewayTargetResponse#private_endpoint_managed_resources #private_endpoint_managed_resources} => Array&lt;Types::ManagedResourceDetails&gt;
     #   * {Types::UpdateGatewayTargetResponse#authorization_data #authorization_data} => Types::AuthorizationData
     #   * {Types::UpdateGatewayTargetResponse#protocol_type #protocol_type} => String
+    #   * {Types::UpdateGatewayTargetResponse#certificate_configurations #certificate_configurations} => Array&lt;Types::CertificateConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -14080,6 +14125,17 @@ module Aws::BedrockAgentCoreControl
     #         routing_domain: "RoutingDomain",
     #       },
     #     },
+    #     certificate_configurations: [
+    #       {
+    #         s3: {
+    #           uri: "CertificateS3Uri", # required
+    #           bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #         },
+    #         secrets_manager: {
+    #           secret_arn: "CertificateSecretArn", # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -14215,6 +14271,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorization_data.oauth2.authorization_url #=> String
     #   resp.authorization_data.oauth2.user_id #=> String
     #   resp.protocol_type #=> String, one of "MCP", "HTTP"
+    #   resp.certificate_configurations #=> Array
+    #   resp.certificate_configurations[0].s3.uri #=> String
+    #   resp.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayTarget AWS API Documentation
     #
@@ -17037,7 +17097,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

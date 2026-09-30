@@ -4903,12 +4903,19 @@ module Aws::GuardDuty
     #   updated. This is in UTC format.
     #   @return [Time]
     #
+    # @!attribute [rw] managed_by
+    #   Indicates what manages the additional configuration. A value of
+    #   `GUARDDUTY_POLICY` means a GuardDuty policy manages the additional
+    #   configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectorAdditionalConfigurationResult AWS API Documentation
     #
     class DetectorAdditionalConfigurationResult < Struct.new(
       :name,
       :status,
-      :updated_at)
+      :updated_at,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4977,13 +4984,19 @@ module Aws::GuardDuty
     #   Additional configuration for a resource.
     #   @return [Array<Types::DetectorAdditionalConfigurationResult>]
     #
+    # @!attribute [rw] managed_by
+    #   Indicates what manages the feature. A value of `GUARDDUTY_POLICY`
+    #   means a GuardDuty policy manages the feature.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectorFeatureConfigurationResult AWS API Documentation
     #
     class DetectorFeatureConfigurationResult < Struct.new(
       :name,
       :status,
       :updated_at,
-      :additional_configuration)
+      :additional_configuration,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9891,12 +9904,19 @@ module Aws::GuardDuty
     #   member account. This is in UTC format.
     #   @return [Time]
     #
+    # @!attribute [rw] managed_by
+    #   Indicates what manages the additional configuration. A value of
+    #   `GUARDDUTY_POLICY` means a GuardDuty policy manages the additional
+    #   configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MemberAdditionalConfigurationResult AWS API Documentation
     #
     class MemberAdditionalConfigurationResult < Struct.new(
       :name,
       :status,
-      :updated_at)
+      :updated_at,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9971,13 +9991,19 @@ module Aws::GuardDuty
     #   configured for the member account.
     #   @return [Array<Types::MemberAdditionalConfigurationResult>]
     #
+    # @!attribute [rw] managed_by
+    #   Indicates what manages the feature. A value of `GUARDDUTY_POLICY`
+    #   means a GuardDuty policy manages the feature.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MemberFeaturesConfigurationResult AWS API Documentation
     #
     class MemberFeaturesConfigurationResult < Struct.new(
       :name,
       :status,
       :updated_at,
-      :additional_configuration)
+      :additional_configuration,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end

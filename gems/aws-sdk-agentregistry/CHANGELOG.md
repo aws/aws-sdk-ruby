@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2026-09-30)
+------------------
+
+* Feature - Minor doc update for the AWS Agent Registry Custom metadata SearchDiscoverableRegistryRecords API
+
 1.5.0 (2026-09-28)
 ------------------
 

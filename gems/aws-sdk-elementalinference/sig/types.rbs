@@ -52,6 +52,7 @@ module Aws::ElementalInference
 
     class ContextualMetadataConfig
       attr_accessor summary_generation: ("ENABLED" | "DISABLED")
+      attr_accessor extended_analysis: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

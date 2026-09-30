@@ -637,6 +637,7 @@ module Aws
         def private_endpoint_managed_resources: () -> ::Array[Types::ManagedResourceDetails]
         def authorization_data: () -> Types::AuthorizationData
         def protocol_type: () -> ("MCP" | "HTTP")
+        def certificate_configurations: () -> ::Array[Types::CertificateConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_gateway_target-instance_method
       def create_gateway_target: (
@@ -653,7 +654,10 @@ module Aws
                                      allowed_query_parameters: Array[::String]?,
                                      allowed_response_headers: Array[::String]?
                                    },
-                                   ?private_endpoint: Params::private_endpoint
+                                   ?private_endpoint: Params::private_endpoint,
+                                   ?certificate_configurations: Array[
+                                     Params::certificate_configuration
+                                   ]
                                  ) -> _CreateGatewayTargetResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayTargetResponseSuccess
 
@@ -1105,6 +1109,7 @@ module Aws
 
       interface _DeleteConfigurationBundleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationBundleResponse]
+        def bundle_arn: () -> ::String
         def bundle_id: () -> ::String
         def status: () -> ("ACTIVE" | "CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
       end
@@ -1734,6 +1739,7 @@ module Aws
         def private_endpoint_managed_resources: () -> ::Array[Types::ManagedResourceDetails]
         def authorization_data: () -> Types::AuthorizationData
         def protocol_type: () -> ("MCP" | "HTTP")
+        def certificate_configurations: () -> ::Array[Types::CertificateConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_gateway_target-instance_method
       def get_gateway_target: (
@@ -2831,7 +2837,7 @@ module Aws
                                            }],
                                          parent_version_ids: Array[::String],
                                          ?branch_name: ::String,
-                                         ?commit_message: ::String,
+                                         commit_message: ::String,
                                          ?created_by: {
                                            name: ::String,
                                            arn: ::String?
@@ -3042,6 +3048,7 @@ module Aws
         def private_endpoint_managed_resources: () -> ::Array[Types::ManagedResourceDetails]
         def authorization_data: () -> Types::AuthorizationData
         def protocol_type: () -> ("MCP" | "HTTP")
+        def certificate_configurations: () -> ::Array[Types::CertificateConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_gateway_target-instance_method
       def update_gateway_target: (
@@ -3058,7 +3065,10 @@ module Aws
                                      allowed_query_parameters: Array[::String]?,
                                      allowed_response_headers: Array[::String]?
                                    },
-                                   ?private_endpoint: Params::private_endpoint
+                                   ?private_endpoint: Params::private_endpoint,
+                                   ?certificate_configurations: Array[
+                                     Params::certificate_configuration
+                                   ]
                                  ) -> _UpdateGatewayTargetResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayTargetResponseSuccess
 

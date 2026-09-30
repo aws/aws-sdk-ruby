@@ -59,6 +59,7 @@ module Aws::Deadline
       attr_accessor job_id: ::String
       attr_accessor session_actions: ::Array[Types::AssignedSessionAction]
       attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor metadata: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -1106,6 +1107,8 @@ module Aws::Deadline
       attr_accessor environment_id: ::String
       attr_accessor schema_version: ::String
       attr_accessor template: untyped
+      attr_accessor extensions: ::Array[::String]
+      attr_accessor resolved_symbol_table: ::String
       SENSITIVE: [:template]
     end
 
@@ -1222,6 +1225,11 @@ module Aws::Deadline
       attr_accessor principal_type: ("USER" | "GROUP")
       attr_accessor identity_store_id: ::String
       attr_accessor membership_level: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "MANAGER")
+      SENSITIVE: []
+    end
+
+    class FleetSoftwareAddOn
+      attr_accessor name: ("docker")
       SENSITIVE: []
     end
 
@@ -1782,6 +1790,7 @@ module Aws::Deadline
       attr_accessor queue_role_arn: ::String
       attr_accessor parameters: ::Hash[::String, Types::JobParameter]
       attr_accessor schema_version: ::String
+      attr_accessor extensions: ::Array[::String]
       attr_accessor path_mapping_rules: ::Array[Types::PathMappingRule]
       SENSITIVE: [:parameters]
     end
@@ -1860,6 +1869,14 @@ module Aws::Deadline
       attr_accessor float: ::String
       attr_accessor string: ::String
       attr_accessor path: ::String
+      attr_accessor bool: ::String
+      attr_accessor range_expr: ::String
+      attr_accessor string_list: ::Array[::String]
+      attr_accessor path_list: ::Array[::String]
+      attr_accessor int_list: ::Array[::String]
+      attr_accessor float_list: ::Array[::String]
+      attr_accessor bool_list: ::Array[::String]
+      attr_accessor int_list_list: ::Array[::Array[::String]]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1870,6 +1887,22 @@ module Aws::Deadline
       class String < JobParameter
       end
       class Path < JobParameter
+      end
+      class Bool < JobParameter
+      end
+      class RangeExpr < JobParameter
+      end
+      class StringList < JobParameter
+      end
+      class PathList < JobParameter
+      end
+      class IntList < JobParameter
+      end
+      class FloatList < JobParameter
+      end
+      class BoolList < JobParameter
+      end
+      class IntListList < JobParameter
       end
       class Unknown < JobParameter
       end
@@ -2755,6 +2788,7 @@ module Aws::Deadline
       attr_accessor excluded_instance_types: ::Array[::String]
       attr_accessor custom_amounts: ::Array[Types::FleetAmountCapability]
       attr_accessor custom_attributes: ::Array[Types::FleetAttributeCapability]
+      attr_accessor software_add_ons: ::Array[Types::FleetSoftwareAddOn]
       SENSITIVE: []
     end
 
@@ -2928,6 +2962,8 @@ module Aws::Deadline
       attr_accessor schema_version: ::String
       attr_accessor template: untyped
       attr_accessor dependencies: ::Array[::String]
+      attr_accessor extensions: ::Array[::String]
+      attr_accessor resolved_symbol_table: ::String
       SENSITIVE: [:template]
     end
 

@@ -143,6 +143,8 @@ module Aws::GlobalAccelerator
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidPortRangeException = Shapes::StructureShape.new(name: 'InvalidPortRangeException')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
+    IpAddressDetail = Shapes::StructureShape.new(name: 'IpAddressDetail')
+    IpAddressDetails = Shapes::ListShape.new(name: 'IpAddressDetails')
     IpAddressFamily = Shapes::StringShape.new(name: 'IpAddressFamily')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     IpAddresses = Shapes::ListShape.new(name: 'IpAddresses')
@@ -179,6 +181,7 @@ module Aws::GlobalAccelerator
     ListenerNotFoundException = Shapes::StructureShape.new(name: 'ListenerNotFoundException')
     Listeners = Shapes::ListShape.new(name: 'Listeners')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    NetworkZone = Shapes::StringShape.new(name: 'NetworkZone')
     PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
     PortMappings = Shapes::ListShape.new(name: 'PortMappings')
     PortMappingsMaxResults = Shapes::IntegerShape.new(name: 'PortMappingsMaxResults')
@@ -651,11 +654,18 @@ module Aws::GlobalAccelerator
     InvalidPortRangeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidPortRangeException.struct_class = Types::InvalidPortRangeException
 
+    IpAddressDetail.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+    IpAddressDetail.add_member(:network_zone, Shapes::ShapeRef.new(shape: NetworkZone, location_name: "NetworkZone"))
+    IpAddressDetail.struct_class = Types::IpAddressDetail
+
+    IpAddressDetails.member = Shapes::ShapeRef.new(shape: IpAddressDetail)
+
     IpAddresses.member = Shapes::ShapeRef.new(shape: IpAddress)
 
     IpSet.add_member(:ip_family, Shapes::ShapeRef.new(shape: GenericString, deprecated: true, location_name: "IpFamily", metadata: {"deprecatedMessage" => "IpFamily has been replaced by IpAddressFamily"}))
     IpSet.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddresses, location_name: "IpAddresses"))
     IpSet.add_member(:ip_address_family, Shapes::ShapeRef.new(shape: IpAddressFamily, location_name: "IpAddressFamily"))
+    IpSet.add_member(:ip_address_details, Shapes::ShapeRef.new(shape: IpAddressDetails, location_name: "IpAddressDetails"))
     IpSet.struct_class = Types::IpSet
 
     IpSets.member = Shapes::ShapeRef.new(shape: IpSet)

@@ -94,7 +94,13 @@ module Aws
                                              model_arn: ::String
                                            }
                                          }?,
-                                         type: ("BEDROCK_FOUNDATION_MODEL")
+                                         mantle_foundation_model_configuration: {
+                                           model_configuration: {
+                                             model_arn: ::String,
+                                             project_id: ::String?
+                                           }
+                                         }?,
+                                         type: ("BEDROCK_FOUNDATION_MODEL" | "MANTLE_FOUNDATION_MODEL")
                                        }?,
                                        foundation_model_type: ("CUSTOM" | "MANAGED")?,
                                        max_agent_iteration: ::Integer?,

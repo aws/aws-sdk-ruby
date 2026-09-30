@@ -2438,6 +2438,7 @@ module Aws
         def timeout_configuration: () -> Types::TimeoutConfig
         def environment_configuration: () -> Types::EnvironmentConfig
         def storage_configuration: () -> Types::StorageConfig
+        def notification_configuration: () -> Types::NotificationConfig
         def trigger_source: () -> Types::TriggerSource
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -3698,6 +3699,7 @@ module Aws
         def timeout_configuration: () -> Types::TimeoutConfig
         def environment_configuration: () -> Types::EnvironmentConfig
         def storage_configuration: () -> Types::StorageConfig
+        def notification_configuration: () -> Types::NotificationConfig
         def trigger_source: () -> Types::TriggerSource
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -3724,6 +3726,9 @@ module Aws
                                 },
                                 ?timeout_configuration: {
                                   run_timeout_in_minutes: ::Integer?
+                                },
+                                ?notification_configuration: {
+                                  notify_on: Array[("SUCCEEDED" | "FAILED" | "STOPPED" | "QUEUED" | "STARTING" | "RUNNING" | "STOPPING")]
                                 },
                                 ?trigger_source: {
                                   type: ("MANUAL" | "SCHEDULED" | "WORKFLOW")?,

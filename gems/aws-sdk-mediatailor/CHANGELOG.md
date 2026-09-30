@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2026-09-29)
+------------------
+
+* Feature - AWS Elemental MediaTailor now supports beaconing configuration on playback configurations. In Insights reporting mode, MediaTailor will now gather client side beaconing metrics. Set the reporting mode to Disabled to turn this off.
+
 1.129.0 (2026-09-11)
 ------------------
 

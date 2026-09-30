@@ -646,6 +646,23 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The beaconing configuration for a playback configuration. Beaconing
+    # controls whether MediaTailor includes its own beacons in the ad
+    # tracking response, in addition to the ad server beacons.
+    #
+    # @!attribute [rw] client_side
+    #   The beaconing settings for client-side reporting sessions. If you
+    #   omit this object, MediaTailor uses `INSIGHTS` reporting mode.
+    #   @return [Types::ClientSideBeaconingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/BeaconingConfiguration AWS API Documentation
+    #
+    class BeaconingConfiguration < Struct.new(
+      :client_side)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for bumpers. Bumpers are short audio or video clips
     # that play at the start or before the end of an ad break. To learn more
     # about bumpers, see [Bumpers][1].
@@ -791,6 +808,47 @@ module Aws::MediaTailor
       :tier,
       :log_configuration,
       :audiences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The beaconing settings that apply to client-side reporting sessions:
+    # whether MediaTailor includes its beacons in the ad tracking response,
+    # and which player operation events it reports on.
+    #
+    # @!attribute [rw] reporting_mode
+    #   Specifies whether MediaTailor includes its beacons in the ad
+    #   tracking response. Valid values, which are case-sensitive:
+    #
+    #   * `INSIGHTS` – MediaTailor includes its beacons in the ad tracking
+    #     response.
+    #
+    #   * `DISABLED` – MediaTailor doesn't include its beacons in the ad
+    #     tracking response.
+    #
+    #   If you send a `ClientSide` object, this setting is required. If you
+    #   omit `BeaconingConfiguration` or `ClientSide` entirely, MediaTailor
+    #   uses `INSIGHTS`.
+    #
+    #   `PutPlaybackConfiguration` replaces the whole playback
+    #   configuration. To keep beaconing off, include `DISABLED` in every
+    #   subsequent write.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_event_types
+    #   The player operation events to report on, in addition to the ad
+    #   progress events that MediaTailor always reports on. The default is
+    #   an empty list. This parameter is valid only when `ReportingMode` is
+    #   `INSIGHTS`. MediaTailor rejects the request if you specify a value
+    #   while `ReportingMode` is `DISABLED`, or if you specify duplicate
+    #   values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ClientSideBeaconingConfiguration AWS API Documentation
+    #
+    class ClientSideBeaconingConfiguration < Struct.new(
+      :reporting_mode,
+      :additional_event_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2953,6 +3011,15 @@ module Aws::MediaTailor
     #   makes per manifest request.
     #   @return [Types::AdsPersonalizationConcurrency]
     #
+    # @!attribute [rw] beaconing_configuration
+    #   The beaconing configuration for this playback configuration, which
+    #   controls whether MediaTailor includes beacons of its own in the ad
+    #   tracking response. MediaTailor always returns this setting. If you
+    #   created the playback configuration before this setting existed,
+    #   MediaTailor reports `ReportingMode` as `INSIGHTS`. This is also the
+    #   value MediaTailor uses for that configuration at playback time.
+    #   @return [Types::BeaconingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPlaybackConfigurationResponse AWS API Documentation
     #
     class GetPlaybackConfigurationResponse < Struct.new(
@@ -2983,7 +3050,8 @@ module Aws::MediaTailor
       :yield_optimization_configuration,
       :function_mapping,
       :ads_personalization_timeouts,
-      :ads_personalization_concurrency)
+      :ads_personalization_concurrency,
+      :beaconing_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4237,6 +4305,12 @@ module Aws::MediaTailor
     #   makes per manifest request.
     #   @return [Types::AdsPersonalizationConcurrency]
     #
+    # @!attribute [rw] beaconing_configuration
+    #   The beaconing configuration for this playback configuration, which
+    #   controls whether MediaTailor includes beacons of its own in the ad
+    #   tracking response.
+    #   @return [Types::BeaconingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PlaybackConfiguration AWS API Documentation
     #
     class PlaybackConfiguration < Struct.new(
@@ -4267,7 +4341,8 @@ module Aws::MediaTailor
       :yield_optimization_configuration,
       :function_mapping,
       :ads_personalization_timeouts,
-      :ads_personalization_concurrency)
+      :ads_personalization_concurrency,
+      :beaconing_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4861,6 +4936,13 @@ module Aws::MediaTailor
     #   makes per manifest request.
     #   @return [Types::AdsPersonalizationConcurrency]
     #
+    # @!attribute [rw] beaconing_configuration
+    #   The beaconing configuration for this playback configuration, which
+    #   controls whether MediaTailor includes beacons of its own in the ad
+    #   tracking response. If you omit this setting, MediaTailor uses
+    #   `INSIGHTS`.
+    #   @return [Types::BeaconingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutPlaybackConfigurationRequest AWS API Documentation
     #
     class PutPlaybackConfigurationRequest < Struct.new(
@@ -4884,7 +4966,8 @@ module Aws::MediaTailor
       :yield_optimization_configuration,
       :function_mapping,
       :ads_personalization_timeouts,
-      :ads_personalization_concurrency)
+      :ads_personalization_concurrency,
+      :beaconing_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5088,6 +5171,12 @@ module Aws::MediaTailor
     #   makes per manifest request.
     #   @return [Types::AdsPersonalizationConcurrency]
     #
+    # @!attribute [rw] beaconing_configuration
+    #   The beaconing configuration for this playback configuration, which
+    #   controls whether MediaTailor includes beacons of its own in the ad
+    #   tracking response.
+    #   @return [Types::BeaconingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutPlaybackConfigurationResponse AWS API Documentation
     #
     class PutPlaybackConfigurationResponse < Struct.new(
@@ -5118,7 +5207,8 @@ module Aws::MediaTailor
       :yield_optimization_configuration,
       :function_mapping,
       :ads_personalization_timeouts,
-      :ads_personalization_concurrency)
+      :ads_personalization_concurrency,
+      :beaconing_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

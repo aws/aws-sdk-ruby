@@ -59,6 +59,7 @@ module Aws::Account
     Name = Shapes::StringShape.new(name: 'Name')
     Otp = Shapes::StringShape.new(name: 'Otp')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
+    PhoneNumberVerificationStatus = Shapes::StringShape.new(name: 'PhoneNumberVerificationStatus')
     PostalCode = Shapes::StringShape.new(name: 'PostalCode')
     PrimaryEmailAddress = Shapes::StringShape.new(name: 'PrimaryEmailAddress')
     PrimaryEmailUpdateStatus = Shapes::StringShape.new(name: 'PrimaryEmailUpdateStatus')
@@ -72,6 +73,8 @@ module Aws::Account
     RegionOptStatusList = Shapes::ListShape.new(name: 'RegionOptStatusList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceUnavailableException = Shapes::StructureShape.new(name: 'ResourceUnavailableException')
+    SendPhoneNumberVerificationRequest = Shapes::StructureShape.new(name: 'SendPhoneNumberVerificationRequest')
+    SendPhoneNumberVerificationResponse = Shapes::StructureShape.new(name: 'SendPhoneNumberVerificationResponse')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     StartPrimaryEmailUpdateRequest = Shapes::StructureShape.new(name: 'StartPrimaryEmailUpdateRequest')
     StartPrimaryEmailUpdateResponse = Shapes::StructureShape.new(name: 'StartPrimaryEmailUpdateResponse')
@@ -84,6 +87,8 @@ module Aws::Account
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VerifyPhoneNumberRequest = Shapes::StructureShape.new(name: 'VerifyPhoneNumberRequest')
+    VerifyPhoneNumberResponse = Shapes::StructureShape.new(name: 'VerifyPhoneNumberResponse')
     WebsiteUrl = Shapes::StringShape.new(name: 'WebsiteUrl')
 
     AcceptPrimaryEmailUpdateRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
@@ -155,6 +160,7 @@ module Aws::Account
     GetContactInformationRequest.struct_class = Types::GetContactInformationRequest
 
     GetContactInformationResponse.add_member(:contact_information, Shapes::ShapeRef.new(shape: ContactInformation, location_name: "ContactInformation"))
+    GetContactInformationResponse.add_member(:verification_status, Shapes::ShapeRef.new(shape: PhoneNumberVerificationStatus, location_name: "VerificationStatus"))
     GetContactInformationResponse.struct_class = Types::GetContactInformationResponse
 
     GetGovCloudAccountInformationRequest.add_member(:standard_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "StandardAccountId"))
@@ -231,6 +237,12 @@ module Aws::Account
     ResourceUnavailableException.add_member(:error_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amzn-ErrorType"))
     ResourceUnavailableException.struct_class = Types::ResourceUnavailableException
 
+    SendPhoneNumberVerificationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    SendPhoneNumberVerificationRequest.struct_class = Types::SendPhoneNumberVerificationRequest
+
+    SendPhoneNumberVerificationResponse.add_member(:status, Shapes::ShapeRef.new(shape: PhoneNumberVerificationStatus, location_name: "Status"))
+    SendPhoneNumberVerificationResponse.struct_class = Types::SendPhoneNumberVerificationResponse
+
     StartPrimaryEmailUpdateRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     StartPrimaryEmailUpdateRequest.add_member(:primary_email, Shapes::ShapeRef.new(shape: PrimaryEmailAddress, required: true, location_name: "PrimaryEmail"))
     StartPrimaryEmailUpdateRequest.struct_class = Types::StartPrimaryEmailUpdateRequest
@@ -252,6 +264,13 @@ module Aws::Account
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    VerifyPhoneNumberRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    VerifyPhoneNumberRequest.add_member(:otp, Shapes::ShapeRef.new(shape: Otp, required: true, location_name: "Otp"))
+    VerifyPhoneNumberRequest.struct_class = Types::VerifyPhoneNumberRequest
+
+    VerifyPhoneNumberResponse.add_member(:status, Shapes::ShapeRef.new(shape: PhoneNumberVerificationStatus, location_name: "Status"))
+    VerifyPhoneNumberResponse.struct_class = Types::VerifyPhoneNumberResponse
 
 
     # @api private
@@ -469,12 +488,40 @@ module Aws::Account
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:send_phone_number_verification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendPhoneNumberVerification"
+        o.http_method = "POST"
+        o.http_request_uri = "/sendPhoneNumberVerification"
+        o.input = Shapes::ShapeRef.new(shape: SendPhoneNumberVerificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendPhoneNumberVerificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:start_primary_email_update, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartPrimaryEmailUpdate"
         o.http_method = "POST"
         o.http_request_uri = "/startPrimaryEmailUpdate"
         o.input = Shapes::ShapeRef.new(shape: StartPrimaryEmailUpdateRequest)
         o.output = Shapes::ShapeRef.new(shape: StartPrimaryEmailUpdateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:verify_phone_number, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "VerifyPhoneNumber"
+        o.http_method = "POST"
+        o.http_request_uri = "/verifyPhoneNumber"
+        o.input = Shapes::ShapeRef.new(shape: VerifyPhoneNumberRequest)
+        o.output = Shapes::ShapeRef.new(shape: VerifyPhoneNumberResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

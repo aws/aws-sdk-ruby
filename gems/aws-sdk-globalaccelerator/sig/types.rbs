@@ -555,10 +555,17 @@ module Aws::GlobalAccelerator
       SENSITIVE: []
     end
 
+    class IpAddressDetail
+      attr_accessor ip_address: ::String
+      attr_accessor network_zone: ::String
+      SENSITIVE: []
+    end
+
     class IpSet
       attr_accessor ip_family: ::String
       attr_accessor ip_addresses: ::Array[::String]
       attr_accessor ip_address_family: ("IPv4" | "IPv6")
+      attr_accessor ip_address_details: ::Array[Types::IpAddressDetail]
       SENSITIVE: []
     end
 

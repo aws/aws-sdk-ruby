@@ -3702,6 +3702,10 @@ module Aws::BedrockAgentRuntime
     #   The Bedrock foundation model configuration.
     #   @return [Types::BedrockFoundationModelConfiguration]
     #
+    # @!attribute [rw] mantle_foundation_model_configuration
+    #   The Mantle foundation model configuration.
+    #   @return [Types::MantleFoundationModelConfiguration]
+    #
     # @!attribute [rw] type
     #   The type of foundation model configuration.
     #   @return [String]
@@ -3710,6 +3714,7 @@ module Aws::BedrockAgentRuntime
     #
     class FoundationModelConfiguration < Struct.new(
       :bedrock_foundation_model_configuration,
+      :mantle_foundation_model_configuration,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -6692,6 +6697,41 @@ module Aws::BedrockAgentRuntime
     class ManagedSearchRerankingConfiguration < Struct.new(
       :bedrock_reranking_configuration,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for a Mantle foundation model.
+    #
+    # @!attribute [rw] model_configuration
+    #   The model configuration containing the model ARN and project ID.
+    #   @return [Types::MantleFoundationModelModelConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/MantleFoundationModelConfiguration AWS API Documentation
+    #
+    class MantleFoundationModelConfiguration < Struct.new(
+      :model_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Model configuration for a Mantle foundation model.
+    #
+    # @!attribute [rw] model_arn
+    #   The ARN of the Mantle foundation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_id
+    #   The Amazon Bedrock project ID used for billing and usage
+    #   attribution. If you don't specify a value, the service uses the
+    #   default project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/MantleFoundationModelModelConfiguration AWS API Documentation
+    #
+    class MantleFoundationModelModelConfiguration < Struct.new(
+      :model_arn,
+      :project_id)
       SENSITIVE = []
       include Aws::Structure
     end

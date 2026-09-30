@@ -1915,6 +1915,7 @@ module Aws::Connect
     SegmentAttributes = Shapes::MapShape.new(name: 'SegmentAttributes')
     SendChatIntegrationEventRequest = Shapes::StructureShape.new(name: 'SendChatIntegrationEventRequest')
     SendChatIntegrationEventResponse = Shapes::StructureShape.new(name: 'SendChatIntegrationEventResponse')
+    SendInAppNotificationActionDefinition = Shapes::StructureShape.new(name: 'SendInAppNotificationActionDefinition')
     SendNotificationActionDefinition = Shapes::StructureShape.new(name: 'SendNotificationActionDefinition')
     SendOutboundEmailRequest = Shapes::StructureShape.new(name: 'SendOutboundEmailRequest')
     SendOutboundEmailResponse = Shapes::StructureShape.new(name: 'SendOutboundEmailResponse')
@@ -8137,6 +8138,7 @@ module Aws::Connect
     RuleAction.add_member(:end_associated_tasks_action, Shapes::ShapeRef.new(shape: EndAssociatedTasksActionDefinition, location_name: "EndAssociatedTasksAction"))
     RuleAction.add_member(:submit_auto_evaluation_action, Shapes::ShapeRef.new(shape: SubmitAutoEvaluationActionDefinition, location_name: "SubmitAutoEvaluationAction"))
     RuleAction.add_member(:extract_information_action, Shapes::ShapeRef.new(shape: ExtractInformationActionDefinition, location_name: "ExtractInformationAction"))
+    RuleAction.add_member(:send_in_app_notification_action, Shapes::ShapeRef.new(shape: SendInAppNotificationActionDefinition, location_name: "SendInAppNotificationAction"))
     RuleAction.struct_class = Types::RuleAction
 
     RuleActions.member = Shapes::ShapeRef.new(shape: RuleAction)
@@ -8703,6 +8705,12 @@ module Aws::Connect
     SendChatIntegrationEventResponse.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "InitialContactId"))
     SendChatIntegrationEventResponse.add_member(:new_chat_created, Shapes::ShapeRef.new(shape: NewChatCreated, location_name: "NewChatCreated"))
     SendChatIntegrationEventResponse.struct_class = Types::SendChatIntegrationEventResponse
+
+    SendInAppNotificationActionDefinition.add_member(:content, Shapes::ShapeRef.new(shape: NotificationContent, required: true, location_name: "Content"))
+    SendInAppNotificationActionDefinition.add_member(:recipient, Shapes::ShapeRef.new(shape: NotificationRecipientType, required: true, location_name: "Recipient"))
+    SendInAppNotificationActionDefinition.add_member(:exclusion, Shapes::ShapeRef.new(shape: NotificationRecipientType, location_name: "Exclusion"))
+    SendInAppNotificationActionDefinition.add_member(:priority, Shapes::ShapeRef.new(shape: ConfigurableNotificationPriority, location_name: "Priority"))
+    SendInAppNotificationActionDefinition.struct_class = Types::SendInAppNotificationActionDefinition
 
     SendNotificationActionDefinition.add_member(:delivery_method, Shapes::ShapeRef.new(shape: NotificationDeliveryType, required: true, location_name: "DeliveryMethod"))
     SendNotificationActionDefinition.add_member(:subject, Shapes::ShapeRef.new(shape: Subject, location_name: "Subject"))

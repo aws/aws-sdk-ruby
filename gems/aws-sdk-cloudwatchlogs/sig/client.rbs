@@ -1168,6 +1168,7 @@ module Aws
                                         destination_resource_arn: ::String
                                       },
                                       ?delivery_destination_type: ("S3" | "CWL" | "FH" | "XRAY"),
+                                      ?role_arn: ::String,
                                       ?tags: Hash[::String, ::String]
                                     ) -> _PutDeliveryDestinationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliveryDestinationResponseSuccess

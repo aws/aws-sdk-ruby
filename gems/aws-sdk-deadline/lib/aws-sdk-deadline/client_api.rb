@@ -137,6 +137,8 @@ module Aws::Deadline
     BatchUpdateTaskItems = Shapes::ListShape.new(name: 'BatchUpdateTaskItems')
     BatchUpdateTaskRequest = Shapes::StructureShape.new(name: 'BatchUpdateTaskRequest')
     BatchUpdateTaskResponse = Shapes::StructureShape.new(name: 'BatchUpdateTaskResponse')
+    BooleanString = Shapes::StringShape.new(name: 'BooleanString')
+    BooleanStringList = Shapes::ListShape.new(name: 'BooleanStringList')
     BoundedString = Shapes::StringShape.new(name: 'BoundedString')
     BudgetActionToAdd = Shapes::StructureShape.new(name: 'BudgetActionToAdd')
     BudgetActionToRemove = Shapes::StructureShape.new(name: 'BudgetActionToRemove')
@@ -284,11 +286,15 @@ module Aws::Deadline
     FleetId = Shapes::StringShape.new(name: 'FleetId')
     FleetMember = Shapes::StructureShape.new(name: 'FleetMember')
     FleetMembers = Shapes::ListShape.new(name: 'FleetMembers')
+    FleetSoftwareAddOn = Shapes::StructureShape.new(name: 'FleetSoftwareAddOn')
+    FleetSoftwareAddOnName = Shapes::StringShape.new(name: 'FleetSoftwareAddOnName')
+    FleetSoftwareAddOns = Shapes::ListShape.new(name: 'FleetSoftwareAddOns')
     FleetStatus = Shapes::StringShape.new(name: 'FleetStatus')
     FleetSummaries = Shapes::ListShape.new(name: 'FleetSummaries')
     FleetSummary = Shapes::StructureShape.new(name: 'FleetSummary')
     Float = Shapes::FloatShape.new(name: 'Float')
     FloatString = Shapes::StringShape.new(name: 'FloatString')
+    FloatStringList = Shapes::ListShape.new(name: 'FloatStringList')
     GetBudgetRequest = Shapes::StructureShape.new(name: 'GetBudgetRequest')
     GetBudgetResponse = Shapes::StructureShape.new(name: 'GetBudgetResponse')
     GetFarmRequest = Shapes::StructureShape.new(name: 'GetFarmRequest')
@@ -348,6 +354,8 @@ module Aws::Deadline
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InstanceTypes = Shapes::ListShape.new(name: 'InstanceTypes')
     IntString = Shapes::StringShape.new(name: 'IntString')
+    IntStringList = Shapes::ListShape.new(name: 'IntStringList')
+    IntStringListList = Shapes::ListShape.new(name: 'IntStringListList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     IpAddresses = Shapes::StructureShape.new(name: 'IpAddresses')
@@ -491,19 +499,24 @@ module Aws::Deadline
     MonitorSummaries = Shapes::ListShape.new(name: 'MonitorSummaries')
     MonitorSummary = Shapes::StructureShape.new(name: 'MonitorSummary')
     MountPath = Shapes::StringShape.new(name: 'MountPath')
+    NestedIntStringList = Shapes::ListShape.new(name: 'NestedIntStringList')
     NextItemOffset = Shapes::IntegerShape.new(name: 'NextItemOffset')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OpenjdExtensionName = Shapes::StringShape.new(name: 'OpenjdExtensionName')
+    OpenjdExtensionNameList = Shapes::ListShape.new(name: 'OpenjdExtensionNameList')
     OutputRelativeDirectoriesList = Shapes::ListShape.new(name: 'OutputRelativeDirectoriesList')
     OutputRelativeDirectoriesListMemberString = Shapes::StringShape.new(name: 'OutputRelativeDirectoriesListMemberString')
     ParameterFilterExpression = Shapes::StructureShape.new(name: 'ParameterFilterExpression')
     ParameterSortExpression = Shapes::StructureShape.new(name: 'ParameterSortExpression')
     ParameterSpace = Shapes::StructureShape.new(name: 'ParameterSpace')
     ParameterString = Shapes::StringShape.new(name: 'ParameterString')
+    ParameterStringList = Shapes::ListShape.new(name: 'ParameterStringList')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PathFormat = Shapes::StringShape.new(name: 'PathFormat')
     PathMappingRule = Shapes::StructureShape.new(name: 'PathMappingRule')
     PathMappingRules = Shapes::ListShape.new(name: 'PathMappingRules')
     PathString = Shapes::StringShape.new(name: 'PathString')
+    PathStringList = Shapes::ListShape.new(name: 'PathStringList')
     Period = Shapes::StringShape.new(name: 'Period')
     PersistentVolumeConfiguration = Shapes::StructureShape.new(name: 'PersistentVolumeConfiguration')
     PersistentVolumeIops = Shapes::IntegerShape.new(name: 'PersistentVolumeIops')
@@ -538,6 +551,7 @@ module Aws::Deadline
     QueueSummaries = Shapes::ListShape.new(name: 'QueueSummaries')
     QueueSummary = Shapes::StructureShape.new(name: 'QueueSummary')
     RangeConstraint = Shapes::StringShape.new(name: 'RangeConstraint')
+    RangeExprString = Shapes::StringShape.new(name: 'RangeExprString')
     Region = Shapes::StringShape.new(name: 'Region')
     RequiredFileSystemLocationNames = Shapes::ListShape.new(name: 'RequiredFileSystemLocationNames')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
@@ -589,6 +603,7 @@ module Aws::Deadline
     SearchWorkersResponse = Shapes::StructureShape.new(name: 'SearchWorkersResponse')
     SecretAccessKey = Shapes::StringShape.new(name: 'SecretAccessKey')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SerializedSymbolTable = Shapes::StringShape.new(name: 'SerializedSymbolTable')
     ServiceManagedEc2AutoScalingConfiguration = Shapes::StructureShape.new(name: 'ServiceManagedEc2AutoScalingConfiguration')
     ServiceManagedEc2FleetConfiguration = Shapes::StructureShape.new(name: 'ServiceManagedEc2FleetConfiguration')
     ServiceManagedEc2InstanceCapabilities = Shapes::StructureShape.new(name: 'ServiceManagedEc2InstanceCapabilities')
@@ -609,6 +624,9 @@ module Aws::Deadline
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     SessionLifecycleStatus = Shapes::StringShape.new(name: 'SessionLifecycleStatus')
     SessionLifecycleTargetStatus = Shapes::StringShape.new(name: 'SessionLifecycleTargetStatus')
+    SessionMetadata = Shapes::MapShape.new(name: 'SessionMetadata')
+    SessionMetadataKey = Shapes::StringShape.new(name: 'SessionMetadataKey')
+    SessionMetadataValue = Shapes::StringShape.new(name: 'SessionMetadataValue')
     SessionSummaries = Shapes::ListShape.new(name: 'SessionSummaries')
     SessionSummary = Shapes::StructureShape.new(name: 'SessionSummary')
     SessionToken = Shapes::StringShape.new(name: 'SessionToken')
@@ -825,6 +843,7 @@ module Aws::Deadline
     AssignedSession.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
     AssignedSession.add_member(:session_actions, Shapes::ShapeRef.new(shape: AssignedSessionActions, required: true, location_name: "sessionActions"))
     AssignedSession.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, required: true, location_name: "logConfiguration"))
+    AssignedSession.add_member(:metadata, Shapes::ShapeRef.new(shape: SessionMetadata, location_name: "metadata"))
     AssignedSession.struct_class = Types::AssignedSession
 
     AssignedSessionAction.add_member(:session_action_id, Shapes::ShapeRef.new(shape: SessionActionId, required: true, location_name: "sessionActionId"))
@@ -1297,6 +1316,8 @@ module Aws::Deadline
     BatchUpdateTaskResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchUpdateTaskErrors, required: true, location_name: "errors"))
     BatchUpdateTaskResponse.struct_class = Types::BatchUpdateTaskResponse
 
+    BooleanStringList.member = Shapes::ShapeRef.new(shape: BooleanString)
+
     BudgetActionToAdd.add_member(:type, Shapes::ShapeRef.new(shape: BudgetActionType, required: true, location_name: "type"))
     BudgetActionToAdd.add_member(:threshold_percentage, Shapes::ShapeRef.new(shape: ThresholdPercentage, required: true, location_name: "thresholdPercentage"))
     BudgetActionToAdd.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1679,6 +1700,8 @@ module Aws::Deadline
     EnvironmentDetailsEntity.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentId"))
     EnvironmentDetailsEntity.add_member(:schema_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "schemaVersion"))
     EnvironmentDetailsEntity.add_member(:template, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "template"))
+    EnvironmentDetailsEntity.add_member(:extensions, Shapes::ShapeRef.new(shape: OpenjdExtensionNameList, location_name: "extensions"))
+    EnvironmentDetailsEntity.add_member(:resolved_symbol_table, Shapes::ShapeRef.new(shape: SerializedSymbolTable, location_name: "resolvedSymbolTable"))
     EnvironmentDetailsEntity.struct_class = Types::EnvironmentDetailsEntity
 
     EnvironmentDetailsError.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
@@ -1776,6 +1799,11 @@ module Aws::Deadline
 
     FleetMembers.member = Shapes::ShapeRef.new(shape: FleetMember)
 
+    FleetSoftwareAddOn.add_member(:name, Shapes::ShapeRef.new(shape: FleetSoftwareAddOnName, required: true, location_name: "name"))
+    FleetSoftwareAddOn.struct_class = Types::FleetSoftwareAddOn
+
+    FleetSoftwareAddOns.member = Shapes::ShapeRef.new(shape: FleetSoftwareAddOn)
+
     FleetSummaries.member = Shapes::ShapeRef.new(shape: FleetSummary)
 
     FleetSummary.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "fleetId"))
@@ -1794,6 +1822,8 @@ module Aws::Deadline
     FleetSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
     FleetSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     FleetSummary.struct_class = Types::FleetSummary
+
+    FloatStringList.member = Shapes::ShapeRef.new(shape: FloatString)
 
     GetBudgetRequest.add_member(:farm_id, Shapes::ShapeRef.new(shape: FarmId, required: true, location: "uri", location_name: "farmId"))
     GetBudgetRequest.add_member(:budget_id, Shapes::ShapeRef.new(shape: BudgetId, required: true, location: "uri", location_name: "budgetId"))
@@ -2197,6 +2227,10 @@ module Aws::Deadline
 
     InstanceTypes.member = Shapes::ShapeRef.new(shape: InstanceType)
 
+    IntStringList.member = Shapes::ShapeRef.new(shape: IntString)
+
+    IntStringListList.member = Shapes::ShapeRef.new(shape: NestedIntStringList)
+
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerErrorException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
@@ -2232,6 +2266,7 @@ module Aws::Deadline
     JobDetailsEntity.add_member(:queue_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "queueRoleArn"))
     JobDetailsEntity.add_member(:parameters, Shapes::ShapeRef.new(shape: JobParameters, location_name: "parameters"))
     JobDetailsEntity.add_member(:schema_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "schemaVersion"))
+    JobDetailsEntity.add_member(:extensions, Shapes::ShapeRef.new(shape: OpenjdExtensionNameList, location_name: "extensions"))
     JobDetailsEntity.add_member(:path_mapping_rules, Shapes::ShapeRef.new(shape: PathMappingRules, location_name: "pathMappingRules"))
     JobDetailsEntity.struct_class = Types::JobDetailsEntity
 
@@ -2288,11 +2323,27 @@ module Aws::Deadline
     JobParameter.add_member(:float, Shapes::ShapeRef.new(shape: FloatString, location_name: "float"))
     JobParameter.add_member(:string, Shapes::ShapeRef.new(shape: ParameterString, location_name: "string"))
     JobParameter.add_member(:path, Shapes::ShapeRef.new(shape: PathString, location_name: "path"))
+    JobParameter.add_member(:bool, Shapes::ShapeRef.new(shape: BooleanString, location_name: "bool"))
+    JobParameter.add_member(:range_expr, Shapes::ShapeRef.new(shape: RangeExprString, location_name: "rangeExpr"))
+    JobParameter.add_member(:string_list, Shapes::ShapeRef.new(shape: ParameterStringList, location_name: "stringList"))
+    JobParameter.add_member(:path_list, Shapes::ShapeRef.new(shape: PathStringList, location_name: "pathList"))
+    JobParameter.add_member(:int_list, Shapes::ShapeRef.new(shape: IntStringList, location_name: "intList"))
+    JobParameter.add_member(:float_list, Shapes::ShapeRef.new(shape: FloatStringList, location_name: "floatList"))
+    JobParameter.add_member(:bool_list, Shapes::ShapeRef.new(shape: BooleanStringList, location_name: "boolList"))
+    JobParameter.add_member(:int_list_list, Shapes::ShapeRef.new(shape: IntStringListList, location_name: "intListList"))
     JobParameter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     JobParameter.add_member_subclass(:int, Types::JobParameter::Int)
     JobParameter.add_member_subclass(:float, Types::JobParameter::Float)
     JobParameter.add_member_subclass(:string, Types::JobParameter::String)
     JobParameter.add_member_subclass(:path, Types::JobParameter::Path)
+    JobParameter.add_member_subclass(:bool, Types::JobParameter::Bool)
+    JobParameter.add_member_subclass(:range_expr, Types::JobParameter::RangeExpr)
+    JobParameter.add_member_subclass(:string_list, Types::JobParameter::StringList)
+    JobParameter.add_member_subclass(:path_list, Types::JobParameter::PathList)
+    JobParameter.add_member_subclass(:int_list, Types::JobParameter::IntList)
+    JobParameter.add_member_subclass(:float_list, Types::JobParameter::FloatList)
+    JobParameter.add_member_subclass(:bool_list, Types::JobParameter::BoolList)
+    JobParameter.add_member_subclass(:int_list_list, Types::JobParameter::IntListList)
     JobParameter.add_member_subclass(:unknown, Types::JobParameter::Unknown)
     JobParameter.struct_class = Types::JobParameter
 
@@ -2735,6 +2786,10 @@ module Aws::Deadline
     MonitorSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     MonitorSummary.struct_class = Types::MonitorSummary
 
+    NestedIntStringList.member = Shapes::ShapeRef.new(shape: IntString)
+
+    OpenjdExtensionNameList.member = Shapes::ShapeRef.new(shape: OpenjdExtensionName)
+
     OutputRelativeDirectoriesList.member = Shapes::ShapeRef.new(shape: OutputRelativeDirectoriesListMemberString)
 
     ParameterFilterExpression.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
@@ -2750,12 +2805,16 @@ module Aws::Deadline
     ParameterSpace.add_member(:combination, Shapes::ShapeRef.new(shape: CombinationExpression, location_name: "combination"))
     ParameterSpace.struct_class = Types::ParameterSpace
 
+    ParameterStringList.member = Shapes::ShapeRef.new(shape: ParameterString)
+
     PathMappingRule.add_member(:source_path_format, Shapes::ShapeRef.new(shape: PathFormat, required: true, location_name: "sourcePathFormat"))
     PathMappingRule.add_member(:source_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sourcePath"))
     PathMappingRule.add_member(:destination_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationPath"))
     PathMappingRule.struct_class = Types::PathMappingRule
 
     PathMappingRules.member = Shapes::ShapeRef.new(shape: PathMappingRule)
+
+    PathStringList.member = Shapes::ShapeRef.new(shape: PathString)
 
     PersistentVolumeConfiguration.add_member(:size_gi_b, Shapes::ShapeRef.new(shape: PersistentVolumeSizeGiB, location_name: "sizeGiB"))
     PersistentVolumeConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: PersistentVolumeIops, location_name: "iops"))
@@ -3000,6 +3059,7 @@ module Aws::Deadline
     ServiceManagedEc2InstanceCapabilities.add_member(:excluded_instance_types, Shapes::ShapeRef.new(shape: InstanceTypes, location_name: "excludedInstanceTypes"))
     ServiceManagedEc2InstanceCapabilities.add_member(:custom_amounts, Shapes::ShapeRef.new(shape: CustomFleetAmountCapabilities, location_name: "customAmounts"))
     ServiceManagedEc2InstanceCapabilities.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomFleetAttributeCapabilities, location_name: "customAttributes"))
+    ServiceManagedEc2InstanceCapabilities.add_member(:software_add_ons, Shapes::ShapeRef.new(shape: FleetSoftwareAddOns, location_name: "softwareAddOns"))
     ServiceManagedEc2InstanceCapabilities.struct_class = Types::ServiceManagedEc2InstanceCapabilities
 
     ServiceManagedEc2InstanceMarketOptions.add_member(:type, Shapes::ShapeRef.new(shape: Ec2MarketType, required: true, location_name: "type"))
@@ -3051,6 +3111,9 @@ module Aws::Deadline
     SessionActionSummary.add_member(:manifests, Shapes::ShapeRef.new(shape: TaskRunManifestPropertiesListResponse, location_name: "manifests"))
     SessionActionSummary.add_member(:definition, Shapes::ShapeRef.new(shape: SessionActionDefinitionSummary, required: true, location_name: "definition"))
     SessionActionSummary.struct_class = Types::SessionActionSummary
+
+    SessionMetadata.key = Shapes::ShapeRef.new(shape: SessionMetadataKey)
+    SessionMetadata.value = Shapes::ShapeRef.new(shape: SessionMetadataValue)
 
     SessionSummaries.member = Shapes::ShapeRef.new(shape: SessionSummary)
 
@@ -3148,6 +3211,8 @@ module Aws::Deadline
     StepDetailsEntity.add_member(:schema_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "schemaVersion"))
     StepDetailsEntity.add_member(:template, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "template"))
     StepDetailsEntity.add_member(:dependencies, Shapes::ShapeRef.new(shape: DependenciesList, required: true, location_name: "dependencies"))
+    StepDetailsEntity.add_member(:extensions, Shapes::ShapeRef.new(shape: OpenjdExtensionNameList, location_name: "extensions"))
+    StepDetailsEntity.add_member(:resolved_symbol_table, Shapes::ShapeRef.new(shape: SerializedSymbolTable, location_name: "resolvedSymbolTable"))
     StepDetailsEntity.struct_class = Types::StepDetailsEntity
 
     StepDetailsError.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))

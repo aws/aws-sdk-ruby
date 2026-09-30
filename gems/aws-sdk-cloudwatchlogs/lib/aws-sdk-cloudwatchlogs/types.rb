@@ -1969,6 +1969,12 @@ module Aws::CloudWatchLogs
     #   resource that will receive the logs.
     #   @return [Types::DeliveryDestinationConfiguration]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that CloudWatch Logs assumes to deliver to
+    #   this delivery destination. This field is present only for X-Ray
+    #   trace delivery destinations that were created with a role.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags that have been assigned to this delivery destination.
     #   @return [Hash<String,String>]
@@ -1981,6 +1987,7 @@ module Aws::CloudWatchLogs
       :delivery_destination_type,
       :output_format,
       :delivery_destination_configuration,
+      :role_arn,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -8065,6 +8072,13 @@ module Aws::CloudWatchLogs
     #   configuration options available for log delivery.
     #   @return [String]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of an IAM role in your account that CloudWatch Logs assumes
+    #   to deliver to this delivery destination. The trust policy of the
+    #   role must allow CloudWatch Logs to assume it. This parameter is
+    #   supported only for X-Ray trace delivery destinations.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   An optional list of key-value pairs to associate with the resource.
     #
@@ -8083,6 +8097,7 @@ module Aws::CloudWatchLogs
       :output_format,
       :delivery_destination_configuration,
       :delivery_destination_type,
+      :role_arn,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -8116,26 +8131,25 @@ module Aws::CloudWatchLogs
     #   `arn:aws:securityhub:us-east-1:111122223333:hub/*` and for Amazon
     #   Web Services Security Hub, use
     #   `arn:aws:securityhub:us-east-1:111122223333:hubv2/*`
+    #
+    #   For the `INSIGHTS_QUERY_LOGS` log type, use a wildcard log group
+    #   ARN, such as `arn:aws:logs:us-east-1:111122223333:log-group:*`.
+    #   Amazon Web Services does not support a specific log group ARN for
+    #   this log type.
     #   @return [String]
     #
     # @!attribute [rw] log_type
     #   Defines the type of log that the source is sending.
     #
+    #   * For Amazon Web Services Amplify, the valid values are
+    #     `ACCESS_LOGS` and `WAF_LOGS`.
+    #
     #   * For Application Load Balancer, the valid values are
     #     `ALB_ACCESS_LOGS`, `ALB_CONNECTION_LOGS`, and
     #     `ALB_HEALTH_CHECK_LOGS`.
     #
-    #   * For Amazon Bedrock Agents, the valid values are `APPLICATION_LOGS`
-    #     and `EVENT_LOGS`.
-    #
-    #   * For Amazon Bedrock Knowledge Bases, the valid values are
+    #   * For Amazon Bedrock AgentCore Gateway, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
-    #
-    #   * For Amazon Bedrock AgentCore Runtime, the valid values are
-    #     `APPLICATION_LOGS`, `USAGE_LOGS` and `TRACES`.
-    #
-    #   * For Amazon Bedrock AgentCore Tools, the valid values are
-    #     `APPLICATION_LOGS`, `USAGE_LOGS` and `TRACES`.
     #
     #   * For Amazon Bedrock AgentCore Identity, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
@@ -8143,24 +8157,29 @@ module Aws::CloudWatchLogs
     #   * For Amazon Bedrock AgentCore Memory, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
     #
-    #   * For Amazon Bedrock AgentCore Gateway, the valid values are
+    #   * For Amazon Bedrock AgentCore Payments, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
     #
-    #   * For Amazon Bedrock AgentCore Payments, the valid values are
+    #   * For Amazon Bedrock AgentCore Runtime, the valid values are
+    #     `APPLICATION_LOGS`, `USAGE_LOGS`, and `TRACES`.
+    #
+    #   * For Amazon Bedrock AgentCore Tools, the valid values are
+    #     `APPLICATION_LOGS`, `USAGE_LOGS`, and `TRACES`.
+    #
+    #   * For Amazon Bedrock Agents, the valid values are `APPLICATION_LOGS`
+    #     and `EVENT_LOGS`.
+    #
+    #   * For Amazon Bedrock Knowledge Bases, the valid values are
     #     `APPLICATION_LOGS` and `TRACES`.
     #
     #   * For CloudFront, the valid value is `ACCESS_LOGS`.
     #
-    #   * For DevOps Agent, the valid value is `APPLICATION_LOGS`.
+    #   * For query execution logs from CloudWatch Logs Insights, the valid
+    #     value is `INSIGHTS_QUERY_LOGS`.
     #
     #   * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
     #
-    #   * For Elemental MediaPackage, the valid values are
-    #     `EGRESS_ACCESS_LOGS` and `INGRESS_ACCESS_LOGS`.
-    #
-    #   * For Elemental MediaTailor, the valid values are
-    #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
-    #     `TRANSCODE_LOGS`.
+    #   * For DevOps Agent, the valid value is `APPLICATION_LOGS`.
     #
     #   * For Amazon EKS Auto Mode, the valid values are
     #     `AUTO_MODE_BLOCK_STORAGE_LOGS`, `AUTO_MODE_COMPUTE_LOGS`,
@@ -8175,6 +8194,16 @@ module Aws::CloudWatchLogs
     #     `EKS_CAPABILITY_ARGOCD_SERVER_LOGS`, and
     #     `EKS_CAPABILITY_KRO_LOGS`.
     #
+    #   * For Amazon Web Services Elemental Inference, the valid value is
+    #     `APPLICATION_LOGS`.
+    #
+    #   * For Elemental MediaPackage, the valid values are
+    #     `EGRESS_ACCESS_LOGS` and `INGRESS_ACCESS_LOGS`.
+    #
+    #   * For Elemental MediaTailor, the valid values are
+    #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
+    #     `TRANSCODE_LOGS`.
+    #
     #   * For Entity Resolution, the valid value is `WORKFLOW_LOGS`.
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
@@ -8187,32 +8216,42 @@ module Aws::CloudWatchLogs
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS`,
     #     `PCS_JOBCOMP_LOGS`, and `PCS_SCHEDULER_AUDIT_LOGS`.
     #
-    #   * For Quick, the valid values are `AGENT_HOURS_LOGS`, `CHAT_LOGS`,
-    #     `FEEDBACK_LOGS`, and `INDEX_USAGE_LOGS`.
-    #
-    #   * For Amazon Web Services RTB Fabric, the valid values is
-    #     `APPLICATION_LOGS`.
-    #
     #   * For Amazon Q, the valid values are `EVENT_LOGS` and
     #     `SYNC_JOB_LOGS`.
     #
+    #   * For Amazon Q in Connect AI agents, the valid value is
+    #     `EVENT_LOGS`.
+    #
+    #   * For Quick, the valid values are `AGENT_HOURS_LOGS`,
+    #     `AGENT_METADATA_LOGS`, `CHAT_LOGS`, `DLP_LOGS`, `FEEDBACK_LOGS`,
+    #     `INDEX_USAGE_LOGS`, and `KB_FILE_SYNC_LOGS`.
+    #
+    #   * For Route 53 Global Resolver, the valid value is
+    #     `GLOBAL_RESOLVER_LOGS`.
+    #
+    #   * For Amazon Web Services RTB Fabric, the valid value is
+    #     `APPLICATION_LOGS`.
+    #
     #   * For Amazon S3, the valid value is `S3_SERVER_ACCESS_LOGS`.
     #
-    #   * For Amazon Web Services Security Hub CSPM, the valid value is
+    #   * For Amazon Web Services Security Hub, the valid value is
     #     `SECURITY_FINDING_LOGS`.
     #
-    #   * For Amazon Web Services Security Hub, the valid value is
+    #   * For Amazon Web Services Security Hub CSPM, the valid value is
     #     `SECURITY_FINDING_LOGS`.
     #
     #   * For Amazon SES mail manager, the valid values are
     #     `APPLICATION_LOGS` and `TRAFFIC_POLICY_DEBUG_LOGS`.
     #
+    #   * For Amazon Web Services Shield Advanced, the valid value is
+    #     `FLOW_LOGS`.
+    #
+    #   * For Amazon VPC Route Server, the valid value is `EVENT_LOGS`.
+    #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
     #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`,
     #     `WORKMAIL_MAILBOX_ACCESS_LOGS`, and
     #     `WORKMAIL_PERSONAL_ACCESS_TOKEN_LOGS`.
-    #
-    #   * For Amazon VPC Route Server, the valid value is `EVENT_LOGS`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -9533,14 +9572,18 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] suffix_path
     #   This string allows re-configuring the S3 object prefix to contain
     #   either static or variable sections. The valid variables to use in
-    #   the suffix path will vary by each log source. To find the values
-    #   supported for the suffix path for each log source, use the
+    #   the suffix path vary by log type. To find the values supported for
+    #   the suffix path for each log type, use the
     #   [DescribeConfigurationTemplates][1] operation and check the
-    #   `allowedSuffixPathFields` field in the response.
+    #   `allowedSuffixPathFields` field in the response. For more
+    #   information about how the destination prefix, suffix path, and
+    #   Hive-compatible setting determine the Amazon S3 object key, see
+    #   [Amazon S3 object key for V2 deliveries][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeConfigurationTemplates.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-infrastructure-V2-S3.html#AWS-logs-infrastructure-V2-S3-object-key
     #   @return [String]
     #
     # @!attribute [rw] enable_hive_compatible_path

@@ -915,6 +915,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_configuration_sets-instance_method
       def list_configuration_sets: (
+                                     ?filter: Hash[("CONFIGURATION_SET_NAME_CONTAINS"), ::String],
                                      ?next_token: ::String,
                                      ?page_size: ::Integer
                                    ) -> _ListConfigurationSetsResponseSuccess
@@ -1010,6 +1011,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_email_identities-instance_method
       def list_email_identities: (
+                                   ?filter: Hash[("IDENTITY_NAME_CONTAINS" | "IDENTITY_TYPE" | "VERIFICATION_STATUS"), ::String],
                                    ?next_token: ::String,
                                    ?page_size: ::Integer
                                  ) -> _ListEmailIdentitiesResponseSuccess
@@ -1165,6 +1167,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_tenants-instance_method
       def list_tenants: (
+                          ?filter: Hash[("TENANT_NAME_CONTAINS" | "SENDING_STATUS"), ::String],
                           ?next_token: ::String,
                           ?page_size: ::Integer
                         ) -> _ListTenantsResponseSuccess

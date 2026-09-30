@@ -282,7 +282,7 @@ module Aws::Inspector2
 
     class AwsLambdaFunctionDetails
       attr_accessor function_name: ::String
-      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2" | "DOTNET_10" | "NODEJS_24_X" | "NODEJS_22_X" | "JAVA_21" | "JAVA_25")
+      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2" | "DOTNET_10" | "NODEJS_24_X" | "NODEJS_22_X" | "JAVA_21" | "JAVA_25" | "PYTHON_3_12" | "PYTHON_3_13" | "PYTHON_3_14" | "RUBY_3_3" | "DOTNET_8" | "NODEJS_20_X")
       attr_accessor code_sha_256: ::String
       attr_accessor version: ::String
       attr_accessor execution_role_arn: ::String
@@ -1873,7 +1873,7 @@ module Aws::Inspector2
       attr_accessor function_tags: ::Hash[::String, ::String]
       attr_accessor layers: ::Array[::String]
       attr_accessor function_name: ::String
-      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2" | "DOTNET_10" | "NODEJS_24_X" | "NODEJS_22_X" | "JAVA_21" | "JAVA_25")
+      attr_accessor runtime: ("NODEJS" | "NODEJS_12_X" | "NODEJS_14_X" | "NODEJS_16_X" | "JAVA_8" | "JAVA_8_AL2" | "JAVA_11" | "PYTHON_3_7" | "PYTHON_3_8" | "PYTHON_3_9" | "UNSUPPORTED" | "NODEJS_18_X" | "GO_1_X" | "JAVA_17" | "PYTHON_3_10" | "PYTHON_3_11" | "DOTNETCORE_3_1" | "DOTNET_6" | "DOTNET_7" | "RUBY_2_7" | "RUBY_3_2" | "DOTNET_10" | "NODEJS_24_X" | "NODEJS_22_X" | "JAVA_21" | "JAVA_25" | "PYTHON_3_12" | "PYTHON_3_13" | "PYTHON_3_14" | "RUBY_3_3" | "DOTNET_8" | "NODEJS_20_X")
       SENSITIVE: []
     end
 
@@ -2631,6 +2631,9 @@ module Aws::Inspector2
       attr_accessor medium: ::Integer
       attr_accessor high: ::Integer
       attr_accessor critical: ::Integer
+      attr_accessor low: ::Integer
+      attr_accessor informational: ::Integer
+      attr_accessor untriaged: ::Integer
       SENSITIVE: []
     end
 

@@ -309,7 +309,13 @@ module Aws
                                           ?target_iops: ::Integer,
                                           ?target_storage_type: ::String,
                                           ?target_allocated_storage: ::Integer,
-                                          ?target_storage_throughput: ::Integer
+                                          ?target_storage_throughput: ::Integer,
+                                          ?target_resource_configurations: Array[
+                                            {
+                                              source_arn: ::String,
+                                              target_kms_key_id: ::String?
+                                            }
+                                          ]
                                         ) -> _CreateBlueGreenDeploymentResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBlueGreenDeploymentResponseSuccess
 

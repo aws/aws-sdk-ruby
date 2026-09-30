@@ -520,6 +520,13 @@ module Aws
                                              export_from_time: ::Time?,
                                              export_to_time: ::Time?,
                                              export_view_type: ("NEW_IMAGE" | "NEW_AND_OLD_IMAGES")?
+                                           },
+                                           ?filter_specification: {
+                                             filter_expression: ::String?,
+                                             projection_expression: ::String?,
+                                             key_condition_expression: ::String?,
+                                             expression_attribute_names: Hash[::String, ::String]?,
+                                             expression_attribute_values: Hash[::String, Params::attribute_value]?
                                            }
                                          ) -> _ExportTableToPointInTimeResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportTableToPointInTimeResponseSuccess

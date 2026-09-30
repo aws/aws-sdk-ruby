@@ -50,6 +50,7 @@ module Aws::ElementalInference
     DisassociateFeedResponse = Shapes::StructureShape.new(name: 'DisassociateFeedResponse')
     ExportDictionaryEntriesRequest = Shapes::StructureShape.new(name: 'ExportDictionaryEntriesRequest')
     ExportDictionaryEntriesResponse = Shapes::StructureShape.new(name: 'ExportDictionaryEntriesResponse')
+    ExtendedAnalysisMode = Shapes::StringShape.new(name: 'ExtendedAnalysisMode')
     FeedArn = Shapes::StringShape.new(name: 'FeedArn')
     FeedAssociation = Shapes::StructureShape.new(name: 'FeedAssociation')
     FeedId = Shapes::StringShape.new(name: 'FeedId')
@@ -159,6 +160,7 @@ module Aws::ElementalInference
     ConflictException.struct_class = Types::ConflictException
 
     ContextualMetadataConfig.add_member(:summary_generation, Shapes::ShapeRef.new(shape: SummaryGenerationMode, location_name: "summaryGeneration"))
+    ContextualMetadataConfig.add_member(:extended_analysis, Shapes::ShapeRef.new(shape: ExtendedAnalysisMode, location_name: "extendedAnalysis"))
     ContextualMetadataConfig.struct_class = Types::ContextualMetadataConfig
 
     CreateDictionaryRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))

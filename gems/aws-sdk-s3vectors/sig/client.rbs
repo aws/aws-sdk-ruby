@@ -265,6 +265,17 @@ module Aws
                         ) -> _ListVectorsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVectorsResponseSuccess
 
+      interface _PutVectorBucketDefaultIndexModeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutVectorBucketDefaultIndexModeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#put_vector_bucket_default_index_mode-instance_method
+      def put_vector_bucket_default_index_mode: (
+                                                  ?vector_bucket_name: ::String,
+                                                  ?vector_bucket_arn: ::String,
+                                                  default_index_mode: ("CLASSIC" | "ENHANCED")
+                                                ) -> _PutVectorBucketDefaultIndexModeResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutVectorBucketDefaultIndexModeResponseSuccess
+
       interface _PutVectorBucketPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutVectorBucketPolicyOutput]
       end
@@ -314,6 +325,7 @@ module Aws
                            },
                            ?filter: {
                            },
+                           ?query_mode: ("CLASSIC" | "ENHANCED"),
                            ?return_metadata: bool,
                            ?return_distance: bool,
                            ?next_token: ::String
@@ -339,6 +351,18 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateIndexModeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIndexModeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#update_index_mode-instance_method
+      def update_index_mode: (
+                               ?vector_bucket_name: ::String,
+                               ?index_name: ::String,
+                               ?index_arn: ::String,
+                               index_mode: ("CLASSIC" | "ENHANCED")
+                             ) -> _UpdateIndexModeResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIndexModeResponseSuccess
     end
   end
 end

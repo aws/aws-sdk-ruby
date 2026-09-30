@@ -99,6 +99,11 @@ module Aws
           name: ::String,
           values: Array[::String]
         }
+      ]?,
+      software_add_ons: Array[
+        {
+          name: ("docker")
+        }
       ]?
     }
 

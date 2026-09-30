@@ -90,6 +90,7 @@ module Aws::ElastiCache
     CompleteMigrationMessage = Shapes::StructureShape.new(name: 'CompleteMigrationMessage')
     CompleteMigrationResponse = Shapes::StructureShape.new(name: 'CompleteMigrationResponse')
     ConfigureShard = Shapes::StructureShape.new(name: 'ConfigureShard')
+    ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     CopyServerlessCacheSnapshotRequest = Shapes::StructureShape.new(name: 'CopyServerlessCacheSnapshotRequest')
     CopyServerlessCacheSnapshotResponse = Shapes::StructureShape.new(name: 'CopyServerlessCacheSnapshotResponse')
     CopySnapshotMessage = Shapes::StructureShape.new(name: 'CopySnapshotMessage')
@@ -829,6 +830,7 @@ module Aws::ElastiCache
     CreateServerlessCacheRequest.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     CreateServerlessCacheRequest.add_member(:daily_snapshot_time, Shapes::ShapeRef.new(shape: String, location_name: "DailySnapshotTime"))
     CreateServerlessCacheRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    CreateServerlessCacheRequest.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "ConnectionType"))
     CreateServerlessCacheRequest.struct_class = Types::CreateServerlessCacheRequest
 
     CreateServerlessCacheResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
@@ -1792,6 +1794,7 @@ module Aws::ElastiCache
     ServerlessCache.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     ServerlessCache.add_member(:daily_snapshot_time, Shapes::ShapeRef.new(shape: String, location_name: "DailySnapshotTime"))
     ServerlessCache.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    ServerlessCache.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "ConnectionType"))
     ServerlessCache.struct_class = Types::ServerlessCache
 
     ServerlessCacheAlreadyExistsFault.struct_class = Types::ServerlessCacheAlreadyExistsFault

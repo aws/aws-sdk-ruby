@@ -1579,6 +1579,7 @@ module Aws::EC2
       attr_accessor adjustment_details: Types::CapacityReservationAdjustmentDetails
       attr_accessor original_start_date: ::Time
       attr_accessor zero_size_preference: ("retain" | "default")
+      attr_accessor launch_status: ("launchable" | "unlaunchable")
       SENSITIVE: []
     end
 

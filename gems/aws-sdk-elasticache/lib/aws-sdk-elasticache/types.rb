@@ -2980,6 +2980,15 @@ module Aws::ElastiCache
     #   provided subnets are IPv6-only, in which case it defaults to `ipv6`.
     #   @return [String]
     #
+    # @!attribute [rw] connection_type
+    #   The connection type for the serverless cache. Must be either `vpc`
+    #   \| `public`. Use `vpc` to access the cache through a VPC endpoint,
+    #   or `public` to access the cache over the internet. If not specified,
+    #   defaults to `vpc`. This value cannot be changed after the serverless
+    #   cache is created. Setting this to `public` requires Valkey 9 or
+    #   above.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCacheRequest AWS API Documentation
     #
     class CreateServerlessCacheRequest < Struct.new(
@@ -2996,7 +3005,8 @@ module Aws::ElastiCache
       :subnet_ids,
       :snapshot_retention_limit,
       :daily_snapshot_time,
-      :network_type)
+      :network_type,
+      :connection_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8733,6 +8743,11 @@ module Aws::ElastiCache
     #   `ipv6`.
     #   @return [String]
     #
+    # @!attribute [rw] connection_type
+    #   The connection type for the serverless cache. Must be either `vpc`
+    #   \| `public`. If not specified, defaults to `vpc`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCache AWS API Documentation
     #
     class ServerlessCache < Struct.new(
@@ -8754,7 +8769,8 @@ module Aws::ElastiCache
       :subnet_ids,
       :snapshot_retention_limit,
       :daily_snapshot_time,
-      :network_type)
+      :network_type,
+      :connection_type)
       SENSITIVE = []
       include Aws::Structure
     end

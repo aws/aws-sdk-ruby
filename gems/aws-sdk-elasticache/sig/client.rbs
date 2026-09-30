@@ -387,7 +387,8 @@ module Aws
                                      ?subnet_ids: Array[::String],
                                      ?snapshot_retention_limit: ::Integer,
                                      ?daily_snapshot_time: ::String,
-                                     ?network_type: ("ipv4" | "ipv6" | "dual_stack")
+                                     ?network_type: ("ipv4" | "ipv6" | "dual_stack"),
+                                     ?connection_type: ("vpc" | "public")
                                    ) -> _CreateServerlessCacheResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServerlessCacheResponseSuccess
 

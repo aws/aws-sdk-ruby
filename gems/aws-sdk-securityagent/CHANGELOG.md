@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2026-09-29)
+------------------
+
+* Feature - Adds support for Azure DevOps and Bitbucket Data Center integration providers.
+
 1.18.0 (2026-09-28)
 ------------------
 

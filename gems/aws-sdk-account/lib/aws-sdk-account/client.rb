@@ -932,6 +932,7 @@ module Aws::Account
     # @return [Types::GetContactInformationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetContactInformationResponse#contact_information #contact_information} => Types::ContactInformation
+    #   * {Types::GetContactInformationResponse#verification_status #verification_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -953,6 +954,7 @@ module Aws::Account
     #   resp.contact_information.phone_number #=> String
     #   resp.contact_information.company_name #=> String
     #   resp.contact_information.website_url #=> String
+    #   resp.verification_status #=> String, one of "PENDING", "VERIFIED", "UNVERIFIED", "NOT_SUPPORTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetContactInformation AWS API Documentation
     #
@@ -1522,6 +1524,74 @@ module Aws::Account
       req.send_request(options)
     end
 
+    # Sends a one-time passcode to the phone number in the primary contact
+    # information of an Amazon Web Services account. Use VerifyPhoneNumber
+    # to submit the passcode and complete the verification.
+    #
+    # For complete details about how to use the primary contact operations,
+    # see [Update the primary contact for your Amazon Web Services
+    # account][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html
+    #
+    # @option params [String] :account_id
+    #   Specifies the 12 digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation.
+    #
+    #   If you do not specify this parameter, it defaults to the Amazon Web
+    #   Services account of the identity used to call the operation.
+    #
+    #   To use this parameter, the caller must be an identity in the
+    #   [organization's management account][1] or a delegated administrator
+    #   account, and the specified account ID must be a member account in the
+    #   same organization. The organization must have [all features
+    #   enabled][2], and the organization must have [trusted access][3]
+    #   enabled for the Account Management service, and optionally a
+    #   [delegated administrator][4] account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, then don't specify this parameter, and call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
+    #
+    # @return [Types::SendPhoneNumberVerificationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendPhoneNumberVerificationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_phone_number_verification({
+    #     account_id: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "VERIFIED", "UNVERIFIED", "NOT_SUPPORTED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/SendPhoneNumberVerification AWS API Documentation
+    #
+    # @overload send_phone_number_verification(params = {})
+    # @param [Hash] params ({})
+    def send_phone_number_verification(params = {}, options = {})
+      req = build_request(:send_phone_number_verification, params)
+      req.send_request(options)
+    end
+
     # Starts the process to update the primary email address for the
     # specified account.
     #
@@ -1579,6 +1649,79 @@ module Aws::Account
       req.send_request(options)
     end
 
+    # Verifies the phone number in the primary contact information of an
+    # Amazon Web Services account by submitting the one-time passcode that
+    # SendPhoneNumberVerification sent to that phone number.
+    #
+    # For complete details about how to use the primary contact operations,
+    # see [Update the primary contact for your Amazon Web Services
+    # account][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html
+    #
+    # @option params [String] :account_id
+    #   Specifies the 12 digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation.
+    #
+    #   If you do not specify this parameter, it defaults to the Amazon Web
+    #   Services account of the identity used to call the operation.
+    #
+    #   To use this parameter, the caller must be an identity in the
+    #   [organization's management account][1] or a delegated administrator
+    #   account, and the specified account ID must be a member account in the
+    #   same organization. The organization must have [all features
+    #   enabled][2], and the organization must have [trusted access][3]
+    #   enabled for the Account Management service, and optionally a
+    #   [delegated administrator][4] account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, then don't specify this parameter, and call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
+    #
+    # @option params [required, String] :otp
+    #   The one-time passcode sent to the phone number in the primary contact
+    #   information by the `SendPhoneNumberVerification` operation.
+    #
+    # @return [Types::VerifyPhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::VerifyPhoneNumberResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.verify_phone_number({
+    #     account_id: "AccountId",
+    #     otp: "Otp", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "VERIFIED", "UNVERIFIED", "NOT_SUPPORTED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/VerifyPhoneNumber AWS API Documentation
+    #
+    # @overload verify_phone_number(params = {})
+    # @param [Hash] params ({})
+    def verify_phone_number(params = {}, options = {})
+      req = build_request(:verify_phone_number, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1597,7 +1740,7 @@ module Aws::Account
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-account'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

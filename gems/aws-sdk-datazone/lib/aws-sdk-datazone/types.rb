@@ -11684,6 +11684,11 @@ module Aws::DataZone
     #   Simple Storage Service path and KMS key ARN.
     #   @return [Types::StorageConfig]
     #
+    # @!attribute [rw] notification_configuration
+    #   The notification configuration of the notebook run, including the
+    #   notebook run states that trigger notifications.
+    #   @return [Types::NotificationConfig]
+    #
     # @!attribute [rw] trigger_source
     #   The source that triggered the notebook run.
     #   @return [Types::TriggerSource]
@@ -11733,6 +11738,7 @@ module Aws::DataZone
       :timeout_configuration,
       :environment_configuration,
       :storage_configuration,
+      :notification_configuration,
       :trigger_source,
       :error,
       :created_at,
@@ -17606,6 +17612,22 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The notification configuration for a notebook run in Amazon SageMaker
+    # Unified Studio.
+    #
+    # @!attribute [rw] notify_on
+    #   Notebook run states that trigger notifications. Ordering is not
+    #   significant.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/NotificationConfig AWS API Documentation
+    #
+    class NotificationConfig < Struct.new(
+      :notify_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a notification generated in Amazon DataZone.
     #
     # @!attribute [rw] identifier
@@ -21961,6 +21983,11 @@ module Aws::DataZone
     #   hours).
     #   @return [Types::TimeoutConfig]
     #
+    # @!attribute [rw] notification_configuration
+    #   The notification configuration for the notebook run. Use this to
+    #   specify the notebook run states that trigger notifications.
+    #   @return [Types::NotificationConfig]
+    #
     # @!attribute [rw] trigger_source
     #   The source that triggered the notebook run.
     #   @return [Types::TriggerSource]
@@ -21995,6 +22022,7 @@ module Aws::DataZone
       :compute_configuration,
       :network_configuration,
       :timeout_configuration,
+      :notification_configuration,
       :trigger_source,
       :metadata,
       :parameters,
@@ -22061,6 +22089,11 @@ module Aws::DataZone
     #   Simple Storage Service path and KMS key ARN.
     #   @return [Types::StorageConfig]
     #
+    # @!attribute [rw] notification_configuration
+    #   The notification configuration of the notebook run, including the
+    #   notebook run states that trigger notifications.
+    #   @return [Types::NotificationConfig]
+    #
     # @!attribute [rw] trigger_source
     #   The source that triggered the notebook run.
     #   @return [Types::TriggerSource]
@@ -22110,6 +22143,7 @@ module Aws::DataZone
       :timeout_configuration,
       :environment_configuration,
       :storage_configuration,
+      :notification_configuration,
       :trigger_source,
       :error,
       :created_at,
