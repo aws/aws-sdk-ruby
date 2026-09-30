@@ -130,19 +130,21 @@ module Aws
         it 'waits for all tasks when a worker dies during shutdown' do
           previous = Thread.report_on_exception
           Thread.report_on_exception = false
-          executor = DefaultExecutor.new(max_threads: 2)
+          executor = DefaultExecutor.new(max_threads: 1)
           done = Queue.new
           executor.post do
             sleep(0.1)
             raise NoMemoryError, 'worker died'
           end
-          executor.post do
-            sleep(0.3)
-            done << :slow
+          # all left for the replacement, which starts after shutdown began joining
+          3.times do
+            executor.post do
+              sleep(0.1)
+              done << :queued
+            end
           end
-          3.times { executor.post { done << :queued } }
           expect { executor.shutdown }.to raise_error(NoMemoryError, 'worker died')
-          expect(done.size).to eq(4)
+          expect(done.size).to eq(3)
         ensure
           Thread.report_on_exception = previous
         end

@@ -65,16 +65,32 @@ module Aws
       #   If nil, waits indefinitely. If timeout expires, remaining threads are killed.
       # @return [Boolean] true when shutdown is complete
       def shutdown(timeout = nil)
+        return true unless begin_shutdown
+
+        deadline = timeout && (Time.now + timeout)
+        join_workers(deadline)
+        kill_remaining_workers if timeout
+
+        finalize_shutdown
+        raise @fatal_error if @fatal_error
+
+        true
+      end
+
+      private
+
+      def begin_shutdown
         @mutex.synchronize do
-          return true if @state == SHUTDOWN
+          return false if @state == SHUTDOWN
 
           @state = SHUTTING_DOWN
           # Close rather than push sentinels, which could block on a full queue.
           @queue.close
         end
+        true
+      end
 
-        # Repeat until empty: a dying worker can add a replacement while we join.
-        deadline = Time.now + timeout if timeout
+      def join_workers(deadline)
         until (threads = @mutex.synchronize { @pool.select(&:alive?) }).empty?
           threads.each do |thread|
             remaining = deadline - Time.now if deadline
@@ -83,23 +99,23 @@ module Aws
             begin
               thread.join(remaining && [remaining, 0].max)
             rescue Exception # rubocop:disable Lint/RescueException
-              nil # recorded by #replace_worker and raised below
+              nil # recorded by #replace_worker and raised by #shutdown
             end
           end
           break if deadline && Time.now >= deadline
         end
-        @mutex.synchronize { @pool.select(&:alive?).each(&:kill) } if timeout
+      end
 
+      def kill_remaining_workers
+        @mutex.synchronize { @pool.select(&:alive?).each(&:kill) }
+      end
+
+      def finalize_shutdown
         @mutex.synchronize do
           @pool.clear
           @state = SHUTDOWN
         end
-        raise @fatal_error if @fatal_error
-
-        true
       end
-
-      private
 
       def ensure_worker_available
         return unless @state == RUNNING

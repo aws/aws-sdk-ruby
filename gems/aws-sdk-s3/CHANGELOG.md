@@ -1,7 +1,9 @@
 Unreleased Changes
 ------------------
 
-* Issue - Fix unbounded memory growth in `upload_stream` when the data source outpaces the upload (#3407).
+* Issue - Fix unbounded memory growth in `upload_stream` on `TransferManager` and `Aws::S3::Object` when the data source outpaces the upload (#3407).
+
+* Issue - Prevent `upload_file`, `upload_stream` and `download_file` on `TransferManager` and `Aws::S3::Object` from hanging when a worker thread is terminated by a non-`StandardError`.
 
 1.232.3 (2026-09-28)
 ------------------
