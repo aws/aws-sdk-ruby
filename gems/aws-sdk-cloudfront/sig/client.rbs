@@ -464,7 +464,7 @@ module Aws
                                             name: ::String,
                                             description: ::String?,
                                             signing_protocol: ("sigv4" | "sigv4a"),
-                                            signing_behavior: ("never" | "always" | "no-override"),
+                                            signing_behavior: ("never" | "always" | "no-override" | "always-amz-auth"),
                                             origin_access_control_origin_type: ("s3" | "mediastore" | "mediapackagev2" | "lambda")
                                           }
                                         ) -> _CreateOriginAccessControlResponseSuccess
@@ -2065,7 +2065,7 @@ module Aws
                                             name: ::String,
                                             description: ::String?,
                                             signing_protocol: ("sigv4" | "sigv4a"),
-                                            signing_behavior: ("never" | "always" | "no-override"),
+                                            signing_behavior: ("never" | "always" | "no-override" | "always-amz-auth"),
                                             origin_access_control_origin_type: ("s3" | "mediastore" | "mediapackagev2" | "lambda")
                                           },
                                           id: ::String,

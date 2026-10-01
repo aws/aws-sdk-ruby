@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.156.0 (2026-10-01)
+------------------
+
+* Feature - Added always-amz-auth as a supported signing behavior for Origin Access Control (OAC), enabling CloudFront to authenticate requests to Lambda-Web origins.
+
 1.155.0 (2026-09-23)
 ------------------
 

@@ -3676,6 +3676,8 @@ module Aws::QuickSight
       attr_accessor host: ::String
       attr_accessor port: ::Integer
       attr_accessor sql_endpoint_path: ::String
+      attr_accessor authentication_type: ("PASSWORD" | "KEYPAIR" | "TOKEN" | "X509")
+      attr_accessor o_auth_parameters: Types::OAuthParameters
       SENSITIVE: []
     end
 
@@ -3866,6 +3868,8 @@ module Aws::QuickSight
       attr_accessor default_text_area_options: Types::DefaultTextAreaControlOptions
       attr_accessor default_slider_options: Types::DefaultSliderControlOptions
       attr_accessor default_relative_date_time_options: Types::DefaultRelativeDateTimeControlOptions
+      attr_accessor default_hierarchy_list: Types::DefaultHierarchyFilterListControlOptions
+      attr_accessor default_hierarchy_dropdown: Types::DefaultHierarchyFilterDropDownControlOptions
       SENSITIVE: []
     end
 
@@ -3899,6 +3903,24 @@ module Aws::QuickSight
 
     class DefaultGridLayoutConfiguration
       attr_accessor canvas_size_options: Types::GridLayoutCanvasSizeOptions
+      SENSITIVE: []
+    end
+
+    class DefaultHierarchyFilterDropDownControlOptions
+      attr_accessor display_options: Types::HierarchyFilterDropDownControlDisplayOptions
+      attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
+      attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
+      SENSITIVE: []
+    end
+
+    class DefaultHierarchyFilterListControlOptions
+      attr_accessor display_options: Types::HierarchyFilterListControlDisplayOptions
+      attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
+      attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -5915,6 +5937,7 @@ module Aws::QuickSight
       attr_accessor relative_dates_filter: Types::RelativeDatesFilter
       attr_accessor top_bottom_filter: Types::TopBottomFilter
       attr_accessor nested_filter: Types::NestedFilter
+      attr_accessor hierarchy_filter: Types::HierarchyFilter
       SENSITIVE: []
     end
 
@@ -5934,6 +5957,8 @@ module Aws::QuickSight
       attr_accessor slider: Types::FilterSliderControl
       attr_accessor relative_date_time: Types::FilterRelativeDateTimeControl
       attr_accessor cross_sheet: Types::FilterCrossSheetControl
+      attr_accessor hierarchy_list: Types::HierarchyFilterListControl
+      attr_accessor hierarchy_dropdown: Types::HierarchyFilterDropDownControl
       SENSITIVE: []
     end
 
@@ -6983,6 +7008,72 @@ module Aws::QuickSight
       attr_accessor actions: ::Array[Types::VisualCustomAction]
       attr_accessor visual_content_alt_text: ::String
       SENSITIVE: []
+    end
+
+    class HierarchyFilter
+      attr_accessor filter_id: ::String
+      attr_accessor column: Types::ColumnIdentifier
+      attr_accessor hierarchy_levels: ::Array[Types::HierarchyFilterLevel]
+      attr_accessor hierarchy_tree: Types::HierarchyFilterNode
+      attr_accessor null_option: ("ALL_VALUES" | "NULLS_ONLY" | "NON_NULLS_ONLY")
+      attr_accessor match_operator: ("INCLUDE" | "EXCLUDE")
+      attr_accessor default_filter_control_configuration: Types::DefaultFilterControlConfiguration
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterDropDownControl
+      attr_accessor filter_control_id: ::String
+      attr_accessor source_filter_id: ::String
+      attr_accessor title: ::String
+      attr_accessor display_options: Types::HierarchyFilterDropDownControlDisplayOptions
+      attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
+      attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterDropDownControlDisplayOptions
+      attr_accessor title_options: Types::LabelOptions
+      attr_accessor info_icon_label_options: Types::SheetControlInfoIconLabelOptions
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterLevel
+      attr_accessor column: Types::ColumnIdentifier
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterListControl
+      attr_accessor filter_control_id: ::String
+      attr_accessor source_filter_id: ::String
+      attr_accessor title: ::String
+      attr_accessor display_options: Types::HierarchyFilterListControlDisplayOptions
+      attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
+      attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterListControlDisplayOptions
+      attr_accessor title_options: Types::LabelOptions
+      attr_accessor info_icon_label_options: Types::SheetControlInfoIconLabelOptions
+      attr_accessor search_options: Types::HierarchyFilterListControlSearchOptions
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterListControlSearchOptions
+      attr_accessor visibility: ("HIDDEN" | "VISIBLE")
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterNode
+      attr_accessor column: Types::ColumnIdentifier
+      attr_accessor parent_value: ::String
+      attr_accessor hierarchy_values: ::Array[::String]
+      attr_accessor children: ::Array[Types::HierarchyFilterNode]
+      SENSITIVE: [:parent_value]
     end
 
     class HistogramAggregatedFieldWells

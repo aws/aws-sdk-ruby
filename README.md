@@ -377,6 +377,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Elemental MediaPackage v2                         | Aws::MediaPackageV2                      | aws-sdk-mediapackagev2                      | 2022-12-25  |
 | AWS Elemental MediaStore                              | Aws::MediaStore                          | aws-sdk-mediastore                          | 2017-09-01  |
 | AWS Elemental MediaStore Data Plane                   | Aws::MediaStoreData                      | aws-sdk-mediastoredata                      | 2017-09-01  |
+| AWS End User Messaging                                | Aws::EndUserMessaging                    | aws-sdk-endusermessaging                    | 2026-09-21  |
 | AWS End User Messaging Social                         | Aws::SocialMessaging                     | aws-sdk-socialmessaging                     | 2024-01-01  |
 | AWS EntityResolution                                  | Aws::EntityResolution                    | aws-sdk-entityresolution                    | 2018-05-10  |
 | AWS Fault Injection Simulator                         | Aws::FIS                                 | aws-sdk-fis                                 | 2020-12-01  |
@@ -706,6 +707,7 @@ RubyGems.org page under "LINKS" section.
 | Inspector2                                            | Aws::Inspector2                          | aws-sdk-inspector2                          | 2020-06-08  |
 | Interconnect                                          | Aws::Interconnect                        | aws-sdk-interconnect                        | 2022-07-26  |
 | Lambda MicroVMs                                       | Aws::LambdaMicrovms                      | aws-sdk-lambdamicrovms                      | 2025-09-09  |
+| Lambda Web                                            | Aws::LambdaWeb                           | aws-sdk-lambdaweb                           | 2025-03-07  |
 | MailManager                                           | Aws::MailManager                         | aws-sdk-mailmanager                         | 2023-10-17  |
 | Managed Streaming for Kafka                           | Aws::Kafka                               | aws-sdk-kafka                               | 2018-11-14  |
 | Managed Streaming for Kafka Connect                   | Aws::KafkaConnect                        | aws-sdk-kafkaconnect                        | 2021-09-14  |

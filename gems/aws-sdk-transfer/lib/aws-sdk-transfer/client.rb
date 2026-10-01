@@ -1305,7 +1305,7 @@ module Aws::Transfer
     #   To specify a log group, you must provide the ARN for an existing log
     #   group. In this case, the format of the log group is as follows:
     #
-    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
     #
     #   For example,
     #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
@@ -1776,6 +1776,17 @@ module Aws::Transfer
     #   Key-value pairs that can be used to group and search for workflows.
     #   Tags are metadata attached to workflows for any purpose.
     #
+    # @option params [Array<String>] :structured_log_destinations
+    #   Specifies the log groups to which your workflow logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
     # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkflowResponse#workflow_id #workflow_id} => String
@@ -1902,6 +1913,7 @@ module Aws::Transfer
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     structured_log_destinations: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -2993,6 +3005,8 @@ module Aws::Transfer
     #   resp.workflow.tags #=> Array
     #   resp.workflow.tags[0].key #=> String
     #   resp.workflow.tags[0].value #=> String
+    #   resp.workflow.structured_log_destinations #=> Array
+    #   resp.workflow.structured_log_destinations[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeWorkflow AWS API Documentation
     #
@@ -5349,7 +5363,7 @@ module Aws::Transfer
     #   To specify a log group, you must provide the ARN for an existing log
     #   group. In this case, the format of the log group is as follows:
     #
-    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
     #
     #   For example,
     #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
@@ -5801,7 +5815,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.147.0'
+      context[:gem_version] = '1.148.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

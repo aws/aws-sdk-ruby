@@ -1557,6 +1557,7 @@ module Aws::BedrockAgent
       attr_accessor failure_reasons: ::Array[::String]
       attr_accessor started_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor text_ready_at: ::Time
       SENSITIVE: []
     end
 
@@ -1593,6 +1594,7 @@ module Aws::BedrockAgent
       attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
       attr_accessor started_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor text_ready_at: ::Time
       attr_accessor statistics: Types::IngestionJobStatistics
       SENSITIVE: []
     end

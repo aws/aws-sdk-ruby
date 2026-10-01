@@ -6191,6 +6191,14 @@ module Aws::BedrockAgent
     #   the job was stopped.
     #   @return [Time]
     #
+    # @!attribute [rw] text_ready_at
+    #   The time at which all text content in the data ingestion job
+    #   finished extraction and became available to query.
+    #
+    #   This time isn't returned until text extraction is complete for all
+    #   the documents in the job.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/IngestionJob AWS API Documentation
     #
     class IngestionJob < Struct.new(
@@ -6202,7 +6210,8 @@ module Aws::BedrockAgent
       :statistics,
       :failure_reasons,
       :started_at,
-      :updated_at)
+      :updated_at,
+      :text_ready_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6334,6 +6343,14 @@ module Aws::BedrockAgent
     #   The time the data ingestion job was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] text_ready_at
+    #   The time at which all text content in the data ingestion job
+    #   finished extraction and became available to query.
+    #
+    #   This time isn't returned until text extraction is complete for all
+    #   the documents in the job.
+    #   @return [Time]
+    #
     # @!attribute [rw] statistics
     #   Contains statistics for the data ingestion job.
     #   @return [Types::IngestionJobStatistics]
@@ -6348,6 +6365,7 @@ module Aws::BedrockAgent
       :status,
       :started_at,
       :updated_at,
+      :text_ready_at,
       :statistics)
       SENSITIVE = []
       include Aws::Structure

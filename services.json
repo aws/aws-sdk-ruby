@@ -506,6 +506,9 @@
   "ElementalInference": {
     "models": "elementalinference/2018-11-14"
   },
+  "EndUserMessaging": {
+    "models": "endusermessaging/2026-09-21"
+  },
   "EntityResolution": {
     "models": "entityresolution/2018-05-10"
   },
@@ -736,6 +739,9 @@
   },
   "LambdaMicrovms": {
     "models": "lambda-microvms/2025-09-09"
+  },
+  "LambdaWeb": {
+    "models": "lambda-web/2025-03-07"
   },
   "LaunchWizard": {
     "models": "launch-wizard/2018-05-10"

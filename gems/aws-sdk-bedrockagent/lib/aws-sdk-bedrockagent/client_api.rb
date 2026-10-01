@@ -1959,6 +1959,7 @@ module Aws::BedrockAgent
     IngestionJob.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     IngestionJob.add_member(:started_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "startedAt"))
     IngestionJob.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    IngestionJob.add_member(:text_ready_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "textReadyAt"))
     IngestionJob.struct_class = Types::IngestionJob
 
     IngestionJobFilter.add_member(:attribute, Shapes::ShapeRef.new(shape: IngestionJobFilterAttribute, required: true, location_name: "attribute"))
@@ -1993,6 +1994,7 @@ module Aws::BedrockAgent
     IngestionJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: IngestionJobStatus, required: true, location_name: "status"))
     IngestionJobSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "startedAt"))
     IngestionJobSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    IngestionJobSummary.add_member(:text_ready_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "textReadyAt"))
     IngestionJobSummary.add_member(:statistics, Shapes::ShapeRef.new(shape: IngestionJobStatistics, location_name: "statistics"))
     IngestionJobSummary.struct_class = Types::IngestionJobSummary
 

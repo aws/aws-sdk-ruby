@@ -1,0 +1,607 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::EndUserMessaging
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BrandProfileAttributeInput
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_type: ("TEXT" | "IMAGE" | "DOCUMENT")
+      attr_accessor attribute_value: ::String
+      attr_accessor attachment_body: ::String
+      attr_accessor description: ::String
+      attr_accessor category: ::String
+      SENSITIVE: [:attribute_name, :attribute_value, :attachment_body, :description]
+    end
+
+    class BrandProfileAttributeOutput
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_type: ("TEXT" | "IMAGE" | "DOCUMENT")
+      attr_accessor media_download_url: ::String
+      SENSITIVE: [:attribute_name, :media_download_url]
+    end
+
+    class BrandProfileAttributeSummary
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_type: ("TEXT" | "IMAGE" | "DOCUMENT")
+      attr_accessor description: ::String
+      attr_accessor category: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:attribute_name, :description]
+    end
+
+    class BrandProfileInfo
+      attr_accessor brand_profile_id: ::String
+      attr_accessor brand_profile_arn: ::String
+      attr_accessor brand_profile_name: ::String
+      attr_accessor status: ("ACTIVE" | "BLOCKED" | "PAUSED" | "CANCELLED" | "FAILED")
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ChannelParameters
+      attr_accessor text: Types::TextParameters
+      attr_accessor voice: Types::VoiceParameters
+      attr_accessor notify: Types::NotifyParameters
+      attr_accessor whats_app: Types::WhatsAppParameters
+      SENSITIVE: []
+    end
+
+    class CodeConfigurationParameters
+      attr_accessor code_type: ("NUMERIC" | "ALPHA" | "ALPHANUMERIC")
+      attr_accessor code_length: ::Integer
+      attr_accessor validity_period_minutes: ::Integer
+      attr_accessor max_attempts: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBrandProfileAttributesInput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor attributes: ::Array[Types::BrandProfileAttributeInput]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:client_token]
+    end
+
+    class CreateBrandProfileAttributesOutput
+      attr_accessor attributes: ::Array[Types::BrandProfileAttributeOutput]
+      SENSITIVE: []
+    end
+
+    class CreateBrandProfileFromRegistrationInput
+      attr_accessor registration_id: ::String
+      attr_accessor brand_profile_name: ::String
+      attr_accessor smart_match: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:client_token]
+    end
+
+    class CreateBrandProfileFromRegistrationOutput
+      attr_accessor results: ::Array[Types::JobResult]
+      SENSITIVE: []
+    end
+
+    class CreateBrandProfileInput
+      attr_accessor brand_profile_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:client_token]
+    end
+
+    class CreateBrandProfileOutput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor brand_profile_arn: ::String
+      attr_accessor brand_profile_name: ::String
+      attr_accessor status: ("ACTIVE" | "BLOCKED" | "PAUSED" | "CANCELLED" | "FAILED")
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor attributes_created: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateNotifyCodeConfigurationInput
+      attr_accessor notify_code_configuration_name: ::String
+      attr_accessor code_configuration_parameters: Types::CodeConfigurationParameters
+      attr_accessor channel_parameters: Types::ChannelParameters
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:client_token]
+    end
+
+    class CreateNotifyCodeConfigurationOutput
+      attr_accessor notify_code_configuration: Types::NotifyCodeConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateRegistrationsFromBrandProfileInput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor registration_types: ::Array[::String]
+      attr_accessor smart_match: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: [:client_token]
+    end
+
+    class CreateRegistrationsFromBrandProfileOutput
+      attr_accessor results: ::Array[Types::JobResult]
+      SENSITIVE: []
+    end
+
+    class DeleteBrandProfileAttributeInput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor attribute_name: ::String
+      SENSITIVE: [:attribute_name]
+    end
+
+    class DeleteBrandProfileAttributeOutput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor attribute_name: ::String
+      SENSITIVE: [:attribute_name]
+    end
+
+    class DeleteBrandProfileInput
+      attr_accessor brand_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBrandProfileOutput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor brand_profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNotifyCodeConfigurationInput
+      attr_accessor notify_code_configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNotifyCodeConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class GetBrandProfileAttributeInput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor attribute_name: ::String
+      SENSITIVE: [:attribute_name]
+    end
+
+    class GetBrandProfileAttributeOutput
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_type: ("TEXT" | "IMAGE" | "DOCUMENT")
+      attr_accessor attribute_value: ::String
+      attr_accessor description: ::String
+      attr_accessor category: ::String
+      attr_accessor media_content_type: ::String
+      attr_accessor media_size_bytes: ::Integer
+      attr_accessor media_download_url: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:attribute_name, :attribute_value, :description, :media_download_url]
+    end
+
+    class GetBrandProfileInput
+      attr_accessor brand_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBrandProfileOutput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor brand_profile_arn: ::String
+      attr_accessor brand_profile_name: ::String
+      attr_accessor status: ("ACTIVE" | "BLOCKED" | "PAUSED" | "CANCELLED" | "FAILED")
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetJobInput
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetNotifyCodeConfigurationInput
+      attr_accessor notify_code_configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetNotifyCodeConfigurationOutput
+      attr_accessor notify_code_configuration: Types::NotifyCodeConfiguration
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Job
+      attr_accessor job_id: ::String
+      attr_accessor status: ("SUCCESS" | "PROCESSING" | "FAILED")
+      attr_accessor operation_type: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor brand_profile_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor resources: ::Array[Types::JobResource]
+      SENSITIVE: []
+    end
+
+    class JobResource
+      attr_accessor resource_type: ("REGISTRATION" | "BRAND_PROFILE")
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class JobResult
+      attr_accessor job_id: ::String
+      attr_accessor resource_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class JobSummary
+      attr_accessor job_id: ::String
+      attr_accessor status: ("SUCCESS" | "PROCESSING" | "FAILED")
+      attr_accessor operation_type: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor brand_profile_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor resources: ::Array[Types::JobResource]
+      SENSITIVE: []
+    end
+
+    class ListBrandProfileAttributesInput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBrandProfileAttributesOutput
+      attr_accessor brand_profile_attributes: ::Array[Types::BrandProfileAttributeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBrandProfilesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBrandProfilesOutput
+      attr_accessor brand_profiles: ::Array[Types::BrandProfileInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("SUCCESS" | "PROCESSING" | "FAILED")
+      attr_accessor brand_profile_id: ::String
+      attr_accessor operation_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsOutput
+      attr_accessor jobs: ::Array[Types::JobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotifyCodeConfigurationsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotifyCodeConfigurationsOutput
+      attr_accessor notify_code_configurations: ::Array[Types::NotifyCodeConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegistrationsFromBrandProfileInput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegistrationsFromBrandProfileOutput
+      attr_accessor registration_associations: ::Array[Types::RegistrationAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class NotifyCodeConfiguration
+      attr_accessor notify_code_configuration_id: ::String
+      attr_accessor notify_code_configuration_arn: ::String
+      attr_accessor notify_code_configuration_name: ::String
+      attr_accessor code_configuration_parameters: Types::CodeConfigurationParameters
+      attr_accessor channel_parameters: Types::ChannelParameters
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class NotifyParameters
+      attr_accessor notify_template_id: ::String
+      attr_accessor voice_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationAssociationSummary
+      attr_accessor registration_id: ::String
+      attr_accessor registration_type: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor smart_match_used: bool
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class SendNotifyCodeVerificationInput
+      attr_accessor channel: ("TEXT" | "VOICE" | "WHATSAPP")
+      attr_accessor destination_identity: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor notify_code_configuration: ::String
+      attr_accessor override_channel_parameters: Types::ChannelParameters
+      attr_accessor override_code_configuration_parameters: Types::CodeConfigurationParameters
+      attr_accessor configuration_set_name: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor reference_id: ::String
+      SENSITIVE: [:destination_identity]
+    end
+
+    class SendNotifyCodeVerificationOutput
+      attr_accessor verification_id: ::String
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TextParameters
+      attr_accessor inline_template_body: ::String
+      attr_accessor destination_country_parameters: ::Hash[::String, ::String]
+      SENSITIVE: [:inline_template_body]
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateBrandProfileAttributeInput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      attr_accessor attachment_body: ::String
+      attr_accessor description: ::String
+      attr_accessor category: ::String
+      SENSITIVE: [:attribute_name, :attribute_value, :description]
+    end
+
+    class UpdateBrandProfileAttributeOutput
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_type: ("TEXT" | "IMAGE" | "DOCUMENT")
+      attr_accessor attribute_value: ::String
+      attr_accessor description: ::String
+      attr_accessor category: ::String
+      attr_accessor media_content_type: ::String
+      attr_accessor media_size_bytes: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:attribute_name, :attribute_value, :description]
+    end
+
+    class UpdateBrandProfileFromRegistrationInput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor smart_match: bool
+      attr_accessor on_attribute_conflict: ("REPLACE" | "PRESERVE")
+      attr_accessor client_token: ::String
+      SENSITIVE: [:client_token]
+    end
+
+    class UpdateBrandProfileFromRegistrationOutput
+      attr_accessor results: ::Array[Types::JobResult]
+      SENSITIVE: []
+    end
+
+    class UpdateBrandProfileInput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor brand_profile_name: ::String
+      attr_accessor deletion_protection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateBrandProfileOutput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor brand_profile_arn: ::String
+      attr_accessor brand_profile_name: ::String
+      attr_accessor status: ("ACTIVE" | "BLOCKED" | "PAUSED" | "CANCELLED" | "FAILED")
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateChannelParameters
+      attr_accessor text: Types::UpdateTextParameters
+      attr_accessor voice: Types::UpdateVoiceParameters
+      attr_accessor notify: Types::UpdateNotifyParameters
+      attr_accessor whats_app: Types::UpdateWhatsAppParameters
+      SENSITIVE: []
+    end
+
+    class UpdateCodeConfigurationParameters
+      attr_accessor code_type: ("NUMERIC" | "ALPHA" | "ALPHANUMERIC")
+      attr_accessor code_length: ::Integer
+      attr_accessor validity_period_minutes: ::Integer
+      attr_accessor max_attempts: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateNotifyCodeConfigurationInput
+      attr_accessor notify_code_configuration_id: ::String
+      attr_accessor notify_code_configuration_name: ::String
+      attr_accessor code_configuration_parameters: Types::UpdateCodeConfigurationParameters
+      attr_accessor channel_parameters: Types::UpdateChannelParameters
+      attr_accessor deletion_protection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateNotifyCodeConfigurationOutput
+      attr_accessor notify_code_configuration: Types::NotifyCodeConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateNotifyParameters
+      attr_accessor notify_template_id: ::String
+      attr_accessor voice_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRegistrationsFromBrandProfileInput
+      attr_accessor brand_profile_id: ::String
+      attr_accessor registration_ids: ::Array[::String]
+      attr_accessor smart_match: bool
+      attr_accessor on_attribute_conflict: ("REPLACE" | "PRESERVE")
+      attr_accessor client_token: ::String
+      SENSITIVE: [:client_token]
+    end
+
+    class UpdateRegistrationsFromBrandProfileOutput
+      attr_accessor results: ::Array[Types::JobResult]
+      SENSITIVE: []
+    end
+
+    class UpdateTextParameters
+      attr_accessor inline_template_body: ::String
+      attr_accessor destination_country_parameters: ::Hash[::String, ::String]
+      SENSITIVE: [:inline_template_body]
+    end
+
+    class UpdateVoiceParameters
+      attr_accessor inline_template_body: ::String
+      attr_accessor language_code: ::String
+      attr_accessor voice_id: ::String
+      attr_accessor voice_message_body_text_type: ("TEXT" | "SSML")
+      SENSITIVE: [:inline_template_body]
+    end
+
+    class UpdateWhatsAppParameters
+      attr_accessor whats_app_template_name: ::String
+      attr_accessor language_code: ::String
+      SENSITIVE: []
+    end
+
+    class ValidateNotifyCodeVerificationInput
+      attr_accessor destination_identity: ::String
+      attr_accessor reference_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: [:destination_identity, :code]
+    end
+
+    class ValidateNotifyCodeVerificationOutput
+      attr_accessor status: ("VALID" | "INVALID")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor path: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VoiceParameters
+      attr_accessor inline_template_body: ::String
+      attr_accessor language_code: ::String
+      attr_accessor voice_id: ::String
+      attr_accessor voice_message_body_text_type: ("TEXT" | "SSML")
+      SENSITIVE: [:inline_template_body]
+    end
+
+    class WhatsAppParameters
+      attr_accessor whats_app_template_name: ::String
+      attr_accessor language_code: ::String
+      SENSITIVE: []
+    end
+  end
+end

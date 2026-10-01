@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.200.0 (2026-10-01)
+------------------
+
+* Feature - This release adds HierarchyFilter support for Amazon QuickSight analysis and dashboard and 2 legged OAuth for databricks datasources.
+
 1.199.0 (2026-09-22)
 ------------------
 

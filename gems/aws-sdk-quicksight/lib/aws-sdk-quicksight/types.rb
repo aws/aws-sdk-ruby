@@ -15585,12 +15585,24 @@ module Aws::QuickSight
     #   The HTTP path of the Databricks data source.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_type
+    #   The authentication type that you want to use for your connection.
+    #   This parameter accepts OAuth and non-OAuth authentication types.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_parameters
+    #   An object that contains information needed to create a data source
+    #   connection between an Quick Sight account and Databricks.
+    #   @return [Types::OAuthParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DatabricksParameters AWS API Documentation
     #
     class DatabricksParameters < Struct.new(
       :host,
       :port,
-      :sql_endpoint_path)
+      :sql_endpoint_path,
+      :authentication_type,
+      :o_auth_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16369,6 +16381,16 @@ module Aws::QuickSight
     #   control type.
     #   @return [Types::DefaultRelativeDateTimeControlOptions]
     #
+    # @!attribute [rw] default_hierarchy_list
+    #   The default options that correspond to the `HierarchyList` filter
+    #   control type.
+    #   @return [Types::DefaultHierarchyFilterListControlOptions]
+    #
+    # @!attribute [rw] default_hierarchy_dropdown
+    #   The default options that correspond to the `HierarchyDropdown`
+    #   filter control type.
+    #   @return [Types::DefaultHierarchyFilterDropDownControlOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultFilterControlOptions AWS API Documentation
     #
     class DefaultFilterControlOptions < Struct.new(
@@ -16378,7 +16400,9 @@ module Aws::QuickSight
       :default_text_field_options,
       :default_text_area_options,
       :default_slider_options,
-      :default_relative_date_time_options)
+      :default_relative_date_time_options,
+      :default_hierarchy_list,
+      :default_hierarchy_dropdown)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16509,6 +16533,93 @@ module Aws::QuickSight
     #
     class DefaultGridLayoutConfiguration < Struct.new(
       :canvas_size_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default options that correspond to the `HierarchyDropdown` filter
+    # control type.
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::HierarchyFilterDropDownControlDisplayOptions]
+    #
+    # @!attribute [rw] type
+    #   The type of the `DefaultHierarchyFilterDropDownControlOptions`.
+    #   Choose one of the following options:
+    #
+    #   * `MULTI_SELECT`: The user can select multiple entries from a
+    #     dropdown menu.
+    #
+    #   * `SINGLE_SELECT`: The user can select a single entry from a
+    #     dropdown menu.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `HierarchyFilterDropDownControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_sort_configurations
+    #   The sort configuration for the values displayed in the control. Only
+    #   one sort configuration can be applied per control.
+    #   @return [Array<Types::ControlSortConfiguration>]
+    #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultHierarchyFilterDropDownControlOptions AWS API Documentation
+    #
+    class DefaultHierarchyFilterDropDownControlOptions < Struct.new(
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default options that correspond to the `HierarchyList` filter
+    # control type.
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::HierarchyFilterListControlDisplayOptions]
+    #
+    # @!attribute [rw] type
+    #   The type of the `DefaultHierarchyFilterListControlOptions`. Choose
+    #   one of the following options:
+    #
+    #   * `MULTI_SELECT`: The user can select multiple entries from the
+    #     list.
+    #
+    #   * `SINGLE_SELECT`: The user can select a single entry from the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `HierarchyFilterListControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_sort_configurations
+    #   The sort configuration for the values displayed in the control. Only
+    #   one sort configuration can be applied per control.
+    #   @return [Array<Types::ControlSortConfiguration>]
+    #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultHierarchyFilterListControlOptions AWS API Documentation
+    #
+    class DefaultHierarchyFilterListControlOptions < Struct.new(
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23586,6 +23697,13 @@ module Aws::QuickSight
     #   by the nested inner filter.
     #   @return [Types::NestedFilter]
     #
+    # @!attribute [rw] hierarchy_filter
+    #   A `HierarchyFilter` filters data by drilling down through an ordered
+    #   list of columns. Each level in the list narrows the data by one
+    #   column, and the selected values at each level determine which values
+    #   are available at the next.
+    #   @return [Types::HierarchyFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Filter AWS API Documentation
     #
     class Filter < Struct.new(
@@ -23596,7 +23714,8 @@ module Aws::QuickSight
       :time_range_filter,
       :relative_dates_filter,
       :top_bottom_filter,
-      :nested_filter)
+      :nested_filter,
+      :hierarchy_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23670,6 +23789,18 @@ module Aws::QuickSight
     #   This represents your filter control on a sheet
     #   @return [Types::FilterCrossSheetControl]
     #
+    # @!attribute [rw] hierarchy_list
+    #   A control from a hierarchy filter that displays the hierarchy as a
+    #   list. You can expand a value to see and select the values beneath
+    #   it, and select either a single value or multiple values.
+    #   @return [Types::HierarchyFilterListControl]
+    #
+    # @!attribute [rw] hierarchy_dropdown
+    #   A control from a hierarchy filter that displays the hierarchy as a
+    #   dropdown list. You can expand a value to see and select the values
+    #   beneath it, and select either a single value or multiple values.
+    #   @return [Types::HierarchyFilterDropDownControl]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterControl AWS API Documentation
     #
     class FilterControl < Struct.new(
@@ -23680,7 +23811,9 @@ module Aws::QuickSight
       :text_area,
       :slider,
       :relative_date_time,
-      :cross_sheet)
+      :cross_sheet,
+      :hierarchy_list,
+      :hierarchy_dropdown)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27843,6 +27976,317 @@ module Aws::QuickSight
       :actions,
       :visual_content_alt_text)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A `HierarchyFilter` filters data by drilling down through an ordered
+    # list of columns. Each level in the list narrows the data by one
+    # column, and the selected values at each level determine which values
+    # are available at the next.
+    #
+    # @!attribute [rw] filter_id
+    #   An identifier that uniquely identifies a filter within a dashboard,
+    #   analysis, or template.
+    #   @return [String]
+    #
+    # @!attribute [rw] column
+    #   The column that anchors the filter. This column determines the
+    #   dataset that the whole filter applies to, so every column in
+    #   `HierarchyLevels` and in `HierarchyTree` must belong to the same
+    #   dataset.
+    #   @return [Types::ColumnIdentifier]
+    #
+    # @!attribute [rw] hierarchy_levels
+    #   The ordered list of columns that defines the drill-down path of the
+    #   filter. The first level is the top of the hierarchy. You can specify
+    #   a maximum of 5 levels.
+    #   @return [Array<Types::HierarchyFilterLevel>]
+    #
+    # @!attribute [rw] hierarchy_tree
+    #   The tree of selected values for the filter. Each node records the
+    #   values that are selected at one level of the hierarchy, and its
+    #   children record the selections beneath those values. Omit this
+    #   attribute to define the drill-down path without restricting any
+    #   values.
+    #   @return [Types::HierarchyFilterNode]
+    #
+    # @!attribute [rw] null_option
+    #   This option determines how null values should be treated when
+    #   filtering data.
+    #
+    #   * `ALL_VALUES`: Include null values in filtered results.
+    #
+    #   * `NULLS_ONLY`: Only include null values in filtered results.
+    #
+    #   * `NON_NULLS_ONLY`: Exclude null values from filtered results.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_operator
+    #   Determines whether the values selected in `HierarchyTree` are kept
+    #   or removed. Choose one of the following options:
+    #
+    #   * `INCLUDE`: Keep only the selected values.
+    #
+    #   * `EXCLUDE`: Remove the selected values.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_filter_control_configuration
+    #   The default configurations for the associated controls. This applies
+    #   only for filters that are scoped to multiple sheets.
+    #   @return [Types::DefaultFilterControlConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilter AWS API Documentation
+    #
+    class HierarchyFilter < Struct.new(
+      :filter_id,
+      :column,
+      :hierarchy_levels,
+      :hierarchy_tree,
+      :null_option,
+      :match_operator,
+      :default_filter_control_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A control from a hierarchy filter that displays the hierarchy as a
+    # dropdown list. You can expand a value to see and select the values
+    # beneath it, and select either a single value or multiple values.
+    #
+    # @!attribute [rw] filter_control_id
+    #   The ID of the `HierarchyFilterDropDownControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_filter_id
+    #   The source filter ID of the `HierarchyFilterDropDownControl`. This
+    #   must be the `FilterId` of a `HierarchyFilter`.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the `HierarchyFilterDropDownControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::HierarchyFilterDropDownControlDisplayOptions]
+    #
+    # @!attribute [rw] type
+    #   The type of the `HierarchyFilterDropDownControl`. Choose one of the
+    #   following options:
+    #
+    #   * `MULTI_SELECT`: The user can select multiple entries from a
+    #     dropdown menu.
+    #
+    #   * `SINGLE_SELECT`: The user can select a single entry from a
+    #     dropdown menu.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `HierarchyFilterDropDownControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_sort_configurations
+    #   The sort configuration for the values displayed in the control. Only
+    #   one sort configuration can be applied per control.
+    #   @return [Array<Types::ControlSortConfiguration>]
+    #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterDropDownControl AWS API Documentation
+    #
+    class HierarchyFilterDropDownControl < Struct.new(
+      :filter_control_id,
+      :source_filter_id,
+      :title,
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The display options of a control.
+    #
+    # @!attribute [rw] title_options
+    #   The options to configure the title visibility, name, and font size.
+    #   @return [Types::LabelOptions]
+    #
+    # @!attribute [rw] info_icon_label_options
+    #   The configuration of info icon label options.
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterDropDownControlDisplayOptions AWS API Documentation
+    #
+    class HierarchyFilterDropDownControlDisplayOptions < Struct.new(
+      :title_options,
+      :info_icon_label_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One level of the drill-down path of a `HierarchyFilter`.
+    #
+    # @!attribute [rw] column
+    #   The column that this level of the hierarchy drills down by. This
+    #   column must belong to the same dataset as `HierarchyFilter$Column`.
+    #   @return [Types::ColumnIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterLevel AWS API Documentation
+    #
+    class HierarchyFilterLevel < Struct.new(
+      :column)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A control from a hierarchy filter that displays the hierarchy as a
+    # list. You can expand a value to see and select the values beneath it,
+    # and select either a single value or multiple values.
+    #
+    # @!attribute [rw] filter_control_id
+    #   The ID of the `HierarchyFilterListControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_filter_id
+    #   The source filter ID of the `HierarchyFilterListControl`. This must
+    #   be the `FilterId` of a `HierarchyFilter`.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the `HierarchyFilterListControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_options
+    #   The display options of a control.
+    #   @return [Types::HierarchyFilterListControlDisplayOptions]
+    #
+    # @!attribute [rw] type
+    #   The type of the `HierarchyFilterListControl`. Choose one of the
+    #   following options:
+    #
+    #   * `MULTI_SELECT`: The user can select multiple entries from the
+    #     list.
+    #
+    #   * `SINGLE_SELECT`: The user can select a single entry from the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_mode
+    #   The visibility configuration of the Apply button on a
+    #   `HierarchyFilterListControl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_sort_configurations
+    #   The sort configuration for the values displayed in the control. Only
+    #   one sort configuration can be applied per control.
+    #   @return [Array<Types::ControlSortConfiguration>]
+    #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterListControl AWS API Documentation
+    #
+    class HierarchyFilterListControl < Struct.new(
+      :filter_control_id,
+      :source_filter_id,
+      :title,
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The display options of a control.
+    #
+    # @!attribute [rw] title_options
+    #   The options to configure the title visibility, name, and font size.
+    #   @return [Types::LabelOptions]
+    #
+    # @!attribute [rw] info_icon_label_options
+    #   The configuration of info icon label options.
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    #
+    # @!attribute [rw] search_options
+    #   The configuration of the search options in a hierarchy list control.
+    #   @return [Types::HierarchyFilterListControlSearchOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterListControlDisplayOptions AWS API Documentation
+    #
+    class HierarchyFilterListControlDisplayOptions < Struct.new(
+      :title_options,
+      :info_icon_label_options,
+      :search_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the search options in a hierarchy list control.
+    #
+    # @!attribute [rw] visibility
+    #   The visibility configuration of the search options in a hierarchy
+    #   list control.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterListControlSearchOptions AWS API Documentation
+    #
+    class HierarchyFilterListControlSearchOptions < Struct.new(
+      :visibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A node in the selection tree of a `HierarchyFilter`. Each node records
+    # the values that are selected at one level of the hierarchy. Nodes nest
+    # through `Children` to record selections at deeper levels.
+    #
+    # The tree cannot be deeper than the number of levels declared in
+    # `HierarchyLevels`. A tree can be a maximum of 5 levels deep, and a
+    # node can have a maximum of 1,000 children.
+    #
+    # @!attribute [rw] column
+    #   The column that this node selects values from. This column must
+    #   match the column of the corresponding level in
+    #   `HierarchyFilter$HierarchyLevels`. The node at depth 1 must match
+    #   the first level, the node at depth 2 must match the second level,
+    #   and so on.
+    #   @return [Types::ColumnIdentifier]
+    #
+    # @!attribute [rw] parent_value
+    #   The value in the parent node's `HierarchyValues` that this node
+    #   belongs to. When a parent selects several values, each of its
+    #   children repeats one of them here to identify which branch of the
+    #   hierarchy that child describes.
+    #
+    #   Omit this attribute on the root node of `HierarchyTree`, which has
+    #   no parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] hierarchy_values
+    #   The values that are selected at this level of the hierarchy. You can
+    #   specify a maximum of 2,000 values per node.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] children
+    #   The nodes that record the selections at the next level of the
+    #   hierarchy. You can specify a maximum of 1,000 children per node.
+    #   @return [Array<Types::HierarchyFilterNode>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HierarchyFilterNode AWS API Documentation
+    #
+    class HierarchyFilterNode < Struct.new(
+      :column,
+      :parent_value,
+      :hierarchy_values,
+      :children)
+      SENSITIVE = [:parent_value, :hierarchy_values]
       include Aws::Structure
     end
 
@@ -34812,8 +35256,8 @@ module Aws::QuickSight
 
     # An object that contains information needed to create a data source
     # connection that uses OAuth client credentials. This option is
-    # available for data source connections that are made with Snowflake and
-    # Starburst.
+    # available for data source connections that are made with Snowflake,
+    # Starburst, and Databricks.
     #
     # @!attribute [rw] token_provider_url
     #   The token endpoint URL of the identity provider.

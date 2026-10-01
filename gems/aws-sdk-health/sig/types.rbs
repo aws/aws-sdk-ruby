@@ -189,6 +189,19 @@ module Aws::Health
       SENSITIVE: []
     end
 
+    class DescribeServiceLifecycleRequest
+      attr_accessor filter: Types::ServiceLifecycleFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeServiceLifecycleResponse
+      attr_accessor service_lifecycles: ::Array[Types::ServiceLifecycle]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class EntityAccountFilter
       attr_accessor event_arn: ::String
       attr_accessor aws_account_id: ::String
@@ -303,6 +316,15 @@ module Aws::Health
       SENSITIVE: []
     end
 
+    class LifecycleEvent
+      attr_accessor lifecycle_event_type: ::String
+      attr_accessor date: ::Time
+      attr_accessor regions: ::Array[::String]
+      attr_accessor impact_risks: ::Array[::String]
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
     class OrganizationAffectedEntitiesErrorItem
       attr_accessor aws_account_id: ::String
       attr_accessor event_arn: ::String
@@ -365,6 +387,20 @@ module Aws::Health
       attr_accessor event_type_categories: ::Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]
       attr_accessor event_status_codes: ::Array[("open" | "closed" | "upcoming")]
       attr_accessor personas: ::Array[("OPERATIONS" | "SECURITY" | "BILLING")]
+      SENSITIVE: []
+    end
+
+    class ServiceLifecycle
+      attr_accessor service: ::String
+      attr_accessor version: ::String
+      attr_accessor title: ::String
+      attr_accessor recommended_version: ::String
+      attr_accessor lifecycle_events: ::Array[Types::LifecycleEvent]
+      SENSITIVE: []
+    end
+
+    class ServiceLifecycleFilter
+      attr_accessor service: ::String
       SENSITIVE: []
     end
 

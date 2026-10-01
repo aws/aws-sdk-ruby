@@ -10045,7 +10045,9 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] name
-    #   Name for the cluster policy.
+    #   The name for the cluster policy. The name must be unique within the
+    #   SageMaker AI HyperPod cluster specified by `ClusterArn`. You can use
+    #   the same name in other clusters within a Region or across Regions.
     #   @return [String]
     #
     # @!attribute [rw] cluster_arn
@@ -10250,7 +10252,10 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] name
-    #   Name to the compute allocation definition.
+    #   The name of the compute allocation definition. The name must be
+    #   unique within the SageMaker AI HyperPod cluster specified by
+    #   `ClusterArn`. You can use the same name in other clusters within a
+    #   Region or across Regions.
     #   @return [String]
     #
     # @!attribute [rw] description

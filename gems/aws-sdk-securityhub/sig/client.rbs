@@ -4954,6 +4954,36 @@ module Aws
                                      ) -> _GetRecommendedPolicyV2ResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommendedPolicyV2ResponseSuccess
 
+      interface _GetRemediationsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRemediationsV2Response]
+        def items: () -> ::Array[Types::RemediationV2Item]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#get_remediations_v2-instance_method
+      def get_remediations_v2: (
+                                 ?target_uid: ::String,
+                                 ?metadata_uid: ::String,
+                                 ?filters: {
+                                   composite_filters: Array[
+                                     {
+                                       string_filters: Array[
+                                         {
+                                           field_name: ("Resource.Type" | "Priority" | "Status" | "Resource.Id" | "Resource.ResourceOwnerAccountId" | "Resource.CloudProvider"),
+                                           filter: {
+                                             value: ::String
+                                           }
+                                         }
+                                       ]?
+                                     }
+                                   ]?
+                                 },
+                                 ?show_guidance: bool,
+                                 ?guidance_format: ("All" | "AwsCli" | "Cli" | "Python" | "Terraform" | "Cdk" | "CloudFormation" | "IaC" | "Template"),
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _GetRemediationsV2ResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRemediationsV2ResponseSuccess
+
       interface _GetResourcesStatisticsV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcesStatisticsV2Response]
         def group_by_results: () -> ::Array[Types::GroupByResult]
@@ -5153,6 +5183,23 @@ module Aws
                                               ?max_results: ::Integer
                                             ) -> _ListEnabledProductsForImportResponseSuccess
                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnabledProductsForImportResponseSuccess
+
+      interface _ListExposuresByRemediationV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExposuresByRemediationV2Response]
+        def items: () -> ::Array[Types::ExposureFinding]
+        def target_uid: () -> ::String
+        def resource: () -> Types::RemediationResource
+        def total_count: () -> ::Integer
+        def trait: () -> Types::RemediationTrait
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#list_exposures_by_remediation_v2-instance_method
+      def list_exposures_by_remediation_v2: (
+                                              target_uid: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListExposuresByRemediationV2ResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExposuresByRemediationV2ResponseSuccess
 
       interface _ListFindingAggregatorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingAggregatorsResponse]

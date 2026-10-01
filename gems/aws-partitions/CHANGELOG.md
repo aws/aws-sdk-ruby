@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.1292.0 (2026-10-01)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LambdaWeb`.
+
+* Feature - Added support for enumerating regions for `Aws::EndUserMessaging`.
+
 1.1291.0 (2026-09-30)
 ------------------
 

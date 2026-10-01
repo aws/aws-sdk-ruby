@@ -812,6 +812,57 @@ module Aws
       cascading_control_configuration: Params::cascading_control_configuration?
     }
 
+      type hierarchy_filter_list_control_display_options = {
+      title_options: Params::label_options?,
+      info_icon_label_options: {
+        visibility: ("HIDDEN" | "VISIBLE")?,
+        info_icon_text: ::String?
+      }?,
+      search_options: {
+        visibility: ("HIDDEN" | "VISIBLE")?
+      }?
+    }
+
+      type hierarchy_filter_list_control = {
+      filter_control_id: ::String,
+      source_filter_id: ::String,
+      title: ::String?,
+      display_options: Params::hierarchy_filter_list_control_display_options?,
+      type: ("MULTI_SELECT" | "SINGLE_SELECT")?,
+      commit_mode: ("AUTO" | "MANUAL")?,
+      control_sort_configurations: Array[
+        Params::control_sort_configuration
+      ]?,
+      control_title_format_text: {
+        plain_text: ::String?,
+        rich_text: ::String?
+      }?
+    }
+
+      type hierarchy_filter_drop_down_control_display_options = {
+      title_options: Params::label_options?,
+      info_icon_label_options: {
+        visibility: ("HIDDEN" | "VISIBLE")?,
+        info_icon_text: ::String?
+      }?
+    }
+
+      type hierarchy_filter_drop_down_control = {
+      filter_control_id: ::String,
+      source_filter_id: ::String,
+      title: ::String?,
+      display_options: Params::hierarchy_filter_drop_down_control_display_options?,
+      type: ("MULTI_SELECT" | "SINGLE_SELECT")?,
+      commit_mode: ("AUTO" | "MANUAL")?,
+      control_sort_configurations: Array[
+        Params::control_sort_configuration
+      ]?,
+      control_title_format_text: {
+        plain_text: ::String?,
+        rich_text: ::String?
+      }?
+    }
+
       type filter_control = {
       date_time_picker: Params::filter_date_time_picker_control?,
       list: Params::filter_list_control?,
@@ -820,7 +871,9 @@ module Aws
       text_area: Params::filter_text_area_control?,
       slider: Params::filter_slider_control?,
       relative_date_time: Params::filter_relative_date_time_control?,
-      cross_sheet: Params::filter_cross_sheet_control?
+      cross_sheet: Params::filter_cross_sheet_control?,
+      hierarchy_list: Params::hierarchy_filter_list_control?,
+      hierarchy_dropdown: Params::hierarchy_filter_drop_down_control?
     }
 
       type table_aggregated_field_wells = {
@@ -4691,6 +4744,32 @@ module Aws
       commit_mode: ("AUTO" | "MANUAL")?
     }
 
+      type default_hierarchy_filter_list_control_options = {
+      display_options: Params::hierarchy_filter_list_control_display_options?,
+      type: ("MULTI_SELECT" | "SINGLE_SELECT")?,
+      commit_mode: ("AUTO" | "MANUAL")?,
+      control_sort_configurations: Array[
+        Params::control_sort_configuration
+      ]?,
+      control_title_format_text: {
+        plain_text: ::String?,
+        rich_text: ::String?
+      }?
+    }
+
+      type default_hierarchy_filter_drop_down_control_options = {
+      display_options: Params::hierarchy_filter_drop_down_control_display_options?,
+      type: ("MULTI_SELECT" | "SINGLE_SELECT")?,
+      commit_mode: ("AUTO" | "MANUAL")?,
+      control_sort_configurations: Array[
+        Params::control_sort_configuration
+      ]?,
+      control_title_format_text: {
+        plain_text: ::String?,
+        rich_text: ::String?
+      }?
+    }
+
       type default_filter_control_options = {
       default_date_time_picker_options: Params::default_date_time_picker_control_options?,
       default_list_options: Params::default_filter_list_control_options?,
@@ -4698,7 +4777,9 @@ module Aws
       default_text_field_options: Params::default_text_field_control_options?,
       default_text_area_options: Params::default_text_area_control_options?,
       default_slider_options: Params::default_slider_control_options?,
-      default_relative_date_time_options: Params::default_relative_date_time_control_options?
+      default_relative_date_time_options: Params::default_relative_date_time_control_options?,
+      default_hierarchy_list: Params::default_hierarchy_filter_list_control_options?,
+      default_hierarchy_dropdown: Params::default_hierarchy_filter_drop_down_control_options?
     }
 
       type default_filter_control_configuration = {
@@ -4873,6 +4954,50 @@ module Aws
       inner_filter: Params::inner_filter
     }
 
+      type hierarchy_filter_node = {
+      column: {
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
+        column_name: ::String
+      },
+      parent_value: ::String?,
+      hierarchy_values: Array[::String]?,
+      children: Array[
+        {
+          column: {
+            data_set_identifier: ::String?,
+            topic_identifier: ::String?,
+            column_name: ::String
+          },
+          parent_value: ::String?,
+          hierarchy_values: Array[::String]?,
+          children: untyped?
+        }
+      ]?
+    }
+
+      type hierarchy_filter = {
+      filter_id: ::String,
+      column: {
+        data_set_identifier: ::String?,
+        topic_identifier: ::String?,
+        column_name: ::String
+      },
+      hierarchy_levels: Array[
+        {
+          column: {
+            data_set_identifier: ::String?,
+            topic_identifier: ::String?,
+            column_name: ::String
+          }
+        }
+      ],
+      hierarchy_tree: Params::hierarchy_filter_node?,
+      null_option: ("ALL_VALUES" | "NULLS_ONLY" | "NON_NULLS_ONLY"),
+      match_operator: ("INCLUDE" | "EXCLUDE"),
+      default_filter_control_configuration: Params::default_filter_control_configuration?
+    }
+
       type filter = {
       category_filter: Params::category_filter?,
       numeric_range_filter: Params::numeric_range_filter?,
@@ -4881,7 +5006,8 @@ module Aws
       time_range_filter: Params::time_range_filter?,
       relative_dates_filter: Params::relative_dates_filter?,
       top_bottom_filter: Params::top_bottom_filter?,
-      nested_filter: Params::nested_filter?
+      nested_filter: Params::nested_filter?,
+      hierarchy_filter: Params::hierarchy_filter?
     }
 
       type decal_settings_configuration = {
@@ -6257,6 +6383,14 @@ module Aws
       o_auth_parameters: Params::o_auth_parameters?
     }
 
+      type databricks_parameters = {
+      host: ::String,
+      port: ::Integer,
+      sql_endpoint_path: ::String,
+      authentication_type: ("PASSWORD" | "KEYPAIR" | "TOKEN" | "X509")?,
+      o_auth_parameters: Params::o_auth_parameters?
+    }
+
       type starburst_parameters = {
       host: ::String,
       port: ::Integer,
@@ -6374,11 +6508,7 @@ module Aws
         host: ::String,
         port: ::Integer
       }?,
-      databricks_parameters: {
-        host: ::String,
-        port: ::Integer,
-        sql_endpoint_path: ::String
-      }?,
+      databricks_parameters: Params::databricks_parameters?,
       starburst_parameters: Params::starburst_parameters?,
       trino_parameters: {
         host: ::String,

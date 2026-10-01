@@ -586,6 +586,7 @@ module Aws::Transfer
     CreateWorkflowRequest.add_member(:steps, Shapes::ShapeRef.new(shape: WorkflowSteps, required: true, location_name: "Steps"))
     CreateWorkflowRequest.add_member(:on_exception_steps, Shapes::ShapeRef.new(shape: WorkflowSteps, location_name: "OnExceptionSteps"))
     CreateWorkflowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateWorkflowRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     CreateWorkflowRequest.struct_class = Types::CreateWorkflowRequest
 
     CreateWorkflowResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "WorkflowId"))
@@ -938,6 +939,7 @@ module Aws::Transfer
     DescribedWorkflow.add_member(:on_exception_steps, Shapes::ShapeRef.new(shape: WorkflowSteps, location_name: "OnExceptionSteps"))
     DescribedWorkflow.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, location_name: "WorkflowId"))
     DescribedWorkflow.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    DescribedWorkflow.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     DescribedWorkflow.struct_class = Types::DescribedWorkflow
 
     EfsFileLocation.add_member(:file_system_id, Shapes::ShapeRef.new(shape: EfsFileSystemId, location_name: "FileSystemId"))

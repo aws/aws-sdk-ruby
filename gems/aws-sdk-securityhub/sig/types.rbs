@@ -5711,6 +5711,15 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class ExposureFinding
+      attr_accessor metadata_uid: ::String
+      attr_accessor title: ::String
+      attr_accessor previous_severity: ("Informational" | "Low" | "Medium" | "High" | "Critical")
+      attr_accessor projected_severity: ("Informational" | "Low" | "Medium" | "High" | "Critical")
+      attr_accessor impact: ("Reduces" | "Resolves" | "Unchanged")
+      SENSITIVE: []
+    end
+
     class ExternalIntegrationConfiguration
       attr_accessor connector_arn: ::String
       SENSITIVE: []
@@ -6130,6 +6139,23 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class GetRemediationsV2Request
+      attr_accessor target_uid: ::String
+      attr_accessor metadata_uid: ::String
+      attr_accessor filters: Types::RemediationFilters
+      attr_accessor show_guidance: bool
+      attr_accessor guidance_format: ("All" | "AwsCli" | "Cli" | "Python" | "Terraform" | "Cdk" | "CloudFormation" | "IaC" | "Template")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRemediationsV2Response
+      attr_accessor items: ::Array[Types::RemediationV2Item]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class GetResourcesStatisticsV2Request
       attr_accessor group_by_rules: ::Array[Types::ResourceGroupByRule]
       attr_accessor scopes: Types::ResourceScopes
@@ -6354,6 +6380,12 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class KbArticle
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
     class KeywordFilter
       attr_accessor value: ::String
       SENSITIVE: []
@@ -6464,6 +6496,23 @@ module Aws::SecurityHub
 
     class ListEnabledProductsForImportResponse
       attr_accessor product_subscriptions: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExposuresByRemediationV2Request
+      attr_accessor target_uid: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExposuresByRemediationV2Response
+      attr_accessor items: ::Array[Types::ExposureFinding]
+      attr_accessor target_uid: ::String
+      attr_accessor resource: Types::RemediationResource
+      attr_accessor total_count: ::Integer
+      attr_accessor trait: Types::RemediationTrait
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -7034,6 +7083,148 @@ module Aws::SecurityHub
 
     class Remediation
       attr_accessor recommendation: Types::Recommendation
+      SENSITIVE: []
+    end
+
+    class RemediationCompositeFilter
+      attr_accessor string_filters: ::Array[Types::RemediationStringFilter]
+      SENSITIVE: []
+    end
+
+    class RemediationFilters
+      attr_accessor composite_filters: ::Array[Types::RemediationCompositeFilter]
+      SENSITIVE: []
+    end
+
+    class RemediationGuidance
+      attr_accessor target_type_name: ::String
+      attr_accessor pattern: ::String
+      attr_accessor version: ::String
+      attr_accessor context: Types::RemediationGuidanceContext
+      attr_accessor specification: Types::RemediationGuidanceSpecification
+      attr_accessor examples: Types::RemediationGuidanceExamples
+      attr_accessor metadata: Types::RemediationGuidanceMetadata
+      SENSITIVE: []
+    end
+
+    class RemediationGuidanceContext
+      attr_accessor problem_statement: ::String
+      attr_accessor risk_assessment: ::String
+      attr_accessor affected_scope: ::String
+      attr_accessor prerequisites: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemediationGuidanceExamples
+      attr_accessor aws_cli: ::String
+      attr_accessor cli: ::String
+      attr_accessor python: ::String
+      attr_accessor terraform: ::String
+      attr_accessor cdk: ::String
+      attr_accessor cloud_formation: ::String
+      attr_accessor ia_c: ::String
+      attr_accessor template: ::String
+      SENSITIVE: []
+    end
+
+    class RemediationGuidanceMetadata
+      attr_accessor resource_type: ::String
+      attr_accessor exposure_type: ::String
+      attr_accessor trait_titles: ::Array[::String]
+      attr_accessor reversibility: ::String
+      attr_accessor fix_effect: ::String
+      attr_accessor risk_level: ::String
+      attr_accessor automation_level: ::String
+      attr_accessor human_review_required: bool
+      attr_accessor generated_at: ::Time
+      attr_accessor verification_status: ::String
+      SENSITIVE: []
+    end
+
+    class RemediationGuidanceSpecification
+      attr_accessor parameters: ::Array[Types::RemediationParameter]
+      attr_accessor steps: ::Array[Types::RemediationStep]
+      attr_accessor expected_end_state: ::String
+      attr_accessor required_permissions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemediationOutcome
+      attr_accessor resolved_findings_count: ::Integer
+      attr_accessor severity_reduction_findings_count: ::Integer
+      attr_accessor severity_unchanged_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class RemediationParameter
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor description: ::String
+      attr_accessor required: bool
+      SENSITIVE: []
+    end
+
+    class RemediationResource
+      attr_accessor account_id: ::String
+      attr_accessor region: ::String
+      attr_accessor resource_owner_account_id: ::String
+      attr_accessor resource_owner_org_id: ::String
+      attr_accessor type: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor resource_guid: ::String
+      attr_accessor resource_region: ::String
+      attr_accessor cloud_provider: ("Azure" | "AWS")
+      SENSITIVE: []
+    end
+
+    class RemediationStep
+      attr_accessor phase: ::String
+      attr_accessor description: ::String
+      attr_accessor service: ::String
+      attr_accessor action: ::String
+      attr_accessor logic: ::String
+      attr_accessor inverse: ::String
+      attr_accessor verify_after: ::String
+      SENSITIVE: []
+    end
+
+    class RemediationStringFilter
+      attr_accessor field_name: ("Resource.Type" | "Priority" | "Status" | "Resource.Id" | "Resource.ResourceOwnerAccountId" | "Resource.CloudProvider")
+      attr_accessor filter: Types::RemediationStringFilterCondition
+      SENSITIVE: []
+    end
+
+    class RemediationStringFilterCondition
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class RemediationSummaryDetail
+      attr_accessor action: ::String
+      attr_accessor description: ::String
+      attr_accessor is_immediate: bool
+      attr_accessor post_remediation_steps: ::Array[::String]
+      attr_accessor kb_articles: ::Array[Types::KbArticle]
+      SENSITIVE: []
+    end
+
+    class RemediationTrait
+      attr_accessor type: ::String
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class RemediationV2Item
+      attr_accessor target_uid: ::String
+      attr_accessor outcome: Types::RemediationOutcome
+      attr_accessor priority: ("Critical" | "High" | "Medium" | "Low")
+      attr_accessor remediation_summary: Types::RemediationSummaryDetail
+      attr_accessor resource: Types::RemediationResource
+      attr_accessor status: ("New" | "Updated" | "Resolved")
+      attr_accessor trait: Types::RemediationTrait
+      attr_accessor guidance: Types::RemediationGuidance
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 

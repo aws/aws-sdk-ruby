@@ -819,6 +819,8 @@ module Aws::QuickSight
     DefaultFormatting = Shapes::StructureShape.new(name: 'DefaultFormatting')
     DefaultFreeFormLayoutConfiguration = Shapes::StructureShape.new(name: 'DefaultFreeFormLayoutConfiguration')
     DefaultGridLayoutConfiguration = Shapes::StructureShape.new(name: 'DefaultGridLayoutConfiguration')
+    DefaultHierarchyFilterDropDownControlOptions = Shapes::StructureShape.new(name: 'DefaultHierarchyFilterDropDownControlOptions')
+    DefaultHierarchyFilterListControlOptions = Shapes::StructureShape.new(name: 'DefaultHierarchyFilterListControlOptions')
     DefaultInteractiveLayoutConfiguration = Shapes::StructureShape.new(name: 'DefaultInteractiveLayoutConfiguration')
     DefaultNewSheetConfiguration = Shapes::StructureShape.new(name: 'DefaultNewSheetConfiguration')
     DefaultPaginatedLayoutConfiguration = Shapes::StructureShape.new(name: 'DefaultPaginatedLayoutConfiguration')
@@ -1375,7 +1377,20 @@ module Aws::QuickSight
     HeatMapVisual = Shapes::StructureShape.new(name: 'HeatMapVisual')
     HexColor = Shapes::StringShape.new(name: 'HexColor')
     HexColorWithTransparency = Shapes::StringShape.new(name: 'HexColorWithTransparency')
+    HierarchyFilter = Shapes::StructureShape.new(name: 'HierarchyFilter')
+    HierarchyFilterDropDownControl = Shapes::StructureShape.new(name: 'HierarchyFilterDropDownControl')
+    HierarchyFilterDropDownControlDisplayOptions = Shapes::StructureShape.new(name: 'HierarchyFilterDropDownControlDisplayOptions')
+    HierarchyFilterLevel = Shapes::StructureShape.new(name: 'HierarchyFilterLevel')
+    HierarchyFilterLevelList = Shapes::ListShape.new(name: 'HierarchyFilterLevelList')
+    HierarchyFilterListControl = Shapes::StructureShape.new(name: 'HierarchyFilterListControl')
+    HierarchyFilterListControlDisplayOptions = Shapes::StructureShape.new(name: 'HierarchyFilterListControlDisplayOptions')
+    HierarchyFilterListControlSearchOptions = Shapes::StructureShape.new(name: 'HierarchyFilterListControlSearchOptions')
+    HierarchyFilterMatchOperator = Shapes::StringShape.new(name: 'HierarchyFilterMatchOperator')
+    HierarchyFilterNode = Shapes::StructureShape.new(name: 'HierarchyFilterNode')
+    HierarchyFilterNodeList = Shapes::ListShape.new(name: 'HierarchyFilterNodeList')
+    HierarchyFilterValue = Shapes::StringShape.new(name: 'HierarchyFilterValue')
     HierarchyId = Shapes::StringShape.new(name: 'HierarchyId')
+    HierarchyValuesList = Shapes::ListShape.new(name: 'HierarchyValuesList')
     HistogramAggregatedFieldWells = Shapes::StructureShape.new(name: 'HistogramAggregatedFieldWells')
     HistogramBinOptions = Shapes::StructureShape.new(name: 'HistogramBinOptions')
     HistogramBinType = Shapes::StringShape.new(name: 'HistogramBinType')
@@ -6012,6 +6027,8 @@ module Aws::QuickSight
     DatabricksParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     DatabricksParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
     DatabricksParameters.add_member(:sql_endpoint_path, Shapes::ShapeRef.new(shape: SqlEndpointPath, required: true, location_name: "SqlEndpointPath"))
+    DatabricksParameters.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
+    DatabricksParameters.add_member(:o_auth_parameters, Shapes::ShapeRef.new(shape: OAuthParameters, location_name: "OAuthParameters"))
     DatabricksParameters.struct_class = Types::DatabricksParameters
 
     DatasetMetadata.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DatasetArn"))
@@ -6171,6 +6188,8 @@ module Aws::QuickSight
     DefaultFilterControlOptions.add_member(:default_text_area_options, Shapes::ShapeRef.new(shape: DefaultTextAreaControlOptions, location_name: "DefaultTextAreaOptions"))
     DefaultFilterControlOptions.add_member(:default_slider_options, Shapes::ShapeRef.new(shape: DefaultSliderControlOptions, location_name: "DefaultSliderOptions"))
     DefaultFilterControlOptions.add_member(:default_relative_date_time_options, Shapes::ShapeRef.new(shape: DefaultRelativeDateTimeControlOptions, location_name: "DefaultRelativeDateTimeOptions"))
+    DefaultFilterControlOptions.add_member(:default_hierarchy_list, Shapes::ShapeRef.new(shape: DefaultHierarchyFilterListControlOptions, location_name: "DefaultHierarchyList"))
+    DefaultFilterControlOptions.add_member(:default_hierarchy_dropdown, Shapes::ShapeRef.new(shape: DefaultHierarchyFilterDropDownControlOptions, location_name: "DefaultHierarchyDropdown"))
     DefaultFilterControlOptions.struct_class = Types::DefaultFilterControlOptions
 
     DefaultFilterDropDownControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: DropDownControlDisplayOptions, location_name: "DisplayOptions"))
@@ -6195,6 +6214,20 @@ module Aws::QuickSight
 
     DefaultGridLayoutConfiguration.add_member(:canvas_size_options, Shapes::ShapeRef.new(shape: GridLayoutCanvasSizeOptions, required: true, location_name: "CanvasSizeOptions"))
     DefaultGridLayoutConfiguration.struct_class = Types::DefaultGridLayoutConfiguration
+
+    DefaultHierarchyFilterDropDownControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: HierarchyFilterDropDownControlDisplayOptions, location_name: "DisplayOptions"))
+    DefaultHierarchyFilterDropDownControlOptions.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
+    DefaultHierarchyFilterDropDownControlOptions.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
+    DefaultHierarchyFilterDropDownControlOptions.add_member(:control_sort_configurations, Shapes::ShapeRef.new(shape: ControlSortConfigurationList, location_name: "ControlSortConfigurations"))
+    DefaultHierarchyFilterDropDownControlOptions.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
+    DefaultHierarchyFilterDropDownControlOptions.struct_class = Types::DefaultHierarchyFilterDropDownControlOptions
+
+    DefaultHierarchyFilterListControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: HierarchyFilterListControlDisplayOptions, location_name: "DisplayOptions"))
+    DefaultHierarchyFilterListControlOptions.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
+    DefaultHierarchyFilterListControlOptions.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
+    DefaultHierarchyFilterListControlOptions.add_member(:control_sort_configurations, Shapes::ShapeRef.new(shape: ControlSortConfigurationList, location_name: "ControlSortConfigurations"))
+    DefaultHierarchyFilterListControlOptions.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
+    DefaultHierarchyFilterListControlOptions.struct_class = Types::DefaultHierarchyFilterListControlOptions
 
     DefaultInteractiveLayoutConfiguration.add_member(:grid, Shapes::ShapeRef.new(shape: DefaultGridLayoutConfiguration, location_name: "Grid"))
     DefaultInteractiveLayoutConfiguration.add_member(:free_form, Shapes::ShapeRef.new(shape: DefaultFreeFormLayoutConfiguration, location_name: "FreeForm"))
@@ -7681,6 +7714,7 @@ module Aws::QuickSight
     Filter.add_member(:relative_dates_filter, Shapes::ShapeRef.new(shape: RelativeDatesFilter, location_name: "RelativeDatesFilter"))
     Filter.add_member(:top_bottom_filter, Shapes::ShapeRef.new(shape: TopBottomFilter, location_name: "TopBottomFilter"))
     Filter.add_member(:nested_filter, Shapes::ShapeRef.new(shape: NestedFilter, location_name: "NestedFilter"))
+    Filter.add_member(:hierarchy_filter, Shapes::ShapeRef.new(shape: HierarchyFilter, location_name: "HierarchyFilter"))
     Filter.struct_class = Types::Filter
 
     FilterAggMetrics.add_member(:metric_operand, Shapes::ShapeRef.new(shape: Identifier, location_name: "MetricOperand"))
@@ -7698,6 +7732,8 @@ module Aws::QuickSight
     FilterControl.add_member(:slider, Shapes::ShapeRef.new(shape: FilterSliderControl, location_name: "Slider"))
     FilterControl.add_member(:relative_date_time, Shapes::ShapeRef.new(shape: FilterRelativeDateTimeControl, location_name: "RelativeDateTime"))
     FilterControl.add_member(:cross_sheet, Shapes::ShapeRef.new(shape: FilterCrossSheetControl, location_name: "CrossSheet"))
+    FilterControl.add_member(:hierarchy_list, Shapes::ShapeRef.new(shape: HierarchyFilterListControl, location_name: "HierarchyList"))
+    FilterControl.add_member(:hierarchy_dropdown, Shapes::ShapeRef.new(shape: HierarchyFilterDropDownControl, location_name: "HierarchyDropdown"))
     FilterControl.struct_class = Types::FilterControl
 
     FilterControlList.member = Shapes::ShapeRef.new(shape: FilterControl)
@@ -8547,6 +8583,62 @@ module Aws::QuickSight
     HeatMapVisual.add_member(:actions, Shapes::ShapeRef.new(shape: VisualCustomActionList, location_name: "Actions"))
     HeatMapVisual.add_member(:visual_content_alt_text, Shapes::ShapeRef.new(shape: LongPlainText, location_name: "VisualContentAltText"))
     HeatMapVisual.struct_class = Types::HeatMapVisual
+
+    HierarchyFilter.add_member(:filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterId"))
+    HierarchyFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
+    HierarchyFilter.add_member(:hierarchy_levels, Shapes::ShapeRef.new(shape: HierarchyFilterLevelList, required: true, location_name: "HierarchyLevels"))
+    HierarchyFilter.add_member(:hierarchy_tree, Shapes::ShapeRef.new(shape: HierarchyFilterNode, location_name: "HierarchyTree"))
+    HierarchyFilter.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, required: true, location_name: "NullOption"))
+    HierarchyFilter.add_member(:match_operator, Shapes::ShapeRef.new(shape: HierarchyFilterMatchOperator, required: true, location_name: "MatchOperator"))
+    HierarchyFilter.add_member(:default_filter_control_configuration, Shapes::ShapeRef.new(shape: DefaultFilterControlConfiguration, location_name: "DefaultFilterControlConfiguration"))
+    HierarchyFilter.struct_class = Types::HierarchyFilter
+
+    HierarchyFilterDropDownControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
+    HierarchyFilterDropDownControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
+    HierarchyFilterDropDownControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
+    HierarchyFilterDropDownControl.add_member(:display_options, Shapes::ShapeRef.new(shape: HierarchyFilterDropDownControlDisplayOptions, location_name: "DisplayOptions"))
+    HierarchyFilterDropDownControl.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
+    HierarchyFilterDropDownControl.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
+    HierarchyFilterDropDownControl.add_member(:control_sort_configurations, Shapes::ShapeRef.new(shape: ControlSortConfigurationList, location_name: "ControlSortConfigurations"))
+    HierarchyFilterDropDownControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
+    HierarchyFilterDropDownControl.struct_class = Types::HierarchyFilterDropDownControl
+
+    HierarchyFilterDropDownControlDisplayOptions.add_member(:title_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "TitleOptions"))
+    HierarchyFilterDropDownControlDisplayOptions.add_member(:info_icon_label_options, Shapes::ShapeRef.new(shape: SheetControlInfoIconLabelOptions, location_name: "InfoIconLabelOptions"))
+    HierarchyFilterDropDownControlDisplayOptions.struct_class = Types::HierarchyFilterDropDownControlDisplayOptions
+
+    HierarchyFilterLevel.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
+    HierarchyFilterLevel.struct_class = Types::HierarchyFilterLevel
+
+    HierarchyFilterLevelList.member = Shapes::ShapeRef.new(shape: HierarchyFilterLevel)
+
+    HierarchyFilterListControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
+    HierarchyFilterListControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
+    HierarchyFilterListControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
+    HierarchyFilterListControl.add_member(:display_options, Shapes::ShapeRef.new(shape: HierarchyFilterListControlDisplayOptions, location_name: "DisplayOptions"))
+    HierarchyFilterListControl.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
+    HierarchyFilterListControl.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
+    HierarchyFilterListControl.add_member(:control_sort_configurations, Shapes::ShapeRef.new(shape: ControlSortConfigurationList, location_name: "ControlSortConfigurations"))
+    HierarchyFilterListControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
+    HierarchyFilterListControl.struct_class = Types::HierarchyFilterListControl
+
+    HierarchyFilterListControlDisplayOptions.add_member(:title_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "TitleOptions"))
+    HierarchyFilterListControlDisplayOptions.add_member(:info_icon_label_options, Shapes::ShapeRef.new(shape: SheetControlInfoIconLabelOptions, location_name: "InfoIconLabelOptions"))
+    HierarchyFilterListControlDisplayOptions.add_member(:search_options, Shapes::ShapeRef.new(shape: HierarchyFilterListControlSearchOptions, location_name: "SearchOptions"))
+    HierarchyFilterListControlDisplayOptions.struct_class = Types::HierarchyFilterListControlDisplayOptions
+
+    HierarchyFilterListControlSearchOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    HierarchyFilterListControlSearchOptions.struct_class = Types::HierarchyFilterListControlSearchOptions
+
+    HierarchyFilterNode.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
+    HierarchyFilterNode.add_member(:parent_value, Shapes::ShapeRef.new(shape: HierarchyFilterValue, location_name: "ParentValue"))
+    HierarchyFilterNode.add_member(:hierarchy_values, Shapes::ShapeRef.new(shape: HierarchyValuesList, location_name: "HierarchyValues"))
+    HierarchyFilterNode.add_member(:children, Shapes::ShapeRef.new(shape: HierarchyFilterNodeList, location_name: "Children"))
+    HierarchyFilterNode.struct_class = Types::HierarchyFilterNode
+
+    HierarchyFilterNodeList.member = Shapes::ShapeRef.new(shape: HierarchyFilterNode)
+
+    HierarchyValuesList.member = Shapes::ShapeRef.new(shape: HierarchyFilterValue)
 
     HistogramAggregatedFieldWells.add_member(:values, Shapes::ShapeRef.new(shape: HistogramMeasureFieldList, location_name: "Values"))
     HistogramAggregatedFieldWells.struct_class = Types::HistogramAggregatedFieldWells

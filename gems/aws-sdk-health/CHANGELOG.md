@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2026-10-01)
+------------------
+
+* Feature - Adds DescribeServiceLifecycle operation returning lifecycle information for AWS services, including end-of-support dates, version recommendations, and lifecycle events.
+
 1.104.0 (2026-09-11)
 ------------------
 

@@ -11532,6 +11532,15 @@ module Aws::CloudFront
     #     [cache policy][2] for all cache behaviors that use origins
     #     associated with this origin access control.**
     #
+    #   * `always-amz-auth` – CloudFront signs all origin requests with
+    #     Amazon authentication headers. If the viewer request contains the
+    #     `Authorization` header, then CloudFront also forwards that header
+    #     to the origin. This value is only valid with Lambda-Web origins.
+    #     **WARNING: To forward the `Authorization` header from the viewer
+    #     request, you *must* add the `Authorization` header to a [cache
+    #     policy][2] for all cache behaviors that use origins associated
+    #     with this origin access control.**
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings
@@ -11645,6 +11654,11 @@ module Aws::CloudFront
     #     the viewer request contains the `Authorization` header, CloudFront
     #     doesn't sign the origin request, but instead passes along the
     #     `Authorization` header that it received in the viewer request.
+    #
+    #   * `always-amz-auth` – CloudFront signs all origin requests with
+    #     Amazon authentication headers, and forwards the viewer's
+    #     `Authorization` header to the origin if one is present. This value
+    #     is only valid with Lambda-Web origins.
     #   @return [String]
     #
     # @!attribute [rw] origin_access_control_origin_type

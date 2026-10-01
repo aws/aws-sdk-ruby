@@ -5444,9 +5444,15 @@ module Aws::EC2
     #   * System tags (prefixed with `aws:`)
     #
     #   * For public and shared AMIs, user-defined tags that are attached by
-    #     other Amazon Web Services accounts
+    #     other Amazon Web Services accounts, except tags with the
+    #     `ec2:SharedTag/` prefix. For more information about tag sharing, see
+    #     [Sharing tags][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: Your user-defined AMI tags are not copied.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#sharing-tags
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new AMI and new snapshots. You can tag the
@@ -77925,7 +77931,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.654.0'
+      context[:gem_version] = '1.655.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

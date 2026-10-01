@@ -291,6 +291,21 @@ module Aws
       def describe_health_service_status_for_organization: () -> _DescribeHealthServiceStatusForOrganizationResponseSuccess
                                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeHealthServiceStatusForOrganizationResponseSuccess
 
+      interface _DescribeServiceLifecycleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceLifecycleResponse]
+        def service_lifecycles: () -> ::Array[Types::ServiceLifecycle]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_service_lifecycle-instance_method
+      def describe_service_lifecycle: (
+                                        ?filter: {
+                                          service: ::String?
+                                        },
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _DescribeServiceLifecycleResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceLifecycleResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#disable_health_service_access_for_organization-instance_method
       def disable_health_service_access_for_organization: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

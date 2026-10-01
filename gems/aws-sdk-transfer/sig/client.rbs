@@ -322,7 +322,8 @@ module Aws
                                  key: ::String,
                                  value: ::String
                                }
-                             ]
+                             ],
+                             ?structured_log_destinations: Array[::String]
                            ) -> _CreateWorkflowResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowResponseSuccess
 

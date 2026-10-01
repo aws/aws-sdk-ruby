@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2026-10-01)
+------------------
+
+* Feature - AWS Transfer Family Workflows adds support for the structuredLogDestinations option, enabling customers to specify a custom Amazon CloudWatch Logs log group for managed workflow execution logs.
+
 1.147.0 (2026-09-29)
 ------------------
 

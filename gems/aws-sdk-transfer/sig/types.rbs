@@ -208,6 +208,7 @@ module Aws::Transfer
       attr_accessor steps: ::Array[Types::WorkflowStep]
       attr_accessor on_exception_steps: ::Array[Types::WorkflowStep]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor structured_log_destinations: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -693,6 +694,7 @@ module Aws::Transfer
       attr_accessor on_exception_steps: ::Array[Types::WorkflowStep]
       attr_accessor workflow_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor structured_log_destinations: ::Array[::String]
       SENSITIVE: []
     end
 

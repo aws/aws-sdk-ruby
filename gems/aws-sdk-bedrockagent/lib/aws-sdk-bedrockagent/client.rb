@@ -4678,6 +4678,7 @@ module Aws::BedrockAgent
     #   resp.ingestion_job.failure_reasons[0] #=> String
     #   resp.ingestion_job.started_at #=> Time
     #   resp.ingestion_job.updated_at #=> Time
+    #   resp.ingestion_job.text_ready_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetIngestionJob AWS API Documentation
     #
@@ -5814,6 +5815,7 @@ module Aws::BedrockAgent
     #   resp.ingestion_job_summaries[0].status #=> String, one of "STARTING", "IN_PROGRESS", "COMPLETE", "FAILED", "STOPPING", "STOPPED"
     #   resp.ingestion_job_summaries[0].started_at #=> Time
     #   resp.ingestion_job_summaries[0].updated_at #=> Time
+    #   resp.ingestion_job_summaries[0].text_ready_at #=> Time
     #   resp.ingestion_job_summaries[0].statistics.number_of_documents_scanned #=> Integer
     #   resp.ingestion_job_summaries[0].statistics.number_of_metadata_documents_scanned #=> Integer
     #   resp.ingestion_job_summaries[0].statistics.number_of_new_documents_indexed #=> Integer
@@ -6286,6 +6288,7 @@ module Aws::BedrockAgent
     #   resp.ingestion_job.failure_reasons[0] #=> String
     #   resp.ingestion_job.started_at #=> Time
     #   resp.ingestion_job.updated_at #=> Time
+    #   resp.ingestion_job.text_ready_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StartIngestionJob AWS API Documentation
     #
@@ -6342,6 +6345,7 @@ module Aws::BedrockAgent
     #   resp.ingestion_job.failure_reasons[0] #=> String
     #   resp.ingestion_job.started_at #=> Time
     #   resp.ingestion_job.updated_at #=> Time
+    #   resp.ingestion_job.text_ready_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/StopIngestionJob AWS API Documentation
     #
@@ -8816,7 +8820,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

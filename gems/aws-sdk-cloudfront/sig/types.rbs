@@ -2852,7 +2852,7 @@ module Aws::CloudFront
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor signing_protocol: ("sigv4" | "sigv4a")
-      attr_accessor signing_behavior: ("never" | "always" | "no-override")
+      attr_accessor signing_behavior: ("never" | "always" | "no-override" | "always-amz-auth")
       attr_accessor origin_access_control_origin_type: ("s3" | "mediastore" | "mediapackagev2" | "lambda")
       SENSITIVE: []
     end
@@ -2877,7 +2877,7 @@ module Aws::CloudFront
       attr_accessor description: ::String
       attr_accessor name: ::String
       attr_accessor signing_protocol: ("sigv4" | "sigv4a")
-      attr_accessor signing_behavior: ("never" | "always" | "no-override")
+      attr_accessor signing_behavior: ("never" | "always" | "no-override" | "always-amz-auth")
       attr_accessor origin_access_control_origin_type: ("s3" | "mediastore" | "mediapackagev2" | "lambda")
       SENSITIVE: []
     end

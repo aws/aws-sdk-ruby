@@ -25300,6 +25300,54 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an exposure finding and the effect the specific
+    # remediation target has on it.
+    #
+    # @!attribute [rw] metadata_uid
+    #   The unique identifier (ID) of the Security Hub exposure finding,
+    #   found under the `metadata.uid` field of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the exposure finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_severity
+    #   The severity of the exposure finding before the remediation target
+    #   is resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] projected_severity
+    #   The severity of the exposure finding after the remediation target is
+    #   resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact
+    #   The impact resolving a remediation target has on the exposure
+    #   finding.
+    #
+    #   * `Reduces` specifies that resolving the remediation target lowers
+    #     the severity of the exposure finding, but does not resolve it.
+    #
+    #   * `Resolves` specifies that resolving the remediation target
+    #     resolves the exposure finding.
+    #
+    #   * `Unchanged` specifies that resolving the remediation target does
+    #     not change the severity of the exposure finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExposureFinding AWS API Documentation
+    #
+    class ExposureFinding < Struct.new(
+      :metadata_uid,
+      :title,
+      :previous_severity,
+      :projected_severity,
+      :impact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the settings and parameters required for integrating external
     # security tools and services.
     #
@@ -25908,7 +25956,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Whether the free trial period is currently active. Valid values:
+    #   Specifies whether the free trial period is currently active. Valid
+    #   values:
     #
     #   * `ACTIVE` specifies that the free trial period is ongoing.
     #
@@ -27049,6 +27098,81 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] target_uid
+    #   The unique identifier (ID) of an existing remediation target to
+    #   return. Returns the single matching target. You can't use
+    #   `TargetUid` together with `MetadataUid` or `Filters`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_uid
+    #   The unique identifier (ID) of the Security Hub exposure finding,
+    #   found under the `metadata.uid` field of the finding. Returns the
+    #   remediation targets associated with that finding. You can't use
+    #   `MetadataUid` together with `TargetUid` or `Filters`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters remediation targets based on a set of criteria. You can't
+    #   use `Filters` together with `TargetUid` or `MetadataUid`.
+    #   @return [Types::RemediationFilters]
+    #
+    # @!attribute [rw] show_guidance
+    #   Specifies whether to show remediation target guidance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] guidance_format
+    #   The format of the remediation guidance examples to return. Valid
+    #   values are `All`, `AwsCli`, `Cli`, `Python`, `Terraform`, `Cdk`,
+    #   `CloudFormation`, `IaC`, and `Template`. If you don't specify a
+    #   value, all formats are returned. Applies only when `ShowGuidance` is
+    #   `true`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Valid range is 1-100. If
+    #   you don't specify a value, the operation returns up to 25 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to paginate the remediations target list returned. On
+    #   your first call to `GetRemediationsV2`, omit this parameter or set
+    #   it to `NULL`. For subsequent calls, use the `NextToken` value
+    #   returned in the previous response to retrieve the next page of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetRemediationsV2Request AWS API Documentation
+    #
+    class GetRemediationsV2Request < Struct.new(
+      :target_uid,
+      :metadata_uid,
+      :filters,
+      :show_guidance,
+      :guidance_format,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   An array of remediation targets returned by the operation.
+    #   @return [Array<Types::RemediationV2Item>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetRemediationsV2Response AWS API Documentation
+    #
+    class GetRemediationsV2Response < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] group_by_rules
     #   How resource statistics should be aggregated and organized in the
     #   response.
@@ -27875,6 +27999,26 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A knowledge base article that provides additional guidance related to
+    # the remediation target.
+    #
+    # @!attribute [rw] title
+    #   The title of the `KbArticle`.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL of the `KbArticle`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/KbArticle AWS API Documentation
+    #
+    class KbArticle < Struct.new(
+      :title,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A keyword filter for querying findings.
     #
     # @!attribute [rw] value
@@ -28270,6 +28414,74 @@ module Aws::SecurityHub
     #
     class ListEnabledProductsForImportResponse < Struct.new(
       :product_subscriptions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_uid
+    #   The unique identifier (ID) of an existing remediation target to list
+    #   exposure findings for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Valid range is 1-100. If
+    #   you don't specify a value, the operation returns up to 25 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to paginate the exposures list returned. On your
+    #   first call to `ListExposuresByRemediationV2`, omit this parameter or
+    #   set it to `NULL`. For subsequent calls, use the `NextToken` value
+    #   returned in the previous response to retrieve the next page of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListExposuresByRemediationV2Request AWS API Documentation
+    #
+    class ListExposuresByRemediationV2Request < Struct.new(
+      :target_uid,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   An array of exposure findings returned by the operation.
+    #   @return [Array<Types::ExposureFinding>]
+    #
+    # @!attribute [rw] target_uid
+    #   The unique identifier (ID) of the remediation target that the
+    #   exposure findings are associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   Provides comprehensive details about a resource.
+    #   @return [Types::RemediationResource]
+    #
+    # @!attribute [rw] total_count
+    #   The total count of exposure findings associated with the remediation
+    #   target.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] trait
+    #   The specific trait associated with the remediation target.
+    #   @return [Types::RemediationTrait]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListExposuresByRemediationV2Response AWS API Documentation
+    #
+    class ListExposuresByRemediationV2Response < Struct.new(
+      :items,
+      :target_uid,
+      :resource,
+      :total_count,
+      :trait,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -30487,6 +30699,598 @@ module Aws::SecurityHub
     #
     class Remediation < Struct.new(
       :recommendation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables the creation of criteria for remediation targets.
+    #
+    # @!attribute [rw] string_filters
+    #   Enables filtering based on string field values.
+    #   @return [Array<Types::RemediationStringFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationCompositeFilter AWS API Documentation
+    #
+    class RemediationCompositeFilter < Struct.new(
+      :string_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the criteria used to filter remediation targets, such as
+    # resource type, priority, or status.
+    #
+    # @!attribute [rw] composite_filters
+    #   A collection of complex filtering conditions that can be applied to
+    #   remediation target data.
+    #   @return [Array<Types::RemediationCompositeFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationFilters AWS API Documentation
+    #
+    class RemediationFilters < Struct.new(
+      :composite_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A remediation guidebook outlining guidance in resolving the
+    # remediation target.
+    #
+    # @!attribute [rw] target_type_name
+    #   The name of the remediation target type.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   The remediation pattern of the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The guidance version.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   The context behind the remediation target's existence and guidance.
+    #   @return [Types::RemediationGuidanceContext]
+    #
+    # @!attribute [rw] specification
+    #   The specification of the remediation target guidance. This outlines
+    #   required resource parameters and permissions, remediation steps, and
+    #   the end state.
+    #   @return [Types::RemediationGuidanceSpecification]
+    #
+    # @!attribute [rw] examples
+    #   Provided remediation guidance examples in different formats that can
+    #   be run for remediating the target.
+    #   @return [Types::RemediationGuidanceExamples]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the remediation guidance.
+    #   @return [Types::RemediationGuidanceMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationGuidance AWS API Documentation
+    #
+    class RemediationGuidance < Struct.new(
+      :target_type_name,
+      :pattern,
+      :version,
+      :context,
+      :specification,
+      :examples,
+      :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The context behind the remediation target's existence and guidance.
+    #
+    # @!attribute [rw] problem_statement
+    #   Explains the cause which directly created the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_assessment
+    #   An assessment of the existing risk the remediation target creates.
+    #   @return [String]
+    #
+    # @!attribute [rw] affected_scope
+    #   The scope of the resources affected by the resolution of the
+    #   remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] prerequisites
+    #   An array of prerequisite steps in resolving the remediation target.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationGuidanceContext AWS API Documentation
+    #
+    class RemediationGuidanceContext < Struct.new(
+      :problem_statement,
+      :risk_assessment,
+      :affected_scope,
+      :prerequisites)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provided remediation guidance examples in different formats that can
+    # be run for remediating the target.
+    #
+    # @!attribute [rw] aws_cli
+    #   An AWS CLI snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] cli
+    #   A CLI snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] python
+    #   A Python snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] terraform
+    #   A Terraform snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] cdk
+    #   A CDK snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_formation
+    #   A CloudFormation snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] ia_c
+    #   An IaC snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   A Template snippet version of the example.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationGuidanceExamples AWS API Documentation
+    #
+    class RemediationGuidanceExamples < Struct.new(
+      :aws_cli,
+      :cli,
+      :python,
+      :terraform,
+      :cdk,
+      :cloud_formation,
+      :ia_c,
+      :template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the remediation guidance.
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type of the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] exposure_type
+    #   The exposure type of the related exposure findings.
+    #   @return [String]
+    #
+    # @!attribute [rw] trait_titles
+    #   The titles of traits this guidance applies to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reversibility
+    #   The extent to which changes made in accordance with the guidance can
+    #   be reversed, for example `Fully reversible`.
+    #   @return [String]
+    #
+    # @!attribute [rw] fix_effect
+    #   When the fix takes effect, for example `Immediate` or `Deferred`.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_level
+    #   The risk when implementing the guidance provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] automation_level
+    #   The extent to which the guidance can be automated, for example
+    #   `Full`.
+    #   @return [String]
+    #
+    # @!attribute [rw] human_review_required
+    #   Specifies whether human review is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] generated_at
+    #   Timestamp of when the guidance was generated.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub CSPM, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @!attribute [rw] verification_status
+    #   Verification status of the guidance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationGuidanceMetadata AWS API Documentation
+    #
+    class RemediationGuidanceMetadata < Struct.new(
+      :resource_type,
+      :exposure_type,
+      :trait_titles,
+      :reversibility,
+      :fix_effect,
+      :risk_level,
+      :automation_level,
+      :human_review_required,
+      :generated_at,
+      :verification_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specification of the remediation target guidance. This outlines
+    # required resource parameters and permissions, remediation steps, and
+    # the end state.
+    #
+    # @!attribute [rw] parameters
+    #   An array of the parameters used in running the steps provided.
+    #   @return [Array<Types::RemediationParameter>]
+    #
+    # @!attribute [rw] steps
+    #   An array of ordered steps for resolving the remediation targets.
+    #   @return [Array<Types::RemediationStep>]
+    #
+    # @!attribute [rw] expected_end_state
+    #   The expected end state of the associated resources after completion
+    #   of the steps.
+    #   @return [String]
+    #
+    # @!attribute [rw] required_permissions
+    #   An array of required permissions to run the steps.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationGuidanceSpecification AWS API Documentation
+    #
+    class RemediationGuidanceSpecification < Struct.new(
+      :parameters,
+      :steps,
+      :expected_end_state,
+      :required_permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The outcome from resolving the remediation target.
+    #
+    # @!attribute [rw] resolved_findings_count
+    #   The number of associated exposure findings that are resolved by
+    #   remediating the target.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity_reduction_findings_count
+    #   The number of associated exposure findings whose severity is reduced
+    #   by remediating the target.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity_unchanged_count
+    #   The number of associated exposure findings whose severity is
+    #   unchanged by remediating the target.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationOutcome AWS API Documentation
+    #
+    class RemediationOutcome < Struct.new(
+      :resolved_findings_count,
+      :severity_reduction_findings_count,
+      :severity_unchanged_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A parameter used in running the guidance steps.
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Specifies whether the parameter is required for running the guidance
+    #   steps.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationParameter AWS API Documentation
+    #
+    class RemediationParameter < Struct.new(
+      :name,
+      :type,
+      :description,
+      :required)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides comprehensive details about a resource.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account that recorded the resource data in
+    #   Security Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region in which Security Hub recorded the
+    #   resource data.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   The identifier of the cloud account that owns the resource. For
+    #   Amazon Web Services resources, this is the Amazon Web Services
+    #   account ID. For Azure resources, this is the Azure subscription ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_org_id
+    #   The identifier of the cloud organization that owns the resource. For
+    #   Amazon Web Services resources, this is the Organizations ID. For
+    #   Azure resources, this is the Azure tenant ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_guid
+    #   The global identifier used to identify a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region
+    #   The native cloud region where the resource is located. For Amazon
+    #   Web Services, this is an Amazon Web Services Region (for example,
+    #   `us-east-1`). For Azure resources, this is the Azure region (for
+    #   example, `westus2`). This field is always included.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_provider
+    #   The cloud provider where the resource exists.
+    #
+    #   * `AWS` specifies that the resource exists in Amazon Web Services.
+    #
+    #   * `Azure` specifies that the resource exists in Microsoft Azure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationResource AWS API Documentation
+    #
+    class RemediationResource < Struct.new(
+      :account_id,
+      :region,
+      :resource_owner_account_id,
+      :resource_owner_org_id,
+      :type,
+      :name,
+      :id,
+      :resource_guid,
+      :resource_region,
+      :cloud_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A step in the remediation guidance.
+    #
+    # @!attribute [rw] phase
+    #   The phase of the remediation plan that this step belongs to (for
+    #   example, `FIX`).
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of what the step does.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   Which service this step is performed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to be taken for this step.
+    #   @return [String]
+    #
+    # @!attribute [rw] logic
+    #   The logic behind the existence of this step.
+    #   @return [String]
+    #
+    # @!attribute [rw] inverse
+    #   The inverse of the step, to be used if the step needs to be rolled
+    #   back.
+    #   @return [String]
+    #
+    # @!attribute [rw] verify_after
+    #   The action to take after the step to verify its success.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationStep AWS API Documentation
+    #
+    class RemediationStep < Struct.new(
+      :phase,
+      :description,
+      :service,
+      :action,
+      :logic,
+      :inverse,
+      :verify_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A string filter for filtering remediation targets.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the filter field. Valid values are `Resource.Type`,
+    #   `Priority`, `Status`, `Resource.Id`,
+    #   `Resource.ResourceOwnerAccountId`, and `Resource.CloudProvider`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   The string filter definition.
+    #   @return [Types::RemediationStringFilterCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationStringFilter AWS API Documentation
+    #
+    class RemediationStringFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The condition to apply to the string filter.
+    #
+    # @!attribute [rw] value
+    #   The value the string filter is comparing against.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationStringFilterCondition AWS API Documentation
+    #
+    class RemediationStringFilterCondition < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the remediation target.
+    #
+    # @!attribute [rw] action
+    #   A summarized action to take for the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_immediate
+    #   Specifies whether the effect of this target is immediate.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] post_remediation_steps
+    #   An array of steps to be taken after remediation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] kb_articles
+    #   An array of `KbArticle` objects.
+    #   @return [Array<Types::KbArticle>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationSummaryDetail AWS API Documentation
+    #
+    class RemediationSummaryDetail < Struct.new(
+      :action,
+      :description,
+      :is_immediate,
+      :post_remediation_steps,
+      :kb_articles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The trait associated with the remediation target.
+    #
+    # @!attribute [rw] type
+    #   The trait type.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The trait title.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationTrait AWS API Documentation
+    #
+    class RemediationTrait < Struct.new(
+      :type,
+      :title)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A remediation target.
+    #
+    # @!attribute [rw] target_uid
+    #   The unique identifier (ID) of the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] outcome
+    #   The outcome of the remediation target's resolution.
+    #   @return [Types::RemediationOutcome]
+    #
+    # @!attribute [rw] priority
+    #   The remediation target's priority. Valid values are `Critical`,
+    #   `High`, `Medium`, and `Low`.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation_summary
+    #   A summary of the remediation target.
+    #   @return [Types::RemediationSummaryDetail]
+    #
+    # @!attribute [rw] resource
+    #   The remediation target's associated resource.
+    #   @return [Types::RemediationResource]
+    #
+    # @!attribute [rw] status
+    #   The current status of the remediation target.
+    #
+    #   * `New` specifies that the remediation target was newly identified.
+    #
+    #   * `Updated` specifies that the remediation target changed after it
+    #     was identified.
+    #
+    #   * `Resolved` specifies that the remediation target is no longer
+    #     present.
+    #   @return [String]
+    #
+    # @!attribute [rw] trait
+    #   The trait associated with the remediation target.
+    #   @return [Types::RemediationTrait]
+    #
+    # @!attribute [rw] guidance
+    #   The remediation target's guidance. Returned only when
+    #   `ShowGuidance` is `true` in the request.
+    #   @return [Types::RemediationGuidance]
+    #
+    # @!attribute [rw] updated_at
+    #   The remediation target's last updated timestamp.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub CSPM, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationV2Item AWS API Documentation
+    #
+    class RemediationV2Item < Struct.new(
+      :target_uid,
+      :outcome,
+      :priority,
+      :remediation_summary,
+      :resource,
+      :status,
+      :trait,
+      :guidance,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33962,7 +34766,14 @@ module Aws::SecurityHub
     #   * To search for values that include the filter value, use
     #     `CONTAINS`. For example, the filter `Title CONTAINS CloudFront`
     #     matches findings that have a `Title` that includes the string
-    #     CloudFront.
+    #     `CloudFront`.
+    #
+    #   * To search for values that contain a word matching the filter
+    #     value, regardless of case, use `CONTAINS_WORD`. For example, the
+    #     filter `Title CONTAINS_WORD lambda` matches a finding whose
+    #     `Title` is `GuardDuty Lambda Protection`, because the `Title`
+    #     contains the word Lambda. Including special characters in the
+    #     filter value might produce unexpected search results.
     #
     #   * To search for values that exactly match the filter value, use
     #     `EQUALS`. For example, the filter `AwsAccountId EQUALS

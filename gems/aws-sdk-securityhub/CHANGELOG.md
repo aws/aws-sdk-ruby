@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.166.0 (2026-10-01)
+------------------
+
+* Feature - Adds GetRemediationsV2 and ListExposuresByRemediationV2 APIs. This feature allows customers to see their highest priority remediations for their Exposure findings. Remediations target key changes customers can make to resources to drive finding resolution.
+
 1.165.0 (2026-09-11)
 ------------------
 

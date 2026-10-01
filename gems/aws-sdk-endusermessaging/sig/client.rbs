@@ -1,0 +1,535 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EndUserMessaging
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateBrandProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBrandProfileOutput]
+        def brand_profile_id: () -> ::String
+        def brand_profile_arn: () -> ::String
+        def brand_profile_name: () -> ::String
+        def status: () -> ("ACTIVE" | "BLOCKED" | "PAUSED" | "CANCELLED" | "FAILED")
+        def deletion_protection_enabled: () -> bool
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def attributes_created: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#create_brand_profile-instance_method
+      def create_brand_profile: (
+                                  brand_profile_name: ::String,
+                                  ?client_token: ::String,
+                                  ?deletion_protection_enabled: bool,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    }
+                                  ]
+                                ) -> _CreateBrandProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrandProfileResponseSuccess
+
+      interface _CreateBrandProfileAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBrandProfileAttributesOutput]
+        def attributes: () -> ::Array[Types::BrandProfileAttributeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#create_brand_profile_attributes-instance_method
+      def create_brand_profile_attributes: (
+                                             brand_profile_id: ::String,
+                                             attributes: Array[
+                                               {
+                                                 attribute_name: ::String,
+                                                 attribute_type: ("TEXT" | "IMAGE" | "DOCUMENT"),
+                                                 attribute_value: ::String?,
+                                                 attachment_body: ::String?,
+                                                 description: ::String?,
+                                                 category: ::String?
+                                               }
+                                             ],
+                                             ?client_token: ::String
+                                           ) -> _CreateBrandProfileAttributesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrandProfileAttributesResponseSuccess
+
+      interface _CreateBrandProfileFromRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBrandProfileFromRegistrationOutput]
+        def results: () -> ::Array[Types::JobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#create_brand_profile_from_registration-instance_method
+      def create_brand_profile_from_registration: (
+                                                    registration_id: ::String,
+                                                    brand_profile_name: ::String,
+                                                    ?smart_match: bool,
+                                                    ?tags: Array[
+                                                      {
+                                                        key: ::String,
+                                                        value: ::String
+                                                      }
+                                                    ],
+                                                    ?client_token: ::String
+                                                  ) -> _CreateBrandProfileFromRegistrationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrandProfileFromRegistrationResponseSuccess
+
+      interface _CreateNotifyCodeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNotifyCodeConfigurationOutput]
+        def notify_code_configuration: () -> Types::NotifyCodeConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#create_notify_code_configuration-instance_method
+      def create_notify_code_configuration: (
+                                              notify_code_configuration_name: ::String,
+                                              ?code_configuration_parameters: {
+                                                code_type: ("NUMERIC" | "ALPHA" | "ALPHANUMERIC")?,
+                                                code_length: ::Integer?,
+                                                validity_period_minutes: ::Integer?,
+                                                max_attempts: ::Integer?
+                                              },
+                                              ?channel_parameters: Params::channel_parameters,
+                                              ?deletion_protection_enabled: bool,
+                                              ?client_token: ::String,
+                                              ?tags: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                }
+                                              ]
+                                            ) -> _CreateNotifyCodeConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNotifyCodeConfigurationResponseSuccess
+
+      interface _CreateRegistrationsFromBrandProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRegistrationsFromBrandProfileOutput]
+        def results: () -> ::Array[Types::JobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#create_registrations_from_brand_profile-instance_method
+      def create_registrations_from_brand_profile: (
+                                                     brand_profile_id: ::String,
+                                                     registration_types: Array[::String],
+                                                     ?smart_match: bool,
+                                                     ?client_token: ::String
+                                                   ) -> _CreateRegistrationsFromBrandProfileResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRegistrationsFromBrandProfileResponseSuccess
+
+      interface _DeleteBrandProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBrandProfileOutput]
+        def brand_profile_id: () -> ::String
+        def brand_profile_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#delete_brand_profile-instance_method
+      def delete_brand_profile: (
+                                  brand_profile_id: ::String
+                                ) -> _DeleteBrandProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBrandProfileResponseSuccess
+
+      interface _DeleteBrandProfileAttributeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBrandProfileAttributeOutput]
+        def brand_profile_id: () -> ::String
+        def attribute_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#delete_brand_profile_attribute-instance_method
+      def delete_brand_profile_attribute: (
+                                            brand_profile_id: ::String,
+                                            attribute_name: ::String
+                                          ) -> _DeleteBrandProfileAttributeResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBrandProfileAttributeResponseSuccess
+
+      interface _DeleteNotifyCodeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNotifyCodeConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#delete_notify_code_configuration-instance_method
+      def delete_notify_code_configuration: (
+                                              notify_code_configuration_id: ::String
+                                            ) -> _DeleteNotifyCodeConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNotifyCodeConfigurationResponseSuccess
+
+      interface _GetBrandProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBrandProfileOutput]
+        def brand_profile_id: () -> ::String
+        def brand_profile_arn: () -> ::String
+        def brand_profile_name: () -> ::String
+        def status: () -> ("ACTIVE" | "BLOCKED" | "PAUSED" | "CANCELLED" | "FAILED")
+        def deletion_protection_enabled: () -> bool
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#get_brand_profile-instance_method
+      def get_brand_profile: (
+                               brand_profile_id: ::String
+                             ) -> _GetBrandProfileResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBrandProfileResponseSuccess
+
+      interface _GetBrandProfileAttributeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBrandProfileAttributeOutput]
+        def attribute_name: () -> ::String
+        def attribute_type: () -> ("TEXT" | "IMAGE" | "DOCUMENT")
+        def attribute_value: () -> ::String
+        def description: () -> ::String
+        def category: () -> ::String
+        def media_content_type: () -> ::String
+        def media_size_bytes: () -> ::Integer
+        def media_download_url: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#get_brand_profile_attribute-instance_method
+      def get_brand_profile_attribute: (
+                                         brand_profile_id: ::String,
+                                         attribute_name: ::String
+                                       ) -> _GetBrandProfileAttributeResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBrandProfileAttributeResponseSuccess
+
+      interface _GetJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Job]
+        def job_id: () -> ::String
+        def status: () -> ("SUCCESS" | "PROCESSING" | "FAILED")
+        def operation_type: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def brand_profile_id: () -> ::String
+        def error_code: () -> ::String
+        def error_message: () -> ::String
+        def resources: () -> ::Array[Types::JobResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#get_job-instance_method
+      def get_job: (
+                     job_id: ::String
+                   ) -> _GetJobResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobResponseSuccess
+
+      interface _GetNotifyCodeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNotifyCodeConfigurationOutput]
+        def notify_code_configuration: () -> Types::NotifyCodeConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#get_notify_code_configuration-instance_method
+      def get_notify_code_configuration: (
+                                           notify_code_configuration_id: ::String
+                                         ) -> _GetNotifyCodeConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotifyCodeConfigurationResponseSuccess
+
+      interface _ListBrandProfileAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBrandProfileAttributesOutput]
+        def brand_profile_attributes: () -> ::Array[Types::BrandProfileAttributeSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#list_brand_profile_attributes-instance_method
+      def list_brand_profile_attributes: (
+                                           brand_profile_id: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListBrandProfileAttributesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBrandProfileAttributesResponseSuccess
+
+      interface _ListBrandProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBrandProfilesOutput]
+        def brand_profiles: () -> ::Array[Types::BrandProfileInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#list_brand_profiles-instance_method
+      def list_brand_profiles: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListBrandProfilesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBrandProfilesResponseSuccess
+
+      interface _ListJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsOutput]
+        def jobs: () -> ::Array[Types::JobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#list_jobs-instance_method
+      def list_jobs: (
+                       ?max_results: ::Integer,
+                       ?next_token: ::String,
+                       ?status: ("SUCCESS" | "PROCESSING" | "FAILED"),
+                       ?brand_profile_id: ::String,
+                       ?operation_type: ::String
+                     ) -> _ListJobsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
+
+      interface _ListNotifyCodeConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotifyCodeConfigurationsOutput]
+        def notify_code_configurations: () -> ::Array[Types::NotifyCodeConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#list_notify_code_configurations-instance_method
+      def list_notify_code_configurations: (
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListNotifyCodeConfigurationsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotifyCodeConfigurationsResponseSuccess
+
+      interface _ListRegistrationsFromBrandProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRegistrationsFromBrandProfileOutput]
+        def registration_associations: () -> ::Array[Types::RegistrationAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#list_registrations_from_brand_profile-instance_method
+      def list_registrations_from_brand_profile: (
+                                                   brand_profile_id: ::String,
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListRegistrationsFromBrandProfileResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRegistrationsFromBrandProfileResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _SendNotifyCodeVerificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendNotifyCodeVerificationOutput]
+        def verification_id: () -> ::String
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#send_notify_code_verification-instance_method
+      def send_notify_code_verification: (
+                                           channel: ("TEXT" | "VOICE" | "WHATSAPP"),
+                                           destination_identity: ::String,
+                                           origination_identity: ::String,
+                                           ?notify_code_configuration: ::String,
+                                           ?override_channel_parameters: Params::channel_parameters,
+                                           ?override_code_configuration_parameters: {
+                                             code_type: ("NUMERIC" | "ALPHA" | "ALPHANUMERIC")?,
+                                             code_length: ::Integer?,
+                                             validity_period_minutes: ::Integer?,
+                                             max_attempts: ::Integer?
+                                           },
+                                           ?configuration_set_name: ::String,
+                                           ?context: Hash[::String, ::String],
+                                           ?reference_id: ::String
+                                         ) -> _SendNotifyCodeVerificationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendNotifyCodeVerificationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            }
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateBrandProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrandProfileOutput]
+        def brand_profile_id: () -> ::String
+        def brand_profile_arn: () -> ::String
+        def brand_profile_name: () -> ::String
+        def status: () -> ("ACTIVE" | "BLOCKED" | "PAUSED" | "CANCELLED" | "FAILED")
+        def deletion_protection_enabled: () -> bool
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#update_brand_profile-instance_method
+      def update_brand_profile: (
+                                  brand_profile_id: ::String,
+                                  ?brand_profile_name: ::String,
+                                  ?deletion_protection_enabled: bool
+                                ) -> _UpdateBrandProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrandProfileResponseSuccess
+
+      interface _UpdateBrandProfileAttributeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrandProfileAttributeOutput]
+        def attribute_name: () -> ::String
+        def attribute_type: () -> ("TEXT" | "IMAGE" | "DOCUMENT")
+        def attribute_value: () -> ::String
+        def description: () -> ::String
+        def category: () -> ::String
+        def media_content_type: () -> ::String
+        def media_size_bytes: () -> ::Integer
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#update_brand_profile_attribute-instance_method
+      def update_brand_profile_attribute: (
+                                            brand_profile_id: ::String,
+                                            attribute_name: ::String,
+                                            ?attribute_value: ::String,
+                                            ?attachment_body: ::String,
+                                            ?description: ::String,
+                                            ?category: ::String
+                                          ) -> _UpdateBrandProfileAttributeResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrandProfileAttributeResponseSuccess
+
+      interface _UpdateBrandProfileFromRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrandProfileFromRegistrationOutput]
+        def results: () -> ::Array[Types::JobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#update_brand_profile_from_registration-instance_method
+      def update_brand_profile_from_registration: (
+                                                    brand_profile_id: ::String,
+                                                    registration_id: ::String,
+                                                    ?smart_match: bool,
+                                                    ?on_attribute_conflict: ("REPLACE" | "PRESERVE"),
+                                                    ?client_token: ::String
+                                                  ) -> _UpdateBrandProfileFromRegistrationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrandProfileFromRegistrationResponseSuccess
+
+      interface _UpdateNotifyCodeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNotifyCodeConfigurationOutput]
+        def notify_code_configuration: () -> Types::NotifyCodeConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#update_notify_code_configuration-instance_method
+      def update_notify_code_configuration: (
+                                              notify_code_configuration_id: ::String,
+                                              ?notify_code_configuration_name: ::String,
+                                              ?code_configuration_parameters: {
+                                                code_type: ("NUMERIC" | "ALPHA" | "ALPHANUMERIC")?,
+                                                code_length: ::Integer?,
+                                                validity_period_minutes: ::Integer?,
+                                                max_attempts: ::Integer?
+                                              },
+                                              ?channel_parameters: {
+                                                text: {
+                                                  inline_template_body: ::String?,
+                                                  destination_country_parameters: Hash[::String, ::String]?
+                                                }?,
+                                                voice: {
+                                                  inline_template_body: ::String?,
+                                                  language_code: ::String?,
+                                                  voice_id: ::String?,
+                                                  voice_message_body_text_type: ("TEXT" | "SSML")?
+                                                }?,
+                                                notify: {
+                                                  notify_template_id: ::String?,
+                                                  voice_id: ::String?
+                                                }?,
+                                                whats_app: {
+                                                  whats_app_template_name: ::String?,
+                                                  language_code: ::String?
+                                                }?
+                                              },
+                                              ?deletion_protection_enabled: bool
+                                            ) -> _UpdateNotifyCodeConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotifyCodeConfigurationResponseSuccess
+
+      interface _UpdateRegistrationsFromBrandProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRegistrationsFromBrandProfileOutput]
+        def results: () -> ::Array[Types::JobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#update_registrations_from_brand_profile-instance_method
+      def update_registrations_from_brand_profile: (
+                                                     brand_profile_id: ::String,
+                                                     registration_ids: Array[::String],
+                                                     ?smart_match: bool,
+                                                     ?on_attribute_conflict: ("REPLACE" | "PRESERVE"),
+                                                     ?client_token: ::String
+                                                   ) -> _UpdateRegistrationsFromBrandProfileResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRegistrationsFromBrandProfileResponseSuccess
+
+      interface _ValidateNotifyCodeVerificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateNotifyCodeVerificationOutput]
+        def status: () -> ("VALID" | "INVALID")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#validate_notify_code_verification-instance_method
+      def validate_notify_code_verification: (
+                                               destination_identity: ::String,
+                                               ?reference_id: ::String,
+                                               code: ::String
+                                             ) -> _ValidateNotifyCodeVerificationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateNotifyCodeVerificationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EndUserMessaging/Client.html#wait_until-instance_method
+      def wait_until: (:brand_profile_active waiter_name, 
+                    brand_profile_id: ::String
+                  ) -> Client::_GetBrandProfileResponseSuccess
+                    | (:brand_profile_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetBrandProfileResponseSuccess
+                    | (:job_success waiter_name, 
+                    job_id: ::String
+                  ) -> Client::_GetJobResponseSuccess
+                    | (:job_success waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetJobResponseSuccess
+    end
+  end
+end
+

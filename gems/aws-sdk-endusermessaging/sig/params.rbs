@@ -1,0 +1,34 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EndUserMessaging
+    module Params
+      type channel_parameters = {
+      text: {
+        inline_template_body: ::String?,
+        destination_country_parameters: Hash[::String, ::String]?
+      }?,
+      voice: {
+        inline_template_body: ::String?,
+        language_code: ::String?,
+        voice_id: ::String?,
+        voice_message_body_text_type: ("TEXT" | "SSML")?
+      }?,
+      notify: {
+        notify_template_id: ::String?,
+        voice_id: ::String?
+      }?,
+      whats_app: {
+        whats_app_template_name: ::String?,
+        language_code: ::String?
+      }?
+    }
+
+    end
+  end
+end

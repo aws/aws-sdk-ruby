@@ -1475,6 +1475,130 @@ module Aws::Health
       req.send_request(options)
     end
 
+    # Returns lifecycle information for Amazon Web Services services,
+    # including end-of-life dates, version recommendations, and lifecycle
+    # events.
+    #
+    # @option params [Types::ServiceLifecycleFilter] :filter
+    #   Values to narrow the results returned.
+    #
+    # @option params [String] :next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in one batch, between 1 and 20,
+    #   inclusive.
+    #
+    # @return [Types::DescribeServiceLifecycleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeServiceLifecycleResponse#service_lifecycles #service_lifecycles} => Array&lt;Types::ServiceLifecycle&gt;
+    #   * {Types::DescribeServiceLifecycleResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To retrieve service lifecycle information
+    #
+    #   # The following example returns service lifecycle information, including support milestones and lifecycle events for each
+    #   # service version.
+    #
+    #   resp = client.describe_service_lifecycle({
+    #     max_results: 5, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "AQICAHjDhCYeYPq-zXMzcdNOIWJQKCUN1s1J84fdK4ztGn9uoAExampleTokenExampleTokenExampleToken", 
+    #     service_lifecycles: [
+    #       {
+    #         version: "ai21.jamba-1-5-large-v1:0", 
+    #         lifecycle_events: [
+    #           {
+    #             date: Time.parse("2026-05-26T00:00:00Z"), 
+    #             description: "Model enters Legacy state — no longer actively maintained. Public extended access (pricing may increase) starts 2026-08-26", 
+    #             impact_risks: [
+    #               "END_OF_SUPPORT", 
+    #             ], 
+    #             lifecycle_event_type: "STANDARD_SUPPORT_END", 
+    #             regions: [
+    #               "all", 
+    #             ], 
+    #           }, 
+    #           {
+    #             date: Time.parse("2026-11-26T00:00:00Z"), 
+    #             description: "Model is no longer available for inference", 
+    #             impact_risks: [
+    #               "AVAILABILITY", 
+    #             ], 
+    #             lifecycle_event_type: "EXTENDED_SUPPORT_END", 
+    #             regions: [
+    #               "all", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         service: "BEDROCK", 
+    #         title: "AI21 Labs Jamba 1.5 Large", 
+    #       }, 
+    #       {
+    #         version: "amazon.nova-2-lite-v1:0", 
+    #         lifecycle_events: [
+    #           {
+    #             date: Time.parse("2025-12-02T00:00:00Z"), 
+    #             description: "Amazon Nova 2 Lite available on Amazon Bedrock", 
+    #             impact_risks: [
+    #             ], 
+    #             lifecycle_event_type: "SUPPORTED", 
+    #             regions: [
+    #               "all", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #         service: "BEDROCK", 
+    #         title: "Amazon Nova 2 Lite", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_service_lifecycle({
+    #     filter: {
+    #       service: "service",
+    #     },
+    #     next_token: "nextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_lifecycles #=> Array
+    #   resp.service_lifecycles[0].service #=> String
+    #   resp.service_lifecycles[0].version #=> String
+    #   resp.service_lifecycles[0].title #=> String
+    #   resp.service_lifecycles[0].recommended_version #=> String
+    #   resp.service_lifecycles[0].lifecycle_events #=> Array
+    #   resp.service_lifecycles[0].lifecycle_events[0].lifecycle_event_type #=> String
+    #   resp.service_lifecycles[0].lifecycle_events[0].date #=> Time
+    #   resp.service_lifecycles[0].lifecycle_events[0].regions #=> Array
+    #   resp.service_lifecycles[0].lifecycle_events[0].regions[0] #=> String
+    #   resp.service_lifecycles[0].lifecycle_events[0].impact_risks #=> Array
+    #   resp.service_lifecycles[0].lifecycle_events[0].impact_risks[0] #=> String
+    #   resp.service_lifecycles[0].lifecycle_events[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeServiceLifecycle AWS API Documentation
+    #
+    # @overload describe_service_lifecycle(params = {})
+    # @param [Hash] params ({})
+    def describe_service_lifecycle(params = {}, options = {})
+      req = build_request(:describe_service_lifecycle, params)
+      req.send_request(options)
+    end
+
     # Disables Health from working with Organizations. To call this
     # operation, you must sign in to the organization's management account.
     # For more information, see [Aggregating Health events][1] in the
@@ -1574,7 +1698,7 @@ module Aws::Health
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

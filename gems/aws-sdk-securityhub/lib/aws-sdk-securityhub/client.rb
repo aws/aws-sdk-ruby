@@ -8975,6 +8975,162 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Retrieves remediation targets for the account, or for all member
+    # accounts if the caller is the delegated administrator. Results are
+    # sorted by priority, highest first, and are paginated. Use `TargetUid`
+    # or `MetadataUid` to scope the request to a single target or finding.
+    #
+    # @option params [String] :target_uid
+    #   The unique identifier (ID) of an existing remediation target to
+    #   return. Returns the single matching target. You can't use `TargetUid`
+    #   together with `MetadataUid` or `Filters`.
+    #
+    # @option params [String] :metadata_uid
+    #   The unique identifier (ID) of the Security Hub exposure finding, found
+    #   under the `metadata.uid` field of the finding. Returns the remediation
+    #   targets associated with that finding. You can't use `MetadataUid`
+    #   together with `TargetUid` or `Filters`.
+    #
+    # @option params [Types::RemediationFilters] :filters
+    #   Filters remediation targets based on a set of criteria. You can't use
+    #   `Filters` together with `TargetUid` or `MetadataUid`.
+    #
+    # @option params [Boolean] :show_guidance
+    #   Specifies whether to show remediation target guidance.
+    #
+    # @option params [String] :guidance_format
+    #   The format of the remediation guidance examples to return. Valid
+    #   values are `All`, `AwsCli`, `Cli`, `Python`, `Terraform`, `Cdk`,
+    #   `CloudFormation`, `IaC`, and `Template`. If you don't specify a
+    #   value, all formats are returned. Applies only when `ShowGuidance` is
+    #   `true`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Valid range is 1-100. If you
+    #   don't specify a value, the operation returns up to 25 results.
+    #
+    # @option params [String] :next_token
+    #   The token used to paginate the remediations target list returned. On
+    #   your first call to `GetRemediationsV2`, omit this parameter or set it
+    #   to `NULL`. For subsequent calls, use the `NextToken` value returned in
+    #   the previous response to retrieve the next page of results.
+    #
+    # @return [Types::GetRemediationsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRemediationsV2Response#items #items} => Array&lt;Types::RemediationV2Item&gt;
+    #   * {Types::GetRemediationsV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_remediations_v2({
+    #     target_uid: "RemediationStringUid",
+    #     metadata_uid: "RemediationStringUid",
+    #     filters: {
+    #       composite_filters: [
+    #         {
+    #           string_filters: [
+    #             {
+    #               field_name: "Resource.Type", # required, accepts Resource.Type, Priority, Status, Resource.Id, Resource.ResourceOwnerAccountId, Resource.CloudProvider
+    #               filter: { # required
+    #                 value: "NonEmptyString", # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     show_guidance: false,
+    #     guidance_format: "All", # accepts All, AwsCli, Cli, Python, Terraform, Cdk, CloudFormation, IaC, Template
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].target_uid #=> String
+    #   resp.items[0].outcome.resolved_findings_count #=> Integer
+    #   resp.items[0].outcome.severity_reduction_findings_count #=> Integer
+    #   resp.items[0].outcome.severity_unchanged_count #=> Integer
+    #   resp.items[0].priority #=> String, one of "Critical", "High", "Medium", "Low"
+    #   resp.items[0].remediation_summary.action #=> String
+    #   resp.items[0].remediation_summary.description #=> String
+    #   resp.items[0].remediation_summary.is_immediate #=> Boolean
+    #   resp.items[0].remediation_summary.post_remediation_steps #=> Array
+    #   resp.items[0].remediation_summary.post_remediation_steps[0] #=> String
+    #   resp.items[0].remediation_summary.kb_articles #=> Array
+    #   resp.items[0].remediation_summary.kb_articles[0].title #=> String
+    #   resp.items[0].remediation_summary.kb_articles[0].url #=> String
+    #   resp.items[0].resource.account_id #=> String
+    #   resp.items[0].resource.region #=> String
+    #   resp.items[0].resource.resource_owner_account_id #=> String
+    #   resp.items[0].resource.resource_owner_org_id #=> String
+    #   resp.items[0].resource.type #=> String
+    #   resp.items[0].resource.name #=> String
+    #   resp.items[0].resource.id #=> String
+    #   resp.items[0].resource.resource_guid #=> String
+    #   resp.items[0].resource.resource_region #=> String
+    #   resp.items[0].resource.cloud_provider #=> String, one of "Azure", "AWS"
+    #   resp.items[0].status #=> String, one of "New", "Updated", "Resolved"
+    #   resp.items[0].trait.type #=> String
+    #   resp.items[0].trait.title #=> String
+    #   resp.items[0].guidance.target_type_name #=> String
+    #   resp.items[0].guidance.pattern #=> String
+    #   resp.items[0].guidance.version #=> String
+    #   resp.items[0].guidance.context.problem_statement #=> String
+    #   resp.items[0].guidance.context.risk_assessment #=> String
+    #   resp.items[0].guidance.context.affected_scope #=> String
+    #   resp.items[0].guidance.context.prerequisites #=> Array
+    #   resp.items[0].guidance.context.prerequisites[0] #=> String
+    #   resp.items[0].guidance.specification.parameters #=> Array
+    #   resp.items[0].guidance.specification.parameters[0].name #=> String
+    #   resp.items[0].guidance.specification.parameters[0].type #=> String
+    #   resp.items[0].guidance.specification.parameters[0].description #=> String
+    #   resp.items[0].guidance.specification.parameters[0].required #=> Boolean
+    #   resp.items[0].guidance.specification.steps #=> Array
+    #   resp.items[0].guidance.specification.steps[0].phase #=> String
+    #   resp.items[0].guidance.specification.steps[0].description #=> String
+    #   resp.items[0].guidance.specification.steps[0].service #=> String
+    #   resp.items[0].guidance.specification.steps[0].action #=> String
+    #   resp.items[0].guidance.specification.steps[0].logic #=> String
+    #   resp.items[0].guidance.specification.steps[0].inverse #=> String
+    #   resp.items[0].guidance.specification.steps[0].verify_after #=> String
+    #   resp.items[0].guidance.specification.expected_end_state #=> String
+    #   resp.items[0].guidance.specification.required_permissions #=> Array
+    #   resp.items[0].guidance.specification.required_permissions[0] #=> String
+    #   resp.items[0].guidance.examples.aws_cli #=> String
+    #   resp.items[0].guidance.examples.cli #=> String
+    #   resp.items[0].guidance.examples.python #=> String
+    #   resp.items[0].guidance.examples.terraform #=> String
+    #   resp.items[0].guidance.examples.cdk #=> String
+    #   resp.items[0].guidance.examples.cloud_formation #=> String
+    #   resp.items[0].guidance.examples.ia_c #=> String
+    #   resp.items[0].guidance.examples.template #=> String
+    #   resp.items[0].guidance.metadata.resource_type #=> String
+    #   resp.items[0].guidance.metadata.exposure_type #=> String
+    #   resp.items[0].guidance.metadata.trait_titles #=> Array
+    #   resp.items[0].guidance.metadata.trait_titles[0] #=> String
+    #   resp.items[0].guidance.metadata.reversibility #=> String
+    #   resp.items[0].guidance.metadata.fix_effect #=> String
+    #   resp.items[0].guidance.metadata.risk_level #=> String
+    #   resp.items[0].guidance.metadata.automation_level #=> String
+    #   resp.items[0].guidance.metadata.human_review_required #=> Boolean
+    #   resp.items[0].guidance.metadata.generated_at #=> Time
+    #   resp.items[0].guidance.metadata.verification_status #=> String
+    #   resp.items[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetRemediationsV2 AWS API Documentation
+    #
+    # @overload get_remediations_v2(params = {})
+    # @param [Hash] params ({})
+    def get_remediations_v2(params = {}, options = {})
+      req = build_request(:get_remediations_v2, params)
+      req.send_request(options)
+    end
+
     # Retrieves statistical information about Amazon Web Services resources
     # and their associated security findings.
     #
@@ -10129,6 +10285,76 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def list_enabled_products_for_import(params = {}, options = {})
       req = build_request(:list_enabled_products_for_import, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the exposure findings tied to a specific remediation target.
+    # Results are sorted by previous severity, highest first, and are
+    # paginated.
+    #
+    # @option params [required, String] :target_uid
+    #   The unique identifier (ID) of an existing remediation target to list
+    #   exposure findings for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Valid range is 1-100. If you
+    #   don't specify a value, the operation returns up to 25 results.
+    #
+    # @option params [String] :next_token
+    #   The token used to paginate the exposures list returned. On your first
+    #   call to `ListExposuresByRemediationV2`, omit this parameter or set it
+    #   to `NULL`. For subsequent calls, use the `NextToken` value returned in
+    #   the previous response to retrieve the next page of results.
+    #
+    # @return [Types::ListExposuresByRemediationV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExposuresByRemediationV2Response#items #items} => Array&lt;Types::ExposureFinding&gt;
+    #   * {Types::ListExposuresByRemediationV2Response#target_uid #target_uid} => String
+    #   * {Types::ListExposuresByRemediationV2Response#resource #resource} => Types::RemediationResource
+    #   * {Types::ListExposuresByRemediationV2Response#total_count #total_count} => Integer
+    #   * {Types::ListExposuresByRemediationV2Response#trait #trait} => Types::RemediationTrait
+    #   * {Types::ListExposuresByRemediationV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_exposures_by_remediation_v2({
+    #     target_uid: "RemediationStringUid", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].metadata_uid #=> String
+    #   resp.items[0].title #=> String
+    #   resp.items[0].previous_severity #=> String, one of "Informational", "Low", "Medium", "High", "Critical"
+    #   resp.items[0].projected_severity #=> String, one of "Informational", "Low", "Medium", "High", "Critical"
+    #   resp.items[0].impact #=> String, one of "Reduces", "Resolves", "Unchanged"
+    #   resp.target_uid #=> String
+    #   resp.resource.account_id #=> String
+    #   resp.resource.region #=> String
+    #   resp.resource.resource_owner_account_id #=> String
+    #   resp.resource.resource_owner_org_id #=> String
+    #   resp.resource.type #=> String
+    #   resp.resource.name #=> String
+    #   resp.resource.id #=> String
+    #   resp.resource.resource_guid #=> String
+    #   resp.resource.resource_region #=> String
+    #   resp.resource.cloud_provider #=> String, one of "Azure", "AWS"
+    #   resp.total_count #=> Integer
+    #   resp.trait.type #=> String
+    #   resp.trait.title #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListExposuresByRemediationV2 AWS API Documentation
+    #
+    # @overload list_exposures_by_remediation_v2(params = {})
+    # @param [Hash] params ({})
+    def list_exposures_by_remediation_v2(params = {}, options = {})
+      req = build_request(:list_exposures_by_remediation_v2, params)
       req.send_request(options)
     end
 
@@ -13609,7 +13835,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

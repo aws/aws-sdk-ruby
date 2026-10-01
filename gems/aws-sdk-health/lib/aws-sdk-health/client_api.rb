@@ -47,6 +47,8 @@ module Aws::Health
     DescribeEventsRequest = Shapes::StructureShape.new(name: 'DescribeEventsRequest')
     DescribeEventsResponse = Shapes::StructureShape.new(name: 'DescribeEventsResponse')
     DescribeHealthServiceStatusForOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeHealthServiceStatusForOrganizationResponse')
+    DescribeServiceLifecycleRequest = Shapes::StructureShape.new(name: 'DescribeServiceLifecycleRequest')
+    DescribeServiceLifecycleResponse = Shapes::StructureShape.new(name: 'DescribeServiceLifecycleResponse')
     EntityAccountFilter = Shapes::StructureShape.new(name: 'EntityAccountFilter')
     EntityAggregate = Shapes::StructureShape.new(name: 'EntityAggregate')
     EntityAggregateList = Shapes::ListShape.new(name: 'EntityAggregateList')
@@ -75,7 +77,11 @@ module Aws::Health
     EventTypeList = Shapes::ListShape.new(name: 'EventTypeList')
     EventTypePersona = Shapes::StringShape.new(name: 'EventTypePersona')
     EventTypePersonaList = Shapes::ListShape.new(name: 'EventTypePersonaList')
+    ImpactRiskList = Shapes::ListShape.new(name: 'ImpactRiskList')
     InvalidPaginationToken = Shapes::StructureShape.new(name: 'InvalidPaginationToken')
+    LifecycleEvent = Shapes::StructureShape.new(name: 'LifecycleEvent')
+    LifecycleEventList = Shapes::ListShape.new(name: 'LifecycleEventList')
+    LifecycleMaxResults = Shapes::IntegerShape.new(name: 'LifecycleMaxResults')
     OrganizationAccountIdsList = Shapes::ListShape.new(name: 'OrganizationAccountIdsList')
     OrganizationAffectedEntitiesErrorItem = Shapes::StructureShape.new(name: 'OrganizationAffectedEntitiesErrorItem')
     OrganizationEntityAccountFiltersList = Shapes::ListShape.new(name: 'OrganizationEntityAccountFiltersList')
@@ -89,6 +95,9 @@ module Aws::Health
     OrganizationEventDetailsErrorItem = Shapes::StructureShape.new(name: 'OrganizationEventDetailsErrorItem')
     OrganizationEventFilter = Shapes::StructureShape.new(name: 'OrganizationEventFilter')
     OrganizationEventList = Shapes::ListShape.new(name: 'OrganizationEventList')
+    ServiceLifecycle = Shapes::StructureShape.new(name: 'ServiceLifecycle')
+    ServiceLifecycleFilter = Shapes::StructureShape.new(name: 'ServiceLifecycleFilter')
+    ServiceLifecycleList = Shapes::ListShape.new(name: 'ServiceLifecycleList')
     UnsupportedLocale = Shapes::StructureShape.new(name: 'UnsupportedLocale')
     accountId = Shapes::StringShape.new(name: 'accountId')
     affectedAccountsList = Shapes::ListShape.new(name: 'affectedAccountsList')
@@ -279,6 +288,15 @@ module Aws::Health
     DescribeHealthServiceStatusForOrganizationResponse.add_member(:health_service_access_status_for_organization, Shapes::ShapeRef.new(shape: healthServiceAccessStatusForOrganization, location_name: "healthServiceAccessStatusForOrganization"))
     DescribeHealthServiceStatusForOrganizationResponse.struct_class = Types::DescribeHealthServiceStatusForOrganizationResponse
 
+    DescribeServiceLifecycleRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ServiceLifecycleFilter, location_name: "filter"))
+    DescribeServiceLifecycleRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
+    DescribeServiceLifecycleRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: LifecycleMaxResults, location_name: "maxResults"))
+    DescribeServiceLifecycleRequest.struct_class = Types::DescribeServiceLifecycleRequest
+
+    DescribeServiceLifecycleResponse.add_member(:service_lifecycles, Shapes::ShapeRef.new(shape: ServiceLifecycleList, location_name: "serviceLifecycles"))
+    DescribeServiceLifecycleResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
+    DescribeServiceLifecycleResponse.struct_class = Types::DescribeServiceLifecycleResponse
+
     EntityAccountFilter.add_member(:event_arn, Shapes::ShapeRef.new(shape: eventArn, required: true, location_name: "eventArn"))
     EntityAccountFilter.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: accountId, location_name: "awsAccountId"))
     EntityAccountFilter.add_member(:status_codes, Shapes::ShapeRef.new(shape: entityStatusCodeList, location_name: "statusCodes"))
@@ -388,8 +406,19 @@ module Aws::Health
 
     EventTypePersonaList.member = Shapes::ShapeRef.new(shape: EventTypePersona)
 
+    ImpactRiskList.member = Shapes::ShapeRef.new(shape: string)
+
     InvalidPaginationToken.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     InvalidPaginationToken.struct_class = Types::InvalidPaginationToken
+
+    LifecycleEvent.add_member(:lifecycle_event_type, Shapes::ShapeRef.new(shape: string, location_name: "lifecycleEventType"))
+    LifecycleEvent.add_member(:date, Shapes::ShapeRef.new(shape: timestamp, location_name: "date"))
+    LifecycleEvent.add_member(:regions, Shapes::ShapeRef.new(shape: regionList, location_name: "regions"))
+    LifecycleEvent.add_member(:impact_risks, Shapes::ShapeRef.new(shape: ImpactRiskList, location_name: "impactRisks"))
+    LifecycleEvent.add_member(:description, Shapes::ShapeRef.new(shape: string, location_name: "description"))
+    LifecycleEvent.struct_class = Types::LifecycleEvent
+
+    LifecycleEventList.member = Shapes::ShapeRef.new(shape: LifecycleEvent)
 
     OrganizationAccountIdsList.member = Shapes::ShapeRef.new(shape: accountId)
 
@@ -457,6 +486,18 @@ module Aws::Health
     OrganizationEventFilter.struct_class = Types::OrganizationEventFilter
 
     OrganizationEventList.member = Shapes::ShapeRef.new(shape: OrganizationEvent)
+
+    ServiceLifecycle.add_member(:service, Shapes::ShapeRef.new(shape: service, location_name: "service"))
+    ServiceLifecycle.add_member(:version, Shapes::ShapeRef.new(shape: string, location_name: "version"))
+    ServiceLifecycle.add_member(:title, Shapes::ShapeRef.new(shape: string, location_name: "title"))
+    ServiceLifecycle.add_member(:recommended_version, Shapes::ShapeRef.new(shape: string, location_name: "recommendedVersion"))
+    ServiceLifecycle.add_member(:lifecycle_events, Shapes::ShapeRef.new(shape: LifecycleEventList, location_name: "lifecycleEvents"))
+    ServiceLifecycle.struct_class = Types::ServiceLifecycle
+
+    ServiceLifecycleFilter.add_member(:service, Shapes::ShapeRef.new(shape: service, location_name: "service"))
+    ServiceLifecycleFilter.struct_class = Types::ServiceLifecycleFilter
+
+    ServiceLifecycleList.member = Shapes::ShapeRef.new(shape: ServiceLifecycle)
 
     UnsupportedLocale.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     UnsupportedLocale.struct_class = Types::UnsupportedLocale
@@ -672,6 +713,21 @@ module Aws::Health
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: DescribeHealthServiceStatusForOrganizationResponse)
+      end)
+
+      api.add_operation(:describe_service_lifecycle, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeServiceLifecycle"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeServiceLifecycleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeServiceLifecycleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:disable_health_service_access_for_organization, Seahorse::Model::Operation.new.tap do |o|

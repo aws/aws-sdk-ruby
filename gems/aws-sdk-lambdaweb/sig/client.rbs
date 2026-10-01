@@ -1,0 +1,472 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LambdaWeb
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateWebFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWebFunctionResponse]
+        def function_name: () -> ::String
+        def function_arn: () -> ::String
+        def state: () -> ("Pending" | "Active" | "Failed" | "Deleting")
+        def state_reason: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def revision: () -> Types::FunctionRevisionSummary
+        def endpoint: () -> Types::FunctionEndpointSummary
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#create_web_function-instance_method
+      def create_web_function: (
+                                 function_name: ::String,
+                                 ?revision_config: {
+                                   description: ::String?,
+                                   kms_key_arn: ::String?,
+                                   build_config: Params::build_config,
+                                   service_config: Params::service_config
+                                 },
+                                 ?endpoint_config: {
+                                   endpoint_name: ::String,
+                                   description: ::String?,
+                                   endpoint_type: ("HomeRegion" | "MultiRegion" | "PerRegion"),
+                                   auth_type: ("ApplicationManaged" | "IamAuth"),
+                                   auto_deployment_mode: ("LatestRevision" | "Disabled")?,
+                                   regions: Array[::String]?,
+                                   scaling_config: {
+                                     max_environments: ::Integer?
+                                   }?,
+                                   throttle_config: {
+                                     rate_limit: ::Integer?
+                                   }?
+                                 },
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _CreateWebFunctionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebFunctionResponseSuccess
+
+      interface _CreateWebFunctionEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWebFunctionEndpointResponse]
+        def function_arn: () -> ::String
+        def endpoint_arn: () -> ::String
+        def endpoint_name: () -> ::String
+        def description: () -> ::String
+        def endpoint_type: () -> ("HomeRegion" | "MultiRegion" | "PerRegion")
+        def domain_name: () -> ::String
+        def auth_type: () -> ("ApplicationManaged" | "IamAuth")
+        def auto_deployment_mode: () -> ("LatestRevision" | "Disabled")
+        def revision_weights: () -> ::Array[Types::RevisionWeight]
+        def regions: () -> ::Array[::String]
+        def scaling_config: () -> Types::ScalingConfig
+        def throttle_config: () -> Types::ThrottleConfig
+        def state: () -> ("Pending" | "Active" | "Failed" | "Deleting")
+        def state_reason: () -> ::String
+        def update_status: () -> ("InProgress" | "Successful" | "Failed")
+        def update_status_reason: () -> ::String
+        def regional_endpoints: () -> ::Hash[::String, Types::RegionalEndpoint]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#create_web_function_endpoint-instance_method
+      def create_web_function_endpoint: (
+                                          function_name: ::String,
+                                          endpoint_name: ::String,
+                                          ?description: ::String,
+                                          endpoint_type: ("HomeRegion" | "MultiRegion" | "PerRegion"),
+                                          auth_type: ("ApplicationManaged" | "IamAuth"),
+                                          ?auto_deployment_mode: ("LatestRevision" | "Disabled"),
+                                          ?revision_weights: Array[
+                                            {
+                                              revision_id: ::String,
+                                              weight: ::Integer
+                                            }
+                                          ],
+                                          ?regions: Array[::String],
+                                          ?scaling_config: {
+                                            max_environments: ::Integer?
+                                          },
+                                          ?throttle_config: {
+                                            rate_limit: ::Integer?
+                                          }
+                                        ) -> _CreateWebFunctionEndpointResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebFunctionEndpointResponseSuccess
+
+      interface _CreateWebFunctionRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWebFunctionRevisionResponse]
+        def function_arn: () -> ::String
+        def revision_arn: () -> ::String
+        def revision_id: () -> ::String
+        def description: () -> ::String
+        def kms_key_arn: () -> ::String
+        def build_config: () -> Types::BuildConfig
+        def service_config: () -> Types::ServiceConfig
+        def state: () -> ("Pending" | "Active" | "Failed")
+        def state_reason: () -> ::String
+        def errors: () -> ::Array[Types::RevisionError]
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#create_web_function_revision-instance_method
+      def create_web_function_revision: (
+                                          function_name: ::String,
+                                          ?description: ::String,
+                                          ?kms_key_arn: ::String,
+                                          build_config: Params::build_config,
+                                          service_config: Params::service_config
+                                        ) -> _CreateWebFunctionRevisionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebFunctionRevisionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String,
+                                    ?revision_id: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#delete_web_function-instance_method
+      def delete_web_function: (
+                                 function_name: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#delete_web_function_endpoint-instance_method
+      def delete_web_function_endpoint: (
+                                          function_name: ::String,
+                                          endpoint_name: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#delete_web_function_revision-instance_method
+      def delete_web_function_revision: (
+                                          function_name: ::String,
+                                          revision_id: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _GetWebAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWebAccountSettingsResponse]
+        def account_quotas: () -> Types::AccountQuotas
+        def account_usage: () -> Types::AccountUsage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#get_web_account_settings-instance_method
+      def get_web_account_settings: (
+                                    ) -> _GetWebAccountSettingsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWebAccountSettingsResponseSuccess
+
+      interface _GetWebFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWebFunctionResponse]
+        def function_name: () -> ::String
+        def function_arn: () -> ::String
+        def state: () -> ("Pending" | "Active" | "Failed" | "Deleting")
+        def state_reason: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#get_web_function-instance_method
+      def get_web_function: (
+                              function_name: ::String
+                            ) -> _GetWebFunctionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWebFunctionResponseSuccess
+
+      interface _GetWebFunctionEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWebFunctionEndpointResponse]
+        def function_arn: () -> ::String
+        def endpoint_arn: () -> ::String
+        def endpoint_name: () -> ::String
+        def description: () -> ::String
+        def endpoint_type: () -> ("HomeRegion" | "MultiRegion" | "PerRegion")
+        def domain_name: () -> ::String
+        def auth_type: () -> ("ApplicationManaged" | "IamAuth")
+        def auto_deployment_mode: () -> ("LatestRevision" | "Disabled")
+        def revision_weights: () -> ::Array[Types::RevisionWeight]
+        def regions: () -> ::Array[::String]
+        def scaling_config: () -> Types::ScalingConfig
+        def throttle_config: () -> Types::ThrottleConfig
+        def state: () -> ("Pending" | "Active" | "Failed" | "Deleting")
+        def state_reason: () -> ::String
+        def update_status: () -> ("InProgress" | "Successful" | "Failed")
+        def update_status_reason: () -> ::String
+        def regional_endpoints: () -> ::Hash[::String, Types::RegionalEndpoint]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#get_web_function_endpoint-instance_method
+      def get_web_function_endpoint: (
+                                       function_name: ::String,
+                                       endpoint_name: ::String
+                                     ) -> _GetWebFunctionEndpointResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWebFunctionEndpointResponseSuccess
+
+      interface _GetWebFunctionRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWebFunctionRevisionResponse]
+        def function_arn: () -> ::String
+        def revision_arn: () -> ::String
+        def revision_id: () -> ::String
+        def description: () -> ::String
+        def kms_key_arn: () -> ::String
+        def build_config: () -> Types::BuildConfig
+        def service_config: () -> Types::ServiceConfig
+        def state: () -> ("Pending" | "Active" | "Failed")
+        def state_reason: () -> ::String
+        def errors: () -> ::Array[Types::RevisionError]
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#get_web_function_revision-instance_method
+      def get_web_function_revision: (
+                                       function_name: ::String,
+                                       revision_id: ::String
+                                     ) -> _GetWebFunctionRevisionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWebFunctionRevisionResponseSuccess
+
+      interface _ListTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#list_tags-instance_method
+      def list_tags: (
+                       resource: ::String
+                     ) -> _ListTagsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
+
+      interface _ListWebFunctionEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWebFunctionEndpointsResponse]
+        def endpoints: () -> ::Array[Types::FunctionEndpointSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#list_web_function_endpoints-instance_method
+      def list_web_function_endpoints: (
+                                         function_name: ::String,
+                                         ?filters: Array[
+                                           {
+                                             name: ::String,
+                                             values: Array[::String]
+                                           }
+                                         ],
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListWebFunctionEndpointsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebFunctionEndpointsResponseSuccess
+
+      interface _ListWebFunctionRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWebFunctionRevisionsResponse]
+        def revisions: () -> ::Array[Types::FunctionRevisionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#list_web_function_revisions-instance_method
+      def list_web_function_revisions: (
+                                         function_name: ::String,
+                                         ?filters: Array[
+                                           {
+                                             name: ::String,
+                                             values: Array[::String]
+                                           }
+                                         ],
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListWebFunctionRevisionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebFunctionRevisionsResponseSuccess
+
+      interface _ListWebFunctionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWebFunctionsResponse]
+        def functions: () -> ::Array[Types::FunctionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#list_web_functions-instance_method
+      def list_web_functions: (
+                                ?filters: Array[
+                                  {
+                                    name: ::String,
+                                    values: Array[::String]
+                                  }
+                                ],
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListWebFunctionsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebFunctionsResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 policy: ::String,
+                                 ?revision_id: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateWebFunctionEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWebFunctionEndpointResponse]
+        def function_arn: () -> ::String
+        def endpoint_arn: () -> ::String
+        def endpoint_name: () -> ::String
+        def description: () -> ::String
+        def endpoint_type: () -> ("HomeRegion" | "MultiRegion" | "PerRegion")
+        def domain_name: () -> ::String
+        def auth_type: () -> ("ApplicationManaged" | "IamAuth")
+        def auto_deployment_mode: () -> ("LatestRevision" | "Disabled")
+        def revision_weights: () -> ::Array[Types::RevisionWeight]
+        def regions: () -> ::Array[::String]
+        def scaling_config: () -> Types::ScalingConfig
+        def throttle_config: () -> Types::ThrottleConfig
+        def state: () -> ("Pending" | "Active" | "Failed" | "Deleting")
+        def state_reason: () -> ::String
+        def update_status: () -> ("InProgress" | "Successful" | "Failed")
+        def update_status_reason: () -> ::String
+        def regional_endpoints: () -> ::Hash[::String, Types::RegionalEndpoint]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#update_web_function_endpoint-instance_method
+      def update_web_function_endpoint: (
+                                          function_name: ::String,
+                                          endpoint_name: ::String,
+                                          ?description: ::String,
+                                          ?auth_type: ("ApplicationManaged" | "IamAuth"),
+                                          ?auto_deployment_mode: ("LatestRevision" | "Disabled"),
+                                          ?revision_weights: Array[
+                                            {
+                                              revision_id: ::String,
+                                              weight: ::Integer
+                                            }
+                                          ],
+                                          ?scaling_config: {
+                                            max_environments: ::Integer?
+                                          },
+                                          ?throttle_config: {
+                                            rate_limit: ::Integer?
+                                          }
+                                        ) -> _UpdateWebFunctionEndpointResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebFunctionEndpointResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaWeb/Client.html#wait_until-instance_method
+      def wait_until: (:web_function_active waiter_name, 
+                    function_name: ::String
+                  ) -> Client::_GetWebFunctionResponseSuccess
+                    | (:web_function_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetWebFunctionResponseSuccess
+                    | (:web_function_deleted waiter_name, 
+                    function_name: ::String
+                  ) -> Client::_GetWebFunctionResponseSuccess
+                    | (:web_function_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetWebFunctionResponseSuccess
+                    | (:web_function_endpoint_active waiter_name, 
+                    function_name: ::String,
+                    endpoint_name: ::String
+                  ) -> Client::_GetWebFunctionEndpointResponseSuccess
+                    | (:web_function_endpoint_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetWebFunctionEndpointResponseSuccess
+                    | (:web_function_endpoint_deleted waiter_name, 
+                    function_name: ::String,
+                    endpoint_name: ::String
+                  ) -> Client::_GetWebFunctionEndpointResponseSuccess
+                    | (:web_function_endpoint_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetWebFunctionEndpointResponseSuccess
+                    | (:web_function_endpoint_updated waiter_name, 
+                    function_name: ::String,
+                    endpoint_name: ::String
+                  ) -> Client::_GetWebFunctionEndpointResponseSuccess
+                    | (:web_function_endpoint_updated waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetWebFunctionEndpointResponseSuccess
+                    | (:web_function_revision_active waiter_name, 
+                    function_name: ::String,
+                    revision_id: ::String
+                  ) -> Client::_GetWebFunctionRevisionResponseSuccess
+                    | (:web_function_revision_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetWebFunctionRevisionResponseSuccess
+    end
+  end
+end
+

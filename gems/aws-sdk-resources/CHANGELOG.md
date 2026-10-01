@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.275.0 (2026-10-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-lambdaweb` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-endusermessaging` gem.
+
 3.274.0 (2026-09-24)
 ------------------
 

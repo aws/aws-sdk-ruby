@@ -1115,7 +1115,7 @@ module Aws::Transfer
     #   To specify a log group, you must provide the ARN for an existing log
     #   group. In this case, the format of the log group is as follows:
     #
-    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
     #
     #   For example,
     #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
@@ -1501,13 +1501,26 @@ module Aws::Transfer
     #   Tags are metadata attached to workflows for any purpose.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] structured_log_destinations
+    #   Specifies the log groups to which your workflow logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateWorkflowRequest AWS API Documentation
     #
     class CreateWorkflowRequest < Struct.new(
       :description,
       :steps,
       :on_exception_steps,
-      :tags)
+      :tags,
+      :structured_log_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3349,7 +3362,7 @@ module Aws::Transfer
     #   To specify a log group, you must provide the ARN for an existing log
     #   group. In this case, the format of the log group is as follows:
     #
-    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
     #
     #   For example,
     #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
@@ -3782,6 +3795,18 @@ module Aws::Transfer
     #   Tags are metadata attached to workflows for any purpose.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] structured_log_destinations
+    #   Specifies the log groups to which your workflow logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedWorkflow AWS API Documentation
     #
     class DescribedWorkflow < Struct.new(
@@ -3790,7 +3815,8 @@ module Aws::Transfer
       :steps,
       :on_exception_steps,
       :workflow_id,
-      :tags)
+      :tags,
+      :structured_log_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7686,7 +7712,7 @@ module Aws::Transfer
     #   To specify a log group, you must provide the ARN for an existing log
     #   group. In this case, the format of the log group is as follows:
     #
-    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
     #
     #   For example,
     #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`

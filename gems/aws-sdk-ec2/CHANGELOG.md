@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.655.0 (2026-10-01)
+------------------
+
+* Feature - This release launches the AMI tag sharing feature, which lets AMI owners share tags alongside their AMIs, eliminating the need to build and maintain custom tag replication workflows.
+
 1.654.0 (2026-09-29)
 ------------------
 

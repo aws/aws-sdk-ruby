@@ -4106,6 +4106,16 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         port: 1, # required
     #         sql_endpoint_path: "SqlEndpointPath", # required
+    #         authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
+    #         o_auth_parameters: {
+    #           token_provider_url: "TokenProviderUrl", # required
+    #           o_auth_scope: "OAuthScope",
+    #           identity_provider_vpc_connection_properties: {
+    #             vpc_connection_arn: "Arn", # required
+    #           },
+    #           identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #           identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
+    #         },
     #       },
     #       starburst_parameters: {
     #         host: "Host", # required
@@ -4318,6 +4328,16 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
+    #               o_auth_parameters: {
+    #                 token_provider_url: "TokenProviderUrl", # required
+    #                 o_auth_scope: "OAuthScope",
+    #                 identity_provider_vpc_connection_properties: {
+    #                   vpc_connection_arn: "Arn", # required
+    #                 },
+    #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #                 identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
+    #               },
     #             },
     #             starburst_parameters: {
     #               host: "Host", # required
@@ -9294,6 +9314,12 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
+    #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
@@ -11304,6 +11330,12 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.databricks_parameters.host #=> String
     #   resp.data_source.data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_source.data_source_parameters.databricks_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
+    #   resp.data_source.data_source_parameters.databricks_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_source.data_source_parameters.databricks_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_source.data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_source.data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_source.data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_source.data_source_parameters.starburst_parameters.host #=> String
     #   resp.data_source.data_source_parameters.starburst_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.starburst_parameters.catalog #=> String
@@ -11422,6 +11454,12 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
+    #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
@@ -15882,6 +15920,12 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_sources[0].data_source_parameters.databricks_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
+    #   resp.data_sources[0].data_source_parameters.databricks_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_sources[0].data_source_parameters.databricks_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_sources[0].data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_sources[0].data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_sources[0].data_source_parameters.databricks_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.catalog #=> String
@@ -16000,6 +16044,12 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.sql_endpoint_path #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.authentication_type #=> String, one of "PASSWORD", "KEYPAIR", "TOKEN", "X509"
+    #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.o_auth_parameters.token_provider_url #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.o_auth_parameters.o_auth_scope #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.catalog #=> String
@@ -20169,6 +20219,16 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
+    #               o_auth_parameters: {
+    #                 token_provider_url: "TokenProviderUrl", # required
+    #                 o_auth_scope: "OAuthScope",
+    #                 identity_provider_vpc_connection_properties: {
+    #                   vpc_connection_arn: "Arn", # required
+    #                 },
+    #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #                 identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
+    #               },
     #             },
     #             starburst_parameters: {
     #               host: "Host", # required
@@ -23930,6 +23990,16 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         port: 1, # required
     #         sql_endpoint_path: "SqlEndpointPath", # required
+    #         authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
+    #         o_auth_parameters: {
+    #           token_provider_url: "TokenProviderUrl", # required
+    #           o_auth_scope: "OAuthScope",
+    #           identity_provider_vpc_connection_properties: {
+    #             vpc_connection_arn: "Arn", # required
+    #           },
+    #           identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #           identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
+    #         },
     #       },
     #       starburst_parameters: {
     #         host: "Host", # required
@@ -24142,6 +24212,16 @@ module Aws::QuickSight
     #               host: "Host", # required
     #               port: 1, # required
     #               sql_endpoint_path: "SqlEndpointPath", # required
+    #               authentication_type: "PASSWORD", # accepts PASSWORD, KEYPAIR, TOKEN, X509
+    #               o_auth_parameters: {
+    #                 token_provider_url: "TokenProviderUrl", # required
+    #                 o_auth_scope: "OAuthScope",
+    #                 identity_provider_vpc_connection_properties: {
+    #                   vpc_connection_arn: "Arn", # required
+    #                 },
+    #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #                 identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
+    #               },
     #             },
     #             starburst_parameters: {
     #               host: "Host", # required
@@ -27199,7 +27279,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.199.0'
+      context[:gem_version] = '1.200.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
