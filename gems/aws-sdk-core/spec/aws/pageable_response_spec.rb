@@ -274,6 +274,27 @@ module Aws
           PageableResponse.apply(object)
         }.to_not change { RubyVM.stat(key) }
       end
+
+      # Kernel#extend creates a singleton class and clears the method cache for every
+      # method the module defines (each, count, to_h, respond_to?, all of Enumerable...),
+      # process-wide, so it must not happen once per response.
+      it 'does not give a Seahorse::Client::Response a singleton class' do
+        skip 'Only applies to MRI' unless defined? RubyVM.stat
+
+        resp = Seahorse::Client::Response.new
+        GC.disable
+        classes_before = ObjectSpace.count_objects.values_at(:T_CLASS, :T_ICLASS)
+        PageableResponse.apply(resp)
+        expect(ObjectSpace.count_objects.values_at(:T_CLASS, :T_ICLASS)).to eq(classes_before)
+      ensure
+        GC.enable
+      end
+
+      it 'leaves every Seahorse::Client::Response pageable' do
+        resp = Seahorse::Client::Response.new
+        expect(resp).to be_kind_of(PageableResponse::Extension)
+        expect(resp).to be_kind_of(Enumerable)
+      end
     end
 
   end
