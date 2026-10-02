@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2026-10-02)
+------------------
+
+* Feature - Dynamic Multiview enables viewers to watch multiple live video streams in a single combined output. Static filter configuration allows users to configure endpoints with layouts and sources without using query parameters. The number of sources per multiview channel has been increased to 50.
+
 1.73.0 (2026-09-23)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2026-10-02)
+------------------
+
+* Feature - Adds trigger filters that control which pull request events, target branches, and labels start an automatic code review.
+
 1.19.0 (2026-09-29)
 ------------------
 

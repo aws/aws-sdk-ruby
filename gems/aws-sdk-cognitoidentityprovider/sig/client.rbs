@@ -374,6 +374,7 @@ module Aws
         def session: () -> ::String
         def challenge_parameters: () -> ::Hash[::String, ::String]
         def authentication_result: () -> Types::AuthenticationResultType
+        def available_challenges: () -> ::Array[("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "SELECT_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED" | "SMS_OTP" | "PASSWORD" | "WEB_AUTHN" | "PASSWORD_SRP")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#admin_respond_to_auth_challenge-instance_method
       def admin_respond_to_auth_challenge: (
@@ -613,7 +614,8 @@ module Aws
                                       provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC"),
                                       provider_details: Hash[::String, ::String],
                                       ?attribute_mapping: Hash[::String, ::String],
-                                      ?idp_identifiers: Array[::String]
+                                      ?idp_identifiers: Array[::String],
+                                      ?acr_mapping: Hash[::String, ::String]
                                     ) -> _CreateIdentityProviderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdentityProviderResponseSuccess
 
@@ -749,7 +751,10 @@ module Aws
                               },
                               ?issuer_configuration: {
                                 type: ("ORIGINAL" | "UPDATED")?
-                              }
+                              },
+                              ?acr_configuration: Hash[::String, {
+                                  acr_value: ::String
+                                }]
                             ) -> _CreateUserPoolResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserPoolResponseSuccess
 
@@ -1498,6 +1503,7 @@ module Aws
         def session: () -> ::String
         def challenge_parameters: () -> ::Hash[::String, ::String]
         def authentication_result: () -> Types::AuthenticationResultType
+        def available_challenges: () -> ::Array[("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "SELECT_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED" | "SMS_OTP" | "PASSWORD" | "WEB_AUTHN" | "PASSWORD_SRP")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#respond_to_auth_challenge-instance_method
       def respond_to_auth_challenge: (
@@ -1828,7 +1834,8 @@ module Aws
                                       provider_name: ::String,
                                       ?provider_details: Hash[::String, ::String],
                                       ?attribute_mapping: Hash[::String, ::String],
-                                      ?idp_identifiers: Array[::String]
+                                      ?idp_identifiers: Array[::String],
+                                      ?acr_mapping: Hash[::String, ::String]
                                     ) -> _UpdateIdentityProviderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdentityProviderResponseSuccess
 
@@ -1974,7 +1981,10 @@ module Aws
                               },
                               ?issuer_configuration: {
                                 type: ("ORIGINAL" | "UPDATED")?
-                              }
+                              },
+                              ?acr_configuration: Hash[::String, {
+                                  acr_value: ::String
+                                }]
                             ) -> _UpdateUserPoolResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserPoolResponseSuccess
 

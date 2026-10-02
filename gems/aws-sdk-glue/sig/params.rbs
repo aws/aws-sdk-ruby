@@ -112,7 +112,7 @@ module Aws
     }
 
       type o_auth_2_properties_input = {
-      o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")?,
+      o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER" | "REFRESH_TOKEN")?,
       o_auth_2_client_application: {
         user_managed_client_application_client_id: ::String?,
         aws_managed_client_application_reference: ::String?

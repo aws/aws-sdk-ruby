@@ -2016,6 +2016,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         url_encode_child_manifest: false,
     #         uri_path_type: "LEAF", # accepts LEAF, ROOT
@@ -2042,6 +2046,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         url_encode_child_manifest: false,
     #         uri_path_type: "LEAF", # accepts LEAF, ROOT
@@ -2058,6 +2066,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         min_update_period_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -2126,6 +2138,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         manifest_layout: "FULL", # accepts FULL, COMPACT
     #       },
@@ -2192,6 +2208,9 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -2210,6 +2229,9 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.low_latency_hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.low_latency_hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.low_latency_hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -2224,6 +2246,9 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.dash_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
     #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
@@ -2267,6 +2292,9 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.mss_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.mss_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.mss_manifests[0].manifest_window_seconds #=> Integer
     #   resp.mss_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
@@ -3205,6 +3233,9 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -3223,6 +3254,9 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.low_latency_hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.low_latency_hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.low_latency_hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -3237,6 +3271,9 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.dash_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
     #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
@@ -3280,6 +3317,9 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.mss_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.mss_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.mss_manifests[0].manifest_window_seconds #=> Integer
     #   resp.mss_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
@@ -5269,6 +5309,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         url_encode_child_manifest: false,
     #         uri_path_type: "LEAF", # accepts LEAF, ROOT
@@ -5295,6 +5339,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         url_encode_child_manifest: false,
     #         uri_path_type: "LEAF", # accepts LEAF, ROOT
@@ -5311,6 +5359,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         min_update_period_seconds: 1,
     #         min_buffer_time_seconds: 1,
@@ -5379,6 +5431,10 @@ module Aws::MediaPackageV2
     #           end: Time.now,
     #           time_delay_seconds: 1,
     #           clip_start_time: Time.now,
+    #           multiview: {
+    #             layout: "LAYOUT_2EH", # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #             sources: ["ResourceName"], # required
+    #           },
     #         },
     #         manifest_layout: "FULL", # accepts FULL, COMPACT
     #       },
@@ -5443,6 +5499,9 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -5461,6 +5520,9 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.low_latency_hls_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.low_latency_hls_manifests[0].start_tag.time_offset #=> Float
     #   resp.low_latency_hls_manifests[0].start_tag.precise #=> Boolean
     #   resp.low_latency_hls_manifests[0].url_encode_child_manifest #=> Boolean
@@ -5474,6 +5536,9 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.mss_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.mss_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.mss_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.mss_manifests[0].manifest_window_seconds #=> Integer
     #   resp.mss_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
@@ -5493,6 +5558,9 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.clip_start_time #=> Time
+    #   resp.dash_manifests[0].filter_configuration.multiview.layout #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources #=> Array
+    #   resp.dash_manifests[0].filter_configuration.multiview.sources[0] #=> String
     #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
     #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
@@ -5555,7 +5623,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

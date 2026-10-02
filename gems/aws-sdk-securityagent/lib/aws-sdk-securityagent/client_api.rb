@@ -500,6 +500,16 @@ module Aws::SecurityAgent
     ThreatSummary = Shapes::StructureShape.new(name: 'ThreatSummary')
     ThreatSummaryList = Shapes::ListShape.new(name: 'ThreatSummaryList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TriggerEvent = Shapes::StringShape.new(name: 'TriggerEvent')
+    TriggerEventList = Shapes::ListShape.new(name: 'TriggerEventList')
+    TriggerFilter = Shapes::StructureShape.new(name: 'TriggerFilter')
+    TriggerFilterGroup = Shapes::StructureShape.new(name: 'TriggerFilterGroup')
+    TriggerFilterGroups = Shapes::ListShape.new(name: 'TriggerFilterGroups')
+    TriggerFilterList = Shapes::ListShape.new(name: 'TriggerFilterList')
+    TriggerFilterMatchMode = Shapes::StringShape.new(name: 'TriggerFilterMatchMode')
+    TriggerFilterType = Shapes::StringShape.new(name: 'TriggerFilterType')
+    TriggerRegexPattern = Shapes::StringShape.new(name: 'TriggerRegexPattern')
+    TriggerRegexPatternList = Shapes::ListShape.new(name: 'TriggerRegexPatternList')
     TrustedCaCertificate = Shapes::StructureShape.new(name: 'TrustedCaCertificate')
     TrustedCaCertificateList = Shapes::ListShape.new(name: 'TrustedCaCertificateList')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
@@ -671,6 +681,7 @@ module Aws::SecurityAgent
     AzureDevOpsRepositoryResource.add_member(:project, Shapes::ShapeRef.new(shape: String, location_name: "project"))
     AzureDevOpsRepositoryResource.struct_class = Types::AzureDevOpsRepositoryResource
 
+    AzureDevOpsResourceCapabilities.add_member(:trigger_filter_groups, Shapes::ShapeRef.new(shape: TriggerFilterGroups, location_name: "triggerFilterGroups"))
     AzureDevOpsResourceCapabilities.add_member(:leave_comments, Shapes::ShapeRef.new(shape: Boolean, location_name: "leaveComments"))
     AzureDevOpsResourceCapabilities.add_member(:remediate_code, Shapes::ShapeRef.new(shape: Boolean, location_name: "remediateCode"))
     AzureDevOpsResourceCapabilities.struct_class = Types::AzureDevOpsResourceCapabilities
@@ -892,6 +903,7 @@ module Aws::SecurityAgent
     BitbucketRepositoryResource.add_member(:workspace, Shapes::ShapeRef.new(shape: BitbucketWorkspace, required: true, location_name: "workspace"))
     BitbucketRepositoryResource.struct_class = Types::BitbucketRepositoryResource
 
+    BitbucketResourceCapabilities.add_member(:trigger_filter_groups, Shapes::ShapeRef.new(shape: TriggerFilterGroups, location_name: "triggerFilterGroups"))
     BitbucketResourceCapabilities.add_member(:leave_comments, Shapes::ShapeRef.new(shape: Boolean, location_name: "leaveComments"))
     BitbucketResourceCapabilities.add_member(:remediate_code, Shapes::ShapeRef.new(shape: Boolean, location_name: "remediateCode"))
     BitbucketResourceCapabilities.struct_class = Types::BitbucketResourceCapabilities
@@ -1549,6 +1561,7 @@ module Aws::SecurityAgent
     GitHubRepositoryResource.add_member(:owner, Shapes::ShapeRef.new(shape: GitHubOwner, required: true, location_name: "owner"))
     GitHubRepositoryResource.struct_class = Types::GitHubRepositoryResource
 
+    GitHubResourceCapabilities.add_member(:trigger_filter_groups, Shapes::ShapeRef.new(shape: TriggerFilterGroups, location_name: "triggerFilterGroups"))
     GitHubResourceCapabilities.add_member(:leave_comments, Shapes::ShapeRef.new(shape: Boolean, location_name: "leaveComments"))
     GitHubResourceCapabilities.add_member(:remediate_code, Shapes::ShapeRef.new(shape: Boolean, location_name: "remediateCode"))
     GitHubResourceCapabilities.struct_class = Types::GitHubResourceCapabilities
@@ -1569,6 +1582,7 @@ module Aws::SecurityAgent
     GitLabRepositoryResource.add_member(:namespace, Shapes::ShapeRef.new(shape: GitLabNamespace, required: true, location_name: "namespace"))
     GitLabRepositoryResource.struct_class = Types::GitLabRepositoryResource
 
+    GitLabResourceCapabilities.add_member(:trigger_filter_groups, Shapes::ShapeRef.new(shape: TriggerFilterGroups, location_name: "triggerFilterGroups"))
     GitLabResourceCapabilities.add_member(:leave_comments, Shapes::ShapeRef.new(shape: Boolean, location_name: "leaveComments"))
     GitLabResourceCapabilities.add_member(:remediate_code, Shapes::ShapeRef.new(shape: Boolean, location_name: "remediateCode"))
     GitLabResourceCapabilities.struct_class = Types::GitLabResourceCapabilities
@@ -2505,6 +2519,23 @@ module Aws::SecurityAgent
     ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TriggerEventList.member = Shapes::ShapeRef.new(shape: TriggerEvent)
+
+    TriggerFilter.add_member(:type, Shapes::ShapeRef.new(shape: TriggerFilterType, required: true, location_name: "type"))
+    TriggerFilter.add_member(:patterns, Shapes::ShapeRef.new(shape: TriggerRegexPatternList, required: true, location_name: "patterns"))
+    TriggerFilter.add_member(:match_mode, Shapes::ShapeRef.new(shape: TriggerFilterMatchMode, location_name: "matchMode"))
+    TriggerFilter.struct_class = Types::TriggerFilter
+
+    TriggerFilterGroup.add_member(:events, Shapes::ShapeRef.new(shape: TriggerEventList, location_name: "events"))
+    TriggerFilterGroup.add_member(:filters, Shapes::ShapeRef.new(shape: TriggerFilterList, location_name: "filters"))
+    TriggerFilterGroup.struct_class = Types::TriggerFilterGroup
+
+    TriggerFilterGroups.member = Shapes::ShapeRef.new(shape: TriggerFilterGroup)
+
+    TriggerFilterList.member = Shapes::ShapeRef.new(shape: TriggerFilter)
+
+    TriggerRegexPatternList.member = Shapes::ShapeRef.new(shape: TriggerRegexPattern)
 
     TrustedCaCertificate.add_member(:source, Shapes::ShapeRef.new(shape: CaCertificateSource, required: true, location_name: "source"))
     TrustedCaCertificate.struct_class = Types::TrustedCaCertificate

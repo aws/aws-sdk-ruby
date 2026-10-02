@@ -482,6 +482,11 @@ module Aws::LambdaWeb
     # permission on the web function. You don't need separate permissions
     # for the initial revision or endpoint.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :function_name
     #   The name of the web function. The name can contain letters, numbers,
     #   hyphens (-), and underscores (\_), and can't begin or end with a
@@ -616,6 +621,11 @@ module Aws::LambdaWeb
     #
     # To use this operation, you must have the `CreateWebFunctionEndpoint`
     # permission on the web function, not on the endpoint being created.
+    #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
     #
     # @option params [required, String] :function_name
     #   The name of the web function to create the endpoint for. You can
@@ -766,6 +776,11 @@ module Aws::LambdaWeb
     # To use this operation, you must have the `CreateWebFunctionRevision`
     # permission on the web function, not on the revision being created.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :function_name
     #   The name of the web function. You can specify the function name or the
     #   function ARN. The length constraint applies only to the full ARN. If
@@ -875,6 +890,11 @@ module Aws::LambdaWeb
 
     # Removes the resource-based policy from a web function.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the web function.
     #
@@ -909,6 +929,11 @@ module Aws::LambdaWeb
     # permission on the web function. You don't need the
     # `DeleteWebFunctionRevision` or `DeleteWebFunctionEndpoint` permission.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :function_name
     #   The name of the web function to delete. You can specify the function
     #   name or the function ARN. The length constraint applies only to the
@@ -933,6 +958,11 @@ module Aws::LambdaWeb
     end
 
     # Deletes a web function endpoint.
+    #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
     #
     # @option params [required, String] :function_name
     #   The name of the web function. You can specify the function name or the
@@ -967,6 +997,11 @@ module Aws::LambdaWeb
     # Deletes a web function revision. You cannot delete a revision that is
     # currently serving traffic on an endpoint.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :function_name
     #   The name of the web function. You can specify the function name or the
     #   function ARN. The length constraint applies only to the full ARN. If
@@ -997,6 +1032,11 @@ module Aws::LambdaWeb
     end
 
     # Retrieves the resource-based policy attached to a web function.
+    #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the web function.
@@ -1030,6 +1070,11 @@ module Aws::LambdaWeb
     # for the current AWS Region, including the quotas that apply to web
     # functions and your current usage.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @return [Types::GetWebAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetWebAccountSettingsResponse#account_quotas #account_quotas} => Types::AccountQuotas
@@ -1054,6 +1099,11 @@ module Aws::LambdaWeb
 
     # Retrieves details about a web function, including its current state
     # and configuration.
+    #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
     #
     # @option params [required, String] :function_name
     #   The name of the web function to retrieve. You can specify the function
@@ -1102,6 +1152,11 @@ module Aws::LambdaWeb
 
     # Retrieves details about a web function endpoint, including its current
     # state, configuration, and domain name.
+    #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
     #
     # @option params [required, String] :function_name
     #   The name of the web function. You can specify the function name or the
@@ -1199,6 +1254,11 @@ module Aws::LambdaWeb
     # Retrieves details about a web function revision, including its state
     # and configuration.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :function_name
     #   The name of the web function. You can specify the function name or the
     #   function ARN. The length constraint applies only to the full ARN. If
@@ -1274,6 +1334,11 @@ module Aws::LambdaWeb
 
     # Returns a list of tags applied to a web function.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource
     #   The Amazon Resource Name (ARN) of the web function.
     #
@@ -1303,6 +1368,11 @@ module Aws::LambdaWeb
 
     # Lists endpoints for a web function. We recommend using pagination to
     # ensure that the operation returns quickly and successfully.
+    #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
     #
     # @option params [required, String] :function_name
     #   The name of the web function. You can specify the function name or the
@@ -1381,6 +1451,11 @@ module Aws::LambdaWeb
     # Lists revisions for a web function. We recommend using pagination to
     # ensure that the operation returns quickly and successfully.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :function_name
     #   The name of the web function. You can specify the function name or the
     #   function ARN. The length constraint applies only to the full ARN. If
@@ -1443,6 +1518,11 @@ module Aws::LambdaWeb
     # Lists web functions in your account. We recommend using pagination to
     # ensure that the operation returns quickly and successfully.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [Array<Types::Filter>] :filters
     #   A list of filters to apply to the results. The only supported filter
     #   name is `state`.
@@ -1499,6 +1579,11 @@ module Aws::LambdaWeb
     # resource-based policy grants permissions to other AWS accounts or
     # services to perform actions on the web function.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the web function.
     #
@@ -1541,6 +1626,11 @@ module Aws::LambdaWeb
     # Adds tags to a web function. If a tag key already exists, the existing
     # value is overwritten with the new value.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource
     #   The Amazon Resource Name (ARN) of the web function.
     #
@@ -1569,6 +1659,11 @@ module Aws::LambdaWeb
 
     # Removes tags from a web function.
     #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource
     #   The Amazon Resource Name (ARN) of the web function.
     #
@@ -1596,6 +1691,11 @@ module Aws::LambdaWeb
     # Updates the configuration of a web function endpoint. You can modify
     # the authorization type, auto-deployment mode, revision weights,
     # scaling, and throttling settings.
+    #
+    # <note markdown="1"> This API is experimental and for internal AWS use only. It is not yet
+    # available to external customers.
+    #
+    #  </note>
     #
     # @option params [required, String] :function_name
     #   The name of the web function. You can specify the function name or the
@@ -1739,7 +1839,7 @@ module Aws::LambdaWeb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambdaweb'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

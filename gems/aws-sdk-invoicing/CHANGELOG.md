@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2026-10-02)
+------------------
+
+* Feature - API and doc updates related to adding MarketplacePunchOutEnabled and MarketplacePunchOutPreference fields to ProcurementPortalPreferences related APIs
+
 1.30.0 (2026-09-11)
 ------------------
 

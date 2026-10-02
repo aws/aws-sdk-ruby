@@ -80,6 +80,8 @@ module Aws::Invoicing
       attr_accessor einvoice_delivery_enabled: bool
       attr_accessor einvoice_delivery_preference: Types::EinvoiceDeliveryPreference
       attr_accessor purchase_order_retrieval_enabled: bool
+      attr_accessor marketplace_punch_out_enabled: bool
+      attr_accessor marketplace_punch_out_preference: Types::MarketplacePunchOutPreference
       attr_accessor contacts: ::Array[Types::Contact]
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       attr_accessor client_token: ::String
@@ -387,6 +389,11 @@ module Aws::Invoicing
       SENSITIVE: []
     end
 
+    class MarketplacePunchOutPreference
+      attr_accessor approval_request_redirect_url: ::String
+      SENSITIVE: []
+    end
+
     class ProcurementPortal
       attr_accessor portal_identifier: ::String
       attr_accessor portal_name: ("SAP_BUSINESS_NETWORK" | "COUPA")
@@ -411,6 +418,8 @@ module Aws::Invoicing
       attr_accessor einvoice_delivery_enabled: bool
       attr_accessor einvoice_delivery_preference: Types::EinvoiceDeliveryPreference
       attr_accessor purchase_order_retrieval_enabled: bool
+      attr_accessor marketplace_punch_out_enabled: bool
+      attr_accessor marketplace_punch_out_preference: Types::MarketplacePunchOutPreference
       attr_accessor contacts: ::Array[Types::Contact]
       attr_accessor einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "VALIDATED" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
       attr_accessor einvoice_delivery_preference_status_reason: ::String
@@ -439,6 +448,7 @@ module Aws::Invoicing
       attr_accessor selector: Types::ProcurementPortalPreferenceSelector
       attr_accessor einvoice_delivery_enabled: bool
       attr_accessor purchase_order_retrieval_enabled: bool
+      attr_accessor marketplace_punch_out_enabled: bool
       attr_accessor einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "VALIDATED" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
       attr_accessor einvoice_delivery_preference_status_reason: ::String
       attr_accessor purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "VALIDATED" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
@@ -472,6 +482,8 @@ module Aws::Invoicing
       attr_accessor einvoice_delivery_enabled: bool
       attr_accessor einvoice_delivery_preference: Types::EinvoiceDeliveryPreference
       attr_accessor purchase_order_retrieval_enabled: bool
+      attr_accessor marketplace_punch_out_enabled: bool
+      attr_accessor marketplace_punch_out_preference: Types::MarketplacePunchOutPreference
       attr_accessor contacts: ::Array[Types::Contact]
       attr_accessor client_token: ::String
       SENSITIVE: [:procurement_portal_shared_secret]

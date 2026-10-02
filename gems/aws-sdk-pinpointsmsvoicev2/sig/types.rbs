@@ -60,6 +60,7 @@ module Aws::PinpointSMSVoiceV2
 
     class CarrierLookupRequest
       attr_accessor phone_number: ::String
+      attr_accessor enable_cleansing: bool
       SENSITIVE: []
     end
 
@@ -71,7 +72,8 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor mcc: ::String
       attr_accessor mnc: ::String
       attr_accessor carrier: ::String
-      attr_accessor phone_number_type: ("MOBILE" | "LANDLINE" | "OTHER" | "INVALID")
+      attr_accessor phone_number_type: ("MOBILE" | "LANDLINE" | "VOIP" | "PREPAID" | "OTHER" | "INVALID")
+      attr_accessor original_phone_number: ::String
       SENSITIVE: []
     end
 

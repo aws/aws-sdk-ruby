@@ -4230,15 +4230,47 @@ module Aws::SecurityAgent
     #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.project #=> String
     #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.project_id #=> String
     #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.access_type #=> String, one of "PRIVATE", "PUBLIC"
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].events #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT", "PULL_REQUEST_LABEL_ADDED"
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].filters #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].filters[0].type #=> String, one of "TARGET_BRANCH", "LABEL"
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].filters[0].patterns #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].filters[0].patterns[0] #=> String
+    #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].filters[0].match_mode #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.integrated_resource_summaries[0].capabilities.github.leave_comments #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.github.remediate_code #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].events #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT", "PULL_REQUEST_LABEL_ADDED"
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].filters #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].filters[0].type #=> String, one of "TARGET_BRANCH", "LABEL"
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].filters[0].patterns #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].filters[0].patterns[0] #=> String
+    #   resp.integrated_resource_summaries[0].capabilities.gitlab.trigger_filter_groups[0].filters[0].match_mode #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.integrated_resource_summaries[0].capabilities.gitlab.leave_comments #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.gitlab.remediate_code #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].events #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT", "PULL_REQUEST_LABEL_ADDED"
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].filters #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].filters[0].type #=> String, one of "TARGET_BRANCH", "LABEL"
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].filters[0].patterns #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].filters[0].patterns[0] #=> String
+    #   resp.integrated_resource_summaries[0].capabilities.bitbucket.trigger_filter_groups[0].filters[0].match_mode #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.integrated_resource_summaries[0].capabilities.bitbucket.leave_comments #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.bitbucket.remediate_code #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.confluence.fetch_document #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.confluence.create_document #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.confluence.update_document #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].events #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT", "PULL_REQUEST_LABEL_ADDED"
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].filters #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].filters[0].type #=> String, one of "TARGET_BRANCH", "LABEL"
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].filters[0].patterns #=> Array
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].filters[0].patterns[0] #=> String
+    #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].filters[0].match_mode #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.leave_comments #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.remediate_code #=> Boolean
     #   resp.next_token #=> String
@@ -5771,14 +5803,50 @@ module Aws::SecurityAgent
     #         },
     #         capabilities: {
     #           github: {
+    #             trigger_filter_groups: [
+    #               {
+    #                 events: ["PULL_REQUEST_READY_FOR_REVIEW"], # accepts PULL_REQUEST_READY_FOR_REVIEW, PULL_REQUEST_DRAFT, PULL_REQUEST_LABEL_ADDED
+    #                 filters: [
+    #                   {
+    #                     type: "TARGET_BRANCH", # required, accepts TARGET_BRANCH, LABEL
+    #                     patterns: ["TriggerRegexPattern"], # required
+    #                     match_mode: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #             leave_comments: false,
     #             remediate_code: false,
     #           },
     #           gitlab: {
+    #             trigger_filter_groups: [
+    #               {
+    #                 events: ["PULL_REQUEST_READY_FOR_REVIEW"], # accepts PULL_REQUEST_READY_FOR_REVIEW, PULL_REQUEST_DRAFT, PULL_REQUEST_LABEL_ADDED
+    #                 filters: [
+    #                   {
+    #                     type: "TARGET_BRANCH", # required, accepts TARGET_BRANCH, LABEL
+    #                     patterns: ["TriggerRegexPattern"], # required
+    #                     match_mode: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #             leave_comments: false,
     #             remediate_code: false,
     #           },
     #           bitbucket: {
+    #             trigger_filter_groups: [
+    #               {
+    #                 events: ["PULL_REQUEST_READY_FOR_REVIEW"], # accepts PULL_REQUEST_READY_FOR_REVIEW, PULL_REQUEST_DRAFT, PULL_REQUEST_LABEL_ADDED
+    #                 filters: [
+    #                   {
+    #                     type: "TARGET_BRANCH", # required, accepts TARGET_BRANCH, LABEL
+    #                     patterns: ["TriggerRegexPattern"], # required
+    #                     match_mode: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #             leave_comments: false,
     #             remediate_code: false,
     #           },
@@ -5788,6 +5856,18 @@ module Aws::SecurityAgent
     #             update_document: false,
     #           },
     #           azure_dev_ops: {
+    #             trigger_filter_groups: [
+    #               {
+    #                 events: ["PULL_REQUEST_READY_FOR_REVIEW"], # accepts PULL_REQUEST_READY_FOR_REVIEW, PULL_REQUEST_DRAFT, PULL_REQUEST_LABEL_ADDED
+    #                 filters: [
+    #                   {
+    #                     type: "TARGET_BRANCH", # required, accepts TARGET_BRANCH, LABEL
+    #                     patterns: ["TriggerRegexPattern"], # required
+    #                     match_mode: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #             leave_comments: false,
     #             remediate_code: false,
     #           },
@@ -6620,7 +6700,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

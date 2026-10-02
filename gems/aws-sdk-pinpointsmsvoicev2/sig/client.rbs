@@ -119,11 +119,13 @@ module Aws
         def mcc: () -> ::String
         def mnc: () -> ::String
         def carrier: () -> ::String
-        def phone_number_type: () -> ("MOBILE" | "LANDLINE" | "OTHER" | "INVALID")
+        def phone_number_type: () -> ("MOBILE" | "LANDLINE" | "VOIP" | "PREPAID" | "OTHER" | "INVALID")
+        def original_phone_number: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#carrier_lookup-instance_method
       def carrier_lookup: (
-                            phone_number: ::String
+                            phone_number: ::String,
+                            ?enable_cleansing: bool
                           ) -> _CarrierLookupResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CarrierLookupResponseSuccess
 

@@ -1999,6 +1999,17 @@ module Aws::MediaPackageV2
     #   endpoint URL.
     #   @return [Time]
     #
+    # @!attribute [rw] multiview
+    #   Optionally pin this manifest to a single multiview combination, so
+    #   that players request it without an `aws.multiview` query parameter.
+    #   When you pin a combination, note that you cannot use the
+    #   `aws.multiview` query parameter for this manifest's endpoint URL,
+    #   even when that parameter requests the same combination.
+    #
+    #   This setting is valid only on an origin endpoint whose channel has
+    #   an `InputType` of `MULTIVIEW`.
+    #   @return [Types::MultiviewFilterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/FilterConfiguration AWS API Documentation
     #
     class FilterConfiguration < Struct.new(
@@ -2007,7 +2018,8 @@ module Aws::MediaPackageV2
       :start,
       :end,
       :time_delay_seconds,
-      :clip_start_time)
+      :clip_start_time,
+      :multiview)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3615,6 +3627,36 @@ module Aws::MediaPackageV2
     class MultiviewConfiguration < Struct.new(
       :available_sources,
       :available_layouts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The multiview combination for a pinned manifest. MediaPackage serves
+    # the manifest with this layout and these sources, so players request it
+    # without an `aws.multiview` query parameter.
+    #
+    # If a request for a pinned manifest also includes an `aws.multiview`
+    # query parameter, MediaPackage rejects the request, even when that
+    # parameter requests the same combination.
+    #
+    # @!attribute [rw] layout
+    #   The layout that MediaPackage uses to composite the tiles into a
+    #   single output. This layout must be one of the `AvailableLayouts` of
+    #   the channel that this origin endpoint is on.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The source channels to composite, in tile order. Each channel must
+    #   be one of the `AvailableSources` of the channel that this origin
+    #   endpoint is on, and the number of channels must equal the number of
+    #   tiles in `Layout`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/MultiviewFilterConfiguration AWS API Documentation
+    #
+    class MultiviewFilterConfiguration < Struct.new(
+      :layout,
+      :sources)
       SENSITIVE = []
       include Aws::Structure
     end

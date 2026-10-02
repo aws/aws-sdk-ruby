@@ -23,6 +23,12 @@ module Aws::CognitoIdentityProvider
     AccountTakeoverActionsType = Shapes::StructureShape.new(name: 'AccountTakeoverActionsType')
     AccountTakeoverEventActionType = Shapes::StringShape.new(name: 'AccountTakeoverEventActionType')
     AccountTakeoverRiskConfigurationType = Shapes::StructureShape.new(name: 'AccountTakeoverRiskConfigurationType')
+    AcrConfigurationType = Shapes::MapShape.new(name: 'AcrConfigurationType')
+    AcrLevelConfigType = Shapes::StructureShape.new(name: 'AcrLevelConfigType')
+    AcrLevelKeyType = Shapes::StringShape.new(name: 'AcrLevelKeyType')
+    AcrMappingKeyType = Shapes::StringShape.new(name: 'AcrMappingKeyType')
+    AcrMappingType = Shapes::MapShape.new(name: 'AcrMappingType')
+    AcrValueType = Shapes::StringShape.new(name: 'AcrValueType')
     AddCustomAttributesRequest = Shapes::StructureShape.new(name: 'AddCustomAttributesRequest')
     AddCustomAttributesResponse = Shapes::StructureShape.new(name: 'AddCustomAttributesResponse')
     AddUserPoolClientSecretRequest = Shapes::StructureShape.new(name: 'AddUserPoolClientSecretRequest')
@@ -670,6 +676,15 @@ module Aws::CognitoIdentityProvider
     AccountTakeoverRiskConfigurationType.add_member(:actions, Shapes::ShapeRef.new(shape: AccountTakeoverActionsType, required: true, location_name: "Actions"))
     AccountTakeoverRiskConfigurationType.struct_class = Types::AccountTakeoverRiskConfigurationType
 
+    AcrConfigurationType.key = Shapes::ShapeRef.new(shape: AcrLevelKeyType)
+    AcrConfigurationType.value = Shapes::ShapeRef.new(shape: AcrLevelConfigType)
+
+    AcrLevelConfigType.add_member(:acr_value, Shapes::ShapeRef.new(shape: AcrValueType, required: true, location_name: "AcrValue"))
+    AcrLevelConfigType.struct_class = Types::AcrLevelConfigType
+
+    AcrMappingType.key = Shapes::ShapeRef.new(shape: AcrMappingKeyType)
+    AcrMappingType.value = Shapes::ShapeRef.new(shape: AcrValueType)
+
     AddCustomAttributesRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     AddCustomAttributesRequest.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributesListType, required: true, location_name: "CustomAttributes"))
     AddCustomAttributesRequest.struct_class = Types::AddCustomAttributesRequest
@@ -868,6 +883,7 @@ module Aws::CognitoIdentityProvider
     AdminRespondToAuthChallengeResponse.add_member(:session, Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
     AdminRespondToAuthChallengeResponse.add_member(:challenge_parameters, Shapes::ShapeRef.new(shape: ChallengeParametersType, location_name: "ChallengeParameters"))
     AdminRespondToAuthChallengeResponse.add_member(:authentication_result, Shapes::ShapeRef.new(shape: AuthenticationResultType, location_name: "AuthenticationResult"))
+    AdminRespondToAuthChallengeResponse.add_member(:available_challenges, Shapes::ShapeRef.new(shape: AvailableChallengeListType, location_name: "AvailableChallenges"))
     AdminRespondToAuthChallengeResponse.struct_class = Types::AdminRespondToAuthChallengeResponse
 
     AdminSetUserMFAPreferenceRequest.add_member(:sms_mfa_settings, Shapes::ShapeRef.new(shape: SMSMfaSettingsType, location_name: "SMSMfaSettings"))
@@ -1132,6 +1148,7 @@ module Aws::CognitoIdentityProvider
     CreateIdentityProviderRequest.add_member(:provider_details, Shapes::ShapeRef.new(shape: ProviderDetailsType, required: true, location_name: "ProviderDetails"))
     CreateIdentityProviderRequest.add_member(:attribute_mapping, Shapes::ShapeRef.new(shape: AttributeMappingType, location_name: "AttributeMapping"))
     CreateIdentityProviderRequest.add_member(:idp_identifiers, Shapes::ShapeRef.new(shape: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
+    CreateIdentityProviderRequest.add_member(:acr_mapping, Shapes::ShapeRef.new(shape: AcrMappingType, location_name: "AcrMapping"))
     CreateIdentityProviderRequest.struct_class = Types::CreateIdentityProviderRequest
 
     CreateIdentityProviderResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProviderType, required: true, location_name: "IdentityProvider"))
@@ -1251,6 +1268,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolRequest.add_member(:user_pool_tier, Shapes::ShapeRef.new(shape: UserPoolTierType, location_name: "UserPoolTier"))
     CreateUserPoolRequest.add_member(:key_configuration, Shapes::ShapeRef.new(shape: KeyConfigurationType, location_name: "KeyConfiguration"))
     CreateUserPoolRequest.add_member(:issuer_configuration, Shapes::ShapeRef.new(shape: IssuerConfigurationType, location_name: "IssuerConfiguration"))
+    CreateUserPoolRequest.add_member(:acr_configuration, Shapes::ShapeRef.new(shape: AcrConfigurationType, location_name: "AcrConfiguration"))
     CreateUserPoolRequest.struct_class = Types::CreateUserPoolRequest
 
     CreateUserPoolResponse.add_member(:user_pool, Shapes::ShapeRef.new(shape: UserPoolType, location_name: "UserPool"))
@@ -1666,6 +1684,7 @@ module Aws::CognitoIdentityProvider
     IdentityProviderType.add_member(:provider_details, Shapes::ShapeRef.new(shape: ProviderDetailsType, location_name: "ProviderDetails"))
     IdentityProviderType.add_member(:attribute_mapping, Shapes::ShapeRef.new(shape: AttributeMappingType, location_name: "AttributeMapping"))
     IdentityProviderType.add_member(:idp_identifiers, Shapes::ShapeRef.new(shape: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
+    IdentityProviderType.add_member(:acr_mapping, Shapes::ShapeRef.new(shape: AcrMappingType, location_name: "AcrMapping"))
     IdentityProviderType.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
     IdentityProviderType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
     IdentityProviderType.struct_class = Types::IdentityProviderType
@@ -2052,6 +2071,7 @@ module Aws::CognitoIdentityProvider
     RespondToAuthChallengeResponse.add_member(:session, Shapes::ShapeRef.new(shape: SessionType, location_name: "Session"))
     RespondToAuthChallengeResponse.add_member(:challenge_parameters, Shapes::ShapeRef.new(shape: ChallengeParametersType, location_name: "ChallengeParameters"))
     RespondToAuthChallengeResponse.add_member(:authentication_result, Shapes::ShapeRef.new(shape: AuthenticationResultType, location_name: "AuthenticationResult"))
+    RespondToAuthChallengeResponse.add_member(:available_challenges, Shapes::ShapeRef.new(shape: AvailableChallengeListType, location_name: "AvailableChallenges"))
     RespondToAuthChallengeResponse.struct_class = Types::RespondToAuthChallengeResponse
 
     RevokeTokenRequest.add_member(:token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "Token"))
@@ -2338,6 +2358,7 @@ module Aws::CognitoIdentityProvider
     UpdateIdentityProviderRequest.add_member(:provider_details, Shapes::ShapeRef.new(shape: ProviderDetailsType, location_name: "ProviderDetails"))
     UpdateIdentityProviderRequest.add_member(:attribute_mapping, Shapes::ShapeRef.new(shape: AttributeMappingType, location_name: "AttributeMapping"))
     UpdateIdentityProviderRequest.add_member(:idp_identifiers, Shapes::ShapeRef.new(shape: IdpIdentifiersListType, location_name: "IdpIdentifiers"))
+    UpdateIdentityProviderRequest.add_member(:acr_mapping, Shapes::ShapeRef.new(shape: AcrMappingType, location_name: "AcrMapping"))
     UpdateIdentityProviderRequest.struct_class = Types::UpdateIdentityProviderRequest
 
     UpdateIdentityProviderResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProviderType, required: true, location_name: "IdentityProvider"))
@@ -2459,6 +2480,7 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolRequest.add_member(:user_pool_tier, Shapes::ShapeRef.new(shape: UserPoolTierType, location_name: "UserPoolTier"))
     UpdateUserPoolRequest.add_member(:key_configuration, Shapes::ShapeRef.new(shape: KeyConfigurationType, location_name: "KeyConfiguration"))
     UpdateUserPoolRequest.add_member(:issuer_configuration, Shapes::ShapeRef.new(shape: IssuerConfigurationType, location_name: "IssuerConfiguration"))
+    UpdateUserPoolRequest.add_member(:acr_configuration, Shapes::ShapeRef.new(shape: AcrConfigurationType, location_name: "AcrConfiguration"))
     UpdateUserPoolRequest.struct_class = Types::UpdateUserPoolRequest
 
     UpdateUserPoolResponse.struct_class = Types::UpdateUserPoolResponse
@@ -2611,6 +2633,7 @@ module Aws::CognitoIdentityProvider
     UserPoolType.add_member(:user_pool_tier, Shapes::ShapeRef.new(shape: UserPoolTierType, location_name: "UserPoolTier"))
     UserPoolType.add_member(:key_configuration, Shapes::ShapeRef.new(shape: KeyConfigurationType, location_name: "KeyConfiguration"))
     UserPoolType.add_member(:issuer_configuration, Shapes::ShapeRef.new(shape: IssuerConfigurationType, location_name: "IssuerConfiguration"))
+    UserPoolType.add_member(:acr_configuration, Shapes::ShapeRef.new(shape: AcrConfigurationType, location_name: "AcrConfiguration"))
     UserPoolType.struct_class = Types::UserPoolType
 
     UserType.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username"))
@@ -2986,6 +3009,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotConfirmedException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
       end)
 
       api.add_operation(:admin_link_provider_for_user, Seahorse::Model::Operation.new.tap do |o|
@@ -4237,6 +4261,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 

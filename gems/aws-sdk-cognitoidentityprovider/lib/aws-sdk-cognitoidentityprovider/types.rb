@@ -136,6 +136,27 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # The configuration for a single authentication context class reference
+    # (ACR) level in a user pool. Each entry in an `AcrConfiguration` map
+    # associates a level (`Level1` through `Level4`) with this
+    # configuration, which provides the custom name that Amazon Cognito
+    # reports for that level in the `acr` token claim.
+    #
+    # @!attribute [rw] acr_value
+    #   The custom name for this authentication context class reference
+    #   (ACR) level. This value is the URI that Amazon Cognito reports in
+    #   the `acr` token claim when a user meets this level. The name must be
+    #   unique across all levels in the user pool, including default names.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AcrLevelConfigType AWS API Documentation
+    #
+    class AcrLevelConfigType < Struct.new(
+      :acr_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the request to add custom attributes.
     #
     # @!attribute [rw] user_pool_id
@@ -1082,6 +1103,37 @@ module Aws::CognitoIdentityProvider
     #       `AvailableChallenges` parameter that specifies the available
     #       sign-in methods.
     #
+    #     * `TARGET_ACR_VALUES`. An optional, space-separated list of the
+    #       authentication context class reference (ACR) level URIs that you
+    #       want the user to reach. List the levels in priority order, from
+    #       highest to lowest. Amazon Cognito attempts the highest-priority
+    #       level that the user can satisfy, and falls back through the
+    #       list. Amazon Cognito ignores any value that it doesn't
+    #       recognize. If none of the requested values are valid, Amazon
+    #       Cognito returns an error.
+    #
+    #       Requesting step-up authentication with this parameter requires
+    #       the Essentials or Plus feature plan. On a lower feature plan,
+    #       AdminInitiateAuth returns a FeatureUnavailableInTierException.
+    #       `USERNAME` is required. When you provide an `ACCESS_TOKEN`, you
+    #       must also provide `TARGET_ACR_VALUES`. Amazon Cognito returns an
+    #       error if you provide an `ACCESS_TOKEN` without
+    #       `TARGET_ACR_VALUES`. The `USERNAME` that you provide must match
+    #       the user that the `ACCESS_TOKEN` was issued for.
+    #
+    #       For more information about step-up authentication and how Amazon
+    #       Cognito handles multi-factor authentication requirements, see
+    #       [Step-up authentication with ACR and AMR][1] in the *Amazon
+    #       Cognito Developer Guide*.
+    #
+    #     * `MAX_AGE`. An optional integer that sets the maximum number of
+    #       seconds allowed since the user last authenticated. If the
+    #       user's most recent authentication is older than this value,
+    #       Amazon Cognito discards the authentication-methods credit from
+    #       any access token that you provide and processes the request as a
+    #       fresh authentication toward the target level. The access token
+    #       itself remains valid.
+    #
     #   USER\_SRP\_AUTH
     #   : * `USERNAME` (required)
     #
@@ -1107,13 +1159,14 @@ module Aws::CognitoIdentityProvider
     #       with SRP authentication)
     #
     #   For more information about `SECRET_HASH`, see [Computing secret hash
-    #   values][1]. For information about `DEVICE_KEY`, see [Working with
-    #   user devices in your user pool][2].
+    #   values][2]. For information about `DEVICE_KEY`, see [Working with
+    #   user devices in your user pool][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash
-    #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-step-up-authentication.html
+    #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash
+    #   [3]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_metadata
@@ -2202,13 +2255,26 @@ module Aws::CognitoIdentityProvider
     #   successful sign-in.
     #   @return [Types::AuthenticationResultType]
     #
+    # @!attribute [rw] available_challenges
+    #   This response parameter lists the available authentication
+    #   challenges that users can select from in [choice-based
+    #   authentication][1]. For example, they might be able to choose
+    #   between passkey authentication, a one-time password from an SMS
+    #   message, and a traditional password.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-selection-sdk.html#authentication-flows-selection-choice
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRespondToAuthChallengeResponse AWS API Documentation
     #
     class AdminRespondToAuthChallengeResponse < Struct.new(
       :challenge_name,
       :session,
       :challenge_parameters,
-      :authentication_result)
+      :authentication_result,
+      :available_challenges)
       SENSITIVE = [:session]
       include Aws::Structure
     end
@@ -3940,6 +4006,22 @@ module Aws::CognitoIdentityProvider
     #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managing-saml-idp-naming.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] acr_mapping
+    #   A mapping between the authentication context class reference (ACR)
+    #   levels of your user pool and the ACR values of the external OpenID
+    #   Connect (OIDC) identity provider (IdP). The map is keyed by level,
+    #   from `Level1` through `Level4`, and each value is the ACR value that
+    #   the IdP uses for the corresponding level. Amazon Cognito uses this
+    #   mapping to translate a requested user pool ACR level to the value
+    #   that the IdP expects, and to map an ACR value that the IdP returns
+    #   back to a user pool level. When the IdP returns an ACR value that
+    #   isn't mapped, Amazon Cognito resolves it to the lowest level. Only
+    #   OIDC IdPs support ACR mapping.
+    #
+    #   Setting `AcrMapping` is available in all feature plans. It isn't
+    #   restricted to the Essentials or Plus feature plan.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateIdentityProviderRequest AWS API Documentation
     #
     class CreateIdentityProviderRequest < Struct.new(
@@ -3948,7 +4030,8 @@ module Aws::CognitoIdentityProvider
       :provider_type,
       :provider_details,
       :attribute_mapping,
-      :idp_identifiers)
+      :idp_identifiers,
+      :acr_mapping)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5048,6 +5131,31 @@ module Aws::CognitoIdentityProvider
     #   type for token generation.
     #   @return [Types::IssuerConfigurationType]
     #
+    # @!attribute [rw] acr_configuration
+    #   The custom names for the authentication context class reference
+    #   (ACR) levels in your user pool. Amazon Cognito defines four fixed
+    #   ACR levels that represent increasing authentication assurance. The
+    #   combination of authentication factors that satisfies each level is
+    #   fixed and you can't change it. With this configuration, you
+    #   customize only the URI name that Amazon Cognito reports for each
+    #   level in the `acr` token claim.
+    #
+    #   You can override a subset of the levels. By default, the levels are
+    #   named `urn:cognito:loa:1` through `urn:cognito:loa:4`, and Amazon
+    #   Cognito applies the default name to any level that you don't
+    #   specify. Each name must be unique across all four levels, including
+    #   any default names that apply to levels you don't override. A name
+    #   can contain any character that is valid in a URL or a URN.
+    #
+    #   Configuring custom ACR level names requires the Essentials or Plus
+    #   feature plan. To activate this setting, your user pool must be in
+    #   the [ Essentials tier][1] or higher.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+    #   @return [Hash<String,Types::AcrLevelConfigType>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolRequest AWS API Documentation
     #
     class CreateUserPoolRequest < Struct.new(
@@ -5076,7 +5184,8 @@ module Aws::CognitoIdentityProvider
       :account_recovery_setting,
       :user_pool_tier,
       :key_configuration,
-      :issuer_configuration)
+      :issuer_configuration,
+      :acr_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5675,7 +5784,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] terms
-    #   A summary of the requested terms documents. Includes a unique
+    #   A summary of the requested terms documents, including a unique
     #   identifier for later changes to the terms documents.
     #   @return [Types::TermsType]
     #
@@ -6512,8 +6621,17 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # This exception is thrown when a feature you attempted to configure
-    # isn't available in your current feature plan.
+    # This exception is thrown when a feature that you attempted to use or
+    # configure isn't included in your user pool's current feature plan.
+    # This can occur when:
+    #
+    # * You configure a feature that your feature plan doesn't support.
+    #
+    # * You make a request that uses a feature that requires a higher
+    #   feature plan.
+    #
+    # To resolve this issue, upgrade your user pool to a feature plan that
+    # includes the feature.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -7663,6 +7781,15 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/authorization-endpoint.html#get-authorize-request-parameters
     #   @return [Array<String>]
     #
+    # @!attribute [rw] acr_mapping
+    #   A mapping between the authentication context class reference (ACR)
+    #   levels of your user pool and the ACR values of the external OpenID
+    #   Connect (OIDC) identity provider (IdP), so that your application
+    #   gets a consistent step-up experience regardless of which IdP
+    #   authenticated the user. The map is keyed by level, from `Level1`
+    #   through `Level4`.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] last_modified_date
     #   The date and time when the item was modified. Amazon Cognito returns
     #   this timestamp in UNIX epoch time format. Your SDK might render the
@@ -7686,6 +7813,7 @@ module Aws::CognitoIdentityProvider
       :provider_details,
       :attribute_mapping,
       :idp_identifiers,
+      :acr_mapping,
       :last_modified_date,
       :creation_date)
       SENSITIVE = []
@@ -7791,6 +7919,37 @@ module Aws::CognitoIdentityProvider
     #       `AvailableChallenges` parameter that specifies the available
     #       sign-in methods.
     #
+    #     * `TARGET_ACR_VALUES`. An optional, space-separated list of the
+    #       authentication context class reference (ACR) level URIs that you
+    #       want the user to reach. List the levels in priority order, from
+    #       highest to lowest. Amazon Cognito attempts the highest-priority
+    #       level that the user can satisfy, and falls back through the
+    #       list. Amazon Cognito ignores any value that it doesn't
+    #       recognize. If none of the requested values are valid, Amazon
+    #       Cognito returns an error.
+    #
+    #       Requesting step-up authentication with this parameter requires
+    #       the Essentials or Plus feature plan. On a lower feature plan,
+    #       InitiateAuth returns a FeatureUnavailableInTierException.
+    #       `USERNAME` is required. When you provide an `ACCESS_TOKEN`, you
+    #       must also provide `TARGET_ACR_VALUES`. Amazon Cognito returns an
+    #       error if you provide an `ACCESS_TOKEN` without
+    #       `TARGET_ACR_VALUES`. The `USERNAME` that you provide must match
+    #       the user that the `ACCESS_TOKEN` was issued for.
+    #
+    #       For more information about step-up authentication and how Amazon
+    #       Cognito handles multi-factor authentication requirements, see
+    #       [Step-up authentication with ACR and AMR][1] in the *Amazon
+    #       Cognito Developer Guide*.
+    #
+    #     * `MAX_AGE`. An optional integer that sets the maximum number of
+    #       seconds allowed since the user last authenticated. If the
+    #       user's most recent authentication is older than this value,
+    #       Amazon Cognito discards the authentication-methods credit from
+    #       any access token that you provide and processes the request as a
+    #       fresh authentication toward the target level. The access token
+    #       itself remains valid.
+    #
     #   USER\_SRP\_AUTH
     #   : * `USERNAME` (required)
     #
@@ -7816,13 +7975,14 @@ module Aws::CognitoIdentityProvider
     #       custom challenges)
     #
     #   For more information about `SECRET_HASH`, see [Computing secret hash
-    #   values][1]. For information about `DEVICE_KEY`, see [Working with
-    #   user devices in your user pool][2].
+    #   values][2]. For information about `DEVICE_KEY`, see [Working with
+    #   user devices in your user pool][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash
-    #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-step-up-authentication.html
+    #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash
+    #   [3]: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_metadata
@@ -10694,13 +10854,26 @@ module Aws::CognitoIdentityProvider
     #   successful sign-in.
     #   @return [Types::AuthenticationResultType]
     #
+    # @!attribute [rw] available_challenges
+    #   This response parameter lists the available authentication
+    #   challenges that users can select from in [choice-based
+    #   authentication][1]. For example, they might be able to choose
+    #   between passkey authentication, a one-time password from an SMS
+    #   message, and a traditional password.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-selection-sdk.html#authentication-flows-selection-choice
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RespondToAuthChallengeResponse AWS API Documentation
     #
     class RespondToAuthChallengeResponse < Struct.new(
       :challenge_name,
       :session,
       :challenge_parameters,
-      :authentication_result)
+      :authentication_result,
+      :available_challenges)
       SENSITIVE = [:session]
       include Aws::Structure
     end
@@ -12527,6 +12700,17 @@ module Aws::CognitoIdentityProvider
     #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managing-saml-idp-naming.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] acr_mapping
+    #   A mapping between the authentication context class reference (ACR)
+    #   levels of your user pool and the ACR values of the external OpenID
+    #   Connect (OIDC) identity provider (IdP). This mapping has the same
+    #   behavior as it does when you create an identity provider. Only OIDC
+    #   IdPs support ACR mapping.
+    #
+    #   Setting `AcrMapping` is available in all feature plans. It isn't
+    #   restricted to the Essentials or Plus feature plan.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateIdentityProviderRequest AWS API Documentation
     #
     class UpdateIdentityProviderRequest < Struct.new(
@@ -12534,7 +12718,8 @@ module Aws::CognitoIdentityProvider
       :provider_name,
       :provider_details,
       :attribute_mapping,
-      :idp_identifiers)
+      :idp_identifiers,
+      :acr_mapping)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13606,6 +13791,24 @@ module Aws::CognitoIdentityProvider
     #   modified.
     #   @return [Types::IssuerConfigurationType]
     #
+    # @!attribute [rw] acr_configuration
+    #   The custom names for the authentication context class reference
+    #   (ACR) levels in your user pool. This configuration has the same
+    #   behavior as it does when you create a user pool: you customize only
+    #   the URI name that Amazon Cognito reports for each of the four fixed
+    #   ACR levels, and any level that you don't specify keeps its default
+    #   name. Each name must be unique across all four levels, including
+    #   default names.
+    #
+    #   Configuring custom ACR level names requires the Essentials or Plus
+    #   feature plan. To activate this setting, your user pool must be in
+    #   the [ Essentials tier][1] or higher.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+    #   @return [Hash<String,Types::AcrLevelConfigType>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolRequest AWS API Documentation
     #
     class UpdateUserPoolRequest < Struct.new(
@@ -13631,7 +13834,8 @@ module Aws::CognitoIdentityProvider
       :pool_name,
       :user_pool_tier,
       :key_configuration,
-      :issuer_configuration)
+      :issuer_configuration,
+      :acr_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14823,6 +15027,21 @@ module Aws::CognitoIdentityProvider
     #   settings.
     #   @return [Types::IssuerConfigurationType]
     #
+    # @!attribute [rw] acr_configuration
+    #   The names of the authentication context class reference (ACR) levels
+    #   for the user pool. Amazon Cognito always returns the effective
+    #   configuration, with default names merged in for any level that you
+    #   haven't customized.
+    #
+    #   Configuring custom ACR level names requires the Essentials or Plus
+    #   feature plan. To activate this setting, your user pool must be in
+    #   the [ Essentials tier][1] or higher.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+    #   @return [Hash<String,Types::AcrLevelConfigType>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolType AWS API Documentation
     #
     class UserPoolType < Struct.new(
@@ -14861,7 +15080,8 @@ module Aws::CognitoIdentityProvider
       :account_recovery_setting,
       :user_pool_tier,
       :key_configuration,
-      :issuer_configuration)
+      :issuer_configuration,
+      :acr_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

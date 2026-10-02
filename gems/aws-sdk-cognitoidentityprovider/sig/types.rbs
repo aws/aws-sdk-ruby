@@ -37,6 +37,11 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class AcrLevelConfigType
+      attr_accessor acr_value: ::String
+      SENSITIVE: []
+    end
+
     class AddCustomAttributesRequest
       attr_accessor user_pool_id: ::String
       attr_accessor custom_attributes: ::Array[Types::SchemaAttributeType]
@@ -311,6 +316,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor session: ::String
       attr_accessor challenge_parameters: ::Hash[::String, ::String]
       attr_accessor authentication_result: Types::AuthenticationResultType
+      attr_accessor available_challenges: ::Array[("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "SELECT_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED" | "SMS_OTP" | "PASSWORD" | "WEB_AUTHN" | "PASSWORD_SRP")]
       SENSITIVE: [:session]
     end
 
@@ -616,6 +622,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor provider_details: ::Hash[::String, ::String]
       attr_accessor attribute_mapping: ::Hash[::String, ::String]
       attr_accessor idp_identifiers: ::Array[::String]
+      attr_accessor acr_mapping: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -767,6 +774,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_tier: ("LITE" | "ESSENTIALS" | "PLUS")
       attr_accessor key_configuration: Types::KeyConfigurationType
       attr_accessor issuer_configuration: Types::IssuerConfigurationType
+      attr_accessor acr_configuration: ::Hash[::String, Types::AcrLevelConfigType]
       SENSITIVE: []
     end
 
@@ -1363,6 +1371,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor provider_details: ::Hash[::String, ::String]
       attr_accessor attribute_mapping: ::Hash[::String, ::String]
       attr_accessor idp_identifiers: ::Array[::String]
+      attr_accessor acr_mapping: ::Hash[::String, ::String]
       attr_accessor last_modified_date: ::Time
       attr_accessor creation_date: ::Time
       SENSITIVE: []
@@ -1875,6 +1884,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor session: ::String
       attr_accessor challenge_parameters: ::Hash[::String, ::String]
       attr_accessor authentication_result: Types::AuthenticationResultType
+      attr_accessor available_challenges: ::Array[("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "SELECT_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED" | "SMS_OTP" | "PASSWORD" | "WEB_AUTHN" | "PASSWORD_SRP")]
       SENSITIVE: [:session]
     end
 
@@ -2263,6 +2273,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor provider_details: ::Hash[::String, ::String]
       attr_accessor attribute_mapping: ::Hash[::String, ::String]
       attr_accessor idp_identifiers: ::Array[::String]
+      attr_accessor acr_mapping: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -2420,6 +2431,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_tier: ("LITE" | "ESSENTIALS" | "PLUS")
       attr_accessor key_configuration: Types::KeyConfigurationType
       attr_accessor issuer_configuration: Types::IssuerConfigurationType
+      attr_accessor acr_configuration: ::Hash[::String, Types::AcrLevelConfigType]
       SENSITIVE: []
     end
 
@@ -2590,6 +2602,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_tier: ("LITE" | "ESSENTIALS" | "PLUS")
       attr_accessor key_configuration: Types::KeyConfigurationType
       attr_accessor issuer_configuration: Types::IssuerConfigurationType
+      attr_accessor acr_configuration: ::Hash[::String, Types::AcrLevelConfigType]
       SENSITIVE: []
     end
 

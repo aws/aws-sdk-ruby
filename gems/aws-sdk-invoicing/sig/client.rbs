@@ -134,6 +134,10 @@ module Aws
                                                   einvoice_delivery_enabled: bool,
                                                   ?einvoice_delivery_preference: Params::einvoice_delivery_preference,
                                                   purchase_order_retrieval_enabled: bool,
+                                                  ?marketplace_punch_out_enabled: bool,
+                                                  ?marketplace_punch_out_preference: {
+                                                    approval_request_redirect_url: ::String?
+                                                  },
                                                   contacts: Array[
                                                     {
                                                       name: ::String?,
@@ -320,6 +324,10 @@ module Aws
                                                einvoice_delivery_enabled: bool,
                                                ?einvoice_delivery_preference: Params::einvoice_delivery_preference,
                                                purchase_order_retrieval_enabled: bool,
+                                               ?marketplace_punch_out_enabled: bool,
+                                               ?marketplace_punch_out_preference: {
+                                                 approval_request_redirect_url: ::String?
+                                               },
                                                contacts: Array[
                                                  {
                                                    name: ::String?,

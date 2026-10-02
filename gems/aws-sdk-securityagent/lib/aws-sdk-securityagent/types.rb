@@ -528,6 +528,13 @@ module Aws::SecurityAgent
 
     # Capabilities for an integrated Azure DevOps repository.
     #
+    # @!attribute [rw] trigger_filter_groups
+    #   The filter groups that control which pull request events start an
+    #   automatic code review when `leaveComments` is enabled. A review
+    #   starts when any group matches. If you omit this, a review starts on
+    #   `PULL_REQUEST_READY_FOR_REVIEW` events.
+    #   @return [Array<Types::TriggerFilterGroup>]
+    #
     # @!attribute [rw] leave_comments
     #   Whether to post code review comments on pull requests.
     #   @return [Boolean]
@@ -539,6 +546,7 @@ module Aws::SecurityAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/AzureDevOpsResourceCapabilities AWS API Documentation
     #
     class AzureDevOpsResourceCapabilities < Struct.new(
+      :trigger_filter_groups,
       :leave_comments,
       :remediate_code)
       SENSITIVE = []
@@ -1575,6 +1583,13 @@ module Aws::SecurityAgent
 
     # Capabilities for an integrated Bitbucket repository.
     #
+    # @!attribute [rw] trigger_filter_groups
+    #   The filter groups that control which pull request events start an
+    #   automatic code review when `leaveComments` is enabled. A review
+    #   starts when any group matches. If you omit this, a review starts on
+    #   `PULL_REQUEST_READY_FOR_REVIEW` events.
+    #   @return [Array<Types::TriggerFilterGroup>]
+    #
     # @!attribute [rw] leave_comments
     #   Whether to post code review comments on pull requests.
     #   @return [Boolean]
@@ -1586,6 +1601,7 @@ module Aws::SecurityAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BitbucketResourceCapabilities AWS API Documentation
     #
     class BitbucketResourceCapabilities < Struct.new(
+      :trigger_filter_groups,
       :leave_comments,
       :remediate_code)
       SENSITIVE = []
@@ -4564,6 +4580,13 @@ module Aws::SecurityAgent
 
     # The capabilities enabled for a GitHub resource integration.
     #
+    # @!attribute [rw] trigger_filter_groups
+    #   The filter groups that control which pull request events start an
+    #   automatic code review when `leaveComments` is enabled. A review
+    #   starts when any group matches. If you omit this, a review starts on
+    #   `PULL_REQUEST_READY_FOR_REVIEW` events.
+    #   @return [Array<Types::TriggerFilterGroup>]
+    #
     # @!attribute [rw] leave_comments
     #   Indicates whether the integration can leave comments on pull
     #   requests.
@@ -4577,6 +4600,7 @@ module Aws::SecurityAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GitHubResourceCapabilities AWS API Documentation
     #
     class GitHubResourceCapabilities < Struct.new(
+      :trigger_filter_groups,
       :leave_comments,
       :remediate_code)
       SENSITIVE = []
@@ -4666,6 +4690,13 @@ module Aws::SecurityAgent
 
     # Capabilities for an integrated GitLab repository.
     #
+    # @!attribute [rw] trigger_filter_groups
+    #   The filter groups that control which merge request events start an
+    #   automatic code review when `leaveComments` is enabled. A review
+    #   starts when any group matches. If you omit this, a review starts on
+    #   `PULL_REQUEST_READY_FOR_REVIEW` events.
+    #   @return [Array<Types::TriggerFilterGroup>]
+    #
     # @!attribute [rw] leave_comments
     #   Whether to post code review comments on merge request discussions.
     #   @return [Boolean]
@@ -4677,6 +4708,7 @@ module Aws::SecurityAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GitLabResourceCapabilities AWS API Documentation
     #
     class GitLabResourceCapabilities < Struct.new(
+      :trigger_filter_groups,
       :leave_comments,
       :remediate_code)
       SENSITIVE = []
@@ -8680,6 +8712,53 @@ module Aws::SecurityAgent
       :message,
       :service_code,
       :quota_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A condition on a pull request value.
+    #
+    # @!attribute [rw] type
+    #   The pull request value to match.
+    #   @return [String]
+    #
+    # @!attribute [rw] patterns
+    #   The regular expressions to match against the value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_mode
+    #   Whether the value must match the patterns. The default is `INCLUDE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/TriggerFilter AWS API Documentation
+    #
+    class TriggerFilter < Struct.new(
+      :type,
+      :patterns,
+      :match_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of conditions that start an automatic code review when they all
+    # pass. A filter group must include `events`, `filters`, or both.
+    #
+    # @!attribute [rw] events
+    #   Passes when the pull request event is one of the listed events. If
+    #   you omit this, the group matches `PULL_REQUEST_READY_FOR_REVIEW` and
+    #   `PULL_REQUEST_DRAFT` events only.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Passes when every filter passes. If you omit this, the group matches
+    #   its events on any target branch and with any labels.
+    #   @return [Array<Types::TriggerFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/TriggerFilterGroup AWS API Documentation
+    #
+    class TriggerFilterGroup < Struct.new(
+      :events,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end

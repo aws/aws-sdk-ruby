@@ -106,6 +106,17 @@ module Aws
       ]?
     }
 
+      type trigger_filter_group = {
+      events: Array[("PULL_REQUEST_READY_FOR_REVIEW" | "PULL_REQUEST_DRAFT" | "PULL_REQUEST_LABEL_ADDED")]?,
+      filters: Array[
+        {
+          type: ("TARGET_BRANCH" | "LABEL"),
+          patterns: Array[::String],
+          match_mode: ("INCLUDE" | "EXCLUDE")?
+        }
+      ]?
+    }
+
     end
   end
 end

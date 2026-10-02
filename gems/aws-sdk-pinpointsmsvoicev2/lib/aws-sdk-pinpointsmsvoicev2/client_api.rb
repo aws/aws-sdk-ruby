@@ -667,6 +667,7 @@ module Aws::PinpointSMSVoiceV2
     AvailablePhoneNumberList.member = Shapes::ShapeRef.new(shape: PhoneNumber)
 
     CarrierLookupRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: CarrierLookupInputPhoneNumberType, required: true, location_name: "PhoneNumber"))
+    CarrierLookupRequest.add_member(:enable_cleansing, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableCleansing"))
     CarrierLookupRequest.struct_class = Types::CarrierLookupRequest
 
     CarrierLookupResult.add_member(:e164_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumberType, required: true, location_name: "E164PhoneNumber"))
@@ -677,6 +678,7 @@ module Aws::PinpointSMSVoiceV2
     CarrierLookupResult.add_member(:mnc, Shapes::ShapeRef.new(shape: MNCType, location_name: "MNC"))
     CarrierLookupResult.add_member(:carrier, Shapes::ShapeRef.new(shape: String, location_name: "Carrier"))
     CarrierLookupResult.add_member(:phone_number_type, Shapes::ShapeRef.new(shape: PhoneNumberType, required: true, location_name: "PhoneNumberType"))
+    CarrierLookupResult.add_member(:original_phone_number, Shapes::ShapeRef.new(shape: CarrierLookupInputPhoneNumberType, location_name: "OriginalPhoneNumber"))
     CarrierLookupResult.struct_class = Types::CarrierLookupResult
 
     CarrierStatusInformation.add_member(:carrier_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CarrierName"))

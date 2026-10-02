@@ -614,6 +614,14 @@ module Aws::PinpointSMSVoiceV2
     #   and commas. The service automatically converts the input to E164
     #   format for processing.
     #
+    # @option params [Boolean] :enable_cleansing
+    #   Specifies whether the service cleanses the phone number that you
+    #   provide. When set to `true`, the service normalizes the phone number
+    #   according to the destination country's national numbering plan and
+    #   dialing rules. The service returns the cleansed number in E.164 format
+    #   in the `E164PhoneNumber` field and returns the number that you
+    #   provided in the `OriginalPhoneNumber` field.
+    #
     # @return [Types::CarrierLookupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CarrierLookupResult#e164_phone_number #e164_phone_number} => String
@@ -624,6 +632,7 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::CarrierLookupResult#mnc #mnc} => String
     #   * {Types::CarrierLookupResult#carrier #carrier} => String
     #   * {Types::CarrierLookupResult#phone_number_type #phone_number_type} => String
+    #   * {Types::CarrierLookupResult#original_phone_number #original_phone_number} => String
     #
     #
     # @example Example: Use CarrierLookup
@@ -651,6 +660,7 @@ module Aws::PinpointSMSVoiceV2
     #
     #   resp = client.carrier_lookup({
     #     phone_number: "CarrierLookupInputPhoneNumberType", # required
+    #     enable_cleansing: false,
     #   })
     #
     # @example Response structure
@@ -662,7 +672,8 @@ module Aws::PinpointSMSVoiceV2
     #   resp.mcc #=> String
     #   resp.mnc #=> String
     #   resp.carrier #=> String
-    #   resp.phone_number_type #=> String, one of "MOBILE", "LANDLINE", "OTHER", "INVALID"
+    #   resp.phone_number_type #=> String, one of "MOBILE", "LANDLINE", "VOIP", "PREPAID", "OTHER", "INVALID"
+    #   resp.original_phone_number #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CarrierLookup AWS API Documentation
     #
@@ -4594,11 +4605,14 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Search available phone numbers from aggregator inventory, optionally
-    # filtered by pattern. If NumberPreference is omitted, returns
-    # unfiltered available numbers. Returns empty list (not an exception)
-    # when no numbers match. ResourceNotFoundException is thrown only for
-    # invalid RegistrationId (campaign not found).
+    # Retrieves a list of phone numbers that are available to request, based
+    # on the country, capabilities, and number type that you specify. You
+    # can optionally provide a number preference to return only numbers that
+    # match a specific digit pattern.
+    #
+    # If no numbers match your search, this operation returns an empty list
+    # rather than an error. This operation currently supports only `TEN_DLC`
+    # number types in the `US`.
     #
     # @option params [required, String] :iso_country_code
     #   The two-character code, in ISO 3166-1 alpha-2 format, for the country
@@ -4621,8 +4635,11 @@ module Aws::PinpointSMSVoiceV2
     #   * The Amazon Resource Name (ARN) of the registration.
     #
     # @option params [Array<Types::NumberPreferenceItem>] :number_preference
-    #   Optional. If omitted, returns unfiltered available numbers. Max 1
-    #   element for List API.
+    #   An optional selection preference used to return only phone numbers
+    #   that match a specific digit pattern, such as numbers that start with,
+    #   end with, or contain a particular sequence. You can specify at most
+    #   one preference. Number preferences apply only to `TEN_DLC` numbers in
+    #   the `US`.
     #
     # @option params [String] :next_token
     #   The token returned from a previous request to retrieve the next page
@@ -7808,7 +7825,7 @@ module Aws::PinpointSMSVoiceV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

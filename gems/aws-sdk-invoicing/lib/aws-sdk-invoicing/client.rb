@@ -707,6 +707,12 @@ module Aws::Invoicing
     #   procurement portal preference. Set to true to enable PO retrieval,
     #   false to disable.
     #
+    # @option params [Boolean] :marketplace_punch_out_enabled
+    #   Defaults to false if not provided.
+    #
+    # @option params [Types::MarketplacePunchOutPreference] :marketplace_punch_out_preference
+    #   Required for Coupa when MarketplacePunchOutEnabled is true.
+    #
     # @option params [required, Array<Types::Contact>] :contacts
     #   List of contact information for portal administrators and technical
     #   contacts responsible for the e-invoice integration.
@@ -756,6 +762,10 @@ module Aws::Invoicing
     #           purchase_order_data_source_type: "ASSOCIATED_PURCHASE_ORDER_REQUIRED", 
     #         }, 
     #       ], 
+    #     }, 
+    #     marketplace_punch_out_enabled: true, 
+    #     marketplace_punch_out_preference: {
+    #       approval_request_redirect_url: "https://www.placeholder-domain.test/approvals", 
     #     }, 
     #     procurement_portal_instance_endpoint: "https://www.placeholder-domain.test", 
     #     procurement_portal_name: "COUPA", 
@@ -831,6 +841,10 @@ module Aws::Invoicing
     #       einvoice_delivery_activation_date: Time.now, # required
     #     },
     #     purchase_order_retrieval_enabled: false, # required
+    #     marketplace_punch_out_enabled: false,
+    #     marketplace_punch_out_preference: {
+    #       approval_request_redirect_url: "BasicStringWithoutSpace",
+    #     },
     #     contacts: [ # required
     #       {
     #         name: "BasicString",
@@ -1200,6 +1214,10 @@ module Aws::Invoicing
     #       }, 
     #       einvoice_delivery_preference_status: "PENDING_VERIFICATION", 
     #       last_update_date: Time.parse(1750375489.242), 
+    #       marketplace_punch_out_enabled: true, 
+    #       marketplace_punch_out_preference: {
+    #         approval_request_redirect_url: "https://www.placeholder-domain.test/approvals", 
+    #       }, 
     #       procurement_portal_instance_endpoint: "https://www.placeholder-domain.test", 
     #       procurement_portal_name: "COUPA", 
     #       procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/a34fd666-7810-4414-9360-aaa4bcab0abd", 
@@ -1273,6 +1291,8 @@ module Aws::Invoicing
     #   resp.procurement_portal_preference.einvoice_delivery_preference.connection_testing_method #=> String, one of "PROD_ENV_DOLLAR_TEST", "TEST_ENV_REPLAY_TEST"
     #   resp.procurement_portal_preference.einvoice_delivery_preference.einvoice_delivery_activation_date #=> Time
     #   resp.procurement_portal_preference.purchase_order_retrieval_enabled #=> Boolean
+    #   resp.procurement_portal_preference.marketplace_punch_out_enabled #=> Boolean
+    #   resp.procurement_portal_preference.marketplace_punch_out_preference.approval_request_redirect_url #=> String
     #   resp.procurement_portal_preference.contacts #=> Array
     #   resp.procurement_portal_preference.contacts[0].name #=> String
     #   resp.procurement_portal_preference.contacts[0].email #=> String
@@ -2340,6 +2360,7 @@ module Aws::Invoicing
     #         einvoice_delivery_enabled: true, 
     #         einvoice_delivery_preference_status: "PENDING_VERIFICATION", 
     #         last_update_date: Time.parse(1750375489.242), 
+    #         marketplace_punch_out_enabled: false, 
     #         procurement_portal_name: "COUPA", 
     #         procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/1c7c6d71-fbc1-45bd-a18c-40cb61810679", 
     #         purchase_order_retrieval_enabled: true, 
@@ -2364,6 +2385,7 @@ module Aws::Invoicing
     #         einvoice_delivery_enabled: true, 
     #         einvoice_delivery_preference_status: "PENDING_VERIFICATION", 
     #         last_update_date: Time.parse(1750375489.242), 
+    #         marketplace_punch_out_enabled: false, 
     #         procurement_portal_name: "COUPA", 
     #         procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/ae467ebd-ec8c-4089-b904-a7cd9e76f970", 
     #         purchase_order_retrieval_enabled: true, 
@@ -2402,6 +2424,7 @@ module Aws::Invoicing
     #         einvoice_delivery_preference_status: "TEST_INITIALIZED", 
     #         einvoice_delivery_preference_status_reason: "test initialized example reason", 
     #         last_update_date: Time.parse(1750375489.242), 
+    #         marketplace_punch_out_enabled: true, 
     #         procurement_portal_name: "COUPA", 
     #         procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
     #         purchase_order_retrieval_enabled: true, 
@@ -2445,6 +2468,7 @@ module Aws::Invoicing
     #   resp.procurement_portal_preferences[0].selector.seller_of_records[0] #=> String
     #   resp.procurement_portal_preferences[0].einvoice_delivery_enabled #=> Boolean
     #   resp.procurement_portal_preferences[0].purchase_order_retrieval_enabled #=> Boolean
+    #   resp.procurement_portal_preferences[0].marketplace_punch_out_enabled #=> Boolean
     #   resp.procurement_portal_preferences[0].einvoice_delivery_preference_status #=> String, one of "PENDING_VERIFICATION", "VALIDATED", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
     #   resp.procurement_portal_preferences[0].einvoice_delivery_preference_status_reason #=> String
     #   resp.procurement_portal_preferences[0].purchase_order_retrieval_preference_status #=> String, one of "PENDING_VERIFICATION", "VALIDATED", "TEST_INITIALIZED", "TEST_INITIALIZATION_FAILED", "TEST_FAILED", "ACTIVE", "SUSPENDED"
@@ -2733,6 +2757,14 @@ module Aws::Invoicing
     #   Updated flag indicating whether purchase order retrieval is enabled
     #   for this procurement portal preference.
     #
+    # @option params [Boolean] :marketplace_punch_out_enabled
+    #   Whether Marketplace PunchOut is enabled for this connection. Defaults
+    #   to false if not provided.
+    #
+    # @option params [Types::MarketplacePunchOutPreference] :marketplace_punch_out_preference
+    #   Configuration for Marketplace PunchOut. Required when
+    #   MarketplacePunchOutEnabled is true.
+    #
     # @option params [required, Array<Types::Contact>] :contacts
     #   Updated list of contact information for portal administrators and
     #   technical contacts.
@@ -2777,6 +2809,7 @@ module Aws::Invoicing
     #         }, 
     #       ], 
     #     }, 
+    #     marketplace_punch_out_enabled: true, 
     #     procurement_portal_instance_endpoint: "https://www.placeholder-domain.test", 
     #     procurement_portal_preference_arn: "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd", 
     #     procurement_portal_shared_secret: "Coupa_Secret_2", 
@@ -2837,6 +2870,10 @@ module Aws::Invoicing
     #       einvoice_delivery_activation_date: Time.now, # required
     #     },
     #     purchase_order_retrieval_enabled: false, # required
+    #     marketplace_punch_out_enabled: false,
+    #     marketplace_punch_out_preference: {
+    #       approval_request_redirect_url: "BasicStringWithoutSpace",
+    #     },
     #     contacts: [ # required
     #       {
     #         name: "BasicString",
@@ -3255,7 +3292,7 @@ module Aws::Invoicing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-invoicing'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

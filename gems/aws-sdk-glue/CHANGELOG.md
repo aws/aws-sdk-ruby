@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.280.0 (2026-10-02)
+------------------
+
+* Feature - Added refresh token grant type to Glue Connection supported OAuth 2.0 grant types
+
 1.279.0 (2026-09-30)
 ------------------
 

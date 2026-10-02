@@ -1420,6 +1420,14 @@ module Aws::Glue
     #   authorization identifier and information from the request's
     #   authorization context.
     #
+    #   For more information about how to utilize QuerySessionContext, see
+    #   [Lake Formation workflow for application integration API
+    #   operations][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/api-overview.html
+    #
     # @return [Types::BatchGetPartitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchGetPartitionResponse#partitions #partitions} => Array&lt;Types::Partition&gt;
@@ -2523,7 +2531,7 @@ module Aws::Glue
     #       authentication_configuration: {
     #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM, IAM
     #         o_auth_2_properties: {
-    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER, REFRESH_TOKEN
     #           o_auth_2_client_application: {
     #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
     #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference",
@@ -8085,7 +8093,7 @@ module Aws::Glue
     #   resp.connection.authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM", "IAM"
     #   resp.connection.authentication_configuration.secret_arn #=> String
     #   resp.connection.authentication_configuration.kms_key_arn #=> String
-    #   resp.connection.authentication_configuration.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"
+    #   resp.connection.authentication_configuration.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER", "REFRESH_TOKEN"
     #   resp.connection.authentication_configuration.o_auth_2_properties.o_auth_2_client_application.user_managed_client_application_client_id #=> String
     #   resp.connection.authentication_configuration.o_auth_2_properties.o_auth_2_client_application.aws_managed_client_application_reference #=> String
     #   resp.connection.authentication_configuration.o_auth_2_properties.token_url #=> String
@@ -8177,7 +8185,7 @@ module Aws::Glue
     #   resp.connection_list[0].authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM", "IAM"
     #   resp.connection_list[0].authentication_configuration.secret_arn #=> String
     #   resp.connection_list[0].authentication_configuration.kms_key_arn #=> String
-    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER", "REFRESH_TOKEN"
     #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.o_auth_2_client_application.user_managed_client_application_client_id #=> String
     #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.o_auth_2_client_application.aws_managed_client_application_reference #=> String
     #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.token_url #=> String
@@ -18906,7 +18914,7 @@ module Aws::Glue
     #       authentication_configuration: {
     #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM, IAM
     #         o_auth_2_properties: {
-    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER, REFRESH_TOKEN
     #           o_auth_2_client_application: {
     #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
     #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference",
@@ -19570,7 +19578,7 @@ module Aws::Glue
     #       authentication_configuration: {
     #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM, IAM
     #         o_auth_2_properties: {
-    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER, REFRESH_TOKEN
     #           o_auth_2_client_application: {
     #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
     #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference",
@@ -21329,7 +21337,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.279.0'
+      context[:gem_version] = '1.280.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

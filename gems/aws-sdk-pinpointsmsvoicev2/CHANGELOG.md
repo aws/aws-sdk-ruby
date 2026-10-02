@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2026-10-02)
+------------------
+
+* Feature - AWS End User Messaging SMS CarrierLookup API now supports phone number cleansing on customer opt-in. when selected, the response includes the additional field "OriginalPhoneNumber". It can also return additional PhoneNumberType enums, VOIP and PREPAID.
+
 1.64.0 (2026-09-11)
 ------------------
 

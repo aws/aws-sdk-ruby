@@ -145,6 +145,7 @@ module Aws::SecurityAgent
     end
 
     class AzureDevOpsResourceCapabilities
+      attr_accessor trigger_filter_groups: ::Array[Types::TriggerFilterGroup]
       attr_accessor leave_comments: bool
       attr_accessor remediate_code: bool
       SENSITIVE: []
@@ -460,6 +461,7 @@ module Aws::SecurityAgent
     end
 
     class BitbucketResourceCapabilities
+      attr_accessor trigger_filter_groups: ::Array[Types::TriggerFilterGroup]
       attr_accessor leave_comments: bool
       attr_accessor remediate_code: bool
       SENSITIVE: []
@@ -1238,6 +1240,7 @@ module Aws::SecurityAgent
     end
 
     class GitHubResourceCapabilities
+      attr_accessor trigger_filter_groups: ::Array[Types::TriggerFilterGroup]
       attr_accessor leave_comments: bool
       attr_accessor remediate_code: bool
       SENSITIVE: []
@@ -1266,6 +1269,7 @@ module Aws::SecurityAgent
     end
 
     class GitLabResourceCapabilities
+      attr_accessor trigger_filter_groups: ::Array[Types::TriggerFilterGroup]
       attr_accessor leave_comments: bool
       attr_accessor remediate_code: bool
       SENSITIVE: []
@@ -2371,6 +2375,19 @@ module Aws::SecurityAgent
       attr_accessor message: ::String
       attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class TriggerFilter
+      attr_accessor type: ("TARGET_BRANCH" | "LABEL")
+      attr_accessor patterns: ::Array[::String]
+      attr_accessor match_mode: ("INCLUDE" | "EXCLUDE")
+      SENSITIVE: []
+    end
+
+    class TriggerFilterGroup
+      attr_accessor events: ::Array[("PULL_REQUEST_READY_FOR_REVIEW" | "PULL_REQUEST_DRAFT" | "PULL_REQUEST_LABEL_ADDED")]
+      attr_accessor filters: ::Array[Types::TriggerFilter]
       SENSITIVE: []
     end
 

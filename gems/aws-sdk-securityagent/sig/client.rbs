@@ -1520,14 +1520,23 @@ module Aws
                                              },
                                              capabilities: {
                                                github: {
+                                                 trigger_filter_groups: Array[
+                                                   Params::trigger_filter_group
+                                                 ]?,
                                                  leave_comments: bool?,
                                                  remediate_code: bool?
                                                }?,
                                                gitlab: {
+                                                 trigger_filter_groups: Array[
+                                                   Params::trigger_filter_group
+                                                 ]?,
                                                  leave_comments: bool?,
                                                  remediate_code: bool?
                                                }?,
                                                bitbucket: {
+                                                 trigger_filter_groups: Array[
+                                                   Params::trigger_filter_group
+                                                 ]?,
                                                  leave_comments: bool?,
                                                  remediate_code: bool?
                                                }?,
@@ -1537,6 +1546,9 @@ module Aws
                                                  update_document: bool?
                                                }?,
                                                azure_dev_ops: {
+                                                 trigger_filter_groups: Array[
+                                                   Params::trigger_filter_group
+                                                 ]?,
                                                  leave_comments: bool?,
                                                  remediate_code: bool?
                                                }?

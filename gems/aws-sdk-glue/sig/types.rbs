@@ -5838,7 +5838,7 @@ module Aws::Glue
     end
 
     class OAuth2Properties
-      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")
+      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER" | "REFRESH_TOKEN")
       attr_accessor o_auth_2_client_application: Types::OAuth2ClientApplication
       attr_accessor token_url: ::String
       attr_accessor token_url_parameters_map: ::Hash[::String, ::String]
@@ -5846,7 +5846,7 @@ module Aws::Glue
     end
 
     class OAuth2PropertiesInput
-      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")
+      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER" | "REFRESH_TOKEN")
       attr_accessor o_auth_2_client_application: Types::OAuth2ClientApplication
       attr_accessor token_url: ::String
       attr_accessor token_url_parameters_map: ::Hash[::String, ::String]
