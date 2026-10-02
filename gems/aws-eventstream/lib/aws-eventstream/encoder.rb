@@ -41,6 +41,14 @@ module Aws
       # and 4 bytes total message crc checksum
       OVERHEAD_LENGTH = 16
 
+      # Maximum encoded length of a single header name (1-byte unsigned length field)
+      MAX_HEADER_NAME_LENGTH = 255
+
+      # Maximum encoded length of a string/bytes header value. The length field is two bytes
+      # (and could hold 65,535), but the protocol caps the value at the signed 16-bit maximum
+      # (INT16_MAX, 2**15 - 1), so the encoder must enforce the lower limit.
+      MAX_HEADER_VALUE_LENGTH = 32_767
+
       # Maximum header length allowed (after encode) 128kb
       MAX_HEADERS_LENGTH = 1024 * 128
 
@@ -109,6 +117,9 @@ module Aws
       # @return [String]
       def encode_headers(message)
         header_entries = message.headers.map do |key, value|
+          if key.bytesize > MAX_HEADER_NAME_LENGTH
+            raise Aws::EventStream::Errors::EventHeaderNameLengthExceedError.new
+          end
           encoded_key = [key.bytesize, key].pack('Ca*')
 
           # header value
@@ -116,7 +127,14 @@ module Aws
           encoded_value = [type_index].pack('C')
           # boolean types doesn't need to specify value
           next [encoded_key, encoded_value].pack('a*a*') if !!pattern == pattern
-          encoded_value = [encoded_value, value.value.bytesize].pack('a*S>') unless value_length
+          unless value_length
+            # string and bytes types carry a 2-byte length prefix capped at INT16_MAX; reject
+            # oversized values rather than letting bytesize wrap mod 65536.
+            if value.value.bytesize > MAX_HEADER_VALUE_LENGTH
+              raise Aws::EventStream::Errors::EventHeaderValueLengthExceedError.new
+            end
+            encoded_value = [encoded_value, value.value.bytesize].pack('a*S>')
+          end
 
           [
             encoded_key,

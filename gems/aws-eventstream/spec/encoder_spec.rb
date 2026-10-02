@@ -41,10 +41,13 @@ module Aws
         end
 
         it 'raises an error when encoded headers exceeds' do
+          # Four in-limit values whose combined encoded size exceeds the 128kb header block.
           headers = {}
-          headers['foo'] = Aws::EventStream::HeaderValue.new(
-            value: '*' * 131073, type: 'string'
-          )
+          ['a', 'b', 'c', 'd'].each do |key|
+            headers[key] = Aws::EventStream::HeaderValue.new(
+              value: '*' * 32_767, type: 'string'
+            )
+          end
           message = Aws::EventStream::Message.new(
             headers: headers,
             payload: StringIO.new
@@ -53,6 +56,123 @@ module Aws
             Encoder.new.encode(message)
           }.to raise_error(Aws::EventStream::Errors::EventHeadersLengthExceedError)
 
+        end
+
+      end
+
+      describe '#encode header length validation' do
+
+        def message_with_header(key, value)
+          Aws::EventStream::Message.new(
+            headers: { key => value },
+            payload: StringIO.new
+          )
+        end
+
+        it 'encodes a 255-byte header name' do
+          message = message_with_header(
+            'n' * 255,
+            Aws::EventStream::HeaderValue.new(value: true, type: 'bool_true')
+          )
+          expect { Encoder.new.encode(message) }.not_to raise_error
+        end
+
+        it 'raises for a 256-byte header name' do
+          message = message_with_header(
+            'n' * 256,
+            Aws::EventStream::HeaderValue.new(value: true, type: 'bool_true')
+          )
+          expect {
+            Encoder.new.encode(message)
+          }.to raise_error(Aws::EventStream::Errors::EventHeaderNameLengthExceedError)
+        end
+
+        it 'raises for a multibyte header name within char count but over 255 bytes' do
+          # 128 two-byte characters => 256 encoded bytes.
+          message = message_with_header(
+            "ñ" * 128,
+            Aws::EventStream::HeaderValue.new(value: true, type: 'bool_true')
+          )
+          expect {
+            Encoder.new.encode(message)
+          }.to raise_error(Aws::EventStream::Errors::EventHeaderNameLengthExceedError)
+        end
+
+        it 'round-trips a 32767-byte string value' do
+          value = 'a' * 32_767
+          message = message_with_header(
+            'n', Aws::EventStream::HeaderValue.new(value: value, type: 'string')
+          )
+          encoded = Encoder.new.encode(message)
+          decoded, _eof = Decoder.new(format: false).decode_chunk(encoded)
+          expect(decoded.headers['n'].value).to eq(value)
+        end
+
+        it 'raises for a 32768-byte string value' do
+          message = message_with_header(
+            'n', Aws::EventStream::HeaderValue.new(value: 'a' * 32_768, type: 'string')
+          )
+          expect {
+            Encoder.new.encode(message)
+          }.to raise_error(Aws::EventStream::Errors::EventHeaderValueLengthExceedError)
+        end
+
+        it 'raises for a 65536-byte string value' do
+          message = message_with_header(
+            'n', Aws::EventStream::HeaderValue.new(value: 'a' * 65_536, type: 'string')
+          )
+          expect {
+            Encoder.new.encode(message)
+          }.to raise_error(Aws::EventStream::Errors::EventHeaderValueLengthExceedError)
+        end
+
+        it 'raises for a multibyte string value within char count but over the byte limit' do
+          # 16384 two-byte characters => 32768 encoded bytes, char count well under the limit.
+          message = message_with_header(
+            'n', Aws::EventStream::HeaderValue.new(value: "ñ" * 16_384, type: 'string')
+          )
+          expect {
+            Encoder.new.encode(message)
+          }.to raise_error(Aws::EventStream::Errors::EventHeaderValueLengthExceedError)
+        end
+
+        it 'round-trips a 32767-byte bytes value' do
+          value = ('a' * 32_767).b
+          message = message_with_header(
+            'n', Aws::EventStream::HeaderValue.new(value: value, type: 'bytes')
+          )
+          encoded = Encoder.new.encode(message)
+          decoded, _eof = Decoder.new(format: false).decode_chunk(encoded)
+          expect(decoded.headers['n'].value.bytesize).to eq(32_767)
+        end
+
+        it 'raises for a 32768-byte bytes value' do
+          message = message_with_header(
+            'n', Aws::EventStream::HeaderValue.new(value: 'a' * 32_768, type: 'bytes')
+          )
+          expect {
+            Encoder.new.encode(message)
+          }.to raise_error(Aws::EventStream::Errors::EventHeaderValueLengthExceedError)
+        end
+
+        it 'raises for a 65536-byte bytes value' do
+          message = message_with_header(
+            'n', Aws::EventStream::HeaderValue.new(value: 'a' * 65_536, type: 'bytes')
+          )
+          expect {
+            Encoder.new.encode(message)
+          }.to raise_error(Aws::EventStream::Errors::EventHeaderValueLengthExceedError)
+        end
+
+        it 'writes nothing to the output IO when validation fails' do
+          message = message_with_header(
+            'n', Aws::EventStream::HeaderValue.new(value: 'a' * 32_768, type: 'string')
+          )
+          test_io = StringIO.new(String.new)
+          expect {
+            Encoder.new.encode(message, test_io)
+          }.to raise_error(Aws::EventStream::Errors::EventHeaderValueLengthExceedError)
+          expect(test_io.string).to be_empty
         end
 
       end

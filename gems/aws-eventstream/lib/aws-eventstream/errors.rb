@@ -44,6 +44,20 @@ module Aws
         end
       end
 
+      # Raised when an encoded header name exceeds the 255-byte protocol limit
+      class EventHeaderNameLengthExceedError < RuntimeError
+        def initialize(*args)
+          super("Encoded header name length should be under 256 bytes.")
+        end
+      end
+
+      # Raised when an encoded header value exceeds the 32767-byte (INT16_MAX) protocol limit
+      class EventHeaderValueLengthExceedError < RuntimeError
+        def initialize(*args)
+          super("Encoded header value length should be under 32768 bytes.")
+        end
+      end
+
     end
   end
 end

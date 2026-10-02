@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Raise an error when event stream header names or values exceed supported byte-length limits.
+
 1.4.0 (2025-06-02)
 ------------------
 
