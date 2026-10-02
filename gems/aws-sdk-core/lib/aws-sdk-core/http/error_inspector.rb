@@ -103,11 +103,13 @@ module Aws
         end
 
         def server?
-          (500..599).cover?(@http_response.status_code)
+          status_code = @http_response.status_code
+          status_code >= 500 && status_code <= 599 # rubocop:disable Style/ComparableBetween
         end
 
         def client?
-          (400..499).cover?(@http_response.status_code)
+          status_code = @http_response.status_code
+          status_code >= 400 && status_code <= 499 # rubocop:disable Style/ComparableBetween
         end
 
         def modeled_retryable?

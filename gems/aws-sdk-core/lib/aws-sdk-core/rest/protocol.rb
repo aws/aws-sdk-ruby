@@ -13,7 +13,7 @@ module Aws
         # Serialize the request into the REST wire format.
         # @param [HandlerContext] context
         def build_request(context) # rubocop:disable Metrics/AbcSize
-          context.http_request.http_method = HTTP_EXTENSION.fetch(context.operation)[:method]
+          context.http_request.http_method = HTTP_EXTENSION.http_method(context.operation)
           Rest::Request::Headers.new(context.operation.input).apply(context.http_request, context.params)
           Rest::Request::Body.new(@codec, context.operation.input).apply(context.http_request, context.params)
           endpoint = Rest::Request::Endpoint.new(context.operation, context.operation.input)

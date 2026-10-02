@@ -21,7 +21,7 @@ module Aws
           private
 
           def apply_http_method(context)
-            context.http_request.http_method = HTTP_EXTENSION.fetch(context.operation)[:method]
+            context.http_request.http_method = HTTP_EXTENSION.http_method(context.operation)
           end
 
           def apply_headers(context)

@@ -9,16 +9,16 @@ module Aws
           def initialize(codec, shape)
             @codec = codec
             @shape = shape
-            @metadata = HTTP_EXTENSION.fetch(shape)
+            @payload_member = HTTP_EXTENSION.payload_member(shape)
+            @body_members = HTTP_EXTENSION.body_members(shape)
           end
 
           def apply(request_or_response, params)
-            payload_name, payload_member, payload_type, = @metadata[:payload_member]
-            body_members = @metadata.fetch(:body_members, [])
-            body = build_body(params, payload_name, payload_member, payload_type, body_members)
+            payload_name, payload_member, payload_type, = @payload_member
+            body = build_body(params, payload_name, payload_member, payload_type, @body_members)
             # For JSON requests, default the body to an empty json if it's not a streaming payload
             # and there's at least one modeled body member.
-            body = '{}' if json? && body.nil? && document_body?(payload_member, payload_type, body_members)
+            body = '{}' if json? && body.nil? && document_body?(payload_member, payload_type, @body_members)
             request_or_response.body = body
           end
 
@@ -39,7 +39,12 @@ module Aws
 
               build(payload_member, params)
             else
-              params = body_members.each_with_object({}) { |(name, _), hash| hash[name] = params[name] }
+              values = params
+              params = {}
+              body_members.each do |member|
+                name = member[0]
+                params[name] = values[name]
+              end
               build(@shape, params) unless params.empty?
             end
           end
@@ -48,8 +53,8 @@ module Aws
             (payload_member || !body_members.empty?) && !%i[raw union].include?(payload_type)
           end
 
-          def build(ref, params)
-            @codec.build(ref, params)
+          def build(shape, params)
+            @codec.build(shape, params)
           end
         end
       end

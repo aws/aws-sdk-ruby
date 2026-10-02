@@ -9,6 +9,8 @@ module Aws
       class ParamBuilder
         def initialize(options = {})
           @ec2 = options[:ec2] || false
+          @extension = @ec2 ? Ec2QueryExtension : QueryExtension
+          @default_timestamp = options.fetch(:default_timestamp, 'date-time')
         end
 
         def build(shape, params, result = nil)
@@ -18,12 +20,12 @@ module Aws
         private
 
         def build_shape(shape, value, result, prefix)
-          case SCHEMA_EXTENSION.target_shape(shape)
-          when SCHEMA_EXTENSION::SHAPE_BLOB then set(prefix, blob(value), result)
-          when SCHEMA_EXTENSION::SHAPE_LIST then list(shape, value, result, prefix)
-          when SCHEMA_EXTENSION::SHAPE_MAP then map(shape, value, result, prefix)
-          when SCHEMA_EXTENSION::SHAPE_STRUCTURE then structure(shape, value, result, "#{prefix}.")
-          when SCHEMA_EXTENSION::SHAPE_TIMESTAMP then set(prefix, timestamp(shape, value), result)
+          case shape.target
+          when Smithy::Schema::Shapes::BlobShape then set(prefix, blob(value), result)
+          when Smithy::Schema::Shapes::ListShape then list(shape, value, result, prefix)
+          when Smithy::Schema::Shapes::MapShape then map(shape, value, result, prefix)
+          when Smithy::Schema::Shapes::StructureShape then structure(shape, value, result, "#{prefix}.")
+          when Smithy::Schema::Shapes::TimestampShape then set(prefix, timestamp(shape, value), result)
           else set(prefix, value.to_s, result)
           end
         end
@@ -37,29 +39,27 @@ module Aws
             return @ec2 ? nil : set(prefix, '', result)
           end
 
-          member_shape, = SCHEMA_EXTENSION.list_member(shape.target)
+          member_shape = shape.target.member
           prefix = list_prefix(shape, member_shape, prefix)
           values.each.with_index do |value, n|
             build_shape(member_shape, value, result, "#{prefix}.#{n + 1}")
           end
         end
 
-        def map(shape, values, result, prefix) # rubocop:disable Metrics/AbcSize
+        def map(shape, values, result, prefix)
           raise NotImplementedError if @ec2
 
-          key_member, = SCHEMA_EXTENSION.map_key_member(shape.target)
-          value_member, = SCHEMA_EXTENSION.map_value_member(shape.target)
-          prefix += '.entry' unless QueryExtension.flattened?(shape)
-          key_name = "%s.%d.#{query_name(key_member)}"
-          value_name = "%s.%d.#{query_name(value_member)}"
+          key_member, value_member, key_name, value_name, flattened = @extension.map_plan(shape)
+          prefix += '.entry' unless flattened
           values.each.with_index do |(key, value), n|
-            build_shape(key_member, key, result, format(key_name, prefix, n + 1))
-            build_shape(value_member, value, result, format(value_name, prefix, n + 1))
+            entry_prefix = "#{prefix}.#{n + 1}"
+            build_shape(key_member, key, result, "#{entry_prefix}.#{key_name}")
+            build_shape(value_member, value, result, "#{entry_prefix}.#{value_name}")
           end
         end
 
         def structure(shape, values, result, prefix)
-          index = @ec2 ? QueryExtension.ec2_query_index(shape.target) : QueryExtension.query_index(shape.target)
+          index = @extension.query_index(shape.target)
           values.each_pair do |name, value|
             next if value.nil?
 
@@ -72,8 +72,8 @@ module Aws
         end
 
         def timestamp(shape, value)
-          format = QueryExtension.timestamp_format(shape)
-          format = 'date-time' if format == :default
+          format = @extension.timestamp_format(shape)
+          format = @default_timestamp if format == :default
 
           Smithy::Schema::Utils.serialize_timestamp(value, format).to_s
         end
@@ -83,12 +83,12 @@ module Aws
         end
 
         def query_name(shape)
-          @ec2 ? QueryExtension.ec2_query_name(shape) : QueryExtension.query_name(shape)
+          @extension.query_name(shape)
         end
 
         def list_prefix(shape, member_shape, prefix)
           return prefix if @ec2
-          return "#{prefix}.#{query_name(member_shape)}" unless QueryExtension.flattened?(shape)
+          return "#{prefix}.#{query_name(member_shape)}" unless @extension.flattened?(shape)
 
           name = query_name(shape)
           return prefix unless name

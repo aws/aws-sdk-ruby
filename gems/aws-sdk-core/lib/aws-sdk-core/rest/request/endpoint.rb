@@ -10,32 +10,35 @@ module Aws
         # @api private
         class Endpoint
           def initialize(operation, shape)
-            @operation_metadata = HTTP_EXTENSION.fetch(operation)
-            @shape_metadata = HTTP_EXTENSION.fetch(shape)
+            @path = HTTP_EXTENSION.path(operation)
+            @static_query = HTTP_EXTENSION.static_query(operation)
+            @label_index = HTTP_EXTENSION.label_index(shape)
+            @query_members = HTTP_EXTENSION.query_members(shape)
+            @query_params_member = HTTP_EXTENSION.query_params_member(shape)
             @querystring_builder = QuerystringBuilder.new
           end
 
           def apply(request, params)
-            apply_path_params(request.endpoint, params, @operation_metadata[:path], @shape_metadata[:label_index])
-            apply_querystring_params(request.endpoint, params, @operation_metadata[:static_query], @shape_metadata)
+            apply_path_params(request.endpoint, params)
+            apply_querystring_params(request.endpoint, params)
           end
 
           private
 
-          def apply_path_params(endpoint, params, path, label_index)
-            endpoint.path += path.gsub(/{.+?}/) do |placeholder|
-              param_value_for_placeholder(placeholder, params, label_index)
+          def apply_path_params(endpoint, params)
+            endpoint.path += @path.gsub(/{.+?}/) do |placeholder|
+              param_value_for_placeholder(placeholder, params)
             end
           end
 
-          def param_value_for_placeholder(placeholder, params, label_index)
+          def param_value_for_placeholder(placeholder, params)
             greedy = placeholder.end_with?('+}')
             modeled_name = greedy ? placeholder[1...-2] : placeholder[1...-1]
-            name, member_ref = label_index.fetch(modeled_name)
+            name, member_shape = @label_index.fetch(modeled_name)
             value =
-              case SCHEMA_EXTENSION.target_shape(member_ref)
-              when SCHEMA_EXTENSION::SHAPE_TIMESTAMP
-                timestamp(member_ref, params[name]).to_s
+              case member_shape.target
+              when Smithy::Schema::Shapes::TimestampShape
+                timestamp(member_shape, params[name]).to_s
               else
                 params[name].to_s
               end
@@ -49,31 +52,31 @@ module Aws
             end
           end
 
-          def timestamp(ref, value)
-            format = SCHEMA_EXTENSION.timestamp_format(ref)
+          def timestamp(shape, value)
+            format = SCHEMA_EXTENSION.timestamp_format(shape)
             format = 'date-time' if format == :default
             Smithy::Schema::Utils.serialize_timestamp(value, format)
           end
 
-          def apply_querystring_params(uri, params, static_query, metadata) # rubocop:disable Metrics/AbcSize
+          def apply_querystring_params(uri, params) # rubocop:disable Metrics/AbcSize
             # collect params that are supposed to be part of the query string
-            members = metadata.fetch(:query_members, [])
-            parts = members.each_with_object([]) do |(member_name, member_ref, query_name), parts|
+            parts = []
+            @query_members.each do |member_name, member_shape, query_name|
               next if params[member_name].nil?
 
-              parts << [member_ref, params[member_name], query_name]
+              parts << [member_shape, params[member_name], query_name]
             end
-            if (name, member = metadata[:query_params_member]) && !params[name].nil?
+            if (name, member = @query_params_member) && !params[name].nil?
               parts << [member, params[name], nil]
             end
             querystring = @querystring_builder.build(parts)
-            querystring = [static_query, querystring == '' ? nil : querystring].compact.join('&')
+            querystring = [@static_query, querystring == '' ? nil : querystring].compact.join('&')
             querystring = nil if querystring == ''
             uri.query = querystring
           end
 
           def escape(string)
-            CGI.escape(string.to_s.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
+            CGI.escapeURIComponent(string.to_s.encode('UTF-8'))
           end
         end
       end

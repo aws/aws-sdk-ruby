@@ -5,62 +5,54 @@ module Aws
     # Cached AWS Query and EC2 Query metadata.
     #
     # Raw Smithy traits remain available on shapes and members. Query-specific
-    # names, indexes, errors, and service settings are cached under
-    # +:aws_query+. Trait lookup remains string-keyed so generated and dynamic
-    # clients use the same metadata path.
+    # names, indexes, errors, and service settings are cached as flat,
+    # Query-prefixed keys. Trait lookup remains string-keyed so generated and
+    # dynamic clients use the same metadata path.
     # @api private
     module QueryExtension
-      KEY = :aws_query
-      EMPTY_HASH = {}.freeze
-
       class << self
-        # Returns cached Query metadata for a shape, member, operation, or
-        # service.
-        #
-        # Example:
-        #   QueryExtension.fetch(shape)
-        #   # => { query_name: 'Example', ec2_query_name: 'Example' }
-        def fetch(shape)
-          return shape[KEY] if shape.key?(KEY)
-
-          shape[KEY] =
-            case shape
-            when Smithy::Schema::Shapes::OperationShape
-              build_operation_metadata(shape)
-            when Smithy::Schema::Shapes::ServiceShape
-              build_service_metadata(shape)
-            when Smithy::Schema::Shapes::MemberShape
-              build_member_metadata(shape)
-            else
-              build_shape_metadata(shape)
-            end
-        end
-
-        # Returns the AWS Query wire name.
+        # Resolves and caches the AWS Query wire name.
         #
         # Example:
         #   QueryExtension.query_name(member)
         #   # => 'ExampleName'
         def query_name(shape)
-          fetch(shape)[:query_name]
+          shape.fetch_metadata(:aws_query_name) do
+            resolve_names(shape, :aws_query_name)
+          end
         end
 
-        # Returns the EC2 Query wire name.
+        # Resolves and caches the EC2 Query wire name.
         #
         # Example:
         #   QueryExtension.ec2_query_name(member)
         #   # => 'ExampleName'
         def ec2_query_name(shape)
-          fetch(shape)[:ec2_query_name]
+          shape.fetch_metadata(:aws_query_ec2_name) do
+            resolve_names(shape, :aws_query_ec2_name)
+          end
         end
 
-        # Returns whether a member is flattened in Query XML.
+        # Resolves and caches whether a member is flattened in Query XML.
         #
         # Example:
         #   QueryExtension.flattened?(member)
         #   # => true
         def flattened?(shape)
-          fetch(shape)[:flattened]
+          shape.fetch_metadata(:aws_query_flattened) do
+            shape.traits.key?('smithy.api#xmlFlattened')
+          end
+        end
+
+        # Resolves and caches the serialization plan for a Query map.
+        #
+        # Example:
+        #   QueryExtension.map_plan(member)
+        #   # => [key_member, value_member, 'key', 'value', false]
+        def map_plan(shape)
+          shape.fetch_metadata(:aws_query_map_plan) do
+            build_map_plan(shape)
+          end
         end
 
         # Returns whether a collection may include nil values.
@@ -78,107 +70,102 @@ module Aws
         #   QueryExtension.timestamp_format(member)
         #   # => 'epoch-seconds'
         def timestamp_format(shape)
-          fetch(shape)[:timestamp_format]
+          Smithy::Schema::Extension.timestamp_format(shape)
         end
 
-        # Returns Query members keyed by Ruby member name.
+        # Resolves and caches Query members keyed by Ruby member name.
         #
         # Example:
         #   QueryExtension.query_index(structure)[:example]
-        #   # => ['Example', member, target_shape]
+        #   # => ['Example', member]
         def query_index(shape)
-          fetch(shape).fetch(:query_index, EMPTY_HASH)
+          shape[:aws_query_index] || resolve_indexes(shape, :aws_query_index)
         end
 
-        # Returns EC2 Query members keyed by Ruby member name.
+        # Resolves and caches EC2 Query members keyed by Ruby member name.
         #
         # Example:
         #   QueryExtension.ec2_query_index(structure)[:example]
-        #   # => ['Example', member, target_shape]
+        #   # => ['Example', member]
         def ec2_query_index(shape)
-          fetch(shape).fetch(:ec2_query_index, EMPTY_HASH)
+          shape[:aws_query_ec2_index] || resolve_indexes(shape, :aws_query_ec2_index)
         end
 
-        # Returns Query error metadata keyed by modeled and wire error code.
+        # Resolves and caches Query errors keyed by modeled and wire error code.
         #
         # Example:
         #   QueryExtension.error_index(operation)['ExampleError']
         #   # => [modeled_name, wire_name, error_member]
         def error_index(operation)
-          fetch(operation)[:error_index]
+          operation[:aws_query_error_index] ||= build_error_index(operation)
         end
 
-        # Returns the synthetic AWS Query response wrapper shape.
+        # Builds and caches the synthetic AWS Query response wrapper shape.
         #
         # Example:
         #   QueryExtension.output_wrapper(operation)
         #   # => response_wrapper_shape
         def output_wrapper(operation)
-          fetch(operation)[:output_wrapper]
+          operation[:aws_query_output_wrapper] ||= build_output_wrapper(operation)
         end
 
-        # Returns the service XML namespace URI.
+        # Resolves and caches the service XML namespace URI.
         #
         # Example:
         #   QueryExtension.xml_namespace(service)
         #   # => 'https://example.com/ns'
         def xml_namespace(service)
-          fetch(service)[:xml_namespace]
+          service.fetch_metadata(:aws_query_xml_namespace) do
+            service.traits.dig('smithy.api#xmlNamespace', 'uri')
+          end
         end
 
         private
 
-        def build_service_metadata(service)
-          { xml_namespace: service.traits.dig('smithy.api#xmlNamespace', 'uri') }.freeze
+        def resolve_names(shape, result)
+          query_name = query_name_value(shape)
+          shape[:aws_query_name] = query_name
+          shape[:aws_query_ec2_name] = ec2_query_name_value(shape, query_name)
+          shape[result]
         end
 
-        def build_operation_metadata(operation)
-          {
-            error_index: build_error_index(operation),
-            output_wrapper: build_output_wrapper(operation)
-          }.freeze
+        def build_map_plan(shape)
+          target = shape.target
+          return unless target.is_a?(Smithy::Schema::Shapes::MapShape)
+
+          key_member = target.key
+          value_member = target.value
+          [
+            key_member,
+            value_member,
+            query_name_value(key_member),
+            query_name_value(value_member),
+            flattened?(shape)
+          ].freeze
         end
 
-        def build_shape_metadata(shape)
-          metadata = base_metadata(shape)
-          build_member_indexes(shape, metadata) if shape.respond_to?(:members)
-          metadata.freeze
-        end
-
-        def build_member_metadata(member)
-          base_metadata(member).freeze
-        end
-
-        def base_metadata(shape)
-          {
-            query_name: query_name_value(shape),
-            ec2_query_name: ec2_query_name_value(shape),
-            flattened: shape.traits.key?('smithy.api#xmlFlattened'),
-            timestamp_format: Smithy::Schema::Extension.timestamp_format(shape)
-          }.compact
-        end
-
-        def build_member_indexes(shape, metadata)
+        def resolve_indexes(shape, result)
           query_index = {}
           ec2_query_index = {}
 
-          Smithy::Schema::Extension.each_member(shape) do |ruby_name, member|
+          shape.members.each do |ruby_name, member|
             add_member_indexes(query_index, ec2_query_index, ruby_name, member)
           end
 
-          metadata[:query_index] = query_index.freeze unless query_index.empty?
-          metadata[:ec2_query_index] = ec2_query_index.freeze unless ec2_query_index.empty?
+          query_index.freeze
+          ec2_query_index.freeze
+          shape[:aws_query_index] = query_index
+          shape[:aws_query_ec2_index] = ec2_query_index
+          shape[result]
         end
 
         def add_member_indexes(query_index, ec2_query_index, ruby_name, member)
-          metadata = fetch(member)
-          target_shape = Smithy::Schema::Extension.target_shape(member)
-          add_member_index(query_index, ruby_name, metadata[:query_name], member, target_shape)
-          add_member_index(ec2_query_index, ruby_name, metadata[:ec2_query_name], member, target_shape)
+          add_member_index(query_index, ruby_name, query_name(member), member)
+          add_member_index(ec2_query_index, ruby_name, ec2_query_name(member), member)
         end
 
-        def add_member_index(index, ruby_name, wire_name, member, target_shape)
-          index[ruby_name] = [wire_name, member, target_shape].freeze if wire_name
+        def add_member_index(index, ruby_name, wire_name, member)
+          index[ruby_name] = [wire_name, member].freeze if wire_name
         end
 
         def query_name_value(shape)
@@ -191,10 +178,10 @@ module Aws
           end
         end
 
-        def ec2_query_name_value(shape)
+        def ec2_query_name_value(shape, query_name = query_name_value(shape))
           shape[:ec2_query_name] ||
             shape.traits['aws.protocols#ec2QueryName'] ||
-            capitalize(query_name_value(shape))
+            capitalize(query_name)
         end
 
         def build_error_index(operation)

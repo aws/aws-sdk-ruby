@@ -10,12 +10,15 @@ module Aws
         let(:member_shape) { Smithy::Schema::Shapes::MemberShape.new(target: string_shape) }
 
         describe 'cached metadata' do
-          it 'stores metadata under the dedicated extension key' do
+          it 'stores flat Query metadata' do
             shape = Smithy::Schema::Shapes::StringShape.new(name: 'Shape')
 
-            expect(shape[:aws_query]).to be_nil
             expect(described_class.query_name(shape)).to eq('Shape')
-            expect(described_class.fetch(shape)).to equal(shape[:aws_query])
+            expect(shape[:aws_query_name]).to eq('Shape')
+            expect(shape[:aws_query_ec2_name]).to eq('Shape')
+            expect(shape[:aws_query_flattened]).to be_nil
+            expect(described_class.flattened?(shape)).to be(false)
+            expect(shape[:aws_query_flattened]).to be(false)
           end
 
           it 'builds Query and EC2 indexes keyed by Ruby member name' do
@@ -49,7 +52,7 @@ module Aws
               traits: { 'smithy.api#xmlName' => 'WireName' }
             )
             expect(described_class.query_name(shape)).to eq('WireName')
-            expect(described_class.fetch(shape)[:query_name]).to eq('WireName')
+            expect(shape[:aws_query_name]).to eq('WireName')
           end
 
           it 'falls back to the modeled member name' do
@@ -58,7 +61,7 @@ module Aws
               name: 'ModeledName'
             )
             expect(described_class.query_name(shape)).to eq('ModeledName')
-            expect(described_class.fetch(shape)[:query_name]).to eq('ModeledName')
+            expect(shape[:aws_query_name]).to eq('ModeledName')
           end
         end
 
@@ -78,7 +81,7 @@ module Aws
             )
 
             expect(described_class.ec2_query_name(shape)).to eq('QueryName')
-            expect(described_class.fetch(shape)[:ec2_query_name]).to eq('QueryName')
+            expect(shape[:aws_query_ec2_name]).to eq('QueryName')
           end
 
           it 'capitalizes the resolved name for ec2 query' do
@@ -87,14 +90,14 @@ module Aws
             )
 
             expect(described_class.ec2_query_name(shape)).to eq('WireName')
-            expect(described_class.fetch(shape)[:ec2_query_name]).to eq('WireName')
+            expect(shape[:aws_query_ec2_name]).to eq('WireName')
           end
 
           it 'capitalizes the modeled member name for ec2 query' do
             shape = Smithy::Schema::Shapes::MemberShape.new(target: string_shape, name: 'modeledName')
 
             expect(described_class.ec2_query_name(shape)).to eq('ModeledName')
-            expect(described_class.fetch(shape)[:ec2_query_name]).to eq('ModeledName')
+            expect(shape[:aws_query_ec2_name]).to eq('ModeledName')
           end
         end
 
@@ -106,7 +109,7 @@ module Aws
             )
 
             expect(described_class.flattened?(shape)).to be(true)
-            expect(described_class.fetch(shape)).to be_a(Hash)
+            expect(shape[:aws_query_flattened]).to be(true)
           end
           it 'returns false when the shape is not flattened' do
             expect(described_class.flattened?(member_shape)).to be(false)
@@ -122,15 +125,24 @@ module Aws
         end
       end
 
-      describe Query::Extension do
-        it 'delegates the legacy Query extension API' do
-          string_shape = Smithy::Schema::Shapes::StringShape.new
-          member = Smithy::Schema::Shapes::MemberShape.new(
-            target: string_shape, name: 'ModeledName'
-          )
+      describe Ec2QueryExtension do
+        let(:string_shape) { Smithy::Schema::Shapes::StringShape.new }
 
-          expect(described_class.query_name(member)).to eq('ModeledName')
-          expect(described_class.ec2_query_name(member)).to eq('ModeledName')
+        it 'uses EC2 Query wire names and indexes from shared Query metadata' do
+          member = Smithy::Schema::Shapes::MemberShape.new(
+            target: string_shape,
+            name: 'modeledName',
+            traits: { 'aws.protocols#ec2QueryName' => 'Ec2Name' }
+          )
+          structure = Smithy::Schema::Shapes::StructureShape.new
+          structure.add_member(:modeled_name, member)
+
+          expect(described_class.query_name(member)).to eq('Ec2Name')
+          expect(described_class.query_index(structure)[:modeled_name]).to eq(['Ec2Name', member])
+          expect(described_class.flattened?(member)).to be(false)
+          expect(described_class.timestamp_format(member)).to eq(:default)
+          expect(structure[:aws_query_index]).to equal(QueryExtension.query_index(structure))
+          expect(structure[:aws_query_ec2_index]).to equal(QueryExtension.ec2_query_index(structure))
         end
       end
     end

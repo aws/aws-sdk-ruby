@@ -137,6 +137,25 @@ module Aws
 
           expect(parse(result)).to eq('Timestamp' => ['1700000000.123'])
         end
+
+        it 'uses the configured default timestamp format' do
+          structure = Smithy::Schema::Shapes::StructureShape.new
+          member = Smithy::Schema::Shapes::MemberShape.new(
+            target: Smithy::Schema::Shapes::TimestampShape.new,
+            name: 'Timestamp'
+          )
+          structure.add_member(:timestamp, member)
+          time = Time.utc(2026, 9, 23, 12, 34, 56)
+          result = ParamList.new
+
+          described_class.new(default_timestamp: 'epoch-seconds').build(
+            structure,
+            { timestamp: time },
+            result
+          )
+
+          expect(parse(result)).to eq('Timestamp' => [time.to_i.to_s])
+        end
       end
     end
   end

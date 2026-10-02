@@ -7,6 +7,8 @@ module Aws
     module Query
       # @api private
       class Param
+        UNRESERVED_PATTERN = /\A[A-Za-z0-9._~-]*\z/
+
         # @param [String] name
         # @param [String, nil] value (nil)
         def initialize(name, value = nil)
@@ -38,7 +40,10 @@ module Aws
         private
 
         def escape(str)
-          CGI.escape(str.to_s.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
+          value = str.to_s
+          return value if value.match?(UNRESERVED_PATTERN)
+
+          CGI.escape(value.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
         end
       end
     end

@@ -31,16 +31,19 @@ module Aws
           private
 
           def empty_blob_payload?(body, member)
-            member && SCHEMA_EXTENSION.target_shape(member) == SCHEMA_EXTENSION::SHAPE_BLOB &&
-              !SCHEMA_EXTENSION.streaming?(member.target) && empty_body?(body)
+            return false unless member
+
+            target_shape = member.target
+            target_shape.is_a?(Smithy::Schema::Shapes::BlobShape) &&
+              !SCHEMA_EXTENSION.streaming?(target_shape) && empty_body?(body)
           end
 
           def empty_body?(body)
             body.respond_to?(:size) && body.size.zero? # rubocop:disable Style/ZeroLengthPredicate
           end
 
-          def parse(ref, body, target = nil)
-            @codec.parse(ref, body, target) if body.size.positive?
+          def parse(shape, body, target = nil)
+            @codec.parse(shape, body, target) if body.size.positive?
           end
         end
       end

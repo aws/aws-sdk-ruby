@@ -28,7 +28,8 @@ module Aws
       # @return [StandardError, nil]
       def parse_error(context)
         apply_request_id(context)
-        return unless (300..599).cover?(context.http_response.status_code)
+        status_code = context.http_response.status_code
+        return unless status_code >= 300 && status_code <= 599 # rubocop:disable Style/ComparableBetween
 
         code, data = extract_error(context)
         build_error(context, code, data)
