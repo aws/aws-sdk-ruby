@@ -355,6 +355,42 @@ module Aws
           handle_with_retry(test_case_def)
         end
 
+        context 'credential invalidation on authentication failure' do
+          let(:provider) { double('credential_provider', invalidate: nil) }
+          let(:signing_credentials) { Credentials.new('akid', 'secret') }
+
+          before(:each) do
+            config.credentials = provider
+            resp.context[:signing_credentials] = signing_credentials
+          end
+
+          it 'invalidates the signing credentials and does not retry on an auth failure' do
+            expect(provider).to receive(:invalidate).with(signing_credentials)
+
+            resp.context.http_response.status_code = 400
+            resp.error = RetryErrorsSvc::Errors::ExpiredToken.new(nil, nil)
+            handle { |_context| resp }
+
+            expect(resp.context.retries).to eq(0)
+          end
+
+          it 'does not invalidate for an authorization error such as AccessDenied' do
+            expect(provider).not_to receive(:invalidate)
+
+            resp.context.http_response.status_code = 400
+            resp.error = RetryErrorsSvc::Errors::AccessDenied.new(nil, nil)
+            handle { |_context| resp }
+          end
+
+          it 'does not invalidate when the provider does not support it' do
+            config.credentials = Credentials.new('akid', 'secret')
+
+            resp.context.http_response.status_code = 400
+            resp.error = RetryErrorsSvc::Errors::ExpiredToken.new(nil, nil)
+            expect { handle { |_context| resp } }.not_to raise_error
+          end
+        end
+
         context 'DynamoDB base backoff and increased retries' do
           let(:api) do
             api = Seahorse::Model::Api.new

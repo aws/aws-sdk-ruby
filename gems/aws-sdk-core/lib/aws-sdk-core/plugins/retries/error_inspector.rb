@@ -6,15 +6,12 @@ module Aws
       # @api private
       # This class will be obsolete when APIs contain modeled exceptions
       class ErrorInspector
-        EXPIRED_CREDS = Set.new(
-          [
-            'InvalidClientTokenId',        # query services
-            'UnrecognizedClientException', # json services
-            'InvalidAccessKeyId',          # s3
-            'AuthFailure',                 # ec2
-            'InvalidIdentityToken',        # sts
-            'ExpiredToken',                # route53
-            'ExpiredTokenException'        # kinesis
+        # Target-service authentication failures that indicate the cached
+        # credentials are no longer valid.
+        INVALIDATING_AUTH_ERRORS = Set.new(
+          %w[
+            ExpiredToken
+            InvalidToken
           ]
         )
 
@@ -71,8 +68,8 @@ module Aws
           @http_status_code = http_status_code
         end
 
-        def expired_credentials?
-          !!(EXPIRED_CREDS.include?(@name) || @name.match(/expired/i))
+        def invalidating_auth_error?
+          INVALIDATING_AUTH_ERRORS.include?(@name)
         end
 
         def throttling_error?
@@ -124,15 +121,10 @@ module Aws
             networking? ||
             checksum? ||
             endpoint_discovery?(context) ||
-            (expired_credentials? && refreshable_credentials?(context)) ||
             clock_skew?(context)
         end
 
         private
-
-        def refreshable_credentials?(context)
-          context.config.credentials.respond_to?(:refresh!)
-        end
 
         def extract_name(error)
           if error.is_a?(Errors::ServiceError)

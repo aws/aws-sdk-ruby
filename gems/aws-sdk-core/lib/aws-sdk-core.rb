@@ -17,6 +17,7 @@ module Aws
   autoload :Credentials, 'aws-sdk-core/credentials'
   autoload :CredentialProvider, 'aws-sdk-core/credential_provider'
   autoload :RefreshingCredentials, 'aws-sdk-core/refreshing_credentials'
+  autoload :ResilientRefreshingCredentials, 'aws-sdk-core/resilient_refreshing_credentials'
   autoload :AssumeRoleCredentials, 'aws-sdk-core/assume_role_credentials'
   autoload :AssumeRoleWebIdentityCredentials, 'aws-sdk-core/assume_role_web_identity_credentials'
   autoload :CredentialProviderChain, 'aws-sdk-core/credential_provider_chain'

@@ -24,7 +24,7 @@ module Aws
   class AssumeRoleWebIdentityCredentials
 
     include CredentialProvider
-    include RefreshingCredentials
+    include ResilientRefreshingCredentials
 
     # @param [Hash] options
     # @option options [required, String] :role_arn the IAM role
@@ -47,7 +47,6 @@ module Aws
       client_opts = {}
       @assume_role_web_identity_params = {}
       @token_file = options.delete(:web_identity_token_file)
-      @async_refresh = true
       options.each_pair do |key, value|
         if self.class.assume_role_web_identity_options.include?(key)
           @assume_role_web_identity_params[key] = value
@@ -68,7 +67,25 @@ module Aws
     # @return [STS::Client]
     attr_reader :client
 
+    # STS error codes that indicate a misconfiguration (bad policy, rejected
+    # or invalid token, disabled region, etc). Retrying will not resolve them,
+    # so they are raised immediately rather than backed off.
+    # @api private
+    NON_RECOVERABLE_ERROR_CODES = %w[
+      AccessDenied
+      IDPRejectedClaim
+      InvalidIdentityToken
+      MalformedPolicyDocument
+      PackedPolicyTooLarge
+      RegionDisabled
+    ].freeze
+
     private
+
+    def non_recoverable_error?(error)
+      error.is_a?(Aws::Errors::ServiceError) &&
+        NON_RECOVERABLE_ERROR_CODES.include?(error.code)
+    end
 
     def refresh
       # read from token file everytime it refreshes

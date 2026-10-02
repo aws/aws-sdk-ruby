@@ -5,6 +5,10 @@ require_relative '../spec_helper'
 module Aws
   describe SSOCredentials do
 
+    before do
+      allow_any_instance_of(SSOCredentials).to receive(:warn)
+    end
+
     let(:client) do
       SSO::Client.new(
         region: 'us-west-2',
@@ -139,6 +143,16 @@ module Aws
 
           sso_creds.credentials
         end
+
+        it 'raises InvalidSSOToken immediately when the token expires on a later refresh' do
+          sso_creds = SSOCredentials.new(sso_opts)
+          allow(Time).to receive(:now).and_return(expiration + 60)
+          allow(token_provider).to receive(:token)
+            .and_raise(Errors::InvalidSSOToken.new(SSOCredentials::SSO_LOGIN_GUIDANCE))
+
+          expect { sso_creds.credentials }.to raise_error(Errors::InvalidSSOToken)
+          expect(sso_creds.rate_limited?).to be(false)
+        end
       end
 
       describe '#expiration' do
@@ -173,6 +187,7 @@ module Aws
           expect(SSO::Client).to receive(:new)
                                    .with({region: sso_region, credentials: nil})
                                    .and_return(client)
+          client.stub_responses(:get_role_credentials, sso_resp)
 
           mock_token_file(sso_start_url, cached_token)
 
@@ -184,6 +199,7 @@ module Aws
           expect(SSO::Client).to receive(:new)
                                    .with({region: sso_region, credentials: nil})
                                    .and_return(client)
+          client.stub_responses(:get_role_credentials, sso_resp)
 
           mock_token_file(sso_start_url, cached_token)
 
@@ -237,6 +253,7 @@ module Aws
 
         it 'sets the client when passed in and does not create a new one' do
           test_client = client # force construction
+          test_client.stub_responses(:get_role_credentials, sso_resp)
           expect(SSO::Client).not_to receive(:new)
 
           mock_token_file(sso_start_url, cached_token)
@@ -267,6 +284,13 @@ module Aws
           expect(sso_creds.credentials.session_token).to eq('session')
           expect(sso_creds.credentials.account_id).to eq(sso_account_id)
           expect(sso_creds.expiration).to eq(expiration)
+        end
+
+        it 'raises UnauthorizedException immediately instead of backing off' do
+          client.stub_responses(:get_role_credentials, 'UnauthorizedException')
+          mock_token_file(sso_start_url, cached_token)
+          expect { SSOCredentials.new(sso_opts) }
+            .to raise_error(SSO::Errors::UnauthorizedException)
         end
 
         it 'reads a new token from disc for each refresh' do

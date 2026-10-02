@@ -15,7 +15,7 @@ module Aws
   # be constructed with additional options that were provided.
   class LoginCredentials
     include CredentialProvider
-    include RefreshingCredentials
+    include ResilientRefreshingCredentials
 
     # @option options [required, String] :login_session An opaque string
     #   used to determine the cache file location. This value can be found
@@ -34,7 +34,6 @@ module Aws
         @client = Signin::Client.new(client_opts.merge(credentials: nil))
       end
       @metrics = ['CREDENTIALS_LOGIN']
-      @async_refresh = true
       super
     end
 
@@ -47,7 +46,8 @@ module Aws
       # First reload the token from disk to ensure it hasn't been refreshed externally
       token_json = read_cached_token
       update_creds(token_json['accessToken'])
-      return if @credentials && @expiration && !near_expiration?(sync_expiration_length)
+      # if the reloaded token is fresh use it without contacting Sign-In
+      return unless refresh_needed?
 
       # Using OpenSSL 3.6.0 may result in errors like "certificate verify failed (unable to get certificate CRL)."
       # A recommended workaround is to use OpenSSL version < 3.6.0 or requiring the openssl gem with a version of at
@@ -65,6 +65,12 @@ module Aws
 
       raise Errors::InvalidLoginToken,
             'Login token is invalid and failed to refresh. Please reauthenticate.'
+    end
+
+    # A missing, unparseable, or malformed login token requires the user to
+    # reauthenticate, so it must be raised immediately rather than retried.
+    def non_recoverable_error?(error)
+      error.is_a?(Errors::InvalidLoginToken) || error.is_a?(ArgumentError)
     end
 
     def read_cached_token

@@ -23,7 +23,7 @@ module Aws
   # @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-imds-credentials.html IMDS Credential Provider
   class InstanceProfileCredentials
     include CredentialProvider
-    include RefreshingCredentials
+    include ResilientRefreshingCredentials
 
     # @api private
     class Non200Response < RuntimeError
@@ -97,9 +97,7 @@ module Aws
       @retries = options[:retries] || 1
       @token_ttl = options[:token_ttl] || 21_600
 
-      @async_refresh = false
       @imds_v1_fallback = false
-      @no_refresh_until = nil
       @token = nil
       @metrics = ['CREDENTIALS_IMDS']
       super
@@ -181,63 +179,33 @@ module Aws
     end
 
     def refresh
-      if @no_refresh_until && @no_refresh_until > Time.now
-        warn_expired_credentials
-        return
+      # Retry loading credentials up to 3 times if the instance metadata
+      # service is responding but is returning invalid JSON documents in
+      # response to the GET profile credentials call.
+      c = retry_errors([Aws::Json::ParseError], max_retries: 3) do
+        Aws::Json.load(retrieve_credentials.to_s)
       end
-
-      new_creds =
-        begin
-          # Retry loading credentials up to 3 times is the instance metadata
-          # service is responding but is returning invalid JSON documents
-          # in response to the GET profile credentials call.
-          retry_errors([Aws::Json::ParseError], max_retries: 3) do
-            Aws::Json.load(retrieve_credentials.to_s)
-          end
-        rescue Aws::Json::ParseError
-          raise Aws::Errors::MetadataParserError
-        end
-
-      if @credentials&.set? && empty_credentials?(new_creds)
-        # credentials are already set, but there was an error getting new credentials
-        # so don't update the credentials and use stale ones (static stability)
-        @no_refresh_until = Time.now + rand(300..360)
-        warn_expired_credentials
-      else
-        # credentials are empty or successfully retrieved, update them
-        update_credentials(new_creds)
-      end
+      @credentials = Credentials.new(c['AccessKeyId'], c['SecretAccessKey'], c['Token'])
+      @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
+    rescue Aws::Json::ParseError
+      raise Aws::Errors::MetadataParserError
     end
 
     def retrieve_credentials
       # Retry loading credentials a configurable number of times if
       # the instance metadata service is not responding.
-      begin
-        retry_errors(NETWORK_ERRORS, max_retries: @retries) do
-          open_connection do |conn|
-            # attempt to fetch token to start secure flow first
-            # and rescue to failover
-            fetch_token(conn) unless @imds_v1_fallback || (@token && !@token.expired?)
+      retry_errors(NETWORK_ERRORS, max_retries: @retries) do
+        open_connection do |conn|
+          # attempt to fetch token to start secure flow first
+          # and rescue to failover
+          fetch_token(conn) unless @imds_v1_fallback || (@token && !@token.expired?)
 
-            # disable insecure flow if we couldn't get token and imds v1 is disabled
-            raise TokenRetrivalError if @token.nil? && @disable_imds_v1
+          # disable insecure flow if we couldn't get token and imds v1 is disabled
+          raise TokenRetrivalError if @token.nil? && @disable_imds_v1
 
-            fetch_credentials(conn)
-          end
+          fetch_credentials(conn)
         end
-      rescue StandardError => e
-        warn("Error retrieving instance profile credentials: #{e}")
-        '{}'
       end
-    end
-
-    def update_credentials(creds)
-      @credentials = Credentials.new(creds['AccessKeyId'], creds['SecretAccessKey'], creds['Token'])
-      @expiration = creds['Expiration'] ? Time.iso8601(creds['Expiration']) : nil
-      return unless @expiration && @expiration < Time.now
-
-      @no_refresh_until = Time.now + rand(300..360)
-      warn_expired_credentials
     end
 
     def fetch_token(conn)
@@ -324,15 +292,6 @@ module Aws
         retries += 1
         retry
       end
-    end
-
-    def warn_expired_credentials
-      warn('Attempting credential expiration extension due to a credential service availability issue. '\
-             'A refresh of these credentials will be attempted again in 5 minutes.')
-    end
-
-    def empty_credentials?(creds_hash)
-      !creds_hash['AccessKeyId'] || creds_hash['AccessKeyId'].empty?
     end
 
     # @api private
