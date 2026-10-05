@@ -362,32 +362,46 @@ module Aws
           before(:each) do
             config.credentials = provider
             resp.context[:signing_credentials] = signing_credentials
+            allow(Kernel).to receive(:rand).and_return(1)
           end
 
-          it 'invalidates the signing credentials and does not retry on an auth failure' do
+          it 'invalidates the signing credentials and retries, per the Retry SEP' do
             expect(provider).to receive(:invalidate).with(signing_credentials)
 
-            resp.context.http_response.status_code = 400
-            resp.error = RetryErrorsSvc::Errors::ExpiredToken.new(nil, nil)
-            handle { |_context| resp }
-
-            expect(resp.context.retries).to eq(0)
+            test_case_def = [
+              {
+                response: {
+                  status_code: 400,
+                  error: RetryErrorsSvc::Errors::ExpiredToken.new(nil, nil)
+                },
+                expect: { retries: 1 }
+              },
+              {
+                response: { status_code: 200, error: nil },
+                expect: { retries: 1 }
+              }
+            ]
+            handle_with_retry(test_case_def)
           end
 
-          it 'does not invalidate for an authorization error such as AccessDenied' do
+          it 'does not invalidate or retry for an authorization error such as AccessDenied' do
             expect(provider).not_to receive(:invalidate)
 
             resp.context.http_response.status_code = 400
             resp.error = RetryErrorsSvc::Errors::AccessDenied.new(nil, nil)
             handle { |_context| resp }
+
+            expect(resp.context.retries).to eq(0)
           end
 
-          it 'does not invalidate when the provider does not support it' do
+          it 'does not invalidate or retry when the provider does not support it' do
             config.credentials = Credentials.new('akid', 'secret')
 
             resp.context.http_response.status_code = 400
             resp.error = RetryErrorsSvc::Errors::ExpiredToken.new(nil, nil)
             expect { handle { |_context| resp } }.not_to raise_error
+
+            expect(resp.context.retries).to eq(0)
           end
         end
 

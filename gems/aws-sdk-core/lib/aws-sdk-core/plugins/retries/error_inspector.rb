@@ -121,10 +121,18 @@ module Aws
             networking? ||
             checksum? ||
             endpoint_discovery?(context) ||
+            (invalidating_auth_error? && invalidatable_credentials?(context)) ||
             clock_skew?(context)
         end
 
         private
+
+        # An invalid credential error is only retried when the provider
+        # implements invalidation and can be made to resolve different
+        # credentials on the retry.
+        def invalidatable_credentials?(context)
+          context.config.credentials.respond_to?(:invalidate)
+        end
 
         def extract_name(error)
           if error.is_a?(Errors::ServiceError)

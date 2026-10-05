@@ -210,13 +210,26 @@ module Aws
         expect(resp.context.retries).to eq(0)
       end
 
-      it 'invalidates the signing credentials and does not retry on an auth failure' do
+      it 'invalidates the signing credentials and retries, per the Retry SEP' do
         provider = double('credential_provider', invalidate: nil)
         signing_credentials = Credentials.new('akid', 'secret')
         config.credentials = provider
         resp.context[:signing_credentials] = signing_credentials
 
-        expect(provider).to receive(:invalidate).with(signing_credentials)
+        # Only the first attempt is rejected, invalidation lets the retry
+        # resolve refreshed credentials and succeed.
+        expect(provider).to receive(:invalidate).with(signing_credentials).once
+        resp.error = RetryErrorsSvc::Errors::ExpiredToken.new(nil, nil)
+        attempt = 0
+        handle do |_context|
+          attempt += 1
+          resp.error = nil if attempt > 1
+          resp
+        end
+        expect(resp.context.retries).to eq(1)
+      end
+
+      it 'does not invalidate or retry when the provider does not support it' do
         resp.error = RetryErrorsSvc::Errors::ExpiredToken.new(nil, nil)
         handle { |_context| resp }
         expect(resp.context.retries).to eq(0)
