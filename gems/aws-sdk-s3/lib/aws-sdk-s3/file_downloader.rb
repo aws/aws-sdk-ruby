@@ -60,7 +60,7 @@ module Aws
       end
 
       def download_with_executor(part_list, total_size, opts)
-        download_attempts = 0
+        queued_parts = 0
         completion_queue = Queue.new
         abort_download = false
         error = nil
@@ -69,24 +69,31 @@ module Aws
         while (part = part_list.shift)
           break if abort_download
 
-          download_attempts += 1
-          @executor.post(part) do |p|
-            update_progress(progress, p)
-            resp = @client.get_object(p.params)
-            range = extract_range(resp.content_range)
-            validate_range(range, p.params[:range]) if p.params[:range]
-            write(resp.body, range, opts)
+          begin
+            @executor.post(part) do |p|
+              update_progress(progress, p)
+              resp = @client.get_object(p.params)
+              range = extract_range(resp.content_range)
+              validate_range(range, p.params[:range]) if p.params[:range]
+              write(resp.body, range, opts)
 
-            execute_checksum_callback(resp, opts)
+              execute_checksum_callback(resp, opts)
+            # Any error, or a corrupt file replaces the destination
+            rescue Exception => e # rubocop:disable Lint/RescueException
+              abort_download = true
+              error = e
+            ensure
+              completion_queue << :done
+            end
+            queued_parts += 1
           rescue StandardError => e
-            abort_download = true
+            # Rejected by the executor, wait for queued parts so none write after cleanup
             error = e
-          ensure
-            completion_queue << :done
+            break
           end
         end
 
-        download_attempts.times { completion_queue.pop }
+        queued_parts.times { completion_queue.pop }
         raise error unless error.nil?
       end
 

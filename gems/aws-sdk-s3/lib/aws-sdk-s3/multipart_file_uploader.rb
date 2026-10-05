@@ -169,7 +169,6 @@ module Aws
             queued_parts += 1
           rescue StandardError => e
             # Rejected by the executor; abort rather than orphan the upload.
-            abort_upload = true
             errors << e
             break
           end
