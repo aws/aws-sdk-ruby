@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:lambdaweb)
 # structure.
 #
 #     lambda_web = Aws::LambdaWeb::Client.new
-#     resp = lambda_web.create_web_function(params)
+#     resp = lambda_web.get_web_account_settings(params)
 #
 # See {Client} for more information.
 #
@@ -49,7 +49,6 @@ module Aws::LambdaWeb
   end
   autoload :Client, 'aws-sdk-lambdaweb/client'
   autoload :Errors, 'aws-sdk-lambdaweb/errors'
-  autoload :Waiters, 'aws-sdk-lambdaweb/waiters'
   autoload :Resource, 'aws-sdk-lambdaweb/resource'
   autoload :EndpointParameters, 'aws-sdk-lambdaweb/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-lambdaweb/endpoint_provider'
