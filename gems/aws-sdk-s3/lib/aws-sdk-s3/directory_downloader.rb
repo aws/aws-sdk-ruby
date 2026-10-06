@@ -148,8 +148,9 @@ module Aws
             stream_objects
             @object_queue << DONE_MARKER
           rescue ClosedQueueError
-            # abort requested
-          rescue StandardError => e
+            nil # abort requested
+          # Any error, or the consumer waits on the queue forever
+          rescue Exception => e # rubocop:disable Lint/RescueException
             close
             raise e
           end

@@ -270,6 +270,53 @@ module Aws
             expect(File.exist?(path)).to be(true)
             expect(File.read(path)).to eq('existing content')
           end
+
+          it 'does not overwrite existing file when a part raises a non-StandardError' do
+            # Held locally: `path` alone is a bare string, and the Tempfile backing it
+            # has no other reference, so it can be GC'd and unlinked before the assertion.
+            destination = Tempfile.new('destination')
+            path = destination.path
+            File.write(path, 'existing content')
+            client.stub_responses(:get_object, lambda { |context|
+              first, last = context.params[:range].scan(/\d+/).map(&:to_i)
+              raise NoMemoryError, 'part 2 failed' if first == 5 * one_meg
+
+              { body: 'x' * (last - first + 1), content_range: "bytes #{first}-#{last}/#{15 * one_meg}" }
+            })
+
+            expect { subject.download(path, range_params.merge(chunk_size: 5 * one_meg, mode: 'get_range')) }
+              .to raise_error(NoMemoryError, 'part 2 failed')
+            expect(File.read(path)).to eq('existing content')
+            expect(Dir.glob("#{path}.s3tmp.*")).to be_empty
+          end
+
+          it 'does not leave a temp file behind when the executor rejects a task mid-download' do
+            executor = DefaultExecutor.new
+            calls = 0
+            allow(executor).to receive(:post).and_wrap_original do |original, *args, &blk|
+              calls += 1
+              raise DefaultExecutor::RejectedExecutionError if calls == 2
+
+              original.call(*args, &blk)
+            end
+            downloader = FileDownloader.new(client: client, executor: executor)
+            written = Queue.new
+            allow(downloader).to receive(:write).and_wrap_original do |original, *args|
+              sleep(0.1)
+              original.call(*args)
+              written << :part
+            end
+            client.stub_responses(:get_object, lambda { |context|
+              first, last = context.params[:range].scan(/\d+/).map(&:to_i)
+              { body: 'x' * (last - first + 1), content_range: "bytes #{first}-#{last}/#{15 * one_meg}" }
+            })
+
+            expect { downloader.download(path, range_params.merge(chunk_size: 5 * one_meg, mode: 'get_range')) }
+              .to raise_error(DefaultExecutor::RejectedExecutionError)
+            expect(written.size).to eq(1)
+            expect(Dir.glob("#{path}.s3tmp.*")).to be_empty
+            executor.shutdown
+          end
         end
       end
     end

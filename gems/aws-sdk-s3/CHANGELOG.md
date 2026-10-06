@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix `download_file` on `TransferManager` and `Aws::S3::Object` leaving a corrupt file at the destination when a part raises a non-`StandardError`, and leaving a temp file behind when a caller-provided executor rejects a part.
+
+* Issue - Prevent `upload_directory` and `download_directory` on `TransferManager` from hanging when listing files or objects raises a non-`StandardError`, such as from a `:filter_callback`.
+
 1.233.1 (2026-10-01)
 ------------------
 

@@ -156,6 +156,10 @@ module Aws
             # encountered a traversal error, we must abort immediately
             close
             raise DirectoryUploadError, "Directory traversal failed for '#{@source_dir}': #{e.message}"
+          # Any other error, or the consumer waits on the queue forever
+          rescue Exception => e # rubocop:disable Lint/RescueException
+            close
+            raise e
           end
 
           while (file = @file_queue.shift) && file != DONE_MARKER

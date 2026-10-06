@@ -131,6 +131,14 @@ module Aws
 
             expect(result[:completed_downloads]).to eq(2)
           end
+
+          it 'raises instead of hanging when the callback raises a non-StandardError',
+             thread_report_on_exception: false do
+            filter = ->(obj) { obj.key == 'file2.json' ? raise(SystemStackError, 'filter failed') : true }
+            download = Thread.new { downloader.download(temp_dir, bucket: 'test-bucket', filter_callback: filter) }
+
+            expect { download.join(5) }.to raise_error(SystemStackError, 'filter failed')
+          end
         end
 
         context 'request callbacks' do
