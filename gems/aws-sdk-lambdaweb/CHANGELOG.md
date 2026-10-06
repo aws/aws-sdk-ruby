@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2026-10-06)
+------------------
+
+* Feature - Removes operations that are not yet generally available from the Lambda Web.
+
 1.1.0 (2026-10-02)
 ------------------
 
