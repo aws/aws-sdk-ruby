@@ -58,6 +58,13 @@ module Aws
         end
       end
 
+      # Raised when a fixed-width header value does not fit its protocol width
+      class EventHeaderValueWidthError < RuntimeError
+        def initialize(type = nil, *args)
+          super("Header value does not fit the fixed width of header type '#{type}'.")
+        end
+      end
+
     end
   end
 end

@@ -127,6 +127,7 @@ module Aws
           encoded_value = [type_index].pack('C')
           # boolean types doesn't need to specify value
           next [encoded_key, encoded_value].pack('a*a*') if !!pattern == pattern
+          validate_fixed_width_value!(value, value_length) if value_length
           unless value_length
             # string and bytes types carry a 2-byte length prefix capped at INT16_MAX; reject
             # oversized values rather than letting bytesize wrap mod 65536.
@@ -149,6 +150,25 @@ module Aws
       end
 
       private
+
+      # Fixed-width values carry no length prefix, so a value that does not fit its
+      # protocol width would either be silently truncated by #pack (integers) or
+      # misalign the header block (uuid). Reject both before anything is written.
+      def validate_fixed_width_value!(value, width)
+        v = value.value
+        valid =
+          if value.type == 'uuid'
+            v.respond_to?(:bytesize) && v.bytesize == width
+          elsif v.is_a?(Integer)
+            limit = 1 << (width * 8 - 1)
+            v >= -limit && v < limit
+          else
+            true
+          end
+        return if valid
+
+        raise Aws::EventStream::Errors::EventHeaderValueWidthError.new(value.type)
+      end
 
       def encode_prelude(total_length, headers_length)
         prelude_body = [total_length, headers_length].pack('NN')
