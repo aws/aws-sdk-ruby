@@ -170,7 +170,6 @@ module Aws
 
         private
 
-        # Credentials that signed a request, used for invalidation matching
         def signing_credentials(signature)
           authorization = signature.headers['authorization']
           return unless authorization

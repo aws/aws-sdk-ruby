@@ -289,9 +289,6 @@ module Aws
           # Estimated skew needs to be updated on every request
           config.clock_skew.update_estimated_skew(context)
 
-          # A target-service authentication failure invalidates the cached
-          # credentials so the next request refreshes and the rejected request
-          # itself is not retried.
           invalidate_credentials(context, error_inspector)
 
           return response unless retryable?(context, response, error_inspector)
@@ -420,6 +417,7 @@ module Aws
           call(context)
         end
 
+        # Marks the credentials that signed this request stale, if the provider supports invalidation
         def invalidate_credentials(context, error_inspector)
           return unless error_inspector.invalidating_auth_error?
 
@@ -474,9 +472,6 @@ module Aws
               context.config.endpoint_cache.delete(key)
             end
 
-            # A target-service authentication failure invalidates the cached
-            # credentials so the next request refreshes and the rejected request
-            # itself is not retried.
             invalidate_credentials(context, error_inspector)
 
             retry_if_possible(response, error_inspector)
@@ -518,6 +513,7 @@ module Aws
             response_truncatable?(context)
         end
 
+        # Marks the credentials that signed this request stale, if the provider supports invalidation
         def invalidate_credentials(context, error_inspector)
           return unless error_inspector.invalidating_auth_error?
 

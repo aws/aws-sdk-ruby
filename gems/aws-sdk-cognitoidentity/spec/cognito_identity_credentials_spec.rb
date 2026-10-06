@@ -34,7 +34,6 @@ module Aws
       end
       let(:resp) { double('client-resp', credentials: cognito_creds) }
 
-      # credential lifecycle fetches during construction
       before do
         allow(client).to receive(:get_credentials_for_identity).and_return(resp)
       end

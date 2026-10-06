@@ -127,9 +127,6 @@ module Aws
 
         private
 
-        # An invalid credential error is only retried when the provider
-        # implements invalidation and can be made to resolve different
-        # credentials on the retry.
         def invalidatable_credentials?(context)
           context.config.credentials.respond_to?(:invalidate)
         end
