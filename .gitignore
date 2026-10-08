@@ -18,3 +18,4 @@ benchmark-results/
 .ruby-version
 *.ps1
 *.psm1
+/afroz
