@@ -16,3 +16,4 @@ benchmark-results/
 .idea
 
 .ruby-version
+*.ps1
