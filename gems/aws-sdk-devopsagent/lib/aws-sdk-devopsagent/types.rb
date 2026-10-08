@@ -1288,6 +1288,29 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Cron or rate schedule. Trigger-created custom-agent schedules use an
+    # EventBridge flexible window of up to 30 minutes for load distribution.
+    #
+    # @!attribute [rw] expression
+    #   EventBridge cron or rate expression that anchors the flexible window
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/CronSchedule AWS API Documentation
+    #
+    class CronSchedule < Struct.new(
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Daily recurrence
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/DailyRecurrence AWS API Documentation
+    #
+    class DailyRecurrence < Aws::EmptyStructure; end
+
     # Authorization configuration for Datadog MCP server (uses authorization
     # discovery only).
     #
@@ -2363,6 +2386,11 @@ module Aws::DevOpsAgent
     #   verification testing and VPC connectivity on this association.
     #   @return [String]
     #
+    # @!attribute [rw] release_management_association_id
+    #   The identifier of the release management association that this
+    #   repository maps to for automatic verification testing.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/GitHubConfiguration AWS API Documentation
     #
     class GitHubConfiguration < Struct.new(
@@ -2371,7 +2399,8 @@ module Aws::DevOpsAgent
       :owner,
       :owner_type,
       :instance_identifier,
-      :runtime_role_arn)
+      :runtime_role_arn,
+      :release_management_association_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2396,13 +2425,19 @@ module Aws::DevOpsAgent
     #   verification testing and VPC connectivity on this association.
     #   @return [String]
     #
+    # @!attribute [rw] release_management_association_id
+    #   The identifier of the release management association that this
+    #   project maps to for automatic verification testing.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/GitLabConfiguration AWS API Documentation
     #
     class GitLabConfiguration < Struct.new(
       :project_id,
       :project_path,
       :instance_identifier,
-      :runtime_role_arn)
+      :runtime_role_arn,
+      :release_management_association_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4116,6 +4151,45 @@ module Aws::DevOpsAgent
       class Unknown < Message; end
     end
 
+    # Monthly recurrence
+    #
+    # @!attribute [rw] day_of_month
+    #   Day of month the window recurs on
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MonthlyRecurrence AWS API Documentation
+    #
+    class MonthlyRecurrence < Struct.new(
+      :day_of_month)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how AWS DevOps Agent reaches your application using a
+    # Release Management Environment
+    #
+    # @note NetworkAccessConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note NetworkAccessConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of NetworkAccessConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] private_access
+    #   Private network access to the resource inside a VPC, using a private
+    #   connection.
+    #   @return [Types::PrivateNetworkAccess]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/NetworkAccessConfiguration AWS API Documentation
+    #
+    class NetworkAccessConfiguration < Struct.new(
+      :private_access,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PrivateAccess < NetworkAccessConfiguration; end
+      class Unknown < NetworkAccessConfiguration; end
+    end
+
     # API key authentication configuration for New Relic service.
     #
     # @!attribute [rw] api_key
@@ -4420,6 +4494,28 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Private network access to the resource inside a VPC, using a private
+    # connection.
+    #
+    # @!attribute [rw] private_connection_name
+    #   Name of the private connection that supplies the VPC configuration
+    #   for this release management environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_role_arn
+    #   Role ARN that AWS DevOps Agent assumes at runtime to connect to your
+    #   VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/PrivateNetworkAccess AWS API Documentation
+    #
+    class PrivateNetworkAccess < Struct.new(
+      :private_connection_name,
+      :runtime_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a recommendation with all its properties and metadata
     #
     # @!attribute [rw] agent_space_arn
@@ -4521,6 +4617,41 @@ module Aws::DevOpsAgent
       :spec)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Recurrence cadence for a time-range schedule
+    #
+    # @note Recurrence is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Recurrence is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Recurrence corresponding to the set member.
+    #
+    # @!attribute [rw] daily
+    #   The window recurs every day
+    #   @return [Types::DailyRecurrence]
+    #
+    # @!attribute [rw] weekly
+    #   The window recurs once per week
+    #   @return [Types::WeeklyRecurrence]
+    #
+    # @!attribute [rw] monthly
+    #   The window recurs once per month
+    #   @return [Types::MonthlyRecurrence]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/Recurrence AWS API Documentation
+    #
+    class Recurrence < Struct.new(
+      :daily,
+      :weekly,
+      :monthly,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Daily < Recurrence; end
+      class Weekly < Recurrence; end
+      class Monthly < Recurrence; end
+      class Unknown < Recurrence; end
     end
 
     # Reference information linking a task to external systems - for input
@@ -5080,6 +5211,26 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Configuration for a release management environment.
+    #
+    # @!attribute [rw] name
+    #   The name for this release management environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_access
+    #   Specifies how AWS DevOps Agent reaches your application using a
+    #   Release Management Environment
+    #   @return [Types::NetworkAccessConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ReleaseManagementConfiguration AWS API Documentation
+    #
+    class ReleaseManagementConfiguration < Struct.new(
+      :name,
+      :network_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # API key configuration for remote A2A agent.
     #
     # @!attribute [rw] api_key_name
@@ -5317,18 +5468,61 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
-    # Schedule-based condition that fires the Trigger
+    # Expression-based schedule condition. CreateTrigger callers using this
+    # condition supply expression and omit spec. Trigger responses always
+    # use this condition, include the persisted or derived expression, and
+    # also include spec when the trigger was created from a structured
+    # schedule.
     #
     # @!attribute [rw] expression
-    #   The schedule expression
+    #   EventBridge cron or rate expression. Required for existing request
+    #   and response compatibility. For a structured schedule response, this
+    #   is the expression derived by Backlog.
     #   @return [String]
+    #
+    # @!attribute [rw] spec
+    #   Structured schedule source of truth (cron \| timeRange). On
+    #   CreateTrigger supply exactly one of spec or expression. Present in
+    #   responses together with the derived expression for structured
+    #   triggers.
+    #   @return [Types::ScheduleSpec]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ScheduleCondition AWS API Documentation
     #
     class ScheduleCondition < Struct.new(
-      :expression)
+      :expression,
+      :spec)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Structured schedule specification. Select exactly one schedule form.
+    #
+    # @note ScheduleSpec is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ScheduleSpec is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ScheduleSpec corresponding to the set member.
+    #
+    # @!attribute [rw] cron
+    #   Runs on an EventBridge cron or rate cadence
+    #   @return [Types::CronSchedule]
+    #
+    # @!attribute [rw] time_range
+    #   Runs within a recurring time-of-day window
+    #   @return [Types::TimeRangeSchedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ScheduleSpec AWS API Documentation
+    #
+    class ScheduleSpec < Struct.new(
+      :cron,
+      :time_range,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Cron < ScheduleSpec; end
+      class TimeRange < ScheduleSpec; end
+      class Unknown < ScheduleSpec; end
     end
 
     # Configuration for a self-managed Private Connection.
@@ -5836,6 +6030,10 @@ module Aws::DevOpsAgent
     #   Remote A2A agent integration configuration (SigV4 auth).
     #   @return [Types::RemoteAgentSigV4Configuration]
     #
+    # @!attribute [rw] release_management
+    #   Release management network environment configuration
+    #   @return [Types::ReleaseManagementConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ServiceConfiguration AWS API Documentation
     #
     class ServiceConfiguration < Struct.new(
@@ -5858,6 +6056,7 @@ module Aws::DevOpsAgent
       :mcpserversigv4,
       :remoteagent,
       :remoteagentsigv4,
+      :release_management,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -5882,6 +6081,7 @@ module Aws::DevOpsAgent
       class Mcpserversigv4 < ServiceConfiguration; end
       class Remoteagent < ServiceConfiguration; end
       class Remoteagentsigv4 < ServiceConfiguration; end
+      class ReleaseManagement < ServiceConfiguration; end
       class Unknown < ServiceConfiguration; end
     end
 
@@ -6466,6 +6666,33 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Recurring time-of-day window in UTC. The service derives an
+    # EventBridge expression anchored at startAfter and a flexible-window
+    # width from the interval to startBefore. A startBefore earlier than
+    # startAfter wraps past midnight.
+    #
+    # @!attribute [rw] start_after
+    #   Earliest time of day the trigger may fire
+    #   @return [String]
+    #
+    # @!attribute [rw] start_before
+    #   Latest time of day the trigger may fire
+    #   @return [String]
+    #
+    # @!attribute [rw] recurrence
+    #   How the window recurs
+    #   @return [Types::Recurrence]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/TimeRangeSchedule AWS API Documentation
+    #
+    class TimeRangeSchedule < Struct.new(
+      :start_after,
+      :start_before,
+      :recurrence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A Trigger fires on a schedule and invokes an agent
     #
     # @!attribute [rw] trigger_id
@@ -6515,14 +6742,15 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
-    # Defines the firing condition for a Trigger
+    # Defines how a Trigger fires.
     #
     # @note TriggerCondition is a union - when making an API calls you must set exactly one of the members.
     #
     # @note TriggerCondition is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TriggerCondition corresponding to the set member.
     #
     # @!attribute [rw] schedule
-    #   Time-based firing condition
+    #   Schedule-based firing condition. On CreateTrigger supply exactly one
+    #   of the schedule condition's expression or spec.
     #   @return [Types::ScheduleCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/TriggerCondition AWS API Documentation
@@ -7369,6 +7597,20 @@ module Aws::DevOpsAgent
       :webhook_url,
       :webhook_type,
       :webhook_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Weekly recurrence
+    #
+    # @!attribute [rw] day_of_week
+    #   Day of week the window recurs on
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/WeeklyRecurrence AWS API Documentation
+    #
+    class WeeklyRecurrence < Struct.new(
+      :day_of_week)
       SENSITIVE = []
       include Aws::Structure
     end

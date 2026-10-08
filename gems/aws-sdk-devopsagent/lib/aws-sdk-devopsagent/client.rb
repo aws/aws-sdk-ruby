@@ -535,6 +535,7 @@ module Aws::DevOpsAgent
     #         owner_type: "organization", # required, accepts organization, user
     #         instance_identifier: "String",
     #         runtime_role_arn: "RoleArn",
+    #         release_management_association_id: "AssociationId",
     #       },
     #       slack: {
     #         workspace_id: "SlackConfigurationWorkspaceIdString", # required
@@ -588,6 +589,7 @@ module Aws::DevOpsAgent
     #         project_path: "String", # required
     #         instance_identifier: "String",
     #         runtime_role_arn: "RoleArn",
+    #         release_management_association_id: "AssociationId",
     #       },
     #       mcpserversplunk: {
     #       },
@@ -628,6 +630,15 @@ module Aws::DevOpsAgent
     #       remoteagent: {
     #       },
     #       remoteagentsigv4: {
+    #       },
+    #       release_management: {
+    #         name: "DisplayName", # required
+    #         network_access: { # required
+    #           private_access: {
+    #             private_connection_name: "PrivateConnectionName", # required
+    #             runtime_role_arn: "RoleArn", # required
+    #           },
+    #         },
     #       },
     #     },
     #     capabilities: {
@@ -670,6 +681,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.github.owner_type #=> String, one of "organization", "user"
     #   resp.association.configuration.github.instance_identifier #=> String
     #   resp.association.configuration.github.runtime_role_arn #=> String
+    #   resp.association.configuration.github.release_management_association_id #=> String
     #   resp.association.configuration.slack.workspace_id #=> String
     #   resp.association.configuration.slack.workspace_name #=> String
     #   resp.association.configuration.slack.transmission_target.ops_oncall_target.channel_name #=> String
@@ -698,6 +710,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.gitlab.project_path #=> String
     #   resp.association.configuration.gitlab.instance_identifier #=> String
     #   resp.association.configuration.gitlab.runtime_role_arn #=> String
+    #   resp.association.configuration.gitlab.release_management_association_id #=> String
     #   resp.association.configuration.azure.subscription_id #=> String
     #   resp.association.configuration.azuredevops.organization_name #=> String
     #   resp.association.configuration.azuredevops.project_id #=> String
@@ -717,6 +730,9 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
     #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.association.configuration.release_management.name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
     #   resp.association.capabilities #=> Hash
     #   resp.association.capabilities["CapabilityType"].enabled #=> Boolean
     #   resp.association.capabilities["CapabilityType"].trigger_filter_groups #=> Array
@@ -1193,7 +1209,26 @@ module Aws::DevOpsAgent
     #     type: "TriggerType", # required
     #     condition: { # required
     #       schedule: {
-    #         expression: "ScheduleExpression", # required
+    #         expression: "ScheduleExpression",
+    #         spec: {
+    #           cron: {
+    #             expression: "ScheduleExpression", # required
+    #           },
+    #           time_range: {
+    #             start_after: "TimeOfDay", # required
+    #             start_before: "TimeOfDay", # required
+    #             recurrence: { # required
+    #               daily: {
+    #               },
+    #               weekly: {
+    #                 day_of_week: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #               },
+    #               monthly: {
+    #                 day_of_month: 1, # required
+    #               },
+    #             },
+    #           },
+    #         },
     #       },
     #     },
     #     action: { # required
@@ -1208,6 +1243,11 @@ module Aws::DevOpsAgent
     #   resp.trigger.agent_space_id #=> String
     #   resp.trigger.type #=> String
     #   resp.trigger.condition.schedule.expression #=> String
+    #   resp.trigger.condition.schedule.spec.cron.expression #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_after #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_before #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.weekly.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.monthly.day_of_month #=> Integer
     #   resp.trigger.status #=> String
     #   resp.trigger.created_at #=> Time
     #   resp.trigger.updated_at #=> Time
@@ -1802,6 +1842,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.github.owner_type #=> String, one of "organization", "user"
     #   resp.association.configuration.github.instance_identifier #=> String
     #   resp.association.configuration.github.runtime_role_arn #=> String
+    #   resp.association.configuration.github.release_management_association_id #=> String
     #   resp.association.configuration.slack.workspace_id #=> String
     #   resp.association.configuration.slack.workspace_name #=> String
     #   resp.association.configuration.slack.transmission_target.ops_oncall_target.channel_name #=> String
@@ -1830,6 +1871,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.gitlab.project_path #=> String
     #   resp.association.configuration.gitlab.instance_identifier #=> String
     #   resp.association.configuration.gitlab.runtime_role_arn #=> String
+    #   resp.association.configuration.gitlab.release_management_association_id #=> String
     #   resp.association.configuration.azure.subscription_id #=> String
     #   resp.association.configuration.azuredevops.organization_name #=> String
     #   resp.association.configuration.azuredevops.project_id #=> String
@@ -1849,6 +1891,9 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
     #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.association.configuration.release_management.name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
     #   resp.association.capabilities #=> Hash
     #   resp.association.capabilities["CapabilityType"].enabled #=> Boolean
     #   resp.association.capabilities["CapabilityType"].trigger_filter_groups #=> Array
@@ -2135,6 +2180,11 @@ module Aws::DevOpsAgent
     #   resp.trigger.agent_space_id #=> String
     #   resp.trigger.type #=> String
     #   resp.trigger.condition.schedule.expression #=> String
+    #   resp.trigger.condition.schedule.spec.cron.expression #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_after #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_before #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.weekly.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.monthly.day_of_month #=> Integer
     #   resp.trigger.status #=> String
     #   resp.trigger.created_at #=> Time
     #   resp.trigger.updated_at #=> Time
@@ -2450,6 +2500,7 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.github.owner_type #=> String, one of "organization", "user"
     #   resp.associations[0].configuration.github.instance_identifier #=> String
     #   resp.associations[0].configuration.github.runtime_role_arn #=> String
+    #   resp.associations[0].configuration.github.release_management_association_id #=> String
     #   resp.associations[0].configuration.slack.workspace_id #=> String
     #   resp.associations[0].configuration.slack.workspace_name #=> String
     #   resp.associations[0].configuration.slack.transmission_target.ops_oncall_target.channel_name #=> String
@@ -2478,6 +2529,7 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.gitlab.project_path #=> String
     #   resp.associations[0].configuration.gitlab.instance_identifier #=> String
     #   resp.associations[0].configuration.gitlab.runtime_role_arn #=> String
+    #   resp.associations[0].configuration.gitlab.release_management_association_id #=> String
     #   resp.associations[0].configuration.azure.subscription_id #=> String
     #   resp.associations[0].configuration.azuredevops.organization_name #=> String
     #   resp.associations[0].configuration.azuredevops.project_id #=> String
@@ -2497,6 +2549,9 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.mcpserversigv4.tool_details #=> Array
     #   resp.associations[0].configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.associations[0].configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.associations[0].configuration.release_management.name #=> String
+    #   resp.associations[0].configuration.release_management.network_access.private_access.private_connection_name #=> String
+    #   resp.associations[0].configuration.release_management.network_access.private_access.runtime_role_arn #=> String
     #   resp.associations[0].capabilities #=> Hash
     #   resp.associations[0].capabilities["CapabilityType"].enabled #=> Boolean
     #   resp.associations[0].capabilities["CapabilityType"].trigger_filter_groups #=> Array
@@ -3144,6 +3199,11 @@ module Aws::DevOpsAgent
     #   resp.items[0].agent_space_id #=> String
     #   resp.items[0].type #=> String
     #   resp.items[0].condition.schedule.expression #=> String
+    #   resp.items[0].condition.schedule.spec.cron.expression #=> String
+    #   resp.items[0].condition.schedule.spec.time_range.start_after #=> String
+    #   resp.items[0].condition.schedule.spec.time_range.start_before #=> String
+    #   resp.items[0].condition.schedule.spec.time_range.recurrence.weekly.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.items[0].condition.schedule.spec.time_range.recurrence.monthly.day_of_month #=> Integer
     #   resp.items[0].status #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
@@ -3497,7 +3557,7 @@ module Aws::DevOpsAgent
     #     private_connection_name: "PrivateConnectionName",
     #     target_url_private_connection_name: "PrivateConnectionName",
     #     exchange_url_private_connection_name: "PrivateConnectionName",
-    #     name: "ServiceName",
+    #     name: "ServiceNameInput",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -4199,6 +4259,7 @@ module Aws::DevOpsAgent
     #         owner_type: "organization", # required, accepts organization, user
     #         instance_identifier: "String",
     #         runtime_role_arn: "RoleArn",
+    #         release_management_association_id: "AssociationId",
     #       },
     #       slack: {
     #         workspace_id: "SlackConfigurationWorkspaceIdString", # required
@@ -4252,6 +4313,7 @@ module Aws::DevOpsAgent
     #         project_path: "String", # required
     #         instance_identifier: "String",
     #         runtime_role_arn: "RoleArn",
+    #         release_management_association_id: "AssociationId",
     #       },
     #       mcpserversplunk: {
     #       },
@@ -4292,6 +4354,15 @@ module Aws::DevOpsAgent
     #       remoteagent: {
     #       },
     #       remoteagentsigv4: {
+    #       },
+    #       release_management: {
+    #         name: "DisplayName", # required
+    #         network_access: { # required
+    #           private_access: {
+    #             private_connection_name: "PrivateConnectionName", # required
+    #             runtime_role_arn: "RoleArn", # required
+    #           },
+    #         },
     #       },
     #     },
     #     capabilities: {
@@ -4334,6 +4405,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.github.owner_type #=> String, one of "organization", "user"
     #   resp.association.configuration.github.instance_identifier #=> String
     #   resp.association.configuration.github.runtime_role_arn #=> String
+    #   resp.association.configuration.github.release_management_association_id #=> String
     #   resp.association.configuration.slack.workspace_id #=> String
     #   resp.association.configuration.slack.workspace_name #=> String
     #   resp.association.configuration.slack.transmission_target.ops_oncall_target.channel_name #=> String
@@ -4362,6 +4434,7 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.gitlab.project_path #=> String
     #   resp.association.configuration.gitlab.instance_identifier #=> String
     #   resp.association.configuration.gitlab.runtime_role_arn #=> String
+    #   resp.association.configuration.gitlab.release_management_association_id #=> String
     #   resp.association.configuration.azure.subscription_id #=> String
     #   resp.association.configuration.azuredevops.organization_name #=> String
     #   resp.association.configuration.azuredevops.project_id #=> String
@@ -4381,6 +4454,9 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.mcpserversigv4.tool_details #=> Array
     #   resp.association.configuration.mcpserversigv4.tool_details[0].name #=> String
     #   resp.association.configuration.mcpserversigv4.tool_details[0].tool_classification #=> String, one of "READ_ONLY", "MUTATIVE", "DESTRUCTIVE"
+    #   resp.association.configuration.release_management.name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
+    #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
     #   resp.association.capabilities #=> Hash
     #   resp.association.capabilities["CapabilityType"].enabled #=> Boolean
     #   resp.association.capabilities["CapabilityType"].trigger_filter_groups #=> Array
@@ -4713,6 +4789,11 @@ module Aws::DevOpsAgent
     #   resp.trigger.agent_space_id #=> String
     #   resp.trigger.type #=> String
     #   resp.trigger.condition.schedule.expression #=> String
+    #   resp.trigger.condition.schedule.spec.cron.expression #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_after #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.start_before #=> String
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.weekly.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.trigger.condition.schedule.spec.time_range.recurrence.monthly.day_of_month #=> Integer
     #   resp.trigger.status #=> String
     #   resp.trigger.created_at #=> Time
     #   resp.trigger.updated_at #=> Time
@@ -4767,7 +4848,7 @@ module Aws::DevOpsAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devopsagent'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

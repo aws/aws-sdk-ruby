@@ -606,6 +606,11 @@ module Aws::Budgets
     #           values: ["Value"],
     #           match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE
     #         },
+    #         product_attributes: {
+    #           key: "ProductAttributeName", # required
+    #           values: ["Value"],
+    #           match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE
+    #         },
     #       },
     #       metrics: ["BlendedCost"], # accepts BlendedCost, UnblendedCost, AmortizedCost, NetUnblendedCost, NetAmortizedCost, UsageQuantity, NormalizedUsageAmount, Hours
     #       billing_view_arn: "BillingViewArn",
@@ -1113,6 +1118,11 @@ module Aws::Budgets
     #   resp.budget.filter_expression.cost_categories.values[0] #=> String
     #   resp.budget.filter_expression.cost_categories.match_options #=> Array
     #   resp.budget.filter_expression.cost_categories.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.budget.filter_expression.product_attributes.key #=> String
+    #   resp.budget.filter_expression.product_attributes.values #=> Array
+    #   resp.budget.filter_expression.product_attributes.values[0] #=> String
+    #   resp.budget.filter_expression.product_attributes.match_options #=> Array
+    #   resp.budget.filter_expression.product_attributes.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"
     #   resp.budget.metrics #=> Array
     #   resp.budget.metrics[0] #=> String, one of "BlendedCost", "UnblendedCost", "AmortizedCost", "NetUnblendedCost", "NetAmortizedCost", "UsageQuantity", "NormalizedUsageAmount", "Hours"
     #   resp.budget.billing_view_arn #=> String
@@ -1566,6 +1576,11 @@ module Aws::Budgets
     #   resp.budget_performance_history.filter_expression.cost_categories.values[0] #=> String
     #   resp.budget_performance_history.filter_expression.cost_categories.match_options #=> Array
     #   resp.budget_performance_history.filter_expression.cost_categories.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.budget_performance_history.filter_expression.product_attributes.key #=> String
+    #   resp.budget_performance_history.filter_expression.product_attributes.values #=> Array
+    #   resp.budget_performance_history.filter_expression.product_attributes.values[0] #=> String
+    #   resp.budget_performance_history.filter_expression.product_attributes.match_options #=> Array
+    #   resp.budget_performance_history.filter_expression.product_attributes.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"
     #   resp.budget_performance_history.metrics #=> Array
     #   resp.budget_performance_history.metrics[0] #=> String, one of "BlendedCost", "UnblendedCost", "AmortizedCost", "NetUnblendedCost", "NetAmortizedCost", "UsageQuantity", "NormalizedUsageAmount", "Hours"
     #   resp.next_token #=> String
@@ -1676,6 +1691,11 @@ module Aws::Budgets
     #   resp.budgets[0].filter_expression.cost_categories.values[0] #=> String
     #   resp.budgets[0].filter_expression.cost_categories.match_options #=> Array
     #   resp.budgets[0].filter_expression.cost_categories.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.budgets[0].filter_expression.product_attributes.key #=> String
+    #   resp.budgets[0].filter_expression.product_attributes.values #=> Array
+    #   resp.budgets[0].filter_expression.product_attributes.values[0] #=> String
+    #   resp.budgets[0].filter_expression.product_attributes.match_options #=> Array
+    #   resp.budgets[0].filter_expression.product_attributes.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"
     #   resp.budgets[0].metrics #=> Array
     #   resp.budgets[0].metrics[0] #=> String, one of "BlendedCost", "UnblendedCost", "AmortizedCost", "NetUnblendedCost", "NetAmortizedCost", "UsageQuantity", "NormalizedUsageAmount", "Hours"
     #   resp.budgets[0].billing_view_arn #=> String
@@ -2046,6 +2066,11 @@ module Aws::Budgets
     #           values: ["Value"],
     #           match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE
     #         },
+    #         product_attributes: {
+    #           key: "ProductAttributeName", # required
+    #           values: ["Value"],
+    #           match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, GREATER_THAN_OR_EQUAL, CASE_SENSITIVE, CASE_INSENSITIVE
+    #         },
     #       },
     #       metrics: ["BlendedCost"], # accepts BlendedCost, UnblendedCost, AmortizedCost, NetUnblendedCost, NetAmortizedCost, UsageQuantity, NormalizedUsageAmount, Hours
     #       billing_view_arn: "BillingViewArn",
@@ -2321,7 +2346,7 @@ module Aws::Budgets
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

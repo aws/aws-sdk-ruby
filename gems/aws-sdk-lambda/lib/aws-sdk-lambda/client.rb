@@ -1578,7 +1578,7 @@ module Aws::Lambda
     #     queues: ["Queue"],
     #     source_access_configurations: [
     #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH, OAUTHBEARER_SCOPE, OAUTHBEARER_AUDIENCE, OAUTHBEARER_LOGICAL_CLUSTER, OAUTHBEARER_IDENTITY_POOL, IAM_AUTH, IAM_OAUTHBEARER_AUTH
     #         uri: "URI",
     #       },
     #     ],
@@ -1595,7 +1595,7 @@ module Aws::Lambda
     #         event_record_format: "JSON", # accepts JSON, SOURCE
     #         access_configs: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH
     #             uri: "Arn",
     #           },
     #         ],
@@ -1613,7 +1613,7 @@ module Aws::Lambda
     #         event_record_format: "JSON", # accepts JSON, SOURCE
     #         access_configs: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH
     #             uri: "Arn",
     #           },
     #         ],
@@ -1666,7 +1666,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH", "OAUTHBEARER_SCOPE", "OAUTHBEARER_AUDIENCE", "OAUTHBEARER_LOGICAL_CLUSTER", "OAUTHBEARER_IDENTITY_POOL", "IAM_AUTH", "IAM_OAUTHBEARER_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -1681,7 +1681,7 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -1689,7 +1689,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -2629,7 +2629,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH", "OAUTHBEARER_SCOPE", "OAUTHBEARER_AUDIENCE", "OAUTHBEARER_LOGICAL_CLUSTER", "OAUTHBEARER_IDENTITY_POOL", "IAM_AUTH", "IAM_OAUTHBEARER_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -2644,7 +2644,7 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -2652,7 +2652,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -3718,7 +3718,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH", "OAUTHBEARER_SCOPE", "OAUTHBEARER_AUDIENCE", "OAUTHBEARER_LOGICAL_CLUSTER", "OAUTHBEARER_IDENTITY_POOL", "IAM_AUTH", "IAM_OAUTHBEARER_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -3733,7 +3733,7 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -3741,7 +3741,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -4807,9 +4807,9 @@ module Aws::Lambda
     #   * {Types::GetProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
     #
     #
-    # @example Example: To get a provisioned concurrency configuration
+    # @example Example: To view a provisioned concurrency configuration
     #
-    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -4826,9 +4826,9 @@ module Aws::Lambda
     #     status: "READY", 
     #   }
     #
-    # @example Example: To view a provisioned concurrency configuration
+    # @example Example: To get a provisioned concurrency configuration
     #
-    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -5705,8 +5705,9 @@ module Aws::Lambda
     #   name, a partial ARN, or a full ARN.
     #
     # @option params [String] :qualifier
-    #   The function version or alias. If not specified, lists executions for
-    #   the $LATEST version.
+    #   The function version to filter executions by. If you don't specify a
+    #   qualifier, this operation returns executions across all versions of
+    #   the Lambda function.
     #
     # @option params [String] :durable_execution_name
     #   Filter executions by name. Only executions with names that matches
@@ -5899,7 +5900,7 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].queues #=> Array
     #   resp.event_source_mappings[0].queues[0] #=> String
     #   resp.event_source_mappings[0].source_access_configurations #=> Array
-    #   resp.event_source_mappings[0].source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.event_source_mappings[0].source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH", "OAUTHBEARER_SCOPE", "OAUTHBEARER_AUDIENCE", "OAUTHBEARER_LOGICAL_CLUSTER", "OAUTHBEARER_IDENTITY_POOL", "IAM_AUTH", "IAM_OAUTHBEARER_AUTH"
     #   resp.event_source_mappings[0].source_access_configurations[0].uri #=> String
     #   resp.event_source_mappings[0].self_managed_event_source.endpoints #=> Hash
     #   resp.event_source_mappings[0].self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -5914,7 +5915,7 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -5922,7 +5923,7 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -8919,7 +8920,7 @@ module Aws::Lambda
     #     tumbling_window_in_seconds: 1,
     #     source_access_configurations: [
     #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH, OAUTHBEARER_SCOPE, OAUTHBEARER_AUDIENCE, OAUTHBEARER_LOGICAL_CLUSTER, OAUTHBEARER_IDENTITY_POOL, IAM_AUTH, IAM_OAUTHBEARER_AUTH
     #         uri: "URI",
     #       },
     #     ],
@@ -8931,7 +8932,7 @@ module Aws::Lambda
     #         event_record_format: "JSON", # accepts JSON, SOURCE
     #         access_configs: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH
     #             uri: "Arn",
     #           },
     #         ],
@@ -8949,7 +8950,7 @@ module Aws::Lambda
     #         event_record_format: "JSON", # accepts JSON, SOURCE
     #         access_configs: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH
     #             uri: "Arn",
     #           },
     #         ],
@@ -9002,7 +9003,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH", "OAUTHBEARER_SCOPE", "OAUTHBEARER_AUDIENCE", "OAUTHBEARER_LOGICAL_CLUSTER", "OAUTHBEARER_IDENTITY_POOL", "IAM_AUTH", "IAM_OAUTHBEARER_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -9017,7 +9018,7 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -9025,7 +9026,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -10036,7 +10037,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.196.0'
+      context[:gem_version] = '1.197.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

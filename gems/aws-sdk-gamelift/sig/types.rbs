@@ -1223,6 +1223,7 @@ module Aws::GameLift
       attr_accessor resolved_image_digest: ::String
       attr_accessor server_sdk_version: ::String
       attr_accessor linux_capabilities: Types::LinuxCapabilities
+      attr_accessor vcpu: ::Float
       SENSITIVE: []
     end
 
@@ -1235,6 +1236,7 @@ module Aws::GameLift
       attr_accessor port_configuration: Types::ContainerPortConfiguration
       attr_accessor server_sdk_version: ::String
       attr_accessor linux_capabilities: Types::LinuxCapabilities
+      attr_accessor vcpu: ::Float
       SENSITIVE: []
     end
 
@@ -2299,6 +2301,7 @@ module Aws::GameLift
       attr_accessor version_description: ::String
       attr_accessor source_version_number: ::Integer
       attr_accessor operating_system: ("AMAZON_LINUX_2023")
+      attr_accessor remove_attributes: ::Array[("TOTAL_VCPU_LIMIT")]
       SENSITIVE: []
     end
 

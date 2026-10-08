@@ -4138,6 +4138,27 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class GetSystemLogsForJobRunRequest
+      attr_accessor job_name: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSystemLogsForJobRunResponse
+      attr_accessor system_logs_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetSystemLogsForSessionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSystemLogsForSessionResponse
+      attr_accessor system_logs_url: ::String
+      SENSITIVE: []
+    end
+
     class GetTableOptimizerRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String

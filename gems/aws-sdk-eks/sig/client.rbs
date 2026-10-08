@@ -238,6 +238,10 @@ module Aws
                                      vpce_ids: Array[::String]?
                                    }?,
                                    endpoint_prefix: ::String?
+                                 }?,
+                                 ack: {
+                                   enable_cross_namespace: bool?,
+                                   disabled_services: Array[::String]?
                                  }?
                                },
                                ?tags: Hash[::String, ::String],
@@ -1115,6 +1119,10 @@ module Aws
                                    network_access: {
                                      vpce_ids: Array[::String]?
                                    }?
+                                 }?,
+                                 ack: {
+                                   enable_cross_namespace: bool?,
+                                   disabled_services: Array[::String]?
                                  }?
                                },
                                ?client_request_token: ::String,

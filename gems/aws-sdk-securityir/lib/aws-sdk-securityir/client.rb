@@ -1224,6 +1224,86 @@ module Aws::SecurityIR
       req.send_request(options)
     end
 
+    # Returns finding-lifecycle metrics for a membership over a date range.
+    #
+    # @option params [required, String] :membership_id
+    #   The membership ID to retrieve metrics for.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_date
+    #   The start of the day-aligned UTC window, inclusive.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_date
+    #   The end of the day-aligned UTC window, inclusive.
+    #
+    # @return [Types::GetFindingMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFindingMetricsResponse#findings_ingested_security_hub #findings_ingested_security_hub} => Integer
+    #   * {Types::GetFindingMetricsResponse#findings_ingested_guard_duty #findings_ingested_guard_duty} => Integer
+    #   * {Types::GetFindingMetricsResponse#findings_triaged #findings_triaged} => Integer
+    #   * {Types::GetFindingMetricsResponse#findings_triaged_false_positive #findings_triaged_false_positive} => Integer
+    #   * {Types::GetFindingMetricsResponse#findings_investigated #findings_investigated} => Integer
+    #   * {Types::GetFindingMetricsResponse#findings_investigated_false_positive #findings_investigated_false_positive} => Integer
+    #   * {Types::GetFindingMetricsResponse#findings_escalated #findings_escalated} => Integer
+    #   * {Types::GetFindingMetricsResponse#findings_escalated_false_positive #findings_escalated_false_positive} => Integer
+    #   * {Types::GetFindingMetricsResponse#findings_true_positive #findings_true_positive} => Integer
+    #   * {Types::GetFindingMetricsResponse#findings_investigated_in_progress #findings_investigated_in_progress} => Integer
+    #   * {Types::GetFindingMetricsResponse#findings_escalated_in_progress #findings_escalated_in_progress} => Integer
+    #
+    #
+    # @example Example: Retrieve finding-lifecycle metrics for a membership
+    #
+    #   resp = client.get_finding_metrics({
+    #     end_date: Time.parse("2026-08-18T00:00:00Z"), 
+    #     membership_id: "m-a1b2c3d4e5f", 
+    #     start_date: Time.parse("2026-08-01T00:00:00Z"), 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     findings_escalated: 8, 
+    #     findings_escalated_false_positive: 2, 
+    #     findings_escalated_in_progress: 0, 
+    #     findings_ingested_guard_duty: 45, 
+    #     findings_ingested_security_hub: 120, 
+    #     findings_investigated: 60, 
+    #     findings_investigated_false_positive: 12, 
+    #     findings_investigated_in_progress: 40, 
+    #     findings_triaged: 165, 
+    #     findings_triaged_false_positive: 30, 
+    #     findings_true_positive: 6, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_finding_metrics({
+    #     membership_id: "MembershipId", # required
+    #     start_date: Time.now, # required
+    #     end_date: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.findings_ingested_security_hub #=> Integer
+    #   resp.findings_ingested_guard_duty #=> Integer
+    #   resp.findings_triaged #=> Integer
+    #   resp.findings_triaged_false_positive #=> Integer
+    #   resp.findings_investigated #=> Integer
+    #   resp.findings_investigated_false_positive #=> Integer
+    #   resp.findings_escalated #=> Integer
+    #   resp.findings_escalated_false_positive #=> Integer
+    #   resp.findings_true_positive #=> Integer
+    #   resp.findings_investigated_in_progress #=> Integer
+    #   resp.findings_escalated_in_progress #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/GetFindingMetrics AWS API Documentation
+    #
+    # @overload get_finding_metrics(params = {})
+    # @param [Hash] params ({})
+    def get_finding_metrics(params = {}, options = {})
+      req = build_request(:get_finding_metrics, params)
+      req.send_request(options)
+    end
+
     # Returns the attributes of a membership.
     #
     # @option params [required, String] :membership_id
@@ -2385,7 +2465,7 @@ module Aws::SecurityIR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityir'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

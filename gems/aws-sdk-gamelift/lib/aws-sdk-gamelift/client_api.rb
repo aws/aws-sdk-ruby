@@ -75,6 +75,8 @@ module Aws::GameLift
     ContainerGroupDefinitionList = Shapes::ListShape.new(name: 'ContainerGroupDefinitionList')
     ContainerGroupDefinitionName = Shapes::StringShape.new(name: 'ContainerGroupDefinitionName')
     ContainerGroupDefinitionNameOrArn = Shapes::StringShape.new(name: 'ContainerGroupDefinitionNameOrArn')
+    ContainerGroupDefinitionRemoveAttribute = Shapes::StringShape.new(name: 'ContainerGroupDefinitionRemoveAttribute')
+    ContainerGroupDefinitionRemoveAttributeList = Shapes::ListShape.new(name: 'ContainerGroupDefinitionRemoveAttributeList')
     ContainerGroupDefinitionStatus = Shapes::StringShape.new(name: 'ContainerGroupDefinitionStatus')
     ContainerGroupPortMapping = Shapes::StructureShape.new(name: 'ContainerGroupPortMapping')
     ContainerGroupPortMappingList = Shapes::ListShape.new(name: 'ContainerGroupPortMappingList')
@@ -795,6 +797,8 @@ module Aws::GameLift
 
     ContainerGroupDefinitionList.member = Shapes::ShapeRef.new(shape: ContainerGroupDefinition)
 
+    ContainerGroupDefinitionRemoveAttributeList.member = Shapes::ShapeRef.new(shape: ContainerGroupDefinitionRemoveAttribute)
+
     ContainerGroupPortMapping.add_member(:container_name, Shapes::ShapeRef.new(shape: NonZeroAnd128MaxAsciiString, location_name: "ContainerName"))
     ContainerGroupPortMapping.add_member(:container_runtime_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ContainerRuntimeId"))
     ContainerGroupPortMapping.add_member(:container_port_mappings, Shapes::ShapeRef.new(shape: ContainerPortMappingList, location_name: "ContainerPortMappings"))
@@ -885,7 +889,7 @@ module Aws::GameLift
     CreateContainerGroupDefinitionInput.add_member(:name, Shapes::ShapeRef.new(shape: ContainerGroupDefinitionName, required: true, location_name: "Name"))
     CreateContainerGroupDefinitionInput.add_member(:container_group_type, Shapes::ShapeRef.new(shape: ContainerGroupType, location_name: "ContainerGroupType"))
     CreateContainerGroupDefinitionInput.add_member(:total_memory_limit_mebibytes, Shapes::ShapeRef.new(shape: ContainerTotalMemoryLimit, required: true, location_name: "TotalMemoryLimitMebibytes"))
-    CreateContainerGroupDefinitionInput.add_member(:total_vcpu_limit, Shapes::ShapeRef.new(shape: ContainerTotalVcpuLimit, required: true, location_name: "TotalVcpuLimit"))
+    CreateContainerGroupDefinitionInput.add_member(:total_vcpu_limit, Shapes::ShapeRef.new(shape: ContainerTotalVcpuLimit, location_name: "TotalVcpuLimit"))
     CreateContainerGroupDefinitionInput.add_member(:game_server_container_definition, Shapes::ShapeRef.new(shape: GameServerContainerDefinitionInput, location_name: "GameServerContainerDefinition"))
     CreateContainerGroupDefinitionInput.add_member(:support_container_definitions, Shapes::ShapeRef.new(shape: SupportContainerDefinitionInputList, location_name: "SupportContainerDefinitions"))
     CreateContainerGroupDefinitionInput.add_member(:operating_system, Shapes::ShapeRef.new(shape: ContainerOperatingSystem, required: true, location_name: "OperatingSystem"))
@@ -1579,6 +1583,7 @@ module Aws::GameLift
     GameServerContainerDefinition.add_member(:resolved_image_digest, Shapes::ShapeRef.new(shape: Sha256, location_name: "ResolvedImageDigest"))
     GameServerContainerDefinition.add_member(:server_sdk_version, Shapes::ShapeRef.new(shape: ServerSdkVersion, location_name: "ServerSdkVersion"))
     GameServerContainerDefinition.add_member(:linux_capabilities, Shapes::ShapeRef.new(shape: LinuxCapabilities, location_name: "LinuxCapabilities"))
+    GameServerContainerDefinition.add_member(:vcpu, Shapes::ShapeRef.new(shape: ContainerVcpu, location_name: "Vcpu"))
     GameServerContainerDefinition.struct_class = Types::GameServerContainerDefinition
 
     GameServerContainerDefinitionInput.add_member(:container_name, Shapes::ShapeRef.new(shape: NonZeroAnd128MaxAsciiString, required: true, location_name: "ContainerName"))
@@ -1589,6 +1594,7 @@ module Aws::GameLift
     GameServerContainerDefinitionInput.add_member(:port_configuration, Shapes::ShapeRef.new(shape: ContainerPortConfiguration, required: true, location_name: "PortConfiguration"))
     GameServerContainerDefinitionInput.add_member(:server_sdk_version, Shapes::ShapeRef.new(shape: ServerSdkVersion, required: true, location_name: "ServerSdkVersion"))
     GameServerContainerDefinitionInput.add_member(:linux_capabilities, Shapes::ShapeRef.new(shape: LinuxCapabilities, location_name: "LinuxCapabilities"))
+    GameServerContainerDefinitionInput.add_member(:vcpu, Shapes::ShapeRef.new(shape: ContainerVcpu, location_name: "Vcpu"))
     GameServerContainerDefinitionInput.struct_class = Types::GameServerContainerDefinitionInput
 
     GameServerContainerGroupCounts.add_member(:pending, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "PENDING"))
@@ -2477,6 +2483,7 @@ module Aws::GameLift
     UpdateContainerGroupDefinitionInput.add_member(:version_description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "VersionDescription"))
     UpdateContainerGroupDefinitionInput.add_member(:source_version_number, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "SourceVersionNumber"))
     UpdateContainerGroupDefinitionInput.add_member(:operating_system, Shapes::ShapeRef.new(shape: ContainerOperatingSystem, location_name: "OperatingSystem"))
+    UpdateContainerGroupDefinitionInput.add_member(:remove_attributes, Shapes::ShapeRef.new(shape: ContainerGroupDefinitionRemoveAttributeList, location_name: "RemoveAttributes"))
     UpdateContainerGroupDefinitionInput.struct_class = Types::UpdateContainerGroupDefinitionInput
 
     UpdateContainerGroupDefinitionOutput.add_member(:container_group_definition, Shapes::ShapeRef.new(shape: ContainerGroupDefinition, location_name: "ContainerGroupDefinition"))

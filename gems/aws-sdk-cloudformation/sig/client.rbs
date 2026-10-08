@@ -143,7 +143,8 @@ module Aws
                                       stack_name: ::String,
                                       ?role_arn: ::String,
                                       ?resources_to_skip: Array[::String],
-                                      ?client_request_token: ::String
+                                      ?client_request_token: ::String,
+                                      ?force_rollback: bool
                                     ) -> _ContinueUpdateRollbackResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ContinueUpdateRollbackResponseSuccess
 

@@ -678,6 +678,101 @@ module Aws::SecurityIR
       include Aws::Structure
     end
 
+    # @!attribute [rw] membership_id
+    #   The membership ID to retrieve metrics for.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The start of the day-aligned UTC window, inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end of the day-aligned UTC window, inclusive.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/GetFindingMetricsRequest AWS API Documentation
+    #
+    class GetFindingMetricsRequest < Struct.new(
+      :membership_id,
+      :start_date,
+      :end_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Finding-lifecycle metrics for a membership over the requested date
+    # range.
+    #
+    # @!attribute [rw] findings_ingested_security_hub
+    #   The number of findings ingested from AWS Security Hub during the
+    #   requested date range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] findings_ingested_guard_duty
+    #   The number of findings ingested from Amazon GuardDuty during the
+    #   requested date range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] findings_triaged
+    #   The number of findings triaged during the requested date range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] findings_triaged_false_positive
+    #   The number of triaged findings that were closed as false positives
+    #   during the requested date range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] findings_investigated
+    #   The number of findings investigated during the requested date range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] findings_investigated_false_positive
+    #   The number of investigated findings that were closed as false
+    #   positives during the requested date range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] findings_escalated
+    #   The number of findings escalated during the requested date range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] findings_escalated_false_positive
+    #   The number of escalated findings that were closed as false positives
+    #   during the requested date range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] findings_true_positive
+    #   The number of findings confirmed as true positives during the
+    #   requested date range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] findings_investigated_in_progress
+    #   The number of findings whose investigation was in progress during
+    #   the requested date range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] findings_escalated_in_progress
+    #   The number of findings whose escalation was in progress during the
+    #   requested date range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/security-ir-2018-05-10/GetFindingMetricsResponse AWS API Documentation
+    #
+    class GetFindingMetricsResponse < Struct.new(
+      :findings_ingested_security_hub,
+      :findings_ingested_guard_duty,
+      :findings_triaged,
+      :findings_triaged_false_positive,
+      :findings_investigated,
+      :findings_investigated_false_positive,
+      :findings_escalated,
+      :findings_escalated_false_positive,
+      :findings_true_positive,
+      :findings_investigated_in_progress,
+      :findings_escalated_in_progress)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_id
     #   @return [String]
     #

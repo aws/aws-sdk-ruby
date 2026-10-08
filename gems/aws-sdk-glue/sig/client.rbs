@@ -2679,6 +2679,27 @@ module Aws
                          ) -> _GetStatementResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStatementResponseSuccess
 
+      interface _GetSystemLogsForJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSystemLogsForJobRunResponse]
+        def system_logs_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_system_logs_for_job_run-instance_method
+      def get_system_logs_for_job_run: (
+                                         job_name: ::String,
+                                         run_id: ::String
+                                       ) -> _GetSystemLogsForJobRunResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSystemLogsForJobRunResponseSuccess
+
+      interface _GetSystemLogsForSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSystemLogsForSessionResponse]
+        def system_logs_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_system_logs_for_session-instance_method
+      def get_system_logs_for_session: (
+                                         id: ::String
+                                       ) -> _GetSystemLogsForSessionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSystemLogsForSessionResponseSuccess
+
       interface _GetTableResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTableResponse]
         def table: () -> Types::Table

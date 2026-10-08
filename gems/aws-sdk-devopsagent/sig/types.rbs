@@ -391,6 +391,14 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class CronSchedule
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class DailyRecurrence < Aws::EmptyStructure
+    end
+
     class DatadogAuthorizationConfig
       attr_accessor authorization_discovery: Types::MCPServerAuthorizationDiscoveryConfig
       attr_accessor unknown: untyped
@@ -720,6 +728,7 @@ module Aws::DevOpsAgent
       attr_accessor owner_type: ("organization" | "user")
       attr_accessor instance_identifier: ::String
       attr_accessor runtime_role_arn: ::String
+      attr_accessor release_management_association_id: ::String
       SENSITIVE: []
     end
 
@@ -728,6 +737,7 @@ module Aws::DevOpsAgent
       attr_accessor project_path: ::String
       attr_accessor instance_identifier: ::String
       attr_accessor runtime_role_arn: ::String
+      attr_accessor release_management_association_id: ::String
       SENSITIVE: []
     end
 
@@ -1223,6 +1233,22 @@ module Aws::DevOpsAgent
       end
     end
 
+    class MonthlyRecurrence
+      attr_accessor day_of_month: ::Integer
+      SENSITIVE: []
+    end
+
+    class NetworkAccessConfiguration
+      attr_accessor private_access: Types::PrivateNetworkAccess
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PrivateAccess < NetworkAccessConfiguration
+      end
+      class Unknown < NetworkAccessConfiguration
+      end
+    end
+
     class NewRelicApiKeyConfig
       attr_accessor api_key: ::String
       attr_accessor account_id: ::String
@@ -1324,6 +1350,12 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class PrivateNetworkAccess
+      attr_accessor private_connection_name: ::String
+      attr_accessor runtime_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class Recommendation
       attr_accessor agent_space_arn: ::String
       attr_accessor recommendation_id: ::String
@@ -1347,6 +1379,23 @@ module Aws::DevOpsAgent
       attr_accessor summary: ::String
       attr_accessor spec: ::String
       SENSITIVE: []
+    end
+
+    class Recurrence
+      attr_accessor daily: Types::DailyRecurrence
+      attr_accessor weekly: Types::WeeklyRecurrence
+      attr_accessor monthly: Types::MonthlyRecurrence
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Daily < Recurrence
+      end
+      class Weekly < Recurrence
+      end
+      class Monthly < Recurrence
+      end
+      class Unknown < Recurrence
+      end
     end
 
     class ReferenceInput
@@ -1496,6 +1545,12 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class ReleaseManagementConfiguration
+      attr_accessor name: ::String
+      attr_accessor network_access: Types::NetworkAccessConfiguration
+      SENSITIVE: []
+    end
+
     class RemoteAgentAPIKeyConfig
       attr_accessor api_key_name: ::String
       attr_accessor api_key_value: ::String
@@ -1573,7 +1628,22 @@ module Aws::DevOpsAgent
 
     class ScheduleCondition
       attr_accessor expression: ::String
+      attr_accessor spec: Types::ScheduleSpec
       SENSITIVE: []
+    end
+
+    class ScheduleSpec
+      attr_accessor cron: Types::CronSchedule
+      attr_accessor time_range: Types::TimeRangeSchedule
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Cron < ScheduleSpec
+      end
+      class TimeRange < ScheduleSpec
+      end
+      class Unknown < ScheduleSpec
+      end
     end
 
     class SelfManagedInput
@@ -1728,6 +1798,7 @@ module Aws::DevOpsAgent
       attr_accessor mcpserversigv4: Types::MCPServerSigV4Configuration
       attr_accessor remoteagent: Types::RemoteAgentConfiguration
       attr_accessor remoteagentsigv4: Types::RemoteAgentSigV4Configuration
+      attr_accessor release_management: Types::ReleaseManagementConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1768,6 +1839,8 @@ module Aws::DevOpsAgent
       class Remoteagent < ServiceConfiguration
       end
       class Remoteagentsigv4 < ServiceConfiguration
+      end
+      class ReleaseManagement < ServiceConfiguration
       end
       class Unknown < ServiceConfiguration
       end
@@ -1950,6 +2023,13 @@ module Aws::DevOpsAgent
 
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimeRangeSchedule
+      attr_accessor start_after: ::String
+      attr_accessor start_before: ::String
+      attr_accessor recurrence: Types::Recurrence
       SENSITIVE: []
     end
 
@@ -2201,6 +2281,11 @@ module Aws::DevOpsAgent
       attr_accessor webhook_url: ::String
       attr_accessor webhook_type: ("hmac" | "apikey" | "gitlab" | "pagerduty")
       attr_accessor webhook_id: ::String
+      SENSITIVE: []
+    end
+
+    class WeeklyRecurrence
+      attr_accessor day_of_week: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
       SENSITIVE: []
     end
 

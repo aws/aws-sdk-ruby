@@ -103,13 +103,16 @@ module Aws::DevOpsAgent
     CreateTriggerRequest = Shapes::StructureShape.new(name: 'CreateTriggerRequest')
     CreateTriggerRequestClientTokenString = Shapes::StringShape.new(name: 'CreateTriggerRequestClientTokenString')
     CreateTriggerResponse = Shapes::StructureShape.new(name: 'CreateTriggerResponse')
+    CronSchedule = Shapes::StructureShape.new(name: 'CronSchedule')
     CustomHeaderName = Shapes::StringShape.new(name: 'CustomHeaderName')
     CustomHeaderValue = Shapes::StringShape.new(name: 'CustomHeaderValue')
     CustomHeaders = Shapes::MapShape.new(name: 'CustomHeaders')
+    DailyRecurrence = Shapes::StructureShape.new(name: 'DailyRecurrence')
     DatadogAuthorizationConfig = Shapes::UnionShape.new(name: 'DatadogAuthorizationConfig')
     DatadogServiceDetails = Shapes::StructureShape.new(name: 'DatadogServiceDetails')
     DatadogServiceDetailsDescriptionString = Shapes::StringShape.new(name: 'DatadogServiceDetailsDescriptionString')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime', timestampFormat: "iso8601")
+    DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
     DeleteAgentSpaceInput = Shapes::StructureShape.new(name: 'DeleteAgentSpaceInput')
     DeleteAgentSpaceOutput = Shapes::StructureShape.new(name: 'DeleteAgentSpaceOutput')
     DeleteAssetFileRequest = Shapes::StructureShape.new(name: 'DeleteAssetFileRequest')
@@ -128,6 +131,7 @@ module Aws::DevOpsAgent
     DisableOperatorAppInput = Shapes::StructureShape.new(name: 'DisableOperatorAppInput')
     DisassociateServiceInput = Shapes::StructureShape.new(name: 'DisassociateServiceInput')
     DisassociateServiceOutput = Shapes::StructureShape.new(name: 'DisassociateServiceOutput')
+    DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     DocumentList = Shapes::ListShape.new(name: 'DocumentList')
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -314,6 +318,9 @@ module Aws::DevOpsAgent
     Message = Shapes::UnionShape.new(name: 'Message')
     MessageContent = Shapes::StringShape.new(name: 'MessageContent')
     MonitorAccountType = Shapes::StringShape.new(name: 'MonitorAccountType')
+    MonthlyRecurrence = Shapes::StructureShape.new(name: 'MonthlyRecurrence')
+    MonthlyRecurrenceDayOfMonthInteger = Shapes::IntegerShape.new(name: 'MonthlyRecurrenceDayOfMonthInteger')
+    NetworkAccessConfiguration = Shapes::UnionShape.new(name: 'NetworkAccessConfiguration')
     NewRelicAlertPolicyIds = Shapes::ListShape.new(name: 'NewRelicAlertPolicyIds')
     NewRelicAlertPolicyIdsMemberString = Shapes::StringShape.new(name: 'NewRelicAlertPolicyIdsMemberString')
     NewRelicApiKey = Shapes::StringShape.new(name: 'NewRelicApiKey')
@@ -352,6 +359,7 @@ module Aws::DevOpsAgent
     PrivateConnectionSummary = Shapes::StructureShape.new(name: 'PrivateConnectionSummary')
     PrivateConnectionSummaryList = Shapes::ListShape.new(name: 'PrivateConnectionSummaryList')
     PrivateConnectionType = Shapes::StringShape.new(name: 'PrivateConnectionType')
+    PrivateNetworkAccess = Shapes::StructureShape.new(name: 'PrivateNetworkAccess')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     RecommendationContent = Shapes::StructureShape.new(name: 'RecommendationContent')
     RecommendationContentSpecString = Shapes::StringShape.new(name: 'RecommendationContentSpecString')
@@ -359,6 +367,7 @@ module Aws::DevOpsAgent
     RecommendationPriority = Shapes::StringShape.new(name: 'RecommendationPriority')
     RecommendationRankPositionInteger = Shapes::IntegerShape.new(name: 'RecommendationRankPositionInteger')
     RecommendationStatus = Shapes::StringShape.new(name: 'RecommendationStatus')
+    Recurrence = Shapes::UnionShape.new(name: 'Recurrence')
     ReferenceInput = Shapes::StructureShape.new(name: 'ReferenceInput')
     ReferenceInputReferenceUrlString = Shapes::StringShape.new(name: 'ReferenceInputReferenceUrlString')
     ReferenceInputSystemString = Shapes::StringShape.new(name: 'ReferenceInputSystemString')
@@ -387,6 +396,7 @@ module Aws::DevOpsAgent
     RegisteredServiceNowDetails = Shapes::StructureShape.new(name: 'RegisteredServiceNowDetails')
     RegisteredServicesList = Shapes::ListShape.new(name: 'RegisteredServicesList')
     RegisteredSlackServiceDetails = Shapes::StructureShape.new(name: 'RegisteredSlackServiceDetails')
+    ReleaseManagementConfiguration = Shapes::StructureShape.new(name: 'ReleaseManagementConfiguration')
     RemoteAgentAPIKeyConfig = Shapes::StructureShape.new(name: 'RemoteAgentAPIKeyConfig')
     RemoteAgentAPIKeyConfigApiKeyHeaderString = Shapes::StringShape.new(name: 'RemoteAgentAPIKeyConfigApiKeyHeaderString')
     RemoteAgentAPIKeyConfigApiKeyNameString = Shapes::StringShape.new(name: 'RemoteAgentAPIKeyConfigApiKeyNameString')
@@ -418,6 +428,7 @@ module Aws::DevOpsAgent
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     ScheduleCondition = Shapes::StructureShape.new(name: 'ScheduleCondition')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
+    ScheduleSpec = Shapes::UnionShape.new(name: 'ScheduleSpec')
     SchedulerState = Shapes::StringShape.new(name: 'SchedulerState')
     Scopes = Shapes::ListShape.new(name: 'Scopes')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
@@ -445,6 +456,7 @@ module Aws::DevOpsAgent
     ServiceId = Shapes::StringShape.new(name: 'ServiceId')
     ServiceManagedInput = Shapes::StructureShape.new(name: 'ServiceManagedInput')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
+    ServiceNameInput = Shapes::StringShape.new(name: 'ServiceNameInput')
     ServiceNowAuthenticationScopeList = Shapes::ListShape.new(name: 'ServiceNowAuthenticationScopeList')
     ServiceNowConfiguration = Shapes::StructureShape.new(name: 'ServiceNowConfiguration')
     ServiceNowInstanceUrl = Shapes::StringShape.new(name: 'ServiceNowInstanceUrl')
@@ -484,6 +496,8 @@ module Aws::DevOpsAgent
     TaskStatus = Shapes::StringShape.new(name: 'TaskStatus')
     TaskType = Shapes::StringShape.new(name: 'TaskType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimeOfDay = Shapes::StringShape.new(name: 'TimeOfDay')
+    TimeRangeSchedule = Shapes::StructureShape.new(name: 'TimeRangeSchedule')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     ToolClassification = Shapes::StringShape.new(name: 'ToolClassification')
     ToolIdentifier = Shapes::StringShape.new(name: 'ToolIdentifier')
@@ -551,6 +565,7 @@ module Aws::DevOpsAgent
     WebhookWebhookIdString = Shapes::StringShape.new(name: 'WebhookWebhookIdString')
     WebhookWebhookUrlString = Shapes::StringShape.new(name: 'WebhookWebhookUrlString')
     WebhooksList = Shapes::ListShape.new(name: 'WebhooksList')
+    WeeklyRecurrence = Shapes::StructureShape.new(name: 'WeeklyRecurrence')
 
     AWSConfiguration.add_member(:assumable_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "assumableRoleArn"))
     AWSConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSConfigurationAccountIdString, required: true, location_name: "accountId"))
@@ -847,8 +862,13 @@ module Aws::DevOpsAgent
     CreateTriggerResponse.add_member(:trigger, Shapes::ShapeRef.new(shape: Trigger, required: true, location_name: "trigger"))
     CreateTriggerResponse.struct_class = Types::CreateTriggerResponse
 
+    CronSchedule.add_member(:expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "expression"))
+    CronSchedule.struct_class = Types::CronSchedule
+
     CustomHeaders.key = Shapes::ShapeRef.new(shape: CustomHeaderName)
     CustomHeaders.value = Shapes::ShapeRef.new(shape: CustomHeaderValue)
+
+    DailyRecurrence.struct_class = Types::DailyRecurrence
 
     DatadogAuthorizationConfig.add_member(:authorization_discovery, Shapes::ShapeRef.new(shape: MCPServerAuthorizationDiscoveryConfig, location_name: "authorizationDiscovery"))
     DatadogAuthorizationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1087,12 +1107,14 @@ module Aws::DevOpsAgent
     GitHubConfiguration.add_member(:owner_type, Shapes::ShapeRef.new(shape: GithubRepoOwnerType, required: true, location_name: "ownerType"))
     GitHubConfiguration.add_member(:instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "instanceIdentifier"))
     GitHubConfiguration.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RoleArn, deprecated: true, location_name: "runtimeRoleArn", metadata: {"deprecatedMessage" => "Superseded by the ReleaseManagement association. Configure the runtime role on the ReleaseManagement association and reference it via releaseManagementAssociationId.", "deprecatedSince" => "2026-08-04"}))
+    GitHubConfiguration.add_member(:release_management_association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "releaseManagementAssociationId"))
     GitHubConfiguration.struct_class = Types::GitHubConfiguration
 
     GitLabConfiguration.add_member(:project_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "projectId"))
     GitLabConfiguration.add_member(:project_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "projectPath"))
     GitLabConfiguration.add_member(:instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "instanceIdentifier"))
     GitLabConfiguration.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RoleArn, deprecated: true, location_name: "runtimeRoleArn", metadata: {"deprecatedMessage" => "Superseded by the ReleaseManagement association. Configure the runtime role on the ReleaseManagement association and reference it via releaseManagementAssociationId.", "deprecatedSince" => "2026-08-04"}))
+    GitLabConfiguration.add_member(:release_management_association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "releaseManagementAssociationId"))
     GitLabConfiguration.struct_class = Types::GitLabConfiguration
 
     GitLabDetails.add_member(:target_url, Shapes::ShapeRef.new(shape: GitLabDetailsTargetUrlString, required: true, location_name: "targetUrl"))
@@ -1458,6 +1480,15 @@ module Aws::DevOpsAgent
     Message.add_member_subclass(:unknown, Types::Message::Unknown)
     Message.struct_class = Types::Message
 
+    MonthlyRecurrence.add_member(:day_of_month, Shapes::ShapeRef.new(shape: MonthlyRecurrenceDayOfMonthInteger, required: true, location_name: "dayOfMonth"))
+    MonthlyRecurrence.struct_class = Types::MonthlyRecurrence
+
+    NetworkAccessConfiguration.add_member(:private_access, Shapes::ShapeRef.new(shape: PrivateNetworkAccess, location_name: "privateAccess"))
+    NetworkAccessConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    NetworkAccessConfiguration.add_member_subclass(:private_access, Types::NetworkAccessConfiguration::PrivateAccess)
+    NetworkAccessConfiguration.add_member_subclass(:unknown, Types::NetworkAccessConfiguration::Unknown)
+    NetworkAccessConfiguration.struct_class = Types::NetworkAccessConfiguration
+
     NewRelicAlertPolicyIds.member = Shapes::ShapeRef.new(shape: NewRelicAlertPolicyIdsMemberString)
 
     NewRelicApiKeyConfig.add_member(:api_key, Shapes::ShapeRef.new(shape: NewRelicApiKey, required: true, location_name: "apiKey"))
@@ -1543,6 +1574,10 @@ module Aws::DevOpsAgent
 
     PrivateConnectionSummaryList.member = Shapes::ShapeRef.new(shape: PrivateConnectionSummary)
 
+    PrivateNetworkAccess.add_member(:private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, required: true, location_name: "privateConnectionName"))
+    PrivateNetworkAccess.add_member(:runtime_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "runtimeRoleArn"))
+    PrivateNetworkAccess.struct_class = Types::PrivateNetworkAccess
+
     Recommendation.add_member(:agent_space_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceArn"))
     Recommendation.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recommendationId"))
     Recommendation.add_member(:task_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskId"))
@@ -1566,6 +1601,16 @@ module Aws::DevOpsAgent
 
     RecommendationList.member = Shapes::ShapeRef.new(shape: Recommendation)
 
+    Recurrence.add_member(:daily, Shapes::ShapeRef.new(shape: DailyRecurrence, location_name: "daily"))
+    Recurrence.add_member(:weekly, Shapes::ShapeRef.new(shape: WeeklyRecurrence, location_name: "weekly"))
+    Recurrence.add_member(:monthly, Shapes::ShapeRef.new(shape: MonthlyRecurrence, location_name: "monthly"))
+    Recurrence.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Recurrence.add_member_subclass(:daily, Types::Recurrence::Daily)
+    Recurrence.add_member_subclass(:weekly, Types::Recurrence::Weekly)
+    Recurrence.add_member_subclass(:monthly, Types::Recurrence::Monthly)
+    Recurrence.add_member_subclass(:unknown, Types::Recurrence::Unknown)
+    Recurrence.struct_class = Types::Recurrence
+
     ReferenceInput.add_member(:system, Shapes::ShapeRef.new(shape: ReferenceInputSystemString, required: true, location_name: "system"))
     ReferenceInput.add_member(:title, Shapes::ShapeRef.new(shape: ReferenceInputTitleString, location_name: "title"))
     ReferenceInput.add_member(:reference_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "referenceId"))
@@ -1586,7 +1631,7 @@ module Aws::DevOpsAgent
     RegisterServiceInput.add_member(:private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, location_name: "privateConnectionName"))
     RegisterServiceInput.add_member(:target_url_private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, location_name: "targetUrlPrivateConnectionName"))
     RegisterServiceInput.add_member(:exchange_url_private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, location_name: "exchangeUrlPrivateConnectionName"))
-    RegisterServiceInput.add_member(:name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "name"))
+    RegisterServiceInput.add_member(:name, Shapes::ShapeRef.new(shape: ServiceNameInput, location_name: "name"))
     RegisterServiceInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RegisterServiceInput.struct_class = Types::RegisterServiceInput
 
@@ -1679,6 +1724,10 @@ module Aws::DevOpsAgent
     RegisteredSlackServiceDetails.add_member(:team_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "teamName"))
     RegisteredSlackServiceDetails.struct_class = Types::RegisteredSlackServiceDetails
 
+    ReleaseManagementConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "name"))
+    ReleaseManagementConfiguration.add_member(:network_access, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, required: true, location_name: "networkAccess"))
+    ReleaseManagementConfiguration.struct_class = Types::ReleaseManagementConfiguration
+
     RemoteAgentAPIKeyConfig.add_member(:api_key_name, Shapes::ShapeRef.new(shape: RemoteAgentAPIKeyConfigApiKeyNameString, required: true, location_name: "apiKeyName"))
     RemoteAgentAPIKeyConfig.add_member(:api_key_value, Shapes::ShapeRef.new(shape: RemoteAgentAPIKeyConfigApiKeyValueString, required: true, location_name: "apiKeyValue"))
     RemoteAgentAPIKeyConfig.add_member(:api_key_header, Shapes::ShapeRef.new(shape: RemoteAgentAPIKeyConfigApiKeyHeaderString, required: true, location_name: "apiKeyHeader"))
@@ -1731,8 +1780,17 @@ module Aws::DevOpsAgent
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    ScheduleCondition.add_member(:expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "expression"))
+    ScheduleCondition.add_member(:expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "expression"))
+    ScheduleCondition.add_member(:spec, Shapes::ShapeRef.new(shape: ScheduleSpec, location_name: "spec"))
     ScheduleCondition.struct_class = Types::ScheduleCondition
+
+    ScheduleSpec.add_member(:cron, Shapes::ShapeRef.new(shape: CronSchedule, location_name: "cron"))
+    ScheduleSpec.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRangeSchedule, location_name: "timeRange"))
+    ScheduleSpec.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ScheduleSpec.add_member_subclass(:cron, Types::ScheduleSpec::Cron)
+    ScheduleSpec.add_member_subclass(:time_range, Types::ScheduleSpec::TimeRange)
+    ScheduleSpec.add_member_subclass(:unknown, Types::ScheduleSpec::Unknown)
+    ScheduleSpec.struct_class = Types::ScheduleSpec
 
     Scopes.member = Shapes::ShapeRef.new(shape: OAuthScope)
 
@@ -1853,6 +1911,7 @@ module Aws::DevOpsAgent
     ServiceConfiguration.add_member(:mcpserversigv4, Shapes::ShapeRef.new(shape: MCPServerSigV4Configuration, location_name: "mcpserversigv4"))
     ServiceConfiguration.add_member(:remoteagent, Shapes::ShapeRef.new(shape: RemoteAgentConfiguration, location_name: "remoteagent"))
     ServiceConfiguration.add_member(:remoteagentsigv4, Shapes::ShapeRef.new(shape: RemoteAgentSigV4Configuration, location_name: "remoteagentsigv4"))
+    ServiceConfiguration.add_member(:release_management, Shapes::ShapeRef.new(shape: ReleaseManagementConfiguration, location_name: "releaseManagement"))
     ServiceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ServiceConfiguration.add_member_subclass(:source_aws, Types::ServiceConfiguration::SourceAws)
     ServiceConfiguration.add_member_subclass(:aws, Types::ServiceConfiguration::Aws)
@@ -1873,6 +1932,7 @@ module Aws::DevOpsAgent
     ServiceConfiguration.add_member_subclass(:mcpserversigv4, Types::ServiceConfiguration::Mcpserversigv4)
     ServiceConfiguration.add_member_subclass(:remoteagent, Types::ServiceConfiguration::Remoteagent)
     ServiceConfiguration.add_member_subclass(:remoteagentsigv4, Types::ServiceConfiguration::Remoteagentsigv4)
+    ServiceConfiguration.add_member_subclass(:release_management, Types::ServiceConfiguration::ReleaseManagement)
     ServiceConfiguration.add_member_subclass(:unknown, Types::ServiceConfiguration::Unknown)
     ServiceConfiguration.struct_class = Types::ServiceConfiguration
 
@@ -2018,6 +2078,11 @@ module Aws::DevOpsAgent
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TimeRangeSchedule.add_member(:start_after, Shapes::ShapeRef.new(shape: TimeOfDay, required: true, location_name: "startAfter"))
+    TimeRangeSchedule.add_member(:start_before, Shapes::ShapeRef.new(shape: TimeOfDay, required: true, location_name: "startBefore"))
+    TimeRangeSchedule.add_member(:recurrence, Shapes::ShapeRef.new(shape: Recurrence, required: true, location_name: "recurrence"))
+    TimeRangeSchedule.struct_class = Types::TimeRangeSchedule
 
     Trigger.add_member(:trigger_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "triggerId"))
     Trigger.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location_name: "agentSpaceId"))
@@ -2211,6 +2276,9 @@ module Aws::DevOpsAgent
 
     WebhooksList.member = Shapes::ShapeRef.new(shape: Webhook)
 
+    WeeklyRecurrence.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, required: true, location_name: "dayOfWeek"))
+    WeeklyRecurrence.struct_class = Types::WeeklyRecurrence
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -2266,8 +2334,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_asset, Seahorse::Model::Operation.new.tap do |o|
@@ -2366,8 +2434,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_trigger, Seahorse::Model::Operation.new.tap do |o|
@@ -2406,8 +2474,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_asset, Seahorse::Model::Operation.new.tap do |o|
@@ -2466,8 +2534,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_trigger, Seahorse::Model::Operation.new.tap do |o|
@@ -2506,8 +2574,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_private_connection, Seahorse::Model::Operation.new.tap do |o|
@@ -2526,8 +2594,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:disable_operator_app, Seahorse::Model::Operation.new.tap do |o|
@@ -2546,9 +2614,9 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:disassociate_service, Seahorse::Model::Operation.new.tap do |o|
@@ -2567,8 +2635,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:enable_operator_app, Seahorse::Model::Operation.new.tap do |o|
@@ -2587,9 +2655,9 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_account_usage, Seahorse::Model::Operation.new.tap do |o|
@@ -2628,8 +2696,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_asset, Seahorse::Model::Operation.new.tap do |o|
@@ -2708,8 +2776,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_backlog_task, Seahorse::Model::Operation.new.tap do |o|
@@ -2747,9 +2815,9 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_recommendation, Seahorse::Model::Operation.new.tap do |o|
@@ -2788,8 +2856,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_trigger, Seahorse::Model::Operation.new.tap do |o|
@@ -2827,9 +2895,9 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2958,8 +3026,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3127,9 +3195,9 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_recommendations, Seahorse::Model::Operation.new.tap do |o|
@@ -3167,9 +3235,9 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3240,8 +3308,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:register_service, Seahorse::Model::Operation.new.tap do |o|
@@ -3340,8 +3408,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_approval_action, Seahorse::Model::Operation.new.tap do |o|
@@ -3420,8 +3488,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_backlog_task, Seahorse::Model::Operation.new.tap do |o|
@@ -3480,8 +3548,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_private_connection_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -3500,8 +3568,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_recommendation, Seahorse::Model::Operation.new.tap do |o|
@@ -3560,8 +3628,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
     end
 

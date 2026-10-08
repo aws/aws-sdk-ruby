@@ -753,6 +753,9 @@ module Aws::CloudFormation
     # *CloudFormation User Guide*. For information for troubleshooting a
     # failed update rollback, see [Update rollback failed][2].
     #
+    # `ForceRollback` and `ResourcesToSkip` are mutually exclusive. For
+    # details, see ContinueUpdateRollbackInput$ForceRollback.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html
@@ -834,6 +837,35 @@ module Aws::CloudFormation
     #   the same name. You might retry `ContinueUpdateRollback` requests to
     #   ensure that CloudFormation successfully received them.
     #
+    # @option params [Boolean] :force_rollback
+    #   Specifies whether CloudFormation forces the rollback to continue by
+    #   skipping resources currently in the `UPDATE_FAILED` state. Use this
+    #   instead of listing each resource individually in `ResourcesToSkip`.
+    #   Only resources that entered the `UPDATE_FAILED` state because a
+    #   rollback failed are skipped. If you don't specify a value, the
+    #   default is `false` and CloudFormation doesn't skip any resources.
+    #
+    #   `ForceRollback` and `ResourcesToSkip` are mutually exclusive.
+    #   Specifying both in the same request returns a validation error.
+    #
+    #   We recommend that you [troubleshoot][1] resources before skipping
+    #   them. CloudFormation sets the status of the skipped resources to
+    #   `UPDATE_COMPLETE` and continues to roll back the stack, including
+    #   resources in nested stacks. After the rollback completes, the skipped
+    #   resources no longer match the resources in the stack template. Before
+    #   performing another stack update, you must update the stack or
+    #   resources to be consistent with each other. If you don't, subsequent
+    #   stack updates might fail, and the stack will become unrecoverable.
+    #
+    #    Drift detection reports skipped resources as `NOT_CHECKED`. For
+    #   guidance, see [Continue rolling back an update][2] in the
+    #   *CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -843,6 +875,7 @@ module Aws::CloudFormation
     #     role_arn: "RoleARN",
     #     resources_to_skip: ["ResourceToSkip"],
     #     client_request_token: "ClientRequestToken",
+    #     force_rollback: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollback AWS API Documentation
@@ -9191,7 +9224,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.159.0'
+      context[:gem_version] = '1.160.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

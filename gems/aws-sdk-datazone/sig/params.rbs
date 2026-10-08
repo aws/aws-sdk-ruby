@@ -345,6 +345,18 @@ module Aws
       ]?
     }
 
+      type source_location = {
+      s3: ::String?,
+      s3_files: {
+        bucket: ::String,
+        file_list: Array[
+          {
+            key: ::String
+          }
+        ]
+      }?
+    }
+
     end
   end
 end

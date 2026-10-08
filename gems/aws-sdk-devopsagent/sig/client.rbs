@@ -229,7 +229,26 @@ module Aws
                             type: ::String,
                             condition: {
                               schedule: {
-                                expression: ::String
+                                expression: ::String?,
+                                spec: {
+                                  cron: {
+                                    expression: ::String
+                                  }?,
+                                  time_range: {
+                                    start_after: ::String,
+                                    start_before: ::String,
+                                    recurrence: {
+                                      daily: {
+                                      }?,
+                                      weekly: {
+                                        day_of_week: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
+                                      }?,
+                                      monthly: {
+                                        day_of_month: ::Integer
+                                      }?
+                                    }
+                                  }?
+                                }?
                               }?
                             },
                             action: {

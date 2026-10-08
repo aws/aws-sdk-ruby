@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2026-10-08)
+------------------
+
+* Feature - Adds a product attribute dimension to CreateBudget and UpdateBudget, letting customers filter AWS Budgets costs by structured attributes such as Amazon Bedrock model, provider, inference type, and feature.
+
 1.113.0 (2026-09-11)
 ------------------
 

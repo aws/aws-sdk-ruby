@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.281.0 (2026-10-08)
+------------------
+
+* Feature - Introduced GetSystemLogsForJobRun and GetSystemLogsForSession APIs, enabling account admins to retrieve system-space logs for FGAC-enabled Glue jobs and sessions.
+
 1.280.0 (2026-10-02)
 ------------------
 

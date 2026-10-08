@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2026-10-08)
+------------------
+
+* Feature - This release adds a new EncryptionMode option (DISK or NATIVE) to EncryptionAtRestOptions for the CreateDomain and UpdateDomainConfig operations, enabling selection of engine-native index-level encryption on supported Amazon OpenSearch Service domains.
+
 1.111.0 (2026-09-29)
 ------------------
 

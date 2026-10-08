@@ -214,7 +214,7 @@ module Aws
                                                name: ::String,
                                                ?container_group_type: ("GAME_SERVER" | "PER_INSTANCE"),
                                                total_memory_limit_mebibytes: ::Integer,
-                                               total_vcpu_limit: ::Float,
+                                               ?total_vcpu_limit: ::Float,
                                                ?game_server_container_definition: Params::game_server_container_definition_input,
                                                ?support_container_definitions: Array[
                                                  Params::support_container_definition_input
@@ -1699,7 +1699,8 @@ module Aws
                                                ?total_vcpu_limit: ::Float,
                                                ?version_description: ::String,
                                                ?source_version_number: ::Integer,
-                                               ?operating_system: ("AMAZON_LINUX_2023")
+                                               ?operating_system: ("AMAZON_LINUX_2023"),
+                                               ?remove_attributes: Array[("TOTAL_VCPU_LIMIT")]
                                              ) -> _UpdateContainerGroupDefinitionResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContainerGroupDefinitionResponseSuccess
 

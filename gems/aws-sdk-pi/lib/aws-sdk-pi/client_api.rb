@@ -463,8 +463,8 @@ module Aws::PI
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "pi",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceAbbreviation" => "AWS PI",
         "serviceFullName" => "AWS Performance Insights",
         "serviceId" => "PI",
@@ -472,6 +472,7 @@ module Aws::PI
         "signingName" => "pi",
         "targetPrefix" => "PerformanceInsightsv20180227",
         "uid" => "pi-2018-02-27",
+        "xmlNamespace" => "http://pi.amazonaws.com/doc/2018-02-27/",
       }
 
       api.add_operation(:create_performance_analysis_report, Seahorse::Model::Operation.new.tap do |o|

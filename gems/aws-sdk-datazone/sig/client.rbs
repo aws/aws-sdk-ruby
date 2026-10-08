@@ -3666,6 +3666,7 @@ module Aws
         def owning_project_id: () -> ::String
         def name: () -> ::String
         def description: () -> ::String
+        def type: () -> ("DATA" | "SQL")
         def source_location: () -> Types::SourceLocation
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -3674,11 +3675,10 @@ module Aws
       def start_notebook_import: (
                                    domain_identifier: ::String,
                                    owning_project_identifier: ::String,
-                                   source_location: {
-                                     s3: ::String?
-                                   },
+                                   source_location: Params::source_location,
                                    name: ::String,
                                    ?description: ::String,
+                                   ?type: ("DATA" | "SQL"),
                                    ?client_token: ::String
                                  ) -> _StartNotebookImportResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNotebookImportResponseSuccess
@@ -3757,9 +3757,7 @@ module Aws
       def start_notebook_sync: (
                                  domain_identifier: ::String,
                                  owning_project_identifier: ::String,
-                                 source_location: {
-                                   s3: ::String?
-                                 },
+                                 source_location: Params::source_location,
                                  ?git_metadata: {
                                    connection_id: ::String,
                                    repository: ::String,

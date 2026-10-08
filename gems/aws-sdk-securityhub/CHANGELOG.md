@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2026-10-08)
+------------------
+
+* Feature - Release findings export APIs - StartExportJobV2, GetExportJobV2, ListExportJobsV2, and CancelExportJobV2. This supports exporting findings from AWS Security Hub to Amazon S3 bucket.
+
 1.166.0 (2026-10-01)
 ------------------
 

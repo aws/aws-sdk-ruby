@@ -134,6 +134,8 @@ module Aws::Budgets
     PlannedBudgetLimits = Shapes::MapShape.new(name: 'PlannedBudgetLimits')
     PolicyArn = Shapes::StringShape.new(name: 'PolicyArn')
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
+    ProductAttributeName = Shapes::StringShape.new(name: 'ProductAttributeName')
+    ProductAttributeValues = Shapes::StructureShape.new(name: 'ProductAttributeValues')
     Region = Shapes::StringShape.new(name: 'Region')
     ResourceLockedException = Shapes::StructureShape.new(name: 'ResourceLockedException')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
@@ -494,6 +496,7 @@ module Aws::Budgets
     Expression.add_member(:dimensions, Shapes::ShapeRef.new(shape: ExpressionDimensionValues, location_name: "Dimensions"))
     Expression.add_member(:tags, Shapes::ShapeRef.new(shape: TagValues, location_name: "Tags"))
     Expression.add_member(:cost_categories, Shapes::ShapeRef.new(shape: CostCategoryValues, location_name: "CostCategories"))
+    Expression.add_member(:product_attributes, Shapes::ShapeRef.new(shape: ProductAttributeValues, location_name: "ProductAttributes"))
     Expression.struct_class = Types::Expression
 
     ExpressionDimensionValues.add_member(:key, Shapes::ShapeRef.new(shape: Dimension, required: true, location_name: "Key"))
@@ -561,6 +564,11 @@ module Aws::Budgets
 
     PlannedBudgetLimits.key = Shapes::ShapeRef.new(shape: GenericString)
     PlannedBudgetLimits.value = Shapes::ShapeRef.new(shape: Spend)
+
+    ProductAttributeValues.add_member(:key, Shapes::ShapeRef.new(shape: ProductAttributeName, required: true, location_name: "Key"))
+    ProductAttributeValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
+    ProductAttributeValues.add_member(:match_options, Shapes::ShapeRef.new(shape: MatchOptions, location_name: "MatchOptions"))
+    ProductAttributeValues.struct_class = Types::ProductAttributeValues
 
     ResourceLockedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     ResourceLockedException.struct_class = Types::ResourceLockedException

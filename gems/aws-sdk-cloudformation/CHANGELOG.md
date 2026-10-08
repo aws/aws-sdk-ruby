@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.160.0 (2026-10-08)
+------------------
+
+* Feature - CloudFormation introduces force rollback, a new opt-in capability that lets your stacks complete a rollback even when an individual resource cannot be reverted. Set ForceRollback on ContinueUpdateRollback and CloudFormation records each resource that fails as skipped, completing the rollback.
+
 1.159.0 (2026-09-11)
 ------------------
 

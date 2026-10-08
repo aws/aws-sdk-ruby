@@ -16457,6 +16457,59 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] job_name
+    #   The name of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The ID of the job run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSystemLogsForJobRunRequest AWS API Documentation
+    #
+    class GetSystemLogsForJobRunRequest < Struct.new(
+      :job_name,
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] system_logs_url
+    #   The URL to download the system logs for the job run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSystemLogsForJobRunResponse AWS API Documentation
+    #
+    class GetSystemLogsForJobRunResponse < Struct.new(
+      :system_logs_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSystemLogsForSessionRequest AWS API Documentation
+    #
+    class GetSystemLogsForSessionRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] system_logs_url
+    #   The URL to download the system logs for the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSystemLogsForSessionResponse AWS API Documentation
+    #
+    class GetSystemLogsForSessionResponse < Struct.new(
+      :system_logs_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog_id
     #   The Catalog ID of the table.
     #   @return [String]

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.166.0 (2026-10-08)
+------------------
+
+* Feature - Added support for GuardDuty RDS Data Activity Monitoring
+
 1.165.0 (2026-09-30)
 ------------------
 

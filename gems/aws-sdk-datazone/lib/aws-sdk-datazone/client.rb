@@ -13733,8 +13733,9 @@ module Aws::DataZone
     #   The identifier of the project that will own the imported notebook.
     #
     # @option params [required, Types::SourceLocation] :source_location
-    #   The source location of the notebook to import. This specifies the
-    #   Amazon Simple Storage Service URI of the notebook file.
+    #   The source location of the notebook to import. Specify either a single
+    #   Amazon Simple Storage Service URI, or a list of objects to import as
+    #   the notebook's cells.
     #
     # @option params [required, String] :name
     #   The name of the imported notebook. The name must be between 1 and 256
@@ -13742,6 +13743,10 @@ module Aws::DataZone
     #
     # @option params [String] :description
     #   The description of the imported notebook.
+    #
+    # @option params [String] :type
+    #   The type of the notebook to import. If not specified, defaults to
+    #   `DATA`.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
@@ -13758,6 +13763,7 @@ module Aws::DataZone
     #   * {Types::StartNotebookImportOutput#owning_project_id #owning_project_id} => String
     #   * {Types::StartNotebookImportOutput#name #name} => String
     #   * {Types::StartNotebookImportOutput#description #description} => String
+    #   * {Types::StartNotebookImportOutput#type #type} => String
     #   * {Types::StartNotebookImportOutput#source_location #source_location} => Types::SourceLocation
     #   * {Types::StartNotebookImportOutput#created_at #created_at} => Time
     #   * {Types::StartNotebookImportOutput#created_by #created_by} => String
@@ -13769,9 +13775,18 @@ module Aws::DataZone
     #     owning_project_identifier: "ProjectId", # required
     #     source_location: { # required
     #       s3: "S3SourceLocation",
+    #       s3_files: {
+    #         bucket: "S3BucketName", # required
+    #         file_list: [ # required
+    #           {
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     name: "NotebookName", # required
     #     description: "Description",
+    #     type: "DATA", # accepts DATA, SQL
     #     client_token: "ClientToken",
     #   })
     #
@@ -13783,7 +13798,11 @@ module Aws::DataZone
     #   resp.owning_project_id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
+    #   resp.type #=> String, one of "DATA", "SQL"
     #   resp.source_location.s3 #=> String
+    #   resp.source_location.s3_files.bucket #=> String
+    #   resp.source_location.s3_files.file_list #=> Array
+    #   resp.source_location.s3_files.file_list[0].key #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #
@@ -14020,6 +14039,14 @@ module Aws::DataZone
     #     owning_project_identifier: "ProjectId", # required
     #     source_location: { # required
     #       s3: "S3SourceLocation",
+    #       s3_files: {
+    #         bucket: "S3BucketName", # required
+    #         file_list: [ # required
+    #           {
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     git_metadata: {
     #       connection_id: "GitConnectionId", # required
@@ -14043,6 +14070,9 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.owning_project_id #=> String
     #   resp.source_location.s3 #=> String
+    #   resp.source_location.s3_files.bucket #=> String
+    #   resp.source_location.s3_files.file_list #=> Array
+    #   resp.source_location.s3_files.file_list[0].key #=> String
     #   resp.git_metadata.connection_id #=> String
     #   resp.git_metadata.repository #=> String
     #   resp.git_metadata.branch #=> String
@@ -16707,7 +16737,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

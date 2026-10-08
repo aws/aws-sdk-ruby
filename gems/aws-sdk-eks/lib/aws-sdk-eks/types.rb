@@ -183,6 +183,72 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Configuration settings for an ACK (Amazon Web Services Controllers for
+    # Kubernetes) capability. This includes whether controllers can resolve
+    # cross-namespace resource references and which ACK service controllers
+    # are disabled.
+    #
+    # @!attribute [rw] enable_cross_namespace
+    #   Specifies whether ACK controllers resolve resource references to
+    #   resources in a different Kubernetes namespace. Set this value to
+    #   `true` to allow references to resolve to resources in another
+    #   namespace. If you don't specify this value, or you omit the `ack`
+    #   configuration entirely, the capability is created with this value
+    #   set to `false` and references must remain within the same namespace.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] disabled_services
+    #   A list of ACK service names whose controllers are turned off for
+    #   this capability, for example `s3`, `ec2`, and `iam`. Resources of a
+    #   disabled service aren't reconciled until you re-enable the service.
+    #   To keep all services enabled, omit this field or specify an empty
+    #   list. An unrecognized service name is accepted and stored but turns
+    #   nothing off, and `DescribeCapability` returns the list exactly as
+    #   you supplied it. For more information, see [ACK capability
+    #   configuration options][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-ack-capability.html#ack-configuration-options
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AckConfigRequest AWS API Documentation
+    #
+    class AckConfigRequest < Struct.new(
+      :enable_cross_namespace,
+      :disabled_services)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object containing configuration details for an ACK
+    # (Amazon Web Services Controllers for Kubernetes) capability.
+    #
+    # @!attribute [rw] enable_cross_namespace
+    #   Indicates whether ACK controllers resolve resource references to
+    #   resources in a different Kubernetes namespace. This value reflects
+    #   the setting that's in effect, and is `false` if you never specified
+    #   a value. Capabilities that were using cross-namespace references
+    #   before this setting became available have this value set to `true`,
+    #   so their behavior is unchanged.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] disabled_services
+    #   The list of ACK service names whose controllers are turned off for
+    #   this capability. Existing custom resource definitions remain
+    #   installed, and resources of a disabled service aren't reconciled
+    #   until the service is re-enabled.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AckConfigResponse AWS API Documentation
+    #
+    class AckConfigResponse < Struct.new(
+      :enable_cross_namespace,
+      :disabled_services)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   The name of your cluster.
     #   @return [String]
@@ -1242,10 +1308,17 @@ module Aws::EKS
     #   is only used when creating or updating an Argo CD capability.
     #   @return [Types::ArgoCdConfigRequest]
     #
+    # @!attribute [rw] ack
+    #   Configuration settings specific to ACK (Amazon Web Services
+    #   Controllers for Kubernetes) capabilities. This field is only used
+    #   when creating or updating an ACK capability.
+    #   @return [Types::AckConfigRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CapabilityConfigurationRequest AWS API Documentation
     #
     class CapabilityConfigurationRequest < Struct.new(
-      :argo_cd)
+      :argo_cd,
+      :ack)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1257,10 +1330,17 @@ module Aws::EKS
     #   server URL and other Argo CD-specific settings.
     #   @return [Types::ArgoCdConfigResponse]
     #
+    # @!attribute [rw] ack
+    #   Configuration settings for an ACK (Amazon Web Services Controllers
+    #   for Kubernetes) capability, including the cross-namespace reference
+    #   setting and the list of disabled services.
+    #   @return [Types::AckConfigResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CapabilityConfigurationResponse AWS API Documentation
     #
     class CapabilityConfigurationResponse < Struct.new(
-      :argo_cd)
+      :argo_cd,
+      :ack)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9024,6 +9104,35 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Configuration updates for an ACK (Amazon Web Services Controllers for
+    # Kubernetes) capability. You only need to specify the fields that you
+    # want to update.
+    #
+    # @!attribute [rw] enable_cross_namespace
+    #   Specifies whether ACK controllers resolve resource references to
+    #   resources in a different Kubernetes namespace. Set this value to
+    #   `false` to require references to remain within the same namespace,
+    #   or `true` to allow cross-namespace references. If you omit this
+    #   field, the current value is unchanged.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] disabled_services
+    #   An updated list of ACK service names whose controllers are turned
+    #   off for this capability. This list replaces the previous list
+    #   instead of merging with it, so specify the complete set of services
+    #   that you want turned off. If you omit this field, the previous list
+    #   is unchanged. To turn all services back on, specify an empty list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAckConfig AWS API Documentation
+    #
+    class UpdateAckConfig < Struct.new(
+      :enable_cross_namespace,
+      :disabled_services)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   The name of your cluster.
     #   @return [String]
@@ -9170,10 +9279,16 @@ module Aws::EKS
     #   Configuration updates specific to Argo CD capabilities.
     #   @return [Types::UpdateArgoCdConfig]
     #
+    # @!attribute [rw] ack
+    #   Configuration updates specific to ACK (Amazon Web Services
+    #   Controllers for Kubernetes) capabilities.
+    #   @return [Types::UpdateAckConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateCapabilityConfiguration AWS API Documentation
     #
     class UpdateCapabilityConfiguration < Struct.new(
-      :argo_cd)
+      :argo_cd,
+      :ack)
       SENSITIVE = []
       include Aws::Structure
     end

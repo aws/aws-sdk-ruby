@@ -4085,6 +4085,12 @@ module Aws::SecurityAgent
     #   The attack script used to reproduce the finding.
     #   @return [String]
     #
+    # @!attribute [rw] remediation_code
+    #   The suggested fix for the finding, describing the changes
+    #   recommended to remediate the vulnerability, with example code or
+    #   configuration.
+    #   @return [String]
+    #
     # @!attribute [rw] code_remediation_task
     #   The code remediation task associated with the finding, if code
     #   remediation was initiated.
@@ -4152,6 +4158,7 @@ module Aws::SecurityAgent
       :confidence,
       :validation_status,
       :attack_script,
+      :remediation_code,
       :code_remediation_task,
       :last_updated_by,
       :customer_note,

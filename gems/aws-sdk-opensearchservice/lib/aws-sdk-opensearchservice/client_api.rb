@@ -267,6 +267,7 @@ module Aws::OpenSearchService
     EBSOptionsStatus = Shapes::StructureShape.new(name: 'EBSOptionsStatus')
     EncryptionAtRestOptions = Shapes::StructureShape.new(name: 'EncryptionAtRestOptions')
     EncryptionAtRestOptionsStatus = Shapes::StructureShape.new(name: 'EncryptionAtRestOptionsStatus')
+    EncryptionMode = Shapes::StringShape.new(name: 'EncryptionMode')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointsMap = Shapes::MapShape.new(name: 'EndpointsMap')
     EngineMode = Shapes::StringShape.new(name: 'EngineMode')
@@ -1568,6 +1569,7 @@ module Aws::OpenSearchService
 
     EncryptionAtRestOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     EncryptionAtRestOptions.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    EncryptionAtRestOptions.add_member(:encryption_mode, Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "EncryptionMode"))
     EncryptionAtRestOptions.struct_class = Types::EncryptionAtRestOptions
 
     EncryptionAtRestOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, required: true, location_name: "Options"))

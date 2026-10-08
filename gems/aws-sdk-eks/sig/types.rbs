@@ -44,6 +44,18 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class AckConfigRequest
+      attr_accessor enable_cross_namespace: bool
+      attr_accessor disabled_services: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AckConfigResponse
+      attr_accessor enable_cross_namespace: bool
+      attr_accessor disabled_services: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ActivateCertificateAuthorityRequest
       attr_accessor cluster_name: ::String
       attr_accessor certificate_authority_id: ::String
@@ -298,11 +310,13 @@ module Aws::EKS
 
     class CapabilityConfigurationRequest
       attr_accessor argo_cd: Types::ArgoCdConfigRequest
+      attr_accessor ack: Types::AckConfigRequest
       SENSITIVE: []
     end
 
     class CapabilityConfigurationResponse
       attr_accessor argo_cd: Types::ArgoCdConfigResponse
+      attr_accessor ack: Types::AckConfigResponse
       SENSITIVE: []
     end
 
@@ -1982,6 +1996,12 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class UpdateAckConfig
+      attr_accessor enable_cross_namespace: bool
+      attr_accessor disabled_services: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class UpdateAddonRequest
       attr_accessor cluster_name: ::String
       attr_accessor addon_name: ::String
@@ -2007,6 +2027,7 @@ module Aws::EKS
 
     class UpdateCapabilityConfiguration
       attr_accessor argo_cd: Types::UpdateArgoCdConfig
+      attr_accessor ack: Types::UpdateAckConfig
       SENSITIVE: []
     end
 
@@ -2117,7 +2138,7 @@ module Aws::EKS
     end
 
     class UpdateParam
-      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "NodeRepairEnabled" | "UpdateStrategy" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations" | "UpgradePolicy" | "ZonalShiftConfig" | "ComputeConfig" | "StorageConfig" | "KubernetesNetworkConfig" | "RemoteNetworkConfig" | "DeletionProtection" | "NodeRepairConfig" | "RoleArn" | "RoleMappingsToAddOrUpdate" | "RoleMappingsToRemove" | "NetworkAccess" | "VendedLogs" | "UpdatedTier" | "PreviousTier" | "WarmPoolEnabled" | "WarmPoolMaxGroupPreparedCapacity" | "WarmPoolMinSize" | "WarmPoolState" | "WarmPoolReuseOnScaleIn" | "ControlPlaneEgressMode" | "KubeApiServerConfig" | "KubeSchedulerConfig" | "KubeControllerManagerConfig" | "ActiveCertificateAuthority" | "TrustedCertificateAuthorities" | "CertificateAuthorityId" | "SigningStatus")
+      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "NodeRepairEnabled" | "UpdateStrategy" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations" | "UpgradePolicy" | "ZonalShiftConfig" | "ComputeConfig" | "StorageConfig" | "KubernetesNetworkConfig" | "RemoteNetworkConfig" | "DeletionProtection" | "NodeRepairConfig" | "RoleArn" | "RoleMappingsToAddOrUpdate" | "RoleMappingsToRemove" | "NetworkAccess" | "VendedLogs" | "UpdatedTier" | "PreviousTier" | "EnableCrossNamespace" | "DisabledServices" | "WarmPoolEnabled" | "WarmPoolMaxGroupPreparedCapacity" | "WarmPoolMinSize" | "WarmPoolState" | "WarmPoolReuseOnScaleIn" | "ControlPlaneEgressMode" | "KubeApiServerConfig" | "KubeSchedulerConfig" | "KubeControllerManagerConfig" | "ActiveCertificateAuthority" | "TrustedCertificateAuthorities" | "CertificateAuthorityId" | "SigningStatus")
       attr_accessor value: ::String
       SENSITIVE: []
     end

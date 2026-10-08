@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2026-10-08)
+------------------
+
+* Feature - Adds support for multi-file notebook import. StartNotebookImport now accepts an s3Files source location with an ordered list of Amazon S3 objects, creating one notebook cell per file, plus a type field to create either a DATA or SQL notebook.
+
 1.93.0 (2026-09-30)
 ------------------
 

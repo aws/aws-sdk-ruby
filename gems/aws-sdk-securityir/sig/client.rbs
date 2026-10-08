@@ -239,6 +239,28 @@ module Aws
                                           ) -> _GetCaseAttachmentUploadUrlResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCaseAttachmentUploadUrlResponseSuccess
 
+      interface _GetFindingMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingMetricsResponse]
+        def findings_ingested_security_hub: () -> ::Integer
+        def findings_ingested_guard_duty: () -> ::Integer
+        def findings_triaged: () -> ::Integer
+        def findings_triaged_false_positive: () -> ::Integer
+        def findings_investigated: () -> ::Integer
+        def findings_investigated_false_positive: () -> ::Integer
+        def findings_escalated: () -> ::Integer
+        def findings_escalated_false_positive: () -> ::Integer
+        def findings_true_positive: () -> ::Integer
+        def findings_investigated_in_progress: () -> ::Integer
+        def findings_escalated_in_progress: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityIR/Client.html#get_finding_metrics-instance_method
+      def get_finding_metrics: (
+                                 membership_id: ::String,
+                                 start_date: ::Time,
+                                 end_date: ::Time
+                               ) -> _GetFindingMetricsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingMetricsResponseSuccess
+
       interface _GetMembershipResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMembershipResponse]
         def membership_id: () -> ::String

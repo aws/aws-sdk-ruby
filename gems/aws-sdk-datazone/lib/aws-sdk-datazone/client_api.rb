@@ -1053,9 +1053,14 @@ module Aws::DataZone
     RunIdentifier = Shapes::StringShape.new(name: 'RunIdentifier')
     RunStatisticsForAssets = Shapes::StructureShape.new(name: 'RunStatisticsForAssets')
     S3AccessGrantLocationId = Shapes::StringShape.new(name: 'S3AccessGrantLocationId')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
+    S3File = Shapes::StructureShape.new(name: 'S3File')
+    S3FileList = Shapes::ListShape.new(name: 'S3FileList')
+    S3FilesLocation = Shapes::StructureShape.new(name: 'S3FilesLocation')
     S3Location = Shapes::StringShape.new(name: 'S3Location')
     S3LocationList = Shapes::ListShape.new(name: 'S3LocationList')
+    S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     S3Path = Shapes::StringShape.new(name: 'S3Path')
     S3Permission = Shapes::StringShape.new(name: 'S3Permission')
     S3Permissions = Shapes::ListShape.new(name: 'S3Permissions')
@@ -5834,6 +5839,15 @@ module Aws::DataZone
     S3Destination.add_member(:uri, Shapes::ShapeRef.new(shape: NotebookS3Uri, location_name: "uri"))
     S3Destination.struct_class = Types::S3Destination
 
+    S3File.add_member(:key, Shapes::ShapeRef.new(shape: S3ObjectKey, required: true, location_name: "key"))
+    S3File.struct_class = Types::S3File
+
+    S3FileList.member = Shapes::ShapeRef.new(shape: S3File)
+
+    S3FilesLocation.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "bucket"))
+    S3FilesLocation.add_member(:file_list, Shapes::ShapeRef.new(shape: S3FileList, required: true, location_name: "fileList"))
+    S3FilesLocation.struct_class = Types::S3FilesLocation
+
     S3LocationList.member = Shapes::ShapeRef.new(shape: S3Location)
 
     S3Permissions.member = Shapes::ShapeRef.new(shape: S3Permission)
@@ -6033,8 +6047,10 @@ module Aws::DataZone
     SnowflakePropertiesPatch.struct_class = Types::SnowflakePropertiesPatch
 
     SourceLocation.add_member(:s3, Shapes::ShapeRef.new(shape: S3SourceLocation, location_name: "s3"))
+    SourceLocation.add_member(:s3_files, Shapes::ShapeRef.new(shape: S3FilesLocation, location_name: "s3Files"))
     SourceLocation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SourceLocation.add_member_subclass(:s3, Types::SourceLocation::S3)
+    SourceLocation.add_member_subclass(:s3_files, Types::SourceLocation::S3Files)
     SourceLocation.add_member_subclass(:unknown, Types::SourceLocation::Unknown)
     SourceLocation.struct_class = Types::SourceLocation
 
@@ -6164,6 +6180,7 @@ module Aws::DataZone
     StartNotebookImportInput.add_member(:source_location, Shapes::ShapeRef.new(shape: SourceLocation, required: true, location_name: "sourceLocation"))
     StartNotebookImportInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "name"))
     StartNotebookImportInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    StartNotebookImportInput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "type"))
     StartNotebookImportInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartNotebookImportInput.struct_class = Types::StartNotebookImportInput
 
@@ -6173,6 +6190,7 @@ module Aws::DataZone
     StartNotebookImportOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "owningProjectId"))
     StartNotebookImportOutput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, location_name: "name"))
     StartNotebookImportOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    StartNotebookImportOutput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, location_name: "type"))
     StartNotebookImportOutput.add_member(:source_location, Shapes::ShapeRef.new(shape: SourceLocation, location_name: "sourceLocation"))
     StartNotebookImportOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     StartNotebookImportOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))

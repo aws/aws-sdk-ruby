@@ -1457,6 +1457,7 @@ module Aws::SecurityAgent
     Finding.add_member(:confidence, Shapes::ShapeRef.new(shape: ConfidenceLevel, location_name: "confidence"))
     Finding.add_member(:validation_status, Shapes::ShapeRef.new(shape: ValidationStatus, location_name: "validationStatus"))
     Finding.add_member(:attack_script, Shapes::ShapeRef.new(shape: String, location_name: "attackScript"))
+    Finding.add_member(:remediation_code, Shapes::ShapeRef.new(shape: String, location_name: "remediationCode"))
     Finding.add_member(:code_remediation_task, Shapes::ShapeRef.new(shape: CodeRemediationTask, location_name: "codeRemediationTask"))
     Finding.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdatedBy"))
     Finding.add_member(:customer_note, Shapes::ShapeRef.new(shape: String, location_name: "customerNote"))

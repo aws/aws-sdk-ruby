@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2026-10-08)
+------------------
+
+* Feature - Adds release management associations with private network access to AWS DevOps Agent, and a releaseManagementAssociationId field on GitHub and GitLab associations. This helps release management agents (Release-readiness review and Release Testing) access customer resources that are behind a VPC.
+
 1.16.0 (2026-09-11)
 ------------------
 

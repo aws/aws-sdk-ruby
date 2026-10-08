@@ -125,6 +125,7 @@ module Aws::CostExplorer
     DescribeCostCategoryDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeCostCategoryDefinitionRequest')
     DescribeCostCategoryDefinitionResponse = Shapes::StructureShape.new(name: 'DescribeCostCategoryDefinitionResponse')
     Dimension = Shapes::StringShape.new(name: 'Dimension')
+    DimensionKey = Shapes::StringShape.new(name: 'DimensionKey')
     DimensionValues = Shapes::StructureShape.new(name: 'DimensionValues')
     DimensionValuesWithAttributes = Shapes::StructureShape.new(name: 'DimensionValuesWithAttributes')
     DimensionValuesWithAttributesList = Shapes::ListShape.new(name: 'DimensionValuesWithAttributesList')
@@ -262,6 +263,9 @@ module Aws::CostExplorer
     PlatformDifference = Shapes::StringShape.new(name: 'PlatformDifference')
     PlatformDifferences = Shapes::ListShape.new(name: 'PlatformDifferences')
     PredictionIntervalLevel = Shapes::IntegerShape.new(name: 'PredictionIntervalLevel')
+    ProductAttributeName = Shapes::StringShape.new(name: 'ProductAttributeName')
+    ProductAttributeValueList = Shapes::ListShape.new(name: 'ProductAttributeValueList')
+    ProductAttributeValues = Shapes::StructureShape.new(name: 'ProductAttributeValues')
     ProvideAnomalyFeedbackRequest = Shapes::StructureShape.new(name: 'ProvideAnomalyFeedbackRequest')
     ProvideAnomalyFeedbackResponse = Shapes::StructureShape.new(name: 'ProvideAnomalyFeedbackResponse')
     PurchasedHours = Shapes::StringShape.new(name: 'PurchasedHours')
@@ -801,6 +805,7 @@ module Aws::CostExplorer
     Expression.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionValues, location_name: "Dimensions"))
     Expression.add_member(:tags, Shapes::ShapeRef.new(shape: TagValues, location_name: "Tags"))
     Expression.add_member(:cost_categories, Shapes::ShapeRef.new(shape: CostCategoryValues, location_name: "CostCategories"))
+    Expression.add_member(:product_attributes, Shapes::ShapeRef.new(shape: ProductAttributeValues, location_name: "ProductAttributes"))
     Expression.struct_class = Types::Expression
 
     Expressions.member = Shapes::ShapeRef.new(shape: Expression)
@@ -972,6 +977,7 @@ module Aws::CostExplorer
     GetDimensionValuesRequest.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, location_name: "SearchString"))
     GetDimensionValuesRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetDimensionValuesRequest.add_member(:dimension, Shapes::ShapeRef.new(shape: Dimension, required: true, location_name: "Dimension"))
+    GetDimensionValuesRequest.add_member(:dimension_key, Shapes::ShapeRef.new(shape: DimensionKey, location_name: "DimensionKey"))
     GetDimensionValuesRequest.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "Context"))
     GetDimensionValuesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetDimensionValuesRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinitions, location_name: "SortBy"))
@@ -1265,6 +1271,13 @@ module Aws::CostExplorer
     NetworkResourceUtilization.struct_class = Types::NetworkResourceUtilization
 
     PlatformDifferences.member = Shapes::ShapeRef.new(shape: PlatformDifference)
+
+    ProductAttributeValueList.member = Shapes::ShapeRef.new(shape: Value)
+
+    ProductAttributeValues.add_member(:key, Shapes::ShapeRef.new(shape: ProductAttributeName, required: true, location_name: "Key"))
+    ProductAttributeValues.add_member(:values, Shapes::ShapeRef.new(shape: ProductAttributeValueList, location_name: "Values"))
+    ProductAttributeValues.add_member(:match_options, Shapes::ShapeRef.new(shape: MatchOptions, location_name: "MatchOptions"))
+    ProductAttributeValues.struct_class = Types::ProductAttributeValues
 
     ProvideAnomalyFeedbackRequest.add_member(:anomaly_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "AnomalyId"))
     ProvideAnomalyFeedbackRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: AnomalyFeedbackType, required: true, location_name: "Feedback"))

@@ -203,6 +203,7 @@ module Aws::CloudFormation
     FailedStackInstancesCount = Shapes::IntegerShape.new(name: 'FailedStackInstancesCount')
     FailureToleranceCount = Shapes::IntegerShape.new(name: 'FailureToleranceCount')
     FailureTolerancePercentage = Shapes::IntegerShape.new(name: 'FailureTolerancePercentage')
+    ForceRollback = Shapes::BooleanShape.new(name: 'ForceRollback')
     GeneratedTemplateDeletionPolicy = Shapes::StringShape.new(name: 'GeneratedTemplateDeletionPolicy')
     GeneratedTemplateId = Shapes::StringShape.new(name: 'GeneratedTemplateId')
     GeneratedTemplateName = Shapes::StringShape.new(name: 'GeneratedTemplateName')
@@ -806,6 +807,7 @@ module Aws::CloudFormation
     ContinueUpdateRollbackInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     ContinueUpdateRollbackInput.add_member(:resources_to_skip, Shapes::ShapeRef.new(shape: ResourcesToSkip, location_name: "ResourcesToSkip"))
     ContinueUpdateRollbackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    ContinueUpdateRollbackInput.add_member(:force_rollback, Shapes::ShapeRef.new(shape: ForceRollback, location_name: "ForceRollback"))
     ContinueUpdateRollbackInput.struct_class = Types::ContinueUpdateRollbackInput
 
     ContinueUpdateRollbackOutput.struct_class = Types::ContinueUpdateRollbackOutput

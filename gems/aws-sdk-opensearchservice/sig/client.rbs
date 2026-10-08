@@ -314,7 +314,8 @@ module Aws
                            },
                            ?encryption_at_rest_options: {
                              enabled: bool?,
-                             kms_key_id: ::String?
+                             kms_key_id: ::String?,
+                             encryption_mode: ("DISK" | "NATIVE")?
                            },
                            ?node_to_node_encryption_options: {
                              enabled: bool?
@@ -1482,7 +1483,8 @@ module Aws
                                     }],
                                   ?encryption_at_rest_options: {
                                     enabled: bool?,
-                                    kms_key_id: ::String?
+                                    kms_key_id: ::String?,
+                                    encryption_mode: ("DISK" | "NATIVE")?
                                   },
                                   ?domain_endpoint_options: {
                                     enforce_https: bool?,

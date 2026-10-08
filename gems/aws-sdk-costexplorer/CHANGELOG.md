@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.157.0 (2026-10-08)
+------------------
+
+* Feature - Adds a product attribute dimension to GetCostAndUsage, GetCostAndUsageWithResources, and GetDimensionValues, letting customers group, filter, and discover Cost Explorer costs by structured attributes such as Amazon Bedrock model, provider, inference type, and feature.
+
 1.156.0 (2026-09-11)
 ------------------
 

@@ -1118,6 +1118,7 @@ module Aws::SecurityAgent
       attr_accessor confidence: ("FALSE_POSITIVE" | "UNCONFIRMED" | "LOW" | "MEDIUM" | "HIGH")
       attr_accessor validation_status: ("CONFIRMED" | "NOT_REPRODUCED" | "VALIDATION_FAILED" | "VALIDATING" | "NOT_VALIDATED")
       attr_accessor attack_script: ::String
+      attr_accessor remediation_code: ::String
       attr_accessor code_remediation_task: Types::CodeRemediationTask
       attr_accessor last_updated_by: ::String
       attr_accessor customer_note: ::String

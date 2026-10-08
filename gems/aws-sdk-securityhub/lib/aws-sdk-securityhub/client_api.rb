@@ -771,6 +771,8 @@ module Aws::SecurityHub
     BooleanConfigurationOptions = Shapes::StructureShape.new(name: 'BooleanConfigurationOptions')
     BooleanFilter = Shapes::StructureShape.new(name: 'BooleanFilter')
     BooleanFilterList = Shapes::ListShape.new(name: 'BooleanFilterList')
+    CancelExportJobV2Request = Shapes::StructureShape.new(name: 'CancelExportJobV2Request')
+    CancelExportJobV2Response = Shapes::StructureShape.new(name: 'CancelExportJobV2Response')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
     Cell = Shapes::StructureShape.new(name: 'Cell')
     Cells = Shapes::ListShape.new(name: 'Cells')
@@ -929,6 +931,18 @@ module Aws::SecurityHub
     EnablementStatus = Shapes::StringShape.new(name: 'EnablementStatus')
     EnumConfigurationOptions = Shapes::StructureShape.new(name: 'EnumConfigurationOptions')
     EnumListConfigurationOptions = Shapes::StructureShape.new(name: 'EnumListConfigurationOptions')
+    ExportDataType = Shapes::StringShape.new(name: 'ExportDataType')
+    ExportDestination = Shapes::UnionShape.new(name: 'ExportDestination')
+    ExportFailureCode = Shapes::StringShape.new(name: 'ExportFailureCode')
+    ExportJobId = Shapes::StringShape.new(name: 'ExportJobId')
+    ExportMaxResults = Shapes::IntegerShape.new(name: 'ExportMaxResults')
+    ExportName = Shapes::StringShape.new(name: 'ExportName')
+    ExportOutput = Shapes::UnionShape.new(name: 'ExportOutput')
+    ExportOutputSummary = Shapes::UnionShape.new(name: 'ExportOutputSummary')
+    ExportScopes = Shapes::StructureShape.new(name: 'ExportScopes')
+    ExportStatus = Shapes::StringShape.new(name: 'ExportStatus')
+    ExportSummary = Shapes::StructureShape.new(name: 'ExportSummary')
+    ExportSummaryList = Shapes::ListShape.new(name: 'ExportSummaryList')
     ExposureFinding = Shapes::StructureShape.new(name: 'ExposureFinding')
     ExposureFindingItemsList = Shapes::ListShape.new(name: 'ExposureFindingItemsList')
     ExposureImpact = Shapes::StringShape.new(name: 'ExposureImpact')
@@ -953,6 +967,11 @@ module Aws::SecurityHub
     FindingProviderFields = Shapes::StructureShape.new(name: 'FindingProviderFields')
     FindingProviderSeverity = Shapes::StructureShape.new(name: 'FindingProviderSeverity')
     FindingScopes = Shapes::StructureShape.new(name: 'FindingScopes')
+    FindingsExportFormat = Shapes::StringShape.new(name: 'FindingsExportFormat')
+    FindingsOutput = Shapes::StructureShape.new(name: 'FindingsOutput')
+    FindingsOutputSummary = Shapes::StructureShape.new(name: 'FindingsOutputSummary')
+    FindingsSelectableField = Shapes::StringShape.new(name: 'FindingsSelectableField')
+    FindingsSelectedFieldList = Shapes::ListShape.new(name: 'FindingsSelectedFieldList')
     FindingsTrendsCompositeFilter = Shapes::StructureShape.new(name: 'FindingsTrendsCompositeFilter')
     FindingsTrendsCompositeFilterList = Shapes::ListShape.new(name: 'FindingsTrendsCompositeFilterList')
     FindingsTrendsFilters = Shapes::StructureShape.new(name: 'FindingsTrendsFilters')
@@ -993,6 +1012,8 @@ module Aws::SecurityHub
     GetConnectorV2Response = Shapes::StructureShape.new(name: 'GetConnectorV2Response')
     GetEnabledStandardsRequest = Shapes::StructureShape.new(name: 'GetEnabledStandardsRequest')
     GetEnabledStandardsResponse = Shapes::StructureShape.new(name: 'GetEnabledStandardsResponse')
+    GetExportJobV2Request = Shapes::StructureShape.new(name: 'GetExportJobV2Request')
+    GetExportJobV2Response = Shapes::StructureShape.new(name: 'GetExportJobV2Response')
     GetFindingAggregatorRequest = Shapes::StructureShape.new(name: 'GetFindingAggregatorRequest')
     GetFindingAggregatorResponse = Shapes::StructureShape.new(name: 'GetFindingAggregatorResponse')
     GetFindingHistoryRequest = Shapes::StructureShape.new(name: 'GetFindingHistoryRequest')
@@ -1096,6 +1117,8 @@ module Aws::SecurityHub
     ListConnectorsV2Response = Shapes::StructureShape.new(name: 'ListConnectorsV2Response')
     ListEnabledProductsForImportRequest = Shapes::StructureShape.new(name: 'ListEnabledProductsForImportRequest')
     ListEnabledProductsForImportResponse = Shapes::StructureShape.new(name: 'ListEnabledProductsForImportResponse')
+    ListExportJobsV2Request = Shapes::StructureShape.new(name: 'ListExportJobsV2Request')
+    ListExportJobsV2Response = Shapes::StructureShape.new(name: 'ListExportJobsV2Response')
     ListExposuresByRemediationV2Request = Shapes::StructureShape.new(name: 'ListExposuresByRemediationV2Request')
     ListExposuresByRemediationV2Response = Shapes::StructureShape.new(name: 'ListExposuresByRemediationV2Response')
     ListFindingAggregatorsRequest = Shapes::StructureShape.new(name: 'ListFindingAggregatorsRequest')
@@ -1338,6 +1361,8 @@ module Aws::SecurityHub
     RuleOrderValueV2 = Shapes::FloatShape.new(name: 'RuleOrderValueV2')
     RuleStatus = Shapes::StringShape.new(name: 'RuleStatus')
     RuleStatusV2 = Shapes::StringShape.new(name: 'RuleStatusV2')
+    S3ExportDestination = Shapes::StructureShape.new(name: 'S3ExportDestination')
+    S3ObjectPrefix = Shapes::StringShape.new(name: 'S3ObjectPrefix')
     ScopeType = Shapes::StringShape.new(name: 'ScopeType')
     ScopeValueList = Shapes::ListShape.new(name: 'ScopeValueList')
     SecurityControl = Shapes::StructureShape.new(name: 'SecurityControl')
@@ -1406,6 +1431,8 @@ module Aws::SecurityHub
     StartConfigurationPolicyAssociationResponse = Shapes::StructureShape.new(name: 'StartConfigurationPolicyAssociationResponse')
     StartConfigurationPolicyDisassociationRequest = Shapes::StructureShape.new(name: 'StartConfigurationPolicyDisassociationRequest')
     StartConfigurationPolicyDisassociationResponse = Shapes::StructureShape.new(name: 'StartConfigurationPolicyDisassociationResponse')
+    StartExportJobV2Request = Shapes::StructureShape.new(name: 'StartExportJobV2Request')
+    StartExportJobV2Response = Shapes::StructureShape.new(name: 'StartExportJobV2Response')
     StatelessCustomActionDefinition = Shapes::StructureShape.new(name: 'StatelessCustomActionDefinition')
     StatelessCustomPublishMetricAction = Shapes::StructureShape.new(name: 'StatelessCustomPublishMetricAction')
     StatelessCustomPublishMetricActionDimension = Shapes::StructureShape.new(name: 'StatelessCustomPublishMetricActionDimension')
@@ -5643,6 +5670,13 @@ module Aws::SecurityHub
 
     BooleanFilterList.member = Shapes::ShapeRef.new(shape: BooleanFilter)
 
+    CancelExportJobV2Request.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location: "uri", location_name: "ExportJobId"))
+    CancelExportJobV2Request.struct_class = Types::CancelExportJobV2Request
+
+    CancelExportJobV2Response.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location_name: "ExportJobId"))
+    CancelExportJobV2Response.add_member(:status, Shapes::ShapeRef.new(shape: ExportStatus, required: true, location_name: "Status"))
+    CancelExportJobV2Response.struct_class = Types::CancelExportJobV2Response
+
     CategoryList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     Cell.add_member(:column, Shapes::ShapeRef.new(shape: Long, location_name: "Column"))
@@ -6225,6 +6259,42 @@ module Aws::SecurityHub
     EnumListConfigurationOptions.add_member(:allowed_values, Shapes::ShapeRef.new(shape: StringList, location_name: "AllowedValues"))
     EnumListConfigurationOptions.struct_class = Types::EnumListConfigurationOptions
 
+    ExportDestination.add_member(:s3, Shapes::ShapeRef.new(shape: S3ExportDestination, location_name: "S3"))
+    ExportDestination.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ExportDestination.add_member_subclass(:s3, Types::ExportDestination::S3)
+    ExportDestination.add_member_subclass(:unknown, Types::ExportDestination::Unknown)
+    ExportDestination.struct_class = Types::ExportDestination
+
+    ExportOutput.add_member(:findings, Shapes::ShapeRef.new(shape: FindingsOutput, location_name: "Findings"))
+    ExportOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ExportOutput.add_member_subclass(:findings, Types::ExportOutput::Findings)
+    ExportOutput.add_member_subclass(:unknown, Types::ExportOutput::Unknown)
+    ExportOutput.struct_class = Types::ExportOutput
+
+    ExportOutputSummary.add_member(:findings, Shapes::ShapeRef.new(shape: FindingsOutputSummary, location_name: "Findings"))
+    ExportOutputSummary.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ExportOutputSummary.add_member_subclass(:findings, Types::ExportOutputSummary::Findings)
+    ExportOutputSummary.add_member_subclass(:unknown, Types::ExportOutputSummary::Unknown)
+    ExportOutputSummary.struct_class = Types::ExportOutputSummary
+
+    ExportScopes.add_member(:aws_organizations, Shapes::ShapeRef.new(shape: AwsOrganizationScopeList, location_name: "AwsOrganizations"))
+    ExportScopes.struct_class = Types::ExportScopes
+
+    ExportSummary.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location_name: "ExportJobId"))
+    ExportSummary.add_member(:name, Shapes::ShapeRef.new(shape: ExportName, location_name: "Name"))
+    ExportSummary.add_member(:status, Shapes::ShapeRef.new(shape: ExportStatus, required: true, location_name: "Status"))
+    ExportSummary.add_member(:data_type, Shapes::ShapeRef.new(shape: ExportDataType, required: true, location_name: "DataType"))
+    ExportSummary.add_member(:output_configuration, Shapes::ShapeRef.new(shape: ExportOutputSummary, location_name: "OutputConfiguration"))
+    ExportSummary.add_member(:scopes, Shapes::ShapeRef.new(shape: ExportScopes, location_name: "Scopes"))
+    ExportSummary.add_member(:destination, Shapes::ShapeRef.new(shape: ExportDestination, required: true, location_name: "Destination"))
+    ExportSummary.add_member(:failure_code, Shapes::ShapeRef.new(shape: ExportFailureCode, location_name: "FailureCode"))
+    ExportSummary.add_member(:failure_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FailureMessage"))
+    ExportSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartedAt"))
+    ExportSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndedAt"))
+    ExportSummary.struct_class = Types::ExportSummary
+
+    ExportSummaryList.member = Shapes::ShapeRef.new(shape: ExportSummary)
+
     ExposureFinding.add_member(:metadata_uid, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "MetadataUid"))
     ExposureFinding.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Title"))
     ExposureFinding.add_member(:previous_severity, Shapes::ShapeRef.new(shape: ExposureSeverity, required: true, location_name: "PreviousSeverity"))
@@ -6294,6 +6364,16 @@ module Aws::SecurityHub
 
     FindingScopes.add_member(:aws_organizations, Shapes::ShapeRef.new(shape: AwsOrganizationScopeList, location_name: "AwsOrganizations"))
     FindingScopes.struct_class = Types::FindingScopes
+
+    FindingsOutput.add_member(:format, Shapes::ShapeRef.new(shape: FindingsExportFormat, required: true, location_name: "Format"))
+    FindingsOutput.add_member(:filters, Shapes::ShapeRef.new(shape: OcsfFindingFilters, location_name: "Filters"))
+    FindingsOutput.add_member(:selected_fields, Shapes::ShapeRef.new(shape: FindingsSelectedFieldList, location_name: "SelectedFields"))
+    FindingsOutput.struct_class = Types::FindingsOutput
+
+    FindingsOutputSummary.add_member(:format, Shapes::ShapeRef.new(shape: FindingsExportFormat, required: true, location_name: "Format"))
+    FindingsOutputSummary.struct_class = Types::FindingsOutputSummary
+
+    FindingsSelectedFieldList.member = Shapes::ShapeRef.new(shape: FindingsSelectableField)
 
     FindingsTrendsCompositeFilter.add_member(:string_filters, Shapes::ShapeRef.new(shape: FindingsTrendsStringFilterList, location_name: "StringFilters"))
     FindingsTrendsCompositeFilter.add_member(:nested_composite_filters, Shapes::ShapeRef.new(shape: FindingsTrendsCompositeFilterList, location_name: "NestedCompositeFilters"))
@@ -6455,6 +6535,22 @@ module Aws::SecurityHub
     GetEnabledStandardsResponse.add_member(:standards_subscriptions, Shapes::ShapeRef.new(shape: StandardsSubscriptions, location_name: "StandardsSubscriptions"))
     GetEnabledStandardsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetEnabledStandardsResponse.struct_class = Types::GetEnabledStandardsResponse
+
+    GetExportJobV2Request.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location: "uri", location_name: "ExportJobId"))
+    GetExportJobV2Request.struct_class = Types::GetExportJobV2Request
+
+    GetExportJobV2Response.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location_name: "ExportJobId"))
+    GetExportJobV2Response.add_member(:name, Shapes::ShapeRef.new(shape: ExportName, location_name: "Name"))
+    GetExportJobV2Response.add_member(:status, Shapes::ShapeRef.new(shape: ExportStatus, required: true, location_name: "Status"))
+    GetExportJobV2Response.add_member(:data_type, Shapes::ShapeRef.new(shape: ExportDataType, required: true, location_name: "DataType"))
+    GetExportJobV2Response.add_member(:output_configuration, Shapes::ShapeRef.new(shape: ExportOutput, location_name: "OutputConfiguration"))
+    GetExportJobV2Response.add_member(:scopes, Shapes::ShapeRef.new(shape: ExportScopes, location_name: "Scopes"))
+    GetExportJobV2Response.add_member(:destination, Shapes::ShapeRef.new(shape: ExportDestination, required: true, location_name: "Destination"))
+    GetExportJobV2Response.add_member(:failure_code, Shapes::ShapeRef.new(shape: ExportFailureCode, location_name: "FailureCode"))
+    GetExportJobV2Response.add_member(:failure_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FailureMessage"))
+    GetExportJobV2Response.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartedAt"))
+    GetExportJobV2Response.add_member(:ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndedAt"))
+    GetExportJobV2Response.struct_class = Types::GetExportJobV2Response
 
     GetFindingAggregatorRequest.add_member(:finding_aggregator_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "FindingAggregatorArn"))
     GetFindingAggregatorRequest.struct_class = Types::GetFindingAggregatorRequest
@@ -6845,6 +6941,16 @@ module Aws::SecurityHub
     ListEnabledProductsForImportResponse.add_member(:product_subscriptions, Shapes::ShapeRef.new(shape: ProductSubscriptionArnList, location_name: "ProductSubscriptions"))
     ListEnabledProductsForImportResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEnabledProductsForImportResponse.struct_class = Types::ListEnabledProductsForImportResponse
+
+    ListExportJobsV2Request.add_member(:status, Shapes::ShapeRef.new(shape: ExportStatus, location: "querystring", location_name: "Status"))
+    ListExportJobsV2Request.add_member(:data_type, Shapes::ShapeRef.new(shape: ExportDataType, location: "querystring", location_name: "DataType"))
+    ListExportJobsV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: ExportMaxResults, location: "querystring", location_name: "MaxResults"))
+    ListExportJobsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListExportJobsV2Request.struct_class = Types::ListExportJobsV2Request
+
+    ListExportJobsV2Response.add_member(:items, Shapes::ShapeRef.new(shape: ExportSummaryList, required: true, location_name: "Items"))
+    ListExportJobsV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListExportJobsV2Response.struct_class = Types::ListExportJobsV2Response
 
     ListExposuresByRemediationV2Request.add_member(:target_uid, Shapes::ShapeRef.new(shape: RemediationStringUid, required: true, location_name: "TargetUid"))
     ListExposuresByRemediationV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -7840,6 +7946,11 @@ module Aws::SecurityHub
     RuleGroupVariablesPortSetsDetails.add_member(:definition, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Definition"))
     RuleGroupVariablesPortSetsDetails.struct_class = Types::RuleGroupVariablesPortSetsDetails
 
+    S3ExportDestination.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "BucketArn"))
+    S3ExportDestination.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "KmsKeyArn"))
+    S3ExportDestination.add_member(:object_prefix, Shapes::ShapeRef.new(shape: S3ObjectPrefix, location_name: "ObjectPrefix"))
+    S3ExportDestination.struct_class = Types::S3ExportDestination
+
     ScopeValueList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     SecurityControl.add_member(:security_control_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecurityControlId"))
@@ -8110,6 +8221,16 @@ module Aws::SecurityHub
     StartConfigurationPolicyDisassociationRequest.struct_class = Types::StartConfigurationPolicyDisassociationRequest
 
     StartConfigurationPolicyDisassociationResponse.struct_class = Types::StartConfigurationPolicyDisassociationResponse
+
+    StartExportJobV2Request.add_member(:name, Shapes::ShapeRef.new(shape: ExportName, location_name: "Name"))
+    StartExportJobV2Request.add_member(:destination, Shapes::ShapeRef.new(shape: ExportDestination, required: true, location_name: "Destination"))
+    StartExportJobV2Request.add_member(:output_configuration, Shapes::ShapeRef.new(shape: ExportOutput, required: true, location_name: "OutputConfiguration"))
+    StartExportJobV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: ExportScopes, location_name: "Scopes"))
+    StartExportJobV2Request.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    StartExportJobV2Request.struct_class = Types::StartExportJobV2Request
+
+    StartExportJobV2Response.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location_name: "ExportJobId"))
+    StartExportJobV2Response.struct_class = Types::StartExportJobV2Response
 
     StatelessCustomActionDefinition.add_member(:publish_metric_action, Shapes::ShapeRef.new(shape: StatelessCustomPublishMetricAction, location_name: "PublishMetricAction"))
     StatelessCustomActionDefinition.struct_class = Types::StatelessCustomActionDefinition
@@ -8651,6 +8772,20 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:cancel_export_job_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelExportJobV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/exportjobsv2/{ExportJobId}/cancel"
+        o.input = Shapes::ShapeRef.new(shape: CancelExportJobV2Request)
+        o.output = Shapes::ShapeRef.new(shape: CancelExportJobV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:create_action_target, Seahorse::Model::Operation.new.tap do |o|
@@ -9382,6 +9517,19 @@ module Aws::SecurityHub
         )
       end)
 
+      api.add_operation(:get_export_job_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExportJobV2"
+        o.http_method = "GET"
+        o.http_request_uri = "/exportjobsv2/{ExportJobId}"
+        o.input = Shapes::ShapeRef.new(shape: GetExportJobV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetExportJobV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_finding_aggregator, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetFindingAggregator"
         o.http_method = "GET"
@@ -9809,6 +9957,24 @@ module Aws::SecurityHub
         )
       end)
 
+      api.add_operation(:list_export_jobs_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExportJobsV2"
+        o.http_method = "GET"
+        o.http_request_uri = "/exportjobsv2"
+        o.input = Shapes::ShapeRef.new(shape: ListExportJobsV2Request)
+        o.output = Shapes::ShapeRef.new(shape: ListExportJobsV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_exposures_by_remediation_v2, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListExposuresByRemediationV2"
         o.http_method = "POST"
@@ -10007,6 +10173,22 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_export_job_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartExportJobV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/exportjobsv2"
+        o.input = Shapes::ShapeRef.new(shape: StartExportJobV2Request)
+        o.output = Shapes::ShapeRef.new(shape: StartExportJobV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

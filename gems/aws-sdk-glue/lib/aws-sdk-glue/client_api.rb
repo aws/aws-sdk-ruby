@@ -866,6 +866,10 @@ module Aws::Glue
     GetSessionResponse = Shapes::StructureShape.new(name: 'GetSessionResponse')
     GetStatementRequest = Shapes::StructureShape.new(name: 'GetStatementRequest')
     GetStatementResponse = Shapes::StructureShape.new(name: 'GetStatementResponse')
+    GetSystemLogsForJobRunRequest = Shapes::StructureShape.new(name: 'GetSystemLogsForJobRunRequest')
+    GetSystemLogsForJobRunResponse = Shapes::StructureShape.new(name: 'GetSystemLogsForJobRunResponse')
+    GetSystemLogsForSessionRequest = Shapes::StructureShape.new(name: 'GetSystemLogsForSessionRequest')
+    GetSystemLogsForSessionResponse = Shapes::StructureShape.new(name: 'GetSystemLogsForSessionResponse')
     GetTableOptimizerRequest = Shapes::StructureShape.new(name: 'GetTableOptimizerRequest')
     GetTableOptimizerResponse = Shapes::StructureShape.new(name: 'GetTableOptimizerResponse')
     GetTableRequest = Shapes::StructureShape.new(name: 'GetTableRequest')
@@ -1837,6 +1841,7 @@ module Aws::Glue
     UpdatedTimestamp = Shapes::StringShape.new(name: 'UpdatedTimestamp')
     UpsertRedshiftTargetOptions = Shapes::StructureShape.new(name: 'UpsertRedshiftTargetOptions')
     UriString = Shapes::StringShape.new(name: 'UriString')
+    Url = Shapes::StringShape.new(name: 'Url')
     UrlString = Shapes::StringShape.new(name: 'UrlString')
     UsageProfileDefinition = Shapes::StructureShape.new(name: 'UsageProfileDefinition')
     UsageProfileDefinitionList = Shapes::ListShape.new(name: 'UsageProfileDefinitionList')
@@ -5235,6 +5240,19 @@ module Aws::Glue
 
     GetStatementResponse.add_member(:statement, Shapes::ShapeRef.new(shape: Statement, location_name: "Statement"))
     GetStatementResponse.struct_class = Types::GetStatementResponse
+
+    GetSystemLogsForJobRunRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "JobName"))
+    GetSystemLogsForJobRunRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: IdString, required: true, location_name: "RunId"))
+    GetSystemLogsForJobRunRequest.struct_class = Types::GetSystemLogsForJobRunRequest
+
+    GetSystemLogsForJobRunResponse.add_member(:system_logs_url, Shapes::ShapeRef.new(shape: Url, location_name: "SystemLogsUrl"))
+    GetSystemLogsForJobRunResponse.struct_class = Types::GetSystemLogsForJobRunResponse
+
+    GetSystemLogsForSessionRequest.add_member(:id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Id"))
+    GetSystemLogsForSessionRequest.struct_class = Types::GetSystemLogsForSessionRequest
+
+    GetSystemLogsForSessionResponse.add_member(:system_logs_url, Shapes::ShapeRef.new(shape: Url, location_name: "SystemLogsUrl"))
+    GetSystemLogsForSessionResponse.struct_class = Types::GetSystemLogsForSessionResponse
 
     GetTableOptimizerRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "CatalogId"))
     GetTableOptimizerRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -11197,6 +11215,31 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalSessionStateException)
+      end)
+
+      api.add_operation(:get_system_logs_for_job_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSystemLogsForJobRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSystemLogsForJobRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSystemLogsForJobRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:get_system_logs_for_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSystemLogsForSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSystemLogsForSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSystemLogsForSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:get_table, Seahorse::Model::Operation.new.tap do |o|

@@ -1348,13 +1348,24 @@ module Aws::SESV2
 
     # Creates an export job for a data source and destination.
     #
+    # Export jobs run asynchronously. This operation returns a `JobId`. Call
+    # `GetExportJob` with that ID until `JobStatus` is `COMPLETED`,
+    # `FAILED`, or `CANCELLED`. When the status is `COMPLETED`, download the
+    # export file from the pre-signed URL in `ExportDestination.S3Url`. When
+    # the status is `FAILED`, see `FailureInfo`. To store a copy in your own
+    # bucket, upload the downloaded file to your bucket. Do not include
+    # `S3Url` in the request.
+    #
     # You can execute this operation no more than once per second.
     #
     # @option params [required, Types::ExportDataSource] :export_data_source
     #   The data source for the export job.
     #
     # @option params [required, Types::ExportDestination] :export_destination
-    #   The destination for the export job.
+    #   The destination for the export job. Specify only `DataFormat`. Do not
+    #   include `S3Url` in this request. SES writes the export file to a
+    #   location that it manages and returns the download URL in
+    #   `GetExportJob`.
     #
     # @return [Types::CreateExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3027,6 +3038,10 @@ module Aws::SESV2
 
     # Provides information about an export job.
     #
+    # When the job status is `COMPLETED`, the response includes a pre-signed
+    # URL in `ExportDestination.S3Url` that you use to download the export
+    # file.
+    #
     # @option params [required, String] :job_id
     #   The export job ID.
     #
@@ -3086,6 +3101,42 @@ module Aws::SESV2
     #     export_source_type: "METRICS_DATA", 
     #     job_id: "ef28cf62-9d8e-4b60-9283-b09816c99a99", 
     #     job_status: "PROCESSING", 
+    #     statistics: {
+    #       exported_records_count: 5, 
+    #       processed_records_count: 5, 
+    #     }, 
+    #   }
+    #
+    # @example Example: Get a completed export job
+    #
+    #   # Gets a completed export job and the pre-signed URL for the export file
+    #
+    #   resp = client.get_export_job({
+    #     job_id: "ef28cf62-9d8e-4b60-9283-b09816c99a99", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     completed_timestamp: Time.parse("1688292100000"), 
+    #     created_timestamp: Time.parse("1688292000000"), 
+    #     export_data_source: {
+    #       message_insights_data_source: {
+    #         end_date: Time.parse("1688256000000"), 
+    #         include: {
+    #           subject: [
+    #             "Hello", 
+    #           ], 
+    #         }, 
+    #         start_date: Time.parse("1688169600000"), 
+    #       }, 
+    #     }, 
+    #     export_destination: {
+    #       data_format: "CSV", 
+    #       s3_url: "https://amzn-s3-demo-bucket.s3.us-east-1.amazonaws.com/export-file.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=EXAMPLE&X-Amz-Date=20230702T100500Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=EXAMPLE", 
+    #     }, 
+    #     export_source_type: "MESSAGE_INSIGHTS", 
+    #     job_id: "ef28cf62-9d8e-4b60-9283-b09816c99a99", 
+    #     job_status: "COMPLETED", 
     #     statistics: {
     #       exported_records_count: 5, 
     #       processed_records_count: 5, 
@@ -3509,7 +3560,7 @@ module Aws::SESV2
     #
     # @option params [Hash<String,String>] :filter
     #   An object that contains filters to apply when listing configuration
-    #   sets. You can filter by configuration set name.
+    #   sets. You can filter by a substring of the configuration set name.
     #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListConfigurationSets` to
@@ -3909,8 +3960,8 @@ module Aws::SESV2
     #
     # @option params [Hash<String,String>] :filter
     #   An object that contains filters to apply when listing email
-    #   identities. You can filter by identity name, identity type, or
-    #   verification status.
+    #   identities. You can filter by a substring of the identity name, by
+    #   identity type, or by verification status.
     #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListEmailIdentities` to
@@ -4608,7 +4659,7 @@ module Aws::SESV2
     #
     # @option params [Hash<String,String>] :filter
     #   An object that contains filters to apply when listing tenants. You can
-    #   filter by tenant name or sending status.
+    #   filter by a substring of the tenant name or by sending status.
     #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListTenants` to indicate the
@@ -6687,7 +6738,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

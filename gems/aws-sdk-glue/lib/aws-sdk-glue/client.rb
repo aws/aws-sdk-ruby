@@ -11420,6 +11420,66 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves the system logs for a job run.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job.
+    #
+    # @option params [required, String] :run_id
+    #   The ID of the job run.
+    #
+    # @return [Types::GetSystemLogsForJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSystemLogsForJobRunResponse#system_logs_url #system_logs_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_system_logs_for_job_run({
+    #     job_name: "NameString", # required
+    #     run_id: "IdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.system_logs_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSystemLogsForJobRun AWS API Documentation
+    #
+    # @overload get_system_logs_for_job_run(params = {})
+    # @param [Hash] params ({})
+    def get_system_logs_for_job_run(params = {}, options = {})
+      req = build_request(:get_system_logs_for_job_run, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the system logs for an interactive session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the session.
+    #
+    # @return [Types::GetSystemLogsForSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSystemLogsForSessionResponse#system_logs_url #system_logs_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_system_logs_for_session({
+    #     id: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.system_logs_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSystemLogsForSession AWS API Documentation
+    #
+    # @overload get_system_logs_for_session(params = {})
+    # @param [Hash] params ({})
+    def get_system_logs_for_session(params = {}, options = {})
+      req = build_request(:get_system_logs_for_session, params)
+      req.send_request(options)
+    end
+
     # Retrieves the `Table` definition in a Data Catalog for a specified
     # table.
     #
@@ -21337,7 +21397,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.280.0'
+      context[:gem_version] = '1.281.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

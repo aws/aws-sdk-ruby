@@ -506,7 +506,7 @@ module Aws::GameLift
     # matchmaking ticket in the failed match is handled as follows:
     #
     # * If the ticket has one or more players who rejected the match or
-    #   failed to respond, the ticket status is set `CANCELLED` and
+    #   failed to respond, the ticket status is set to `CANCELLED` and
     #   processing is terminated.
     #
     # * If all players in the ticket accepted the match, the ticket status
@@ -699,7 +699,7 @@ module Aws::GameLift
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new alias resource. Tags are
     #   developer-defined key-value pairs. Tagging Amazon Web Services
-    #   resources are useful for resource management, access management and
+    #   resources is useful for resource management, access management and
     #   cost allocation. For more information, see [ Tagging Amazon Web
     #   Services Resources][1] in the *Amazon Web Services General Reference*.
     #
@@ -855,7 +855,7 @@ module Aws::GameLift
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new build resource. Tags are
     #   developer defined key-value pairs. Tagging Amazon Web Services
-    #   resources are useful for resource management, access management and
+    #   resources is useful for resource management, access management and
     #   cost allocation. For more information, see [ Tagging Amazon Web
     #   Services Resources][1] in the *Amazon Web Services General Reference*.
     #   Once the resource is created, you can use [TagResource][2],
@@ -1064,12 +1064,12 @@ module Aws::GameLift
     #
     # @option params [String] :per_instance_container_group_definition_name
     #   The name of a container group definition resource that describes a set
-    #   of axillary software. A fleet instance has one process for executables
-    #   in this container group. A per-instance container group is optional.
-    #   You can update the fleet to add or remove a per-instance container
-    #   group at any time. You can specify the container group definition's
-    #   name to use the latest version. Alternatively, provide an ARN value
-    #   with a specific version number.
+    #   of auxiliary software. A fleet instance has one process for
+    #   executables in this container group. A per-instance container group is
+    #   optional. You can update the fleet to add or remove a per-instance
+    #   container group at any time. You can specify the container group
+    #   definition's name to use the latest version. Alternatively, provide
+    #   an ARN value with a specific version number.
     #
     #   Create a container group definition by calling
     #   [https://docs.aws.amazon.com/gamelift/latest/apireference/API\_CreateContainerGroupDefinition.html][1].
@@ -1155,7 +1155,7 @@ module Aws::GameLift
     #   By default, Amazon GameLift Servers calculates the maximum number of
     #   game server container groups that can fit on each instance. This
     #   calculation is based on the CPU and memory resources of the fleet's
-    #   instance type). To use the calculated maximum, don't set this
+    #   instance type. To use the calculated maximum, don't set this
     #   parameter. If you set this number manually, Amazon GameLift Servers
     #   uses your value as long as it's less than the calculated maximum.
     #
@@ -1164,8 +1164,8 @@ module Aws::GameLift
     #   For multi-location fleets, the instance type must be available in the
     #   home region and all remote locations. Instance type determines the
     #   computing resources and processing power that's available to host
-    #   your game servers. This includes including CPU, memory, storage, and
-    #   networking capacity.
+    #   your game servers. This includes CPU, memory, storage, and networking
+    #   capacity.
     #
     #   By default, Amazon GameLift Servers uses the `c5.large` instance type.
     #   If this instance type does not have sufficient resources for your
@@ -1250,14 +1250,15 @@ module Aws::GameLift
     #
     #   By default, this property is set to `CLOUDWATCH`.
     #
-    #   Amazon GameLift Servers requires permissions to send logs other Amazon
-    #   Web Services services in your account. These permissions are included
-    #   in the IAM fleet role for this container fleet (see `FleetRoleArn)`.
+    #   Amazon GameLift Servers requires permissions to send logs to other
+    #   Amazon Web Services services in your account. These permissions are
+    #   included in the IAM fleet role for this container fleet (see
+    #   `FleetRoleArn`).
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new fleet resource. Tags are
     #   developer-defined key-value pairs. Tagging Amazon Web Services
-    #   resources are useful for resource management, access management and
+    #   resources is useful for resource management, access management and
     #   cost allocation. For more information, see [ Tagging Amazon Web
     #   Services Resources][1] in the *Amazon Web Services General Reference*.
     #
@@ -1267,10 +1268,10 @@ module Aws::GameLift
     #
     # @option params [String] :player_gateway_mode
     #   Configures player gateway for your fleet. Player gateway provides
-    #   benefits such as DDoS protection by rate limiting and validating traﬃc
-    #   before it reaches game servers, hiding game server IP addresses from
-    #   players, and providing updated endpoints when relay endpoints become
-    #   unhealthy.
+    #   benefits such as DDoS protection by rate limiting and validating
+    #   traffic before it reaches game servers, hiding game server IP
+    #   addresses from players, and providing updated endpoints when relay
+    #   endpoints become unhealthy.
     #
     #   **How it works:** When enabled, game clients connect to relay
     #   endpoints instead of to your game servers. Player gateway validates
@@ -1467,7 +1468,8 @@ module Aws::GameLift
     #
     #   * `TotalMemoryLimitMebibytes`
     #
-    #   * `TotalVcpuLimit`
+    #   * Either `TotalVcpuLimit` or a `Vcpu` value for the game server
+    #     container
     #
     #   * At least one `GameServerContainerDefinition`
     #
@@ -1530,14 +1532,24 @@ module Aws::GameLift
     #
     #   Default value: 1024
     #
-    # @option params [required, Float] :total_vcpu_limit
+    # @option params [Float] :total_vcpu_limit
     #   The maximum amount of vCPU units to allocate to the container group (1
     #   vCPU is equal to 1024 CPU units). All containers in the group share
-    #   this memory. If you specify vCPU limits for individual containers, the
-    #   total value must be equal to or greater than the sum of the CPU limits
-    #   for all containers in the group.
+    #   these resources. If you set vCPU reservations for individual
+    #   containers, the total value must be equal to or greater than the sum
+    #   of the `Vcpu` values for all containers in the group.
     #
-    #   Default value: 1
+    #   This property is required for a per-instance container group.
+    #
+    #   For a game server container group, Amazon GameLift Servers requires
+    #   either a total vCPU limit or a `Vcpu` value for the game server
+    #   container. If you set a total vCPU limit for a game server container
+    #   group, Amazon GameLift Servers uses this value to calculate how many
+    #   game server container groups fit on an instance. If you don't set a
+    #   total vCPU limit, the group's containers can use up to the
+    #   instance's available vCPU, and Amazon GameLift Servers uses the sum
+    #   of the containers' `Vcpu` values to calculate how many game server
+    #   container groups fit on an instance.
     #
     # @option params [Types::GameServerContainerDefinitionInput] :game_server_container_definition
     #   The definition for the game server container in this group. Define a
@@ -1578,7 +1590,7 @@ module Aws::GameLift
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the container group definition resource.
     #   Tags are developer-defined key-value pairs. Tagging Amazon Web
-    #   Services resources are useful for resource management, access
+    #   Services resources is useful for resource management, access
     #   management and cost allocation. For more information, see [ Tagging
     #   Amazon Web Services Resources][1] in the *Amazon Web Services General
     #   Reference*.
@@ -1597,7 +1609,7 @@ module Aws::GameLift
     #     name: "ContainerGroupDefinitionName", # required
     #     container_group_type: "GAME_SERVER", # accepts GAME_SERVER, PER_INSTANCE
     #     total_memory_limit_mebibytes: 1, # required
-    #     total_vcpu_limit: 1.0, # required
+    #     total_vcpu_limit: 1.0,
     #     game_server_container_definition: {
     #       container_name: "NonZeroAnd128MaxAsciiString", # required
     #       depends_on: [
@@ -1633,6 +1645,7 @@ module Aws::GameLift
     #       linux_capabilities: {
     #         include: ["AUDIT_CONTROL"], # accepts AUDIT_CONTROL, AUDIT_WRITE, BLOCK_SUSPEND, CHOWN, DAC_OVERRIDE, DAC_READ_SEARCH, FOWNER, FSETID, IPC_LOCK, IPC_OWNER, KILL, LEASE, LINUX_IMMUTABLE, MAC_ADMIN, MAC_OVERRIDE, MKNOD, NET_ADMIN, NET_BIND_SERVICE, NET_BROADCAST, NET_RAW, SETFCAP, SETGID, SETPCAP, SETUID, SYS_ADMIN, SYS_BOOT, SYS_CHROOT, SYS_MODULE, SYS_NICE, SYS_PACCT, SYS_PTRACE, SYS_RAWIO, SYS_RESOURCE, SYS_TIME, SYS_TTY_CONFIG, SYSLOG, WAKE_ALARM
     #       },
+    #       vcpu: 1.0,
     #     },
     #     support_container_definitions: [
     #       {
@@ -1720,6 +1733,7 @@ module Aws::GameLift
     #   resp.container_group_definition.game_server_container_definition.server_sdk_version #=> String
     #   resp.container_group_definition.game_server_container_definition.linux_capabilities.include #=> Array
     #   resp.container_group_definition.game_server_container_definition.linux_capabilities.include[0] #=> String, one of "AUDIT_CONTROL", "AUDIT_WRITE", "BLOCK_SUSPEND", "CHOWN", "DAC_OVERRIDE", "DAC_READ_SEARCH", "FOWNER", "FSETID", "IPC_LOCK", "IPC_OWNER", "KILL", "LEASE", "LINUX_IMMUTABLE", "MAC_ADMIN", "MAC_OVERRIDE", "MKNOD", "NET_ADMIN", "NET_BIND_SERVICE", "NET_BROADCAST", "NET_RAW", "SETFCAP", "SETGID", "SETPCAP", "SETUID", "SYS_ADMIN", "SYS_BOOT", "SYS_CHROOT", "SYS_MODULE", "SYS_NICE", "SYS_PACCT", "SYS_PTRACE", "SYS_RAWIO", "SYS_RESOURCE", "SYS_TIME", "SYS_TTY_CONFIG", "SYSLOG", "WAKE_ALARM"
+    #   resp.container_group_definition.game_server_container_definition.vcpu #=> Float
     #   resp.container_group_definition.support_container_definitions #=> Array
     #   resp.container_group_definition.support_container_definitions[0].container_name #=> String
     #   resp.container_group_definition.support_container_definitions[0].depends_on #=> Array
@@ -1939,7 +1953,7 @@ module Aws::GameLift
     # @option params [Types::RuntimeConfiguration] :runtime_configuration
     #   Instructions for how to launch and run server processes on the fleet.
     #   Set runtime configuration for managed EC2 fleets. For an Anywhere
-    #   fleets, set this parameter only if the fleet is running the Amazon
+    #   fleet, set this parameter only if the fleet is running the Amazon
     #   GameLift Servers Agent. The runtime configuration defines one or more
     #   server process configurations. Each server process identifies a game
     #   executable or Realtime script file and the number of processes to run
@@ -2052,7 +2066,7 @@ module Aws::GameLift
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new fleet resource. Tags are
     #   developer-defined key-value pairs. Tagging Amazon Web Services
-    #   resources are useful for resource management, access management and
+    #   resources is useful for resource management, access management and
     #   cost allocation. For more information, see [ Tagging Amazon Web
     #   Services Resources][1] in the *Amazon Web Services General Reference*.
     #
@@ -2089,11 +2103,11 @@ module Aws::GameLift
     #
     # @option params [String] :player_gateway_mode
     #   Configures player gateway for your fleet. Player gateway provides
-    #   benefits such as DDoS protection by rate limiting and validating traﬃc
-    #   before it reaches game servers, hiding game server IP addresses from
-    #   players, and providing updated endpoints when relay endpoints become
-    #   unhealthy. Note, player gateway is only available for fleets using
-    #   server SDK 5.x or later game server builds.
+    #   benefits such as DDoS protection by rate limiting and validating
+    #   traffic before it reaches game servers, hiding game server IP
+    #   addresses from players, and providing updated endpoints when relay
+    #   endpoints become unhealthy. Note, player gateway is only available for
+    #   fleets using server SDK 5.x or later game server builds.
     #
     #   **How it works:** When enabled, game clients connect to relay
     #   endpoints instead of to your game servers. Player gateway validates
@@ -2250,7 +2264,7 @@ module Aws::GameLift
     # **This API works with the following fleet types:** EC2, Anywhere,
     # Container
     #
-    # Adds remote locations to an EC2 and begins populating the new
+    # Adds remote locations to an EC2 fleet and begins populating the new
     # locations with instances. The new instances conform to the fleet's
     # instance type, auto-scaling, and other configuration settings.
     #
@@ -2484,10 +2498,10 @@ module Aws::GameLift
     #   active game servers running might be terminated during a scale-down
     #   event, causing players to be dropped from the game. Protected
     #   instances cannot be terminated while there are active game servers
-    #   running except in the event of a forced game server group deletion
-    #   (see ). An exception to this is with Spot Instances, which can be
-    #   terminated by Amazon Web Services regardless of protection status.
-    #   This property is set to `NO_PROTECTION` by default.
+    #   running except in the event of a forced game server group deletion. An
+    #   exception to this is with Spot Instances, which can be terminated by
+    #   Amazon Web Services regardless of protection status. This property is
+    #   set to `NO_PROTECTION` by default.
     #
     # @option params [Array<String>] :vpc_subnets
     #   A list of virtual private cloud (VPC) subnets to use with instances in
@@ -2612,8 +2626,9 @@ module Aws::GameLift
     # by using [UpdateGameSession][2] to change the game session's player
     # session creation policy.
     #
-    # Amazon GameLift Servers retains logs for active for 14 days. To access
-    # the logs, call [GetGameSessionLogUrl][3] to download the log files.
+    # Amazon GameLift Servers retains logs for active game sessions for 14
+    # days. To access the logs, call [GetGameSessionLogUrl][3] to download
+    # the log files.
     #
     # *Available in Amazon GameLift Servers Local.*
     #
@@ -2678,8 +2693,8 @@ module Aws::GameLift
     #   Servers limits the number of game session creation requests with the
     #   same `CreatorId` in a specified time period.
     #
-    #   If you your fleet doesn't have a resource creation limit policy and
-    #   you provide a `CreatorId` in your `CreateGameSession` requests, Amazon
+    #   If your fleet doesn't have a resource creation limit policy and you
+    #   provide a `CreatorId` in your `CreateGameSession` requests, Amazon
     #   GameLift Servers limits requests to one request per `CreatorId` per
     #   second.
     #
@@ -2927,7 +2942,7 @@ module Aws::GameLift
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new game session queue resource.
     #   Tags are developer-defined key-value pairs. Tagging Amazon Web
-    #   Services resources are useful for resource management, access
+    #   Services resources is useful for resource management, access
     #   management and cost allocation. For more information, see [ Tagging
     #   Amazon Web Services Resources][1] in the *Amazon Web Services General
     #   Reference*.
@@ -3011,10 +3026,9 @@ module Aws::GameLift
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new resource. Tags are
     #   developer-defined key-value pairs. Tagging Amazon Web Services
-    #   resources are useful for resource management, access management, and
+    #   resources is useful for resource management, access management, and
     #   cost allocation. For more information, see [ Tagging Amazon Web
-    #   Services Resources][1] in the *Amazon Web Services General
-    #   Rareference*.
+    #   Services Resources][1] in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -3056,7 +3070,7 @@ module Aws::GameLift
     # Container
     #
     # Defines a new matchmaking configuration for use with FlexMatch.
-    # Whether your are using FlexMatch with Amazon GameLift Servers hosting
+    # Whether you are using FlexMatch with Amazon GameLift Servers hosting
     # or as a standalone matchmaking service, the matchmaking configuration
     # sets out rules for matching players and forming teams. If you're also
     # using Amazon GameLift Servers hosting, it defines how to start game
@@ -3104,7 +3118,9 @@ module Aws::GameLift
     #   `arn:aws:gamelift:<region>::gamesessionqueue/<queue name>`. Queues can
     #   be located in any Region. Queues are used to start new Amazon GameLift
     #   Servers-hosted game sessions for matches that are created with this
-    #   matchmaking configuration. If `FlexMatchMode` is set to `STANDALONE`,
+    #   matchmaking configuration. A matchmaking configuration supports only
+    #   one queue; if you specify more than one ARN, the request fails with an
+    #   `InvalidRequestException`. If `FlexMatchMode` is set to `STANDALONE`,
     #   do not set this parameter.
     #
     #
@@ -3217,7 +3233,7 @@ module Aws::GameLift
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new matchmaking configuration
     #   resource. Tags are developer-defined key-value pairs. Tagging Amazon
-    #   Web Services resources are useful for resource management, access
+    #   Web Services resources is useful for resource management, access
     #   management and cost allocation. For more information, see [ Tagging
     #   Amazon Web Services Resources][1] in the *Amazon Web Services General
     #   Reference*.
@@ -3337,7 +3353,7 @@ module Aws::GameLift
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new matchmaking rule set resource.
     #   Tags are developer-defined key-value pairs. Tagging Amazon Web
-    #   Services resources are useful for resource management, access
+    #   Services resources is useful for resource management, access
     #   management and cost allocation. For more information, see [ Tagging
     #   Amazon Web Services Resources][1] in the *Amazon Web Services General
     #   Reference*.
@@ -3641,7 +3657,7 @@ module Aws::GameLift
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new script resource. Tags are
     #   developer-defined key-value pairs. Tagging Amazon Web Services
-    #   resources are useful for resource management, access management and
+    #   resources is useful for resource management, access management and
     #   cost allocation. For more information, see [ Tagging Amazon Web
     #   Services Resources][1] in the *Amazon Web Services General Reference*.
     #   Once the resource is created, you can use [TagResource][2],
@@ -3853,7 +3869,7 @@ module Aws::GameLift
     # To establish the connection, call this operation from the Amazon Web
     # Services account that is used to manage the Amazon GameLift Servers
     # fleets. Identify the following values: (1) The ID of the fleet you
-    # want to be enable a VPC peering connection for; (2) The Amazon Web
+    # want to enable a VPC peering connection for; (2) The Amazon Web
     # Services account with the VPC that you want to peer with; and (3) The
     # ID of the VPC you want to peer with. This operation is asynchronous.
     # If successful, a connection request is created. You can use continuous
@@ -4175,7 +4191,7 @@ module Aws::GameLift
     # Container
     #
     # Removes locations from a multi-location fleet. When deleting a
-    # location, all game server process and all instances that are still
+    # location, all game server processes and all instances that are still
     # active in the location are shut down.
     #
     # To delete fleet locations, identify the fleet ID and provide a list of
@@ -4600,7 +4616,7 @@ module Aws::GameLift
     #
     # Removes a VPC peering connection. To delete the connection, you must
     # have a valid authorization for the VPC peering connection that you
-    # want to delete..
+    # want to delete.
     #
     # Once a valid authorization exists, call this operation from the Amazon
     # Web Services account that is used to manage the Amazon GameLift
@@ -4646,7 +4662,7 @@ module Aws::GameLift
     # Removes a compute resource from an Anywhere fleet. Deregistered
     # computes can no longer host game sessions through Amazon GameLift
     # Servers. Use this operation with an Anywhere fleet that doesn't use
-    # the Amazon GameLift Servers Agent For Anywhere fleets with the Agent,
+    # the Amazon GameLift Servers Agent. For Anywhere fleets with the Agent,
     # the Agent handles all compute registry tasks for you.
     #
     # To deregister a compute, call this operation from the compute that's
@@ -4940,9 +4956,9 @@ module Aws::GameLift
     # includes the fleet properties, including information about the most
     # recent deployment.
     #
-    # <note markdown="1"> Some API operations limit the number of fleet IDs that allowed in one
-    # request. If a request exceeds this limit, the request fails and the
-    # error message contains the maximum allowed number.
+    # <note markdown="1"> Some API operations limit the number of fleet IDs that are allowed in
+    # one request. If a request exceeds this limit, the request fails and
+    # the error message contains the maximum allowed number.
     #
     #  </note>
     #
@@ -5084,6 +5100,7 @@ module Aws::GameLift
     #   resp.container_group_definition.game_server_container_definition.server_sdk_version #=> String
     #   resp.container_group_definition.game_server_container_definition.linux_capabilities.include #=> Array
     #   resp.container_group_definition.game_server_container_definition.linux_capabilities.include[0] #=> String, one of "AUDIT_CONTROL", "AUDIT_WRITE", "BLOCK_SUSPEND", "CHOWN", "DAC_OVERRIDE", "DAC_READ_SEARCH", "FOWNER", "FSETID", "IPC_LOCK", "IPC_OWNER", "KILL", "LEASE", "LINUX_IMMUTABLE", "MAC_ADMIN", "MAC_OVERRIDE", "MKNOD", "NET_ADMIN", "NET_BIND_SERVICE", "NET_BROADCAST", "NET_RAW", "SETFCAP", "SETGID", "SETPCAP", "SETUID", "SYS_ADMIN", "SYS_BOOT", "SYS_CHROOT", "SYS_MODULE", "SYS_NICE", "SYS_PACCT", "SYS_PTRACE", "SYS_RAWIO", "SYS_RESOURCE", "SYS_TIME", "SYS_TTY_CONFIG", "SYSLOG", "WAKE_ALARM"
+    #   resp.container_group_definition.game_server_container_definition.vcpu #=> Float
     #   resp.container_group_definition.support_container_definitions #=> Array
     #   resp.container_group_definition.support_container_definitions[0].container_name #=> String
     #   resp.container_group_definition.support_container_definitions[0].depends_on #=> Array
@@ -5384,9 +5401,9 @@ module Aws::GameLift
     # If successful, a `FleetAttributes` object is returned for each fleet
     # requested, unless the fleet identifier is not found.
     #
-    # <note markdown="1"> Some API operations limit the number of fleet IDs that allowed in one
-    # request. If a request exceeds this limit, the request fails and the
-    # error message contains the maximum allowed number.
+    # <note markdown="1"> Some API operations limit the number of fleet IDs that are allowed in
+    # one request. If a request exceeds this limit, the request fails and
+    # the error message contains the maximum allowed number.
     #
     #  </note>
     #
@@ -6349,9 +6366,9 @@ module Aws::GameLift
     # Container
     #
     # Retrieves additional game session properties, including the game
-    # session protection policy in force, a set of one or more game sessions
-    # in a specific fleet location. You can optionally filter the results by
-    # current game session status.
+    # session protection policy in force, for a set of one or more game
+    # sessions in a specific fleet location. You can optionally filter the
+    # results by current game session status.
     #
     # This operation can be used in the following ways:
     #
@@ -6782,7 +6799,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This API works with the following fleet types:**EC2, Container
+    # **This API works with the following fleet types:** EC2, Container
     #
     # Retrieves information about the EC2 instances in an Amazon GameLift
     # Servers managed fleet, including instance ID, connection data, and
@@ -8454,6 +8471,7 @@ module Aws::GameLift
     #   resp.container_group_definitions[0].game_server_container_definition.server_sdk_version #=> String
     #   resp.container_group_definitions[0].game_server_container_definition.linux_capabilities.include #=> Array
     #   resp.container_group_definitions[0].game_server_container_definition.linux_capabilities.include[0] #=> String, one of "AUDIT_CONTROL", "AUDIT_WRITE", "BLOCK_SUSPEND", "CHOWN", "DAC_OVERRIDE", "DAC_READ_SEARCH", "FOWNER", "FSETID", "IPC_LOCK", "IPC_OWNER", "KILL", "LEASE", "LINUX_IMMUTABLE", "MAC_ADMIN", "MAC_OVERRIDE", "MKNOD", "NET_ADMIN", "NET_BIND_SERVICE", "NET_BROADCAST", "NET_RAW", "SETFCAP", "SETGID", "SETPCAP", "SETUID", "SYS_ADMIN", "SYS_BOOT", "SYS_CHROOT", "SYS_MODULE", "SYS_NICE", "SYS_PACCT", "SYS_PTRACE", "SYS_RAWIO", "SYS_RESOURCE", "SYS_TIME", "SYS_TTY_CONFIG", "SYSLOG", "WAKE_ALARM"
+    #   resp.container_group_definitions[0].game_server_container_definition.vcpu #=> Float
     #   resp.container_group_definitions[0].support_container_definitions #=> Array
     #   resp.container_group_definitions[0].support_container_definitions[0].container_name #=> String
     #   resp.container_group_definitions[0].support_container_definitions[0].depends_on #=> Array
@@ -8591,6 +8609,7 @@ module Aws::GameLift
     #   resp.container_group_definitions[0].game_server_container_definition.server_sdk_version #=> String
     #   resp.container_group_definitions[0].game_server_container_definition.linux_capabilities.include #=> Array
     #   resp.container_group_definitions[0].game_server_container_definition.linux_capabilities.include[0] #=> String, one of "AUDIT_CONTROL", "AUDIT_WRITE", "BLOCK_SUSPEND", "CHOWN", "DAC_OVERRIDE", "DAC_READ_SEARCH", "FOWNER", "FSETID", "IPC_LOCK", "IPC_OWNER", "KILL", "LEASE", "LINUX_IMMUTABLE", "MAC_ADMIN", "MAC_OVERRIDE", "MKNOD", "NET_ADMIN", "NET_BIND_SERVICE", "NET_BROADCAST", "NET_RAW", "SETFCAP", "SETGID", "SETPCAP", "SETUID", "SYS_ADMIN", "SYS_BOOT", "SYS_CHROOT", "SYS_MODULE", "SYS_NICE", "SYS_PACCT", "SYS_PTRACE", "SYS_RAWIO", "SYS_RESOURCE", "SYS_TIME", "SYS_TTY_CONFIG", "SYSLOG", "WAKE_ALARM"
+    #   resp.container_group_definitions[0].game_server_container_definition.vcpu #=> Float
     #   resp.container_group_definitions[0].support_container_definitions #=> Array
     #   resp.container_group_definitions[0].support_container_definitions[0].container_name #=> String
     #   resp.container_group_definitions[0].support_container_definitions[0].depends_on #=> Array
@@ -8722,7 +8741,7 @@ module Aws::GameLift
     # multiple locations, this operation retrieves fleets based on their
     # home Region only.
     #
-    # You can use operation in the following ways:
+    # You can use this operation in the following ways:
     #
     # * To get a list of all fleets in a Region, don't provide a build or
     #   script identifier.
@@ -8797,7 +8816,7 @@ module Aws::GameLift
 
     # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
-    # Lists a game server groups.
+    # Lists game server groups.
     #
     # @option params [Integer] :limit
     #   The game server groups' limit.
@@ -9260,7 +9279,7 @@ module Aws::GameLift
     #   * **ActiveInstances** -- Fleet instances that are currently running at
     #     least one game session.
     #
-    #   * **AvailableGameSessions** -- Additional game sessions that fleet
+    #   * **AvailableGameSessions** -- Additional game sessions that a fleet
     #     could host simultaneously, given current capacity.
     #
     #   * **AvailablePlayerSessions** -- Empty player slots in currently
@@ -9758,8 +9777,8 @@ module Aws::GameLift
     # * **gameSessionProperties** -- A set of key-value pairs that can store
     #   custom data in a game session. For example: `{"Key": "difficulty",
     #   "Value": "novice"}`. The filter expression must specify the
-    #   [https://docs.aws.amazon.com/gamelift/latest/apireference/API\_GameProperty][2]
-    #   -- a `Key` and a string `Value` to search for the game sessions.
+    #   [GameProperty][2] -- a `Key` and a string `Value` to search for the
+    #   game sessions.
     #
     #   For example, to search for the above key-value pair, specify the
     #   following search filter: `gameSessionProperties.difficulty =
@@ -9809,7 +9828,7 @@ module Aws::GameLift
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessions.html
-    # [2]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameProperty
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameProperty.html
     # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-search
     # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
     #
@@ -10063,7 +10082,7 @@ module Aws::GameLift
     #
     #   * `PlayerLatencies`. Include a set of latency values for
     #     destinations in the queue. When a request includes latency data,
-    #     Amazon GameLift Servers automatically reorder the queue's
+    #     Amazon GameLift Servers automatically reorders the queue's
     #     locations priority list based on lowest available latency values.
     #     If a request includes latency data for multiple players, Amazon
     #     GameLift Servers calculates each location's average latency for
@@ -10085,7 +10104,7 @@ module Aws::GameLift
     #     in any of the locations on the override list.
     #
     #   ^
-    # * Request a placement and prioritized based on a custom list of
+    # * Request a placement and prioritize based on a custom list of
     #   locations.
     #
     # * You can request new player sessions for a group of players. Include
@@ -10276,7 +10295,7 @@ module Aws::GameLift
     # process of forming new matches. Backfill requests use the same
     # matchmaker that was used to make the original match, and they provide
     # matchmaking data for all players currently in the game session.
-    # FlexMatch uses this information to select new players so that
+    # FlexMatch uses this information to select new players so that the
     # backfilled match continues to meet the original match requirements.
     #
     # When using FlexMatch with Amazon GameLift Servers managed hosting, you
@@ -10630,7 +10649,7 @@ module Aws::GameLift
     # If successful, this operation removes the placement request from the
     # queue and moves the `GameSessionPlacement` to `CANCELLED` status.
     #
-    # This operation results in an `InvalidRequestExecption` (400) error if
+    # This operation results in an `InvalidRequestException` (400) error if
     # a game session has already been created for this placement. You can
     # clean up an unneeded game session by calling
     # [TerminateGameSession][1].
@@ -11237,11 +11256,11 @@ module Aws::GameLift
     # [https://docs.aws.amazon.com/gamelift/latest/apireference/API\_DescribeFleetDeployment.html][1].
     #
     # <note markdown="1"> A managed fleet's runtime environment, which depends on the fleet's
-    # Amazon Machine Image \{AMI} version, can't be updated. You must
-    # create a new fleet. As a best practice, we recommend replacing your
-    # managed fleets every 30 days to maintain a secure and up-to-date
-    # runtime environment for your hosted game servers. For guidance, see [
-    # Security best practices for Amazon GameLift Servers][2].
+    # Amazon Machine Image (AMI) version, can't be updated. You must create
+    # a new fleet. As a best practice, we recommend replacing your managed
+    # fleets every 30 days to maintain a secure and up-to-date runtime
+    # environment for your hosted game servers. For guidance, see [ Security
+    # best practices for Amazon GameLift Servers][2].
     #
     #  </note>
     #
@@ -11279,7 +11298,7 @@ module Aws::GameLift
     # deployment configuration provided. A deployment replaces existing
     # fleet instances with new instances that are deployed with the updated
     # fleet properties. The fleet is placed in `UPDATING` status until the
-    # deployment is complete, then return to `ACTIVE`.
+    # deployment is complete, then returns to `ACTIVE`.
     #
     # You can have only one update deployment active at a time for a fleet.
     # If a second update request initiates a deployment while another
@@ -11525,12 +11544,18 @@ module Aws::GameLift
     #   container group has only one support container definition, provide
     #   an empty set.
     #
+    # * Remove the total vCPU limit from a game server container group so
+    #   that its containers can use up to the instance's available vCPU.
+    #   Set `RemoveAttributes` to `TOTAL_VCPU_LIMIT`. The game server
+    #   container must have a `Vcpu` value, because a game server container
+    #   group needs either a total vCPU limit or a game server `Vcpu` value.
+    #
     # **Results:**
     #
     # If successful, this operation returns the complete properties of the
     # new container group definition version.
     #
-    # If the container group definition version is used in an active fleets,
+    # If the container group definition version is used in an active fleet,
     # the update automatically initiates a new fleet deployment of the new
     # version. You can track a fleet's deployments using
     # [ListFleetDeployments][1].
@@ -11563,9 +11588,20 @@ module Aws::GameLift
     # @option params [Float] :total_vcpu_limit
     #   The maximum amount of vCPU units to allocate to the container group (1
     #   vCPU is equal to 1024 CPU units). All containers in the group share
-    #   this memory. If you specify vCPU limits for individual containers, the
-    #   total value must be equal to or greater than the sum of the CPU limits
-    #   for all containers in the group.
+    #   these resources. If you set vCPU reservations for individual
+    #   containers, the total value must be equal to or greater than the sum
+    #   of the `Vcpu` values for all containers in the group.
+    #
+    #   For a game server container group, Amazon GameLift Servers requires
+    #   either a total vCPU limit or a `Vcpu` value for the game server
+    #   container. If the container group has a total vCPU limit, Amazon
+    #   GameLift Servers uses this value to calculate how many game server
+    #   container groups fit on an instance. If the container group doesn't
+    #   have a total vCPU limit, its containers can use up to the instance's
+    #   available vCPU, and Amazon GameLift Servers uses the sum of the
+    #   containers' `Vcpu` values to calculate how many game server container
+    #   groups fit on an instance. To remove the total vCPU limit, omit this
+    #   parameter and set `RemoveAttributes` to `TOTAL_VCPU_LIMIT`.
     #
     # @option params [String] :version_description
     #   A description for this update to the container group definition.
@@ -11592,6 +11628,14 @@ module Aws::GameLift
     #
     #   [1]: http://aws.amazon.com/amazon-linux-2/faqs/
     #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
+    #
+    # @option params [Array<String>] :remove_attributes
+    #   If set, this update removes the container group's total vCPU limit,
+    #   and the group's containers can use up to the instance's available
+    #   vCPU. You can't remove the total vCPU limit from a per-instance
+    #   container group. A game server container group needs either a total
+    #   vCPU limit or a `Vcpu` value for the game server container. You can't
+    #   set `TotalVcpuLimit` in the same request.
     #
     # @return [Types::UpdateContainerGroupDefinitionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11636,6 +11680,7 @@ module Aws::GameLift
     #       linux_capabilities: {
     #         include: ["AUDIT_CONTROL"], # accepts AUDIT_CONTROL, AUDIT_WRITE, BLOCK_SUSPEND, CHOWN, DAC_OVERRIDE, DAC_READ_SEARCH, FOWNER, FSETID, IPC_LOCK, IPC_OWNER, KILL, LEASE, LINUX_IMMUTABLE, MAC_ADMIN, MAC_OVERRIDE, MKNOD, NET_ADMIN, NET_BIND_SERVICE, NET_BROADCAST, NET_RAW, SETFCAP, SETGID, SETPCAP, SETUID, SYS_ADMIN, SYS_BOOT, SYS_CHROOT, SYS_MODULE, SYS_NICE, SYS_PACCT, SYS_PTRACE, SYS_RAWIO, SYS_RESOURCE, SYS_TIME, SYS_TTY_CONFIG, SYSLOG, WAKE_ALARM
     #       },
+    #       vcpu: 1.0,
     #     },
     #     support_container_definitions: [
     #       {
@@ -11689,6 +11734,7 @@ module Aws::GameLift
     #     version_description: "NonZeroAndMaxString",
     #     source_version_number: 1,
     #     operating_system: "AMAZON_LINUX_2023", # accepts AMAZON_LINUX_2023
+    #     remove_attributes: ["TOTAL_VCPU_LIMIT"], # accepts TOTAL_VCPU_LIMIT
     #   })
     #
     # @example Response structure
@@ -11720,6 +11766,7 @@ module Aws::GameLift
     #   resp.container_group_definition.game_server_container_definition.server_sdk_version #=> String
     #   resp.container_group_definition.game_server_container_definition.linux_capabilities.include #=> Array
     #   resp.container_group_definition.game_server_container_definition.linux_capabilities.include[0] #=> String, one of "AUDIT_CONTROL", "AUDIT_WRITE", "BLOCK_SUSPEND", "CHOWN", "DAC_OVERRIDE", "DAC_READ_SEARCH", "FOWNER", "FSETID", "IPC_LOCK", "IPC_OWNER", "KILL", "LEASE", "LINUX_IMMUTABLE", "MAC_ADMIN", "MAC_OVERRIDE", "MKNOD", "NET_ADMIN", "NET_BIND_SERVICE", "NET_BROADCAST", "NET_RAW", "SETFCAP", "SETGID", "SETPCAP", "SETUID", "SYS_ADMIN", "SYS_BOOT", "SYS_CHROOT", "SYS_MODULE", "SYS_NICE", "SYS_PACCT", "SYS_PTRACE", "SYS_RAWIO", "SYS_RESOURCE", "SYS_TIME", "SYS_TTY_CONFIG", "SYSLOG", "WAKE_ALARM"
+    #   resp.container_group_definition.game_server_container_definition.vcpu #=> Float
     #   resp.container_group_definition.support_container_definitions #=> Array
     #   resp.container_group_definition.support_container_definitions[0].container_name #=> String
     #   resp.container_group_definition.support_container_definitions[0].depends_on #=> Array
@@ -11773,11 +11820,11 @@ module Aws::GameLift
     # returns the identifiers for the updated fleet.
     #
     # <note markdown="1"> A managed fleet's runtime environment, which depends on the fleet's
-    # Amazon Machine Image \{AMI} version, can't be updated. You must
-    # create a new fleet. As a best practice, we recommend replacing your
-    # managed fleets every 30 days to maintain a secure and up-to-date
-    # runtime environment for your hosted game servers. For guidance, see [
-    # Security best practices for Amazon GameLift Servers][1].
+    # Amazon Machine Image (AMI) version, can't be updated. You must create
+    # a new fleet. As a best practice, we recommend replacing your managed
+    # fleets every 30 days to maintain a secure and up-to-date runtime
+    # environment for your hosted game servers. For guidance, see [ Security
+    # best practices for Amazon GameLift Servers][1].
     #
     #  </note>
     #
@@ -12095,7 +12142,7 @@ module Aws::GameLift
     #   (when the game server is available to be claimed) to `UTILIZED`
     #   (when the game server is currently hosting games). Identify the game
     #   server and game server group and specify the new utilization status.
-    #   You can't change the status from to `UTILIZED` to `AVAILABLE` .
+    #   You can't change the status from `UTILIZED` to `AVAILABLE` .
     #
     # * To report health status, identify the game server and game server
     #   group and set health check to `HEALTHY`. If a game server does not
@@ -12133,7 +12180,7 @@ module Aws::GameLift
     # @option params [String] :utilization_status
     #   Indicates if the game server is available or is currently hosting
     #   gameplay. You can update a game server status from `AVAILABLE` to
-    #   `UTILIZED`, but you can't change a the status from `UTILIZED` to
+    #   `UTILIZED`, but you can't change the status from `UTILIZED` to
     #   `AVAILABLE`.
     #
     # @option params [String] :health_check
@@ -12243,10 +12290,10 @@ module Aws::GameLift
     #   active game servers running might be terminated during a scale-down
     #   event, causing players to be dropped from the game. Protected
     #   instances cannot be terminated while there are active game servers
-    #   running except in the event of a forced game server group deletion
-    #   (see ). An exception to this is with Spot Instances, which can be
-    #   terminated by Amazon Web Services regardless of protection status.
-    #   This property is set to `NO_PROTECTION` by default.
+    #   running except in the event of a forced game server group deletion. An
+    #   exception to this is with Spot Instances, which can be terminated by
+    #   Amazon Web Services regardless of protection status. This property is
+    #   set to `NO_PROTECTION` by default.
     #
     # @option params [String] :balancing_strategy
     #   Indicates how Amazon GameLift Servers FleetIQ balances the use of Spot
@@ -12604,7 +12651,9 @@ module Aws::GameLift
     #   `arn:aws:gamelift:<region>::gamesessionqueue/<queue name>`. Queues can
     #   be located in any Region. Queues are used to start new Amazon GameLift
     #   Servers-hosted game sessions for matches that are created with this
-    #   matchmaking configuration. If `FlexMatchMode` is set to `STANDALONE`,
+    #   matchmaking configuration. A matchmaking configuration supports only
+    #   one queue; if you specify more than one ARN, the request fails with an
+    #   `InvalidRequestException`. If `FlexMatchMode` is set to `STANDALONE`,
     #   do not set this parameter.
     #
     #
@@ -13020,7 +13069,7 @@ module Aws::GameLift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

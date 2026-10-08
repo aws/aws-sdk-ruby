@@ -2356,6 +2356,66 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Cancels a findings export job that is in progress. Security Hub
+    # transitions a running job to the `CANCELLED` state and returns the
+    # `ExportJobId` and its new `Status`. Canceling a job that is already in
+    # the `CANCELLED` state succeeds and returns the same result, so you can
+    # safely retry a cancel request.
+    #
+    # You can't cancel an export job that has already reached a terminal
+    # `SUCCEEDED` or `FAILED` state; in that case, this operation returns a
+    # `ConflictException`. If no export job matches the `ExportJobId` that
+    # you provide, this operation returns a `ResourceNotFoundException`.
+    #
+    # The `Status` value returned by this operation reflects the
+    # cancellation immediately, even though the job can take a short time to
+    # stop completely.
+    #
+    # @option params [required, String] :export_job_id
+    #   The unique identifier of the export job to cancel. This is the value
+    #   returned by `StartExportJobV2`.
+    #
+    # @return [Types::CancelExportJobV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelExportJobV2Response#export_job_id #export_job_id} => String
+    #   * {Types::CancelExportJobV2Response#status #status} => String
+    #
+    #
+    # @example Example: Example – Canceling a running export job
+    #
+    #   # The following example cancels an export job that is in progress. Security Hub transitions the job to the CANCELLED state
+    #   # and returns its new status.
+    #
+    #   resp = client.cancel_export_job_v2({
+    #     export_job_id: "a1b2c3d4e5f6", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     export_job_id: "a1b2c3d4e5f6", 
+    #     status: "CANCELLED", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_export_job_v2({
+    #     export_job_id: "ExportJobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_job_id #=> String
+    #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CancelExportJobV2 AWS API Documentation
+    #
+    # @overload cancel_export_job_v2(params = {})
+    # @param [Hash] params ({})
+    def cancel_export_job_v2(params = {}, options = {})
+      req = build_request(:cancel_export_job_v2, params)
+      req.send_request(options)
+    end
+
     # Creates a custom action target in Security Hub CSPM.
     #
     # You can use custom actions on findings and insights in Security Hub
@@ -6703,6 +6763,227 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Returns the details of a single findings export job, including its
+    # current `Status`, the `Destination` it writes to, the
+    # `OutputConfiguration` it was started with, and its `StartedAt` and
+    # `EndedAt` timestamps. Use this operation to poll an export job that
+    # you started with `StartExportJobV2` until it reaches a terminal state
+    # (`SUCCEEDED`, `FAILED`, or `CANCELLED`).
+    #
+    # If the job failed, the response includes a `FailureCode` and
+    # `FailureMessage` that describe the reason. Input values such as
+    # `Scopes` and `Filters` are echoed back as they were submitted, with
+    # relative date ranges returned unresolved. If no export job matches the
+    # `ExportJobId` that you provide, this operation returns a
+    # `ResourceNotFoundException`.
+    #
+    # @option params [required, String] :export_job_id
+    #   The unique identifier of the export job to retrieve. This is the value
+    #   returned by `StartExportJobV2`.
+    #
+    # @return [Types::GetExportJobV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExportJobV2Response#export_job_id #export_job_id} => String
+    #   * {Types::GetExportJobV2Response#name #name} => String
+    #   * {Types::GetExportJobV2Response#status #status} => String
+    #   * {Types::GetExportJobV2Response#data_type #data_type} => String
+    #   * {Types::GetExportJobV2Response#output_configuration #output_configuration} => Types::ExportOutput
+    #   * {Types::GetExportJobV2Response#scopes #scopes} => Types::ExportScopes
+    #   * {Types::GetExportJobV2Response#destination #destination} => Types::ExportDestination
+    #   * {Types::GetExportJobV2Response#failure_code #failure_code} => String
+    #   * {Types::GetExportJobV2Response#failure_message #failure_message} => String
+    #   * {Types::GetExportJobV2Response#started_at #started_at} => Time
+    #   * {Types::GetExportJobV2Response#ended_at #ended_at} => Time
+    #
+    #
+    # @example Example: Example – Getting the details of a completed export job
+    #
+    #   # The following example retrieves an export job that has finished successfully. The output is available in the destination
+    #   # bucket.
+    #
+    #   resp = client.get_export_job_v2({
+    #     export_job_id: "a1b2c3d4e5f6", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     data_type: "FINDINGS", 
+    #     destination: {
+    #       s3: {
+    #         bucket_arn: "arn:aws:s3:::amzn-s3-demo-bucket", 
+    #         kms_key_arn: "arn:aws:kms:aa-example-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #         object_prefix: "security-hub-exports/2026-Q1", 
+    #       }, 
+    #     }, 
+    #     ended_at: Time.parse("2026-03-27T18:09:52Z"), 
+    #     export_job_id: "a1b2c3d4e5f6", 
+    #     name: "quarterly-critical-findings", 
+    #     output_configuration: {
+    #       findings: {
+    #         filters: {
+    #           composite_filters: [
+    #             {
+    #               operator: "AND", 
+    #               string_filters: [
+    #                 {
+    #                   field_name: "severity", 
+    #                   filter: {
+    #                     comparison: "EQUALS", 
+    #                     value: "Critical", 
+    #                   }, 
+    #                 }, 
+    #                 {
+    #                   field_name: "status", 
+    #                   filter: {
+    #                     comparison: "EQUALS", 
+    #                     value: "New", 
+    #                   }, 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #           ], 
+    #           composite_operator: "AND", 
+    #         }, 
+    #         format: "CSV", 
+    #         selected_fields: [
+    #           "finding_info.title", 
+    #           "severity", 
+    #           "status", 
+    #           "cloud.account.uid", 
+    #           "resources.uid", 
+    #         ], 
+    #       }, 
+    #     }, 
+    #     started_at: Time.parse("2026-03-27T18:04:11Z"), 
+    #     status: "SUCCEEDED", 
+    #   }
+    #
+    # @example Example: Example – Getting the details of a failed export job
+    #
+    #   # The following example retrieves an export job that failed because Security Hub couldn't write to the destination. The
+    #   # FailureCode and FailureMessage explain the cause.
+    #
+    #   resp = client.get_export_job_v2({
+    #     export_job_id: "f6e5d4c3b2a1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     data_type: "FINDINGS", 
+    #     destination: {
+    #       s3: {
+    #         bucket_arn: "arn:aws:s3:::amzn-s3-demo-bucket", 
+    #         kms_key_arn: "arn:aws:kms:aa-example-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       }, 
+    #     }, 
+    #     ended_at: Time.parse("2026-03-27T18:05:03Z"), 
+    #     export_job_id: "f6e5d4c3b2a1", 
+    #     failure_code: "ACCESS_DENIED", 
+    #     failure_message: "Security Hub could not write to the destination bucket. Verify the bucket policy and KMS key policy.", 
+    #     output_configuration: {
+    #       findings: {
+    #         filters: {
+    #           composite_filters: [
+    #             {
+    #               date_filters: [
+    #                 {
+    #                   field_name: "finding_info.last_seen_time_dt", 
+    #                   filter: {
+    #                     date_range: {
+    #                       comparison: "WITHIN", 
+    #                       unit: "DAYS", 
+    #                       value: 30, 
+    #                     }, 
+    #                   }, 
+    #                 }, 
+    #               ], 
+    #               operator: "AND", 
+    #             }, 
+    #           ], 
+    #           composite_operator: "AND", 
+    #         }, 
+    #         format: "OCSF_JSON", 
+    #       }, 
+    #     }, 
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organizational_unit_id: "ou-1234-a1b2c3d4", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     started_at: Time.parse("2026-03-27T18:04:11Z"), 
+    #     status: "FAILED", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_export_job_v2({
+    #     export_job_id: "ExportJobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_job_id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"
+    #   resp.data_type #=> String, one of "FINDINGS"
+    #   resp.output_configuration.findings.format #=> String, one of "CSV", "OCSF_JSON"
+    #   resp.output_configuration.findings.filters.composite_filters #=> Array
+    #   resp.output_configuration.findings.filters.composite_filters[0].string_filters #=> Array
+    #   resp.output_configuration.findings.filters.composite_filters[0].string_filters[0].field_name #=> String, one of "metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"
+    #   resp.output_configuration.findings.filters.composite_filters[0].string_filters[0].filter.value #=> String
+    #   resp.output_configuration.findings.filters.composite_filters[0].string_filters[0].filter.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
+    #   resp.output_configuration.findings.filters.composite_filters[0].date_filters #=> Array
+    #   resp.output_configuration.findings.filters.composite_filters[0].date_filters[0].field_name #=> String, one of "finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt"
+    #   resp.output_configuration.findings.filters.composite_filters[0].date_filters[0].filter.start #=> String
+    #   resp.output_configuration.findings.filters.composite_filters[0].date_filters[0].filter.end #=> String
+    #   resp.output_configuration.findings.filters.composite_filters[0].date_filters[0].filter.date_range.value #=> Integer
+    #   resp.output_configuration.findings.filters.composite_filters[0].date_filters[0].filter.date_range.unit #=> String, one of "DAYS"
+    #   resp.output_configuration.findings.filters.composite_filters[0].date_filters[0].filter.date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
+    #   resp.output_configuration.findings.filters.composite_filters[0].boolean_filters #=> Array
+    #   resp.output_configuration.findings.filters.composite_filters[0].boolean_filters[0].field_name #=> String, one of "compliance.assessments.meets_criteria", "vulnerabilities.is_exploit_available", "vulnerabilities.is_fix_available"
+    #   resp.output_configuration.findings.filters.composite_filters[0].boolean_filters[0].filter.value #=> Boolean
+    #   resp.output_configuration.findings.filters.composite_filters[0].number_filters #=> Array
+    #   resp.output_configuration.findings.filters.composite_filters[0].number_filters[0].field_name #=> String, one of "activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id"
+    #   resp.output_configuration.findings.filters.composite_filters[0].number_filters[0].filter.gte #=> Float
+    #   resp.output_configuration.findings.filters.composite_filters[0].number_filters[0].filter.lte #=> Float
+    #   resp.output_configuration.findings.filters.composite_filters[0].number_filters[0].filter.eq #=> Float
+    #   resp.output_configuration.findings.filters.composite_filters[0].number_filters[0].filter.gt #=> Float
+    #   resp.output_configuration.findings.filters.composite_filters[0].number_filters[0].filter.lt #=> Float
+    #   resp.output_configuration.findings.filters.composite_filters[0].map_filters #=> Array
+    #   resp.output_configuration.findings.filters.composite_filters[0].map_filters[0].field_name #=> String, one of "resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags"
+    #   resp.output_configuration.findings.filters.composite_filters[0].map_filters[0].filter.key #=> String
+    #   resp.output_configuration.findings.filters.composite_filters[0].map_filters[0].filter.value #=> String
+    #   resp.output_configuration.findings.filters.composite_filters[0].map_filters[0].filter.comparison #=> String, one of "EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.output_configuration.findings.filters.composite_filters[0].ip_filters #=> Array
+    #   resp.output_configuration.findings.filters.composite_filters[0].ip_filters[0].field_name #=> String, one of "evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"
+    #   resp.output_configuration.findings.filters.composite_filters[0].ip_filters[0].filter.cidr #=> String
+    #   resp.output_configuration.findings.filters.composite_filters[0].nested_composite_filters #=> Types::CompositeFilterList
+    #   resp.output_configuration.findings.filters.composite_filters[0].operator #=> String, one of "AND", "OR"
+    #   resp.output_configuration.findings.filters.composite_operator #=> String, one of "AND", "OR"
+    #   resp.output_configuration.findings.selected_fields #=> Array
+    #   resp.output_configuration.findings.selected_fields[0] #=> String, one of "metadata.uid", "activity_name", "cloud.account.name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.feature.uid", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.cvss.vendor_name", "vulnerabilities.cve.cvss.version", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "vendor_attributes.severity", "activity_id", "compliance.status_id", "confidence_score", "severity_id", "status_id", "finding_info.related_events_count", "evidences.api.response.code", "evidences.dst_endpoint.autonomous_system.number", "evidences.dst_endpoint.port", "evidences.src_endpoint.autonomous_system.number", "evidences.src_endpoint.port", "resources.image.in_use_count", "vulnerabilities.cve.cvss.base_score", "vendor_attributes.severity_id", "finding_info.created_time_dt", "finding_info.first_seen_time_dt", "finding_info.last_seen_time_dt", "finding_info.modified_time_dt", "resources.image.created_time_dt", "resources.image.last_used_time_dt", "resources.modified_time_dt", "compliance.assessments.meets_criteria", "vulnerabilities.is_exploit_available", "vulnerabilities.is_fix_available", "resources.tags", "compliance.control_parameters", "databucket.tags", "finding_info.tags", "evidences.dst_endpoint.ip", "evidences.src_endpoint.ip"
+    #   resp.scopes.aws_organizations #=> Array
+    #   resp.scopes.aws_organizations[0].organization_id #=> String
+    #   resp.scopes.aws_organizations[0].organizational_unit_id #=> String
+    #   resp.destination.s3.bucket_arn #=> String
+    #   resp.destination.s3.kms_key_arn #=> String
+    #   resp.destination.s3.object_prefix #=> String
+    #   resp.failure_code #=> String, one of "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "INTERNAL_ERROR"
+    #   resp.failure_message #=> String
+    #   resp.started_at #=> Time
+    #   resp.ended_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetExportJobV2 AWS API Documentation
+    #
+    # @overload get_export_job_v2(params = {})
+    # @param [Hash] params ({})
+    def get_export_job_v2(params = {}, options = {})
+      req = build_request(:get_export_job_v2, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> The *aggregation Region* is now called the *home Region*.
     #
     #  </note>
@@ -10288,6 +10569,119 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Returns the findings export jobs in your account as a paginated list
+    # of `ExportSummary` objects. You can filter the results by job `Status`
+    # or `DataType`.
+    #
+    # To page through the results, use the `MaxResults` and `NextToken`
+    # parameters. If the response includes a `NextToken` value, pass it in a
+    # subsequent request to retrieve the next page of results.
+    #
+    # Each `ExportSummary` reports the output `Format` of the job but not
+    # its full `OutputConfiguration`. To retrieve the filters and selected
+    # fields that a job was started with, call `GetExportJobV2`.
+    #
+    # @option params [String] :status
+    #   Filters the results to export jobs that have the specified status.
+    #
+    # @option params [String] :data_type
+    #   Filters the results to export jobs that produce the specified data
+    #   type.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Valid range
+    #   is 1–20.
+    #
+    # @option params [String] :next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue listing
+    #   data, set the value of this parameter to the value returned in the
+    #   previous response.
+    #
+    # @return [Types::ListExportJobsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExportJobsV2Response#items #items} => Array&lt;Types::ExportSummary&gt;
+    #   * {Types::ListExportJobsV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Example – Listing successful findings export jobs
+    #
+    #   # The following example lists the findings export jobs in the account that have succeeded, returning up to 10 results per
+    #   # page.
+    #
+    #   resp = client.list_export_jobs_v2({
+    #     data_type: "FINDINGS", 
+    #     max_results: 10, 
+    #     status: "SUCCEEDED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         data_type: "FINDINGS", 
+    #         destination: {
+    #           s3: {
+    #             bucket_arn: "arn:aws:s3:::amzn-s3-demo-bucket", 
+    #             kms_key_arn: "arn:aws:kms:aa-example-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #             object_prefix: "security-hub-exports/2026-Q1", 
+    #           }, 
+    #         }, 
+    #         ended_at: Time.parse("2026-03-27T18:09:52Z"), 
+    #         export_job_id: "a1b2c3d4e5f6", 
+    #         name: "quarterly-critical-findings", 
+    #         output_configuration: {
+    #           findings: {
+    #             format: "CSV", 
+    #           }, 
+    #         }, 
+    #         started_at: Time.parse("2026-03-27T18:04:11Z"), 
+    #         status: "SUCCEEDED", 
+    #       }, 
+    #     ], 
+    #     next_token: "U2VjdXJpdHlIdWJFeGFtcGxlUGFnaW5hdGlvblRva2Vu", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_export_jobs_v2({
+    #     status: "RUNNING", # accepts RUNNING, SUCCEEDED, FAILED, CANCELLED
+    #     data_type: "FINDINGS", # accepts FINDINGS
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].export_job_id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"
+    #   resp.items[0].data_type #=> String, one of "FINDINGS"
+    #   resp.items[0].output_configuration.findings.format #=> String, one of "CSV", "OCSF_JSON"
+    #   resp.items[0].scopes.aws_organizations #=> Array
+    #   resp.items[0].scopes.aws_organizations[0].organization_id #=> String
+    #   resp.items[0].scopes.aws_organizations[0].organizational_unit_id #=> String
+    #   resp.items[0].destination.s3.bucket_arn #=> String
+    #   resp.items[0].destination.s3.kms_key_arn #=> String
+    #   resp.items[0].destination.s3.object_prefix #=> String
+    #   resp.items[0].failure_code #=> String, one of "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "INTERNAL_ERROR"
+    #   resp.items[0].failure_message #=> String
+    #   resp.items[0].started_at #=> Time
+    #   resp.items[0].ended_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListExportJobsV2 AWS API Documentation
+    #
+    # @overload list_export_jobs_v2(params = {})
+    # @param [Hash] params ({})
+    def list_export_jobs_v2(params = {}, options = {})
+      req = build_request(:list_export_jobs_v2, params)
+      req.send_request(options)
+    end
+
     # Retrieves the exposure findings tied to a specific remediation target.
     # Results are sorted by previous severity, highest first, and are
     # paginated.
@@ -11254,6 +11648,307 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def start_configuration_policy_disassociation(params = {}, options = {})
       req = build_request(:start_configuration_policy_disassociation, params)
+      req.send_request(options)
+    end
+
+    # Starts an ad hoc export job that writes Security Hub findings to an
+    # Amazon Simple Storage Service (Amazon S3) bucket that you own. Because
+    # the export runs asynchronously, this operation returns only the
+    # `ExportJobId` of the new job; it doesn't wait for the export to
+    # finish. Use `GetExportJobV2` to poll the job, and `ListExportJobsV2`
+    # to view the export jobs in your account.
+    #
+    # Security Hub allows only one export job in the `RUNNING` state per
+    # account at a time. If an export job is already running, this operation
+    # returns a `ServiceQuotaExceededException`. Wait for the running job to
+    # finish, or cancel it with `CancelExportJobV2`, before you start a new
+    # one.
+    #
+    # Specify the destination bucket and Amazon Web Services Key Management
+    # Service (Amazon Web Services KMS) key in the `Destination` parameter,
+    # and the output format (`CSV` or `OCSF_JSON`), optional filters, and
+    # field selection in the `OutputConfiguration` parameter. Before you
+    # call this operation, you must grant Security Hub permission to write
+    # to your bucket and use your Amazon Web Services KMS key by adding the
+    # bucket policy and key policy statements shown in the Examples section.
+    #
+    # Two identities use your Amazon Web Services KMS key, and each needs
+    # its own permission. Security Hub uses the key when it writes the
+    # export objects to your bucket. The IAM principal that calls
+    # `StartExportJobV2` must also have `kms:GenerateDataKey` and
+    # `kms:Decrypt` permissions on the key. The Examples section shows both
+    # grants.
+    #
+    # A delegated administrator can use the optional `Scopes` parameter to
+    # export findings for specific organizations or organizational units
+    # (OUs).
+    #
+    # To make the request idempotent, provide a `ClientToken`. If you retry
+    # a `StartExportJobV2` request with the same `ClientToken` and the same
+    # request parameters, Security Hub returns the `ExportJobId` of the
+    # original job instead of starting a new one. If you reuse a
+    # `ClientToken` with different request parameters, this operation
+    # returns a `ConflictException`.
+    #
+    # @option params [String] :name
+    #   An optional, user-provided name for the export job that helps you
+    #   identify it in `ListExportJobsV2` results. The value can be 1–256
+    #   characters. Alphanumeric characters, spaces, and the following ASCII
+    #   characters are permitted: `. _ , : ( ) / + -`.
+    #
+    # @option params [required, Types::ExportDestination] :destination
+    #   The destination that Security Hub writes the export to. You must
+    #   specify exactly one destination type. Currently, the only supported
+    #   type is Amazon S3.
+    #
+    # @option params [required, Types::ExportOutput] :output_configuration
+    #   Specifies what data to export and how to format it. You must specify
+    #   exactly one output type. Currently, the only supported type is
+    #   `Findings`.
+    #
+    # @option params [Types::ExportScopes] :scopes
+    #   Limits the export to findings from specific organizational units (OUs)
+    #   or from the delegated administrator's organization. Only the
+    #   delegated administrator account can use this parameter; other accounts
+    #   that specify it receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator exports findings from all accounts across the entire
+    #   organization, and other accounts export only their own findings.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If you
+    #   specify multiple entries, Security Hub combines them using OR logic.
+    #
+    # @option params [String] :client_token
+    #   A unique identifier used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartExportJobV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartExportJobV2Response#export_job_id #export_job_id} => String
+    #
+    #
+    # @example Example: Example – Starting a CSV export of critical findings
+    #
+    #   # The following example starts an export that writes selected fields of new, critical findings to an Amazon S3 bucket in
+    #   # CSV format.
+    #
+    #   resp = client.start_export_job_v2({
+    #     client_token: "b3d1f9a2-1c4e-4b9a-9f2e-EXAMPLE11111", 
+    #     destination: {
+    #       s3: {
+    #         bucket_arn: "arn:aws:s3:::amzn-s3-demo-bucket", 
+    #         kms_key_arn: "arn:aws:kms:aa-example-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #         object_prefix: "security-hub-exports/2026-Q1", 
+    #       }, 
+    #     }, 
+    #     name: "quarterly-critical-findings", 
+    #     output_configuration: {
+    #       findings: {
+    #         filters: {
+    #           composite_filters: [
+    #             {
+    #               operator: "AND", 
+    #               string_filters: [
+    #                 {
+    #                   field_name: "severity", 
+    #                   filter: {
+    #                     comparison: "EQUALS", 
+    #                     value: "Critical", 
+    #                   }, 
+    #                 }, 
+    #                 {
+    #                   field_name: "status", 
+    #                   filter: {
+    #                     comparison: "EQUALS", 
+    #                     value: "New", 
+    #                   }, 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #           ], 
+    #           composite_operator: "AND", 
+    #         }, 
+    #         format: "CSV", 
+    #         selected_fields: [
+    #           "finding_info.title", 
+    #           "severity", 
+    #           "status", 
+    #           "cloud.account.uid", 
+    #           "resources.uid", 
+    #         ], 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     export_job_id: "a1b2c3d4e5f6", 
+    #   }
+    #
+    # @example Example: Example – Starting an OCSF JSON export scoped to an organizational unit
+    #
+    #   # The following example, run by a delegated administrator, starts an export of the last 30 days of findings for a specific
+    #   # organizational unit (OU) in OCSF JSON format.
+    #
+    #   resp = client.start_export_job_v2({
+    #     destination: {
+    #       s3: {
+    #         bucket_arn: "arn:aws:s3:::amzn-s3-demo-bucket", 
+    #         kms_key_arn: "arn:aws:kms:aa-example-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       }, 
+    #     }, 
+    #     output_configuration: {
+    #       findings: {
+    #         filters: {
+    #           composite_filters: [
+    #             {
+    #               date_filters: [
+    #                 {
+    #                   field_name: "finding_info.last_seen_time_dt", 
+    #                   filter: {
+    #                     date_range: {
+    #                       comparison: "WITHIN", 
+    #                       unit: "DAYS", 
+    #                       value: 30, 
+    #                     }, 
+    #                   }, 
+    #                 }, 
+    #               ], 
+    #               operator: "AND", 
+    #             }, 
+    #           ], 
+    #           composite_operator: "AND", 
+    #         }, 
+    #         format: "OCSF_JSON", 
+    #       }, 
+    #     }, 
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organizational_unit_id: "ou-1234-a1b2c3d4", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     export_job_id: "f6e5d4c3b2a1", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_export_job_v2({
+    #     name: "ExportName",
+    #     destination: { # required
+    #       s3: {
+    #         bucket_arn: "NonEmptyString", # required
+    #         kms_key_arn: "NonEmptyString", # required
+    #         object_prefix: "S3ObjectPrefix",
+    #       },
+    #     },
+    #     output_configuration: { # required
+    #       findings: {
+    #         format: "CSV", # required, accepts CSV, OCSF_JSON
+    #         filters: {
+    #           composite_filters: [
+    #             {
+    #               string_filters: [
+    #                 {
+    #                   field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
+    #                   filter: {
+    #                     value: "NonEmptyString",
+    #                     comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #                   },
+    #                 },
+    #               ],
+    #               date_filters: [
+    #                 {
+    #                   field_name: "finding_info.created_time_dt", # accepts finding_info.created_time_dt, finding_info.first_seen_time_dt, finding_info.last_seen_time_dt, finding_info.modified_time_dt, resources.image.created_time_dt, resources.image.last_used_time_dt, resources.modified_time_dt
+    #                   filter: {
+    #                     start: "NonEmptyString",
+    #                     end: "NonEmptyString",
+    #                     date_range: {
+    #                       value: 1,
+    #                       unit: "DAYS", # accepts DAYS
+    #                       comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               boolean_filters: [
+    #                 {
+    #                   field_name: "compliance.assessments.meets_criteria", # accepts compliance.assessments.meets_criteria, vulnerabilities.is_exploit_available, vulnerabilities.is_fix_available
+    #                   filter: {
+    #                     value: false,
+    #                   },
+    #                 },
+    #               ],
+    #               number_filters: [
+    #                 {
+    #                   field_name: "activity_id", # accepts activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count, vulnerabilities.cve.cvss.base_score, vendor_attributes.severity_id
+    #                   filter: {
+    #                     gte: 1.0,
+    #                     lte: 1.0,
+    #                     eq: 1.0,
+    #                     gt: 1.0,
+    #                     lt: 1.0,
+    #                   },
+    #                 },
+    #               ],
+    #               map_filters: [
+    #                 {
+    #                   field_name: "resources.tags", # accepts resources.tags, compliance.control_parameters, databucket.tags, finding_info.tags
+    #                   filter: {
+    #                     key: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                     comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #                   },
+    #                 },
+    #               ],
+    #               ip_filters: [
+    #                 {
+    #                   field_name: "evidences.dst_endpoint.ip", # accepts evidences.dst_endpoint.ip, evidences.src_endpoint.ip
+    #                   filter: {
+    #                     cidr: "NonEmptyString",
+    #                   },
+    #                 },
+    #               ],
+    #               nested_composite_filters: {
+    #                 # recursive CompositeFilterList
+    #               },
+    #               operator: "AND", # accepts AND, OR
+    #             },
+    #           ],
+    #           composite_operator: "AND", # accepts AND, OR
+    #         },
+    #         selected_fields: ["metadata.uid"], # accepts metadata.uid, activity_name, cloud.account.name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.feature.uid, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.cvss.vendor_name, vulnerabilities.cve.cvss.version, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, vendor_attributes.severity, activity_id, compliance.status_id, confidence_score, severity_id, status_id, finding_info.related_events_count, evidences.api.response.code, evidences.dst_endpoint.autonomous_system.number, evidences.dst_endpoint.port, evidences.src_endpoint.autonomous_system.number, evidences.src_endpoint.port, resources.image.in_use_count, vulnerabilities.cve.cvss.base_score, vendor_attributes.severity_id, finding_info.created_time_dt, finding_info.first_seen_time_dt, finding_info.last_seen_time_dt, finding_info.modified_time_dt, resources.image.created_time_dt, resources.image.last_used_time_dt, resources.modified_time_dt, compliance.assessments.meets_criteria, vulnerabilities.is_exploit_available, vulnerabilities.is_fix_available, resources.tags, compliance.control_parameters, databucket.tags, finding_info.tags, evidences.dst_endpoint.ip, evidences.src_endpoint.ip
+    #       },
+    #     },
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString",
+    #         },
+    #       ],
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartExportJobV2 AWS API Documentation
+    #
+    # @overload start_export_job_v2(params = {})
+    # @param [Hash] params ({})
+    def start_export_job_v2(params = {}, options = {})
+      req = build_request(:start_export_job_v2, params)
       req.send_request(options)
     end
 
@@ -13835,7 +14530,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.166.0'
+      context[:gem_version] = '1.167.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

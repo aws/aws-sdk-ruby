@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.198.0 (2026-10-08)
+------------------
+
+* Feature - AWS Elemental MediaLive Workflow Monitor now supports AWS Elemental Inference feeds as a target resource type for CloudWatch alarm templates.
+
 1.197.0 (2026-09-11)
 ------------------
 

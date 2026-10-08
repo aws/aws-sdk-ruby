@@ -22,6 +22,10 @@ module Aws::EKS
     AccessPolicy = Shapes::StructureShape.new(name: 'AccessPolicy')
     AccessScope = Shapes::StructureShape.new(name: 'AccessScope')
     AccessScopeType = Shapes::StringShape.new(name: 'AccessScopeType')
+    AckConfigRequest = Shapes::StructureShape.new(name: 'AckConfigRequest')
+    AckConfigResponse = Shapes::StructureShape.new(name: 'AckConfigResponse')
+    AckDisabledServicesList = Shapes::ListShape.new(name: 'AckDisabledServicesList')
+    AckServiceName = Shapes::StringShape.new(name: 'AckServiceName')
     ActivateCertificateAuthorityRequest = Shapes::StructureShape.new(name: 'ActivateCertificateAuthorityRequest')
     ActivateCertificateAuthorityResponse = Shapes::StructureShape.new(name: 'ActivateCertificateAuthorityResponse')
     ActiveCertificateAuthority = Shapes::StructureShape.new(name: 'ActiveCertificateAuthority')
@@ -417,6 +421,7 @@ module Aws::EKS
     UpdateAccessConfigRequest = Shapes::StructureShape.new(name: 'UpdateAccessConfigRequest')
     UpdateAccessEntryRequest = Shapes::StructureShape.new(name: 'UpdateAccessEntryRequest')
     UpdateAccessEntryResponse = Shapes::StructureShape.new(name: 'UpdateAccessEntryResponse')
+    UpdateAckConfig = Shapes::StructureShape.new(name: 'UpdateAckConfig')
     UpdateAddonRequest = Shapes::StructureShape.new(name: 'UpdateAddonRequest')
     UpdateAddonResponse = Shapes::StructureShape.new(name: 'UpdateAddonResponse')
     UpdateArgoCdConfig = Shapes::StructureShape.new(name: 'UpdateArgoCdConfig')
@@ -493,6 +498,16 @@ module Aws::EKS
     AccessScope.add_member(:type, Shapes::ShapeRef.new(shape: AccessScopeType, location_name: "type"))
     AccessScope.add_member(:namespaces, Shapes::ShapeRef.new(shape: StringList, location_name: "namespaces"))
     AccessScope.struct_class = Types::AccessScope
+
+    AckConfigRequest.add_member(:enable_cross_namespace, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enableCrossNamespace"))
+    AckConfigRequest.add_member(:disabled_services, Shapes::ShapeRef.new(shape: AckDisabledServicesList, location_name: "disabledServices"))
+    AckConfigRequest.struct_class = Types::AckConfigRequest
+
+    AckConfigResponse.add_member(:enable_cross_namespace, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enableCrossNamespace"))
+    AckConfigResponse.add_member(:disabled_services, Shapes::ShapeRef.new(shape: AckDisabledServicesList, location_name: "disabledServices"))
+    AckConfigResponse.struct_class = Types::AckConfigResponse
+
+    AckDisabledServicesList.member = Shapes::ShapeRef.new(shape: AckServiceName)
 
     ActivateCertificateAuthorityRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     ActivateCertificateAuthorityRequest.add_member(:certificate_authority_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "certificateAuthorityId"))
@@ -700,9 +715,11 @@ module Aws::EKS
     Capability.struct_class = Types::Capability
 
     CapabilityConfigurationRequest.add_member(:argo_cd, Shapes::ShapeRef.new(shape: ArgoCdConfigRequest, location_name: "argoCd"))
+    CapabilityConfigurationRequest.add_member(:ack, Shapes::ShapeRef.new(shape: AckConfigRequest, location_name: "ack"))
     CapabilityConfigurationRequest.struct_class = Types::CapabilityConfigurationRequest
 
     CapabilityConfigurationResponse.add_member(:argo_cd, Shapes::ShapeRef.new(shape: ArgoCdConfigResponse, location_name: "argoCd"))
+    CapabilityConfigurationResponse.add_member(:ack, Shapes::ShapeRef.new(shape: AckConfigResponse, location_name: "ack"))
     CapabilityConfigurationResponse.struct_class = Types::CapabilityConfigurationResponse
 
     CapabilityHealth.add_member(:issues, Shapes::ShapeRef.new(shape: CapabilityIssueList, location_name: "issues"))
@@ -1983,6 +2000,10 @@ module Aws::EKS
     UpdateAccessEntryResponse.add_member(:access_entry, Shapes::ShapeRef.new(shape: AccessEntry, location_name: "accessEntry"))
     UpdateAccessEntryResponse.struct_class = Types::UpdateAccessEntryResponse
 
+    UpdateAckConfig.add_member(:enable_cross_namespace, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enableCrossNamespace"))
+    UpdateAckConfig.add_member(:disabled_services, Shapes::ShapeRef.new(shape: AckDisabledServicesList, location_name: "disabledServices"))
+    UpdateAckConfig.struct_class = Types::UpdateAckConfig
+
     UpdateAddonRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
     UpdateAddonRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "addonName"))
     UpdateAddonRequest.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, location_name: "addonVersion"))
@@ -2001,6 +2022,7 @@ module Aws::EKS
     UpdateArgoCdConfig.struct_class = Types::UpdateArgoCdConfig
 
     UpdateCapabilityConfiguration.add_member(:argo_cd, Shapes::ShapeRef.new(shape: UpdateArgoCdConfig, location_name: "argoCd"))
+    UpdateCapabilityConfiguration.add_member(:ack, Shapes::ShapeRef.new(shape: UpdateAckConfig, location_name: "ack"))
     UpdateCapabilityConfiguration.struct_class = Types::UpdateCapabilityConfiguration
 
     UpdateCapabilityRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))

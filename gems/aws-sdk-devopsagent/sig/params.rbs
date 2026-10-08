@@ -23,7 +23,8 @@ module Aws
       owner: ::String,
       owner_type: ("organization" | "user"),
       instance_identifier: ::String?,
-      runtime_role_arn: ::String?
+      runtime_role_arn: ::String?,
+      release_management_association_id: ::String?
     }
 
       type slack_transmission_target = {
@@ -57,6 +58,16 @@ module Aws
           tool_classification: ("READ_ONLY" | "MUTATIVE" | "DESTRUCTIVE")?
         }
       ]?
+    }
+
+      type release_management_configuration = {
+      name: ::String,
+      network_access: {
+        private_access: {
+          private_connection_name: ::String,
+          runtime_role_arn: ::String
+        }?
+      }
     }
 
       type service_configuration = {
@@ -103,7 +114,8 @@ module Aws
         project_id: ::String,
         project_path: ::String,
         instance_identifier: ::String?,
-        runtime_role_arn: ::String?
+        runtime_role_arn: ::String?,
+        release_management_association_id: ::String?
       }?,
       mcpserversplunk: {
       }?,
@@ -134,7 +146,8 @@ module Aws
       remoteagent: {
       }?,
       remoteagentsigv4: {
-      }?
+      }?,
+      release_management: Params::release_management_configuration?
     }
 
       type capability_configuration = {

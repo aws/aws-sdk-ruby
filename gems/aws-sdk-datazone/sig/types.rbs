@@ -5556,6 +5556,17 @@ module Aws::DataZone
       SENSITIVE: [:uri]
     end
 
+    class S3File
+      attr_accessor key: ::String
+      SENSITIVE: [:key]
+    end
+
+    class S3FilesLocation
+      attr_accessor bucket: ::String
+      attr_accessor file_list: ::Array[Types::S3File]
+      SENSITIVE: [:bucket]
+    end
+
     class S3PropertiesInput
       attr_accessor s3_uri: ::String
       attr_accessor s3_access_grant_location_id: ::String
@@ -5811,10 +5822,13 @@ module Aws::DataZone
 
     class SourceLocation
       attr_accessor s3: ::String
+      attr_accessor s3_files: Types::S3FilesLocation
       attr_accessor unknown: untyped
       SENSITIVE: [:s3]
 
       class S3 < SourceLocation
+      end
+      class S3Files < SourceLocation
       end
       class Unknown < SourceLocation
       end
@@ -5973,6 +5987,7 @@ module Aws::DataZone
       attr_accessor source_location: Types::SourceLocation
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor client_token: ::String
       SENSITIVE: [:name, :description]
     end
@@ -5984,6 +5999,7 @@ module Aws::DataZone
       attr_accessor owning_project_id: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor source_location: Types::SourceLocation
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String

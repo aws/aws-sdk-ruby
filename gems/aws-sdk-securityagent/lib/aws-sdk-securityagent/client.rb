@@ -1148,6 +1148,7 @@ module Aws::SecurityAgent
     #   resp.findings[0].confidence #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
     #   resp.findings[0].validation_status #=> String, one of "CONFIRMED", "NOT_REPRODUCED", "VALIDATION_FAILED", "VALIDATING", "NOT_VALIDATED"
     #   resp.findings[0].attack_script #=> String
+    #   resp.findings[0].remediation_code #=> String
     #   resp.findings[0].code_remediation_task.status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.findings[0].code_remediation_task.status_reason #=> String
     #   resp.findings[0].code_remediation_task.task_details #=> Array
@@ -6700,7 +6701,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

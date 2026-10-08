@@ -4748,11 +4748,21 @@ module Aws::OpenSearchService
     #   `1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a`.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_mode
+    #   The type of encryption at rest applied to the domain's data. Valid
+    #   values are `DISK` and `NATIVE`. `DISK` is the default and uses
+    #   volume-level encryption. `NATIVE` uses engine-native, index-level
+    #   encryption and requires encryption at rest to be enabled and
+    #   OpenSearch version 3.3 or later. After the mode is set to `NATIVE`,
+    #   it can't be changed back to `DISK`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/EncryptionAtRestOptions AWS API Documentation
     #
     class EncryptionAtRestOptions < Struct.new(
       :enabled,
-      :kms_key_id)
+      :kms_key_id,
+      :encryption_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9482,8 +9492,8 @@ module Aws::OpenSearchService
     #   A list of advisory warning codes to accept for this configuration
     #   change. By default, any advisory warning blocks the change. Include
     #   the code of each warning you want to accept so the change can
-    #   proceed. You can find warning codes in the`ValidationFailures` list
-    #   returned by `DescribeDomainChangeProgress`and
+    #   proceed. You can find warning codes in the `ValidationFailures` list
+    #   returned by `DescribeDomainChangeProgress` and
     #   `DescribeDryRunProgress`. Critical validation failures cannot be
     #   accepted and always block the change. If you omit this parameter or
     #   pass an empty list, all warnings block the change. For more

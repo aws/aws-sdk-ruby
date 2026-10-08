@@ -1430,7 +1430,7 @@ module Aws
         def period: () -> ::Integer
         def statistic: () -> ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
         def tags: () -> ::Hash[::String, ::String]
-        def target_resource_type: () -> ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+        def target_resource_type: () -> ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
         def threshold: () -> ::Float
         def treat_missing_data: () -> ("notBreaching" | "breaching" | "ignore" | "missing")
       end
@@ -1446,7 +1446,7 @@ module Aws
                                                period: ::Integer,
                                                statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum"),
                                                ?tags: Hash[::String, ::String],
-                                               target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION"),
+                                               target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED"),
                                                threshold: ::Float,
                                                treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing"),
                                                ?request_id: ::String
@@ -1599,7 +1599,7 @@ module Aws
         def period: () -> ::Integer
         def statistic: () -> ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
         def tags: () -> ::Hash[::String, ::String]
-        def target_resource_type: () -> ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+        def target_resource_type: () -> ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
         def threshold: () -> ::Float
         def treat_missing_data: () -> ("notBreaching" | "breaching" | "ignore" | "missing")
       end
@@ -1861,7 +1861,7 @@ module Aws
         def period: () -> ::Integer
         def statistic: () -> ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
         def tags: () -> ::Hash[::String, ::String]
-        def target_resource_type: () -> ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+        def target_resource_type: () -> ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
         def threshold: () -> ::Float
         def treat_missing_data: () -> ("notBreaching" | "breaching" | "ignore" | "missing")
       end
@@ -1877,7 +1877,7 @@ module Aws
                                                ?name: ::String,
                                                ?period: ::Integer,
                                                ?statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum"),
-                                               ?target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION"),
+                                               ?target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED"),
                                                ?threshold: ::Float,
                                                ?treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
                                              ) -> _UpdateCloudWatchAlarmTemplateResponseSuccess

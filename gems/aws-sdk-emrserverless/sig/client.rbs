@@ -215,7 +215,8 @@ module Aws
       def get_resource_dashboard: (
                                     application_id: ::String,
                                     resource_id: ::String,
-                                    resource_type: ("SESSION")
+                                    resource_type: ("SESSION"),
+                                    ?access_system_profile_logs: bool
                                   ) -> _GetResourceDashboardResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceDashboardResponseSuccess
 

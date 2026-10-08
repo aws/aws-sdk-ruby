@@ -4109,6 +4109,17 @@ module Aws
                                                        ) -> _BatchUpdateStandardsControlAssociationsResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateStandardsControlAssociationsResponseSuccess
 
+      interface _CancelExportJobV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelExportJobV2Response]
+        def export_job_id: () -> ::String
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#cancel_export_job_v2-instance_method
+      def cancel_export_job_v2: (
+                                  export_job_id: ::String
+                                ) -> _CancelExportJobV2ResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelExportJobV2ResponseSuccess
+
       interface _CreateActionTargetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateActionTargetResponse]
         def action_target_arn: () -> ::String
@@ -4763,6 +4774,26 @@ module Aws
                                  ) -> _GetEnabledStandardsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnabledStandardsResponseSuccess
 
+      interface _GetExportJobV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExportJobV2Response]
+        def export_job_id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELLED")
+        def data_type: () -> ("FINDINGS")
+        def output_configuration: () -> Types::ExportOutput
+        def scopes: () -> Types::ExportScopes
+        def destination: () -> Types::ExportDestination
+        def failure_code: () -> ("ACCESS_DENIED" | "RESOURCE_NOT_FOUND" | "INTERNAL_ERROR")
+        def failure_message: () -> ::String
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#get_export_job_v2-instance_method
+      def get_export_job_v2: (
+                               export_job_id: ::String
+                             ) -> _GetExportJobV2ResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExportJobV2ResponseSuccess
+
       interface _GetFindingAggregatorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingAggregatorResponse]
         def finding_aggregator_arn: () -> ::String
@@ -5184,6 +5215,20 @@ module Aws
                                             ) -> _ListEnabledProductsForImportResponseSuccess
                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnabledProductsForImportResponseSuccess
 
+      interface _ListExportJobsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExportJobsV2Response]
+        def items: () -> ::Array[Types::ExportSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#list_export_jobs_v2-instance_method
+      def list_export_jobs_v2: (
+                                 ?status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELLED"),
+                                 ?data_type: ("FINDINGS"),
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListExportJobsV2ResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExportJobsV2ResponseSuccess
+
       interface _ListExposuresByRemediationV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListExposuresByRemediationV2Response]
         def items: () -> ::Array[Types::ExposureFinding]
@@ -5349,6 +5394,39 @@ module Aws
                                                        configuration_policy_identifier: ::String
                                                      ) -> _StartConfigurationPolicyDisassociationResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartConfigurationPolicyDisassociationResponseSuccess
+
+      interface _StartExportJobV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartExportJobV2Response]
+        def export_job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#start_export_job_v2-instance_method
+      def start_export_job_v2: (
+                                 ?name: ::String,
+                                 destination: {
+                                   s3: {
+                                     bucket_arn: ::String,
+                                     kms_key_arn: ::String,
+                                     object_prefix: ::String?
+                                   }?
+                                 },
+                                 output_configuration: {
+                                   findings: {
+                                     format: ("CSV" | "OCSF_JSON"),
+                                     filters: Params::ocsf_finding_filters?,
+                                     selected_fields: Array[("metadata.uid" | "activity_name" | "cloud.account.name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.traits.category" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.feature.uid" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.name" | "resources.owner.account.uid" | "resources.owner.org.uid" | "resources.owner.account.name" | "resources.provider" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.cvss.vendor_name" | "vulnerabilities.cve.cvss.version" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "vendor_attributes.severity" | "activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count" | "vulnerabilities.cve.cvss.base_score" | "vendor_attributes.severity_id" | "finding_info.created_time_dt" | "finding_info.first_seen_time_dt" | "finding_info.last_seen_time_dt" | "finding_info.modified_time_dt" | "resources.image.created_time_dt" | "resources.image.last_used_time_dt" | "resources.modified_time_dt" | "compliance.assessments.meets_criteria" | "vulnerabilities.is_exploit_available" | "vulnerabilities.is_fix_available" | "resources.tags" | "compliance.control_parameters" | "databucket.tags" | "finding_info.tags" | "evidences.dst_endpoint.ip" | "evidences.src_endpoint.ip")]?
+                                   }?
+                                 },
+                                 ?scopes: {
+                                   aws_organizations: Array[
+                                     {
+                                       organization_id: ::String?,
+                                       organizational_unit_id: ::String?
+                                     }
+                                   ]?
+                                 },
+                                 ?client_token: ::String
+                               ) -> _StartExportJobV2ResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartExportJobV2ResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

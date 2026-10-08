@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2026-10-08)
+------------------
+
+* Feature - SESV2 DEED - Documentation Update
+
 1.111.0 (2026-09-29)
 ------------------
 

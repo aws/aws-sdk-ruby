@@ -22565,6 +22565,36 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job to cancel. This is the value
+    #   returned by `StartExportJobV2`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CancelExportJobV2Request AWS API Documentation
+    #
+    class CancelExportJobV2Request < Struct.new(
+      :export_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The state of the export job after the cancel request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CancelExportJobV2Response AWS API Documentation
+    #
+    class CancelExportJobV2Response < Struct.new(
+      :export_job_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An occurrence of sensitive data detected in a Microsoft Excel
     # workbook, comma-separated value (CSV) file, or tab-separated value
     # (TSV) file.
@@ -25300,6 +25330,187 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Specifies where Security Hub writes the export output. This is a
+    # union: you must specify exactly one member. Currently, the only
+    # supported member is `S3`.
+    #
+    # @note ExportDestination is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ExportDestination is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ExportDestination corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   The Amazon Simple Storage Service (Amazon S3) bucket and Amazon Web
+    #   Services Key Management Service (Amazon Web Services KMS) key that
+    #   Security Hub uses to write the export.
+    #   @return [Types::S3ExportDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExportDestination AWS API Documentation
+    #
+    class ExportDestination < Struct.new(
+      :s3,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < ExportDestination; end
+      class Unknown < ExportDestination; end
+    end
+
+    # Specifies what data to export and how to format it. This is a union:
+    # you must specify exactly one member. Currently, the only supported
+    # member is `Findings`.
+    #
+    # @note ExportOutput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ExportOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ExportOutput corresponding to the set member.
+    #
+    # @!attribute [rw] findings
+    #   Configures an export of Security Hub findings, including the output
+    #   format and any filters or selected fields.
+    #   @return [Types::FindingsOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExportOutput AWS API Documentation
+    #
+    class ExportOutput < Struct.new(
+      :findings,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Findings < ExportOutput; end
+      class Unknown < ExportOutput; end
+    end
+
+    # A summary of the output configuration for an export job. The populated
+    # member corresponds to the data type that was exported.
+    #
+    # @note ExportOutputSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ExportOutputSummary corresponding to the set member.
+    #
+    # @!attribute [rw] findings
+    #   The output configuration summary for a findings export.
+    #   @return [Types::FindingsOutputSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExportOutputSummary AWS API Documentation
+    #
+    class ExportOutputSummary < Struct.new(
+      :findings,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Findings < ExportOutputSummary; end
+      class Unknown < ExportOutputSummary; end
+    end
+
+    # Defines the data boundary for a findings export. Scopes determine
+    # which organizational units or organizations to retrieve data from.
+    #
+    # Only a delegated administrator can use this structure. If a delegated
+    # administrator omits it, the export covers the entire organization; any
+    # other caller exports only findings from its own account.
+    #
+    # @!attribute [rw] aws_organizations
+    #   A list of Organizations scopes to include in the export. Each entry
+    #   in the list specifies an organization or organizational unit to
+    #   include for the delegated administrator's account. If the list
+    #   specifies multiple entries, the entries are combined using OR logic.
+    #   @return [Array<Types::AwsOrganizationScope>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExportScopes AWS API Documentation
+    #
+    class ExportScopes < Struct.new(
+      :aws_organizations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an export job, as returned by `ListExportJobsV2`.
+    #
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The user-provided name of the export job, if one was specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The category of data that the export job produces.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   The output configuration of the export job. For findings exports,
+    #   this reports the output format. Present only for findings exports;
+    #   absent for other data types.
+    #   @return [Types::ExportOutputSummary]
+    #
+    # @!attribute [rw] scopes
+    #   The organization scopes that the export job was started with, echoed
+    #   verbatim. Absent if the caller didn't supply `Scopes`.
+    #   @return [Types::ExportScopes]
+    #
+    # @!attribute [rw] destination
+    #   The destination that the export job writes to.
+    #   @return [Types::ExportDestination]
+    #
+    # @!attribute [rw] failure_code
+    #   A code that classifies why the export job failed. Present only when
+    #   `Status` is `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   A human-readable message about why the export job failed. Present
+    #   only when `Status` is `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The time when the export job was created.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The time when the export job reached a terminal state. Absent while
+    #   the job is `RUNNING`.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExportSummary AWS API Documentation
+    #
+    class ExportSummary < Struct.new(
+      :export_job_id,
+      :name,
+      :status,
+      :data_type,
+      :output_configuration,
+      :scopes,
+      :destination,
+      :failure_code,
+      :failure_message,
+      :started_at,
+      :ended_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides details about an exposure finding and the effect the specific
     # remediation target has on it.
     #
@@ -25727,6 +25938,69 @@ module Aws::SecurityHub
     #
     class FindingScopes < Struct.new(
       :aws_organizations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a findings export: the output format, an
+    # optional set of filters, and the fields to include.
+    #
+    # @!attribute [rw] format
+    #   The output format of the export. `CSV` produces comma-separated rows
+    #   that are suitable for spreadsheets and analysis tools. `OCSF_JSON`
+    #   produces newline-delimited JSON records in the Open Cybersecurity
+    #   Schema Framework (OCSF) format used elsewhere in Security Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   An optional set of OCSF finding filters that restrict which findings
+    #   are exported. The filter structure is the same as the one used by
+    #   `GetFindingsV2`. If you omit this member, Security Hub exports all
+    #   findings available to the caller. When echoed by `GetExportJobV2`,
+    #   relative date ranges are returned unresolved.
+    #   @return [Types::OcsfFindingFilters]
+    #
+    # @!attribute [rw] selected_fields
+    #   The OCSF finding fields to include in the export, specified as OCSF
+    #   field paths (for example, `finding_info.title` or `severity`). You
+    #   can specify from 1 to 50 fields.
+    #
+    #   Whether this parameter is required depends on the value of `Format`:
+    #
+    #   * `CSV` – Required. The field paths that you specify become the
+    #     columns of the output, in the order that you provide them. If you
+    #     omit this parameter, the request returns a `ValidationException`.
+    #
+    #   * `OCSF_JSON` – Not supported. This format includes each finding in
+    #     full, so field selection doesn't apply. If you specify this
+    #     parameter, the request returns a `ValidationException`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingsOutput AWS API Documentation
+    #
+    class FindingsOutput < Struct.new(
+      :format,
+      :filters,
+      :selected_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the output configuration for a findings export, returned
+    # by `ListExportJobsV2`. Unlike the configuration returned by
+    # `GetExportJobV2`, it reports only the output format.
+    #
+    # @!attribute [rw] format
+    #   The output format of the export. `CSV` produces comma-separated rows
+    #   that are suitable for spreadsheets and analysis tools. `OCSF_JSON`
+    #   produces newline-delimited JSON records in the Open Cybersecurity
+    #   Schema Framework (OCSF) format used elsewhere in Security Hub.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingsOutputSummary AWS API Documentation
+    #
+    class FindingsOutputSummary < Struct.new(
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26508,6 +26782,105 @@ module Aws::SecurityHub
     class GetEnabledStandardsResponse < Struct.new(
       :standards_subscriptions,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job to retrieve. This is the
+    #   value returned by `StartExportJobV2`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetExportJobV2Request AWS API Documentation
+    #
+    class GetExportJobV2Request < Struct.new(
+      :export_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The user-provided name of the export job, if one was specified when
+    #   the job was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The category of data that the export job produces.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   The output configuration that the export job was started with,
+    #   including the format and any filters or selected fields.
+    #   @return [Types::ExportOutput]
+    #
+    # @!attribute [rw] scopes
+    #   The organization scopes that the export job was started with, echoed
+    #   verbatim. This parameter is absent if the caller didn't supply
+    #   `Scopes`. It contains only the organization or organizational unit
+    #   (OU) identifiers that the caller submitted; it never contains
+    #   resolved member-account identifiers.
+    #   @return [Types::ExportScopes]
+    #
+    # @!attribute [rw] destination
+    #   The destination that the export job writes to.
+    #   @return [Types::ExportDestination]
+    #
+    # @!attribute [rw] failure_code
+    #   A code that classifies why the export job failed. Present only when
+    #   `Status` is `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   A human-readable message that provides more detail about why the
+    #   export job failed. Present only when `Status` is `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The time when the export job was created.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The time when the export job reached a terminal state (`SUCCEEDED`,
+    #   `FAILED`, or `CANCELLED`). This parameter is absent while the job is
+    #   `RUNNING`.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetExportJobV2Response AWS API Documentation
+    #
+    class GetExportJobV2Response < Struct.new(
+      :export_job_id,
+      :name,
+      :status,
+      :data_type,
+      :output_configuration,
+      :scopes,
+      :destination,
+      :failure_code,
+      :failure_message,
+      :started_at,
+      :ended_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28414,6 +28787,56 @@ module Aws::SecurityHub
     #
     class ListEnabledProductsForImportResponse < Struct.new(
       :product_subscriptions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   Filters the results to export jobs that have the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   Filters the results to export jobs that produce the specified data
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Valid
+    #   range is 1–20.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue
+    #   listing data, set the value of this parameter to the value returned
+    #   in the previous response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListExportJobsV2Request AWS API Documentation
+    #
+    class ListExportJobsV2Request < Struct.new(
+      :status,
+      :data_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The export jobs that match the request, as `ExportSummary` objects.
+    #   @return [Array<Types::ExportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListExportJobsV2Response AWS API Documentation
+    #
+    class ListExportJobsV2Response < Struct.new(
+      :items,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -30815,7 +31238,7 @@ module Aws::SecurityHub
     # be run for remediating the target.
     #
     # @!attribute [rw] aws_cli
-    #   An AWS CLI snippet version of the example.
+    #   An CLI snippet version of the example.
     #   @return [String]
     #
     # @!attribute [rw] cli
@@ -33220,6 +33643,62 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The Amazon S3 destination for an export, including the bucket, the
+    # Amazon Web Services KMS key used for encryption, and an optional
+    # object key prefix.
+    #
+    # @!attribute [rw] bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket that Security
+    #   Hub writes the export to. You must own the bucket, and its bucket
+    #   policy must grant the Security Hub service principal
+    #   (`exportv2.securityhub.amazonaws.com`) permission to write objects.
+    #   For the required bucket policy, see the Examples section of
+    #   `StartExportJobV2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the Amazon Web Services KMS key that Security Hub uses to
+    #   encrypt the export objects with server-side encryption. The key
+    #   policy must allow the Security Hub service principal
+    #   (`exportv2.securityhub.amazonaws.com`) to use the key through Amazon
+    #   S3. For the required key policy, see the Examples section of
+    #   `StartExportJobV2`.
+    #
+    #   The key must meet all of the following requirements:
+    #
+    #   * It must be a symmetric key with a key usage of `ENCRYPT_DECRYPT`.
+    #
+    #   * It must be a single-Region key. Multi-Region keys, whose key IDs
+    #     begin with `mrk-`, are rejected.
+    #
+    #   * You must specify the full key ARN. Key IDs and aliases are
+    #     rejected.
+    #
+    #   * The key must be in the same Amazon Web Services account as the
+    #     export job.
+    #
+    #   * The key must be in the same Amazon Web Services Region as the
+    #     export job.
+    #
+    #   * The key must be in the `aws`, `aws-cn`, or `aws-us-gov` partition.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_prefix
+    #   An optional key prefix that Security Hub prepends to the Amazon S3
+    #   object keys of the export output. Use a prefix to organize exports
+    #   within the bucket. The value can be up to 512 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/S3ExportDestination AWS API Documentation
+    #
+    class S3ExportDestination < Struct.new(
+      :bucket_arn,
+      :kms_key_arn,
+      :object_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A security control in Security Hub CSPM describes a security best
     # practice related to a specific resource.
     #
@@ -34651,6 +35130,72 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyDisassociationResponse AWS API Documentation
     #
     class StartConfigurationPolicyDisassociationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
+    #   An optional, user-provided name for the export job that helps you
+    #   identify it in `ListExportJobsV2` results. The value can be 1–256
+    #   characters. Alphanumeric characters, spaces, and the following ASCII
+    #   characters are permitted: `. _ , : ( ) / + -`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination that Security Hub writes the export to. You must
+    #   specify exactly one destination type. Currently, the only supported
+    #   type is Amazon S3.
+    #   @return [Types::ExportDestination]
+    #
+    # @!attribute [rw] output_configuration
+    #   Specifies what data to export and how to format it. You must specify
+    #   exactly one output type. Currently, the only supported type is
+    #   `Findings`.
+    #   @return [Types::ExportOutput]
+    #
+    # @!attribute [rw] scopes
+    #   Limits the export to findings from specific organizational units
+    #   (OUs) or from the delegated administrator's organization. Only the
+    #   delegated administrator account can use this parameter; other
+    #   accounts that specify it receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator exports findings from all accounts across the entire
+    #   organization, and other accounts export only their own findings.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   you specify multiple entries, Security Hub combines them using OR
+    #   logic.
+    #   @return [Types::ExportScopes]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartExportJobV2Request AWS API Documentation
+    #
+    class StartExportJobV2Request < Struct.new(
+      :name,
+      :destination,
+      :output_configuration,
+      :scopes,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job that Security Hub started.
+    #   Use this value with `GetExportJobV2` or `CancelExportJobV2`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartExportJobV2Response AWS API Documentation
+    #
+    class StartExportJobV2Response < Struct.new(
+      :export_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The definition of a custom action that can be used for stateless
     # packet handling.

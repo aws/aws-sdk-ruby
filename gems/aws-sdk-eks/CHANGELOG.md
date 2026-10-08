@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.180.0 (2026-10-08)
+------------------
+
+* Feature - Configurations support for EKS ACK Capabilities, including EnableCrossNamespace and DisableServices configuration.
+
 1.179.0 (2026-09-28)
 ------------------
 

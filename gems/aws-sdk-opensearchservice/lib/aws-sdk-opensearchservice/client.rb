@@ -1354,6 +1354,7 @@ module Aws::OpenSearchService
     #     encryption_at_rest_options: {
     #       enabled: false,
     #       kms_key_id: "KmsKeyId",
+    #       encryption_mode: "DISK", # accepts DISK, NATIVE
     #     },
     #     node_to_node_encryption_options: {
     #       enabled: false,
@@ -1525,6 +1526,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status.encryption_at_rest_options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_status.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
@@ -2066,6 +2068,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status.encryption_at_rest_options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_status.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
@@ -2521,6 +2524,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status.encryption_at_rest_options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_status.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
@@ -2820,6 +2824,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.cognito_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.enabled #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.kms_key_id #=> String
+    #   resp.domain_config.encryption_at_rest_options.options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_config.encryption_at_rest_options.status.creation_date #=> Time
     #   resp.domain_config.encryption_at_rest_options.status.update_date #=> Time
     #   resp.domain_config.encryption_at_rest_options.status.update_version #=> Integer
@@ -3148,6 +3153,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].cognito_options.role_arn #=> String
     #   resp.domain_status_list[0].encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status_list[0].encryption_at_rest_options.kms_key_id #=> String
+    #   resp.domain_status_list[0].encryption_at_rest_options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_status_list[0].node_to_node_encryption_options.enabled #=> Boolean
     #   resp.domain_status_list[0].advanced_options #=> Hash
     #   resp.domain_status_list[0].advanced_options["String"] #=> String
@@ -3330,6 +3336,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.cognito_options.role_arn #=> String
     #   resp.dry_run_config.encryption_at_rest_options.enabled #=> Boolean
     #   resp.dry_run_config.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.dry_run_config.encryption_at_rest_options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.dry_run_config.node_to_node_encryption_options.enabled #=> Boolean
     #   resp.dry_run_config.advanced_options #=> Hash
     #   resp.dry_run_config.advanced_options["String"] #=> String
@@ -6283,11 +6290,12 @@ module Aws::OpenSearchService
     #   A list of advisory warning codes to accept for this configuration
     #   change. By default, any advisory warning blocks the change. Include
     #   the code of each warning you want to accept so the change can proceed.
-    #   You can find warning codes in the`ValidationFailures` list returned by
-    #   `DescribeDomainChangeProgress`and `DescribeDryRunProgress`. Critical
-    #   validation failures cannot be accepted and always block the change. If
-    #   you omit this parameter or pass an empty list, all warnings block the
-    #   change. For more information, see [Validating a domain update][1].
+    #   You can find warning codes in the `ValidationFailures` list returned
+    #   by `DescribeDomainChangeProgress` and `DescribeDryRunProgress`.
+    #   Critical validation failures cannot be accepted and always block the
+    #   change. If you omit this parameter or pass an empty list, all warnings
+    #   block the change. For more information, see [Validating a domain
+    #   update][1].
     #
     #
     #
@@ -6366,6 +6374,7 @@ module Aws::OpenSearchService
     #     encryption_at_rest_options: {
     #       enabled: false,
     #       kms_key_id: "KmsKeyId",
+    #       encryption_mode: "DISK", # accepts DISK, NATIVE
     #     },
     #     domain_endpoint_options: {
     #       enforce_https: false,
@@ -6554,6 +6563,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.cognito_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.enabled #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.kms_key_id #=> String
+    #   resp.domain_config.encryption_at_rest_options.options.encryption_mode #=> String, one of "DISK", "NATIVE"
     #   resp.domain_config.encryption_at_rest_options.status.creation_date #=> Time
     #   resp.domain_config.encryption_at_rest_options.status.update_date #=> Time
     #   resp.domain_config.encryption_at_rest_options.status.update_version #=> Integer
@@ -7121,7 +7131,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

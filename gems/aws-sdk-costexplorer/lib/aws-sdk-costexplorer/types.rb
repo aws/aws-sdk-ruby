@@ -617,8 +617,8 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values.
     #
-    #     * There are three types of simple dimension values:
-    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #     * There are four types of simple dimension values:
+    #       `CostCategories`, `Tags`, `Dimensions`, and `ProductAttributes`.
     #
     #       * Specify the `CostCategories` field to define a filter that
     #         acts on Cost Categories.
@@ -628,6 +628,15 @@ module Aws::CostExplorer
     #
     #       * Specify the `Dimensions` field to define a filter that acts on
     #         the [ `DimensionValues` ][1].
+    #
+    #       * Specify the `ProductAttributes` field to define a filter that
+    #         acts on the product attributes of supported services, such as
+    #         Amazon Bedrock. Only `GetCostAndUsage`,
+    #         `GetCostAndUsageWithResources`, `GetDimensionValues` (in the
+    #         `COST_AND_USAGE` context), `GetTags`, and `GetCostCategories`
+    #         support `ProductAttributes`. For the supported services, keys
+    #         and `SERVICE` filter rules, see [ `ProductAttributeValues`
+    #         ][2].
     #     * For each filter type, you can set the dimension name and values
     #       for the filters that you plan to use.
     #
@@ -697,6 +706,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] metrics
@@ -1071,8 +1081,8 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values.
     #
-    #     * There are three types of simple dimension values:
-    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #     * There are four types of simple dimension values:
+    #       `CostCategories`, `Tags`, `Dimensions`, and `ProductAttributes`.
     #
     #       * Specify the `CostCategories` field to define a filter that
     #         acts on Cost Categories.
@@ -1082,6 +1092,15 @@ module Aws::CostExplorer
     #
     #       * Specify the `Dimensions` field to define a filter that acts on
     #         the [ `DimensionValues` ][1].
+    #
+    #       * Specify the `ProductAttributes` field to define a filter that
+    #         acts on the product attributes of supported services, such as
+    #         Amazon Bedrock. Only `GetCostAndUsage`,
+    #         `GetCostAndUsageWithResources`, `GetDimensionValues` (in the
+    #         `COST_AND_USAGE` context), `GetTags`, and `GetCostCategories`
+    #         support `ProductAttributes`. For the supported services, keys
+    #         and `SERVICE` filter rules, see [ `ProductAttributeValues`
+    #         ][2].
     #     * For each filter type, you can set the dimension name and values
     #       for the filters that you plan to use.
     #
@@ -1151,6 +1170,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] metrics
@@ -1784,6 +1804,11 @@ module Aws::CostExplorer
     #   `ANOMALY_TOTAL_IMPACT_PERCENTAGE` can only be used in
     #   [AnomalySubscriptions][2].
     #
+    #   Use `PRODUCT_ATTRIBUTE` only as the `Dimension` in
+    #   `GetDimensionValues`. To filter or group by product attributes, use
+    #   the `ProductAttributes` field of `Expression` or the
+    #   `PRODUCT_ATTRIBUTE` group type.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html
@@ -2174,8 +2199,8 @@ module Aws::CostExplorer
     #
     # * Simple dimension values.
     #
-    #   * There are three types of simple dimension values:
-    #     `CostCategories`, `Tags`, and `Dimensions`.
+    #   * There are four types of simple dimension values: `CostCategories`,
+    #     `Tags`, `Dimensions`, and `ProductAttributes`.
     #
     #     * Specify the `CostCategories` field to define a filter that acts
     #       on Cost Categories.
@@ -2185,6 +2210,14 @@ module Aws::CostExplorer
     #
     #     * Specify the `Dimensions` field to define a filter that acts on
     #       the [ `DimensionValues` ][1].
+    #
+    #     * Specify the `ProductAttributes` field to define a filter that
+    #       acts on the product attributes of supported services, such as
+    #       Amazon Bedrock. Only `GetCostAndUsage`,
+    #       `GetCostAndUsageWithResources`, `GetDimensionValues` (in the
+    #       `COST_AND_USAGE` context), `GetTags`, and `GetCostCategories`
+    #       support `ProductAttributes`. For the supported services, keys
+    #       and `SERVICE` filter rules, see [ `ProductAttributeValues` ][2].
     #   * For each filter type, you can set the dimension name and values
     #     for the filters that you plan to use.
     #
@@ -2252,6 +2285,7 @@ module Aws::CostExplorer
     #
     #
     # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    # [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #
     # @!attribute [rw] or
     #   Return results that match either `Dimension` object.
@@ -2277,6 +2311,20 @@ module Aws::CostExplorer
     #   The filter that's based on `CostCategory` values.
     #   @return [Types::CostCategoryValues]
     #
+    # @!attribute [rw] product_attributes
+    #   The filter that's based on `ProductAttributeValues`. Use it to
+    #   filter the costs of supported services, such as Amazon Bedrock, by
+    #   product attributes. The following operations support this filter:
+    #   `GetCostAndUsage`, `GetCostAndUsageWithResources`,
+    #   `GetDimensionValues` (in the `COST_AND_USAGE` context), `GetTags`,
+    #   and `GetCostCategories`. For the supported services and keys, see [
+    #   `ProductAttributeValues` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
+    #   @return [Types::ProductAttributeValues]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Expression AWS API Documentation
     #
     class Expression < Struct.new(
@@ -2285,7 +2333,8 @@ module Aws::CostExplorer
       :not,
       :dimensions,
       :tags,
-      :cost_categories)
+      :cost_categories,
+      :product_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2676,8 +2725,8 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values.
     #
-    #     * There are three types of simple dimension values:
-    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #     * There are four types of simple dimension values:
+    #       `CostCategories`, `Tags`, `Dimensions`, and `ProductAttributes`.
     #
     #       * Specify the `CostCategories` field to define a filter that
     #         acts on Cost Categories.
@@ -2687,6 +2736,15 @@ module Aws::CostExplorer
     #
     #       * Specify the `Dimensions` field to define a filter that acts on
     #         the [ `DimensionValues` ][1].
+    #
+    #       * Specify the `ProductAttributes` field to define a filter that
+    #         acts on the product attributes of supported services, such as
+    #         Amazon Bedrock. Only `GetCostAndUsage`,
+    #         `GetCostAndUsageWithResources`, `GetDimensionValues` (in the
+    #         `COST_AND_USAGE` context), `GetTags`, and `GetCostCategories`
+    #         support `ProductAttributes`. For the supported services, keys
+    #         and `SERVICE` filter rules, see [ `ProductAttributeValues`
+    #         ][2].
     #     * For each filter type, you can set the dimension name and values
     #       for the filters that you plan to use.
     #
@@ -2756,6 +2814,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] group_by
@@ -2837,13 +2896,25 @@ module Aws::CostExplorer
     #   Valid values for `MatchOptions` for `Dimensions` are `EQUALS` and
     #   `CASE_SENSITIVE`.
     #
-    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
-    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`. Default values are
-    #   `EQUALS` and `CASE_SENSITIVE`.
+    #   Valid values for `MatchOptions` for `CostCategories`, `Tags`, and
+    #   `ProductAttributes` are `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`.
+    #   Default values are `EQUALS` and `CASE_SENSITIVE`.
+    #
+    #   You can filter by product attributes with or without grouping by
+    #   them. If you filter or group by product attributes, the results
+    #   include only the costs of supported services, and a `SERVICE` filter
+    #   is optional. For more information, see [ProductAttributeValues][2].
+    #
+    #   If you include a `SERVICE` filter, it must apply to the whole
+    #   request: combine it with other filters by using `And`, and include
+    #   it in every branch of an `Or`. A `SERVICE` filter inside `Not`
+    #   doesn't meet this requirement, and the request fails with a
+    #   `ValidationException`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] metrics
@@ -2874,8 +2945,8 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] group_by
     #   You can group Amazon Web Services costs using up to two different
-    #   groups, either dimensions, tag keys, cost categories, or any two
-    #   group by types.
+    #   groups, either dimensions, tag keys, cost categories, product
+    #   attributes, or any two group by types.
     #
     #   Valid values for the `DIMENSION` type are `AZ`, `INSTANCE_TYPE`,
     #   `LEGAL_ENTITY_NAME`, `INVOICING_ENTITY`, `LINKED_ACCOUNT`,
@@ -2884,6 +2955,24 @@ module Aws::CostExplorer
     #
     #   When you group by the `TAG` type and include a valid tag key, you
     #   get all tag values, including empty strings.
+    #
+    #   To group by the `PRODUCT_ATTRIBUTE` type, set `Key` to a product
+    #   attribute key, such as `model`. For the keys of each supported
+    #   service, see [ProductAttributeValues][1]. The results include only
+    #   the costs of supported services, and if you have no such costs, the
+    #   response contains no groups.
+    #
+    #   In the response, each group key has the format `key$value`, for
+    #   example, `model$Claude Sonnet 5`. Costs that have no value for the
+    #   key are in the group `key$`, for example, `model$`. Remove the
+    #   `key$` prefix before you use a value in a `ProductAttributes`
+    #   filter. Keys are case-sensitive: if you group by a key that doesn't
+    #   exist, such as `Model`, all of your costs of supported services are
+    #   in the group `Model$`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [Array<Types::GroupDefinition>]
     #
     # @!attribute [rw] billing_view_arn
@@ -2978,13 +3067,17 @@ module Aws::CostExplorer
     #   Valid values for `MatchOptions` for `Dimensions` are `EQUALS` and
     #   `CASE_SENSITIVE`.
     #
-    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
-    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`. Default values are
-    #   `EQUALS` and `CASE_SENSITIVE`.
+    #   Valid values for `MatchOptions` for `CostCategories`, `Tags`, and
+    #   `ProductAttributes` are `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`.
+    #   Default values are `EQUALS` and `CASE_SENSITIVE`.
+    #
+    #   If you filter or group by product attributes, the `SERVICE` filter
+    #   rules are the same as for [GetCostAndUsage][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] metrics
@@ -3015,7 +3108,17 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] group_by
     #   You can group Amazon Web Services costs using up to two different
-    #   groups: `DIMENSION`, `TAG`, `COST_CATEGORY`.
+    #   groups: `DIMENSION`, `TAG`, `COST_CATEGORY`, and
+    #   `PRODUCT_ATTRIBUTE`.
+    #
+    #   `PRODUCT_ATTRIBUTE` groups work the same way as in
+    #   [GetCostAndUsage][1]. A `PRODUCT_ATTRIBUTE` group or a
+    #   `ProductAttributes` filter doesn't meet the requirement to group by
+    #   or filter by a `ResourceId`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html
     #   @return [Array<Types::GroupDefinition>]
     #
     # @!attribute [rw] billing_view_arn
@@ -3106,8 +3209,8 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values.
     #
-    #     * There are three types of simple dimension values:
-    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #     * There are four types of simple dimension values:
+    #       `CostCategories`, `Tags`, `Dimensions`, and `ProductAttributes`.
     #
     #       * Specify the `CostCategories` field to define a filter that
     #         acts on Cost Categories.
@@ -3117,6 +3220,15 @@ module Aws::CostExplorer
     #
     #       * Specify the `Dimensions` field to define a filter that acts on
     #         the [ `DimensionValues` ][1].
+    #
+    #       * Specify the `ProductAttributes` field to define a filter that
+    #         acts on the product attributes of supported services, such as
+    #         Amazon Bedrock. Only `GetCostAndUsage`,
+    #         `GetCostAndUsageWithResources`, `GetDimensionValues` (in the
+    #         `COST_AND_USAGE` context), `GetTags`, and `GetCostCategories`
+    #         support `ProductAttributes`. For the supported services, keys
+    #         and `SERVICE` filter rules, see [ `ProductAttributeValues`
+    #         ][2].
     #     * For each filter type, you can set the dimension name and values
     #       for the filters that you plan to use.
     #
@@ -3186,6 +3298,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] sort_by
@@ -3335,8 +3448,8 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values.
     #
-    #     * There are three types of simple dimension values:
-    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #     * There are four types of simple dimension values:
+    #       `CostCategories`, `Tags`, `Dimensions`, and `ProductAttributes`.
     #
     #       * Specify the `CostCategories` field to define a filter that
     #         acts on Cost Categories.
@@ -3346,6 +3459,15 @@ module Aws::CostExplorer
     #
     #       * Specify the `Dimensions` field to define a filter that acts on
     #         the [ `DimensionValues` ][1].
+    #
+    #       * Specify the `ProductAttributes` field to define a filter that
+    #         acts on the product attributes of supported services, such as
+    #         Amazon Bedrock. Only `GetCostAndUsage`,
+    #         `GetCostAndUsageWithResources`, `GetDimensionValues` (in the
+    #         `COST_AND_USAGE` context), `GetTags`, and `GetCostCategories`
+    #         support `ProductAttributes`. For the supported services, keys
+    #         and `SERVICE` filter rules, see [ `ProductAttributeValues`
+    #         ][2].
     #     * For each filter type, you can set the dimension name and values
     #       for the filters that you plan to use.
     #
@@ -3415,6 +3537,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] group_by
@@ -3620,9 +3743,36 @@ module Aws::CostExplorer
     #   `LINK_ACCOUNT_NAME` and `SERVICE_CODE` can only be used in
     #   [CostCategoryRule][1].
     #
+    #   `PRODUCT_ATTRIBUTE` returns the product attribute keys that are
+    #   available for your costs of supported services, or the values of the
+    #   key that you specify in `DimensionKey`. `PRODUCT_ATTRIBUTE` is
+    #   supported only in the `COST_AND_USAGE` context.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_key
+    #   The product attribute key to return values for, such as `model`. If
+    #   you omit `DimensionKey` or set it to an empty string, the response
+    #   lists the product attribute keys that are available for your costs
+    #   of supported services instead. For the supported services, see
+    #   [ProductAttributeValues][1].
+    #
+    #   If you specify a key, the response lists the values of that key. If
+    #   some of your costs have no value for the key, the response includes
+    #   an empty-string value. Keys are case-sensitive, and a key that
+    #   doesn't exist returns no values other than an empty string.
+    #
+    #   You can specify `DimensionKey` only when `Dimension` is
+    #   `PRODUCT_ATTRIBUTE`. If you also specify `SortBy`, `DimensionKey` is
+    #   required. As a result, you can't list product attribute keys when
+    #   you use `SortBy`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [String]
     #
     # @!attribute [rw] context
@@ -3688,6 +3838,9 @@ module Aws::CostExplorer
     #
     #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows
     #     or Linux.
+    #
+    #   * PRODUCT\_ATTRIBUTE - The product attributes of supported services,
+    #     such as the model provider or the model for Amazon Bedrock.
     #
     #   * PURCHASE\_TYPE - The reservation type of the purchase that this
     #     usage is related to. Examples include On-Demand Instances and
@@ -3786,8 +3939,8 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values.
     #
-    #     * There are three types of simple dimension values:
-    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #     * There are four types of simple dimension values:
+    #       `CostCategories`, `Tags`, `Dimensions`, and `ProductAttributes`.
     #
     #       * Specify the `CostCategories` field to define a filter that
     #         acts on Cost Categories.
@@ -3797,6 +3950,15 @@ module Aws::CostExplorer
     #
     #       * Specify the `Dimensions` field to define a filter that acts on
     #         the [ `DimensionValues` ][1].
+    #
+    #       * Specify the `ProductAttributes` field to define a filter that
+    #         acts on the product attributes of supported services, such as
+    #         Amazon Bedrock. Only `GetCostAndUsage`,
+    #         `GetCostAndUsageWithResources`, `GetDimensionValues` (in the
+    #         `COST_AND_USAGE` context), `GetTags`, and `GetCostCategories`
+    #         support `ProductAttributes`. For the supported services, keys
+    #         and `SERVICE` filter rules, see [ `ProductAttributeValues`
+    #         ][2].
     #     * For each filter type, you can set the dimension name and values
     #       for the filters that you plan to use.
     #
@@ -3866,6 +4028,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] sort_by
@@ -3926,6 +4089,7 @@ module Aws::CostExplorer
       :search_string,
       :time_period,
       :dimension,
+      :dimension_key,
       :context,
       :filter,
       :sort_by,
@@ -4266,8 +4430,8 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values.
     #
-    #     * There are three types of simple dimension values:
-    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #     * There are four types of simple dimension values:
+    #       `CostCategories`, `Tags`, `Dimensions`, and `ProductAttributes`.
     #
     #       * Specify the `CostCategories` field to define a filter that
     #         acts on Cost Categories.
@@ -4277,6 +4441,15 @@ module Aws::CostExplorer
     #
     #       * Specify the `Dimensions` field to define a filter that acts on
     #         the [ `DimensionValues` ][1].
+    #
+    #       * Specify the `ProductAttributes` field to define a filter that
+    #         acts on the product attributes of supported services, such as
+    #         Amazon Bedrock. Only `GetCostAndUsage`,
+    #         `GetCostAndUsageWithResources`, `GetDimensionValues` (in the
+    #         `COST_AND_USAGE` context), `GetTags`, and `GetCostCategories`
+    #         support `ProductAttributes`. For the supported services, keys
+    #         and `SERVICE` filter rules, see [ `ProductAttributeValues`
+    #         ][2].
     #     * For each filter type, you can set the dimension name and values
     #       for the filters that you plan to use.
     #
@@ -4346,6 +4519,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] account_scope
@@ -4598,8 +4772,8 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values.
     #
-    #     * There are three types of simple dimension values:
-    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #     * There are four types of simple dimension values:
+    #       `CostCategories`, `Tags`, `Dimensions`, and `ProductAttributes`.
     #
     #       * Specify the `CostCategories` field to define a filter that
     #         acts on Cost Categories.
@@ -4609,6 +4783,15 @@ module Aws::CostExplorer
     #
     #       * Specify the `Dimensions` field to define a filter that acts on
     #         the [ `DimensionValues` ][1].
+    #
+    #       * Specify the `ProductAttributes` field to define a filter that
+    #         acts on the product attributes of supported services, such as
+    #         Amazon Bedrock. Only `GetCostAndUsage`,
+    #         `GetCostAndUsageWithResources`, `GetDimensionValues` (in the
+    #         `COST_AND_USAGE` context), `GetTags`, and `GetCostCategories`
+    #         support `ProductAttributes`. For the supported services, keys
+    #         and `SERVICE` filter rules, see [ `ProductAttributeValues`
+    #         ][2].
     #     * For each filter type, you can set the dimension name and values
     #       for the filters that you plan to use.
     #
@@ -4678,6 +4861,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] configuration
@@ -5217,8 +5401,8 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values.
     #
-    #     * There are three types of simple dimension values:
-    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #     * There are four types of simple dimension values:
+    #       `CostCategories`, `Tags`, `Dimensions`, and `ProductAttributes`.
     #
     #       * Specify the `CostCategories` field to define a filter that
     #         acts on Cost Categories.
@@ -5228,6 +5412,15 @@ module Aws::CostExplorer
     #
     #       * Specify the `Dimensions` field to define a filter that acts on
     #         the [ `DimensionValues` ][1].
+    #
+    #       * Specify the `ProductAttributes` field to define a filter that
+    #         acts on the product attributes of supported services, such as
+    #         Amazon Bedrock. Only `GetCostAndUsage`,
+    #         `GetCostAndUsageWithResources`, `GetDimensionValues` (in the
+    #         `COST_AND_USAGE` context), `GetTags`, and `GetCostCategories`
+    #         support `ProductAttributes`. For the supported services, keys
+    #         and `SERVICE` filter rules, see [ `ProductAttributeValues`
+    #         ][2].
     #     * For each filter type, you can set the dimension name and values
     #       for the filters that you plan to use.
     #
@@ -5297,6 +5490,7 @@ module Aws::CostExplorer
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] sort_by
@@ -5843,8 +6037,8 @@ module Aws::CostExplorer
     #   resource types based on the latest version. If the filter is
     #   present, the result only includes Cost Categories that supports
     #   input resource type. If the filter isn't provided, no filtering is
-    #   applied. The valid values are `billing:rispgroupsharing` and
-    #   `billing:billingview`.
+    #   applied. The valid values are `billing:rispgroupsharing`,
+    #   `billing:billingview`, and `billing:creditsharing`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitionsRequest AWS API Documentation
@@ -6095,6 +6289,111 @@ module Aws::CostExplorer
       :network_out_bytes_per_second,
       :network_packets_in_per_second,
       :network_packets_out_per_second)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The product attribute values that you can use to filter the costs of
+    # supported services. Currently, Amazon Bedrock is the only supported
+    # service.
+    #
+    # The following product attribute keys are available for each supported
+    # service:
+    #
+    # * Amazon Bedrock
+    #
+    #   * `provider` - The model provider, such as `Anthropic`, `Cohere`, or
+    #     `OpenAI`.
+    #
+    #   * `model` - The model, such as `Claude Sonnet 5` or `Claude Haiku
+    #     4.5`.
+    #
+    #   * `inferenceType` - The type of inference usage, such as `Input
+    #     tokens` or `Output tokens`.
+    #
+    #   * `feature` - The feature that was used, such as `On-demand
+    #     Inference` or `Reranker`.
+    #
+    # The following operations support product attributes:
+    # `GetCostAndUsage`, `GetCostAndUsageWithResources`,
+    # `GetDimensionValues` (in the `COST_AND_USAGE` context), `GetTags`, and
+    # `GetCostCategories`.
+    #
+    # Product attribute data is available for time periods that start on or
+    # after September 1, 2026. Requests for earlier time periods that use
+    # product attributes fail with a `DataUnavailableException`.
+    #
+    # The `SERVICE` filter rules for product attributes depend on the
+    # operation:
+    #
+    # * `GetCostAndUsage` and `GetCostAndUsageWithResources` - Optional.
+    #
+    # * `GetDimensionValues` - Required when the filter includes
+    #   `ProductAttributes`, for any `Dimension`. Otherwise, optional.
+    #
+    # * `GetTags` and `GetCostCategories` - Required when the filter
+    #   includes `ProductAttributes`.
+    #
+    # A `SERVICE` filter must contain only supported services, or the
+    # request fails with a `ValidationException`. Service names are matched
+    # exactly. To list them, use `GetDimensionValues` with `Dimension` set
+    # to `SERVICE` and the same `TimePeriod`, for example with
+    # `SearchString` set to `Bedrock`.
+    #
+    # The costs of a supported service can appear under multiple service
+    # names. When the `SERVICE` filter is optional, omit it so that your
+    # results include all of those costs.
+    #
+    # For example, the following `Expression` filters for the costs of one
+    # model: `{ "ProductAttributes": { "Key": "model", "Values": [ "Claude
+    # Sonnet 5" ], "MatchOptions": [ "EQUALS" ] } }`
+    #
+    # @!attribute [rw] key
+    #   The name of the product attribute, such as `model`. The keys that
+    #   are available depend on the service. For the keys of each supported
+    #   service, see [ `ProductAttributeValues` ][1].
+    #
+    #   Keys are case-sensitive. A key that doesn't exist doesn't return
+    #   an error: `EQUALS` matches no costs, and `ABSENT` matches all costs
+    #   of supported services.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The specific values of the product attribute, such as `Claude Sonnet
+    #   5` for the `model` key. Values are matched exactly, including case.
+    #   To list the values of a key, use `GetDimensionValues` with
+    #   `Dimension` set to `PRODUCT_ATTRIBUTE` and `DimensionKey` set to the
+    #   key.
+    #
+    #   To match costs that have no value for the key, set `MatchOptions` to
+    #   `ABSENT` and omit `Values`. Otherwise, `Values` is required.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_options
+    #   The match options that you can use to filter your results. Valid
+    #   values:
+    #
+    #   * `EQUALS` - Matches the values that you specify.
+    #
+    #   * `ABSENT` - Matches costs that have no value for the key. Omit
+    #     `Values`.
+    #
+    #   * `CASE_SENSITIVE` - Use only with `EQUALS`. Values are always
+    #     matched case-sensitively.
+    #
+    #   Default values are `EQUALS` and `CASE_SENSITIVE`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ProductAttributeValues AWS API Documentation
+    #
+    class ProductAttributeValues < Struct.new(
+      :key,
+      :values,
+      :match_options)
       SENSITIVE = []
       include Aws::Structure
     end

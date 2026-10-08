@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2026-10-08)
+------------------
+
+* Feature - Include model field for suggested remediation steps as part of findings
+
 1.20.0 (2026-10-02)
 ------------------
 

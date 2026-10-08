@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2026-10-08)
+------------------
+
+* Feature - Adds support for retrieving finding-lifecycle metrics for an AWS Security Incident Response membership.
+
 1.28.0 (2026-09-11)
 ------------------
 

@@ -153,6 +153,7 @@ module Aws::CloudFormation
       attr_accessor role_arn: ::String
       attr_accessor resources_to_skip: ::Array[::String]
       attr_accessor client_request_token: ::String
+      attr_accessor force_rollback: bool
       SENSITIVE: []
     end
 

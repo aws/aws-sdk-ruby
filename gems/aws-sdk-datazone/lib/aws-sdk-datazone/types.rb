@@ -20343,6 +20343,43 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # A single Amazon Simple Storage Service object to import as a notebook
+    # cell.
+    #
+    # @!attribute [rw] key
+    #   The key of the Amazon Simple Storage Service object to import.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/S3File AWS API Documentation
+    #
+    class S3File < Struct.new(
+      :key)
+      SENSITIVE = [:key]
+      include Aws::Structure
+    end
+
+    # The Amazon Simple Storage Service objects to import as the cells of a
+    # notebook, specified as a bucket and an ordered list of object keys.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon Simple Storage Service bucket that contains
+    #   the files to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_list
+    #   The files to import. Cells are created in the order in which you
+    #   list the files. You can specify between 1 and 100 files.
+    #   @return [Array<Types::S3File>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/S3FilesLocation AWS API Documentation
+    #
+    class S3FilesLocation < Struct.new(
+      :bucket,
+      :file_list)
+      SENSITIVE = [:bucket]
+      include Aws::Structure
+    end
+
     # The Amazon S3 properties of a connection.
     #
     # @!attribute [rw] s3_uri
@@ -21224,16 +21261,24 @@ module Aws::DataZone
     #   The Amazon Simple Storage Service URI of the notebook source file.
     #   @return [String]
     #
+    # @!attribute [rw] s3_files
+    #   The Amazon Simple Storage Service objects to import as the
+    #   notebook's cells. One cell is created for each object, in the order
+    #   in which you list them.
+    #   @return [Types::S3FilesLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SourceLocation AWS API Documentation
     #
     class SourceLocation < Struct.new(
       :s3,
+      :s3_files,
       :unknown)
       SENSITIVE = [:s3]
       include Aws::Structure
       include Aws::Structure::Union
 
       class S3 < SourceLocation; end
+      class S3Files < SourceLocation; end
       class Unknown < SourceLocation; end
     end
 
@@ -21864,8 +21909,9 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] source_location
-    #   The source location of the notebook to import. This specifies the
-    #   Amazon Simple Storage Service URI of the notebook file.
+    #   The source location of the notebook to import. Specify either a
+    #   single Amazon Simple Storage Service URI, or a list of objects to
+    #   import as the notebook's cells.
     #   @return [Types::SourceLocation]
     #
     # @!attribute [rw] name
@@ -21875,6 +21921,11 @@ module Aws::DataZone
     #
     # @!attribute [rw] description
     #   The description of the imported notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the notebook to import. If not specified, defaults to
+    #   `DATA`.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -21893,6 +21944,7 @@ module Aws::DataZone
       :source_location,
       :name,
       :description,
+      :type,
       :client_token)
       SENSITIVE = [:name, :description]
       include Aws::Structure
@@ -21922,6 +21974,10 @@ module Aws::DataZone
     #   The description of the imported notebook.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the imported notebook.
+    #   @return [String]
+    #
     # @!attribute [rw] source_location
     #   The source location from which the notebook was imported.
     #   @return [Types::SourceLocation]
@@ -21943,6 +21999,7 @@ module Aws::DataZone
       :owning_project_id,
       :name,
       :description,
+      :type,
       :source_location,
       :created_at,
       :created_by)

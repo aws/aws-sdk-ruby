@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2026-10-08)
+------------------
+
+* Feature - Amazon GameLift Servers container fleets now support CPU bursting for game server container groups. The TotalVcpuLimit property of a game server container group definition is now optional. When you omit it, the group has no CPU cap and its containers can burst into unused CPU on the instance.
+
 1.136.0 (2026-09-11)
 ------------------
 

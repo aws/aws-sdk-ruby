@@ -301,7 +301,7 @@ module Aws
                                 metrics: Array[::String],
                                 ?group_by: Array[
                                   {
-                                    type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                    type: ("DIMENSION" | "TAG" | "COST_CATEGORY" | "PRODUCT_ATTRIBUTE")?,
                                     key: ::String?
                                   }
                                 ],
@@ -331,7 +331,7 @@ module Aws
                                             ?filter: Params::expression,
                                             ?group_by: Array[
                                               {
-                                                type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                                type: ("DIMENSION" | "TAG" | "COST_CATEGORY" | "PRODUCT_ATTRIBUTE")?,
                                                 key: ::String?
                                               }
                                             ],
@@ -358,7 +358,7 @@ module Aws
                                                ?metrics: Array[::String],
                                                ?group_by: Array[
                                                  {
-                                                   type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                                   type: ("DIMENSION" | "TAG" | "COST_CATEGORY" | "PRODUCT_ATTRIBUTE")?,
                                                    key: ::String?
                                                  }
                                                ],
@@ -416,7 +416,7 @@ module Aws
                                          ?filter: Params::expression,
                                          ?group_by: Array[
                                            {
-                                             type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                             type: ("DIMENSION" | "TAG" | "COST_CATEGORY" | "PRODUCT_ATTRIBUTE")?,
                                              key: ::String?
                                            }
                                          ],
@@ -458,7 +458,8 @@ module Aws
                                     start: ::String,
                                     end: ::String
                                   },
-                                  dimension: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "PAYER_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE"),
+                                  dimension: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "PAYER_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE" | "PRODUCT_ATTRIBUTE"),
+                                  ?dimension_key: ::String,
                                   ?context: ("COST_AND_USAGE" | "RESERVATIONS" | "SAVINGS_PLANS"),
                                   ?filter: Params::expression,
                                   ?sort_by: Array[
@@ -487,7 +488,7 @@ module Aws
                                       },
                                       ?group_by: Array[
                                         {
-                                          type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                          type: ("DIMENSION" | "TAG" | "COST_CATEGORY" | "PRODUCT_ATTRIBUTE")?,
                                           key: ::String?
                                         }
                                       ],
@@ -542,7 +543,7 @@ module Aws
                                          },
                                          ?group_by: Array[
                                            {
-                                             type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                             type: ("DIMENSION" | "TAG" | "COST_CATEGORY" | "PRODUCT_ATTRIBUTE")?,
                                              key: ::String?
                                            }
                                          ],
@@ -602,7 +603,7 @@ module Aws
                                         },
                                         ?group_by: Array[
                                           {
-                                            type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                            type: ("DIMENSION" | "TAG" | "COST_CATEGORY" | "PRODUCT_ATTRIBUTE")?,
                                             key: ::String?
                                           }
                                         ],

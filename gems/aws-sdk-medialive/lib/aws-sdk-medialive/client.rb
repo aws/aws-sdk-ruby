@@ -4860,7 +4860,7 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string",
     #     },
-    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION", # required, accepts CLOUDFRONT_DISTRIBUTION, MEDIALIVE_MULTIPLEX, MEDIALIVE_CHANNEL, MEDIALIVE_INPUT_DEVICE, MEDIAPACKAGE_CHANNEL, MEDIAPACKAGE_ORIGIN_ENDPOINT, MEDIACONNECT_FLOW, S3_BUCKET, MEDIATAILOR_PLAYBACK_CONFIGURATION
+    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION", # required, accepts CLOUDFRONT_DISTRIBUTION, MEDIALIVE_MULTIPLEX, MEDIALIVE_CHANNEL, MEDIALIVE_INPUT_DEVICE, MEDIAPACKAGE_CHANNEL, MEDIAPACKAGE_ORIGIN_ENDPOINT, MEDIACONNECT_FLOW, S3_BUCKET, MEDIATAILOR_PLAYBACK_CONFIGURATION, ELEMENTAL_INFERENCE_FEED
     #     threshold: 1.0, # required
     #     treat_missing_data: "notBreaching", # required, accepts notBreaching, breaching, ignore, missing
     #     request_id: "__stringMin1Max256PatternS",
@@ -4883,7 +4883,7 @@ module Aws::MediaLive
     #   resp.statistic #=> String, one of "SampleCount", "Average", "Sum", "Minimum", "Maximum"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION"
+    #   resp.target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION", "ELEMENTAL_INFERENCE_FEED"
     #   resp.threshold #=> Float
     #   resp.treat_missing_data #=> String, one of "notBreaching", "breaching", "ignore", "missing"
     #
@@ -5345,7 +5345,7 @@ module Aws::MediaLive
     #   resp.statistic #=> String, one of "SampleCount", "Average", "Sum", "Minimum", "Maximum"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION"
+    #   resp.target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION", "ELEMENTAL_INFERENCE_FEED"
     #   resp.threshold #=> Float
     #   resp.treat_missing_data #=> String, one of "notBreaching", "breaching", "ignore", "missing"
     #
@@ -5670,7 +5670,7 @@ module Aws::MediaLive
     #   resp.cloud_watch_alarm_templates[0].statistic #=> String, one of "SampleCount", "Average", "Sum", "Minimum", "Maximum"
     #   resp.cloud_watch_alarm_templates[0].tags #=> Hash
     #   resp.cloud_watch_alarm_templates[0].tags["__string"] #=> String
-    #   resp.cloud_watch_alarm_templates[0].target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION"
+    #   resp.cloud_watch_alarm_templates[0].target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION", "ELEMENTAL_INFERENCE_FEED"
     #   resp.cloud_watch_alarm_templates[0].threshold #=> Float
     #   resp.cloud_watch_alarm_templates[0].treat_missing_data #=> String, one of "notBreaching", "breaching", "ignore", "missing"
     #   resp.next_token #=> String
@@ -6166,7 +6166,7 @@ module Aws::MediaLive
     #     name: "__stringMin1Max255PatternS",
     #     period: 1,
     #     statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
-    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION", # accepts CLOUDFRONT_DISTRIBUTION, MEDIALIVE_MULTIPLEX, MEDIALIVE_CHANNEL, MEDIALIVE_INPUT_DEVICE, MEDIAPACKAGE_CHANNEL, MEDIAPACKAGE_ORIGIN_ENDPOINT, MEDIACONNECT_FLOW, S3_BUCKET, MEDIATAILOR_PLAYBACK_CONFIGURATION
+    #     target_resource_type: "CLOUDFRONT_DISTRIBUTION", # accepts CLOUDFRONT_DISTRIBUTION, MEDIALIVE_MULTIPLEX, MEDIALIVE_CHANNEL, MEDIALIVE_INPUT_DEVICE, MEDIAPACKAGE_CHANNEL, MEDIAPACKAGE_ORIGIN_ENDPOINT, MEDIACONNECT_FLOW, S3_BUCKET, MEDIATAILOR_PLAYBACK_CONFIGURATION, ELEMENTAL_INFERENCE_FEED
     #     threshold: 1.0,
     #     treat_missing_data: "notBreaching", # accepts notBreaching, breaching, ignore, missing
     #   })
@@ -6188,7 +6188,7 @@ module Aws::MediaLive
     #   resp.statistic #=> String, one of "SampleCount", "Average", "Sum", "Minimum", "Maximum"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION"
+    #   resp.target_resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "MEDIALIVE_MULTIPLEX", "MEDIALIVE_CHANNEL", "MEDIALIVE_INPUT_DEVICE", "MEDIAPACKAGE_CHANNEL", "MEDIAPACKAGE_ORIGIN_ENDPOINT", "MEDIACONNECT_FLOW", "S3_BUCKET", "MEDIATAILOR_PLAYBACK_CONFIGURATION", "ELEMENTAL_INFERENCE_FEED"
     #   resp.threshold #=> Float
     #   resp.treat_missing_data #=> String, one of "notBreaching", "breaching", "ignore", "missing"
     #
@@ -8114,7 +8114,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.197.0'
+      context[:gem_version] = '1.198.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -784,7 +784,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT, RDS_DATA_RISK
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -3515,7 +3515,7 @@ module Aws::GuardDuty
     #   resp.features[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING", "AI_PROTECTION"
     #   resp.features[0].auto_enable #=> String, one of "NEW", "NONE", "ALL"
     #   resp.features[0].additional_configuration #=> Array
-    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
+    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT", "RDS_DATA_RISK"
     #   resp.features[0].additional_configuration[0].auto_enable #=> String, one of "NEW", "NONE", "ALL"
     #   resp.next_token #=> String
     #   resp.auto_enable_organization_members #=> String, one of "NEW", "ALL", "NONE"
@@ -4075,7 +4075,7 @@ module Aws::GuardDuty
     #   resp.features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].updated_at #=> Time
     #   resp.features[0].additional_configuration #=> Array
-    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
+    #   resp.features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT", "RDS_DATA_RISK"
     #   resp.features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.features[0].additional_configuration[0].updated_at #=> Time
     #   resp.features[0].additional_configuration[0].managed_by #=> String, one of "GUARDDUTY_POLICY"
@@ -5461,7 +5461,7 @@ module Aws::GuardDuty
     #   resp.member_data_source_configurations[0].features[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].updated_at #=> Time
     #   resp.member_data_source_configurations[0].features[0].additional_configuration #=> Array
-    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
+    #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT", "RDS_DATA_RISK"
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].updated_at #=> Time
     #   resp.member_data_source_configurations[0].features[0].additional_configuration[0].managed_by #=> String, one of "GUARDDUTY_POLICY"
@@ -5555,7 +5555,7 @@ module Aws::GuardDuty
     #   resp.organization_details.organization_statistics.count_by_feature[0].name #=> String, one of "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "RUNTIME_MONITORING", "AI_PROTECTION"
     #   resp.organization_details.organization_statistics.count_by_feature[0].enabled_accounts_count #=> Integer
     #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration #=> Array
-    #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
+    #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].name #=> String, one of "EKS_ADDON_MANAGEMENT", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT", "RDS_DATA_RISK"
     #   resp.organization_details.organization_statistics.count_by_feature[0].additional_configuration[0].enabled_accounts_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetOrganizationStatistics AWS API Documentation
@@ -5840,7 +5840,7 @@ module Aws::GuardDuty
     #       account_ids: ["AccountId"],
     #       data_sources: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS, EC2_MALWARE_SCAN
     #       resources: ["String"],
-    #       features: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, EC2_RUNTIME_MONITORING, FARGATE_RUNTIME_MONITORING, RDS_DBI_PROTECTION_PROVISIONED, RDS_DBI_PROTECTION_SERVERLESS, AI_PROTECTION
+    #       features: ["FLOW_LOGS"], # accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_DATA_EVENTS, EKS_AUDIT_LOGS, EBS_MALWARE_PROTECTION, RDS_LOGIN_EVENTS, LAMBDA_NETWORK_LOGS, EKS_RUNTIME_MONITORING, EC2_RUNTIME_MONITORING, FARGATE_RUNTIME_MONITORING, RDS_DBI_PROTECTION_PROVISIONED, RDS_DBI_PROTECTION_SERVERLESS, RDS_DBI_PROTECTION_LIMITLESS, RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED, RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS, RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS, AI_PROTECTION
     #     },
     #     unit: "String",
     #     max_results: 1,
@@ -5854,7 +5854,7 @@ module Aws::GuardDuty
     #   resp.usage_statistics.sum_by_account[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_account[0].total.unit #=> String
     #   resp.usage_statistics.top_accounts_by_feature #=> Array
-    #   resp.usage_statistics.top_accounts_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS", "AI_PROTECTION"
+    #   resp.usage_statistics.top_accounts_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS", "RDS_DBI_PROTECTION_LIMITLESS", "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED", "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS", "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS", "AI_PROTECTION"
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts #=> Array
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].account_id #=> String
     #   resp.usage_statistics.top_accounts_by_feature[0].accounts[0].total.amount #=> String
@@ -5872,7 +5872,7 @@ module Aws::GuardDuty
     #   resp.usage_statistics.top_resources[0].total.amount #=> String
     #   resp.usage_statistics.top_resources[0].total.unit #=> String
     #   resp.usage_statistics.sum_by_feature #=> Array
-    #   resp.usage_statistics.sum_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS", "AI_PROTECTION"
+    #   resp.usage_statistics.sum_by_feature[0].feature #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "LAMBDA_NETWORK_LOGS", "EKS_RUNTIME_MONITORING", "EC2_RUNTIME_MONITORING", "FARGATE_RUNTIME_MONITORING", "RDS_DBI_PROTECTION_PROVISIONED", "RDS_DBI_PROTECTION_SERVERLESS", "RDS_DBI_PROTECTION_LIMITLESS", "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED", "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS", "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS", "AI_PROTECTION"
     #   resp.usage_statistics.sum_by_feature[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_feature[0].total.unit #=> String
     #   resp.next_token #=> String
@@ -7664,7 +7664,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT, RDS_DATA_RISK
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -9359,7 +9359,7 @@ module Aws::GuardDuty
     #         status: "ENABLED", # accepts ENABLED, DISABLED
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT, RDS_DATA_RISK
     #             status: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -9489,7 +9489,7 @@ module Aws::GuardDuty
     #         auto_enable: "NEW", # accepts NEW, NONE, ALL
     #         additional_configuration: [
     #           {
-    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT
+    #             name: "EKS_ADDON_MANAGEMENT", # accepts EKS_ADDON_MANAGEMENT, ECS_FARGATE_AGENT_MANAGEMENT, EC2_AGENT_MANAGEMENT, RDS_DATA_RISK
     #             auto_enable: "NEW", # accepts NEW, NONE, ALL
     #           },
     #         ],
@@ -9740,7 +9740,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
