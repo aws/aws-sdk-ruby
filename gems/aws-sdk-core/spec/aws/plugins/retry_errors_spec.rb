@@ -403,6 +403,56 @@ module Aws
 
             expect(resp.context.retries).to eq(0)
           end
+
+          it 'does not invalidate or retry when there are no signing credentials on the context' do
+            resp.context[:signing_credentials] = nil
+
+            resp.context.http_response.status_code = 400
+            resp.error = RetryErrorsSvc::Errors::ExpiredToken.new(nil, nil)
+            expect(provider).not_to receive(:invalidate)
+            expect { handle { |_context| resp } }.not_to raise_error
+
+            expect(resp.context.retries).to eq(0)
+          end
+        end
+
+        context 'refresh-and-retry for providers that only implement refresh!' do
+          let(:provider) { double('refreshing_credential_provider', refresh!: nil) }
+
+          before(:each) do
+            config.credentials = provider
+            allow(Kernel).to receive(:rand).and_return(1)
+          end
+
+          it 'refreshes and retries for an error code that indicates rejected credentials' do
+            expect(provider).to receive(:refresh!)
+
+            test_case_def = [
+              {
+                response: {
+                  status_code: 400,
+                  error: RetryErrorsSvc::Errors::InvalidClientTokenId.new(nil, nil)
+                },
+                expect: { retries: 1 }
+              },
+              {
+                response: { status_code: 200, error: nil },
+                expect: { retries: 1 }
+              }
+            ]
+            handle_with_retry(test_case_def)
+          end
+
+          it 'does not refresh when the provider implements invalidate' do
+            allow(provider).to receive(:invalidate)
+
+            resp.context.http_response.status_code = 400
+            resp.error = RetryErrorsSvc::Errors::InvalidClientTokenId.new(nil, nil)
+            expect(provider).not_to receive(:refresh!)
+            handle { |_context| resp }
+
+            expect(resp.context.retries).to eq(0)
+          end
         end
 
         context 'DynamoDB base backoff and increased retries' do

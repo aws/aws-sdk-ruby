@@ -66,6 +66,16 @@ module Aws
       expect(creds.client).to be(client)
     end
 
+    it 'excludes advisory_refresh_window from client construction' do
+      expect(STS::Client).to receive(:new).with({}).and_return(client)
+      creds = AssumeRoleCredentials.new(
+        role_arn: 'arn',
+        role_session_name: 'session',
+        advisory_refresh_window: 120
+      )
+      expect(creds.client).to be(client)
+    end
+
     it 'accepts a client' do
       creds = AssumeRoleCredentials.new(
         client: client,

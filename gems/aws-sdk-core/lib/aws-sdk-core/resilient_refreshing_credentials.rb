@@ -17,7 +17,7 @@ module Aws
   module ResilientRefreshingCredentials
     MANDATORY_REFRESH_WINDOW = 60 # 1 minute
 
-    CLIENT_EXCLUDE_OPTIONS = Set.new([:before_refresh]).freeze
+    CLIENT_EXCLUDE_OPTIONS = Set.new(%i[before_refresh advisory_refresh_window]).freeze
 
     # @api private
     # Signals a credential source response whose Expiration is at or before
@@ -63,8 +63,10 @@ module Aws
     # @return [void]
     def refresh!
       @mutex.synchronize do
-        @before_refresh&.call(self)
-        refresh
+        error = call_source
+        raise error if error
+
+        on_refresh_success
       end
     end
 
@@ -114,7 +116,9 @@ module Aws
           cache_non_recoverable_error(error)
           raise error
         end
-        raise Errors::MissingCredentialsError
+
+        warn("Initial credential fetch failed: #{error.message}")
+        raise Errors::MissingCredentialsError, error.message, cause: error
       end
     end
 
@@ -203,7 +207,7 @@ module Aws
     end
 
     def within?(seconds)
-      return false unless @expiration
+      return true unless @expiration
 
       Time.now + seconds > @expiration
     end
@@ -238,11 +242,12 @@ module Aws
 
     def log_refresh_failure(error)
       seconds = (@next_refresh_allowed_at - Time.now).round
-      warn(
+      message =
         "Credential refresh failed: #{error.message}. The SDK will continue " \
         'using cached credentials. A refresh of these credentials will be ' \
         "attempted again after #{seconds} seconds."
-      )
+      logger = respond_to?(:client) && client&.config&.logger
+      logger ? logger.warn(message) : warn(message)
     end
   end
 end

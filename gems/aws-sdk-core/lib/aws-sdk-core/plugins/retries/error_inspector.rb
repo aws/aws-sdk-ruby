@@ -15,6 +15,20 @@ module Aws
           ]
         )
 
+        # Error codes that indicate cached credentials were rejected or have
+        # expired.
+        REFRESHING_AUTH_ERRORS = Set.new(
+          %w[
+            InvalidClientTokenId
+            UnrecognizedClientException
+            InvalidAccessKeyId
+            AuthFailure
+            InvalidIdentityToken
+            ExpiredToken
+            ExpiredTokenException
+          ]
+        )
+
         THROTTLING_ERRORS = Set.new(
           [
             'Throttling',                             # query services
@@ -72,6 +86,10 @@ module Aws
           INVALIDATING_AUTH_ERRORS.include?(@name)
         end
 
+        def refreshing_auth_error?
+          REFRESHING_AUTH_ERRORS.include?(@name) || !!(@name =~ /expired/i)
+        end
+
         def throttling_error?
           !!(THROTTLING_ERRORS.include?(@name) ||
             @name.match(/throttl/i) ||
@@ -122,13 +140,19 @@ module Aws
             checksum? ||
             endpoint_discovery?(context) ||
             (invalidating_auth_error? && invalidatable_credentials?(context)) ||
+            (refreshing_auth_error? && refreshable_credentials?(context)) ||
             clock_skew?(context)
         end
 
         private
 
         def invalidatable_credentials?(context)
-          context.config.credentials.respond_to?(:invalidate)
+          context.config.credentials.respond_to?(:invalidate) && !context[:signing_credentials].nil?
+        end
+
+        def refreshable_credentials?(context)
+          provider = context.config.credentials
+          !provider.respond_to?(:invalidate) && provider.respond_to?(:refresh!)
         end
 
         def extract_name(error)

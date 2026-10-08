@@ -412,6 +412,7 @@ module Aws
 
         def retry_request(context, error)
           context.retries += 1
+          context.config.credentials.refresh! if refresh_credentials?(context, error)
           context.http_request.body.rewind
           context.http_response.reset
           call(context)
@@ -426,6 +427,12 @@ module Aws
           return unless provider.respond_to?(:invalidate) && signed_with
 
           provider.invalidate(signed_with)
+        end
+
+        def refresh_credentials?(context, error)
+          error.refreshing_auth_error? &&
+            context.config.credentials.respond_to?(:refresh!) &&
+            !context.config.credentials.respond_to?(:invalidate)
         end
 
         def add_retry_headers(context)
@@ -498,6 +505,7 @@ module Aws
         def retry_request(context, error)
           delay_retry(context)
           context.retries += 1
+          context.config.credentials.refresh! if refresh_credentials?(context, error)
           context.http_request.body.rewind
           context.http_response.reset
           call(context)
@@ -522,6 +530,12 @@ module Aws
           return unless provider.respond_to?(:invalidate) && signed_with
 
           provider.invalidate(signed_with)
+        end
+
+        def refresh_credentials?(context, error)
+          error.refreshing_auth_error? &&
+            context.config.credentials.respond_to?(:refresh!) &&
+            !context.config.credentials.respond_to?(:invalidate)
         end
 
         def retry_limit(context)

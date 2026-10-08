@@ -116,6 +116,32 @@ module Aws
 
         expect { resolver.credentials }.to raise_error(RefreshingCredentialsTestError)
       end
+
+      it 'logs through client.config.logger instead of Kernel#warn when the resolver exposes a client' do
+        logger = double('logger')
+        client = double('client', config: double('config', logger: logger))
+        resolver = build_resolver(resolver_class, 'cachedCredentials' => 'advisory')
+        allow(resolver).to receive(:client).and_return(client)
+        resolver.expect_response('error', nil)
+
+        expect(logger).to receive(:warn).with(/Credential refresh failed: recoverable refresh failure/)
+        expect(resolver).not_to receive(:warn).with(/Credential refresh failed/)
+
+        resolver.credentials
+      end
+    end
+
+    describe 'nil expiration' do
+      it 'treats a nil expiration as always eligible for refresh rather than perpetually valid' do
+        resolver = resolver_class.new(
+          credentials: Credentials.new('CACHED-AKID', 'secret', 'token'),
+          expiration: nil
+        )
+        allow(resolver).to receive(:warn)
+        resolver.expect_response('freshCredentials', nil)
+
+        expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
+      end
     end
 
     describe 'advisory window configuration' do
@@ -180,6 +206,52 @@ module Aws
 
       resolver.expect_response('freshCredentials', nil)
       expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
+    end
+
+    it 'preserves the underlying source error as the cause of MissingCredentialsError' do
+      resolver = build_resolver(resolver_class, 'cachedCredentials' => 'none')
+      resolver.expect_response('error', nil)
+
+      expect(resolver).to receive(:warn).with(/Initial credential fetch failed: recoverable refresh failure/)
+
+      expect { resolver.credentials }.to raise_error(Errors::MissingCredentialsError) do |error|
+        expect(error.message).to include('recoverable refresh failure')
+        expect(error.cause).to be_a(RuntimeError)
+        expect(error.cause.message).to eq('recoverable refresh failure')
+      end
+    end
+
+    describe '#refresh!' do
+      it 'clears backoff and cached error state and recomputes the advisory window on success' do
+        resolver = build_resolver(resolver_class, 'cachedCredentials' => 'advisory')
+        resolver.expect_response('error', nil)
+        resolver.credentials # fails, sets refresh backoff
+        expect(resolver.rate_limited?).to be(true)
+
+        resolver.expect_response('freshCredentials', 120)
+        resolver.refresh!
+
+        expect(resolver.rate_limited?).to be(false)
+        expect(resolver.advisory_window).to eq(5 * 60) # 120s lifetime <= 20 minutes
+        expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
+      end
+
+      it 'raises StaleCredentialsError and keeps the prior credentials when the response is already expired' do
+        resolver = build_resolver(resolver_class, 'cachedCredentials' => 'valid')
+        resolver.expect_response('staleCredentials', nil)
+
+        expect { resolver.refresh! }.to raise_error(ResilientRefreshingCredentials::StaleCredentialsError)
+        expect(resolver.credentials.access_key_id).to eq(@seeded_akid)
+      end
+
+      it 'raises without applying refresh backoff on a recoverable failure' do
+        resolver = build_resolver(resolver_class, 'cachedCredentials' => 'valid')
+        resolver.expect_response('error', nil)
+
+        expect { resolver.refresh! }.to raise_error('recoverable refresh failure')
+        expect(resolver.rate_limited?).to be(false)
+        expect(resolver.credentials.access_key_id).to eq(@seeded_akid)
+      end
     end
 
     it 'treats invalidate as a no-op when no credentials are cached yet' do

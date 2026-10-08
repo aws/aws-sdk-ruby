@@ -42,6 +42,36 @@ module Aws
         end
       end
 
+      describe '#refreshing_auth_error?' do
+        refreshing_errors = [
+          RetryErrorsSvc::Errors::InvalidClientTokenId,
+          RetryErrorsSvc::Errors::UnrecognizedClientException,
+          RetryErrorsSvc::Errors::InvalidAccessKeyId,
+          RetryErrorsSvc::Errors::AuthFailure,
+          RetryErrorsSvc::Errors::InvalidIdentityToken,
+          RetryErrorsSvc::Errors::ExpiredToken,
+          RetryErrorsSvc::Errors::ExpiredTokenException
+        ]
+
+        refreshing_errors.each do |e|
+          it "returns true for #{e.name}" do
+            expect(inspector(e).refreshing_auth_error?).to be(true)
+          end
+        end
+
+        it 'returns true for error types that match /expired/i' do
+          expect(
+            inspector(RetryErrorsSvc::Errors::SomeExpiredError).refreshing_auth_error?
+          ).to be(true)
+        end
+
+        it 'returns false for other errors' do
+          expect(
+            inspector(RetryErrorsSvc::Errors::SomeRandomError).refreshing_auth_error?
+          ).to be(false)
+        end
+      end
+
       describe '#throttling_error?' do
         thorttling_errors = [
           RetryErrorsSvc::Errors::Throttling,
