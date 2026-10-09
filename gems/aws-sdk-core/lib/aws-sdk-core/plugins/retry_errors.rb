@@ -289,6 +289,8 @@ module Aws
           # Estimated skew needs to be updated on every request
           config.clock_skew.update_estimated_skew(context)
 
+          invalidate_credentials(context, error_inspector)
+
           return response unless retryable?(context, response, error_inspector)
 
           return response if context.retries >= config.max_attempts - 1
@@ -416,9 +418,21 @@ module Aws
           call(context)
         end
 
+        # Marks the credentials that signed this request stale, if the provider supports invalidation
+        def invalidate_credentials(context, error_inspector)
+          return unless error_inspector.invalidating_auth_error?
+
+          provider = context.config.credentials
+          signed_with = context[:signing_credentials]
+          return unless provider.respond_to?(:invalidate) && signed_with
+
+          provider.invalidate(signed_with)
+        end
+
         def refresh_credentials?(context, error)
-          error.expired_credentials? &&
-            context.config.credentials.respond_to?(:refresh!)
+          error.refreshing_auth_error? &&
+            context.config.credentials.respond_to?(:refresh!) &&
+            !context.config.credentials.respond_to?(:invalidate)
         end
 
         def add_retry_headers(context)
@@ -465,6 +479,8 @@ module Aws
               context.config.endpoint_cache.delete(key)
             end
 
+            invalidate_credentials(context, error_inspector)
+
             retry_if_possible(response, error_inspector)
           else
             response
@@ -505,9 +521,21 @@ module Aws
             response_truncatable?(context)
         end
 
+        # Marks the credentials that signed this request stale, if the provider supports invalidation
+        def invalidate_credentials(context, error_inspector)
+          return unless error_inspector.invalidating_auth_error?
+
+          provider = context.config.credentials
+          signed_with = context[:signing_credentials]
+          return unless provider.respond_to?(:invalidate) && signed_with
+
+          provider.invalidate(signed_with)
+        end
+
         def refresh_credentials?(context, error)
-          error.expired_credentials? &&
-            context.config.credentials.respond_to?(:refresh!)
+          error.refreshing_auth_error? &&
+            context.config.credentials.respond_to?(:refresh!) &&
+            !context.config.credentials.respond_to?(:invalidate)
         end
 
         def retry_limit(context)

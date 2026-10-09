@@ -204,21 +204,47 @@ module Aws
           expect_token_write_back(expected_token)
         end
 
-        it 'warns when refresh call fails' do
+        it 'raises MissingCredentialsError when the refresh call fails on initial fetch' do
           mock_token_file(login_session, cached_token)
           client.stub_responses(:create_o_auth_2_token, 'InternalError')
-          expect_any_instance_of(LoginCredentials).to receive(:warn).with(/Failed to refresh Login token/)
-          LoginCredentials.new(login_session: login_session, client: client)
+          expect_any_instance_of(LoginCredentials).to receive(:warn).with(/Initial credential fetch failed/)
+          expect do
+            LoginCredentials.new(login_session: login_session, client: client)
+          end.to raise_error(Aws::Errors::MissingCredentialsError)
         end
 
-        it 'raises when refresh call fails and token is hard expired' do
+        it 'raises MissingCredentialsError when refresh call fails and token is hard expired' do
           mock_token_file(login_session, cached_token)
           client.stub_responses(:create_o_auth_2_token, 'InternalError')
-          expect_any_instance_of(LoginCredentials).to receive(:warn).with(/Failed to refresh Login token/)
+          expect_any_instance_of(LoginCredentials).to receive(:warn).with(/Initial credential fetch failed/)
           allow(Time).to receive(:now).and_return(Time.parse(old_expiration) + 1)
           expect do
             LoginCredentials.new(login_session: login_session, client: client)
-          end.to raise_error(/Login token is invalid and failed to refresh/)
+          end.to raise_error(Aws::Errors::MissingCredentialsError)
+        end
+
+        it 'applies static stability and backoff on a transient failure after credentials are cached' do
+          mock_token_file(login_session, cached_token)
+          client.stub_responses(:create_o_auth_2_token, signin_resp)
+          creds = LoginCredentials.new(login_session: login_session, client: client)
+          creds.credentials # establish cached credentials
+
+          client.stub_responses(:create_o_auth_2_token, 'InternalError')
+          allow(Time).to receive(:now).and_return(time + 650) # inside the 300s advisory window
+          expect_any_instance_of(LoginCredentials).to receive(:warn).with(/Credential refresh failed/)
+          expect(creds.credentials.access_key_id).to eq('new_akid') # still the cached value
+          expect(creds.rate_limited?).to be(true)
+        end
+
+        it 'raises immediately for a non-recoverable Sign-In rejection' do
+          mock_token_file(login_session, cached_token)
+          client.stub_responses(
+            :create_o_auth_2_token,
+            Signin::Errors::AccessDeniedException.new(nil, 'denied', { error: 'TOKEN_EXPIRED' })
+          )
+          expect do
+            LoginCredentials.new(login_session: login_session, client: client)
+          end.to raise_error(Errors::InvalidLoginToken, /session has expired/)
         end
       end
 
@@ -229,6 +255,19 @@ module Aws
             expect do
               LoginCredentials.new(login_session: login_session, client: client)
             end.to raise_error(/Failed to load a Login token/)
+          end
+        end
+
+        context 'unparseable cache file' do
+          it 'raises InvalidLoginToken instead of a raw JSON parser error' do
+            token_file.open
+            token_file.write('not valid json')
+            token_file.rewind
+            allow_any_instance_of(LoginCredentials).to receive(:login_cache_file).and_return(token_file.path)
+            token_file.close
+            expect do
+              LoginCredentials.new(login_session: login_session, client: client)
+            end.to raise_error(Errors::InvalidLoginToken, /Failed to load a Login token/)
           end
         end
 

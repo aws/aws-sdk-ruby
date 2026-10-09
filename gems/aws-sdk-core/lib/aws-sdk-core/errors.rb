@@ -185,8 +185,9 @@ module Aws
     # Raised when a client is constructed and credentials are not
     # set, or the set credentials are empty.
     class MissingCredentialsError < RuntimeError
-      def initialize(*args)
+      def initialize(detail = nil, *_args)
         msg = 'unable to sign request without credentials set'
+        msg += ": #{detail}" if detail
         super(msg)
       end
     end
