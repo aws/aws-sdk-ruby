@@ -429,6 +429,8 @@ module Aws::Deadline
     ListLicenseEndpointsResponse = Shapes::StructureShape.new(name: 'ListLicenseEndpointsResponse')
     ListLimitsRequest = Shapes::StructureShape.new(name: 'ListLimitsRequest')
     ListLimitsResponse = Shapes::StructureShape.new(name: 'ListLimitsResponse')
+    ListMembershipsRequest = Shapes::StructureShape.new(name: 'ListMembershipsRequest')
+    ListMembershipsResponse = Shapes::StructureShape.new(name: 'ListMembershipsResponse')
     ListMeteredProductsRequest = Shapes::StructureShape.new(name: 'ListMeteredProductsRequest')
     ListMeteredProductsResponse = Shapes::StructureShape.new(name: 'ListMeteredProductsResponse')
     ListMonitorsRequest = Shapes::StructureShape.new(name: 'ListMonitorsRequest')
@@ -487,6 +489,10 @@ module Aws::Deadline
     MaxRetriesPerTask = Shapes::IntegerShape.new(name: 'MaxRetriesPerTask')
     MaxWorkerCount = Shapes::IntegerShape.new(name: 'MaxWorkerCount')
     MembershipLevel = Shapes::StringShape.new(name: 'MembershipLevel')
+    MembershipResourceType = Shapes::StringShape.new(name: 'MembershipResourceType')
+    MembershipResourceTypes = Shapes::ListShape.new(name: 'MembershipResourceTypes')
+    MembershipSummaries = Shapes::ListShape.new(name: 'MembershipSummaries')
+    MembershipSummary = Shapes::UnionShape.new(name: 'MembershipSummary')
     MemoryAmountMiB = Shapes::IntegerShape.new(name: 'MemoryAmountMiB')
     MemoryMiBRange = Shapes::StructureShape.new(name: 'MemoryMiBRange')
     MeteredProductId = Shapes::StringShape.new(name: 'MeteredProductId')
@@ -2537,6 +2543,18 @@ module Aws::Deadline
     ListLimitsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListLimitsResponse.struct_class = Types::ListLimitsResponse
 
+    ListMembershipsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListMembershipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListMembershipsRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: IdentityCenterPrincipalId, required: true, location: "querystring", location_name: "principalId"))
+    ListMembershipsRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, location: "querystring", location_name: "identityStoreId"))
+    ListMembershipsRequest.add_member(:identity_center_region, Shapes::ShapeRef.new(shape: Region, location: "querystring", location_name: "identityCenterRegion"))
+    ListMembershipsRequest.add_member(:resource_types, Shapes::ShapeRef.new(shape: MembershipResourceTypes, location: "querystring", location_name: "resourceTypes"))
+    ListMembershipsRequest.struct_class = Types::ListMembershipsRequest
+
+    ListMembershipsResponse.add_member(:memberships, Shapes::ShapeRef.new(shape: MembershipSummaries, required: true, location_name: "memberships"))
+    ListMembershipsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListMembershipsResponse.struct_class = Types::ListMembershipsResponse
+
     ListMeteredProductsRequest.add_member(:license_endpoint_id, Shapes::ShapeRef.new(shape: LicenseEndpointId, required: true, location: "uri", location_name: "licenseEndpointId"))
     ListMeteredProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListMeteredProductsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -2757,6 +2775,22 @@ module Aws::Deadline
     ManifestProperties.struct_class = Types::ManifestProperties
 
     ManifestPropertiesList.member = Shapes::ShapeRef.new(shape: ManifestProperties)
+
+    MembershipResourceTypes.member = Shapes::ShapeRef.new(shape: MembershipResourceType)
+
+    MembershipSummaries.member = Shapes::ShapeRef.new(shape: MembershipSummary)
+
+    MembershipSummary.add_member(:farm, Shapes::ShapeRef.new(shape: FarmMember, location_name: "farm"))
+    MembershipSummary.add_member(:queue, Shapes::ShapeRef.new(shape: QueueMember, location_name: "queue"))
+    MembershipSummary.add_member(:fleet, Shapes::ShapeRef.new(shape: FleetMember, location_name: "fleet"))
+    MembershipSummary.add_member(:job, Shapes::ShapeRef.new(shape: JobMember, location_name: "job"))
+    MembershipSummary.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MembershipSummary.add_member_subclass(:farm, Types::MembershipSummary::Farm)
+    MembershipSummary.add_member_subclass(:queue, Types::MembershipSummary::Queue)
+    MembershipSummary.add_member_subclass(:fleet, Types::MembershipSummary::Fleet)
+    MembershipSummary.add_member_subclass(:job, Types::MembershipSummary::Job)
+    MembershipSummary.add_member_subclass(:unknown, Types::MembershipSummary::Unknown)
+    MembershipSummary.struct_class = Types::MembershipSummary
 
     MemoryMiBRange.add_member(:min, Shapes::ShapeRef.new(shape: MemoryAmountMiB, required: true, location_name: "min"))
     MemoryMiBRange.add_member(:max, Shapes::ShapeRef.new(shape: MemoryAmountMiB, location_name: "max"))
@@ -5113,6 +5147,28 @@ module Aws::Deadline
         }
         o.input = Shapes::ShapeRef.new(shape: ListLimitsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListLimitsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_memberships, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMemberships"
+        o.http_method = "GET"
+        o.http_request_uri = "/2023-10-12/memberships"
+        o.endpoint_pattern = {
+          "hostPrefix" => "management.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListMembershipsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMembershipsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

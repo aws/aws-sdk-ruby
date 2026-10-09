@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2026-10-09)
+------------------
+
+* Feature - Adds a test scope field to specify whether a pentest targets a web application or a generative AI application.
+
 1.21.0 (2026-10-08)
 ------------------
 

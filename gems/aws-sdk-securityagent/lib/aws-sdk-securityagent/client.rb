@@ -703,6 +703,7 @@ module Aws::SecurityAgent
     #   resp.deleted[0].report_filters.annotation_notes #=> Boolean
     #   resp.deleted[0].report_filters.compliance_report #=> Boolean
     #   resp.deleted[0].cicd_configuration.enabled #=> Boolean
+    #   resp.deleted[0].test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
     #   resp.deleted[0].created_at #=> Time
     #   resp.deleted[0].updated_at #=> Time
     #   resp.failed #=> Array
@@ -1349,6 +1350,7 @@ module Aws::SecurityAgent
     #   resp.pentest_jobs[0].scope_changes[0].head_commit_sha #=> String
     #   resp.pentest_jobs[0].scope_changes[0].trigger_run_id #=> String
     #   resp.pentest_jobs[0].cicd_configuration.enabled #=> Boolean
+    #   resp.pentest_jobs[0].test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
     #   resp.pentest_jobs[0].created_at #=> Time
     #   resp.pentest_jobs[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1456,6 +1458,7 @@ module Aws::SecurityAgent
     #   resp.pentests[0].report_filters.annotation_notes #=> Boolean
     #   resp.pentests[0].report_filters.compliance_report #=> Boolean
     #   resp.pentests[0].cicd_configuration.enabled #=> Boolean
+    #   resp.pentests[0].test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
     #   resp.pentests[0].created_at #=> Time
     #   resp.pentests[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -2411,6 +2414,9 @@ module Aws::SecurityAgent
     # @option params [Types::CiCdConfiguration] :cicd_configuration
     #   The CI/CD pentesting configuration to apply to the pentest.
     #
+    # @option params [Types::TestScope] :test_scope
+    #   The category of application a pentest targets.
+    #
     # @return [Types::CreatePentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePentestOutput#pentest_id #pentest_id} => String
@@ -2425,6 +2431,7 @@ module Aws::SecurityAgent
     #   * {Types::CreatePentestOutput#report_destination #report_destination} => Types::ReportDestination
     #   * {Types::CreatePentestOutput#report_filters #report_filters} => Types::ReportFilters
     #   * {Types::CreatePentestOutput#cicd_configuration #cicd_configuration} => Types::CiCdConfiguration
+    #   * {Types::CreatePentestOutput#test_scope #test_scope} => Types::TestScope
     #
     # @example Request syntax with placeholder values
     #
@@ -2530,6 +2537,9 @@ module Aws::SecurityAgent
     #     cicd_configuration: {
     #       enabled: false,
     #     },
+    #     test_scope: {
+    #       type: "WEB_APP", # required, accepts WEB_APP, GENERATIVE_AI_APP
+    #     },
     #   })
     #
     # @example Response structure
@@ -2589,6 +2599,7 @@ module Aws::SecurityAgent
     #   resp.report_filters.annotation_notes #=> Boolean
     #   resp.report_filters.compliance_report #=> Boolean
     #   resp.cicd_configuration.enabled #=> Boolean
+    #   resp.test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreatePentest AWS API Documentation
     #
@@ -5974,6 +5985,9 @@ module Aws::SecurityAgent
     # @option params [Types::CiCdConfiguration] :cicd_configuration
     #   The updated CI/CD pentesting configuration to apply to the pentest.
     #
+    # @option params [Types::TestScope] :test_scope
+    #   The category of application a pentest targets.
+    #
     # @return [Types::UpdatePentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePentestOutput#pentest_id #pentest_id} => String
@@ -5988,6 +6002,7 @@ module Aws::SecurityAgent
     #   * {Types::UpdatePentestOutput#report_destination #report_destination} => Types::ReportDestination
     #   * {Types::UpdatePentestOutput#report_filters #report_filters} => Types::ReportFilters
     #   * {Types::UpdatePentestOutput#cicd_configuration #cicd_configuration} => Types::CiCdConfiguration
+    #   * {Types::UpdatePentestOutput#test_scope #test_scope} => Types::TestScope
     #
     # @example Request syntax with placeholder values
     #
@@ -6094,6 +6109,9 @@ module Aws::SecurityAgent
     #     cicd_configuration: {
     #       enabled: false,
     #     },
+    #     test_scope: {
+    #       type: "WEB_APP", # required, accepts WEB_APP, GENERATIVE_AI_APP
+    #     },
     #   })
     #
     # @example Response structure
@@ -6153,6 +6171,7 @@ module Aws::SecurityAgent
     #   resp.report_filters.annotation_notes #=> Boolean
     #   resp.report_filters.compliance_report #=> Boolean
     #   resp.cicd_configuration.enabled #=> Boolean
+    #   resp.test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdatePentest AWS API Documentation
     #
@@ -6701,7 +6720,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

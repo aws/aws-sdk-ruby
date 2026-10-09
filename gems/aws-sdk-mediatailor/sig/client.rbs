@@ -780,7 +780,12 @@ module Aws
                             request_timeout_milliseconds: ::Integer,
                             url: ::String,
                             body: ::String?,
-                            headers: Hash[::String, ::String]?
+                            headers: Hash[::String, ::String]?,
+                            cache: {
+                              ttl_minimum_seconds: ::Integer,
+                              ttl_maximum_seconds: ::Integer,
+                              key: ::String?
+                            }?
                           },
                           ?aws_service_request_configuration: {
                             runtime: ("JSONATA"),
@@ -790,6 +795,11 @@ module Aws
                             url: ::String,
                             body: ::String?,
                             headers: Hash[::String, ::String]?,
+                            cache: {
+                              ttl_minimum_seconds: ::Integer,
+                              ttl_maximum_seconds: ::Integer,
+                              key: ::String?
+                            }?,
                             target_service: ::String,
                             target_region: ::String
                           },
@@ -829,7 +839,12 @@ module Aws
                             request_timeout_milliseconds: ::Integer,
                             url: ::String,
                             body: ::String?,
-                            headers: Hash[::String, ::String]?
+                            headers: Hash[::String, ::String]?,
+                            cache: {
+                              ttl_minimum_seconds: ::Integer,
+                              ttl_maximum_seconds: ::Integer,
+                              key: ::String?
+                            }?
                           },
                           ?tags: Hash[::String, ::String]
                         ) -> _PutFunctionResponseSuccess

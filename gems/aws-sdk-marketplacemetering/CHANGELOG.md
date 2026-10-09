@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2026-10-09)
+------------------
+
+* Feature - AWS Marketplace Metering Service adds AgreementId to ResolveCustomer API response.
+
 1.105.0 (2026-09-11)
 ------------------
 

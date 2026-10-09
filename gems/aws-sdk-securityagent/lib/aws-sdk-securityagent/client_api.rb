@@ -474,6 +474,8 @@ module Aws::SecurityAgent
     TaskList = Shapes::ListShape.new(name: 'TaskList')
     TaskSummary = Shapes::StructureShape.new(name: 'TaskSummary')
     TaskSummaryList = Shapes::ListShape.new(name: 'TaskSummaryList')
+    TestScope = Shapes::StructureShape.new(name: 'TestScope')
+    TestScopeType = Shapes::StringShape.new(name: 'TestScopeType')
     Threat = Shapes::StructureShape.new(name: 'Threat')
     ThreatActor = Shapes::StringShape.new(name: 'ThreatActor')
     ThreatAnchorShape = Shapes::StructureShape.new(name: 'ThreatAnchorShape')
@@ -1167,6 +1169,7 @@ module Aws::SecurityAgent
     CreatePentestInput.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "reportDestination"))
     CreatePentestInput.add_member(:report_filters, Shapes::ShapeRef.new(shape: ReportFilters, location_name: "reportFilters"))
     CreatePentestInput.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
+    CreatePentestInput.add_member(:test_scope, Shapes::ShapeRef.new(shape: TestScope, location_name: "testScope"))
     CreatePentestInput.struct_class = Types::CreatePentestInput
 
     CreatePentestOutput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestId"))
@@ -1181,6 +1184,7 @@ module Aws::SecurityAgent
     CreatePentestOutput.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "reportDestination"))
     CreatePentestOutput.add_member(:report_filters, Shapes::ShapeRef.new(shape: ReportFilters, location_name: "reportFilters"))
     CreatePentestOutput.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
+    CreatePentestOutput.add_member(:test_scope, Shapes::ShapeRef.new(shape: TestScope, location_name: "testScope"))
     CreatePentestOutput.struct_class = Types::CreatePentestOutput
 
     CreatePrivateConnectionInput.add_member(:private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, required: true, location_name: "privateConnectionName"))
@@ -1999,6 +2003,7 @@ module Aws::SecurityAgent
     Pentest.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "reportDestination"))
     Pentest.add_member(:report_filters, Shapes::ShapeRef.new(shape: ReportFilters, location_name: "reportFilters"))
     Pentest.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
+    Pentest.add_member(:test_scope, Shapes::ShapeRef.new(shape: TestScope, location_name: "testScope"))
     Pentest.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     Pentest.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     Pentest.struct_class = Types::Pentest
@@ -2037,6 +2042,7 @@ module Aws::SecurityAgent
     PentestJob.add_member(:scope_result, Shapes::ShapeRef.new(shape: ScopeResult, location_name: "scopeResult"))
     PentestJob.add_member(:scope_changes, Shapes::ShapeRef.new(shape: ScopeChangeList, location_name: "scopeChanges"))
     PentestJob.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
+    PentestJob.add_member(:test_scope, Shapes::ShapeRef.new(shape: TestScope, location_name: "testScope"))
     PentestJob.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     PentestJob.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     PentestJob.struct_class = Types::PentestJob
@@ -2378,6 +2384,9 @@ module Aws::SecurityAgent
 
     TaskSummaryList.member = Shapes::ShapeRef.new(shape: TaskSummary)
 
+    TestScope.add_member(:type, Shapes::ShapeRef.new(shape: TestScopeType, required: true, location_name: "type"))
+    TestScope.struct_class = Types::TestScope
+
     Threat.add_member(:threat_id, Shapes::ShapeRef.new(shape: String, location_name: "threatId"))
     Threat.add_member(:threat_job_id, Shapes::ShapeRef.new(shape: String, location_name: "threatJobId"))
     Threat.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
@@ -2649,6 +2658,7 @@ module Aws::SecurityAgent
     UpdatePentestInput.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "reportDestination"))
     UpdatePentestInput.add_member(:report_filters, Shapes::ShapeRef.new(shape: ReportFilters, location_name: "reportFilters"))
     UpdatePentestInput.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
+    UpdatePentestInput.add_member(:test_scope, Shapes::ShapeRef.new(shape: TestScope, location_name: "testScope"))
     UpdatePentestInput.struct_class = Types::UpdatePentestInput
 
     UpdatePentestOutput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestId"))
@@ -2663,6 +2673,7 @@ module Aws::SecurityAgent
     UpdatePentestOutput.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "reportDestination"))
     UpdatePentestOutput.add_member(:report_filters, Shapes::ShapeRef.new(shape: ReportFilters, location_name: "reportFilters"))
     UpdatePentestOutput.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
+    UpdatePentestOutput.add_member(:test_scope, Shapes::ShapeRef.new(shape: TestScope, location_name: "testScope"))
     UpdatePentestOutput.struct_class = Types::UpdatePentestOutput
 
     UpdatePrivateConnectionCertificateInput.add_member(:private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, required: true, location_name: "privateConnectionName"))

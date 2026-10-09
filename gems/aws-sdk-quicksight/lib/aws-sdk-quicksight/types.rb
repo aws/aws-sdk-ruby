@@ -7155,6 +7155,22 @@ module Aws::QuickSight
     #   The ability to use Bee actions.
     #   @return [String]
     #
+    # @!attribute [rw] gong_action
+    #   The ability to perform actions using Gong connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_gong_action
+    #   The ability to create and update Gong actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_gong_action
+    #   The ability to share Gong actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_gong_action
+    #   The ability to use Gong actions.
+    #   @return [String]
+    #
     # @!attribute [rw] topic
     #   The ability to perform Topic-related actions.
     #   @return [String]
@@ -7269,6 +7285,742 @@ module Aws::QuickSight
     # @!attribute [rw] quick_event_trigger
     #   The ability to create, view, edit, delete, and run Quick event
     #   triggers for flows and automations.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_data_source
+    #   The ability to create, update, and share file data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_file_data_source
+    #   The ability to create file data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_file_data_source
+    #   The ability to update file data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_file_data_source
+    #   The ability to share file data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_data_source
+    #   The ability to create, update, and share Amazon S3 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_s3_data_source
+    #   The ability to create Amazon S3 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_s3_data_source
+    #   The ability to update Amazon S3 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_s3_data_source
+    #   The ability to share Amazon S3 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_analytics_data_source
+    #   The ability to create, update, and share Amazon S3 Analytics data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_s3_analytics_data_source
+    #   The ability to create Amazon S3 Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_s3_analytics_data_source
+    #   The ability to update Amazon S3 Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_s3_analytics_data_source
+    #   The ability to share Amazon S3 Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_tables_data_source
+    #   The ability to create, update, and share Amazon S3 Tables data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_s3_tables_data_source
+    #   The ability to create Amazon S3 Tables data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_s3_tables_data_source
+    #   The ability to update Amazon S3 Tables data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_s3_tables_data_source
+    #   The ability to share Amazon S3 Tables data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] athena_data_source
+    #   The ability to create, update, and share Amazon Athena data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_athena_data_source
+    #   The ability to create Amazon Athena data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_athena_data_source
+    #   The ability to update Amazon Athena data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_athena_data_source
+    #   The ability to share Amazon Athena data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] rds_data_source
+    #   The ability to create, update, and share auto-discovered Amazon RDS
+    #   data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_rds_data_source
+    #   The ability to create auto-discovered Amazon RDS data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_rds_data_source
+    #   The ability to update auto-discovered Amazon RDS data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_rds_data_source
+    #   The ability to share auto-discovered Amazon RDS data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_auto_discovered_data_source
+    #   The ability to create, update, and share auto-discovered Amazon
+    #   Redshift data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_redshift_auto_discovered_data_source
+    #   The ability to create auto-discovered Amazon Redshift data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_redshift_auto_discovered_data_source
+    #   The ability to update auto-discovered Amazon Redshift data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_redshift_auto_discovered_data_source
+    #   The ability to share auto-discovered Amazon Redshift data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_manual_data_source
+    #   The ability to create, update, and share manually configured Amazon
+    #   Redshift data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_redshift_manual_data_source
+    #   The ability to create manually configured Amazon Redshift data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_redshift_manual_data_source
+    #   The ability to update manually configured Amazon Redshift data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_redshift_manual_data_source
+    #   The ability to share manually configured Amazon Redshift data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_search_data_source
+    #   The ability to create, update, and share Amazon OpenSearch Service
+    #   data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_open_search_data_source
+    #   The ability to create Amazon OpenSearch Service data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_open_search_data_source
+    #   The ability to update Amazon OpenSearch Service data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_open_search_data_source
+    #   The ability to share Amazon OpenSearch Service data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestream_data_source
+    #   The ability to create, update, and share Amazon Timestream data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_timestream_data_source
+    #   The ability to create Amazon Timestream data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_timestream_data_source
+    #   The ability to update Amazon Timestream data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_timestream_data_source
+    #   The ability to share Amazon Timestream data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] aurora_data_source
+    #   The ability to create, update, and share Amazon Aurora data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_aurora_data_source
+    #   The ability to create Amazon Aurora data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_aurora_data_source
+    #   The ability to update Amazon Aurora data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_aurora_data_source
+    #   The ability to share Amazon Aurora data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] my_sql_data_source
+    #   The ability to create, update, and share MySQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_my_sql_data_source
+    #   The ability to create MySQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_my_sql_data_source
+    #   The ability to update MySQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_my_sql_data_source
+    #   The ability to share MySQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] postgre_sql_data_source
+    #   The ability to create, update, and share PostgreSQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_postgre_sql_data_source
+    #   The ability to create PostgreSQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_postgre_sql_data_source
+    #   The ability to update PostgreSQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_postgre_sql_data_source
+    #   The ability to share PostgreSQL data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] oracle_data_source
+    #   The ability to create, update, and share Oracle data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_oracle_data_source
+    #   The ability to create Oracle data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_oracle_data_source
+    #   The ability to update Oracle data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_oracle_data_source
+    #   The ability to share Oracle data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] sql_server_data_source
+    #   The ability to create, update, and share SQL Server data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_sql_server_data_source
+    #   The ability to create SQL Server data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_sql_server_data_source
+    #   The ability to update SQL Server data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_sql_server_data_source
+    #   The ability to share SQL Server data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] maria_db_data_source
+    #   The ability to create, update, and share MariaDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_maria_db_data_source
+    #   The ability to create MariaDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_maria_db_data_source
+    #   The ability to update MariaDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_maria_db_data_source
+    #   The ability to share MariaDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] snowflake_data_source
+    #   The ability to create, update, and share Snowflake data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_snowflake_data_source
+    #   The ability to create Snowflake data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_snowflake_data_source
+    #   The ability to update Snowflake data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_snowflake_data_source
+    #   The ability to share Snowflake data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_big_query_data_source
+    #   The ability to create, update, and share Google BigQuery data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_google_big_query_data_source
+    #   The ability to create Google BigQuery data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_google_big_query_data_source
+    #   The ability to update Google BigQuery data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_big_query_data_source
+    #   The ability to share Google BigQuery data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] databricks_data_source
+    #   The ability to create, update, and share Databricks data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_databricks_data_source
+    #   The ability to create Databricks data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_databricks_data_source
+    #   The ability to update Databricks data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_databricks_data_source
+    #   The ability to share Databricks data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] starburst_data_source
+    #   The ability to create, update, and share Starburst data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_starburst_data_source
+    #   The ability to create Starburst data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_starburst_data_source
+    #   The ability to update Starburst data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_starburst_data_source
+    #   The ability to share Starburst data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] trino_data_source
+    #   The ability to create, update, and share Trino data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_trino_data_source
+    #   The ability to create Trino data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_trino_data_source
+    #   The ability to update Trino data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_trino_data_source
+    #   The ability to share Trino data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] impala_data_source
+    #   The ability to create, update, and share Impala data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_impala_data_source
+    #   The ability to create Impala data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_impala_data_source
+    #   The ability to update Impala data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_impala_data_source
+    #   The ability to share Impala data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] teradata_data_source
+    #   The ability to create, update, and share Teradata data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_teradata_data_source
+    #   The ability to create Teradata data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_teradata_data_source
+    #   The ability to update Teradata data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_teradata_data_source
+    #   The ability to share Teradata data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] presto_data_source
+    #   The ability to create, update, and share Presto data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_presto_data_source
+    #   The ability to create Presto data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_presto_data_source
+    #   The ability to update Presto data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_presto_data_source
+    #   The ability to share Presto data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] spark_data_source
+    #   The ability to create, update, and share Spark data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_spark_data_source
+    #   The ability to create Spark data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_spark_data_source
+    #   The ability to update Spark data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_spark_data_source
+    #   The ability to share Spark data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] exasol_data_source
+    #   The ability to create, update, and share Exasol data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_exasol_data_source
+    #   The ability to create Exasol data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_exasol_data_source
+    #   The ability to update Exasol data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_exasol_data_source
+    #   The ability to share Exasol data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_2_data_source
+    #   The ability to create, update, and share Db2 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_db_2_data_source
+    #   The ability to create Db2 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_db_2_data_source
+    #   The ability to update Db2 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_db_2_data_source
+    #   The ability to share Db2 data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] sap_hana_data_source
+    #   The ability to create, update, and share SAP HANA data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_sap_hana_data_source
+    #   The ability to create SAP HANA data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_sap_hana_data_source
+    #   The ability to update SAP HANA data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_sap_hana_data_source
+    #   The ability to share SAP HANA data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] denodo_data_source
+    #   The ability to create, update, and share Denodo data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_denodo_data_source
+    #   The ability to create Denodo data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_denodo_data_source
+    #   The ability to update Denodo data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_denodo_data_source
+    #   The ability to share Denodo data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] dremio_data_source
+    #   The ability to create, update, and share Dremio data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_dremio_data_source
+    #   The ability to create Dremio data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_dremio_data_source
+    #   The ability to update Dremio data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_dremio_data_source
+    #   The ability to share Dremio data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] salesforce_data_source
+    #   The ability to create, update, and share Salesforce data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_salesforce_data_source
+    #   The ability to create Salesforce data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_salesforce_data_source
+    #   The ability to update Salesforce data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_salesforce_data_source
+    #   The ability to share Salesforce data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] radiant_data_source
+    #   The ability to create, update, and share Amazon QuickSight data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_radiant_data_source
+    #   The ability to create Amazon QuickSight data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_radiant_data_source
+    #   The ability to update Amazon QuickSight data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_radiant_data_source
+    #   The ability to share Amazon QuickSight data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] pay_pal_data_source
+    #   The ability to create, update, and share PayPal data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_pay_pal_data_source
+    #   The ability to create PayPal data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_pay_pal_data_source
+    #   The ability to update PayPal data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_pay_pal_data_source
+    #   The ability to share PayPal data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] square_data_source
+    #   The ability to create, update, and share Square data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_square_data_source
+    #   The ability to create Square data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_square_data_source
+    #   The ability to update Square data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_square_data_source
+    #   The ability to share Square data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] git_hub_data_source
+    #   The ability to create, update, and share GitHub data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_git_hub_data_source
+    #   The ability to create GitHub data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_git_hub_data_source
+    #   The ability to update GitHub data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_git_hub_data_source
+    #   The ability to share GitHub data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] twitter_data_source
+    #   The ability to create, update, and share Twitter data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_twitter_data_source
+    #   The ability to create Twitter data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_twitter_data_source
+    #   The ability to update Twitter data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_twitter_data_source
+    #   The ability to share Twitter data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] jira_data_source
+    #   The ability to create, update, and share Jira data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_jira_data_source
+    #   The ability to create Jira data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_jira_data_source
+    #   The ability to update Jira data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_jira_data_source
+    #   The ability to share Jira data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_now_data_source
+    #   The ability to create, update, and share ServiceNow data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_service_now_data_source
+    #   The ability to create ServiceNow data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_service_now_data_source
+    #   The ability to update ServiceNow data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_service_now_data_source
+    #   The ability to share ServiceNow data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] adobe_analytics_data_source
+    #   The ability to create, update, and share Adobe Analytics data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_adobe_analytics_data_source
+    #   The ability to create Adobe Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_adobe_analytics_data_source
+    #   The ability to update Adobe Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_adobe_analytics_data_source
+    #   The ability to share Adobe Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_analytics_data_source
+    #   The ability to create, update, and share Google Analytics data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_google_analytics_data_source
+    #   The ability to create Google Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_google_analytics_data_source
+    #   The ability to update Google Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_analytics_data_source
+    #   The ability to share Google Analytics data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_sheets_data_source
+    #   The ability to create, update, and share Google Sheets data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_google_sheets_data_source
+    #   The ability to create Google Sheets data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_google_sheets_data_source
+    #   The ability to update Google Sheets data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_sheets_data_source
+    #   The ability to share Google Sheets data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_db_data_source
+    #   The ability to create, update, and share Amazon DocumentDB data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_document_db_data_source
+    #   The ability to create Amazon DocumentDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_document_db_data_source
+    #   The ability to update Amazon DocumentDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_document_db_data_source
+    #   The ability to share Amazon DocumentDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] mongo_db_data_source
+    #   The ability to create, update, and share MongoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_mongo_db_data_source
+    #   The ability to create MongoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_mongo_db_data_source
+    #   The ability to update MongoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_mongo_db_data_source
+    #   The ability to share MongoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] mongo_atlas_data_source
+    #   The ability to create, update, and share MongoDB Atlas data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_mongo_atlas_data_source
+    #   The ability to create MongoDB Atlas data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_mongo_atlas_data_source
+    #   The ability to update MongoDB Atlas data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_mongo_atlas_data_source
+    #   The ability to share MongoDB Atlas data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] dynamo_db_data_source
+    #   The ability to create, update, and share Amazon DynamoDB data
+    #   sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_dynamo_db_data_source
+    #   The ability to create Amazon DynamoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_dynamo_db_data_source
+    #   The ability to update Amazon DynamoDB data sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_dynamo_db_data_source
+    #   The ability to share Amazon DynamoDB data sources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Capabilities AWS API Documentation
@@ -7639,6 +8391,10 @@ module Aws::QuickSight
       :create_and_update_bee_action,
       :share_bee_action,
       :use_bee_action,
+      :gong_action,
+      :create_and_update_gong_action,
+      :share_gong_action,
+      :use_gong_action,
       :topic,
       :edit_visual_with_q,
       :build_calculated_field_with_q,
@@ -7664,7 +8420,187 @@ module Aws::QuickSight
       :trigger,
       :schedule_trigger,
       :inbound_email_trigger,
-      :quick_event_trigger)
+      :quick_event_trigger,
+      :file_data_source,
+      :create_file_data_source,
+      :update_file_data_source,
+      :share_file_data_source,
+      :s3_data_source,
+      :create_s3_data_source,
+      :update_s3_data_source,
+      :share_s3_data_source,
+      :s3_analytics_data_source,
+      :create_s3_analytics_data_source,
+      :update_s3_analytics_data_source,
+      :share_s3_analytics_data_source,
+      :s3_tables_data_source,
+      :create_s3_tables_data_source,
+      :update_s3_tables_data_source,
+      :share_s3_tables_data_source,
+      :athena_data_source,
+      :create_athena_data_source,
+      :update_athena_data_source,
+      :share_athena_data_source,
+      :rds_data_source,
+      :create_rds_data_source,
+      :update_rds_data_source,
+      :share_rds_data_source,
+      :redshift_auto_discovered_data_source,
+      :create_redshift_auto_discovered_data_source,
+      :update_redshift_auto_discovered_data_source,
+      :share_redshift_auto_discovered_data_source,
+      :redshift_manual_data_source,
+      :create_redshift_manual_data_source,
+      :update_redshift_manual_data_source,
+      :share_redshift_manual_data_source,
+      :open_search_data_source,
+      :create_open_search_data_source,
+      :update_open_search_data_source,
+      :share_open_search_data_source,
+      :timestream_data_source,
+      :create_timestream_data_source,
+      :update_timestream_data_source,
+      :share_timestream_data_source,
+      :aurora_data_source,
+      :create_aurora_data_source,
+      :update_aurora_data_source,
+      :share_aurora_data_source,
+      :my_sql_data_source,
+      :create_my_sql_data_source,
+      :update_my_sql_data_source,
+      :share_my_sql_data_source,
+      :postgre_sql_data_source,
+      :create_postgre_sql_data_source,
+      :update_postgre_sql_data_source,
+      :share_postgre_sql_data_source,
+      :oracle_data_source,
+      :create_oracle_data_source,
+      :update_oracle_data_source,
+      :share_oracle_data_source,
+      :sql_server_data_source,
+      :create_sql_server_data_source,
+      :update_sql_server_data_source,
+      :share_sql_server_data_source,
+      :maria_db_data_source,
+      :create_maria_db_data_source,
+      :update_maria_db_data_source,
+      :share_maria_db_data_source,
+      :snowflake_data_source,
+      :create_snowflake_data_source,
+      :update_snowflake_data_source,
+      :share_snowflake_data_source,
+      :google_big_query_data_source,
+      :create_google_big_query_data_source,
+      :update_google_big_query_data_source,
+      :share_google_big_query_data_source,
+      :databricks_data_source,
+      :create_databricks_data_source,
+      :update_databricks_data_source,
+      :share_databricks_data_source,
+      :starburst_data_source,
+      :create_starburst_data_source,
+      :update_starburst_data_source,
+      :share_starburst_data_source,
+      :trino_data_source,
+      :create_trino_data_source,
+      :update_trino_data_source,
+      :share_trino_data_source,
+      :impala_data_source,
+      :create_impala_data_source,
+      :update_impala_data_source,
+      :share_impala_data_source,
+      :teradata_data_source,
+      :create_teradata_data_source,
+      :update_teradata_data_source,
+      :share_teradata_data_source,
+      :presto_data_source,
+      :create_presto_data_source,
+      :update_presto_data_source,
+      :share_presto_data_source,
+      :spark_data_source,
+      :create_spark_data_source,
+      :update_spark_data_source,
+      :share_spark_data_source,
+      :exasol_data_source,
+      :create_exasol_data_source,
+      :update_exasol_data_source,
+      :share_exasol_data_source,
+      :db_2_data_source,
+      :create_db_2_data_source,
+      :update_db_2_data_source,
+      :share_db_2_data_source,
+      :sap_hana_data_source,
+      :create_sap_hana_data_source,
+      :update_sap_hana_data_source,
+      :share_sap_hana_data_source,
+      :denodo_data_source,
+      :create_denodo_data_source,
+      :update_denodo_data_source,
+      :share_denodo_data_source,
+      :dremio_data_source,
+      :create_dremio_data_source,
+      :update_dremio_data_source,
+      :share_dremio_data_source,
+      :salesforce_data_source,
+      :create_salesforce_data_source,
+      :update_salesforce_data_source,
+      :share_salesforce_data_source,
+      :radiant_data_source,
+      :create_radiant_data_source,
+      :update_radiant_data_source,
+      :share_radiant_data_source,
+      :pay_pal_data_source,
+      :create_pay_pal_data_source,
+      :update_pay_pal_data_source,
+      :share_pay_pal_data_source,
+      :square_data_source,
+      :create_square_data_source,
+      :update_square_data_source,
+      :share_square_data_source,
+      :git_hub_data_source,
+      :create_git_hub_data_source,
+      :update_git_hub_data_source,
+      :share_git_hub_data_source,
+      :twitter_data_source,
+      :create_twitter_data_source,
+      :update_twitter_data_source,
+      :share_twitter_data_source,
+      :jira_data_source,
+      :create_jira_data_source,
+      :update_jira_data_source,
+      :share_jira_data_source,
+      :service_now_data_source,
+      :create_service_now_data_source,
+      :update_service_now_data_source,
+      :share_service_now_data_source,
+      :adobe_analytics_data_source,
+      :create_adobe_analytics_data_source,
+      :update_adobe_analytics_data_source,
+      :share_adobe_analytics_data_source,
+      :google_analytics_data_source,
+      :create_google_analytics_data_source,
+      :update_google_analytics_data_source,
+      :share_google_analytics_data_source,
+      :google_sheets_data_source,
+      :create_google_sheets_data_source,
+      :update_google_sheets_data_source,
+      :share_google_sheets_data_source,
+      :document_db_data_source,
+      :create_document_db_data_source,
+      :update_document_db_data_source,
+      :share_document_db_data_source,
+      :mongo_db_data_source,
+      :create_mongo_db_data_source,
+      :update_mongo_db_data_source,
+      :share_mongo_db_data_source,
+      :mongo_atlas_data_source,
+      :create_mongo_atlas_data_source,
+      :update_mongo_atlas_data_source,
+      :share_mongo_atlas_data_source,
+      :dynamo_db_data_source,
+      :create_dynamo_db_data_source,
+      :update_dynamo_db_data_source,
+      :share_dynamo_db_data_source)
       SENSITIVE = []
       include Aws::Structure
     end

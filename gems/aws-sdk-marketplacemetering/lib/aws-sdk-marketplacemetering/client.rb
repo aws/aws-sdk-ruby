@@ -512,9 +512,20 @@ module Aws::MarketplaceMetering
     # this grace period, we return a `TimestampOutOfBoundsException` error.
     #
     # `BatchMeterUsage` can process up to 25 `UsageRecords` at a time, and
-    # each request must be less than 1 MB in size. Optionally, you can have
-    # multiple usage allocations for usage data that's split into buckets
-    # according to predefined tags.
+    # each request must be less than 1 MB in size.
+    #
+    # **Vendor-metered tagging**
+    #
+    # `BatchMeterUsage` supports vendor-metered tagging. Optionally, you can
+    # split the usage in a `UsageRecord` into buckets by including
+    # `UsageAllocations`, where each `UsageAllocation` has a set of `Tags`
+    # that you define. Vendor-metered tagging doesn't change the price,
+    # dimensions, or the total usage that you report. It gives buyers a more
+    # granular view of their usage of your product so they can perform cost
+    # allocation in the Amazon Web Services Billing and Cost Management
+    # console. For more information, see [Vendor-metered tagging][3] and
+    # [BatchMeterUsage with usage allocation tagging code example][4] in the
+    # *Amazon Web Services Marketplace Seller Guide*.
     #
     # `BatchMeterUsage` returns a list of `UsageRecordResult` objects, which
     # have each `UsageRecord`. It also returns a list of
@@ -522,10 +533,10 @@ module Aws::MarketplaceMetering
     # should be retried.
     #
     # For Amazon Web Services Regions that support `BatchMeterUsage`, see
-    # [BatchMeterUsage Region support][3].
+    # [BatchMeterUsage Region support][5].
     #
     # <note markdown="1"> For an example of `BatchMeterUsage`, see [ BatchMeterUsage code
-    # example][4] in the *Amazon Web Services Marketplace Seller Guide*.
+    # example][6] in the *Amazon Web Services Marketplace Seller Guide*.
     #
     #  </note>
     #
@@ -533,8 +544,10 @@ module Aws::MarketplaceMetering
     #
     # [1]: https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements
     # [2]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-licensearn-example
-    # [3]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
-    # [4]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
+    # [3]: https://docs.aws.amazon.com/marketplace/latest/userguide/metering-for-usage.html#saas-vendor-metered-tagging
+    # [4]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-tagging
+    # [5]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
+    # [6]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
     #
     # @option params [required, Array<Types::UsageRecord>] :usage_records
     #   The set of `UsageRecords` to submit. `BatchMeterUsage` accepts up to
@@ -933,6 +946,7 @@ module Aws::MarketplaceMetering
     #   * {Types::ResolveCustomerResult#product_code #product_code} => String
     #   * {Types::ResolveCustomerResult#customer_aws_account_id #customer_aws_account_id} => String
     #   * {Types::ResolveCustomerResult#license_arn #license_arn} => String
+    #   * {Types::ResolveCustomerResult#metadata #metadata} => Types::Metadata
     #
     # @example Request syntax with placeholder values
     #
@@ -946,6 +960,7 @@ module Aws::MarketplaceMetering
     #   resp.product_code #=> String
     #   resp.customer_aws_account_id #=> String
     #   resp.license_arn #=> String
+    #   resp.metadata.agreement_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomer AWS API Documentation
     #
@@ -974,7 +989,7 @@ module Aws::MarketplaceMetering
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacemetering'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2165,6 +2165,9 @@ module Aws::MediaTailor
     #   resp.http_request_configuration.body #=> String
     #   resp.http_request_configuration.headers #=> Hash
     #   resp.http_request_configuration.headers["__string"] #=> String
+    #   resp.http_request_configuration.cache.ttl_minimum_seconds #=> Integer
+    #   resp.http_request_configuration.cache.ttl_maximum_seconds #=> Integer
+    #   resp.http_request_configuration.cache.key #=> String
     #   resp.aws_service_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.aws_service_request_configuration.output #=> Hash
     #   resp.aws_service_request_configuration.output["__string"] #=> String
@@ -2174,6 +2177,9 @@ module Aws::MediaTailor
     #   resp.aws_service_request_configuration.body #=> String
     #   resp.aws_service_request_configuration.headers #=> Hash
     #   resp.aws_service_request_configuration.headers["__string"] #=> String
+    #   resp.aws_service_request_configuration.cache.ttl_minimum_seconds #=> Integer
+    #   resp.aws_service_request_configuration.cache.ttl_maximum_seconds #=> Integer
+    #   resp.aws_service_request_configuration.cache.key #=> String
     #   resp.aws_service_request_configuration.target_service #=> String
     #   resp.aws_service_request_configuration.target_region #=> String
     #   resp.custom_output_configuration.runtime #=> String, one of "JSONATA"
@@ -2205,6 +2211,9 @@ module Aws::MediaTailor
     #   resp.vast_request_configuration.body #=> String
     #   resp.vast_request_configuration.headers #=> Hash
     #   resp.vast_request_configuration.headers["__string"] #=> String
+    #   resp.vast_request_configuration.cache.ttl_minimum_seconds #=> Integer
+    #   resp.vast_request_configuration.cache.ttl_maximum_seconds #=> Integer
+    #   resp.vast_request_configuration.cache.key #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.arn #=> String
@@ -2638,6 +2647,9 @@ module Aws::MediaTailor
     #   resp.items[0].http_request_configuration.body #=> String
     #   resp.items[0].http_request_configuration.headers #=> Hash
     #   resp.items[0].http_request_configuration.headers["__string"] #=> String
+    #   resp.items[0].http_request_configuration.cache.ttl_minimum_seconds #=> Integer
+    #   resp.items[0].http_request_configuration.cache.ttl_maximum_seconds #=> Integer
+    #   resp.items[0].http_request_configuration.cache.key #=> String
     #   resp.items[0].aws_service_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.items[0].aws_service_request_configuration.output #=> Hash
     #   resp.items[0].aws_service_request_configuration.output["__string"] #=> String
@@ -2647,6 +2659,9 @@ module Aws::MediaTailor
     #   resp.items[0].aws_service_request_configuration.body #=> String
     #   resp.items[0].aws_service_request_configuration.headers #=> Hash
     #   resp.items[0].aws_service_request_configuration.headers["__string"] #=> String
+    #   resp.items[0].aws_service_request_configuration.cache.ttl_minimum_seconds #=> Integer
+    #   resp.items[0].aws_service_request_configuration.cache.ttl_maximum_seconds #=> Integer
+    #   resp.items[0].aws_service_request_configuration.cache.key #=> String
     #   resp.items[0].aws_service_request_configuration.target_service #=> String
     #   resp.items[0].aws_service_request_configuration.target_region #=> String
     #   resp.items[0].custom_output_configuration.runtime #=> String, one of "JSONATA"
@@ -2678,6 +2693,9 @@ module Aws::MediaTailor
     #   resp.items[0].vast_request_configuration.body #=> String
     #   resp.items[0].vast_request_configuration.headers #=> Hash
     #   resp.items[0].vast_request_configuration.headers["__string"] #=> String
+    #   resp.items[0].vast_request_configuration.cache.ttl_minimum_seconds #=> Integer
+    #   resp.items[0].vast_request_configuration.cache.ttl_maximum_seconds #=> Integer
+    #   resp.items[0].vast_request_configuration.cache.key #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["__string"] #=> String
     #   resp.items[0].arn #=> String
@@ -3318,6 +3336,11 @@ module Aws::MediaTailor
     #       headers: {
     #         "__string" => "__string",
     #       },
+    #       cache: {
+    #         ttl_minimum_seconds: 1, # required
+    #         ttl_maximum_seconds: 1, # required
+    #         key: "__string",
+    #       },
     #     },
     #     aws_service_request_configuration: {
     #       runtime: "JSONATA", # required, accepts JSONATA
@@ -3330,6 +3353,11 @@ module Aws::MediaTailor
     #       body: "__string",
     #       headers: {
     #         "__string" => "__string",
+    #       },
+    #       cache: {
+    #         ttl_minimum_seconds: 1, # required
+    #         ttl_maximum_seconds: 1, # required
+    #         key: "__string",
     #       },
     #       target_service: "AwsTargetService", # required
     #       target_region: "AwsServiceRequestConfigurationTargetRegionString", # required
@@ -3381,6 +3409,11 @@ module Aws::MediaTailor
     #       headers: {
     #         "__string" => "__string",
     #       },
+    #       cache: {
+    #         ttl_minimum_seconds: 1, # required
+    #         ttl_maximum_seconds: 1, # required
+    #         key: "__string",
+    #       },
     #     },
     #     tags: {
     #       "__string" => "__string",
@@ -3401,6 +3434,9 @@ module Aws::MediaTailor
     #   resp.http_request_configuration.body #=> String
     #   resp.http_request_configuration.headers #=> Hash
     #   resp.http_request_configuration.headers["__string"] #=> String
+    #   resp.http_request_configuration.cache.ttl_minimum_seconds #=> Integer
+    #   resp.http_request_configuration.cache.ttl_maximum_seconds #=> Integer
+    #   resp.http_request_configuration.cache.key #=> String
     #   resp.aws_service_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.aws_service_request_configuration.output #=> Hash
     #   resp.aws_service_request_configuration.output["__string"] #=> String
@@ -3410,6 +3446,9 @@ module Aws::MediaTailor
     #   resp.aws_service_request_configuration.body #=> String
     #   resp.aws_service_request_configuration.headers #=> Hash
     #   resp.aws_service_request_configuration.headers["__string"] #=> String
+    #   resp.aws_service_request_configuration.cache.ttl_minimum_seconds #=> Integer
+    #   resp.aws_service_request_configuration.cache.ttl_maximum_seconds #=> Integer
+    #   resp.aws_service_request_configuration.cache.key #=> String
     #   resp.aws_service_request_configuration.target_service #=> String
     #   resp.aws_service_request_configuration.target_region #=> String
     #   resp.custom_output_configuration.runtime #=> String, one of "JSONATA"
@@ -3441,6 +3480,9 @@ module Aws::MediaTailor
     #   resp.vast_request_configuration.body #=> String
     #   resp.vast_request_configuration.headers #=> Hash
     #   resp.vast_request_configuration.headers["__string"] #=> String
+    #   resp.vast_request_configuration.cache.ttl_minimum_seconds #=> Integer
+    #   resp.vast_request_configuration.cache.ttl_maximum_seconds #=> Integer
+    #   resp.vast_request_configuration.cache.key #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.arn #=> String
@@ -4488,7 +4530,7 @@ module Aws::MediaTailor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

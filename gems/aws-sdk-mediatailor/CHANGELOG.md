@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2026-10-09)
+------------------
+
+* Feature - Add caching settings to http functions
+
 1.130.0 (2026-09-29)
 ------------------
 

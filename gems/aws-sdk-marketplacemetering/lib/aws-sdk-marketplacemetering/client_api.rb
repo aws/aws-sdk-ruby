@@ -14,6 +14,7 @@ module Aws::MarketplaceMetering
 
     include Seahorse::Model
 
+    AgreementId = Shapes::StringShape.new(name: 'AgreementId')
     AllocatedUsageQuantity = Shapes::IntegerShape.new(name: 'AllocatedUsageQuantity')
     BatchMeterUsageRequest = Shapes::StructureShape.new(name: 'BatchMeterUsageRequest')
     BatchMeterUsageResult = Shapes::StructureShape.new(name: 'BatchMeterUsageResult')
@@ -38,6 +39,7 @@ module Aws::MarketplaceMetering
     InvalidUsageAllocationsException = Shapes::StructureShape.new(name: 'InvalidUsageAllocationsException')
     InvalidUsageDimensionException = Shapes::StructureShape.new(name: 'InvalidUsageDimensionException')
     LicenseArn = Shapes::StringShape.new(name: 'LicenseArn')
+    Metadata = Shapes::StructureShape.new(name: 'Metadata')
     MeterUsageRequest = Shapes::StructureShape.new(name: 'MeterUsageRequest')
     MeterUsageResult = Shapes::StructureShape.new(name: 'MeterUsageResult')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
@@ -124,6 +126,9 @@ module Aws::MarketplaceMetering
     InvalidUsageDimensionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InvalidUsageDimensionException.struct_class = Types::InvalidUsageDimensionException
 
+    Metadata.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "AgreementId"))
+    Metadata.struct_class = Types::Metadata
+
     MeterUsageRequest.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, required: true, location_name: "ProductCode"))
     MeterUsageRequest.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     MeterUsageRequest.add_member(:usage_dimension, Shapes::ShapeRef.new(shape: UsageDimension, required: true, location_name: "UsageDimension"))
@@ -155,6 +160,7 @@ module Aws::MarketplaceMetering
     ResolveCustomerResult.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, location_name: "ProductCode"))
     ResolveCustomerResult.add_member(:customer_aws_account_id, Shapes::ShapeRef.new(shape: CustomerAWSAccountId, location_name: "CustomerAWSAccountId"))
     ResolveCustomerResult.add_member(:license_arn, Shapes::ShapeRef.new(shape: LicenseArn, location_name: "LicenseArn"))
+    ResolveCustomerResult.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     ResolveCustomerResult.struct_class = Types::ResolveCustomerResult
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))

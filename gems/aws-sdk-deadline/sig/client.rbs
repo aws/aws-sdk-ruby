@@ -1456,6 +1456,22 @@ module Aws
                        ) -> _ListLimitsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLimitsResponseSuccess
 
+      interface _ListMembershipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMembershipsResponse]
+        def memberships: () -> ::Array[Types::MembershipSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_memberships-instance_method
+      def list_memberships: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              principal_id: ::String,
+                              ?identity_store_id: ::String,
+                              ?identity_center_region: ::String,
+                              ?resource_types: Array[("FARM" | "QUEUE" | "FLEET" | "JOB")]
+                            ) -> _ListMembershipsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMembershipsResponseSuccess
+
       interface _ListMeteredProductsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMeteredProductsResponse]
         def metered_products: () -> ::Array[Types::MeteredProductSummary]

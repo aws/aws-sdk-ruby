@@ -2838,6 +2838,10 @@ module Aws::QuickSight
     #       create_and_update_bee_action: "DENY", # accepts DENY, ALLOW
     #       share_bee_action: "DENY", # accepts DENY, ALLOW
     #       use_bee_action: "DENY", # accepts DENY, ALLOW
+    #       gong_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_gong_action: "DENY", # accepts DENY, ALLOW
+    #       share_gong_action: "DENY", # accepts DENY, ALLOW
+    #       use_gong_action: "DENY", # accepts DENY, ALLOW
     #       topic: "DENY", # accepts DENY, ALLOW
     #       edit_visual_with_q: "DENY", # accepts DENY, ALLOW
     #       build_calculated_field_with_q: "DENY", # accepts DENY, ALLOW
@@ -2864,6 +2868,186 @@ module Aws::QuickSight
     #       schedule_trigger: "DENY", # accepts DENY, ALLOW
     #       inbound_email_trigger: "DENY", # accepts DENY, ALLOW
     #       quick_event_trigger: "DENY", # accepts DENY, ALLOW
+    #       file_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_file_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_file_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_file_data_source: "DENY", # accepts DENY, ALLOW
+    #       s3_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_s3_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_s3_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_s3_data_source: "DENY", # accepts DENY, ALLOW
+    #       s3_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_s3_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_s3_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_s3_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       s3_tables_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_s3_tables_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_s3_tables_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_s3_tables_data_source: "DENY", # accepts DENY, ALLOW
+    #       athena_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_athena_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_athena_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_athena_data_source: "DENY", # accepts DENY, ALLOW
+    #       rds_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_rds_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_rds_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_rds_data_source: "DENY", # accepts DENY, ALLOW
+    #       redshift_auto_discovered_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_redshift_auto_discovered_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_redshift_auto_discovered_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_redshift_auto_discovered_data_source: "DENY", # accepts DENY, ALLOW
+    #       redshift_manual_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_redshift_manual_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_redshift_manual_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_redshift_manual_data_source: "DENY", # accepts DENY, ALLOW
+    #       open_search_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_open_search_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_open_search_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_open_search_data_source: "DENY", # accepts DENY, ALLOW
+    #       timestream_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_timestream_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_timestream_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_timestream_data_source: "DENY", # accepts DENY, ALLOW
+    #       aurora_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_aurora_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_aurora_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_aurora_data_source: "DENY", # accepts DENY, ALLOW
+    #       my_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_my_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_my_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_my_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       postgre_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_postgre_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_postgre_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_postgre_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       oracle_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_oracle_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_oracle_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_oracle_data_source: "DENY", # accepts DENY, ALLOW
+    #       sql_server_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_sql_server_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_sql_server_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_sql_server_data_source: "DENY", # accepts DENY, ALLOW
+    #       maria_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_maria_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_maria_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_maria_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       snowflake_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_snowflake_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_snowflake_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_snowflake_data_source: "DENY", # accepts DENY, ALLOW
+    #       google_big_query_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_google_big_query_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_google_big_query_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_google_big_query_data_source: "DENY", # accepts DENY, ALLOW
+    #       databricks_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_databricks_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_databricks_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_databricks_data_source: "DENY", # accepts DENY, ALLOW
+    #       starburst_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_starburst_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_starburst_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_starburst_data_source: "DENY", # accepts DENY, ALLOW
+    #       trino_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_trino_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_trino_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_trino_data_source: "DENY", # accepts DENY, ALLOW
+    #       impala_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_impala_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_impala_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_impala_data_source: "DENY", # accepts DENY, ALLOW
+    #       teradata_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_teradata_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_teradata_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_teradata_data_source: "DENY", # accepts DENY, ALLOW
+    #       presto_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_presto_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_presto_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_presto_data_source: "DENY", # accepts DENY, ALLOW
+    #       spark_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_spark_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_spark_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_spark_data_source: "DENY", # accepts DENY, ALLOW
+    #       exasol_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_exasol_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_exasol_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_exasol_data_source: "DENY", # accepts DENY, ALLOW
+    #       db_2_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_db_2_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_db_2_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_db_2_data_source: "DENY", # accepts DENY, ALLOW
+    #       sap_hana_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_sap_hana_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_sap_hana_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_sap_hana_data_source: "DENY", # accepts DENY, ALLOW
+    #       denodo_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_denodo_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_denodo_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_denodo_data_source: "DENY", # accepts DENY, ALLOW
+    #       dremio_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_dremio_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_dremio_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_dremio_data_source: "DENY", # accepts DENY, ALLOW
+    #       salesforce_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_salesforce_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_salesforce_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_salesforce_data_source: "DENY", # accepts DENY, ALLOW
+    #       radiant_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_radiant_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_radiant_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_radiant_data_source: "DENY", # accepts DENY, ALLOW
+    #       pay_pal_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_pay_pal_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_pay_pal_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_pay_pal_data_source: "DENY", # accepts DENY, ALLOW
+    #       square_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_square_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_square_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_square_data_source: "DENY", # accepts DENY, ALLOW
+    #       git_hub_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_git_hub_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_git_hub_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_git_hub_data_source: "DENY", # accepts DENY, ALLOW
+    #       twitter_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_twitter_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_twitter_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_twitter_data_source: "DENY", # accepts DENY, ALLOW
+    #       jira_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_jira_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_jira_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_jira_data_source: "DENY", # accepts DENY, ALLOW
+    #       service_now_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_service_now_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_service_now_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_service_now_data_source: "DENY", # accepts DENY, ALLOW
+    #       adobe_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_adobe_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_adobe_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_adobe_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       google_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_google_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_google_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_google_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       google_sheets_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_google_sheets_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_google_sheets_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_google_sheets_data_source: "DENY", # accepts DENY, ALLOW
+    #       document_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_document_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_document_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_document_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       mongo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_mongo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_mongo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_mongo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       mongo_atlas_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_mongo_atlas_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_mongo_atlas_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_mongo_atlas_data_source: "DENY", # accepts DENY, ALLOW
+    #       dynamo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_dynamo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_dynamo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_dynamo_db_data_source: "DENY", # accepts DENY, ALLOW
     #     },
     #     governance: {
     #       default_category_effects: {
@@ -10204,6 +10388,10 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.create_and_update_bee_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.share_bee_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.use_bee_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.gong_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_gong_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_gong_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_gong_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.topic #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.edit_visual_with_q #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.build_calculated_field_with_q #=> String, one of "DENY", "ALLOW"
@@ -10230,6 +10418,186 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.schedule_trigger #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.inbound_email_trigger #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.quick_event_trigger #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.file_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_file_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_file_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_file_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.s3_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_s3_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_s3_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_s3_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.s3_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_s3_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_s3_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_s3_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.s3_tables_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_s3_tables_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_s3_tables_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_s3_tables_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.athena_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_athena_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_athena_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_athena_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.rds_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_rds_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_rds_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_rds_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.redshift_auto_discovered_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_redshift_auto_discovered_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_redshift_auto_discovered_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_redshift_auto_discovered_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.redshift_manual_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_redshift_manual_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_redshift_manual_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_redshift_manual_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.open_search_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_open_search_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_open_search_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_open_search_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.timestream_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_timestream_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_timestream_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_timestream_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.aurora_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_aurora_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_aurora_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_aurora_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.my_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_my_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_my_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_my_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.postgre_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_postgre_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_postgre_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_postgre_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.oracle_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_oracle_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_oracle_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_oracle_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.sql_server_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_sql_server_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_sql_server_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_sql_server_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.maria_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_maria_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_maria_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_maria_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.snowflake_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_snowflake_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_snowflake_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_snowflake_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.google_big_query_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_google_big_query_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_google_big_query_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_google_big_query_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.databricks_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_databricks_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_databricks_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_databricks_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.starburst_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_starburst_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_starburst_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_starburst_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.trino_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_trino_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_trino_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_trino_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.impala_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_impala_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_impala_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_impala_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.teradata_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_teradata_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_teradata_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_teradata_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.presto_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_presto_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_presto_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_presto_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.spark_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_spark_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_spark_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_spark_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.exasol_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_exasol_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_exasol_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_exasol_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.db_2_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_db_2_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_db_2_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_db_2_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.sap_hana_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_sap_hana_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_sap_hana_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_sap_hana_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.denodo_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_denodo_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_denodo_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_denodo_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.dremio_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_dremio_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_dremio_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_dremio_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.salesforce_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_salesforce_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_salesforce_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_salesforce_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.radiant_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_radiant_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_radiant_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_radiant_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.pay_pal_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_pay_pal_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_pay_pal_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_pay_pal_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.square_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_square_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_square_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_square_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.git_hub_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_git_hub_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_git_hub_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_git_hub_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.twitter_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_twitter_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_twitter_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_twitter_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.jira_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_jira_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_jira_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_jira_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.service_now_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_service_now_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_service_now_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_service_now_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.adobe_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_adobe_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_adobe_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_adobe_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.google_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_google_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_google_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_google_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.google_sheets_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_google_sheets_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_google_sheets_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_google_sheets_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.document_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_document_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_document_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_document_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.mongo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_mongo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_mongo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_mongo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.mongo_atlas_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_mongo_atlas_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_mongo_atlas_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_mongo_atlas_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.dynamo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_dynamo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.update_dynamo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.share_dynamo_db_data_source #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.governance.default_category_effects #=> Hash
     #   resp.custom_permissions.governance.default_category_effects["GovernanceCategoryName"] #=> String, one of "DENY_BY_DEFAULT"
     #   resp.request_id #=> String
@@ -15586,6 +15954,10 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.create_and_update_bee_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.share_bee_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.use_bee_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.gong_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_gong_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_gong_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_gong_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.topic #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.edit_visual_with_q #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.build_calculated_field_with_q #=> String, one of "DENY", "ALLOW"
@@ -15612,6 +15984,186 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.schedule_trigger #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.inbound_email_trigger #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.quick_event_trigger #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.file_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_file_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_file_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_file_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.s3_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_s3_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_s3_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_s3_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.s3_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_s3_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_s3_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_s3_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.s3_tables_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_s3_tables_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_s3_tables_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_s3_tables_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.athena_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_athena_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_athena_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_athena_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.rds_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_rds_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_rds_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_rds_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.redshift_auto_discovered_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_redshift_auto_discovered_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_redshift_auto_discovered_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_redshift_auto_discovered_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.redshift_manual_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_redshift_manual_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_redshift_manual_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_redshift_manual_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.open_search_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_open_search_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_open_search_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_open_search_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.timestream_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_timestream_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_timestream_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_timestream_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.aurora_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_aurora_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_aurora_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_aurora_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.my_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_my_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_my_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_my_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.postgre_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_postgre_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_postgre_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_postgre_sql_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.oracle_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_oracle_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_oracle_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_oracle_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.sql_server_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_sql_server_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_sql_server_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_sql_server_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.maria_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_maria_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_maria_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_maria_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.snowflake_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_snowflake_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_snowflake_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_snowflake_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.google_big_query_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_google_big_query_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_google_big_query_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_google_big_query_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.databricks_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_databricks_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_databricks_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_databricks_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.starburst_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_starburst_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_starburst_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_starburst_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.trino_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_trino_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_trino_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_trino_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.impala_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_impala_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_impala_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_impala_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.teradata_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_teradata_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_teradata_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_teradata_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.presto_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_presto_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_presto_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_presto_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.spark_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_spark_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_spark_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_spark_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.exasol_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_exasol_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_exasol_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_exasol_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.db_2_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_db_2_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_db_2_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_db_2_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.sap_hana_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_sap_hana_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_sap_hana_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_sap_hana_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.denodo_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_denodo_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_denodo_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_denodo_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.dremio_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_dremio_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_dremio_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_dremio_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.salesforce_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_salesforce_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_salesforce_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_salesforce_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.radiant_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_radiant_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_radiant_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_radiant_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.pay_pal_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_pay_pal_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_pay_pal_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_pay_pal_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.square_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_square_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_square_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_square_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.git_hub_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_git_hub_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_git_hub_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_git_hub_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.twitter_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_twitter_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_twitter_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_twitter_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.jira_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_jira_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_jira_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_jira_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.service_now_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_service_now_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_service_now_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_service_now_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.adobe_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_adobe_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_adobe_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_adobe_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.google_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_google_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_google_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_google_analytics_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.google_sheets_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_google_sheets_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_google_sheets_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_google_sheets_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.document_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_document_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_document_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_document_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.mongo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_mongo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_mongo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_mongo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.mongo_atlas_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_mongo_atlas_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_mongo_atlas_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_mongo_atlas_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.dynamo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_dynamo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.update_dynamo_db_data_source #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.share_dynamo_db_data_source #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].governance.default_category_effects #=> Hash
     #   resp.custom_permissions_list[0].governance.default_category_effects["GovernanceCategoryName"] #=> String, one of "DENY_BY_DEFAULT"
     #   resp.next_token #=> String
@@ -22534,6 +23086,10 @@ module Aws::QuickSight
     #       create_and_update_bee_action: "DENY", # accepts DENY, ALLOW
     #       share_bee_action: "DENY", # accepts DENY, ALLOW
     #       use_bee_action: "DENY", # accepts DENY, ALLOW
+    #       gong_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_gong_action: "DENY", # accepts DENY, ALLOW
+    #       share_gong_action: "DENY", # accepts DENY, ALLOW
+    #       use_gong_action: "DENY", # accepts DENY, ALLOW
     #       topic: "DENY", # accepts DENY, ALLOW
     #       edit_visual_with_q: "DENY", # accepts DENY, ALLOW
     #       build_calculated_field_with_q: "DENY", # accepts DENY, ALLOW
@@ -22560,6 +23116,186 @@ module Aws::QuickSight
     #       schedule_trigger: "DENY", # accepts DENY, ALLOW
     #       inbound_email_trigger: "DENY", # accepts DENY, ALLOW
     #       quick_event_trigger: "DENY", # accepts DENY, ALLOW
+    #       file_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_file_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_file_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_file_data_source: "DENY", # accepts DENY, ALLOW
+    #       s3_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_s3_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_s3_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_s3_data_source: "DENY", # accepts DENY, ALLOW
+    #       s3_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_s3_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_s3_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_s3_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       s3_tables_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_s3_tables_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_s3_tables_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_s3_tables_data_source: "DENY", # accepts DENY, ALLOW
+    #       athena_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_athena_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_athena_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_athena_data_source: "DENY", # accepts DENY, ALLOW
+    #       rds_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_rds_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_rds_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_rds_data_source: "DENY", # accepts DENY, ALLOW
+    #       redshift_auto_discovered_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_redshift_auto_discovered_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_redshift_auto_discovered_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_redshift_auto_discovered_data_source: "DENY", # accepts DENY, ALLOW
+    #       redshift_manual_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_redshift_manual_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_redshift_manual_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_redshift_manual_data_source: "DENY", # accepts DENY, ALLOW
+    #       open_search_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_open_search_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_open_search_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_open_search_data_source: "DENY", # accepts DENY, ALLOW
+    #       timestream_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_timestream_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_timestream_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_timestream_data_source: "DENY", # accepts DENY, ALLOW
+    #       aurora_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_aurora_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_aurora_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_aurora_data_source: "DENY", # accepts DENY, ALLOW
+    #       my_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_my_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_my_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_my_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       postgre_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_postgre_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_postgre_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_postgre_sql_data_source: "DENY", # accepts DENY, ALLOW
+    #       oracle_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_oracle_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_oracle_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_oracle_data_source: "DENY", # accepts DENY, ALLOW
+    #       sql_server_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_sql_server_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_sql_server_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_sql_server_data_source: "DENY", # accepts DENY, ALLOW
+    #       maria_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_maria_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_maria_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_maria_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       snowflake_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_snowflake_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_snowflake_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_snowflake_data_source: "DENY", # accepts DENY, ALLOW
+    #       google_big_query_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_google_big_query_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_google_big_query_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_google_big_query_data_source: "DENY", # accepts DENY, ALLOW
+    #       databricks_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_databricks_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_databricks_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_databricks_data_source: "DENY", # accepts DENY, ALLOW
+    #       starburst_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_starburst_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_starburst_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_starburst_data_source: "DENY", # accepts DENY, ALLOW
+    #       trino_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_trino_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_trino_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_trino_data_source: "DENY", # accepts DENY, ALLOW
+    #       impala_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_impala_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_impala_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_impala_data_source: "DENY", # accepts DENY, ALLOW
+    #       teradata_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_teradata_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_teradata_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_teradata_data_source: "DENY", # accepts DENY, ALLOW
+    #       presto_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_presto_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_presto_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_presto_data_source: "DENY", # accepts DENY, ALLOW
+    #       spark_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_spark_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_spark_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_spark_data_source: "DENY", # accepts DENY, ALLOW
+    #       exasol_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_exasol_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_exasol_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_exasol_data_source: "DENY", # accepts DENY, ALLOW
+    #       db_2_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_db_2_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_db_2_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_db_2_data_source: "DENY", # accepts DENY, ALLOW
+    #       sap_hana_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_sap_hana_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_sap_hana_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_sap_hana_data_source: "DENY", # accepts DENY, ALLOW
+    #       denodo_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_denodo_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_denodo_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_denodo_data_source: "DENY", # accepts DENY, ALLOW
+    #       dremio_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_dremio_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_dremio_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_dremio_data_source: "DENY", # accepts DENY, ALLOW
+    #       salesforce_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_salesforce_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_salesforce_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_salesforce_data_source: "DENY", # accepts DENY, ALLOW
+    #       radiant_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_radiant_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_radiant_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_radiant_data_source: "DENY", # accepts DENY, ALLOW
+    #       pay_pal_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_pay_pal_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_pay_pal_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_pay_pal_data_source: "DENY", # accepts DENY, ALLOW
+    #       square_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_square_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_square_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_square_data_source: "DENY", # accepts DENY, ALLOW
+    #       git_hub_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_git_hub_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_git_hub_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_git_hub_data_source: "DENY", # accepts DENY, ALLOW
+    #       twitter_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_twitter_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_twitter_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_twitter_data_source: "DENY", # accepts DENY, ALLOW
+    #       jira_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_jira_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_jira_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_jira_data_source: "DENY", # accepts DENY, ALLOW
+    #       service_now_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_service_now_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_service_now_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_service_now_data_source: "DENY", # accepts DENY, ALLOW
+    #       adobe_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_adobe_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_adobe_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_adobe_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       google_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_google_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_google_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_google_analytics_data_source: "DENY", # accepts DENY, ALLOW
+    #       google_sheets_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_google_sheets_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_google_sheets_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_google_sheets_data_source: "DENY", # accepts DENY, ALLOW
+    #       document_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_document_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_document_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_document_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       mongo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_mongo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_mongo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_mongo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       mongo_atlas_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_mongo_atlas_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_mongo_atlas_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_mongo_atlas_data_source: "DENY", # accepts DENY, ALLOW
+    #       dynamo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       create_dynamo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       update_dynamo_db_data_source: "DENY", # accepts DENY, ALLOW
+    #       share_dynamo_db_data_source: "DENY", # accepts DENY, ALLOW
     #     },
     #     governance: {
     #       default_category_effects: {
@@ -27279,7 +28015,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.200.0'
+      context[:gem_version] = '1.201.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

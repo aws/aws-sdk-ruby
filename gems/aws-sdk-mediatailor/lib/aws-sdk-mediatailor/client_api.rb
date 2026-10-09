@@ -128,6 +128,7 @@ module Aws::MediaTailor
     HttpPackageConfiguration = Shapes::StructureShape.new(name: 'HttpPackageConfiguration')
     HttpPackageConfigurations = Shapes::ListShape.new(name: 'HttpPackageConfigurations')
     HttpRequest = Shapes::StructureShape.new(name: 'HttpRequest')
+    HttpRequestCacheConfiguration = Shapes::StructureShape.new(name: 'HttpRequestCacheConfiguration')
     HttpRequestConfiguration = Shapes::StructureShape.new(name: 'HttpRequestConfiguration')
     InsertionMode = Shapes::StringShape.new(name: 'InsertionMode')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -356,6 +357,7 @@ module Aws::MediaTailor
     AwsServiceRequestConfiguration.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Url"))
     AwsServiceRequestConfiguration.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     AwsServiceRequestConfiguration.add_member(:headers, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "Headers"))
+    AwsServiceRequestConfiguration.add_member(:cache, Shapes::ShapeRef.new(shape: HttpRequestCacheConfiguration, location_name: "Cache"))
     AwsServiceRequestConfiguration.add_member(:target_service, Shapes::ShapeRef.new(shape: AwsTargetService, required: true, location_name: "TargetService"))
     AwsServiceRequestConfiguration.add_member(:target_region, Shapes::ShapeRef.new(shape: AwsServiceRequestConfigurationTargetRegionString, required: true, location_name: "TargetRegion"))
     AwsServiceRequestConfiguration.struct_class = Types::AwsServiceRequestConfiguration
@@ -830,6 +832,11 @@ module Aws::MediaTailor
     HttpRequest.add_member(:compress_request, Shapes::ShapeRef.new(shape: CompressionMethod, location_name: "CompressRequest"))
     HttpRequest.struct_class = Types::HttpRequest
 
+    HttpRequestCacheConfiguration.add_member(:ttl_minimum_seconds, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "TtlMinimumSeconds"))
+    HttpRequestCacheConfiguration.add_member(:ttl_maximum_seconds, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "TtlMaximumSeconds"))
+    HttpRequestCacheConfiguration.add_member(:key, Shapes::ShapeRef.new(shape: __string, location_name: "Key"))
+    HttpRequestCacheConfiguration.struct_class = Types::HttpRequestCacheConfiguration
+
     HttpRequestConfiguration.add_member(:runtime, Shapes::ShapeRef.new(shape: RuntimeType, required: true, location_name: "Runtime"))
     HttpRequestConfiguration.add_member(:output, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "Output"))
     HttpRequestConfiguration.add_member(:method_type, Shapes::ShapeRef.new(shape: MethodType, required: true, location_name: "MethodType"))
@@ -837,6 +844,7 @@ module Aws::MediaTailor
     HttpRequestConfiguration.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Url"))
     HttpRequestConfiguration.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     HttpRequestConfiguration.add_member(:headers, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "Headers"))
+    HttpRequestConfiguration.add_member(:cache, Shapes::ShapeRef.new(shape: HttpRequestCacheConfiguration, location_name: "Cache"))
     HttpRequestConfiguration.struct_class = Types::HttpRequestConfiguration
 
     KeyValuePair.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Key"))
@@ -1349,6 +1357,7 @@ module Aws::MediaTailor
     VastRequestConfiguration.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Url"))
     VastRequestConfiguration.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     VastRequestConfiguration.add_member(:headers, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "Headers"))
+    VastRequestConfiguration.add_member(:cache, Shapes::ShapeRef.new(shape: HttpRequestCacheConfiguration, location_name: "Cache"))
     VastRequestConfiguration.struct_class = Types::VastRequestConfiguration
 
     VastResponse.add_member(:ad_sequencing_mode, Shapes::ShapeRef.new(shape: AdSequencingMode, location_name: "AdSequencingMode"))

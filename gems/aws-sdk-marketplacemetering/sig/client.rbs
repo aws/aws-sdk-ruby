@@ -156,6 +156,7 @@ module Aws
         def product_code: () -> ::String
         def customer_aws_account_id: () -> ::String
         def license_arn: () -> ::String
+        def metadata: () -> Types::Metadata
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceMetering/Client.html#resolve_customer-instance_method
       def resolve_customer: (

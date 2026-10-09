@@ -765,6 +765,7 @@ module Aws::SecurityAgent
       attr_accessor report_destination: Types::ReportDestination
       attr_accessor report_filters: Types::ReportFilters
       attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       SENSITIVE: []
     end
 
@@ -781,6 +782,7 @@ module Aws::SecurityAgent
       attr_accessor report_destination: Types::ReportDestination
       attr_accessor report_filters: Types::ReportFilters
       attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       SENSITIVE: []
     end
 
@@ -1839,6 +1841,7 @@ module Aws::SecurityAgent
       attr_accessor report_destination: Types::ReportDestination
       attr_accessor report_filters: Types::ReportFilters
       attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1877,6 +1880,7 @@ module Aws::SecurityAgent
       attr_accessor scope_result: Types::ScopeResult
       attr_accessor scope_changes: ::Array[Types::ScopeChange]
       attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -2238,6 +2242,11 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class TestScope
+      attr_accessor type: ("WEB_APP" | "GENERATIVE_AI_APP")
+      SENSITIVE: []
+    end
+
     class Threat
       attr_accessor threat_id: ::String
       attr_accessor threat_job_id: ::String
@@ -2529,6 +2538,7 @@ module Aws::SecurityAgent
       attr_accessor report_destination: Types::ReportDestination
       attr_accessor report_filters: Types::ReportFilters
       attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       SENSITIVE: []
     end
 
@@ -2545,6 +2555,7 @@ module Aws::SecurityAgent
       attr_accessor report_destination: Types::ReportDestination
       attr_accessor report_filters: Types::ReportFilters
       attr_accessor cicd_configuration: Types::CiCdConfiguration
+      attr_accessor test_scope: Types::TestScope
       SENSITIVE: []
     end
 

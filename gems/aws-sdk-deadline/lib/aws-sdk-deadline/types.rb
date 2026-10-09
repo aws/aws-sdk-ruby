@@ -8099,6 +8099,79 @@ module Aws::Deadline
     # Shared pagination fields for List operation inputs (nextToken +
     # maxResults).
     #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or `null` to start from the
+    #   beginning.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] principal_id
+    #   The ID of the IAM Identity Center principal whose Deadline Cloud
+    #   resource memberships you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The identity store ID that contains the principal. This parameter is
+    #   required for callers that do not use a monitor session.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_region
+    #   The Region of the IAM Identity Center instance. If not provided, the
+    #   service defaults to the Amazon Web Services Region in which you make
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_types
+    #   The resource types to include when listing the principal's
+    #   memberships. If not specified, memberships for all supported
+    #   resource types are returned.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListMembershipsRequest AWS API Documentation
+    #
+    class ListMembershipsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :principal_id,
+      :identity_store_id,
+      :identity_center_region,
+      :resource_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Shared pagination field for List operation outputs (nextToken).
+    #
+    # @!attribute [rw] memberships
+    #   The memberships associated with the specified principal.
+    #   @return [Array<Types::MembershipSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If Deadline Cloud returns `nextToken`, then there are more results
+    #   available. The value of `nextToken` is a unique pagination token for
+    #   each page. To retrieve the next page, call the operation again using
+    #   the returned token. Keep all other arguments unchanged. If no
+    #   results remain, then `nextToken` is set to `null`. Each pagination
+    #   token expires after 24 hours. If you provide a token that isn't
+    #   valid, then you receive an HTTP 400 `ValidationException` error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListMembershipsResponse AWS API Documentation
+    #
+    class ListMembershipsResponse < Struct.new(
+      :memberships,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Shared pagination fields for List operation inputs (nextToken +
+    # maxResults).
+    #
     # @!attribute [rw] license_endpoint_id
     #   The license endpoint ID to include on the list of metered products.
     #   @return [String]
@@ -9273,6 +9346,47 @@ module Aws::Deadline
       :input_manifest_hash)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A membership record for a principal on a single Deadline Cloud
+    # resource. The summary identifies the resource that the principal is a
+    # member of and the principal's membership level for that resource.
+    #
+    # @note MembershipSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MembershipSummary corresponding to the set member.
+    #
+    # @!attribute [rw] farm
+    #   A membership on a farm.
+    #   @return [Types::FarmMember]
+    #
+    # @!attribute [rw] queue
+    #   A membership on a queue.
+    #   @return [Types::QueueMember]
+    #
+    # @!attribute [rw] fleet
+    #   A membership on a fleet.
+    #   @return [Types::FleetMember]
+    #
+    # @!attribute [rw] job
+    #   A membership on a job.
+    #   @return [Types::JobMember]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/MembershipSummary AWS API Documentation
+    #
+    class MembershipSummary < Struct.new(
+      :farm,
+      :queue,
+      :fleet,
+      :job,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Farm < MembershipSummary; end
+      class Queue < MembershipSummary; end
+      class Fleet < MembershipSummary; end
+      class Job < MembershipSummary; end
+      class Unknown < MembershipSummary; end
     end
 
     # The range of memory in MiB.

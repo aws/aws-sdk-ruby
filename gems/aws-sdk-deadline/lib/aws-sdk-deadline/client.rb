@@ -5522,6 +5522,111 @@ module Aws::Deadline
       req.send_request(options)
     end
 
+    # Lists the Deadline Cloud resource memberships associated with a
+    # specified IAM Identity Center principal, optionally filtered by the
+    # requested resource types.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or `null` to start from the
+    #   beginning.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages.
+    #
+    # @option params [required, String] :principal_id
+    #   The ID of the IAM Identity Center principal whose Deadline Cloud
+    #   resource memberships you want to list.
+    #
+    # @option params [String] :identity_store_id
+    #   The identity store ID that contains the principal. This parameter is
+    #   required for callers that do not use a monitor session.
+    #
+    # @option params [String] :identity_center_region
+    #   The Region of the IAM Identity Center instance. If not provided, the
+    #   service defaults to the Amazon Web Services Region in which you make
+    #   the request.
+    #
+    # @option params [Array<String>] :resource_types
+    #   The resource types to include when listing the principal's
+    #   memberships. If not specified, memberships for all supported resource
+    #   types are returned.
+    #
+    # @return [Types::ListMembershipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMembershipsResponse#memberships #memberships} => Array&lt;Types::MembershipSummary&gt;
+    #   * {Types::ListMembershipsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List memberships using a cross-region identity store
+    #
+    #   resp = client.list_memberships({
+    #     identity_center_region: "us-east-1", 
+    #     identity_store_id: "d-1234567890", 
+    #     principal_id: "12345678-1234-1234-1234-123456789abc", 
+    #     resource_types: [
+    #       "QUEUE", 
+    #       "JOB", 
+    #     ], 
+    #   })
+    #
+    # @example Example: List a Monitor user's memberships of every resource type
+    #
+    #   resp = client.list_memberships({
+    #     principal_id: "12345678-1234-1234-1234-123456789abc", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_memberships({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     principal_id: "IdentityCenterPrincipalId", # required
+    #     identity_store_id: "IdentityStoreId",
+    #     identity_center_region: "Region",
+    #     resource_types: ["FARM"], # accepts FARM, QUEUE, FLEET, JOB
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.memberships #=> Array
+    #   resp.memberships[0].farm.farm_id #=> String
+    #   resp.memberships[0].farm.principal_id #=> String
+    #   resp.memberships[0].farm.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.memberships[0].farm.identity_store_id #=> String
+    #   resp.memberships[0].farm.membership_level #=> String, one of "VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"
+    #   resp.memberships[0].queue.farm_id #=> String
+    #   resp.memberships[0].queue.queue_id #=> String
+    #   resp.memberships[0].queue.principal_id #=> String
+    #   resp.memberships[0].queue.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.memberships[0].queue.identity_store_id #=> String
+    #   resp.memberships[0].queue.membership_level #=> String, one of "VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"
+    #   resp.memberships[0].fleet.farm_id #=> String
+    #   resp.memberships[0].fleet.fleet_id #=> String
+    #   resp.memberships[0].fleet.principal_id #=> String
+    #   resp.memberships[0].fleet.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.memberships[0].fleet.identity_store_id #=> String
+    #   resp.memberships[0].fleet.membership_level #=> String, one of "VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"
+    #   resp.memberships[0].job.farm_id #=> String
+    #   resp.memberships[0].job.queue_id #=> String
+    #   resp.memberships[0].job.job_id #=> String
+    #   resp.memberships[0].job.principal_id #=> String
+    #   resp.memberships[0].job.principal_type #=> String, one of "USER", "GROUP"
+    #   resp.memberships[0].job.identity_store_id #=> String
+    #   resp.memberships[0].job.membership_level #=> String, one of "VIEWER", "CONTRIBUTOR", "OWNER", "MANAGER"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ListMemberships AWS API Documentation
+    #
+    # @overload list_memberships(params = {})
+    # @param [Hash] params ({})
+    def list_memberships(params = {}, options = {})
+      req = build_request(:list_memberships, params)
+      req.send_request(options)
+    end
+
     # Lists metered products.
     #
     # @option params [required, String] :license_endpoint_id
@@ -8466,7 +8571,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

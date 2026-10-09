@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.201.0 (2026-10-09)
+------------------
+
+* Feature - Adds granular custom permissions for the Gong action connector (GongAction, CreateAndUpdateGongAction, ShareGongAction, UseGongAction) and for create, update, and share operations on 45 data source connectors, such as Amazon S3 and Snowflake, through the Custom Permissions APIs.
+
 1.200.0 (2026-10-01)
 ------------------
 

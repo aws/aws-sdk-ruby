@@ -2137,6 +2137,22 @@ module Aws::Deadline
       SENSITIVE: []
     end
 
+    class ListMembershipsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor principal_id: ::String
+      attr_accessor identity_store_id: ::String
+      attr_accessor identity_center_region: ::String
+      attr_accessor resource_types: ::Array[("FARM" | "QUEUE" | "FLEET" | "JOB")]
+      SENSITIVE: []
+    end
+
+    class ListMembershipsResponse
+      attr_accessor memberships: ::Array[Types::MembershipSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListMeteredProductsRequest
       attr_accessor license_endpoint_id: ::String
       attr_accessor next_token: ::String
@@ -2426,6 +2442,26 @@ module Aws::Deadline
       attr_accessor input_manifest_path: ::String
       attr_accessor input_manifest_hash: ::String
       SENSITIVE: []
+    end
+
+    class MembershipSummary
+      attr_accessor farm: Types::FarmMember
+      attr_accessor queue: Types::QueueMember
+      attr_accessor fleet: Types::FleetMember
+      attr_accessor job: Types::JobMember
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Farm < MembershipSummary
+      end
+      class Queue < MembershipSummary
+      end
+      class Fleet < MembershipSummary
+      end
+      class Job < MembershipSummary
+      end
+      class Unknown < MembershipSummary
+      end
     end
 
     class MemoryMiBRange

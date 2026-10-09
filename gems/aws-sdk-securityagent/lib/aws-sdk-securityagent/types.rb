@@ -2776,6 +2776,10 @@ module Aws::SecurityAgent
     #   The CI/CD pentesting configuration to apply to the pentest.
     #   @return [Types::CiCdConfiguration]
     #
+    # @!attribute [rw] test_scope
+    #   The category of application a pentest targets.
+    #   @return [Types::TestScope]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreatePentestInput AWS API Documentation
     #
     class CreatePentestInput < Struct.new(
@@ -2792,7 +2796,8 @@ module Aws::SecurityAgent
       :max_task_hours,
       :report_destination,
       :report_filters,
-      :cicd_configuration)
+      :cicd_configuration,
+      :test_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2848,6 +2853,10 @@ module Aws::SecurityAgent
     #   The CI/CD pentesting configuration applied to the pentest.
     #   @return [Types::CiCdConfiguration]
     #
+    # @!attribute [rw] test_scope
+    #   The category of application a pentest targets.
+    #   @return [Types::TestScope]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreatePentestOutput AWS API Documentation
     #
     class CreatePentestOutput < Struct.new(
@@ -2862,7 +2871,8 @@ module Aws::SecurityAgent
       :agent_space_id,
       :report_destination,
       :report_filters,
-      :cicd_configuration)
+      :cicd_configuration,
+      :test_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6638,6 +6648,10 @@ module Aws::SecurityAgent
     #   the pentest is set up to run from a CI/CD pipeline.
     #   @return [Types::CiCdConfiguration]
     #
+    # @!attribute [rw] test_scope
+    #   The category of application a pentest targets.
+    #   @return [Types::TestScope]
+    #
     # @!attribute [rw] created_at
     #   The date and time the pentest was created, in UTC format.
     #   @return [Time]
@@ -6665,6 +6679,7 @@ module Aws::SecurityAgent
       :report_destination,
       :report_filters,
       :cicd_configuration,
+      :test_scope,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -6814,6 +6829,10 @@ module Aws::SecurityAgent
     #   pipeline, scoped to the code changes in each pipeline run.
     #   @return [Types::CiCdConfiguration]
     #
+    # @!attribute [rw] test_scope
+    #   The category of application a pentest targets.
+    #   @return [Types::TestScope]
+    #
     # @!attribute [rw] created_at
     #   The date and time the pentest job was created, in UTC format.
     #   @return [Time]
@@ -6857,6 +6876,7 @@ module Aws::SecurityAgent
       :scope_result,
       :scope_changes,
       :cicd_configuration,
+      :test_scope,
       :created_at,
       :updated_at)
       SENSITIVE = [:trusted_ca_certificates]
@@ -8122,6 +8142,20 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # The category of application a pentest targets.
+    #
+    # @!attribute [rw] type
+    #   The category of application under test.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/TestScope AWS API Documentation
+    #
+    class TestScope < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a threat identified during threat modeling.
     #
     # @!attribute [rw] threat_id
@@ -9289,6 +9323,10 @@ module Aws::SecurityAgent
     #   The updated CI/CD pentesting configuration to apply to the pentest.
     #   @return [Types::CiCdConfiguration]
     #
+    # @!attribute [rw] test_scope
+    #   The category of application a pentest targets.
+    #   @return [Types::TestScope]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdatePentestInput AWS API Documentation
     #
     class UpdatePentestInput < Struct.new(
@@ -9306,7 +9344,8 @@ module Aws::SecurityAgent
       :max_task_hours,
       :report_destination,
       :report_filters,
-      :cicd_configuration)
+      :cicd_configuration,
+      :test_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9362,6 +9401,10 @@ module Aws::SecurityAgent
     #   The CI/CD pentesting configuration applied to the pentest.
     #   @return [Types::CiCdConfiguration]
     #
+    # @!attribute [rw] test_scope
+    #   The category of application a pentest targets.
+    #   @return [Types::TestScope]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdatePentestOutput AWS API Documentation
     #
     class UpdatePentestOutput < Struct.new(
@@ -9376,7 +9419,8 @@ module Aws::SecurityAgent
       :agent_space_id,
       :report_destination,
       :report_filters,
-      :cicd_configuration)
+      :cicd_configuration,
+      :test_scope)
       SENSITIVE = []
       include Aws::Structure
     end

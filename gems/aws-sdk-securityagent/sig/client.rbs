@@ -517,6 +517,7 @@ module Aws
         def report_destination: () -> Types::ReportDestination
         def report_filters: () -> Types::ReportFilters
         def cicd_configuration: () -> Types::CiCdConfiguration
+        def test_scope: () -> Types::TestScope
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_pentest-instance_method
       def create_pentest: (
@@ -547,6 +548,9 @@ module Aws
                             ?report_filters: Params::report_filters,
                             ?cicd_configuration: {
                               enabled: bool?
+                            },
+                            ?test_scope: {
+                              type: ("WEB_APP" | "GENERATIVE_AI_APP")
                             }
                           ) -> _CreatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePentestResponseSuccess
@@ -1585,6 +1589,7 @@ module Aws
         def report_destination: () -> Types::ReportDestination
         def report_filters: () -> Types::ReportFilters
         def cicd_configuration: () -> Types::CiCdConfiguration
+        def test_scope: () -> Types::TestScope
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_pentest-instance_method
       def update_pentest: (
@@ -1616,6 +1621,9 @@ module Aws
                             ?report_filters: Params::report_filters,
                             ?cicd_configuration: {
                               enabled: bool?
+                            },
+                            ?test_scope: {
+                              type: ("WEB_APP" | "GENERATIVE_AI_APP")
                             }
                           ) -> _UpdatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePentestResponseSuccess
