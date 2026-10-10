@@ -1,0 +1,39 @@
+module Aws
+  module S3
+    class TransferManager
+      def initialize: (?client: Client, ?executor: untyped, ?logger: untyped) -> void
+
+      attr_reader client: Client
+      attr_reader executor: untyped
+      attr_reader logger: untyped
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/TransferManager.html#download_directory-instance_method
+      def download_directory: (
+                                String destination,
+                                bucket: String,
+                                **untyped options
+                              ) -> { completed_downloads: Integer, failed_downloads: Integer, ?errors: Array[StandardError] }
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/TransferManager.html#download_file-instance_method
+      def download_file: (untyped destination, bucket: String, key: String, **untyped options) -> true
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/TransferManager.html#upload_directory-instance_method
+      def upload_directory: (
+                              String | Pathname source,
+                              bucket: String,
+                              **untyped options
+                            ) -> { completed_uploads: Integer, failed_uploads: Integer, ?errors: Array[StandardError] }
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/TransferManager.html#upload_file-instance_method
+      def upload_file: (
+                         untyped source,
+                         bucket: String,
+                         key: String,
+                         **untyped options
+                       ) ?{ (Client::_PutObjectResponseSuccess | Client::_CompleteMultipartUploadResponseSuccess response) -> void } -> true
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/TransferManager.html#upload_stream-instance_method
+      def upload_stream: (bucket: String, key: String, **untyped options) { (IO write_stream) -> void } -> true
+    end
+  end
+end
