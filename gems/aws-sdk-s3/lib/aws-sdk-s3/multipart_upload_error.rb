@@ -10,7 +10,7 @@ module Aws
         super(message)
       end
 
-      # @return [Array<StandardError>] The list of errors encountered when uploading or aborting the upload.
+      # @return [Array<Exception>] The list of errors encountered when uploading or aborting the upload.
       attr_reader :errors
     end
   end
