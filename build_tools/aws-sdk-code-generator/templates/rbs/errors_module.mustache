@@ -6,7 +6,7 @@ module Aws
       end
 
       {{#errors}}
-      class {{name}} < ::Aws::Errors::ServiceError
+      class {{name}} < ServiceError
         {{#members}}
         {{{signature}}}
         {{/members}}
