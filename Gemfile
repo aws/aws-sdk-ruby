@@ -72,7 +72,7 @@ end
 
 group :test do
   gem 'addressable'
-  gem 'cucumber'
+  gem 'cucumber', '11.1.1'
   gem 'multipart-post'
   gem 'opentelemetry-sdk'
   gem 'rspec'
