@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2026-10-12)
+------------------
+
+* Feature - AWS HealthOmics now supports private workflow runs using VPC resources shared across accounts via AWS RAM. A new optional vpcOwnerAccountId field in CreateConfiguration's VpcConfig allows customers to specify the account that owns the shared subnets and security groups.
+
 1.79.0 (2026-09-11)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1.0 (2026-10-12)
+------------------
+
+* Feature - Adds support for updating agentCoreEvaluationRoleArn in UpdateSpace API
+
 1.0.0 (2026-09-22)
 ------------------
 

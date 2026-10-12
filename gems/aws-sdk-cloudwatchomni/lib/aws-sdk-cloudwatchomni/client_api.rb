@@ -1157,7 +1157,6 @@ module Aws::CloudWatchOmni
     MetadataAttributeMap.value = Shapes::ShapeRef.new(shape: String)
 
     MetricMetadata.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    MetricMetadata.add_member(:namespace, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "namespace", metadata: {"deprecatedMessage" => "Use attributes['service.namespace']; retained for backward compatibility.", "deprecatedSince" => "2026-08-19"}))
     MetricMetadata.add_member(:preferred_stat, Shapes::ShapeRef.new(shape: String, location_name: "preferredStat"))
     MetricMetadata.add_member(:metric_type, Shapes::ShapeRef.new(shape: String, location_name: "metricType"))
     MetricMetadata.add_member(:attributes, Shapes::ShapeRef.new(shape: MetadataAttributeMap, location_name: "attributes"))
@@ -1579,6 +1578,7 @@ module Aws::CloudWatchOmni
 
     UpdateSpaceInput.add_member(:space_id, Shapes::ShapeRef.new(shape: SpaceId, required: true, location_name: "spaceId"))
     UpdateSpaceInput.add_member(:name, Shapes::ShapeRef.new(shape: UpdateSpaceInputNameString, location_name: "name"))
+    UpdateSpaceInput.add_member(:agent_core_evaluation_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "agentCoreEvaluationRoleArn"))
     UpdateSpaceInput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     UpdateSpaceInput.struct_class = Types::UpdateSpaceInput
 
@@ -1888,6 +1888,7 @@ module Aws::CloudWatchOmni
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_space, Seahorse::Model::Operation.new.tap do |o|
@@ -1900,6 +1901,7 @@ module Aws::CloudWatchOmni
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_view, Seahorse::Model::Operation.new.tap do |o|
@@ -2245,6 +2247,7 @@ module Aws::CloudWatchOmni
         o.output = Shapes::ShapeRef.new(shape: ListSpacesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(

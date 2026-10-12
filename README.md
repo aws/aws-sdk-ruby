@@ -734,6 +734,7 @@ RubyGems.org page under "LINKS" section.
 | Route 53 Profiles                                     | Aws::Route53Profiles                     | aws-sdk-route53profiles                     | 2018-05-10  |
 | Route53 Recovery Cluster                              | Aws::Route53RecoveryCluster              | aws-sdk-route53recoverycluster              | 2019-12-02  |
 | Runtime for Amazon Bedrock Data Automation            | Aws::BedrockDataAutomationRuntime        | aws-sdk-bedrockdataautomationruntime        | 2024-06-13  |
+| SageMaker Training Session Runtime                    | Aws::SageMakerTrainingSessionRuntime     | aws-sdk-sagemakertrainingsessionruntime     | 2025-02-10  |
 | Sagemaker Job Runtime Service                         | Aws::SagemakerJobRuntime                 | aws-sdk-sagemakerjobruntime                 | 2026-02-01  |
 | Schemas                                               | Aws::Schemas                             | aws-sdk-schemas                             | 2019-12-02  |
 | Security Incident Response                            | Aws::SecurityIR                          | aws-sdk-securityir                          | 2018-05-10  |

@@ -2581,6 +2581,7 @@ module Aws::Omics
     class VpcConfig
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_owner_account_id: ::String
       SENSITIVE: []
     end
 
@@ -2588,6 +2589,7 @@ module Aws::Omics
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor vpc_id: ::String
+      attr_accessor vpc_owner_account_id: ::String
       SENSITIVE: []
     end
 

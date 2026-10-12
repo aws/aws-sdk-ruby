@@ -3806,6 +3806,10 @@ module Aws::BedrockAgentCoreControl
     #               },
     #             ],
     #           },
+    #           record_expiry_specification: {
+    #             record_expiry_duration_days: 1,
+    #             action: "REMOVE", # accepts REMOVE
+    #           },
     #         },
     #         summary_memory_strategy: {
     #           name: "Name", # required
@@ -3840,6 +3844,10 @@ module Aws::BedrockAgentCoreControl
     #               },
     #             ],
     #           },
+    #           record_expiry_specification: {
+    #             record_expiry_duration_days: 1,
+    #             action: "REMOVE", # accepts REMOVE
+    #           },
     #         },
     #         user_preference_memory_strategy: {
     #           name: "Name", # required
@@ -3873,6 +3881,10 @@ module Aws::BedrockAgentCoreControl
     #                 },
     #               },
     #             ],
+    #           },
+    #           record_expiry_specification: {
+    #             record_expiry_duration_days: 1,
+    #             action: "REMOVE", # accepts REMOVE
     #           },
     #         },
     #         custom_memory_strategy: {
@@ -4000,6 +4012,10 @@ module Aws::BedrockAgentCoreControl
     #               },
     #             ],
     #           },
+    #           record_expiry_specification: {
+    #             record_expiry_duration_days: 1,
+    #             action: "REMOVE", # accepts REMOVE
+    #           },
     #         },
     #         episodic_memory_strategy: {
     #           name: "Name", # required
@@ -4065,6 +4081,10 @@ module Aws::BedrockAgentCoreControl
     #                 },
     #               },
     #             ],
+    #           },
+    #           record_expiry_specification: {
+    #             record_expiry_duration_days: 1,
+    #             action: "REMOVE", # accepts REMOVE
     #           },
     #         },
     #       },
@@ -4200,6 +4220,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].memory_record_schema.metadata_schema[0].extraction_config.llm_extraction_config.validation.string_list_validation.max_items #=> Integer
     #   resp.memory.strategies[0].memory_record_schema.metadata_schema[0].extraction_config.llm_extraction_config.validation.number_validation.min_value #=> Float
     #   resp.memory.strategies[0].memory_record_schema.metadata_schema[0].extraction_config.llm_extraction_config.validation.number_validation.max_value #=> Float
+    #   resp.memory.strategies[0].record_expiry_duration_days #=> Integer
     #   resp.memory.indexed_keys #=> Array
     #   resp.memory.indexed_keys[0].key #=> String
     #   resp.memory.indexed_keys[0].type #=> String, one of "STRING", "STRINGLIST", "NUMBER"
@@ -5193,10 +5214,10 @@ module Aws::BedrockAgentCoreControl
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure the idempotency of the
-    #   request. The AWS SDK automatically generates this token, so you don't
-    #   need to provide it in most cases. If you retry a request with the same
-    #   client token, the service returns the same response without creating a
-    #   duplicate policy.
+    #   request. The Amazon Web Services SDK automatically generates this
+    #   token, so you don't need to provide it in most cases. If you retry a
+    #   request with the same client token, the service returns the same
+    #   response without creating a duplicate policy.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -6587,7 +6608,7 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :client_token
     #   A client token is used for keeping track of idempotent requests. It
     #   can contain a session id which can be around 250 chars, combined with
-    #   a unique AWS identifier.
+    #   a unique Amazon Web Services identifier.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -8659,6 +8680,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].memory_record_schema.metadata_schema[0].extraction_config.llm_extraction_config.validation.string_list_validation.max_items #=> Integer
     #   resp.memory.strategies[0].memory_record_schema.metadata_schema[0].extraction_config.llm_extraction_config.validation.number_validation.min_value #=> Float
     #   resp.memory.strategies[0].memory_record_schema.metadata_schema[0].extraction_config.llm_extraction_config.validation.number_validation.max_value #=> Float
+    #   resp.memory.strategies[0].record_expiry_duration_days #=> Integer
     #   resp.memory.indexed_keys #=> Array
     #   resp.memory.indexed_keys[0].key #=> String
     #   resp.memory.indexed_keys[0].type #=> String, one of "STRING", "STRINGLIST", "NUMBER"
@@ -12084,10 +12106,10 @@ module Aws::BedrockAgentCoreControl
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure the idempotency of the
-    #   request. The AWS SDK automatically generates this token, so you don't
-    #   need to provide it in most cases. If you retry a request with the same
-    #   client token, the service returns the same response without starting a
-    #   duplicate generation.
+    #   request. The Amazon Web Services SDK automatically generates this
+    #   token, so you don't need to provide it in most cases. If you retry a
+    #   request with the same client token, the service returns the same
+    #   response without starting a duplicate generation.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -14963,7 +14985,7 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :client_token
     #   A client token is used for keeping track of idempotent requests. It
     #   can contain a session id which can be around 250 chars, combined with
-    #   a unique AWS identifier.
+    #   a unique Amazon Web Services identifier.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -15046,6 +15068,10 @@ module Aws::BedrockAgentCoreControl
     #                 },
     #               ],
     #             },
+    #             record_expiry_specification: {
+    #               record_expiry_duration_days: 1,
+    #               action: "REMOVE", # accepts REMOVE
+    #             },
     #           },
     #           summary_memory_strategy: {
     #             name: "Name", # required
@@ -15080,6 +15106,10 @@ module Aws::BedrockAgentCoreControl
     #                 },
     #               ],
     #             },
+    #             record_expiry_specification: {
+    #               record_expiry_duration_days: 1,
+    #               action: "REMOVE", # accepts REMOVE
+    #             },
     #           },
     #           user_preference_memory_strategy: {
     #             name: "Name", # required
@@ -15113,6 +15143,10 @@ module Aws::BedrockAgentCoreControl
     #                   },
     #                 },
     #               ],
+    #             },
+    #             record_expiry_specification: {
+    #               record_expiry_duration_days: 1,
+    #               action: "REMOVE", # accepts REMOVE
     #             },
     #           },
     #           custom_memory_strategy: {
@@ -15240,6 +15274,10 @@ module Aws::BedrockAgentCoreControl
     #                 },
     #               ],
     #             },
+    #             record_expiry_specification: {
+    #               record_expiry_duration_days: 1,
+    #               action: "REMOVE", # accepts REMOVE
+    #             },
     #           },
     #           episodic_memory_strategy: {
     #             name: "Name", # required
@@ -15305,6 +15343,10 @@ module Aws::BedrockAgentCoreControl
     #                   },
     #                 },
     #               ],
+    #             },
+    #             record_expiry_specification: {
+    #               record_expiry_duration_days: 1,
+    #               action: "REMOVE", # accepts REMOVE
     #             },
     #           },
     #         },
@@ -15471,6 +15513,10 @@ module Aws::BedrockAgentCoreControl
     #               },
     #             ],
     #           },
+    #           record_expiry_specification: {
+    #             record_expiry_duration_days: 1,
+    #             action: "REMOVE", # accepts REMOVE
+    #           },
     #         },
     #       ],
     #       delete_memory_strategies: [
@@ -15607,6 +15653,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.memory.strategies[0].memory_record_schema.metadata_schema[0].extraction_config.llm_extraction_config.validation.string_list_validation.max_items #=> Integer
     #   resp.memory.strategies[0].memory_record_schema.metadata_schema[0].extraction_config.llm_extraction_config.validation.number_validation.min_value #=> Float
     #   resp.memory.strategies[0].memory_record_schema.metadata_schema[0].extraction_config.llm_extraction_config.validation.number_validation.max_value #=> Float
+    #   resp.memory.strategies[0].record_expiry_duration_days #=> Integer
     #   resp.memory.indexed_keys #=> Array
     #   resp.memory.indexed_keys[0].key #=> String
     #   resp.memory.indexed_keys[0].type #=> String, one of "STRING", "STRINGLIST", "NUMBER"
@@ -17097,7 +17144,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

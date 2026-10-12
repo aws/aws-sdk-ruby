@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2026-10-12)
+------------------
+
+* Feature - Lambda Web Functions GA launch. Lambda Web Functions enable customers to run web applications and API backends
+
 1.2.0 (2026-10-06)
 ------------------
 

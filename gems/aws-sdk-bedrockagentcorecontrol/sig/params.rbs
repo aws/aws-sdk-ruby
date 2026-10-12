@@ -787,7 +787,11 @@ module Aws
       description: ::String?,
       namespaces: Array[::String]?,
       namespace_templates: Array[::String]?,
-      memory_record_schema: Params::memory_record_schema?
+      memory_record_schema: Params::memory_record_schema?,
+      record_expiry_specification: {
+        record_expiry_duration_days: ::Integer?,
+        action: ("REMOVE")?
+      }?
     }
 
       type summary_memory_strategy_input = {
@@ -795,7 +799,11 @@ module Aws
       description: ::String?,
       namespaces: Array[::String]?,
       namespace_templates: Array[::String]?,
-      memory_record_schema: Params::memory_record_schema?
+      memory_record_schema: Params::memory_record_schema?,
+      record_expiry_specification: {
+        record_expiry_duration_days: ::Integer?,
+        action: ("REMOVE")?
+      }?
     }
 
       type user_preference_memory_strategy_input = {
@@ -803,7 +811,11 @@ module Aws
       description: ::String?,
       namespaces: Array[::String]?,
       namespace_templates: Array[::String]?,
-      memory_record_schema: Params::memory_record_schema?
+      memory_record_schema: Params::memory_record_schema?,
+      record_expiry_specification: {
+        record_expiry_duration_days: ::Integer?,
+        action: ("REMOVE")?
+      }?
     }
 
       type semantic_override_configuration_input = {
@@ -878,7 +890,11 @@ module Aws
       namespaces: Array[::String]?,
       namespace_templates: Array[::String]?,
       configuration: Params::custom_configuration_input?,
-      memory_record_schema: Params::memory_record_schema?
+      memory_record_schema: Params::memory_record_schema?,
+      record_expiry_specification: {
+        record_expiry_duration_days: ::Integer?,
+        action: ("REMOVE")?
+      }?
     }
 
       type episodic_reflection_configuration_input = {
@@ -893,7 +909,11 @@ module Aws
       namespaces: Array[::String]?,
       namespace_templates: Array[::String]?,
       reflection_configuration: Params::episodic_reflection_configuration_input?,
-      memory_record_schema: Params::memory_record_schema?
+      memory_record_schema: Params::memory_record_schema?,
+      record_expiry_specification: {
+        record_expiry_duration_days: ::Integer?,
+        action: ("REMOVE")?
+      }?
     }
 
       type memory_strategy_input = {

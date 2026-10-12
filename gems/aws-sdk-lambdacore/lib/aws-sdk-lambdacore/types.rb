@@ -65,9 +65,18 @@ module Aws::LambdaCore
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for a network connector, assigned by the
-    #   service at creation time
+    #   The unique identifier of the network connector.
     #   @return [String]
+    #
+    # @!attribute [rw] version_arn
+    #   The qualified ARN of the connector version created by this request,
+    #   including the immutable version suffix.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number assigned to the connector. A newly created
+    #   connector starts at version 1.
+    #   @return [Integer]
     #
     # @!attribute [rw] configuration
     #   The network configuration of the connector, including VPC subnets
@@ -89,6 +98,8 @@ module Aws::LambdaCore
       :arn,
       :name,
       :id,
+      :version_arn,
+      :version,
       :configuration,
       :operator_role,
       :state)
@@ -97,8 +108,12 @@ module Aws::LambdaCore
     end
 
     # @!attribute [rw] identifier
-    #   A flexible identifier that accepts a network connector ID, name, or
-    #   ARN
+    #   The identifier of the network connector to delete. Provide an
+    #   unqualified ARN (or an ID or name) to delete the entire connector
+    #   and all of its versions, or a version-qualified ARN — one that
+    #   includes the immutable version suffix — to delete a specific
+    #   historical version. You can't delete the latest version with a
+    #   version-qualified identifier; delete the connector instead.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/DeleteNetworkConnectorRequest AWS API Documentation
@@ -118,9 +133,18 @@ module Aws::LambdaCore
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for a network connector, assigned by the
-    #   service at creation time
+    #   The unique identifier of the network connector.
     #   @return [String]
+    #
+    # @!attribute [rw] version_arn
+    #   The qualified ARN of the connector version affected by this request,
+    #   including the immutable version suffix.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the connector version affected by this
+    #   request.
+    #   @return [Integer]
     #
     # @!attribute [rw] configuration
     #   The network configuration of the connector, including VPC subnets
@@ -143,6 +167,8 @@ module Aws::LambdaCore
       :arn,
       :name,
       :id,
+      :version_arn,
+      :version,
       :configuration,
       :operator_role,
       :state)
@@ -151,8 +177,11 @@ module Aws::LambdaCore
     end
 
     # @!attribute [rw] identifier
-    #   A flexible identifier that accepts a network connector ID, name, or
-    #   ARN
+    #   The identifier of the network connector to retrieve. You can specify
+    #   the connector ID, name, or ARN. Provide an unqualified ARN (or an ID
+    #   or name) to retrieve the connector's latest version, or a
+    #   version-qualified ARN — one that includes the immutable version
+    #   suffix — to retrieve a specific historical version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/GetNetworkConnectorRequest AWS API Documentation
@@ -172,13 +201,39 @@ module Aws::LambdaCore
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for a network connector, assigned by the
-    #   service at creation time
+    #   The unique identifier of the network connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_arn
+    #   The qualified ARN of the specific connector version returned by this
+    #   request, including the immutable version suffix. This is populated
+    #   only when you supply a version-qualified identifier. On a standard
+    #   (unqualified) request, this field is not populated; the connector's
+    #   latest active version is returned instead through the
+    #   `LatestVersionArn` and `LatestVersion` fields described below.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version number of the connector configuration, incremented on
-    #   each update.
+    #   The version number of the network connector. On a standard
+    #   (unqualified) request, this is the connector's current version;
+    #   each configuration update increments it. When you supply a
+    #   version-qualified identifier, this is the specific version you
+    #   requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_version_arn
+    #   The qualified ARN of the connector's latest active version,
+    #   including the immutable version suffix. This field is returned only
+    #   on a standard (unqualified) request; when you supply a
+    #   version-qualified identifier it is not returned, and `VersionArn` is
+    #   returned instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The version number of the connector's latest active version. Each
+    #   configuration update creates a new immutable version; this attribute
+    #   exposes the most recent one. This field is returned only on a
+    #   standard (unqualified) request.
     #   @return [Integer]
     #
     # @!attribute [rw] configuration
@@ -230,7 +285,10 @@ module Aws::LambdaCore
       :arn,
       :name,
       :id,
+      :version_arn,
       :version,
+      :latest_version_arn,
+      :latest_version,
       :configuration,
       :operator_role,
       :state,
@@ -259,6 +317,58 @@ module Aws::LambdaCore
     class InvalidParameterValueException < Struct.new(
       :type,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The identifier of the network connector whose versions you want to
+    #   list. You can specify the connector ID, name, or full ARN. Specify
+    #   an unqualified identifier — this operation lists all versions of the
+    #   connector, not a specific version.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Optional filter to return only versions in the specified state (for
+    #   example, `ACTIVE` or `FAILED`).
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token from a previous `ListNetworkConnectorVersions`
+    #   response. Use this value to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of versions to return per page. Valid range: 1 to
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/ListNetworkConnectorVersionsRequest AWS API Documentation
+    #
+    class ListNetworkConnectorVersionsRequest < Struct.new(
+      :identifier,
+      :state,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_connector_versions
+    #   A list of connector version summaries for the current page of
+    #   results.
+    #   @return [Array<Types::NetworkConnectorVersionSummary>]
+    #
+    # @!attribute [rw] next_marker
+    #   The pagination token to include in a subsequent request to retrieve
+    #   the next page. This value is null when there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/ListNetworkConnectorVersionsResponse AWS API Documentation
+    #
+    class ListNetworkConnectorVersionsResponse < Struct.new(
+      :network_connector_versions,
+      :next_marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -334,16 +444,18 @@ module Aws::LambdaCore
       class Unknown < NetworkConnectorConfiguration; end
     end
 
-    # The account has reached the maximum number of network connectors
-    # allowed. Delete unused connectors or request a limit increase through
-    # Service Quotas.
+    # The request would exceed a network connector limit. For
+    # `CreateNetworkConnector`, the account has reached the maximum number
+    # of network connectors allowed. For `UpdateNetworkConnector`, the
+    # connector has reached the maximum number of versions allowed.
     #
     # @!attribute [rw] type
     #   The exception type.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   A human-readable description of the error.
+    #   The account has reached the maximum number of network connectors
+    #   allowed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/NetworkConnectorLimitExceededException AWS API Documentation
@@ -369,8 +481,7 @@ module Aws::LambdaCore
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for a network connector, assigned by the
-    #   service at creation time
+    #   The unique identifier of the network connector.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -385,6 +496,17 @@ module Aws::LambdaCore
     #   The date and time when the connector was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] latest_version_arn
+    #   The qualified ARN of the connector's latest version, including the
+    #   immutable version suffix.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The version number of the connector's latest version. Each
+    #   configuration update creates a new immutable version; this attribute
+    #   exposes the most recent one.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/NetworkConnectorSummary AWS API Documentation
     #
     class NetworkConnectorSummary < Struct.new(
@@ -393,6 +515,70 @@ module Aws::LambdaCore
       :id,
       :type,
       :state,
+      :last_modified,
+      :latest_version_arn,
+      :latest_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a single version of a network connector
+    # returned by `ListNetworkConnectorVersions`. Each configuration update
+    # creates a new immutable version; this shape describes one such
+    # version. To retrieve the full configuration of a version, call
+    # `GetNetworkConnector` with a version-qualified identifier.
+    #
+    # @!attribute [rw] arn
+    #   The unqualified ARN of the network connector that this version
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_arn
+    #   The qualified ARN of this connector version, including the immutable
+    #   version suffix.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the network connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the network connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of this connector version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The current state of this connector version.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   A human-readable explanation of the current state, populated when
+    #   the state is `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason_code
+    #   A machine-readable code indicating the reason for the current state.
+    #   Use this for programmatic error handling.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   The date and time when this connector version was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/NetworkConnectorVersionSummary AWS API Documentation
+    #
+    class NetworkConnectorVersionSummary < Struct.new(
+      :arn,
+      :version_arn,
+      :name,
+      :id,
+      :version,
+      :state,
+      :state_reason,
+      :state_reason_code,
       :last_modified)
       SENSITIVE = []
       include Aws::Structure
@@ -409,9 +595,8 @@ module Aws::LambdaCore
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   The IDs of the VPC security groups to attach to the ENIs. Specify 0
-    #   to 5 security groups. All security groups must be in the same VPC as
-    #   the subnets.
+    #   The IDs of the VPC security groups to attach to the ENIs. All
+    #   security groups must be in the same VPC as the subnets.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_protocol
@@ -421,7 +606,8 @@ module Aws::LambdaCore
     #
     # @!attribute [rw] associated_compute_resource_types
     #   The types of Lambda compute resources that can use this connector.
-    #   Currently, only `MicroVm` is supported.
+    #   Valid values are `MicroVm` and `WebFunction`. Specify exactly one
+    #   value.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/NetworkConnectorVpcEgressConfiguration AWS API Documentation
@@ -523,8 +709,8 @@ module Aws::LambdaCore
     end
 
     # @!attribute [rw] identifier
-    #   A flexible identifier that accepts a network connector ID, name, or
-    #   ARN
+    #   The identifier of the network connector to update. You can specify
+    #   the connector ID, name, or full ARN.
     #   @return [String]
     #
     # @!attribute [rw] configuration
@@ -567,9 +753,19 @@ module Aws::LambdaCore
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for a network connector, assigned by the
-    #   service at creation time
+    #   The unique identifier of the network connector.
     #   @return [String]
+    #
+    # @!attribute [rw] version_arn
+    #   The qualified ARN of the connector version resulting from this
+    #   update, including the immutable version suffix.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the connector version resulting from this
+    #   update. A configuration change creates a new, incremented version; a
+    #   no-op update returns the current version number.
+    #   @return [Integer]
     #
     # @!attribute [rw] operator_role
     #   The ARN of the IAM role that Lambda uses to manage the underlying
@@ -604,6 +800,8 @@ module Aws::LambdaCore
       :arn,
       :name,
       :id,
+      :version_arn,
+      :version,
       :operator_role,
       :configuration,
       :state,

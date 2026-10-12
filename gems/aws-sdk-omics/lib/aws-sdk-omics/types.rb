@@ -9662,11 +9662,17 @@ module Aws::Omics
     #   List of subnet IDs. Maximum of 16 subnets allowed.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] vpc_owner_account_id
+    #   The Amazon Web Services account ID of the cross-account VPC owner
+    #   for RAM-shared VPC configurations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/VpcConfig AWS API Documentation
     #
     class VpcConfig < Struct.new(
       :security_group_ids,
-      :subnet_ids)
+      :subnet_ids,
+      :vpc_owner_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9685,12 +9691,18 @@ module Aws::Omics
     #   VPC ID computed from the provided subnet IDs.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_owner_account_id
+    #   The Amazon Web Services account ID of the cross-account VPC owner
+    #   for RAM-shared VPC configurations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/VpcConfigResponse AWS API Documentation
     #
     class VpcConfigResponse < Struct.new(
       :security_group_ids,
       :subnet_ids,
-      :vpc_id)
+      :vpc_id,
+      :vpc_owner_account_id)
       SENSITIVE = []
       include Aws::Structure
     end

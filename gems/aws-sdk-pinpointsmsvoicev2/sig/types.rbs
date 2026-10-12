@@ -1370,6 +1370,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor pool_id: ::String
       attr_accessor registration_id: ::String
       attr_accessor messaging_limits: Types::MessagingLimits
+      attr_accessor pricing_tier: ::String
       attr_accessor created_timestamp: ::Time
       SENSITIVE: []
     end
@@ -2169,6 +2170,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registered: bool
       attr_accessor registration_id: ::String
       attr_accessor messaging_limits: Types::MessagingLimits
+      attr_accessor pricing_tier: ::String
       SENSITIVE: []
     end
 

@@ -621,6 +621,7 @@ module Aws
             'SageMakerMetrics' => 'metrics.sagemaker',
             'SageMakerRuntime' => 'runtime.sagemaker',
             'SageMakerRuntimeHTTP2' => 'runtime.sagemaker',
+            'SageMakerTrainingSessionRuntime' => 'training-session-runtime.sagemaker',
             'SagemakerEdgeManager' => 'edge.sagemaker',
             'SagemakerJobRuntime' => 'job-runtime.sagemaker',
             'SavingsPlans' => 'savingsplans',

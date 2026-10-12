@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.198.0 (2026-10-12)
+------------------
+
+* Feature - Doc updates to reposition Lambda Functions as Lambda Event Functions
+
 1.197.0 (2026-10-08)
 ------------------
 

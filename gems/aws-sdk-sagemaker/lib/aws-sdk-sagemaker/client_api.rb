@@ -281,6 +281,7 @@ module Aws::SageMaker
     AwsManagedHumanLoopRequestSource = Shapes::StringShape.new(name: 'AwsManagedHumanLoopRequestSource')
     BacktestResultsLocation = Shapes::StringShape.new(name: 'BacktestResultsLocation')
     BaseModel = Shapes::StructureShape.new(name: 'BaseModel')
+    BaseModelArn = Shapes::StringShape.new(name: 'BaseModelArn')
     BaseModelName = Shapes::StringShape.new(name: 'BaseModelName')
     BatchAddClusterNodesError = Shapes::StructureShape.new(name: 'BatchAddClusterNodesError')
     BatchAddClusterNodesErrorCode = Shapes::StringShape.new(name: 'BatchAddClusterNodesErrorCode')
@@ -330,6 +331,7 @@ module Aws::SageMaker
     Bias = Shapes::StructureShape.new(name: 'Bias')
     BillableTimeInSeconds = Shapes::IntegerShape.new(name: 'BillableTimeInSeconds')
     BillableTokenCount = Shapes::IntegerShape.new(name: 'BillableTokenCount')
+    BillableTokenUsage = Shapes::StructureShape.new(name: 'BillableTokenUsage')
     BlockedReason = Shapes::StringShape.new(name: 'BlockedReason')
     BlueGreenUpdatePolicy = Shapes::StructureShape.new(name: 'BlueGreenUpdatePolicy')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -752,6 +754,8 @@ module Aws::SageMaker
     CreateTrainingJobResponse = Shapes::StructureShape.new(name: 'CreateTrainingJobResponse')
     CreateTrainingPlanRequest = Shapes::StructureShape.new(name: 'CreateTrainingPlanRequest')
     CreateTrainingPlanResponse = Shapes::StructureShape.new(name: 'CreateTrainingPlanResponse')
+    CreateTrainingSessionRequest = Shapes::StructureShape.new(name: 'CreateTrainingSessionRequest')
+    CreateTrainingSessionResponse = Shapes::StructureShape.new(name: 'CreateTrainingSessionResponse')
     CreateTransformJobRequest = Shapes::StructureShape.new(name: 'CreateTransformJobRequest')
     CreateTransformJobResponse = Shapes::StructureShape.new(name: 'CreateTransformJobResponse')
     CreateTrialComponentRequest = Shapes::StructureShape.new(name: 'CreateTrialComponentRequest')
@@ -780,6 +784,7 @@ module Aws::SageMaker
     CustomImageContainerEnvironmentVariables = Shapes::MapShape.new(name: 'CustomImageContainerEnvironmentVariables')
     CustomImages = Shapes::ListShape.new(name: 'CustomImages')
     CustomPosixUserConfig = Shapes::StructureShape.new(name: 'CustomPosixUserConfig')
+    CustomerKmsKeyArn = Shapes::StringShape.new(name: 'CustomerKmsKeyArn')
     CustomerMetadataKey = Shapes::StringShape.new(name: 'CustomerMetadataKey')
     CustomerMetadataKeyList = Shapes::ListShape.new(name: 'CustomerMetadataKeyList')
     CustomerMetadataMap = Shapes::MapShape.new(name: 'CustomerMetadataMap')
@@ -894,6 +899,8 @@ module Aws::SageMaker
     DeleteTagsInput = Shapes::StructureShape.new(name: 'DeleteTagsInput')
     DeleteTagsOutput = Shapes::StructureShape.new(name: 'DeleteTagsOutput')
     DeleteTrainingJobRequest = Shapes::StructureShape.new(name: 'DeleteTrainingJobRequest')
+    DeleteTrainingSessionRequest = Shapes::StructureShape.new(name: 'DeleteTrainingSessionRequest')
+    DeleteTrainingSessionResponse = Shapes::StructureShape.new(name: 'DeleteTrainingSessionResponse')
     DeleteTrialComponentRequest = Shapes::StructureShape.new(name: 'DeleteTrialComponentRequest')
     DeleteTrialComponentResponse = Shapes::StructureShape.new(name: 'DeleteTrialComponentResponse')
     DeleteTrialRequest = Shapes::StructureShape.new(name: 'DeleteTrialRequest')
@@ -1057,6 +1064,8 @@ module Aws::SageMaker
     DescribeTrainingPlanExtensionHistoryResponse = Shapes::StructureShape.new(name: 'DescribeTrainingPlanExtensionHistoryResponse')
     DescribeTrainingPlanRequest = Shapes::StructureShape.new(name: 'DescribeTrainingPlanRequest')
     DescribeTrainingPlanResponse = Shapes::StructureShape.new(name: 'DescribeTrainingPlanResponse')
+    DescribeTrainingSessionRequest = Shapes::StructureShape.new(name: 'DescribeTrainingSessionRequest')
+    DescribeTrainingSessionResponse = Shapes::StructureShape.new(name: 'DescribeTrainingSessionResponse')
     DescribeTransformJobRequest = Shapes::StructureShape.new(name: 'DescribeTransformJobRequest')
     DescribeTransformJobResponse = Shapes::StructureShape.new(name: 'DescribeTransformJobResponse')
     DescribeTrialComponentRequest = Shapes::StructureShape.new(name: 'DescribeTrialComponentRequest')
@@ -1577,6 +1586,9 @@ module Aws::SageMaker
     IotRoleAlias = Shapes::StringShape.new(name: 'IotRoleAlias')
     IsTrackingServerActive = Shapes::StringShape.new(name: 'IsTrackingServerActive')
     ItemIdentifierAttributeName = Shapes::StringShape.new(name: 'ItemIdentifierAttributeName')
+    JavaBoolean = Shapes::BooleanShape.new(name: 'JavaBoolean')
+    JavaInteger = Shapes::IntegerShape.new(name: 'JavaInteger')
+    JavaLong = Shapes::IntegerShape.new(name: 'JavaLong')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobArn = Shapes::StringShape.new(name: 'JobArn')
     JobCategory = Shapes::StringShape.new(name: 'JobCategory')
@@ -1829,6 +1841,8 @@ module Aws::SageMaker
     ListTrainingJobsResponse = Shapes::StructureShape.new(name: 'ListTrainingJobsResponse')
     ListTrainingPlansRequest = Shapes::StructureShape.new(name: 'ListTrainingPlansRequest')
     ListTrainingPlansResponse = Shapes::StructureShape.new(name: 'ListTrainingPlansResponse')
+    ListTrainingSessionsRequest = Shapes::StructureShape.new(name: 'ListTrainingSessionsRequest')
+    ListTrainingSessionsResponse = Shapes::StructureShape.new(name: 'ListTrainingSessionsResponse')
     ListTransformJobsRequest = Shapes::StructureShape.new(name: 'ListTransformJobsRequest')
     ListTransformJobsResponse = Shapes::StructureShape.new(name: 'ListTransformJobsResponse')
     ListTrialComponentKey256 = Shapes::ListShape.new(name: 'ListTrialComponentKey256')
@@ -1849,6 +1863,8 @@ module Aws::SageMaker
     LocalPath = Shapes::StringShape.new(name: 'LocalPath')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongS3Uri = Shapes::StringShape.new(name: 'LongS3Uri')
+    LoraAlpha = Shapes::IntegerShape.new(name: 'LoraAlpha')
+    LoraConfig = Shapes::StructureShape.new(name: 'LoraConfig')
     MIGProfileType = Shapes::StringShape.new(name: 'MIGProfileType')
     MLFramework = Shapes::StringShape.new(name: 'MLFramework')
     MLflowArn = Shapes::StringShape.new(name: 'MLflowArn')
@@ -2198,6 +2214,7 @@ module Aws::SageMaker
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
     OutputParameter = Shapes::StructureShape.new(name: 'OutputParameter')
     OutputParameterList = Shapes::ListShape.new(name: 'OutputParameterList')
+    OutputS3Path = Shapes::StringShape.new(name: 'OutputS3Path')
     OwnershipSettings = Shapes::StructureShape.new(name: 'OwnershipSettings')
     OwnershipSettingsSummary = Shapes::StructureShape.new(name: 'OwnershipSettingsSummary')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
@@ -2384,6 +2401,7 @@ module Aws::SageMaker
     RStudioServerProDomainSettingsForUpdate = Shapes::StructureShape.new(name: 'RStudioServerProDomainSettingsForUpdate')
     RStudioServerProUserGroup = Shapes::StringShape.new(name: 'RStudioServerProUserGroup')
     RandomSeed = Shapes::IntegerShape.new(name: 'RandomSeed')
+    Rank = Shapes::IntegerShape.new(name: 'Rank')
     RealTimeInferenceConfig = Shapes::StructureShape.new(name: 'RealTimeInferenceConfig')
     RealTimeInferenceRecommendation = Shapes::StructureShape.new(name: 'RealTimeInferenceRecommendation')
     RealTimeInferenceRecommendations = Shapes::ListShape.new(name: 'RealTimeInferenceRecommendations')
@@ -2675,6 +2693,8 @@ module Aws::SageMaker
     StopPipelineExecutionResponse = Shapes::StructureShape.new(name: 'StopPipelineExecutionResponse')
     StopProcessingJobRequest = Shapes::StructureShape.new(name: 'StopProcessingJobRequest')
     StopTrainingJobRequest = Shapes::StructureShape.new(name: 'StopTrainingJobRequest')
+    StopTrainingSessionRequest = Shapes::StructureShape.new(name: 'StopTrainingSessionRequest')
+    StopTrainingSessionResponse = Shapes::StructureShape.new(name: 'StopTrainingSessionResponse')
     StopTransformJobRequest = Shapes::StructureShape.new(name: 'StopTransformJobRequest')
     StoppingCondition = Shapes::StructureShape.new(name: 'StoppingCondition')
     StorageType = Shapes::StringShape.new(name: 'StorageType')
@@ -2833,6 +2853,15 @@ module Aws::SageMaker
     TrainingRepositoryAccessMode = Shapes::StringShape.new(name: 'TrainingRepositoryAccessMode')
     TrainingRepositoryAuthConfig = Shapes::StructureShape.new(name: 'TrainingRepositoryAuthConfig')
     TrainingRepositoryCredentialsProviderArn = Shapes::StringShape.new(name: 'TrainingRepositoryCredentialsProviderArn')
+    TrainingSessionArn = Shapes::StringShape.new(name: 'TrainingSessionArn')
+    TrainingSessionDetail = Shapes::StructureShape.new(name: 'TrainingSessionDetail')
+    TrainingSessionModelConfig = Shapes::StructureShape.new(name: 'TrainingSessionModelConfig')
+    TrainingSessionName = Shapes::StringShape.new(name: 'TrainingSessionName')
+    TrainingSessionOutputConfig = Shapes::StructureShape.new(name: 'TrainingSessionOutputConfig')
+    TrainingSessionS3Location = Shapes::StructureShape.new(name: 'TrainingSessionS3Location')
+    TrainingSessionStatus = Shapes::StringShape.new(name: 'TrainingSessionStatus')
+    TrainingSessionSummaries = Shapes::ListShape.new(name: 'TrainingSessionSummaries')
+    TrainingSessionSummary = Shapes::StructureShape.new(name: 'TrainingSessionSummary')
     TrainingSpecification = Shapes::StructureShape.new(name: 'TrainingSpecification')
     TrainingStepIndex = Shapes::IntegerShape.new(name: 'TrainingStepIndex')
     TrainingTimeInSeconds = Shapes::IntegerShape.new(name: 'TrainingTimeInSeconds')
@@ -3904,6 +3933,11 @@ module Aws::SageMaker
     Bias.add_member(:pre_training_report, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "PreTrainingReport"))
     Bias.add_member(:post_training_report, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "PostTrainingReport"))
     Bias.struct_class = Types::Bias
+
+    BillableTokenUsage.add_member(:prefill_token_count, Shapes::ShapeRef.new(shape: JavaLong, location_name: "PrefillTokenCount"))
+    BillableTokenUsage.add_member(:sample_token_count, Shapes::ShapeRef.new(shape: JavaLong, location_name: "SampleTokenCount"))
+    BillableTokenUsage.add_member(:training_token_count, Shapes::ShapeRef.new(shape: JavaLong, location_name: "TrainingTokenCount"))
+    BillableTokenUsage.struct_class = Types::BillableTokenUsage
 
     BlueGreenUpdatePolicy.add_member(:traffic_routing_configuration, Shapes::ShapeRef.new(shape: TrafficRoutingConfig, required: true, location_name: "TrafficRoutingConfiguration"))
     BlueGreenUpdatePolicy.add_member(:termination_wait_in_seconds, Shapes::ShapeRef.new(shape: TerminationWaitInSeconds, location_name: "TerminationWaitInSeconds"))
@@ -5474,6 +5508,19 @@ module Aws::SageMaker
     CreateTrainingPlanResponse.add_member(:training_plan_arn, Shapes::ShapeRef.new(shape: TrainingPlanArn, required: true, location_name: "TrainingPlanArn"))
     CreateTrainingPlanResponse.struct_class = Types::CreateTrainingPlanResponse
 
+    CreateTrainingSessionRequest.add_member(:training_session_name, Shapes::ShapeRef.new(shape: TrainingSessionName, required: true, location_name: "TrainingSessionName"))
+    CreateTrainingSessionRequest.add_member(:model_package_group_arn, Shapes::ShapeRef.new(shape: ModelPackageGroupArn, location_name: "ModelPackageGroupArn"))
+    CreateTrainingSessionRequest.add_member(:lora_config, Shapes::ShapeRef.new(shape: LoraConfig, required: true, location_name: "LoraConfig"))
+    CreateTrainingSessionRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateTrainingSessionRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    CreateTrainingSessionRequest.add_member(:model_config, Shapes::ShapeRef.new(shape: TrainingSessionModelConfig, required: true, location_name: "ModelConfig"))
+    CreateTrainingSessionRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: TrainingSessionOutputConfig, required: true, location_name: "OutputConfig"))
+    CreateTrainingSessionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTrainingSessionRequest.struct_class = Types::CreateTrainingSessionRequest
+
+    CreateTrainingSessionResponse.add_member(:training_session_arn, Shapes::ShapeRef.new(shape: TrainingSessionArn, required: true, location_name: "TrainingSessionArn"))
+    CreateTrainingSessionResponse.struct_class = Types::CreateTrainingSessionResponse
+
     CreateTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
     CreateTransformJobRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     CreateTransformJobRequest.add_member(:max_concurrent_transforms, Shapes::ShapeRef.new(shape: MaxConcurrentTransforms, location_name: "MaxConcurrentTransforms"))
@@ -5963,6 +6010,11 @@ module Aws::SageMaker
 
     DeleteTrainingJobRequest.add_member(:training_job_name, Shapes::ShapeRef.new(shape: TrainingJobName, required: true, location_name: "TrainingJobName"))
     DeleteTrainingJobRequest.struct_class = Types::DeleteTrainingJobRequest
+
+    DeleteTrainingSessionRequest.add_member(:training_session_name, Shapes::ShapeRef.new(shape: TrainingSessionName, required: true, location_name: "TrainingSessionName"))
+    DeleteTrainingSessionRequest.struct_class = Types::DeleteTrainingSessionRequest
+
+    DeleteTrainingSessionResponse.struct_class = Types::DeleteTrainingSessionResponse
 
     DeleteTrialComponentRequest.add_member(:trial_component_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, required: true, location_name: "TrialComponentName"))
     DeleteTrialComponentRequest.struct_class = Types::DeleteTrialComponentRequest
@@ -7331,6 +7383,12 @@ module Aws::SageMaker
     DescribeTrainingPlanResponse.add_member(:target_resources, Shapes::ShapeRef.new(shape: SageMakerResourceNames, location_name: "TargetResources"))
     DescribeTrainingPlanResponse.add_member(:reserved_capacity_summaries, Shapes::ShapeRef.new(shape: ReservedCapacitySummaries, location_name: "ReservedCapacitySummaries"))
     DescribeTrainingPlanResponse.struct_class = Types::DescribeTrainingPlanResponse
+
+    DescribeTrainingSessionRequest.add_member(:training_session_name, Shapes::ShapeRef.new(shape: TrainingSessionName, required: true, location_name: "TrainingSessionName"))
+    DescribeTrainingSessionRequest.struct_class = Types::DescribeTrainingSessionRequest
+
+    DescribeTrainingSessionResponse.add_member(:training_session_detail, Shapes::ShapeRef.new(shape: TrainingSessionDetail, required: true, location_name: "TrainingSessionDetail"))
+    DescribeTrainingSessionResponse.struct_class = Types::DescribeTrainingSessionResponse
 
     DescribeTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
     DescribeTransformJobRequest.struct_class = Types::DescribeTransformJobRequest
@@ -10062,6 +10120,18 @@ module Aws::SageMaker
     ListTrainingPlansResponse.add_member(:training_plan_summaries, Shapes::ShapeRef.new(shape: TrainingPlanSummaries, required: true, location_name: "TrainingPlanSummaries"))
     ListTrainingPlansResponse.struct_class = Types::ListTrainingPlansResponse
 
+    ListTrainingSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTrainingSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListTrainingSessionsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    ListTrainingSessionsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    ListTrainingSessionsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: NameContains, location_name: "NameContains"))
+    ListTrainingSessionsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: TrainingSessionStatus, location_name: "StatusEquals"))
+    ListTrainingSessionsRequest.struct_class = Types::ListTrainingSessionsRequest
+
+    ListTrainingSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTrainingSessionsResponse.add_member(:training_session_summaries, Shapes::ShapeRef.new(shape: TrainingSessionSummaries, location_name: "TrainingSessionSummaries"))
+    ListTrainingSessionsResponse.struct_class = Types::ListTrainingSessionsResponse
+
     ListTransformJobsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
     ListTransformJobsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
     ListTransformJobsRequest.add_member(:last_modified_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTimeAfter"))
@@ -10151,6 +10221,10 @@ module Aws::SageMaker
     ListWorkteamsResponse.add_member(:workteams, Shapes::ShapeRef.new(shape: Workteams, required: true, location_name: "Workteams"))
     ListWorkteamsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListWorkteamsResponse.struct_class = Types::ListWorkteamsResponse
+
+    LoraConfig.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, required: true, location_name: "Rank"))
+    LoraConfig.add_member(:alpha, Shapes::ShapeRef.new(shape: LoraAlpha, required: true, location_name: "Alpha"))
+    LoraConfig.struct_class = Types::LoraConfig
 
     MLflowConfiguration.add_member(:mlflow_resource_arn, Shapes::ShapeRef.new(shape: MLflowArn, location_name: "MlflowResourceArn"))
     MLflowConfiguration.add_member(:mlflow_experiment_name, Shapes::ShapeRef.new(shape: MlflowExperimentEntityName, location_name: "MlflowExperimentName"))
@@ -12278,6 +12352,11 @@ module Aws::SageMaker
     StopTrainingJobRequest.add_member(:training_job_name, Shapes::ShapeRef.new(shape: TrainingJobName, required: true, location_name: "TrainingJobName"))
     StopTrainingJobRequest.struct_class = Types::StopTrainingJobRequest
 
+    StopTrainingSessionRequest.add_member(:training_session_name, Shapes::ShapeRef.new(shape: TrainingSessionName, required: true, location_name: "TrainingSessionName"))
+    StopTrainingSessionRequest.struct_class = Types::StopTrainingSessionRequest
+
+    StopTrainingSessionResponse.struct_class = Types::StopTrainingSessionResponse
+
     StopTransformJobRequest.add_member(:transform_job_name, Shapes::ShapeRef.new(shape: TransformJobName, required: true, location_name: "TransformJobName"))
     StopTransformJobRequest.struct_class = Types::StopTransformJobRequest
 
@@ -12607,6 +12686,43 @@ module Aws::SageMaker
 
     TrainingRepositoryAuthConfig.add_member(:training_repository_credentials_provider_arn, Shapes::ShapeRef.new(shape: TrainingRepositoryCredentialsProviderArn, required: true, location_name: "TrainingRepositoryCredentialsProviderArn"))
     TrainingRepositoryAuthConfig.struct_class = Types::TrainingRepositoryAuthConfig
+
+    TrainingSessionDetail.add_member(:training_session_arn, Shapes::ShapeRef.new(shape: TrainingSessionArn, required: true, location_name: "TrainingSessionArn"))
+    TrainingSessionDetail.add_member(:training_session_name, Shapes::ShapeRef.new(shape: TrainingSessionName, required: true, location_name: "TrainingSessionName"))
+    TrainingSessionDetail.add_member(:training_session_status, Shapes::ShapeRef.new(shape: TrainingSessionStatus, required: true, location_name: "TrainingSessionStatus"))
+    TrainingSessionDetail.add_member(:model_package_group_arn, Shapes::ShapeRef.new(shape: ModelPackageGroupArn, location_name: "ModelPackageGroupArn"))
+    TrainingSessionDetail.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    TrainingSessionDetail.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    TrainingSessionDetail.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    TrainingSessionDetail.add_member(:error_details, Shapes::ShapeRef.new(shape: FailureReason, location_name: "ErrorDetails"))
+    TrainingSessionDetail.add_member(:last_received_sequence_number, Shapes::ShapeRef.new(shape: JavaInteger, location_name: "LastReceivedSequenceNumber"))
+    TrainingSessionDetail.add_member(:billable_token_usage, Shapes::ShapeRef.new(shape: BillableTokenUsage, location_name: "BillableTokenUsage"))
+    TrainingSessionDetail.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    TrainingSessionDetail.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    TrainingSessionDetail.add_member(:lora_config, Shapes::ShapeRef.new(shape: LoraConfig, location_name: "LoraConfig"))
+    TrainingSessionDetail.add_member(:model_config, Shapes::ShapeRef.new(shape: TrainingSessionModelConfig, location_name: "ModelConfig"))
+    TrainingSessionDetail.add_member(:output_config, Shapes::ShapeRef.new(shape: TrainingSessionOutputConfig, location_name: "OutputConfig"))
+    TrainingSessionDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    TrainingSessionDetail.struct_class = Types::TrainingSessionDetail
+
+    TrainingSessionModelConfig.add_member(:base_model_arn, Shapes::ShapeRef.new(shape: BaseModelArn, required: true, location_name: "BaseModelArn"))
+    TrainingSessionModelConfig.add_member(:accept_eula, Shapes::ShapeRef.new(shape: JavaBoolean, location_name: "AcceptEula"))
+    TrainingSessionModelConfig.struct_class = Types::TrainingSessionModelConfig
+
+    TrainingSessionOutputConfig.add_member(:s3_location, Shapes::ShapeRef.new(shape: TrainingSessionS3Location, required: true, location_name: "S3Location"))
+    TrainingSessionOutputConfig.struct_class = Types::TrainingSessionOutputConfig
+
+    TrainingSessionS3Location.add_member(:path, Shapes::ShapeRef.new(shape: OutputS3Path, required: true, location_name: "Path"))
+    TrainingSessionS3Location.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: CustomerKmsKeyArn, location_name: "KmsKeyArn"))
+    TrainingSessionS3Location.struct_class = Types::TrainingSessionS3Location
+
+    TrainingSessionSummaries.member = Shapes::ShapeRef.new(shape: TrainingSessionSummary)
+
+    TrainingSessionSummary.add_member(:training_session_arn, Shapes::ShapeRef.new(shape: TrainingSessionArn, required: true, location_name: "TrainingSessionArn"))
+    TrainingSessionSummary.add_member(:training_session_status, Shapes::ShapeRef.new(shape: TrainingSessionStatus, required: true, location_name: "TrainingSessionStatus"))
+    TrainingSessionSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    TrainingSessionSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    TrainingSessionSummary.struct_class = Types::TrainingSessionSummary
 
     TrainingSpecification.add_member(:training_image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "TrainingImage"))
     TrainingSpecification.add_member(:training_image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "TrainingImageDigest"))
@@ -14250,6 +14366,17 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
+      api.add_operation(:create_training_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTrainingSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTrainingSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTrainingSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
       api.add_operation(:create_transform_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTransformJob"
         o.http_method = "POST"
@@ -14827,6 +14954,15 @@ module Aws::SageMaker
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+      end)
+
+      api.add_operation(:delete_training_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTrainingSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTrainingSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTrainingSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:delete_trial, Seahorse::Model::Operation.new.tap do |o|
@@ -15504,6 +15640,15 @@ module Aws::SageMaker
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_training_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTrainingSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTrainingSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTrainingSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:describe_transform_job, Seahorse::Model::Operation.new.tap do |o|
@@ -16830,6 +16975,20 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:list_training_sessions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTrainingSessions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTrainingSessionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTrainingSessionsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_transform_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTransformJobs"
         o.http_method = "POST"
@@ -17264,6 +17423,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopTrainingJobRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:stop_training_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopTrainingSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopTrainingSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopTrainingSessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 

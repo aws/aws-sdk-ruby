@@ -21,6 +21,8 @@ module Aws::LambdaCore
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor id: ::String
+      attr_accessor version_arn: ::String
+      attr_accessor version: ::Integer
       attr_accessor configuration: Types::NetworkConnectorConfiguration
       attr_accessor operator_role: ::String
       attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
@@ -36,6 +38,8 @@ module Aws::LambdaCore
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor id: ::String
+      attr_accessor version_arn: ::String
+      attr_accessor version: ::Integer
       attr_accessor configuration: Types::NetworkConnectorConfiguration
       attr_accessor operator_role: ::String
       attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
@@ -51,15 +55,18 @@ module Aws::LambdaCore
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor id: ::String
+      attr_accessor version_arn: ::String
       attr_accessor version: ::Integer
+      attr_accessor latest_version_arn: ::String
+      attr_accessor latest_version: ::Integer
       attr_accessor configuration: Types::NetworkConnectorConfiguration
       attr_accessor operator_role: ::String
       attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
       attr_accessor state_reason: ::String
-      attr_accessor state_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SubnetOutOfIPAddresses")
+      attr_accessor state_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
       attr_accessor last_update_status: ("Successful" | "Failed" | "InProgress")
       attr_accessor last_update_status_reason: ::String
-      attr_accessor last_update_status_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SubnetOutOfIPAddresses")
+      attr_accessor last_update_status_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
       attr_accessor last_modified: ::Time
       SENSITIVE: []
     end
@@ -67,6 +74,20 @@ module Aws::LambdaCore
     class InvalidParameterValueException
       attr_accessor type: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkConnectorVersionsRequest
+      attr_accessor identifier: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListNetworkConnectorVersionsResponse
+      attr_accessor network_connector_versions: ::Array[Types::NetworkConnectorVersionSummary]
+      attr_accessor next_marker: ::String
       SENSITIVE: []
     end
 
@@ -107,6 +128,21 @@ module Aws::LambdaCore
       attr_accessor type: ("VPC_EGRESS")
       attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
       attr_accessor last_modified: ::Time
+      attr_accessor latest_version_arn: ::String
+      attr_accessor latest_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class NetworkConnectorVersionSummary
+      attr_accessor arn: ::String
+      attr_accessor version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
+      attr_accessor state_reason: ::String
+      attr_accessor state_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
+      attr_accessor last_modified: ::Time
       SENSITIVE: []
     end
 
@@ -114,7 +150,7 @@ module Aws::LambdaCore
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor network_protocol: ("IPv4" | "DualStack")
-      attr_accessor associated_compute_resource_types: ::Array[("MicroVm")]
+      attr_accessor associated_compute_resource_types: ::Array[("MicroVm" | "WebFunction")]
       SENSITIVE: []
     end
 
@@ -156,6 +192,8 @@ module Aws::LambdaCore
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor id: ::String
+      attr_accessor version_arn: ::String
+      attr_accessor version: ::Integer
       attr_accessor operator_role: ::String
       attr_accessor configuration: Types::NetworkConnectorConfiguration
       attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")

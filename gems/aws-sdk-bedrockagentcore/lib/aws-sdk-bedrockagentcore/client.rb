@@ -502,6 +502,15 @@ module Aws::BedrockAgentCore
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::RecordExpirySpecification] :record_expiry_specification
+    #   The record expiry (long-term memory time-to-live) applied to every
+    #   record created by this request. Set `recordExpiryDurationDays` to the
+    #   number of days after which the records expire. Only the expiry
+    #   provided here is applied; the records' strategy association has no
+    #   effect on their expiry. If you do not provide this value, the records
+    #   do not expire. The `REMOVE` action does not apply when creating
+    #   records.
+    #
     # @return [Types::BatchCreateMemoryRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchCreateMemoryRecordsOutput#successful_records #successful_records} => Array&lt;Types::MemoryRecordOutput&gt;
@@ -531,6 +540,10 @@ module Aws::BedrockAgentCore
     #       },
     #     ],
     #     client_token: "String",
+    #     record_expiry_specification: {
+    #       record_expiry_duration_days: 1,
+    #       action: "REMOVE", # accepts REMOVE
+    #     },
     #   })
     #
     # @example Response structure
@@ -618,6 +631,28 @@ module Aws::BedrockAgentCore
     #   A list of memory record update inputs to be processed in the batch
     #   operation.
     #
+    # @option params [Types::RecordExpirySpecification] :record_expiry_specification
+    #   The record expiry (long-term memory time-to-live) applied to every
+    #   record updated by this request. Set `recordExpiryDurationDays` to
+    #   configure or overwrite the number of days after which the records
+    #   expire, or set `action` to `REMOVE` to clear a previously configured
+    #   expiry so that the records no longer expire.
+    #
+    #   When you do not provide this value, the service determines each
+    #   record's expiry from its current state:
+    #
+    #   * If the record already has an expiry configured, the service resets
+    #     and reapplies the expiry based on the last applied
+    #     `recordExpiryDurationDays`.
+    #
+    #   * If the record does not have an expiry configured, no expiry is
+    #     applied and the record remains non-expiring. This is the outcome
+    #     regardless of whether the record's strategy configures an expiry.
+    #
+    #   Providing an explicit `recordExpiryDurationDays` always takes
+    #   precedence: it overwrites an existing expiry, or sets one on a record
+    #   that previously had none.
+    #
     # @return [Types::BatchUpdateMemoryRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchUpdateMemoryRecordsOutput#successful_records #successful_records} => Array&lt;Types::MemoryRecordOutput&gt;
@@ -647,6 +682,10 @@ module Aws::BedrockAgentCore
     #         },
     #       },
     #     ],
+    #     record_expiry_specification: {
+    #       record_expiry_duration_days: 1,
+    #       action: "REMOVE", # accepts REMOVE
+    #     },
     #   })
     #
     # @example Response structure
@@ -2107,12 +2146,14 @@ module Aws::BedrockAgentCore
     #   resp.memory_record.namespaces #=> Array
     #   resp.memory_record.namespaces[0] #=> String
     #   resp.memory_record.created_at #=> Time
+    #   resp.memory_record.timestamp #=> Time
     #   resp.memory_record.metadata #=> Hash
     #   resp.memory_record.metadata["MetadataKey"].string_value #=> String
     #   resp.memory_record.metadata["MetadataKey"].string_list_value #=> Array
     #   resp.memory_record.metadata["MetadataKey"].string_list_value[0] #=> String
     #   resp.memory_record.metadata["MetadataKey"].number_value #=> Float
     #   resp.memory_record.metadata["MetadataKey"].date_time_value #=> Time
+    #   resp.memory_record.expires_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetMemoryRecord AWS API Documentation
     #
@@ -4775,6 +4816,7 @@ module Aws::BedrockAgentCore
     #   resp.memory_record_summaries[0].namespaces[0] #=> String
     #   resp.memory_record_summaries[0].created_at #=> Time
     #   resp.memory_record_summaries[0].score #=> Float
+    #   resp.memory_record_summaries[0].timestamp #=> Time
     #   resp.memory_record_summaries[0].metadata #=> Hash
     #   resp.memory_record_summaries[0].metadata["MetadataKey"].string_value #=> String
     #   resp.memory_record_summaries[0].metadata["MetadataKey"].string_list_value #=> Array
@@ -5202,6 +5244,7 @@ module Aws::BedrockAgentCore
     #   resp.memory_record_summaries[0].namespaces[0] #=> String
     #   resp.memory_record_summaries[0].created_at #=> Time
     #   resp.memory_record_summaries[0].score #=> Float
+    #   resp.memory_record_summaries[0].timestamp #=> Time
     #   resp.memory_record_summaries[0].metadata #=> Hash
     #   resp.memory_record_summaries[0].metadata["MetadataKey"].string_value #=> String
     #   resp.memory_record_summaries[0].metadata["MetadataKey"].string_list_value #=> Array
@@ -6583,7 +6626,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

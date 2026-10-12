@@ -5486,6 +5486,10 @@ module Aws::PinpointSMSVoiceV2
     #   message caps.
     #   @return [Types::MessagingLimits]
     #
+    # @!attribute [rw] pricing_tier
+    #   The pricing model.
+    #   @return [String]
+    #
     # @!attribute [rw] created_timestamp
     #   The time when the phone number was created, in [UNIX epoch time][1]
     #   format.
@@ -5517,6 +5521,7 @@ module Aws::PinpointSMSVoiceV2
       :pool_id,
       :registration_id,
       :messaging_limits,
+      :pricing_tier,
       :created_timestamp)
       SENSITIVE = []
       include Aws::Structure
@@ -8929,6 +8934,10 @@ module Aws::PinpointSMSVoiceV2
     #   per-capability send rates.
     #   @return [Types::MessagingLimits]
     #
+    # @!attribute [rw] pricing_tier
+    #   The pricing model.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SenderIdInformation AWS API Documentation
     #
     class SenderIdInformation < Struct.new(
@@ -8940,7 +8949,8 @@ module Aws::PinpointSMSVoiceV2
       :deletion_protection_enabled,
       :registered,
       :registration_id,
-      :messaging_limits)
+      :messaging_limits,
+      :pricing_tier)
       SENSITIVE = []
       include Aws::Structure
     end

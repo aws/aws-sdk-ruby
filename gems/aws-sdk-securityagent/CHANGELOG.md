@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2026-10-12)
+------------------
+
+* Feature - Adds support for Jira integration provider in AWS Security Agent.
+
 1.22.0 (2026-10-09)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1294.0 (2026-10-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMakerTrainingSessionRuntime`.
+
 1.1293.0 (2026-10-06)
 ------------------
 

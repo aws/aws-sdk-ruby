@@ -1,8 +1,8 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetAccountUsageSuccess",
-    "operationName" : "GetAccountUsage",
+    "id" : "ListAgentSpacesSuccess",
+    "operationName" : "ListAgentSpaces",
     "input" : { },
     "expectation" : {
       "success" : { }
@@ -14,8 +14,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListAgentSpacesSuccess",
-    "operationName" : "ListAgentSpaces",
+    "id" : "GetAccountUsageSuccess",
+    "operationName" : "GetAccountUsage",
     "input" : { },
     "expectation" : {
       "success" : { }

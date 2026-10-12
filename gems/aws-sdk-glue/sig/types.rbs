@@ -339,6 +339,17 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class BatchGetDataQualityResultV2Request
+      attr_accessor result_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDataQualityResultV2Response
+      attr_accessor results: ::Array[Types::DataQualityResultV2Item]
+      attr_accessor results_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class BatchGetDataQualityRulesetEvaluationRunRequest
       attr_accessor run_ids: ::Array[::String]
       SENSITIVE: []
@@ -2005,6 +2016,12 @@ module Aws::Glue
       SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_distributions]
     end
 
+    class DataQualityConfigurationV2
+      attr_accessor observations_enabled: ("ALL" | "NONE")
+      attr_accessor observation_mode: ("SCHEDULED" | "FIXED")
+      SENSITIVE: []
+    end
+
     class DataQualityEncryption
       attr_accessor data_quality_encryption_mode: ("DISABLED" | "SSE-KMS")
       attr_accessor kms_key_arn: ::String
@@ -2083,6 +2100,44 @@ module Aws::Glue
       attr_accessor job_run_id: ::String
       attr_accessor started_after: ::Time
       attr_accessor started_before: ::Time
+      SENSITIVE: []
+    end
+
+    class DataQualityResultV2Item
+      attr_accessor result_id: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor execution_started_on: ::Time
+      attr_accessor execution_completed_on: ::Time
+      attr_accessor result_published_on: ::Time
+      attr_accessor score: ::Float
+      attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
+      attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
+      attr_accessor observations: ::Array[Types::DataQualityObservation]
+      attr_accessor evaluation_context: ::String
+      attr_accessor descriptors: ::Hash[::String, ::String]
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
+      attr_accessor ruleset_name: ::String
+      SENSITIVE: []
+    end
+
+    class DataQualityResultsV2Description
+      attr_accessor result_id: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor result_published_on: ::Time
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor evaluation_context: ::String
+      attr_accessor descriptors: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DataQualityResultsV2FilterCriteria
+      attr_accessor data_source: Types::DataSource
+      attr_accessor published_after: ::Time
+      attr_accessor published_before: ::Time
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor evaluation_context: ::String
       SENSITIVE: []
     end
 
@@ -2187,6 +2242,16 @@ module Aws::Glue
       attr_accessor table_name: ::String
       attr_accessor database_name: ::String
       attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class DataQualityTelemetry
+      attr_accessor vcpu_hours: ::Float
+      attr_accessor flags_enabled: ::Hash[::String, ::String]
+      attr_accessor library_version: ::String
+      attr_accessor spark_version: ::String
+      attr_accessor host_runtime_version: ::String
+      attr_accessor engine: ("SPARK" | "PYTHON")
       SENSITIVE: []
     end
 
@@ -3528,6 +3593,31 @@ module Aws::Glue
       attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
       attr_accessor observations: ::Array[Types::DataQualityObservation]
       attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
+      SENSITIVE: []
+    end
+
+    class GetDataQualityResultV2Request
+      attr_accessor result_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityResultV2Response
+      attr_accessor result_id: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor profile_id: ::String
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor execution_started_on: ::Time
+      attr_accessor execution_completed_on: ::Time
+      attr_accessor result_published_on: ::Time
+      attr_accessor score: ::Float
+      attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
+      attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
+      attr_accessor observations: ::Array[Types::DataQualityObservation]
+      attr_accessor evaluation_context: ::String
+      attr_accessor descriptors: ::Hash[::String, ::String]
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
+      attr_accessor ruleset_name: ::String
       SENSITIVE: []
     end
 
@@ -5274,6 +5364,19 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ListDataQualityResultsV2Request
+      attr_accessor filter: Types::DataQualityResultsV2FilterCriteria
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataQualityResultsV2Response
+      attr_accessor results: ::Array[Types::DataQualityResultsV2Description]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDataQualityRuleRecommendationRunsRequest
       attr_accessor filter: Types::DataQualityRuleRecommendationRunFilter
       attr_accessor next_token: ::String
@@ -6097,6 +6200,32 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class PublishDataQualityResultV2Request
+      attr_accessor dimensions: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor execution_started_on: ::Time
+      attr_accessor execution_completed_on: ::Time
+      attr_accessor score: ::Float
+      attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
+      attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
+      attr_accessor observations: ::Array[Types::DataQualityObservation]
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
+      attr_accessor statistics: ::Array[Types::StatisticSummary]
+      attr_accessor run_configuration: Types::DataQualityConfigurationV2
+      attr_accessor client_token: ::String
+      attr_accessor evaluation_context: ::String
+      attr_accessor descriptors: ::Hash[::String, ::String]
+      attr_accessor ruleset_name: ::String
+      attr_accessor data_quality_security_configuration: ::String
+      attr_accessor telemetry: Types::DataQualityTelemetry
+      SENSITIVE: []
+    end
+
+    class PublishDataQualityResultV2Response
+      attr_accessor result_id: ::String
+      SENSITIVE: []
+    end
+
     class PutAssetRequest
       attr_accessor asset_type_id: ::String
       attr_accessor identifier: ::String
@@ -6262,6 +6391,11 @@ module Aws::Glue
       attr_accessor cluster_id: ::String
       attr_accessor query_authorization_id: ::String
       attr_accessor additional_context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RLSProperties
+      attr_accessor default_rls_policy: ::String
       SENSITIVE: []
     end
 
@@ -7610,6 +7744,7 @@ module Aws::Glue
       attr_accessor is_materialized_view: bool
       attr_accessor iceberg_table_metadata: Types::IcebergTableMetadata
       attr_accessor status: Types::TableStatus
+      attr_accessor rls_properties: Types::RLSProperties
       SENSITIVE: []
     end
 

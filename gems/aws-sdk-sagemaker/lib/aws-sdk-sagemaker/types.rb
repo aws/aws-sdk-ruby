@@ -4988,6 +4988,31 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The billable token usage for a training session, broken down by
+    # operation type.
+    #
+    # @!attribute [rw] prefill_token_count
+    #   The number of prefill tokens consumed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_token_count
+    #   The number of sample tokens consumed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] training_token_count
+    #   The number of training tokens consumed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BillableTokenUsage AWS API Documentation
+    #
+    class BillableTokenUsage < Struct.new(
+      :prefill_token_count,
+      :sample_token_count,
+      :training_token_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Update policy for a blue/green deployment. If this update policy is
     # specified, SageMaker creates a new fleet during the deployment while
     # maintaining the old fleet. SageMaker flips traffic to the new fleet
@@ -14718,6 +14743,79 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] training_session_name
+    #   The name of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_group_arn
+    #   The Amazon Resource Name (ARN) of the model package group where
+    #   checkpoints and fine-tuned model artifacts are published.
+    #   @return [String]
+    #
+    # @!attribute [rw] lora_config
+    #   The Low-Rank Adaptation (LoRA) configuration for the training
+    #   session, including the rank and alpha parameters.
+    #   @return [Types::LoraConfig]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
+    #   assumes to access resources on your behalf. The role must have
+    #   permissions to access the output S3 path and model package group.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   The Virtual Private Cloud (VPC) configuration for the training
+    #   session. Specify subnets and security groups to run the training
+    #   session in your VPC.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] model_config
+    #   The configuration for the base model, including the model ARN and
+    #   end-user license agreement (EULA) acceptance.
+    #   @return [Types::TrainingSessionModelConfig]
+    #
+    # @!attribute [rw] output_config
+    #   The output configuration for the training session, including the S3
+    #   location and optional encryption settings.
+    #   @return [Types::TrainingSessionOutputConfig]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs to apply to the training session as
+    #   tags. For more information, see [Tagging Amazon Web Services
+    #   Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingSessionRequest AWS API Documentation
+    #
+    class CreateTrainingSessionRequest < Struct.new(
+      :training_session_name,
+      :model_package_group_arn,
+      :lora_config,
+      :role_arn,
+      :vpc_config,
+      :model_config,
+      :output_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] training_session_arn
+    #   The Amazon Resource Name (ARN) of the training session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingSessionResponse AWS API Documentation
+    #
+    class CreateTrainingSessionResponse < Struct.new(
+      :training_session_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] transform_job_name
     #   The name of the transform job. The name must be unique within an
     #   Amazon Web Services Region in an Amazon Web Services account.
@@ -17057,6 +17155,22 @@ module Aws::SageMaker
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] training_session_name
+    #   The name of the training session to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTrainingSessionRequest AWS API Documentation
+    #
+    class DeleteTrainingSessionRequest < Struct.new(
+      :training_session_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTrainingSessionResponse AWS API Documentation
+    #
+    class DeleteTrainingSessionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] trial_component_name
     #   The name of the component to delete.
@@ -24627,6 +24741,30 @@ module Aws::SageMaker
       :total_ultra_server_count,
       :target_resources,
       :reserved_capacity_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] training_session_name
+    #   The name of the training session to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingSessionRequest AWS API Documentation
+    #
+    class DescribeTrainingSessionRequest < Struct.new(
+      :training_session_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] training_session_detail
+    #   The detailed information about the training session.
+    #   @return [Types::TrainingSessionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingSessionResponse AWS API Documentation
+    #
+    class DescribeTrainingSessionResponse < Struct.new(
+      :training_session_detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40299,6 +40437,67 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   If the response was truncated, use the token returned in the
+    #   previous response to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of training sessions to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only training sessions created after the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only training sessions created before the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the training session name to filter results. Only
+    #   sessions whose name contains the specified string are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_equals
+    #   A filter that returns only training sessions with the specified
+    #   status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingSessionsRequest AWS API Documentation
+    #
+    class ListTrainingSessionsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :creation_time_after,
+      :creation_time_before,
+      :name_contains,
+      :status_equals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the response is truncated, this token retrieves the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_session_summaries
+    #   An array of `TrainingSessionSummary` objects that provide summary
+    #   information about the training sessions.
+    #   @return [Array<Types::TrainingSessionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingSessionsResponse AWS API Documentation
+    #
+    class ListTrainingSessionsResponse < Struct.new(
+      :next_token,
+      :training_session_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] creation_time_after
     #   A filter that returns only transform jobs created after the
     #   specified time.
@@ -40740,6 +40939,26 @@ module Aws::SageMaker
     class ListWorkteamsResponse < Struct.new(
       :workteams,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Low-Rank Adaptation (LoRA) configuration for a training session,
+    # including the rank and alpha parameters.
+    #
+    # @!attribute [rw] rank
+    #   The rank of the Low-Rank Adaptation (LoRA) adapter matrices.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] alpha
+    #   The Low-Rank Adaptation (LoRA) scaling factor.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LoraConfig AWS API Documentation
+    #
+    class LoraConfig < Struct.new(
+      :rank,
+      :alpha)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -53000,6 +53219,22 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] training_session_name
+    #   The name of the training session to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingSessionRequest AWS API Documentation
+    #
+    class StopTrainingSessionRequest < Struct.new(
+      :training_session_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingSessionResponse AWS API Documentation
+    #
+    class StopTrainingSessionResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] transform_job_name
     #   The name of the batch transform job to stop.
     #   @return [String]
@@ -55212,6 +55447,190 @@ module Aws::SageMaker
     #
     class TrainingRepositoryAuthConfig < Struct.new(
       :training_repository_credentials_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about a training session.
+    #
+    # @!attribute [rw] training_session_arn
+    #   The Amazon Resource Name (ARN) of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_session_name
+    #   The name of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_session_status
+    #   The current status of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_group_arn
+    #   The Amazon Resource Name (ARN) of the model package group where
+    #   checkpoints are published.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the training session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the training session was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The date and time that the training session ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_details
+    #   If the training session failed or is blocked, detailed error
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_received_sequence_number
+    #   The sequence number of the last training operation received by the
+    #   session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] billable_token_usage
+    #   The billable token usage for the training session.
+    #   @return [Types::BillableTokenUsage]
+    #
+    # @!attribute [rw] vpc_config
+    #   The Virtual Private Cloud (VPC) configuration for the training
+    #   session.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] lora_config
+    #   The Low-Rank Adaptation (LoRA) configuration for the training
+    #   session.
+    #   @return [Types::LoraConfig]
+    #
+    # @!attribute [rw] model_config
+    #   The configuration for the base model.
+    #   @return [Types::TrainingSessionModelConfig]
+    #
+    # @!attribute [rw] output_config
+    #   The output configuration for the training session.
+    #   @return [Types::TrainingSessionOutputConfig]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the training session.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSessionDetail AWS API Documentation
+    #
+    class TrainingSessionDetail < Struct.new(
+      :training_session_arn,
+      :training_session_name,
+      :training_session_status,
+      :model_package_group_arn,
+      :creation_time,
+      :last_modified_time,
+      :end_time,
+      :error_details,
+      :last_received_sequence_number,
+      :billable_token_usage,
+      :vpc_config,
+      :role_arn,
+      :lora_config,
+      :model_config,
+      :output_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the base model used in a training session.
+    #
+    # @!attribute [rw] base_model_arn
+    #   The Amazon Resource Name (ARN) of the base foundation model from
+    #   SageMaker Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept_eula
+    #   Specifies whether you accept the end-user license agreement (EULA)
+    #   for gated models.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSessionModelConfig AWS API Documentation
+    #
+    class TrainingSessionModelConfig < Struct.new(
+      :base_model_arn,
+      :accept_eula)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output configuration for a training session, including the Amazon
+    # S3 location for checkpoints and model artifacts, and optional
+    # encryption settings.
+    #
+    # @!attribute [rw] s3_location
+    #   The Amazon S3 location where training session outputs, including
+    #   checkpoints and model artifacts, are stored.
+    #   @return [Types::TrainingSessionS3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSessionOutputConfig AWS API Documentation
+    #
+    class TrainingSessionOutputConfig < Struct.new(
+      :s3_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the Amazon S3 path and optional encryption settings for
+    # training session output data, including checkpoints, model artifacts,
+    # and invocation results.
+    #
+    # @!attribute [rw] path
+    #   The Amazon S3 path where training session outputs are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt output
+    #   data. If not specified, the default Amazon S3 encryption is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSessionS3Location AWS API Documentation
+    #
+    class TrainingSessionS3Location < Struct.new(
+      :path,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a training session.
+    #
+    # @!attribute [rw] training_session_arn
+    #   The Amazon Resource Name (ARN) of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_session_status
+    #   The current status of the training session.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the training session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the training session was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSessionSummary AWS API Documentation
+    #
+    class TrainingSessionSummary < Struct.new(
+      :training_session_arn,
+      :training_session_status,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end

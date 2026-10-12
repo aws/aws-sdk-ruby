@@ -3021,7 +3021,6 @@ module Aws::CloudWatchOmni
     #   resp.nodes[0].sources[0] #=> String, one of "VPC_FLOW_LOG", "CLOUDTRAIL", "IAM_POLICY", "CODE_SEMANTICS", "TELEMETRY", "AZURE_VNET_FLOW_LOG", "ELB_ACCESS_LOG", "CLOUDFRONT_ACCESS_LOG", "S3_ACCESS_LOG", "WAF_ACCESS_LOG", "AWS_INTEGRATION", "CONFIG"
     #   resp.nodes[0].metadata.metrics #=> Array
     #   resp.nodes[0].metadata.metrics[0].name #=> String
-    #   resp.nodes[0].metadata.metrics[0].namespace #=> String
     #   resp.nodes[0].metadata.metrics[0].preferred_stat #=> String
     #   resp.nodes[0].metadata.metrics[0].metric_type #=> String
     #   resp.nodes[0].metadata.metrics[0].attributes #=> Hash
@@ -3069,7 +3068,6 @@ module Aws::CloudWatchOmni
     #   resp.nodes[0].edges[0].sources[0] #=> String, one of "VPC_FLOW_LOG", "CLOUDTRAIL", "IAM_POLICY", "CODE_SEMANTICS", "TELEMETRY", "AZURE_VNET_FLOW_LOG", "ELB_ACCESS_LOG", "CLOUDFRONT_ACCESS_LOG", "S3_ACCESS_LOG", "WAF_ACCESS_LOG", "AWS_INTEGRATION", "CONFIG"
     #   resp.nodes[0].edges[0].metadata.metrics #=> Array
     #   resp.nodes[0].edges[0].metadata.metrics[0].name #=> String
-    #   resp.nodes[0].edges[0].metadata.metrics[0].namespace #=> String
     #   resp.nodes[0].edges[0].metadata.metrics[0].preferred_stat #=> String
     #   resp.nodes[0].edges[0].metadata.metrics[0].metric_type #=> String
     #   resp.nodes[0].edges[0].metadata.metrics[0].attributes #=> Hash
@@ -5888,6 +5886,11 @@ module Aws::CloudWatchOmni
     #   characters: lowercase letters, numbers, and hyphens. It must begin and
     #   end with a letter or number and cannot contain consecutive hyphens.
     #
+    # @option params [String] :agent_core_evaluation_role_arn
+    #   The ARN of the IAM role used by AgentCore online evaluation. Must be
+    #   in the caller's account. Omit if the space does not use AgentCore
+    #   online evaluation.
+    #
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   How to encrypt the space's data at rest. Omit to leave encryption
     #   unchanged. Pass `encryptionStrategy` AWS\_OWNED to stop using a
@@ -5934,6 +5937,7 @@ module Aws::CloudWatchOmni
     #   resp = client.update_space({
     #     space_id: "SpaceId", # required
     #     name: "UpdateSpaceInputNameString",
+    #     agent_core_evaluation_role_arn: "Arn",
     #     encryption_configuration: {
     #       encryption_strategy: "AWS_OWNED", # required, accepts AWS_OWNED, CUSTOMER_MANAGED
     #       kms_key_arn: "KmsKeyArn",
@@ -6058,7 +6062,7 @@ module Aws::CloudWatchOmni
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchomni'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

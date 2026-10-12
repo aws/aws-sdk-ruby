@@ -325,6 +325,7 @@ module Aws
         def compute_node_group_id: () -> ::String
         def compute_node_group_name: () -> ::String
         def node_lifecycle_actions: () -> Types::NodeLifecycleActions
+        def scheduler_version: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#register_compute_node_group_instance-instance_method
       def register_compute_node_group_instance: (

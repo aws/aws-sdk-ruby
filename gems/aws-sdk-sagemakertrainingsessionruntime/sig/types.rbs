@@ -1,0 +1,379 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SageMakerTrainingSessionRuntime
+  module Types
+
+    class AdamParamsConfig
+      attr_accessor learning_rate: ::Float
+      attr_accessor beta1: ::Float
+      attr_accessor beta2: ::Float
+      attr_accessor eps: ::Float
+      attr_accessor weight_decay: ::Float
+      attr_accessor grad_clip_norm: ::Float
+      attr_accessor lora_plus_lr_ratio: ::Float
+      SENSITIVE: []
+    end
+
+    class ComputeLogprobsConfig
+      attr_accessor prompt: Types::ModelInput
+      attr_accessor model_package_arn: ::String
+      SENSITIVE: [:prompt]
+    end
+
+    class ComputeLogprobsResult
+      attr_accessor logprobs: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Datum
+      attr_accessor model_input: Types::ModelInput
+      attr_accessor loss_fn_inputs: ::Hash[::String, Types::TensorData]
+      SENSITIVE: [:model_input]
+    end
+
+    class EncodedTextChunk
+      attr_accessor tokens: ::Array[::Integer]
+      attr_accessor type: ("encoded_text")
+      SENSITIVE: []
+    end
+
+    class ExecuteSamplingOperationInput
+      attr_accessor training_session_name: ::String
+      attr_accessor operation_config: Types::SampleOperationConfig
+      SENSITIVE: []
+    end
+
+    class ExecuteSamplingOperationOutput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteTrainingOperationInput
+      attr_accessor training_session_name: ::String
+      attr_accessor sequence_number: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor operation_config: Types::OperationConfig
+      SENSITIVE: []
+    end
+
+    class ExecuteTrainingOperationOutput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class ForwardBackwardConfig
+      attr_accessor loss_fn_name: ("cross_entropy" | "importance_sampling" | "ppo" | "cispo")
+      attr_accessor datum_list: ::Array[Types::Datum]
+      attr_accessor loss_fn_config: untyped
+      SENSITIVE: []
+    end
+
+    class ForwardBackwardResult
+      attr_accessor loss_fn_output_type: ::String
+      attr_accessor loss_fn_outputs: ::Array[::Hash[::String, Types::TensorData]]
+      attr_accessor metrics: ::Hash[::String, ::Float]
+      attr_accessor token_usage: Types::TrainingTokenUsage
+      SENSITIVE: []
+    end
+
+    class ForwardConfig
+      attr_accessor loss_fn_name: ("cross_entropy" | "importance_sampling" | "ppo" | "cispo")
+      attr_accessor datum_list: ::Array[Types::Datum]
+      attr_accessor loss_fn_config: untyped
+      SENSITIVE: []
+    end
+
+    class ForwardResult
+      attr_accessor loss_fn_output_type: ::String
+      attr_accessor loss_fn_outputs: ::Array[::Hash[::String, Types::TensorData]]
+      attr_accessor metrics: ::Hash[::String, ::Float]
+      attr_accessor token_usage: Types::TrainingTokenUsage
+      SENSITIVE: []
+    end
+
+    class GetSamplingOperationResultInput
+      attr_accessor training_session_name: ::String
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSamplingOperationResultOutput
+      attr_accessor status: ("Pending" | "InProgress" | "Completed" | "Failed" | "Skipped")
+      attr_accessor operation_result: Types::SampleOperationResult
+      attr_accessor error_details: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrainingOperationResultInput
+      attr_accessor training_session_name: ::String
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrainingOperationResultOutput
+      attr_accessor status: ("Pending" | "InProgress" | "Completed" | "Failed" | "Skipped")
+      attr_accessor operation_result: Types::OperationResult
+      attr_accessor error_details: ::String
+      attr_accessor token_usage: Types::TrainingTokenUsage
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LoadStateConfig
+      attr_accessor model_package_arn: ::String
+      attr_accessor load_optimizer: bool
+      SENSITIVE: []
+    end
+
+    class LoadStateResult < Aws::EmptyStructure
+    end
+
+    class LoadWeightsForSamplingConfig
+      attr_accessor model_package_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LoadWeightsForSamplingResult < Aws::EmptyStructure
+    end
+
+    class ModelInput
+      attr_accessor chunks: ::Array[Types::EncodedTextChunk]
+      SENSITIVE: []
+    end
+
+    class OperationConfig
+      attr_accessor forward: Types::ForwardConfig
+      attr_accessor forward_backward: Types::ForwardBackwardConfig
+      attr_accessor optimizer_step: Types::OptimizerStepConfig
+      attr_accessor save_weights: Types::SaveWeightsConfig
+      attr_accessor save_state: Types::SaveStateConfig
+      attr_accessor load_state: Types::LoadStateConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Forward < OperationConfig
+      end
+      class ForwardBackward < OperationConfig
+      end
+      class OptimizerStep < OperationConfig
+      end
+      class SaveWeights < OperationConfig
+      end
+      class SaveState < OperationConfig
+      end
+      class LoadState < OperationConfig
+      end
+      class Unknown < OperationConfig
+      end
+    end
+
+    class OperationResult
+      attr_accessor forward: Types::ForwardResult
+      attr_accessor forward_backward: Types::ForwardBackwardResult
+      attr_accessor optimizer_step: Types::OptimizerStepResult
+      attr_accessor save_weights: Types::SaveWeightsResult
+      attr_accessor save_state: Types::SaveStateResult
+      attr_accessor load_state: Types::LoadStateResult
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Forward < OperationResult
+      end
+      class ForwardBackward < OperationResult
+      end
+      class OptimizerStep < OperationResult
+      end
+      class SaveWeights < OperationResult
+      end
+      class SaveState < OperationResult
+      end
+      class LoadState < OperationResult
+      end
+      class Unknown < OperationResult
+      end
+    end
+
+    class OptimizerStepConfig
+      attr_accessor adam_params_config: Types::AdamParamsConfig
+      SENSITIVE: []
+    end
+
+    class OptimizerStepResult
+      attr_accessor metrics: ::Hash[::String, ::Float]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SampleConfig
+      attr_accessor prompt: Types::ModelInput
+      attr_accessor num_samples: ::Integer
+      attr_accessor sampling_params: Types::SamplingParams
+      attr_accessor include_prompt_logprobs: bool
+      attr_accessor topk_prompt_logprobs: ::Integer
+      attr_accessor model_package_arn: ::String
+      SENSITIVE: [:prompt]
+    end
+
+    class SampleOperationConfig
+      attr_accessor sample: Types::SampleConfig
+      attr_accessor compute_logprobs: Types::ComputeLogprobsConfig
+      attr_accessor load_weights_for_sampling: Types::LoadWeightsForSamplingConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Sample < SampleOperationConfig
+      end
+      class ComputeLogprobs < SampleOperationConfig
+      end
+      class LoadWeightsForSampling < SampleOperationConfig
+      end
+      class Unknown < SampleOperationConfig
+      end
+    end
+
+    class SampleOperationResult
+      attr_accessor sample: Types::SampleResponse
+      attr_accessor compute_logprobs: Types::ComputeLogprobsResult
+      attr_accessor load_weights_for_sampling: Types::LoadWeightsForSamplingResult
+      attr_accessor unknown: untyped
+      SENSITIVE: [:sample]
+
+      class Sample < SampleOperationResult
+      end
+      class ComputeLogprobs < SampleOperationResult
+      end
+      class LoadWeightsForSampling < SampleOperationResult
+      end
+      class Unknown < SampleOperationResult
+      end
+    end
+
+    class SampleResponse
+      attr_accessor sequences: ::Array[Types::SampledSequence]
+      attr_accessor prompt_logprobs: ::Array[::Float]
+      attr_accessor topk_prompt_logprobs: ::Array[::Array[Types::TokenLogprob]]
+      SENSITIVE: []
+    end
+
+    class SampleTokenUsage
+      attr_accessor prefill: ::Integer
+      attr_accessor decode: ::Integer
+      SENSITIVE: []
+    end
+
+    class SampleTrainingSessionInput
+      attr_accessor training_session_name: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor model_package_arn: ::String
+      attr_accessor body: ::String
+      SENSITIVE: [:body]
+    end
+
+    class SampleTrainingSessionOutput
+      attr_accessor content_type: ::String
+      attr_accessor body: ::String
+      SENSITIVE: [:body]
+    end
+
+    class SampleTrainingSessionWithResponseStreamInput
+      attr_accessor training_session_name: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor model_package_arn: ::String
+      attr_accessor body: ::String
+      SENSITIVE: [:body]
+    end
+
+    class SampleTrainingSessionWithResponseStreamOutput
+      attr_accessor content_type: ::String
+      attr_accessor body: ::IO
+      SENSITIVE: [:body]
+    end
+
+    class SampledSequence
+      attr_accessor stop_reason: ("stop" | "length")
+      attr_accessor tokens: ::Array[::Integer]
+      attr_accessor logprobs: ::Array[::Float]
+      attr_accessor token_usage: Types::SampleTokenUsage
+      SENSITIVE: []
+    end
+
+    class SamplingParams
+      attr_accessor max_tokens: ::Integer
+      attr_accessor temperature: ::Float
+      attr_accessor top_k: ::Integer
+      attr_accessor top_p: ::Float
+      attr_accessor seed: ::Integer
+      attr_accessor stop: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SaveStateConfig
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class SaveStateResult
+      attr_accessor model_package_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SaveWeightsConfig
+      attr_accessor merge_weights: bool
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class SaveWeightsResult
+      attr_accessor model_package_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TensorData
+      attr_accessor data: untyped
+      attr_accessor dtype: ::String
+      attr_accessor shape: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TokenLogprob
+      attr_accessor token_id: ::Integer
+      attr_accessor logprob: ::Float
+      SENSITIVE: []
+    end
+
+    class TrainingTokenUsage
+      attr_accessor training_tokens: ::Integer
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

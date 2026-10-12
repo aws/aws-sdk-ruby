@@ -1608,6 +1608,7 @@ module Aws::DevOpsAgent
     #   * {Types::GetAccountUsageOutput#monthly_account_evaluation_hours #monthly_account_evaluation_hours} => Types::UsageMetric
     #   * {Types::GetAccountUsageOutput#monthly_account_system_learning_hours #monthly_account_system_learning_hours} => Types::UsageMetric
     #   * {Types::GetAccountUsageOutput#monthly_account_on_demand_hours #monthly_account_on_demand_hours} => Types::UsageMetric
+    #   * {Types::GetAccountUsageOutput#monthly_account_grader_hours #monthly_account_grader_hours} => Types::UsageMetric
     #   * {Types::GetAccountUsageOutput#usage_period_start_time #usage_period_start_time} => Time
     #   * {Types::GetAccountUsageOutput#usage_period_end_time #usage_period_end_time} => Time
     #
@@ -1621,6 +1622,8 @@ module Aws::DevOpsAgent
     #   resp.monthly_account_system_learning_hours.usage #=> Float
     #   resp.monthly_account_on_demand_hours.limit #=> Integer
     #   resp.monthly_account_on_demand_hours.usage #=> Float
+    #   resp.monthly_account_grader_hours.limit #=> Integer
+    #   resp.monthly_account_grader_hours.usage #=> Float
     #   resp.usage_period_start_time #=> Time
     #   resp.usage_period_end_time #=> Time
     #
@@ -1638,6 +1641,9 @@ module Aws::DevOpsAgent
     # @option params [required, String] :agent_space_id
     #   The unique identifier of the AgentSpace
     #
+    # @option params [String] :included_data
+    #   How much data to include in the response.
+    #
     # @return [Types::GetAgentSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAgentSpaceOutput#agent_space #agent_space} => Types::AgentSpace
@@ -1647,6 +1653,7 @@ module Aws::DevOpsAgent
     #
     #   resp = client.get_agent_space({
     #     agent_space_id: "AgentSpaceId", # required
+    #     included_data: "METADATA_ONLY", # accepts METADATA_ONLY, ALL_DATA
     #   })
     #
     # @example Response structure
@@ -2089,23 +2096,29 @@ module Aws::DevOpsAgent
     #   resp.service.additional_service_details.slack.team_name #=> String
     #   resp.service.additional_service_details.mcpserverdatadog.name #=> String
     #   resp.service.additional_service_details.mcpserverdatadog.endpoint #=> String
-    #   resp.service.additional_service_details.mcpserverdatadog.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.service.additional_service_details.mcpserverdatadog.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.service.additional_service_details.mcpserverdatadog.description #=> String
     #   resp.service.additional_service_details.mcpserverdatadog.api_key_header #=> String
+    #   resp.service.additional_service_details.mcpserverdatadog.custom_header_names #=> Array
+    #   resp.service.additional_service_details.mcpserverdatadog.custom_header_names[0] #=> String
     #   resp.service.additional_service_details.mcpserver.name #=> String
     #   resp.service.additional_service_details.mcpserver.endpoint #=> String
-    #   resp.service.additional_service_details.mcpserver.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.service.additional_service_details.mcpserver.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.service.additional_service_details.mcpserver.description #=> String
     #   resp.service.additional_service_details.mcpserver.api_key_header #=> String
+    #   resp.service.additional_service_details.mcpserver.custom_header_names #=> Array
+    #   resp.service.additional_service_details.mcpserver.custom_header_names[0] #=> String
     #   resp.service.additional_service_details.servicenow.instance_url #=> String
     #   resp.service.additional_service_details.gitlab.target_url #=> String
     #   resp.service.additional_service_details.gitlab.token_type #=> String, one of "personal", "group"
     #   resp.service.additional_service_details.gitlab.group_id #=> String
     #   resp.service.additional_service_details.mcpserversplunk.name #=> String
     #   resp.service.additional_service_details.mcpserversplunk.endpoint #=> String
-    #   resp.service.additional_service_details.mcpserversplunk.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.service.additional_service_details.mcpserversplunk.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.service.additional_service_details.mcpserversplunk.description #=> String
     #   resp.service.additional_service_details.mcpserversplunk.api_key_header #=> String
+    #   resp.service.additional_service_details.mcpserversplunk.custom_header_names #=> Array
+    #   resp.service.additional_service_details.mcpserversplunk.custom_header_names[0] #=> String
     #   resp.service.additional_service_details.mcpservernewrelic.account_id #=> String
     #   resp.service.additional_service_details.mcpservernewrelic.region #=> String, one of "US", "EU", "JP"
     #   resp.service.additional_service_details.mcpservernewrelic.description #=> String
@@ -2116,7 +2129,7 @@ module Aws::DevOpsAgent
     #   resp.service.additional_service_details.azureidentity.web_identity_token_audiences #=> Array
     #   resp.service.additional_service_details.azureidentity.web_identity_token_audiences[0] #=> String
     #   resp.service.additional_service_details.mcpservergrafana.endpoint #=> String
-    #   resp.service.additional_service_details.mcpservergrafana.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.service.additional_service_details.mcpservergrafana.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.service.additional_service_details.pagerduty.scopes #=> Array
     #   resp.service.additional_service_details.pagerduty.scopes[0] #=> String
     #   resp.service.additional_service_details.mcpserversigv4.name #=> String
@@ -2206,6 +2219,9 @@ module Aws::DevOpsAgent
     # @option params [String] :next_token
     #   Token for the next page of results.
     #
+    # @option params [String] :included_data
+    #   How much data to include in the response.
+    #
     # @return [Types::ListAgentSpacesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAgentSpacesOutput#next_token #next_token} => String
@@ -2218,6 +2234,7 @@ module Aws::DevOpsAgent
     #   resp = client.list_agent_spaces({
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     included_data: "METADATA_ONLY", # accepts METADATA_ONLY, ALL_DATA
     #   })
     #
     # @example Response structure
@@ -3067,23 +3084,29 @@ module Aws::DevOpsAgent
     #   resp.services[0].additional_service_details.slack.team_name #=> String
     #   resp.services[0].additional_service_details.mcpserverdatadog.name #=> String
     #   resp.services[0].additional_service_details.mcpserverdatadog.endpoint #=> String
-    #   resp.services[0].additional_service_details.mcpserverdatadog.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.services[0].additional_service_details.mcpserverdatadog.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.services[0].additional_service_details.mcpserverdatadog.description #=> String
     #   resp.services[0].additional_service_details.mcpserverdatadog.api_key_header #=> String
+    #   resp.services[0].additional_service_details.mcpserverdatadog.custom_header_names #=> Array
+    #   resp.services[0].additional_service_details.mcpserverdatadog.custom_header_names[0] #=> String
     #   resp.services[0].additional_service_details.mcpserver.name #=> String
     #   resp.services[0].additional_service_details.mcpserver.endpoint #=> String
-    #   resp.services[0].additional_service_details.mcpserver.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.services[0].additional_service_details.mcpserver.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.services[0].additional_service_details.mcpserver.description #=> String
     #   resp.services[0].additional_service_details.mcpserver.api_key_header #=> String
+    #   resp.services[0].additional_service_details.mcpserver.custom_header_names #=> Array
+    #   resp.services[0].additional_service_details.mcpserver.custom_header_names[0] #=> String
     #   resp.services[0].additional_service_details.servicenow.instance_url #=> String
     #   resp.services[0].additional_service_details.gitlab.target_url #=> String
     #   resp.services[0].additional_service_details.gitlab.token_type #=> String, one of "personal", "group"
     #   resp.services[0].additional_service_details.gitlab.group_id #=> String
     #   resp.services[0].additional_service_details.mcpserversplunk.name #=> String
     #   resp.services[0].additional_service_details.mcpserversplunk.endpoint #=> String
-    #   resp.services[0].additional_service_details.mcpserversplunk.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.services[0].additional_service_details.mcpserversplunk.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.services[0].additional_service_details.mcpserversplunk.description #=> String
     #   resp.services[0].additional_service_details.mcpserversplunk.api_key_header #=> String
+    #   resp.services[0].additional_service_details.mcpserversplunk.custom_header_names #=> Array
+    #   resp.services[0].additional_service_details.mcpserversplunk.custom_header_names[0] #=> String
     #   resp.services[0].additional_service_details.mcpservernewrelic.account_id #=> String
     #   resp.services[0].additional_service_details.mcpservernewrelic.region #=> String, one of "US", "EU", "JP"
     #   resp.services[0].additional_service_details.mcpservernewrelic.description #=> String
@@ -3094,7 +3117,7 @@ module Aws::DevOpsAgent
     #   resp.services[0].additional_service_details.azureidentity.web_identity_token_audiences #=> Array
     #   resp.services[0].additional_service_details.azureidentity.web_identity_token_audiences[0] #=> String
     #   resp.services[0].additional_service_details.mcpservergrafana.endpoint #=> String
-    #   resp.services[0].additional_service_details.mcpservergrafana.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
+    #   resp.services[0].additional_service_details.mcpservergrafana.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token", "custom-headers"
     #   resp.services[0].additional_service_details.pagerduty.scopes #=> Array
     #   resp.services[0].additional_service_details.pagerduty.scopes[0] #=> String
     #   resp.services[0].additional_service_details.mcpserversigv4.name #=> String
@@ -3370,6 +3393,11 @@ module Aws::DevOpsAgent
     #             token_value: "MCPServerBearerTokenConfigTokenValueString", # required
     #             authorization_header: "MCPServerBearerTokenConfigAuthorizationHeaderString",
     #           },
+    #           custom_headers: {
+    #             headers: { # required
+    #               "CustomHeaderName" => "CustomHeaderValue",
+    #             },
+    #           },
     #           authorization_discovery: {
     #             return_to_endpoint: "MCPServerAuthorizationDiscoveryConfigReturnToEndpointString", # required
     #           },
@@ -3418,6 +3446,11 @@ module Aws::DevOpsAgent
     #             token_name: "MCPServerBearerTokenConfigTokenNameString", # required
     #             token_value: "MCPServerBearerTokenConfigTokenValueString", # required
     #             authorization_header: "MCPServerBearerTokenConfigAuthorizationHeaderString",
+    #           },
+    #           custom_headers: {
+    #             headers: { # required
+    #               "CustomHeaderName" => "CustomHeaderValue",
+    #             },
     #           },
     #           authorization_discovery: {
     #             return_to_endpoint: "MCPServerAuthorizationDiscoveryConfigReturnToEndpointString", # required
@@ -3476,6 +3509,11 @@ module Aws::DevOpsAgent
     #             token_name: "MCPServerBearerTokenConfigTokenNameString", # required
     #             token_value: "MCPServerBearerTokenConfigTokenValueString", # required
     #             authorization_header: "MCPServerBearerTokenConfigAuthorizationHeaderString",
+    #           },
+    #           custom_headers: {
+    #             headers: { # required
+    #               "CustomHeaderName" => "CustomHeaderValue",
+    #             },
     #           },
     #           authorization_discovery: {
     #             return_to_endpoint: "MCPServerAuthorizationDiscoveryConfigReturnToEndpointString", # required
@@ -4848,7 +4886,7 @@ module Aws::DevOpsAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devopsagent'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

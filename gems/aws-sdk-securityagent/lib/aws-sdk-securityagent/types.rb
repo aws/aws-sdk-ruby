@@ -801,6 +801,178 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # A finding that failed to disassociate, with the cause of the failure.
+    #
+    # @!attribute [rw] finding_id
+    #   The identifier of the finding that failed to disassociate.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The machine-readable failure category.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A customer-facing explanation of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDisassociateFindingIssueError AWS API Documentation
+    #
+    class BatchDisassociateFindingIssueError < Struct.new(
+      :finding_id,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input for the BatchDisassociateFindingIssue operation.
+    #
+    # @!attribute [rw] agent_space_id
+    #   The identifier of the agent space where the job exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] pentest_job_id
+    #   The identifier of the penetration test job. This parameter is
+    #   mutually exclusive with `codeReviewJobId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The identifier of the code review job. This parameter is mutually
+    #   exclusive with `pentestJobId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_ids
+    #   The identifiers of the findings to disassociate from their issues.
+    #   Each must belong to the specified job.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDisassociateFindingIssueInput AWS API Documentation
+    #
+    class BatchDisassociateFindingIssueInput < Struct.new(
+      :agent_space_id,
+      :pentest_job_id,
+      :code_review_job_id,
+      :finding_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output for the BatchDisassociateFindingIssue operation.
+    #
+    # @!attribute [rw] errors
+    #   The findings whose issue could not be disassociated.
+    #   @return [Array<Types::BatchDisassociateFindingIssueError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDisassociateFindingIssueOutput AWS API Documentation
+    #
+    class BatchDisassociateFindingIssueOutput < Struct.new(
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A finding whose issue could not be created, with the cause of the
+    # failure.
+    #
+    # @!attribute [rw] finding_id
+    #   The identifier of the finding this error corresponds to.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The machine-readable failure category.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A customer-facing explanation of why the issue could not be created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchExportFindingError AWS API Documentation
+    #
+    class BatchExportFindingError < Struct.new(
+      :finding_id,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A finding whose issue was created.
+    #
+    # @!attribute [rw] finding_id
+    #   The identifier of the finding this result corresponds to.
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_issue
+    #   The issue that was created for the finding.
+    #   @return [Types::LinkedIssue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchExportFindingResult AWS API Documentation
+    #
+    class BatchExportFindingResult < Struct.new(
+      :finding_id,
+      :linked_issue)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input for the BatchExportFindings operation.
+    #
+    # @!attribute [rw] agent_space_id
+    #   The identifier of the agent space where the job exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] pentest_job_id
+    #   The identifier of the penetration test job. This parameter is
+    #   mutually exclusive with `codeReviewJobId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The identifier of the code review job. This parameter is mutually
+    #   exclusive with `pentestJobId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_destination
+    #   The destination issue-tracker project the findings are exported to.
+    #   Must be a connected capability of the agent space.
+    #   @return [Types::IssueDestination]
+    #
+    # @!attribute [rw] finding_ids
+    #   The identifiers of the findings to export. Each must belong to the
+    #   specified job.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchExportFindingsInput AWS API Documentation
+    #
+    class BatchExportFindingsInput < Struct.new(
+      :agent_space_id,
+      :pentest_job_id,
+      :code_review_job_id,
+      :issue_destination,
+      :finding_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output for the BatchExportFindings operation.
+    #
+    # @!attribute [rw] results
+    #   The findings whose issue was created, each with its linked issue.
+    #   @return [Array<Types::BatchExportFindingResult>]
+    #
+    # @!attribute [rw] errors
+    #   The findings whose issue could not be created, each with a
+    #   customer-facing reason.
+    #   @return [Array<Types::BatchExportFindingError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchExportFindingsOutput AWS API Documentation
+    #
+    class BatchExportFindingsOutput < Struct.new(
+      :results,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for batch retrieving agent spaces.
     #
     # @!attribute [rw] agent_space_ids
@@ -4140,6 +4312,11 @@ module Aws::SecurityAgent
     #   finding was produced from.
     #   @return [String]
     #
+    # @!attribute [rw] linked_issue
+    #   The issue in a third-party issue tracker that this finding has been
+    #   exported to.
+    #   @return [Types::LinkedIssue]
+    #
     # @!attribute [rw] created_at
     #   The date and time the finding was created, in UTC format.
     #   @return [Time]
@@ -4177,6 +4354,7 @@ module Aws::SecurityAgent
       :alignment_rationale,
       :revalidation_job_ids,
       :original_finding_id,
+      :linked_issue,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -4408,6 +4586,10 @@ module Aws::SecurityAgent
     #   absent for SaaS integrations.
     #   @return [String]
     #
+    # @!attribute [rw] site_url
+    #   The Atlassian Cloud site URL for Atlassian integrations.
+    #   @return [String]
+    #
     # @!attribute [rw] webhook_url
     #   The payload URL of the integration's webhook, once it has been
     #   created. The signing secret is never returned on a read.
@@ -4428,6 +4610,7 @@ module Aws::SecurityAgent
       :display_name,
       :kms_key_id,
       :target_url,
+      :site_url,
       :webhook_url,
       :private_connection_name)
       SENSITIVE = []
@@ -4956,6 +5139,10 @@ module Aws::SecurityAgent
     #   The Azure DevOps repository resource information.
     #   @return [Types::AzureDevOpsRepositoryResource]
     #
+    # @!attribute [rw] jira_project
+    #   The Jira project resource information.
+    #   @return [Types::JiraProjectResource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegratedResource AWS API Documentation
     #
     class IntegratedResource < Struct.new(
@@ -4964,6 +5151,7 @@ module Aws::SecurityAgent
       :bitbucket_repository,
       :confluence_document,
       :azure_dev_ops_repository,
+      :jira_project,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -4974,6 +5162,7 @@ module Aws::SecurityAgent
       class BitbucketRepository < IntegratedResource; end
       class ConfluenceDocument < IntegratedResource; end
       class AzureDevOpsRepository < IntegratedResource; end
+      class JiraProject < IntegratedResource; end
       class Unknown < IntegratedResource; end
     end
 
@@ -5022,6 +5211,10 @@ module Aws::SecurityAgent
     #   The Azure DevOps repository metadata.
     #   @return [Types::AzureDevOpsRepositoryMetadata]
     #
+    # @!attribute [rw] jira_project
+    #   The Jira project metadata.
+    #   @return [Types::JiraProjectMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegratedResourceMetadata AWS API Documentation
     #
     class IntegratedResourceMetadata < Struct.new(
@@ -5030,6 +5223,7 @@ module Aws::SecurityAgent
       :bitbucket_repository,
       :confluence_document,
       :azure_dev_ops_repository,
+      :jira_project,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -5040,6 +5234,7 @@ module Aws::SecurityAgent
       class BitbucketRepository < IntegratedResourceMetadata; end
       class ConfluenceDocument < IntegratedResourceMetadata; end
       class AzureDevOpsRepository < IntegratedResourceMetadata; end
+      class JiraProject < IntegratedResourceMetadata; end
       class Unknown < IntegratedResourceMetadata; end
     end
 
@@ -5159,6 +5354,184 @@ module Aws::SecurityAgent
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The destination for filing findings as issues in an integrated issue
+    # tracker.
+    #
+    # @!attribute [rw] integration_id
+    #   The integration identifier for the issue-tracker provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_key
+    #   The identifier of the project the issues are filed under.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IssueDestination AWS API Documentation
+    #
+    class IssueDestination < Struct.new(
+      :integration_id,
+      :project_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for creating a Jira integration.
+    #
+    # @!attribute [rw] installation_id
+    #   The Atlassian installation identifier, available from the Atlassian
+    #   administration console.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The OAuth 2.0 authorization code returned from the consent redirect.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The CSRF state token echoed back from the OAuth redirect.
+    #   @return [String]
+    #
+    # @!attribute [rw] site_url
+    #   The Jira Cloud site URL, for example https://mysite.atlassian.net.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/JiraIntegrationInput AWS API Documentation
+    #
+    class JiraIntegrationInput < Struct.new(
+      :installation_id,
+      :code,
+      :state,
+      :site_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a Jira project that is integrated with the
+    # service.
+    #
+    # @!attribute [rw] name
+    #   Name of the resource e.g. repository name, etc.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_resource_id
+    #   Provider Id of the resource e.g. GitHub repository id, etc.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_key
+    #   The Jira project key, for example PROJ.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_id
+    #   The Jira project identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The display name of the Jira project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/JiraProjectMetadata AWS API Documentation
+    #
+    class JiraProjectMetadata < Struct.new(
+      :name,
+      :provider_resource_id,
+      :project_key,
+      :project_id,
+      :project_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a Jira project resource used in an integration.
+    #
+    # @!attribute [rw] name
+    #   Name of the resource e.g. repository name, etc.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_key
+    #   The Jira project key, for example PROJ.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_id
+    #   The Jira project identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The display name of the Jira project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/JiraProjectResource AWS API Documentation
+    #
+    class JiraProjectResource < Struct.new(
+      :name,
+      :project_key,
+      :project_id,
+      :project_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Capabilities for an integrated Jira project.
+    #
+    # @!attribute [rw] create_issue
+    #   Whether to create issues in the integrated jira project.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] comment_issue
+    #   Whether to post comments on issues in the integrated jira project.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/JiraResourceCapabilities AWS API Documentation
+    #
+    class JiraResourceCapabilities < Struct.new(
+      :create_issue,
+      :comment_issue)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reference to an issue created for a finding in a third-party issue
+    # tracker.
+    #
+    # @!attribute [rw] provider
+    #   The issue-tracker provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_id
+    #   The integration identifier for the issue-tracker provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_key
+    #   The key of the project the issue belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_key
+    #   The issue key.
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_id
+    #   The stable numeric issue identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_url
+    #   The issue URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] site_url
+    #   The Atlassian Cloud site URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/LinkedIssue AWS API Documentation
+    #
+    class LinkedIssue < Struct.new(
+      :provider,
+      :integration_id,
+      :project_key,
+      :issue_key,
+      :issue_id,
+      :issue_url,
+      :site_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7094,6 +7467,10 @@ module Aws::SecurityAgent
     #   integration.
     #   @return [Types::BitbucketDataCenterIntegrationInput]
     #
+    # @!attribute [rw] jira
+    #   The configuration for a Jira integration.
+    #   @return [Types::JiraIntegrationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ProviderInput AWS API Documentation
     #
     class ProviderInput < Struct.new(
@@ -7103,6 +7480,7 @@ module Aws::SecurityAgent
       :confluence,
       :azure_dev_ops,
       :bitbucket_data_center,
+      :jira,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -7114,6 +7492,7 @@ module Aws::SecurityAgent
       class Confluence < ProviderInput; end
       class AzureDevOps < ProviderInput; end
       class BitbucketDataCenter < ProviderInput; end
+      class Jira < ProviderInput; end
       class Unknown < ProviderInput; end
     end
 
@@ -7145,6 +7524,10 @@ module Aws::SecurityAgent
     #   The Azure DevOps-specific resource capabilities.
     #   @return [Types::AzureDevOpsResourceCapabilities]
     #
+    # @!attribute [rw] jira
+    #   The Jira-specific resource capabilities.
+    #   @return [Types::JiraResourceCapabilities]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ProviderResourceCapabilities AWS API Documentation
     #
     class ProviderResourceCapabilities < Struct.new(
@@ -7153,6 +7536,7 @@ module Aws::SecurityAgent
       :bitbucket,
       :confluence,
       :azure_dev_ops,
+      :jira,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -7163,6 +7547,7 @@ module Aws::SecurityAgent
       class Bitbucket < ProviderResourceCapabilities; end
       class Confluence < ProviderResourceCapabilities; end
       class AzureDevOps < ProviderResourceCapabilities; end
+      class Jira < ProviderResourceCapabilities; end
       class Unknown < ProviderResourceCapabilities; end
     end
 

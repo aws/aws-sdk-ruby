@@ -223,6 +223,54 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class BatchDisassociateFindingIssueError
+      attr_accessor finding_id: ::String
+      attr_accessor code: ("CLIENT_ERROR" | "INTERNAL_ERROR" | "STOPPED_BY_USER")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateFindingIssueInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor pentest_job_id: ::String
+      attr_accessor code_review_job_id: ::String
+      attr_accessor finding_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateFindingIssueOutput
+      attr_accessor errors: ::Array[Types::BatchDisassociateFindingIssueError]
+      SENSITIVE: []
+    end
+
+    class BatchExportFindingError
+      attr_accessor finding_id: ::String
+      attr_accessor code: ("CLIENT_ERROR" | "INTERNAL_ERROR" | "STOPPED_BY_USER")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchExportFindingResult
+      attr_accessor finding_id: ::String
+      attr_accessor linked_issue: Types::LinkedIssue
+      SENSITIVE: []
+    end
+
+    class BatchExportFindingsInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor pentest_job_id: ::String
+      attr_accessor code_review_job_id: ::String
+      attr_accessor issue_destination: Types::IssueDestination
+      attr_accessor finding_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchExportFindingsOutput
+      attr_accessor results: ::Array[Types::BatchExportFindingResult]
+      attr_accessor errors: ::Array[Types::BatchExportFindingError]
+      SENSITIVE: []
+    end
+
     class BatchGetAgentSpacesInput
       attr_accessor agent_space_ids: ::Array[::String]
       SENSITIVE: []
@@ -724,7 +772,7 @@ module Aws::SecurityAgent
     end
 
     class CreateIntegrationInput
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
       attr_accessor input: Types::ProviderInput
       attr_accessor integration_display_name: ::String
       attr_accessor kms_key_id: ::String
@@ -1129,6 +1177,7 @@ module Aws::SecurityAgent
       attr_accessor alignment_rationale: ::String
       attr_accessor revalidation_job_ids: ::Array[::String]
       attr_accessor original_finding_id: ::String
+      attr_accessor linked_issue: Types::LinkedIssue
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1190,11 +1239,12 @@ module Aws::SecurityAgent
     class GetIntegrationOutput
       attr_accessor integration_id: ::String
       attr_accessor installation_id: ::String
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
-      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
+      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION" | "ISSUE_TRACKING")
       attr_accessor display_name: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor target_url: ::String
+      attr_accessor site_url: ::String
       attr_accessor webhook_url: ::String
       attr_accessor private_connection_name: ::String
       SENSITIVE: []
@@ -1314,7 +1364,7 @@ module Aws::SecurityAgent
     end
 
     class InitiateProviderRegistrationInput
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
       attr_accessor target_url: ::String
       attr_accessor organization_name: ::String
       attr_accessor client_id: ::String
@@ -1347,6 +1397,7 @@ module Aws::SecurityAgent
       attr_accessor bitbucket_repository: Types::BitbucketRepositoryResource
       attr_accessor confluence_document: Types::ConfluenceDocumentResource
       attr_accessor azure_dev_ops_repository: Types::AzureDevOpsRepositoryResource
+      attr_accessor jira_project: Types::JiraProjectResource
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1359,6 +1410,8 @@ module Aws::SecurityAgent
       class ConfluenceDocument < IntegratedResource
       end
       class AzureDevOpsRepository < IntegratedResource
+      end
+      class JiraProject < IntegratedResource
       end
       class Unknown < IntegratedResource
       end
@@ -1376,6 +1429,7 @@ module Aws::SecurityAgent
       attr_accessor bitbucket_repository: Types::BitbucketRepositoryMetadata
       attr_accessor confluence_document: Types::ConfluenceDocumentMetadata
       attr_accessor azure_dev_ops_repository: Types::AzureDevOpsRepositoryMetadata
+      attr_accessor jira_project: Types::JiraProjectMetadata
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1389,6 +1443,8 @@ module Aws::SecurityAgent
       end
       class AzureDevOpsRepository < IntegratedResourceMetadata
       end
+      class JiraProject < IntegratedResourceMetadata
+      end
       class Unknown < IntegratedResourceMetadata
       end
     end
@@ -1401,8 +1457,8 @@ module Aws::SecurityAgent
     end
 
     class IntegrationFilter
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
-      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
+      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION" | "ISSUE_TRACKING")
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1417,8 +1473,8 @@ module Aws::SecurityAgent
     class IntegrationSummary
       attr_accessor integration_id: ::String
       attr_accessor installation_id: ::String
-      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
-      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION")
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
+      attr_accessor provider_type: ("SOURCE_CODE" | "DOCUMENTATION" | "ISSUE_TRACKING")
       attr_accessor display_name: ::String
       attr_accessor target_url: ::String
       attr_accessor webhook_url: ::String
@@ -1428,6 +1484,54 @@ module Aws::SecurityAgent
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IssueDestination
+      attr_accessor integration_id: ::String
+      attr_accessor project_key: ::String
+      SENSITIVE: []
+    end
+
+    class JiraIntegrationInput
+      attr_accessor installation_id: ::String
+      attr_accessor code: ::String
+      attr_accessor state: ::String
+      attr_accessor site_url: ::String
+      SENSITIVE: []
+    end
+
+    class JiraProjectMetadata
+      attr_accessor name: ::String
+      attr_accessor provider_resource_id: ::String
+      attr_accessor project_key: ::String
+      attr_accessor project_id: ::String
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class JiraProjectResource
+      attr_accessor name: ::String
+      attr_accessor project_key: ::String
+      attr_accessor project_id: ::String
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class JiraResourceCapabilities
+      attr_accessor create_issue: bool
+      attr_accessor comment_issue: bool
+      SENSITIVE: []
+    end
+
+    class LinkedIssue
+      attr_accessor provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
+      attr_accessor integration_id: ::String
+      attr_accessor project_key: ::String
+      attr_accessor issue_key: ::String
+      attr_accessor issue_id: ::String
+      attr_accessor issue_url: ::String
+      attr_accessor site_url: ::String
       SENSITIVE: []
     end
 
@@ -1564,7 +1668,7 @@ module Aws::SecurityAgent
     class ListIntegratedResourcesInput
       attr_accessor agent_space_id: ::String
       attr_accessor integration_id: ::String
-      attr_accessor resource_type: ("CODE_REPOSITORY" | "DOCUMENT")
+      attr_accessor resource_type: ("CODE_REPOSITORY" | "DOCUMENT" | "PROJECT")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -1943,6 +2047,7 @@ module Aws::SecurityAgent
       attr_accessor confluence: Types::ConfluenceIntegrationInput
       attr_accessor azure_dev_ops: Types::AzureDevOpsIntegrationInput
       attr_accessor bitbucket_data_center: Types::BitbucketDataCenterIntegrationInput
+      attr_accessor jira: Types::JiraIntegrationInput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1958,6 +2063,8 @@ module Aws::SecurityAgent
       end
       class BitbucketDataCenter < ProviderInput
       end
+      class Jira < ProviderInput
+      end
       class Unknown < ProviderInput
       end
     end
@@ -1968,6 +2075,7 @@ module Aws::SecurityAgent
       attr_accessor bitbucket: Types::BitbucketResourceCapabilities
       attr_accessor confluence: Types::ConfluenceResourceCapabilities
       attr_accessor azure_dev_ops: Types::AzureDevOpsResourceCapabilities
+      attr_accessor jira: Types::JiraResourceCapabilities
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1980,6 +2088,8 @@ module Aws::SecurityAgent
       class Confluence < ProviderResourceCapabilities
       end
       class AzureDevOps < ProviderResourceCapabilities
+      end
+      class Jira < ProviderResourceCapabilities
       end
       class Unknown < ProviderResourceCapabilities
       end

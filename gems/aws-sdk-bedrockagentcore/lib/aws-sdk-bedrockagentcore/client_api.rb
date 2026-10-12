@@ -633,6 +633,9 @@ module Aws::BedrockAgentCore
     RecommendationSummaryList = Shapes::ListShape.new(name: 'RecommendationSummaryList')
     RecommendationToolName = Shapes::StringShape.new(name: 'RecommendationToolName')
     RecommendationType = Shapes::StringShape.new(name: 'RecommendationType')
+    RecordExpiryAction = Shapes::StringShape.new(name: 'RecordExpiryAction')
+    RecordExpiryDurationDays = Shapes::IntegerShape.new(name: 'RecordExpiryDurationDays')
+    RecordExpirySpecification = Shapes::UnionShape.new(name: 'RecordExpirySpecification')
     RegistryArn = Shapes::StringShape.new(name: 'RegistryArn')
     RegistryIdentifier = Shapes::StringShape.new(name: 'RegistryIdentifier')
     RegistryRecordArn = Shapes::StringShape.new(name: 'RegistryRecordArn')
@@ -929,6 +932,7 @@ module Aws::BedrockAgentCore
     BatchCreateMemoryRecordsInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
     BatchCreateMemoryRecordsInput.add_member(:records, Shapes::ShapeRef.new(shape: MemoryRecordsCreateInputList, required: true, location_name: "records"))
     BatchCreateMemoryRecordsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    BatchCreateMemoryRecordsInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     BatchCreateMemoryRecordsInput.struct_class = Types::BatchCreateMemoryRecordsInput
 
     BatchCreateMemoryRecordsOutput.add_member(:successful_records, Shapes::ShapeRef.new(shape: MemoryRecordsOutputList, required: true, location_name: "successfulRecords"))
@@ -964,6 +968,7 @@ module Aws::BedrockAgentCore
 
     BatchUpdateMemoryRecordsInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
     BatchUpdateMemoryRecordsInput.add_member(:records, Shapes::ShapeRef.new(shape: MemoryRecordsUpdateInputList, required: true, location_name: "records"))
+    BatchUpdateMemoryRecordsInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     BatchUpdateMemoryRecordsInput.struct_class = Types::BatchUpdateMemoryRecordsInput
 
     BatchUpdateMemoryRecordsOutput.add_member(:successful_records, Shapes::ShapeRef.new(shape: MemoryRecordsOutputList, required: true, location_name: "successfulRecords"))
@@ -2531,7 +2536,9 @@ module Aws::BedrockAgentCore
     MemoryRecord.add_member(:memory_strategy_id, Shapes::ShapeRef.new(shape: MemoryStrategyId, required: true, location_name: "memoryStrategyId"))
     MemoryRecord.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespacesList, required: true, location_name: "namespaces"))
     MemoryRecord.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    MemoryRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))
     MemoryRecord.add_member(:metadata, Shapes::ShapeRef.new(shape: MemoryRecordMetadataMap, location_name: "metadata"))
+    MemoryRecord.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
     MemoryRecord.struct_class = Types::MemoryRecord
 
     MemoryRecordCreateInput.add_member(:request_identifier, Shapes::ShapeRef.new(shape: RequestIdentifier, required: true, location_name: "requestIdentifier"))
@@ -2586,6 +2593,7 @@ module Aws::BedrockAgentCore
     MemoryRecordSummary.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespacesList, required: true, location_name: "namespaces"))
     MemoryRecordSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     MemoryRecordSummary.add_member(:score, Shapes::ShapeRef.new(shape: Double, location_name: "score"))
+    MemoryRecordSummary.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))
     MemoryRecordSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: MemoryRecordMetadataMap, location_name: "metadata"))
     MemoryRecordSummary.struct_class = Types::MemoryRecordSummary
 
@@ -2890,6 +2898,14 @@ module Aws::BedrockAgentCore
     RecommendationSummary.struct_class = Types::RecommendationSummary
 
     RecommendationSummaryList.member = Shapes::ShapeRef.new(shape: RecommendationSummary)
+
+    RecordExpirySpecification.add_member(:record_expiry_duration_days, Shapes::ShapeRef.new(shape: RecordExpiryDurationDays, location_name: "recordExpiryDurationDays"))
+    RecordExpirySpecification.add_member(:action, Shapes::ShapeRef.new(shape: RecordExpiryAction, location_name: "action"))
+    RecordExpirySpecification.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RecordExpirySpecification.add_member_subclass(:record_expiry_duration_days, Types::RecordExpirySpecification::RecordExpiryDurationDays)
+    RecordExpirySpecification.add_member_subclass(:action, Types::RecordExpirySpecification::Action)
+    RecordExpirySpecification.add_member_subclass(:unknown, Types::RecordExpirySpecification::Unknown)
+    RecordExpirySpecification.struct_class = Types::RecordExpirySpecification
 
     RegistryRecordSummary.add_member(:registry_arn, Shapes::ShapeRef.new(shape: RegistryArn, required: true, location_name: "registryArn"))
     RegistryRecordSummary.add_member(:record_arn, Shapes::ShapeRef.new(shape: RegistryRecordArn, required: true, location_name: "recordArn"))

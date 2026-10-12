@@ -216,6 +216,9 @@ module Aws
         token_value: ::String,
         authorization_header: ::String?
       }?,
+      custom_headers: {
+        headers: Hash[::String, ::String]
+      }?,
       authorization_discovery: {
         return_to_endpoint: ::String
       }?

@@ -11326,6 +11326,108 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Creates a training session in Amazon SageMaker. A training session
+    # provisions compute resources for fine-tuning a foundation model using
+    # Low-Rank Adaptation (LoRA). After the session is created, you can
+    # submit training operations and sample inference requests through the
+    # Amazon SageMaker Training Session Runtime API.
+    #
+    # The following operations are related to `CreateTrainingSession`:
+    #
+    # * `DescribeTrainingSession`
+    #
+    # * `ListTrainingSessions`
+    #
+    # * `StopTrainingSession`
+    #
+    # * `DeleteTrainingSession`
+    #
+    # @option params [required, String] :training_session_name
+    #   The name of the training session.
+    #
+    # @option params [String] :model_package_group_arn
+    #   The Amazon Resource Name (ARN) of the model package group where
+    #   checkpoints and fine-tuned model artifacts are published.
+    #
+    # @option params [required, Types::LoraConfig] :lora_config
+    #   The Low-Rank Adaptation (LoRA) configuration for the training session,
+    #   including the rank and alpha parameters.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
+    #   assumes to access resources on your behalf. The role must have
+    #   permissions to access the output S3 path and model package group.
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   The Virtual Private Cloud (VPC) configuration for the training
+    #   session. Specify subnets and security groups to run the training
+    #   session in your VPC.
+    #
+    # @option params [required, Types::TrainingSessionModelConfig] :model_config
+    #   The configuration for the base model, including the model ARN and
+    #   end-user license agreement (EULA) acceptance.
+    #
+    # @option params [required, Types::TrainingSessionOutputConfig] :output_config
+    #   The output configuration for the training session, including the S3
+    #   location and optional encryption settings.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of key-value pairs to apply to the training session as tags.
+    #   For more information, see [Tagging Amazon Web Services Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::CreateTrainingSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTrainingSessionResponse#training_session_arn #training_session_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_training_session({
+    #     training_session_name: "TrainingSessionName", # required
+    #     model_package_group_arn: "ModelPackageGroupArn",
+    #     lora_config: { # required
+    #       rank: 1, # required
+    #       alpha: 1, # required
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
+    #     model_config: { # required
+    #       base_model_arn: "BaseModelArn", # required
+    #       accept_eula: false,
+    #     },
+    #     output_config: { # required
+    #       s3_location: { # required
+    #         path: "OutputS3Path", # required
+    #         kms_key_arn: "CustomerKmsKeyArn",
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.training_session_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingSession AWS API Documentation
+    #
+    # @overload create_training_session(params = {})
+    # @param [Hash] params ({})
+    def create_training_session(params = {}, options = {})
+      req = build_request(:create_training_session, params)
+      req.send_request(options)
+    end
+
     # Starts a transform job. A transform job uses a trained model to get
     # inferences on a dataset and saves these results to an Amazon S3
     # location that you specify.
@@ -13889,6 +13991,38 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def delete_training_job(params = {}, options = {})
       req = build_request(:delete_training_job, params)
+      req.send_request(options)
+    end
+
+    # Deletes a training session. You must stop a running session before
+    # deleting it. Use the `StopTrainingSession` operation to stop the
+    # session first.
+    #
+    # The following operations are related to `DeleteTrainingSession`:
+    #
+    # * `CreateTrainingSession`
+    #
+    # * `DescribeTrainingSession`
+    #
+    # * `StopTrainingSession`
+    #
+    # @option params [required, String] :training_session_name
+    #   The name of the training session to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_training_session({
+    #     training_session_name: "TrainingSessionName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTrainingSession AWS API Documentation
+    #
+    # @overload delete_training_session(params = {})
+    # @param [Hash] params ({})
+    def delete_training_session(params = {}, options = {})
+      req = build_request(:delete_training_session, params)
       req.send_request(options)
     end
 
@@ -20773,6 +20907,71 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_training_plan_extension_history(params = {}, options = {})
       req = build_request(:describe_training_plan_extension_history, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a training session, including its
+    # current status, model configuration, Low-Rank Adaptation (LoRA)
+    # parameters, and timestamps.
+    #
+    # The following operations are related to `DescribeTrainingSession`:
+    #
+    # * `CreateTrainingSession`
+    #
+    # * `ListTrainingSessions`
+    #
+    # * `StopTrainingSession`
+    #
+    # * `DeleteTrainingSession`
+    #
+    # @option params [required, String] :training_session_name
+    #   The name of the training session to describe.
+    #
+    # @return [Types::DescribeTrainingSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTrainingSessionResponse#training_session_detail #training_session_detail} => Types::TrainingSessionDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_training_session({
+    #     training_session_name: "TrainingSessionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.training_session_detail.training_session_arn #=> String
+    #   resp.training_session_detail.training_session_name #=> String
+    #   resp.training_session_detail.training_session_status #=> String, one of "Created", "Blocked", "Running", "Failed", "Scheduled", "Stopping", "Stopped", "Expired", "Deleting", "DeletionFailed"
+    #   resp.training_session_detail.model_package_group_arn #=> String
+    #   resp.training_session_detail.creation_time #=> Time
+    #   resp.training_session_detail.last_modified_time #=> Time
+    #   resp.training_session_detail.end_time #=> Time
+    #   resp.training_session_detail.error_details #=> String
+    #   resp.training_session_detail.last_received_sequence_number #=> Integer
+    #   resp.training_session_detail.billable_token_usage.prefill_token_count #=> Integer
+    #   resp.training_session_detail.billable_token_usage.sample_token_count #=> Integer
+    #   resp.training_session_detail.billable_token_usage.training_token_count #=> Integer
+    #   resp.training_session_detail.vpc_config.security_group_ids #=> Array
+    #   resp.training_session_detail.vpc_config.security_group_ids[0] #=> String
+    #   resp.training_session_detail.vpc_config.subnets #=> Array
+    #   resp.training_session_detail.vpc_config.subnets[0] #=> String
+    #   resp.training_session_detail.role_arn #=> String
+    #   resp.training_session_detail.lora_config.rank #=> Integer
+    #   resp.training_session_detail.lora_config.alpha #=> Integer
+    #   resp.training_session_detail.model_config.base_model_arn #=> String
+    #   resp.training_session_detail.model_config.accept_eula #=> Boolean
+    #   resp.training_session_detail.output_config.s3_location.path #=> String
+    #   resp.training_session_detail.output_config.s3_location.kms_key_arn #=> String
+    #   resp.training_session_detail.tags #=> Array
+    #   resp.training_session_detail.tags[0].key #=> String
+    #   resp.training_session_detail.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingSession AWS API Documentation
+    #
+    # @overload describe_training_session(params = {})
+    # @param [Hash] params ({})
+    def describe_training_session(params = {}, options = {})
+      req = build_request(:describe_training_session, params)
       req.send_request(options)
     end
 
@@ -28354,6 +28553,75 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists training sessions in your account. You can filter results by
+    # creation time, name, and status. The operation paginates results. To
+    # retrieve additional results, use the `NextToken` parameter.
+    #
+    # The following operations are related to `ListTrainingSessions`:
+    #
+    # * `CreateTrainingSession`
+    #
+    # * `DescribeTrainingSession`
+    #
+    # @option params [String] :next_token
+    #   If the response was truncated, use the token returned in the previous
+    #   response to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of training sessions to return in the response.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only training sessions created after the
+    #   specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only training sessions created before the
+    #   specified time.
+    #
+    # @option params [String] :name_contains
+    #   A string in the training session name to filter results. Only sessions
+    #   whose name contains the specified string are returned.
+    #
+    # @option params [String] :status_equals
+    #   A filter that returns only training sessions with the specified
+    #   status.
+    #
+    # @return [Types::ListTrainingSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTrainingSessionsResponse#next_token #next_token} => String
+    #   * {Types::ListTrainingSessionsResponse#training_session_summaries #training_session_summaries} => Array&lt;Types::TrainingSessionSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_training_sessions({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     name_contains: "NameContains",
+    #     status_equals: "Created", # accepts Created, Blocked, Running, Failed, Scheduled, Stopping, Stopped, Expired, Deleting, DeletionFailed
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.training_session_summaries #=> Array
+    #   resp.training_session_summaries[0].training_session_arn #=> String
+    #   resp.training_session_summaries[0].training_session_status #=> String, one of "Created", "Blocked", "Running", "Failed", "Scheduled", "Stopping", "Stopped", "Expired", "Deleting", "DeletionFailed"
+    #   resp.training_session_summaries[0].creation_time #=> Time
+    #   resp.training_session_summaries[0].last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingSessions AWS API Documentation
+    #
+    # @overload list_training_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_training_sessions(params = {}, options = {})
+      req = build_request(:list_training_sessions, params)
+      req.send_request(options)
+    end
+
     # Lists transform jobs.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
@@ -30386,6 +30654,39 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def stop_training_job(params = {}, options = {})
       req = build_request(:stop_training_job, params)
+      req.send_request(options)
+    end
+
+    # Stops a running training session and sets the session status to
+    # `Stopping`. After the session stops, the status changes to `Stopped`.
+    # To delete a stopped session, use the `DeleteTrainingSession`
+    # operation.
+    #
+    # The following operations are related to `StopTrainingSession`:
+    #
+    # * `CreateTrainingSession`
+    #
+    # * `DescribeTrainingSession`
+    #
+    # * `DeleteTrainingSession`
+    #
+    # @option params [required, String] :training_session_name
+    #   The name of the training session to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_training_session({
+    #     training_session_name: "TrainingSessionName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingSession AWS API Documentation
+    #
+    # @overload stop_training_session(params = {})
+    # @param [Hash] params ({})
+    def stop_training_session(params = {}, options = {})
+      req = build_request(:stop_training_session, params)
       req.send_request(options)
     end
 
@@ -34787,7 +35088,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.398.0'
+      context[:gem_version] = '1.399.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -105,6 +105,7 @@ module Aws::DevOpsAgent
     CreateTriggerResponse = Shapes::StructureShape.new(name: 'CreateTriggerResponse')
     CronSchedule = Shapes::StructureShape.new(name: 'CronSchedule')
     CustomHeaderName = Shapes::StringShape.new(name: 'CustomHeaderName')
+    CustomHeaderNames = Shapes::ListShape.new(name: 'CustomHeaderNames')
     CustomHeaderValue = Shapes::StringShape.new(name: 'CustomHeaderValue')
     CustomHeaders = Shapes::MapShape.new(name: 'CustomHeaders')
     DailyRecurrence = Shapes::StructureShape.new(name: 'DailyRecurrence')
@@ -203,6 +204,7 @@ module Aws::DevOpsAgent
     IdpAuthConfiguration = Shapes::StructureShape.new(name: 'IdpAuthConfiguration')
     IdpClientId = Shapes::StringShape.new(name: 'IdpClientId')
     IdpClientSecret = Shapes::StringShape.new(name: 'IdpClientSecret')
+    IncludedData = Shapes::StringShape.new(name: 'IncludedData')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InterruptId = Shapes::StringShape.new(name: 'InterruptId')
@@ -282,6 +284,8 @@ module Aws::DevOpsAgent
     MCPServerBearerTokenConfigTokenNameString = Shapes::StringShape.new(name: 'MCPServerBearerTokenConfigTokenNameString')
     MCPServerBearerTokenConfigTokenValueString = Shapes::StringShape.new(name: 'MCPServerBearerTokenConfigTokenValueString')
     MCPServerConfiguration = Shapes::StructureShape.new(name: 'MCPServerConfiguration')
+    MCPServerCustomHeadersConfig = Shapes::StructureShape.new(name: 'MCPServerCustomHeadersConfig')
+    MCPServerCustomHeadersConfigHeadersMap = Shapes::MapShape.new(name: 'MCPServerCustomHeadersConfigHeadersMap')
     MCPServerDatadogConfiguration = Shapes::StructureShape.new(name: 'MCPServerDatadogConfiguration')
     MCPServerDetails = Shapes::StructureShape.new(name: 'MCPServerDetails')
     MCPServerDetailsDescriptionString = Shapes::StringShape.new(name: 'MCPServerDetailsDescriptionString')
@@ -865,6 +869,8 @@ module Aws::DevOpsAgent
     CronSchedule.add_member(:expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "expression"))
     CronSchedule.struct_class = Types::CronSchedule
 
+    CustomHeaderNames.member = Shapes::ShapeRef.new(shape: CustomHeaderName)
+
     CustomHeaders.key = Shapes::ShapeRef.new(shape: CustomHeaderName)
     CustomHeaders.value = Shapes::ShapeRef.new(shape: CustomHeaderValue)
 
@@ -1019,11 +1025,13 @@ module Aws::DevOpsAgent
     GetAccountUsageOutput.add_member(:monthly_account_evaluation_hours, Shapes::ShapeRef.new(shape: UsageMetric, location_name: "monthlyAccountEvaluationHours"))
     GetAccountUsageOutput.add_member(:monthly_account_system_learning_hours, Shapes::ShapeRef.new(shape: UsageMetric, location_name: "monthlyAccountSystemLearningHours"))
     GetAccountUsageOutput.add_member(:monthly_account_on_demand_hours, Shapes::ShapeRef.new(shape: UsageMetric, location_name: "monthlyAccountOnDemandHours"))
+    GetAccountUsageOutput.add_member(:monthly_account_grader_hours, Shapes::ShapeRef.new(shape: UsageMetric, location_name: "monthlyAccountGraderHours"))
     GetAccountUsageOutput.add_member(:usage_period_start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "usagePeriodStartTime"))
     GetAccountUsageOutput.add_member(:usage_period_end_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "usagePeriodEndTime"))
     GetAccountUsageOutput.struct_class = Types::GetAccountUsageOutput
 
     GetAgentSpaceInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
+    GetAgentSpaceInput.add_member(:included_data, Shapes::ShapeRef.new(shape: IncludedData, location: "querystring", location_name: "includedData"))
     GetAgentSpaceInput.struct_class = Types::GetAgentSpaceInput
 
     GetAgentSpaceOutput.add_member(:agent_space, Shapes::ShapeRef.new(shape: AgentSpace, required: true, location_name: "agentSpace"))
@@ -1200,6 +1208,7 @@ module Aws::DevOpsAgent
 
     ListAgentSpacesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAgentSpacesInputMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListAgentSpacesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAgentSpacesInput.add_member(:included_data, Shapes::ShapeRef.new(shape: IncludedData, location: "querystring", location_name: "includedData"))
     ListAgentSpacesInput.struct_class = Types::ListAgentSpacesInput
 
     ListAgentSpacesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -1385,12 +1394,14 @@ module Aws::DevOpsAgent
     MCPServerAuthorizationConfig.add_member(:o_auth_3_lo, Shapes::ShapeRef.new(shape: MCPServerOAuth3LOConfig, location_name: "oAuth3LO"))
     MCPServerAuthorizationConfig.add_member(:api_key, Shapes::ShapeRef.new(shape: MCPServerAPIKeyConfig, location_name: "apiKey"))
     MCPServerAuthorizationConfig.add_member(:bearer_token, Shapes::ShapeRef.new(shape: MCPServerBearerTokenConfig, location_name: "bearerToken"))
+    MCPServerAuthorizationConfig.add_member(:custom_headers, Shapes::ShapeRef.new(shape: MCPServerCustomHeadersConfig, location_name: "customHeaders"))
     MCPServerAuthorizationConfig.add_member(:authorization_discovery, Shapes::ShapeRef.new(shape: MCPServerAuthorizationDiscoveryConfig, location_name: "authorizationDiscovery"))
     MCPServerAuthorizationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     MCPServerAuthorizationConfig.add_member_subclass(:o_auth_client_credentials, Types::MCPServerAuthorizationConfig::OAuthClientCredentials)
     MCPServerAuthorizationConfig.add_member_subclass(:o_auth_3_lo, Types::MCPServerAuthorizationConfig::OAuth3Lo)
     MCPServerAuthorizationConfig.add_member_subclass(:api_key, Types::MCPServerAuthorizationConfig::ApiKey)
     MCPServerAuthorizationConfig.add_member_subclass(:bearer_token, Types::MCPServerAuthorizationConfig::BearerToken)
+    MCPServerAuthorizationConfig.add_member_subclass(:custom_headers, Types::MCPServerAuthorizationConfig::CustomHeaders)
     MCPServerAuthorizationConfig.add_member_subclass(:authorization_discovery, Types::MCPServerAuthorizationConfig::AuthorizationDiscovery)
     MCPServerAuthorizationConfig.add_member_subclass(:unknown, Types::MCPServerAuthorizationConfig::Unknown)
     MCPServerAuthorizationConfig.struct_class = Types::MCPServerAuthorizationConfig
@@ -1406,6 +1417,12 @@ module Aws::DevOpsAgent
     MCPServerConfiguration.add_member(:tools, Shapes::ShapeRef.new(shape: MCPToolsList, required: true, location_name: "tools"))
     MCPServerConfiguration.add_member(:tool_details, Shapes::ShapeRef.new(shape: MCPToolDetailsList, location_name: "toolDetails"))
     MCPServerConfiguration.struct_class = Types::MCPServerConfiguration
+
+    MCPServerCustomHeadersConfig.add_member(:headers, Shapes::ShapeRef.new(shape: MCPServerCustomHeadersConfigHeadersMap, required: true, location_name: "headers"))
+    MCPServerCustomHeadersConfig.struct_class = Types::MCPServerCustomHeadersConfig
+
+    MCPServerCustomHeadersConfigHeadersMap.key = Shapes::ShapeRef.new(shape: CustomHeaderName)
+    MCPServerCustomHeadersConfigHeadersMap.value = Shapes::ShapeRef.new(shape: CustomHeaderValue)
 
     MCPServerDatadogConfiguration.add_member(:enabled_elevated_tools, Shapes::ShapeRef.new(shape: MCPToolDetailsList, location_name: "enabledElevatedTools"))
     MCPServerDatadogConfiguration.struct_class = Types::MCPServerDatadogConfiguration
@@ -1669,6 +1686,7 @@ module Aws::DevOpsAgent
     RegisteredMCPServerDetails.add_member(:authorization_method, Shapes::ShapeRef.new(shape: MCPServerAuthorizationMethod, required: true, location_name: "authorizationMethod"))
     RegisteredMCPServerDetails.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     RegisteredMCPServerDetails.add_member(:api_key_header, Shapes::ShapeRef.new(shape: String, location_name: "apiKeyHeader"))
+    RegisteredMCPServerDetails.add_member(:custom_header_names, Shapes::ShapeRef.new(shape: CustomHeaderNames, location_name: "customHeaderNames"))
     RegisteredMCPServerDetails.struct_class = Types::RegisteredMCPServerDetails
 
     RegisteredMCPServerSigV4Details.add_member(:name, Shapes::ShapeRef.new(shape: MCPServerName, required: true, location_name: "name"))

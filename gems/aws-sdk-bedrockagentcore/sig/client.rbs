@@ -106,7 +106,11 @@ module Aws
                                                }]?
                                            }
                                          ],
-                                         ?client_token: ::String
+                                         ?client_token: ::String,
+                                         ?record_expiry_specification: {
+                                           record_expiry_duration_days: ::Integer?,
+                                           action: ("REMOVE")?
+                                         }
                                        ) -> _BatchCreateMemoryRecordsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateMemoryRecordsResponseSuccess
 
@@ -152,7 +156,11 @@ module Aws
                                                  date_time_value: ::Time?
                                                }]?
                                            }
-                                         ]
+                                         ],
+                                         ?record_expiry_specification: {
+                                           record_expiry_duration_days: ::Integer?,
+                                           action: ("REMOVE")?
+                                         }
                                        ) -> _BatchUpdateMemoryRecordsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateMemoryRecordsResponseSuccess
 

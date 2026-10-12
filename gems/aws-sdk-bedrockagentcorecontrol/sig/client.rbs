@@ -3206,7 +3206,11 @@ module Aws
                                      historical_context_window_size: ::Integer?
                                    }?
                                  }?,
-                                 memory_record_schema: Params::memory_record_schema?
+                                 memory_record_schema: Params::memory_record_schema?,
+                                 record_expiry_specification: {
+                                   record_expiry_duration_days: ::Integer?,
+                                   action: ("REMOVE")?
+                                 }?
                                }
                              ]?,
                              delete_memory_strategies: Array[

@@ -212,6 +212,17 @@ module Aws
                                          ) -> _BatchGetDataQualityResultResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDataQualityResultResponseSuccess
 
+      interface _BatchGetDataQualityResultV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDataQualityResultV2Response]
+        def results: () -> ::Array[Types::DataQualityResultV2Item]
+        def results_not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#batch_get_data_quality_result_v2-instance_method
+      def batch_get_data_quality_result_v2: (
+                                              result_ids: Array[::String]
+                                            ) -> _BatchGetDataQualityResultV2ResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDataQualityResultV2ResponseSuccess
+
       interface _BatchGetDataQualityRulesetEvaluationRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDataQualityRulesetEvaluationRunResponse]
         def runs: () -> ::Array[Types::DataQualityRulesetEvaluationRun]
@@ -1996,6 +2007,31 @@ module Aws
                                    ) -> _GetDataQualityResultResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataQualityResultResponseSuccess
 
+      interface _GetDataQualityResultV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityResultV2Response]
+        def result_id: () -> ::String
+        def data_source: () -> Types::DataSource
+        def profile_id: () -> ::String
+        def dimensions: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Hash[::String, ::String]
+        def execution_started_on: () -> ::Time
+        def execution_completed_on: () -> ::Time
+        def result_published_on: () -> ::Time
+        def score: () -> ::Float
+        def rule_results: () -> ::Array[Types::DataQualityRuleResult]
+        def analyzer_results: () -> ::Array[Types::DataQualityAnalyzerResult]
+        def observations: () -> ::Array[Types::DataQualityObservation]
+        def evaluation_context: () -> ::String
+        def descriptors: () -> ::Hash[::String, ::String]
+        def aggregated_metrics: () -> Types::DataQualityAggregatedMetrics
+        def ruleset_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_data_quality_result_v2-instance_method
+      def get_data_quality_result_v2: (
+                                        result_id: ::String
+                                      ) -> _GetDataQualityResultV2ResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataQualityResultV2ResponseSuccess
+
       interface _GetDataQualityRuleRecommendationRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityRuleRecommendationRunResponse]
         def run_id: () -> ::String
@@ -3152,6 +3188,25 @@ module Aws
                                      ) -> _ListDataQualityResultsResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataQualityResultsResponseSuccess
 
+      interface _ListDataQualityResultsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataQualityResultsV2Response]
+        def results: () -> ::Array[Types::DataQualityResultsV2Description]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#list_data_quality_results_v2-instance_method
+      def list_data_quality_results_v2: (
+                                          ?filter: {
+                                            data_source: Params::data_source?,
+                                            published_after: ::Time?,
+                                            published_before: ::Time?,
+                                            dimensions: Hash[::String, ::String]?,
+                                            evaluation_context: ::String?
+                                          },
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListDataQualityResultsV2ResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataQualityResultsV2ResponseSuccess
+
       interface _ListDataQualityRuleRecommendationRunsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDataQualityRuleRecommendationRunsResponse]
         def runs: () -> ::Array[Types::DataQualityRuleRecommendationRunDescription]
@@ -3570,6 +3625,112 @@ module Aws
                                 ?integration_name: ::String
                               ) -> _ModifyIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyIntegrationResponseSuccess
+
+      interface _PublishDataQualityResultV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishDataQualityResultV2Response]
+        def result_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#publish_data_quality_result_v2-instance_method
+      def publish_data_quality_result_v2: (
+                                            dimensions: Hash[::String, ::String],
+                                            ?tags: Hash[::String, ::String],
+                                            ?execution_started_on: ::Time,
+                                            ?execution_completed_on: ::Time,
+                                            score: ::Float,
+                                            rule_results: Array[
+                                              {
+                                                name: ::String?,
+                                                description: ::String?,
+                                                evaluation_message: ::String?,
+                                                result: ("PASS" | "FAIL" | "ERROR")?,
+                                                evaluated_metrics: Hash[::String, ::Float]?,
+                                                evaluated_rule: ::String?,
+                                                rule_metrics: Hash[::String, ::Float]?,
+                                                labels: Hash[::String, ::String]?
+                                              }
+                                            ],
+                                            ?analyzer_results: Array[
+                                              {
+                                                name: ::String?,
+                                                description: ::String?,
+                                                evaluation_message: ::String?,
+                                                evaluated_metrics: Hash[::String, ::Float]?,
+                                                evaluated_distributions: Hash[::String, {
+                                                    bin_edges: Array[::String]?,
+                                                    count: Array[::Integer]?,
+                                                    data_type: ::String?
+                                                  }]?
+                                              }
+                                            ],
+                                            ?observations: Array[
+                                              {
+                                                description: ::String?,
+                                                metric_based_observation: {
+                                                  metric_name: ::String?,
+                                                  statistic_id: ::String?,
+                                                  metric_values: {
+                                                    actual_value: ::Float?,
+                                                    expected_value: ::Float?,
+                                                    lower_limit: ::Float?,
+                                                    upper_limit: ::Float?
+                                                  }?,
+                                                  new_rules: Array[::String]?
+                                                }?
+                                              }
+                                            ],
+                                            ?aggregated_metrics: {
+                                              total_rows_processed: ::Float?,
+                                              total_rows_passed: ::Float?,
+                                              total_rows_failed: ::Float?,
+                                              total_rules_processed: ::Float?,
+                                              total_rules_passed: ::Float?,
+                                              total_rules_failed: ::Float?
+                                            },
+                                            ?statistics: Array[
+                                              {
+                                                statistic_id: ::String?,
+                                                profile_id: ::String?,
+                                                run_identifier: {
+                                                  run_id: ::String?,
+                                                  job_run_id: ::String?
+                                                }?,
+                                                statistic_name: ::String?,
+                                                double_value: ::Float?,
+                                                distribution_value: {
+                                                  bin_edges: Array[::String]?,
+                                                  count: Array[::Integer]?,
+                                                  data_type: ::String?
+                                                }?,
+                                                evaluation_level: ("Dataset" | "Column" | "Multicolumn")?,
+                                                columns_referenced: Array[::String]?,
+                                                referenced_datasets: Array[::String]?,
+                                                statistic_properties: Hash[::String, ::String]?,
+                                                recorded_on: ::Time?,
+                                                inclusion_annotation: {
+                                                  value: ("INCLUDE" | "EXCLUDE")?,
+                                                  last_modified_on: ::Time?
+                                                }?
+                                              }
+                                            ],
+                                            ?run_configuration: {
+                                              observations_enabled: ("ALL" | "NONE")?,
+                                              observation_mode: ("SCHEDULED" | "FIXED")?
+                                            },
+                                            ?client_token: ::String,
+                                            evaluation_context: ::String,
+                                            ?descriptors: Hash[::String, ::String],
+                                            ?ruleset_name: ::String,
+                                            ?data_quality_security_configuration: ::String,
+                                            ?telemetry: {
+                                              vcpu_hours: ::Float?,
+                                              flags_enabled: Hash[::String, ::String]?,
+                                              library_version: ::String?,
+                                              spark_version: ::String?,
+                                              host_runtime_version: ::String?,
+                                              engine: ("SPARK" | "PYTHON")?
+                                            }
+                                          ) -> _PublishDataQualityResultV2ResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishDataQualityResultV2ResponseSuccess
 
       interface _PutAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutAssetResponse]

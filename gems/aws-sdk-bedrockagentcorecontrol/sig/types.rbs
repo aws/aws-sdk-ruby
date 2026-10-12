@@ -1451,6 +1451,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor configuration: Types::CustomConfigurationInput
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 
@@ -2019,6 +2020,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor reflection_configuration: Types::EpisodicReflectionConfigurationInput
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 
@@ -4422,6 +4424,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor updated_at: ::Time
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_duration_days: ::Integer
       SENSITIVE: [:description]
     end
 
@@ -4550,6 +4553,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor configuration: Types::ModifyStrategyConfiguration
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 
@@ -5046,6 +5050,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class RecordExpirySpecification
+      attr_accessor record_expiry_duration_days: ::Integer
+      attr_accessor action: ("REMOVE")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RecordExpiryDurationDays < RecordExpirySpecification
+      end
+      class Action < RecordExpirySpecification
+      end
+      class Unknown < RecordExpirySpecification
+      end
+    end
+
     class RecordingConfig
       attr_accessor enabled: bool
       attr_accessor s3_location: Types::S3Location
@@ -5364,6 +5382,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespaces: ::Array[::String]
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 
@@ -5594,6 +5613,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespaces: ::Array[::String]
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 
@@ -6539,6 +6559,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespaces: ::Array[::String]
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 

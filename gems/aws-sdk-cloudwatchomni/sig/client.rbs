@@ -960,6 +960,7 @@ module Aws
       def update_space: (
                           space_id: ::String,
                           ?name: ::String,
+                          ?agent_core_evaluation_role_arn: ::String,
                           ?encryption_configuration: {
                             encryption_strategy: ("AWS_OWNED" | "CUSTOMER_MANAGED"),
                             kms_key_arn: ::String?

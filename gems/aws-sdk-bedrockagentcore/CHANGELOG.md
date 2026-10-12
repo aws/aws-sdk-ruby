@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2026-10-12)
+------------------
+
+* Feature - AgentCore Memory now supports Long-Term Memory Time-to-Live on Batch APIs.
+
 1.57.0 (2026-09-21)
 ------------------
 

@@ -3398,6 +3398,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.phone_numbers[0].messaging_limits.rate_limits["String"] #=> Integer
     #   resp.phone_numbers[0].messaging_limits.daily_message_caps #=> Hash
     #   resp.phone_numbers[0].messaging_limits.daily_message_caps["String"] #=> Integer
+    #   resp.phone_numbers[0].pricing_tier #=> String
     #   resp.phone_numbers[0].created_timestamp #=> Time
     #   resp.next_token #=> String
     #
@@ -4252,6 +4253,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.sender_ids[0].messaging_limits.rate_limits["String"] #=> Integer
     #   resp.sender_ids[0].messaging_limits.daily_message_caps #=> Hash
     #   resp.sender_ids[0].messaging_limits.daily_message_caps["String"] #=> Integer
+    #   resp.sender_ids[0].pricing_tier #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeSenderIds AWS API Documentation
@@ -7825,7 +7827,7 @@ module Aws::PinpointSMSVoiceV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

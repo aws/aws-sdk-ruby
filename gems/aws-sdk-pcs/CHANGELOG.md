@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2026-10-12)
+------------------
+
+* Feature - Adding scheduler version to RegisterComputeNodeGroup API. A compute node uses this value to run the matching scheduler version.
+
 1.54.0 (2026-09-11)
 ------------------
 

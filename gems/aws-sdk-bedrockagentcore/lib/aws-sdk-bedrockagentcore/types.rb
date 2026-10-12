@@ -403,12 +403,23 @@ module Aws::BedrockAgentCore
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] record_expiry_specification
+    #   The record expiry (long-term memory time-to-live) applied to every
+    #   record created by this request. Set `recordExpiryDurationDays` to
+    #   the number of days after which the records expire. Only the expiry
+    #   provided here is applied; the records' strategy association has no
+    #   effect on their expiry. If you do not provide this value, the
+    #   records do not expire. The `REMOVE` action does not apply when
+    #   creating records.
+    #   @return [Types::RecordExpirySpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchCreateMemoryRecordsInput AWS API Documentation
     #
     class BatchCreateMemoryRecordsInput < Struct.new(
       :memory_id,
       :records,
-      :client_token)
+      :client_token,
+      :record_expiry_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -563,11 +574,35 @@ module Aws::BedrockAgentCore
     #   operation.
     #   @return [Array<Types::MemoryRecordUpdateInput>]
     #
+    # @!attribute [rw] record_expiry_specification
+    #   The record expiry (long-term memory time-to-live) applied to every
+    #   record updated by this request. Set `recordExpiryDurationDays` to
+    #   configure or overwrite the number of days after which the records
+    #   expire, or set `action` to `REMOVE` to clear a previously configured
+    #   expiry so that the records no longer expire.
+    #
+    #   When you do not provide this value, the service determines each
+    #   record's expiry from its current state:
+    #
+    #   * If the record already has an expiry configured, the service resets
+    #     and reapplies the expiry based on the last applied
+    #     `recordExpiryDurationDays`.
+    #
+    #   * If the record does not have an expiry configured, no expiry is
+    #     applied and the record remains non-expiring. This is the outcome
+    #     regardless of whether the record's strategy configures an expiry.
+    #
+    #   Providing an explicit `recordExpiryDurationDays` always takes
+    #   precedence: it overwrites an existing expiry, or sets one on a
+    #   record that previously had none.
+    #   @return [Types::RecordExpirySpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchUpdateMemoryRecordsInput AWS API Documentation
     #
     class BatchUpdateMemoryRecordsInput < Struct.new(
       :memory_id,
-      :records)
+      :records,
+      :record_expiry_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5149,7 +5184,8 @@ module Aws::BedrockAgentCore
     #   @return [Types::HarnessSkillGitSource]
     #
     # @!attribute [rw] aws_skills
-    #   AWS Skills baked into the Harness's underlying Runtime.
+    #   Amazon Web Services Skills baked into the Harness's underlying
+    #   Runtime.
     #   @return [Types::HarnessSkillAwsSkillsSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/HarnessSkill AWS API Documentation
@@ -5171,7 +5207,7 @@ module Aws::BedrockAgentCore
       class Unknown < HarnessSkill; end
     end
 
-    # Passed to show that AWS Skills should be included.
+    # Passed to show that Amazon Web Services Skills should be included.
     #
     # @!attribute [rw] paths
     #   Optionally filter allowed skills with glob syntax, e.g.,
@@ -7435,9 +7471,26 @@ module Aws::BedrockAgentCore
     #   The timestamp when the memory record was created.
     #   @return [Time]
     #
+    # @!attribute [rw] timestamp
+    #   The timestamp based on which the memory record was ingested. This
+    #   reflects the time of the source content that the record was derived
+    #   from, which can differ from `createdAt`, the time the record itself
+    #   was written.
+    #   @return [Time]
+    #
     # @!attribute [rw] metadata
     #   A map of metadata key-value pairs associated with a memory record.
     #   @return [Hash<String,Types::MemoryRecordMetadataValue>]
+    #
+    # @!attribute [rw] expires_at
+    #   The timestamp at which the memory record expires and becomes
+    #   eligible for deletion. This value is set when a record expiry
+    #   (long-term memory time-to-live) applies to the record, either from
+    #   the strategy the record belongs to or from a record expiry provided
+    #   on the batch request that created or updated it. If the record has
+    #   no expiry configured, this value is not present and the record does
+    #   not expire.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecord AWS API Documentation
     #
@@ -7447,7 +7500,9 @@ module Aws::BedrockAgentCore
       :memory_strategy_id,
       :namespaces,
       :created_at,
-      :metadata)
+      :timestamp,
+      :metadata,
+      :expires_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7662,6 +7717,13 @@ module Aws::BedrockAgentCore
     #   search query.
     #   @return [Float]
     #
+    # @!attribute [rw] timestamp
+    #   The timestamp based on which the memory record was ingested. This
+    #   reflects the time of the source content that the record was derived
+    #   from, which can differ from `createdAt`, the time the record itself
+    #   was written.
+    #   @return [Time]
+    #
     # @!attribute [rw] metadata
     #   A map of metadata key-value pairs associated with a memory record.
     #   @return [Hash<String,Types::MemoryRecordMetadataValue>]
@@ -7675,6 +7737,7 @@ module Aws::BedrockAgentCore
       :namespaces,
       :created_at,
       :score,
+      :timestamp,
       :metadata)
       SENSITIVE = []
       include Aws::Structure
@@ -8904,6 +8967,41 @@ module Aws::BedrockAgentCore
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Specifies the record expiry (long-term memory time-to-live) applied to
+    # the records in a batch request. Provide exactly one of
+    # `recordExpiryDurationDays` or `action`. Set `recordExpiryDurationDays`
+    # to configure or update the expiry, or set `action` to `REMOVE` to
+    # remove a previously configured expiry.
+    #
+    # @note RecordExpirySpecification is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] record_expiry_duration_days
+    #   The duration, in days, after which the records in this request
+    #   expire. The minimum is 31 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   The action to apply to the existing record expiry configuration. Set
+    #   to `REMOVE` to remove a previously configured expiry so that the
+    #   records no longer expire. This value does not apply when creating
+    #   records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/RecordExpirySpecification AWS API Documentation
+    #
+    class RecordExpirySpecification < Struct.new(
+      :record_expiry_duration_days,
+      :action,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RecordExpiryDurationDays < RecordExpirySpecification; end
+      class Action < RecordExpirySpecification; end
+      class Unknown < RecordExpirySpecification; end
     end
 
     # Summary information about a registry record.

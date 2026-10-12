@@ -433,6 +433,7 @@ module Aws::PCS
       attr_accessor compute_node_group_id: ::String
       attr_accessor compute_node_group_name: ::String
       attr_accessor node_lifecycle_actions: Types::NodeLifecycleActions
+      attr_accessor scheduler_version: ::String
       SENSITIVE: [:shared_secret]
     end
 

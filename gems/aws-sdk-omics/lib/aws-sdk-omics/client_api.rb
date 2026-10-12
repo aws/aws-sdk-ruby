@@ -2805,11 +2805,13 @@ module Aws::Omics
 
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: VpcConfigSecurityGroupIdsList, location_name: "securityGroupIds"))
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: VpcConfigSubnetIdsList, location_name: "subnetIds"))
+    VpcConfig.add_member(:vpc_owner_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "vpcOwnerAccountId"))
     VpcConfig.struct_class = Types::VpcConfig
 
     VpcConfigResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
     VpcConfigResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "subnetIds"))
     VpcConfigResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
+    VpcConfigResponse.add_member(:vpc_owner_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "vpcOwnerAccountId"))
     VpcConfigResponse.struct_class = Types::VpcConfigResponse
 
     VpcConfigSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)

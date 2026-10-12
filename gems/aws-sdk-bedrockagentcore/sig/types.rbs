@@ -130,6 +130,7 @@ module Aws::BedrockAgentCore
       attr_accessor memory_id: ::String
       attr_accessor records: ::Array[Types::MemoryRecordCreateInput]
       attr_accessor client_token: ::String
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: []
     end
 
@@ -175,6 +176,7 @@ module Aws::BedrockAgentCore
     class BatchUpdateMemoryRecordsInput
       attr_accessor memory_id: ::String
       attr_accessor records: ::Array[Types::MemoryRecordUpdateInput]
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: []
     end
 
@@ -2237,7 +2239,9 @@ module Aws::BedrockAgentCore
       attr_accessor memory_strategy_id: ::String
       attr_accessor namespaces: ::Array[::String]
       attr_accessor created_at: ::Time
+      attr_accessor timestamp: ::Time
       attr_accessor metadata: ::Hash[::String, Types::MemoryRecordMetadataValue]
+      attr_accessor expires_at: ::Time
       SENSITIVE: []
     end
 
@@ -2315,6 +2319,7 @@ module Aws::BedrockAgentCore
       attr_accessor namespaces: ::Array[::String]
       attr_accessor created_at: ::Time
       attr_accessor score: ::Float
+      attr_accessor timestamp: ::Time
       attr_accessor metadata: ::Hash[::String, Types::MemoryRecordMetadataValue]
       SENSITIVE: []
     end
@@ -2706,6 +2711,20 @@ module Aws::BedrockAgentCore
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
+    end
+
+    class RecordExpirySpecification
+      attr_accessor record_expiry_duration_days: ::Integer
+      attr_accessor action: ("REMOVE")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RecordExpiryDurationDays < RecordExpirySpecification
+      end
+      class Action < RecordExpirySpecification
+      end
+      class Unknown < RecordExpirySpecification
+      end
     end
 
     class RegistryRecordSummary

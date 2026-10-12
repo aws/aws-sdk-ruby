@@ -1237,6 +1237,9 @@
   "SageMakerRuntimeHTTP2": {
     "models": "sagemaker-runtime-http2/2025-10-01"
   },
+  "SageMakerTrainingSessionRuntime": {
+    "models": "sagemakertrainingsessionruntime/2025-02-10"
+  },
   "SagemakerEdgeManager": {
     "models": "sagemaker-edge/2020-09-23"
   },

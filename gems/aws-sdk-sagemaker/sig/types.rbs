@@ -1000,6 +1000,13 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class BillableTokenUsage
+      attr_accessor prefill_token_count: ::Integer
+      attr_accessor sample_token_count: ::Integer
+      attr_accessor training_token_count: ::Integer
+      SENSITIVE: []
+    end
+
     class BlueGreenUpdatePolicy
       attr_accessor traffic_routing_configuration: Types::TrafficRoutingConfig
       attr_accessor termination_wait_in_seconds: ::Integer
@@ -2941,6 +2948,23 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class CreateTrainingSessionRequest
+      attr_accessor training_session_name: ::String
+      attr_accessor model_package_group_arn: ::String
+      attr_accessor lora_config: Types::LoraConfig
+      attr_accessor role_arn: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor model_config: Types::TrainingSessionModelConfig
+      attr_accessor output_config: Types::TrainingSessionOutputConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTrainingSessionResponse
+      attr_accessor training_session_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateTransformJobRequest
       attr_accessor transform_job_name: ::String
       attr_accessor model_name: ::String
@@ -3625,6 +3649,14 @@ module Aws::SageMaker
     class DeleteTrainingJobRequest
       attr_accessor training_job_name: ::String
       SENSITIVE: []
+    end
+
+    class DeleteTrainingSessionRequest
+      attr_accessor training_session_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTrainingSessionResponse < Aws::EmptyStructure
     end
 
     class DeleteTrialComponentRequest
@@ -5299,6 +5331,16 @@ module Aws::SageMaker
       attr_accessor total_ultra_server_count: ::Integer
       attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster" | "endpoint" | "studio-apps")]
       attr_accessor reserved_capacity_summaries: ::Array[Types::ReservedCapacitySummary]
+      SENSITIVE: []
+    end
+
+    class DescribeTrainingSessionRequest
+      attr_accessor training_session_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTrainingSessionResponse
+      attr_accessor training_session_detail: Types::TrainingSessionDetail
       SENSITIVE: []
     end
 
@@ -8624,6 +8666,22 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ListTrainingSessionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      attr_accessor name_contains: ::String
+      attr_accessor status_equals: ("Created" | "Blocked" | "Running" | "Failed" | "Scheduled" | "Stopping" | "Stopped" | "Expired" | "Deleting" | "DeletionFailed")
+      SENSITIVE: []
+    end
+
+    class ListTrainingSessionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor training_session_summaries: ::Array[Types::TrainingSessionSummary]
+      SENSITIVE: []
+    end
+
     class ListTransformJobsRequest
       attr_accessor creation_time_after: ::Time
       attr_accessor creation_time_before: ::Time
@@ -8737,6 +8795,12 @@ module Aws::SageMaker
     class ListWorkteamsResponse
       attr_accessor workteams: ::Array[Types::Workteam]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LoraConfig
+      attr_accessor rank: ::Integer
+      attr_accessor alpha: ::Integer
       SENSITIVE: []
     end
 
@@ -11306,6 +11370,14 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class StopTrainingSessionRequest
+      attr_accessor training_session_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopTrainingSessionResponse < Aws::EmptyStructure
+    end
+
     class StopTransformJobRequest
       attr_accessor transform_job_name: ::String
       SENSITIVE: []
@@ -11671,6 +11743,51 @@ module Aws::SageMaker
 
     class TrainingRepositoryAuthConfig
       attr_accessor training_repository_credentials_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TrainingSessionDetail
+      attr_accessor training_session_arn: ::String
+      attr_accessor training_session_name: ::String
+      attr_accessor training_session_status: ("Created" | "Blocked" | "Running" | "Failed" | "Scheduled" | "Stopping" | "Stopped" | "Expired" | "Deleting" | "DeletionFailed")
+      attr_accessor model_package_group_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor error_details: ::String
+      attr_accessor last_received_sequence_number: ::Integer
+      attr_accessor billable_token_usage: Types::BillableTokenUsage
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor role_arn: ::String
+      attr_accessor lora_config: Types::LoraConfig
+      attr_accessor model_config: Types::TrainingSessionModelConfig
+      attr_accessor output_config: Types::TrainingSessionOutputConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TrainingSessionModelConfig
+      attr_accessor base_model_arn: ::String
+      attr_accessor accept_eula: bool
+      SENSITIVE: []
+    end
+
+    class TrainingSessionOutputConfig
+      attr_accessor s3_location: Types::TrainingSessionS3Location
+      SENSITIVE: []
+    end
+
+    class TrainingSessionS3Location
+      attr_accessor path: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TrainingSessionSummary
+      attr_accessor training_session_arn: ::String
+      attr_accessor training_session_status: ("Created" | "Blocked" | "Running" | "Failed" | "Scheduled" | "Stopping" | "Stopped" | "Expired" | "Deleting" | "DeletionFailed")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 

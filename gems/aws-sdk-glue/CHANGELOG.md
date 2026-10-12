@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.282.0 (2026-10-12)
+------------------
+
+* Feature - Adds new AWS Glue Data Quality APIs to retrieve and list data quality evaluation results. The new GetDataQualityResultV2, BatchGetDataQualityResultV2, and ListDataQualityResultsV2 operations return data quality results published from any supported data processing engine.
+
 1.281.0 (2026-10-08)
 ------------------
 

@@ -287,7 +287,7 @@ module Aws
                                  configuration: Params::router_input_configuration,
                                  maximum_bitrate: ::Integer,
                                  routing_scope: ("REGIONAL" | "GLOBAL"),
-                                 tier: ("INPUT_100" | "INPUT_50" | "INPUT_20"),
+                                 tier: ("INPUT_100" | "INPUT_50" | "INPUT_20" | "INPUT_500" | "INPUT_250"),
                                  ?region_name: ::String,
                                  ?availability_zone: ::String,
                                  ?transit_encryption: Params::router_input_transit_encryption,
@@ -322,7 +322,7 @@ module Aws
                                   configuration: Params::router_output_configuration,
                                   maximum_bitrate: ::Integer,
                                   routing_scope: ("REGIONAL" | "GLOBAL"),
-                                  tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20"),
+                                  tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20" | "OUTPUT_500" | "OUTPUT_250"),
                                   ?region_name: ::String,
                                   ?availability_zone: ::String,
                                   ?maintenance_configuration: Params::maintenance_configuration,
@@ -1137,7 +1137,8 @@ module Aws
                                 ?ndi_speed_hq_quality: ::Integer,
                                 ?router_integration_state: ("ENABLED" | "DISABLED"),
                                 ?router_integration_transit_encryption: Params::flow_transit_encryption,
-                                ?ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")
+                                ?ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME"),
+                                ?ndi_audio_reference_level: ::Integer
                               ) -> _UpdateFlowOutputResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowOutputResponseSuccess
 
@@ -1176,7 +1177,8 @@ module Aws
                                   }?
                                 },
                                 ?ndi_source_settings: {
-                                  source_name: ::String?
+                                  source_name: ::String?,
+                                  audio_reference_level: ::Integer?
                                 },
                                 ?router_integration_state: ("ENABLED" | "DISABLED"),
                                 ?router_integration_transit_decryption: Params::flow_transit_encryption
@@ -1206,7 +1208,7 @@ module Aws
                                  ?configuration: Params::router_input_configuration,
                                  ?maximum_bitrate: ::Integer,
                                  ?routing_scope: ("REGIONAL" | "GLOBAL"),
-                                 ?tier: ("INPUT_100" | "INPUT_50" | "INPUT_20"),
+                                 ?tier: ("INPUT_100" | "INPUT_50" | "INPUT_20" | "INPUT_500" | "INPUT_250"),
                                  ?transit_encryption: Params::router_input_transit_encryption,
                                  ?maintenance_configuration: Params::maintenance_configuration,
                                  ?content_quality_analysis_configuration: Params::router_content_quality_analysis_configuration
@@ -1236,7 +1238,7 @@ module Aws
                                   ?configuration: Params::router_output_configuration,
                                   ?maximum_bitrate: ::Integer,
                                   ?routing_scope: ("REGIONAL" | "GLOBAL"),
-                                  ?tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20"),
+                                  ?tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20" | "OUTPUT_500" | "OUTPUT_250"),
                                   ?maintenance_configuration: Params::maintenance_configuration,
                                   ?fabric_configuration: {
                                     recovery_latency_mode: ("BALANCED" | "LOW_LATENCY")

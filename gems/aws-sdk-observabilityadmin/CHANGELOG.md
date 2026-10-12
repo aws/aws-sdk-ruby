@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2026-10-12)
+------------------
+
+* Feature - Adding support for TransactionSearch telemetry rules.
+
 1.41.0 (2026-09-30)
 ------------------
 

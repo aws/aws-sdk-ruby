@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2026-10-12)
+------------------
+
+* Feature - AgentCore Memory now supports configuring Long-Term Memory Time-to-Live (TTL) on Memory Strategies.
+
 1.77.0 (2026-09-30)
 ------------------
 
