@@ -4922,7 +4922,7 @@ module Aws
         def pipeline_arn: () -> ::String
         def pipeline_execution_arn: () -> ::String
         def pipeline_execution_display_name: () -> ::String
-        def pipeline_execution_status: () -> ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded")
+        def pipeline_execution_status: () -> ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded" | "CompletedWithFailures")
         def pipeline_execution_description: () -> ::String
         def pipeline_experiment_config: () -> Types::PipelineExperimentConfig
         def failure_reason: () -> ::String

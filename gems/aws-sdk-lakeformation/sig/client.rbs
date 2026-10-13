@@ -112,6 +112,23 @@ module Aws
                                            ) -> _AssumeDecoratedRoleWithSAMLResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssumeDecoratedRoleWithSAMLResponseSuccess
 
+      interface _AttachRLSPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachRLSPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#attach_rls_policy-instance_method
+      def attach_rls_policy: (
+                               name: ::String,
+                               resource: Params::resource,
+                               ?principal: {
+                                 data_lake_principal_identifier: ::String?
+                               },
+                               ?condition: {
+                                 expression: ::String?
+                               },
+                               ?set_default: bool
+                             ) -> _AttachRLSPolicyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachRLSPolicyResponseSuccess
+
       interface _BatchGrantPermissionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGrantPermissionsResponse]
         def failures: () -> ::Array[Types::BatchPermissionsFailureEntry]
@@ -240,6 +257,22 @@ module Aws
                                         ) -> _CreateLakeFormationOptInResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLakeFormationOptInResponseSuccess
 
+      interface _CreateRLSPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRLSPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#create_rls_policy-instance_method
+      def create_rls_policy: (
+                               name: ::String,
+                               attachment_columns: Array[
+                                 {
+                                   name: ::String,
+                                   type: ::String?
+                                 }
+                               ],
+                               filter_expression: ::String
+                             ) -> _CreateRLSPolicyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRLSPolicyResponseSuccess
+
       interface _DeleteDataCellsFilterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataCellsFilterResponse]
       end
@@ -314,6 +347,15 @@ module Aws
                                     ) -> _DeleteObjectsOnCancelResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteObjectsOnCancelResponseSuccess
 
+      interface _DeleteRLSPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRLSPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#delete_rls_policy-instance_method
+      def delete_rls_policy: (
+                               name: ::String
+                             ) -> _DeleteRLSPolicyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRLSPolicyResponseSuccess
+
       interface _DeregisterResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterResourceResponse]
       end
@@ -358,6 +400,23 @@ module Aws
                                   transaction_id: ::String
                                 ) -> _DescribeTransactionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTransactionResponseSuccess
+
+      interface _DetachRLSPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachRLSPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#detach_rls_policy-instance_method
+      def detach_rls_policy: (
+                               name: ::String,
+                               resource: Params::resource,
+                               ?principal: {
+                                 data_lake_principal_identifier: ::String?
+                               },
+                               ?condition: {
+                                 expression: ::String?
+                               },
+                               ?remove_default: bool
+                             ) -> _DetachRLSPolicyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachRLSPolicyResponseSuccess
 
       interface _ExtendTransactionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ExtendTransactionResponse]
@@ -462,6 +521,16 @@ module Aws
                                   query_id: ::String
                                 ) -> _GetQueryStatisticsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryStatisticsResponseSuccess
+
+      interface _GetRLSPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRLSPolicyResponse]
+        def rls_policy: () -> Types::RLSPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_rls_policy-instance_method
+      def get_rls_policy: (
+                            name: ::String
+                          ) -> _GetRLSPolicyResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRLSPolicyResponseSuccess
 
       interface _GetResourceLFTagsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceLFTagsResponse]
@@ -686,6 +755,35 @@ module Aws
                               ?include_related: ::String
                             ) -> _ListPermissionsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionsResponseSuccess
+
+      interface _ListRLSPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRLSPoliciesResponse]
+        def rls_policies: () -> ::Array[Types::RLSPolicy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#list_rls_policies-instance_method
+      def list_rls_policies: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListRLSPoliciesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRLSPoliciesResponseSuccess
+
+      interface _ListRLSPolicyAttachmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRLSPolicyAttachmentsResponse]
+        def rls_policy_attachments: () -> ::Array[Types::RLSPolicyAttachment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#list_rls_policy_attachments-instance_method
+      def list_rls_policy_attachments: (
+                                         ?resource: Params::resource,
+                                         ?principal: {
+                                           data_lake_principal_identifier: ::String?
+                                         },
+                                         ?policy_name: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListRLSPolicyAttachmentsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRLSPolicyAttachmentsResponseSuccess
 
       interface _ListResourcesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesResponse]
@@ -966,6 +1064,16 @@ module Aws
                                                                  }
                                                                ) -> _UpdateLakeFormationIdentityCenterConfigurationResponseSuccess
                                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLakeFormationIdentityCenterConfigurationResponseSuccess
+
+      interface _UpdateRLSPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRLSPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#update_rls_policy-instance_method
+      def update_rls_policy: (
+                               name: ::String,
+                               ?filter_expression: ::String
+                             ) -> _UpdateRLSPolicyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRLSPolicyResponseSuccess
 
       interface _UpdateResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceResponse]

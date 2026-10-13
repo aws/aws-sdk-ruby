@@ -123,8 +123,9 @@ module Aws
                                 },
                                 ?application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER"),
                                 ?auth_config: {
-                                  auth_type: ("API_KEY")?,
-                                  credential_provider_identifier: ::String?
+                                  auth_type: ("API_KEY" | "CONNECT_JWT")?,
+                                  credential_provider_identifier: ::String?,
+                                  audience_override: ::String?
                                 }
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
@@ -434,8 +435,9 @@ module Aws
                                 },
                                 ?application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER"),
                                 ?auth_config: {
-                                  auth_type: ("API_KEY")?,
-                                  credential_provider_identifier: ::String?
+                                  auth_type: ("API_KEY" | "CONNECT_JWT")?,
+                                  credential_provider_identifier: ::String?,
+                                  audience_override: ::String?
                                 }
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess

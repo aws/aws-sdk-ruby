@@ -353,6 +353,7 @@ module Aws::AppStream
     StopImageBuilderRequest = Shapes::StructureShape.new(name: 'StopImageBuilderRequest')
     StopImageBuilderResult = Shapes::StructureShape.new(name: 'StopImageBuilderResult')
     StorageConnector = Shapes::StructureShape.new(name: 'StorageConnector')
+    StorageConnectorAuthentication = Shapes::StringShape.new(name: 'StorageConnectorAuthentication')
     StorageConnectorList = Shapes::ListShape.new(name: 'StorageConnectorList')
     StorageConnectorType = Shapes::StringShape.new(name: 'StorageConnectorType')
     StreamView = Shapes::StringShape.new(name: 'StreamView')
@@ -812,6 +813,7 @@ module Aws::AppStream
     CreateStackRequest.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     CreateStackRequest.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
     CreateStackRequest.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: AgentAccessConfig, location_name: "AgentAccessConfig"))
+    CreateStackRequest.add_member(:storage_connector_authentication, Shapes::ShapeRef.new(shape: StorageConnectorAuthentication, location_name: "StorageConnectorAuthentication"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
 
     CreateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -1521,6 +1523,7 @@ module Aws::AppStream
     Stack.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     Stack.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
     Stack.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: AgentAccessConfig, location_name: "AgentAccessConfig"))
+    Stack.add_member(:storage_connector_authentication, Shapes::ShapeRef.new(shape: StorageConnectorAuthentication, location_name: "StorageConnectorAuthentication"))
     Stack.struct_class = Types::Stack
 
     StackAttributes.member = Shapes::ShapeRef.new(shape: StackAttribute)
@@ -1724,6 +1727,7 @@ module Aws::AppStream
     UpdateStackRequest.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     UpdateStackRequest.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
     UpdateStackRequest.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: AgentAccessConfigForUpdate, location_name: "AgentAccessConfig"))
+    UpdateStackRequest.add_member(:storage_connector_authentication, Shapes::ShapeRef.new(shape: StorageConnectorAuthentication, location_name: "StorageConnectorAuthentication"))
     UpdateStackRequest.struct_class = Types::UpdateStackRequest
 
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))

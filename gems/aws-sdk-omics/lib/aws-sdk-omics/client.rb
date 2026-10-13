@@ -1844,10 +1844,11 @@ module Aws::Omics
     #     container_registry_map: {
     #       registry_mappings: [
     #         {
-    #           upstream_registry_url: "Uri",
-    #           ecr_repository_prefix: "EcrRepositoryPrefix",
+    #           upstream_registry_url: "Uri", # required
+    #           ecr_repository_prefix: "EcrRepositoryPrefix", # required
     #           upstream_repository_prefix: "UpstreamRepositoryPrefix",
     #           ecr_account_id: "AwsAccountId",
+    #           credential_arn: "SecretArn",
     #         },
     #       ],
     #       image_mappings: [
@@ -2093,10 +2094,11 @@ module Aws::Omics
     #     container_registry_map: {
     #       registry_mappings: [
     #         {
-    #           upstream_registry_url: "Uri",
-    #           ecr_repository_prefix: "EcrRepositoryPrefix",
+    #           upstream_registry_url: "Uri", # required
+    #           ecr_repository_prefix: "EcrRepositoryPrefix", # required
     #           upstream_repository_prefix: "UpstreamRepositoryPrefix",
     #           ecr_account_id: "AwsAccountId",
+    #           credential_arn: "SecretArn",
     #         },
     #       ],
     #       image_mappings: [
@@ -4219,6 +4221,7 @@ module Aws::Omics
     #   resp.container_registry_map.registry_mappings[0].ecr_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].upstream_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].ecr_account_id #=> String
+    #   resp.container_registry_map.registry_mappings[0].credential_arn #=> String
     #   resp.container_registry_map.image_mappings #=> Array
     #   resp.container_registry_map.image_mappings[0].source_image #=> String
     #   resp.container_registry_map.image_mappings[0].destination_image #=> String
@@ -4346,6 +4349,7 @@ module Aws::Omics
     #   resp.container_registry_map.registry_mappings[0].ecr_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].upstream_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].ecr_account_id #=> String
+    #   resp.container_registry_map.registry_mappings[0].credential_arn #=> String
     #   resp.container_registry_map.image_mappings #=> Array
     #   resp.container_registry_map.image_mappings[0].source_image #=> String
     #   resp.container_registry_map.image_mappings[0].destination_image #=> String
@@ -7428,7 +7432,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

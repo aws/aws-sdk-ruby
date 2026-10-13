@@ -314,6 +314,9 @@ module Aws::Connect
     ContactFields = Shapes::ListShape.new(name: 'ContactFields')
     ContactFilter = Shapes::StructureShape.new(name: 'ContactFilter')
     ContactFlow = Shapes::StructureShape.new(name: 'ContactFlow')
+    ContactFlowAliasInfo = Shapes::StructureShape.new(name: 'ContactFlowAliasInfo')
+    ContactFlowAliasSummary = Shapes::StructureShape.new(name: 'ContactFlowAliasSummary')
+    ContactFlowAliasSummaryList = Shapes::ListShape.new(name: 'ContactFlowAliasSummaryList')
     ContactFlowAttributeAndCondition = Shapes::StructureShape.new(name: 'ContactFlowAttributeAndCondition')
     ContactFlowAttributeFilter = Shapes::StructureShape.new(name: 'ContactFlowAttributeFilter')
     ContactFlowAttributeOrConditionList = Shapes::ListShape.new(name: 'ContactFlowAttributeOrConditionList')
@@ -397,6 +400,8 @@ module Aws::Connect
     CreateAuthCodeRequest = Shapes::StructureShape.new(name: 'CreateAuthCodeRequest')
     CreateAuthCodeResponse = Shapes::StructureShape.new(name: 'CreateAuthCodeResponse')
     CreateCaseActionDefinition = Shapes::StructureShape.new(name: 'CreateCaseActionDefinition')
+    CreateContactFlowAliasRequest = Shapes::StructureShape.new(name: 'CreateContactFlowAliasRequest')
+    CreateContactFlowAliasResponse = Shapes::StructureShape.new(name: 'CreateContactFlowAliasResponse')
     CreateContactFlowModuleAliasRequest = Shapes::StructureShape.new(name: 'CreateContactFlowModuleAliasRequest')
     CreateContactFlowModuleAliasResponse = Shapes::StructureShape.new(name: 'CreateContactFlowModuleAliasResponse')
     CreateContactFlowModuleRequest = Shapes::StructureShape.new(name: 'CreateContactFlowModuleRequest')
@@ -546,6 +551,8 @@ module Aws::Connect
     DeleteContactDataRequest = Shapes::StructureShape.new(name: 'DeleteContactDataRequest')
     DeleteContactDataResponse = Shapes::StructureShape.new(name: 'DeleteContactDataResponse')
     DeleteContactEvaluationRequest = Shapes::StructureShape.new(name: 'DeleteContactEvaluationRequest')
+    DeleteContactFlowAliasRequest = Shapes::StructureShape.new(name: 'DeleteContactFlowAliasRequest')
+    DeleteContactFlowAliasResponse = Shapes::StructureShape.new(name: 'DeleteContactFlowAliasResponse')
     DeleteContactFlowModuleAliasRequest = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleAliasRequest')
     DeleteContactFlowModuleAliasResponse = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleAliasResponse')
     DeleteContactFlowModuleRequest = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleRequest')
@@ -613,6 +620,8 @@ module Aws::Connect
     DescribeAuthenticationProfileResponse = Shapes::StructureShape.new(name: 'DescribeAuthenticationProfileResponse')
     DescribeContactEvaluationRequest = Shapes::StructureShape.new(name: 'DescribeContactEvaluationRequest')
     DescribeContactEvaluationResponse = Shapes::StructureShape.new(name: 'DescribeContactEvaluationResponse')
+    DescribeContactFlowAliasRequest = Shapes::StructureShape.new(name: 'DescribeContactFlowAliasRequest')
+    DescribeContactFlowAliasResponse = Shapes::StructureShape.new(name: 'DescribeContactFlowAliasResponse')
     DescribeContactFlowModuleAliasRequest = Shapes::StructureShape.new(name: 'DescribeContactFlowModuleAliasRequest')
     DescribeContactFlowModuleAliasResponse = Shapes::StructureShape.new(name: 'DescribeContactFlowModuleAliasResponse')
     DescribeContactFlowModuleRequest = Shapes::StructureShape.new(name: 'DescribeContactFlowModuleRequest')
@@ -1188,6 +1197,8 @@ module Aws::Connect
     ListCondition = Shapes::StructureShape.new(name: 'ListCondition')
     ListContactEvaluationsRequest = Shapes::StructureShape.new(name: 'ListContactEvaluationsRequest')
     ListContactEvaluationsResponse = Shapes::StructureShape.new(name: 'ListContactEvaluationsResponse')
+    ListContactFlowAliasesRequest = Shapes::StructureShape.new(name: 'ListContactFlowAliasesRequest')
+    ListContactFlowAliasesResponse = Shapes::StructureShape.new(name: 'ListContactFlowAliasesResponse')
     ListContactFlowModuleAliasesRequest = Shapes::StructureShape.new(name: 'ListContactFlowModuleAliasesRequest')
     ListContactFlowModuleAliasesResponse = Shapes::StructureShape.new(name: 'ListContactFlowModuleAliasesResponse')
     ListContactFlowModuleVersionsRequest = Shapes::StructureShape.new(name: 'ListContactFlowModuleVersionsRequest')
@@ -2139,6 +2150,8 @@ module Aws::Connect
     UpdateContactAttributesResponse = Shapes::StructureShape.new(name: 'UpdateContactAttributesResponse')
     UpdateContactEvaluationRequest = Shapes::StructureShape.new(name: 'UpdateContactEvaluationRequest')
     UpdateContactEvaluationResponse = Shapes::StructureShape.new(name: 'UpdateContactEvaluationResponse')
+    UpdateContactFlowAliasRequest = Shapes::StructureShape.new(name: 'UpdateContactFlowAliasRequest')
+    UpdateContactFlowAliasResponse = Shapes::StructureShape.new(name: 'UpdateContactFlowAliasResponse')
     UpdateContactFlowContentRequest = Shapes::StructureShape.new(name: 'UpdateContactFlowContentRequest')
     UpdateContactFlowContentResponse = Shapes::StructureShape.new(name: 'UpdateContactFlowContentResponse')
     UpdateContactFlowMetadataRequest = Shapes::StructureShape.new(name: 'UpdateContactFlowMetadataRequest')
@@ -3307,6 +3320,27 @@ module Aws::Connect
     ContactFlow.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     ContactFlow.struct_class = Types::ContactFlow
 
+    ContactFlowAliasInfo.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ContactFlowId"))
+    ContactFlowAliasInfo.add_member(:contact_flow_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ContactFlowArn"))
+    ContactFlowAliasInfo.add_member(:alias_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "AliasId"))
+    ContactFlowAliasInfo.add_member(:version, Shapes::ShapeRef.new(shape: ResourceVersion, location_name: "Version"))
+    ContactFlowAliasInfo.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowName, location_name: "Name"))
+    ContactFlowAliasInfo.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
+    ContactFlowAliasInfo.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    ContactFlowAliasInfo.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ContactFlowAliasInfo.struct_class = Types::ContactFlowAliasInfo
+
+    ContactFlowAliasSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    ContactFlowAliasSummary.add_member(:alias_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "AliasId"))
+    ContactFlowAliasSummary.add_member(:version, Shapes::ShapeRef.new(shape: ResourceVersion, location_name: "Version"))
+    ContactFlowAliasSummary.add_member(:alias_name, Shapes::ShapeRef.new(shape: ContactFlowName, location_name: "AliasName"))
+    ContactFlowAliasSummary.add_member(:alias_description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "AliasDescription"))
+    ContactFlowAliasSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ContactFlowAliasSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    ContactFlowAliasSummary.struct_class = Types::ContactFlowAliasSummary
+
+    ContactFlowAliasSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlowAliasSummary)
+
     ContactFlowAttributeAndCondition.add_member(:tag_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "TagConditions"))
     ContactFlowAttributeAndCondition.add_member(:contact_flow_type_condition, Shapes::ShapeRef.new(shape: ContactFlowTypeCondition, location_name: "ContactFlowTypeCondition"))
     ContactFlowAttributeAndCondition.struct_class = Types::ContactFlowAttributeAndCondition
@@ -3420,6 +3454,8 @@ module Aws::Connect
     ContactFlowVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     ContactFlowVersionSummary.add_member(:version_description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "VersionDescription"))
     ContactFlowVersionSummary.add_member(:version, Shapes::ShapeRef.new(shape: ResourceVersion, location_name: "Version"))
+    ContactFlowVersionSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ContactFlowVersionSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     ContactFlowVersionSummary.struct_class = Types::ContactFlowVersionSummary
 
     ContactFlowVersionSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlowVersionSummary)
@@ -3560,6 +3596,17 @@ module Aws::Connect
     CreateCaseActionDefinition.add_member(:fields, Shapes::ShapeRef.new(shape: FieldValues, required: true, location_name: "Fields"))
     CreateCaseActionDefinition.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location_name: "TemplateId"))
     CreateCaseActionDefinition.struct_class = Types::CreateCaseActionDefinition
+
+    CreateContactFlowAliasRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    CreateContactFlowAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
+    CreateContactFlowAliasRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ContactFlowId"))
+    CreateContactFlowAliasRequest.add_member(:contact_flow_version, Shapes::ShapeRef.new(shape: ResourceVersion, required: true, location_name: "ContactFlowVersion"))
+    CreateContactFlowAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: ContactFlowName, required: true, location_name: "AliasName"))
+    CreateContactFlowAliasRequest.struct_class = Types::CreateContactFlowAliasRequest
+
+    CreateContactFlowAliasResponse.add_member(:contact_flow_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ContactFlowArn"))
+    CreateContactFlowAliasResponse.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
+    CreateContactFlowAliasResponse.struct_class = Types::CreateContactFlowAliasResponse
 
     CreateContactFlowModuleAliasRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
     CreateContactFlowModuleAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
@@ -4290,6 +4337,13 @@ module Aws::Connect
     DeleteContactEvaluationRequest.add_member(:evaluation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationId"))
     DeleteContactEvaluationRequest.struct_class = Types::DeleteContactEvaluationRequest
 
+    DeleteContactFlowAliasRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteContactFlowAliasRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ContactFlowId"))
+    DeleteContactFlowAliasRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "AliasId"))
+    DeleteContactFlowAliasRequest.struct_class = Types::DeleteContactFlowAliasRequest
+
+    DeleteContactFlowAliasResponse.struct_class = Types::DeleteContactFlowAliasResponse
+
     DeleteContactFlowModuleAliasRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
     DeleteContactFlowModuleAliasRequest.add_member(:contact_flow_module_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "ContactFlowModuleId"))
     DeleteContactFlowModuleAliasRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "AliasId"))
@@ -4524,6 +4578,14 @@ module Aws::Connect
     DescribeContactEvaluationResponse.add_member(:evaluation, Shapes::ShapeRef.new(shape: Evaluation, required: true, location_name: "Evaluation"))
     DescribeContactEvaluationResponse.add_member(:evaluation_form, Shapes::ShapeRef.new(shape: EvaluationFormContent, required: true, location_name: "EvaluationForm"))
     DescribeContactEvaluationResponse.struct_class = Types::DescribeContactEvaluationResponse
+
+    DescribeContactFlowAliasRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    DescribeContactFlowAliasRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ContactFlowId"))
+    DescribeContactFlowAliasRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "AliasId"))
+    DescribeContactFlowAliasRequest.struct_class = Types::DescribeContactFlowAliasRequest
+
+    DescribeContactFlowAliasResponse.add_member(:contact_flow_alias, Shapes::ShapeRef.new(shape: ContactFlowAliasInfo, location_name: "ContactFlowAlias"))
+    DescribeContactFlowAliasResponse.struct_class = Types::DescribeContactFlowAliasResponse
 
     DescribeContactFlowModuleAliasRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
     DescribeContactFlowModuleAliasRequest.add_member(:contact_flow_module_id, Shapes::ShapeRef.new(shape: ContactFlowModuleId, required: true, location: "uri", location_name: "ContactFlowModuleId"))
@@ -6362,6 +6424,16 @@ module Aws::Connect
     ListContactEvaluationsResponse.add_member(:evaluation_summary_list, Shapes::ShapeRef.new(shape: EvaluationSummaryList, required: true, location_name: "EvaluationSummaryList"))
     ListContactEvaluationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListContactEvaluationsResponse.struct_class = Types::ListContactEvaluationsResponse
+
+    ListContactFlowAliasesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    ListContactFlowAliasesRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ContactFlowId"))
+    ListContactFlowAliasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListContactFlowAliasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListContactFlowAliasesRequest.struct_class = Types::ListContactFlowAliasesRequest
+
+    ListContactFlowAliasesResponse.add_member(:contact_flow_alias_summary_list, Shapes::ShapeRef.new(shape: ContactFlowAliasSummaryList, location_name: "ContactFlowAliasSummaryList"))
+    ListContactFlowAliasesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListContactFlowAliasesResponse.struct_class = Types::ListContactFlowAliasesResponse
 
     ListContactFlowModuleAliasesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
     ListContactFlowModuleAliasesRequest.add_member(:contact_flow_module_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ContactFlowModuleId"))
@@ -9415,6 +9487,16 @@ module Aws::Connect
     UpdateContactEvaluationResponse.add_member(:evaluation_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "EvaluationArn"))
     UpdateContactEvaluationResponse.struct_class = Types::UpdateContactEvaluationResponse
 
+    UpdateContactFlowAliasRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateContactFlowAliasRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ContactFlowId"))
+    UpdateContactFlowAliasRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "AliasId"))
+    UpdateContactFlowAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowName, location_name: "Name"))
+    UpdateContactFlowAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
+    UpdateContactFlowAliasRequest.add_member(:contact_flow_version, Shapes::ShapeRef.new(shape: ResourceVersion, location_name: "ContactFlowVersion"))
+    UpdateContactFlowAliasRequest.struct_class = Types::UpdateContactFlowAliasRequest
+
+    UpdateContactFlowAliasResponse.struct_class = Types::UpdateContactFlowAliasResponse
+
     UpdateContactFlowContentRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateContactFlowContentRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location: "uri", location_name: "ContactFlowId"))
     UpdateContactFlowContentRequest.add_member(:content, Shapes::ShapeRef.new(shape: ContactFlowContent, required: true, location_name: "Content"))
@@ -10921,6 +11003,22 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:create_contact_flow_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContactFlowAlias"
+        o.http_method = "PUT"
+        o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}/alias"
+        o.input = Shapes::ShapeRef.new(shape: CreateContactFlowAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContactFlowAliasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_contact_flow_module, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateContactFlowModule"
         o.http_method = "PUT"
@@ -11542,6 +11640,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_contact_flow_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteContactFlowAlias"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}/alias/{AliasId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteContactFlowAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteContactFlowAliasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_contact_flow_module, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteContactFlowModule"
         o.http_method = "DELETE"
@@ -12109,6 +12221,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ContactFlowNotPublishedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:describe_contact_flow_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeContactFlowAlias"
+        o.http_method = "GET"
+        o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}/alias/{AliasId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeContactFlowAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeContactFlowAliasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
@@ -13210,6 +13336,26 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_contact_flow_aliases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContactFlowAliases"
+        o.http_method = "GET"
+        o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}/aliases"
+        o.input = Shapes::ShapeRef.new(shape: ListContactFlowAliasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContactFlowAliasesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }
@@ -15524,6 +15670,22 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+      end)
+
+      api.add_operation(:update_contact_flow_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateContactFlowAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact-flows/{InstanceId}/{ContactFlowId}/alias/{AliasId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateContactFlowAliasRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateContactFlowAliasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConditionalOperationFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
       end)
 
       api.add_operation(:update_contact_flow_content, Seahorse::Model::Operation.new.tap do |o|

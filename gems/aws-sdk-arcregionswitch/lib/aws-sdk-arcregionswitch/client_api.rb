@@ -194,6 +194,7 @@ module Aws::ARCRegionswitch
     RegionEventSourceMappingMap = Shapes::MapShape.new(name: 'RegionEventSourceMappingMap')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     RegionNeptuneClusterArnMap = Shapes::MapShape.new(name: 'RegionNeptuneClusterArnMap')
+    RegionSsmDocumentMap = Shapes::MapShape.new(name: 'RegionSsmDocumentMap')
     RegionSwitchPlanConfiguration = Shapes::StructureShape.new(name: 'RegionSwitchPlanConfiguration')
     RegionToRunIn = Shapes::StringShape.new(name: 'RegionToRunIn')
     RegionalScalingResource = Shapes::MapShape.new(name: 'RegionalScalingResource')
@@ -228,6 +229,22 @@ module Aws::ARCRegionswitch
     ServiceQuotaWarningStatus = Shapes::StringShape.new(name: 'ServiceQuotaWarningStatus')
     ServiceQuotaWarningSummary = Shapes::StructureShape.new(name: 'ServiceQuotaWarningSummary')
     ServiceQuotaWarningSummaryList = Shapes::ListShape.new(name: 'ServiceQuotaWarningSummaryList')
+    SsmDocumentArn = Shapes::StringShape.new(name: 'SsmDocumentArn')
+    SsmDocumentConfig = Shapes::StructureShape.new(name: 'SsmDocumentConfig')
+    SsmDocumentParameters = Shapes::MapShape.new(name: 'SsmDocumentParameters')
+    SsmDocumentVersion = Shapes::StringShape.new(name: 'SsmDocumentVersion')
+    SsmParameterKey = Shapes::StringShape.new(name: 'SsmParameterKey')
+    SsmParameterValue = Shapes::StringShape.new(name: 'SsmParameterValue')
+    SsmParameterValues = Shapes::ListShape.new(name: 'SsmParameterValues')
+    SsmSendCommandConfiguration = Shapes::StructureShape.new(name: 'SsmSendCommandConfiguration')
+    SsmSendCommandConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'SsmSendCommandConfigurationTimeoutMinutesInteger')
+    SsmSendCommandUngraceful = Shapes::StructureShape.new(name: 'SsmSendCommandUngraceful')
+    SsmSendCommandUngracefulBehavior = Shapes::StringShape.new(name: 'SsmSendCommandUngracefulBehavior')
+    SsmTarget = Shapes::StructureShape.new(name: 'SsmTarget')
+    SsmTargetKey = Shapes::StringShape.new(name: 'SsmTargetKey')
+    SsmTargetList = Shapes::ListShape.new(name: 'SsmTargetList')
+    SsmTargetValue = Shapes::StringShape.new(name: 'SsmTargetValue')
+    SsmTargetValueList = Shapes::ListShape.new(name: 'SsmTargetValueList')
     StartPlanExecutionRequest = Shapes::StructureShape.new(name: 'StartPlanExecutionRequest')
     StartPlanExecutionRequestClientTokenString = Shapes::StringShape.new(name: 'StartPlanExecutionRequestClientTokenString')
     StartPlanExecutionResponse = Shapes::StructureShape.new(name: 'StartPlanExecutionResponse')
@@ -478,6 +495,7 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member(:aurora_provisioned_scaling_config, Shapes::ShapeRef.new(shape: AuroraProvisionedScalingConfiguration, location_name: "auroraProvisionedScalingConfig"))
     ExecutionBlockConfiguration.add_member(:neptune_global_database_config, Shapes::ShapeRef.new(shape: NeptuneGlobalDatabaseConfiguration, location_name: "neptuneGlobalDatabaseConfig"))
     ExecutionBlockConfiguration.add_member(:rds_switchover_read_replica_config, Shapes::ShapeRef.new(shape: RdsSwitchoverReadReplicaConfiguration, location_name: "rdsSwitchoverReadReplicaConfig"))
+    ExecutionBlockConfiguration.add_member(:ssm_send_command_config, Shapes::ShapeRef.new(shape: SsmSendCommandConfiguration, location_name: "ssmSendCommandConfig"))
     ExecutionBlockConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ExecutionBlockConfiguration.add_member_subclass(:custom_action_lambda_config, Types::ExecutionBlockConfiguration::CustomActionLambdaConfig)
     ExecutionBlockConfiguration.add_member_subclass(:ec2_asg_capacity_increase_config, Types::ExecutionBlockConfiguration::Ec2AsgCapacityIncreaseConfig)
@@ -497,6 +515,7 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member_subclass(:aurora_provisioned_scaling_config, Types::ExecutionBlockConfiguration::AuroraProvisionedScalingConfig)
     ExecutionBlockConfiguration.add_member_subclass(:neptune_global_database_config, Types::ExecutionBlockConfiguration::NeptuneGlobalDatabaseConfig)
     ExecutionBlockConfiguration.add_member_subclass(:rds_switchover_read_replica_config, Types::ExecutionBlockConfiguration::RdsSwitchoverReadReplicaConfig)
+    ExecutionBlockConfiguration.add_member_subclass(:ssm_send_command_config, Types::ExecutionBlockConfiguration::SsmSendCommandConfig)
     ExecutionBlockConfiguration.add_member_subclass(:unknown, Types::ExecutionBlockConfiguration::Unknown)
     ExecutionBlockConfiguration.struct_class = Types::ExecutionBlockConfiguration
 
@@ -787,6 +806,9 @@ module Aws::ARCRegionswitch
     RegionNeptuneClusterArnMap.key = Shapes::ShapeRef.new(shape: Region)
     RegionNeptuneClusterArnMap.value = Shapes::ShapeRef.new(shape: NeptuneClusterArn)
 
+    RegionSsmDocumentMap.key = Shapes::ShapeRef.new(shape: Region)
+    RegionSsmDocumentMap.value = Shapes::ShapeRef.new(shape: SsmDocumentConfig)
+
     RegionSwitchPlanConfiguration.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
     RegionSwitchPlanConfiguration.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
     RegionSwitchPlanConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: PlanArn, required: true, location_name: "arn"))
@@ -881,6 +903,36 @@ module Aws::ARCRegionswitch
     ServiceQuotaWarningSummary.struct_class = Types::ServiceQuotaWarningSummary
 
     ServiceQuotaWarningSummaryList.member = Shapes::ShapeRef.new(shape: ServiceQuotaWarningSummary)
+
+    SsmDocumentConfig.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
+    SsmDocumentConfig.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    SsmDocumentConfig.add_member(:document_arn, Shapes::ShapeRef.new(shape: SsmDocumentArn, required: true, location_name: "documentArn"))
+    SsmDocumentConfig.add_member(:targets, Shapes::ShapeRef.new(shape: SsmTargetList, required: true, location_name: "targets"))
+    SsmDocumentConfig.add_member(:parameters, Shapes::ShapeRef.new(shape: SsmDocumentParameters, location_name: "parameters"))
+    SsmDocumentConfig.add_member(:document_version, Shapes::ShapeRef.new(shape: SsmDocumentVersion, location_name: "documentVersion"))
+    SsmDocumentConfig.struct_class = Types::SsmDocumentConfig
+
+    SsmDocumentParameters.key = Shapes::ShapeRef.new(shape: SsmParameterKey)
+    SsmDocumentParameters.value = Shapes::ShapeRef.new(shape: SsmParameterValues)
+
+    SsmParameterValues.member = Shapes::ShapeRef.new(shape: SsmParameterValue)
+
+    SsmSendCommandConfiguration.add_member(:timeout_minutes, Shapes::ShapeRef.new(shape: SsmSendCommandConfigurationTimeoutMinutesInteger, location_name: "timeoutMinutes"))
+    SsmSendCommandConfiguration.add_member(:region_documents, Shapes::ShapeRef.new(shape: RegionSsmDocumentMap, required: true, location_name: "regionDocuments"))
+    SsmSendCommandConfiguration.add_member(:retry_interval_minutes, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "retryIntervalMinutes"))
+    SsmSendCommandConfiguration.add_member(:ungraceful, Shapes::ShapeRef.new(shape: SsmSendCommandUngraceful, location_name: "ungraceful"))
+    SsmSendCommandConfiguration.struct_class = Types::SsmSendCommandConfiguration
+
+    SsmSendCommandUngraceful.add_member(:behavior, Shapes::ShapeRef.new(shape: SsmSendCommandUngracefulBehavior, location_name: "behavior"))
+    SsmSendCommandUngraceful.struct_class = Types::SsmSendCommandUngraceful
+
+    SsmTarget.add_member(:key, Shapes::ShapeRef.new(shape: SsmTargetKey, required: true, location_name: "key"))
+    SsmTarget.add_member(:values, Shapes::ShapeRef.new(shape: SsmTargetValueList, required: true, location_name: "values"))
+    SsmTarget.struct_class = Types::SsmTarget
+
+    SsmTargetList.member = Shapes::ShapeRef.new(shape: SsmTarget)
+
+    SsmTargetValueList.member = Shapes::ShapeRef.new(shape: SsmTargetValue)
 
     StartPlanExecutionRequest.add_member(:plan_arn, Shapes::ShapeRef.new(shape: PlanArn, required: true, location_name: "planArn"))
     StartPlanExecutionRequest.add_member(:target_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetRegion"))

@@ -7196,13 +7196,30 @@ module Aws::Omics
     #   Account ID of the account that owns the upstream container image.
     #   @return [String]
     #
+    # @!attribute [rw] credential_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that holds the credentials for the upstream registry.
+    #   You must specify this value when Amazon Elastic Container Registry
+    #   (Amazon ECR) doesn't support pull through cache for the upstream
+    #   registry. HealthOmics supports only some of these registries. The
+    #   workflow role must have permission to call the
+    #   `secretsmanager:GetSecretValue` operation on the secret. For more
+    #   information about the supported registries, see [Container
+    #   images][1] in the *Amazon Web Services HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/RegistryMapping AWS API Documentation
     #
     class RegistryMapping < Struct.new(
       :upstream_registry_url,
       :ecr_repository_prefix,
       :upstream_repository_prefix,
-      :ecr_account_id)
+      :ecr_account_id,
+      :credential_arn)
       SENSITIVE = []
       include Aws::Structure
     end

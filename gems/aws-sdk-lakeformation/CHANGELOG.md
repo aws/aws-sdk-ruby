@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2026-10-13)
+------------------
+
+* Feature - Added new LakeFormation APIs and documentation updates for Simple Row-level Security (RLS).
+
 1.95.0 (2026-09-11)
 ------------------
 

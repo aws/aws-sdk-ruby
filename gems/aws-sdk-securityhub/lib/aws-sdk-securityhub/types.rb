@@ -752,12 +752,18 @@ module Aws::SecurityHub
     #   systems or service.
     #   @return [Types::ExternalIntegrationConfiguration]
     #
+    # @!attribute [rw] resource_fields_update
+    #   The changes to be applied to resource fields when an automation rule
+    #   is triggered.
+    #   @return [Types::AutomationRulesResourceFieldsUpdateV2]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesActionV2 AWS API Documentation
     #
     class AutomationRulesActionV2 < Struct.new(
       :type,
       :finding_fields_update,
-      :external_integration_configuration)
+      :external_integration_configuration,
+      :resource_fields_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1473,6 +1479,22 @@ module Aws::SecurityHub
       :actions,
       :created_at,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows you to define the structure for modifying specific fields of
+    # resources.
+    #
+    # @!attribute [rw] criticality
+    #   The criticality level to be assigned to resources that match the
+    #   automation rule criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesResourceFieldsUpdateV2 AWS API Documentation
+    #
+    class AutomationRulesResourceFieldsUpdateV2 < Struct.new(
+      :criticality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23949,7 +23971,7 @@ module Aws::SecurityHub
     end
 
     # Defines the parameters and conditions used to evaluate and filter
-    # security findings.
+    # security findings or resources.
     #
     # @note Criteria is a union - when making an API calls you must set exactly one of the members.
     #
@@ -23959,17 +23981,42 @@ module Aws::SecurityHub
     #   The filtering conditions that align with OCSF standards.
     #   @return [Types::OcsfFindingFilters]
     #
+    # @!attribute [rw] resource_criteria
+    #   The filtering conditions for resources.
+    #   @return [Types::ResourcesFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Criteria AWS API Documentation
     #
     class Criteria < Struct.new(
       :ocsf_finding_criteria,
+      :resource_criteria,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class OcsfFindingCriteria < Criteria; end
+      class ResourceCriteria < Criteria; end
       class Unknown < Criteria; end
+    end
+
+    # Details the source and reason of a criticality.
+    #
+    # @!attribute [rw] source
+    #   The source of the criticality.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason the criticality was assigned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CriticalitySource AWS API Documentation
+    #
+    class CriticalitySource < Struct.new(
+      :source,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # A summary of a CSPM connector.
@@ -32683,6 +32730,14 @@ module Aws::SecurityHub
     #   structure.
     #   @return [Types::ResourceInfo]
     #
+    # @!attribute [rw] resource_criticality
+    #   The criticality assigned to a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] criticality_sources
+    #   The sources of criticalities determined from a resource.
+    #   @return [Array<Types::CriticalitySource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceResult AWS API Documentation
     #
     class ResourceResult < Struct.new(
@@ -32706,7 +32761,9 @@ module Aws::SecurityHub
       :resource_config,
       :resource_sub_category,
       :discovery_type,
-      :resource_info)
+      :resource_info,
+      :resource_criticality,
+      :criticality_sources)
       SENSITIVE = []
       include Aws::Structure
     end

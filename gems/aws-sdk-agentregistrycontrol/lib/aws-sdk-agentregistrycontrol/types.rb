@@ -420,11 +420,8 @@ module Aws::AgentRegistryControl
     #   @return [Array<Types::Provenance>]
     #
     # @!attribute [rw] custom_metadata
-    #   The custom metadata to attach to the registry record. Each key must
-    #   match a property defined in the registry's custom metadata schema.
-    #   Values can be strings (maximum 128 characters) or native JSON
-    #   booleans (`true` or `false`). Values are validated against the
-    #   schema at creation time.
+    #   The custom metadata for the record. Values are strings or JSON
+    #   booleans.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] tags
@@ -644,23 +641,20 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
-    # Configuration that defines a typed metadata schema for a registry.
-    # Specify at least one of a default schema or per-record-type schema
-    # overrides. You can provide both.
+    # The custom metadata fields that records in the registry can carry.
+    # `defaultSchema` defines the common attributes for every record type,
+    # and `recordTypeSchemaOverrides` adds fields for individual record
+    # types.
     #
     # @!attribute [rw] default_schema
-    #   The default JSON Schema that applies to record types without a
-    #   specific override. Supported property types are `string`, `string`
-    #   with an `enum` constraint, `string` with a `uri` format, and
-    #   `boolean`.
+    #   A JSON Schema with the common attributes: fields that records of
+    #   every record type can carry.
     #   @return [String]
     #
     # @!attribute [rw] record_type_schema_overrides
-    #   A list of per-record-type schema overrides. When a record's type
-    #   matches an override, that override's schema is used instead of the
-    #   default schema for validation. If you don't specify an override for
-    #   a record type, the default schema applies. If no default schema
-    #   exists, custom metadata on records of that type is rejected.
+    #   The fields for individual record types. Records of a record type can
+    #   carry the common attributes defined in `defaultSchema` plus that
+    #   record type's fields.
     #   @return [Array<Types::RecordTypeSchemaOverride>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/CustomMetadataSchemaConfiguration AWS API Documentation
@@ -1446,16 +1440,15 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
-    # A schema override for a specific record type within a custom metadata
-    # schema configuration.
+    # The custom metadata fields for one record type, in addition to the
+    # common attributes defined in `defaultSchema`.
     #
     # @!attribute [rw] record_type
-    #   The record type that this schema override applies to.
+    #   The record type these fields apply to.
     #   @return [String]
     #
     # @!attribute [rw] schema
-    #   The JSON Schema for the specified record type. Must follow the same
-    #   structural rules as the default schema.
+    #   A JSON Schema with the fields for this record type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/RecordTypeSchemaOverride AWS API Documentation
@@ -2256,11 +2249,9 @@ module Aws::AgentRegistryControl
     #   @return [Types::UpdatedApprovalConfiguration]
     #
     # @!attribute [rw] custom_metadata_schema_configuration
-    #   Updated custom metadata schema configuration for the registry. Omit
-    #   to leave the existing schema unchanged. Schema evolution is additive
-    #   only: you can add properties and enum values, but you cannot remove
-    #   properties, change property types or formats, add or remove enum
-    #   constraints, or remove record type overrides.
+    #   The new custom metadata schema configuration, which replaces the
+    #   current one. You can add fields and allowed values, but you can't
+    #   remove a field or an allowed value, or change a field's type.
     #   @return [Types::UpdatedCustomMetadataSchemaConfiguration]
     #
     # @!attribute [rw] auto_detection_configuration

@@ -726,7 +726,8 @@ module Aws
                                 ?integration_config: {
                                   refresh_interval: ::String?,
                                   source_properties: Hash[::String, ::String]?,
-                                  continuous_sync: bool?
+                                  continuous_sync: bool?,
+                                  target_namespace: ::String?
                                 }
                               ) -> _CreateIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationResponseSuccess
@@ -3620,7 +3621,8 @@ module Aws
                                 ?integration_config: {
                                   refresh_interval: ::String?,
                                   source_properties: Hash[::String, ::String]?,
-                                  continuous_sync: bool?
+                                  continuous_sync: bool?,
+                                  target_namespace: ::String?
                                 },
                                 ?integration_name: ::String
                               ) -> _ModifyIntegrationResponseSuccess

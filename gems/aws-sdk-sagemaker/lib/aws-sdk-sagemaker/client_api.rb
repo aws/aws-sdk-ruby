@@ -199,6 +199,7 @@ module Aws::SageMaker
     AthenaQueryString = Shapes::StringShape.new(name: 'AthenaQueryString')
     AthenaResultCompressionType = Shapes::StringShape.new(name: 'AthenaResultCompressionType')
     AthenaResultFormat = Shapes::StringShape.new(name: 'AthenaResultFormat')
+    AthenaStepMetadata = Shapes::StructureShape.new(name: 'AthenaStepMetadata')
     AthenaWorkGroup = Shapes::StringShape.new(name: 'AthenaWorkGroup')
     AttachClusterNodeNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'AttachClusterNodeNetworkInterfaceRequest')
     AttachClusterNodeNetworkInterfaceResponse = Shapes::StructureShape.new(name: 'AttachClusterNodeNetworkInterfaceResponse')
@@ -427,6 +428,11 @@ module Aws::SageMaker
     ClarifyTextConfig = Shapes::StructureShape.new(name: 'ClarifyTextConfig')
     ClarifyTextGranularity = Shapes::StringShape.new(name: 'ClarifyTextGranularity')
     ClarifyTextLanguage = Shapes::StringShape.new(name: 'ClarifyTextLanguage')
+    CleanupFailure = Shapes::StructureShape.new(name: 'CleanupFailure')
+    CleanupFailureErrorCode = Shapes::StringShape.new(name: 'CleanupFailureErrorCode')
+    CleanupFailureList = Shapes::ListShape.new(name: 'CleanupFailureList')
+    CleanupStepMetadata = Shapes::StructureShape.new(name: 'CleanupStepMetadata')
+    CleanupStepNameList = Shapes::ListShape.new(name: 'CleanupStepNameList')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -1140,6 +1146,9 @@ module Aws::SageMaker
     DynamicScalingConfiguration = Shapes::StructureShape.new(name: 'DynamicScalingConfiguration')
     EFSFileSystem = Shapes::StructureShape.new(name: 'EFSFileSystem')
     EFSFileSystemConfig = Shapes::StructureShape.new(name: 'EFSFileSystemConfig')
+    EMRServerlessApplicationId = Shapes::StringShape.new(name: 'EMRServerlessApplicationId')
+    EMRServerlessJobRunId = Shapes::StringShape.new(name: 'EMRServerlessJobRunId')
+    EMRServerlessStepMetadata = Shapes::StructureShape.new(name: 'EMRServerlessStepMetadata')
     EMRStepMetadata = Shapes::StructureShape.new(name: 'EMRStepMetadata')
     EbsStorageSettings = Shapes::StructureShape.new(name: 'EbsStorageSettings')
     Ec2CapacityReservation = Shapes::StructureShape.new(name: 'Ec2CapacityReservation')
@@ -1320,6 +1329,9 @@ module Aws::SageMaker
     FlowDefinitionTaskKeywords = Shapes::ListShape.new(name: 'FlowDefinitionTaskKeywords')
     FlowDefinitionTaskTimeLimitInSeconds = Shapes::IntegerShape.new(name: 'FlowDefinitionTaskTimeLimitInSeconds')
     FlowDefinitionTaskTitle = Shapes::StringShape.new(name: 'FlowDefinitionTaskTitle')
+    ForEachSelectorResult = Shapes::StructureShape.new(name: 'ForEachSelectorResult')
+    ForEachStatus = Shapes::StringShape.new(name: 'ForEachStatus')
+    ForEachStepMetadata = Shapes::StructureShape.new(name: 'ForEachStepMetadata')
     ForecastFrequency = Shapes::StringShape.new(name: 'ForecastFrequency')
     ForecastHorizon = Shapes::IntegerShape.new(name: 'ForecastHorizon')
     ForecastQuantile = Shapes::StringShape.new(name: 'ForecastQuantile')
@@ -1586,6 +1598,7 @@ module Aws::SageMaker
     IotRoleAlias = Shapes::StringShape.new(name: 'IotRoleAlias')
     IsTrackingServerActive = Shapes::StringShape.new(name: 'IsTrackingServerActive')
     ItemIdentifierAttributeName = Shapes::StringShape.new(name: 'ItemIdentifierAttributeName')
+    IterationContext = Shapes::StructureShape.new(name: 'IterationContext')
     JavaBoolean = Shapes::BooleanShape.new(name: 'JavaBoolean')
     JavaInteger = Shapes::IntegerShape.new(name: 'JavaInteger')
     JavaLong = Shapes::IntegerShape.new(name: 'JavaLong')
@@ -2702,6 +2715,7 @@ module Aws::SageMaker
     String = Shapes::StringShape.new(name: 'String')
     String1024 = Shapes::StringShape.new(name: 'String1024')
     String128 = Shapes::StringShape.new(name: 'String128')
+    String12800 = Shapes::StringShape.new(name: 'String12800')
     String200 = Shapes::StringShape.new(name: 'String200')
     String2048 = Shapes::StringShape.new(name: 'String2048')
     String256 = Shapes::StringShape.new(name: 'String256')
@@ -3561,6 +3575,10 @@ module Aws::SageMaker
     AthenaDatasetDefinition.add_member(:output_compression, Shapes::ShapeRef.new(shape: AthenaResultCompressionType, location_name: "OutputCompression"))
     AthenaDatasetDefinition.struct_class = Types::AthenaDatasetDefinition
 
+    AthenaStepMetadata.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: String256, location_name: "QueryExecutionId"))
+    AthenaStepMetadata.add_member(:s3_output_location, Shapes::ShapeRef.new(shape: String1024, location_name: "S3OutputLocation"))
+    AthenaStepMetadata.struct_class = Types::AthenaStepMetadata
+
     AttachClusterNodeNetworkInterfaceRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
     AttachClusterNodeNetworkInterfaceRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
     AttachClusterNodeNetworkInterfaceRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: ClusterNetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
@@ -4129,6 +4147,20 @@ module Aws::SageMaker
     ClarifyTextConfig.add_member(:language, Shapes::ShapeRef.new(shape: ClarifyTextLanguage, required: true, location_name: "Language"))
     ClarifyTextConfig.add_member(:granularity, Shapes::ShapeRef.new(shape: ClarifyTextGranularity, required: true, location_name: "Granularity"))
     ClarifyTextConfig.struct_class = Types::ClarifyTextConfig
+
+    CleanupFailure.add_member(:step_name, Shapes::ShapeRef.new(shape: String256, location_name: "StepName"))
+    CleanupFailure.add_member(:error_code, Shapes::ShapeRef.new(shape: CleanupFailureErrorCode, location_name: "ErrorCode"))
+    CleanupFailure.add_member(:error_message, Shapes::ShapeRef.new(shape: String2048, location_name: "ErrorMessage"))
+    CleanupFailure.struct_class = Types::CleanupFailure
+
+    CleanupFailureList.member = Shapes::ShapeRef.new(shape: CleanupFailure)
+
+    CleanupStepMetadata.add_member(:cleaned_steps, Shapes::ShapeRef.new(shape: CleanupStepNameList, location_name: "CleanedSteps"))
+    CleanupStepMetadata.add_member(:failed_steps, Shapes::ShapeRef.new(shape: CleanupFailureList, location_name: "FailedSteps"))
+    CleanupStepMetadata.add_member(:skipped_steps, Shapes::ShapeRef.new(shape: CleanupStepNameList, location_name: "SkippedSteps"))
+    CleanupStepMetadata.struct_class = Types::CleanupStepMetadata
+
+    CleanupStepNameList.member = Shapes::ShapeRef.new(shape: String256)
 
     ClusterAccountingDatabase.add_member(:endpoint, Shapes::ShapeRef.new(shape: ClusterAccountingDatabaseEndpoint, required: true, location_name: "Endpoint"))
     ClusterAccountingDatabase.add_member(:port, Shapes::ShapeRef.new(shape: ClusterAccountingDatabasePort, location_name: "Port"))
@@ -7649,6 +7681,12 @@ module Aws::SageMaker
     EFSFileSystemConfig.add_member(:file_system_path, Shapes::ShapeRef.new(shape: FileSystemPath, location_name: "FileSystemPath"))
     EFSFileSystemConfig.struct_class = Types::EFSFileSystemConfig
 
+    EMRServerlessStepMetadata.add_member(:application_id, Shapes::ShapeRef.new(shape: EMRServerlessApplicationId, location_name: "ApplicationId"))
+    EMRServerlessStepMetadata.add_member(:job_run_id, Shapes::ShapeRef.new(shape: EMRServerlessJobRunId, location_name: "JobRunId"))
+    EMRServerlessStepMetadata.add_member(:job_run_name, Shapes::ShapeRef.new(shape: String256, location_name: "JobRunName"))
+    EMRServerlessStepMetadata.add_member(:log_file_path, Shapes::ShapeRef.new(shape: String1024, location_name: "LogFilePath"))
+    EMRServerlessStepMetadata.struct_class = Types::EMRServerlessStepMetadata
+
     EMRStepMetadata.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String256, location_name: "ClusterId"))
     EMRStepMetadata.add_member(:step_id, Shapes::ShapeRef.new(shape: String256, location_name: "StepId"))
     EMRStepMetadata.add_member(:step_name, Shapes::ShapeRef.new(shape: String256, location_name: "StepName"))
@@ -8068,6 +8106,19 @@ module Aws::SageMaker
     FlowDefinitionSummary.struct_class = Types::FlowDefinitionSummary
 
     FlowDefinitionTaskKeywords.member = Shapes::ShapeRef.new(shape: FlowDefinitionTaskKeyword)
+
+    ForEachSelectorResult.add_member(:step_name, Shapes::ShapeRef.new(shape: String256, location_name: "StepName"))
+    ForEachSelectorResult.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "Index", metadata: {"box" => true}))
+    ForEachSelectorResult.struct_class = Types::ForEachSelectorResult
+
+    ForEachStepMetadata.add_member(:status, Shapes::ShapeRef.new(shape: ForEachStatus, location_name: "Status"))
+    ForEachStepMetadata.add_member(:input_item_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InputItemCount", metadata: {"box" => true}))
+    ForEachStepMetadata.add_member(:total_step_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalStepCount", metadata: {"box" => true}))
+    ForEachStepMetadata.add_member(:succeeded_step_count, Shapes::ShapeRef.new(shape: Integer, location_name: "SucceededStepCount", metadata: {"box" => true}))
+    ForEachStepMetadata.add_member(:failed_step_count, Shapes::ShapeRef.new(shape: Integer, location_name: "FailedStepCount", metadata: {"box" => true}))
+    ForEachStepMetadata.add_member(:stopped_step_count, Shapes::ShapeRef.new(shape: Integer, location_name: "StoppedStepCount", metadata: {"box" => true}))
+    ForEachStepMetadata.add_member(:selector, Shapes::ShapeRef.new(shape: ForEachSelectorResult, location_name: "Selector"))
+    ForEachStepMetadata.struct_class = Types::ForEachStepMetadata
 
     ForecastQuantiles.member = Shapes::ShapeRef.new(shape: ForecastQuantile)
 
@@ -8768,6 +8819,11 @@ module Aws::SageMaker
     IntegerParameterRangeSpecification.struct_class = Types::IntegerParameterRangeSpecification
 
     IntegerParameterRanges.member = Shapes::ShapeRef.new(shape: IntegerParameterRange)
+
+    IterationContext.add_member(:parent_step_name, Shapes::ShapeRef.new(shape: String256, location_name: "ParentStepName"))
+    IterationContext.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "Index", metadata: {"box" => true}))
+    IterationContext.add_member(:item, Shapes::ShapeRef.new(shape: String12800, location_name: "Item"))
+    IterationContext.struct_class = Types::IterationContext
 
     Job.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     Job.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "JobArn"))
@@ -11234,6 +11290,7 @@ module Aws::SageMaker
     PipelineExecutionStep.add_member(:metadata, Shapes::ShapeRef.new(shape: PipelineExecutionStepMetadata, location_name: "Metadata"))
     PipelineExecutionStep.add_member(:attempt_count, Shapes::ShapeRef.new(shape: Integer, location_name: "AttemptCount", metadata: {"box" => true}))
     PipelineExecutionStep.add_member(:selective_execution_result, Shapes::ShapeRef.new(shape: SelectiveExecutionResult, location_name: "SelectiveExecutionResult"))
+    PipelineExecutionStep.add_member(:iteration_context, Shapes::ShapeRef.new(shape: IterationContext, location_name: "IterationContext"))
     PipelineExecutionStep.struct_class = Types::PipelineExecutionStep
 
     PipelineExecutionStepList.member = Shapes::ShapeRef.new(shape: PipelineExecutionStep)
@@ -11248,6 +11305,7 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:callback, Shapes::ShapeRef.new(shape: CallbackStepMetadata, location_name: "Callback"))
     PipelineExecutionStepMetadata.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaStepMetadata, location_name: "Lambda"))
     PipelineExecutionStepMetadata.add_member(:emr, Shapes::ShapeRef.new(shape: EMRStepMetadata, location_name: "EMR"))
+    PipelineExecutionStepMetadata.add_member(:emr_serverless, Shapes::ShapeRef.new(shape: EMRServerlessStepMetadata, location_name: "EMRServerless"))
     PipelineExecutionStepMetadata.add_member(:quality_check, Shapes::ShapeRef.new(shape: QualityCheckStepMetadata, location_name: "QualityCheck"))
     PipelineExecutionStepMetadata.add_member(:clarify_check, Shapes::ShapeRef.new(shape: ClarifyCheckStepMetadata, location_name: "ClarifyCheck"))
     PipelineExecutionStepMetadata.add_member(:fail, Shapes::ShapeRef.new(shape: FailStepMetadata, location_name: "Fail"))
@@ -11261,6 +11319,9 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:inference_component, Shapes::ShapeRef.new(shape: InferenceComponentMetadata, location_name: "InferenceComponent"))
     PipelineExecutionStepMetadata.add_member(:lineage, Shapes::ShapeRef.new(shape: LineageMetadata, location_name: "Lineage"))
     PipelineExecutionStepMetadata.add_member(:job, Shapes::ShapeRef.new(shape: JobStepMetadata, location_name: "Job"))
+    PipelineExecutionStepMetadata.add_member(:athena, Shapes::ShapeRef.new(shape: AthenaStepMetadata, location_name: "Athena"))
+    PipelineExecutionStepMetadata.add_member(:cleanup, Shapes::ShapeRef.new(shape: CleanupStepMetadata, location_name: "Cleanup"))
+    PipelineExecutionStepMetadata.add_member(:for_each, Shapes::ShapeRef.new(shape: ForEachStepMetadata, location_name: "ForEach"))
     PipelineExecutionStepMetadata.struct_class = Types::PipelineExecutionStepMetadata
 
     PipelineExecutionSummary.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))

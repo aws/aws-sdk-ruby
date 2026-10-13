@@ -20045,7 +20045,7 @@ module Aws::SageMaker
     #   resp.pipeline_arn #=> String
     #   resp.pipeline_execution_arn #=> String
     #   resp.pipeline_execution_display_name #=> String
-    #   resp.pipeline_execution_status #=> String, one of "Executing", "Stopping", "Stopped", "Failed", "Succeeded"
+    #   resp.pipeline_execution_status #=> String, one of "Executing", "Stopping", "Stopped", "Failed", "Succeeded", "CompletedWithFailures"
     #   resp.pipeline_execution_description #=> String
     #   resp.pipeline_experiment_config.experiment_name #=> String
     #   resp.pipeline_experiment_config.trial_name #=> String
@@ -27440,6 +27440,10 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.emr.step_id #=> String
     #   resp.pipeline_execution_steps[0].metadata.emr.step_name #=> String
     #   resp.pipeline_execution_steps[0].metadata.emr.log_file_path #=> String
+    #   resp.pipeline_execution_steps[0].metadata.emr_serverless.application_id #=> String
+    #   resp.pipeline_execution_steps[0].metadata.emr_serverless.job_run_id #=> String
+    #   resp.pipeline_execution_steps[0].metadata.emr_serverless.job_run_name #=> String
+    #   resp.pipeline_execution_steps[0].metadata.emr_serverless.log_file_path #=> String
     #   resp.pipeline_execution_steps[0].metadata.quality_check.check_type #=> String
     #   resp.pipeline_execution_steps[0].metadata.quality_check.baseline_used_for_drift_check_statistics #=> String
     #   resp.pipeline_execution_steps[0].metadata.quality_check.baseline_used_for_drift_check_constraints #=> String
@@ -27477,8 +27481,29 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.lineage.associations[0].source_arn #=> String
     #   resp.pipeline_execution_steps[0].metadata.lineage.associations[0].destination_arn #=> String
     #   resp.pipeline_execution_steps[0].metadata.job.arn #=> String
+    #   resp.pipeline_execution_steps[0].metadata.athena.query_execution_id #=> String
+    #   resp.pipeline_execution_steps[0].metadata.athena.s3_output_location #=> String
+    #   resp.pipeline_execution_steps[0].metadata.cleanup.cleaned_steps #=> Array
+    #   resp.pipeline_execution_steps[0].metadata.cleanup.cleaned_steps[0] #=> String
+    #   resp.pipeline_execution_steps[0].metadata.cleanup.failed_steps #=> Array
+    #   resp.pipeline_execution_steps[0].metadata.cleanup.failed_steps[0].step_name #=> String
+    #   resp.pipeline_execution_steps[0].metadata.cleanup.failed_steps[0].error_code #=> String, one of "ClientError", "InternalFailure"
+    #   resp.pipeline_execution_steps[0].metadata.cleanup.failed_steps[0].error_message #=> String
+    #   resp.pipeline_execution_steps[0].metadata.cleanup.skipped_steps #=> Array
+    #   resp.pipeline_execution_steps[0].metadata.cleanup.skipped_steps[0] #=> String
+    #   resp.pipeline_execution_steps[0].metadata.for_each.status #=> String, one of "Succeeded", "Failed", "Stopped"
+    #   resp.pipeline_execution_steps[0].metadata.for_each.input_item_count #=> Integer
+    #   resp.pipeline_execution_steps[0].metadata.for_each.total_step_count #=> Integer
+    #   resp.pipeline_execution_steps[0].metadata.for_each.succeeded_step_count #=> Integer
+    #   resp.pipeline_execution_steps[0].metadata.for_each.failed_step_count #=> Integer
+    #   resp.pipeline_execution_steps[0].metadata.for_each.stopped_step_count #=> Integer
+    #   resp.pipeline_execution_steps[0].metadata.for_each.selector.step_name #=> String
+    #   resp.pipeline_execution_steps[0].metadata.for_each.selector.index #=> Integer
     #   resp.pipeline_execution_steps[0].attempt_count #=> Integer
     #   resp.pipeline_execution_steps[0].selective_execution_result.source_pipeline_execution_arn #=> String
+    #   resp.pipeline_execution_steps[0].iteration_context.parent_step_name #=> String
+    #   resp.pipeline_execution_steps[0].iteration_context.index #=> Integer
+    #   resp.pipeline_execution_steps[0].iteration_context.item #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutionSteps AWS API Documentation
@@ -27541,7 +27566,7 @@ module Aws::SageMaker
     #   resp.pipeline_execution_summaries #=> Array
     #   resp.pipeline_execution_summaries[0].pipeline_execution_arn #=> String
     #   resp.pipeline_execution_summaries[0].start_time #=> Time
-    #   resp.pipeline_execution_summaries[0].pipeline_execution_status #=> String, one of "Executing", "Stopping", "Stopped", "Failed", "Succeeded"
+    #   resp.pipeline_execution_summaries[0].pipeline_execution_status #=> String, one of "Executing", "Stopping", "Stopped", "Failed", "Succeeded", "CompletedWithFailures"
     #   resp.pipeline_execution_summaries[0].pipeline_execution_description #=> String
     #   resp.pipeline_execution_summaries[0].pipeline_execution_display_name #=> String
     #   resp.pipeline_execution_summaries[0].pipeline_execution_failure_reason #=> String
@@ -35088,7 +35113,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.399.0'
+      context[:gem_version] = '1.400.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

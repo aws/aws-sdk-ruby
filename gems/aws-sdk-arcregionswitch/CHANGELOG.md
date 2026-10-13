@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2026-10-13)
+------------------
+
+* Feature - Adds support for SSM Execution Block in Region switch plans
+
 1.25.0 (2026-09-25)
 ------------------
 

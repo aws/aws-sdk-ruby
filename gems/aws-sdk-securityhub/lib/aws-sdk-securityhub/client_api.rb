@@ -76,6 +76,7 @@ module Aws::SecurityHub
     AutomationRulesMetadataList = Shapes::ListShape.new(name: 'AutomationRulesMetadataList')
     AutomationRulesMetadataListV2 = Shapes::ListShape.new(name: 'AutomationRulesMetadataListV2')
     AutomationRulesMetadataV2 = Shapes::StructureShape.new(name: 'AutomationRulesMetadataV2')
+    AutomationRulesResourceFieldsUpdateV2 = Shapes::StructureShape.new(name: 'AutomationRulesResourceFieldsUpdateV2')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
     AwsAmazonMqBrokerDetails = Shapes::StructureShape.new(name: 'AwsAmazonMqBrokerDetails')
@@ -833,6 +834,9 @@ module Aws::SecurityHub
     CreateTicketV2Request = Shapes::StructureShape.new(name: 'CreateTicketV2Request')
     CreateTicketV2Response = Shapes::StructureShape.new(name: 'CreateTicketV2Response')
     Criteria = Shapes::UnionShape.new(name: 'Criteria')
+    CriticalitySource = Shapes::StructureShape.new(name: 'CriticalitySource')
+    CriticalitySourceList = Shapes::ListShape.new(name: 'CriticalitySourceList')
+    CriticalitySourceType = Shapes::StringShape.new(name: 'CriticalitySourceType')
     CrossAccountMaxResults = Shapes::IntegerShape.new(name: 'CrossAccountMaxResults')
     CspmConnectorProviderName = Shapes::StringShape.new(name: 'CspmConnectorProviderName')
     CspmConnectorStatus = Shapes::StringShape.new(name: 'CspmConnectorStatus')
@@ -1278,6 +1282,7 @@ module Aws::SecurityHub
     ResourceCategory = Shapes::StringShape.new(name: 'ResourceCategory')
     ResourceConfig = Shapes::DocumentShape.new(name: 'ResourceConfig', document: true)
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
+    ResourceCriticality = Shapes::StringShape.new(name: 'ResourceCriticality')
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
     ResourceFindingsSummary = Shapes::StructureShape.new(name: 'ResourceFindingsSummary')
     ResourceFindingsSummaryList = Shapes::ListShape.new(name: 'ResourceFindingsSummaryList')
@@ -1692,6 +1697,7 @@ module Aws::SecurityHub
     AutomationRulesActionV2.add_member(:type, Shapes::ShapeRef.new(shape: AutomationRulesActionTypeV2, required: true, location_name: "Type"))
     AutomationRulesActionV2.add_member(:finding_fields_update, Shapes::ShapeRef.new(shape: AutomationRulesFindingFieldsUpdateV2, location_name: "FindingFieldsUpdate"))
     AutomationRulesActionV2.add_member(:external_integration_configuration, Shapes::ShapeRef.new(shape: ExternalIntegrationConfiguration, location_name: "ExternalIntegrationConfiguration"))
+    AutomationRulesActionV2.add_member(:resource_fields_update, Shapes::ShapeRef.new(shape: AutomationRulesResourceFieldsUpdateV2, location_name: "ResourceFieldsUpdate"))
     AutomationRulesActionV2.struct_class = Types::AutomationRulesActionV2
 
     AutomationRulesArnsList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -1795,6 +1801,9 @@ module Aws::SecurityHub
     AutomationRulesMetadataV2.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     AutomationRulesMetadataV2.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     AutomationRulesMetadataV2.struct_class = Types::AutomationRulesMetadataV2
+
+    AutomationRulesResourceFieldsUpdateV2.add_member(:criticality, Shapes::ShapeRef.new(shape: ResourceCriticality, required: true, location_name: "Criticality"))
+    AutomationRulesResourceFieldsUpdateV2.struct_class = Types::AutomationRulesResourceFieldsUpdateV2
 
     AvailabilityZone.add_member(:zone_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ZoneName"))
     AvailabilityZone.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SubnetId"))
@@ -5947,10 +5956,18 @@ module Aws::SecurityHub
     CreateTicketV2Response.struct_class = Types::CreateTicketV2Response
 
     Criteria.add_member(:ocsf_finding_criteria, Shapes::ShapeRef.new(shape: OcsfFindingFilters, location_name: "OcsfFindingCriteria"))
+    Criteria.add_member(:resource_criteria, Shapes::ShapeRef.new(shape: ResourcesFilters, location_name: "ResourceCriteria"))
     Criteria.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Criteria.add_member_subclass(:ocsf_finding_criteria, Types::Criteria::OcsfFindingCriteria)
+    Criteria.add_member_subclass(:resource_criteria, Types::Criteria::ResourceCriteria)
     Criteria.add_member_subclass(:unknown, Types::Criteria::Unknown)
     Criteria.struct_class = Types::Criteria
+
+    CriticalitySource.add_member(:source, Shapes::ShapeRef.new(shape: CriticalitySourceType, required: true, location_name: "Source"))
+    CriticalitySource.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Reason"))
+    CriticalitySource.struct_class = Types::CriticalitySource
+
+    CriticalitySourceList.member = Shapes::ShapeRef.new(shape: CriticalitySource)
 
     CspmConnectorSummary.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorArn"))
     CspmConnectorSummary.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorId"))
@@ -7724,6 +7741,8 @@ module Aws::SecurityHub
     ResourceResult.add_member(:resource_sub_category, Shapes::ShapeRef.new(shape: ResourceSubCategory, location_name: "ResourceSubCategory"))
     ResourceResult.add_member(:discovery_type, Shapes::ShapeRef.new(shape: DiscoveryType, location_name: "DiscoveryType"))
     ResourceResult.add_member(:resource_info, Shapes::ShapeRef.new(shape: ResourceInfo, location_name: "ResourceInfo"))
+    ResourceResult.add_member(:resource_criticality, Shapes::ShapeRef.new(shape: ResourceCriticality, location_name: "ResourceCriticality"))
+    ResourceResult.add_member(:criticality_sources, Shapes::ShapeRef.new(shape: CriticalitySourceList, location_name: "CriticalitySources"))
     ResourceResult.struct_class = Types::ResourceResult
 
     ResourceScopes.add_member(:aws_organizations, Shapes::ShapeRef.new(shape: AwsOrganizationScopeList, location_name: "AwsOrganizations"))

@@ -3464,6 +3464,7 @@ module Aws::Glue
     #         "IntegrationString" => "IntegrationString",
     #       },
     #       continuous_sync: false,
+    #       target_namespace: "TargetNamespace",
     #     },
     #   })
     #
@@ -3490,6 +3491,7 @@ module Aws::Glue
     #   resp.integration_config.source_properties #=> Hash
     #   resp.integration_config.source_properties["IntegrationString"] #=> String
     #   resp.integration_config.continuous_sync #=> Boolean
+    #   resp.integration_config.target_namespace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIntegration AWS API Documentation
     #
@@ -7087,6 +7089,7 @@ module Aws::Glue
     #   resp.inbound_integrations[0].integration_config.source_properties #=> Hash
     #   resp.inbound_integrations[0].integration_config.source_properties["IntegrationString"] #=> String
     #   resp.inbound_integrations[0].integration_config.continuous_sync #=> Boolean
+    #   resp.inbound_integrations[0].integration_config.target_namespace #=> String
     #   resp.inbound_integrations[0].errors #=> Array
     #   resp.inbound_integrations[0].errors[0].error_code #=> String
     #   resp.inbound_integrations[0].errors[0].error_message #=> String
@@ -7157,6 +7160,7 @@ module Aws::Glue
     #   resp.integrations[0].integration_config.source_properties #=> Hash
     #   resp.integrations[0].integration_config.source_properties["IntegrationString"] #=> String
     #   resp.integrations[0].integration_config.continuous_sync #=> Boolean
+    #   resp.integrations[0].integration_config.target_namespace #=> String
     #   resp.integrations[0].errors #=> Array
     #   resp.integrations[0].errors[0].error_code #=> String
     #   resp.integrations[0].errors[0].error_message #=> String
@@ -16180,6 +16184,7 @@ module Aws::Glue
     #         "IntegrationString" => "IntegrationString",
     #       },
     #       continuous_sync: false,
+    #       target_namespace: "TargetNamespace",
     #     },
     #     integration_name: "String128",
     #   })
@@ -16207,6 +16212,7 @@ module Aws::Glue
     #   resp.integration_config.source_properties #=> Hash
     #   resp.integration_config.source_properties["IntegrationString"] #=> String
     #   resp.integration_config.continuous_sync #=> Boolean
+    #   resp.integration_config.target_namespace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ModifyIntegration AWS API Documentation
     #
@@ -21901,7 +21907,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.282.0'
+      context[:gem_version] = '1.283.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

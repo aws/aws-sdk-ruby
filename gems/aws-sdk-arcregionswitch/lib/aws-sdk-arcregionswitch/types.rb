@@ -996,6 +996,10 @@ module Aws::ARCRegionswitch
     #   An Amazon RDS switchover read replica execution block.
     #   @return [Types::RdsSwitchoverReadReplicaConfiguration]
     #
+    # @!attribute [rw] ssm_send_command_config
+    #   Specifies an AWS Systems Manager `SendCommand` execution block.
+    #   @return [Types::SsmSendCommandConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ExecutionBlockConfiguration AWS API Documentation
     #
     class ExecutionBlockConfiguration < Struct.new(
@@ -1017,6 +1021,7 @@ module Aws::ARCRegionswitch
       :aurora_provisioned_scaling_config,
       :neptune_global_database_config,
       :rds_switchover_read_replica_config,
+      :ssm_send_command_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1040,6 +1045,7 @@ module Aws::ARCRegionswitch
       class AuroraProvisionedScalingConfig < ExecutionBlockConfiguration; end
       class NeptuneGlobalDatabaseConfig < ExecutionBlockConfiguration; end
       class RdsSwitchoverReadReplicaConfig < ExecutionBlockConfiguration; end
+      class SsmSendCommandConfig < ExecutionBlockConfiguration; end
       class Unknown < ExecutionBlockConfiguration; end
     end
 
@@ -2704,6 +2710,127 @@ module Aws::ARCRegionswitch
       :warning_message,
       :last_checked_at,
       :warning_created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Systems Manager document to run and the managed nodes to target
+    # for a single Amazon Web Services Region.
+    #
+    # @!attribute [rw] cross_account_role
+    #   The cross-account role for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID (secret key) for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_arn
+    #   The Amazon Resource Name (ARN) of the Systems Manager document to
+    #   run.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The target filters that Systems Manager resolves to managed nodes
+    #   when the command runs. To target specific managed nodes, use the
+    #   `InstanceIds` key. You can specify up to five target filters.
+    #   @return [Array<Types::SsmTarget>]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters that are passed to this Region's Systems Manager
+    #   document. You set parameters for each document, so each Region can
+    #   run its document with its own parameters.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] document_version
+    #   The version of the Systems Manager document to run for this Region.
+    #   When you omit it, Systems Manager runs the document's default
+    #   version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/SsmDocumentConfig AWS API Documentation
+    #
+    class SsmDocumentConfig < Struct.new(
+      :cross_account_role,
+      :external_id,
+      :document_arn,
+      :targets,
+      :parameters,
+      :document_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for an AWS Systems Manager `SendCommand` execution block
+    # in a Region switch plan. This execution block runs a Systems Manager
+    # document on the managed nodes that you target in each Amazon Web
+    # Services Region of the plan.
+    #
+    # @!attribute [rw] timeout_minutes
+    #   The timeout value specified for the configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] region_documents
+    #   The Systems Manager document and target configuration for each
+    #   Amazon Web Services Region in the plan. Provide an entry for each
+    #   Amazon Web Services Region that you want the command to run in.
+    #   @return [Hash<String,Types::SsmDocumentConfig>]
+    #
+    # @!attribute [rw] retry_interval_minutes
+    #   How often, in minutes, Region switch retries the command if it
+    #   returns a failure.
+    #   @return [Float]
+    #
+    # @!attribute [rw] ungraceful
+    #   Specifies the settings that determine how the execution block
+    #   behaves when the plan runs ungracefully, such as whether to skip the
+    #   command.
+    #   @return [Types::SsmSendCommandUngraceful]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/SsmSendCommandConfiguration AWS API Documentation
+    #
+    class SsmSendCommandConfiguration < Struct.new(
+      :timeout_minutes,
+      :region_documents,
+      :retry_interval_minutes,
+      :ungraceful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The ungraceful execution settings for an AWS Systems Manager
+    # `SendCommand` execution block.
+    #
+    # @!attribute [rw] behavior
+    #   Specifies whether to skip running this command during an ungraceful
+    #   execution. Set to `skip` to skip the command.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/SsmSendCommandUngraceful AWS API Documentation
+    #
+    class SsmSendCommandUngraceful < Struct.new(
+      :behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single `SendCommand` target filter, consisting of a target key and
+    # the values matched by that key.
+    #
+    # @!attribute [rw] key
+    #   The target key, such as `tag:Environment` or `InstanceIds`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values matched by this target key. Multiple values combine with
+    #   a logical OR.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/SsmTarget AWS API Documentation
+    #
+    class SsmTarget < Struct.new(
+      :key,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end

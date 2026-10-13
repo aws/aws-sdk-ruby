@@ -19463,12 +19463,29 @@ module Aws::Glue
     #   Amazon Redshift and Amazon S3.
     #   @return [Boolean]
     #
+    # @!attribute [rw] target_namespace
+    #   An optional custom namespace for the integration's target. Supply
+    #   this parameter only when the target is an Amazon S3 Tables table
+    #   bucket; it is not accepted for other target types. The integration
+    #   replicates data into the namespace you specify, reusing it if it
+    #   already exists. If you omit this parameter, the target namespace
+    #   defaults to `zetl_` followed by the integration ID, with hyphens
+    #   converted to underscores.
+    #
+    #   The value is immutable after the integration is created;
+    #   `ModifyIntegration` rejects changes to it. It must be a valid Amazon
+    #   S3 Tables namespace name: 1 to 255 characters using lowercase
+    #   letters, numbers, and underscores, with no leading or trailing
+    #   underscore and no reserved `aws` prefix.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationConfig AWS API Documentation
     #
     class IntegrationConfig < Struct.new(
       :refresh_interval,
       :source_properties,
-      :continuous_sync)
+      :continuous_sync,
+      :target_namespace)
       SENSITIVE = []
       include Aws::Structure
     end

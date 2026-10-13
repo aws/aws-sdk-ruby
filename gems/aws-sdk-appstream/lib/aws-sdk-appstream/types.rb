@@ -2441,6 +2441,15 @@ module Aws::AppStream
     #   access is enabled for the stack.
     #   @return [Types::AgentAccessConfig]
     #
+    # @!attribute [rw] storage_connector_authentication
+    #   Specifies whether users' cloud storage authentication persists
+    #   across streaming sessions. When you specify FORCE\_REAUTHENTICATION,
+    #   WorkSpaces Applications removes the stored authentication for the
+    #   stack's OneDrive and Google Drive connectors when a user's session
+    #   ends. The user links their cloud storage again on their next
+    #   session. The default is REUSE\_CREDENTIALS.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -2457,7 +2466,8 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
-      :agent_access_config)
+      :agent_access_config,
+      :storage_connector_authentication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6006,6 +6016,15 @@ module Aws::AppStream
     #   enabled.
     #   @return [Types::AgentAccessConfig]
     #
+    # @!attribute [rw] storage_connector_authentication
+    #   Indicates whether users' cloud storage authentication persists
+    #   across streaming sessions. When this attribute is
+    #   FORCE\_REAUTHENTICATION, WorkSpaces Applications removes the stored
+    #   authentication for the stack's OneDrive and Google Drive connectors
+    #   when a user's session ends. The user links their cloud storage
+    #   again on their next session. The default is REUSE\_CREDENTIALS.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -6024,7 +6043,8 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
-      :agent_access_config)
+      :agent_access_config,
+      :storage_connector_authentication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7075,6 +7095,16 @@ module Aws::AppStream
     #   AttributesToDelete with the AGENT\_ACCESS\_CONFIG value.
     #   @return [Types::AgentAccessConfigForUpdate]
     #
+    # @!attribute [rw] storage_connector_authentication
+    #   Specifies whether users' cloud storage authentication persists
+    #   across streaming sessions. When you specify FORCE\_REAUTHENTICATION,
+    #   WorkSpaces Applications removes the stored authentication for the
+    #   stack's OneDrive and Google Drive connectors when a user's session
+    #   ends. The user links their cloud storage again on their next
+    #   session. To clear this attribute, add
+    #   STORAGE\_CONNECTOR\_AUTHENTICATION to AttributesToDelete.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -7092,7 +7122,8 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
-      :agent_access_config)
+      :agent_access_config,
+      :storage_connector_authentication)
       SENSITIVE = []
       include Aws::Structure
     end

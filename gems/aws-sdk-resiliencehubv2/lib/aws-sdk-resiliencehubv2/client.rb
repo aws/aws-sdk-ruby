@@ -768,6 +768,11 @@ module Aws::Resiliencehubv2
     #   KMS key identifier — accepts key ID, key ARN, alias name, or alias
     #   ARN.
     #
+    # @option params [Types::DevOpsAgentConfiguration] :dev_ops_agent_configuration
+    #   The optional DevOps Agent integration configuration to apply to the
+    #   new service. If you omit this field, the new service has no DevOps
+    #   Agent integration.
+    #
     # @option params [Hash<String,String>] :tags
     #   Resource tags.
     #
@@ -816,6 +821,9 @@ module Aws::Resiliencehubv2
     #       ],
     #     },
     #     kms_key_id: "KmsKeyId",
+    #     dev_ops_agent_configuration: {
+    #       agent_space_arn: "DevOpsAgentSpaceArn",
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -890,6 +898,13 @@ module Aws::Resiliencehubv2
     #   resp.service.organization_id #=> String
     #   resp.service.ou_id #=> String
     #   resp.service.account_id #=> String
+    #   resp.service.dev_ops_agent_configuration.agent_space_arn #=> String
+    #   resp.service.dev_ops_agent_configuration.agent_space_id #=> String
+    #   resp.service.dev_ops_agent_configuration.region #=> String
+    #   resp.service.dev_ops_agent_configuration.status #=> String, one of "CONNECTING", "CONNECTED", "DISCONNECTED", "FAILED"
+    #   resp.service.dev_ops_agent_configuration.operator_app_url #=> String
+    #   resp.service.dev_ops_agent_configuration.connected_at #=> Time
+    #   resp.service.dev_ops_agent_configuration.status_reason #=> String
     #   resp.service.created_at #=> Time
     #   resp.service.updated_at #=> Time
     #
@@ -1610,6 +1625,7 @@ module Aws::Resiliencehubv2
     #   resp.finding.testing_recommendations[0].suggested_changes #=> Array
     #   resp.finding.testing_recommendations[0].suggested_changes[0] #=> String
     #   resp.finding.updated_at #=> Time
+    #   resp.finding.investigation_deep_link #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetFailureModeFinding AWS API Documentation
     #
@@ -1749,6 +1765,13 @@ module Aws::Resiliencehubv2
     #   resp.service.organization_id #=> String
     #   resp.service.ou_id #=> String
     #   resp.service.account_id #=> String
+    #   resp.service.dev_ops_agent_configuration.agent_space_arn #=> String
+    #   resp.service.dev_ops_agent_configuration.agent_space_id #=> String
+    #   resp.service.dev_ops_agent_configuration.region #=> String
+    #   resp.service.dev_ops_agent_configuration.status #=> String, one of "CONNECTING", "CONNECTED", "DISCONNECTED", "FAILED"
+    #   resp.service.dev_ops_agent_configuration.operator_app_url #=> String
+    #   resp.service.dev_ops_agent_configuration.connected_at #=> Time
+    #   resp.service.dev_ops_agent_configuration.status_reason #=> String
     #   resp.service.created_at #=> Time
     #   resp.service.updated_at #=> Time
     #
@@ -1934,6 +1957,11 @@ module Aws::Resiliencehubv2
     #   resp.test_run.regions #=> Array
     #   resp.test_run.regions[0] #=> String
     #   resp.test_run.account_targeting #=> String, one of "SINGLE_ACCOUNT", "MULTI_ACCOUNT"
+    #   resp.test_run.dev_ops_agent_investigation.verdict #=> String, one of "PASS", "FAIL"
+    #   resp.test_run.dev_ops_agent_investigation.confidence #=> String, one of "HIGH", "MEDIUM", "LOW"
+    #   resp.test_run.dev_ops_agent_investigation.deep_link #=> String
+    #   resp.test_run.dev_ops_agent_investigation.status #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED"
+    #   resp.test_run.dev_ops_agent_investigation.summary #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetTestRun AWS API Documentation
     #
@@ -2143,6 +2171,13 @@ module Aws::Resiliencehubv2
     #   resp.service.organization_id #=> String
     #   resp.service.ou_id #=> String
     #   resp.service.account_id #=> String
+    #   resp.service.dev_ops_agent_configuration.agent_space_arn #=> String
+    #   resp.service.dev_ops_agent_configuration.agent_space_id #=> String
+    #   resp.service.dev_ops_agent_configuration.region #=> String
+    #   resp.service.dev_ops_agent_configuration.status #=> String, one of "CONNECTING", "CONNECTED", "DISCONNECTED", "FAILED"
+    #   resp.service.dev_ops_agent_configuration.operator_app_url #=> String
+    #   resp.service.dev_ops_agent_configuration.connected_at #=> Time
+    #   resp.service.dev_ops_agent_configuration.status_reason #=> String
     #   resp.service.created_at #=> Time
     #   resp.service.updated_at #=> Time
     #
@@ -2485,6 +2520,7 @@ module Aws::Resiliencehubv2
     #   resp.findings_summary[0].status #=> String, one of "OPEN", "RESOLVED", "IRRELEVANT"
     #   resp.findings_summary[0].policy_component #=> String, one of "AVAILABILITY_SLO", "MULTI_AZ_DISASTER_RECOVERY", "MULTI_REGION_DISASTER_RECOVERY", "DATA_RECOVERY"
     #   resp.findings_summary[0].updated_at #=> Time
+    #   resp.findings_summary[0].investigation_deep_link #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListFailureModeFindings AWS API Documentation
@@ -2854,6 +2890,10 @@ module Aws::Resiliencehubv2
     #   resp.service_resources[0].resource.aws_region #=> String
     #   resp.service_resources[0].resource.aws_account_id #=> String
     #   resp.service_resources[0].resource.resource_type #=> String
+    #   resp.service_resources[0].resource.availability_zone_id #=> String
+    #   resp.service_resources[0].resource.availability_zone_name #=> String
+    #   resp.service_resources[0].resource.containment_parent_id #=> String
+    #   resp.service_resources[0].resource.logical_resource_group_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListResources AWS API Documentation
@@ -3135,6 +3175,8 @@ module Aws::Resiliencehubv2
     #   resp.service_summaries[0].regions[0] #=> String
     #   resp.service_summaries[0].policy_arn #=> String
     #   resp.service_summaries[0].assessment_status #=> String, one of "NOT_STARTED", "PENDING", "IN_PROGRESS", "FAILED", "SUCCESS"
+    #   resp.service_summaries[0].dev_ops_agent_status #=> String, one of "CONNECTING", "CONNECTED", "DISCONNECTED", "FAILED"
+    #   resp.service_summaries[0].dev_ops_agent_space_arn #=> String
     #   resp.service_summaries[0].open_findings_count #=> Integer
     #   resp.service_summaries[0].resolved_findings_count #=> Integer
     #   resp.service_summaries[0].dependency_discovery.status #=> String, one of "ENABLED", "INITIALIZING", "DISABLED"
@@ -4179,6 +4221,7 @@ module Aws::Resiliencehubv2
     #   resp.finding.testing_recommendations[0].suggested_changes #=> Array
     #   resp.finding.testing_recommendations[0].suggested_changes[0] #=> String
     #   resp.finding.updated_at #=> Time
+    #   resp.finding.investigation_deep_link #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/UpdateFailureModeFinding AWS API Documentation
     #
@@ -4299,6 +4342,11 @@ module Aws::Resiliencehubv2
     # @option params [Types::ServiceReportConfiguration] :report_configuration
     #   Configuration for automatic report generation on a Service.
     #
+    # @option params [Types::DevOpsAgentConfiguration] :dev_ops_agent_configuration
+    #   The optional DevOps Agent integration configuration to set, replace,
+    #   or disconnect for the service. If you omit this field, the existing
+    #   DevOps Agent linkage stays unchanged.
+    #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServiceResponse#service #service} => Types::Service
@@ -4336,6 +4384,9 @@ module Aws::Resiliencehubv2
     #           },
     #         },
     #       ],
+    #     },
+    #     dev_ops_agent_configuration: {
+    #       agent_space_arn: "DevOpsAgentSpaceArn",
     #     },
     #   })
     #
@@ -4407,6 +4458,13 @@ module Aws::Resiliencehubv2
     #   resp.service.organization_id #=> String
     #   resp.service.ou_id #=> String
     #   resp.service.account_id #=> String
+    #   resp.service.dev_ops_agent_configuration.agent_space_arn #=> String
+    #   resp.service.dev_ops_agent_configuration.agent_space_id #=> String
+    #   resp.service.dev_ops_agent_configuration.region #=> String
+    #   resp.service.dev_ops_agent_configuration.status #=> String, one of "CONNECTING", "CONNECTED", "DISCONNECTED", "FAILED"
+    #   resp.service.dev_ops_agent_configuration.operator_app_url #=> String
+    #   resp.service.dev_ops_agent_configuration.connected_at #=> Time
+    #   resp.service.dev_ops_agent_configuration.status_reason #=> String
     #   resp.service.created_at #=> Time
     #   resp.service.updated_at #=> Time
     #
@@ -4664,7 +4722,7 @@ module Aws::Resiliencehubv2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resiliencehubv2'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

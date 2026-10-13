@@ -167,20 +167,44 @@ module Aws::DataSync
     #   The VPC service endpoint you use must include the DataSync service
     #   name (for example, `com.amazonaws.us-east-2.datasync`).
     #
+    #   The endpoint ID is informational. DataSync doesn't verify it or use
+    #   it to connect to your agent. For more information, see [Using a
+    #   single VPC service endpoint across multiple subnets][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#datasync-in-vpc
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#vpc-endpoint-multiple-subnets
     #   @return [String]
     #
     # @!attribute [rw] subnet_arns
-    #   Specifies the ARN of the subnet where your VPC service endpoint is
-    #   located. You can only specify one ARN.
+    #   Specifies the ARN of the subnet where DataSync creates the [network
+    #   interfaces][1] that handle data transfer traffic for your tasks. You
+    #   can only specify one ARN.
+    #
+    #   The subnet doesn't have to be the subnet that contains your VPC
+    #   service endpoint. The subnet can be one that another Amazon Web
+    #   Services account shared with you through [RAM][2], in which case the
+    #   ARN must specify the account that owns the subnet. For more
+    #   information, see [Using a single VPC service endpoint across
+    #   multiple subnets][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/required-network-interfaces.html
+    #   [2]: https://docs.aws.amazon.com/ram/latest/userguide/what-is.html
+    #   [3]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#vpc-endpoint-multiple-subnets
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_arns
     #   Specifies the Amazon Resource Name (ARN) of the security group that
     #   allows traffic between your agent and VPC service endpoint. You can
     #   only specify one ARN.
+    #
+    #   The ARN must specify your own account, even when the security group
+    #   was shared with you from the account that owns the VPC. The security
+    #   group must belong to the same VPC as the subnet that you specify in
+    #   `SubnetArns`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateAgentRequest AWS API Documentation
@@ -4276,7 +4300,10 @@ module Aws::DataSync
     #
     #   You can specify the following options:
     #
-    #   * `AUTOMATIC` (default): DataSync chooses NFS version 4.1.
+    #   * `AUTOMATIC` (default): DataSync chooses NFS version 4.1. For
+    #     Amazon FSx for OpenZFS locations, DataSync first attempts to use
+    #     NFS version 4.2, then falls back to version 4.1, and then to
+    #     earlier versions if needed.
     #
     #   * `NFS3`: Stateless protocol version that allows for asynchronous
     #     writes on the server.
@@ -4287,6 +4314,11 @@ module Aws::DataSync
     #   * `NFSv4_1`: Stateful protocol version that supports sessions,
     #     directory delegations, and parallel data processing. NFS version
     #     4.1 also includes all features available in version 4.0.
+    #
+    #   * `NFSv4_2`: Stateful protocol version that supports sparse file
+    #     operations, space reservation, and server-side copy operations, in
+    #     addition to all features available in version 4.1. Selecting NFS
+    #     version 4.2 requires an Enhanced mode task.
     #
     #   <note markdown="1"> DataSync currently only supports NFS version 3 with Amazon FSx for
     #   NetApp ONTAP locations.
@@ -4661,6 +4693,18 @@ module Aws::DataSync
     #   `NONE` value.
     #   @return [String]
     #
+    # @!attribute [rw] object_metadata
+    #   Specifies whether you want DataSync to `PRESERVE` object metadata
+    #   (default behavior) when transferring between object storage systems.
+    #   If you want your DataSync task to ignore object metadata, specify
+    #   the `NONE` value.
+    #
+    #   <note markdown="1"> Even if you specify `NONE`, metadata for the last modified time is
+    #   still preserved.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Options AWS API Documentation
     #
     class Options < Struct.new(
@@ -4678,7 +4722,8 @@ module Aws::DataSync
       :log_level,
       :transfer_mode,
       :security_descriptor_copy_flags,
-      :object_tags)
+      :object_tags,
+      :object_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4707,7 +4752,10 @@ module Aws::DataSync
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc
     #
     # @!attribute [rw] vpc_endpoint_id
-    #   Specifies the ID of the VPC endpoint that your agent connects to.
+    #   Specifies the ID of the VPC service endpoint that's recorded for
+    #   your agent. The endpoint ID is informational and isn't verified by
+    #   DataSync. Your agent communicates through the private IP address in
+    #   `PrivateLinkEndpoint`, which is set when you activate the agent.
     #   @return [String]
     #
     # @!attribute [rw] private_link_endpoint
@@ -4720,8 +4768,12 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] subnet_arns
-    #   Specifies the ARN of the subnet where your VPC endpoint is located.
-    #   You can only specify one ARN.
+    #   Specifies the ARN of the subnet where DataSync creates the network
+    #   interfaces that handle data transfer traffic for your tasks. You can
+    #   only specify one ARN.
+    #
+    #   The subnet doesn't have to be the subnet that contains your VPC
+    #   endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_arns
@@ -6230,10 +6282,10 @@ module Aws::DataSync
     #
     #   The number of NameNodes you can specify depends on the task mode:
     #
-    #   * Enhanced mode – You can specify multiple NameNodes for HDFS High
-    #     Availability (HA) configurations.
+    #   * **Enhanced mode** – You can specify multiple NameNodes for HDFS
+    #     High Availability (HA) configurations.
     #
-    #   * Basic mode – You can specify only one NameNode.
+    #   * **Basic mode** – You can specify only one NameNode.
     #   @return [Array<Types::HdfsNameNode>]
     #
     # @!attribute [rw] block_size

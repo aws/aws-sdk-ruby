@@ -62,7 +62,8 @@ module Aws::LambdaWeb
     #
     # @!attribute [rw] function_count
     #   The number of web functions in your account in the current AWS
-    #   Region.
+    #   Region. This count includes web functions in all states, not only
+    #   functions in the `Active` state.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-web-2025-03-07/AccountUsage AWS API Documentation

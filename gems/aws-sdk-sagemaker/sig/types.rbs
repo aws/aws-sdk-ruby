@@ -551,6 +551,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class AthenaStepMetadata
+      attr_accessor query_execution_id: ::String
+      attr_accessor s3_output_location: ::String
+      SENSITIVE: []
+    end
+
     class AttachClusterNodeNetworkInterfaceRequest
       attr_accessor cluster_name: ::String
       attr_accessor node_id: ::String
@@ -1231,6 +1237,20 @@ module Aws::SageMaker
     class ClarifyTextConfig
       attr_accessor language: ("af" | "sq" | "ar" | "hy" | "eu" | "bn" | "bg" | "ca" | "zh" | "hr" | "cs" | "da" | "nl" | "en" | "et" | "fi" | "fr" | "de" | "el" | "gu" | "he" | "hi" | "hu" | "is" | "id" | "ga" | "it" | "kn" | "ky" | "lv" | "lt" | "lb" | "mk" | "ml" | "mr" | "ne" | "nb" | "fa" | "pl" | "pt" | "ro" | "ru" | "sa" | "sr" | "tn" | "si" | "sk" | "sl" | "es" | "sv" | "tl" | "ta" | "tt" | "te" | "tr" | "uk" | "ur" | "yo" | "lij" | "xx")
       attr_accessor granularity: ("token" | "sentence" | "paragraph")
+      SENSITIVE: []
+    end
+
+    class CleanupFailure
+      attr_accessor step_name: ::String
+      attr_accessor error_code: ("ClientError" | "InternalFailure")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class CleanupStepMetadata
+      attr_accessor cleaned_steps: ::Array[::String]
+      attr_accessor failed_steps: ::Array[Types::CleanupFailure]
+      attr_accessor skipped_steps: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -5074,7 +5094,7 @@ module Aws::SageMaker
       attr_accessor pipeline_arn: ::String
       attr_accessor pipeline_execution_arn: ::String
       attr_accessor pipeline_execution_display_name: ::String
-      attr_accessor pipeline_execution_status: ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded")
+      attr_accessor pipeline_execution_status: ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded" | "CompletedWithFailures")
       attr_accessor pipeline_execution_description: ::String
       attr_accessor pipeline_experiment_config: Types::PipelineExperimentConfig
       attr_accessor failure_reason: ::String
@@ -5661,6 +5681,14 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class EMRServerlessStepMetadata
+      attr_accessor application_id: ::String
+      attr_accessor job_run_id: ::String
+      attr_accessor job_run_name: ::String
+      attr_accessor log_file_path: ::String
+      SENSITIVE: []
+    end
+
     class EMRStepMetadata
       attr_accessor cluster_id: ::String
       attr_accessor step_id: ::String
@@ -6141,6 +6169,23 @@ module Aws::SageMaker
       attr_accessor flow_definition_status: ("Initializing" | "Active" | "Failed" | "Deleting")
       attr_accessor creation_time: ::Time
       attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ForEachSelectorResult
+      attr_accessor step_name: ::String
+      attr_accessor index: ::Integer
+      SENSITIVE: []
+    end
+
+    class ForEachStepMetadata
+      attr_accessor status: ("Succeeded" | "Failed" | "Stopped")
+      attr_accessor input_item_count: ::Integer
+      attr_accessor total_step_count: ::Integer
+      attr_accessor succeeded_step_count: ::Integer
+      attr_accessor failed_step_count: ::Integer
+      attr_accessor stopped_step_count: ::Integer
+      attr_accessor selector: Types::ForEachSelectorResult
       SENSITIVE: []
     end
 
@@ -6943,6 +6988,13 @@ module Aws::SageMaker
     class IntegerParameterRangeSpecification
       attr_accessor min_value: ::String
       attr_accessor max_value: ::String
+      SENSITIVE: []
+    end
+
+    class IterationContext
+      attr_accessor parent_step_name: ::String
+      attr_accessor index: ::Integer
+      attr_accessor item: ::String
       SENSITIVE: []
     end
 
@@ -9964,7 +10016,7 @@ module Aws::SageMaker
       attr_accessor pipeline_arn: ::String
       attr_accessor pipeline_execution_arn: ::String
       attr_accessor pipeline_execution_display_name: ::String
-      attr_accessor pipeline_execution_status: ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded")
+      attr_accessor pipeline_execution_status: ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded" | "CompletedWithFailures")
       attr_accessor pipeline_execution_description: ::String
       attr_accessor pipeline_experiment_config: Types::PipelineExperimentConfig
       attr_accessor failure_reason: ::String
@@ -9992,6 +10044,7 @@ module Aws::SageMaker
       attr_accessor metadata: Types::PipelineExecutionStepMetadata
       attr_accessor attempt_count: ::Integer
       attr_accessor selective_execution_result: Types::SelectiveExecutionResult
+      attr_accessor iteration_context: Types::IterationContext
       SENSITIVE: []
     end
 
@@ -10006,6 +10059,7 @@ module Aws::SageMaker
       attr_accessor callback: Types::CallbackStepMetadata
       attr_accessor lambda: Types::LambdaStepMetadata
       attr_accessor emr: Types::EMRStepMetadata
+      attr_accessor emr_serverless: Types::EMRServerlessStepMetadata
       attr_accessor quality_check: Types::QualityCheckStepMetadata
       attr_accessor clarify_check: Types::ClarifyCheckStepMetadata
       attr_accessor fail: Types::FailStepMetadata
@@ -10019,13 +10073,16 @@ module Aws::SageMaker
       attr_accessor inference_component: Types::InferenceComponentMetadata
       attr_accessor lineage: Types::LineageMetadata
       attr_accessor job: Types::JobStepMetadata
+      attr_accessor athena: Types::AthenaStepMetadata
+      attr_accessor cleanup: Types::CleanupStepMetadata
+      attr_accessor for_each: Types::ForEachStepMetadata
       SENSITIVE: []
     end
 
     class PipelineExecutionSummary
       attr_accessor pipeline_execution_arn: ::String
       attr_accessor start_time: ::Time
-      attr_accessor pipeline_execution_status: ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded")
+      attr_accessor pipeline_execution_status: ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded" | "CompletedWithFailures")
       attr_accessor pipeline_execution_description: ::String
       attr_accessor pipeline_execution_display_name: ::String
       attr_accessor pipeline_execution_failure_reason: ::String
@@ -10061,7 +10118,7 @@ module Aws::SageMaker
       attr_accessor last_modified_by: Types::UserContext
       attr_accessor last_executed_pipeline_execution_arn: ::String
       attr_accessor last_executed_pipeline_execution_display_name: ::String
-      attr_accessor last_executed_pipeline_execution_status: ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded")
+      attr_accessor last_executed_pipeline_execution_status: ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded" | "CompletedWithFailures")
       SENSITIVE: []
     end
 

@@ -57,6 +57,7 @@ module Aws::Route53Domains
 
     class CheckDomainAvailabilityResponse
       attr_accessor availability: ("AVAILABLE" | "AVAILABLE_RESERVED" | "AVAILABLE_PREORDER" | "UNAVAILABLE" | "UNAVAILABLE_PREMIUM" | "UNAVAILABLE_RESTRICTED" | "RESERVED" | "DONT_KNOW" | "INVALID_NAME_FOR_TLD" | "PENDING")
+      attr_accessor price: Types::PriceWithCurrency
       SENSITIVE: []
     end
 
@@ -69,6 +70,7 @@ module Aws::Route53Domains
     class CheckDomainTransferabilityResponse
       attr_accessor transferability: Types::DomainTransferability
       attr_accessor message: ::String
+      attr_accessor price: Types::PriceWithCurrency
       SENSITIVE: []
     end
 
@@ -185,6 +187,7 @@ module Aws::Route53Domains
     class DomainSuggestion
       attr_accessor domain_name: ::String
       attr_accessor availability: ::String
+      attr_accessor price: Types::PriceWithCurrency
       SENSITIVE: []
     end
 
@@ -197,7 +200,7 @@ module Aws::Route53Domains
     end
 
     class DomainTransferability
-      attr_accessor transferable: ("TRANSFERABLE" | "UNTRANSFERABLE" | "DONT_KNOW" | "DOMAIN_IN_OWN_ACCOUNT" | "DOMAIN_IN_ANOTHER_ACCOUNT" | "PREMIUM_DOMAIN")
+      attr_accessor transferable: ("TRANSFERABLE" | "UNTRANSFERABLE" | "DONT_KNOW" | "DOMAIN_IN_OWN_ACCOUNT" | "DOMAIN_IN_ANOTHER_ACCOUNT" | "PREMIUM_DOMAIN" | "PENDING")
       SENSITIVE: []
     end
 
@@ -282,10 +285,21 @@ module Aws::Route53Domains
       SENSITIVE: [:admin_contact, :registrant_contact, :tech_contact, :abuse_contact_email, :abuse_contact_phone, :billing_contact]
     end
 
+    class GetDomainPricesRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainPricesResponse
+      attr_accessor domain_price: Types::DomainPrice
+      SENSITIVE: []
+    end
+
     class GetDomainSuggestionsRequest
       attr_accessor domain_name: ::String
       attr_accessor suggestion_count: ::Integer
       attr_accessor only_available: bool
+      attr_accessor only_standard_prices: bool
       SENSITIVE: []
     end
 
@@ -396,6 +410,7 @@ module Aws::Route53Domains
     class PriceWithCurrency
       attr_accessor price: ::Float
       attr_accessor currency: ::String
+      attr_accessor price_type: ("STANDARD" | "REGISTRY_PREMIUM")
       SENSITIVE: []
     end
 
@@ -418,6 +433,7 @@ module Aws::Route53Domains
       attr_accessor privacy_protect_tech_contact: bool
       attr_accessor billing_contact: Types::ContactDetail
       attr_accessor privacy_protect_billing_contact: bool
+      attr_accessor consent: Types::Consent
       SENSITIVE: [:admin_contact, :registrant_contact, :tech_contact, :billing_contact]
     end
 
@@ -440,6 +456,7 @@ module Aws::Route53Domains
       attr_accessor domain_name: ::String
       attr_accessor duration_in_years: ::Integer
       attr_accessor current_expiry_year: ::Integer
+      attr_accessor consent: Types::Consent
       SENSITIVE: []
     end
 
@@ -513,6 +530,7 @@ module Aws::Route53Domains
       attr_accessor privacy_protect_tech_contact: bool
       attr_accessor billing_contact: Types::ContactDetail
       attr_accessor privacy_protect_billing_contact: bool
+      attr_accessor consent: Types::Consent
       SENSITIVE: [:auth_code, :admin_contact, :registrant_contact, :tech_contact, :billing_contact]
     end
 

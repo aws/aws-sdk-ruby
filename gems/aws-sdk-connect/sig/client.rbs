@@ -627,6 +627,21 @@ module Aws
                                ) -> _CreateContactFlowResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactFlowResponseSuccess
 
+      interface _CreateContactFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactFlowAliasResponse]
+        def contact_flow_arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_contact_flow_alias-instance_method
+      def create_contact_flow_alias: (
+                                       instance_id: ::String,
+                                       ?description: ::String,
+                                       contact_flow_id: ::String,
+                                       contact_flow_version: ::Integer,
+                                       alias_name: ::String
+                                     ) -> _CreateContactFlowAliasResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactFlowAliasResponseSuccess
+
       interface _CreateContactFlowModuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactFlowModuleResponse]
         def id: () -> ::String
@@ -1414,6 +1429,17 @@ module Aws
                                ) -> _DeleteContactFlowResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactFlowResponseSuccess
 
+      interface _DeleteContactFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactFlowAliasResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_contact_flow_alias-instance_method
+      def delete_contact_flow_alias: (
+                                       instance_id: ::String,
+                                       contact_flow_id: ::String,
+                                       alias_id: ::String
+                                     ) -> _DeleteContactFlowAliasResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactFlowAliasResponseSuccess
+
       interface _DeleteContactFlowModuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactFlowModuleResponse]
       end
@@ -1809,6 +1835,18 @@ module Aws
                                    contact_flow_id: ::String
                                  ) -> _DescribeContactFlowResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContactFlowResponseSuccess
+
+      interface _DescribeContactFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContactFlowAliasResponse]
+        def contact_flow_alias: () -> Types::ContactFlowAliasInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_contact_flow_alias-instance_method
+      def describe_contact_flow_alias: (
+                                         instance_id: ::String,
+                                         contact_flow_id: ::String,
+                                         alias_id: ::String
+                                       ) -> _DescribeContactFlowAliasResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContactFlowAliasResponseSuccess
 
       interface _DescribeContactFlowModuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContactFlowModuleResponse]
@@ -2858,6 +2896,20 @@ module Aws
                                       ?next_token: ::String
                                     ) -> _ListContactEvaluationsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactEvaluationsResponseSuccess
+
+      interface _ListContactFlowAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContactFlowAliasesResponse]
+        def contact_flow_alias_summary_list: () -> ::Array[Types::ContactFlowAliasSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_contact_flow_aliases-instance_method
+      def list_contact_flow_aliases: (
+                                       instance_id: ::String,
+                                       contact_flow_id: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListContactFlowAliasesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactFlowAliasesResponseSuccess
 
       interface _ListContactFlowModuleAliasesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListContactFlowModuleAliasesResponse]
@@ -5308,6 +5360,20 @@ module Aws
                                        }
                                      ) -> _UpdateContactEvaluationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactEvaluationResponseSuccess
+
+      interface _UpdateContactFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContactFlowAliasResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_contact_flow_alias-instance_method
+      def update_contact_flow_alias: (
+                                       instance_id: ::String,
+                                       contact_flow_id: ::String,
+                                       alias_id: ::String,
+                                       ?name: ::String,
+                                       ?description: ::String,
+                                       ?contact_flow_version: ::Integer
+                                     ) -> _UpdateContactFlowAliasResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactFlowAliasResponseSuccess
 
       interface _UpdateContactFlowContentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContactFlowContentResponse]

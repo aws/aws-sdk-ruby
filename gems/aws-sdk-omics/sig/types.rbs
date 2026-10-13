@@ -1938,6 +1938,7 @@ module Aws::Omics
       attr_accessor ecr_repository_prefix: ::String
       attr_accessor upstream_repository_prefix: ::String
       attr_accessor ecr_account_id: ::String
+      attr_accessor credential_arn: ::String
       SENSITIVE: []
     end
 

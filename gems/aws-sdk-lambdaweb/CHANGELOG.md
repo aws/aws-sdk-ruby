@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2026-10-13)
+------------------
+
+* Feature - Documentation update to include common use cases.
+
 1.3.0 (2026-10-12)
 ------------------
 

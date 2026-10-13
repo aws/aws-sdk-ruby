@@ -4849,6 +4849,7 @@ module Aws::Glue
       attr_accessor refresh_interval: ::String
       attr_accessor source_properties: ::Hash[::String, ::String]
       attr_accessor continuous_sync: bool
+      attr_accessor target_namespace: ::String
       SENSITIVE: []
     end
 

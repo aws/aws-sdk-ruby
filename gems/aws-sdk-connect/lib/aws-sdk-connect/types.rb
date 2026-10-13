@@ -4508,6 +4508,101 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains information about a flow alias.
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_arn
+    #   The Amazon Resource Name (ARN) of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_id
+    #   The identifier of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the flow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowAliasInfo AWS API Documentation
+    #
+    class ContactFlowAliasInfo < Struct.new(
+      :contact_flow_id,
+      :contact_flow_arn,
+      :alias_id,
+      :version,
+      :name,
+      :description,
+      :last_modified_region,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a flow alias.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the flow alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_id
+    #   The identifier of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the flow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] alias_name
+    #   The name of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_description
+    #   The description of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowAliasSummary AWS API Documentation
+    #
+    class ContactFlowAliasSummary < Struct.new(
+      :arn,
+      :alias_id,
+      :version,
+      :alias_name,
+      :alias_description,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of conditions which would be applied together with an AND
     # condition.
     #
@@ -4987,7 +5082,7 @@ module Aws::Connect
     # A summary of a flow version's metadata.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the view version.
+    #   The Amazon Resource Name (ARN) of the flow version.
     #   @return [String]
     #
     # @!attribute [rw] version_description
@@ -4998,12 +5093,23 @@ module Aws::Connect
     #   The identifier of the flow version.
     #   @return [Integer]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowVersionSummary AWS API Documentation
     #
     class ContactFlowVersionSummary < Struct.new(
       :arn,
       :version_description,
-      :version)
+      :version,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5669,6 +5775,60 @@ module Aws::Connect
     class CreateCaseActionDefinition < Struct.new(
       :fields,
       :template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_version
+    #   The version of the flow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] alias_name
+    #   The name of the alias.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowAliasRequest AWS API Documentation
+    #
+    class CreateContactFlowAliasRequest < Struct.new(
+      :instance_id,
+      :description,
+      :contact_flow_id,
+      :contact_flow_version,
+      :alias_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flow_arn
+    #   The Amazon Resource Name (ARN) of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the alias.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowAliasResponse AWS API Documentation
+    #
+    class CreateContactFlowAliasResponse < Struct.new(
+      :contact_flow_arn,
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9738,6 +9898,37 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_id
+    #   The identifier of the alias.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowAliasRequest AWS API Documentation
+    #
+    class DeleteContactFlowAliasRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :alias_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowAliasResponse AWS API Documentation
+    #
+    class DeleteContactFlowAliasResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] contact_flow_module_id
     #   The identifier of the flow module.
     #   @return [String]
@@ -10825,6 +11016,45 @@ module Aws::Connect
     class DescribeContactEvaluationResponse < Struct.new(
       :evaluation,
       :evaluation_form)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_id
+    #   The identifier of the alias.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowAliasRequest AWS API Documentation
+    #
+    class DescribeContactFlowAliasRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :alias_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flow_alias
+    #   Information about the flow alias.
+    #   @return [Types::ContactFlowAliasInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowAliasResponse AWS API Documentation
+    #
+    class DescribeContactFlowAliasResponse < Struct.new(
+      :contact_flow_alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22393,6 +22623,58 @@ module Aws::Connect
     #
     class ListContactEvaluationsResponse < Struct.new(
       :evaluation_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowAliasesRequest AWS API Documentation
+    #
+    class ListContactFlowAliasesRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flow_alias_summary_list
+    #   Information about the flow aliases.
+    #   @return [Array<Types::ContactFlowAliasSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowAliasesResponse AWS API Documentation
+    #
+    class ListContactFlowAliasesResponse < Struct.new(
+      :contact_flow_alias_summary_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -37679,6 +37961,52 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_id
+    #   The identifier of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_version
+    #   The version of the flow.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowAliasRequest AWS API Documentation
+    #
+    class UpdateContactFlowAliasRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :alias_id,
+      :name,
+      :description,
+      :contact_flow_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowAliasResponse AWS API Documentation
+    #
+    class UpdateContactFlowAliasResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The identifier of the Connect Customer instance.

@@ -2768,6 +2768,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The query execution identifier and the result output location for the
+    # Amazon Athena query that an Athena step runs.
+    #
+    # @!attribute [rw] query_execution_id
+    #   The unique identifier of the Amazon Athena query execution that was
+    #   run by this step execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_output_location
+    #   The Amazon S3 location of the Amazon Athena query results. This is
+    #   the effective output location reported by `GetQueryExecution` for
+    #   the query. This value can be absent when the query uses Athena
+    #   managed query results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AthenaStepMetadata AWS API Documentation
+    #
+    class AthenaStepMetadata < Struct.new(
+      :query_execution_id,
+      :s3_output_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   The name or Amazon Resource Name (ARN) of the SageMaker HyperPod
     #   cluster that contains the target node.
@@ -6148,6 +6172,63 @@ module Aws::SageMaker
     class ClarifyTextConfig < Struct.new(
       :language,
       :granularity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 output resources associated with an upstream step that
+    # the Cleanup step could not delete.
+    #
+    # @!attribute [rw] step_name
+    #   The name of the upstream step whose Amazon S3 output resources the
+    #   Cleanup step could not delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code that identifies why the Cleanup step could not delete
+    #   the output resources associated with the upstream step.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message describing why the Cleanup step could not delete the
+    #   output resources associated with the upstream step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CleanupFailure AWS API Documentation
+    #
+    class CleanupFailure < Struct.new(
+      :step_name,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cleanup outcomes for Amazon S3 output resources associated with
+    # upstream steps.
+    #
+    # @!attribute [rw] cleaned_steps
+    #   The names of upstream steps whose Amazon S3 output resources the
+    #   Cleanup step deleted successfully.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_steps
+    #   The upstream steps whose Amazon S3 output resources the Cleanup step
+    #   could not delete.
+    #   @return [Array<Types::CleanupFailure>]
+    #
+    # @!attribute [rw] skipped_steps
+    #   The names of upstream steps that the Cleanup step skipped. The
+    #   Cleanup step skips a step when the output properties needed to
+    #   locate its resources are unavailable.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CleanupStepMetadata AWS API Documentation
+    #
+    class CleanupStepMetadata < Struct.new(
+      :cleaned_steps,
+      :failed_steps,
+      :skipped_steps)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26059,6 +26140,36 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configurations and outcomes of an Amazon EMR Serverless step
+    # execution.
+    #
+    # @!attribute [rw] application_id
+    #   The identifier of the Amazon EMR Serverless application.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_id
+    #   The identifier of the Amazon EMR Serverless job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_name
+    #   The name of the Amazon EMR Serverless job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_file_path
+    #   The path to the log file for the Amazon EMR Serverless job run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EMRServerlessStepMetadata AWS API Documentation
+    #
+    class EMRServerlessStepMetadata < Struct.new(
+      :application_id,
+      :job_run_id,
+      :job_run_name,
+      :log_file_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configurations and outcomes of an Amazon EMR step execution.
     #
     # @!attribute [rw] cluster_id
@@ -28233,6 +28344,73 @@ module Aws::SageMaker
       :flow_definition_status,
       :creation_time,
       :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of the selector that identifies an iteration of a ForEach
+    # step.
+    #
+    # @!attribute [rw] step_name
+    #   The name of the step associated with the iteration.
+    #   @return [String]
+    #
+    # @!attribute [rw] index
+    #   The index of the iteration within the ForEach step.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ForEachSelectorResult AWS API Documentation
+    #
+    class ForEachSelectorResult < Struct.new(
+      :step_name,
+      :index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status, the iteration-step counts, and the selector information
+    # for a ForEach step execution.
+    #
+    # @!attribute [rw] status
+    #   The status of the ForEach step execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_item_count
+    #   The number of input items that the ForEach step iterates over.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_step_count
+    #   The total number of steps generated across all iterations of the
+    #   ForEach step.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] succeeded_step_count
+    #   The number of iteration steps that completed successfully.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_step_count
+    #   The number of iteration steps that failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stopped_step_count
+    #   The number of iteration steps that were stopped.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] selector
+    #   Identifies the body step and iteration selected within the ForEach
+    #   step.
+    #   @return [Types::ForEachSelectorResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ForEachStepMetadata AWS API Documentation
+    #
+    class ForEachStepMetadata < Struct.new(
+      :status,
+      :input_item_count,
+      :total_step_count,
+      :succeeded_step_count,
+      :failed_step_count,
+      :stopped_step_count,
+      :selector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33264,6 +33442,30 @@ module Aws::SageMaker
     class IntegerParameterRangeSpecification < Struct.new(
       :min_value,
       :max_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The context for an iteration of a ForEach step.
+    #
+    # @!attribute [rw] parent_step_name
+    #   The name of the ForEach step that generated this iteration.
+    #   @return [String]
+    #
+    # @!attribute [rw] index
+    #   The index of the iteration within the ForEach step.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] item
+    #   The input item that is being processed in this iteration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IterationContext AWS API Documentation
+    #
+    class IterationContext < Struct.new(
+      :parent_step_name,
+      :index,
+      :item)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46398,6 +46600,11 @@ module Aws::SageMaker
     #   are reused for this step.
     #   @return [Types::SelectiveExecutionResult]
     #
+    # @!attribute [rw] iteration_context
+    #   The context for the iteration of a ForEach step that generated this
+    #   step execution.
+    #   @return [Types::IterationContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStep AWS API Documentation
     #
     class PipelineExecutionStep < Struct.new(
@@ -46411,7 +46618,8 @@ module Aws::SageMaker
       :failure_reason,
       :metadata,
       :attempt_count,
-      :selective_execution_result)
+      :selective_execution_result,
+      :iteration_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46466,6 +46674,11 @@ module Aws::SageMaker
     # @!attribute [rw] emr
     #   The configurations and outcomes of an Amazon EMR step execution.
     #   @return [Types::EMRStepMetadata]
+    #
+    # @!attribute [rw] emr_serverless
+    #   The configurations and outcomes of an Amazon EMR Serverless step
+    #   execution.
+    #   @return [Types::EMRServerlessStepMetadata]
     #
     # @!attribute [rw] quality_check
     #   The configurations and outcomes of the check step execution. This
@@ -46569,6 +46782,18 @@ module Aws::SageMaker
     #   The metadata for a SageMaker job used in a pipeline execution step.
     #   @return [Types::JobStepMetadata]
     #
+    # @!attribute [rw] athena
+    #   The metadata for the Athena step execution.
+    #   @return [Types::AthenaStepMetadata]
+    #
+    # @!attribute [rw] cleanup
+    #   The metadata for the cleanup step execution.
+    #   @return [Types::CleanupStepMetadata]
+    #
+    # @!attribute [rw] for_each
+    #   The metadata for the ForEach step execution.
+    #   @return [Types::ForEachStepMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStepMetadata AWS API Documentation
     #
     class PipelineExecutionStepMetadata < Struct.new(
@@ -46582,6 +46807,7 @@ module Aws::SageMaker
       :callback,
       :lambda,
       :emr,
+      :emr_serverless,
       :quality_check,
       :clarify_check,
       :fail,
@@ -46594,7 +46820,10 @@ module Aws::SageMaker
       :bedrock_model_import,
       :inference_component,
       :lineage,
-      :job)
+      :job,
+      :athena,
+      :cleanup,
+      :for_each)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.283.0 (2026-10-13)
+------------------
+
+* Feature - Amazon Glue releasing support for adding custom namespace for S3 Tables in Glue zero-ETL integration
+
 1.282.0 (2026-10-12)
 ------------------
 

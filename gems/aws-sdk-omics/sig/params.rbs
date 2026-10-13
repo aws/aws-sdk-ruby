@@ -11,10 +11,11 @@ module Aws
       type container_registry_map = {
       registry_mappings: Array[
         {
-          upstream_registry_url: ::String?,
-          ecr_repository_prefix: ::String?,
+          upstream_registry_url: ::String,
+          ecr_repository_prefix: ::String,
           upstream_repository_prefix: ::String?,
-          ecr_account_id: ::String?
+          ecr_account_id: ::String?,
+          credential_arn: ::String?
         }
       ]?,
       image_mappings: Array[

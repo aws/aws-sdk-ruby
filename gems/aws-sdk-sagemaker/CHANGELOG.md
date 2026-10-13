@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.400.0 (2026-10-13)
+------------------
+
+* Feature - Adds Amazon Athena, Cleanup, ForEach, and Amazon EMR Serverless step metadata, ForEach iteration context, and the CompletedWithFailures execution status to SageMaker Pipelines.
+
 1.399.0 (2026-10-12)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2026-10-13)
+------------------
+
+* Feature - Adds support for DevOpsAgent integration where users can specify the agent space ARN at service level and launch investigations directly from Resilience Hub v2.
+
 1.7.0 (2026-09-16)
 ------------------
 

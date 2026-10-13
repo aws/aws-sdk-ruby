@@ -1729,6 +1729,7 @@ module Aws::Glue
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     TargetColumn = Shapes::StringShape.new(name: 'TargetColumn')
     TargetFormat = Shapes::StringShape.new(name: 'TargetFormat')
+    TargetNamespace = Shapes::StringShape.new(name: 'TargetNamespace')
     TargetProcessingProperties = Shapes::StructureShape.new(name: 'TargetProcessingProperties')
     TargetRedshiftCatalog = Shapes::StructureShape.new(name: 'TargetRedshiftCatalog')
     TargetResourceNotFound = Shapes::StructureShape.new(name: 'TargetResourceNotFound')
@@ -5856,6 +5857,7 @@ module Aws::Glue
     IntegrationConfig.add_member(:refresh_interval, Shapes::ShapeRef.new(shape: String128, location_name: "RefreshInterval"))
     IntegrationConfig.add_member(:source_properties, Shapes::ShapeRef.new(shape: IntegrationSourcePropertiesMap, location_name: "SourceProperties"))
     IntegrationConfig.add_member(:continuous_sync, Shapes::ShapeRef.new(shape: ContinuousSync, location_name: "ContinuousSync"))
+    IntegrationConfig.add_member(:target_namespace, Shapes::ShapeRef.new(shape: TargetNamespace, location_name: "TargetNamespace"))
     IntegrationConfig.struct_class = Types::IntegrationConfig
 
     IntegrationConflictOperationFault.add_member(:message, Shapes::ShapeRef.new(shape: IntegrationErrorMessage, location_name: "Message"))

@@ -186,6 +186,15 @@ module Aws
       }?
     }
 
+      type ssm_send_command_configuration = {
+      timeout_minutes: ::Integer?,
+      region_documents: Hash[::String, Params::ssm_document_config],
+      retry_interval_minutes: ::Float,
+      ungraceful: {
+        behavior: ("skip")?
+      }?
+    }
+
       type execution_block_configuration = {
       custom_action_lambda_config: Params::custom_action_lambda_configuration?,
       ec2_asg_capacity_increase_config: Params::ec2_asg_capacity_increase_configuration?,
@@ -235,14 +244,29 @@ module Aws
       aurora_serverless_scaling_config: Params::aurora_serverless_scaling_configuration?,
       aurora_provisioned_scaling_config: Params::aurora_provisioned_scaling_configuration?,
       neptune_global_database_config: Params::neptune_global_database_configuration?,
-      rds_switchover_read_replica_config: Params::rds_switchover_read_replica_configuration?
+      rds_switchover_read_replica_config: Params::rds_switchover_read_replica_configuration?,
+      ssm_send_command_config: Params::ssm_send_command_configuration?
     }
 
       type step = {
       name: ::String,
       description: ::String?,
       execution_block_configuration: Params::execution_block_configuration,
-      execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping" | "AuroraServerlessScaling" | "AuroraProvisionedScaling" | "NeptuneGlobalDatabase" | "RdsSwitchoverReadReplica")
+      execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping" | "AuroraServerlessScaling" | "AuroraProvisionedScaling" | "NeptuneGlobalDatabase" | "RdsSwitchoverReadReplica" | "SSMSendCommand")
+    }
+
+      type ssm_document_config = {
+      cross_account_role: ::String?,
+      external_id: ::String?,
+      document_arn: ::String,
+      targets: Array[
+        {
+          key: ::String,
+          values: Array[::String]
+        }
+      ],
+      parameters: Hash[::String, Array[::String]]?,
+      document_version: ::String?
     }
 
       type trigger = {
