@@ -49,7 +49,7 @@ module Aws
   module PageableResponse
 
     def self.apply(base)
-      base.extend Extension
+      base.extend Extension unless Extension === base
       base.instance_variable_set(:@last_page, nil)
       base.instance_variable_set(:@more_results, nil)
       base
@@ -217,5 +217,10 @@ module Aws
       end
 
     end
+
+    # Mixed into the response class once rather than extended onto each
+    # response: Kernel#extend clears the method cache for every method the
+    # extension defines, process-wide, on every request.
+    Seahorse::Client::Response.include(Extension)
   end
 end

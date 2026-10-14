@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Mix `PageableResponse` into `Seahorse::Client::Response` once instead of extending every response object, which cleared Ruby's method cache for each of the extension's methods on every request and made YJIT discard compiled code.
+
 3.257.0 (2026-09-14)
 ------------------
 
