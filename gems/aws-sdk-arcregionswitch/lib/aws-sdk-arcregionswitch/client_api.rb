@@ -134,6 +134,7 @@ module Aws::ARCRegionswitch
     LambdaEventSourceMappingUngraceful = Shapes::StructureShape.new(name: 'LambdaEventSourceMappingUngraceful')
     LambdaEventSourceMappingUngracefulBehavior = Shapes::StringShape.new(name: 'LambdaEventSourceMappingUngracefulBehavior')
     LambdaList = Shapes::ListShape.new(name: 'LambdaList')
+    LambdaPayload = Shapes::StringShape.new(name: 'LambdaPayload')
     LambdaUngraceful = Shapes::StructureShape.new(name: 'LambdaUngraceful')
     LambdaUngracefulBehavior = Shapes::StringShape.new(name: 'LambdaUngracefulBehavior')
     Lambdas = Shapes::StructureShape.new(name: 'Lambdas')
@@ -645,6 +646,7 @@ module Aws::ARCRegionswitch
     Lambdas.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
     Lambdas.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
     Lambdas.add_member(:arn, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "arn"))
+    Lambdas.add_member(:payload, Shapes::ShapeRef.new(shape: LambdaPayload, location_name: "payload"))
     Lambdas.struct_class = Types::Lambdas
 
     ListPlanExecutionEventsRequest.add_member(:plan_arn, Shapes::ShapeRef.new(shape: PlanArn, required: true, location_name: "planArn"))

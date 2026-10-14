@@ -55,8 +55,9 @@ module Aws::DynamoDBStreams
     class GetShardIteratorInput
       attr_accessor stream_arn: ::String
       attr_accessor shard_id: ::String
-      attr_accessor shard_iterator_type: ("TRIM_HORIZON" | "LATEST" | "AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER")
+      attr_accessor shard_iterator_type: ("TRIM_HORIZON" | "LATEST" | "AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "AT_TIMESTAMP")
       attr_accessor sequence_number: ::String
+      attr_accessor timestamp: ::Time
       SENSITIVE: []
     end
 

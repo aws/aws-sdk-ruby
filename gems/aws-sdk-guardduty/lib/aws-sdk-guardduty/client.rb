@@ -3910,13 +3910,16 @@ module Aws::GuardDuty
     #   resp.rule.name #=> String
     #   resp.rule.description #=> String
     #   resp.rule.severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
-    #   resp.rule.data_source #=> String, one of "CloudTrailManagementEvent"
+    #   resp.rule.data_source #=> String, one of "CloudTrailManagementEvent", "RuntimeMonitoring"
     #   resp.rule.tactic #=> String
     #   resp.rule.technique #=> String
     #   resp.rule.service #=> String
     #   resp.rule.definition.expression #=> String
     #   resp.rule.language #=> String, one of "SQL"
     #   resp.rule.schema #=> String, one of "CloudTrail"
+    #   resp.rule.runtime_monitoring_details.platforms.eks.min_agent_version #=> String
+    #   resp.rule.runtime_monitoring_details.platforms.ec2.min_agent_version #=> String
+    #   resp.rule.runtime_monitoring_details.platforms.ecs_fargate.min_agent_version #=> String
     #   resp.rule.created_at #=> Time
     #   resp.rule.updated_at #=> Time
     #
@@ -4890,6 +4893,7 @@ module Aws::GuardDuty
     #   resp.findings[0].type #=> String
     #   resp.findings[0].updated_at #=> String
     #   resp.findings[0].associated_attack_sequence_arn #=> String
+    #   resp.findings[0].custom_detection_rule_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindings AWS API Documentation
     #
@@ -6236,7 +6240,7 @@ module Aws::GuardDuty
     #   resp.rules[0].name #=> String
     #   resp.rules[0].description #=> String
     #   resp.rules[0].severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
-    #   resp.rules[0].data_source #=> String, one of "CloudTrailManagementEvent"
+    #   resp.rules[0].data_source #=> String, one of "CloudTrailManagementEvent", "RuntimeMonitoring"
     #   resp.rules[0].tactic #=> String
     #   resp.rules[0].technique #=> String
     #   resp.rules[0].service #=> String
@@ -9740,7 +9744,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.166.0'
+      context[:gem_version] = '1.167.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

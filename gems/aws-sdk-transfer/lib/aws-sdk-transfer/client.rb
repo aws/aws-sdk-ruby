@@ -1353,6 +1353,12 @@ module Aws::Transfer
     #
     #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
     #
+    # @option params [String] :host_key_storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private host
+    #   key material in an Secrets Manager secret.
+    #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServerResponse#server_id #server_id} => String
@@ -1424,6 +1430,7 @@ module Aws::Transfer
     #       directory_listing_optimization: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     ip_address_type: "IPV4", # accepts IPV4, DUALSTACK
+    #     host_key_storage_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SECRETS_MANAGER
     #   })
     #
     # @example Response structure
@@ -2590,6 +2597,8 @@ module Aws::Transfer
     #   resp.host_key.tags #=> Array
     #   resp.host_key.tags[0].key #=> String
     #   resp.host_key.tags[0].value #=> String
+    #   resp.host_key.storage_type #=> String, one of "SERVICE_MANAGED", "SECRETS_MANAGER"
+    #   resp.host_key.secret_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeHostKey AWS API Documentation
     #
@@ -3157,6 +3166,20 @@ module Aws::Transfer
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for host keys.
     #
+    # @option params [String] :storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private host
+    #   key material in an Secrets Manager secret.
+    #
+    # @option params [String] :kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   Secrets Manager secret that stores the host key. If you specify a
+    #   customer managed key, its key policy must allow the
+    #   `AWSServiceRoleForTransfer` service-linked role to decrypt the secret.
+    #   If you don't specify a value, Transfer Family uses the Amazon Web
+    #   Services managed key for Secrets Manager.
+    #
     # @return [Types::ImportHostKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportHostKeyResponse#server_id #server_id} => String
@@ -3174,6 +3197,8 @@ module Aws::Transfer
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     storage_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SECRETS_MANAGER
+    #     kms_key: "KmsKey",
     #   })
     #
     # @example Response structure
@@ -3621,6 +3646,8 @@ module Aws::Transfer
     #   resp.host_keys[0].description #=> String
     #   resp.host_keys[0].type #=> String
     #   resp.host_keys[0].date_imported #=> Time
+    #   resp.host_keys[0].storage_type #=> String, one of "SERVICE_MANAGED", "SECRETS_MANAGER"
+    #   resp.host_keys[0].secret_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListHostKeys AWS API Documentation
     #
@@ -5034,8 +5061,16 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Updates the description for the host key that's specified by the
-    # `ServerId` and `HostKeyId` parameters.
+    # Updates the host key that's specified by the `ServerId` and
+    # `HostKeyId` parameters. You can update the description of the host
+    # key, change where the host key is stored by specifying the
+    # `StorageType`, and specify the KMS key used to encrypt the host key
+    # when it's stored in Secrets Manager.
+    #
+    # To change a host key's storage type from `SERVICE_MANAGED` to
+    # `SECRETS_MANAGER`, you must have the `transfer:ExportHostKey`
+    # permission. `transfer:ExportHostKey` is a permission-only action that
+    # has no corresponding API operation.
     #
     # @option params [required, String] :server_id
     #   The identifier of the server that contains the host key that you are
@@ -5044,8 +5079,22 @@ module Aws::Transfer
     # @option params [required, String] :host_key_id
     #   The identifier of the host key that you are updating.
     #
-    # @option params [required, String] :description
+    # @option params [String] :description
     #   An updated description for the host key.
+    #
+    # @option params [String] :storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private host
+    #   key material in an Secrets Manager secret.
+    #
+    # @option params [String] :kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   Secrets Manager secret that stores the host key. If you specify a
+    #   customer managed key, its key policy must allow the
+    #   `AWSServiceRoleForTransfer` service-linked role to decrypt the secret.
+    #   If you don't specify a value, Transfer Family uses the Amazon Web
+    #   Services managed key for Secrets Manager.
     #
     # @return [Types::UpdateHostKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5057,7 +5106,9 @@ module Aws::Transfer
     #   resp = client.update_host_key({
     #     server_id: "ServerId", # required
     #     host_key_id: "HostKeyId", # required
-    #     description: "HostKeyDescription", # required
+    #     description: "HostKeyDescription",
+    #     storage_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SECRETS_MANAGER
+    #     kms_key: "KmsKey",
     #   })
     #
     # @example Response structure
@@ -5815,7 +5866,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.148.0'
+      context[:gem_version] = '1.149.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

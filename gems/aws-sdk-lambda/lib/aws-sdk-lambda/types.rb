@@ -789,11 +789,26 @@ module Aws::Lambda
     #   The tenant identifier for the chained invocation.
     #   @return [String]
     #
+    # @!attribute [rw] x_amzn_trace_id
+    #   The optional X-Ray trace header to use when starting the chained
+    #   invocation. If you omit this value, the child invocation inherits
+    #   the parent durable execution's trace header.
+    #
+    #   Specify this value on the `START` update for the chained invocation
+    #   operation. For more information about the header format, see
+    #   [Tracing header][1] in the *X-Ray Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ChainedInvokeOptions AWS API Documentation
     #
     class ChainedInvokeOptions < Struct.new(
       :function_name,
-      :tenant_id)
+      :tenant_id,
+      :x_amzn_trace_id)
       SENSITIVE = []
       include Aws::Structure
     end

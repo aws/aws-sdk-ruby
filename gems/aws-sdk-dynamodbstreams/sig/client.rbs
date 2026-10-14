@@ -116,8 +116,9 @@ module Aws
       def get_shard_iterator: (
                                 stream_arn: ::String,
                                 shard_id: ::String,
-                                shard_iterator_type: ("TRIM_HORIZON" | "LATEST" | "AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER"),
-                                ?sequence_number: ::String
+                                shard_iterator_type: ("TRIM_HORIZON" | "LATEST" | "AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "AT_TIMESTAMP"),
+                                ?sequence_number: ::String,
+                                ?timestamp: ::Time
                               ) -> _GetShardIteratorResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetShardIteratorResponseSuccess
 

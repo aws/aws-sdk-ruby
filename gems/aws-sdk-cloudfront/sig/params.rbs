@@ -609,7 +609,8 @@ module Aws
       origin_ssl_protocols: {
         quantity: ::Integer,
         items: Array[("SSLv3" | "TLSv1" | "TLSv1.1" | "TLSv1.2")]
-      }?
+      }?,
+      ip_address_type: ("ipv4" | "dualstack")?
     }
 
     end

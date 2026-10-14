@@ -760,6 +760,7 @@ module Aws::Lambda
 
     ChainedInvokeOptions.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location_name: "FunctionName"))
     ChainedInvokeOptions.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantId, location_name: "TenantId"))
+    ChainedInvokeOptions.add_member(:x_amzn_trace_id, Shapes::ShapeRef.new(shape: XAmznTraceId, location_name: "XAmznTraceId"))
     ChainedInvokeOptions.struct_class = Types::ChainedInvokeOptions
 
     ChainedInvokeStartedDetails.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location_name: "FunctionName"))

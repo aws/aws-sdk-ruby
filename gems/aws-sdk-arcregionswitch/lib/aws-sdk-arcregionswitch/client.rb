@@ -639,6 +639,7 @@ module Aws::ARCRegionswitch
     #                     cross_account_role: "IamRoleArn",
     #                     external_id: "String",
     #                     arn: "LambdaArn",
+    #                     payload: "LambdaPayload",
     #                   },
     #                 ],
     #                 retry_interval_minutes: 1.0, # required
@@ -938,6 +939,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -1169,6 +1171,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -1498,6 +1501,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -1717,6 +1721,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -2580,6 +2585,7 @@ module Aws::ARCRegionswitch
     #                     cross_account_role: "IamRoleArn",
     #                     external_id: "String",
     #                     arn: "LambdaArn",
+    #                     payload: "LambdaPayload",
     #                   },
     #                 ],
     #                 retry_interval_minutes: 1.0, # required
@@ -2872,6 +2878,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -3147,7 +3154,7 @@ module Aws::ARCRegionswitch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-arcregionswitch'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

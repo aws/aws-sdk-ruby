@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.157.0 (2026-10-14)
+------------------
+
+* Feature - This release adds a new "IpAddressType" field to "VPCOriginEndpointConfig", allowing customers to specify whether their VPC origin accepts IPv4-only or dualstack connections.
+
 1.156.0 (2026-10-01)
 ------------------
 

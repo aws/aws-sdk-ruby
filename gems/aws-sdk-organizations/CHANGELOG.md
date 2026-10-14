@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2026-10-14)
+------------------
+
+* Feature - With dual-stack enabled, all requests now resolve to the endpoint in the partition's primary Region (for example, organizations.us-east-1.api.aws) and are signed for that Region. Previously, requests from other Regions resolved to a nonexistent endpoint. No API changes.
+
 1.150.0 (2026-09-30)
 ------------------
 

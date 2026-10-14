@@ -160,6 +160,7 @@ module Aws::Transfer
       attr_accessor structured_log_destinations: ::Array[::String]
       attr_accessor s3_storage_options: Types::S3StorageOptions
       attr_accessor ip_address_type: ("IPV4" | "DUALSTACK")
+      attr_accessor host_key_storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER")
       SENSITIVE: [:host_key]
     end
 
@@ -561,6 +562,8 @@ module Aws::Transfer
       attr_accessor type: ::String
       attr_accessor date_imported: ::Time
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER")
+      attr_accessor secret_id: ::String
       SENSITIVE: []
     end
 
@@ -782,6 +785,8 @@ module Aws::Transfer
       attr_accessor host_key_body: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER")
+      attr_accessor kms_key: ::String
       SENSITIVE: [:host_key_body]
     end
 
@@ -1061,6 +1066,8 @@ module Aws::Transfer
       attr_accessor description: ::String
       attr_accessor type: ::String
       attr_accessor date_imported: ::Time
+      attr_accessor storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER")
+      attr_accessor secret_id: ::String
       SENSITIVE: []
     end
 
@@ -1436,6 +1443,8 @@ module Aws::Transfer
       attr_accessor server_id: ::String
       attr_accessor host_key_id: ::String
       attr_accessor description: ::String
+      attr_accessor storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER")
+      attr_accessor kms_key: ::String
       SENSITIVE: []
     end
 

@@ -17443,6 +17443,12 @@ module Aws::CloudFront
     #   your origin.
     #   @return [Types::OriginSslProtocols]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type of the CloudFront VPC origin endpoint
+    #   configuration. Valid values are `ipv4` and `dualstack`. IPv6-only is
+    #   not supported for VPC origins.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/VpcOriginEndpointConfig AWS API Documentation
     #
     class VpcOriginEndpointConfig < Struct.new(
@@ -17451,7 +17457,8 @@ module Aws::CloudFront
       :http_port,
       :https_port,
       :origin_protocol_policy,
-      :origin_ssl_protocols)
+      :origin_ssl_protocols,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17533,6 +17540,11 @@ module Aws::CloudFront
     #   The VPC origin summary origin endpoint ARN.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type of the CloudFront VPC origin. Valid values are
+    #   `ipv4` and `dualstack`. IPv6-only is not supported for VPC origins.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/VpcOriginSummary AWS API Documentation
     #
     class VpcOriginSummary < Struct.new(
@@ -17543,7 +17555,8 @@ module Aws::CloudFront
       :last_modified_time,
       :arn,
       :account_id,
-      :origin_endpoint_arn)
+      :origin_endpoint_arn,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

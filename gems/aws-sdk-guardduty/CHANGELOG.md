@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2026-10-14)
+------------------
+
+* Feature - Releasing support for Custom Detection Rule Runtime Monitoring
+
 1.166.0 (2026-10-08)
 ------------------
 

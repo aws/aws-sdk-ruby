@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2026-10-14)
+------------------
+
+* Feature - This release supports scoping Amazon Bedrock AgentCore Gateway rate limits by request header or request body field.
+
 1.78.0 (2026-10-12)
 ------------------
 

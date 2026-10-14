@@ -3962,6 +3962,7 @@ module Aws::CloudFront
     #         quantity: 1, # required
     #         items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
     #       },
+    #       ip_address_type: "ipv4", # accepts ipv4, dualstack
     #     },
     #     tags: {
     #       items: [
@@ -3989,6 +3990,7 @@ module Aws::CloudFront
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items #=> Array
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.vpc_origin.vpc_origin_endpoint_config.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.location #=> String
     #   resp.etag #=> String
     #
@@ -4798,6 +4800,7 @@ module Aws::CloudFront
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items #=> Array
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.vpc_origin.vpc_origin_endpoint_config.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteVpcOrigin AWS API Documentation
@@ -7196,6 +7199,7 @@ module Aws::CloudFront
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items #=> Array
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.vpc_origin.vpc_origin_endpoint_config.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetVpcOrigin AWS API Documentation
@@ -10795,6 +10799,7 @@ module Aws::CloudFront
     #   resp.vpc_origin_list.items[0].arn #=> String
     #   resp.vpc_origin_list.items[0].account_id #=> String
     #   resp.vpc_origin_list.items[0].origin_endpoint_arn #=> String
+    #   resp.vpc_origin_list.items[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListVpcOrigins AWS API Documentation
     #
@@ -13725,6 +13730,7 @@ module Aws::CloudFront
     #         quantity: 1, # required
     #         items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
     #       },
+    #       ip_address_type: "ipv4", # accepts ipv4, dualstack
     #     },
     #     id: "string", # required
     #     if_match: "string", # required
@@ -13746,6 +13752,7 @@ module Aws::CloudFront
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items #=> Array
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.vpc_origin.vpc_origin_endpoint_config.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateVpcOrigin AWS API Documentation
@@ -13815,7 +13822,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.156.0'
+      context[:gem_version] = '1.157.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

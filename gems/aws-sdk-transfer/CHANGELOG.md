@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2026-10-14)
+------------------
+
+* Feature - AWS Transfer Family now lets you store SFTP server host keys in AWS Secrets Manager in your own AWS account. This gives you greater control over your server identity and helps simplify server migrations and failover.
+
 1.148.0 (2026-10-01)
 ------------------
 

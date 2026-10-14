@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2026-10-14)
+------------------
+
+* Feature - Features - Adds support for an optional payload to invoke the Lambda function with as part of the Custom action Lambda execution block
+
 1.26.0 (2026-10-13)
 ------------------
 

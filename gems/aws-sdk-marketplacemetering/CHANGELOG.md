@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2026-10-14)
+------------------
+
+* Feature - Documentation update - added a Get started pointer to the AWS Marketplace AI Metering Agent Skill in the BatchMeterUsage API reference. No API or behavior change.
+
 1.106.0 (2026-10-09)
 ------------------
 

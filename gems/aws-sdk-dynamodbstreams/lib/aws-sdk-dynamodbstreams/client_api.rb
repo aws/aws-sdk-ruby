@@ -69,6 +69,7 @@ module Aws::DynamoDBStreams
     StringAttributeValue = Shapes::StringShape.new(name: 'StringAttributeValue')
     StringSetAttributeValue = Shapes::ListShape.new(name: 'StringSetAttributeValue')
     TableName = Shapes::StringShape.new(name: 'TableName')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TrimmedDataAccessException = Shapes::StructureShape.new(name: 'TrimmedDataAccessException')
 
     AttributeMap.key = Shapes::ShapeRef.new(shape: AttributeName)
@@ -112,6 +113,7 @@ module Aws::DynamoDBStreams
     GetShardIteratorInput.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, required: true, location_name: "ShardId"))
     GetShardIteratorInput.add_member(:shard_iterator_type, Shapes::ShapeRef.new(shape: ShardIteratorType, required: true, location_name: "ShardIteratorType"))
     GetShardIteratorInput.add_member(:sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "SequenceNumber"))
+    GetShardIteratorInput.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     GetShardIteratorInput.struct_class = Types::GetShardIteratorInput
 
     GetShardIteratorOutput.add_member(:shard_iterator, Shapes::ShapeRef.new(shape: ShardIterator, location_name: "ShardIterator"))
