@@ -15,7 +15,7 @@ module Aws
   # be constructed with additional options that were provided.
   class LoginCredentials
     include CredentialProvider
-    include RefreshingCredentials
+    include ResilientRefreshingCredentials
 
     # @option options [required, String] :login_session An opaque string
     #   used to determine the cache file location. This value can be found
@@ -34,7 +34,6 @@ module Aws
         @client = Signin::Client.new(client_opts.merge(credentials: nil))
       end
       @metrics = ['CREDENTIALS_LOGIN']
-      @async_refresh = true
       super
     end
 
@@ -43,11 +42,14 @@ module Aws
 
     private
 
+    NON_RECOVERABLE_SIGNIN_ERRORS = %w[TOKEN_EXPIRED USER_CREDENTIALS_CHANGED INSUFFICIENT_PERMISSIONS].freeze
+
     def refresh
       # First reload the token from disk to ensure it hasn't been refreshed externally
       token_json = read_cached_token
       update_creds(token_json['accessToken'])
-      return if @credentials && @expiration && !near_expiration?(sync_expiration_length)
+      # if the reloaded token is fresh use it without contacting Sign-In
+      return unless refresh_needed?
 
       # Using OpenSSL 3.6.0 may result in errors like "certificate verify failed (unable to get certificate CRL)."
       # A recommended workaround is to use OpenSSL version < 3.6.0 or requiring the openssl gem with a version of at
@@ -57,21 +59,21 @@ module Aws
         warn 'WARNING: OpenSSL 3.6.x may cause certificate verify errors - use OpenSSL < 3.6.0 or openssl gem >= 3.2.2'
       end
 
-      # Attempt to refresh the token
       attempt_refresh(token_json)
+    end
 
-      # Raise if token is hard expired
-      return unless !@expiration || @expiration < Time.now
-
-      raise Errors::InvalidLoginToken,
-            'Login token is invalid and failed to refresh. Please reauthenticate.'
+    # A missing, unparseable, or malformed login token, or a Sign-In
+    # rejection that requires the user to take action, must be raised
+    # immediately rather than retried.
+    def non_recoverable_error?(error)
+      error.is_a?(Errors::InvalidLoginToken) || error.is_a?(ArgumentError)
     end
 
     def read_cached_token
       cached_token = JSON.load_file(login_cache_file)
       validate_cached_token(cached_token)
       cached_token
-    rescue Errno::ENOENT, Aws::Json::ParseError
+    rescue Errno::ENOENT, JSON::ParserError
       raise Errors::InvalidLoginToken,
             "Failed to load a Login token for login session #{@login_session}. Please reauthenticate."
     end
@@ -116,18 +118,26 @@ module Aws
       update_creds(token_json['accessToken'])
       update_token_cache(token_json)
     rescue Signin::Errors::AccessDeniedException => e
-      case e.error
+      raise Errors::InvalidLoginToken, signin_rejection_message(e.error) if non_recoverable_signin_error?(e)
+
+      raise
+    end
+
+    def non_recoverable_signin_error?(error)
+      NON_RECOVERABLE_SIGNIN_ERRORS.include?(error.error)
+    end
+
+    def signin_rejection_message(error_code)
+      case error_code
       when 'TOKEN_EXPIRED'
-        warn 'Your session has expired. Please reauthenticate.'
+        'Your session has expired. Please reauthenticate.'
       when 'USER_CREDENTIALS_CHANGED'
-        warn 'Unable to refresh credentials because of a change in your password. ' \
+        'Unable to refresh credentials because of a change in your password. ' \
           'Please reauthenticate with your new password.'
       when 'INSUFFICIENT_PERMISSIONS'
-        warn 'Unable to refresh credentials due to insufficient permissions. ' \
+        'Unable to refresh credentials due to insufficient permissions. ' \
           'You may be missing permission for the `CreateOAuth2Token` action.'
       end
-    rescue StandardError => e
-      warn("Failed to refresh Login token for LoginCredentials: #{e.message}")
     end
 
     def make_request(token_json)

@@ -45,7 +45,7 @@ module Aws
     # to be refreshed and it has access to the CognitoIdentityCredentials object.
     class CognitoIdentityCredentials
       include CredentialProvider
-      include RefreshingCredentials
+      include ResilientRefreshingCredentials
 
       # @param [Hash] options
       # @option options [String] :identity_id the Cognito identity_id.  Required
@@ -83,7 +83,6 @@ module Aws
         @identity_id = options.delete(:identity_id)
         @custom_role_arn = options.delete(:custom_role_arn)
         @logins = options.delete(:logins) || {}
-        @async_refresh = false
 
         client_opts = {}
         options.each_pair { |k, v| client_opts[k] = v unless CLIENT_EXCLUDE_OPTIONS.include?(k) }
@@ -116,8 +115,6 @@ module Aws
       private
 
       def refresh
-        @before_refresh&.call(self)
-
         resp = @client.get_credentials_for_identity(
           identity_id: identity_id,
           custom_role_arn: @custom_role_arn,

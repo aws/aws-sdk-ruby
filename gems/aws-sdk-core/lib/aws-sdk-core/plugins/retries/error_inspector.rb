@@ -6,15 +6,26 @@ module Aws
       # @api private
       # This class will be obsolete when APIs contain modeled exceptions
       class ErrorInspector
-        EXPIRED_CREDS = Set.new(
-          [
-            'InvalidClientTokenId',        # query services
-            'UnrecognizedClientException', # json services
-            'InvalidAccessKeyId',          # s3
-            'AuthFailure',                 # ec2
-            'InvalidIdentityToken',        # sts
-            'ExpiredToken',                # route53
-            'ExpiredTokenException'        # kinesis
+        # Target-service authentication failures that indicate the cached
+        # credentials are no longer valid.
+        INVALIDATING_AUTH_ERRORS = Set.new(
+          %w[
+            ExpiredToken
+            InvalidToken
+          ]
+        )
+
+        # Error codes that indicate cached credentials were rejected or have
+        # expired.
+        REFRESHING_AUTH_ERRORS = Set.new(
+          %w[
+            InvalidClientTokenId
+            UnrecognizedClientException
+            InvalidAccessKeyId
+            AuthFailure
+            InvalidIdentityToken
+            ExpiredToken
+            ExpiredTokenException
           ]
         )
 
@@ -71,8 +82,12 @@ module Aws
           @http_status_code = http_status_code
         end
 
-        def expired_credentials?
-          !!(EXPIRED_CREDS.include?(@name) || @name.match(/expired/i))
+        def invalidating_auth_error?
+          INVALIDATING_AUTH_ERRORS.include?(@name)
+        end
+
+        def refreshing_auth_error?
+          REFRESHING_AUTH_ERRORS.include?(@name) || !!(@name =~ /expired/i)
         end
 
         def throttling_error?
@@ -124,14 +139,20 @@ module Aws
             networking? ||
             checksum? ||
             endpoint_discovery?(context) ||
-            (expired_credentials? && refreshable_credentials?(context)) ||
+            (invalidating_auth_error? && invalidatable_credentials?(context)) ||
+            (refreshing_auth_error? && refreshable_credentials?(context)) ||
             clock_skew?(context)
         end
 
         private
 
+        def invalidatable_credentials?(context)
+          context.config.credentials.respond_to?(:invalidate) && !context[:signing_credentials].nil?
+        end
+
         def refreshable_credentials?(context)
-          context.config.credentials.respond_to?(:refresh!)
+          provider = context.config.credentials
+          !provider.respond_to?(:invalidate) && provider.respond_to?(:refresh!)
         end
 
         def extract_name(error)
