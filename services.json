@@ -530,20 +530,6 @@
   "FSx": {
     "models": "fsx/2018-03-01"
   },
-  "FinSpaceData": {
-    "models": "finspace-data/2020-07-13",
-    "deprecated": true,
-    "addPlugins": [
-      "Aws::FinSpaceData::Plugins::ContentType"
-    ]
-  },
-  "Finspace": {
-    "models": "finspace/2021-03-12",
-    "deprecated": true,
-    "addPlugins": [
-      "Aws::Finspace::Plugins::ContentType"
-    ]
-  },
   "Firehose": {
     "models": "firehose/2015-08-04"
   },
@@ -1354,10 +1340,6 @@
   },
   "TimestreamWrite": {
     "models": "timestream-write/2018-11-01"
-  },
-  "Tnb": {
-    "models": "tnb/2008-10-21",
-    "deprecated": true
   },
   "TranscribeService": {
     "models": "transcribe/2017-10-26"
