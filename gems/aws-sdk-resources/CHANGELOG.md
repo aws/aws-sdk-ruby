@@ -1,8 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Feature - Remove dependencies on the discontinued TNB, FinSpace, and FinSpace Data service gems.
-
 3.276.0 (2026-10-12)
 ------------------
 
