@@ -146,10 +146,24 @@ module Aws
         default: true,
         doc_type: 'Boolean',
         docstring: <<~DOCS) do |cfg|
-          Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-          a clock skew correction and retry requests with skewed client clocks.
+          Deprecated. Use `disable_clock_skew_correction` instead. Used only in
+          `standard` and `adaptive` retry modes. Specifies whether to apply a
+          clock skew correction and retry requests with skewed client clocks.
+          Takes effect only when `disable_clock_skew_correction` is not set.
         DOCS
         resolve_correct_clock_skew(cfg)
+      end
+
+      option(
+        :disable_clock_skew_correction,
+        doc_type: 'Boolean',
+        docstring: <<~DOCS) do |cfg|
+          Used only in `standard` and `adaptive` retry modes. When `true`, the
+          SDK does not apply a clock skew correction, does not update its stored
+          skew from responses, and does not retry clock skew errors. Clock skew
+          correction is enabled by default.
+        DOCS
+        resolve_disable_clock_skew_correction(cfg)
       end
 
       # @api private undocumented
@@ -246,6 +260,23 @@ module Aws
           end
           value == 'true'
         end
+
+        def resolve_disable_clock_skew_correction(cfg)
+          value = ENV['AWS_DISABLE_CLOCK_SKEW_CORRECTION'] ||
+                  Aws.shared_config.disable_clock_skew_correction(profile: cfg.profile)
+          # When the canonical option is unset, fall back to the deprecated
+          # correct_clock_skew alias (disabled == !correct_clock_skew).
+          return !cfg.correct_clock_skew if value.nil?
+
+          # Raise if provided value is not true or false
+          if value != 'true' && value != 'false'
+            raise ArgumentError,
+                  'Must provide either `true` or `false` for '\
+                    'disable_clock_skew_correction profile option or for '\
+                    'ENV[\'AWS_DISABLE_CLOCK_SKEW_CORRECTION\']'
+          end
+          value == 'true'
+        end
       end
 
       class Handler < Seahorse::Client::Handler
@@ -279,11 +310,12 @@ module Aws
             config.endpoint_cache.delete(key)
           end
 
-          # Clock correction needs to be updated from the response even when
-          # the request is not retryable but should only be updated
-          # in the case of clock skew errors
-          if error_inspector.clock_skew?(context)
-            config.clock_skew.update_clock_correction(context)
+          # Record clock correction and estimated skew from every response
+          # (success or error) unless correction is disabled. Recording on every
+          # response lets a stale or bad value be healed by the next response.
+          unless clock_skew_correction_disabled?(config)
+            sent_at = context.metadata[:clock_skew_request_sent_at]
+            config.clock_skew.update_clock_correction(context, sent_at)
           end
 
           # Estimated skew needs to be updated on every request
@@ -319,6 +351,13 @@ module Aws
 
         def new_retries?
           RetryErrors.new_retries?
+        end
+
+        # True when clock skew correction is turned off. The deprecated
+        # correct_clock_skew alias is folded in by the option resolver.
+        def clock_skew_correction_disabled?(config)
+          config.respond_to?(:disable_clock_skew_correction) &&
+            config.disable_clock_skew_correction
         end
 
         def with_metric(retry_mode, &block)

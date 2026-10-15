@@ -190,17 +190,28 @@ module Aws
         end
 
         def apply_clock_skew(context, req)
-          if context.config.respond_to?(:clock_skew) &&
-             context.config.clock_skew &&
-             context.config.correct_clock_skew
+          return unless context.config.respond_to?(:clock_skew) &&
+                        context.config.clock_skew &&
+                        clock_skew_correction_enabled?(context.config)
 
-            endpoint = context.http_request.endpoint
-            skew = context.config.clock_skew.clock_correction(endpoint)
-            if skew.abs.positive?
-              req.headers['X-Amz-Date'] =
-                (Time.now.utc + skew).strftime('%Y%m%dT%H%M%SZ')
-            end
+          # Capture the raw, pre-skew send time for this attempt for the midpoint calculation.
+          context.metadata[:clock_skew_request_sent_at] = Time.now.utc
+
+          endpoint = context.http_request.endpoint
+          skew = context.config.clock_skew.clock_correction(endpoint)
+          if skew.abs.positive?
+            req.headers['X-Amz-Date'] =
+              (Time.now.utc + skew).strftime('%Y%m%dT%H%M%SZ')
           end
+        end
+
+        # Clock skew correction is on unless disabled by the option or the deprecated alias.
+        def clock_skew_correction_enabled?(config)
+          if config.respond_to?(:disable_clock_skew_correction)
+            return !config.disable_clock_skew_correction
+          end
+
+          !config.respond_to?(:correct_clock_skew) || config.correct_clock_skew
         end
 
       end

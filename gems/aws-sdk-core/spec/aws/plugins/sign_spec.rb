@@ -178,6 +178,17 @@ module Aws
               to eq now.utc.strftime("%Y%m%dT%H%M%SZ")
           end
 
+          it 'skips clock skew correction when disable_clock_skew_correction is true' do
+            client = TestClient.new(client_options.merge(
+              clock_skew: clock_skew,
+              disable_clock_skew_correction: true
+            ))
+            expect(clock_skew).not_to receive(:clock_correction)
+            resp = client.operation
+            expect(resp.context.http_request.headers['X-Amz-Date']).
+              to eq now.utc.strftime("%Y%m%dT%H%M%SZ")
+          end
+
           it 'skips clock skew correction when clock skew is 0' do
             client = TestClient.new(client_options.merge(
               clock_skew: clock_skew,
@@ -200,6 +211,21 @@ module Aws
             resp = client.operation
             expect(resp.context.http_request.headers['X-Amz-Date']).
               to eq (now.utc + 1000).strftime("%Y%m%dT%H%M%SZ")
+          end
+
+          it 'captures the pre-skew send time when correction is enabled' do
+            client = TestClient.new(client_options.merge(clock_skew: clock_skew))
+            resp = client.operation
+            expect(resp.context.metadata[:clock_skew_request_sent_at]).to eq(utc)
+          end
+
+          it 'does not capture the send time when disabled' do
+            client = TestClient.new(client_options.merge(
+              clock_skew: clock_skew,
+              disable_clock_skew_correction: true
+            ))
+            resp = client.operation
+            expect(resp.context.metadata[:clock_skew_request_sent_at]).to be_nil
           end
         end
 

@@ -109,7 +109,10 @@ module Aws
 
           if context.config.respond_to?(:clock_skew) &&
              context.config.clock_skew &&
-             context.config.correct_clock_skew
+             clock_skew_correction_enabled?(context.config)
+
+            # Capture the raw, pre-skew send time for this attempt.
+            context.metadata[:clock_skew_request_sent_at] = Time.now.utc
 
             endpoint = context.http_request.endpoint
             skew = context.config.clock_skew.clock_correction(endpoint)
@@ -136,6 +139,15 @@ module Aws
           # add request metadata with signature components for debugging
           context[:canonical_request] = signature.canonical_request
           context[:string_to_sign] = signature.string_to_sign
+        end
+
+        # Clock skew correction is on unless disabled by the option or the deprecated alias.
+        def clock_skew_correction_enabled?(config)
+          if config.respond_to?(:disable_clock_skew_correction)
+            return !config.disable_clock_skew_correction
+          end
+
+          !config.respond_to?(:correct_clock_skew) || config.correct_clock_skew
         end
 
         # @api private
