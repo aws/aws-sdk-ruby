@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Remove region enumeration support for the discontinued TNB, FinSpace, and FinSpace Data services.
+
 1.1296.0 (2026-10-14)
 ------------------
 
