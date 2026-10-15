@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+# Gems for the ops/CPU-sec harness. The SDK gems (aws-sdk-core, aws-sigv4,
+# aws-partitions, aws-eventstream) and the code generator load from this
+# checkout, so baseline and current builds differ only in SDK code.
+source 'https://rubygems.org'
+
+# aws-sdk-core runtime dependencies
+gem 'base64'
+gem 'bigdecimal'
+gem 'jmespath'
+gem 'logger'
+gem 'rexml'
+
+# JSON and XML engines (CBOR uses the SDK's built-in encoder/decoder)
+gem 'oj'
+gem 'ox'
+
+# code generator
+gem 'kramdown'
+gem 'mustache', '< 1.1.3'
