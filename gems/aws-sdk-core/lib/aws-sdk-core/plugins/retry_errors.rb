@@ -146,10 +146,9 @@ module Aws
         default: true,
         doc_type: 'Boolean',
         docstring: <<~DOCS) do |cfg|
-          Deprecated. Use `disable_clock_skew_correction` instead. Used only in
-          `standard` and `adaptive` retry modes. Specifies whether to apply a
-          clock skew correction and retry requests with skewed client clocks.
-          Takes effect only when `disable_clock_skew_correction` is not set.
+          Used only in `standard` and `adaptive` retry modes. Specifies whether
+          to apply a clock skew correction and retry requests with skewed client
+          clocks. Takes effect only when `disable_clock_skew_correction` is not set.
         DOCS
         resolve_correct_clock_skew(cfg)
       end
@@ -264,8 +263,8 @@ module Aws
         def resolve_disable_clock_skew_correction(cfg)
           value = ENV['AWS_DISABLE_CLOCK_SKEW_CORRECTION'] ||
                   Aws.shared_config.disable_clock_skew_correction(profile: cfg.profile)
-          # When the canonical option is unset, fall back to the deprecated
-          # correct_clock_skew alias (disabled == !correct_clock_skew).
+          # When the canonical option is unset, fall back to the
+          # correct_clock_skew option (disabled == !correct_clock_skew).
           return !cfg.correct_clock_skew if value.nil?
 
           # Raise if provided value is not true or false
@@ -353,8 +352,8 @@ module Aws
           RetryErrors.new_retries?
         end
 
-        # True when clock skew correction is turned off. The deprecated
-        # correct_clock_skew alias is folded in by the option resolver.
+        # True when clock skew correction is turned off. The fallback
+        # correct_clock_skew option is folded in by the option resolver.
         def clock_skew_correction_disabled?(config)
           config.respond_to?(:disable_clock_skew_correction) &&
             config.disable_clock_skew_correction

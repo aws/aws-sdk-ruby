@@ -134,7 +134,7 @@ module Aws
         expect(client.config.disable_clock_skew_correction).to eq(true)
       end
 
-      it 'falls back to the deprecated correct_clock_skew when disable is unset' do
+      it 'falls back to correct_clock_skew when disable_clock_skew_correction is unset' do
         c = RetryErrorsSvc::Client.new(
           stub_responses: true, correct_clock_skew: false
         )
@@ -556,9 +556,12 @@ module Aws
           # A stale correction is healed by a successful response's Date header,
           # with no error or retry (previously Ruby could not heal here).
           it 'heals a stale correction from a healthy response without retrying' do
-            resp.context.config.clock_skew.send(
-              :set_clock_correction, 'https://example.com', -300
-            )
+            resp.context.http_request.endpoint = 'https://example.com'
+            clock_skew = resp.context.config.clock_skew
+            clock_skew.send(:set_clock_correction, 'https://example.com', -300)
+            # Precondition: a stale -300s correction is stored.
+            expect(clock_skew.clock_correction('https://example.com')).to eq(-300)
+
             test_case_def = [
               {
                 response: { status_code: 200, error: nil, clock_skew: 0 },

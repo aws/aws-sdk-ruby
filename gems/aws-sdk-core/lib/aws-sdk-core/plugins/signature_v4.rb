@@ -141,7 +141,7 @@ module Aws
           context[:string_to_sign] = signature.string_to_sign
         end
 
-        # Clock skew correction is on unless disabled by the option or the deprecated alias.
+        # Clock skew correction is on unless disabled by the option or the correct_clock_skew fallback.
         def clock_skew_correction_enabled?(config)
           if config.respond_to?(:disable_clock_skew_correction)
             return !config.disable_clock_skew_correction
