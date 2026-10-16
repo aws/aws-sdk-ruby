@@ -118,6 +118,36 @@ module Aws
           .to receive(:correct_clock_skew).and_return('true')
         expect(client.config.correct_clock_skew).to eq(true)
       end
+
+      it 'defaults disable_clock_skew_correction to false' do
+        expect(client.config.disable_clock_skew_correction).to eq(false)
+      end
+
+      it 'can configure disable_clock_skew_correction using ENV' do
+        ENV['AWS_DISABLE_CLOCK_SKEW_CORRECTION'] = 'true'
+        expect(client.config.disable_clock_skew_correction).to eq(true)
+      end
+
+      it 'can configure disable_clock_skew_correction with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:disable_clock_skew_correction).and_return('true')
+        expect(client.config.disable_clock_skew_correction).to eq(true)
+      end
+
+      it 'falls back to correct_clock_skew when disable_clock_skew_correction is unset' do
+        c = RetryErrorsSvc::Client.new(
+          stub_responses: true, correct_clock_skew: false
+        )
+        expect(c.config.disable_clock_skew_correction).to eq(true)
+      end
+
+      it 'lets disable_clock_skew_correction take precedence over correct_clock_skew' do
+        c = RetryErrorsSvc::Client.new(
+          stub_responses: true, correct_clock_skew: true,
+          disable_clock_skew_correction: true
+        )
+        expect(c.config.disable_clock_skew_correction).to eq(true)
+      end
     end
 
     describe RetryErrors::Handler do
@@ -488,6 +518,121 @@ module Aws
           ]
 
           handle_with_retry(test_case_def)
+        end
+
+        # Clock skew correction scenarios.
+        context 'clock skew correction' do
+          let(:skew_error) do
+            RetryErrorsSvc::Errors::RequestTimeTooSkewed.new(nil, nil)
+          end
+
+          # Clocks agree: success on the first attempt, no correction.
+
+          it 'does not correct when clocks agree' do
+            test_case_def = [
+              {
+                response: { status_code: 200, error: nil, clock_skew: 0 },
+                expect: { retries: 0, clock_correction: 0 }
+              }
+            ]
+            handle_with_retry(test_case_def)
+          end
+
+          # Skew error: retry with the learned correction, correction persisted.
+          it 'retries a skew error and learns the correction' do
+            test_case_def = [
+              {
+                response: { status_code: 403, error: skew_error, clock_skew: 1000 },
+                expect: { retries: 1 }
+              },
+              {
+                response: { status_code: 200, error: nil },
+                expect: { retries: 1, clock_correction: 1000 }
+              }
+            ]
+            handle_with_retry(test_case_def)
+          end
+
+          # A stale correction is healed by a successful response's Date header,
+          # with no error or retry (previously Ruby could not heal here).
+          it 'heals a stale correction from a healthy response without retrying' do
+            resp.context.http_request.endpoint = 'https://example.com'
+            clock_skew = resp.context.config.clock_skew
+            clock_skew.send(:set_clock_correction, 'https://example.com', -300)
+            # Precondition: a stale -300s correction is stored.
+            expect(clock_skew.clock_correction('https://example.com')).to eq(-300)
+
+            test_case_def = [
+              {
+                response: { status_code: 200, error: nil, clock_skew: 0 },
+                expect: { retries: 0, clock_correction: 0 }
+              }
+            ]
+            handle_with_retry(test_case_def)
+          end
+
+          # Skew below the 4 minute threshold is not retried as clock skew.
+          it 'does not retry a skew error when skew is below the threshold' do
+            test_case_def = [
+              {
+                response: { status_code: 403, error: skew_error, clock_skew: 60 },
+                expect: { retries: 0 }
+              }
+            ]
+            handle_with_retry(test_case_def)
+          end
+
+          # Skew above the 4 minute threshold is retried.
+          it 'retries a skew error when skew exceeds the threshold' do
+            test_case_def = [
+              {
+                response: { status_code: 403, error: skew_error, clock_skew: 300 },
+                expect: { retries: 1 }
+              },
+              {
+                response: { status_code: 200, error: nil },
+                expect: { retries: 1 }
+              }
+            ]
+            handle_with_retry(test_case_def)
+          end
+
+          # Skew error with no Date header is not a candidate and does not update.
+
+          it 'does not treat a skew error without a Date header as skew' do
+            test_case_def = [
+              {
+                response: { status_code: 403, error: skew_error },
+                expect: { retries: 0, clock_correction: 0 }
+              }
+            ]
+            handle_with_retry(test_case_def)
+          end
+
+          # Cached response (Age header) does not update the correction even when
+          # its Date implies a large skew.
+          it 'does not update the correction for a cached (Age header) response' do
+            test_case_def = [
+              {
+                response: { status_code: 200, error: nil,
+                            clock_skew: -3600, age: 3600 },
+                expect: { retries: 0, clock_correction: 0 }
+              }
+            ]
+            handle_with_retry(test_case_def)
+          end
+
+          # When disabled, a skew error is not retried and nothing is recorded.
+          it 'does not correct or retry skew errors when disabled' do
+            config.disable_clock_skew_correction = true
+            test_case_def = [
+              {
+                response: { status_code: 403, error: skew_error, clock_skew: 1000 },
+                expect: { retries: 0, clock_correction: 0 }
+              }
+            ]
+            handle_with_retry(test_case_def)
+          end
         end
 
         it 'deletes endpoints from the endpoint cache and retries endpoint discovery errors' do

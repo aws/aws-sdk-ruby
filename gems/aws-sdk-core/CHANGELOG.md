@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Standardize clock skew correction: use a 4 minute detection threshold and an NTP-style midpoint calculation, refresh the stored correction from every response so a stale value can heal, and ignore cached (`Age` header) and slow (over 15 minute) responses. Add a `disable_clock_skew_correction` option (`AWS_DISABLE_CLOCK_SKEW_CORRECTION`) that takes precedence over `correct_clock_skew`, which continues to work when the new option is unset.
+
 * Feature - Improve RBS support for service-specific error handling by making modeled errors inherit from each service's `ServiceError`.
 
 3.257.0 (2026-09-14)
