@@ -210,7 +210,7 @@ end
 
 When(/^I send an HTTP get request for the presigned url$/) do
   uri = URI(@url)
-  @resp = Net::HTTP.get_response(uri.host, uri.request_uri)
+  @resp = Net::HTTP.get_response(uri)
 end
 
 Then(/^the response should be "(.*?)"$/) do |expected|
@@ -219,18 +219,14 @@ end
 
 When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do |body|
   uri = URI(@url)
-  http = Net::HTTP.new(uri.host)
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = uri.scheme == 'https'
   req = Net::HTTP::Put.new(
     uri.request_uri, 'content-length' => body.bytesize.to_s
   )
   req.body = body
   @resp = http.request(req)
   expect(@resp.code).to eq('200')
-end
-
-Then(/^I make an unauthenticated HTTP GET request for key "(.*?)"$/) do |key|
-  uri = URI.parse("http://#{@bucket_name}.s3.amazonaws.com/#{key}")
-  @resp = Net::HTTP.get_response(uri)
 end
 
 When(/^I get an object that doesn't exist with a read block$/) do
@@ -251,7 +247,8 @@ end
 
 When(/^I send an HTTP put request with the content type as "(.*?)"$/) do |content_type|
   uri = URI(@url)
-  http = Net::HTTP.new(uri.host)
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = uri.scheme == 'https'
   req = Net::HTTP::Put.new(uri.request_uri, 'content-type' => content_type)
   req.body = 'data'
   @resp = http.request(req)
@@ -271,8 +268,10 @@ Then(/^the keys in my bucket should be$/) do |table|
   expect(keys.sort).to eq(table.rows.map(&:first).sort)
 end
 
-Given(/^I have a bucket configured with a virtual hosted CNAME$/) do
-  @bucket_name = cfg_value('s3', 'virtual_hosted_bucket')
+Then(/^the presigned URL should use virtual-hosted bucket addressing$/) do
+  uri = URI(@url)
+  expect(uri.host).to start_with("#{@bucket_name}.")
+  expect(uri.path).not_to include(@bucket_name)
 end
 
 When(/^I get the bucket location$/) do

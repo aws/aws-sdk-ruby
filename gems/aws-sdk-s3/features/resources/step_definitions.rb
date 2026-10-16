@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'tempfile'
+require 'securerandom'
 require 'fileutils'
 require 'net/https'
 require 'net/http/post/multipart'
@@ -14,16 +15,40 @@ Before("@s3", "@resources") do
 end
 
 After("@s3", "@resources") do
+  errors = []
   @created_buckets.each do |bucket|
-    bucket.delete!
+    begin
+      bucket.delete!
+    rescue StandardError => e
+      errors << "#{bucket.name}: #{e.class}: #{e.message}"
+    end
   end
+  raise "Bucket cleanup failed: #{errors.join('; ')}" unless errors.empty?
+end
+
+def create_bucket_resource
+  options = { bucket: "aws-sdk-resources-#{SecureRandom.hex(12)}" }
+  if @client.config.region != 'us-east-1'
+    options[:create_bucket_configuration] = {
+      location_constraint: @client.config.region
+    }
+  end
+  bucket = @s3.create_bucket(options)
+  @created_buckets << bucket
+  @client.wait_until(:bucket_exists, bucket: bucket.name)
+  bucket
 end
 
 Given(/^I create a bucket resource$/) do
-  @bucket_name = "aws-sdk-resources-#{Time.now.to_i}-#{rand(1000)}"
-  @bucket = @s3.create_bucket(bucket: @bucket_name)
-  @s3.client.wait_until(:bucket_exists, bucket: @bucket_name)
-  @created_buckets << @bucket
+  @bucket = create_bucket_resource
+  @bucket_name = @bucket.name
+end
+
+Given(/^I create a 10MB source object in a different bucket$/) do
+  @source_bucket = create_bucket_resource.name
+  @source_key = 'source-object'
+  @source_body = 'a' * (5 * 1024 * 1024) + 'b' * (5 * 1024 * 1024)
+  @s3.bucket(@source_bucket).object(@source_key).put(body: @source_body)
 end
 
 Given("I have {int} {int}MB chunks") do |number, size|
@@ -109,9 +134,18 @@ end
 
 Then(/^I should be able to multipart copy the object to a different bucket$/) do
   target_bucket = @s3.bucket(@bucket_name)
-  target_object = target_bucket.object("#{@source_key}-copy")
-  target_object.copy_from("#{@source_bucket}/#{@source_key}", multipart_copy: true)
-  expect(ApiCallTracker.called_operations).to include(:create_multipart_upload)
+  @copied_object = target_bucket.object("#{@source_key}-copy")
+  @copied_object.copy_from(
+    "#{@source_bucket}/#{@source_key}",
+    multipart_copy: true, min_part_size: 5 * 1024 * 1024
+  )
+  operations = ApiCallTracker.called_operations
+  expect(operations).to include(:create_multipart_upload, :complete_multipart_upload)
+  expect(operations.count(:upload_part_copy)).to eq(2)
+end
+
+Then(/^the copied object should match the source object$/) do
+  expect(@copied_object.get.body.read).to eq(@source_body)
 end
 
 Then(/^I should be able to multipart copy the object$/) do
