@@ -1,0 +1,14 @@
+module Aws
+  module S3
+    module Errors
+      # Not modeled in the API. Defined at runtime by Aws::Errors::DynamicErrors.
+
+      # Raised for a 404 response without an error body (e.g. HEAD requests).
+      class NotFound < ServiceError
+      end
+
+      class SlowDown < ServiceError
+      end
+    end
+  end
+end
