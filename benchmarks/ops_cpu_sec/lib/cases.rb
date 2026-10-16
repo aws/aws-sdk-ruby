@@ -29,8 +29,10 @@ module OpsCpuSec
         select(specs, filter).map { |spec| spec['id'] }
       end
 
-      def load(filter)
-        select(specs, filter).map { |spec| build(spec) }
+      # transport: StubTransport or an HttpsLoopback; capture: add the
+      # validator's request capture.
+      def load(filter, transport: StubTransport, capture: false)
+        select(specs, filter).map { |spec| build(spec, transport, capture) }
       end
 
       def specs
@@ -41,7 +43,7 @@ module OpsCpuSec
         filter ? specs.select { |spec| spec['id'].match?(filter) } : specs
       end
 
-      def build(spec)
+      def build(spec, transport, capture)
         mod = service_module(SERVICES.fetch(spec['protocol']))
         method_name = underscore(spec['operation']).to_sym
         operation_ref = mod::Client.api.operation(method_name)
@@ -49,8 +51,7 @@ module OpsCpuSec
         client = mod::Client.new(
           region: 'us-east-1',
           credentials: Aws::Credentials.new('akid', 'secret'),
-          plugins: [StubSendPlugin],
-          ocs_response: canned
+          **transport.client_options(canned, capture: capture)
         )
         Case.new(spec['id'], spec['protocol'], spec['kind'], spec['operation'], method_name, client, params,
                  spec, canned)
