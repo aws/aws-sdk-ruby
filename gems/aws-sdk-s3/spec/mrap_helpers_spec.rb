@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require_relative 'spec_helper'
 $LOAD_PATH.unshift(File.expand_path('../../aws-sdk-s3control/lib', __dir__))
 require 'aws-sdk-s3control'
 require_relative '../features/client/mrap_helpers'
