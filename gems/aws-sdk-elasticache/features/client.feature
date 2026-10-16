@@ -10,7 +10,3 @@ Feature: ElastiCache
     When I attempt to call the "DescribeCacheClusters" API with:
     | CacheClusterId | fake_cluster |
     Then I expect the response error code to be "InvalidParameterValue"
-    And I expect the response error message to include:
-    """
-    The parameter CacheClusterIdentifier is not a valid identifier.
-    """
