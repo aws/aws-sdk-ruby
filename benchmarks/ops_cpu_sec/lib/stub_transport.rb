@@ -10,6 +10,25 @@ module OpsCpuSec
     attr_accessor :capture
   end
 
+  # The in-process stub transport (the default).
+  module StubTransport
+    class << self
+      def name
+        'stub'
+      end
+
+      def description
+        'in-process StubSendHandler replacing the Net::HTTP send handler (no sockets)'
+      end
+
+      def client_options(canned, capture: false) # rubocop:disable Lint/UnusedMethodArgument
+        { plugins: [StubSendPlugin], ocs_response: canned }
+      end
+
+      def prepare(_test_case); end
+    end
+  end
+
   # Replaces the Net::HTTP send handler. Like the real handler, it passes
   # the request headers through, streams the whole request body, and
   # signals the response headers, body and completion.

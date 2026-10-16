@@ -8,10 +8,16 @@ benchmark cases (22 awsJson1_0, 19 rpcv2Cbor, 10 awsQuery, 10 restJson1,
 Each operation is a real `Client#<operation>` call through the full handler
 stack: param conversion and validation, protocol build, endpoint resolution
 (the service's endpoint rule set), SigV4 signing, retry and checksum
-handlers, response parsing and output structs. Only the HTTP transport is
-replaced: `StubSendHandler` takes the place of the Net::HTTP send handler,
-streams the request body like the real handler, and returns the case's canned
-status, headers and body bytes. Nothing touches a socket.
+handlers, response parsing and output structs. Two transports are available:
+
+* **stub** (default): `StubSendHandler` takes the place of the Net::HTTP send
+  handler, streams the request body like the real handler, and returns the
+  case's canned status, headers and body bytes. Nothing touches a socket, so
+  only SDK code is measured.
+* **https** (`--transport https`): calls go through the SDK's own Net::HTTP
+  send handler, over TLS with keep-alive, to a fixture server on loopback. This
+  adds the HTTP client, TLS and the socket path. See
+  [HTTPS loopback mode](#https-loopback-mode).
 
 ## Layout
 
@@ -19,6 +25,8 @@ status, headers and body bytes. Nothing touches a socket.
 |---|---|
 | `ops_cpu_sec.rb` | Entry point: options, warmup, timed loop, report |
 | `lib/stub_transport.rb` | `StubSendHandler`, the in-process replacement for the Net::HTTP send handler |
+| `lib/https_loopback.rb` | `--transport https`: fixture posting and the loopback socket redirect |
+| `lib/options.rb` | Command-line options |
 | `lib/cases.rb` | Loads the fixtures and builds one client per case |
 | `lib/validator.rb`, `lib/validator/` | `--validate`: checks every case against the model before timing |
 | `fixtures/cases.json` | The 71 cases (generated) |
@@ -46,7 +54,9 @@ bundle exec ruby benchmarks/ops_cpu_sec/ops_cpu_sec.rb              # full run
 
 Options: `--filter REGEX` (exits with status 2 if no case matches), `--warmup N` (default 1000),
 `--min-iterations N` (default 50000), `--min-cpu-seconds S` (default 5),
-`--json FILE`.
+`--json FILE`, `--transport stub|https` (default stub), `--https-server
+HOST:PORT` (default 127.0.0.1:18443) and `--fixture-control HOST:PORT`
+(default 127.0.0.1:18080).
 
 Per case: build the client (not timed), run the warmup iterations, `GC.start`,
 then call the operation until 50,000 iterations or 5 s of process CPU have
@@ -59,6 +69,40 @@ prints the mean CPU/wall ratio and a cross-check of total CPU against
 
 Compare builds with separate processes, alternating between them (for example
 baseline, current, baseline, current, ...), and use the median per case.
+
+## HTTPS loopback mode
+
+`--transport https` sends every call through the SDK's production Net::HTTP
+handler to a fixture server running as a separate process on the same host,
+so the server's CPU is not part of the measurement. The server must:
+
+* serve HTTPS (HTTP/1.1, keep-alive) on `--https-server` and answer every
+  request with the current fixture;
+* accept `POST /fixture` on the plaintext `--fixture-control` address, where the
+  body is a complete HTTP/1.1 response (status line, headers, a
+  `Content-Length` that matches the body, the body), and answer `204`.
+
+The smithy-java e2e benchmark `FixtureServer`
+([smithy-lang/smithy-java](https://github.com/smithy-lang/smithy-java),
+`benchmarks/e2e-benchmarks`) implements this. For example, with its jar built
+from that module:
+
+```sh
+java -cp smithy-java-e2e-benchmark.jar software.amazon.smithy.java.benchmarks.fixture.FixtureServer   --listen 127.0.0.1:18443 --control 127.0.0.1:18080 &
+bundle exec ruby benchmarks/ops_cpu_sec/ops_cpu_sec.rb --transport https --validate
+bundle exec ruby benchmarks/ops_cpu_sec/ops_cpu_sec.rb --transport https
+```
+
+Before each case the harness posts that case's canned response (the stub's
+status, headers and body, plus `Content-Length` and a protocol `Content-Type`
+when the case has none). Only the socket is redirected: endpoint resolution,
+the URL, the `Host` header, TLS SNI and SigV4 signing stay those of the real
+endpoint. The server's certificate is not verified (`ssl_verify_peer: false`),
+since it is expected to be self-signed.
+
+In this mode the CPU/wall ratio is below 1, because the client waits for the
+server's process. Use Linux; on other systems the loopback cost is larger and
+noisier.
 
 ## Validation
 
@@ -74,6 +118,9 @@ baseline, current, baseline, current, ...), and use the median per case.
 * response cases return the model's canned response, and the parsed output
   contains every value of the response body and of the output-bound headers,
   and no other values.
+
+With `--transport https`, the same checks run against the requests as they
+are handed to Net::HTTP and the responses parsed from the server.
 
 ## Regenerating the inputs
 
