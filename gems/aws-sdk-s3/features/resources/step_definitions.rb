@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'base64'
 require 'tempfile'
 require 'fileutils'
 require 'net/https'
@@ -58,18 +57,6 @@ When(/^I upload the chunks to the "(.*?)" object$/) do |key|
   end
 end
 
-When(/^I upload the chunks to the "(.*?)" object with SSE\/CPK$/) do |key|
-  require 'openssl'
-  cipher = OpenSSL::Cipher::AES256.new(:CBC)
-  encryption_key = cipher.random_key
-  @bucket.object(key).upload_stream({
-    sse_customer_key: encryption_key,
-    sse_customer_algorithm: 'AES256'
-  }) do |write_stream|
-    @chunks.each {|chunk| write_stream << chunk }
-  end
-end
-
 Then(/^the chunks should have been uploaded as a multipart upload$/) do
   expect(ApiCallTracker.called_operations).to include(:create_multipart_upload)
   expect(ApiCallTracker.called_operations).to include(:upload_part)
@@ -98,108 +85,8 @@ When(/^I upload the file$/) do
   @old_key = @file.path
 end
 
-When(/^I upload the file to the "(.*?)" object with SSE\/CPK$/) do |key|
-  require 'openssl'
-  cipher = OpenSSL::Cipher::AES256.new(:CBC)
-  ecnryption_key = cipher.random_key
-  @bucket.object(key).upload_file(@file, {
-    sse_customer_key: ecnryption_key,
-    sse_customer_algorithm: 'AES256'
-  })
-  @bucket.object(key).upload_file(@file)
-end
-
 Then(/^the file should have been uploaded as a multipart upload$/) do
   expect(ApiCallTracker.called_operations).to include(:create_multipart_upload)
-end
-
-Given(/^I have an encryption client$/) do
-  @cse = Aws::S3::Encryption::Client.new({
-    client: @s3.client,
-    encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
-  })
-end
-
-Given(/^I have a V2 encryption client$/) do
-  @cse = Aws::S3::EncryptionV2::Client.new(
-   client: @s3.client,
-   encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
-   key_wrap_schema: :aes_gcm,
-   content_encryption_schema: :aes_gcm_no_padding,
-   security_profile: :v2_and_legacy
-  )
-end
-
-Given(/^I have an encryption client configured to use KMS$/) do
-  @cse = Aws::S3::Encryption::Client.new({
-    client: @s3.client,
-    kms_key_id: @kms_key_id,
-  })
-end
-
-Given(/^I have a V2 encryption client configured to use KMS$/) do
-  @cse = Aws::S3::EncryptionV2::Client.new(
-   client: @s3.client,
-   kms_key_id: @kms_key_id
-  )
-end
-
-Given(/^I have an encryption client configured for :instruction_file$/) do
-  @cse = Aws::S3::Encryption::Client.new({
-    client: @s3.client,
-    encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
-    envelope_location: :instruction_file,
-  })
-end
-
-Given(/^I have a V2 encryption client configured for :instruction_file$/) do
-  @cse = Aws::S3::EncryptionV2::Client.new(
-   client: @s3.client,
-   encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
-   envelope_location: :instruction_file,
-   key_wrap_schema: :aes_gcm,
-   content_encryption_schema: :aes_gcm_no_padding,
-   security_profile: :v2_and_legacy
-  )
-end
-
-When(/^I perform an encrypted PUT of the value "(.*?)"$/) do |value|
-  @key = 'encrypted'
-  @plain_text = value
-  @cse.put_object(bucket: @bucket_name, key: @key, body: @plain_text)
-end
-
-When(/^I GET the object with a non\-encryption client$/) do
-  @cipher_text = @s3.client.get_object(bucket: @bucket_name, key: @key).body.read
-end
-
-When(/^I GET the object with a V2 encryption client$/) do
-  cse_v2 = Aws::S3::EncryptionV2::Client.new(
-    client: @s3.client,
-    encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
-    key_wrap_schema: :aes_gcm,
-    content_encryption_schema: :aes_gcm_no_padding,
-    security_profile: :v2_and_legacy
-  )
-  @cipher_text = cse_v2.get_object(bucket: @bucket_name, key: @key).body.read
-end
-
-Then(/^the object data should be encrypted$/) do
-  expect(@cipher_text).not_to eq(@plain_text)
-end
-
-When(/^I GET the object with an encryption client$/) do
-  @plain_text = @cse.get_object(bucket: @bucket_name, key: @key).body.read
-end
-
-Then(/^the object data should be "(.*?)"$/) do |value|
-  expect(@plain_text).to eq(value)
-end
-
-Then(/^the instruction file should exist$/) do
-  expect {
-    @s3.client.head_object(bucket: @bucket_name, key: @key + '.instruction')
-  }.not_to raise_error
 end
 
 When(/^I create a presigned post$/) do
@@ -218,19 +105,6 @@ Then(/^I should be able to POST an object to the form url$/) do
   http.verify_mode = OpenSSL::SSL::VERIFY_PEER
   resp = http.request(req)
   expect(resp.code.to_i).to eq(201)
-end
-
-Given(/^I have an encryption client configured to read a Java encrypted object$/) do
-  @cse = Aws::S3::Encryption::Client.new(
-    profile: @profile,
-    kms_key_id: @kms_key_id,
-  )
-end
-Given(/^I have a V2 encryption client configured to read a Java encrypted object$/) do
-  @cse = Aws::S3::EncryptionV2::Client.new(
-    profile: @profile,
-    kms_key_id: @kms_key_id,
-    )
 end
 
 Then(/^I should be able to multipart copy the object to a different bucket$/) do
