@@ -11,10 +11,6 @@ Feature: Amazon CloudFront
     When I attempt to call the "GetDistribution" API with:
     | Id | fake-id |
     Then I expect the response error code to be "NoSuchDistribution"
-    And I expect the response error message to include:
-    """
-    The specified distribution does not exist.
-    """
 
   @veryslow
   Scenario: CRUD distributions

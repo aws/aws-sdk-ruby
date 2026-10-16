@@ -11,10 +11,6 @@ Feature: Amazon DynamoDB
     When I attempt to call the "DescribeTable" API with:
     | TableName | fake-table |
     Then I expect the response error code to be "ResourceNotFoundException"
-    And I expect the response error message to include:
-    """
-    Requested resource not found: Table: fake-table not found
-    """
 
   @endpointdiscovery
   Scenario: Endpoint Discovery

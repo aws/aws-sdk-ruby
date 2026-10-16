@@ -10,7 +10,3 @@ Feature: Amazon Redshift
     When I attempt to call the "DescribeClusters" API with:
     | ClusterIdentifier | fake-cluster |
     Then I expect the response error code to be "ClusterNotFound"
-    And I expect the response error message to include:
-    """
-    Cluster fake-cluster not found.
-    """

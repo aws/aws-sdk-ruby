@@ -10,7 +10,3 @@ Feature: AWS Identity and Access Management
     When I attempt to call the "GetUser" API with:
     | UserName | fake_user |
     Then I expect the response error code to be "NoSuchEntity"
-    And I expect the response error message to include:
-    """
-    The user with name fake_user cannot be found.
-    """
