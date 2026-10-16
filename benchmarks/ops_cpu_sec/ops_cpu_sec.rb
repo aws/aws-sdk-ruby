@@ -13,6 +13,12 @@
 #   --list               print the case ids and exit
 #   --validate           check every case's request/response against the model and exit
 #   --filter REGEX       only run cases whose id matches (fails if none match)
+#   --transport NAME     stub (default): in-process stub, no sockets
+#                        https: the SDK's Net::HTTP client to a loopback fixture
+#                        server (see lib/https_loopback.rb and the README)
+#   --https-server ADDR  https data address, host:port (default 127.0.0.1:18443)
+#   --fixture-control ADDR
+#                        https fixture control address, host:port (default 127.0.0.1:18080)
 #   --warmup N           warmup iterations (default 1000)
 #   --min-iterations N   stop after N iterations ... (default 50000)
 #   --min-cpu-seconds S  ... or S seconds of process CPU, whichever comes first (default 5)
@@ -43,6 +49,8 @@ require 'ox'
 require 'aws-sdk-core'
 require 'aws-sdk-code-generator'
 require_relative 'lib/stub_transport'
+require_relative 'lib/https_loopback'
+require_relative 'lib/options'
 require_relative 'lib/cases'
 require_relative 'lib/validator'
 
@@ -53,7 +61,6 @@ module OpsCpuSec
     'xml' => [Aws::Xml::Parser, 'Aws::Xml::Parser::OxEngine'],
     'cbor' => [Aws::RpcV2, 'Aws::RpcV2::CborEngine']
   }.freeze
-  DEFAULTS = { warmup: 1000, min_iterations: 50_000, min_cpu_seconds: 5.0 }.freeze
   HEADER = format('# %<id>-44s %<iterations>10s %<cpu>9s %<wall>9s %<ops>14s %<ratio>9s',
                   id: 'id', iterations: 'iterations', cpu: 'cpu_s', wall: 'wall_s',
                   ops: 'ops_cpu_sec', ratio: 'cpu_wall')
@@ -62,7 +69,7 @@ module OpsCpuSec
 
   class << self
     def main(argv)
-      opts = parse_options(argv)
+      opts = Options.parse(argv)
       ids = Cases.ids(opts[:filter])
       if ids.empty?
         warn "no cases match --filter #{opts[:filter].source.inspect}"
@@ -71,25 +78,15 @@ module OpsCpuSec
       return list(ids) if opts[:list]
 
       check_engines!
-      cases = Cases.load(opts[:filter])
-      return Validator.run(cases) ? 0 : 1 if opts[:validate]
+      transport = Options.transport(opts)
+      cases = Cases.load(opts[:filter], transport: transport, capture: opts[:validate])
+      return Validator.run(cases, transport) ? 0 : 1 if opts[:validate]
 
-      run_benchmarks(cases, opts)
+      run_benchmarks(cases, transport, opts)
       0
-    end
-
-    def parse_options(argv)
-      opts = DEFAULTS.dup
-      OptionParser.new do |o|
-        o.on('--list') { opts[:list] = true }
-        o.on('--validate') { opts[:validate] = true }
-        o.on('--filter REGEX') { |value| opts[:filter] = Regexp.new(value) }
-        o.on('--warmup N', Integer) { |value| opts[:warmup] = value }
-        o.on('--min-iterations N', Integer) { |value| opts[:min_iterations] = value }
-        o.on('--min-cpu-seconds S', Float) { |value| opts[:min_cpu_seconds] = value }
-        o.on('--json FILE') { |value| opts[:json] = value }
-      end.parse!(argv)
-      opts
+    rescue OptionParser::ParseError, ArgumentError => e
+      warn e.message
+      2
     end
 
     def list(ids)
@@ -97,14 +94,18 @@ module OpsCpuSec
       0
     end
 
-    def run_benchmarks(cases, opts)
+    def run_benchmarks(cases, transport, opts)
       meta = metadata.merge(opts.slice(:warmup, :min_iterations, :min_cpu_seconds).transform_keys(&:to_s))
+      meta['transport'] = "#{transport.name}: #{transport.description}"
       meta.each { |key, value| puts "# #{key}: #{value}" }
       puts HEADER
       $stdout.flush
       times0 = Process.times
       cpu0 = cpu_now
-      results = cases.map { |test_case| measure_and_print(test_case, opts) }
+      results = cases.map do |test_case|
+        transport.prepare(test_case)
+        measure_and_print(test_case, opts)
+      end
       summary = summarize(results, cpu_now - cpu0, times0, Process.times)
       write_json(opts[:json], meta, summary, results) if opts[:json]
     end
