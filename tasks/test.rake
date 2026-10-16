@@ -115,5 +115,5 @@ task 'test:features' do
 end
 
 desc 'Runs unit and integration tests after rebuilding gems'
-task 'test' => ['build', 'test:spec', 'test:features']
+task 'test' => %w[build test:spec test:features]
 task 'default' => 'test'
