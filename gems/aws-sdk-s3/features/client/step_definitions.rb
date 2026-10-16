@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 require 'openssl'
+require 'securerandom'
+require_relative 'mrap_helpers'
+
+World(S3MrapHelpers)
 
 Before('@s3', '@client') do
   @client = Aws::S3::Client.new
@@ -293,18 +297,56 @@ end
 Given(/^I create a temporary MRAP$/) do
   $LOAD_PATH.unshift(File.expand_path('../../../aws-sdk-s3control/lib', __dir__))
   require 'aws-sdk-s3control'
-  require_relative 'mrap_fixture'
 
   identity = Aws::STS::Client.new(
     region: @client.config.region, credentials: @client.config.credentials
   ).get_caller_identity
-  control = Aws::S3Control::Client.new(
+  @mrap_account = identity.account
+  @mrap_control = Aws::S3Control::Client.new(
     region: 'us-west-2', credentials: @client.config.credentials
   )
-  @mrap_fixture = S3MrapFixture.new(s3_client: @client, control: control, identity: identity)
-  @bucket_name = @mrap_fixture.create
+  name = "aws-sdk-mrap-#{SecureRandom.hex(12)}"
+  options = { bucket: name }
+  if @client.config.region != 'us-east-1'
+    options[:create_bucket_configuration] = {
+      location_constraint: @client.config.region
+    }
+  end
+  @client.create_bucket(options)
+  @mrap_bucket = name
+  @client.wait_until(:bucket_exists, bucket: name)
+
+  @mrap_name = name
+  begin
+    @mrap_control.create_multi_region_access_point(
+      account_id: @mrap_account,
+      details: {
+        name: name,
+        public_access_block: {
+          block_public_acls: true, ignore_public_acls: true,
+          block_public_policy: true, restrict_public_buckets: true
+        },
+        regions: [{ bucket: name, bucket_account_id: @mrap_account }]
+      }
+    )
+  rescue Aws::S3Control::Errors::ServiceError => error
+    # A rejection without retries created no MRAP; still clean up its bucket.
+    if error.context.retries.zero? && (400..499).cover?(error.context.http_response.status_code)
+      @mrap_name = nil
+    end
+    raise
+  end
+  point = wait_for_mrap do |access_point|
+    next false if !access_point || access_point.status == 'CREATING'
+
+    raise "MRAP #{name} creation failed: #{access_point.status}" unless access_point.status == 'READY'
+
+    true
+  end
+  partition = identity.arn.split(':')[1]
+  @bucket_name = "arn:#{partition}:s3::#{@mrap_account}:accesspoint/#{point.alias}"
 end
 
 After('@mrap') do
-  @mrap_fixture.cleanup if @mrap_fixture
+  cleanup_mrap
 end
