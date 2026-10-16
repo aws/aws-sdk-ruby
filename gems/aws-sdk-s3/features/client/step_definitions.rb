@@ -291,11 +291,21 @@ Then(/^I can streaming download key "([^"]*)"$/) do |key|
   expect(resp.context[:response_target]).to be_a(Proc)
 end
 
-When(/I have access to an MRAP bucket and CRT/) do
-  begin
-    @client.head_bucket(bucket: 'ruby-sdk-integtest-mrap-bucket')
-  rescue
-    pending("Account does not have access to the MRAP test bucket: ruby-sdk-integtest-mrap-bucket")
-  end
-  @bucket_name = "arn:aws:s3::469596866844:accesspoint/mpatcdsojq97c.mrap"
+Given(/^I create a temporary MRAP$/) do
+  $LOAD_PATH.unshift(File.expand_path('../../../aws-sdk-s3control/lib', __dir__))
+  require 'aws-sdk-s3control'
+  require_relative 'mrap_fixture'
+
+  identity = Aws::STS::Client.new(
+    region: @client.config.region, credentials: @client.config.credentials
+  ).get_caller_identity
+  control = Aws::S3Control::Client.new(
+    region: 'us-west-2', credentials: @client.config.credentials
+  )
+  @mrap_fixture = S3MrapFixture.new(s3_client: @client, control: control, identity: identity)
+  @bucket_name = @mrap_fixture.create
+end
+
+After('@mrap') do
+  @mrap_fixture.cleanup if @mrap_fixture
 end
