@@ -220,6 +220,23 @@ Then(/^I should be able to POST an object to the form url$/) do
   expect(resp.code.to_i).to eq(201)
 end
 
+When(/^I create a presigned post with tags$/) do
+  @tag_set = [
+    { key: 'project', value: 'presigned-post' },
+    { key: 'description', value: 'café / uploads' },
+    { key: 'empty', value: '' }
+  ]
+  @post = @bucket.object('key').presigned_post(
+    success_action_status: '201',
+    tagging: { tag_set: @tag_set }
+  )
+end
+
+Then(/^the uploaded object should have the tags$/) do
+  response = @client.get_object_tagging(bucket: @bucket.name, key: 'key')
+  expect(response.tag_set.map(&:to_h)).to match_array(@tag_set)
+end
+
 Given(/^I have an encryption client configured to read a Java encrypted object$/) do
   @cse = Aws::S3::Encryption::Client.new(
     profile: @profile,
