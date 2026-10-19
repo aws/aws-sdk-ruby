@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `tagging` to `Aws::S3::PresignedPost`, accepting the same tagging structure as `put_object_tagging` and serializing it to XML in the signed POST form.
+
 1.233.2 (2026-10-06)
 ------------------
 

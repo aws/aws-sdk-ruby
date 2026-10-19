@@ -313,6 +313,97 @@ module Aws
           expect(post.fields['x-amz-storage-class']).to eq('REDUCED_REDUNDANCY')
         end
       end
+
+      describe 'tagging' do
+        let(:tagging) do
+          { tag_set: [{ key: 'project', value: 'test' }] }
+        end
+
+        let(:xml) do
+          '<Tagging xmlns="http://s3.amazonaws.com/doc/2006-03-01/">' \
+            '<TagSet><Tag><Key>project</Key><Value>test</Value></Tag>' \
+            '</TagSet></Tagging>'
+        end
+
+        before { options[:key] = 'key' }
+
+        it 'sets the XML field and policy condition via :tagging' do
+          options[:tagging] = tagging
+          expect(post.fields['tagging']).to eq(xml)
+          expect(policy(post)).to include('tagging' => xml)
+        end
+
+        it 'sets the XML field and policy condition via #tagging' do
+          expect(post.tagging(tagging)).to be(post)
+          expect(post.fields['tagging']).to eq(xml)
+          expect(policy(post)).to include('tagging' => xml)
+        end
+
+        it 'accepts SDK structures' do
+          post.tagging(Types::Tagging.new(
+            tag_set: [Types::Tag.new(key: 'project', value: 'test')]
+          ))
+          expect(post.fields['tagging']).to eq(xml)
+        end
+
+        it 'converts parameters without modifying the input hash' do
+          tagging = { tag_set: [{ key: :project, value: :test }.freeze].freeze }.freeze
+          post.tagging(tagging)
+          expect(post.fields['tagging']).to eq(xml)
+          expect(tagging[:tag_set].first).to eq(key: :project, value: :test)
+        end
+
+        it 'uses the same XML serialization as put_object_tagging' do
+          tagging = {
+            tag_set: [
+              { key: 'a&<b>', value: "\"café\" & <tea>\r\n" },
+              { key: 'empty', value: '' }
+            ]
+          }
+          client = Client.new(stub_responses: true)
+          response = client.put_object_tagging(
+            bucket: bucket, key: 'key', tagging: tagging
+          )
+          post.tagging(tagging)
+          xml = post.fields['tagging']
+          expect(xml).to eq(response.context.http_request.body_contents)
+          expect(xml).to include('<Key>a&amp;&lt;b&gt;</Key>')
+          expect(xml).to include('<Value>"café" &amp; &lt;tea&gt;&#xD;&#xA;</Value>')
+          expect(xml).to include('<Tag><Key>empty</Key><Value></Value></Tag>')
+          expect(policy(post)).to include('tagging' => xml)
+        end
+
+        it 'accepts an empty tag set' do
+          post.tagging(tag_set: [])
+          expect(post.fields['tagging']).to eq(
+            '<Tagging xmlns="http://s3.amazonaws.com/doc/2006-03-01/">' \
+              '<TagSet></TagSet></Tagging>'
+          )
+        end
+
+        [
+          nil,
+          'project=test',
+          {},
+          { tag_set: 'project=test' },
+          { tag_set: [{ key: 'project' }] },
+          { tag_set: [{ value: 'test' }] },
+          { tag_set: [{ key: 'project', value: 123 }] },
+          { tag_set: [], unexpected: true }
+        ].each do |invalid|
+          it "rejects invalid tagging parameters: #{invalid.inspect}" do
+            expect { post.tagging(invalid) }.to raise_error(ArgumentError)
+            expect(post.fields).not_to have_key('tagging')
+            expect(policy(post)).not_to include(hash_including('tagging'))
+          end
+        end
+
+        it 'rejects the filename variable inside tagging XML' do
+          expect do
+            post.tagging(tag_set: [{ key: 'filename', value: '${filename}' }])
+          end.to raise_error(ArgumentError, /\$\{filename\}/)
+        end
+      end
     end
   end
 end
