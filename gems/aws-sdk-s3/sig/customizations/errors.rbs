@@ -4,9 +4,12 @@ module Aws
       # Not modeled in the API. Defined at runtime by Aws::Errors::DynamicErrors.
 
       # Raised for a 404 response without an error body (e.g. HEAD requests).
+      # https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadObject.html
       class NotFound < ServiceError
       end
 
+      # Raised when S3 returns a 503 Slow Down response because the request rate is too high.
+      # https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
       class SlowDown < ServiceError
       end
     end

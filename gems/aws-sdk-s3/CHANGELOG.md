@@ -3,7 +3,6 @@ Unreleased Changes
 
 * Feature - Add RBS signatures for `TransferManager`, `MultipartUploadError`, `Errors::NotFound` and `Errors::SlowDown`.
 
-
 1.234.0 (2026-10-19)
 ------------------
 
