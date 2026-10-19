@@ -597,6 +597,18 @@ module Aws
             handle_with_retry(test_case_def)
           end
 
+          # Recording precedes the budget check: an exhausted retry still records.
+          it 'records the correction when a skew error exhausts the retry budget' do
+            config.max_attempts = 1
+            test_case_def = [
+              {
+                response: { status_code: 403, error: skew_error, clock_skew: 1000 },
+                expect: { retries: 0, clock_correction: 1000 }
+              }
+            ]
+            handle_with_retry(test_case_def)
+          end
+
           # Skew error with no Date header is not a candidate and does not update.
 
           it 'does not treat a skew error without a Date header as skew' do
