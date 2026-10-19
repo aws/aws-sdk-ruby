@@ -948,7 +948,6 @@ module Aws::CloudWatchOmni
 
     class MetricMetadata
       attr_accessor name: ::String
-      attr_accessor namespace: ::String
       attr_accessor preferred_stat: ::String
       attr_accessor metric_type: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
@@ -1414,6 +1413,7 @@ module Aws::CloudWatchOmni
     class UpdateSpaceInput
       attr_accessor space_id: ::String
       attr_accessor name: ::String
+      attr_accessor agent_core_evaluation_role_arn: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: []
     end

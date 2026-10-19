@@ -548,18 +548,42 @@ module Aws::DataSync
     #   The VPC service endpoint you use must include the DataSync service
     #   name (for example, `com.amazonaws.us-east-2.datasync`).
     #
+    #   The endpoint ID is informational. DataSync doesn't verify it or use
+    #   it to connect to your agent. For more information, see [Using a single
+    #   VPC service endpoint across multiple subnets][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#datasync-in-vpc
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#vpc-endpoint-multiple-subnets
     #
     # @option params [Array<String>] :subnet_arns
-    #   Specifies the ARN of the subnet where your VPC service endpoint is
-    #   located. You can only specify one ARN.
+    #   Specifies the ARN of the subnet where DataSync creates the [network
+    #   interfaces][1] that handle data transfer traffic for your tasks. You
+    #   can only specify one ARN.
+    #
+    #   The subnet doesn't have to be the subnet that contains your VPC
+    #   service endpoint. The subnet can be one that another Amazon Web
+    #   Services account shared with you through [RAM][2], in which case the
+    #   ARN must specify the account that owns the subnet. For more
+    #   information, see [Using a single VPC service endpoint across multiple
+    #   subnets][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/required-network-interfaces.html
+    #   [2]: https://docs.aws.amazon.com/ram/latest/userguide/what-is.html
+    #   [3]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#vpc-endpoint-multiple-subnets
     #
     # @option params [Array<String>] :security_group_arns
     #   Specifies the Amazon Resource Name (ARN) of the security group that
     #   allows traffic between your agent and VPC service endpoint. You can
     #   only specify one ARN.
+    #
+    #   The ARN must specify your own account, even when the security group
+    #   was shared with you from the account that owns the VPC. The security
+    #   group must belong to the same VPC as the subnet that you specify in
+    #   `SubnetArns`.
     #
     # @return [Types::CreateAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1015,7 +1039,7 @@ module Aws::DataSync
     #     protocol: { # required
     #       nfs: {
     #         mount_options: {
-    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1, NFS4_2
     #         },
     #       },
     #       smb: {
@@ -1110,7 +1134,7 @@ module Aws::DataSync
     #     protocol: { # required
     #       nfs: {
     #         mount_options: {
-    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1, NFS4_2
     #         },
     #       },
     #       smb: {
@@ -1580,7 +1604,7 @@ module Aws::DataSync
     #       agent_arns: ["AgentArn"], # required
     #     },
     #     mount_options: {
-    #       version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #       version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1, NFS4_2
     #     },
     #     tags: [
     #       {
@@ -2288,6 +2312,7 @@ module Aws::DataSync
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #       object_tags: "PRESERVE", # accepts PRESERVE, NONE
+    #       object_metadata: "PRESERVE", # accepts PRESERVE, NONE
     #     },
     #     excludes: [
     #       {
@@ -2659,7 +2684,7 @@ module Aws::DataSync
     #   resp.creation_time #=> Time
     #   resp.location_arn #=> String
     #   resp.location_uri #=> String
-    #   resp.protocol.nfs.mount_options.version #=> String, one of "AUTOMATIC", "NFS3", "NFS4_0", "NFS4_1"
+    #   resp.protocol.nfs.mount_options.version #=> String, one of "AUTOMATIC", "NFS3", "NFS4_0", "NFS4_1", "NFS4_2"
     #   resp.protocol.smb.domain #=> String
     #   resp.protocol.smb.mount_options.version #=> String, one of "AUTOMATIC", "SMB2", "SMB3", "SMB1", "SMB2_0"
     #   resp.protocol.smb.password #=> String
@@ -2715,7 +2740,7 @@ module Aws::DataSync
     #   resp.location_uri #=> String
     #   resp.security_group_arns #=> Array
     #   resp.security_group_arns[0] #=> String
-    #   resp.protocol.nfs.mount_options.version #=> String, one of "AUTOMATIC", "NFS3", "NFS4_0", "NFS4_1"
+    #   resp.protocol.nfs.mount_options.version #=> String, one of "AUTOMATIC", "NFS3", "NFS4_0", "NFS4_1", "NFS4_2"
     #   resp.protocol.smb.domain #=> String
     #   resp.protocol.smb.mount_options.version #=> String, one of "AUTOMATIC", "SMB2", "SMB3", "SMB1", "SMB2_0"
     #   resp.protocol.smb.password #=> String
@@ -2875,7 +2900,7 @@ module Aws::DataSync
     #   resp.location_uri #=> String
     #   resp.on_prem_config.agent_arns #=> Array
     #   resp.on_prem_config.agent_arns[0] #=> String
-    #   resp.mount_options.version #=> String, one of "AUTOMATIC", "NFS3", "NFS4_0", "NFS4_1"
+    #   resp.mount_options.version #=> String, one of "AUTOMATIC", "NFS3", "NFS4_0", "NFS4_1", "NFS4_2"
     #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationNfs AWS API Documentation
@@ -3102,6 +3127,7 @@ module Aws::DataSync
     #   resp.options.transfer_mode #=> String, one of "CHANGED", "ALL"
     #   resp.options.security_descriptor_copy_flags #=> String, one of "NONE", "OWNER_DACL", "OWNER_DACL_SACL"
     #   resp.options.object_tags #=> String, one of "PRESERVE", "NONE"
+    #   resp.options.object_metadata #=> String, one of "PRESERVE", "NONE"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -3226,6 +3252,7 @@ module Aws::DataSync
     #   resp.options.transfer_mode #=> String, one of "CHANGED", "ALL"
     #   resp.options.security_descriptor_copy_flags #=> String, one of "NONE", "OWNER_DACL", "OWNER_DACL_SACL"
     #   resp.options.object_tags #=> String, one of "PRESERVE", "NONE"
+    #   resp.options.object_metadata #=> String, one of "PRESERVE", "NONE"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -3684,6 +3711,7 @@ module Aws::DataSync
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #       object_tags: "PRESERVE", # accepts PRESERVE, NONE
+    #       object_metadata: "PRESERVE", # accepts PRESERVE, NONE
     #     },
     #     includes: [
     #       {
@@ -4122,7 +4150,7 @@ module Aws::DataSync
     #     protocol: {
     #       nfs: {
     #         mount_options: {
-    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1, NFS4_2
     #         },
     #       },
     #       smb: {
@@ -4192,7 +4220,7 @@ module Aws::DataSync
     #     protocol: {
     #       nfs: {
     #         mount_options: {
-    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1, NFS4_2
     #         },
     #       },
     #       smb: {
@@ -4339,10 +4367,10 @@ module Aws::DataSync
     #
     #   The number of NameNodes you can specify depends on the task mode:
     #
-    #   * Enhanced mode – You can specify multiple NameNodes for HDFS High
+    #   * **Enhanced mode** – You can specify multiple NameNodes for HDFS High
     #     Availability (HA) configurations.
     #
-    #   * Basic mode – You can specify only one NameNode.
+    #   * **Basic mode** – You can specify only one NameNode.
     #
     # @option params [Integer] :block_size
     #   The size of the data blocks to write into the HDFS cluster.
@@ -4490,7 +4518,7 @@ module Aws::DataSync
     #       agent_arns: ["AgentArn"], # required
     #     },
     #     mount_options: {
-    #       version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #       version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1, NFS4_2
     #     },
     #   })
     #
@@ -5017,6 +5045,7 @@ module Aws::DataSync
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #       object_tags: "PRESERVE", # accepts PRESERVE, NONE
+    #       object_metadata: "PRESERVE", # accepts PRESERVE, NONE
     #     },
     #     excludes: [
     #       {
@@ -5136,6 +5165,7 @@ module Aws::DataSync
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
     #       object_tags: "PRESERVE", # accepts PRESERVE, NONE
+    #       object_metadata: "PRESERVE", # accepts PRESERVE, NONE
     #     },
     #   })
     #
@@ -5166,7 +5196,7 @@ module Aws::DataSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

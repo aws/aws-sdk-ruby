@@ -11,117 +11,117 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ALPNPolicyNotSupportedException < ::Aws::Errors::ServiceError
+      class ALPNPolicyNotSupportedException < ServiceError
       end
-      class AllocationIdNotFoundException < ::Aws::Errors::ServiceError
+      class AllocationIdNotFoundException < ServiceError
       end
-      class AvailabilityZoneNotSupportedException < ::Aws::Errors::ServiceError
+      class AvailabilityZoneNotSupportedException < ServiceError
       end
-      class CaCertificatesBundleNotFoundException < ::Aws::Errors::ServiceError
+      class CaCertificatesBundleNotFoundException < ServiceError
       end
-      class CapacityDecreaseRequestsLimitExceededException < ::Aws::Errors::ServiceError
+      class CapacityDecreaseRequestsLimitExceededException < ServiceError
       end
-      class CapacityReservationPendingException < ::Aws::Errors::ServiceError
+      class CapacityReservationPendingException < ServiceError
       end
-      class CapacityUnitsLimitExceededException < ::Aws::Errors::ServiceError
+      class CapacityUnitsLimitExceededException < ServiceError
       end
-      class CertificateNotFoundException < ::Aws::Errors::ServiceError
+      class CertificateNotFoundException < ServiceError
       end
-      class DeleteAssociationSameAccountException < ::Aws::Errors::ServiceError
+      class DeleteAssociationSameAccountException < ServiceError
       end
-      class DuplicateListenerException < ::Aws::Errors::ServiceError
+      class DuplicateListenerException < ServiceError
       end
-      class DuplicateLoadBalancerNameException < ::Aws::Errors::ServiceError
+      class DuplicateLoadBalancerNameException < ServiceError
       end
-      class DuplicateTagKeysException < ::Aws::Errors::ServiceError
+      class DuplicateTagKeysException < ServiceError
       end
-      class DuplicateTargetGroupNameException < ::Aws::Errors::ServiceError
+      class DuplicateTargetGroupNameException < ServiceError
       end
-      class DuplicateTrustStoreNameException < ::Aws::Errors::ServiceError
+      class DuplicateTrustStoreNameException < ServiceError
       end
-      class HealthUnavailableException < ::Aws::Errors::ServiceError
+      class HealthUnavailableException < ServiceError
       end
-      class IncompatibleProtocolsException < ::Aws::Errors::ServiceError
+      class IncompatibleProtocolsException < ServiceError
       end
-      class InsufficientCapacityException < ::Aws::Errors::ServiceError
+      class InsufficientCapacityException < ServiceError
       end
-      class InvalidCaCertificatesBundleException < ::Aws::Errors::ServiceError
+      class InvalidCaCertificatesBundleException < ServiceError
       end
-      class InvalidConfigurationRequestException < ::Aws::Errors::ServiceError
+      class InvalidConfigurationRequestException < ServiceError
       end
-      class InvalidLoadBalancerActionException < ::Aws::Errors::ServiceError
+      class InvalidLoadBalancerActionException < ServiceError
       end
-      class InvalidRevocationContentException < ::Aws::Errors::ServiceError
+      class InvalidRevocationContentException < ServiceError
       end
-      class InvalidSchemeException < ::Aws::Errors::ServiceError
+      class InvalidSchemeException < ServiceError
       end
-      class InvalidSecurityGroupException < ::Aws::Errors::ServiceError
+      class InvalidSecurityGroupException < ServiceError
       end
-      class InvalidSubnetException < ::Aws::Errors::ServiceError
+      class InvalidSubnetException < ServiceError
       end
-      class InvalidTargetException < ::Aws::Errors::ServiceError
+      class InvalidTargetException < ServiceError
       end
-      class ListenerNotFoundException < ::Aws::Errors::ServiceError
+      class ListenerNotFoundException < ServiceError
       end
-      class LoadBalancerNotFoundException < ::Aws::Errors::ServiceError
+      class LoadBalancerNotFoundException < ServiceError
       end
-      class OperationNotPermittedException < ::Aws::Errors::ServiceError
+      class OperationNotPermittedException < ServiceError
       end
-      class PriorRequestNotCompleteException < ::Aws::Errors::ServiceError
+      class PriorRequestNotCompleteException < ServiceError
       end
-      class PriorityInUseException < ::Aws::Errors::ServiceError
+      class PriorityInUseException < ServiceError
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
       end
-      class RevocationContentNotFoundException < ::Aws::Errors::ServiceError
+      class RevocationContentNotFoundException < ServiceError
       end
-      class RevocationIdNotFoundException < ::Aws::Errors::ServiceError
+      class RevocationIdNotFoundException < ServiceError
       end
-      class RuleNotFoundException < ::Aws::Errors::ServiceError
+      class RuleNotFoundException < ServiceError
       end
-      class SSLPolicyNotFoundException < ::Aws::Errors::ServiceError
+      class SSLPolicyNotFoundException < ServiceError
       end
-      class SubnetNotFoundException < ::Aws::Errors::ServiceError
+      class SubnetNotFoundException < ServiceError
       end
-      class TargetGroupAssociationLimitException < ::Aws::Errors::ServiceError
+      class TargetGroupAssociationLimitException < ServiceError
       end
-      class TargetGroupNotFoundException < ::Aws::Errors::ServiceError
+      class TargetGroupNotFoundException < ServiceError
       end
-      class TooManyActionsException < ::Aws::Errors::ServiceError
+      class TooManyActionsException < ServiceError
       end
-      class TooManyCertificatesException < ::Aws::Errors::ServiceError
+      class TooManyCertificatesException < ServiceError
       end
-      class TooManyListenersException < ::Aws::Errors::ServiceError
+      class TooManyListenersException < ServiceError
       end
-      class TooManyLoadBalancersException < ::Aws::Errors::ServiceError
+      class TooManyLoadBalancersException < ServiceError
       end
-      class TooManyRegistrationsForTargetIdException < ::Aws::Errors::ServiceError
+      class TooManyRegistrationsForTargetIdException < ServiceError
       end
-      class TooManyRulesException < ::Aws::Errors::ServiceError
+      class TooManyRulesException < ServiceError
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
       end
-      class TooManyTargetGroupsException < ::Aws::Errors::ServiceError
+      class TooManyTargetGroupsException < ServiceError
       end
-      class TooManyTargetsException < ::Aws::Errors::ServiceError
+      class TooManyTargetsException < ServiceError
       end
-      class TooManyTrustStoreRevocationEntriesException < ::Aws::Errors::ServiceError
+      class TooManyTrustStoreRevocationEntriesException < ServiceError
       end
-      class TooManyTrustStoresException < ::Aws::Errors::ServiceError
+      class TooManyTrustStoresException < ServiceError
       end
-      class TooManyUniqueTargetGroupsPerLoadBalancerException < ::Aws::Errors::ServiceError
+      class TooManyUniqueTargetGroupsPerLoadBalancerException < ServiceError
       end
-      class TrustStoreAssociationNotFoundException < ::Aws::Errors::ServiceError
+      class TrustStoreAssociationNotFoundException < ServiceError
       end
-      class TrustStoreInUseException < ::Aws::Errors::ServiceError
+      class TrustStoreInUseException < ServiceError
       end
-      class TrustStoreNotFoundException < ::Aws::Errors::ServiceError
+      class TrustStoreNotFoundException < ServiceError
       end
-      class TrustStoreNotReadyException < ::Aws::Errors::ServiceError
+      class TrustStoreNotReadyException < ServiceError
       end
-      class UnsupportedProtocolException < ::Aws::Errors::ServiceError
+      class UnsupportedProtocolException < ServiceError
       end
     end
   end

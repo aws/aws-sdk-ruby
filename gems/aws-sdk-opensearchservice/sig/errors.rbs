@@ -11,37 +11,37 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
       end
-      class BaseException < ::Aws::Errors::ServiceError
+      class BaseException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
       end
-      class DependencyFailureException < ::Aws::Errors::ServiceError
+      class DependencyFailureException < ServiceError
       end
-      class DisabledOperationException < ::Aws::Errors::ServiceError
+      class DisabledOperationException < ServiceError
       end
-      class InternalException < ::Aws::Errors::ServiceError
+      class InternalException < ServiceError
       end
-      class InvalidPaginationTokenException < ::Aws::Errors::ServiceError
+      class InvalidPaginationTokenException < ServiceError
       end
-      class InvalidTypeException < ::Aws::Errors::ServiceError
+      class InvalidTypeException < ServiceError
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
       end
-      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ResourceAlreadyExistsException < ServiceError
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
       end
-      class SlotNotAvailableException < ::Aws::Errors::ServiceError
+      class SlotNotAvailableException < ServiceError
         def slot_suggestions: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
       end
     end
   end

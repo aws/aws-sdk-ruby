@@ -159,6 +159,37 @@ module Aws
                                       ) -> _BatchDeleteThreatModelsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteThreatModelsResponseSuccess
 
+      interface _BatchDisassociateFindingIssueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateFindingIssueOutput]
+        def errors: () -> ::Array[Types::BatchDisassociateFindingIssueError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#batch_disassociate_finding_issue-instance_method
+      def batch_disassociate_finding_issue: (
+                                              agent_space_id: ::String,
+                                              ?pentest_job_id: ::String,
+                                              ?code_review_job_id: ::String,
+                                              finding_ids: Array[::String]
+                                            ) -> _BatchDisassociateFindingIssueResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateFindingIssueResponseSuccess
+
+      interface _BatchExportFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchExportFindingsOutput]
+        def results: () -> ::Array[Types::BatchExportFindingResult]
+        def errors: () -> ::Array[Types::BatchExportFindingError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#batch_export_findings-instance_method
+      def batch_export_findings: (
+                                   agent_space_id: ::String,
+                                   ?pentest_job_id: ::String,
+                                   ?code_review_job_id: ::String,
+                                   issue_destination: {
+                                     integration_id: ::String,
+                                     project_key: ::String
+                                   },
+                                   finding_ids: Array[::String]
+                                 ) -> _BatchExportFindingsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchExportFindingsResponseSuccess
+
       interface _BatchGetAgentSpacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetAgentSpacesOutput]
         def agent_spaces: () -> ::Array[Types::AgentSpace]
@@ -441,7 +472,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_integration-instance_method
       def create_integration: (
-                                provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS"),
+                                provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA"),
                                 input: {
                                   github: {
                                     code: ::String,
@@ -477,6 +508,12 @@ module Aws
                                     target_url: ::String,
                                     code: ::String,
                                     state: ::String
+                                  }?,
+                                  jira: {
+                                    installation_id: ::String,
+                                    code: ::String,
+                                    state: ::String,
+                                    site_url: ::String
                                   }?
                                 },
                                 integration_display_name: ::String,
@@ -858,11 +895,12 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIntegrationOutput]
         def integration_id: () -> ::String
         def installation_id: () -> ::String
-        def provider: () -> ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")
-        def provider_type: () -> ("SOURCE_CODE" | "DOCUMENTATION")
+        def provider: () -> ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")
+        def provider_type: () -> ("SOURCE_CODE" | "DOCUMENTATION" | "ISSUE_TRACKING")
         def display_name: () -> ::String
         def kms_key_id: () -> ::String
         def target_url: () -> ::String
+        def site_url: () -> ::String
         def webhook_url: () -> ::String
         def private_connection_name: () -> ::String
       end
@@ -918,7 +956,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#initiate_provider_registration-instance_method
       def initiate_provider_registration: (
-                                            provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS"),
+                                            provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA"),
                                             ?target_url: ::String,
                                             ?organization_name: ::String,
                                             ?client_id: ::String,
@@ -1065,7 +1103,7 @@ module Aws
       def list_integrated_resources: (
                                        agent_space_id: ::String,
                                        ?integration_id: ::String,
-                                       ?resource_type: ("CODE_REPOSITORY" | "DOCUMENT"),
+                                       ?resource_type: ("CODE_REPOSITORY" | "DOCUMENT" | "PROJECT"),
                                        ?next_token: ::String,
                                        ?max_results: ::Integer
                                      ) -> _ListIntegratedResourcesResponseSuccess
@@ -1079,8 +1117,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#list_integrations-instance_method
       def list_integrations: (
                                ?filter: {
-                                 provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS")?,
-                                 provider_type: ("SOURCE_CODE" | "DOCUMENTATION")?
+                                 provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "CONFLUENCE" | "AZURE_DEVOPS" | "JIRA")?,
+                                 provider_type: ("SOURCE_CODE" | "DOCUMENTATION" | "ISSUE_TRACKING")?
                                },
                                ?next_token: ::String,
                                ?max_results: ::Integer
@@ -1520,6 +1558,12 @@ module Aws
                                                  name: ::String,
                                                  organization: ::String,
                                                  project: ::String?
+                                               }?,
+                                               jira_project: {
+                                                 name: ::String,
+                                                 project_key: ::String,
+                                                 project_id: ::String,
+                                                 project_name: ::String?
                                                }?
                                              },
                                              capabilities: {
@@ -1555,6 +1599,10 @@ module Aws
                                                  ]?,
                                                  leave_comments: bool?,
                                                  remediate_code: bool?
+                                               }?,
+                                               jira: {
+                                                 create_issue: bool?,
+                                                 comment_issue: bool?
                                                }?
                                              }?
                                            }

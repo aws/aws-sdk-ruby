@@ -106,6 +106,8 @@ module Aws::Glue
     BatchGetCustomEntityTypesResponse = Shapes::StructureShape.new(name: 'BatchGetCustomEntityTypesResponse')
     BatchGetDataQualityResultRequest = Shapes::StructureShape.new(name: 'BatchGetDataQualityResultRequest')
     BatchGetDataQualityResultResponse = Shapes::StructureShape.new(name: 'BatchGetDataQualityResultResponse')
+    BatchGetDataQualityResultV2Request = Shapes::StructureShape.new(name: 'BatchGetDataQualityResultV2Request')
+    BatchGetDataQualityResultV2Response = Shapes::StructureShape.new(name: 'BatchGetDataQualityResultV2Response')
     BatchGetDataQualityRulesetEvaluationRunRequest = Shapes::StructureShape.new(name: 'BatchGetDataQualityRulesetEvaluationRunRequest')
     BatchGetDataQualityRulesetEvaluationRunResponse = Shapes::StructureShape.new(name: 'BatchGetDataQualityRulesetEvaluationRunResponse')
     BatchGetDevEndpointsRequest = Shapes::StructureShape.new(name: 'BatchGetDevEndpointsRequest')
@@ -213,6 +215,7 @@ module Aws::Glue
     ClassifierList = Shapes::ListShape.new(name: 'ClassifierList')
     ClassifierNameList = Shapes::ListShape.new(name: 'ClassifierNameList')
     ClientCredentialsProperties = Shapes::StructureShape.new(name: 'ClientCredentialsProperties')
+    ClientTokenString = Shapes::StringShape.new(name: 'ClientTokenString')
     CloudWatchEncryption = Shapes::StructureShape.new(name: 'CloudWatchEncryption')
     CloudWatchEncryptionMode = Shapes::StringShape.new(name: 'CloudWatchEncryptionMode')
     CodeGenArgName = Shapes::StringShape.new(name: 'CodeGenArgName')
@@ -451,9 +454,12 @@ module Aws::Glue
     DataQualityAggregatedMetrics = Shapes::StructureShape.new(name: 'DataQualityAggregatedMetrics')
     DataQualityAnalyzerResult = Shapes::StructureShape.new(name: 'DataQualityAnalyzerResult')
     DataQualityAnalyzerResults = Shapes::ListShape.new(name: 'DataQualityAnalyzerResults')
+    DataQualityConfigurationV2 = Shapes::StructureShape.new(name: 'DataQualityConfigurationV2')
     DataQualityEncryption = Shapes::StructureShape.new(name: 'DataQualityEncryption')
     DataQualityEncryptionMode = Shapes::StringShape.new(name: 'DataQualityEncryptionMode')
+    DataQualityEngine = Shapes::StringShape.new(name: 'DataQualityEngine')
     DataQualityEvaluationRunAdditionalRunOptions = Shapes::StructureShape.new(name: 'DataQualityEvaluationRunAdditionalRunOptions')
+    DataQualityFlagsEnabled = Shapes::MapShape.new(name: 'DataQualityFlagsEnabled')
     DataQualityGlueTable = Shapes::StructureShape.new(name: 'DataQualityGlueTable')
     DataQualityMetricValues = Shapes::StructureShape.new(name: 'DataQualityMetricValues')
     DataQualityModelStatus = Shapes::StringShape.new(name: 'DataQualityModelStatus')
@@ -466,7 +472,13 @@ module Aws::Glue
     DataQualityResultFilterCriteria = Shapes::StructureShape.new(name: 'DataQualityResultFilterCriteria')
     DataQualityResultIdList = Shapes::ListShape.new(name: 'DataQualityResultIdList')
     DataQualityResultIds = Shapes::ListShape.new(name: 'DataQualityResultIds')
+    DataQualityResultV2IdList = Shapes::ListShape.new(name: 'DataQualityResultV2IdList')
+    DataQualityResultV2Item = Shapes::StructureShape.new(name: 'DataQualityResultV2Item')
+    DataQualityResultV2List = Shapes::ListShape.new(name: 'DataQualityResultV2List')
     DataQualityResultsList = Shapes::ListShape.new(name: 'DataQualityResultsList')
+    DataQualityResultsV2Description = Shapes::StructureShape.new(name: 'DataQualityResultsV2Description')
+    DataQualityResultsV2DescriptionList = Shapes::ListShape.new(name: 'DataQualityResultsV2DescriptionList')
+    DataQualityResultsV2FilterCriteria = Shapes::StructureShape.new(name: 'DataQualityResultsV2FilterCriteria')
     DataQualityRuleRecommendationRunAdditionalRunOptions = Shapes::StructureShape.new(name: 'DataQualityRuleRecommendationRunAdditionalRunOptions')
     DataQualityRuleRecommendationRunDescription = Shapes::StructureShape.new(name: 'DataQualityRuleRecommendationRunDescription')
     DataQualityRuleRecommendationRunFilter = Shapes::StructureShape.new(name: 'DataQualityRuleRecommendationRunFilter')
@@ -487,6 +499,7 @@ module Aws::Glue
     DataQualityRulesetListDetails = Shapes::StructureShape.new(name: 'DataQualityRulesetListDetails')
     DataQualityRulesetString = Shapes::StringShape.new(name: 'DataQualityRulesetString')
     DataQualityTargetTable = Shapes::StructureShape.new(name: 'DataQualityTargetTable')
+    DataQualityTelemetry = Shapes::StructureShape.new(name: 'DataQualityTelemetry')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceMap = Shapes::MapShape.new(name: 'DataSourceMap')
     Database = Shapes::StructureShape.new(name: 'Database')
@@ -781,6 +794,8 @@ module Aws::Glue
     GetDataQualityModelResultResponse = Shapes::StructureShape.new(name: 'GetDataQualityModelResultResponse')
     GetDataQualityResultRequest = Shapes::StructureShape.new(name: 'GetDataQualityResultRequest')
     GetDataQualityResultResponse = Shapes::StructureShape.new(name: 'GetDataQualityResultResponse')
+    GetDataQualityResultV2Request = Shapes::StructureShape.new(name: 'GetDataQualityResultV2Request')
+    GetDataQualityResultV2Response = Shapes::StructureShape.new(name: 'GetDataQualityResultV2Response')
     GetDataQualityRuleRecommendationRunRequest = Shapes::StructureShape.new(name: 'GetDataQualityRuleRecommendationRunRequest')
     GetDataQualityRuleRecommendationRunResponse = Shapes::StructureShape.new(name: 'GetDataQualityRuleRecommendationRunResponse')
     GetDataQualityRulesetEvaluationRunRequest = Shapes::StructureShape.new(name: 'GetDataQualityRulesetEvaluationRunRequest')
@@ -1130,6 +1145,8 @@ module Aws::Glue
     ListCustomEntityTypesResponse = Shapes::StructureShape.new(name: 'ListCustomEntityTypesResponse')
     ListDataQualityResultsRequest = Shapes::StructureShape.new(name: 'ListDataQualityResultsRequest')
     ListDataQualityResultsResponse = Shapes::StructureShape.new(name: 'ListDataQualityResultsResponse')
+    ListDataQualityResultsV2Request = Shapes::StructureShape.new(name: 'ListDataQualityResultsV2Request')
+    ListDataQualityResultsV2Response = Shapes::StructureShape.new(name: 'ListDataQualityResultsV2Response')
     ListDataQualityRuleRecommendationRunsRequest = Shapes::StructureShape.new(name: 'ListDataQualityRuleRecommendationRunsRequest')
     ListDataQualityRuleRecommendationRunsResponse = Shapes::StructureShape.new(name: 'ListDataQualityRuleRecommendationRunsResponse')
     ListDataQualityRulesetEvaluationRunsRequest = Shapes::StructureShape.new(name: 'ListDataQualityRulesetEvaluationRunsRequest')
@@ -1371,6 +1388,11 @@ module Aws::Glue
     PropertyTypes = Shapes::ListShape.new(name: 'PropertyTypes')
     PropertyValue = Shapes::StringShape.new(name: 'PropertyValue')
     PublicKeysList = Shapes::ListShape.new(name: 'PublicKeysList')
+    PublishDataQualityResultDescriptors = Shapes::MapShape.new(name: 'PublishDataQualityResultDescriptors')
+    PublishDataQualityResultDimensions = Shapes::MapShape.new(name: 'PublishDataQualityResultDimensions')
+    PublishDataQualityResultTags = Shapes::MapShape.new(name: 'PublishDataQualityResultTags')
+    PublishDataQualityResultV2Request = Shapes::StructureShape.new(name: 'PublishDataQualityResultV2Request')
+    PublishDataQualityResultV2Response = Shapes::StructureShape.new(name: 'PublishDataQualityResultV2Response')
     PutAssetRequest = Shapes::StructureShape.new(name: 'PutAssetRequest')
     PutAssetResponse = Shapes::StructureShape.new(name: 'PutAssetResponse')
     PutAssetTypeRequest = Shapes::StructureShape.new(name: 'PutAssetTypeRequest')
@@ -1398,6 +1420,7 @@ module Aws::Glue
     QuerySchemaVersionMetadataResponse = Shapes::StructureShape.new(name: 'QuerySchemaVersionMetadataResponse')
     QuerySessionContext = Shapes::StructureShape.new(name: 'QuerySessionContext')
     QuoteChar = Shapes::StringShape.new(name: 'QuoteChar')
+    RLSProperties = Shapes::StructureShape.new(name: 'RLSProperties')
     Recipe = Shapes::StructureShape.new(name: 'Recipe')
     RecipeAction = Shapes::StructureShape.new(name: 'RecipeAction')
     RecipeReference = Shapes::StructureShape.new(name: 'RecipeReference')
@@ -1706,6 +1729,7 @@ module Aws::Glue
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     TargetColumn = Shapes::StringShape.new(name: 'TargetColumn')
     TargetFormat = Shapes::StringShape.new(name: 'TargetFormat')
+    TargetNamespace = Shapes::StringShape.new(name: 'TargetNamespace')
     TargetProcessingProperties = Shapes::StructureShape.new(name: 'TargetProcessingProperties')
     TargetRedshiftCatalog = Shapes::StructureShape.new(name: 'TargetRedshiftCatalog')
     TargetResourceNotFound = Shapes::StructureShape.new(name: 'TargetResourceNotFound')
@@ -2180,6 +2204,13 @@ module Aws::Glue
     BatchGetDataQualityResultResponse.add_member(:results, Shapes::ShapeRef.new(shape: DataQualityResultsList, required: true, location_name: "Results"))
     BatchGetDataQualityResultResponse.add_member(:results_not_found, Shapes::ShapeRef.new(shape: DataQualityResultIds, location_name: "ResultsNotFound"))
     BatchGetDataQualityResultResponse.struct_class = Types::BatchGetDataQualityResultResponse
+
+    BatchGetDataQualityResultV2Request.add_member(:result_ids, Shapes::ShapeRef.new(shape: DataQualityResultV2IdList, required: true, location_name: "ResultIds"))
+    BatchGetDataQualityResultV2Request.struct_class = Types::BatchGetDataQualityResultV2Request
+
+    BatchGetDataQualityResultV2Response.add_member(:results, Shapes::ShapeRef.new(shape: DataQualityResultV2List, required: true, location_name: "Results"))
+    BatchGetDataQualityResultV2Response.add_member(:results_not_found, Shapes::ShapeRef.new(shape: DataQualityResultV2IdList, location_name: "ResultsNotFound"))
+    BatchGetDataQualityResultV2Response.struct_class = Types::BatchGetDataQualityResultV2Response
 
     BatchGetDataQualityRulesetEvaluationRunRequest.add_member(:run_ids, Shapes::ShapeRef.new(shape: DataQualityRulesetEvaluationRunIdList, required: true, location_name: "RunIds"))
     BatchGetDataQualityRulesetEvaluationRunRequest.struct_class = Types::BatchGetDataQualityRulesetEvaluationRunRequest
@@ -3614,6 +3645,10 @@ module Aws::Glue
 
     DataQualityAnalyzerResults.member = Shapes::ShapeRef.new(shape: DataQualityAnalyzerResult)
 
+    DataQualityConfigurationV2.add_member(:observations_enabled, Shapes::ShapeRef.new(shape: ObservationConfiguration, location_name: "ObservationsEnabled"))
+    DataQualityConfigurationV2.add_member(:observation_mode, Shapes::ShapeRef.new(shape: ObservationMode, location_name: "ObservationMode"))
+    DataQualityConfigurationV2.struct_class = Types::DataQualityConfigurationV2
+
     DataQualityEncryption.add_member(:data_quality_encryption_mode, Shapes::ShapeRef.new(shape: DataQualityEncryptionMode, location_name: "DataQualityEncryptionMode"))
     DataQualityEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     DataQualityEncryption.struct_class = Types::DataQualityEncryption
@@ -3629,6 +3664,9 @@ module Aws::Glue
     DataQualityEvaluationRunAdditionalRunOptions.add_member(:data_quality_rule_results, Shapes::ShapeRef.new(shape: DataQualityRuleResultsOptions, location_name: "DataQualityRuleResults"))
     DataQualityEvaluationRunAdditionalRunOptions.add_member(:observation_results, Shapes::ShapeRef.new(shape: ObservationResultsOptions, location_name: "ObservationResults"))
     DataQualityEvaluationRunAdditionalRunOptions.struct_class = Types::DataQualityEvaluationRunAdditionalRunOptions
+
+    DataQualityFlagsEnabled.key = Shapes::ShapeRef.new(shape: NameString)
+    DataQualityFlagsEnabled.value = Shapes::ShapeRef.new(shape: NameString)
 
     DataQualityGlueTable.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     DataQualityGlueTable.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
@@ -3687,7 +3725,45 @@ module Aws::Glue
 
     DataQualityResultIds.member = Shapes::ShapeRef.new(shape: HashString)
 
+    DataQualityResultV2IdList.member = Shapes::ShapeRef.new(shape: HashString)
+
+    DataQualityResultV2Item.add_member(:result_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "ResultId"))
+    DataQualityResultV2Item.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    DataQualityResultV2Item.add_member(:dimensions, Shapes::ShapeRef.new(shape: PublishDataQualityResultDimensions, location_name: "Dimensions"))
+    DataQualityResultV2Item.add_member(:tags, Shapes::ShapeRef.new(shape: PublishDataQualityResultTags, location_name: "Tags"))
+    DataQualityResultV2Item.add_member(:execution_started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExecutionStartedOn"))
+    DataQualityResultV2Item.add_member(:execution_completed_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExecutionCompletedOn"))
+    DataQualityResultV2Item.add_member(:result_published_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ResultPublishedOn"))
+    DataQualityResultV2Item.add_member(:score, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "Score"))
+    DataQualityResultV2Item.add_member(:rule_results, Shapes::ShapeRef.new(shape: DataQualityRuleResults, location_name: "RuleResults"))
+    DataQualityResultV2Item.add_member(:analyzer_results, Shapes::ShapeRef.new(shape: DataQualityAnalyzerResults, location_name: "AnalyzerResults"))
+    DataQualityResultV2Item.add_member(:observations, Shapes::ShapeRef.new(shape: DataQualityObservations, location_name: "Observations"))
+    DataQualityResultV2Item.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: NameString, location_name: "EvaluationContext"))
+    DataQualityResultV2Item.add_member(:descriptors, Shapes::ShapeRef.new(shape: PublishDataQualityResultDescriptors, location_name: "Descriptors"))
+    DataQualityResultV2Item.add_member(:aggregated_metrics, Shapes::ShapeRef.new(shape: DataQualityAggregatedMetrics, location_name: "AggregatedMetrics"))
+    DataQualityResultV2Item.add_member(:ruleset_name, Shapes::ShapeRef.new(shape: NameString, location_name: "RulesetName"))
+    DataQualityResultV2Item.struct_class = Types::DataQualityResultV2Item
+
+    DataQualityResultV2List.member = Shapes::ShapeRef.new(shape: DataQualityResultV2Item)
+
     DataQualityResultsList.member = Shapes::ShapeRef.new(shape: DataQualityResult)
+
+    DataQualityResultsV2Description.add_member(:result_id, Shapes::ShapeRef.new(shape: HashString, location_name: "ResultId"))
+    DataQualityResultsV2Description.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    DataQualityResultsV2Description.add_member(:result_published_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ResultPublishedOn"))
+    DataQualityResultsV2Description.add_member(:dimensions, Shapes::ShapeRef.new(shape: PublishDataQualityResultDimensions, location_name: "Dimensions"))
+    DataQualityResultsV2Description.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: NameString, location_name: "EvaluationContext"))
+    DataQualityResultsV2Description.add_member(:descriptors, Shapes::ShapeRef.new(shape: PublishDataQualityResultDescriptors, location_name: "Descriptors"))
+    DataQualityResultsV2Description.struct_class = Types::DataQualityResultsV2Description
+
+    DataQualityResultsV2DescriptionList.member = Shapes::ShapeRef.new(shape: DataQualityResultsV2Description)
+
+    DataQualityResultsV2FilterCriteria.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    DataQualityResultsV2FilterCriteria.add_member(:published_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PublishedAfter"))
+    DataQualityResultsV2FilterCriteria.add_member(:published_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PublishedBefore"))
+    DataQualityResultsV2FilterCriteria.add_member(:dimensions, Shapes::ShapeRef.new(shape: PublishDataQualityResultDimensions, location_name: "Dimensions"))
+    DataQualityResultsV2FilterCriteria.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: NameString, location_name: "EvaluationContext"))
+    DataQualityResultsV2FilterCriteria.struct_class = Types::DataQualityResultsV2FilterCriteria
 
     DataQualityRuleRecommendationRunAdditionalRunOptions.add_member(:custom_log_group_prefix, Shapes::ShapeRef.new(shape: GenericString, location_name: "CustomLogGroupPrefix"))
     DataQualityRuleRecommendationRunAdditionalRunOptions.struct_class = Types::DataQualityRuleRecommendationRunAdditionalRunOptions
@@ -3782,6 +3858,14 @@ module Aws::Glue
     DataQualityTargetTable.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     DataQualityTargetTable.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, location_name: "CatalogId"))
     DataQualityTargetTable.struct_class = Types::DataQualityTargetTable
+
+    DataQualityTelemetry.add_member(:vcpu_hours, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "VcpuHours"))
+    DataQualityTelemetry.add_member(:flags_enabled, Shapes::ShapeRef.new(shape: DataQualityFlagsEnabled, location_name: "FlagsEnabled"))
+    DataQualityTelemetry.add_member(:library_version, Shapes::ShapeRef.new(shape: NameString, location_name: "LibraryVersion"))
+    DataQualityTelemetry.add_member(:spark_version, Shapes::ShapeRef.new(shape: NameString, location_name: "SparkVersion"))
+    DataQualityTelemetry.add_member(:host_runtime_version, Shapes::ShapeRef.new(shape: NameString, location_name: "HostRuntimeVersion"))
+    DataQualityTelemetry.add_member(:engine, Shapes::ShapeRef.new(shape: DataQualityEngine, location_name: "Engine"))
+    DataQualityTelemetry.struct_class = Types::DataQualityTelemetry
 
     DataSource.add_member(:glue_table, Shapes::ShapeRef.new(shape: GlueTable, location_name: "GlueTable"))
     DataSource.add_member(:data_quality_glue_table, Shapes::ShapeRef.new(shape: DataQualityGlueTable, location_name: "DataQualityGlueTable"))
@@ -4799,6 +4883,27 @@ module Aws::Glue
     GetDataQualityResultResponse.add_member(:aggregated_metrics, Shapes::ShapeRef.new(shape: DataQualityAggregatedMetrics, location_name: "AggregatedMetrics"))
     GetDataQualityResultResponse.struct_class = Types::GetDataQualityResultResponse
 
+    GetDataQualityResultV2Request.add_member(:result_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "ResultId"))
+    GetDataQualityResultV2Request.struct_class = Types::GetDataQualityResultV2Request
+
+    GetDataQualityResultV2Response.add_member(:result_id, Shapes::ShapeRef.new(shape: HashString, location_name: "ResultId"))
+    GetDataQualityResultV2Response.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    GetDataQualityResultV2Response.add_member(:profile_id, Shapes::ShapeRef.new(shape: HashString, location_name: "ProfileId"))
+    GetDataQualityResultV2Response.add_member(:dimensions, Shapes::ShapeRef.new(shape: PublishDataQualityResultDimensions, location_name: "Dimensions"))
+    GetDataQualityResultV2Response.add_member(:tags, Shapes::ShapeRef.new(shape: PublishDataQualityResultTags, location_name: "Tags"))
+    GetDataQualityResultV2Response.add_member(:execution_started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExecutionStartedOn"))
+    GetDataQualityResultV2Response.add_member(:execution_completed_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExecutionCompletedOn"))
+    GetDataQualityResultV2Response.add_member(:result_published_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ResultPublishedOn"))
+    GetDataQualityResultV2Response.add_member(:score, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "Score"))
+    GetDataQualityResultV2Response.add_member(:rule_results, Shapes::ShapeRef.new(shape: DataQualityRuleResults, location_name: "RuleResults"))
+    GetDataQualityResultV2Response.add_member(:analyzer_results, Shapes::ShapeRef.new(shape: DataQualityAnalyzerResults, location_name: "AnalyzerResults"))
+    GetDataQualityResultV2Response.add_member(:observations, Shapes::ShapeRef.new(shape: DataQualityObservations, location_name: "Observations"))
+    GetDataQualityResultV2Response.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: NameString, location_name: "EvaluationContext"))
+    GetDataQualityResultV2Response.add_member(:descriptors, Shapes::ShapeRef.new(shape: PublishDataQualityResultDescriptors, location_name: "Descriptors"))
+    GetDataQualityResultV2Response.add_member(:aggregated_metrics, Shapes::ShapeRef.new(shape: DataQualityAggregatedMetrics, location_name: "AggregatedMetrics"))
+    GetDataQualityResultV2Response.add_member(:ruleset_name, Shapes::ShapeRef.new(shape: NameString, location_name: "RulesetName"))
+    GetDataQualityResultV2Response.struct_class = Types::GetDataQualityResultV2Response
+
     GetDataQualityRuleRecommendationRunRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "RunId"))
     GetDataQualityRuleRecommendationRunRequest.struct_class = Types::GetDataQualityRuleRecommendationRunRequest
 
@@ -5752,6 +5857,7 @@ module Aws::Glue
     IntegrationConfig.add_member(:refresh_interval, Shapes::ShapeRef.new(shape: String128, location_name: "RefreshInterval"))
     IntegrationConfig.add_member(:source_properties, Shapes::ShapeRef.new(shape: IntegrationSourcePropertiesMap, location_name: "SourceProperties"))
     IntegrationConfig.add_member(:continuous_sync, Shapes::ShapeRef.new(shape: ContinuousSync, location_name: "ContinuousSync"))
+    IntegrationConfig.add_member(:target_namespace, Shapes::ShapeRef.new(shape: TargetNamespace, location_name: "TargetNamespace"))
     IntegrationConfig.struct_class = Types::IntegrationConfig
 
     IntegrationConflictOperationFault.add_member(:message, Shapes::ShapeRef.new(shape: IntegrationErrorMessage, location_name: "Message"))
@@ -6209,6 +6315,15 @@ module Aws::Glue
     ListDataQualityResultsResponse.add_member(:results, Shapes::ShapeRef.new(shape: DataQualityResultDescriptionList, required: true, location_name: "Results"))
     ListDataQualityResultsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListDataQualityResultsResponse.struct_class = Types::ListDataQualityResultsResponse
+
+    ListDataQualityResultsV2Request.add_member(:filter, Shapes::ShapeRef.new(shape: DataQualityResultsV2FilterCriteria, location_name: "Filter"))
+    ListDataQualityResultsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDataQualityResultsV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListDataQualityResultsV2Request.struct_class = Types::ListDataQualityResultsV2Request
+
+    ListDataQualityResultsV2Response.add_member(:results, Shapes::ShapeRef.new(shape: DataQualityResultsV2DescriptionList, required: true, location_name: "Results"))
+    ListDataQualityResultsV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDataQualityResultsV2Response.struct_class = Types::ListDataQualityResultsV2Response
 
     ListDataQualityRuleRecommendationRunsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DataQualityRuleRecommendationRunFilter, location_name: "Filter"))
     ListDataQualityRuleRecommendationRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -6900,6 +7015,37 @@ module Aws::Glue
 
     PublicKeysList.member = Shapes::ShapeRef.new(shape: GenericString)
 
+    PublishDataQualityResultDescriptors.key = Shapes::ShapeRef.new(shape: NameString)
+    PublishDataQualityResultDescriptors.value = Shapes::ShapeRef.new(shape: NameString)
+
+    PublishDataQualityResultDimensions.key = Shapes::ShapeRef.new(shape: NameString)
+    PublishDataQualityResultDimensions.value = Shapes::ShapeRef.new(shape: NameString)
+
+    PublishDataQualityResultTags.key = Shapes::ShapeRef.new(shape: NameString)
+    PublishDataQualityResultTags.value = Shapes::ShapeRef.new(shape: NameString)
+
+    PublishDataQualityResultV2Request.add_member(:dimensions, Shapes::ShapeRef.new(shape: PublishDataQualityResultDimensions, required: true, location_name: "Dimensions"))
+    PublishDataQualityResultV2Request.add_member(:tags, Shapes::ShapeRef.new(shape: PublishDataQualityResultTags, location_name: "Tags"))
+    PublishDataQualityResultV2Request.add_member(:execution_started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExecutionStartedOn"))
+    PublishDataQualityResultV2Request.add_member(:execution_completed_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExecutionCompletedOn"))
+    PublishDataQualityResultV2Request.add_member(:score, Shapes::ShapeRef.new(shape: GenericBoundedDouble, required: true, location_name: "Score"))
+    PublishDataQualityResultV2Request.add_member(:rule_results, Shapes::ShapeRef.new(shape: DataQualityRuleResults, required: true, location_name: "RuleResults"))
+    PublishDataQualityResultV2Request.add_member(:analyzer_results, Shapes::ShapeRef.new(shape: DataQualityAnalyzerResults, location_name: "AnalyzerResults"))
+    PublishDataQualityResultV2Request.add_member(:observations, Shapes::ShapeRef.new(shape: DataQualityObservations, location_name: "Observations"))
+    PublishDataQualityResultV2Request.add_member(:aggregated_metrics, Shapes::ShapeRef.new(shape: DataQualityAggregatedMetrics, location_name: "AggregatedMetrics"))
+    PublishDataQualityResultV2Request.add_member(:statistics, Shapes::ShapeRef.new(shape: StatisticSummaryList, location_name: "Statistics"))
+    PublishDataQualityResultV2Request.add_member(:run_configuration, Shapes::ShapeRef.new(shape: DataQualityConfigurationV2, location_name: "RunConfiguration"))
+    PublishDataQualityResultV2Request.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    PublishDataQualityResultV2Request.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "EvaluationContext"))
+    PublishDataQualityResultV2Request.add_member(:descriptors, Shapes::ShapeRef.new(shape: PublishDataQualityResultDescriptors, location_name: "Descriptors"))
+    PublishDataQualityResultV2Request.add_member(:ruleset_name, Shapes::ShapeRef.new(shape: HashString, location_name: "RulesetName"))
+    PublishDataQualityResultV2Request.add_member(:data_quality_security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "DataQualitySecurityConfiguration"))
+    PublishDataQualityResultV2Request.add_member(:telemetry, Shapes::ShapeRef.new(shape: DataQualityTelemetry, location_name: "Telemetry"))
+    PublishDataQualityResultV2Request.struct_class = Types::PublishDataQualityResultV2Request
+
+    PublishDataQualityResultV2Response.add_member(:result_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "ResultId"))
+    PublishDataQualityResultV2Response.struct_class = Types::PublishDataQualityResultV2Response
+
     PutAssetRequest.add_member(:asset_type_id, Shapes::ShapeRef.new(shape: AssetTypeId, required: true, location_name: "AssetTypeId"))
     PutAssetRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "Identifier"))
     PutAssetRequest.add_member(:name, Shapes::ShapeRef.new(shape: AssetName, required: true, location_name: "Name"))
@@ -7024,6 +7170,9 @@ module Aws::Glue
     QuerySessionContext.add_member(:query_authorization_id, Shapes::ShapeRef.new(shape: HashString, location_name: "QueryAuthorizationId"))
     QuerySessionContext.add_member(:additional_context, Shapes::ShapeRef.new(shape: AdditionalContextMap, location_name: "AdditionalContext"))
     QuerySessionContext.struct_class = Types::QuerySessionContext
+
+    RLSProperties.add_member(:default_rls_policy, Shapes::ShapeRef.new(shape: NameString, location_name: "DefaultRLSPolicy"))
+    RLSProperties.struct_class = Types::RLSProperties
 
     Recipe.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     Recipe.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
@@ -8099,6 +8248,7 @@ module Aws::Glue
     Table.add_member(:is_materialized_view, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsMaterializedView"))
     Table.add_member(:iceberg_table_metadata, Shapes::ShapeRef.new(shape: IcebergTableMetadata, location_name: "IcebergTableMetadata"))
     Table.add_member(:status, Shapes::ShapeRef.new(shape: TableStatus, location_name: "Status"))
+    Table.add_member(:rls_properties, Shapes::ShapeRef.new(shape: RLSProperties, location_name: "RLSProperties"))
     Table.struct_class = Types::Table
 
     TableAttributesList.member = Shapes::ShapeRef.new(shape: TableAttributes)
@@ -9009,6 +9159,17 @@ module Aws::Glue
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchGetDataQualityResultRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchGetDataQualityResultResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:batch_get_data_quality_result_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetDataQualityResultV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetDataQualityResultV2Request)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetDataQualityResultV2Response)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
@@ -10622,6 +10783,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
       end)
 
+      api.add_operation(:get_data_quality_result_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataQualityResultV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDataQualityResultV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetDataQualityResultV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+      end)
+
       api.add_operation(:get_data_quality_rule_recommendation_run, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDataQualityRuleRecommendationRun"
         o.http_method = "POST"
@@ -11655,6 +11828,23 @@ module Aws::Glue
         )
       end)
 
+      api.add_operation(:list_data_quality_results_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataQualityResultsV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDataQualityResultsV2Request)
+        o.output = Shapes::ShapeRef.new(shape: ListDataQualityResultsV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_data_quality_rule_recommendation_runs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDataQualityRuleRecommendationRuns"
         o.http_method = "POST"
@@ -12097,6 +12287,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:publish_data_quality_result_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PublishDataQualityResultV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PublishDataQualityResultV2Request)
+        o.output = Shapes::ShapeRef.new(shape: PublishDataQualityResultV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
       end)
 
       api.add_operation(:put_asset, Seahorse::Model::Operation.new.tap do |o|

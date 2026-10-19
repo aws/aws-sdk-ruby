@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.144.0 (2026-10-13)
+------------------
+
+* Feature - Adds support for administrators to require users to re-authenticate OneDrive and Google Drive storage connectors when a streaming session is reused.
+
 1.143.0 (2026-09-29)
 ------------------
 

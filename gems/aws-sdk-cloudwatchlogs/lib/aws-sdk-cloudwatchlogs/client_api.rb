@@ -128,6 +128,7 @@ module Aws::CloudWatchLogs
     DeliveryDestination = Shapes::StructureShape.new(name: 'DeliveryDestination')
     DeliveryDestinationConfiguration = Shapes::StructureShape.new(name: 'DeliveryDestinationConfiguration')
     DeliveryDestinationName = Shapes::StringShape.new(name: 'DeliveryDestinationName')
+    DeliveryDestinationNames = Shapes::ListShape.new(name: 'DeliveryDestinationNames')
     DeliveryDestinationPolicy = Shapes::StringShape.new(name: 'DeliveryDestinationPolicy')
     DeliveryDestinationType = Shapes::StringShape.new(name: 'DeliveryDestinationType')
     DeliveryDestinationTypes = Shapes::ListShape.new(name: 'DeliveryDestinationTypes')
@@ -144,6 +145,7 @@ module Aws::CloudWatchLogs
     DeliverySourceConfigurationSupportedValues = Shapes::ListShape.new(name: 'DeliverySourceConfigurationSupportedValues')
     DeliverySourceConfigurationValue = Shapes::StringShape.new(name: 'DeliverySourceConfigurationValue')
     DeliverySourceName = Shapes::StringShape.new(name: 'DeliverySourceName')
+    DeliverySourceNames = Shapes::ListShape.new(name: 'DeliverySourceNames')
     DeliverySourceStatus = Shapes::StringShape.new(name: 'DeliverySourceStatus')
     DeliverySourceStatusReason = Shapes::StringShape.new(name: 'DeliverySourceStatusReason')
     DeliverySources = Shapes::ListShape.new(name: 'DeliverySources')
@@ -259,6 +261,7 @@ module Aws::CloudWatchLogs
     FilterLogEventsResponse = Shapes::StructureShape.new(name: 'FilterLogEventsResponse')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
     FilterPattern = Shapes::StringShape.new(name: 'FilterPattern')
+    FilterResourceArns = Shapes::ListShape.new(name: 'FilterResourceArns')
     FilteredLogEvent = Shapes::StructureShape.new(name: 'FilteredLogEvent')
     FilteredLogEvents = Shapes::ListShape.new(name: 'FilteredLogEvents')
     Flatten = Shapes::BooleanShape.new(name: 'Flatten')
@@ -1074,6 +1077,8 @@ module Aws::CloudWatchLogs
     DeliveryDestinationConfiguration.add_member(:destination_resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "destinationResourceArn"))
     DeliveryDestinationConfiguration.struct_class = Types::DeliveryDestinationConfiguration
 
+    DeliveryDestinationNames.member = Shapes::ShapeRef.new(shape: DeliveryDestinationName)
+
     DeliveryDestinationTypes.member = Shapes::ShapeRef.new(shape: DeliveryDestinationType)
 
     DeliveryDestinations.member = Shapes::ShapeRef.new(shape: DeliveryDestination)
@@ -1104,6 +1109,8 @@ module Aws::CloudWatchLogs
 
     DeliverySourceConfigurationSupportedValues.member = Shapes::ShapeRef.new(shape: DeliverySourceConfigurationSchemaField)
 
+    DeliverySourceNames.member = Shapes::ShapeRef.new(shape: DeliverySourceName)
+
     DeliverySources.member = Shapes::ShapeRef.new(shape: DeliverySource)
 
     DescribeAccountPoliciesRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
@@ -1130,6 +1137,7 @@ module Aws::CloudWatchLogs
 
     DescribeDeliveriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeDeliveriesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeDeliveriesRequest.add_member(:delivery_source_names, Shapes::ShapeRef.new(shape: DeliverySourceNames, location_name: "deliverySourceNames"))
     DescribeDeliveriesRequest.struct_class = Types::DescribeDeliveriesRequest
 
     DescribeDeliveriesResponse.add_member(:deliveries, Shapes::ShapeRef.new(shape: Deliveries, location_name: "deliveries"))
@@ -1138,6 +1146,7 @@ module Aws::CloudWatchLogs
 
     DescribeDeliveryDestinationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeDeliveryDestinationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeDeliveryDestinationsRequest.add_member(:names, Shapes::ShapeRef.new(shape: DeliveryDestinationNames, location_name: "names"))
     DescribeDeliveryDestinationsRequest.struct_class = Types::DescribeDeliveryDestinationsRequest
 
     DescribeDeliveryDestinationsResponse.add_member(:delivery_destinations, Shapes::ShapeRef.new(shape: DeliveryDestinations, location_name: "deliveryDestinations"))
@@ -1146,6 +1155,7 @@ module Aws::CloudWatchLogs
 
     DescribeDeliverySourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeDeliverySourcesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeDeliverySourcesRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: FilterResourceArns, location_name: "resourceArns"))
     DescribeDeliverySourcesRequest.struct_class = Types::DescribeDeliverySourcesRequest
 
     DescribeDeliverySourcesResponse.add_member(:delivery_sources, Shapes::ShapeRef.new(shape: DeliverySources, location_name: "deliverySources"))
@@ -1408,6 +1418,8 @@ module Aws::CloudWatchLogs
     FilterLogEventsResponse.add_member(:searched_log_streams, Shapes::ShapeRef.new(shape: SearchedLogStreams, location_name: "searchedLogStreams"))
     FilterLogEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     FilterLogEventsResponse.struct_class = Types::FilterLogEventsResponse
+
+    FilterResourceArns.member = Shapes::ShapeRef.new(shape: Arn)
 
     FilteredLogEvent.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "logStreamName"))
     FilteredLogEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))

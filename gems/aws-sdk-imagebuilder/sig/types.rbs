@@ -50,6 +50,12 @@ module Aws::Imagebuilder
       SENSITIVE: []
     end
 
+    class AutoScalingGroupConfiguration
+      attr_accessor name: ::String
+      attr_accessor capacity_wait_timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class CallRateLimitExceededException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -380,11 +386,13 @@ module Aws::Imagebuilder
       attr_accessor logging: Types::Logging
       attr_accessor key_pair: ::String
       attr_accessor terminate_instance_on_failure: bool
+      attr_accessor terminate_instance_on_completion: bool
       attr_accessor sns_topic_arn: ::String
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor instance_metadata_options: Types::InstanceMetadataOptions
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor placement: Types::Placement
+      attr_accessor parent_instance: Types::ParentInstanceConfiguration
       attr_accessor client_token: ::String
       attr_accessor dry_run: bool
       SENSITIVE: []
@@ -1197,6 +1205,8 @@ module Aws::Imagebuilder
       attr_accessor instance_metadata_options: Types::InstanceMetadataOptions
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor placement: Types::Placement
+      attr_accessor terminate_instance_on_completion: bool
+      attr_accessor parent_instance: Types::ParentInstanceConfiguration
       SENSITIVE: []
     end
 
@@ -1777,6 +1787,11 @@ module Aws::Imagebuilder
       SENSITIVE: []
     end
 
+    class ParentInstanceConfiguration
+      attr_accessor auto_scaling_group: Types::AutoScalingGroupConfiguration
+      SENSITIVE: []
+    end
+
     class PipelineLoggingConfiguration
       attr_accessor image_log_group_name: ::String
       attr_accessor pipeline_log_group_name: ::String
@@ -2105,10 +2120,12 @@ module Aws::Imagebuilder
       attr_accessor logging: Types::Logging
       attr_accessor key_pair: ::String
       attr_accessor terminate_instance_on_failure: bool
+      attr_accessor terminate_instance_on_completion: bool
       attr_accessor sns_topic_arn: ::String
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor instance_metadata_options: Types::InstanceMetadataOptions
       attr_accessor placement: Types::Placement
+      attr_accessor parent_instance: Types::ParentInstanceConfiguration
       attr_accessor client_token: ::String
       SENSITIVE: []
     end

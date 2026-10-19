@@ -639,6 +639,7 @@ module Aws::ARCRegionswitch
     #                     cross_account_role: "IamRoleArn",
     #                     external_id: "String",
     #                     arn: "LambdaArn",
+    #                     payload: "LambdaPayload",
     #                   },
     #                 ],
     #                 retry_interval_minutes: 1.0, # required
@@ -848,8 +849,32 @@ module Aws::ARCRegionswitch
     #                   ungraceful: "promoteReadReplica", # accepts promoteReadReplica
     #                 },
     #               },
+    #               ssm_send_command_config: {
+    #                 timeout_minutes: 1,
+    #                 region_documents: { # required
+    #                   "Region" => {
+    #                     cross_account_role: "IamRoleArn",
+    #                     external_id: "String",
+    #                     document_arn: "SsmDocumentArn", # required
+    #                     targets: [ # required
+    #                       {
+    #                         key: "SsmTargetKey", # required
+    #                         values: ["SsmTargetValue"], # required
+    #                       },
+    #                     ],
+    #                     parameters: {
+    #                       "SsmParameterKey" => ["SsmParameterValue"],
+    #                     },
+    #                     document_version: "SsmDocumentVersion",
+    #                   },
+    #                 },
+    #                 retry_interval_minutes: 1.0, # required
+    #                 ungraceful: {
+    #                   behavior: "skip", # accepts skip
+    #                 },
+    #               },
     #             },
-    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica, LambdaEventSourceMapping, AuroraServerlessScaling, AuroraProvisionedScaling, NeptuneGlobalDatabase, RdsSwitchoverReadReplica
+    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica, LambdaEventSourceMapping, AuroraServerlessScaling, AuroraProvisionedScaling, NeptuneGlobalDatabase, RdsSwitchoverReadReplica, SSMSendCommand
     #           },
     #         ],
     #         workflow_target_action: "activate", # required, accepts activate, deactivate, postRecovery
@@ -914,6 +939,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -1035,7 +1061,22 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map["Region"] #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.ungraceful.ungraceful #=> String, one of "promoteReadReplica"
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].document_arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].key #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].values #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].values[0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters["SsmParameterKey"] #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters["SsmParameterKey"][0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].document_version #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.retry_interval_minutes #=> Float
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.ungraceful.behavior #=> String, one of "skip"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1130,6 +1171,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -1251,7 +1293,22 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map["Region"] #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.ungraceful.ungraceful #=> String, one of "promoteReadReplica"
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].document_arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].key #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].values #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].values[0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters["SsmParameterKey"] #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters["SsmParameterKey"][0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].document_version #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.retry_interval_minutes #=> Float
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.ungraceful.behavior #=> String, one of "skip"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1444,6 +1501,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -1565,7 +1623,22 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map["Region"] #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.ungraceful.ungraceful #=> String, one of "promoteReadReplica"
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].document_arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].key #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].values #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].values[0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters["SsmParameterKey"] #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters["SsmParameterKey"][0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].document_version #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.retry_interval_minutes #=> Float
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.ungraceful.behavior #=> String, one of "skip"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1648,6 +1721,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -1769,7 +1843,22 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map["Region"] #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.ungraceful.ungraceful #=> String, one of "promoteReadReplica"
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].document_arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].key #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].values #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].values[0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters["SsmParameterKey"] #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters["SsmParameterKey"][0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].document_version #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.retry_interval_minutes #=> Float
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.ungraceful.behavior #=> String, one of "skip"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1855,7 +1944,7 @@ module Aws::ARCRegionswitch
     #   resp.items[0].timestamp #=> Time
     #   resp.items[0].type #=> String, one of "unknown", "executionPending", "executionStarted", "executionSucceeded", "executionFailed", "executionPausing", "executionPaused", "executionCanceling", "executionCanceled", "executionPendingApproval", "executionBehaviorChangedToUngraceful", "executionBehaviorChangedToGraceful", "executionPendingChildPlanManualApproval", "executionSuccessMonitoringApplicationHealth", "stepStarted", "stepUpdate", "stepSucceeded", "stepFailed", "stepSkipped", "stepPausedByError", "stepPausedByOperator", "stepCanceled", "stepPendingApproval", "stepExecutionBehaviorChangedToUngraceful", "stepPendingApplicationHealthMonitor", "planEvaluationWarning"
     #   resp.items[0].step_name #=> String
-    #   resp.items[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
+    #   resp.items[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"
     #   resp.items[0].resources #=> Array
     #   resp.items[0].resources[0] #=> String
     #   resp.items[0].error #=> String
@@ -2196,10 +2285,10 @@ module Aws::ARCRegionswitch
     # resource in another Region or account in the plan.
     #
     # Returns the warnings for the plans that you own and for plans that are
-    # shared with your account through AWS Resource Access Manager (AWS
-    # RAM). To return warnings for specific plans, provide a list of plan
-    # Amazon Resource Names (ARNs). Region switch ignores any plan ARN that
-    # you can't access. If you don't provide any plan ARNs, Region switch
+    # shared with your account through Resource Access Manager (RAM). To
+    # return warnings for specific plans, provide a list of plan Amazon
+    # Resource Names (ARNs). Region switch ignores any plan ARN that you
+    # can't access. If you don't provide any plan ARNs, Region switch
     # returns the warnings for all of your accessible plans.
     #
     # @option params [Array<String>] :plan_arns
@@ -2496,6 +2585,7 @@ module Aws::ARCRegionswitch
     #                     cross_account_role: "IamRoleArn",
     #                     external_id: "String",
     #                     arn: "LambdaArn",
+    #                     payload: "LambdaPayload",
     #                   },
     #                 ],
     #                 retry_interval_minutes: 1.0, # required
@@ -2705,8 +2795,32 @@ module Aws::ARCRegionswitch
     #                   ungraceful: "promoteReadReplica", # accepts promoteReadReplica
     #                 },
     #               },
+    #               ssm_send_command_config: {
+    #                 timeout_minutes: 1,
+    #                 region_documents: { # required
+    #                   "Region" => {
+    #                     cross_account_role: "IamRoleArn",
+    #                     external_id: "String",
+    #                     document_arn: "SsmDocumentArn", # required
+    #                     targets: [ # required
+    #                       {
+    #                         key: "SsmTargetKey", # required
+    #                         values: ["SsmTargetValue"], # required
+    #                       },
+    #                     ],
+    #                     parameters: {
+    #                       "SsmParameterKey" => ["SsmParameterValue"],
+    #                     },
+    #                     document_version: "SsmDocumentVersion",
+    #                   },
+    #                 },
+    #                 retry_interval_minutes: 1.0, # required
+    #                 ungraceful: {
+    #                   behavior: "skip", # accepts skip
+    #                 },
+    #               },
     #             },
-    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica, LambdaEventSourceMapping, AuroraServerlessScaling, AuroraProvisionedScaling, NeptuneGlobalDatabase, RdsSwitchoverReadReplica
+    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica, LambdaEventSourceMapping, AuroraServerlessScaling, AuroraProvisionedScaling, NeptuneGlobalDatabase, RdsSwitchoverReadReplica, SSMSendCommand
     #           },
     #         ],
     #         workflow_target_action: "activate", # required, accepts activate, deactivate, postRecovery
@@ -2764,6 +2878,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].cross_account_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.lambdas[0].payload #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.retry_interval_minutes #=> Float
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.region_to_run #=> String, one of "activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.custom_action_lambda_config.ungraceful.behavior #=> String, one of "skip"
@@ -2885,7 +3000,22 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.db_instance_arn_map["Region"] #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_switchover_read_replica_config.ungraceful.ungraceful #=> String, one of "promoteReadReplica"
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].document_arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].key #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].values #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].targets[0].values[0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters["SsmParameterKey"] #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].parameters["SsmParameterKey"][0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.region_documents["Region"].document_version #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.retry_interval_minutes #=> Float
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ssm_send_command_config.ungraceful.behavior #=> String, one of "skip"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -3024,7 +3154,7 @@ module Aws::ARCRegionswitch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-arcregionswitch'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

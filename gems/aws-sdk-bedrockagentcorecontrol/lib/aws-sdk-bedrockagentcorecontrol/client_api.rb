@@ -1087,6 +1087,9 @@ module Aws::BedrockAgentCoreControl
     RatingScale = Shapes::UnionShape.new(name: 'RatingScale')
     ReasoningConfiguration = Shapes::StructureShape.new(name: 'ReasoningConfiguration')
     ReasoningConfigurationEffortString = Shapes::StringShape.new(name: 'ReasoningConfigurationEffortString')
+    RecordExpiryAction = Shapes::StringShape.new(name: 'RecordExpiryAction')
+    RecordExpiryDurationDays = Shapes::IntegerShape.new(name: 'RecordExpiryDurationDays')
+    RecordExpirySpecification = Shapes::UnionShape.new(name: 'RecordExpirySpecification')
     RecordIdentifier = Shapes::StringShape.new(name: 'RecordIdentifier')
     RecordingConfig = Shapes::StructureShape.new(name: 'RecordingConfig')
     ReflectionConfiguration = Shapes::UnionShape.new(name: 'ReflectionConfiguration')
@@ -2594,6 +2597,7 @@ module Aws::BedrockAgentCoreControl
     CustomMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     CustomMemoryStrategyInput.add_member(:configuration, Shapes::ShapeRef.new(shape: CustomConfigurationInput, location_name: "configuration"))
     CustomMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    CustomMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     CustomMemoryStrategyInput.struct_class = Types::CustomMemoryStrategyInput
 
     CustomOauth2ProviderConfigInput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
@@ -3010,6 +3014,7 @@ module Aws::BedrockAgentCoreControl
     EpisodicMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     EpisodicMemoryStrategyInput.add_member(:reflection_configuration, Shapes::ShapeRef.new(shape: EpisodicReflectionConfigurationInput, location_name: "reflectionConfiguration"))
     EpisodicMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    EpisodicMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     EpisodicMemoryStrategyInput.struct_class = Types::EpisodicMemoryStrategyInput
 
     EpisodicOverrideConfigurationInput.add_member(:extraction, Shapes::ShapeRef.new(shape: EpisodicOverrideExtractionConfigurationInput, location_name: "extraction"))
@@ -4819,6 +4824,7 @@ module Aws::BedrockAgentCoreControl
     MemoryStrategy.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     MemoryStrategy.add_member(:status, Shapes::ShapeRef.new(shape: MemoryStrategyStatus, location_name: "status"))
     MemoryStrategy.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    MemoryStrategy.add_member(:record_expiry_duration_days, Shapes::ShapeRef.new(shape: RecordExpiryDurationDays, location_name: "recordExpiryDurationDays"))
     MemoryStrategy.struct_class = Types::MemoryStrategy
 
     MemoryStrategyInput.add_member(:semantic_memory_strategy, Shapes::ShapeRef.new(shape: SemanticMemoryStrategyInput, location_name: "semanticMemoryStrategy"))
@@ -4916,6 +4922,7 @@ module Aws::BedrockAgentCoreControl
     ModifyMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     ModifyMemoryStrategyInput.add_member(:configuration, Shapes::ShapeRef.new(shape: ModifyStrategyConfiguration, location_name: "configuration"))
     ModifyMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    ModifyMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     ModifyMemoryStrategyInput.struct_class = Types::ModifyMemoryStrategyInput
 
     ModifyReflectionConfiguration.add_member(:episodic_reflection_configuration, Shapes::ShapeRef.new(shape: EpisodicReflectionConfigurationInput, location_name: "episodicReflectionConfiguration"))
@@ -5306,6 +5313,14 @@ module Aws::BedrockAgentCoreControl
     ReasoningConfiguration.add_member(:effort, Shapes::ShapeRef.new(shape: ReasoningConfigurationEffortString, location_name: "effort"))
     ReasoningConfiguration.struct_class = Types::ReasoningConfiguration
 
+    RecordExpirySpecification.add_member(:record_expiry_duration_days, Shapes::ShapeRef.new(shape: RecordExpiryDurationDays, location_name: "recordExpiryDurationDays"))
+    RecordExpirySpecification.add_member(:action, Shapes::ShapeRef.new(shape: RecordExpiryAction, location_name: "action"))
+    RecordExpirySpecification.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RecordExpirySpecification.add_member_subclass(:record_expiry_duration_days, Types::RecordExpirySpecification::RecordExpiryDurationDays)
+    RecordExpirySpecification.add_member_subclass(:action, Types::RecordExpirySpecification::Action)
+    RecordExpirySpecification.add_member_subclass(:unknown, Types::RecordExpirySpecification::Unknown)
+    RecordExpirySpecification.struct_class = Types::RecordExpirySpecification
+
     RecordingConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     RecordingConfig.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
     RecordingConfig.struct_class = Types::RecordingConfig
@@ -5546,6 +5561,7 @@ module Aws::BedrockAgentCoreControl
     SemanticMemoryStrategyInput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespacesList, deprecated: true, location_name: "namespaces", metadata: {"deprecatedMessage" => "Use namespaceTemplates instead", "deprecatedSince" => "2026-03-02"}))
     SemanticMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     SemanticMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    SemanticMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     SemanticMemoryStrategyInput.struct_class = Types::SemanticMemoryStrategyInput
 
     SemanticOverrideConfigurationInput.add_member(:extraction, Shapes::ShapeRef.new(shape: SemanticOverrideExtractionConfigurationInput, location_name: "extraction"))
@@ -5718,6 +5734,7 @@ module Aws::BedrockAgentCoreControl
     SummaryMemoryStrategyInput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespacesList, deprecated: true, location_name: "namespaces", metadata: {"deprecatedMessage" => "Use namespaceTemplates instead", "deprecatedSince" => "2026-03-02"}))
     SummaryMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     SummaryMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    SummaryMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     SummaryMemoryStrategyInput.struct_class = Types::SummaryMemoryStrategyInput
 
     SummaryOverrideConfigurationInput.add_member(:consolidation, Shapes::ShapeRef.new(shape: SummaryOverrideConsolidationConfigurationInput, location_name: "consolidation"))
@@ -6461,6 +6478,7 @@ module Aws::BedrockAgentCoreControl
     UserPreferenceMemoryStrategyInput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespacesList, deprecated: true, location_name: "namespaces", metadata: {"deprecatedMessage" => "Use namespaceTemplates instead", "deprecatedSince" => "2026-03-02"}))
     UserPreferenceMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     UserPreferenceMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    UserPreferenceMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     UserPreferenceMemoryStrategyInput.struct_class = Types::UserPreferenceMemoryStrategyInput
 
     UserPreferenceOverrideConfigurationInput.add_member(:extraction, Shapes::ShapeRef.new(shape: UserPreferenceOverrideExtractionConfigurationInput, location_name: "extraction"))

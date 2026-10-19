@@ -382,6 +382,7 @@ module Aws
         def monthly_account_evaluation_hours: () -> Types::UsageMetric
         def monthly_account_system_learning_hours: () -> Types::UsageMetric
         def monthly_account_on_demand_hours: () -> Types::UsageMetric
+        def monthly_account_grader_hours: () -> Types::UsageMetric
         def usage_period_start_time: () -> ::Time
         def usage_period_end_time: () -> ::Time
       end
@@ -397,7 +398,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#get_agent_space-instance_method
       def get_agent_space: (
-                             agent_space_id: ::String
+                             agent_space_id: ::String,
+                             ?included_data: ("METADATA_ONLY" | "ALL_DATA")
                            ) -> _GetAgentSpaceResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentSpaceResponseSuccess
 
@@ -516,7 +518,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_agent_spaces-instance_method
       def list_agent_spaces: (
                                ?max_results: ::Integer,
-                               ?next_token: ::String
+                               ?next_token: ::String,
+                               ?included_data: ("METADATA_ONLY" | "ALL_DATA")
                              ) -> _ListAgentSpacesResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentSpacesResponseSuccess
 

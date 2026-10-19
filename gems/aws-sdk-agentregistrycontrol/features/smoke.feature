@@ -8,18 +8,6 @@
 Feature: Smoke tests for AgentRegistryControl
 
   @agentregistrycontrol @smoke
-  Scenario: GetRegistryFailure
-    Given I create a 'Aws::AgentRegistryControl' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_registry' with params:
-      """
-{"registry_id":"000000000000"}
-      """
-    Then I expect a 'Aws::AgentRegistryControl::Errors::ResourceNotFoundException' was raised
-
-  @agentregistrycontrol @smoke
   Scenario: ListRegistriesSuccess
     Given I create a 'Aws::AgentRegistryControl' client with config:
       """
@@ -30,3 +18,15 @@ Feature: Smoke tests for AgentRegistryControl
 {}
       """
     Then I expect an error was not raised
+
+  @agentregistrycontrol @smoke
+  Scenario: GetRegistryFailure
+    Given I create a 'Aws::AgentRegistryControl' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_registry' with params:
+      """
+{"registry_id":"000000000000"}
+      """
+    Then I expect a 'Aws::AgentRegistryControl::Errors::ResourceNotFoundException' was raised

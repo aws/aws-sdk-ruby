@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.1296.0 (2026-10-14)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1295.0 (2026-10-13)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1294.0 (2026-10-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMakerTrainingSessionRuntime`.
+
 1.1293.0 (2026-10-06)
 ------------------
 

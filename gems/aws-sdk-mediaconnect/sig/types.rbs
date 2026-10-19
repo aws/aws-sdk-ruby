@@ -175,6 +175,7 @@ module Aws::MediaConnect
       attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
       attr_accessor router_integration_transit_encryption: Types::FlowTransitEncryption
       attr_accessor ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")
+      attr_accessor ndi_audio_reference_level: ::Integer
       SENSITIVE: []
     end
 
@@ -318,6 +319,13 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class ColorInformation
+      attr_accessor colorimetry: ("BT709" | "BT470M" | "BT470BG" | "BT601" | "SMPTE240M" | "GENERIC_FILM" | "BT2020" | "SMPTE428" | "SMPTE431" | "SMPTE432")
+      attr_accessor transfer_characteristics: ("BT709" | "BT470M" | "BT470BG" | "BT601" | "SMPTE240M" | "LINEAR" | "LOG100" | "LOG316" | "IEC61966_2_4" | "BT1361_ECG" | "IEC61966_2_1" | "BT2020_10" | "BT2020_12" | "BT2100_PQ" | "SMPTE428" | "BT2100_HLG")
+      attr_accessor matrix_coefficients: ("IDENTITY" | "BT709" | "FCC" | "BT470BG" | "BT601" | "SMPTE240M" | "YCGCO" | "BT2020_NCL" | "BT2020_CL" | "SMPTE2085" | "CHROMATICITY_DERIVED_NCL" | "CHROMATICITY_DERIVED_CL" | "BT2100_ICTCP" | "IPT_C2")
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -402,7 +410,7 @@ module Aws::MediaConnect
       attr_accessor configuration: Types::RouterInputConfiguration
       attr_accessor maximum_bitrate: ::Integer
       attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
-      attr_accessor tier: ("INPUT_100" | "INPUT_50" | "INPUT_20")
+      attr_accessor tier: ("INPUT_100" | "INPUT_50" | "INPUT_20" | "INPUT_500" | "INPUT_250")
       attr_accessor region_name: ::String
       attr_accessor availability_zone: ::String
       attr_accessor transit_encryption: Types::RouterInputTransitEncryption
@@ -437,7 +445,7 @@ module Aws::MediaConnect
       attr_accessor configuration: Types::RouterOutputConfiguration
       attr_accessor maximum_bitrate: ::Integer
       attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
-      attr_accessor tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20")
+      attr_accessor tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20" | "OUTPUT_500" | "OUTPUT_250")
       attr_accessor region_name: ::String
       attr_accessor availability_zone: ::String
       attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
@@ -1445,6 +1453,7 @@ module Aws::MediaConnect
       attr_accessor codec: ::String
       attr_accessor stream_id: ::Integer
       attr_accessor scan_mode: ("progressive" | "interlace" | "progressive-segmented-frame")
+      attr_accessor color: Types::ColorInformation
       attr_accessor frame_resolution: Types::FrameResolution
       attr_accessor frame_rate: ::String
       attr_accessor channels: ::Integer
@@ -1467,6 +1476,7 @@ module Aws::MediaConnect
 
     class NdiSourceSettings
       attr_accessor source_name: ::String
+      attr_accessor audio_reference_level: ::Integer
       SENSITIVE: []
     end
 
@@ -1709,7 +1719,7 @@ module Aws::MediaConnect
       attr_accessor region_name: ::String
       attr_accessor availability_zone: ::String
       attr_accessor maximum_bitrate: ::Integer
-      attr_accessor tier: ("INPUT_100" | "INPUT_50" | "INPUT_20")
+      attr_accessor tier: ("INPUT_100" | "INPUT_50" | "INPUT_20" | "INPUT_500" | "INPUT_250")
       attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -1937,7 +1947,7 @@ module Aws::MediaConnect
       attr_accessor availability_zone: ::String
       attr_accessor maximum_bitrate: ::Integer
       attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
-      attr_accessor tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20")
+      attr_accessor tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20" | "OUTPUT_500" | "OUTPUT_250")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor messages: ::Array[Types::RouterOutputMessage]
@@ -2369,17 +2379,20 @@ module Aws::MediaConnect
       attr_accessor ndi_program_name: ::String
       attr_accessor ndi_source_settings: Types::NdiSourceSettings
       attr_accessor ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")
+      attr_accessor ndi_audio_reference_level: ::Integer
       SENSITIVE: []
     end
 
     class TransportMediaInfo
       attr_accessor programs: ::Array[Types::TransportStreamProgram]
+      attr_accessor ts_id: ::Integer
       SENSITIVE: []
     end
 
     class TransportStream
       attr_accessor channels: ::Integer
       attr_accessor codec: ::String
+      attr_accessor color: Types::ColorInformation
       attr_accessor frame_rate: ::String
       attr_accessor frame_resolution: Types::FrameResolution
       attr_accessor pid: ::Integer
@@ -2569,6 +2582,7 @@ module Aws::MediaConnect
       attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
       attr_accessor router_integration_transit_encryption: Types::FlowTransitEncryption
       attr_accessor ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")
+      attr_accessor ndi_audio_reference_level: ::Integer
       SENSITIVE: []
     end
 
@@ -2664,7 +2678,7 @@ module Aws::MediaConnect
       attr_accessor configuration: Types::RouterInputConfiguration
       attr_accessor maximum_bitrate: ::Integer
       attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
-      attr_accessor tier: ("INPUT_100" | "INPUT_50" | "INPUT_20")
+      attr_accessor tier: ("INPUT_100" | "INPUT_50" | "INPUT_20" | "INPUT_500" | "INPUT_250")
       attr_accessor transit_encryption: Types::RouterInputTransitEncryption
       attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
       attr_accessor content_quality_analysis_configuration: Types::RouterContentQualityAnalysisConfiguration
@@ -2694,7 +2708,7 @@ module Aws::MediaConnect
       attr_accessor configuration: Types::RouterOutputConfiguration
       attr_accessor maximum_bitrate: ::Integer
       attr_accessor routing_scope: ("REGIONAL" | "GLOBAL")
-      attr_accessor tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20")
+      attr_accessor tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20" | "OUTPUT_500" | "OUTPUT_250")
       attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
       attr_accessor fabric_configuration: Types::FabricConfiguration
       SENSITIVE: []

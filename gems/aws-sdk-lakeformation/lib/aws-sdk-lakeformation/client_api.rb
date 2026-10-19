@@ -27,6 +27,8 @@ module Aws::LakeFormation
     ApplicationStatus = Shapes::StringShape.new(name: 'ApplicationStatus')
     AssumeDecoratedRoleWithSAMLRequest = Shapes::StructureShape.new(name: 'AssumeDecoratedRoleWithSAMLRequest')
     AssumeDecoratedRoleWithSAMLResponse = Shapes::StructureShape.new(name: 'AssumeDecoratedRoleWithSAMLResponse')
+    AttachRLSPolicyRequest = Shapes::StructureShape.new(name: 'AttachRLSPolicyRequest')
+    AttachRLSPolicyResponse = Shapes::StructureShape.new(name: 'AttachRLSPolicyResponse')
     AuditContext = Shapes::StructureShape.new(name: 'AuditContext')
     AuditContextString = Shapes::StringShape.new(name: 'AuditContextString')
     AuthorizedSessionTagValueList = Shapes::ListShape.new(name: 'AuthorizedSessionTagValueList')
@@ -44,9 +46,12 @@ module Aws::LakeFormation
     CancelTransactionResponse = Shapes::StructureShape.new(name: 'CancelTransactionResponse')
     CatalogIdString = Shapes::StringShape.new(name: 'CatalogIdString')
     CatalogResource = Shapes::StructureShape.new(name: 'CatalogResource')
+    Column = Shapes::StructureShape.new(name: 'Column')
     ColumnLFTag = Shapes::StructureShape.new(name: 'ColumnLFTag')
     ColumnLFTagsList = Shapes::ListShape.new(name: 'ColumnLFTagsList')
+    ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnNames = Shapes::ListShape.new(name: 'ColumnNames')
+    ColumnTypeString = Shapes::StringShape.new(name: 'ColumnTypeString')
     ColumnWildcard = Shapes::StructureShape.new(name: 'ColumnWildcard')
     CommitTransactionRequest = Shapes::StructureShape.new(name: 'CommitTransactionRequest')
     CommitTransactionResponse = Shapes::StructureShape.new(name: 'CommitTransactionResponse')
@@ -66,6 +71,8 @@ module Aws::LakeFormation
     CreateLakeFormationIdentityCenterConfigurationResponse = Shapes::StructureShape.new(name: 'CreateLakeFormationIdentityCenterConfigurationResponse')
     CreateLakeFormationOptInRequest = Shapes::StructureShape.new(name: 'CreateLakeFormationOptInRequest')
     CreateLakeFormationOptInResponse = Shapes::StructureShape.new(name: 'CreateLakeFormationOptInResponse')
+    CreateRLSPolicyRequest = Shapes::StructureShape.new(name: 'CreateRLSPolicyRequest')
+    CreateRLSPolicyResponse = Shapes::StructureShape.new(name: 'CreateRLSPolicyResponse')
     CredentialTimeoutDurationSecondInteger = Shapes::IntegerShape.new(name: 'CredentialTimeoutDurationSecondInteger')
     CredentialsScope = Shapes::StringShape.new(name: 'CredentialsScope')
     DataCellsFilter = Shapes::StructureShape.new(name: 'DataCellsFilter')
@@ -93,6 +100,8 @@ module Aws::LakeFormation
     DeleteObjectInput = Shapes::StructureShape.new(name: 'DeleteObjectInput')
     DeleteObjectsOnCancelRequest = Shapes::StructureShape.new(name: 'DeleteObjectsOnCancelRequest')
     DeleteObjectsOnCancelResponse = Shapes::StructureShape.new(name: 'DeleteObjectsOnCancelResponse')
+    DeleteRLSPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRLSPolicyRequest')
+    DeleteRLSPolicyResponse = Shapes::StructureShape.new(name: 'DeleteRLSPolicyResponse')
     DeregisterResourceRequest = Shapes::StructureShape.new(name: 'DeregisterResourceRequest')
     DeregisterResourceResponse = Shapes::StructureShape.new(name: 'DeregisterResourceResponse')
     DescribeLakeFormationIdentityCenterConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeLakeFormationIdentityCenterConfigurationRequest')
@@ -102,6 +111,8 @@ module Aws::LakeFormation
     DescribeTransactionRequest = Shapes::StructureShape.new(name: 'DescribeTransactionRequest')
     DescribeTransactionResponse = Shapes::StructureShape.new(name: 'DescribeTransactionResponse')
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
+    DetachRLSPolicyRequest = Shapes::StructureShape.new(name: 'DetachRLSPolicyRequest')
+    DetachRLSPolicyResponse = Shapes::StructureShape.new(name: 'DetachRLSPolicyResponse')
     DetailsMap = Shapes::StructureShape.new(name: 'DetailsMap')
     ETagString = Shapes::StringShape.new(name: 'ETagString')
     EnableStatus = Shapes::StringShape.new(name: 'EnableStatus')
@@ -137,6 +148,8 @@ module Aws::LakeFormation
     GetQueryStatisticsRequest = Shapes::StructureShape.new(name: 'GetQueryStatisticsRequest')
     GetQueryStatisticsRequestQueryIdString = Shapes::StringShape.new(name: 'GetQueryStatisticsRequestQueryIdString')
     GetQueryStatisticsResponse = Shapes::StructureShape.new(name: 'GetQueryStatisticsResponse')
+    GetRLSPolicyRequest = Shapes::StructureShape.new(name: 'GetRLSPolicyRequest')
+    GetRLSPolicyResponse = Shapes::StructureShape.new(name: 'GetRLSPolicyResponse')
     GetResourceLFTagsRequest = Shapes::StructureShape.new(name: 'GetResourceLFTagsRequest')
     GetResourceLFTagsResponse = Shapes::StructureShape.new(name: 'GetResourceLFTagsResponse')
     GetTableObjectsRequest = Shapes::StructureShape.new(name: 'GetTableObjectsRequest')
@@ -192,6 +205,10 @@ module Aws::LakeFormation
     ListLakeFormationOptInsResponse = Shapes::StructureShape.new(name: 'ListLakeFormationOptInsResponse')
     ListPermissionsRequest = Shapes::StructureShape.new(name: 'ListPermissionsRequest')
     ListPermissionsResponse = Shapes::StructureShape.new(name: 'ListPermissionsResponse')
+    ListRLSPoliciesRequest = Shapes::StructureShape.new(name: 'ListRLSPoliciesRequest')
+    ListRLSPoliciesResponse = Shapes::StructureShape.new(name: 'ListRLSPoliciesResponse')
+    ListRLSPolicyAttachmentsRequest = Shapes::StructureShape.new(name: 'ListRLSPolicyAttachmentsRequest')
+    ListRLSPolicyAttachmentsResponse = Shapes::StructureShape.new(name: 'ListRLSPolicyAttachmentsResponse')
     ListResourcesRequest = Shapes::StructureShape.new(name: 'ListResourcesRequest')
     ListResourcesResponse = Shapes::StructureShape.new(name: 'ListResourcesResponse')
     ListTableStorageOptimizersRequest = Shapes::StructureShape.new(name: 'ListTableStorageOptimizersRequest')
@@ -238,6 +255,11 @@ module Aws::LakeFormation
     QuerySessionContext = Shapes::StructureShape.new(name: 'QuerySessionContext')
     QueryStateString = Shapes::StringShape.new(name: 'QueryStateString')
     RAMResourceShareArn = Shapes::StringShape.new(name: 'RAMResourceShareArn')
+    RLSPolicy = Shapes::StructureShape.new(name: 'RLSPolicy')
+    RLSPolicyAttachment = Shapes::StructureShape.new(name: 'RLSPolicyAttachment')
+    RLSPolicyAttachmentList = Shapes::ListShape.new(name: 'RLSPolicyAttachmentList')
+    RLSPolicyList = Shapes::ListShape.new(name: 'RLSPolicyList')
+    RLSPolicyResource = Shapes::StructureShape.new(name: 'RLSPolicyResource')
     RedshiftConnect = Shapes::StructureShape.new(name: 'RedshiftConnect')
     RedshiftScopeUnion = Shapes::UnionShape.new(name: 'RedshiftScopeUnion')
     RedshiftServiceIntegrations = Shapes::ListShape.new(name: 'RedshiftServiceIntegrations')
@@ -322,6 +344,8 @@ module Aws::LakeFormation
     UpdateLFTagResponse = Shapes::StructureShape.new(name: 'UpdateLFTagResponse')
     UpdateLakeFormationIdentityCenterConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLakeFormationIdentityCenterConfigurationRequest')
     UpdateLakeFormationIdentityCenterConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateLakeFormationIdentityCenterConfigurationResponse')
+    UpdateRLSPolicyRequest = Shapes::StructureShape.new(name: 'UpdateRLSPolicyRequest')
+    UpdateRLSPolicyResponse = Shapes::StructureShape.new(name: 'UpdateRLSPolicyResponse')
     UpdateResourceRequest = Shapes::StructureShape.new(name: 'UpdateResourceRequest')
     UpdateResourceResponse = Shapes::StructureShape.new(name: 'UpdateResourceResponse')
     UpdateTableObjectsRequest = Shapes::StructureShape.new(name: 'UpdateTableObjectsRequest')
@@ -379,6 +403,15 @@ module Aws::LakeFormation
     AssumeDecoratedRoleWithSAMLResponse.add_member(:expiration, Shapes::ShapeRef.new(shape: ExpirationTimestamp, location_name: "Expiration"))
     AssumeDecoratedRoleWithSAMLResponse.struct_class = Types::AssumeDecoratedRoleWithSAMLResponse
 
+    AttachRLSPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    AttachRLSPolicyRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
+    AttachRLSPolicyRequest.add_member(:principal, Shapes::ShapeRef.new(shape: DataLakePrincipal, location_name: "Principal"))
+    AttachRLSPolicyRequest.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, location_name: "Condition"))
+    AttachRLSPolicyRequest.add_member(:set_default, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "SetDefault"))
+    AttachRLSPolicyRequest.struct_class = Types::AttachRLSPolicyRequest
+
+    AttachRLSPolicyResponse.struct_class = Types::AttachRLSPolicyResponse
+
     AuditContext.add_member(:additional_audit_context, Shapes::ShapeRef.new(shape: AuditContextString, location_name: "AdditionalAuditContext"))
     AuditContext.struct_class = Types::AuditContext
 
@@ -422,11 +455,17 @@ module Aws::LakeFormation
     CatalogResource.add_member(:id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "Id"))
     CatalogResource.struct_class = Types::CatalogResource
 
+    Column.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    Column.add_member(:type, Shapes::ShapeRef.new(shape: ColumnTypeString, location_name: "Type"))
+    Column.struct_class = Types::Column
+
     ColumnLFTag.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     ColumnLFTag.add_member(:lf_tags, Shapes::ShapeRef.new(shape: LFTagsList, location_name: "LFTags"))
     ColumnLFTag.struct_class = Types::ColumnLFTag
 
     ColumnLFTagsList.member = Shapes::ShapeRef.new(shape: ColumnLFTag)
+
+    ColumnList.member = Shapes::ShapeRef.new(shape: Column)
 
     ColumnNames.member = Shapes::ShapeRef.new(shape: NameString)
 
@@ -484,6 +523,13 @@ module Aws::LakeFormation
     CreateLakeFormationOptInRequest.struct_class = Types::CreateLakeFormationOptInRequest
 
     CreateLakeFormationOptInResponse.struct_class = Types::CreateLakeFormationOptInResponse
+
+    CreateRLSPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateRLSPolicyRequest.add_member(:attachment_columns, Shapes::ShapeRef.new(shape: ColumnList, required: true, location_name: "AttachmentColumns"))
+    CreateRLSPolicyRequest.add_member(:filter_expression, Shapes::ShapeRef.new(shape: PredicateString, required: true, location_name: "FilterExpression"))
+    CreateRLSPolicyRequest.struct_class = Types::CreateRLSPolicyRequest
+
+    CreateRLSPolicyResponse.struct_class = Types::CreateRLSPolicyResponse
 
     DataCellsFilter.add_member(:table_catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "TableCatalogId"))
     DataCellsFilter.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -576,6 +622,11 @@ module Aws::LakeFormation
 
     DeleteObjectsOnCancelResponse.struct_class = Types::DeleteObjectsOnCancelResponse
 
+    DeleteRLSPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    DeleteRLSPolicyRequest.struct_class = Types::DeleteRLSPolicyRequest
+
+    DeleteRLSPolicyResponse.struct_class = Types::DeleteRLSPolicyResponse
+
     DeregisterResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
     DeregisterResourceRequest.struct_class = Types::DeregisterResourceRequest
 
@@ -604,6 +655,15 @@ module Aws::LakeFormation
 
     DescribeTransactionResponse.add_member(:transaction_description, Shapes::ShapeRef.new(shape: TransactionDescription, location_name: "TransactionDescription"))
     DescribeTransactionResponse.struct_class = Types::DescribeTransactionResponse
+
+    DetachRLSPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    DetachRLSPolicyRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
+    DetachRLSPolicyRequest.add_member(:principal, Shapes::ShapeRef.new(shape: DataLakePrincipal, location_name: "Principal"))
+    DetachRLSPolicyRequest.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, location_name: "Condition"))
+    DetachRLSPolicyRequest.add_member(:remove_default, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "RemoveDefault"))
+    DetachRLSPolicyRequest.struct_class = Types::DetachRLSPolicyRequest
+
+    DetachRLSPolicyResponse.struct_class = Types::DetachRLSPolicyResponse
 
     DetailsMap.add_member(:resource_share, Shapes::ShapeRef.new(shape: ResourceShareList, location_name: "ResourceShare"))
     DetailsMap.struct_class = Types::DetailsMap
@@ -704,6 +764,12 @@ module Aws::LakeFormation
     GetQueryStatisticsResponse.add_member(:planning_statistics, Shapes::ShapeRef.new(shape: PlanningStatistics, location_name: "PlanningStatistics"))
     GetQueryStatisticsResponse.add_member(:query_submission_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "QuerySubmissionTime"))
     GetQueryStatisticsResponse.struct_class = Types::GetQueryStatisticsResponse
+
+    GetRLSPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    GetRLSPolicyRequest.struct_class = Types::GetRLSPolicyRequest
+
+    GetRLSPolicyResponse.add_member(:rls_policy, Shapes::ShapeRef.new(shape: RLSPolicy, location_name: "RLSPolicy"))
+    GetRLSPolicyResponse.struct_class = Types::GetRLSPolicyResponse
 
     GetResourceLFTagsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetResourceLFTagsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
@@ -909,6 +975,25 @@ module Aws::LakeFormation
     ListPermissionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListPermissionsResponse.struct_class = Types::ListPermissionsResponse
 
+    ListRLSPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListRLSPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListRLSPoliciesRequest.struct_class = Types::ListRLSPoliciesRequest
+
+    ListRLSPoliciesResponse.add_member(:rls_policies, Shapes::ShapeRef.new(shape: RLSPolicyList, location_name: "RLSPolicies"))
+    ListRLSPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListRLSPoliciesResponse.struct_class = Types::ListRLSPoliciesResponse
+
+    ListRLSPolicyAttachmentsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "Resource"))
+    ListRLSPolicyAttachmentsRequest.add_member(:principal, Shapes::ShapeRef.new(shape: DataLakePrincipal, location_name: "Principal"))
+    ListRLSPolicyAttachmentsRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: NameString, location_name: "PolicyName"))
+    ListRLSPolicyAttachmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListRLSPolicyAttachmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListRLSPolicyAttachmentsRequest.struct_class = Types::ListRLSPolicyAttachmentsRequest
+
+    ListRLSPolicyAttachmentsResponse.add_member(:rls_policy_attachments, Shapes::ShapeRef.new(shape: RLSPolicyAttachmentList, location_name: "RLSPolicyAttachments"))
+    ListRLSPolicyAttachmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListRLSPolicyAttachmentsResponse.struct_class = Types::ListRLSPolicyAttachmentsResponse
+
     ListResourcesRequest.add_member(:filter_condition_list, Shapes::ShapeRef.new(shape: FilterConditionList, location_name: "FilterConditionList"))
     ListResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     ListResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
@@ -1013,6 +1098,28 @@ module Aws::LakeFormation
     QuerySessionContext.add_member(:additional_context, Shapes::ShapeRef.new(shape: AdditionalContextMap, location_name: "AdditionalContext"))
     QuerySessionContext.struct_class = Types::QuerySessionContext
 
+    RLSPolicy.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    RLSPolicy.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    RLSPolicy.add_member(:attachment_columns, Shapes::ShapeRef.new(shape: ColumnList, location_name: "AttachmentColumns"))
+    RLSPolicy.add_member(:filter_expression, Shapes::ShapeRef.new(shape: PredicateString, location_name: "FilterExpression"))
+    RLSPolicy.struct_class = Types::RLSPolicy
+
+    RLSPolicyAttachment.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    RLSPolicyAttachment.add_member(:policy_name, Shapes::ShapeRef.new(shape: NameString, location_name: "PolicyName"))
+    RLSPolicyAttachment.add_member(:principal, Shapes::ShapeRef.new(shape: DataLakePrincipal, location_name: "Principal"))
+    RLSPolicyAttachment.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "Resource"))
+    RLSPolicyAttachment.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, location_name: "Condition"))
+    RLSPolicyAttachment.add_member(:default_rls_policy, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "DefaultRLSPolicy"))
+    RLSPolicyAttachment.struct_class = Types::RLSPolicyAttachment
+
+    RLSPolicyAttachmentList.member = Shapes::ShapeRef.new(shape: RLSPolicyAttachment)
+
+    RLSPolicyList.member = Shapes::ShapeRef.new(shape: RLSPolicy)
+
+    RLSPolicyResource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    RLSPolicyResource.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    RLSPolicyResource.struct_class = Types::RLSPolicyResource
+
     RedshiftConnect.add_member(:authorization, Shapes::ShapeRef.new(shape: ServiceAuthorization, required: true, location_name: "Authorization"))
     RedshiftConnect.struct_class = Types::RedshiftConnect
 
@@ -1052,6 +1159,7 @@ module Aws::LakeFormation
     Resource.add_member(:lf_tag, Shapes::ShapeRef.new(shape: LFTagKeyResource, location_name: "LFTag"))
     Resource.add_member(:lf_tag_policy, Shapes::ShapeRef.new(shape: LFTagPolicyResource, location_name: "LFTagPolicy"))
     Resource.add_member(:lf_tag_expression, Shapes::ShapeRef.new(shape: LFTagExpressionResource, location_name: "LFTagExpression"))
+    Resource.add_member(:rls_policy, Shapes::ShapeRef.new(shape: RLSPolicyResource, location_name: "RLSPolicy"))
     Resource.struct_class = Types::Resource
 
     ResourceInfo.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, location_name: "ResourceArn"))
@@ -1245,6 +1353,12 @@ module Aws::LakeFormation
 
     UpdateLakeFormationIdentityCenterConfigurationResponse.struct_class = Types::UpdateLakeFormationIdentityCenterConfigurationResponse
 
+    UpdateRLSPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    UpdateRLSPolicyRequest.add_member(:filter_expression, Shapes::ShapeRef.new(shape: PredicateString, location_name: "FilterExpression"))
+    UpdateRLSPolicyRequest.struct_class = Types::UpdateRLSPolicyRequest
+
+    UpdateRLSPolicyResponse.struct_class = Types::UpdateRLSPolicyResponse
+
     UpdateResourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
     UpdateResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
     UpdateResourceRequest.add_member(:with_federation, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "WithFederation"))
@@ -1341,6 +1455,22 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:attach_rls_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachRLSPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/AttachRLSPolicy"
+        o.input = Shapes::ShapeRef.new(shape: AttachRLSPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: AttachRLSPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:batch_grant_permissions, Seahorse::Model::Operation.new.tap do |o|
@@ -1464,6 +1594,21 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
       end)
 
+      api.add_operation(:create_rls_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRLSPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateRLSPolicy"
+        o.input = Shapes::ShapeRef.new(shape: CreateRLSPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRLSPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:delete_data_cells_filter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataCellsFilter"
         o.http_method = "POST"
@@ -1547,6 +1692,20 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
+      api.add_operation(:delete_rls_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRLSPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteRLSPolicy"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRLSPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRLSPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:deregister_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeregisterResource"
         o.http_method = "POST"
@@ -1594,6 +1753,20 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:detach_rls_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetachRLSPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/DetachRLSPolicy"
+        o.input = Shapes::ShapeRef.new(shape: DetachRLSPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetachRLSPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:extend_transaction, Seahorse::Model::Operation.new.tap do |o|
@@ -1719,6 +1892,19 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:get_rls_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRLSPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetRLSPolicy"
+        o.input = Shapes::ShapeRef.new(shape: GetRLSPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRLSPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_resource_lf_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -1914,6 +2100,7 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1931,6 +2118,44 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_rls_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRLSPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListRLSPolicies"
+        o.input = Shapes::ShapeRef.new(shape: ListRLSPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRLSPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_rls_policy_attachments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRLSPolicyAttachments"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListRLSPolicyAttachments"
+        o.input = Shapes::ShapeRef.new(shape: ListRLSPolicyAttachmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRLSPolicyAttachmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2159,6 +2384,21 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:update_rls_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRLSPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateRLSPolicy"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRLSPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRLSPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)

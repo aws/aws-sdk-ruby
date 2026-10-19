@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.5.0 (2026-10-13)
+------------------
+
+* Feature - AWS Agent Registry is improving recently launched custom metadata schema feature to make shared attributes easier to manage.
+
 1.4.0 (2026-09-28)
 ------------------
 

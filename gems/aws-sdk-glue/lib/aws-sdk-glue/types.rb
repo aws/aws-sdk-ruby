@@ -1270,6 +1270,36 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] result_ids
+    #   A list of unique result IDs for the data quality results.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDataQualityResultV2Request AWS API Documentation
+    #
+    class BatchGetDataQualityResultV2Request < Struct.new(
+      :result_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A list of `DataQualityResultV2Item` objects representing the data
+    #   quality results.
+    #   @return [Array<Types::DataQualityResultV2Item>]
+    #
+    # @!attribute [rw] results_not_found
+    #   A list of result IDs for which results were not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDataQualityResultV2Response AWS API Documentation
+    #
+    class BatchGetDataQualityResultV2Response < Struct.new(
+      :results,
+      :results_not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] run_ids
     #   A list of unique run identifiers for the evaluation runs to
     #   retrieve.
@@ -8735,6 +8765,33 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The run configuration for a data quality result.
+    #
+    # @!attribute [rw] observations_enabled
+    #   Whether observations are enabled for the run. Valid values are:
+    #
+    #   * `ALL`
+    #
+    #   * `NONE`
+    #   @return [String]
+    #
+    # @!attribute [rw] observation_mode
+    #   The observation mode for the run. Valid values are:
+    #
+    #   * `SCHEDULED`
+    #
+    #   * `FIXED`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityConfigurationV2 AWS API Documentation
+    #
+    class DataQualityConfigurationV2 < Struct.new(
+      :observations_enabled,
+      :observation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies how Data Quality assets in your account should be encrypted.
     #
     # @!attribute [rw] data_quality_encryption_mode
@@ -8995,8 +9052,9 @@ module Aws::Glue
     #   @return [Array<Types::DataQualityAnalyzerResult>]
     #
     # @!attribute [rw] observations
-    #   A list of `DataQualityObservation` objects representing the
-    #   observations generated after evaluating the rules and analyzers.
+    #   A list of `DataQualityObservation` objects representing the anomaly
+    #   detection observations generated after evaluating the rules and
+    #   analyzers.
     #   @return [Array<Types::DataQualityObservation>]
     #
     # @!attribute [rw] aggregated_metrics
@@ -9092,6 +9150,192 @@ module Aws::Glue
       :job_run_id,
       :started_after,
       :started_before)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a data quality result returned by
+    # `BatchGetDataQualityResultV2`.
+    #
+    # @!attribute [rw] result_id
+    #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The table associated with the data quality result, if any.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] dimensions
+    #   A map of platform-specific identifiers, such as cluster,
+    #   application, workgroup, or project IDs, that identify where the data
+    #   quality evaluation ran.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   A map of tags associated with the data quality result.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] execution_started_on
+    #   The date and time when this data quality run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_completed_on
+    #   The date and time when this data quality run completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] result_published_on
+    #   The date and time when this data quality result was published.
+    #   @return [Time]
+    #
+    # @!attribute [rw] score
+    #   An aggregate data quality score. Represents the ratio of rules that
+    #   passed to the total number of rules.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rule_results
+    #   A list of `DataQualityRuleResult` objects representing the results
+    #   for each rule.
+    #   @return [Array<Types::DataQualityRuleResult>]
+    #
+    # @!attribute [rw] analyzer_results
+    #   A list of `DataQualityAnalyzerResult` objects representing the
+    #   results for each analyzer.
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    #
+    # @!attribute [rw] observations
+    #   A list of `DataQualityObservation` objects representing the anomaly
+    #   detection observations generated after evaluating the rules and
+    #   analyzers.
+    #   @return [Array<Types::DataQualityObservation>]
+    #
+    # @!attribute [rw] evaluation_context
+    #   The evaluation context for the data quality result. This value
+    #   identifies a specific data quality result, or a series of related
+    #   results, within a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptors
+    #   A map of user-provided descriptors that add contextual metadata and
+    #   configuration to the data quality result, such as database name,
+    #   table name, team, or environment.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] aggregated_metrics
+    #   A summary of `DataQualityAggregatedMetrics` objects showing the
+    #   total counts of processed rows and rules, including their pass/fail
+    #   statistics based on row-level results.
+    #   @return [Types::DataQualityAggregatedMetrics]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The name of the ruleset associated with the data quality result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResultV2Item AWS API Documentation
+    #
+    class DataQualityResultV2Item < Struct.new(
+      :result_id,
+      :data_source,
+      :dimensions,
+      :tags,
+      :execution_started_on,
+      :execution_completed_on,
+      :result_published_on,
+      :score,
+      :rule_results,
+      :analyzer_results,
+      :observations,
+      :evaluation_context,
+      :descriptors,
+      :aggregated_metrics,
+      :ruleset_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a data quality result returned by
+    # `ListDataQualityResultsV2`.
+    #
+    # @!attribute [rw] result_id
+    #   The unique result ID for this data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The table associated with the data quality result, if any.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] result_published_on
+    #   The date and time when this data quality result was published.
+    #   @return [Time]
+    #
+    # @!attribute [rw] dimensions
+    #   A map of platform-specific identifiers, such as cluster,
+    #   application, workgroup, or project IDs, that identify where the data
+    #   quality evaluation ran.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] evaluation_context
+    #   The evaluation context for the data quality result. This value
+    #   identifies a specific data quality result, or a series of related
+    #   results, within a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptors
+    #   A map of user-provided descriptors that add contextual metadata and
+    #   configuration to the data quality result, such as database name,
+    #   table name, team, or environment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResultsV2Description AWS API Documentation
+    #
+    class DataQualityResultsV2Description < Struct.new(
+      :result_id,
+      :data_source,
+      :result_published_on,
+      :dimensions,
+      :evaluation_context,
+      :descriptors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the criteria used to filter the data quality results
+    # returned by `ListDataQualityResultsV2`.
+    #
+    # @!attribute [rw] data_source
+    #   The data source used to filter the results. For example, you can
+    #   retrieve all results for an Glue table. `DatabaseName` and
+    #   `TableName` are required. If you omit `CatalogId`, the catalog of
+    #   the calling account is used.
+    #
+    #   When you filter by data source, a page of results can be empty but
+    #   still include a `NextToken`. Keep requesting pages until `NextToken`
+    #   is absent.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] published_after
+    #   The time after which to include published results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] published_before
+    #   The time before which to include published results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] dimensions
+    #   The platform dimensions to filter results by.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] evaluation_context
+    #   The evaluation context to filter results by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResultsV2FilterCriteria AWS API Documentation
+    #
+    class DataQualityResultsV2FilterCriteria < Struct.new(
+      :data_source,
+      :published_after,
+      :published_before,
+      :dimensions,
+      :evaluation_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9506,6 +9750,37 @@ module Aws::Glue
       :table_name,
       :database_name,
       :catalog_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vcpu_hours
+    #   @return [Float]
+    #
+    # @!attribute [rw] flags_enabled
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] library_version
+    #   @return [String]
+    #
+    # @!attribute [rw] spark_version
+    #   @return [String]
+    #
+    # @!attribute [rw] host_runtime_version
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityTelemetry AWS API Documentation
+    #
+    class DataQualityTelemetry < Struct.new(
+      :vcpu_hours,
+      :flags_enabled,
+      :library_version,
+      :spark_version,
+      :host_runtime_version,
+      :engine)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14192,8 +14467,9 @@ module Aws::Glue
     #   @return [Array<Types::DataQualityAnalyzerResult>]
     #
     # @!attribute [rw] observations
-    #   A list of `DataQualityObservation` objects representing the
-    #   observations generated after evaluating the rules and analyzers.
+    #   A list of `DataQualityObservation` objects representing the anomaly
+    #   detection observations generated after evaluating the rules and
+    #   analyzers.
     #   @return [Array<Types::DataQualityObservation>]
     #
     # @!attribute [rw] aggregated_metrics
@@ -14220,6 +14496,118 @@ module Aws::Glue
       :analyzer_results,
       :observations,
       :aggregated_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result_id
+    #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResultV2Request AWS API Documentation
+    #
+    class GetDataQualityResultV2Request < Struct.new(
+      :result_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result_id
+    #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The table associated with the data quality result, if any.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] profile_id
+    #   The Profile ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   A map of platform-specific identifiers, such as cluster,
+    #   application, workgroup, or project IDs, that identify where the data
+    #   quality evaluation ran.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   A map of tags associated with the data quality result.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] execution_started_on
+    #   The date and time when this data quality run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_completed_on
+    #   The date and time when this data quality run completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] result_published_on
+    #   The date and time when this data quality result was published.
+    #   @return [Time]
+    #
+    # @!attribute [rw] score
+    #   An aggregate data quality score. Represents the ratio of rules that
+    #   passed to the total number of rules.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rule_results
+    #   A list of `DataQualityRuleResult` objects representing the results
+    #   for each rule.
+    #   @return [Array<Types::DataQualityRuleResult>]
+    #
+    # @!attribute [rw] analyzer_results
+    #   A list of `DataQualityAnalyzerResult` objects representing the
+    #   results for each analyzer.
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    #
+    # @!attribute [rw] observations
+    #   A list of `DataQualityObservation` objects representing the anomaly
+    #   detection observations generated after evaluating the rules and
+    #   analyzers.
+    #   @return [Array<Types::DataQualityObservation>]
+    #
+    # @!attribute [rw] evaluation_context
+    #   The evaluation context for the data quality result. This value
+    #   identifies a specific data quality result, or a series of related
+    #   results, within a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptors
+    #   A map of user-provided descriptors that add contextual metadata and
+    #   configuration to the data quality result, such as database name,
+    #   table name, team, or environment.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] aggregated_metrics
+    #   A summary of `DataQualityAggregatedMetrics` objects showing the
+    #   total counts of processed rows and rules, including their pass/fail
+    #   statistics based on row-level results.
+    #   @return [Types::DataQualityAggregatedMetrics]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The name of the ruleset associated with the data quality result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResultV2Response AWS API Documentation
+    #
+    class GetDataQualityResultV2Response < Struct.new(
+      :result_id,
+      :data_source,
+      :profile_id,
+      :dimensions,
+      :tags,
+      :execution_started_on,
+      :execution_completed_on,
+      :result_published_on,
+      :score,
+      :rule_results,
+      :analyzer_results,
+      :observations,
+      :evaluation_context,
+      :descriptors,
+      :aggregated_metrics,
+      :ruleset_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19075,12 +19463,29 @@ module Aws::Glue
     #   Amazon Redshift and Amazon S3.
     #   @return [Boolean]
     #
+    # @!attribute [rw] target_namespace
+    #   An optional custom namespace for the integration's target. Supply
+    #   this parameter only when the target is an Amazon S3 Tables table
+    #   bucket; it is not accepted for other target types. The integration
+    #   replicates data into the namespace you specify, reusing it if it
+    #   already exists. If you omit this parameter, the target namespace
+    #   defaults to `zetl_` followed by the integration ID, with hyphens
+    #   converted to underscores.
+    #
+    #   The value is immutable after the integration is created;
+    #   `ModifyIntegration` rejects changes to it. It must be a valid Amazon
+    #   S3 Tables namespace name: 1 to 255 characters using lowercase
+    #   letters, numbers, and underscores, with no leading or trailing
+    #   underscore and no reserved `aws` prefix.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationConfig AWS API Documentation
     #
     class IntegrationConfig < Struct.new(
       :refresh_interval,
       :source_properties,
-      :continuous_sync)
+      :continuous_sync,
+      :target_namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21731,6 +22136,46 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityResultsResponse AWS API Documentation
     #
     class ListDataQualityResultsResponse < Struct.new(
+      :results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   The filter criteria.
+    #   @return [Types::DataQualityResultsV2FilterCriteria]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. If you don't specify a
+    #   value, the operation uses the default number of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityResultsV2Request AWS API Documentation
+    #
+    class ListDataQualityResultsV2Request < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A list of `DataQualityResultsV2Description` objects.
+    #   @return [Array<Types::DataQualityResultsV2Description>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token, if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityResultsV2Response AWS API Documentation
+    #
+    class ListDataQualityResultsV2Response < Struct.new(
       :results,
       :next_token)
       SENSITIVE = []
@@ -24811,6 +25256,112 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] dimensions
+    #   The dimensions for the result.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the result.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] execution_started_on
+    #   The time execution started for the result.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_completed_on
+    #   The time execution completed for the result.
+    #   @return [Time]
+    #
+    # @!attribute [rw] score
+    #   The score for the result.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rule_results
+    #   The rule level results.
+    #   @return [Array<Types::DataQualityRuleResult>]
+    #
+    # @!attribute [rw] analyzer_results
+    #   The analyzer level results.
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    #
+    # @!attribute [rw] observations
+    #   The observations for the result.
+    #   @return [Array<Types::DataQualityObservation>]
+    #
+    # @!attribute [rw] aggregated_metrics
+    #   The aggregated metrics for the result.
+    #   @return [Types::DataQualityAggregatedMetrics]
+    #
+    # @!attribute [rw] statistics
+    #   The statistics for the result.
+    #   @return [Array<Types::StatisticSummary>]
+    #
+    # @!attribute [rw] run_configuration
+    #   The run configuration for the result.
+    #   @return [Types::DataQualityConfigurationV2]
+    #
+    # @!attribute [rw] client_token
+    #   The client token for the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_context
+    #   The evaluation context for the result.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptors
+    #   The descriptors for the result.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The ruleset name for the result.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_security_configuration
+    #   The security configuration for the result.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry
+    #   @return [Types::DataQualityTelemetry]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PublishDataQualityResultV2Request AWS API Documentation
+    #
+    class PublishDataQualityResultV2Request < Struct.new(
+      :dimensions,
+      :tags,
+      :execution_started_on,
+      :execution_completed_on,
+      :score,
+      :rule_results,
+      :analyzer_results,
+      :observations,
+      :aggregated_metrics,
+      :statistics,
+      :run_configuration,
+      :client_token,
+      :evaluation_context,
+      :descriptors,
+      :ruleset_name,
+      :data_quality_security_configuration,
+      :telemetry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result_id
+    #   The ID of the result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PublishDataQualityResultV2Response AWS API Documentation
+    #
+    class PublishDataQualityResultV2Response < Struct.new(
+      :result_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] asset_type_id
     #   The identifier of the asset type for the asset.
     #   @return [String]
@@ -25432,6 +25983,22 @@ module Aws::Glue
       :cluster_id,
       :query_authorization_id,
       :additional_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that describes the default row-level security policy of a
+    # table.
+    #
+    # @!attribute [rw] default_rls_policy
+    #   The name of the default row-level security policy applied to the
+    #   table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RLSProperties AWS API Documentation
+    #
+    class RLSProperties < Struct.new(
+      :default_rls_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30697,6 +31264,11 @@ module Aws::Glue
     #   Indicates the the state of an asynchronous change to a table.
     #   @return [Types::TableStatus]
     #
+    # @!attribute [rw] rls_properties
+    #   A `RLSProperties` structure that describes the default row-level
+    #   security policy of the table.
+    #   @return [Types::RLSProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table AWS API Documentation
     #
     class Table < Struct.new(
@@ -30725,7 +31297,8 @@ module Aws::Glue
       :is_multi_dialect_view,
       :is_materialized_view,
       :iceberg_table_metadata,
-      :status)
+      :status,
+      :rls_properties)
       SENSITIVE = []
       include Aws::Structure
     end

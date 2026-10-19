@@ -31,6 +31,7 @@ module Aws::Route53Domains
     CheckDomainTransferabilityResponse = Shapes::StructureShape.new(name: 'CheckDomainTransferabilityResponse')
     City = Shapes::StringShape.new(name: 'City')
     Consent = Shapes::StructureShape.new(name: 'Consent')
+    ConsentPrice = Shapes::FloatShape.new(name: 'ConsentPrice')
     ContactDetail = Shapes::StructureShape.new(name: 'ContactDetail')
     ContactName = Shapes::StringShape.new(name: 'ContactName')
     ContactNumber = Shapes::StringShape.new(name: 'ContactNumber')
@@ -87,6 +88,8 @@ module Aws::Route53Domains
     GetContactReachabilityStatusResponse = Shapes::StructureShape.new(name: 'GetContactReachabilityStatusResponse')
     GetDomainDetailRequest = Shapes::StructureShape.new(name: 'GetDomainDetailRequest')
     GetDomainDetailResponse = Shapes::StructureShape.new(name: 'GetDomainDetailResponse')
+    GetDomainPricesRequest = Shapes::StructureShape.new(name: 'GetDomainPricesRequest')
+    GetDomainPricesResponse = Shapes::StructureShape.new(name: 'GetDomainPricesResponse')
     GetDomainSuggestionsRequest = Shapes::StructureShape.new(name: 'GetDomainSuggestionsRequest')
     GetDomainSuggestionsResponse = Shapes::StructureShape.new(name: 'GetDomainSuggestionsResponse')
     GetOperationDetailRequest = Shapes::StructureShape.new(name: 'GetOperationDetailRequest')
@@ -127,6 +130,7 @@ module Aws::Route53Domains
     PageMaxItems = Shapes::IntegerShape.new(name: 'PageMaxItems')
     Password = Shapes::StringShape.new(name: 'Password')
     Price = Shapes::FloatShape.new(name: 'Price')
+    PriceType = Shapes::StringShape.new(name: 'PriceType')
     PriceWithCurrency = Shapes::StructureShape.new(name: 'PriceWithCurrency')
     PushDomainRequest = Shapes::StructureShape.new(name: 'PushDomainRequest')
     ReachabilityStatus = Shapes::StringShape.new(name: 'ReachabilityStatus')
@@ -215,6 +219,7 @@ module Aws::Route53Domains
     CheckDomainAvailabilityRequest.struct_class = Types::CheckDomainAvailabilityRequest
 
     CheckDomainAvailabilityResponse.add_member(:availability, Shapes::ShapeRef.new(shape: DomainAvailability, location_name: "Availability"))
+    CheckDomainAvailabilityResponse.add_member(:price, Shapes::ShapeRef.new(shape: PriceWithCurrency, location_name: "Price"))
     CheckDomainAvailabilityResponse.struct_class = Types::CheckDomainAvailabilityResponse
 
     CheckDomainTransferabilityRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -223,9 +228,10 @@ module Aws::Route53Domains
 
     CheckDomainTransferabilityResponse.add_member(:transferability, Shapes::ShapeRef.new(shape: DomainTransferability, location_name: "Transferability"))
     CheckDomainTransferabilityResponse.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    CheckDomainTransferabilityResponse.add_member(:price, Shapes::ShapeRef.new(shape: PriceWithCurrency, location_name: "Price"))
     CheckDomainTransferabilityResponse.struct_class = Types::CheckDomainTransferabilityResponse
 
-    Consent.add_member(:max_price, Shapes::ShapeRef.new(shape: Price, required: true, location_name: "MaxPrice"))
+    Consent.add_member(:max_price, Shapes::ShapeRef.new(shape: ConsentPrice, required: true, location_name: "MaxPrice"))
     Consent.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, required: true, location_name: "Currency"))
     Consent.struct_class = Types::Consent
 
@@ -276,8 +282,8 @@ module Aws::Route53Domains
     DisassociateDelegationSignerFromDomainResponse.struct_class = Types::DisassociateDelegationSignerFromDomainResponse
 
     DnssecKey.add_member(:algorithm, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Algorithm"))
-    DnssecKey.add_member(:flags, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Flags"))
-    DnssecKey.add_member(:public_key, Shapes::ShapeRef.new(shape: DnssecPublicKey, location_name: "PublicKey"))
+    DnssecKey.add_member(:flags, Shapes::ShapeRef.new(shape: NullableInteger, deprecated: true, location_name: "Flags", metadata: {"deprecatedMessage" => "The DnssecKey response no longer returns the flags.", "deprecatedSince" => "2026-10-01"}))
+    DnssecKey.add_member(:public_key, Shapes::ShapeRef.new(shape: DnssecPublicKey, deprecated: true, location_name: "PublicKey", metadata: {"deprecatedMessage" => "The DnssecKey response no longer returns the public key.", "deprecatedSince" => "2026-10-01"}))
     DnssecKey.add_member(:digest_type, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "DigestType"))
     DnssecKey.add_member(:digest, Shapes::ShapeRef.new(shape: String, location_name: "Digest"))
     DnssecKey.add_member(:key_tag, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "KeyTag"))
@@ -311,6 +317,7 @@ module Aws::Route53Domains
 
     DomainSuggestion.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     DomainSuggestion.add_member(:availability, Shapes::ShapeRef.new(shape: String, location_name: "Availability"))
+    DomainSuggestion.add_member(:price, Shapes::ShapeRef.new(shape: PriceWithCurrency, location_name: "Price"))
     DomainSuggestion.struct_class = Types::DomainSuggestion
 
     DomainSuggestionsList.member = Shapes::ShapeRef.new(shape: DomainSuggestion)
@@ -390,9 +397,16 @@ module Aws::Route53Domains
     GetDomainDetailResponse.add_member(:billing_privacy, Shapes::ShapeRef.new(shape: Boolean, location_name: "BillingPrivacy"))
     GetDomainDetailResponse.struct_class = Types::GetDomainDetailResponse
 
+    GetDomainPricesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    GetDomainPricesRequest.struct_class = Types::GetDomainPricesRequest
+
+    GetDomainPricesResponse.add_member(:domain_price, Shapes::ShapeRef.new(shape: DomainPrice, location_name: "DomainPrice"))
+    GetDomainPricesResponse.struct_class = Types::GetDomainPricesResponse
+
     GetDomainSuggestionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     GetDomainSuggestionsRequest.add_member(:suggestion_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "SuggestionCount"))
     GetDomainSuggestionsRequest.add_member(:only_available, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "OnlyAvailable"))
+    GetDomainSuggestionsRequest.add_member(:only_standard_prices, Shapes::ShapeRef.new(shape: Boolean, location_name: "OnlyStandardPrices"))
     GetDomainSuggestionsRequest.struct_class = Types::GetDomainSuggestionsRequest
 
     GetDomainSuggestionsResponse.add_member(:suggestions_list, Shapes::ShapeRef.new(shape: DomainSuggestionsList, location_name: "SuggestionsList"))
@@ -481,6 +495,7 @@ module Aws::Route53Domains
 
     PriceWithCurrency.add_member(:price, Shapes::ShapeRef.new(shape: Price, required: true, location_name: "Price"))
     PriceWithCurrency.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, required: true, location_name: "Currency"))
+    PriceWithCurrency.add_member(:price_type, Shapes::ShapeRef.new(shape: PriceType, location_name: "PriceType"))
     PriceWithCurrency.struct_class = Types::PriceWithCurrency
 
     PushDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -499,6 +514,7 @@ module Aws::Route53Domains
     RegisterDomainRequest.add_member(:privacy_protect_tech_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectTechContact"))
     RegisterDomainRequest.add_member(:billing_contact, Shapes::ShapeRef.new(shape: ContactDetail, location_name: "BillingContact"))
     RegisterDomainRequest.add_member(:privacy_protect_billing_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectBillingContact"))
+    RegisterDomainRequest.add_member(:consent, Shapes::ShapeRef.new(shape: Consent, location_name: "Consent"))
     RegisterDomainRequest.struct_class = Types::RegisterDomainRequest
 
     RegisterDomainResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
@@ -513,6 +529,7 @@ module Aws::Route53Domains
     RenewDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     RenewDomainRequest.add_member(:duration_in_years, Shapes::ShapeRef.new(shape: DurationInYears, location_name: "DurationInYears"))
     RenewDomainRequest.add_member(:current_expiry_year, Shapes::ShapeRef.new(shape: CurrentExpiryYear, required: true, location_name: "CurrentExpiryYear"))
+    RenewDomainRequest.add_member(:consent, Shapes::ShapeRef.new(shape: Consent, location_name: "Consent"))
     RenewDomainRequest.struct_class = Types::RenewDomainRequest
 
     RenewDomainResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
@@ -568,6 +585,7 @@ module Aws::Route53Domains
     TransferDomainRequest.add_member(:privacy_protect_tech_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectTechContact"))
     TransferDomainRequest.add_member(:billing_contact, Shapes::ShapeRef.new(shape: ContactDetail, location_name: "BillingContact"))
     TransferDomainRequest.add_member(:privacy_protect_billing_contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivacyProtectBillingContact"))
+    TransferDomainRequest.add_member(:consent, Shapes::ShapeRef.new(shape: Consent, location_name: "Consent"))
     TransferDomainRequest.struct_class = Types::TransferDomainRequest
 
     TransferDomainResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
@@ -812,6 +830,17 @@ module Aws::Route53Domains
         o.output = Shapes::ShapeRef.new(shape: GetDomainDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
+      end)
+
+      api.add_operation(:get_domain_prices, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDomainPrices"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDomainPricesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDomainPricesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
+        o.errors << Shapes::ShapeRef.new(shape: TLDInMaintenance)
       end)
 
       api.add_operation(:get_domain_suggestions, Seahorse::Model::Operation.new.tap do |o|

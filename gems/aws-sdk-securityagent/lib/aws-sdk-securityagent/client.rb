@@ -796,6 +796,116 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
+    # Disassociates a batch of findings from their linked issues.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The identifier of the agent space where the job exists.
+    #
+    # @option params [String] :pentest_job_id
+    #   The identifier of the penetration test job. This parameter is mutually
+    #   exclusive with `codeReviewJobId`.
+    #
+    # @option params [String] :code_review_job_id
+    #   The identifier of the code review job. This parameter is mutually
+    #   exclusive with `pentestJobId`.
+    #
+    # @option params [required, Array<String>] :finding_ids
+    #   The identifiers of the findings to disassociate from their issues.
+    #   Each must belong to the specified job.
+    #
+    # @return [Types::BatchDisassociateFindingIssueOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateFindingIssueOutput#errors #errors} => Array&lt;Types::BatchDisassociateFindingIssueError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_finding_issue({
+    #     agent_space_id: "String", # required
+    #     pentest_job_id: "String",
+    #     code_review_job_id: "String",
+    #     finding_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].finding_id #=> String
+    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDisassociateFindingIssue AWS API Documentation
+    #
+    # @overload batch_disassociate_finding_issue(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_finding_issue(params = {}, options = {})
+      req = build_request(:batch_disassociate_finding_issue, params)
+      req.send_request(options)
+    end
+
+    # Exports a batch of findings to the connected issue tracker as issues.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The identifier of the agent space where the job exists.
+    #
+    # @option params [String] :pentest_job_id
+    #   The identifier of the penetration test job. This parameter is mutually
+    #   exclusive with `codeReviewJobId`.
+    #
+    # @option params [String] :code_review_job_id
+    #   The identifier of the code review job. This parameter is mutually
+    #   exclusive with `pentestJobId`.
+    #
+    # @option params [required, Types::IssueDestination] :issue_destination
+    #   The destination issue-tracker project the findings are exported to.
+    #   Must be a connected capability of the agent space.
+    #
+    # @option params [required, Array<String>] :finding_ids
+    #   The identifiers of the findings to export. Each must belong to the
+    #   specified job.
+    #
+    # @return [Types::BatchExportFindingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchExportFindingsOutput#results #results} => Array&lt;Types::BatchExportFindingResult&gt;
+    #   * {Types::BatchExportFindingsOutput#errors #errors} => Array&lt;Types::BatchExportFindingError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_export_findings({
+    #     agent_space_id: "String", # required
+    #     pentest_job_id: "String",
+    #     code_review_job_id: "String",
+    #     issue_destination: { # required
+    #       integration_id: "String", # required
+    #       project_key: "String", # required
+    #     },
+    #     finding_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].finding_id #=> String
+    #   resp.results[0].linked_issue.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS", "JIRA"
+    #   resp.results[0].linked_issue.integration_id #=> String
+    #   resp.results[0].linked_issue.project_key #=> String
+    #   resp.results[0].linked_issue.issue_key #=> String
+    #   resp.results[0].linked_issue.issue_id #=> String
+    #   resp.results[0].linked_issue.issue_url #=> String
+    #   resp.results[0].linked_issue.site_url #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].finding_id #=> String
+    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchExportFindings AWS API Documentation
+    #
+    # @overload batch_export_findings(params = {})
+    # @param [Hash] params ({})
+    def batch_export_findings(params = {}, options = {})
+      req = build_request(:batch_export_findings, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about one or more agent spaces.
     #
     # @option params [required, Array<String>] :agent_space_ids
@@ -1173,6 +1283,13 @@ module Aws::SecurityAgent
     #   resp.findings[0].revalidation_job_ids #=> Array
     #   resp.findings[0].revalidation_job_ids[0] #=> String
     #   resp.findings[0].original_finding_id #=> String
+    #   resp.findings[0].linked_issue.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS", "JIRA"
+    #   resp.findings[0].linked_issue.integration_id #=> String
+    #   resp.findings[0].linked_issue.project_key #=> String
+    #   resp.findings[0].linked_issue.issue_key #=> String
+    #   resp.findings[0].linked_issue.issue_id #=> String
+    #   resp.findings[0].linked_issue.issue_url #=> String
+    #   resp.findings[0].linked_issue.site_url #=> String
     #   resp.findings[0].created_at #=> Time
     #   resp.findings[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -2258,7 +2375,7 @@ module Aws::SecurityAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_integration({
-    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS
+    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS, JIRA
     #     input: { # required
     #       github: {
     #         code: "AuthCode", # required
@@ -2294,6 +2411,12 @@ module Aws::SecurityAgent
     #         target_url: "TargetUrl", # required
     #         code: "AuthCode", # required
     #         state: "CsrfState", # required
+    #       },
+    #       jira: {
+    #         installation_id: "JiraInstallationId", # required
+    #         code: "AuthCode", # required
+    #         state: "CsrfState", # required
+    #         site_url: "JiraSiteUrl", # required
     #       },
     #     },
     #     integration_display_name: "String", # required
@@ -3497,6 +3620,7 @@ module Aws::SecurityAgent
     #   * {Types::GetIntegrationOutput#display_name #display_name} => String
     #   * {Types::GetIntegrationOutput#kms_key_id #kms_key_id} => String
     #   * {Types::GetIntegrationOutput#target_url #target_url} => String
+    #   * {Types::GetIntegrationOutput#site_url #site_url} => String
     #   * {Types::GetIntegrationOutput#webhook_url #webhook_url} => String
     #   * {Types::GetIntegrationOutput#private_connection_name #private_connection_name} => String
     #
@@ -3510,11 +3634,12 @@ module Aws::SecurityAgent
     #
     #   resp.integration_id #=> String
     #   resp.installation_id #=> String
-    #   resp.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS"
-    #   resp.provider_type #=> String, one of "SOURCE_CODE", "DOCUMENTATION"
+    #   resp.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS", "JIRA"
+    #   resp.provider_type #=> String, one of "SOURCE_CODE", "DOCUMENTATION", "ISSUE_TRACKING"
     #   resp.display_name #=> String
     #   resp.kms_key_id #=> String
     #   resp.target_url #=> String
+    #   resp.site_url #=> String
     #   resp.webhook_url #=> String
     #   resp.private_connection_name #=> String
     #
@@ -3650,7 +3775,7 @@ module Aws::SecurityAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.initiate_provider_registration({
-    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS
+    #     provider: "GITHUB", # required, accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS, JIRA
     #     target_url: "TargetUrl",
     #     organization_name: "String",
     #     client_id: "ClientId",
@@ -4209,7 +4334,7 @@ module Aws::SecurityAgent
     #   resp = client.list_integrated_resources({
     #     agent_space_id: "AgentSpaceId", # required
     #     integration_id: "IntegrationId",
-    #     resource_type: "CODE_REPOSITORY", # accepts CODE_REPOSITORY, DOCUMENT
+    #     resource_type: "CODE_REPOSITORY", # accepts CODE_REPOSITORY, DOCUMENT, PROJECT
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -4242,6 +4367,11 @@ module Aws::SecurityAgent
     #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.project #=> String
     #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.project_id #=> String
     #   resp.integrated_resource_summaries[0].resource.azure_dev_ops_repository.access_type #=> String, one of "PRIVATE", "PUBLIC"
+    #   resp.integrated_resource_summaries[0].resource.jira_project.name #=> String
+    #   resp.integrated_resource_summaries[0].resource.jira_project.provider_resource_id #=> String
+    #   resp.integrated_resource_summaries[0].resource.jira_project.project_key #=> String
+    #   resp.integrated_resource_summaries[0].resource.jira_project.project_id #=> String
+    #   resp.integrated_resource_summaries[0].resource.jira_project.project_name #=> String
     #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups #=> Array
     #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].events #=> Array
     #   resp.integrated_resource_summaries[0].capabilities.github.trigger_filter_groups[0].events[0] #=> String, one of "PULL_REQUEST_READY_FOR_REVIEW", "PULL_REQUEST_DRAFT", "PULL_REQUEST_LABEL_ADDED"
@@ -4285,6 +4415,8 @@ module Aws::SecurityAgent
     #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.trigger_filter_groups[0].filters[0].match_mode #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.leave_comments #=> Boolean
     #   resp.integrated_resource_summaries[0].capabilities.azure_dev_ops.remediate_code #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.jira.create_issue #=> Boolean
+    #   resp.integrated_resource_summaries[0].capabilities.jira.comment_issue #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListIntegratedResources AWS API Documentation
@@ -4322,8 +4454,8 @@ module Aws::SecurityAgent
     #
     #   resp = client.list_integrations({
     #     filter: {
-    #       provider: "GITHUB", # accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS
-    #       provider_type: "SOURCE_CODE", # accepts SOURCE_CODE, DOCUMENTATION
+    #       provider: "GITHUB", # accepts GITHUB, GITLAB, BITBUCKET, CONFLUENCE, AZURE_DEVOPS, JIRA
+    #       provider_type: "SOURCE_CODE", # accepts SOURCE_CODE, DOCUMENTATION, ISSUE_TRACKING
     #     },
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -4334,8 +4466,8 @@ module Aws::SecurityAgent
     #   resp.integration_summaries #=> Array
     #   resp.integration_summaries[0].integration_id #=> String
     #   resp.integration_summaries[0].installation_id #=> String
-    #   resp.integration_summaries[0].provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS"
-    #   resp.integration_summaries[0].provider_type #=> String, one of "SOURCE_CODE", "DOCUMENTATION"
+    #   resp.integration_summaries[0].provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "CONFLUENCE", "AZURE_DEVOPS", "JIRA"
+    #   resp.integration_summaries[0].provider_type #=> String, one of "SOURCE_CODE", "DOCUMENTATION", "ISSUE_TRACKING"
     #   resp.integration_summaries[0].display_name #=> String
     #   resp.integration_summaries[0].target_url #=> String
     #   resp.integration_summaries[0].webhook_url #=> String
@@ -5812,6 +5944,12 @@ module Aws::SecurityAgent
     #             organization: "AzureDevOpsOrganization", # required
     #             project: "String",
     #           },
+    #           jira_project: {
+    #             name: "ProviderResourceName", # required
+    #             project_key: "String", # required
+    #             project_id: "String", # required
+    #             project_name: "JiraProjectResourceProjectNameString",
+    #           },
     #         },
     #         capabilities: {
     #           github: {
@@ -5882,6 +6020,10 @@ module Aws::SecurityAgent
     #             ],
     #             leave_comments: false,
     #             remediate_code: false,
+    #           },
+    #           jira: {
+    #             create_issue: false,
+    #             comment_issue: false,
     #           },
     #         },
     #       },
@@ -6720,7 +6862,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

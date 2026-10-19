@@ -199,6 +199,9 @@ module Aws
                             ?dependency_discovery: ("ENABLED" | "DISABLED"),
                             ?report_configuration: Params::service_report_configuration,
                             ?kms_key_id: ::String,
+                            ?dev_ops_agent_configuration: {
+                              agent_space_arn: ::String?
+                            },
                             ?tags: Hash[::String, ::String],
                             ?client_token: ::String
                           ) -> _CreateServiceResponseSuccess
@@ -1096,7 +1099,10 @@ module Aws
                               ]?
                             },
                             ?dependency_discovery: ("ENABLED" | "DISABLED"),
-                            ?report_configuration: Params::service_report_configuration
+                            ?report_configuration: Params::service_report_configuration,
+                            ?dev_ops_agent_configuration: {
+                              agent_space_arn: ::String?
+                            }
                           ) -> _UpdateServiceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceResponseSuccess
 

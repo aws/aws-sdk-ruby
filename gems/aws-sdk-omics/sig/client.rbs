@@ -243,7 +243,8 @@ module Aws
                                   run_configurations: {
                                     vpc_config: {
                                       security_group_ids: Array[::String]?,
-                                      subnet_ids: Array[::String]?
+                                      subnet_ids: Array[::String]?,
+                                      vpc_owner_account_id: ::String?
                                     }?
                                   },
                                   ?tags: Hash[::String, ::String],

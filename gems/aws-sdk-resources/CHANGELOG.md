@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.276.0 (2026-10-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakertrainingsessionruntime` gem.
+
 3.275.0 (2026-10-01)
 ------------------
 

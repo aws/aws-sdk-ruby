@@ -1496,6 +1496,7 @@ module Aws::PCS
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#compute_node_group_id #compute_node_group_id} => String
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#compute_node_group_name #compute_node_group_name} => String
     #   * {Types::RegisterComputeNodeGroupInstanceResponse#node_lifecycle_actions #node_lifecycle_actions} => Types::NodeLifecycleActions
+    #   * {Types::RegisterComputeNodeGroupInstanceResponse#scheduler_version #scheduler_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1536,6 +1537,7 @@ module Aws::PCS
     #   resp.node_lifecycle_actions.stages.node_ready[0].on_error #=> String, one of "TERMINATE", "STOP_SEQUENCE", "CONTINUE"
     #   resp.node_lifecycle_actions.stages.node_ready[0].execution_policy #=> String, one of "FIRST_BOOT_ONLY", "EVERY_BOOT"
     #   resp.node_lifecycle_actions.script_caching_policy #=> String, one of "CACHE_ONCE", "REFRESH_ON_REBOOT"
+    #   resp.scheduler_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/RegisterComputeNodeGroupInstance AWS API Documentation
     #
@@ -2059,7 +2061,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

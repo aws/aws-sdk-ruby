@@ -831,6 +831,7 @@ module Aws::Lambda
     #         chained_invoke_options: {
     #           function_name: "NamespacedFunctionName", # required
     #           tenant_id: "TenantId",
+    #           x_amzn_trace_id: "XAmznTraceId",
     #         },
     #       },
     #     ],
@@ -890,8 +891,8 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Creates an [alias][1] for a Lambda function version. Use aliases to
-    # provide clients with a function identifier that you can update to
+    # Creates an [alias][1] for a Lambda Event Function version. Use aliases
+    # to provide clients with a function identifier that you can update to
     # invoke a different version.
     #
     # You can also map an alias to split invocation requests between two
@@ -997,7 +998,7 @@ module Aws::Lambda
     end
 
     # Creates a capacity provider that manages compute resources for Lambda
-    # functions
+    # Event Functions
     #
     # @option params [required, String] :capacity_provider_name
     #   The name of the capacity provider.
@@ -1180,8 +1181,9 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Creates a mapping between an event source and an Lambda function.
-    # Lambda reads items from the event source and invokes the function.
+    # Creates a mapping between an event source and an Lambda Event
+    # Function. Lambda reads items from the event source and invokes the
+    # function.
     #
     # For details about how to configure different event sources, see the
     # following topics.
@@ -1710,7 +1712,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Creates a Lambda function. To create a function, you need a
+    # Creates a Lambda Event Function. To create a function, you need a
     # [deployment package][1] and an [execution role][2]. The deployment
     # package is a .zip file archive or container image that contains your
     # function code. The execution role grants the function permission to
@@ -2396,7 +2398,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Deletes a Lambda function [alias][1].
+    # Deletes a Lambda Event Function [alias][1].
     #
     #
     #
@@ -2673,10 +2675,10 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Deletes a Lambda function. To delete a specific function version, use
-    # the `Qualifier` parameter. Otherwise, all versions and aliases are
-    # deleted. This doesn't require the user to have explicit permissions
-    # for DeleteAlias.
+    # Deletes a Lambda Event Function. To delete a specific function
+    # version, use the `Qualifier` parameter. Otherwise, all versions and
+    # aliases are deleted. This doesn't require the user to have explicit
+    # permissions for DeleteAlias.
     #
     # <note markdown="1"> A deleted Lambda function cannot be recovered. Ensure that you specify
     # the correct function name and version before deleting.
@@ -3096,7 +3098,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns details about a Lambda function [alias][1].
+    # Returns details about a Lambda Event Function [alias][1].
     #
     #
     #
@@ -4059,9 +4061,10 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns the version-specific settings of a Lambda function or version.
-    # The output includes only options that can vary between versions of a
-    # function. To modify these settings, use UpdateFunctionConfiguration.
+    # Returns the version-specific settings of a Lambda Event Function or
+    # version. The output includes only options that can vary between
+    # versions of a function. To modify these settings, use
+    # UpdateFunctionConfiguration.
     #
     # To get all of a function's details, including function-level
     # settings, use GetFunction.
@@ -4807,9 +4810,9 @@ module Aws::Lambda
     #   * {Types::GetProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
     #
     #
-    # @example Example: To view a provisioned concurrency configuration
+    # @example Example: To get a provisioned concurrency configuration
     #
-    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -4826,9 +4829,9 @@ module Aws::Lambda
     #     status: "READY", 
     #   }
     #
-    # @example Example: To get a provisioned concurrency configuration
+    # @example Example: To view a provisioned concurrency configuration
     #
-    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -4967,12 +4970,13 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Invokes a Lambda function. You can invoke a function synchronously
-    # (and wait for the response), or asynchronously. By default, Lambda
-    # invokes your function synchronously (i.e. the`InvocationType` is
-    # `RequestResponse`). To invoke a function asynchronously, set
-    # `InvocationType` to `Event`. Lambda passes the `ClientContext` object
-    # to your function for synchronous invocations only.
+    # Invokes a Lambda Event Function. You can invoke a function
+    # synchronously (and wait for the response), or asynchronously. By
+    # default, Lambda invokes your function synchronously (i.e.
+    # the`InvocationType` is `RequestResponse`). To invoke a function
+    # asynchronously, set `InvocationType` to `Event`. Lambda passes the
+    # `ClientContext` object to your function for synchronous invocations
+    # only.
     #
     # For synchronous invocations, the maximum payload size is 6 MB. For
     # asynchronous invocations, the maximum payload size is 1 MB.
@@ -5250,9 +5254,9 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Configure your Lambda functions to stream response payloads back to
-    # clients. For more information, see [Configuring a Lambda function to
-    # stream responses][1].
+    # Configure your Lambda Event Functions to stream response payloads back
+    # to clients. For more information, see [Configuring a Lambda function
+    # to stream responses][1].
     #
     # This operation requires permission for the [lambda:InvokeFunction][2]
     # action. For details on how to set up permissions for cross-account
@@ -5473,7 +5477,7 @@ module Aws::Lambda
       req.send_request(options, &block)
     end
 
-    # Returns a list of [aliases][1] for a Lambda function.
+    # Returns a list of [aliases][1] for a Lambda Event Function.
     #
     #
     #
@@ -6151,7 +6155,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns a list of Lambda functions, with the version-specific
+    # Returns a list of Lambda Event Functions, with the version-specific
     # configuration of each. Lambda returns up to 50 functions per call.
     #
     # Set `FunctionVersion` to `ALL` to include all published versions of
@@ -8320,7 +8324,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Updates the configuration of a Lambda function [alias][1].
+    # Updates the configuration of a Lambda Event Function [alias][1].
     #
     #
     #
@@ -9047,9 +9051,10 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Updates a Lambda function's code. If code signing is enabled for the
-    # function, the code package must be signed by a trusted publisher. For
-    # more information, see [Configuring code signing for Lambda][1].
+    # Updates a Lambda Event Function's code. If code signing is enabled
+    # for the function, the code package must be signed by a trusted
+    # publisher. For more information, see [Configuring code signing for
+    # Lambda][1].
     #
     # If the function's package type is `Image`, then you must specify the
     # code package in `ImageUri` as the URI of a [container image][2] in the
@@ -9330,7 +9335,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Modify the version-specific settings of a Lambda function.
+    # Modifies the version-specific settings of a Lambda Event Function.
     #
     # When you update a function, Lambda provisions an instance of the
     # function and its supporting resources. If your function connects to a
@@ -10037,7 +10042,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.197.0'
+      context[:gem_version] = '1.200.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -106,7 +106,11 @@ module Aws
                                                }]?
                                            }
                                          ],
-                                         ?client_token: ::String
+                                         ?client_token: ::String,
+                                         ?record_expiry_specification: {
+                                           record_expiry_duration_days: ::Integer?,
+                                           action: ("REMOVE")?
+                                         }
                                        ) -> _BatchCreateMemoryRecordsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateMemoryRecordsResponseSuccess
 
@@ -152,7 +156,11 @@ module Aws
                                                  date_time_value: ::Time?
                                                }]?
                                            }
-                                         ]
+                                         ],
+                                         ?record_expiry_specification: {
+                                           record_expiry_duration_days: ::Integer?,
+                                           action: ("REMOVE")?
+                                         }
                                        ) -> _BatchUpdateMemoryRecordsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateMemoryRecordsResponseSuccess
 
@@ -528,6 +536,7 @@ module Aws
         def data_source_config: () -> Types::DataSourceConfig
         def output_config: () -> Types::OutputConfig
         def evaluation_results: () -> Types::EvaluationJobResults
+        def insight_results: () -> ::Array[Types::InsightResult]
         def failure_analysis_result: () -> Types::FailureAnalysisResultContent
         def user_intent_result: () -> Types::UserIntentClusteringResultContent
         def execution_summary_result: () -> Types::ExecutionSummaryClusteringResultContent

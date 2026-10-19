@@ -970,6 +970,7 @@ module Aws::Omics
     #       vpc_config: {
     #         security_group_ids: ["SecurityGroupId"],
     #         subnet_ids: ["SubnetId"],
+    #         vpc_owner_account_id: "AwsAccountId",
     #       },
     #     },
     #     tags: {
@@ -989,6 +990,7 @@ module Aws::Omics
     #   resp.run_configurations.vpc_config.subnet_ids #=> Array
     #   resp.run_configurations.vpc_config.subnet_ids[0] #=> String
     #   resp.run_configurations.vpc_config.vpc_id #=> String
+    #   resp.run_configurations.vpc_config.vpc_owner_account_id #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "DELETED", "FAILED"
     #   resp.creation_time #=> Time
     #   resp.tags #=> Hash
@@ -1842,10 +1844,11 @@ module Aws::Omics
     #     container_registry_map: {
     #       registry_mappings: [
     #         {
-    #           upstream_registry_url: "Uri",
-    #           ecr_repository_prefix: "EcrRepositoryPrefix",
+    #           upstream_registry_url: "Uri", # required
+    #           ecr_repository_prefix: "EcrRepositoryPrefix", # required
     #           upstream_repository_prefix: "UpstreamRepositoryPrefix",
     #           ecr_account_id: "AwsAccountId",
+    #           credential_arn: "SecretArn",
     #         },
     #       ],
     #       image_mappings: [
@@ -2091,10 +2094,11 @@ module Aws::Omics
     #     container_registry_map: {
     #       registry_mappings: [
     #         {
-    #           upstream_registry_url: "Uri",
-    #           ecr_repository_prefix: "EcrRepositoryPrefix",
+    #           upstream_registry_url: "Uri", # required
+    #           ecr_repository_prefix: "EcrRepositoryPrefix", # required
     #           upstream_repository_prefix: "UpstreamRepositoryPrefix",
     #           ecr_account_id: "AwsAccountId",
+    #           credential_arn: "SecretArn",
     #         },
     #       ],
     #       image_mappings: [
@@ -3017,6 +3021,7 @@ module Aws::Omics
     #   resp.run_configurations.vpc_config.subnet_ids #=> Array
     #   resp.run_configurations.vpc_config.subnet_ids[0] #=> String
     #   resp.run_configurations.vpc_config.vpc_id #=> String
+    #   resp.run_configurations.vpc_config.vpc_owner_account_id #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "DELETED", "FAILED"
     #   resp.creation_time #=> Time
     #   resp.tags #=> Hash
@@ -3669,6 +3674,7 @@ module Aws::Omics
     #   resp.vpc_config.subnet_ids #=> Array
     #   resp.vpc_config.subnet_ids[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
+    #   resp.vpc_config.vpc_owner_account_id #=> String
     #   resp.session_policy #=> String
     #
     #
@@ -4215,6 +4221,7 @@ module Aws::Omics
     #   resp.container_registry_map.registry_mappings[0].ecr_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].upstream_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].ecr_account_id #=> String
+    #   resp.container_registry_map.registry_mappings[0].credential_arn #=> String
     #   resp.container_registry_map.image_mappings #=> Array
     #   resp.container_registry_map.image_mappings[0].source_image #=> String
     #   resp.container_registry_map.image_mappings[0].destination_image #=> String
@@ -4342,6 +4349,7 @@ module Aws::Omics
     #   resp.container_registry_map.registry_mappings[0].ecr_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].upstream_repository_prefix #=> String
     #   resp.container_registry_map.registry_mappings[0].ecr_account_id #=> String
+    #   resp.container_registry_map.registry_mappings[0].credential_arn #=> String
     #   resp.container_registry_map.image_mappings #=> Array
     #   resp.container_registry_map.image_mappings[0].source_image #=> String
     #   resp.container_registry_map.image_mappings[0].destination_image #=> String
@@ -7424,7 +7432,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1955,6 +1955,11 @@ module Aws::DevOpsAgent
     #   Monthly on-demand hours usage and limit for an account
     #   @return [Types::UsageMetric]
     #
+    # @!attribute [rw] monthly_account_grader_hours
+    #   Represents a usage metric with its configured limit and current
+    #   usage value.
+    #   @return [Types::UsageMetric]
+    #
     # @!attribute [rw] usage_period_start_time
     #   The start time of the usage tracking period
     #   @return [Time]
@@ -1970,6 +1975,7 @@ module Aws::DevOpsAgent
       :monthly_account_evaluation_hours,
       :monthly_account_system_learning_hours,
       :monthly_account_on_demand_hours,
+      :monthly_account_grader_hours,
       :usage_period_start_time,
       :usage_period_end_time)
       SENSITIVE = []
@@ -1982,10 +1988,15 @@ module Aws::DevOpsAgent
     #   The unique identifier of the AgentSpace
     #   @return [String]
     #
+    # @!attribute [rw] included_data
+    #   How much data to include in the response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/GetAgentSpaceInput AWS API Documentation
     #
     class GetAgentSpaceInput < Struct.new(
-      :agent_space_id)
+      :agent_space_id,
+      :included_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2829,11 +2840,16 @@ module Aws::DevOpsAgent
     #   Token for the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] included_data
+    #   How much data to include in the response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ListAgentSpacesInput AWS API Documentation
     #
     class ListAgentSpacesInput < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :included_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3732,6 +3748,11 @@ module Aws::DevOpsAgent
     #   MCP server configuration with Bearer token (RFC 6750).
     #   @return [Types::MCPServerBearerTokenConfig]
     #
+    # @!attribute [rw] custom_headers
+    #   MCP server configuration with one or more custom authentication
+    #   headers.
+    #   @return [Types::MCPServerCustomHeadersConfig]
+    #
     # @!attribute [rw] authorization_discovery
     #   MCP server authorization discovery configuration.
     #   @return [Types::MCPServerAuthorizationDiscoveryConfig]
@@ -3743,6 +3764,7 @@ module Aws::DevOpsAgent
       :o_auth_3_lo,
       :api_key,
       :bearer_token,
+      :custom_headers,
       :authorization_discovery,
       :unknown)
       SENSITIVE = []
@@ -3753,6 +3775,7 @@ module Aws::DevOpsAgent
       class OAuth3Lo < MCPServerAuthorizationConfig; end
       class ApiKey < MCPServerAuthorizationConfig; end
       class BearerToken < MCPServerAuthorizationConfig; end
+      class CustomHeaders < MCPServerAuthorizationConfig; end
       class AuthorizationDiscovery < MCPServerAuthorizationConfig; end
       class Unknown < MCPServerAuthorizationConfig; end
     end
@@ -3815,6 +3838,21 @@ module Aws::DevOpsAgent
       :tools,
       :tool_details)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for authenticating to an MCP server with custom HTTP
+    # headers.
+    #
+    # @!attribute [rw] headers
+    #   Custom headers map.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MCPServerCustomHeadersConfig AWS API Documentation
+    #
+    class MCPServerCustomHeadersConfig < Struct.new(
+      :headers)
+      SENSITIVE = [:headers]
       include Aws::Structure
     end
 
@@ -4948,6 +4986,12 @@ module Aws::DevOpsAgent
     #   provided.
     #   @return [String]
     #
+    # @!attribute [rw] custom_header_names
+    #   The configured custom authentication header names when the MCP
+    #   server uses custom-header authentication. Secret values are not
+    #   returned.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/RegisteredMCPServerDetails AWS API Documentation
     #
     class RegisteredMCPServerDetails < Struct.new(
@@ -4955,7 +4999,8 @@ module Aws::DevOpsAgent
       :endpoint,
       :authorization_method,
       :description,
-      :api_key_header)
+      :api_key_header,
+      :custom_header_names)
       SENSITIVE = [:description]
       include Aws::Structure
     end

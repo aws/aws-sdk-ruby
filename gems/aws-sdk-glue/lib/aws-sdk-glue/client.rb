@@ -1144,6 +1144,104 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves a list of data quality results for the specified result IDs.
+    # You can specify up to 100 result IDs in a single request.
+    #
+    # @option params [required, Array<String>] :result_ids
+    #   A list of unique result IDs for the data quality results.
+    #
+    # @return [Types::BatchGetDataQualityResultV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetDataQualityResultV2Response#results #results} => Array&lt;Types::DataQualityResultV2Item&gt;
+    #   * {Types::BatchGetDataQualityResultV2Response#results_not_found #results_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_data_quality_result_v2({
+    #     result_ids: ["HashString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].result_id #=> String
+    #   resp.results[0].data_source.glue_table.database_name #=> String
+    #   resp.results[0].data_source.glue_table.table_name #=> String
+    #   resp.results[0].data_source.glue_table.catalog_id #=> String
+    #   resp.results[0].data_source.glue_table.connection_name #=> String
+    #   resp.results[0].data_source.glue_table.additional_options #=> Hash
+    #   resp.results[0].data_source.glue_table.additional_options["NameString"] #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.database_name #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.table_name #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.catalog_id #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.connection_name #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.additional_options #=> Hash
+    #   resp.results[0].data_source.data_quality_glue_table.additional_options["NameString"] #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.pre_processing_query #=> String
+    #   resp.results[0].dimensions #=> Hash
+    #   resp.results[0].dimensions["NameString"] #=> String
+    #   resp.results[0].tags #=> Hash
+    #   resp.results[0].tags["NameString"] #=> String
+    #   resp.results[0].execution_started_on #=> Time
+    #   resp.results[0].execution_completed_on #=> Time
+    #   resp.results[0].result_published_on #=> Time
+    #   resp.results[0].score #=> Float
+    #   resp.results[0].rule_results #=> Array
+    #   resp.results[0].rule_results[0].name #=> String
+    #   resp.results[0].rule_results[0].description #=> String
+    #   resp.results[0].rule_results[0].evaluation_message #=> String
+    #   resp.results[0].rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
+    #   resp.results[0].rule_results[0].evaluated_metrics #=> Hash
+    #   resp.results[0].rule_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.results[0].rule_results[0].evaluated_rule #=> String
+    #   resp.results[0].rule_results[0].rule_metrics #=> Hash
+    #   resp.results[0].rule_results[0].rule_metrics["NameString"] #=> Float
+    #   resp.results[0].rule_results[0].labels #=> Hash
+    #   resp.results[0].rule_results[0].labels["NameString"] #=> String
+    #   resp.results[0].analyzer_results #=> Array
+    #   resp.results[0].analyzer_results[0].name #=> String
+    #   resp.results[0].analyzer_results[0].description #=> String
+    #   resp.results[0].analyzer_results[0].evaluation_message #=> String
+    #   resp.results[0].analyzer_results[0].evaluated_metrics #=> Hash
+    #   resp.results[0].analyzer_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.results[0].analyzer_results[0].evaluated_distributions #=> Hash
+    #   resp.results[0].analyzer_results[0].evaluated_distributions["NameString"].bin_edges #=> Array
+    #   resp.results[0].analyzer_results[0].evaluated_distributions["NameString"].bin_edges[0] #=> String
+    #   resp.results[0].analyzer_results[0].evaluated_distributions["NameString"].count #=> Array
+    #   resp.results[0].analyzer_results[0].evaluated_distributions["NameString"].count[0] #=> Integer
+    #   resp.results[0].analyzer_results[0].evaluated_distributions["NameString"].data_type #=> String
+    #   resp.results[0].observations #=> Array
+    #   resp.results[0].observations[0].description #=> String
+    #   resp.results[0].observations[0].metric_based_observation.metric_name #=> String
+    #   resp.results[0].observations[0].metric_based_observation.statistic_id #=> String
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.actual_value #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.expected_value #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.lower_limit #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.upper_limit #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.new_rules #=> Array
+    #   resp.results[0].observations[0].metric_based_observation.new_rules[0] #=> String
+    #   resp.results[0].evaluation_context #=> String
+    #   resp.results[0].descriptors #=> Hash
+    #   resp.results[0].descriptors["NameString"] #=> String
+    #   resp.results[0].aggregated_metrics.total_rows_processed #=> Float
+    #   resp.results[0].aggregated_metrics.total_rows_passed #=> Float
+    #   resp.results[0].aggregated_metrics.total_rows_failed #=> Float
+    #   resp.results[0].aggregated_metrics.total_rules_processed #=> Float
+    #   resp.results[0].aggregated_metrics.total_rules_passed #=> Float
+    #   resp.results[0].aggregated_metrics.total_rules_failed #=> Float
+    #   resp.results[0].ruleset_name #=> String
+    #   resp.results_not_found #=> Array
+    #   resp.results_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDataQualityResultV2 AWS API Documentation
+    #
+    # @overload batch_get_data_quality_result_v2(params = {})
+    # @param [Hash] params ({})
+    def batch_get_data_quality_result_v2(params = {}, options = {})
+      req = build_request(:batch_get_data_quality_result_v2, params)
+      req.send_request(options)
+    end
+
     # Retrieves the details of multiple evaluation runs in a single request.
     #
     # @option params [required, Array<String>] :run_ids
@@ -3366,6 +3464,7 @@ module Aws::Glue
     #         "IntegrationString" => "IntegrationString",
     #       },
     #       continuous_sync: false,
+    #       target_namespace: "TargetNamespace",
     #     },
     #   })
     #
@@ -3392,6 +3491,7 @@ module Aws::Glue
     #   resp.integration_config.source_properties #=> Hash
     #   resp.integration_config.source_properties["IntegrationString"] #=> String
     #   resp.integration_config.continuous_sync #=> Boolean
+    #   resp.integration_config.target_namespace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIntegration AWS API Documentation
     #
@@ -6989,6 +7089,7 @@ module Aws::Glue
     #   resp.inbound_integrations[0].integration_config.source_properties #=> Hash
     #   resp.inbound_integrations[0].integration_config.source_properties["IntegrationString"] #=> String
     #   resp.inbound_integrations[0].integration_config.continuous_sync #=> Boolean
+    #   resp.inbound_integrations[0].integration_config.target_namespace #=> String
     #   resp.inbound_integrations[0].errors #=> Array
     #   resp.inbound_integrations[0].errors[0].error_code #=> String
     #   resp.inbound_integrations[0].errors[0].error_message #=> String
@@ -7059,6 +7160,7 @@ module Aws::Glue
     #   resp.integrations[0].integration_config.source_properties #=> Hash
     #   resp.integrations[0].integration_config.source_properties["IntegrationString"] #=> String
     #   resp.integrations[0].integration_config.continuous_sync #=> Boolean
+    #   resp.integrations[0].integration_config.target_namespace #=> String
     #   resp.integrations[0].errors #=> Array
     #   resp.integrations[0].errors[0].error_code #=> String
     #   resp.integrations[0].errors[0].error_message #=> String
@@ -8791,6 +8893,116 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_data_quality_result(params = {}, options = {})
       req = build_request(:get_data_quality_result, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the result of a data quality rule evaluation published from
+    # any supported data platform.
+    #
+    # @option params [required, String] :result_id
+    #   A unique result ID for the data quality result.
+    #
+    # @return [Types::GetDataQualityResultV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataQualityResultV2Response#result_id #result_id} => String
+    #   * {Types::GetDataQualityResultV2Response#data_source #data_source} => Types::DataSource
+    #   * {Types::GetDataQualityResultV2Response#profile_id #profile_id} => String
+    #   * {Types::GetDataQualityResultV2Response#dimensions #dimensions} => Hash&lt;String,String&gt;
+    #   * {Types::GetDataQualityResultV2Response#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetDataQualityResultV2Response#execution_started_on #execution_started_on} => Time
+    #   * {Types::GetDataQualityResultV2Response#execution_completed_on #execution_completed_on} => Time
+    #   * {Types::GetDataQualityResultV2Response#result_published_on #result_published_on} => Time
+    #   * {Types::GetDataQualityResultV2Response#score #score} => Float
+    #   * {Types::GetDataQualityResultV2Response#rule_results #rule_results} => Array&lt;Types::DataQualityRuleResult&gt;
+    #   * {Types::GetDataQualityResultV2Response#analyzer_results #analyzer_results} => Array&lt;Types::DataQualityAnalyzerResult&gt;
+    #   * {Types::GetDataQualityResultV2Response#observations #observations} => Array&lt;Types::DataQualityObservation&gt;
+    #   * {Types::GetDataQualityResultV2Response#evaluation_context #evaluation_context} => String
+    #   * {Types::GetDataQualityResultV2Response#descriptors #descriptors} => Hash&lt;String,String&gt;
+    #   * {Types::GetDataQualityResultV2Response#aggregated_metrics #aggregated_metrics} => Types::DataQualityAggregatedMetrics
+    #   * {Types::GetDataQualityResultV2Response#ruleset_name #ruleset_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_quality_result_v2({
+    #     result_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result_id #=> String
+    #   resp.data_source.glue_table.database_name #=> String
+    #   resp.data_source.glue_table.table_name #=> String
+    #   resp.data_source.glue_table.catalog_id #=> String
+    #   resp.data_source.glue_table.connection_name #=> String
+    #   resp.data_source.glue_table.additional_options #=> Hash
+    #   resp.data_source.glue_table.additional_options["NameString"] #=> String
+    #   resp.data_source.data_quality_glue_table.database_name #=> String
+    #   resp.data_source.data_quality_glue_table.table_name #=> String
+    #   resp.data_source.data_quality_glue_table.catalog_id #=> String
+    #   resp.data_source.data_quality_glue_table.connection_name #=> String
+    #   resp.data_source.data_quality_glue_table.additional_options #=> Hash
+    #   resp.data_source.data_quality_glue_table.additional_options["NameString"] #=> String
+    #   resp.data_source.data_quality_glue_table.pre_processing_query #=> String
+    #   resp.profile_id #=> String
+    #   resp.dimensions #=> Hash
+    #   resp.dimensions["NameString"] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["NameString"] #=> String
+    #   resp.execution_started_on #=> Time
+    #   resp.execution_completed_on #=> Time
+    #   resp.result_published_on #=> Time
+    #   resp.score #=> Float
+    #   resp.rule_results #=> Array
+    #   resp.rule_results[0].name #=> String
+    #   resp.rule_results[0].description #=> String
+    #   resp.rule_results[0].evaluation_message #=> String
+    #   resp.rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
+    #   resp.rule_results[0].evaluated_metrics #=> Hash
+    #   resp.rule_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.rule_results[0].evaluated_rule #=> String
+    #   resp.rule_results[0].rule_metrics #=> Hash
+    #   resp.rule_results[0].rule_metrics["NameString"] #=> Float
+    #   resp.rule_results[0].labels #=> Hash
+    #   resp.rule_results[0].labels["NameString"] #=> String
+    #   resp.analyzer_results #=> Array
+    #   resp.analyzer_results[0].name #=> String
+    #   resp.analyzer_results[0].description #=> String
+    #   resp.analyzer_results[0].evaluation_message #=> String
+    #   resp.analyzer_results[0].evaluated_metrics #=> Hash
+    #   resp.analyzer_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.analyzer_results[0].evaluated_distributions #=> Hash
+    #   resp.analyzer_results[0].evaluated_distributions["NameString"].bin_edges #=> Array
+    #   resp.analyzer_results[0].evaluated_distributions["NameString"].bin_edges[0] #=> String
+    #   resp.analyzer_results[0].evaluated_distributions["NameString"].count #=> Array
+    #   resp.analyzer_results[0].evaluated_distributions["NameString"].count[0] #=> Integer
+    #   resp.analyzer_results[0].evaluated_distributions["NameString"].data_type #=> String
+    #   resp.observations #=> Array
+    #   resp.observations[0].description #=> String
+    #   resp.observations[0].metric_based_observation.metric_name #=> String
+    #   resp.observations[0].metric_based_observation.statistic_id #=> String
+    #   resp.observations[0].metric_based_observation.metric_values.actual_value #=> Float
+    #   resp.observations[0].metric_based_observation.metric_values.expected_value #=> Float
+    #   resp.observations[0].metric_based_observation.metric_values.lower_limit #=> Float
+    #   resp.observations[0].metric_based_observation.metric_values.upper_limit #=> Float
+    #   resp.observations[0].metric_based_observation.new_rules #=> Array
+    #   resp.observations[0].metric_based_observation.new_rules[0] #=> String
+    #   resp.evaluation_context #=> String
+    #   resp.descriptors #=> Hash
+    #   resp.descriptors["NameString"] #=> String
+    #   resp.aggregated_metrics.total_rows_processed #=> Float
+    #   resp.aggregated_metrics.total_rows_passed #=> Float
+    #   resp.aggregated_metrics.total_rows_failed #=> Float
+    #   resp.aggregated_metrics.total_rules_processed #=> Float
+    #   resp.aggregated_metrics.total_rules_passed #=> Float
+    #   resp.aggregated_metrics.total_rules_failed #=> Float
+    #   resp.ruleset_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResultV2 AWS API Documentation
+    #
+    # @overload get_data_quality_result_v2(params = {})
+    # @param [Hash] params ({})
+    def get_data_quality_result_v2(params = {}, options = {})
+      req = build_request(:get_data_quality_result_v2, params)
       req.send_request(options)
     end
 
@@ -11698,6 +11910,7 @@ module Aws::Glue
     #   resp.table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
     #   resp.table.status.details.view_validations[0].error.error_code #=> String
     #   resp.table.status.details.view_validations[0].error.error_message #=> String
+    #   resp.table.rls_properties.default_rls_policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable AWS API Documentation
     #
@@ -11981,6 +12194,7 @@ module Aws::Glue
     #   resp.table_version.table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
     #   resp.table_version.table.status.details.view_validations[0].error.error_code #=> String
     #   resp.table_version.table.status.details.view_validations[0].error.error_message #=> String
+    #   resp.table_version.table.rls_properties.default_rls_policy #=> String
     #   resp.table_version.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
@@ -12188,6 +12402,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
     #   resp.table_versions[0].table.status.details.view_validations[0].error.error_code #=> String
     #   resp.table_versions[0].table.status.details.view_validations[0].error.error_message #=> String
+    #   resp.table_versions[0].table.rls_properties.default_rls_policy #=> String
     #   resp.table_versions[0].version_id #=> String
     #   resp.next_token #=> String
     #
@@ -12438,6 +12653,7 @@ module Aws::Glue
     #   resp.table_list[0].status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
     #   resp.table_list[0].status.details.view_validations[0].error.error_code #=> String
     #   resp.table_list[0].status.details.view_validations[0].error.error_message #=> String
+    #   resp.table_list[0].rls_properties.default_rls_policy #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables AWS API Documentation
@@ -13226,6 +13442,7 @@ module Aws::Glue
     #   resp.table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
     #   resp.table.status.details.view_validations[0].error.error_code #=> String
     #   resp.table.status.details.view_validations[0].error.error_message #=> String
+    #   resp.table.rls_properties.default_rls_policy #=> String
     #   resp.authorized_columns #=> Array
     #   resp.authorized_columns[0] #=> String
     #   resp.is_registered_with_lake_formation #=> Boolean
@@ -14375,6 +14592,97 @@ module Aws::Glue
     # @param [Hash] params ({})
     def list_data_quality_results(params = {}, options = {})
       req = build_request(:list_data_quality_results, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of data quality execution results for your
+    # account, filtered by the specified criteria. Use the `NextToken`
+    # parameter to retrieve additional results.
+    #
+    # @option params [Types::DataQualityResultsV2FilterCriteria] :filter
+    #   The filter criteria.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. If you don't specify a
+    #   value, the operation uses the default number of results.
+    #
+    # @return [Types::ListDataQualityResultsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataQualityResultsV2Response#results #results} => Array&lt;Types::DataQualityResultsV2Description&gt;
+    #   * {Types::ListDataQualityResultsV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_quality_results_v2({
+    #     filter: {
+    #       data_source: {
+    #         glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString",
+    #           },
+    #         },
+    #         data_quality_glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString",
+    #           },
+    #           pre_processing_query: "PreProcessingQueryString",
+    #         },
+    #       },
+    #       published_after: Time.now,
+    #       published_before: Time.now,
+    #       dimensions: {
+    #         "NameString" => "NameString",
+    #       },
+    #       evaluation_context: "NameString",
+    #     },
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].result_id #=> String
+    #   resp.results[0].data_source.glue_table.database_name #=> String
+    #   resp.results[0].data_source.glue_table.table_name #=> String
+    #   resp.results[0].data_source.glue_table.catalog_id #=> String
+    #   resp.results[0].data_source.glue_table.connection_name #=> String
+    #   resp.results[0].data_source.glue_table.additional_options #=> Hash
+    #   resp.results[0].data_source.glue_table.additional_options["NameString"] #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.database_name #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.table_name #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.catalog_id #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.connection_name #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.additional_options #=> Hash
+    #   resp.results[0].data_source.data_quality_glue_table.additional_options["NameString"] #=> String
+    #   resp.results[0].data_source.data_quality_glue_table.pre_processing_query #=> String
+    #   resp.results[0].result_published_on #=> Time
+    #   resp.results[0].dimensions #=> Hash
+    #   resp.results[0].dimensions["NameString"] #=> String
+    #   resp.results[0].evaluation_context #=> String
+    #   resp.results[0].descriptors #=> Hash
+    #   resp.results[0].descriptors["NameString"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityResultsV2 AWS API Documentation
+    #
+    # @overload list_data_quality_results_v2(params = {})
+    # @param [Hash] params ({})
+    def list_data_quality_results_v2(params = {}, options = {})
+      req = build_request(:list_data_quality_results_v2, params)
       req.send_request(options)
     end
 
@@ -15876,6 +16184,7 @@ module Aws::Glue
     #         "IntegrationString" => "IntegrationString",
     #       },
     #       continuous_sync: false,
+    #       target_namespace: "TargetNamespace",
     #     },
     #     integration_name: "String128",
     #   })
@@ -15903,6 +16212,7 @@ module Aws::Glue
     #   resp.integration_config.source_properties #=> Hash
     #   resp.integration_config.source_properties["IntegrationString"] #=> String
     #   resp.integration_config.continuous_sync #=> Boolean
+    #   resp.integration_config.target_namespace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ModifyIntegration AWS API Documentation
     #
@@ -15910,6 +16220,205 @@ module Aws::Glue
     # @param [Hash] params ({})
     def modify_integration(params = {}, options = {})
       req = build_request(:modify_integration, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This operation is intended for internal use. Do not call it directly.
+    #
+    #  </note>
+    #
+    # AWS Glue Data Quality uses this operation to publish a data quality
+    # result.
+    #
+    # @option params [required, Hash<String,String>] :dimensions
+    #   The dimensions for the result.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags for the result.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :execution_started_on
+    #   The time execution started for the result.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :execution_completed_on
+    #   The time execution completed for the result.
+    #
+    # @option params [required, Float] :score
+    #   The score for the result.
+    #
+    # @option params [required, Array<Types::DataQualityRuleResult>] :rule_results
+    #   The rule level results.
+    #
+    # @option params [Array<Types::DataQualityAnalyzerResult>] :analyzer_results
+    #   The analyzer level results.
+    #
+    # @option params [Array<Types::DataQualityObservation>] :observations
+    #   The observations for the result.
+    #
+    # @option params [Types::DataQualityAggregatedMetrics] :aggregated_metrics
+    #   The aggregated metrics for the result.
+    #
+    # @option params [Array<Types::StatisticSummary>] :statistics
+    #   The statistics for the result.
+    #
+    # @option params [Types::DataQualityConfigurationV2] :run_configuration
+    #   The run configuration for the result.
+    #
+    # @option params [String] :client_token
+    #   The client token for the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :evaluation_context
+    #   The evaluation context for the result.
+    #
+    # @option params [Hash<String,String>] :descriptors
+    #   The descriptors for the result.
+    #
+    # @option params [String] :ruleset_name
+    #   The ruleset name for the result.
+    #
+    # @option params [String] :data_quality_security_configuration
+    #   The security configuration for the result.
+    #
+    # @option params [Types::DataQualityTelemetry] :telemetry
+    #
+    # @return [Types::PublishDataQualityResultV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PublishDataQualityResultV2Response#result_id #result_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.publish_data_quality_result_v2({
+    #     dimensions: { # required
+    #       "NameString" => "NameString",
+    #     },
+    #     tags: {
+    #       "NameString" => "NameString",
+    #     },
+    #     execution_started_on: Time.now,
+    #     execution_completed_on: Time.now,
+    #     score: 1.0, # required
+    #     rule_results: [ # required
+    #       {
+    #         name: "NameString",
+    #         description: "DataQualityRuleResultDescription",
+    #         evaluation_message: "DataQualityRuleResultDescription",
+    #         result: "PASS", # accepts PASS, FAIL, ERROR
+    #         evaluated_metrics: {
+    #           "NameString" => 1.0,
+    #         },
+    #         evaluated_rule: "DataQualityRuleResultDescription",
+    #         rule_metrics: {
+    #           "NameString" => 1.0,
+    #         },
+    #         labels: {
+    #           "NameString" => "NameString",
+    #         },
+    #       },
+    #     ],
+    #     analyzer_results: [
+    #       {
+    #         name: "NameString",
+    #         description: "DataQualityRuleResultDescription",
+    #         evaluation_message: "DataQualityRuleResultDescription",
+    #         evaluated_metrics: {
+    #           "NameString" => 1.0,
+    #         },
+    #         evaluated_distributions: {
+    #           "NameString" => {
+    #             bin_edges: ["GenericString"],
+    #             count: [1],
+    #             data_type: "NameString",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     observations: [
+    #       {
+    #         description: "DataQualityObservationDescription",
+    #         metric_based_observation: {
+    #           metric_name: "NameString",
+    #           statistic_id: "HashString",
+    #           metric_values: {
+    #             actual_value: 1.0,
+    #             expected_value: 1.0,
+    #             lower_limit: 1.0,
+    #             upper_limit: 1.0,
+    #           },
+    #           new_rules: ["NameString"],
+    #         },
+    #       },
+    #     ],
+    #     aggregated_metrics: {
+    #       total_rows_processed: 1.0,
+    #       total_rows_passed: 1.0,
+    #       total_rows_failed: 1.0,
+    #       total_rules_processed: 1.0,
+    #       total_rules_passed: 1.0,
+    #       total_rules_failed: 1.0,
+    #     },
+    #     statistics: [
+    #       {
+    #         statistic_id: "HashString",
+    #         profile_id: "HashString",
+    #         run_identifier: {
+    #           run_id: "HashString",
+    #           job_run_id: "HashString",
+    #         },
+    #         statistic_name: "StatisticNameString",
+    #         double_value: 1.0,
+    #         distribution_value: {
+    #           bin_edges: ["GenericString"],
+    #           count: [1],
+    #           data_type: "NameString",
+    #         },
+    #         evaluation_level: "Dataset", # accepts Dataset, Column, Multicolumn
+    #         columns_referenced: ["NameString"],
+    #         referenced_datasets: ["NameString"],
+    #         statistic_properties: {
+    #           "NameString" => "DescriptionString",
+    #         },
+    #         recorded_on: Time.now,
+    #         inclusion_annotation: {
+    #           value: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           last_modified_on: Time.now,
+    #         },
+    #       },
+    #     ],
+    #     run_configuration: {
+    #       observations_enabled: "ALL", # accepts ALL, NONE
+    #       observation_mode: "SCHEDULED", # accepts SCHEDULED, FIXED
+    #     },
+    #     client_token: "ClientTokenString",
+    #     evaluation_context: "NameString", # required
+    #     descriptors: {
+    #       "NameString" => "NameString",
+    #     },
+    #     ruleset_name: "HashString",
+    #     data_quality_security_configuration: "NameString",
+    #     telemetry: {
+    #       vcpu_hours: 1.0,
+    #       flags_enabled: {
+    #         "NameString" => "NameString",
+    #       },
+    #       library_version: "NameString",
+    #       spark_version: "NameString",
+    #       host_runtime_version: "NameString",
+    #       engine: "SPARK", # accepts SPARK, PYTHON
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PublishDataQualityResultV2 AWS API Documentation
+    #
+    # @overload publish_data_quality_result_v2(params = {})
+    # @param [Hash] params ({})
+    def publish_data_quality_result_v2(params = {}, options = {})
+      req = build_request(:publish_data_quality_result_v2, params)
       req.send_request(options)
     end
 
@@ -17692,6 +18201,7 @@ module Aws::Glue
     #   resp.table_list[0].status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
     #   resp.table_list[0].status.details.view_validations[0].error.error_code #=> String
     #   resp.table_list[0].status.details.view_validations[0].error.error_message #=> String
+    #   resp.table_list[0].rls_properties.default_rls_policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables AWS API Documentation
     #
@@ -21397,7 +21907,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.281.0'
+      context[:gem_version] = '1.284.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

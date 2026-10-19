@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2026-10-14)
+------------------
+
+* Feature - Add support for a new iterator type (AT TIMESTAMP) for DynamoDB Streams GetShardIterator API that allows reading from a specific point in time from the stream.
+
 1.96.0 (2026-09-11)
 ------------------
 

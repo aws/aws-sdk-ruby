@@ -598,6 +598,7 @@ module Aws::DevOpsAgent
       attr_accessor monthly_account_evaluation_hours: Types::UsageMetric
       attr_accessor monthly_account_system_learning_hours: Types::UsageMetric
       attr_accessor monthly_account_on_demand_hours: Types::UsageMetric
+      attr_accessor monthly_account_grader_hours: Types::UsageMetric
       attr_accessor usage_period_start_time: ::Time
       attr_accessor usage_period_end_time: ::Time
       SENSITIVE: []
@@ -605,6 +606,7 @@ module Aws::DevOpsAgent
 
     class GetAgentSpaceInput
       attr_accessor agent_space_id: ::String
+      attr_accessor included_data: ("METADATA_ONLY" | "ALL_DATA")
       SENSITIVE: []
     end
 
@@ -847,6 +849,7 @@ module Aws::DevOpsAgent
     class ListAgentSpacesInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor included_data: ("METADATA_ONLY" | "ALL_DATA")
       SENSITIVE: []
     end
 
@@ -1101,6 +1104,7 @@ module Aws::DevOpsAgent
       attr_accessor o_auth_3_lo: Types::MCPServerOAuth3LOConfig
       attr_accessor api_key: Types::MCPServerAPIKeyConfig
       attr_accessor bearer_token: Types::MCPServerBearerTokenConfig
+      attr_accessor custom_headers: Types::MCPServerCustomHeadersConfig
       attr_accessor authorization_discovery: Types::MCPServerAuthorizationDiscoveryConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
@@ -1112,6 +1116,8 @@ module Aws::DevOpsAgent
       class ApiKey < MCPServerAuthorizationConfig
       end
       class BearerToken < MCPServerAuthorizationConfig
+      end
+      class CustomHeaders < MCPServerAuthorizationConfig
       end
       class AuthorizationDiscovery < MCPServerAuthorizationConfig
       end
@@ -1134,6 +1140,11 @@ module Aws::DevOpsAgent
     class MCPServerConfiguration
       attr_accessor tools: ::Array[::String]
       attr_accessor tool_details: ::Array[Types::MCPToolDetail]
+      SENSITIVE: []
+    end
+
+    class MCPServerCustomHeadersConfig
+      attr_accessor headers: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -1465,16 +1476,17 @@ module Aws::DevOpsAgent
 
     class RegisteredGrafanaServerDetails
       attr_accessor endpoint: ::String
-      attr_accessor authorization_method: ("oauth-client-credentials" | "oauth-3lo" | "api-key" | "bearer-token")
+      attr_accessor authorization_method: ("oauth-client-credentials" | "oauth-3lo" | "api-key" | "bearer-token" | "custom-headers")
       SENSITIVE: []
     end
 
     class RegisteredMCPServerDetails
       attr_accessor name: ::String
       attr_accessor endpoint: ::String
-      attr_accessor authorization_method: ("oauth-client-credentials" | "oauth-3lo" | "api-key" | "bearer-token")
+      attr_accessor authorization_method: ("oauth-client-credentials" | "oauth-3lo" | "api-key" | "bearer-token" | "custom-headers")
       attr_accessor description: ::String
       attr_accessor api_key_header: ::String
+      attr_accessor custom_header_names: ::Array[::String]
       SENSITIVE: [:description]
     end
 

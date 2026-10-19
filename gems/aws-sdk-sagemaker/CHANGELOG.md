@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.401.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.400.0 (2026-10-13)
+------------------
+
+* Feature - Adds Amazon Athena, Cleanup, ForEach, and Amazon EMR Serverless step metadata, ForEach iteration context, and the CompletedWithFailures execution status to SageMaker Pipelines.
+
+1.399.0 (2026-10-12)
+------------------
+
+* Feature - Amazon SageMaker Training Session is a managed service for training on shared GPU infrastructure. It provides full lifecycle management of training sessions and exposes low-level primitive APIs for operations like forward-backward passes, optimizer steps, and state management.
+
 1.398.0 (2026-10-01)
 ------------------
 

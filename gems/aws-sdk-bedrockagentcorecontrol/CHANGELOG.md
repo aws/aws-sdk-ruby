@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2026-10-14)
+------------------
+
+* Feature - This release supports scoping Amazon Bedrock AgentCore Gateway rate limits by request header or request body field.
+
+1.78.0 (2026-10-12)
+------------------
+
+* Feature - AgentCore Memory now supports configuring Long-Term Memory Time-to-Live (TTL) on Memory Strategies.
+
 1.77.0 (2026-09-30)
 ------------------
 

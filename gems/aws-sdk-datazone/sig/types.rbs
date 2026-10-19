@@ -766,7 +766,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: []
     end
@@ -972,7 +972,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:description]
     end
@@ -2605,7 +2605,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:connection_credentials, :description]
     end
@@ -3457,7 +3457,7 @@ module Aws::DataZone
     class GlueConnection
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor match_criteria: ::Array[::String]
       attr_accessor connection_properties: ::Hash[::String, ::String]
       attr_accessor spark_properties: ::Hash[::String, ::String]
@@ -3481,7 +3481,7 @@ module Aws::DataZone
       attr_accessor physical_connection_requirements: Types::PhysicalConnectionRequirements
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor connection_type: ("SNOWFLAKE" | "BIGQUERY" | "DOCUMENTDB" | "DYNAMODB" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SQLSERVER" | "TERADATA" | "VERTICA")
+      attr_accessor connection_type: ("SNOWFLAKE" | "BIGQUERY" | "DOCUMENTDB" | "DYNAMODB" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SQLSERVER" | "TERADATA" | "VERTICA" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor match_criteria: ::String
       attr_accessor validate_credentials: bool
       attr_accessor validate_for_compute_environments: ::Array[("SPARK" | "ATHENA" | "PYTHON")]
@@ -3920,7 +3920,7 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor environment_identifier: ::String
       attr_accessor project_identifier: ::String
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: []
     end
@@ -6480,7 +6480,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:description]
     end

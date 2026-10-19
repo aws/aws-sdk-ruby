@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.55.0 (2026-10-12)
+------------------
+
+* Feature - Adding scheduler version to RegisterComputeNodeGroup API. A compute node uses this value to run the matching scheduler version.
+
 1.54.0 (2026-09-11)
 ------------------
 

@@ -606,8 +606,9 @@ module Aws::AppIntegrationsService
     #     },
     #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER, A2A_SERVER
     #     auth_config: {
-    #       auth_type: "API_KEY", # accepts API_KEY
+    #       auth_type: "API_KEY", # accepts API_KEY, CONNECT_JWT
     #       credential_provider_identifier: "Arn",
+    #       audience_override: "Identifier",
     #     },
     #   })
     #
@@ -1091,8 +1092,9 @@ module Aws::AppIntegrationsService
     #   resp.iframe_config.sandbox #=> Array
     #   resp.iframe_config.sandbox[0] #=> String
     #   resp.application_type #=> String, one of "STANDARD", "SERVICE", "MCP_SERVER", "A2A_SERVER"
-    #   resp.auth_config.auth_type #=> String, one of "API_KEY"
+    #   resp.auth_config.auth_type #=> String, one of "API_KEY", "CONNECT_JWT"
     #   resp.auth_config.credential_provider_identifier #=> String
+    #   resp.auth_config.audience_override #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplication AWS API Documentation
     #
@@ -1745,8 +1747,9 @@ module Aws::AppIntegrationsService
     #     },
     #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER, A2A_SERVER
     #     auth_config: {
-    #       auth_type: "API_KEY", # accepts API_KEY
+    #       auth_type: "API_KEY", # accepts API_KEY, CONNECT_JWT
     #       credential_provider_identifier: "Arn",
+    #       audience_override: "Identifier",
     #     },
     #   })
     #
@@ -1890,7 +1893,7 @@ module Aws::AppIntegrationsService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

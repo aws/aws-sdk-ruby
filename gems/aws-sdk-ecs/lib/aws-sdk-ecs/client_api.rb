@@ -503,6 +503,9 @@ module Aws::ECS
     ServiceConnectClientAlias = Shapes::StructureShape.new(name: 'ServiceConnectClientAlias')
     ServiceConnectClientAliasList = Shapes::ListShape.new(name: 'ServiceConnectClientAliasList')
     ServiceConnectConfiguration = Shapes::StructureShape.new(name: 'ServiceConnectConfiguration')
+    ServiceConnectContainerConfiguration = Shapes::UnionShape.new(name: 'ServiceConnectContainerConfiguration')
+    ServiceConnectContainerConfigurations = Shapes::ListShape.new(name: 'ServiceConnectContainerConfigurations')
+    ServiceConnectContainerLogLevel = Shapes::StringShape.new(name: 'ServiceConnectContainerLogLevel')
     ServiceConnectIncludeQueryParameters = Shapes::StringShape.new(name: 'ServiceConnectIncludeQueryParameters')
     ServiceConnectService = Shapes::StructureShape.new(name: 'ServiceConnectService')
     ServiceConnectServiceList = Shapes::ListShape.new(name: 'ServiceConnectServiceList')
@@ -2555,7 +2558,16 @@ module Aws::ECS
     ServiceConnectConfiguration.add_member(:services, Shapes::ShapeRef.new(shape: ServiceConnectServiceList, location_name: "services"))
     ServiceConnectConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))
     ServiceConnectConfiguration.add_member(:access_log_configuration, Shapes::ShapeRef.new(shape: ServiceConnectAccessLogConfiguration, location_name: "accessLogConfiguration"))
+    ServiceConnectConfiguration.add_member(:container_configurations, Shapes::ShapeRef.new(shape: ServiceConnectContainerConfigurations, location_name: "containerConfigurations"))
     ServiceConnectConfiguration.struct_class = Types::ServiceConnectConfiguration
+
+    ServiceConnectContainerConfiguration.add_member(:log_level, Shapes::ShapeRef.new(shape: ServiceConnectContainerLogLevel, location_name: "logLevel"))
+    ServiceConnectContainerConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ServiceConnectContainerConfiguration.add_member_subclass(:log_level, Types::ServiceConnectContainerConfiguration::LogLevel)
+    ServiceConnectContainerConfiguration.add_member_subclass(:unknown, Types::ServiceConnectContainerConfiguration::Unknown)
+    ServiceConnectContainerConfiguration.struct_class = Types::ServiceConnectContainerConfiguration
+
+    ServiceConnectContainerConfigurations.member = Shapes::ShapeRef.new(shape: ServiceConnectContainerConfiguration)
 
     ServiceConnectService.add_member(:port_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "portName"))
     ServiceConnectService.add_member(:discovery_name, Shapes::ShapeRef.new(shape: String, location_name: "discoveryName"))

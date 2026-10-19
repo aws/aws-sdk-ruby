@@ -2845,6 +2845,42 @@ module Aws
                                 ) -> _CreateTrainingPlanResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrainingPlanResponseSuccess
 
+      interface _CreateTrainingSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrainingSessionResponse]
+        def training_session_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_training_session-instance_method
+      def create_training_session: (
+                                     training_session_name: ::String,
+                                     ?model_package_group_arn: ::String,
+                                     lora_config: {
+                                       rank: ::Integer,
+                                       alpha: ::Integer
+                                     },
+                                     role_arn: ::String,
+                                     ?vpc_config: {
+                                       security_group_ids: Array[::String],
+                                       subnets: Array[::String]
+                                     },
+                                     model_config: {
+                                       base_model_arn: ::String,
+                                       accept_eula: bool?
+                                     },
+                                     output_config: {
+                                       s3_location: {
+                                         path: ::String,
+                                         kms_key_arn: ::String?
+                                       }
+                                     },
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       }
+                                     ]
+                                   ) -> _CreateTrainingSessionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrainingSessionResponseSuccess
+
       interface _CreateTransformJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateTransformJobResponse]
         def transform_job_arn: () -> ::String
@@ -3485,6 +3521,15 @@ module Aws
                                  training_job_name: ::String
                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteTrainingSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrainingSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_training_session-instance_method
+      def delete_training_session: (
+                                     training_session_name: ::String
+                                   ) -> _DeleteTrainingSessionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTrainingSessionResponseSuccess
 
       interface _DeleteTrialResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrialResponse]
@@ -4877,7 +4922,7 @@ module Aws
         def pipeline_arn: () -> ::String
         def pipeline_execution_arn: () -> ::String
         def pipeline_execution_display_name: () -> ::String
-        def pipeline_execution_status: () -> ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded")
+        def pipeline_execution_status: () -> ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded" | "CompletedWithFailures")
         def pipeline_execution_description: () -> ::String
         def pipeline_experiment_config: () -> Types::PipelineExperimentConfig
         def failure_reason: () -> ::String
@@ -5115,6 +5160,16 @@ module Aws
                                                       ?max_results: ::Integer
                                                     ) -> _DescribeTrainingPlanExtensionHistoryResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrainingPlanExtensionHistoryResponseSuccess
+
+      interface _DescribeTrainingSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrainingSessionResponse]
+        def training_session_detail: () -> Types::TrainingSessionDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_training_session-instance_method
+      def describe_training_session: (
+                                       training_session_name: ::String
+                                     ) -> _DescribeTrainingSessionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrainingSessionResponseSuccess
 
       interface _DescribeTransformJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTransformJobResponse]
@@ -6906,6 +6961,22 @@ module Aws
                                ) -> _ListTrainingPlansResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrainingPlansResponseSuccess
 
+      interface _ListTrainingSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrainingSessionsResponse]
+        def next_token: () -> ::String
+        def training_session_summaries: () -> ::Array[Types::TrainingSessionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_training_sessions-instance_method
+      def list_training_sessions: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    ?creation_time_after: ::Time,
+                                    ?creation_time_before: ::Time,
+                                    ?name_contains: ::String,
+                                    ?status_equals: ("Created" | "Blocked" | "Running" | "Failed" | "Scheduled" | "Stopping" | "Stopped" | "Expired" | "Deleting" | "DeletionFailed")
+                                  ) -> _ListTrainingSessionsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrainingSessionsResponseSuccess
+
       interface _ListTransformJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTransformJobsResponse]
         def transform_job_summaries: () -> ::Array[Types::TransformJobSummary]
@@ -7421,6 +7492,15 @@ module Aws
                                training_job_name: ::String
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StopTrainingSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopTrainingSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#stop_training_session-instance_method
+      def stop_training_session: (
+                                   training_session_name: ::String
+                                 ) -> _StopTrainingSessionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopTrainingSessionResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#stop_transform_job-instance_method
       def stop_transform_job: (

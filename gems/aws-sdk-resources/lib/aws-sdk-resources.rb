@@ -383,6 +383,7 @@ module Aws
   autoload :SageMakerMetrics, 'aws-sdk-sagemakermetrics'
   autoload :SageMakerRuntime, 'aws-sdk-sagemakerruntime'
   autoload :SageMakerRuntimeHTTP2, 'aws-sdk-sagemakerruntimehttp2'
+  autoload :SageMakerTrainingSessionRuntime, 'aws-sdk-sagemakertrainingsessionruntime'
   autoload :SagemakerEdgeManager, 'aws-sdk-sagemakeredgemanager'
   autoload :SagemakerJobRuntime, 'aws-sdk-sagemakerjobruntime'
   autoload :SavingsPlans, 'aws-sdk-savingsplans'

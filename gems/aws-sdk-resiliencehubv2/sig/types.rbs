@@ -189,6 +189,7 @@ module Aws::Resiliencehubv2
       attr_accessor dependency_discovery: ("ENABLED" | "DISABLED")
       attr_accessor report_configuration: Types::ServiceReportConfiguration
       attr_accessor kms_key_id: ::String
+      attr_accessor dev_ops_agent_configuration: Types::DevOpsAgentConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
       SENSITIVE: [:tags]
@@ -393,6 +394,31 @@ module Aws::Resiliencehubv2
       SENSITIVE: []
     end
 
+    class DevOpsAgentConfiguration
+      attr_accessor agent_space_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DevOpsAgentConfigurationView
+      attr_accessor agent_space_arn: ::String
+      attr_accessor agent_space_id: ::String
+      attr_accessor region: ::String
+      attr_accessor status: ("CONNECTING" | "CONNECTED" | "DISCONNECTED" | "FAILED")
+      attr_accessor operator_app_url: ::String
+      attr_accessor connected_at: ::Time
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class DevOpsAgentInvestigation
+      attr_accessor verdict: ("PASS" | "FAIL")
+      attr_accessor confidence: ("HIGH" | "MEDIUM" | "LOW")
+      attr_accessor deep_link: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED")
+      attr_accessor summary: ::String
+      SENSITIVE: []
+    end
+
     class DisasterRecoverySource
       attr_accessor value: ::String
       attr_accessor policy_name: ::String
@@ -473,6 +499,7 @@ module Aws::Resiliencehubv2
       attr_accessor observability_recommendations: ::Array[Types::ObservabilityRecommendation]
       attr_accessor testing_recommendations: ::Array[Types::TestingRecommendation]
       attr_accessor updated_at: ::Time
+      attr_accessor investigation_deep_link: ::String
       SENSITIVE: []
     end
 
@@ -486,6 +513,7 @@ module Aws::Resiliencehubv2
       attr_accessor status: ("OPEN" | "RESOLVED" | "IRRELEVANT")
       attr_accessor policy_component: ("AVAILABILITY_SLO" | "MULTI_AZ_DISASTER_RECOVERY" | "MULTI_REGION_DISASTER_RECOVERY" | "DATA_RECOVERY")
       attr_accessor updated_at: ::Time
+      attr_accessor investigation_deep_link: ::String
       SENSITIVE: []
     end
 
@@ -1235,6 +1263,10 @@ module Aws::Resiliencehubv2
       attr_accessor aws_region: ::String
       attr_accessor aws_account_id: ::String
       attr_accessor resource_type: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor availability_zone_name: ::String
+      attr_accessor containment_parent_id: ::String
+      attr_accessor logical_resource_group_id: ::String
       SENSITIVE: []
     end
 
@@ -1316,6 +1348,7 @@ module Aws::Resiliencehubv2
       attr_accessor organization_id: ::String
       attr_accessor ou_id: ::String
       attr_accessor account_id: ::String
+      attr_accessor dev_ops_agent_configuration: Types::DevOpsAgentConfigurationView
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:tags]
@@ -1532,6 +1565,8 @@ module Aws::Resiliencehubv2
       attr_accessor regions: ::Array[::String]
       attr_accessor policy_arn: ::String
       attr_accessor assessment_status: ("NOT_STARTED" | "PENDING" | "IN_PROGRESS" | "FAILED" | "SUCCESS")
+      attr_accessor dev_ops_agent_status: ("CONNECTING" | "CONNECTED" | "DISCONNECTED" | "FAILED")
+      attr_accessor dev_ops_agent_space_arn: ::String
       attr_accessor open_findings_count: ::Integer
       attr_accessor resolved_findings_count: ::Integer
       attr_accessor dependency_discovery: Types::DependencyDiscoveryConfig
@@ -1850,6 +1885,7 @@ module Aws::Resiliencehubv2
       attr_accessor permission_model: Types::PermissionModel
       attr_accessor regions: ::Array[::String]
       attr_accessor account_targeting: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+      attr_accessor dev_ops_agent_investigation: Types::DevOpsAgentInvestigation
       SENSITIVE: []
     end
 
@@ -2128,6 +2164,7 @@ module Aws::Resiliencehubv2
       attr_accessor permission_model: Types::PermissionModel
       attr_accessor dependency_discovery: ("ENABLED" | "DISABLED")
       attr_accessor report_configuration: Types::ServiceReportConfiguration
+      attr_accessor dev_ops_agent_configuration: Types::DevOpsAgentConfiguration
       SENSITIVE: []
     end
 

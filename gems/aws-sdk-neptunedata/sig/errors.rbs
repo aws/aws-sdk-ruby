@@ -11,205 +11,205 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class BadRequestException < ::Aws::Errors::ServiceError
+      class BadRequestException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class BulkLoadIdNotFoundException < ::Aws::Errors::ServiceError
+      class BulkLoadIdNotFoundException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class CancelledByUserException < ::Aws::Errors::ServiceError
+      class CancelledByUserException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class ClientTimeoutException < ::Aws::Errors::ServiceError
+      class ClientTimeoutException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class ConstraintViolationException < ::Aws::Errors::ServiceError
+      class ConstraintViolationException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class ExpiredStreamException < ::Aws::Errors::ServiceError
+      class ExpiredStreamException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class FailureByQueryException < ::Aws::Errors::ServiceError
+      class FailureByQueryException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class IllegalArgumentException < ::Aws::Errors::ServiceError
+      class IllegalArgumentException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class InternalFailureException < ::Aws::Errors::ServiceError
+      class InternalFailureException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class InvalidArgumentException < ::Aws::Errors::ServiceError
+      class InvalidArgumentException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class InvalidNumericDataException < ::Aws::Errors::ServiceError
+      class InvalidNumericDataException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class LoadUrlAccessDeniedException < ::Aws::Errors::ServiceError
+      class LoadUrlAccessDeniedException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class MLResourceNotFoundException < ::Aws::Errors::ServiceError
+      class MLResourceNotFoundException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class MalformedQueryException < ::Aws::Errors::ServiceError
+      class MalformedQueryException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class MemoryLimitExceededException < ::Aws::Errors::ServiceError
+      class MemoryLimitExceededException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class MethodNotAllowedException < ::Aws::Errors::ServiceError
+      class MethodNotAllowedException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class MissingParameterException < ::Aws::Errors::ServiceError
+      class MissingParameterException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class ParsingException < ::Aws::Errors::ServiceError
+      class ParsingException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class PreconditionsFailedException < ::Aws::Errors::ServiceError
+      class PreconditionsFailedException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class QueryLimitExceededException < ::Aws::Errors::ServiceError
+      class QueryLimitExceededException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class QueryLimitException < ::Aws::Errors::ServiceError
+      class QueryLimitException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class QueryTooLargeException < ::Aws::Errors::ServiceError
+      class QueryTooLargeException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class ReadOnlyViolationException < ::Aws::Errors::ServiceError
+      class ReadOnlyViolationException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class S3Exception < ::Aws::Errors::ServiceError
+      class S3Exception < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class ServerShutdownException < ::Aws::Errors::ServiceError
+      class ServerShutdownException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class StatisticsNotAvailableException < ::Aws::Errors::ServiceError
+      class StatisticsNotAvailableException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class StreamRecordsNotFoundException < ::Aws::Errors::ServiceError
+      class StreamRecordsNotFoundException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class TimeLimitExceededException < ::Aws::Errors::ServiceError
+      class TimeLimitExceededException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class TooManyRequestsException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String
         def code: () -> ::String
       end
-      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+      class UnsupportedOperationException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String

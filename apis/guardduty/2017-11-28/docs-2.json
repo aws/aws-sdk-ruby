@@ -184,6 +184,7 @@
         "CoverageResource$AccountId": "<p>The unique ID of the Amazon Web Services account.</p>",
         "CreateIPSetRequest$ExpectedBucketOwner": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>",
         "CreateThreatIntelSetRequest$ExpectedBucketOwner": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>",
+        "DestinationProperties$ExpectedBucketOwner": "<p>The 12-digit Amazon Web Services account ID of the account that owns the Amazon S3 bucket specified in the <code>DestinationArn</code> parameter.</p> <p>When you provide this value, GuardDuty verifies that the specified account owns the bucket before it exports findings. If the account ID doesn't match the actual owner of the bucket, GuardDuty doesn't export findings to that bucket. This helps prevent GuardDuty from exporting your findings to a bucket that a different Amazon Web Services account owns (for example, if the original bucket was deleted and its name was later claimed by another account). If you don't specify this value, GuardDuty doesn't perform this verification. GuardDuty strongly recommends that you provide the expected bucket owner when possible.</p> <p>When you update a publishing destination, omitting this field leaves the currently stored value unchanged. This field appears in the response only if it was provided when the publishing destination was created or updated.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_exportfindings.html#guardduty-exportfindings-expected-bucket-owner\">Verifying the Amazon S3 bucket owner</a> in the <i>Amazon GuardDuty User Guide</i>.</p>",
         "DetectionRuleAccountIds$member": null,
         "DnsRequestAction$VpcOwnerAccountId": "<p>The Amazon Web Services account ID that owns the VPC through which the DNS request was made.</p>",
         "GetIPSetResponse$ExpectedBucketOwner": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter. This field appears in the response only if it was provided during IPSet creation or update.</p>",
@@ -1264,6 +1265,14 @@
         "UpdateCustomDetectionRuleOrgConfigurationRequest$ExcludeAccountIds": "<p>The account IDs to exclude from the organization configuration. Mutually exclusive with <code>IncludeAccountIds</code>.</p>"
       }
     },
+    "DetectionRuleAgentVersion": {
+      "base": null,
+      "refs": {
+        "DetectionRuleEc2Requirements$MinAgentVersion": "<p>The minimum GuardDuty agent version required to run the rule on Amazon EC2.</p>",
+        "DetectionRuleEcsFargateRequirements$MinAgentVersion": "<p>The minimum GuardDuty agent version required to run the rule on Amazon ECS with the Fargate launch type.</p>",
+        "DetectionRuleEksRequirements$MinAgentVersion": "<p>The minimum GuardDuty agent version required to run the rule on Amazon EKS.</p>"
+      }
+    },
     "DetectionRuleArn": {
       "base": null,
       "refs": {
@@ -1293,6 +1302,24 @@
       "refs": {
         "RuleDetail$Description": "<p>A description of what the rule detects.</p>",
         "RuleSummary$Description": "<p>A description of what the rule detects.</p>"
+      }
+    },
+    "DetectionRuleEc2Requirements": {
+      "base": "<p>The requirements for running a Runtime Monitoring custom detection rule on Amazon EC2.</p>",
+      "refs": {
+        "DetectionRuleRuntimePlatforms$Ec2": "<p>The requirements for running the rule on Amazon EC2.</p>"
+      }
+    },
+    "DetectionRuleEcsFargateRequirements": {
+      "base": "<p>The requirements for running a Runtime Monitoring custom detection rule on Amazon ECS with the Fargate launch type.</p>",
+      "refs": {
+        "DetectionRuleRuntimePlatforms$EcsFargate": "<p>The requirements for running the rule on Amazon ECS with the Fargate launch type.</p>"
+      }
+    },
+    "DetectionRuleEksRequirements": {
+      "base": "<p>The requirements for running a Runtime Monitoring custom detection rule on Amazon EKS.</p>",
+      "refs": {
+        "DetectionRuleRuntimePlatforms$Eks": "<p>The requirements for running the rule on Amazon EKS.</p>"
       }
     },
     "DetectionRuleFilter": {
@@ -1349,6 +1376,18 @@
       "base": null,
       "refs": {
         "ListCustomDetectionRuleOrgConfigurationsResponse$Configurations": "<p>A list of organization configurations for custom detection rules.</p>"
+      }
+    },
+    "DetectionRuleRuntimeMonitoringDetails": {
+      "base": "<p>Contains Runtime Monitoring-specific details for a custom detection rule.</p>",
+      "refs": {
+        "RuleDetail$RuntimeMonitoringDetails": "<p>Runtime Monitoring-specific details for the rule, including the platforms on which the rule can run and the minimum GuardDuty agent version required on each.</p>"
+      }
+    },
+    "DetectionRuleRuntimePlatforms": {
+      "base": "<p>The platforms on which a Runtime Monitoring custom detection rule can run. A member's presence is the support statement: when present, the rule runs on that platform and <code>minAgentVersion</code> is the minimum GuardDuty agent version required there. When absent, the rule cannot run on that platform at any agent version.</p>",
+      "refs": {
+        "DetectionRuleRuntimeMonitoringDetails$Platforms": "<p>The platforms on which the rule can run. The presence of a platform member indicates that the rule is supported on that platform; the absence of a member indicates that the rule cannot run on that platform at any agent version.</p>"
       }
     },
     "DetectionRuleServiceName": {
@@ -4522,6 +4561,7 @@
         "Finding$Title": "<p>The title of the finding.</p>",
         "Finding$UpdatedAt": "<p>The time and date when the finding was last updated.</p>",
         "Finding$AssociatedAttackSequenceArn": "<p>Amazon Resource Name (ARN) associated with the attack sequence finding.</p>",
+        "Finding$CustomDetectionRuleName": "<p>The name of the custom detection rule that generated this finding.</p>",
         "FindingTypeStatistics$FindingType": "<p>Name of the finding type.</p>",
         "FlagsList$member": null,
         "GetDetectorResponse$CreatedAt": "<p>The timestamp of when the detector was created.</p>",

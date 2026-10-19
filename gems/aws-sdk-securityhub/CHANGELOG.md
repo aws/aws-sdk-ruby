@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.169.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.168.0 (2026-10-13)
+------------------
+
+* Feature - Adds and updates APIs to support criticality. This feature allows customers to create automation rules to assign criticality to resources matching a criteria. With this release, resources and exposure findings will include the criticality.
+
 1.167.0 (2026-10-08)
 ------------------
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.200.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.199.0 (2026-10-14)
+------------------
+
+* Feature - AWS Lambda now supports an optional X-Ray trace header for chained invocations in durable executions, enabling child invocations to be linked to the initiating span.
+
+1.198.0 (2026-10-12)
+------------------
+
+* Feature - Doc updates to reposition Lambda Functions as Lambda Event Functions
+
 1.197.0 (2026-10-08)
 ------------------
 

@@ -532,12 +532,14 @@
   },
   "FinSpaceData": {
     "models": "finspace-data/2020-07-13",
+    "deprecated": true,
     "addPlugins": [
       "Aws::FinSpaceData::Plugins::ContentType"
     ]
   },
   "Finspace": {
     "models": "finspace/2021-03-12",
+    "deprecated": true,
     "addPlugins": [
       "Aws::Finspace::Plugins::ContentType"
     ]
@@ -1237,6 +1239,9 @@
   "SageMakerRuntimeHTTP2": {
     "models": "sagemaker-runtime-http2/2025-10-01"
   },
+  "SageMakerTrainingSessionRuntime": {
+    "models": "sagemakertrainingsessionruntime/2025-02-10"
+  },
   "SagemakerEdgeManager": {
     "models": "sagemaker-edge/2020-09-23"
   },
@@ -1351,7 +1356,8 @@
     "models": "timestream-write/2018-11-01"
   },
   "Tnb": {
-    "models": "tnb/2008-10-21"
+    "models": "tnb/2008-10-21",
+    "deprecated": true
   },
   "TranscribeService": {
     "models": "transcribe/2017-10-26"

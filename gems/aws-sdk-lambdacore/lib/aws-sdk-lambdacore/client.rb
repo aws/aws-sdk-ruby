@@ -484,8 +484,9 @@ module Aws::LambdaCore
     # `PENDING` state while ENIs are provisioned in your VPC (provisioning
     # typically takes up to 10 minutes). Use `GetNetworkConnector` to poll
     # the connector state until it reaches `ACTIVE`. Once active, you can
-    # attach the connector to Lambda MicroVMs at run time using the
-    # `egressNetworkConnectors` parameter on `RunMicroVm`.
+    # attach the connector to supported Lambda compute resources — such as
+    # MicroVMs and WebFunctions — at run time. For how to attach a
+    # connector, see the documentation for the specific compute type.
     #
     # This operation is idempotent when you provide a `ClientToken` — if you
     # retry a request that completed successfully using the same client
@@ -526,6 +527,8 @@ module Aws::LambdaCore
     #   * {Types::CreateNetworkConnectorResponse#arn #arn} => String
     #   * {Types::CreateNetworkConnectorResponse#name #name} => String
     #   * {Types::CreateNetworkConnectorResponse#id #id} => String
+    #   * {Types::CreateNetworkConnectorResponse#version_arn #version_arn} => String
+    #   * {Types::CreateNetworkConnectorResponse#version #version} => Integer
     #   * {Types::CreateNetworkConnectorResponse#configuration #configuration} => Types::NetworkConnectorConfiguration
     #   * {Types::CreateNetworkConnectorResponse#operator_role #operator_role} => String
     #   * {Types::CreateNetworkConnectorResponse#state #state} => String
@@ -539,7 +542,7 @@ module Aws::LambdaCore
     #         subnet_ids: ["NetworkConnectorSubnetId"],
     #         security_group_ids: ["NetworkConnectorSecurityGroupId"],
     #         network_protocol: "IPv4", # accepts IPv4, DualStack
-    #         associated_compute_resource_types: ["MicroVm"], # accepts MicroVm
+    #         associated_compute_resource_types: ["MicroVm"], # accepts MicroVm, WebFunction
     #       },
     #     },
     #     operator_role: "NetworkConnectorRoleArn",
@@ -554,13 +557,15 @@ module Aws::LambdaCore
     #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.id #=> String
+    #   resp.version_arn #=> String
+    #   resp.version #=> Integer
     #   resp.configuration.vpc_egress_configuration.subnet_ids #=> Array
     #   resp.configuration.vpc_egress_configuration.subnet_ids[0] #=> String
     #   resp.configuration.vpc_egress_configuration.security_group_ids #=> Array
     #   resp.configuration.vpc_egress_configuration.security_group_ids[0] #=> String
     #   resp.configuration.vpc_egress_configuration.network_protocol #=> String, one of "IPv4", "DualStack"
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types #=> Array
-    #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm"
+    #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm", "WebFunction"
     #   resp.operator_role #=> String
     #   resp.state #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "FAILED", "DELETING", "DELETE_FAILED"
     #
@@ -581,18 +586,30 @@ module Aws::LambdaCore
     # This operation is idempotent — calling delete on a connector that is
     # already deleting or has been deleted succeeds without error. You can
     # delete connectors in `ACTIVE` or `FAILED` states. Before deleting a
-    # connector, ensure that no Lambda MicroVMs are using it, as they will
-    # lose VPC egress connectivity immediately.
+    # connector, ensure that no Lambda compute resources are using it, as
+    # they will lose VPC egress connectivity immediately.
+    #
+    # Deleting with an unqualified identifier removes the connector and all
+    # of its versions. To remove a single historical version, supply its
+    # version-qualified ARN; the connector and its remaining versions are
+    # unaffected. You can't delete the latest version on its own — delete
+    # the connector to remove it.
     #
     # @option params [required, String] :identifier
-    #   A flexible identifier that accepts a network connector ID, name, or
-    #   ARN
+    #   The identifier of the network connector to delete. Provide an
+    #   unqualified ARN (or an ID or name) to delete the entire connector and
+    #   all of its versions, or a version-qualified ARN — one that includes
+    #   the immutable version suffix — to delete a specific historical
+    #   version. You can't delete the latest version with a version-qualified
+    #   identifier; delete the connector instead.
     #
     # @return [Types::DeleteNetworkConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteNetworkConnectorResponse#arn #arn} => String
     #   * {Types::DeleteNetworkConnectorResponse#name #name} => String
     #   * {Types::DeleteNetworkConnectorResponse#id #id} => String
+    #   * {Types::DeleteNetworkConnectorResponse#version_arn #version_arn} => String
+    #   * {Types::DeleteNetworkConnectorResponse#version #version} => Integer
     #   * {Types::DeleteNetworkConnectorResponse#configuration #configuration} => Types::NetworkConnectorConfiguration
     #   * {Types::DeleteNetworkConnectorResponse#operator_role #operator_role} => String
     #   * {Types::DeleteNetworkConnectorResponse#state #state} => String
@@ -608,13 +625,15 @@ module Aws::LambdaCore
     #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.id #=> String
+    #   resp.version_arn #=> String
+    #   resp.version #=> Integer
     #   resp.configuration.vpc_egress_configuration.subnet_ids #=> Array
     #   resp.configuration.vpc_egress_configuration.subnet_ids[0] #=> String
     #   resp.configuration.vpc_egress_configuration.security_group_ids #=> Array
     #   resp.configuration.vpc_egress_configuration.security_group_ids[0] #=> String
     #   resp.configuration.vpc_egress_configuration.network_protocol #=> String, one of "IPv4", "DualStack"
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types #=> Array
-    #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm"
+    #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm", "WebFunction"
     #   resp.operator_role #=> String
     #   resp.state #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "FAILED", "DELETING", "DELETE_FAILED"
     #
@@ -639,15 +658,21 @@ module Aws::LambdaCore
     # recent update succeeded or failed.
     #
     # @option params [required, String] :identifier
-    #   A flexible identifier that accepts a network connector ID, name, or
-    #   ARN
+    #   The identifier of the network connector to retrieve. You can specify
+    #   the connector ID, name, or ARN. Provide an unqualified ARN (or an ID
+    #   or name) to retrieve the connector's latest version, or a
+    #   version-qualified ARN — one that includes the immutable version suffix
+    #   — to retrieve a specific historical version.
     #
     # @return [Types::GetNetworkConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetNetworkConnectorResponse#arn #arn} => String
     #   * {Types::GetNetworkConnectorResponse#name #name} => String
     #   * {Types::GetNetworkConnectorResponse#id #id} => String
+    #   * {Types::GetNetworkConnectorResponse#version_arn #version_arn} => String
     #   * {Types::GetNetworkConnectorResponse#version #version} => Integer
+    #   * {Types::GetNetworkConnectorResponse#latest_version_arn #latest_version_arn} => String
+    #   * {Types::GetNetworkConnectorResponse#latest_version #latest_version} => Integer
     #   * {Types::GetNetworkConnectorResponse#configuration #configuration} => Types::NetworkConnectorConfiguration
     #   * {Types::GetNetworkConnectorResponse#operator_role #operator_role} => String
     #   * {Types::GetNetworkConnectorResponse#state #state} => String
@@ -669,21 +694,24 @@ module Aws::LambdaCore
     #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.id #=> String
+    #   resp.version_arn #=> String
     #   resp.version #=> Integer
+    #   resp.latest_version_arn #=> String
+    #   resp.latest_version #=> Integer
     #   resp.configuration.vpc_egress_configuration.subnet_ids #=> Array
     #   resp.configuration.vpc_egress_configuration.subnet_ids[0] #=> String
     #   resp.configuration.vpc_egress_configuration.security_group_ids #=> Array
     #   resp.configuration.vpc_egress_configuration.security_group_ids[0] #=> String
     #   resp.configuration.vpc_egress_configuration.network_protocol #=> String, one of "IPv4", "DualStack"
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types #=> Array
-    #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm"
+    #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm", "WebFunction"
     #   resp.operator_role #=> String
     #   resp.state #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "FAILED", "DELETING", "DELETE_FAILED"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "DisallowedByVpcEncryptionControl", "Ec2RequestLimitExceeded", "InsufficientRolePermissions", "InternalError", "InvalidSecurityGroup", "InvalidSubnet", "SubnetOutOfIPAddresses"
+    #   resp.state_reason_code #=> String, one of "DisallowedByVpcEncryptionControl", "Ec2RequestLimitExceeded", "InsufficientRolePermissions", "InternalError", "InvalidSecurityGroup", "InvalidSubnet", "SecurityGroupsPerInterfaceLimitExceeded", "SubnetOutOfIPAddresses"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "DisallowedByVpcEncryptionControl", "Ec2RequestLimitExceeded", "InsufficientRolePermissions", "InternalError", "InvalidSecurityGroup", "InvalidSubnet", "SubnetOutOfIPAddresses"
+    #   resp.last_update_status_reason_code #=> String, one of "DisallowedByVpcEncryptionControl", "Ec2RequestLimitExceeded", "InsufficientRolePermissions", "InternalError", "InvalidSecurityGroup", "InvalidSubnet", "SecurityGroupsPerInterfaceLimitExceeded", "SubnetOutOfIPAddresses"
     #   resp.last_modified #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/GetNetworkConnector AWS API Documentation
@@ -692,6 +720,75 @@ module Aws::LambdaCore
     # @param [Hash] params ({})
     def get_network_connector(params = {}, options = {})
       req = build_request(:get_network_connector, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of the versions of a network connector. Each
+    # configuration update creates a new immutable version; this operation
+    # lists those versions for the connector you specify. You can optionally
+    # filter results by version state. Use the `Marker` parameter from a
+    # previous response to retrieve the next page of results.
+    #
+    # Each item in the response includes the version-qualified ARN, version
+    # number, current state, and last modified timestamp for that version.
+    # To retrieve the current (latest) configuration of the connector, use
+    # `GetNetworkConnector`; to inspect a specific version, call
+    # `GetNetworkConnector` with a version-qualified identifier.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the network connector whose versions you want to
+    #   list. You can specify the connector ID, name, or full ARN. Specify an
+    #   unqualified identifier — this operation lists all versions of the
+    #   connector, not a specific version.
+    #
+    # @option params [String] :state
+    #   Optional filter to return only versions in the specified state (for
+    #   example, `ACTIVE` or `FAILED`).
+    #
+    # @option params [String] :marker
+    #   The pagination token from a previous `ListNetworkConnectorVersions`
+    #   response. Use this value to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of versions to return per page. Valid range: 1 to
+    #   100.
+    #
+    # @return [Types::ListNetworkConnectorVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkConnectorVersionsResponse#network_connector_versions #network_connector_versions} => Array&lt;Types::NetworkConnectorVersionSummary&gt;
+    #   * {Types::ListNetworkConnectorVersionsResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_connector_versions({
+    #     identifier: "NetworkConnectorIdentifier", # required
+    #     state: "PENDING", # accepts PENDING, ACTIVE, INACTIVE, FAILED, DELETING, DELETE_FAILED
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_connector_versions #=> Array
+    #   resp.network_connector_versions[0].arn #=> String
+    #   resp.network_connector_versions[0].version_arn #=> String
+    #   resp.network_connector_versions[0].name #=> String
+    #   resp.network_connector_versions[0].id #=> String
+    #   resp.network_connector_versions[0].version #=> Integer
+    #   resp.network_connector_versions[0].state #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.network_connector_versions[0].state_reason #=> String
+    #   resp.network_connector_versions[0].state_reason_code #=> String, one of "DisallowedByVpcEncryptionControl", "Ec2RequestLimitExceeded", "InsufficientRolePermissions", "InternalError", "InvalidSecurityGroup", "InvalidSubnet", "SecurityGroupsPerInterfaceLimitExceeded", "SubnetOutOfIPAddresses"
+    #   resp.network_connector_versions[0].last_modified #=> Time
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/ListNetworkConnectorVersions AWS API Documentation
+    #
+    # @overload list_network_connector_versions(params = {})
+    # @param [Hash] params ({})
+    def list_network_connector_versions(params = {}, options = {})
+      req = build_request(:list_network_connector_versions, params)
       req.send_request(options)
     end
 
@@ -741,6 +838,8 @@ module Aws::LambdaCore
     #   resp.network_connectors[0].type #=> String, one of "VPC_EGRESS"
     #   resp.network_connectors[0].state #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "FAILED", "DELETING", "DELETE_FAILED"
     #   resp.network_connectors[0].last_modified #=> Time
+    #   resp.network_connectors[0].latest_version_arn #=> String
+    #   resp.network_connectors[0].latest_version #=> Integer
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/ListNetworkConnectors AWS API Documentation
@@ -766,9 +865,15 @@ module Aws::LambdaCore
     # troubleshooting. This operation is idempotent when you provide a
     # `ClientToken`.
     #
+    # Each successful configuration change creates a new immutable version.
+    # A connector can have a limited number of versions; once that limit is
+    # reached, further updates fail with
+    # `NetworkConnectorLimitExceededException` until you delete older
+    # versions.
+    #
     # @option params [required, String] :identifier
-    #   A flexible identifier that accepts a network connector ID, name, or
-    #   ARN
+    #   The identifier of the network connector to update. You can specify the
+    #   connector ID, name, or full ARN.
     #
     # @option params [Types::NetworkConnectorConfiguration] :configuration
     #   The updated network configuration for the connector. Provide the full
@@ -791,6 +896,8 @@ module Aws::LambdaCore
     #   * {Types::UpdateNetworkConnectorResponse#arn #arn} => String
     #   * {Types::UpdateNetworkConnectorResponse#name #name} => String
     #   * {Types::UpdateNetworkConnectorResponse#id #id} => String
+    #   * {Types::UpdateNetworkConnectorResponse#version_arn #version_arn} => String
+    #   * {Types::UpdateNetworkConnectorResponse#version #version} => Integer
     #   * {Types::UpdateNetworkConnectorResponse#operator_role #operator_role} => String
     #   * {Types::UpdateNetworkConnectorResponse#configuration #configuration} => Types::NetworkConnectorConfiguration
     #   * {Types::UpdateNetworkConnectorResponse#state #state} => String
@@ -807,7 +914,7 @@ module Aws::LambdaCore
     #         subnet_ids: ["NetworkConnectorSubnetId"],
     #         security_group_ids: ["NetworkConnectorSecurityGroupId"],
     #         network_protocol: "IPv4", # accepts IPv4, DualStack
-    #         associated_compute_resource_types: ["MicroVm"], # accepts MicroVm
+    #         associated_compute_resource_types: ["MicroVm"], # accepts MicroVm, WebFunction
     #       },
     #     },
     #     operator_role: "NetworkConnectorRoleArn",
@@ -819,6 +926,8 @@ module Aws::LambdaCore
     #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.id #=> String
+    #   resp.version_arn #=> String
+    #   resp.version #=> Integer
     #   resp.operator_role #=> String
     #   resp.configuration.vpc_egress_configuration.subnet_ids #=> Array
     #   resp.configuration.vpc_egress_configuration.subnet_ids[0] #=> String
@@ -826,7 +935,7 @@ module Aws::LambdaCore
     #   resp.configuration.vpc_egress_configuration.security_group_ids[0] #=> String
     #   resp.configuration.vpc_egress_configuration.network_protocol #=> String, one of "IPv4", "DualStack"
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types #=> Array
-    #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm"
+    #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm", "WebFunction"
     #   resp.state #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "FAILED", "DELETING", "DELETE_FAILED"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
@@ -859,7 +968,7 @@ module Aws::LambdaCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambdacore'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

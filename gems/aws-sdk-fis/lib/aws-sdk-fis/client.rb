@@ -2042,7 +2042,7 @@ module Aws::FIS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fis'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

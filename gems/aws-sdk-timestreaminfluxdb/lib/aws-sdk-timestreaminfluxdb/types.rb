@@ -3078,6 +3078,29 @@ module Aws::TimestreamInfluxDB
     #   Default: 10s
     #   @return [Types::Duration]
     #
+    # @!attribute [rw] upgrade_pacha_tree
+    #   Specifies whether to migrate the cluster from the Parquet storage
+    #   engine to PachaTree. This action cannot be reversed. To create a new
+    #   cluster on Parquet, set this to false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] wal_buffer_size
+    #   The maximum size, in bytes, of the in-memory WAL buffer before a
+    #   flush is triggered regardless of the flush interval. Increase this
+    #   value if WAL files are flushed before the interval elapses.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] snapshot_size
+    #   The maximum size of the active snapshot bucket before it is rotated
+    #   for snapshotting.
+    #   @return [Types::PercentOrAbsoluteLong]
+    #
+    # @!attribute [rw] snapshot_duration
+    #   The time-based trigger that controls how often the ingester creates
+    #   snapshots. This value is also used on query nodes as the bucket
+    #   rotation interval for the replica buffer.
+    #   @return [Types::Duration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/InfluxDBv3EnterpriseParameters AWS API Documentation
     #
     class InfluxDBv3EnterpriseParameters < Struct.new(
@@ -3134,7 +3157,11 @@ module Aws::TimestreamInfluxDB
       :last_value_cache_disable_from_history,
       :distinct_value_cache_disable_from_history,
       :replication_interval,
-      :catalog_sync_interval)
+      :catalog_sync_interval,
+      :upgrade_pacha_tree,
+      :wal_buffer_size,
+      :snapshot_size,
+      :snapshot_duration)
       SENSITIVE = []
       include Aws::Structure
     end

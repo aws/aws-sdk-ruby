@@ -712,6 +712,9 @@ module Aws::CodeStarNotifications
     #
     #   * Amazon Q Developer in chat applications clients are specified as
     #     `AWSChatbotSlack`.
+    #
+    #   * Amazon Q Developer in chat applications clients for Microsoft
+    #     Teams are specified as `AWSChatbotMicrosoftTeams`.
     #   @return [String]
     #
     # @!attribute [rw] target_address
@@ -743,8 +746,11 @@ module Aws::CodeStarNotifications
     #   * Amazon Q Developer in chat applications topics are specified as
     #     `SNS`.
     #
-    #   * Amazon Q Developer in chat applications clients are specified as
-    #     `AWSChatbotSlack`.
+    #   * Amazon Q Developer in chat applications clients for Slack are
+    #     specified as `AWSChatbotSlack`.
+    #
+    #   * Amazon Q Developer in chat applications clients for Microsoft
+    #     Teams are specified as `AWSChatbotMicrosoftTeams`.
     #   @return [String]
     #
     # @!attribute [rw] target_status

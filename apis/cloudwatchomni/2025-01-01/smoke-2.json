@@ -1,11 +1,13 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListDomainsSuccess",
-    "operationName" : "ListDomains",
-    "input" : { },
+    "id" : "GetSpaceNotFound",
+    "operationName" : "GetSpace",
+    "input" : {
+      "spaceId" : "00000000-0000-4000-8000-000000000000"
+    },
     "expectation" : {
-      "success" : { }
+      "failure" : { }
     },
     "config" : {
       "region" : "us-east-1",
@@ -14,13 +16,11 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetSpaceNotFound",
-    "operationName" : "GetSpace",
-    "input" : {
-      "spaceId" : "00000000-0000-4000-8000-000000000000"
-    },
+    "id" : "ListDomainsSuccess",
+    "operationName" : "ListDomains",
+    "input" : { },
     "expectation" : {
-      "failure" : { }
+      "success" : { }
     },
     "config" : {
       "region" : "us-east-1",

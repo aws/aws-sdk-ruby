@@ -669,11 +669,8 @@ module Aws::AgentRegistryControl
     #   are rejected.
     #
     # @option params [Hash,Array,String,Numeric,Boolean] :custom_metadata
-    #   The custom metadata to attach to the registry record. Each key must
-    #   match a property defined in the registry's custom metadata schema.
-    #   Values can be strings (maximum 128 characters) or native JSON booleans
-    #   (`true` or `false`). Values are validated against the schema at
-    #   creation time.
+    #   The custom metadata for the record. Values are strings or JSON
+    #   booleans.
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -1716,11 +1713,9 @@ module Aws::AgentRegistryControl
     #   PENDING\_APPROVAL are unaffected.
     #
     # @option params [Types::UpdatedCustomMetadataSchemaConfiguration] :custom_metadata_schema_configuration
-    #   Updated custom metadata schema configuration for the registry. Omit to
-    #   leave the existing schema unchanged. Schema evolution is additive
-    #   only: you can add properties and enum values, but you cannot remove
-    #   properties, change property types or formats, add or remove enum
-    #   constraints, or remove record type overrides.
+    #   The new custom metadata schema configuration, which replaces the
+    #   current one. You can add fields and allowed values, but you can't
+    #   remove a field or an allowed value, or change a field's type.
     #
     # @option params [Types::UpdatedAutoDetectionConfiguration] :auto_detection_configuration
     #   The updated auto-detection configuration for the registry, with PATCH
@@ -2600,7 +2595,7 @@ module Aws::AgentRegistryControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-agentregistrycontrol'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

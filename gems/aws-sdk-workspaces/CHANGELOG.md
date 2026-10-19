@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2026-10-19)
+------------------
+
+* Feature - Adds optional imageValidationMode enum to ImportCustomWorkspaceImageRequest. This allows customers to opt-in to having prevalidation run in the service account instead of customer account.
+
 1.167.0 (2026-09-15)
 ------------------
 

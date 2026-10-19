@@ -11,33 +11,33 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+      class IdempotentParameterMismatchException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class InvalidInputException < ::Aws::Errors::ServiceError
+      class InvalidInputException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class InvalidTagException < ::Aws::Errors::ServiceError
+      class InvalidTagException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-        def code: () -> ::String
-      end
-      class PredictorNotMountedException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class TagLimitExceededException < ::Aws::Errors::ServiceError
+      class PredictorNotMountedException < ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class TagLimitExceededException < ServiceError
         def message: () -> ::String
       end
     end

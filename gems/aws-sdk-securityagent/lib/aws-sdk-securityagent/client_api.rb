@@ -64,6 +64,18 @@ module Aws::SecurityAgent
     BatchDeleteSecurityRequirementsOutput = Shapes::StructureShape.new(name: 'BatchDeleteSecurityRequirementsOutput')
     BatchDeleteThreatModelsInput = Shapes::StructureShape.new(name: 'BatchDeleteThreatModelsInput')
     BatchDeleteThreatModelsOutput = Shapes::StructureShape.new(name: 'BatchDeleteThreatModelsOutput')
+    BatchDisassociateFindingIssueError = Shapes::StructureShape.new(name: 'BatchDisassociateFindingIssueError')
+    BatchDisassociateFindingIssueErrorMessageString = Shapes::StringShape.new(name: 'BatchDisassociateFindingIssueErrorMessageString')
+    BatchDisassociateFindingIssueErrors = Shapes::ListShape.new(name: 'BatchDisassociateFindingIssueErrors')
+    BatchDisassociateFindingIssueInput = Shapes::StructureShape.new(name: 'BatchDisassociateFindingIssueInput')
+    BatchDisassociateFindingIssueOutput = Shapes::StructureShape.new(name: 'BatchDisassociateFindingIssueOutput')
+    BatchExportFindingError = Shapes::StructureShape.new(name: 'BatchExportFindingError')
+    BatchExportFindingErrorList = Shapes::ListShape.new(name: 'BatchExportFindingErrorList')
+    BatchExportFindingErrorMessageString = Shapes::StringShape.new(name: 'BatchExportFindingErrorMessageString')
+    BatchExportFindingResult = Shapes::StructureShape.new(name: 'BatchExportFindingResult')
+    BatchExportFindingResultList = Shapes::ListShape.new(name: 'BatchExportFindingResultList')
+    BatchExportFindingsInput = Shapes::StructureShape.new(name: 'BatchExportFindingsInput')
+    BatchExportFindingsOutput = Shapes::StructureShape.new(name: 'BatchExportFindingsOutput')
     BatchGetAgentSpacesInput = Shapes::StructureShape.new(name: 'BatchGetAgentSpacesInput')
     BatchGetAgentSpacesOutput = Shapes::StructureShape.new(name: 'BatchGetAgentSpacesOutput')
     BatchGetArtifactMetadataInput = Shapes::StructureShape.new(name: 'BatchGetArtifactMetadataInput')
@@ -270,11 +282,21 @@ module Aws::SecurityAgent
     IntegrationSummaryList = Shapes::ListShape.new(name: 'IntegrationSummaryList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
+    IssueDestination = Shapes::StructureShape.new(name: 'IssueDestination')
+    JiraInstallationId = Shapes::StringShape.new(name: 'JiraInstallationId')
+    JiraIntegrationInput = Shapes::StructureShape.new(name: 'JiraIntegrationInput')
+    JiraProjectMetadata = Shapes::StructureShape.new(name: 'JiraProjectMetadata')
+    JiraProjectMetadataProjectNameString = Shapes::StringShape.new(name: 'JiraProjectMetadataProjectNameString')
+    JiraProjectResource = Shapes::StructureShape.new(name: 'JiraProjectResource')
+    JiraProjectResourceProjectNameString = Shapes::StringShape.new(name: 'JiraProjectResourceProjectNameString')
+    JiraResourceCapabilities = Shapes::StructureShape.new(name: 'JiraResourceCapabilities')
+    JiraSiteUrl = Shapes::StringShape.new(name: 'JiraSiteUrl')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     JobType = Shapes::StringShape.new(name: 'JobType')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
     LambdaFunctionArns = Shapes::ListShape.new(name: 'LambdaFunctionArns')
+    LinkedIssue = Shapes::StructureShape.new(name: 'LinkedIssue')
     ListActorMessagesInput = Shapes::StructureShape.new(name: 'ListActorMessagesInput')
     ListActorMessagesOutput = Shapes::StructureShape.new(name: 'ListActorMessagesOutput')
     ListAgentSpacesInput = Shapes::StructureShape.new(name: 'ListAgentSpacesInput')
@@ -739,6 +761,46 @@ module Aws::SecurityAgent
     BatchDeleteThreatModelsOutput.add_member(:deleted, Shapes::ShapeRef.new(shape: ThreatModelIdList, location_name: "deleted"))
     BatchDeleteThreatModelsOutput.add_member(:failed, Shapes::ShapeRef.new(shape: DeleteThreatModelFailureList, location_name: "failed"))
     BatchDeleteThreatModelsOutput.struct_class = Types::BatchDeleteThreatModelsOutput
+
+    BatchDisassociateFindingIssueError.add_member(:finding_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "findingId"))
+    BatchDisassociateFindingIssueError.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "code"))
+    BatchDisassociateFindingIssueError.add_member(:message, Shapes::ShapeRef.new(shape: BatchDisassociateFindingIssueErrorMessageString, required: true, location_name: "message"))
+    BatchDisassociateFindingIssueError.struct_class = Types::BatchDisassociateFindingIssueError
+
+    BatchDisassociateFindingIssueErrors.member = Shapes::ShapeRef.new(shape: BatchDisassociateFindingIssueError)
+
+    BatchDisassociateFindingIssueInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    BatchDisassociateFindingIssueInput.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestJobId"))
+    BatchDisassociateFindingIssueInput.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewJobId"))
+    BatchDisassociateFindingIssueInput.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIdList, required: true, location_name: "findingIds"))
+    BatchDisassociateFindingIssueInput.struct_class = Types::BatchDisassociateFindingIssueInput
+
+    BatchDisassociateFindingIssueOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchDisassociateFindingIssueErrors, required: true, location_name: "errors"))
+    BatchDisassociateFindingIssueOutput.struct_class = Types::BatchDisassociateFindingIssueOutput
+
+    BatchExportFindingError.add_member(:finding_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "findingId"))
+    BatchExportFindingError.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "code"))
+    BatchExportFindingError.add_member(:message, Shapes::ShapeRef.new(shape: BatchExportFindingErrorMessageString, required: true, location_name: "message"))
+    BatchExportFindingError.struct_class = Types::BatchExportFindingError
+
+    BatchExportFindingErrorList.member = Shapes::ShapeRef.new(shape: BatchExportFindingError)
+
+    BatchExportFindingResult.add_member(:finding_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "findingId"))
+    BatchExportFindingResult.add_member(:linked_issue, Shapes::ShapeRef.new(shape: LinkedIssue, required: true, location_name: "linkedIssue"))
+    BatchExportFindingResult.struct_class = Types::BatchExportFindingResult
+
+    BatchExportFindingResultList.member = Shapes::ShapeRef.new(shape: BatchExportFindingResult)
+
+    BatchExportFindingsInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    BatchExportFindingsInput.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestJobId"))
+    BatchExportFindingsInput.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewJobId"))
+    BatchExportFindingsInput.add_member(:issue_destination, Shapes::ShapeRef.new(shape: IssueDestination, required: true, location_name: "issueDestination"))
+    BatchExportFindingsInput.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIdList, required: true, location_name: "findingIds"))
+    BatchExportFindingsInput.struct_class = Types::BatchExportFindingsInput
+
+    BatchExportFindingsOutput.add_member(:results, Shapes::ShapeRef.new(shape: BatchExportFindingResultList, required: true, location_name: "results"))
+    BatchExportFindingsOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchExportFindingErrorList, required: true, location_name: "errors"))
+    BatchExportFindingsOutput.struct_class = Types::BatchExportFindingsOutput
 
     BatchGetAgentSpacesInput.add_member(:agent_space_ids, Shapes::ShapeRef.new(shape: AgentSpaceIdList, required: true, location_name: "agentSpaceIds"))
     BatchGetAgentSpacesInput.struct_class = Types::BatchGetAgentSpacesInput
@@ -1470,6 +1532,7 @@ module Aws::SecurityAgent
     Finding.add_member(:alignment_rationale, Shapes::ShapeRef.new(shape: String, location_name: "alignmentRationale"))
     Finding.add_member(:revalidation_job_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "revalidationJobIds"))
     Finding.add_member(:original_finding_id, Shapes::ShapeRef.new(shape: String, location_name: "originalFindingId"))
+    Finding.add_member(:linked_issue, Shapes::ShapeRef.new(shape: LinkedIssue, location_name: "linkedIssue"))
     Finding.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     Finding.struct_class = Types::Finding
@@ -1530,6 +1593,7 @@ module Aws::SecurityAgent
     GetIntegrationOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
     GetIntegrationOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     GetIntegrationOutput.add_member(:target_url, Shapes::ShapeRef.new(shape: TargetUrl, location_name: "targetUrl"))
+    GetIntegrationOutput.add_member(:site_url, Shapes::ShapeRef.new(shape: TargetUrl, location_name: "siteUrl"))
     GetIntegrationOutput.add_member(:webhook_url, Shapes::ShapeRef.new(shape: String, location_name: "webhookUrl"))
     GetIntegrationOutput.add_member(:private_connection_name, Shapes::ShapeRef.new(shape: PrivateConnectionName, location_name: "privateConnectionName"))
     GetIntegrationOutput.struct_class = Types::GetIntegrationOutput
@@ -1643,12 +1707,14 @@ module Aws::SecurityAgent
     IntegratedResource.add_member(:bitbucket_repository, Shapes::ShapeRef.new(shape: BitbucketRepositoryResource, location_name: "bitbucketRepository"))
     IntegratedResource.add_member(:confluence_document, Shapes::ShapeRef.new(shape: ConfluenceDocumentResource, location_name: "confluenceDocument"))
     IntegratedResource.add_member(:azure_dev_ops_repository, Shapes::ShapeRef.new(shape: AzureDevOpsRepositoryResource, location_name: "azureDevOpsRepository"))
+    IntegratedResource.add_member(:jira_project, Shapes::ShapeRef.new(shape: JiraProjectResource, location_name: "jiraProject"))
     IntegratedResource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     IntegratedResource.add_member_subclass(:github_repository, Types::IntegratedResource::GithubRepository)
     IntegratedResource.add_member_subclass(:gitlab_repository, Types::IntegratedResource::GitlabRepository)
     IntegratedResource.add_member_subclass(:bitbucket_repository, Types::IntegratedResource::BitbucketRepository)
     IntegratedResource.add_member_subclass(:confluence_document, Types::IntegratedResource::ConfluenceDocument)
     IntegratedResource.add_member_subclass(:azure_dev_ops_repository, Types::IntegratedResource::AzureDevOpsRepository)
+    IntegratedResource.add_member_subclass(:jira_project, Types::IntegratedResource::JiraProject)
     IntegratedResource.add_member_subclass(:unknown, Types::IntegratedResource::Unknown)
     IntegratedResource.struct_class = Types::IntegratedResource
 
@@ -1663,12 +1729,14 @@ module Aws::SecurityAgent
     IntegratedResourceMetadata.add_member(:bitbucket_repository, Shapes::ShapeRef.new(shape: BitbucketRepositoryMetadata, location_name: "bitbucketRepository"))
     IntegratedResourceMetadata.add_member(:confluence_document, Shapes::ShapeRef.new(shape: ConfluenceDocumentMetadata, location_name: "confluenceDocument"))
     IntegratedResourceMetadata.add_member(:azure_dev_ops_repository, Shapes::ShapeRef.new(shape: AzureDevOpsRepositoryMetadata, location_name: "azureDevOpsRepository"))
+    IntegratedResourceMetadata.add_member(:jira_project, Shapes::ShapeRef.new(shape: JiraProjectMetadata, location_name: "jiraProject"))
     IntegratedResourceMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     IntegratedResourceMetadata.add_member_subclass(:github_repository, Types::IntegratedResourceMetadata::GithubRepository)
     IntegratedResourceMetadata.add_member_subclass(:gitlab_repository, Types::IntegratedResourceMetadata::GitlabRepository)
     IntegratedResourceMetadata.add_member_subclass(:bitbucket_repository, Types::IntegratedResourceMetadata::BitbucketRepository)
     IntegratedResourceMetadata.add_member_subclass(:confluence_document, Types::IntegratedResourceMetadata::ConfluenceDocument)
     IntegratedResourceMetadata.add_member_subclass(:azure_dev_ops_repository, Types::IntegratedResourceMetadata::AzureDevOpsRepository)
+    IntegratedResourceMetadata.add_member_subclass(:jira_project, Types::IntegratedResourceMetadata::JiraProject)
     IntegratedResourceMetadata.add_member_subclass(:unknown, Types::IntegratedResourceMetadata::Unknown)
     IntegratedResourceMetadata.struct_class = Types::IntegratedResourceMetadata
 
@@ -1702,7 +1770,43 @@ module Aws::SecurityAgent
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    IssueDestination.add_member(:integration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "integrationId"))
+    IssueDestination.add_member(:project_key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "projectKey"))
+    IssueDestination.struct_class = Types::IssueDestination
+
+    JiraIntegrationInput.add_member(:installation_id, Shapes::ShapeRef.new(shape: JiraInstallationId, required: true, location_name: "installationId"))
+    JiraIntegrationInput.add_member(:code, Shapes::ShapeRef.new(shape: AuthCode, required: true, location_name: "code"))
+    JiraIntegrationInput.add_member(:state, Shapes::ShapeRef.new(shape: CsrfState, required: true, location_name: "state"))
+    JiraIntegrationInput.add_member(:site_url, Shapes::ShapeRef.new(shape: JiraSiteUrl, required: true, location_name: "siteUrl"))
+    JiraIntegrationInput.struct_class = Types::JiraIntegrationInput
+
+    JiraProjectMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ProviderResourceName, required: true, location_name: "name"))
+    JiraProjectMetadata.add_member(:provider_resource_id, Shapes::ShapeRef.new(shape: ProviderResourceId, required: true, location_name: "providerResourceId"))
+    JiraProjectMetadata.add_member(:project_key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "projectKey"))
+    JiraProjectMetadata.add_member(:project_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "projectId"))
+    JiraProjectMetadata.add_member(:project_name, Shapes::ShapeRef.new(shape: JiraProjectMetadataProjectNameString, location_name: "projectName"))
+    JiraProjectMetadata.struct_class = Types::JiraProjectMetadata
+
+    JiraProjectResource.add_member(:name, Shapes::ShapeRef.new(shape: ProviderResourceName, required: true, location_name: "name"))
+    JiraProjectResource.add_member(:project_key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "projectKey"))
+    JiraProjectResource.add_member(:project_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "projectId"))
+    JiraProjectResource.add_member(:project_name, Shapes::ShapeRef.new(shape: JiraProjectResourceProjectNameString, location_name: "projectName"))
+    JiraProjectResource.struct_class = Types::JiraProjectResource
+
+    JiraResourceCapabilities.add_member(:create_issue, Shapes::ShapeRef.new(shape: Boolean, location_name: "createIssue"))
+    JiraResourceCapabilities.add_member(:comment_issue, Shapes::ShapeRef.new(shape: Boolean, location_name: "commentIssue"))
+    JiraResourceCapabilities.struct_class = Types::JiraResourceCapabilities
+
     LambdaFunctionArns.member = Shapes::ShapeRef.new(shape: LambdaFunctionArn)
+
+    LinkedIssue.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, location_name: "provider"))
+    LinkedIssue.add_member(:integration_id, Shapes::ShapeRef.new(shape: String, location_name: "integrationId"))
+    LinkedIssue.add_member(:project_key, Shapes::ShapeRef.new(shape: String, location_name: "projectKey"))
+    LinkedIssue.add_member(:issue_key, Shapes::ShapeRef.new(shape: String, location_name: "issueKey"))
+    LinkedIssue.add_member(:issue_id, Shapes::ShapeRef.new(shape: String, location_name: "issueId"))
+    LinkedIssue.add_member(:issue_url, Shapes::ShapeRef.new(shape: String, location_name: "issueUrl"))
+    LinkedIssue.add_member(:site_url, Shapes::ShapeRef.new(shape: String, location_name: "siteUrl"))
+    LinkedIssue.struct_class = Types::LinkedIssue
 
     ListActorMessagesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListActorMessagesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -2109,6 +2213,7 @@ module Aws::SecurityAgent
     ProviderInput.add_member(:confluence, Shapes::ShapeRef.new(shape: ConfluenceIntegrationInput, location_name: "confluence"))
     ProviderInput.add_member(:azure_dev_ops, Shapes::ShapeRef.new(shape: AzureDevOpsIntegrationInput, location_name: "azureDevOps"))
     ProviderInput.add_member(:bitbucket_data_center, Shapes::ShapeRef.new(shape: BitbucketDataCenterIntegrationInput, location_name: "bitbucketDataCenter"))
+    ProviderInput.add_member(:jira, Shapes::ShapeRef.new(shape: JiraIntegrationInput, location_name: "jira"))
     ProviderInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderInput.add_member_subclass(:github, Types::ProviderInput::Github)
     ProviderInput.add_member_subclass(:gitlab, Types::ProviderInput::Gitlab)
@@ -2116,6 +2221,7 @@ module Aws::SecurityAgent
     ProviderInput.add_member_subclass(:confluence, Types::ProviderInput::Confluence)
     ProviderInput.add_member_subclass(:azure_dev_ops, Types::ProviderInput::AzureDevOps)
     ProviderInput.add_member_subclass(:bitbucket_data_center, Types::ProviderInput::BitbucketDataCenter)
+    ProviderInput.add_member_subclass(:jira, Types::ProviderInput::Jira)
     ProviderInput.add_member_subclass(:unknown, Types::ProviderInput::Unknown)
     ProviderInput.struct_class = Types::ProviderInput
 
@@ -2124,12 +2230,14 @@ module Aws::SecurityAgent
     ProviderResourceCapabilities.add_member(:bitbucket, Shapes::ShapeRef.new(shape: BitbucketResourceCapabilities, location_name: "bitbucket"))
     ProviderResourceCapabilities.add_member(:confluence, Shapes::ShapeRef.new(shape: ConfluenceResourceCapabilities, location_name: "confluence"))
     ProviderResourceCapabilities.add_member(:azure_dev_ops, Shapes::ShapeRef.new(shape: AzureDevOpsResourceCapabilities, location_name: "azureDevOps"))
+    ProviderResourceCapabilities.add_member(:jira, Shapes::ShapeRef.new(shape: JiraResourceCapabilities, location_name: "jira"))
     ProviderResourceCapabilities.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderResourceCapabilities.add_member_subclass(:github, Types::ProviderResourceCapabilities::Github)
     ProviderResourceCapabilities.add_member_subclass(:gitlab, Types::ProviderResourceCapabilities::Gitlab)
     ProviderResourceCapabilities.add_member_subclass(:bitbucket, Types::ProviderResourceCapabilities::Bitbucket)
     ProviderResourceCapabilities.add_member_subclass(:confluence, Types::ProviderResourceCapabilities::Confluence)
     ProviderResourceCapabilities.add_member_subclass(:azure_dev_ops, Types::ProviderResourceCapabilities::AzureDevOps)
+    ProviderResourceCapabilities.add_member_subclass(:jira, Types::ProviderResourceCapabilities::Jira)
     ProviderResourceCapabilities.add_member_subclass(:unknown, Types::ProviderResourceCapabilities::Unknown)
     ProviderResourceCapabilities.struct_class = Types::ProviderResourceCapabilities
 
@@ -2930,6 +3038,36 @@ module Aws::SecurityAgent
         o.http_request_uri = "/BatchDeleteThreatModels"
         o.input = Shapes::ShapeRef.new(shape: BatchDeleteThreatModelsInput)
         o.output = Shapes::ShapeRef.new(shape: BatchDeleteThreatModelsOutput)
+      end)
+
+      api.add_operation(:batch_disassociate_finding_issue, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDisassociateFindingIssue"
+        o.http_method = "POST"
+        o.http_request_uri = "/BatchDisassociateFindingIssue"
+        o.input = Shapes::ShapeRef.new(shape: BatchDisassociateFindingIssueInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchDisassociateFindingIssueOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:batch_export_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchExportFindings"
+        o.http_method = "POST"
+        o.http_request_uri = "/BatchExportFindings"
+        o.input = Shapes::ShapeRef.new(shape: BatchExportFindingsInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchExportFindingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:batch_get_agent_spaces, Seahorse::Model::Operation.new.tap do |o|

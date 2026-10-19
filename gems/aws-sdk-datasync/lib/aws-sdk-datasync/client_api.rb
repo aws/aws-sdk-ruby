@@ -176,6 +176,7 @@ module Aws::DataSync
     NfsMountOptions = Shapes::StructureShape.new(name: 'NfsMountOptions')
     NfsSubdirectory = Shapes::StringShape.new(name: 'NfsSubdirectory')
     NfsVersion = Shapes::StringShape.new(name: 'NfsVersion')
+    ObjectMetadata = Shapes::StringShape.new(name: 'ObjectMetadata')
     ObjectStorageAccessKey = Shapes::StringShape.new(name: 'ObjectStorageAccessKey')
     ObjectStorageBucketName = Shapes::StringShape.new(name: 'ObjectStorageBucketName')
     ObjectStorageCertificate = Shapes::BlobShape.new(name: 'ObjectStorageCertificate')
@@ -891,6 +892,7 @@ module Aws::DataSync
     Options.add_member(:transfer_mode, Shapes::ShapeRef.new(shape: TransferMode, location_name: "TransferMode"))
     Options.add_member(:security_descriptor_copy_flags, Shapes::ShapeRef.new(shape: SmbSecurityDescriptorCopyFlags, location_name: "SecurityDescriptorCopyFlags"))
     Options.add_member(:object_tags, Shapes::ShapeRef.new(shape: ObjectTags, location_name: "ObjectTags"))
+    Options.add_member(:object_metadata, Shapes::ShapeRef.new(shape: ObjectMetadata, location_name: "ObjectMetadata"))
     Options.struct_class = Types::Options
 
     OutputTagList.member = Shapes::ShapeRef.new(shape: TagListEntry)

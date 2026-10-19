@@ -15,6 +15,7 @@ module Aws::CloudWatch
     include Seahorse::Model
 
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    ActionConfiguration = Shapes::StructureShape.new(name: 'ActionConfiguration')
     ActionLogLineCount = Shapes::IntegerShape.new(name: 'ActionLogLineCount')
     ActionLogLineRoleArn = Shapes::StringShape.new(name: 'ActionLogLineRoleArn')
     ActionPrefix = Shapes::StringShape.new(name: 'ActionPrefix')
@@ -37,6 +38,10 @@ module Aws::CloudWatch
     AlarmNames = Shapes::ListShape.new(name: 'AlarmNames')
     AlarmPromQLCriteria = Shapes::StructureShape.new(name: 'AlarmPromQLCriteria')
     AlarmRule = Shapes::StringShape.new(name: 'AlarmRule')
+    AlarmTagsPropagation = Shapes::StructureShape.new(name: 'AlarmTagsPropagation')
+    AlarmTagsPropagationEnabled = Shapes::BooleanShape.new(name: 'AlarmTagsPropagationEnabled')
+    AlarmTagsPropagationTagKey = Shapes::StringShape.new(name: 'AlarmTagsPropagationTagKey')
+    AlarmTagsPropagationTagKeys = Shapes::ListShape.new(name: 'AlarmTagsPropagationTagKeys')
     AlarmType = Shapes::StringShape.new(name: 'AlarmType')
     AlarmTypes = Shapes::ListShape.new(name: 'AlarmTypes')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
@@ -394,6 +399,9 @@ module Aws::CloudWatch
     WarmUpConfiguration = Shapes::StructureShape.new(name: 'WarmUpConfiguration')
     WarmUpPeriodDurationInMinutes = Shapes::IntegerShape.new(name: 'WarmUpPeriodDurationInMinutes')
 
+    ActionConfiguration.add_member(:alarm_tags_propagation, Shapes::ShapeRef.new(shape: AlarmTagsPropagation, location_name: "AlarmTagsPropagation"))
+    ActionConfiguration.struct_class = Types::ActionConfiguration
+
     AlarmContributor.add_member(:contributor_id, Shapes::ShapeRef.new(shape: ContributorId, required: true, location_name: "ContributorId"))
     AlarmContributor.add_member(:contributor_attributes, Shapes::ShapeRef.new(shape: ContributorAttributes, required: true, location_name: "ContributorAttributes"))
     AlarmContributor.add_member(:state_reason, Shapes::ShapeRef.new(shape: StateReason, required: true, location_name: "StateReason"))
@@ -431,6 +439,13 @@ module Aws::CloudWatch
     AlarmPromQLCriteria.add_member(:pending_period, Shapes::ShapeRef.new(shape: PendingPeriod, location_name: "PendingPeriod"))
     AlarmPromQLCriteria.add_member(:recovery_period, Shapes::ShapeRef.new(shape: RecoveryPeriod, location_name: "RecoveryPeriod"))
     AlarmPromQLCriteria.struct_class = Types::AlarmPromQLCriteria
+
+    AlarmTagsPropagation.add_member(:enabled, Shapes::ShapeRef.new(shape: AlarmTagsPropagationEnabled, required: true, location_name: "Enabled"))
+    AlarmTagsPropagation.add_member(:included_tag_keys, Shapes::ShapeRef.new(shape: AlarmTagsPropagationTagKeys, location_name: "IncludedTagKeys"))
+    AlarmTagsPropagation.add_member(:excluded_tag_keys, Shapes::ShapeRef.new(shape: AlarmTagsPropagationTagKeys, location_name: "ExcludedTagKeys"))
+    AlarmTagsPropagation.struct_class = Types::AlarmTagsPropagation
+
+    AlarmTagsPropagationTagKeys.member = Shapes::ShapeRef.new(shape: AlarmTagsPropagationTagKey)
 
     AlarmTypes.member = Shapes::ShapeRef.new(shape: AlarmType)
 
@@ -485,6 +500,7 @@ module Aws::CloudWatch
     CompositeAlarm.add_member(:actions_suppressor, Shapes::ShapeRef.new(shape: AlarmArn, location_name: "ActionsSuppressor"))
     CompositeAlarm.add_member(:actions_suppressor_wait_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorWaitPeriod"))
     CompositeAlarm.add_member(:actions_suppressor_extension_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorExtensionPeriod"))
+    CompositeAlarm.add_member(:action_configuration, Shapes::ShapeRef.new(shape: ActionConfiguration, location_name: "ActionConfiguration"))
     CompositeAlarm.struct_class = Types::CompositeAlarm
 
     CompositeAlarms.member = Shapes::ShapeRef.new(shape: CompositeAlarm)
@@ -993,6 +1009,7 @@ module Aws::CloudWatch
     LogAlarm.add_member(:action_log_line_count, Shapes::ShapeRef.new(shape: ActionLogLineCount, location_name: "ActionLogLineCount"))
     LogAlarm.add_member(:action_log_line_role_arn, Shapes::ShapeRef.new(shape: ActionLogLineRoleArn, location_name: "ActionLogLineRoleArn"))
     LogAlarm.add_member(:warm_up_configuration, Shapes::ShapeRef.new(shape: WarmUpConfiguration, location_name: "WarmUpConfiguration"))
+    LogAlarm.add_member(:action_configuration, Shapes::ShapeRef.new(shape: ActionConfiguration, location_name: "ActionConfiguration"))
     LogAlarm.struct_class = Types::LogAlarm
 
     LogAlarms.member = Shapes::ShapeRef.new(shape: LogAlarm)
@@ -1059,6 +1076,7 @@ module Aws::CloudWatch
     MetricAlarm.add_member(:warm_up_configuration, Shapes::ShapeRef.new(shape: WarmUpConfiguration, location_name: "WarmUpConfiguration"))
     MetricAlarm.add_member(:evaluation_criteria, Shapes::ShapeRef.new(shape: EvaluationCriteria, location_name: "EvaluationCriteria"))
     MetricAlarm.add_member(:evaluation_interval, Shapes::ShapeRef.new(shape: EvaluationInterval, location_name: "EvaluationInterval"))
+    MetricAlarm.add_member(:action_configuration, Shapes::ShapeRef.new(shape: ActionConfiguration, location_name: "ActionConfiguration"))
     MetricAlarm.struct_class = Types::MetricAlarm
 
     MetricAlarms.member = Shapes::ShapeRef.new(shape: MetricAlarm)
@@ -1207,6 +1225,7 @@ module Aws::CloudWatch
     PutCompositeAlarmInput.add_member(:actions_suppressor, Shapes::ShapeRef.new(shape: AlarmArn, location_name: "ActionsSuppressor"))
     PutCompositeAlarmInput.add_member(:actions_suppressor_wait_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorWaitPeriod"))
     PutCompositeAlarmInput.add_member(:actions_suppressor_extension_period, Shapes::ShapeRef.new(shape: SuppressorPeriod, location_name: "ActionsSuppressorExtensionPeriod"))
+    PutCompositeAlarmInput.add_member(:action_configuration, Shapes::ShapeRef.new(shape: ActionConfiguration, location_name: "ActionConfiguration"))
     PutCompositeAlarmInput.struct_class = Types::PutCompositeAlarmInput
 
     PutDashboardInput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, required: true, location_name: "DashboardName"))
@@ -1242,6 +1261,7 @@ module Aws::CloudWatch
     PutLogAlarmInput.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: TreatMissingData, location_name: "TreatMissingData"))
     PutLogAlarmInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PutLogAlarmInput.add_member(:warm_up_configuration, Shapes::ShapeRef.new(shape: WarmUpConfiguration, location_name: "WarmUpConfiguration"))
+    PutLogAlarmInput.add_member(:action_configuration, Shapes::ShapeRef.new(shape: ActionConfiguration, location_name: "ActionConfiguration"))
     PutLogAlarmInput.struct_class = Types::PutLogAlarmInput
 
     PutManagedInsightRulesInput.add_member(:managed_rules, Shapes::ShapeRef.new(shape: ManagedRules, required: true, location_name: "ManagedRules"))
@@ -1276,6 +1296,7 @@ module Aws::CloudWatch
     PutMetricAlarmInput.add_member(:warm_up_configuration, Shapes::ShapeRef.new(shape: WarmUpConfiguration, location_name: "WarmUpConfiguration"))
     PutMetricAlarmInput.add_member(:evaluation_criteria, Shapes::ShapeRef.new(shape: EvaluationCriteria, location_name: "EvaluationCriteria"))
     PutMetricAlarmInput.add_member(:evaluation_interval, Shapes::ShapeRef.new(shape: EvaluationInterval, location_name: "EvaluationInterval"))
+    PutMetricAlarmInput.add_member(:action_configuration, Shapes::ShapeRef.new(shape: ActionConfiguration, location_name: "ActionConfiguration"))
     PutMetricAlarmInput.struct_class = Types::PutMetricAlarmInput
 
     PutMetricDataInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))

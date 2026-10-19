@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2026-10-19)
+------------------
+
+* Feature - Adds four new parameters to the InfluxDBv3Enterprise parameter group for Amazon Timestream for InfluxDB. The new parameters are upgradePachaTree, walBufferSize, snapshotSize, and snapshotDuration.
+
 1.49.0 (2026-09-11)
 ------------------
 

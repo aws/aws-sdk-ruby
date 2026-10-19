@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2026-10-19)
+------------------
+
+* Feature - Adds the Builtin.FailureAnalysis evaluator for batch evaluations. GetBatchEvaluation now returns insightResults that group session failures into insights with root causes and suggested fixes.
+
+1.58.0 (2026-10-12)
+------------------
+
+* Feature - AgentCore Memory now supports Long-Term Memory Time-to-Live on Batch APIs.
+
 1.57.0 (2026-09-21)
 ------------------
 

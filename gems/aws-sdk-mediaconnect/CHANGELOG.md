@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.109.0 (2026-10-12)
+------------------
+
+* Feature - This release adds support for MediaConnect Router high-bitrate tiers. It also adds a configurable audio reference level for NDI flows, and enhanced source metadata that includes color information and transport stream ID.
+
 1.108.0 (2026-09-25)
 ------------------
 

@@ -461,7 +461,7 @@ module Aws::Connect
       attr_accessor file_id: ::String
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
       attr_accessor associated_resource_arn: ::String
@@ -1090,6 +1090,29 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ContactFlowAliasInfo
+      attr_accessor contact_flow_id: ::String
+      attr_accessor contact_flow_arn: ::String
+      attr_accessor alias_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_modified_region: ::String
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ContactFlowAliasSummary
+      attr_accessor arn: ::String
+      attr_accessor alias_id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor alias_name: ::String
+      attr_accessor alias_description: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
     class ContactFlowAttributeAndCondition
       attr_accessor tag_conditions: ::Array[Types::TagCondition]
       attr_accessor contact_flow_type_condition: Types::ContactFlowTypeCondition
@@ -1212,6 +1235,8 @@ module Aws::Connect
       attr_accessor arn: ::String
       attr_accessor version_description: ::String
       attr_accessor version: ::Integer
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -1350,7 +1375,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       SENSITIVE: []
     end
 
@@ -1373,6 +1398,21 @@ module Aws::Connect
     class CreateCaseActionDefinition
       attr_accessor fields: ::Array[Types::FieldValue]
       attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor contact_flow_version: ::Integer
+      attr_accessor alias_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactFlowAliasResponse
+      attr_accessor contact_flow_arn: ::String
+      attr_accessor id: ::String
       SENSITIVE: []
     end
 
@@ -2298,6 +2338,16 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DeleteContactFlowAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor alias_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContactFlowAliasResponse < Aws::EmptyStructure
+    end
+
     class DeleteContactFlowModuleAliasRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_flow_module_id: ::String
@@ -2644,6 +2694,18 @@ module Aws::Connect
     class DescribeContactEvaluationResponse
       attr_accessor evaluation: Types::Evaluation
       attr_accessor evaluation_form: Types::EvaluationFormContent
+      SENSITIVE: []
+    end
+
+    class DescribeContactFlowAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor alias_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContactFlowAliasResponse
+      attr_accessor contact_flow_alias: Types::ContactFlowAliasInfo
       SENSITIVE: []
     end
 
@@ -4175,6 +4237,7 @@ module Aws::Connect
       attr_accessor file_id: ::String
       attr_accessor url_expiry_in_seconds: ::Integer
       attr_accessor associated_resource_arn: ::String
+      attr_accessor url_content_disposition: ("INLINE" | "ATTACHMENT")
       SENSITIVE: []
     end
 
@@ -4182,7 +4245,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor associated_resource_arn: ::String
@@ -4993,6 +5056,20 @@ module Aws::Connect
 
     class ListContactEvaluationsResponse
       attr_accessor evaluation_summary_list: ::Array[Types::EvaluationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContactFlowAliasesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContactFlowAliasesResponse
+      attr_accessor contact_flow_alias_summary_list: ::Array[Types::ContactFlowAliasSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -8033,7 +8110,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor upload_url_metadata: Types::UploadUrlMetadata
       SENSITIVE: []
@@ -8765,6 +8842,19 @@ module Aws::Connect
       attr_accessor evaluation_id: ::String
       attr_accessor evaluation_arn: ::String
       SENSITIVE: []
+    end
+
+    class UpdateContactFlowAliasRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_flow_id: ::String
+      attr_accessor alias_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor contact_flow_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateContactFlowAliasResponse < Aws::EmptyStructure
     end
 
     class UpdateContactFlowContentRequest

@@ -11,22 +11,22 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class ConstraintViolationException < ::Aws::Errors::ServiceError
+      class ConstraintViolationException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceException < ::Aws::Errors::ServiceError
+      class InternalServiceException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
       end
-      class PaginationTokenExpiredException < ::Aws::Errors::ServiceError
+      class PaginationTokenExpiredException < ServiceError
         def message: () -> ::String
       end
-      class ThrottledException < ::Aws::Errors::ServiceError
+      class ThrottledException < ServiceError
         def message: () -> ::String
       end
     end

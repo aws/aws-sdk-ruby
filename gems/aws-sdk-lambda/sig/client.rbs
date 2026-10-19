@@ -158,7 +158,8 @@ module Aws
                                               }?,
                                               chained_invoke_options: {
                                                 function_name: ::String,
-                                                tenant_id: ::String?
+                                                tenant_id: ::String?,
+                                                x_amzn_trace_id: ::String?
                                               }?
                                             }
                                           ],

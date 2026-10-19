@@ -202,7 +202,12 @@ module Aws
       access_log_configuration: {
         format: ("TEXT" | "JSON"),
         include_query_parameters: ("DISABLED" | "ENABLED")?
-      }?
+      }?,
+      container_configurations: Array[
+        {
+          log_level: ("debug" | "info")?
+        }
+      ]?
     }
 
       type service_connect_service = {

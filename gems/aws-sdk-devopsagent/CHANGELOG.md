@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2026-10-19)
+------------------
+
+* Feature - Documentation update release for AWS service
+
+1.18.0 (2026-10-12)
+------------------
+
+* Feature - Adds support for the includedData field in GetAgentSpace and ListAgentSpaces APIs
+
 1.17.0 (2026-10-08)
 ------------------
 

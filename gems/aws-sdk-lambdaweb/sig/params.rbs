@@ -24,6 +24,7 @@ module Aws
       type service_config = {
       execution_role_arn: ::String,
       timeout_seconds: ::Integer?,
+      egress_network_connector_arn: ::String?,
       max_concurrency_per_environment: ::Integer?,
       environment_variables: Hash[::String, ::String]?,
       telemetry_config: {

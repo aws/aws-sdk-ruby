@@ -358,6 +358,48 @@ module Aws
                                  ) -> _CreatePromptVersionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePromptVersionResponseSuccess
 
+      interface _CreateRetrievalInstructionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRetrievalInstructionResponse]
+        def retrieval_instruction_id: () -> ::String
+        def retrieval_instruction_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("ACTIVE" | "INACTIVE")
+        def last_transition_status: () -> ("CREATING" | "UPDATING" | "CREATE_SUCCESSFUL" | "CREATE_FAILED" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_retrieval_instruction-instance_method
+      def create_retrieval_instruction: (
+                                          ?client_token: ::String,
+                                          name: ::String,
+                                          instruction: {
+                                            retrieval_guidance: ::String?,
+                                            persona: ::String?,
+                                            answer_format: ::String?,
+                                            answer_policy: ::String?
+                                          },
+                                          ?description: ::String,
+                                          ?customer_encryption_key_arn: ::String,
+                                          ?tags: Hash[::String, ::String]
+                                        ) -> _CreateRetrievalInstructionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRetrievalInstructionResponseSuccess
+
+      interface _CreateRetrievalInstructionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRetrievalInstructionVersionResponse]
+        def retrieval_instruction_id: () -> ::String
+        def retrieval_instruction_arn: () -> ::String
+        def version: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_retrieval_instruction_version-instance_method
+      def create_retrieval_instruction_version: (
+                                                  retrieval_instruction_id: ::String,
+                                                  ?description: ::String,
+                                                  ?client_token: ::String
+                                                ) -> _CreateRetrievalInstructionVersionResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRetrievalInstructionVersionResponseSuccess
+
       interface _CreateVpcConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcConfigurationResponse]
         def vpc_configuration_id: () -> ::String
@@ -529,6 +571,19 @@ module Aws
                                     ?expected_revision_id: ::String
                                   ) -> _DeleteResourcePolicyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteRetrievalInstructionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRetrievalInstructionResponse]
+        def retrieval_instruction_id: () -> ::String
+        def retrieval_instruction_arn: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_retrieval_instruction-instance_method
+      def delete_retrieval_instruction: (
+                                          retrieval_instruction_id: ::String,
+                                          ?retrieval_instruction_version: ::String
+                                        ) -> _DeleteRetrievalInstructionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRetrievalInstructionResponseSuccess
 
       interface _DeleteVpcConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcConfigurationResponse]
@@ -773,6 +828,29 @@ module Aws
                                  resource_arn: ::String
                                ) -> _GetResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _GetRetrievalInstructionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRetrievalInstructionResponse]
+        def retrieval_instruction_id: () -> ::String
+        def retrieval_instruction_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("ACTIVE" | "INACTIVE")
+        def last_transition_status: () -> ("CREATING" | "UPDATING" | "CREATE_SUCCESSFUL" | "CREATE_FAILED" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED")
+        def instruction: () -> Types::RetrievalInstructionContent
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def description: () -> ::String
+        def customer_encryption_key_arn: () -> ::String
+        def last_transition_status_reasons: () -> ::Array[Types::RetrievalInstructionFailureReason]
+        def version: () -> ::String
+        def latest_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_retrieval_instruction-instance_method
+      def get_retrieval_instruction: (
+                                       retrieval_instruction_id: ::String,
+                                       ?retrieval_instruction_version: ::String
+                                     ) -> _GetRetrievalInstructionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRetrievalInstructionResponseSuccess
 
       interface _GetVpcConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetVpcConfigurationResponse]
@@ -1049,6 +1127,32 @@ module Aws
                           ?next_token: ::String
                         ) -> _ListPromptsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPromptsResponseSuccess
+
+      interface _ListRetrievalInstructionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRetrievalInstructionVersionsResponse]
+        def retrieval_instruction_version_summaries: () -> ::Array[Types::RetrievalInstructionVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_retrieval_instruction_versions-instance_method
+      def list_retrieval_instruction_versions: (
+                                                 retrieval_instruction_id: ::String,
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _ListRetrievalInstructionVersionsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRetrievalInstructionVersionsResponseSuccess
+
+      interface _ListRetrievalInstructionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRetrievalInstructionsResponse]
+        def retrieval_instruction_summaries: () -> ::Array[Types::RetrievalInstructionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_retrieval_instructions-instance_method
+      def list_retrieval_instructions: (
+                                         ?status: ("ACTIVE" | "INACTIVE"),
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListRetrievalInstructionsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRetrievalInstructionsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -1387,6 +1491,29 @@ module Aws
                            prompt_identifier: ::String
                          ) -> _UpdatePromptResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePromptResponseSuccess
+
+      interface _UpdateRetrievalInstructionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRetrievalInstructionResponse]
+        def retrieval_instruction_id: () -> ::String
+        def retrieval_instruction_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("ACTIVE" | "INACTIVE")
+        def last_transition_status: () -> ("CREATING" | "UPDATING" | "CREATE_SUCCESSFUL" | "CREATE_FAILED" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_retrieval_instruction-instance_method
+      def update_retrieval_instruction: (
+                                          retrieval_instruction_id: ::String,
+                                          instruction: {
+                                            retrieval_guidance: ::String?,
+                                            persona: ::String?,
+                                            answer_format: ::String?,
+                                            answer_policy: ::String?
+                                          },
+                                          ?description: ::String
+                                        ) -> _UpdateRetrievalInstructionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRetrievalInstructionResponseSuccess
 
       interface _ValidateFlowDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ValidateFlowDefinitionResponse]

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.284.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.283.0 (2026-10-13)
+------------------
+
+* Feature - Amazon Glue releasing support for adding custom namespace for S3 Tables in Glue zero-ETL integration
+
+1.282.0 (2026-10-12)
+------------------
+
+* Feature - Adds new AWS Glue Data Quality APIs to retrieve and list data quality evaluation results. The new GetDataQualityResultV2, BatchGetDataQualityResultV2, and ListDataQualityResultsV2 operations return data quality results published from any supported data processing engine.
+
 1.281.0 (2026-10-08)
 ------------------
 

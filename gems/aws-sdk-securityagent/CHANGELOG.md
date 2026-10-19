@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2026-10-12)
+------------------
+
+* Feature - Adds support for Jira integration provider in AWS Security Agent.
+
 1.22.0 (2026-10-09)
 ------------------
 

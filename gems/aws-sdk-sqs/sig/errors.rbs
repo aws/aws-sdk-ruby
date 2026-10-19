@@ -11,86 +11,86 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class BatchEntryIdsNotDistinct < ::Aws::Errors::ServiceError
+      class BatchEntryIdsNotDistinct < ServiceError
         def message: () -> ::String
       end
-      class BatchRequestTooLong < ::Aws::Errors::ServiceError
+      class BatchRequestTooLong < ServiceError
         def message: () -> ::String
       end
-      class EmptyBatchRequest < ::Aws::Errors::ServiceError
+      class EmptyBatchRequest < ServiceError
         def message: () -> ::String
       end
-      class InvalidAddress < ::Aws::Errors::ServiceError
+      class InvalidAddress < ServiceError
         def message: () -> ::String
       end
-      class InvalidAttributeName < ::Aws::Errors::ServiceError
+      class InvalidAttributeName < ServiceError
         def message: () -> ::String
       end
-      class InvalidAttributeValue < ::Aws::Errors::ServiceError
+      class InvalidAttributeValue < ServiceError
         def message: () -> ::String
       end
-      class InvalidBatchEntryId < ::Aws::Errors::ServiceError
+      class InvalidBatchEntryId < ServiceError
         def message: () -> ::String
       end
-      class InvalidIdFormat < ::Aws::Errors::ServiceError
+      class InvalidIdFormat < ServiceError
       end
-      class InvalidMessageContents < ::Aws::Errors::ServiceError
+      class InvalidMessageContents < ServiceError
         def message: () -> ::String
       end
-      class InvalidSecurity < ::Aws::Errors::ServiceError
+      class InvalidSecurity < ServiceError
         def message: () -> ::String
       end
-      class KmsAccessDenied < ::Aws::Errors::ServiceError
+      class KmsAccessDenied < ServiceError
         def message: () -> ::String
       end
-      class KmsDisabled < ::Aws::Errors::ServiceError
+      class KmsDisabled < ServiceError
         def message: () -> ::String
       end
-      class KmsInvalidKeyUsage < ::Aws::Errors::ServiceError
+      class KmsInvalidKeyUsage < ServiceError
         def message: () -> ::String
       end
-      class KmsInvalidState < ::Aws::Errors::ServiceError
+      class KmsInvalidState < ServiceError
         def message: () -> ::String
       end
-      class KmsNotFound < ::Aws::Errors::ServiceError
+      class KmsNotFound < ServiceError
         def message: () -> ::String
       end
-      class KmsOptInRequired < ::Aws::Errors::ServiceError
+      class KmsOptInRequired < ServiceError
         def message: () -> ::String
       end
-      class KmsThrottled < ::Aws::Errors::ServiceError
+      class KmsThrottled < ServiceError
         def message: () -> ::String
       end
-      class MessageNotInflight < ::Aws::Errors::ServiceError
+      class MessageNotInflight < ServiceError
       end
-      class OverLimit < ::Aws::Errors::ServiceError
+      class OverLimit < ServiceError
         def message: () -> ::String
       end
-      class PurgeQueueInProgress < ::Aws::Errors::ServiceError
+      class PurgeQueueInProgress < ServiceError
         def message: () -> ::String
       end
-      class QueueDeletedRecently < ::Aws::Errors::ServiceError
+      class QueueDeletedRecently < ServiceError
         def message: () -> ::String
       end
-      class QueueDoesNotExist < ::Aws::Errors::ServiceError
+      class QueueDoesNotExist < ServiceError
         def message: () -> ::String
       end
-      class QueueNameExists < ::Aws::Errors::ServiceError
+      class QueueNameExists < ServiceError
         def message: () -> ::String
       end
-      class ReceiptHandleIsInvalid < ::Aws::Errors::ServiceError
+      class ReceiptHandleIsInvalid < ServiceError
         def message: () -> ::String
       end
-      class RequestThrottled < ::Aws::Errors::ServiceError
+      class RequestThrottled < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class TooManyEntriesInBatchRequest < ::Aws::Errors::ServiceError
+      class TooManyEntriesInBatchRequest < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedOperation < ::Aws::Errors::ServiceError
+      class UnsupportedOperation < ServiceError
         def message: () -> ::String
       end
     end

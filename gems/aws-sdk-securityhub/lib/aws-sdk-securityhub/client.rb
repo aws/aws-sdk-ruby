@@ -3029,7 +3029,7 @@ module Aws::SecurityHub
     #           {
     #             string_filters: [
     #               {
-    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
+    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, impact, likelihood, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.criticality, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #                 filter: {
     #                   value: "NonEmptyString",
     #                   comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -3096,10 +3096,66 @@ module Aws::SecurityHub
     #         ],
     #         composite_operator: "AND", # accepts AND, OR
     #       },
+    #       resource_criteria: {
+    #         composite_filters: [
+    #           {
+    #             string_filters: [
+    #               {
+    #                 field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, AccountName, Region, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition, ResourceRegion, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName, ResourceSubCategory, DiscoveryType, ResourceInfo.AIDetails.HostResourceGuid, ResourceInfo.AIDetails.HostResourceType, ResourceInfo.AIDetails.CanonicalId, ResourceCriticality
+    #                 filter: {
+    #                   value: "NonEmptyString",
+    #                   comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #                 },
+    #               },
+    #             ],
+    #             date_filters: [
+    #               {
+    #                 field_name: "ResourceDetailCaptureTime", # accepts ResourceDetailCaptureTime, ResourceCreationTime
+    #                 filter: {
+    #                   start: "NonEmptyString",
+    #                   end: "NonEmptyString",
+    #                   date_range: {
+    #                     value: 1,
+    #                     unit: "DAYS", # accepts DAYS
+    #                     comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             number_filters: [
+    #               {
+    #                 field_name: "FindingsSummary.TotalFindings", # accepts FindingsSummary.TotalFindings, FindingsSummary.Severities.Other, FindingsSummary.Severities.Fatal, FindingsSummary.Severities.Critical, FindingsSummary.Severities.High, FindingsSummary.Severities.Medium, FindingsSummary.Severities.Low, FindingsSummary.Severities.Informational, FindingsSummary.Severities.Unknown, ResourceInfo.AIDetails.SelfHostedAIModelResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount, ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount, ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount, ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount, ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount
+    #                 filter: {
+    #                   gte: 1.0,
+    #                   lte: 1.0,
+    #                   eq: 1.0,
+    #                   gt: 1.0,
+    #                   lt: 1.0,
+    #                 },
+    #               },
+    #             ],
+    #             map_filters: [
+    #               {
+    #                 field_name: "ResourceTags", # accepts ResourceTags
+    #                 filter: {
+    #                   key: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                   comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #                 },
+    #               },
+    #             ],
+    #             nested_composite_filters: {
+    #               # recursive ResourcesCompositeFilterList
+    #             },
+    #             operator: "AND", # accepts AND, OR
+    #           },
+    #         ],
+    #         composite_operator: "AND", # accepts AND, OR
+    #       },
     #     },
     #     actions: [ # required
     #       {
-    #         type: "FINDING_FIELDS_UPDATE", # required, accepts FINDING_FIELDS_UPDATE, EXTERNAL_INTEGRATION
+    #         type: "FINDING_FIELDS_UPDATE", # required, accepts FINDING_FIELDS_UPDATE, EXTERNAL_INTEGRATION, RESOURCE_FIELDS_UPDATE
     #         finding_fields_update: {
     #           severity_id: 1,
     #           comment: "NonEmptyString",
@@ -3107,6 +3163,9 @@ module Aws::SecurityHub
     #         },
     #         external_integration_configuration: {
     #           connector_arn: "NonEmptyString",
+    #         },
+    #         resource_fields_update: {
+    #           criticality: "Very High", # required, accepts Very High, High, Medium, Low, Unknown
     #         },
     #       },
     #     ],
@@ -6287,7 +6346,7 @@ module Aws::SecurityHub
     #   resp.description #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters #=> Array
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters #=> Array
-    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].field_name #=> String, one of "metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].field_name #=> String, one of "metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "impact", "likelihood", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.criticality", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].filter.value #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].string_filters[0].filter.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters #=> Array
@@ -6318,12 +6377,40 @@ module Aws::SecurityHub
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].nested_composite_filters #=> Types::CompositeFilterList
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].operator #=> String, one of "AND", "OR"
     #   resp.criteria.ocsf_finding_criteria.composite_operator #=> String, one of "AND", "OR"
+    #   resp.criteria.resource_criteria.composite_filters #=> Array
+    #   resp.criteria.resource_criteria.composite_filters[0].string_filters #=> Array
+    #   resp.criteria.resource_criteria.composite_filters[0].string_filters[0].field_name #=> String, one of "ResourceGuid", "ResourceId", "AccountId", "AccountName", "Region", "ResourceProvider", "ResourceOwnerAccountId", "ResourceOwnerOrgId", "ResourceCloudPartition", "ResourceRegion", "ResourceCategory", "ResourceType", "ResourceName", "FindingsSummary.FindingType", "FindingsSummary.ProductName", "ResourceSubCategory", "DiscoveryType", "ResourceInfo.AIDetails.HostResourceGuid", "ResourceInfo.AIDetails.HostResourceType", "ResourceInfo.AIDetails.CanonicalId", "ResourceCriticality"
+    #   resp.criteria.resource_criteria.composite_filters[0].string_filters[0].filter.value #=> String
+    #   resp.criteria.resource_criteria.composite_filters[0].string_filters[0].filter.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
+    #   resp.criteria.resource_criteria.composite_filters[0].date_filters #=> Array
+    #   resp.criteria.resource_criteria.composite_filters[0].date_filters[0].field_name #=> String, one of "ResourceDetailCaptureTime", "ResourceCreationTime"
+    #   resp.criteria.resource_criteria.composite_filters[0].date_filters[0].filter.start #=> String
+    #   resp.criteria.resource_criteria.composite_filters[0].date_filters[0].filter.end #=> String
+    #   resp.criteria.resource_criteria.composite_filters[0].date_filters[0].filter.date_range.value #=> Integer
+    #   resp.criteria.resource_criteria.composite_filters[0].date_filters[0].filter.date_range.unit #=> String, one of "DAYS"
+    #   resp.criteria.resource_criteria.composite_filters[0].date_filters[0].filter.date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
+    #   resp.criteria.resource_criteria.composite_filters[0].number_filters #=> Array
+    #   resp.criteria.resource_criteria.composite_filters[0].number_filters[0].field_name #=> String, one of "FindingsSummary.TotalFindings", "FindingsSummary.Severities.Other", "FindingsSummary.Severities.Fatal", "FindingsSummary.Severities.Critical", "FindingsSummary.Severities.High", "FindingsSummary.Severities.Medium", "FindingsSummary.Severities.Low", "FindingsSummary.Severities.Informational", "FindingsSummary.Severities.Unknown", "ResourceInfo.AIDetails.SelfHostedAIModelResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount", "ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount", "ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount", "ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount", "ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount"
+    #   resp.criteria.resource_criteria.composite_filters[0].number_filters[0].filter.gte #=> Float
+    #   resp.criteria.resource_criteria.composite_filters[0].number_filters[0].filter.lte #=> Float
+    #   resp.criteria.resource_criteria.composite_filters[0].number_filters[0].filter.eq #=> Float
+    #   resp.criteria.resource_criteria.composite_filters[0].number_filters[0].filter.gt #=> Float
+    #   resp.criteria.resource_criteria.composite_filters[0].number_filters[0].filter.lt #=> Float
+    #   resp.criteria.resource_criteria.composite_filters[0].map_filters #=> Array
+    #   resp.criteria.resource_criteria.composite_filters[0].map_filters[0].field_name #=> String, one of "ResourceTags"
+    #   resp.criteria.resource_criteria.composite_filters[0].map_filters[0].filter.key #=> String
+    #   resp.criteria.resource_criteria.composite_filters[0].map_filters[0].filter.value #=> String
+    #   resp.criteria.resource_criteria.composite_filters[0].map_filters[0].filter.comparison #=> String, one of "EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.criteria.resource_criteria.composite_filters[0].nested_composite_filters #=> Types::ResourcesCompositeFilterList
+    #   resp.criteria.resource_criteria.composite_filters[0].operator #=> String, one of "AND", "OR"
+    #   resp.criteria.resource_criteria.composite_operator #=> String, one of "AND", "OR"
     #   resp.actions #=> Array
-    #   resp.actions[0].type #=> String, one of "FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION"
+    #   resp.actions[0].type #=> String, one of "FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION", "RESOURCE_FIELDS_UPDATE"
     #   resp.actions[0].finding_fields_update.severity_id #=> Integer
     #   resp.actions[0].finding_fields_update.comment #=> String
     #   resp.actions[0].finding_fields_update.status_id #=> Integer
     #   resp.actions[0].external_integration_configuration.connector_arn #=> String
+    #   resp.actions[0].resource_fields_update.criticality #=> String, one of "Very High", "High", "Medium", "Low", "Unknown"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -6931,7 +7018,7 @@ module Aws::SecurityHub
     #   resp.output_configuration.findings.format #=> String, one of "CSV", "OCSF_JSON"
     #   resp.output_configuration.findings.filters.composite_filters #=> Array
     #   resp.output_configuration.findings.filters.composite_filters[0].string_filters #=> Array
-    #   resp.output_configuration.findings.filters.composite_filters[0].string_filters[0].field_name #=> String, one of "metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"
+    #   resp.output_configuration.findings.filters.composite_filters[0].string_filters[0].field_name #=> String, one of "metadata.uid", "activity_name", "cloud.account.uid", "cloud.provider", "cloud.region", "compliance.assessments.category", "compliance.assessments.name", "compliance.control", "compliance.status", "compliance.standards", "finding_info.desc", "finding_info.src_url", "finding_info.title", "finding_info.types", "finding_info.uid", "finding_info.related_events.traits.category", "finding_info.related_events.uid", "finding_info.related_events.product.uid", "finding_info.related_events.title", "impact", "likelihood", "metadata.product.name", "metadata.product.uid", "metadata.product.vendor_name", "remediation.desc", "remediation.references", "resources.cloud_partition", "resources.criticality", "resources.name", "resources.owner.account.uid", "resources.owner.org.uid", "resources.owner.account.name", "resources.provider", "resources.region", "resources.type", "resources.uid", "severity", "status", "comment", "vulnerabilities.fix_coverage", "class_name", "databucket.encryption_details.algorithm", "databucket.encryption_details.key_uid", "databucket.file.data_classifications.classifier_details.type", "evidences.actor.user.account.uid", "evidences.api.operation", "evidences.api.response.error_message", "evidences.api.service.name", "evidences.connection_info.direction", "evidences.connection_info.protocol_name", "evidences.dst_endpoint.autonomous_system.name", "evidences.dst_endpoint.location.city", "evidences.dst_endpoint.location.country", "evidences.src_endpoint.autonomous_system.name", "evidences.src_endpoint.hostname", "evidences.src_endpoint.location.city", "evidences.src_endpoint.location.country", "finding_info.analytic.name", "malware.name", "malware_scan_info.uid", "malware.severity", "resources.cloud_function.layers.uid_alt", "resources.cloud_function.runtime", "resources.cloud_function.user.uid", "resources.device.encryption_details.key_uid", "resources.device.image.uid", "resources.image.architecture", "resources.image.registry_uid", "resources.image.repository_name", "resources.image.uid", "resources.subnet_info.uid", "resources.vpc_uid", "vulnerabilities.affected_code.file.path", "vulnerabilities.affected_packages.name", "vulnerabilities.cve.epss.score", "vulnerabilities.cve.uid", "vulnerabilities.related_vulnerabilities", "cloud.account.name", "vendor_attributes.severity"
     #   resp.output_configuration.findings.filters.composite_filters[0].string_filters[0].filter.value #=> String
     #   resp.output_configuration.findings.filters.composite_filters[0].string_filters[0].filter.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
     #   resp.output_configuration.findings.filters.composite_filters[0].date_filters #=> Array
@@ -7261,7 +7348,7 @@ module Aws::SecurityHub
     #             {
     #               string_filters: [
     #                 {
-    #                   field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
+    #                   field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, impact, likelihood, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.criticality, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #                   filter: {
     #                     value: "NonEmptyString",
     #                     comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -7328,7 +7415,7 @@ module Aws::SecurityHub
     #           ],
     #           composite_operator: "AND", # accepts AND, OR
     #         },
-    #         group_by_field: "activity_name", # required, accepts activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.name, compliance.status, compliance.control, finding_info.title, finding_info.related_events.traits.category, finding_info.types, metadata.product.name, metadata.product.uid, resources.type, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.uid, severity, status, vulnerabilities.fix_coverage, class_name, vulnerabilities.affected_packages.name, finding_info.analytic.name, compliance.standards, cloud.account.name, vendor_attributes.severity, metadata.product.vendor_name
+    #         group_by_field: "activity_name", # required, accepts activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.name, compliance.status, compliance.control, finding_info.title, finding_info.related_events.traits.category, finding_info.types, impact, likelihood, metadata.product.name, metadata.product.uid, resources.type, resources.cloud_partition, resources.criticality, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.uid, severity, status, vulnerabilities.fix_coverage, class_name, vulnerabilities.affected_packages.name, finding_info.analytic.name, compliance.standards, cloud.account.name, vendor_attributes.severity, metadata.product.vendor_name
     #       },
     #     ],
     #     scopes: {
@@ -8402,7 +8489,7 @@ module Aws::SecurityHub
     #         {
     #           string_filters: [
     #             {
-    #               field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
+    #               field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, impact, likelihood, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.criticality, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #               filter: {
     #                 value: "NonEmptyString",
     #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -9461,13 +9548,13 @@ module Aws::SecurityHub
     #   resp = client.get_resources_statistics_v2({
     #     group_by_rules: [ # required
     #       {
-    #         group_by_field: "AccountId", # required, accepts AccountId, AccountName, Region, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition, ResourceRegion, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, ResourceSubCategory, DiscoveryType, ResourceInfo.AIDetails.HostResourceType, ResourceInfo.AIDetails.CanonicalId
+    #         group_by_field: "AccountId", # required, accepts AccountId, AccountName, Region, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition, ResourceRegion, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, ResourceSubCategory, DiscoveryType, ResourceInfo.AIDetails.HostResourceType, ResourceInfo.AIDetails.CanonicalId, ResourceCriticality
     #         filters: {
     #           composite_filters: [
     #             {
     #               string_filters: [
     #                 {
-    #                   field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, AccountName, Region, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition, ResourceRegion, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName, ResourceSubCategory, DiscoveryType, ResourceInfo.AIDetails.HostResourceGuid, ResourceInfo.AIDetails.HostResourceType, ResourceInfo.AIDetails.CanonicalId
+    #                   field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, AccountName, Region, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition, ResourceRegion, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName, ResourceSubCategory, DiscoveryType, ResourceInfo.AIDetails.HostResourceGuid, ResourceInfo.AIDetails.HostResourceType, ResourceInfo.AIDetails.CanonicalId, ResourceCriticality
     #                   filter: {
     #                     value: "NonEmptyString",
     #                     comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -9695,7 +9782,7 @@ module Aws::SecurityHub
     #         {
     #           string_filters: [
     #             {
-    #               field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, AccountName, Region, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition, ResourceRegion, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName, ResourceSubCategory, DiscoveryType, ResourceInfo.AIDetails.HostResourceGuid, ResourceInfo.AIDetails.HostResourceType, ResourceInfo.AIDetails.CanonicalId
+    #               field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, AccountName, Region, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition, ResourceRegion, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName, ResourceSubCategory, DiscoveryType, ResourceInfo.AIDetails.HostResourceGuid, ResourceInfo.AIDetails.HostResourceType, ResourceInfo.AIDetails.CanonicalId, ResourceCriticality
     #               filter: {
     #                 value: "NonEmptyString",
     #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -9810,6 +9897,10 @@ module Aws::SecurityHub
     #   resp.resources[0].resource_info.ai_details.self_hosted_ai_agent_framework_resource_count #=> Integer
     #   resp.resources[0].resource_info.ai_details.self_hosted_ai_agent_tools_and_identity_resource_count #=> Integer
     #   resp.resources[0].resource_info.ai_details.self_hosted_total_ai_resource_count #=> Integer
+    #   resp.resources[0].resource_criticality #=> String, one of "Very High", "High", "Medium", "Low", "Unknown"
+    #   resp.resources[0].criticality_sources #=> Array
+    #   resp.resources[0].criticality_sources[0].source #=> String, one of "AutomationRule", "ResourceName", "TagInference"
+    #   resp.resources[0].criticality_sources[0].reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetResourcesV2 AWS API Documentation
@@ -10158,7 +10249,7 @@ module Aws::SecurityHub
     #   resp.rules[0].rule_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.rules[0].description #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION"
+    #   resp.rules[0].actions[0].type #=> String, one of "FINDING_FIELDS_UPDATE", "EXTERNAL_INTEGRATION", "RESOURCE_FIELDS_UPDATE"
     #   resp.rules[0].created_at #=> Time
     #   resp.rules[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -11858,7 +11949,7 @@ module Aws::SecurityHub
     #             {
     #               string_filters: [
     #                 {
-    #                   field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
+    #                   field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, impact, likelihood, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.criticality, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #                   filter: {
     #                     value: "NonEmptyString",
     #                     comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -12160,7 +12251,7 @@ module Aws::SecurityHub
     #           {
     #             string_filters: [
     #               {
-    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
+    #                 field_name: "metadata.uid", # accepts metadata.uid, activity_name, cloud.account.uid, cloud.provider, cloud.region, compliance.assessments.category, compliance.assessments.name, compliance.control, compliance.status, compliance.standards, finding_info.desc, finding_info.src_url, finding_info.title, finding_info.types, finding_info.uid, finding_info.related_events.traits.category, finding_info.related_events.uid, finding_info.related_events.product.uid, finding_info.related_events.title, impact, likelihood, metadata.product.name, metadata.product.uid, metadata.product.vendor_name, remediation.desc, remediation.references, resources.cloud_partition, resources.criticality, resources.name, resources.owner.account.uid, resources.owner.org.uid, resources.owner.account.name, resources.provider, resources.region, resources.type, resources.uid, severity, status, comment, vulnerabilities.fix_coverage, class_name, databucket.encryption_details.algorithm, databucket.encryption_details.key_uid, databucket.file.data_classifications.classifier_details.type, evidences.actor.user.account.uid, evidences.api.operation, evidences.api.response.error_message, evidences.api.service.name, evidences.connection_info.direction, evidences.connection_info.protocol_name, evidences.dst_endpoint.autonomous_system.name, evidences.dst_endpoint.location.city, evidences.dst_endpoint.location.country, evidences.src_endpoint.autonomous_system.name, evidences.src_endpoint.hostname, evidences.src_endpoint.location.city, evidences.src_endpoint.location.country, finding_info.analytic.name, malware.name, malware_scan_info.uid, malware.severity, resources.cloud_function.layers.uid_alt, resources.cloud_function.runtime, resources.cloud_function.user.uid, resources.device.encryption_details.key_uid, resources.device.image.uid, resources.image.architecture, resources.image.registry_uid, resources.image.repository_name, resources.image.uid, resources.subnet_info.uid, resources.vpc_uid, vulnerabilities.affected_code.file.path, vulnerabilities.affected_packages.name, vulnerabilities.cve.epss.score, vulnerabilities.cve.uid, vulnerabilities.related_vulnerabilities, cloud.account.name, vendor_attributes.severity
     #                 filter: {
     #                   value: "NonEmptyString",
     #                   comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
@@ -12227,10 +12318,66 @@ module Aws::SecurityHub
     #         ],
     #         composite_operator: "AND", # accepts AND, OR
     #       },
+    #       resource_criteria: {
+    #         composite_filters: [
+    #           {
+    #             string_filters: [
+    #               {
+    #                 field_name: "ResourceGuid", # accepts ResourceGuid, ResourceId, AccountId, AccountName, Region, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition, ResourceRegion, ResourceCategory, ResourceType, ResourceName, FindingsSummary.FindingType, FindingsSummary.ProductName, ResourceSubCategory, DiscoveryType, ResourceInfo.AIDetails.HostResourceGuid, ResourceInfo.AIDetails.HostResourceType, ResourceInfo.AIDetails.CanonicalId, ResourceCriticality
+    #                 filter: {
+    #                   value: "NonEmptyString",
+    #                   comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #                 },
+    #               },
+    #             ],
+    #             date_filters: [
+    #               {
+    #                 field_name: "ResourceDetailCaptureTime", # accepts ResourceDetailCaptureTime, ResourceCreationTime
+    #                 filter: {
+    #                   start: "NonEmptyString",
+    #                   end: "NonEmptyString",
+    #                   date_range: {
+    #                     value: 1,
+    #                     unit: "DAYS", # accepts DAYS
+    #                     comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             number_filters: [
+    #               {
+    #                 field_name: "FindingsSummary.TotalFindings", # accepts FindingsSummary.TotalFindings, FindingsSummary.Severities.Other, FindingsSummary.Severities.Fatal, FindingsSummary.Severities.Critical, FindingsSummary.Severities.High, FindingsSummary.Severities.Medium, FindingsSummary.Severities.Low, FindingsSummary.Severities.Informational, FindingsSummary.Severities.Unknown, ResourceInfo.AIDetails.SelfHostedAIModelResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount, ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount, ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount, ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount, ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount, ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount
+    #                 filter: {
+    #                   gte: 1.0,
+    #                   lte: 1.0,
+    #                   eq: 1.0,
+    #                   gt: 1.0,
+    #                   lt: 1.0,
+    #                 },
+    #               },
+    #             ],
+    #             map_filters: [
+    #               {
+    #                 field_name: "ResourceTags", # accepts ResourceTags
+    #                 filter: {
+    #                   key: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                   comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #                 },
+    #               },
+    #             ],
+    #             nested_composite_filters: {
+    #               # recursive ResourcesCompositeFilterList
+    #             },
+    #             operator: "AND", # accepts AND, OR
+    #           },
+    #         ],
+    #         composite_operator: "AND", # accepts AND, OR
+    #       },
     #     },
     #     actions: [
     #       {
-    #         type: "FINDING_FIELDS_UPDATE", # required, accepts FINDING_FIELDS_UPDATE, EXTERNAL_INTEGRATION
+    #         type: "FINDING_FIELDS_UPDATE", # required, accepts FINDING_FIELDS_UPDATE, EXTERNAL_INTEGRATION, RESOURCE_FIELDS_UPDATE
     #         finding_fields_update: {
     #           severity_id: 1,
     #           comment: "NonEmptyString",
@@ -12238,6 +12385,9 @@ module Aws::SecurityHub
     #         },
     #         external_integration_configuration: {
     #           connector_arn: "NonEmptyString",
+    #         },
+    #         resource_fields_update: {
+    #           criticality: "Very High", # required, accepts Very High, High, Medium, Low, Unknown
     #         },
     #       },
     #     ],
@@ -14530,7 +14680,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.167.0'
+      context[:gem_version] = '1.169.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

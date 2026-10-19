@@ -1168,6 +1168,13 @@ module Aws::Transfer
     #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
     #   @return [String]
     #
+    # @!attribute [rw] host_key_storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private
+    #   host key material in an Secrets Manager secret.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest AWS API Documentation
     #
     class CreateServerRequest < Struct.new(
@@ -1188,7 +1195,8 @@ module Aws::Transfer
       :workflow_details,
       :structured_log_destinations,
       :s3_storage_options,
-      :ip_address_type)
+      :ip_address_type,
+      :host_key_storage_type)
       SENSITIVE = [:host_key]
       include Aws::Structure
     end
@@ -2962,6 +2970,16 @@ module Aws::Transfer
     #   Key-value pairs that can be used to group and search for host keys.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`).
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_id
+    #   The ARN of the Secrets Manager secret that stores the host key
+    #   material, when `StorageType` is `SECRETS_MANAGER`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedHostKey AWS API Documentation
     #
     class DescribedHostKey < Struct.new(
@@ -2971,7 +2989,9 @@ module Aws::Transfer
       :description,
       :type,
       :date_imported,
-      :tags)
+      :tags,
+      :storage_type,
+      :secret_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4340,13 +4360,31 @@ module Aws::Transfer
     #   Key-value pairs that can be used to group and search for host keys.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private
+    #   host key material in an Secrets Manager secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   Secrets Manager secret that stores the host key. If you specify a
+    #   customer managed key, its key policy must allow the
+    #   `AWSServiceRoleForTransfer` service-linked role to decrypt the
+    #   secret. If you don't specify a value, Transfer Family uses the
+    #   Amazon Web Services managed key for Secrets Manager.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportHostKeyRequest AWS API Documentation
     #
     class ImportHostKeyRequest < Struct.new(
       :server_id,
       :host_key_body,
       :description,
-      :tags)
+      :tags,
+      :storage_type,
+      :kms_key)
       SENSITIVE = [:host_key_body]
       include Aws::Structure
     end
@@ -5444,6 +5482,16 @@ module Aws::Transfer
     #   The date on which the host key was added to the server.
     #   @return [Time]
     #
+    # @!attribute [rw] storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`).
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_id
+    #   The ARN of the Secrets Manager secret that stores the host key
+    #   material, when `StorageType` is `SECRETS_MANAGER`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListedHostKey AWS API Documentation
     #
     class ListedHostKey < Struct.new(
@@ -5452,7 +5500,9 @@ module Aws::Transfer
       :fingerprint,
       :description,
       :type,
-      :date_imported)
+      :date_imported,
+      :storage_type,
+      :secret_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7391,12 +7441,30 @@ module Aws::Transfer
     #   An updated description for the host key.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private
+    #   host key material in an Secrets Manager secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   Secrets Manager secret that stores the host key. If you specify a
+    #   customer managed key, its key policy must allow the
+    #   `AWSServiceRoleForTransfer` service-linked role to decrypt the
+    #   secret. If you don't specify a value, Transfer Family uses the
+    #   Amazon Web Services managed key for Secrets Manager.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateHostKeyRequest AWS API Documentation
     #
     class UpdateHostKeyRequest < Struct.new(
       :server_id,
       :host_key_id,
-      :description)
+      :description,
+      :storage_type,
+      :kms_key)
       SENSITIVE = []
       include Aws::Structure
     end

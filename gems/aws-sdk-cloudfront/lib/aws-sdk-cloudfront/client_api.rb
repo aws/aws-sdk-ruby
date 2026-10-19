@@ -821,6 +821,7 @@ module Aws::CloudFront
     ViewerMtlsConfig = Shapes::StructureShape.new(name: 'ViewerMtlsConfig')
     ViewerMtlsMode = Shapes::StringShape.new(name: 'ViewerMtlsMode')
     ViewerProtocolPolicy = Shapes::StringShape.new(name: 'ViewerProtocolPolicy')
+    VpcIpAddressType = Shapes::StringShape.new(name: 'VpcIpAddressType')
     VpcOrigin = Shapes::StructureShape.new(name: 'VpcOrigin')
     VpcOriginConfig = Shapes::StructureShape.new(name: 'VpcOriginConfig')
     VpcOriginEndpointConfig = Shapes::StructureShape.new(name: 'VpcOriginEndpointConfig')
@@ -4210,6 +4211,7 @@ module Aws::CloudFront
     VpcOriginEndpointConfig.add_member(:https_port, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "HTTPSPort"))
     VpcOriginEndpointConfig.add_member(:origin_protocol_policy, Shapes::ShapeRef.new(shape: OriginProtocolPolicy, required: true, location_name: "OriginProtocolPolicy"))
     VpcOriginEndpointConfig.add_member(:origin_ssl_protocols, Shapes::ShapeRef.new(shape: OriginSslProtocols, location_name: "OriginSslProtocols"))
+    VpcOriginEndpointConfig.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: VpcIpAddressType, location_name: "IpAddressType"))
     VpcOriginEndpointConfig.struct_class = Types::VpcOriginEndpointConfig
 
     VpcOriginList.add_member(:marker, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Marker"))
@@ -4228,6 +4230,7 @@ module Aws::CloudFront
     VpcOriginSummary.add_member(:arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Arn"))
     VpcOriginSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: string, location_name: "AccountId"))
     VpcOriginSummary.add_member(:origin_endpoint_arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "OriginEndpointArn"))
+    VpcOriginSummary.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: VpcIpAddressType, location_name: "IpAddressType"))
     VpcOriginSummary.struct_class = Types::VpcOriginSummary
 
     VpcOriginSummaryList.member = Shapes::ShapeRef.new(shape: VpcOriginSummary, location_name: "VpcOriginSummary")

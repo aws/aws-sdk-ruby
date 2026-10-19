@@ -2626,6 +2626,11 @@ module Aws::ECS
     #         format: "TEXT", # required, accepts TEXT, JSON
     #         include_query_parameters: "DISABLED", # accepts DISABLED, ENABLED
     #       },
+    #       container_configurations: [
+    #         {
+    #           log_level: "debug", # accepts debug, info
+    #         },
+    #       ],
     #     },
     #     volume_configurations: [
     #       {
@@ -2833,6 +2838,8 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
     #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.format #=> String, one of "TEXT", "JSON"
     #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.include_query_parameters #=> String, one of "DISABLED", "ENABLED"
+    #   resp.service.deployments[0].service_connect_configuration.container_configurations #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.container_configurations[0].log_level #=> String, one of "debug", "info"
     #   resp.service.deployments[0].service_connect_resources #=> Array
     #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
@@ -4082,6 +4089,8 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
     #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.format #=> String, one of "TEXT", "JSON"
     #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.include_query_parameters #=> String, one of "DISABLED", "ENABLED"
+    #   resp.service.deployments[0].service_connect_configuration.container_configurations #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.container_configurations[0].log_level #=> String, one of "debug", "info"
     #   resp.service.deployments[0].service_connect_resources #=> Array
     #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
@@ -6559,6 +6568,8 @@ module Aws::ECS
     #   resp.service_revisions[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
     #   resp.service_revisions[0].service_connect_configuration.access_log_configuration.format #=> String, one of "TEXT", "JSON"
     #   resp.service_revisions[0].service_connect_configuration.access_log_configuration.include_query_parameters #=> String, one of "DISABLED", "ENABLED"
+    #   resp.service_revisions[0].service_connect_configuration.container_configurations #=> Array
+    #   resp.service_revisions[0].service_connect_configuration.container_configurations[0].log_level #=> String, one of "debug", "info"
     #   resp.service_revisions[0].volume_configurations #=> Array
     #   resp.service_revisions[0].volume_configurations[0].name #=> String
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.encrypted #=> Boolean
@@ -6984,6 +6995,8 @@ module Aws::ECS
     #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
     #   resp.services[0].deployments[0].service_connect_configuration.access_log_configuration.format #=> String, one of "TEXT", "JSON"
     #   resp.services[0].deployments[0].service_connect_configuration.access_log_configuration.include_query_parameters #=> String, one of "DISABLED", "ENABLED"
+    #   resp.services[0].deployments[0].service_connect_configuration.container_configurations #=> Array
+    #   resp.services[0].deployments[0].service_connect_configuration.container_configurations[0].log_level #=> String, one of "debug", "info"
     #   resp.services[0].deployments[0].service_connect_resources #=> Array
     #   resp.services[0].deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.services[0].deployments[0].service_connect_resources[0].discovery_arn #=> String
@@ -15623,6 +15636,11 @@ module Aws::ECS
     #         format: "TEXT", # required, accepts TEXT, JSON
     #         include_query_parameters: "DISABLED", # accepts DISABLED, ENABLED
     #       },
+    #       container_configurations: [
+    #         {
+    #           log_level: "debug", # accepts debug, info
+    #         },
+    #       ],
     #     },
     #     volume_configurations: [
     #       {
@@ -15830,6 +15848,8 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
     #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.format #=> String, one of "TEXT", "JSON"
     #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.include_query_parameters #=> String, one of "DISABLED", "ENABLED"
+    #   resp.service.deployments[0].service_connect_configuration.container_configurations #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.container_configurations[0].log_level #=> String, one of "debug", "info"
     #   resp.service.deployments[0].service_connect_resources #=> Array
     #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
@@ -16388,7 +16408,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.248.0'
+      context[:gem_version] = '1.249.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
