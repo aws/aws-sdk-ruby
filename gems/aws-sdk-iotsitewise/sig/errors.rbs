@@ -11,53 +11,53 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class ConflictingOperationException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-        def resource_id: () -> ::String
-        def resource_arn: () -> ::String
-      end
-      class InternalFailureException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class LimitExceededException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class PreconditionFailedException < ::Aws::Errors::ServiceError
+      class ConflictingOperationException < ServiceError
         def message: () -> ::String
         def resource_id: () -> ::String
         def resource_arn: () -> ::String
       end
-      class QueryTimeoutException < ::Aws::Errors::ServiceError
+      class InternalFailureException < ServiceError
         def message: () -> ::String
       end
-      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ServiceError
+        def message: () -> ::String
+      end
+      class PreconditionFailedException < ServiceError
         def message: () -> ::String
         def resource_id: () -> ::String
         def resource_arn: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class QueryTimeoutException < ServiceError
         def message: () -> ::String
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class ResourceAlreadyExistsException < ServiceError
+        def message: () -> ::String
+        def resource_id: () -> ::String
+        def resource_arn: () -> ::String
+      end
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
         def resource_name: () -> ::String
       end
-      class UnauthorizedException < ::Aws::Errors::ServiceError
+      class UnauthorizedException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
     end

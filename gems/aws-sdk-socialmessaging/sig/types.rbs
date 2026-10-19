@@ -316,6 +316,8 @@ module Aws::SocialMessaging
       attr_accessor waba_name: ::String
       attr_accessor event_destinations: ::Array[Types::WhatsAppBusinessAccountEventDestination]
       attr_accessor marketing_messages_onboarding_status: ::String
+      attr_accessor direct_send_enforcement_status: ::String
+      attr_accessor direct_send_enforcement_status_expires_at: ::Time
       attr_accessor dataset_id: ::String
       attr_accessor phone_numbers: ::Array[Types::WhatsAppPhoneNumberSummary]
       SENSITIVE: []
@@ -338,6 +340,8 @@ module Aws::SocialMessaging
       attr_accessor waba_name: ::String
       attr_accessor event_destinations: ::Array[Types::WhatsAppBusinessAccountEventDestination]
       attr_accessor marketing_messages_onboarding_status: ::String
+      attr_accessor direct_send_enforcement_status: ::String
+      attr_accessor direct_send_enforcement_status_expires_at: ::Time
       attr_accessor dataset_id: ::String
       SENSITIVE: []
     end
@@ -612,6 +616,8 @@ module Aws::SocialMessaging
       attr_accessor template_quality_score: ::String
       attr_accessor template_language: ::String
       attr_accessor template_category: ::String
+      attr_accessor template_source: ::String
+      attr_accessor correct_category: ::String
       SENSITIVE: []
     end
 

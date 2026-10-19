@@ -148,6 +148,7 @@ module Aws::TimestreamInfluxDB
     InfluxDBv3EnterpriseParametersSnapshottedWalFilesToKeepInteger = Shapes::IntegerShape.new(name: 'InfluxDBv3EnterpriseParametersSnapshottedWalFilesToKeepInteger')
     InfluxDBv3EnterpriseParametersTableIndexCacheConcurrencyLimitInteger = Shapes::IntegerShape.new(name: 'InfluxDBv3EnterpriseParametersTableIndexCacheConcurrencyLimitInteger')
     InfluxDBv3EnterpriseParametersTableIndexCacheMaxEntriesInteger = Shapes::IntegerShape.new(name: 'InfluxDBv3EnterpriseParametersTableIndexCacheMaxEntriesInteger')
+    InfluxDBv3EnterpriseParametersWalBufferSizeLong = Shapes::IntegerShape.new(name: 'InfluxDBv3EnterpriseParametersWalBufferSizeLong')
     InfluxDBv3EnterpriseParametersWalMaxWriteBufferSizeInteger = Shapes::IntegerShape.new(name: 'InfluxDBv3EnterpriseParametersWalMaxWriteBufferSizeInteger')
     InfluxDBv3EnterpriseParametersWalReplayConcurrencyLimitInteger = Shapes::IntegerShape.new(name: 'InfluxDBv3EnterpriseParametersWalReplayConcurrencyLimitInteger')
     InfluxDBv3EnterpriseParametersWalSnapshotSizeInteger = Shapes::IntegerShape.new(name: 'InfluxDBv3EnterpriseParametersWalSnapshotSizeInteger')
@@ -761,6 +762,10 @@ module Aws::TimestreamInfluxDB
     InfluxDBv3EnterpriseParameters.add_member(:distinct_value_cache_disable_from_history, Shapes::ShapeRef.new(shape: Boolean, location_name: "distinctValueCacheDisableFromHistory"))
     InfluxDBv3EnterpriseParameters.add_member(:replication_interval, Shapes::ShapeRef.new(shape: Duration, location_name: "replicationInterval"))
     InfluxDBv3EnterpriseParameters.add_member(:catalog_sync_interval, Shapes::ShapeRef.new(shape: Duration, location_name: "catalogSyncInterval"))
+    InfluxDBv3EnterpriseParameters.add_member(:upgrade_pacha_tree, Shapes::ShapeRef.new(shape: Boolean, location_name: "upgradePachaTree"))
+    InfluxDBv3EnterpriseParameters.add_member(:wal_buffer_size, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersWalBufferSizeLong, location_name: "walBufferSize"))
+    InfluxDBv3EnterpriseParameters.add_member(:snapshot_size, Shapes::ShapeRef.new(shape: PercentOrAbsoluteLong, location_name: "snapshotSize"))
+    InfluxDBv3EnterpriseParameters.add_member(:snapshot_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "snapshotDuration"))
     InfluxDBv3EnterpriseParameters.struct_class = Types::InfluxDBv3EnterpriseParameters
 
     InstanceModeList.member = Shapes::ShapeRef.new(shape: InstanceMode)

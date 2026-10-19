@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2026-10-19)
+------------------
+
+* Feature - Adding support for EKS Container Insights Telemetry Rules
+
 1.42.0 (2026-10-12)
 ------------------
 

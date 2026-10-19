@@ -232,6 +232,7 @@ module Aws::CodeDeploy
       attr_accessor ecs_services: ::Array[Types::ECSService]
       attr_accessor on_premises_tag_set: Types::OnPremisesTagSet
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor ec2_deployment_options: Types::EC2DeploymentOptions
       attr_accessor termination_hook_enabled: bool
       SENSITIVE: []
     end
@@ -254,6 +255,7 @@ module Aws::CodeDeploy
       attr_accessor file_exists_behavior: ("DISALLOW" | "OVERWRITE" | "RETAIN")
       attr_accessor deployment_mode: ("STANDARD" | "RESTART")
       attr_accessor override_alarm_configuration: Types::AlarmConfiguration
+      attr_accessor ec2_deployment_options: Types::EC2DeploymentOptions
       SENSITIVE: []
     end
 
@@ -365,6 +367,7 @@ module Aws::CodeDeploy
       attr_accessor on_premises_tag_set: Types::OnPremisesTagSet
       attr_accessor compute_platform: ("Server" | "Lambda" | "ECS")
       attr_accessor ecs_services: ::Array[Types::ECSService]
+      attr_accessor ec2_deployment_options: Types::EC2DeploymentOptions
       attr_accessor termination_hook_enabled: bool
       SENSITIVE: []
     end
@@ -410,6 +413,7 @@ module Aws::CodeDeploy
       attr_accessor external_id: ::String
       attr_accessor related_deployments: Types::RelatedDeployments
       attr_accessor override_alarm_configuration: Types::AlarmConfiguration
+      attr_accessor ec2_deployment_options: Types::EC2DeploymentOptions
       SENSITIVE: []
     end
 
@@ -475,6 +479,11 @@ module Aws::CodeDeploy
       attr_accessor script_name: ::String
       attr_accessor message: ::String
       attr_accessor log_tail: ::String
+      SENSITIVE: []
+    end
+
+    class EC2DeploymentOptions
+      attr_accessor auto_scaling_group_processes_to_suspend: ::Array[("Terminate" | "AZRebalance" | "InstanceRefresh" | "ScheduledActions")]
       SENSITIVE: []
     end
 
@@ -720,6 +729,9 @@ module Aws::CodeDeploy
     end
 
     class InvalidAutoScalingGroupException < Aws::EmptyStructure
+    end
+
+    class InvalidAutoScalingGroupProcessToSuspendException < Aws::EmptyStructure
     end
 
     class InvalidBlueGreenDeploymentConfigurationException < Aws::EmptyStructure
@@ -1319,6 +1331,7 @@ module Aws::CodeDeploy
       attr_accessor ec2_tag_set: Types::EC2TagSet
       attr_accessor ecs_services: ::Array[Types::ECSService]
       attr_accessor on_premises_tag_set: Types::OnPremisesTagSet
+      attr_accessor ec2_deployment_options: Types::EC2DeploymentOptions
       attr_accessor termination_hook_enabled: bool
       SENSITIVE: []
     end

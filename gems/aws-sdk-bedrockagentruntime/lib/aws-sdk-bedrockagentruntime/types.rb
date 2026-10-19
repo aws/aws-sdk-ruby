@@ -423,6 +423,28 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # The retrieval instruction, identified by its ID and version, that was
+    # applied to the request.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the retrieval instruction applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version that was applied: a version number, or DRAFT. The
+    #   service reports this version whenever it reports appliedInstruction,
+    #   including DRAFT when the request did not specify a version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveAppliedInstruction AWS API Documentation
+    #
+    class AgenticRetrieveAppliedInstruction < Struct.new(
+      :id,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for a Bedrock guardrail applied during agentic
     # retrieval.
     #
@@ -626,6 +648,29 @@ module Aws::BedrockAgentRuntime
       :action,
       :id,
       :message,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The retrieval instruction, identified by its ID and optional version,
+    # to apply to this request.
+    #
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the retrieval instruction. The instruction must
+    #   exist in the caller's account and its status must be ACTIVE.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the retrieval instruction to apply: a version number,
+    #   or DRAFT for the instruction's current reviewed content. When
+    #   omitted, DRAFT is used. This default is permanent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveInstructionConfiguration AWS API Documentation
+    #
+    class AgenticRetrieveInstructionConfiguration < Struct.new(
+      :retrieval_instruction_id,
       :version)
       SENSITIVE = []
       include Aws::Structure
@@ -1085,6 +1130,10 @@ module Aws::BedrockAgentRuntime
     #   Policy configuration for guardrails and content filtering.
     #   @return [Types::AgenticRetrievePolicyConfiguration]
     #
+    # @!attribute [rw] retrieval_instruction_configuration
+    #   A retrieval instruction to apply to this request.
+    #   @return [Types::AgenticRetrieveInstructionConfiguration]
+    #
     # @!attribute [rw] retrievers
     #   The list of retrievers to use for agentic retrieval.
     #   @return [Array<Types::AgenticRetriever>]
@@ -1104,6 +1153,7 @@ module Aws::BedrockAgentRuntime
       :messages,
       :next_token,
       :policy_configuration,
+      :retrieval_instruction_configuration,
       :retrievers,
       :user_context)
       SENSITIVE = [:user_context]
@@ -1155,6 +1205,11 @@ module Aws::BedrockAgentRuntime
     #   The list of actions taken during this step.
     #   @return [Array<Types::AgenticRetrieveAction>]
     #
+    # @!attribute [rw] applied_instruction
+    #   The agent reports the retrieval instruction applied to this request
+    #   on the first planning step.
+    #   @return [Types::AgenticRetrieveAppliedInstruction]
+    #
     # @!attribute [rw] failures
     #   Failures that occurred during this step.
     #   @return [Array<Types::AgenticRetrieveFailure>]
@@ -1187,6 +1242,7 @@ module Aws::BedrockAgentRuntime
     #
     class AgenticRetrieveTraceEventAttributes < Struct.new(
       :actions,
+      :applied_instruction,
       :failures,
       :message,
       :retrieval_metadata,

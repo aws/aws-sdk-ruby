@@ -386,6 +386,13 @@ module Aws::CloudWatch
     #       },
     #     },
     #     evaluation_interval: 1,
+    #     action_configuration: {
+    #       alarm_tags_propagation: {
+    #         enabled: false, # required
+    #         included_tag_keys: ["AlarmTagsPropagationTagKey"],
+    #         excluded_tag_keys: ["AlarmTagsPropagationTagKey"],
+    #       },
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :alarm_name
@@ -834,6 +841,10 @@ module Aws::CloudWatch
     #   This parameter is required for alarms that use `EvaluationCriteria`,
     #   and cannot be specified for alarms configured with `MetricName` or
     #   `Metrics`.
+    # @option options [Types::ActionConfiguration] :action_configuration
+    #   Settings that change the content of the notifications and events that
+    #   the alarm sends when its state changes. These settings apply to the
+    #   alarm's actions, whichever state triggers them.
     # @return [Alarm]
     def put_alarm(options = {})
       options = options.merge(

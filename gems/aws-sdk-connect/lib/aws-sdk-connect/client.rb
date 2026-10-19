@@ -2053,7 +2053,7 @@ module Aws::Connect
     #   resp.files[0].file_id #=> String
     #   resp.files[0].file_name #=> String
     #   resp.files[0].file_size_in_bytes #=> Integer
-    #   resp.files[0].file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED"
+    #   resp.files[0].file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
     #   resp.files[0].created_by.connect_user_arn #=> String
     #   resp.files[0].created_by.aws_identity_arn #=> String
     #   resp.files[0].file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT", "VOICE_RECORDING"
@@ -2602,7 +2602,7 @@ module Aws::Connect
     #   resp.file_arn #=> String
     #   resp.file_id #=> String
     #   resp.creation_time #=> String
-    #   resp.file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED"
+    #   resp.file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAttachedFile AWS API Documentation
     #
@@ -11786,6 +11786,18 @@ module Aws::Connect
     #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
     #   [3]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
     #
+    # @option params [String] :url_content_disposition
+    #   Specifies how a browser handles the file at the pre-signed URL. The
+    #   valid values are the following:
+    #
+    #   INLINE
+    #
+    #   : Displays the file in the browser.
+    #
+    #   ATTACHMENT
+    #
+    #   : Downloads the file. This is the default.
+    #
     # @return [Types::GetAttachedFileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAttachedFileResponse#file_arn #file_arn} => String
@@ -11807,6 +11819,7 @@ module Aws::Connect
     #     file_id: "FileId", # required
     #     url_expiry_in_seconds: 1,
     #     associated_resource_arn: "ARN", # required
+    #     url_content_disposition: "INLINE", # accepts INLINE, ATTACHMENT
     #   })
     #
     # @example Response structure
@@ -11814,7 +11827,7 @@ module Aws::Connect
     #   resp.file_arn #=> String
     #   resp.file_id #=> String
     #   resp.creation_time #=> String
-    #   resp.file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED"
+    #   resp.file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
     #   resp.file_name #=> String
     #   resp.file_size_in_bytes #=> Integer
     #   resp.associated_resource_arn #=> String
@@ -24805,7 +24818,7 @@ module Aws::Connect
     #   resp.file_arn #=> String
     #   resp.file_id #=> String
     #   resp.creation_time #=> String
-    #   resp.file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED"
+    #   resp.file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
     #   resp.created_by.connect_user_arn #=> String
     #   resp.created_by.aws_identity_arn #=> String
     #   resp.upload_url_metadata.url #=> String
@@ -32007,7 +32020,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.285.0'
+      context[:gem_version] = '1.286.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

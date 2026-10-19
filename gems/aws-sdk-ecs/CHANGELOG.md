@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.249.0 (2026-10-19)
+------------------
+
+* Feature - Adds support for configurable envoy application log levels. Customers can now debug network connectivity issues with their task's sidecar envoys.
+
 1.248.0 (2026-09-30)
 ------------------
 

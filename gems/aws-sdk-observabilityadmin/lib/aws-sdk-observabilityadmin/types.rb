@@ -815,13 +815,33 @@ module Aws::ObservabilityAdmin
     #   `${source.accountId}`, and `${source.region}`.
     #   @return [Types::TagPropagationConfiguration]
     #
+    # @!attribute [rw] log_group_deletion_protection
+    #   Specifies whether this centralization rule enables deletion
+    #   protection on the destination log groups that it creates. If you
+    #   don't specify this setting, the rule doesn't enable deletion
+    #   protection on the log groups that it creates. If you specify a
+    #   backup Region in `BackupConfiguration`, the setting also applies to
+    #   the log groups that the rule creates in the backup Region.
+    #
+    #   When you set this to `ENABLED`, the rule enables deletion protection
+    #   only on log groups that it creates after you enable the setting. It
+    #   does not add deletion protection to log groups the rule created
+    #   before you enabled the setting.
+    #
+    #   If you remove this setting from the rule or delete the rule,
+    #   deletion protection stays enabled on log groups that already have
+    #   it. To delete one of these log groups, first disable deletion
+    #   protection on the log group in the destination account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DestinationLogsConfiguration AWS API Documentation
     #
     class DestinationLogsConfiguration < Struct.new(
       :logs_encryption_configuration,
       :backup_configuration,
       :log_group_name_configuration,
-      :tag_propagation_configuration)
+      :tag_propagation_configuration,
+      :log_group_deletion_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2792,8 +2812,9 @@ module Aws::ObservabilityAdmin
     #   The type of Amazon Web Services resource to configure telemetry for
     #   (for example, `AWS::EC2::VPC`, `AWS::EKS::Cluster`,
     #   `AWS::ElasticLoadBalancingV2::LoadBalancer`,
-    #   `AWS::Bedrock::KnowledgeBase`, or
-    #   `AWS::BedrockAgentCore::PaymentManager`).
+    #   `AWS::Bedrock::KnowledgeBase`,
+    #   `AWS::BedrockAgentCore::PaymentManager`, or
+    #   `AWS::XRay::TransactionSearchConfig`).
     #   @return [String]
     #
     # @!attribute [rw] telemetry_type

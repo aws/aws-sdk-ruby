@@ -114,6 +114,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#evaluation_interval-instance_method
       def evaluation_interval: () -> ::Integer
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#action_configuration-instance_method
+      def action_configuration: () -> Types::ActionConfiguration
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#load-instance_method

@@ -1053,6 +1053,7 @@ module Aws::BedrockAgentCore
       attr_accessor data_source_config: Types::DataSourceConfig
       attr_accessor output_config: Types::OutputConfig
       attr_accessor evaluation_results: Types::EvaluationJobResults
+      attr_accessor insight_results: ::Array[Types::InsightResult]
       attr_accessor failure_analysis_result: Types::FailureAnalysisResultContent
       attr_accessor user_intent_result: Types::UserIntentClusteringResultContent
       attr_accessor execution_summary_result: Types::ExecutionSummaryClusteringResultContent
@@ -1780,6 +1781,26 @@ module Aws::BedrockAgentCore
     class Insight
       attr_accessor insight_id: ::String
       SENSITIVE: []
+    end
+
+    class InsightResult
+      attr_accessor type: ("FAILURE")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor affected_session_count: ::Integer
+      attr_accessor sample_sessions: ::Array[Types::SampleSession]
+      attr_accessor root_causes: ::Array[Types::InsightRootCause]
+      SENSITIVE: [:name, :description]
+    end
+
+    class InsightRootCause
+      attr_accessor name: ::String
+      attr_accessor explanation: ::String
+      attr_accessor affected_session_count: ::Integer
+      attr_accessor suggested_fix: ::String
+      attr_accessor sample_sessions: ::Array[Types::SampleSession]
+      SENSITIVE: [:name, :explanation, :suggested_fix]
     end
 
     class InsightsFailureSignal
@@ -2838,6 +2859,13 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class SampleSession
+      attr_accessor session_id: ::String
+      attr_accessor last_seen_at: ::Time
+      attr_accessor findings: ::Array[Types::SessionFinding]
+      SENSITIVE: []
+    end
+
     class SaveBrowserSessionProfileRequest
       attr_accessor trace_id: ::String
       attr_accessor trace_parent: ::String
@@ -2920,6 +2948,15 @@ module Aws::BedrockAgentCore
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       SENSITIVE: []
+    end
+
+    class SessionFinding
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ("SPAN_ID" | "TRACE_ID" | "SPAN_NAME")
+      attr_accessor description: ::String
+      attr_accessor category: ::String
+      attr_accessor confidence: ::Float
+      SENSITIVE: [:description]
     end
 
     class SessionLimits

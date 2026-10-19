@@ -16520,13 +16520,27 @@ module Aws::Connect
     #   [3]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
     #   @return [String]
     #
+    # @!attribute [rw] url_content_disposition
+    #   Specifies how a browser handles the file at the pre-signed URL. The
+    #   valid values are the following:
+    #
+    #   INLINE
+    #
+    #   : Displays the file in the browser.
+    #
+    #   ATTACHMENT
+    #
+    #   : Downloads the file. This is the default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetAttachedFileRequest AWS API Documentation
     #
     class GetAttachedFileRequest < Struct.new(
       :instance_id,
       :file_id,
       :url_expiry_in_seconds,
-      :associated_resource_arn)
+      :associated_resource_arn,
+      :url_content_disposition)
       SENSITIVE = []
       include Aws::Structure
     end

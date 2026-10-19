@@ -11,78 +11,78 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class ConflictingOperationException < ::Aws::Errors::ServiceError
+      class ConflictingOperationException < ServiceError
         def message: () -> ::String
       end
-      class CustomMetadataLimitExceededException < ::Aws::Errors::ServiceError
+      class CustomMetadataLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class DeactivatingLastSystemUserException < ::Aws::Errors::ServiceError
+      class DeactivatingLastSystemUserException < ServiceError
       end
-      class DocumentLockedForCommentsException < ::Aws::Errors::ServiceError
+      class DocumentLockedForCommentsException < ServiceError
         def message: () -> ::String
       end
-      class DraftUploadOutOfSyncException < ::Aws::Errors::ServiceError
+      class DraftUploadOutOfSyncException < ServiceError
         def message: () -> ::String
       end
-      class EntityAlreadyExistsException < ::Aws::Errors::ServiceError
+      class EntityAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class EntityNotExistsException < ::Aws::Errors::ServiceError
+      class EntityNotExistsException < ServiceError
         def message: () -> ::String
         def entity_ids: () -> ::String
       end
-      class FailedDependencyException < ::Aws::Errors::ServiceError
+      class FailedDependencyException < ServiceError
         def message: () -> ::String
       end
-      class IllegalUserStateException < ::Aws::Errors::ServiceError
+      class IllegalUserStateException < ServiceError
         def message: () -> ::String
       end
-      class InvalidArgumentException < ::Aws::Errors::ServiceError
+      class InvalidArgumentException < ServiceError
         def message: () -> ::String
       end
-      class InvalidCommentOperationException < ::Aws::Errors::ServiceError
+      class InvalidCommentOperationException < ServiceError
         def message: () -> ::String
       end
-      class InvalidOperationException < ::Aws::Errors::ServiceError
+      class InvalidOperationException < ServiceError
         def message: () -> ::String
       end
-      class InvalidPasswordException < ::Aws::Errors::ServiceError
+      class InvalidPasswordException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ProhibitedStateException < ::Aws::Errors::ServiceError
+      class ProhibitedStateException < ServiceError
         def message: () -> ::String
       end
-      class RequestedEntityTooLargeException < ::Aws::Errors::ServiceError
+      class RequestedEntityTooLargeException < ServiceError
         def message: () -> ::String
       end
-      class ResourceAlreadyCheckedOutException < ::Aws::Errors::ServiceError
+      class ResourceAlreadyCheckedOutException < ServiceError
         def message: () -> ::String
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class StorageLimitExceededException < ::Aws::Errors::ServiceError
+      class StorageLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class StorageLimitWillExceedException < ::Aws::Errors::ServiceError
+      class StorageLimitWillExceedException < ServiceError
         def message: () -> ::String
       end
-      class TooManyLabelsException < ::Aws::Errors::ServiceError
+      class TooManyLabelsException < ServiceError
         def message: () -> ::String
       end
-      class TooManySubscriptionsException < ::Aws::Errors::ServiceError
+      class TooManySubscriptionsException < ServiceError
         def message: () -> ::String
       end
-      class UnauthorizedOperationException < ::Aws::Errors::ServiceError
+      class UnauthorizedOperationException < ServiceError
       end
-      class UnauthorizedResourceAccessException < ::Aws::Errors::ServiceError
+      class UnauthorizedResourceAccessException < ServiceError
         def message: () -> ::String
       end
     end

@@ -249,7 +249,8 @@ module Aws
                                            destination_type: ("S3"),
                                            destination_properties: {
                                              destination_arn: ::String?,
-                                             kms_key_arn: ::String?
+                                             kms_key_arn: ::String?,
+                                             expected_bucket_owner: ::String?
                                            },
                                            ?client_token: ::String,
                                            ?tags: Hash[::String, ::String]
@@ -1468,7 +1469,8 @@ module Aws
                                            destination_id: ::String,
                                            ?destination_properties: {
                                              destination_arn: ::String?,
-                                             kms_key_arn: ::String?
+                                             kms_key_arn: ::String?,
+                                             expected_bucket_owner: ::String?
                                            }
                                          ) -> _UpdatePublishingDestinationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePublishingDestinationResponseSuccess

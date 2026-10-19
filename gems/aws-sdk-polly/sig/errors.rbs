@@ -11,64 +11,64 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class EngineNotSupportedException < ::Aws::Errors::ServiceError
+      class EngineNotSupportedException < ServiceError
         def message: () -> ::String
       end
-      class InvalidLexiconException < ::Aws::Errors::ServiceError
+      class InvalidLexiconException < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidS3BucketException < ::Aws::Errors::ServiceError
+      class InvalidS3BucketException < ServiceError
         def message: () -> ::String
       end
-      class InvalidS3KeyException < ::Aws::Errors::ServiceError
+      class InvalidS3KeyException < ServiceError
         def message: () -> ::String
       end
-      class InvalidSampleRateException < ::Aws::Errors::ServiceError
+      class InvalidSampleRateException < ServiceError
         def message: () -> ::String
       end
-      class InvalidSnsTopicArnException < ::Aws::Errors::ServiceError
+      class InvalidSnsTopicArnException < ServiceError
         def message: () -> ::String
       end
-      class InvalidSsmlException < ::Aws::Errors::ServiceError
+      class InvalidSsmlException < ServiceError
         def message: () -> ::String
       end
-      class InvalidTaskIdException < ::Aws::Errors::ServiceError
+      class InvalidTaskIdException < ServiceError
         def message: () -> ::String
       end
-      class LanguageNotSupportedException < ::Aws::Errors::ServiceError
+      class LanguageNotSupportedException < ServiceError
         def message: () -> ::String
       end
-      class LexiconNotFoundException < ::Aws::Errors::ServiceError
+      class LexiconNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class LexiconSizeExceededException < ::Aws::Errors::ServiceError
+      class LexiconSizeExceededException < ServiceError
         def message: () -> ::String
       end
-      class MarksNotSupportedForFormatException < ::Aws::Errors::ServiceError
+      class MarksNotSupportedForFormatException < ServiceError
         def message: () -> ::String
       end
-      class MaxLexemeLengthExceededException < ::Aws::Errors::ServiceError
+      class MaxLexemeLengthExceededException < ServiceError
         def message: () -> ::String
       end
-      class MaxLexiconsNumberExceededException < ::Aws::Errors::ServiceError
+      class MaxLexiconsNumberExceededException < ServiceError
         def message: () -> ::String
       end
-      class SsmlMarksNotSupportedForTextTypeException < ::Aws::Errors::ServiceError
+      class SsmlMarksNotSupportedForTextTypeException < ServiceError
         def message: () -> ::String
       end
-      class SynthesisTaskNotFoundException < ::Aws::Errors::ServiceError
+      class SynthesisTaskNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class TextLengthExceededException < ::Aws::Errors::ServiceError
+      class TextLengthExceededException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedPlsAlphabetException < ::Aws::Errors::ServiceError
+      class UnsupportedPlsAlphabetException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedPlsLanguageException < ::Aws::Errors::ServiceError
+      class UnsupportedPlsLanguageException < ServiceError
         def message: () -> ::String
       end
     end

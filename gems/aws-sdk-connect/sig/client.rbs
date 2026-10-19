@@ -543,7 +543,7 @@ module Aws
         def file_arn: () -> ::String
         def file_id: () -> ::String
         def creation_time: () -> ::String
-        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_attached_file-instance_method
       def create_attached_file: (
@@ -2421,7 +2421,7 @@ module Aws
         def file_arn: () -> ::String
         def file_id: () -> ::String
         def creation_time: () -> ::String
-        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
         def file_name: () -> ::String
         def file_size_in_bytes: () -> ::Integer
         def associated_resource_arn: () -> ::String
@@ -2435,7 +2435,8 @@ module Aws
                                instance_id: ::String,
                                file_id: ::String,
                                ?url_expiry_in_seconds: ::Integer,
-                               associated_resource_arn: ::String
+                               associated_resource_arn: ::String,
+                               ?url_content_disposition: ("INLINE" | "ATTACHMENT")
                              ) -> _GetAttachedFileResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAttachedFileResponseSuccess
 
@@ -4683,7 +4684,7 @@ module Aws
         def file_arn: () -> ::String
         def file_id: () -> ::String
         def creation_time: () -> ::String
-        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
         def created_by: () -> Types::CreatedByInfo
         def upload_url_metadata: () -> Types::UploadUrlMetadata
       end

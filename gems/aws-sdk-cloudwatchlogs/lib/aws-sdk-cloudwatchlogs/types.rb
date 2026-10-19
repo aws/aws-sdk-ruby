@@ -2296,11 +2296,17 @@ module Aws::CloudWatchLogs
     #   response.
     #   @return [Integer]
     #
+    # @!attribute [rw] delivery_source_names
+    #   An array of delivery source names that filters the results to
+    #   deliveries associated with any specified delivery source.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliveriesRequest AWS API Documentation
     #
     class DescribeDeliveriesRequest < Struct.new(
       :next_token,
-      :limit)
+      :limit,
+      :delivery_source_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2334,11 +2340,17 @@ module Aws::CloudWatchLogs
     #   return in the response.
     #   @return [Integer]
     #
+    # @!attribute [rw] names
+    #   An array of delivery destination names that filters the results to
+    #   delivery destinations with any specified name.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliveryDestinationsRequest AWS API Documentation
     #
     class DescribeDeliveryDestinationsRequest < Struct.new(
       :next_token,
-      :limit)
+      :limit,
+      :names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2372,11 +2384,17 @@ module Aws::CloudWatchLogs
     #   in the response.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_arns
+    #   An array of Amazon Resource Names (ARNs) that filters the results to
+    #   delivery sources associated with any specified ARN.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliverySourcesRequest AWS API Documentation
     #
     class DescribeDeliverySourcesRequest < Struct.new(
       :next_token,
-      :limit)
+      :limit,
+      :resource_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8204,7 +8222,12 @@ module Aws::CloudWatchLogs
     #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
     #     `TRANSCODE_LOGS`.
     #
+    #   * For Amazon ECS, the valid value is `ACTION_LOGS`.
+    #
     #   * For Entity Resolution, the valid value is `WORKFLOW_LOGS`.
+    #
+    #   * For Amazon EventBridge Event Bus (Custom), the valid values are
+    #     `INFO_LOGS` and `ERROR_LOGS`.
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
@@ -8214,7 +8237,8 @@ module Aws::CloudWatchLogs
     #   * For Network Load Balancer, the valid value is `NLB_ACCESS_LOGS`.
     #
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS`,
-    #     `PCS_JOBCOMP_LOGS`, and `PCS_SCHEDULER_AUDIT_LOGS`.
+    #     `PCS_JOBCOMP_LOGS`, `PCS_SCHEDULER_AUDIT_LOGS`, and
+    #     `PCS_SCALING_LOGS`.
     #
     #   * For Amazon Q, the valid values are `EVENT_LOGS` and
     #     `SYNC_JOB_LOGS`.

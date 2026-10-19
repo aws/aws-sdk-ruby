@@ -11,106 +11,106 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AuthorizationErrorException < ::Aws::Errors::ServiceError
+      class AuthorizationErrorException < ServiceError
         def message: () -> ::String
       end
-      class BatchEntryIdsNotDistinctException < ::Aws::Errors::ServiceError
+      class BatchEntryIdsNotDistinctException < ServiceError
         def message: () -> ::String
       end
-      class BatchRequestTooLongException < ::Aws::Errors::ServiceError
+      class BatchRequestTooLongException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentAccessException < ::Aws::Errors::ServiceError
+      class ConcurrentAccessException < ServiceError
         def message: () -> ::String
       end
-      class EmptyBatchRequestException < ::Aws::Errors::ServiceError
+      class EmptyBatchRequestException < ServiceError
         def message: () -> ::String
       end
-      class EndpointDisabledException < ::Aws::Errors::ServiceError
+      class EndpointDisabledException < ServiceError
         def message: () -> ::String
       end
-      class FilterPolicyLimitExceededException < ::Aws::Errors::ServiceError
+      class FilterPolicyLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class InternalErrorException < ::Aws::Errors::ServiceError
+      class InternalErrorException < ServiceError
         def message: () -> ::String
       end
-      class InvalidBatchEntryIdException < ::Aws::Errors::ServiceError
+      class InvalidBatchEntryIdException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+      class InvalidParameterValueException < ServiceError
         def message: () -> ::String
       end
-      class InvalidSecurityException < ::Aws::Errors::ServiceError
+      class InvalidSecurityException < ServiceError
         def message: () -> ::String
       end
-      class InvalidStateException < ::Aws::Errors::ServiceError
+      class InvalidStateException < ServiceError
         def message: () -> ::String
       end
-      class KMSAccessDeniedException < ::Aws::Errors::ServiceError
+      class KMSAccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class KMSDisabledException < ::Aws::Errors::ServiceError
+      class KMSDisabledException < ServiceError
         def message: () -> ::String
       end
-      class KMSInvalidStateException < ::Aws::Errors::ServiceError
+      class KMSInvalidStateException < ServiceError
         def message: () -> ::String
       end
-      class KMSNotFoundException < ::Aws::Errors::ServiceError
+      class KMSNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class KMSOptInRequired < ::Aws::Errors::ServiceError
+      class KMSOptInRequired < ServiceError
         def message: () -> ::String
       end
-      class KMSThrottlingException < ::Aws::Errors::ServiceError
+      class KMSThrottlingException < ServiceError
         def message: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def message: () -> ::String
       end
-      class OptedOutException < ::Aws::Errors::ServiceError
+      class OptedOutException < ServiceError
         def message: () -> ::String
       end
-      class PlatformApplicationDisabledException < ::Aws::Errors::ServiceError
+      class PlatformApplicationDisabledException < ServiceError
         def message: () -> ::String
       end
-      class ReplayLimitExceededException < ::Aws::Errors::ServiceError
+      class ReplayLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class StaleTagException < ::Aws::Errors::ServiceError
+      class StaleTagException < ServiceError
         def message: () -> ::String
       end
-      class SubscriptionLimitExceededException < ::Aws::Errors::ServiceError
+      class SubscriptionLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class TagLimitExceededException < ::Aws::Errors::ServiceError
+      class TagLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class TagPolicyException < ::Aws::Errors::ServiceError
+      class TagPolicyException < ServiceError
         def message: () -> ::String
       end
-      class ThrottledException < ::Aws::Errors::ServiceError
+      class ThrottledException < ServiceError
         def message: () -> ::String
       end
-      class TooManyEntriesInBatchRequestException < ::Aws::Errors::ServiceError
+      class TooManyEntriesInBatchRequestException < ServiceError
         def message: () -> ::String
       end
-      class TopicLimitExceededException < ::Aws::Errors::ServiceError
+      class TopicLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class UserErrorException < ::Aws::Errors::ServiceError
+      class UserErrorException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
-      class VerificationException < ::Aws::Errors::ServiceError
+      class VerificationException < ServiceError
         def message: () -> ::String
         def status: () -> ::String
       end

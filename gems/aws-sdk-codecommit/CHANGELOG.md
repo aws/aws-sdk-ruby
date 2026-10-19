@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2026-10-19)
+------------------
+
+* Feature - Documentation update release for AWS service
+
 1.105.0 (2026-09-11)
 ------------------
 

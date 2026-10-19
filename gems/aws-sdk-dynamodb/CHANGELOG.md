@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.176.0 (2026-10-19)
+------------------
+
+* Feature - Enable account endpoint generation for existing CN and GovCloud regions
+
 1.175.0 (2026-09-30)
 ------------------
 

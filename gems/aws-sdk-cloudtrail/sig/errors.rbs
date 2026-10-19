@@ -11,177 +11,177 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
       end
-      class AccountHasOngoingImportException < ::Aws::Errors::ServiceError
+      class AccountHasOngoingImportException < ServiceError
       end
-      class AccountNotFoundException < ::Aws::Errors::ServiceError
+      class AccountNotFoundException < ServiceError
       end
-      class AccountNotRegisteredException < ::Aws::Errors::ServiceError
+      class AccountNotRegisteredException < ServiceError
       end
-      class AccountRegisteredException < ::Aws::Errors::ServiceError
+      class AccountRegisteredException < ServiceError
       end
-      class CannotDelegateManagementAccountException < ::Aws::Errors::ServiceError
+      class CannotDelegateManagementAccountException < ServiceError
       end
-      class ChannelARNInvalidException < ::Aws::Errors::ServiceError
+      class ChannelARNInvalidException < ServiceError
       end
-      class ChannelAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ChannelAlreadyExistsException < ServiceError
       end
-      class ChannelExistsForEDSException < ::Aws::Errors::ServiceError
+      class ChannelExistsForEDSException < ServiceError
       end
-      class ChannelMaxLimitExceededException < ::Aws::Errors::ServiceError
+      class ChannelMaxLimitExceededException < ServiceError
       end
-      class ChannelNotFoundException < ::Aws::Errors::ServiceError
+      class ChannelNotFoundException < ServiceError
       end
-      class CloudTrailARNInvalidException < ::Aws::Errors::ServiceError
+      class CloudTrailARNInvalidException < ServiceError
       end
-      class CloudTrailAccessNotEnabledException < ::Aws::Errors::ServiceError
+      class CloudTrailAccessNotEnabledException < ServiceError
       end
-      class CloudTrailInvalidClientTokenIdException < ::Aws::Errors::ServiceError
+      class CloudTrailInvalidClientTokenIdException < ServiceError
       end
-      class CloudWatchLogsDeliveryUnavailableException < ::Aws::Errors::ServiceError
+      class CloudWatchLogsDeliveryUnavailableException < ServiceError
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
       end
-      class DelegatedAdminAccountLimitExceededException < ::Aws::Errors::ServiceError
+      class DelegatedAdminAccountLimitExceededException < ServiceError
       end
-      class EventDataStoreARNInvalidException < ::Aws::Errors::ServiceError
+      class EventDataStoreARNInvalidException < ServiceError
       end
-      class EventDataStoreAlreadyExistsException < ::Aws::Errors::ServiceError
+      class EventDataStoreAlreadyExistsException < ServiceError
       end
-      class EventDataStoreFederationEnabledException < ::Aws::Errors::ServiceError
+      class EventDataStoreFederationEnabledException < ServiceError
       end
-      class EventDataStoreHasOngoingImportException < ::Aws::Errors::ServiceError
+      class EventDataStoreHasOngoingImportException < ServiceError
       end
-      class EventDataStoreMaxLimitExceededException < ::Aws::Errors::ServiceError
+      class EventDataStoreMaxLimitExceededException < ServiceError
       end
-      class EventDataStoreNotFoundException < ::Aws::Errors::ServiceError
+      class EventDataStoreNotFoundException < ServiceError
       end
-      class EventDataStoreTerminationProtectedException < ::Aws::Errors::ServiceError
+      class EventDataStoreTerminationProtectedException < ServiceError
       end
-      class GenerateResponseException < ::Aws::Errors::ServiceError
+      class GenerateResponseException < ServiceError
       end
-      class ImportNotFoundException < ::Aws::Errors::ServiceError
+      class ImportNotFoundException < ServiceError
       end
-      class InactiveEventDataStoreException < ::Aws::Errors::ServiceError
+      class InactiveEventDataStoreException < ServiceError
       end
-      class InactiveQueryException < ::Aws::Errors::ServiceError
+      class InactiveQueryException < ServiceError
       end
-      class InsightNotEnabledException < ::Aws::Errors::ServiceError
+      class InsightNotEnabledException < ServiceError
       end
-      class InsufficientDependencyServiceAccessPermissionException < ::Aws::Errors::ServiceError
+      class InsufficientDependencyServiceAccessPermissionException < ServiceError
       end
-      class InsufficientEncryptionPolicyException < ::Aws::Errors::ServiceError
+      class InsufficientEncryptionPolicyException < ServiceError
       end
-      class InsufficientIAMAccessPermissionException < ::Aws::Errors::ServiceError
+      class InsufficientIAMAccessPermissionException < ServiceError
       end
-      class InsufficientS3BucketPolicyException < ::Aws::Errors::ServiceError
+      class InsufficientS3BucketPolicyException < ServiceError
       end
-      class InsufficientSnsTopicPolicyException < ::Aws::Errors::ServiceError
+      class InsufficientSnsTopicPolicyException < ServiceError
       end
-      class InvalidCloudWatchLogsLogGroupArnException < ::Aws::Errors::ServiceError
+      class InvalidCloudWatchLogsLogGroupArnException < ServiceError
       end
-      class InvalidCloudWatchLogsRoleArnException < ::Aws::Errors::ServiceError
+      class InvalidCloudWatchLogsRoleArnException < ServiceError
       end
-      class InvalidDateRangeException < ::Aws::Errors::ServiceError
+      class InvalidDateRangeException < ServiceError
       end
-      class InvalidEventCategoryException < ::Aws::Errors::ServiceError
+      class InvalidEventCategoryException < ServiceError
       end
-      class InvalidEventDataStoreCategoryException < ::Aws::Errors::ServiceError
+      class InvalidEventDataStoreCategoryException < ServiceError
       end
-      class InvalidEventDataStoreStatusException < ::Aws::Errors::ServiceError
+      class InvalidEventDataStoreStatusException < ServiceError
       end
-      class InvalidEventSelectorsException < ::Aws::Errors::ServiceError
+      class InvalidEventSelectorsException < ServiceError
       end
-      class InvalidHomeRegionException < ::Aws::Errors::ServiceError
+      class InvalidHomeRegionException < ServiceError
       end
-      class InvalidImportSourceException < ::Aws::Errors::ServiceError
+      class InvalidImportSourceException < ServiceError
       end
-      class InvalidInsightSelectorsException < ::Aws::Errors::ServiceError
+      class InvalidInsightSelectorsException < ServiceError
       end
-      class InvalidKmsKeyIdException < ::Aws::Errors::ServiceError
+      class InvalidKmsKeyIdException < ServiceError
       end
-      class InvalidLookupAttributesException < ::Aws::Errors::ServiceError
+      class InvalidLookupAttributesException < ServiceError
       end
-      class InvalidMaxResultsException < ::Aws::Errors::ServiceError
+      class InvalidMaxResultsException < ServiceError
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
       end
-      class InvalidParameterCombinationException < ::Aws::Errors::ServiceError
+      class InvalidParameterCombinationException < ServiceError
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
       end
-      class InvalidQueryStatementException < ::Aws::Errors::ServiceError
+      class InvalidQueryStatementException < ServiceError
       end
-      class InvalidQueryStatusException < ::Aws::Errors::ServiceError
+      class InvalidQueryStatusException < ServiceError
       end
-      class InvalidS3BucketNameException < ::Aws::Errors::ServiceError
+      class InvalidS3BucketNameException < ServiceError
       end
-      class InvalidS3PrefixException < ::Aws::Errors::ServiceError
+      class InvalidS3PrefixException < ServiceError
       end
-      class InvalidSnsTopicNameException < ::Aws::Errors::ServiceError
+      class InvalidSnsTopicNameException < ServiceError
       end
-      class InvalidSourceException < ::Aws::Errors::ServiceError
+      class InvalidSourceException < ServiceError
       end
-      class InvalidTagParameterException < ::Aws::Errors::ServiceError
+      class InvalidTagParameterException < ServiceError
       end
-      class InvalidTimeRangeException < ::Aws::Errors::ServiceError
+      class InvalidTimeRangeException < ServiceError
       end
-      class InvalidTokenException < ::Aws::Errors::ServiceError
+      class InvalidTokenException < ServiceError
       end
-      class InvalidTrailNameException < ::Aws::Errors::ServiceError
+      class InvalidTrailNameException < ServiceError
       end
-      class KmsException < ::Aws::Errors::ServiceError
+      class KmsException < ServiceError
       end
-      class KmsKeyDisabledException < ::Aws::Errors::ServiceError
+      class KmsKeyDisabledException < ServiceError
       end
-      class KmsKeyNotFoundException < ::Aws::Errors::ServiceError
+      class KmsKeyNotFoundException < ServiceError
       end
-      class MaxConcurrentQueriesException < ::Aws::Errors::ServiceError
+      class MaxConcurrentQueriesException < ServiceError
       end
-      class MaximumNumberOfTrailsExceededException < ::Aws::Errors::ServiceError
+      class MaximumNumberOfTrailsExceededException < ServiceError
       end
-      class NoManagementAccountSLRExistsException < ::Aws::Errors::ServiceError
+      class NoManagementAccountSLRExistsException < ServiceError
       end
-      class NotOrganizationManagementAccountException < ::Aws::Errors::ServiceError
+      class NotOrganizationManagementAccountException < ServiceError
       end
-      class NotOrganizationMasterAccountException < ::Aws::Errors::ServiceError
+      class NotOrganizationMasterAccountException < ServiceError
       end
-      class OperationNotPermittedException < ::Aws::Errors::ServiceError
+      class OperationNotPermittedException < ServiceError
       end
-      class OrganizationNotInAllFeaturesModeException < ::Aws::Errors::ServiceError
+      class OrganizationNotInAllFeaturesModeException < ServiceError
       end
-      class OrganizationsNotInUseException < ::Aws::Errors::ServiceError
+      class OrganizationsNotInUseException < ServiceError
       end
-      class QueryIdNotFoundException < ::Aws::Errors::ServiceError
+      class QueryIdNotFoundException < ServiceError
       end
-      class ResourceARNNotValidException < ::Aws::Errors::ServiceError
+      class ResourceARNNotValidException < ServiceError
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
       end
-      class ResourcePolicyNotFoundException < ::Aws::Errors::ServiceError
+      class ResourcePolicyNotFoundException < ServiceError
       end
-      class ResourcePolicyNotValidException < ::Aws::Errors::ServiceError
+      class ResourcePolicyNotValidException < ServiceError
       end
-      class ResourceTypeNotSupportedException < ::Aws::Errors::ServiceError
+      class ResourceTypeNotSupportedException < ServiceError
       end
-      class S3BucketDoesNotExistException < ::Aws::Errors::ServiceError
+      class S3BucketDoesNotExistException < ServiceError
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
       end
-      class TagsLimitExceededException < ::Aws::Errors::ServiceError
+      class TagsLimitExceededException < ServiceError
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
       end
-      class TrailAlreadyExistsException < ::Aws::Errors::ServiceError
+      class TrailAlreadyExistsException < ServiceError
       end
-      class TrailNotFoundException < ::Aws::Errors::ServiceError
+      class TrailNotFoundException < ServiceError
       end
-      class TrailNotProvidedException < ::Aws::Errors::ServiceError
+      class TrailNotProvidedException < ServiceError
       end
-      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+      class UnsupportedOperationException < ServiceError
       end
     end
   end

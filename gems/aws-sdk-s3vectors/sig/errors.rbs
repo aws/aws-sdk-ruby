@@ -11,43 +11,43 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
       end
-      class KmsDisabledException < ::Aws::Errors::ServiceError
+      class KmsDisabledException < ServiceError
         def message: () -> ::String
       end
-      class KmsInvalidKeyUsageException < ::Aws::Errors::ServiceError
+      class KmsInvalidKeyUsageException < ServiceError
         def message: () -> ::String
       end
-      class KmsInvalidStateException < ::Aws::Errors::ServiceError
+      class KmsInvalidStateException < ServiceError
         def message: () -> ::String
       end
-      class KmsNotFoundException < ::Aws::Errors::ServiceError
+      class KmsNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def message: () -> ::String
       end
-      class RequestTimeoutException < ::Aws::Errors::ServiceError
+      class RequestTimeoutException < ServiceError
         def message: () -> ::String
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class TooManyRequestsException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
         def field_list: () -> ::String
       end

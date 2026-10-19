@@ -11,47 +11,47 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDenied < ::Aws::Errors::ServiceError
+      class AccessDenied < ServiceError
       end
-      class AnnotationLimitExceeded < ::Aws::Errors::ServiceError
+      class AnnotationLimitExceeded < ServiceError
       end
-      class AnnotationNameTooLong < ::Aws::Errors::ServiceError
+      class AnnotationNameTooLong < ServiceError
       end
-      class BucketAlreadyExists < ::Aws::Errors::ServiceError
+      class BucketAlreadyExists < ServiceError
       end
-      class BucketAlreadyOwnedByYou < ::Aws::Errors::ServiceError
+      class BucketAlreadyOwnedByYou < ServiceError
       end
-      class EncryptionTypeMismatch < ::Aws::Errors::ServiceError
+      class EncryptionTypeMismatch < ServiceError
       end
-      class IdempotencyParameterMismatch < ::Aws::Errors::ServiceError
+      class IdempotencyParameterMismatch < ServiceError
       end
-      class InvalidAnnotationName < ::Aws::Errors::ServiceError
+      class InvalidAnnotationName < ServiceError
       end
-      class InvalidObjectState < ::Aws::Errors::ServiceError
+      class InvalidObjectState < ServiceError
         def storage_class: () -> ::String
         def access_tier: () -> ::String
       end
-      class InvalidPrefix < ::Aws::Errors::ServiceError
+      class InvalidPrefix < ServiceError
       end
-      class InvalidRequest < ::Aws::Errors::ServiceError
+      class InvalidRequest < ServiceError
       end
-      class InvalidWriteOffset < ::Aws::Errors::ServiceError
+      class InvalidWriteOffset < ServiceError
       end
-      class NoSuchAnnotation < ::Aws::Errors::ServiceError
+      class NoSuchAnnotation < ServiceError
       end
-      class NoSuchBucket < ::Aws::Errors::ServiceError
+      class NoSuchBucket < ServiceError
       end
-      class NoSuchKey < ::Aws::Errors::ServiceError
+      class NoSuchKey < ServiceError
       end
-      class NoSuchUpload < ::Aws::Errors::ServiceError
+      class NoSuchUpload < ServiceError
       end
-      class ObjectAlreadyInActiveTierError < ::Aws::Errors::ServiceError
+      class ObjectAlreadyInActiveTierError < ServiceError
       end
-      class ObjectNotInActiveTierError < ::Aws::Errors::ServiceError
+      class ObjectNotInActiveTierError < ServiceError
       end
-      class TooManyParts < ::Aws::Errors::ServiceError
+      class TooManyParts < ServiceError
       end
-      class UnsupportedMediaType < ::Aws::Errors::ServiceError
+      class UnsupportedMediaType < ServiceError
       end
     end
   end

@@ -36,6 +36,7 @@ module Aws::XRay
     CancelTraceRetrievalRequest = Shapes::StructureShape.new(name: 'CancelTraceRetrievalRequest')
     CancelTraceRetrievalResult = Shapes::StructureShape.new(name: 'CancelTraceRetrievalResult')
     ClientID = Shapes::StringShape.new(name: 'ClientID')
+    CloudWatchLogsConfiguration = Shapes::StructureShape.new(name: 'CloudWatchLogsConfiguration')
     CooldownWindowMinutes = Shapes::IntegerShape.new(name: 'CooldownWindowMinutes')
     CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
     CreateGroupResult = Shapes::StructureShape.new(name: 'CreateGroupResult')
@@ -149,6 +150,7 @@ module Aws::XRay
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidPolicyRevisionIdException = Shapes::StructureShape.new(name: 'InvalidPolicyRevisionIdException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LinksList = Shapes::ListShape.new(name: 'LinksList')
     ListResourcePoliciesRequest = Shapes::StructureShape.new(name: 'ListResourcePoliciesRequest')
     ListResourcePoliciesResult = Shapes::StructureShape.new(name: 'ListResourcePoliciesResult')
@@ -344,6 +346,9 @@ module Aws::XRay
     CancelTraceRetrievalRequest.struct_class = Types::CancelTraceRetrievalRequest
 
     CancelTraceRetrievalResult.struct_class = Types::CancelTraceRetrievalResult
+
+    CloudWatchLogsConfiguration.add_member(:spans_log_group_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "SpansLogGroupKmsKeyId"))
+    CloudWatchLogsConfiguration.struct_class = Types::CloudWatchLogsConfiguration
 
     CreateGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location_name: "GroupName"))
     CreateGroupRequest.add_member(:filter_expression, Shapes::ShapeRef.new(shape: FilterExpression, location_name: "FilterExpression"))
@@ -1167,6 +1172,7 @@ module Aws::XRay
     UpdateSamplingRuleResult.struct_class = Types::UpdateSamplingRuleResult
 
     UpdateTraceSegmentDestinationRequest.add_member(:destination, Shapes::ShapeRef.new(shape: TraceSegmentDestination, location_name: "Destination"))
+    UpdateTraceSegmentDestinationRequest.add_member(:cloud_watch_logs_configuration, Shapes::ShapeRef.new(shape: CloudWatchLogsConfiguration, location_name: "CloudWatchLogsConfiguration"))
     UpdateTraceSegmentDestinationRequest.struct_class = Types::UpdateTraceSegmentDestinationRequest
 
     UpdateTraceSegmentDestinationResult.add_member(:destination, Shapes::ShapeRef.new(shape: TraceSegmentDestination, location_name: "Destination"))

@@ -998,6 +998,8 @@ module Aws::SocialMessaging
     #   resp.account.event_destinations[0].event_destination_arn #=> String
     #   resp.account.event_destinations[0].role_arn #=> String
     #   resp.account.marketing_messages_onboarding_status #=> String
+    #   resp.account.direct_send_enforcement_status #=> String
+    #   resp.account.direct_send_enforcement_status_expires_at #=> Time
     #   resp.account.dataset_id #=> String
     #   resp.account.phone_numbers #=> Array
     #   resp.account.phone_numbers[0].arn #=> String
@@ -1422,6 +1424,8 @@ module Aws::SocialMessaging
     #   resp.linked_accounts[0].event_destinations[0].event_destination_arn #=> String
     #   resp.linked_accounts[0].event_destinations[0].role_arn #=> String
     #   resp.linked_accounts[0].marketing_messages_onboarding_status #=> String
+    #   resp.linked_accounts[0].direct_send_enforcement_status #=> String
+    #   resp.linked_accounts[0].direct_send_enforcement_status_expires_at #=> Time
     #   resp.linked_accounts[0].dataset_id #=> String
     #   resp.next_token #=> String
     #
@@ -1601,6 +1605,8 @@ module Aws::SocialMessaging
     #   resp.templates[0].template_quality_score #=> String
     #   resp.templates[0].template_language #=> String
     #   resp.templates[0].template_category #=> String
+    #   resp.templates[0].template_source #=> String
+    #   resp.templates[0].correct_category #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/ListWhatsAppMessageTemplates AWS API Documentation
@@ -2298,7 +2304,7 @@ module Aws::SocialMessaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-socialmessaging'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

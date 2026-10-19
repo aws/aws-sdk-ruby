@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.150.0 (2026-10-19)
+------------------
+
+* Feature - This release adds ActionConfiguration to PutMetricAlarm, PutCompositeAlarm and PutLogAlarm. It allows customers to include an alarm's tags in its notifications and alarm state change events
+
 1.149.0 (2026-09-24)
 ------------------
 

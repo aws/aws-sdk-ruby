@@ -11,148 +11,148 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AlreadyExistsException < ::Aws::Errors::ServiceError
+      class AlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class CloudHsmClusterInUseException < ::Aws::Errors::ServiceError
+      class CloudHsmClusterInUseException < ServiceError
         def message: () -> ::String
       end
-      class CloudHsmClusterInvalidConfigurationException < ::Aws::Errors::ServiceError
+      class CloudHsmClusterInvalidConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class CloudHsmClusterNotActiveException < ::Aws::Errors::ServiceError
+      class CloudHsmClusterNotActiveException < ServiceError
         def message: () -> ::String
       end
-      class CloudHsmClusterNotFoundException < ::Aws::Errors::ServiceError
+      class CloudHsmClusterNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class CloudHsmClusterNotRelatedException < ::Aws::Errors::ServiceError
+      class CloudHsmClusterNotRelatedException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class CustomKeyStoreHasCMKsException < ::Aws::Errors::ServiceError
+      class CustomKeyStoreHasCMKsException < ServiceError
         def message: () -> ::String
       end
-      class CustomKeyStoreInvalidStateException < ::Aws::Errors::ServiceError
+      class CustomKeyStoreInvalidStateException < ServiceError
         def message: () -> ::String
       end
-      class CustomKeyStoreNameInUseException < ::Aws::Errors::ServiceError
+      class CustomKeyStoreNameInUseException < ServiceError
         def message: () -> ::String
       end
-      class CustomKeyStoreNotFoundException < ::Aws::Errors::ServiceError
+      class CustomKeyStoreNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class DependencyTimeoutException < ::Aws::Errors::ServiceError
+      class DependencyTimeoutException < ServiceError
         def message: () -> ::String
       end
-      class DisabledException < ::Aws::Errors::ServiceError
+      class DisabledException < ServiceError
         def message: () -> ::String
       end
-      class DryRunOperationException < ::Aws::Errors::ServiceError
+      class DryRunOperationException < ServiceError
         def message: () -> ::String
       end
-      class ExpiredImportTokenException < ::Aws::Errors::ServiceError
+      class ExpiredImportTokenException < ServiceError
         def message: () -> ::String
       end
-      class IncorrectKeyException < ::Aws::Errors::ServiceError
+      class IncorrectKeyException < ServiceError
         def message: () -> ::String
       end
-      class IncorrectKeyMaterialException < ::Aws::Errors::ServiceError
+      class IncorrectKeyMaterialException < ServiceError
         def message: () -> ::String
       end
-      class IncorrectTrustAnchorException < ::Aws::Errors::ServiceError
+      class IncorrectTrustAnchorException < ServiceError
         def message: () -> ::String
       end
-      class InvalidAliasNameException < ::Aws::Errors::ServiceError
+      class InvalidAliasNameException < ServiceError
         def message: () -> ::String
       end
-      class InvalidArnException < ::Aws::Errors::ServiceError
+      class InvalidArnException < ServiceError
         def message: () -> ::String
       end
-      class InvalidCiphertextException < ::Aws::Errors::ServiceError
+      class InvalidCiphertextException < ServiceError
         def message: () -> ::String
       end
-      class InvalidGrantIdException < ::Aws::Errors::ServiceError
+      class InvalidGrantIdException < ServiceError
         def message: () -> ::String
       end
-      class InvalidGrantTokenException < ::Aws::Errors::ServiceError
+      class InvalidGrantTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidImportTokenException < ::Aws::Errors::ServiceError
+      class InvalidImportTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidKeyUsageException < ::Aws::Errors::ServiceError
+      class InvalidKeyUsageException < ServiceError
         def message: () -> ::String
       end
-      class InvalidMarkerException < ::Aws::Errors::ServiceError
+      class InvalidMarkerException < ServiceError
         def message: () -> ::String
       end
-      class KMSInternalException < ::Aws::Errors::ServiceError
+      class KMSInternalException < ServiceError
         def message: () -> ::String
       end
-      class KMSInvalidMacException < ::Aws::Errors::ServiceError
+      class KMSInvalidMacException < ServiceError
         def message: () -> ::String
       end
-      class KMSInvalidSignatureException < ::Aws::Errors::ServiceError
+      class KMSInvalidSignatureException < ServiceError
         def message: () -> ::String
       end
-      class KMSInvalidStateException < ::Aws::Errors::ServiceError
+      class KMSInvalidStateException < ServiceError
         def message: () -> ::String
       end
-      class KeyUnavailableException < ::Aws::Errors::ServiceError
+      class KeyUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class MalformedPolicyDocumentException < ::Aws::Errors::ServiceError
+      class MalformedPolicyDocumentException < ServiceError
         def message: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def message: () -> ::String
       end
-      class TagException < ::Aws::Errors::ServiceError
+      class TagException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+      class UnsupportedOperationException < ServiceError
         def message: () -> ::String
       end
-      class XksKeyAlreadyInUseException < ::Aws::Errors::ServiceError
+      class XksKeyAlreadyInUseException < ServiceError
         def message: () -> ::String
       end
-      class XksKeyInvalidConfigurationException < ::Aws::Errors::ServiceError
+      class XksKeyInvalidConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class XksKeyNotFoundException < ::Aws::Errors::ServiceError
+      class XksKeyNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class XksProxyIncorrectAuthenticationCredentialException < ::Aws::Errors::ServiceError
+      class XksProxyIncorrectAuthenticationCredentialException < ServiceError
         def message: () -> ::String
       end
-      class XksProxyInvalidConfigurationException < ::Aws::Errors::ServiceError
+      class XksProxyInvalidConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class XksProxyInvalidResponseException < ::Aws::Errors::ServiceError
+      class XksProxyInvalidResponseException < ServiceError
         def message: () -> ::String
       end
-      class XksProxyUriEndpointInUseException < ::Aws::Errors::ServiceError
+      class XksProxyUriEndpointInUseException < ServiceError
         def message: () -> ::String
       end
-      class XksProxyUriInUseException < ::Aws::Errors::ServiceError
+      class XksProxyUriInUseException < ServiceError
         def message: () -> ::String
       end
-      class XksProxyUriUnreachableException < ::Aws::Errors::ServiceError
+      class XksProxyUriUnreachableException < ServiceError
         def message: () -> ::String
       end
-      class XksProxyVpcEndpointServiceInUseException < ::Aws::Errors::ServiceError
+      class XksProxyVpcEndpointServiceInUseException < ServiceError
         def message: () -> ::String
       end
-      class XksProxyVpcEndpointServiceInvalidConfigurationException < ::Aws::Errors::ServiceError
+      class XksProxyVpcEndpointServiceInvalidConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class XksProxyVpcEndpointServiceNotFoundException < ::Aws::Errors::ServiceError
+      class XksProxyVpcEndpointServiceNotFoundException < ServiceError
         def message: () -> ::String
       end
     end

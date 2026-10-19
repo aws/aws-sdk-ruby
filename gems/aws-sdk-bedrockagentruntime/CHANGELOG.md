@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2026-10-19)
+------------------
+
+* Feature - Adds support for applying a Retrieval Instruction, optionally by version, to AgenticRetrieveStream requests for Amazon Bedrock Knowledge Bases, and reports the applied instruction and version on the trace.
+
 1.83.0 (2026-09-29)
 ------------------
 

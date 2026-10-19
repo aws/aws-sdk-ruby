@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - Amazon FinSpace Data has been removed from the SDK because it has been discontinued.
 
 1.71.0 (2026-09-11)

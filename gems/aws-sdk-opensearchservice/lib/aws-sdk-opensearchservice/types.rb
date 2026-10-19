@@ -4090,6 +4090,10 @@ module Aws::OpenSearchService
     #
     #   * **Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08:** TLS security policy
     #     that supports TLS version 1.3 with FIPS
+    #
+    #   * **Policy-Min-TLS-1-2-FIPS-PQ-2026-10:** TLS security policy that
+    #     supports TLS version 1.2 to TLS version 1.3 with FIPS and
+    #     post-quantum cipher suites
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_enabled

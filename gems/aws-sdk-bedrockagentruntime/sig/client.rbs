@@ -161,6 +161,10 @@ module Aws
                                          guardrail_version: ::String
                                        }?
                                      },
+                                     ?retrieval_instruction_configuration: {
+                                       retrieval_instruction_id: ::String,
+                                       version: ::String?
+                                     },
                                      retrievers: Array[
                                        {
                                          configuration: {

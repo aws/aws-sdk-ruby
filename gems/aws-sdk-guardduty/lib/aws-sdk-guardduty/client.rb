@@ -2593,6 +2593,7 @@ module Aws::GuardDuty
     #     destination_properties: { # required
     #       destination_arn: "String",
     #       kms_key_arn: "String",
+    #       expected_bucket_owner: "AccountId",
     #     },
     #     client_token: "ClientToken",
     #     tags: {
@@ -3570,6 +3571,7 @@ module Aws::GuardDuty
     #   resp.publishing_failure_start_timestamp #=> Integer
     #   resp.destination_properties.destination_arn #=> String
     #   resp.destination_properties.kms_key_arn #=> String
+    #   resp.destination_properties.expected_bucket_owner #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -9542,6 +9544,7 @@ module Aws::GuardDuty
     #     destination_properties: {
     #       destination_arn: "String",
     #       kms_key_arn: "String",
+    #       expected_bucket_owner: "AccountId",
     #     },
     #   })
     #
@@ -9744,7 +9747,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.167.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

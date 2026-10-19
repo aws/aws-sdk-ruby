@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.166.0 (2026-10-19)
+------------------
+
+* Feature - Amazon CloudWatch Logs now supports filtering DescribeDeliverySources by resourceArns, DescribeDeliveryDestinations by names, and DescribeDeliveries by deliverySourceNames.
+
 1.165.0 (2026-09-30)
 ------------------
 

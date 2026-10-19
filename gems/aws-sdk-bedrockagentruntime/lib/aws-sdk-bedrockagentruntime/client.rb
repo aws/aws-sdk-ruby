@@ -516,6 +516,9 @@ module Aws::BedrockAgentRuntime
     # @option params [Types::AgenticRetrievePolicyConfiguration] :policy_configuration
     #   Policy configuration for guardrails and content filtering.
     #
+    # @option params [Types::AgenticRetrieveInstructionConfiguration] :retrieval_instruction_configuration
+    #   A retrieval instruction to apply to this request.
+    #
     # @option params [required, Array<Types::AgenticRetriever>] :retrievers
     #   The list of retrievers to use for agentic retrieval.
     #
@@ -793,6 +796,10 @@ module Aws::BedrockAgentRuntime
     #         guardrail_version: "AgenticRetrieveBedrockGuardrailConfigurationGuardrailVersionString", # required
     #       },
     #     },
+    #     retrieval_instruction_configuration: {
+    #       retrieval_instruction_id: "RetrievalInstructionId", # required
+    #       version: "RetrievalInstructionVersion",
+    #     },
     #     retrievers: [ # required
     #       {
     #         configuration: { # required
@@ -941,6 +948,8 @@ module Aws::BedrockAgentRuntime
     #   event.attributes.actions[0].retrieve.input_query.text #=> String
     #   event.attributes.actions[0].retrieve.source_retrievers #=> Array
     #   event.attributes.actions[0].retrieve.source_retrievers[0].identifier #=> String
+    #   event.attributes.applied_instruction.id #=> String
+    #   event.attributes.applied_instruction.version #=> String
     #   event.attributes.failures #=> Array
     #   event.attributes.failures[0].message #=> String
     #   event.attributes.message #=> String
@@ -8473,7 +8482,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
