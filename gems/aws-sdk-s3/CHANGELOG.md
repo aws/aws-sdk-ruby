@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Improve object key validation in `TransferManager#download_directory` on Windows.
+
 1.233.2 (2026-10-06)
 ------------------
 

@@ -209,7 +209,12 @@ module Aws
         end
 
         def validate_key(key)
-          segments = key.split('/')
+          validation_key = key
+          if File::ALT_SEPARATOR
+            validation_key = key.gsub(File::ALT_SEPARATOR, File::SEPARATOR)
+          end
+
+          segments = validation_key.split(File::SEPARATOR)
           return unless segments.any? { |s| %w[. ..].include?(s) }
 
           DirectoryDownloadError.new("invalid key '#{key}': contains '.' or '..' path segments")
