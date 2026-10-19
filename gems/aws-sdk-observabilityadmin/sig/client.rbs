@@ -355,7 +355,7 @@ module Aws
       def list_resource_telemetry: (
                                      ?resource_identifier_prefix: ::String,
                                      ?resource_types: Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")],
-                                     ?telemetry_configuration_state: Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")],
+                                     ?telemetry_configuration_state: Hash[("Logs" | "Metrics" | "Traces" | "Insights"), ("Enabled" | "Disabled" | "NotApplicable")],
                                      ?resource_tags: Hash[::String, ::String],
                                      ?max_results: ::Integer,
                                      ?next_token: ::String
@@ -372,7 +372,7 @@ module Aws
                                                       ?account_identifiers: Array[::String],
                                                       ?resource_identifier_prefix: ::String,
                                                       ?resource_types: Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")],
-                                                      ?telemetry_configuration_state: Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")],
+                                                      ?telemetry_configuration_state: Hash[("Logs" | "Metrics" | "Traces" | "Insights"), ("Enabled" | "Disabled" | "NotApplicable")],
                                                       ?resource_tags: Hash[::String, ::String],
                                                       ?max_results: ::Integer,
                                                       ?next_token: ::String

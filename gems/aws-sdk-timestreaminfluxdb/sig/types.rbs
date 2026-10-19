@@ -602,6 +602,10 @@ module Aws::TimestreamInfluxDB
       attr_accessor distinct_value_cache_disable_from_history: bool
       attr_accessor replication_interval: Types::Duration
       attr_accessor catalog_sync_interval: Types::Duration
+      attr_accessor upgrade_pacha_tree: bool
+      attr_accessor wal_buffer_size: ::Integer
+      attr_accessor snapshot_size: Types::PercentOrAbsoluteLong
+      attr_accessor snapshot_duration: Types::Duration
       SENSITIVE: []
     end
 

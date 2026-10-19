@@ -1177,8 +1177,8 @@ module Aws::GlueDataBrew
     #
     # @option params [required, String] :cron_expression
     #   The date or dates and time or times when the jobs are to be run. For
-    #   more information, see [Cron expressions][1] in the *Glue DataBrew
-    #   Developer Guide*.
+    #   more information, see [Cron expressions][1] in the <i> Glue DataBrew
+    #   Developer Guide</i>.
     #
     #
     #
@@ -3392,8 +3392,8 @@ module Aws::GlueDataBrew
     #
     # @option params [required, String] :cron_expression
     #   The date or dates and time or times when the jobs are to be run. For
-    #   more information, see [Cron expressions][1] in the *Glue DataBrew
-    #   Developer Guide*.
+    #   more information, see [Cron expressions][1] in the <i> Glue DataBrew
+    #   Developer Guide</i>.
     #
     #
     #
@@ -3445,7 +3445,7 @@ module Aws::GlueDataBrew
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

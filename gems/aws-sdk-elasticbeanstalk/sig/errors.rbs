@@ -11,44 +11,44 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class CodeBuildNotInServiceRegionException < ::Aws::Errors::ServiceError
+      class CodeBuildNotInServiceRegionException < ServiceError
       end
-      class ElasticBeanstalkServiceException < ::Aws::Errors::ServiceError
+      class ElasticBeanstalkServiceException < ServiceError
         def message: () -> ::String
       end
-      class InsufficientPrivilegesException < ::Aws::Errors::ServiceError
+      class InsufficientPrivilegesException < ServiceError
       end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
       end
-      class ManagedActionInvalidStateException < ::Aws::Errors::ServiceError
+      class ManagedActionInvalidStateException < ServiceError
       end
-      class OperationInProgressException < ::Aws::Errors::ServiceError
+      class OperationInProgressException < ServiceError
       end
-      class PlatformVersionStillReferencedException < ::Aws::Errors::ServiceError
+      class PlatformVersionStillReferencedException < ServiceError
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
       end
-      class ResourceTypeNotSupportedException < ::Aws::Errors::ServiceError
+      class ResourceTypeNotSupportedException < ServiceError
       end
-      class S3LocationNotInServiceRegionException < ::Aws::Errors::ServiceError
+      class S3LocationNotInServiceRegionException < ServiceError
       end
-      class S3SubscriptionRequiredException < ::Aws::Errors::ServiceError
+      class S3SubscriptionRequiredException < ServiceError
       end
-      class SourceBundleDeletionException < ::Aws::Errors::ServiceError
+      class SourceBundleDeletionException < ServiceError
       end
-      class TooManyApplicationVersionsException < ::Aws::Errors::ServiceError
+      class TooManyApplicationVersionsException < ServiceError
       end
-      class TooManyApplicationsException < ::Aws::Errors::ServiceError
+      class TooManyApplicationsException < ServiceError
       end
-      class TooManyBucketsException < ::Aws::Errors::ServiceError
+      class TooManyBucketsException < ServiceError
       end
-      class TooManyConfigurationTemplatesException < ::Aws::Errors::ServiceError
+      class TooManyConfigurationTemplatesException < ServiceError
       end
-      class TooManyEnvironmentsException < ::Aws::Errors::ServiceError
+      class TooManyEnvironmentsException < ServiceError
       end
-      class TooManyPlatformsException < ::Aws::Errors::ServiceError
+      class TooManyPlatformsException < ServiceError
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
       end
     end
   end

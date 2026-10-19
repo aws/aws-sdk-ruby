@@ -11,37 +11,37 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class DefaultUndefinedFault < ::Aws::Errors::ServiceError
+      class DefaultUndefinedFault < ServiceError
         def message: () -> ::String
       end
-      class DomainAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DomainAlreadyExistsFault < ServiceError
         def message: () -> ::String
       end
-      class DomainDeprecatedFault < ::Aws::Errors::ServiceError
+      class DomainDeprecatedFault < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededFault < ::Aws::Errors::ServiceError
+      class LimitExceededFault < ServiceError
         def message: () -> ::String
       end
-      class OperationNotPermittedFault < ::Aws::Errors::ServiceError
+      class OperationNotPermittedFault < ServiceError
         def message: () -> ::String
       end
-      class TooManyTagsFault < ::Aws::Errors::ServiceError
+      class TooManyTagsFault < ServiceError
         def message: () -> ::String
       end
-      class TypeAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class TypeAlreadyExistsFault < ServiceError
         def message: () -> ::String
       end
-      class TypeDeprecatedFault < ::Aws::Errors::ServiceError
+      class TypeDeprecatedFault < ServiceError
         def message: () -> ::String
       end
-      class TypeNotDeprecatedFault < ::Aws::Errors::ServiceError
+      class TypeNotDeprecatedFault < ServiceError
         def message: () -> ::String
       end
-      class UnknownResourceFault < ::Aws::Errors::ServiceError
+      class UnknownResourceFault < ServiceError
         def message: () -> ::String
       end
-      class WorkflowExecutionAlreadyStartedFault < ::Aws::Errors::ServiceError
+      class WorkflowExecutionAlreadyStartedFault < ServiceError
         def message: () -> ::String
       end
     end

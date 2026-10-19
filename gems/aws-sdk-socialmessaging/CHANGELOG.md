@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2026-10-19)
+------------------
+
+* Feature - Adding support for WhatsApp Direct Send.
+
 1.33.0 (2026-09-17)
 ------------------
 

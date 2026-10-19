@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2026-10-19)
+------------------
+
+* Feature - Amazon OpenSearch Service adds a new TLS security policy to support FIPS policy and post-quantum cryptography
+
 1.112.0 (2026-10-08)
 ------------------
 

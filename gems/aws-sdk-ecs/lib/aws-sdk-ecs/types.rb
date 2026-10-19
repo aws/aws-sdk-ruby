@@ -15016,6 +15016,20 @@ module Aws::ECS
     #    </note>
     #   @return [Types::ServiceConnectAccessLogConfiguration]
     #
+    # @!attribute [rw] container_configurations
+    #   The settings for the Service Connect proxy container that Amazon ECS
+    #   adds to each task in this service. Each object in the list sets
+    #   exactly one setting, and each setting can appear only once in the
+    #   list.
+    #
+    #   Your changes to these settings apply only to tasks that Amazon ECS
+    #   launches after you update the service. Your running tasks keep their
+    #   existing settings until Amazon ECS replaces them. If you update the
+    #   `serviceConnectConfiguration` of your service and don't include
+    #   `containerConfigurations`, the proxy container settings return to
+    #   their defaults.
+    #   @return [Array<Types::ServiceConnectContainerConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectConfiguration AWS API Documentation
     #
     class ServiceConnectConfiguration < Struct.new(
@@ -15023,9 +15037,40 @@ module Aws::ECS
       :namespace,
       :services,
       :log_configuration,
-      :access_log_configuration)
+      :access_log_configuration,
+      :container_configurations)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains a configuration setting for the Service Connect proxy
+    # container, such as the log level. Specify exactly one member in each
+    # object.
+    #
+    # @note ServiceConnectContainerConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ServiceConnectContainerConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ServiceConnectContainerConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] log_level
+    #   The log level of the Service Connect proxy container. Set the log
+    #   level to `debug` to collect more detailed proxy logs when you
+    #   troubleshoot connectivity issues between services, and set it back
+    #   to `info` when you finish. Debug logging increases the volume of
+    #   logs that the proxy container writes. If you don't specify a log
+    #   level, the default is `info`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectContainerConfiguration AWS API Documentation
+    #
+    class ServiceConnectContainerConfiguration < Struct.new(
+      :log_level,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class LogLevel < ServiceConnectContainerConfiguration; end
+      class Unknown < ServiceConnectContainerConfiguration; end
     end
 
     # The Service Connect service object configuration. For more

@@ -11,295 +11,295 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessToClusterDeniedFault < ::Aws::Errors::ServiceError
+      class AccessToClusterDeniedFault < ServiceError
       end
-      class AccessToSnapshotDeniedFault < ::Aws::Errors::ServiceError
+      class AccessToSnapshotDeniedFault < ServiceError
       end
-      class AuthenticationProfileAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class AuthenticationProfileAlreadyExistsFault < ServiceError
       end
-      class AuthenticationProfileNotFoundFault < ::Aws::Errors::ServiceError
+      class AuthenticationProfileNotFoundFault < ServiceError
       end
-      class AuthenticationProfileQuotaExceededFault < ::Aws::Errors::ServiceError
+      class AuthenticationProfileQuotaExceededFault < ServiceError
       end
-      class AuthorizationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class AuthorizationAlreadyExistsFault < ServiceError
       end
-      class AuthorizationNotFoundFault < ::Aws::Errors::ServiceError
+      class AuthorizationNotFoundFault < ServiceError
       end
-      class AuthorizationQuotaExceededFault < ::Aws::Errors::ServiceError
+      class AuthorizationQuotaExceededFault < ServiceError
       end
-      class BatchDeleteRequestSizeExceededFault < ::Aws::Errors::ServiceError
+      class BatchDeleteRequestSizeExceededFault < ServiceError
       end
-      class BatchModifyClusterSnapshotsLimitExceededFault < ::Aws::Errors::ServiceError
+      class BatchModifyClusterSnapshotsLimitExceededFault < ServiceError
       end
-      class BucketNotFoundFault < ::Aws::Errors::ServiceError
+      class BucketNotFoundFault < ServiceError
       end
-      class ClusterAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ClusterAlreadyExistsFault < ServiceError
       end
-      class ClusterNotFoundFault < ::Aws::Errors::ServiceError
+      class ClusterNotFoundFault < ServiceError
       end
-      class ClusterOnLatestRevisionFault < ::Aws::Errors::ServiceError
+      class ClusterOnLatestRevisionFault < ServiceError
       end
-      class ClusterParameterGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ClusterParameterGroupAlreadyExistsFault < ServiceError
       end
-      class ClusterParameterGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class ClusterParameterGroupNotFoundFault < ServiceError
       end
-      class ClusterParameterGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ClusterParameterGroupQuotaExceededFault < ServiceError
       end
-      class ClusterQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ClusterQuotaExceededFault < ServiceError
       end
-      class ClusterSecurityGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ClusterSecurityGroupAlreadyExistsFault < ServiceError
       end
-      class ClusterSecurityGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class ClusterSecurityGroupNotFoundFault < ServiceError
       end
-      class ClusterSecurityGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ClusterSecurityGroupQuotaExceededFault < ServiceError
       end
-      class ClusterSnapshotAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ClusterSnapshotAlreadyExistsFault < ServiceError
       end
-      class ClusterSnapshotNotFoundFault < ::Aws::Errors::ServiceError
+      class ClusterSnapshotNotFoundFault < ServiceError
       end
-      class ClusterSnapshotQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ClusterSnapshotQuotaExceededFault < ServiceError
       end
-      class ClusterSubnetGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ClusterSubnetGroupAlreadyExistsFault < ServiceError
       end
-      class ClusterSubnetGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class ClusterSubnetGroupNotFoundFault < ServiceError
       end
-      class ClusterSubnetGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ClusterSubnetGroupQuotaExceededFault < ServiceError
       end
-      class ClusterSubnetQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ClusterSubnetQuotaExceededFault < ServiceError
       end
-      class ConflictPolicyUpdateFault < ::Aws::Errors::ServiceError
+      class ConflictPolicyUpdateFault < ServiceError
       end
-      class CopyToRegionDisabledFault < ::Aws::Errors::ServiceError
+      class CopyToRegionDisabledFault < ServiceError
       end
-      class CustomCnameAssociationFault < ::Aws::Errors::ServiceError
+      class CustomCnameAssociationFault < ServiceError
       end
-      class CustomDomainAssociationNotFoundFault < ::Aws::Errors::ServiceError
+      class CustomDomainAssociationNotFoundFault < ServiceError
       end
-      class DependentServiceAccessDeniedFault < ::Aws::Errors::ServiceError
+      class DependentServiceAccessDeniedFault < ServiceError
       end
-      class DependentServiceRequestThrottlingFault < ::Aws::Errors::ServiceError
+      class DependentServiceRequestThrottlingFault < ServiceError
       end
-      class DependentServiceUnavailableFault < ::Aws::Errors::ServiceError
+      class DependentServiceUnavailableFault < ServiceError
       end
-      class EndpointAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class EndpointAlreadyExistsFault < ServiceError
       end
-      class EndpointAuthorizationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class EndpointAuthorizationAlreadyExistsFault < ServiceError
       end
-      class EndpointAuthorizationNotFoundFault < ::Aws::Errors::ServiceError
+      class EndpointAuthorizationNotFoundFault < ServiceError
       end
-      class EndpointAuthorizationsPerClusterLimitExceededFault < ::Aws::Errors::ServiceError
+      class EndpointAuthorizationsPerClusterLimitExceededFault < ServiceError
       end
-      class EndpointNotFoundFault < ::Aws::Errors::ServiceError
+      class EndpointNotFoundFault < ServiceError
       end
-      class EndpointsPerAuthorizationLimitExceededFault < ::Aws::Errors::ServiceError
+      class EndpointsPerAuthorizationLimitExceededFault < ServiceError
       end
-      class EndpointsPerClusterLimitExceededFault < ::Aws::Errors::ServiceError
+      class EndpointsPerClusterLimitExceededFault < ServiceError
       end
-      class EventSubscriptionQuotaExceededFault < ::Aws::Errors::ServiceError
+      class EventSubscriptionQuotaExceededFault < ServiceError
       end
-      class HsmClientCertificateAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class HsmClientCertificateAlreadyExistsFault < ServiceError
       end
-      class HsmClientCertificateNotFoundFault < ::Aws::Errors::ServiceError
+      class HsmClientCertificateNotFoundFault < ServiceError
       end
-      class HsmClientCertificateQuotaExceededFault < ::Aws::Errors::ServiceError
+      class HsmClientCertificateQuotaExceededFault < ServiceError
       end
-      class HsmConfigurationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class HsmConfigurationAlreadyExistsFault < ServiceError
       end
-      class HsmConfigurationNotFoundFault < ::Aws::Errors::ServiceError
+      class HsmConfigurationNotFoundFault < ServiceError
       end
-      class HsmConfigurationQuotaExceededFault < ::Aws::Errors::ServiceError
+      class HsmConfigurationQuotaExceededFault < ServiceError
       end
-      class InProgressTableRestoreQuotaExceededFault < ::Aws::Errors::ServiceError
+      class InProgressTableRestoreQuotaExceededFault < ServiceError
       end
-      class IncompatibleOrderableOptions < ::Aws::Errors::ServiceError
+      class IncompatibleOrderableOptions < ServiceError
       end
-      class InsufficientClusterCapacityFault < ::Aws::Errors::ServiceError
+      class InsufficientClusterCapacityFault < ServiceError
       end
-      class InsufficientS3BucketPolicyFault < ::Aws::Errors::ServiceError
+      class InsufficientS3BucketPolicyFault < ServiceError
       end
-      class IntegrationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class IntegrationAlreadyExistsFault < ServiceError
       end
-      class IntegrationConflictOperationFault < ::Aws::Errors::ServiceError
+      class IntegrationConflictOperationFault < ServiceError
       end
-      class IntegrationConflictStateFault < ::Aws::Errors::ServiceError
+      class IntegrationConflictStateFault < ServiceError
       end
-      class IntegrationNotFoundFault < ::Aws::Errors::ServiceError
+      class IntegrationNotFoundFault < ServiceError
       end
-      class IntegrationQuotaExceededFault < ::Aws::Errors::ServiceError
+      class IntegrationQuotaExceededFault < ServiceError
       end
-      class IntegrationSourceNotFoundFault < ::Aws::Errors::ServiceError
+      class IntegrationSourceNotFoundFault < ServiceError
       end
-      class IntegrationTargetNotFoundFault < ::Aws::Errors::ServiceError
+      class IntegrationTargetNotFoundFault < ServiceError
       end
-      class InvalidAuthenticationProfileRequestFault < ::Aws::Errors::ServiceError
+      class InvalidAuthenticationProfileRequestFault < ServiceError
       end
-      class InvalidAuthorizationStateFault < ::Aws::Errors::ServiceError
+      class InvalidAuthorizationStateFault < ServiceError
       end
-      class InvalidClusterParameterGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidClusterParameterGroupStateFault < ServiceError
       end
-      class InvalidClusterSecurityGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidClusterSecurityGroupStateFault < ServiceError
       end
-      class InvalidClusterSnapshotScheduleStateFault < ::Aws::Errors::ServiceError
+      class InvalidClusterSnapshotScheduleStateFault < ServiceError
       end
-      class InvalidClusterSnapshotStateFault < ::Aws::Errors::ServiceError
+      class InvalidClusterSnapshotStateFault < ServiceError
       end
-      class InvalidClusterStateFault < ::Aws::Errors::ServiceError
+      class InvalidClusterStateFault < ServiceError
       end
-      class InvalidClusterSubnetGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidClusterSubnetGroupStateFault < ServiceError
       end
-      class InvalidClusterSubnetStateFault < ::Aws::Errors::ServiceError
+      class InvalidClusterSubnetStateFault < ServiceError
       end
-      class InvalidClusterTrackFault < ::Aws::Errors::ServiceError
+      class InvalidClusterTrackFault < ServiceError
       end
-      class InvalidDataShareFault < ::Aws::Errors::ServiceError
+      class InvalidDataShareFault < ServiceError
       end
-      class InvalidElasticIpFault < ::Aws::Errors::ServiceError
+      class InvalidElasticIpFault < ServiceError
       end
-      class InvalidEndpointStateFault < ::Aws::Errors::ServiceError
+      class InvalidEndpointStateFault < ServiceError
       end
-      class InvalidHsmClientCertificateStateFault < ::Aws::Errors::ServiceError
+      class InvalidHsmClientCertificateStateFault < ServiceError
       end
-      class InvalidHsmConfigurationStateFault < ::Aws::Errors::ServiceError
+      class InvalidHsmConfigurationStateFault < ServiceError
       end
-      class InvalidNamespaceFault < ::Aws::Errors::ServiceError
+      class InvalidNamespaceFault < ServiceError
       end
-      class InvalidPolicyFault < ::Aws::Errors::ServiceError
+      class InvalidPolicyFault < ServiceError
       end
-      class InvalidReservedNodeStateFault < ::Aws::Errors::ServiceError
+      class InvalidReservedNodeStateFault < ServiceError
       end
-      class InvalidRestoreFault < ::Aws::Errors::ServiceError
+      class InvalidRestoreFault < ServiceError
       end
-      class InvalidRetentionPeriodFault < ::Aws::Errors::ServiceError
+      class InvalidRetentionPeriodFault < ServiceError
       end
-      class InvalidS3BucketNameFault < ::Aws::Errors::ServiceError
+      class InvalidS3BucketNameFault < ServiceError
       end
-      class InvalidS3KeyPrefixFault < ::Aws::Errors::ServiceError
+      class InvalidS3KeyPrefixFault < ServiceError
       end
-      class InvalidScheduleFault < ::Aws::Errors::ServiceError
+      class InvalidScheduleFault < ServiceError
       end
-      class InvalidScheduledActionFault < ::Aws::Errors::ServiceError
+      class InvalidScheduledActionFault < ServiceError
       end
-      class InvalidSnapshotCopyGrantStateFault < ::Aws::Errors::ServiceError
+      class InvalidSnapshotCopyGrantStateFault < ServiceError
       end
-      class InvalidSubnet < ::Aws::Errors::ServiceError
+      class InvalidSubnet < ServiceError
       end
-      class InvalidSubscriptionStateFault < ::Aws::Errors::ServiceError
+      class InvalidSubscriptionStateFault < ServiceError
       end
-      class InvalidTableRestoreArgumentFault < ::Aws::Errors::ServiceError
+      class InvalidTableRestoreArgumentFault < ServiceError
       end
-      class InvalidTagFault < ::Aws::Errors::ServiceError
+      class InvalidTagFault < ServiceError
       end
-      class InvalidUsageLimitFault < ::Aws::Errors::ServiceError
+      class InvalidUsageLimitFault < ServiceError
       end
-      class InvalidVPCNetworkStateFault < ::Aws::Errors::ServiceError
+      class InvalidVPCNetworkStateFault < ServiceError
       end
-      class Ipv6CidrBlockNotFoundFault < ::Aws::Errors::ServiceError
+      class Ipv6CidrBlockNotFoundFault < ServiceError
       end
-      class LimitExceededFault < ::Aws::Errors::ServiceError
+      class LimitExceededFault < ServiceError
       end
-      class NumberOfNodesPerClusterLimitExceededFault < ::Aws::Errors::ServiceError
+      class NumberOfNodesPerClusterLimitExceededFault < ServiceError
       end
-      class NumberOfNodesQuotaExceededFault < ::Aws::Errors::ServiceError
+      class NumberOfNodesQuotaExceededFault < ServiceError
       end
-      class PartnerNotFoundFault < ::Aws::Errors::ServiceError
+      class PartnerNotFoundFault < ServiceError
       end
-      class Qev2IdcApplicationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class Qev2IdcApplicationAlreadyExistsFault < ServiceError
       end
-      class Qev2IdcApplicationNotExistsFault < ::Aws::Errors::ServiceError
+      class Qev2IdcApplicationNotExistsFault < ServiceError
       end
-      class RedshiftIdcApplicationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class RedshiftIdcApplicationAlreadyExistsFault < ServiceError
       end
-      class RedshiftIdcApplicationNotExistsFault < ::Aws::Errors::ServiceError
+      class RedshiftIdcApplicationNotExistsFault < ServiceError
       end
-      class RedshiftIdcApplicationQuotaExceededFault < ::Aws::Errors::ServiceError
+      class RedshiftIdcApplicationQuotaExceededFault < ServiceError
       end
-      class RedshiftInvalidParameterFault < ::Aws::Errors::ServiceError
+      class RedshiftInvalidParameterFault < ServiceError
       end
-      class ReservedNodeAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ReservedNodeAlreadyExistsFault < ServiceError
       end
-      class ReservedNodeAlreadyMigratedFault < ::Aws::Errors::ServiceError
+      class ReservedNodeAlreadyMigratedFault < ServiceError
       end
-      class ReservedNodeExchangeNotFoundFault < ::Aws::Errors::ServiceError
+      class ReservedNodeExchangeNotFoundFault < ServiceError
       end
-      class ReservedNodeNotFoundFault < ::Aws::Errors::ServiceError
+      class ReservedNodeNotFoundFault < ServiceError
       end
-      class ReservedNodeOfferingNotFoundFault < ::Aws::Errors::ServiceError
+      class ReservedNodeOfferingNotFoundFault < ServiceError
       end
-      class ReservedNodeQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ReservedNodeQuotaExceededFault < ServiceError
       end
-      class ResizeNotFoundFault < ::Aws::Errors::ServiceError
+      class ResizeNotFoundFault < ServiceError
       end
-      class ResourceNotFoundFault < ::Aws::Errors::ServiceError
+      class ResourceNotFoundFault < ServiceError
       end
-      class SNSInvalidTopicFault < ::Aws::Errors::ServiceError
+      class SNSInvalidTopicFault < ServiceError
       end
-      class SNSNoAuthorizationFault < ::Aws::Errors::ServiceError
+      class SNSNoAuthorizationFault < ServiceError
       end
-      class SNSTopicArnNotFoundFault < ::Aws::Errors::ServiceError
+      class SNSTopicArnNotFoundFault < ServiceError
       end
-      class ScheduleDefinitionTypeUnsupportedFault < ::Aws::Errors::ServiceError
+      class ScheduleDefinitionTypeUnsupportedFault < ServiceError
       end
-      class ScheduledActionAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ScheduledActionAlreadyExistsFault < ServiceError
       end
-      class ScheduledActionNotFoundFault < ::Aws::Errors::ServiceError
+      class ScheduledActionNotFoundFault < ServiceError
       end
-      class ScheduledActionQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ScheduledActionQuotaExceededFault < ServiceError
       end
-      class ScheduledActionTypeUnsupportedFault < ::Aws::Errors::ServiceError
+      class ScheduledActionTypeUnsupportedFault < ServiceError
       end
-      class SnapshotCopyAlreadyDisabledFault < ::Aws::Errors::ServiceError
+      class SnapshotCopyAlreadyDisabledFault < ServiceError
       end
-      class SnapshotCopyAlreadyEnabledFault < ::Aws::Errors::ServiceError
+      class SnapshotCopyAlreadyEnabledFault < ServiceError
       end
-      class SnapshotCopyDisabledFault < ::Aws::Errors::ServiceError
+      class SnapshotCopyDisabledFault < ServiceError
       end
-      class SnapshotCopyGrantAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class SnapshotCopyGrantAlreadyExistsFault < ServiceError
       end
-      class SnapshotCopyGrantNotFoundFault < ::Aws::Errors::ServiceError
+      class SnapshotCopyGrantNotFoundFault < ServiceError
       end
-      class SnapshotCopyGrantQuotaExceededFault < ::Aws::Errors::ServiceError
+      class SnapshotCopyGrantQuotaExceededFault < ServiceError
       end
-      class SnapshotScheduleAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class SnapshotScheduleAlreadyExistsFault < ServiceError
       end
-      class SnapshotScheduleNotFoundFault < ::Aws::Errors::ServiceError
+      class SnapshotScheduleNotFoundFault < ServiceError
       end
-      class SnapshotScheduleQuotaExceededFault < ::Aws::Errors::ServiceError
+      class SnapshotScheduleQuotaExceededFault < ServiceError
       end
-      class SnapshotScheduleUpdateInProgressFault < ::Aws::Errors::ServiceError
+      class SnapshotScheduleUpdateInProgressFault < ServiceError
       end
-      class SourceNotFoundFault < ::Aws::Errors::ServiceError
+      class SourceNotFoundFault < ServiceError
       end
-      class SubnetAlreadyInUse < ::Aws::Errors::ServiceError
+      class SubnetAlreadyInUse < ServiceError
       end
-      class SubscriptionAlreadyExistFault < ::Aws::Errors::ServiceError
+      class SubscriptionAlreadyExistFault < ServiceError
       end
-      class SubscriptionCategoryNotFoundFault < ::Aws::Errors::ServiceError
+      class SubscriptionCategoryNotFoundFault < ServiceError
       end
-      class SubscriptionEventIdNotFoundFault < ::Aws::Errors::ServiceError
+      class SubscriptionEventIdNotFoundFault < ServiceError
       end
-      class SubscriptionNotFoundFault < ::Aws::Errors::ServiceError
+      class SubscriptionNotFoundFault < ServiceError
       end
-      class SubscriptionSeverityNotFoundFault < ::Aws::Errors::ServiceError
+      class SubscriptionSeverityNotFoundFault < ServiceError
       end
-      class TableLimitExceededFault < ::Aws::Errors::ServiceError
+      class TableLimitExceededFault < ServiceError
       end
-      class TableRestoreNotFoundFault < ::Aws::Errors::ServiceError
+      class TableRestoreNotFoundFault < ServiceError
       end
-      class TagLimitExceededFault < ::Aws::Errors::ServiceError
+      class TagLimitExceededFault < ServiceError
       end
-      class UnauthorizedOperation < ::Aws::Errors::ServiceError
+      class UnauthorizedOperation < ServiceError
       end
-      class UnauthorizedPartnerIntegrationFault < ::Aws::Errors::ServiceError
+      class UnauthorizedPartnerIntegrationFault < ServiceError
       end
-      class UnknownSnapshotCopyRegionFault < ::Aws::Errors::ServiceError
+      class UnknownSnapshotCopyRegionFault < ServiceError
       end
-      class UnsupportedOperationFault < ::Aws::Errors::ServiceError
+      class UnsupportedOperationFault < ServiceError
       end
-      class UnsupportedOptionFault < ::Aws::Errors::ServiceError
+      class UnsupportedOptionFault < ServiceError
       end
-      class UsageLimitAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class UsageLimitAlreadyExistsFault < ServiceError
       end
-      class UsageLimitNotFoundFault < ::Aws::Errors::ServiceError
+      class UsageLimitNotFoundFault < ServiceError
       end
     end
   end

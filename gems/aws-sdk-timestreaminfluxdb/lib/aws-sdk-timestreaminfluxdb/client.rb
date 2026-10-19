@@ -1268,6 +1268,16 @@ module Aws::TimestreamInfluxDB
     #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
     #           value: 1, # required
     #         },
+    #         upgrade_pacha_tree: false,
+    #         wal_buffer_size: 1,
+    #         snapshot_size: {
+    #           percent: "PercentOrAbsoluteLongPercentString",
+    #           absolute: 1,
+    #         },
+    #         snapshot_duration: {
+    #           duration_type: "hours", # required, accepts hours, minutes, seconds, milliseconds, days
+    #           value: 1, # required
+    #         },
     #       },
     #     },
     #     tags: {
@@ -1451,6 +1461,12 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_3_enterprise.replication_interval.value #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.catalog_sync_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_3_enterprise.catalog_sync_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.upgrade_pacha_tree #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.wal_buffer_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.snapshot_size.percent #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.snapshot_size.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.snapshot_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.snapshot_duration.value #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbParameterGroup AWS API Documentation
     #
@@ -2131,6 +2147,12 @@ module Aws::TimestreamInfluxDB
     #   resp.parameters.influx_d_bv_3_enterprise.replication_interval.value #=> Integer
     #   resp.parameters.influx_d_bv_3_enterprise.catalog_sync_interval.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
     #   resp.parameters.influx_d_bv_3_enterprise.catalog_sync_interval.value #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.upgrade_pacha_tree #=> Boolean
+    #   resp.parameters.influx_d_bv_3_enterprise.wal_buffer_size #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.snapshot_size.percent #=> String
+    #   resp.parameters.influx_d_bv_3_enterprise.snapshot_size.absolute #=> Integer
+    #   resp.parameters.influx_d_bv_3_enterprise.snapshot_duration.duration_type #=> String, one of "hours", "minutes", "seconds", "milliseconds", "days"
+    #   resp.parameters.influx_d_bv_3_enterprise.snapshot_duration.value #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbParameterGroup AWS API Documentation
     #
@@ -2983,7 +3005,7 @@ module Aws::TimestreamInfluxDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -229,6 +229,7 @@ module Aws::ObservabilityAdmin
       attr_accessor backup_configuration: Types::LogsBackupConfiguration
       attr_accessor log_group_name_configuration: Types::LogGroupNameConfiguration
       attr_accessor tag_propagation_configuration: Types::TagPropagationConfiguration
+      attr_accessor log_group_deletion_protection: ("ENABLED")
       SENSITIVE: []
     end
 
@@ -432,7 +433,7 @@ module Aws::ObservabilityAdmin
       attr_accessor account_identifiers: ::Array[::String]
       attr_accessor resource_identifier_prefix: ::String
       attr_accessor resource_types: ::Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")]
-      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")]
+      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces" | "Insights"), ("Enabled" | "Disabled" | "NotApplicable")]
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -448,7 +449,7 @@ module Aws::ObservabilityAdmin
     class ListResourceTelemetryInput
       attr_accessor resource_identifier_prefix: ::String
       attr_accessor resource_types: ::Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")]
-      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")]
+      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces" | "Insights"), ("Enabled" | "Disabled" | "NotApplicable")]
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -667,7 +668,7 @@ module Aws::ObservabilityAdmin
 
     class TelemetryConfiguration
       attr_accessor account_identifier: ::String
-      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces"), ("Enabled" | "Disabled" | "NotApplicable")]
+      attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces" | "Insights"), ("Enabled" | "Disabled" | "NotApplicable")]
       attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")
       attr_accessor resource_identifier: ::String
       attr_accessor resource_tags: ::Hash[::String, ::String]
@@ -725,7 +726,7 @@ module Aws::ObservabilityAdmin
 
     class TelemetryRule
       attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")
-      attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces")
+      attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces" | "Insights")
       attr_accessor telemetry_source_types: ::Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]
       attr_accessor destination_configuration: Types::TelemetryDestinationConfiguration
       attr_accessor scope: ::String
@@ -742,7 +743,7 @@ module Aws::ObservabilityAdmin
       attr_accessor created_time_stamp: ::Integer
       attr_accessor last_update_time_stamp: ::Integer
       attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")
-      attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces")
+      attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces" | "Insights")
       attr_accessor telemetry_source_types: ::Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]
       SENSITIVE: []
     end

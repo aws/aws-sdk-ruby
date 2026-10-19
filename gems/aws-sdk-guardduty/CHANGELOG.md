@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2026-10-19)
+------------------
+
+* Feature - Adding a new Expected Bucket Owner optional field for GuardDuty publishing destination APIs
+
 1.167.0 (2026-10-14)
 ------------------
 

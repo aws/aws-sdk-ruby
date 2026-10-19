@@ -11,11 +11,11 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class InternalException < ::Aws::Errors::ServiceError
+      class InternalException < ServiceError
         def message: () -> ::String
         def error_code: () -> ::String
       end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
         def message: () -> ::String
         def error_code: () -> ::String
         def datasync_error_code: () -> ::String

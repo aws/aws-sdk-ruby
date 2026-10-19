@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.258.0 (2026-10-19)
+------------------
+
 * Feature - Improve RBS support for service-specific error handling by making modeled errors inherit from each service's `ServiceError`.
 
 3.257.0 (2026-09-14)

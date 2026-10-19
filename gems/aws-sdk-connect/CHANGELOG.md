@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.286.0 (2026-10-19)
+------------------
+
+* Feature - Amazon Connect GetAttachedFile API now supports an optional UrlContentDisposition parameter. Set it to INLINE to get a pre-signed URL that displays the file in the browser, so agents can preview email attachments without downloading them. ATTACHMENT (download) remains the default.
+
 1.285.0 (2026-10-13)
 ------------------
 

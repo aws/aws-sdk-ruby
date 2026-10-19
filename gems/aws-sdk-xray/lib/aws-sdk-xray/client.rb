@@ -2754,6 +2754,11 @@ module Aws::XRay
     # @option params [String] :destination
     #   The configured destination of trace segments.
     #
+    # @option params [Types::CloudWatchLogsConfiguration] :cloud_watch_logs_configuration
+    #   Specifies settings for the CloudWatch Logs log groups that X-Ray
+    #   creates for Transaction Search. Specify this only when `Destination`
+    #   is `CloudWatchLogs`.
+    #
     # @return [Types::UpdateTraceSegmentDestinationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTraceSegmentDestinationResult#destination #destination} => String
@@ -2763,6 +2768,9 @@ module Aws::XRay
     #
     #   resp = client.update_trace_segment_destination({
     #     destination: "XRay", # accepts XRay, CloudWatchLogs
+    #     cloud_watch_logs_configuration: {
+    #       spans_log_group_kms_key_id: "KmsKeyId",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2797,7 +2805,7 @@ module Aws::XRay
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

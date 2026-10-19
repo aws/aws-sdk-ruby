@@ -11,44 +11,44 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class DryRunException < ::Aws::Errors::ServiceError
+      class DryRunException < ServiceError
         def message: () -> ::String
       end
-      class InsufficientCapacityException < ::Aws::Errors::ServiceError
+      class InsufficientCapacityException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
       end
-      class InvalidPaginationException < ::Aws::Errors::ServiceError
+      class InvalidPaginationException < ServiceError
         def message: () -> ::String
       end
-      class Ipv6CidrBlockNotFoundException < ::Aws::Errors::ServiceError
+      class Ipv6CidrBlockNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
         def resource_name: () -> ::String
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
         def resource_name: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
     end

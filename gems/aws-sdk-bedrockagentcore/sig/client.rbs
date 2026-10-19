@@ -536,6 +536,7 @@ module Aws
         def data_source_config: () -> Types::DataSourceConfig
         def output_config: () -> Types::OutputConfig
         def evaluation_results: () -> Types::EvaluationJobResults
+        def insight_results: () -> ::Array[Types::InsightResult]
         def failure_analysis_result: () -> Types::FailureAnalysisResultContent
         def user_intent_result: () -> Types::UserIntentClusteringResultContent
         def execution_summary_result: () -> Types::ExecutionSummaryClusteringResultContent

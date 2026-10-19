@@ -61,6 +61,7 @@ module Aws::ObservabilityAdmin
     DeleteTelemetryPipelineOutput = Shapes::StructureShape.new(name: 'DeleteTelemetryPipelineOutput')
     DeleteTelemetryRuleForOrganizationInput = Shapes::StructureShape.new(name: 'DeleteTelemetryRuleForOrganizationInput')
     DeleteTelemetryRuleInput = Shapes::StructureShape.new(name: 'DeleteTelemetryRuleInput')
+    DeletionProtection = Shapes::StringShape.new(name: 'DeletionProtection')
     DestinationLogsConfiguration = Shapes::StructureShape.new(name: 'DestinationLogsConfiguration')
     DestinationMetricsConfiguration = Shapes::StructureShape.new(name: 'DestinationMetricsConfiguration')
     DestinationType = Shapes::StringShape.new(name: 'DestinationType')
@@ -412,6 +413,7 @@ module Aws::ObservabilityAdmin
     DestinationLogsConfiguration.add_member(:backup_configuration, Shapes::ShapeRef.new(shape: LogsBackupConfiguration, location_name: "BackupConfiguration"))
     DestinationLogsConfiguration.add_member(:log_group_name_configuration, Shapes::ShapeRef.new(shape: LogGroupNameConfiguration, location_name: "LogGroupNameConfiguration"))
     DestinationLogsConfiguration.add_member(:tag_propagation_configuration, Shapes::ShapeRef.new(shape: TagPropagationConfiguration, location_name: "TagPropagationConfiguration"))
+    DestinationLogsConfiguration.add_member(:log_group_deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "LogGroupDeletionProtection"))
     DestinationLogsConfiguration.struct_class = Types::DestinationLogsConfiguration
 
     DestinationMetricsConfiguration.add_member(:backup_configuration, Shapes::ShapeRef.new(shape: MetricsBackupConfiguration, location_name: "BackupConfiguration"))

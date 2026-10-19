@@ -11,13 +11,13 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class InvalidPaginationToken < ::Aws::Errors::ServiceError
+      class InvalidPaginationToken < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedLocale < ::Aws::Errors::ServiceError
+      class UnsupportedLocale < ServiceError
         def message: () -> ::String
       end
     end

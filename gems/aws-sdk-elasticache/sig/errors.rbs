@@ -11,159 +11,159 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class APICallRateForCustomerExceededFault < ::Aws::Errors::ServiceError
+      class APICallRateForCustomerExceededFault < ServiceError
       end
-      class AuthorizationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class AuthorizationAlreadyExistsFault < ServiceError
       end
-      class AuthorizationNotFoundFault < ::Aws::Errors::ServiceError
+      class AuthorizationNotFoundFault < ServiceError
       end
-      class CacheClusterAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class CacheClusterAlreadyExistsFault < ServiceError
       end
-      class CacheClusterNotFoundFault < ::Aws::Errors::ServiceError
+      class CacheClusterNotFoundFault < ServiceError
       end
-      class CacheParameterGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class CacheParameterGroupAlreadyExistsFault < ServiceError
       end
-      class CacheParameterGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class CacheParameterGroupNotFoundFault < ServiceError
       end
-      class CacheParameterGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class CacheParameterGroupQuotaExceededFault < ServiceError
       end
-      class CacheSecurityGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class CacheSecurityGroupAlreadyExistsFault < ServiceError
       end
-      class CacheSecurityGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class CacheSecurityGroupNotFoundFault < ServiceError
       end
-      class CacheSecurityGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class CacheSecurityGroupQuotaExceededFault < ServiceError
       end
-      class CacheSubnetGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class CacheSubnetGroupAlreadyExistsFault < ServiceError
       end
-      class CacheSubnetGroupInUse < ::Aws::Errors::ServiceError
+      class CacheSubnetGroupInUse < ServiceError
       end
-      class CacheSubnetGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class CacheSubnetGroupNotFoundFault < ServiceError
       end
-      class CacheSubnetGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class CacheSubnetGroupQuotaExceededFault < ServiceError
       end
-      class CacheSubnetQuotaExceededFault < ::Aws::Errors::ServiceError
+      class CacheSubnetQuotaExceededFault < ServiceError
       end
-      class ClusterQuotaForCustomerExceededFault < ::Aws::Errors::ServiceError
+      class ClusterQuotaForCustomerExceededFault < ServiceError
       end
-      class DefaultUserAssociatedToUserGroupFault < ::Aws::Errors::ServiceError
+      class DefaultUserAssociatedToUserGroupFault < ServiceError
       end
-      class DefaultUserRequired < ::Aws::Errors::ServiceError
+      class DefaultUserRequired < ServiceError
       end
-      class DuplicateUserNameFault < ::Aws::Errors::ServiceError
+      class DuplicateUserNameFault < ServiceError
       end
-      class GlobalReplicationGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class GlobalReplicationGroupAlreadyExistsFault < ServiceError
       end
-      class GlobalReplicationGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class GlobalReplicationGroupNotFoundFault < ServiceError
       end
-      class InsufficientCacheClusterCapacityFault < ::Aws::Errors::ServiceError
+      class InsufficientCacheClusterCapacityFault < ServiceError
       end
-      class InvalidARNFault < ::Aws::Errors::ServiceError
+      class InvalidARNFault < ServiceError
       end
-      class InvalidCacheClusterStateFault < ::Aws::Errors::ServiceError
+      class InvalidCacheClusterStateFault < ServiceError
       end
-      class InvalidCacheParameterGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidCacheParameterGroupStateFault < ServiceError
       end
-      class InvalidCacheSecurityGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidCacheSecurityGroupStateFault < ServiceError
       end
-      class InvalidCredentialsException < ::Aws::Errors::ServiceError
+      class InvalidCredentialsException < ServiceError
       end
-      class InvalidGlobalReplicationGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidGlobalReplicationGroupStateFault < ServiceError
       end
-      class InvalidKMSKeyFault < ::Aws::Errors::ServiceError
+      class InvalidKMSKeyFault < ServiceError
       end
-      class InvalidParameterCombinationException < ::Aws::Errors::ServiceError
+      class InvalidParameterCombinationException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+      class InvalidParameterValueException < ServiceError
         def message: () -> ::String
       end
-      class InvalidReplicationGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidReplicationGroupStateFault < ServiceError
       end
-      class InvalidServerlessCacheSnapshotStateFault < ::Aws::Errors::ServiceError
+      class InvalidServerlessCacheSnapshotStateFault < ServiceError
       end
-      class InvalidServerlessCacheStateFault < ::Aws::Errors::ServiceError
+      class InvalidServerlessCacheStateFault < ServiceError
       end
-      class InvalidSnapshotStateFault < ::Aws::Errors::ServiceError
+      class InvalidSnapshotStateFault < ServiceError
       end
-      class InvalidSubnet < ::Aws::Errors::ServiceError
+      class InvalidSubnet < ServiceError
       end
-      class InvalidUserGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidUserGroupStateFault < ServiceError
       end
-      class InvalidUserStateFault < ::Aws::Errors::ServiceError
+      class InvalidUserStateFault < ServiceError
       end
-      class InvalidVPCNetworkStateFault < ::Aws::Errors::ServiceError
+      class InvalidVPCNetworkStateFault < ServiceError
       end
-      class NoOperationFault < ::Aws::Errors::ServiceError
+      class NoOperationFault < ServiceError
       end
-      class NodeGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class NodeGroupNotFoundFault < ServiceError
       end
-      class NodeGroupsPerReplicationGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class NodeGroupsPerReplicationGroupQuotaExceededFault < ServiceError
       end
-      class NodeQuotaForClusterExceededFault < ::Aws::Errors::ServiceError
+      class NodeQuotaForClusterExceededFault < ServiceError
       end
-      class NodeQuotaForCustomerExceededFault < ::Aws::Errors::ServiceError
+      class NodeQuotaForCustomerExceededFault < ServiceError
       end
-      class ReplicationGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ReplicationGroupAlreadyExistsFault < ServiceError
       end
-      class ReplicationGroupAlreadyUnderMigrationFault < ::Aws::Errors::ServiceError
+      class ReplicationGroupAlreadyUnderMigrationFault < ServiceError
       end
-      class ReplicationGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class ReplicationGroupNotFoundFault < ServiceError
       end
-      class ReplicationGroupNotUnderMigrationFault < ::Aws::Errors::ServiceError
+      class ReplicationGroupNotUnderMigrationFault < ServiceError
       end
-      class ReservedCacheNodeAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ReservedCacheNodeAlreadyExistsFault < ServiceError
       end
-      class ReservedCacheNodeNotFoundFault < ::Aws::Errors::ServiceError
+      class ReservedCacheNodeNotFoundFault < ServiceError
       end
-      class ReservedCacheNodeQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ReservedCacheNodeQuotaExceededFault < ServiceError
       end
-      class ReservedCacheNodesOfferingNotFoundFault < ::Aws::Errors::ServiceError
+      class ReservedCacheNodesOfferingNotFoundFault < ServiceError
       end
-      class ServerlessCacheAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ServerlessCacheAlreadyExistsFault < ServiceError
       end
-      class ServerlessCacheNotFoundFault < ::Aws::Errors::ServiceError
+      class ServerlessCacheNotFoundFault < ServiceError
       end
-      class ServerlessCacheQuotaForCustomerExceededFault < ::Aws::Errors::ServiceError
+      class ServerlessCacheQuotaForCustomerExceededFault < ServiceError
       end
-      class ServerlessCacheSnapshotAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ServerlessCacheSnapshotAlreadyExistsFault < ServiceError
       end
-      class ServerlessCacheSnapshotNotFoundFault < ::Aws::Errors::ServiceError
+      class ServerlessCacheSnapshotNotFoundFault < ServiceError
       end
-      class ServerlessCacheSnapshotQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ServerlessCacheSnapshotQuotaExceededFault < ServiceError
       end
-      class ServiceLinkedRoleNotFoundFault < ::Aws::Errors::ServiceError
+      class ServiceLinkedRoleNotFoundFault < ServiceError
       end
-      class ServiceUpdateNotFoundFault < ::Aws::Errors::ServiceError
+      class ServiceUpdateNotFoundFault < ServiceError
       end
-      class SnapshotAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class SnapshotAlreadyExistsFault < ServiceError
       end
-      class SnapshotFeatureNotSupportedFault < ::Aws::Errors::ServiceError
+      class SnapshotFeatureNotSupportedFault < ServiceError
       end
-      class SnapshotNotFoundFault < ::Aws::Errors::ServiceError
+      class SnapshotNotFoundFault < ServiceError
       end
-      class SnapshotQuotaExceededFault < ::Aws::Errors::ServiceError
+      class SnapshotQuotaExceededFault < ServiceError
       end
-      class SubnetInUse < ::Aws::Errors::ServiceError
+      class SubnetInUse < ServiceError
       end
-      class SubnetNotAllowedFault < ::Aws::Errors::ServiceError
+      class SubnetNotAllowedFault < ServiceError
       end
-      class TagNotFoundFault < ::Aws::Errors::ServiceError
+      class TagNotFoundFault < ServiceError
       end
-      class TagQuotaPerResourceExceeded < ::Aws::Errors::ServiceError
+      class TagQuotaPerResourceExceeded < ServiceError
       end
-      class TestFailoverNotAvailableFault < ::Aws::Errors::ServiceError
+      class TestFailoverNotAvailableFault < ServiceError
       end
-      class UserAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class UserAlreadyExistsFault < ServiceError
       end
-      class UserGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class UserGroupAlreadyExistsFault < ServiceError
       end
-      class UserGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class UserGroupNotFoundFault < ServiceError
       end
-      class UserGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class UserGroupQuotaExceededFault < ServiceError
       end
-      class UserNotFoundFault < ::Aws::Errors::ServiceError
+      class UserNotFoundFault < ServiceError
       end
-      class UserQuotaExceededFault < ::Aws::Errors::ServiceError
+      class UserQuotaExceededFault < ServiceError
       end
     end
   end
