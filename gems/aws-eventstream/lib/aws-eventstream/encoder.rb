@@ -41,6 +41,14 @@ module Aws
       # and 4 bytes total message crc checksum
       OVERHEAD_LENGTH = 16
 
+      # Maximum encoded length of a single header name (1-byte unsigned length field)
+      MAX_HEADER_NAME_LENGTH = 255
+
+      # Maximum encoded length of a string/bytes header value. The length field is two bytes
+      # (and could hold 65,535), but the protocol caps the value at the signed 16-bit maximum
+      # (INT16_MAX, 2**15 - 1), so the encoder must enforce the lower limit.
+      MAX_HEADER_VALUE_LENGTH = 32_767
+
       # Maximum header length allowed (after encode) 128kb
       MAX_HEADERS_LENGTH = 1024 * 128
 
@@ -109,6 +117,9 @@ module Aws
       # @return [String]
       def encode_headers(message)
         header_entries = message.headers.map do |key, value|
+          if key.bytesize > MAX_HEADER_NAME_LENGTH
+            raise Aws::EventStream::Errors::EventHeaderNameLengthExceedError.new
+          end
           encoded_key = [key.bytesize, key].pack('Ca*')
 
           # header value
@@ -116,7 +127,15 @@ module Aws
           encoded_value = [type_index].pack('C')
           # boolean types doesn't need to specify value
           next [encoded_key, encoded_value].pack('a*a*') if !!pattern == pattern
-          encoded_value = [encoded_value, value.value.bytesize].pack('a*S>') unless value_length
+          validate_fixed_width_value!(value, value_length) if value_length
+          unless value_length
+            # string and bytes types carry a 2-byte length prefix capped at INT16_MAX; reject
+            # oversized values rather than letting bytesize wrap mod 65536.
+            if value.value.bytesize > MAX_HEADER_VALUE_LENGTH
+              raise Aws::EventStream::Errors::EventHeaderValueLengthExceedError.new
+            end
+            encoded_value = [encoded_value, value.value.bytesize].pack('a*S>')
+          end
 
           [
             encoded_key,
@@ -131,6 +150,25 @@ module Aws
       end
 
       private
+
+      # Fixed-width values carry no length prefix, so a value that does not fit its
+      # protocol width would either be silently truncated by #pack (integers) or
+      # misalign the header block (uuid). Reject both before anything is written.
+      def validate_fixed_width_value!(value, width)
+        v = value.value
+        valid =
+          if value.type == 'uuid'
+            v.respond_to?(:bytesize) && v.bytesize == width
+          elsif v.is_a?(Integer)
+            limit = 1 << (width * 8 - 1)
+            v >= -limit && v < limit
+          else
+            true
+          end
+        return if valid
+
+        raise Aws::EventStream::Errors::EventHeaderValueWidthError.new(value.type)
+      end
 
       def encode_prelude(total_length, headers_length)
         prelude_body = [total_length, headers_length].pack('NN')

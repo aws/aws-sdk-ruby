@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Bump the minimum version of the aws-eventstream dependency.
+
 3.259.0 (2026-10-20)
 ------------------
 
