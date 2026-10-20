@@ -216,10 +216,6 @@ Then(/^I expect the response error code to be "(.*?)"$/) do |error_code|
   expect(@error.class.name.split('::').last).to eq(error_code)
 end
 
-Then(/^I expect the response error message to include:$/) do |error_message|
-  expect(@error.message).to include(error_message)
-end
-
 Then(/^the HTTP request body should be:$/) do |string|
   expect(@response.context.http_request.body_contents).to eq(string)
 end

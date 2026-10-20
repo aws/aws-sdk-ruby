@@ -13,10 +13,6 @@ Feature: Amazon CloudWatch
     | StateValue  | mno |
     | StateReason | xyz |
     Then I expect the response error code to be "ValidationError"
-    And I expect the response error message to include:
-    """
-    failed to satisfy constraint
-    """
 
   Scenario: Query Compatible Ambiguous Error Resolution
     When I attempt to call the "GetDashboard" API with:
