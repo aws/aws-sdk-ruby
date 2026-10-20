@@ -2298,8 +2298,8 @@ module Aws::CodePipeline
 
     # Lists the rules for the condition. For more information about
     # conditions, see [Stage conditions][1] and [How do stage conditions
-    # work?][2].For more information about rules, see the [CodePipeline rule
-    # reference][3].
+    # work?][2].For more information about rules, see the [ CodePipeline
+    # rule reference][3].
     #
     #
     #
@@ -3772,7 +3772,7 @@ module Aws::CodePipeline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

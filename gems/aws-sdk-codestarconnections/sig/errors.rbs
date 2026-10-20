@@ -11,55 +11,55 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class ConditionalCheckFailedException < ::Aws::Errors::ServiceError
+      class ConditionalCheckFailedException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
       end
-      class InvalidInputException < ::Aws::Errors::ServiceError
+      class InvalidInputException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ResourceAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ResourceUnavailableException < ::Aws::Errors::ServiceError
+      class ResourceUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class RetryLatestCommitFailedException < ::Aws::Errors::ServiceError
+      class RetryLatestCommitFailedException < ServiceError
         def message: () -> ::String
       end
-      class SyncBlockerDoesNotExistException < ::Aws::Errors::ServiceError
+      class SyncBlockerDoesNotExistException < ServiceError
         def message: () -> ::String
       end
-      class SyncConfigurationStillExistsException < ::Aws::Errors::ServiceError
+      class SyncConfigurationStillExistsException < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+      class UnsupportedOperationException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedProviderTypeException < ::Aws::Errors::ServiceError
+      class UnsupportedProviderTypeException < ServiceError
         def message: () -> ::String
       end
-      class UpdateOutOfSyncException < ::Aws::Errors::ServiceError
+      class UpdateOutOfSyncException < ServiceError
         def message: () -> ::String
       end
     end

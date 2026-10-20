@@ -63,6 +63,11 @@ module Aws::XRay
     class CancelTraceRetrievalResult < Aws::EmptyStructure
     end
 
+    class CloudWatchLogsConfiguration
+      attr_accessor spans_log_group_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateGroupRequest
       attr_accessor group_name: ::String
       attr_accessor filter_expression: ::String
@@ -1067,6 +1072,7 @@ module Aws::XRay
 
     class UpdateTraceSegmentDestinationRequest
       attr_accessor destination: ("XRay" | "CloudWatchLogs")
+      attr_accessor cloud_watch_logs_configuration: Types::CloudWatchLogsConfiguration
       SENSITIVE: []
     end
 

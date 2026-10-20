@@ -252,6 +252,9 @@ module Aws::BedrockAgentCore
     FilterInput = Shapes::StructureShape.new(name: 'FilterInput')
     FilterStringValue = Shapes::StringShape.new(name: 'FilterStringValue')
     FilterValue = Shapes::UnionShape.new(name: 'FilterValue')
+    FindingDescription = Shapes::StringShape.new(name: 'FindingDescription')
+    FindingTargetId = Shapes::StringShape.new(name: 'FindingTargetId')
+    FindingTargetType = Shapes::StringShape.new(name: 'FindingTargetType')
     GatewayArn = Shapes::StringShape.new(name: 'GatewayArn')
     GatewayFilter = Shapes::StructureShape.new(name: 'GatewayFilter')
     GetABTestRequest = Shapes::StructureShape.new(name: 'GetABTestRequest')
@@ -394,8 +397,16 @@ module Aws::BedrockAgentCore
     InputContentBlock = Shapes::StructureShape.new(name: 'InputContentBlock')
     InputContentBlockList = Shapes::ListShape.new(name: 'InputContentBlockList')
     Insight = Shapes::StructureShape.new(name: 'Insight')
+    InsightDescription = Shapes::StringShape.new(name: 'InsightDescription')
     InsightId = Shapes::StringShape.new(name: 'InsightId')
     InsightList = Shapes::ListShape.new(name: 'InsightList')
+    InsightName = Shapes::StringShape.new(name: 'InsightName')
+    InsightResult = Shapes::StructureShape.new(name: 'InsightResult')
+    InsightResultList = Shapes::ListShape.new(name: 'InsightResultList')
+    InsightRootCause = Shapes::StructureShape.new(name: 'InsightRootCause')
+    InsightRootCauseList = Shapes::ListShape.new(name: 'InsightRootCauseList')
+    InsightSampleSessionList = Shapes::ListShape.new(name: 'InsightSampleSessionList')
+    InsightType = Shapes::StringShape.new(name: 'InsightType')
     InsightsFailureCategory = Shapes::StringShape.new(name: 'InsightsFailureCategory')
     InsightsFailureSignal = Shapes::StructureShape.new(name: 'InsightsFailureSignal')
     InsightsFailureSignalList = Shapes::ListShape.new(name: 'InsightsFailureSignalList')
@@ -665,6 +676,8 @@ module Aws::BedrockAgentCore
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RootCauseCluster = Shapes::StructureShape.new(name: 'RootCauseCluster')
     RootCauseClusterList = Shapes::ListShape.new(name: 'RootCauseClusterList')
+    RootCauseExplanation = Shapes::StringShape.new(name: 'RootCauseExplanation')
+    RootCauseName = Shapes::StringShape.new(name: 'RootCauseName')
     RuntimeClientError = Shapes::StructureShape.new(name: 'RuntimeClientError')
     S3FilesAccessPointArn = Shapes::StringShape.new(name: 'S3FilesAccessPointArn')
     S3FilesConfiguration = Shapes::StructureShape.new(name: 'S3FilesConfiguration')
@@ -673,6 +686,7 @@ module Aws::BedrockAgentCore
     S3LocationBucketString = Shapes::StringShape.new(name: 'S3LocationBucketString')
     S3LocationPrefixString = Shapes::StringShape.new(name: 'S3LocationPrefixString')
     S3LocationVersionIdString = Shapes::StringShape.new(name: 'S3LocationVersionIdString')
+    SampleSession = Shapes::StructureShape.new(name: 'SampleSession')
     SaveBrowserSessionProfileRequest = Shapes::StructureShape.new(name: 'SaveBrowserSessionProfileRequest')
     SaveBrowserSessionProfileRequestTraceIdString = Shapes::StringShape.new(name: 'SaveBrowserSessionProfileRequestTraceIdString')
     SaveBrowserSessionProfileRequestTraceParentString = Shapes::StringShape.new(name: 'SaveBrowserSessionProfileRequestTraceParentString')
@@ -702,6 +716,10 @@ module Aws::BedrockAgentCore
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionFilter = Shapes::StructureShape.new(name: 'SessionFilter')
     SessionFilterConfig = Shapes::StructureShape.new(name: 'SessionFilterConfig')
+    SessionFinding = Shapes::StructureShape.new(name: 'SessionFinding')
+    SessionFindingCategoryString = Shapes::StringShape.new(name: 'SessionFindingCategoryString')
+    SessionFindingConfidenceDouble = Shapes::FloatShape.new(name: 'SessionFindingConfidenceDouble')
+    SessionFindingList = Shapes::ListShape.new(name: 'SessionFindingList')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     SessionLimits = Shapes::StructureShape.new(name: 'SessionLimits')
     SessionMetadataList = Shapes::ListShape.new(name: 'SessionMetadataList')
@@ -767,6 +785,7 @@ module Aws::BedrockAgentCore
     SubscriptionRequiredException = Shapes::StructureShape.new(name: 'SubscriptionRequiredException')
     SubscriptionRequiredExceptionProductNameString = Shapes::StringShape.new(name: 'SubscriptionRequiredExceptionProductNameString')
     SubscriptionRequiredExceptionSubscriptionUrlString = Shapes::StringShape.new(name: 'SubscriptionRequiredExceptionSubscriptionUrlString')
+    SuggestedFix = Shapes::StringShape.new(name: 'SuggestedFix')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     SystemPromptConfig = Shapes::UnionShape.new(name: 'SystemPromptConfig')
     SystemPromptConfigurationBundle = Shapes::StructureShape.new(name: 'SystemPromptConfigurationBundle')
@@ -1649,6 +1668,7 @@ module Aws::BedrockAgentCore
     GetBatchEvaluationResponse.add_member(:data_source_config, Shapes::ShapeRef.new(shape: DataSourceConfig, location_name: "dataSourceConfig"))
     GetBatchEvaluationResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "outputConfig"))
     GetBatchEvaluationResponse.add_member(:evaluation_results, Shapes::ShapeRef.new(shape: EvaluationJobResults, location_name: "evaluationResults"))
+    GetBatchEvaluationResponse.add_member(:insight_results, Shapes::ShapeRef.new(shape: InsightResultList, location_name: "insightResults"))
     GetBatchEvaluationResponse.add_member(:failure_analysis_result, Shapes::ShapeRef.new(shape: FailureAnalysisResultContent, location_name: "failureAnalysisResult"))
     GetBatchEvaluationResponse.add_member(:user_intent_result, Shapes::ShapeRef.new(shape: UserIntentClusteringResultContent, location_name: "userIntentResult"))
     GetBatchEvaluationResponse.add_member(:execution_summary_result, Shapes::ShapeRef.new(shape: ExecutionSummaryClusteringResultContent, location_name: "executionSummaryResult"))
@@ -2167,6 +2187,28 @@ module Aws::BedrockAgentCore
     Insight.struct_class = Types::Insight
 
     InsightList.member = Shapes::ShapeRef.new(shape: Insight)
+
+    InsightResult.add_member(:type, Shapes::ShapeRef.new(shape: InsightType, required: true, location_name: "type"))
+    InsightResult.add_member(:name, Shapes::ShapeRef.new(shape: InsightName, required: true, location_name: "name"))
+    InsightResult.add_member(:description, Shapes::ShapeRef.new(shape: InsightDescription, required: true, location_name: "description"))
+    InsightResult.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    InsightResult.add_member(:affected_session_count, Shapes::ShapeRef.new(shape: Integer, location_name: "affectedSessionCount"))
+    InsightResult.add_member(:sample_sessions, Shapes::ShapeRef.new(shape: InsightSampleSessionList, location_name: "sampleSessions"))
+    InsightResult.add_member(:root_causes, Shapes::ShapeRef.new(shape: InsightRootCauseList, location_name: "rootCauses"))
+    InsightResult.struct_class = Types::InsightResult
+
+    InsightResultList.member = Shapes::ShapeRef.new(shape: InsightResult)
+
+    InsightRootCause.add_member(:name, Shapes::ShapeRef.new(shape: RootCauseName, required: true, location_name: "name"))
+    InsightRootCause.add_member(:explanation, Shapes::ShapeRef.new(shape: RootCauseExplanation, required: true, location_name: "explanation"))
+    InsightRootCause.add_member(:affected_session_count, Shapes::ShapeRef.new(shape: Integer, location_name: "affectedSessionCount"))
+    InsightRootCause.add_member(:suggested_fix, Shapes::ShapeRef.new(shape: SuggestedFix, location_name: "suggestedFix"))
+    InsightRootCause.add_member(:sample_sessions, Shapes::ShapeRef.new(shape: InsightSampleSessionList, location_name: "sampleSessions"))
+    InsightRootCause.struct_class = Types::InsightRootCause
+
+    InsightRootCauseList.member = Shapes::ShapeRef.new(shape: InsightRootCause)
+
+    InsightSampleSessionList.member = Shapes::ShapeRef.new(shape: SampleSession)
 
     InsightsFailureSignal.add_member(:category, Shapes::ShapeRef.new(shape: InsightsFailureCategory, required: true, location_name: "category"))
     InsightsFailureSignal.add_member(:evidence, Shapes::ShapeRef.new(shape: String, required: true, location_name: "evidence"))
@@ -2989,6 +3031,11 @@ module Aws::BedrockAgentCore
     S3Location.add_member(:version_id, Shapes::ShapeRef.new(shape: S3LocationVersionIdString, location_name: "versionId"))
     S3Location.struct_class = Types::S3Location
 
+    SampleSession.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "sessionId"))
+    SampleSession.add_member(:last_seen_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastSeenAt"))
+    SampleSession.add_member(:findings, Shapes::ShapeRef.new(shape: SessionFindingList, location_name: "findings"))
+    SampleSession.struct_class = Types::SampleSession
+
     SaveBrowserSessionProfileRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: SaveBrowserSessionProfileRequestTraceIdString, location: "header", location_name: "X-Amzn-Trace-Id"))
     SaveBrowserSessionProfileRequest.add_member(:trace_parent, Shapes::ShapeRef.new(shape: SaveBrowserSessionProfileRequestTraceParentString, location: "header", location_name: "traceparent"))
     SaveBrowserSessionProfileRequest.add_member(:profile_identifier, Shapes::ShapeRef.new(shape: BrowserProfileId, required: true, location: "uri", location_name: "profileIdentifier"))
@@ -3051,6 +3098,15 @@ module Aws::BedrockAgentCore
     SessionFilterConfig.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "startTime"))
     SessionFilterConfig.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
     SessionFilterConfig.struct_class = Types::SessionFilterConfig
+
+    SessionFinding.add_member(:target_id, Shapes::ShapeRef.new(shape: FindingTargetId, location_name: "targetId"))
+    SessionFinding.add_member(:target_type, Shapes::ShapeRef.new(shape: FindingTargetType, location_name: "targetType"))
+    SessionFinding.add_member(:description, Shapes::ShapeRef.new(shape: FindingDescription, required: true, location_name: "description"))
+    SessionFinding.add_member(:category, Shapes::ShapeRef.new(shape: SessionFindingCategoryString, location_name: "category"))
+    SessionFinding.add_member(:confidence, Shapes::ShapeRef.new(shape: SessionFindingConfidenceDouble, location_name: "confidence"))
+    SessionFinding.struct_class = Types::SessionFinding
+
+    SessionFindingList.member = Shapes::ShapeRef.new(shape: SessionFinding)
 
     SessionLimits.add_member(:max_spend_amount, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "maxSpendAmount"))
     SessionLimits.struct_class = Types::SessionLimits

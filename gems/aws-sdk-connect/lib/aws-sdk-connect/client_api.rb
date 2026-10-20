@@ -388,6 +388,7 @@ module Aws::Connect
     Contacts = Shapes::ListShape.new(name: 'Contacts')
     Content = Shapes::StringShape.new(name: 'Content')
     ContentAttributes = Shapes::StructureShape.new(name: 'ContentAttributes')
+    ContentDisposition = Shapes::StringShape.new(name: 'ContentDisposition')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     ControlPlaneAttributeFilter = Shapes::StructureShape.new(name: 'ControlPlaneAttributeFilter')
     ControlPlaneTagFilter = Shapes::StructureShape.new(name: 'ControlPlaneTagFilter')
@@ -5780,6 +5781,7 @@ module Aws::Connect
     GetAttachedFileRequest.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location: "uri", location_name: "FileId"))
     GetAttachedFileRequest.add_member(:url_expiry_in_seconds, Shapes::ShapeRef.new(shape: URLExpiryInSeconds, location: "querystring", location_name: "urlExpiryInSeconds"))
     GetAttachedFileRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    GetAttachedFileRequest.add_member(:url_content_disposition, Shapes::ShapeRef.new(shape: ContentDisposition, location: "querystring", location_name: "urlContentDisposition"))
     GetAttachedFileRequest.struct_class = Types::GetAttachedFileRequest
 
     GetAttachedFileResponse.add_member(:file_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "FileArn"))

@@ -11,49 +11,49 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessPointNotFoundException < ::Aws::Errors::ServiceError
+      class AccessPointNotFoundException < ServiceError
       end
-      class CertificateNotFoundException < ::Aws::Errors::ServiceError
+      class CertificateNotFoundException < ServiceError
       end
-      class DependencyThrottleException < ::Aws::Errors::ServiceError
+      class DependencyThrottleException < ServiceError
       end
-      class DuplicateAccessPointNameException < ::Aws::Errors::ServiceError
+      class DuplicateAccessPointNameException < ServiceError
       end
-      class DuplicateListenerException < ::Aws::Errors::ServiceError
+      class DuplicateListenerException < ServiceError
       end
-      class DuplicatePolicyNameException < ::Aws::Errors::ServiceError
+      class DuplicatePolicyNameException < ServiceError
       end
-      class DuplicateTagKeysException < ::Aws::Errors::ServiceError
+      class DuplicateTagKeysException < ServiceError
       end
-      class InvalidConfigurationRequestException < ::Aws::Errors::ServiceError
+      class InvalidConfigurationRequestException < ServiceError
       end
-      class InvalidEndPointException < ::Aws::Errors::ServiceError
+      class InvalidEndPointException < ServiceError
       end
-      class InvalidSchemeException < ::Aws::Errors::ServiceError
+      class InvalidSchemeException < ServiceError
       end
-      class InvalidSecurityGroupException < ::Aws::Errors::ServiceError
+      class InvalidSecurityGroupException < ServiceError
       end
-      class InvalidSubnetException < ::Aws::Errors::ServiceError
+      class InvalidSubnetException < ServiceError
       end
-      class ListenerNotFoundException < ::Aws::Errors::ServiceError
+      class ListenerNotFoundException < ServiceError
       end
-      class LoadBalancerAttributeNotFoundException < ::Aws::Errors::ServiceError
+      class LoadBalancerAttributeNotFoundException < ServiceError
       end
-      class OperationNotPermittedException < ::Aws::Errors::ServiceError
+      class OperationNotPermittedException < ServiceError
       end
-      class PolicyNotFoundException < ::Aws::Errors::ServiceError
+      class PolicyNotFoundException < ServiceError
       end
-      class PolicyTypeNotFoundException < ::Aws::Errors::ServiceError
+      class PolicyTypeNotFoundException < ServiceError
       end
-      class SubnetNotFoundException < ::Aws::Errors::ServiceError
+      class SubnetNotFoundException < ServiceError
       end
-      class TooManyAccessPointsException < ::Aws::Errors::ServiceError
+      class TooManyAccessPointsException < ServiceError
       end
-      class TooManyPoliciesException < ::Aws::Errors::ServiceError
+      class TooManyPoliciesException < ServiceError
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
       end
-      class UnsupportedProtocolException < ::Aws::Errors::ServiceError
+      class UnsupportedProtocolException < ServiceError
       end
     end
   end

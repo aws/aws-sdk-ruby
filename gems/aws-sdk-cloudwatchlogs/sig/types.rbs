@@ -523,6 +523,7 @@ module Aws::CloudWatchLogs
     class DescribeDeliveriesRequest
       attr_accessor next_token: ::String
       attr_accessor limit: ::Integer
+      attr_accessor delivery_source_names: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -535,6 +536,7 @@ module Aws::CloudWatchLogs
     class DescribeDeliveryDestinationsRequest
       attr_accessor next_token: ::String
       attr_accessor limit: ::Integer
+      attr_accessor names: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -547,6 +549,7 @@ module Aws::CloudWatchLogs
     class DescribeDeliverySourcesRequest
       attr_accessor next_token: ::String
       attr_accessor limit: ::Integer
+      attr_accessor resource_arns: ::Array[::String]
       SENSITIVE: []
     end
 

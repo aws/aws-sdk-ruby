@@ -644,7 +644,14 @@ module Aws
                                  ],
                                  ?actions_suppressor: ::String,
                                  ?actions_suppressor_wait_period: ::Integer,
-                                 ?actions_suppressor_extension_period: ::Integer
+                                 ?actions_suppressor_extension_period: ::Integer,
+                                 ?action_configuration: {
+                                   alarm_tags_propagation: {
+                                     enabled: bool,
+                                     included_tag_keys: Array[::String]?,
+                                     excluded_tag_keys: Array[::String]?
+                                   }?
+                                 }
                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -725,6 +732,13 @@ module Aws
                            ?warm_up_configuration: {
                              warm_up_period_duration_in_minutes: ::Integer,
                              only_start_evaluating_after_warm_up_period_ends: bool?
+                           },
+                           ?action_configuration: {
+                             alarm_tags_propagation: {
+                               enabled: bool,
+                               included_tag_keys: Array[::String]?,
+                               excluded_tag_keys: Array[::String]?
+                             }?
                            }
                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -804,7 +818,14 @@ module Aws
                                   recovery_period: ::Integer?
                                 }?
                               },
-                              ?evaluation_interval: ::Integer
+                              ?evaluation_interval: ::Integer,
+                              ?action_configuration: {
+                                alarm_tags_propagation: {
+                                  enabled: bool,
+                                  included_tag_keys: Array[::String]?,
+                                  excluded_tag_keys: Array[::String]?
+                                }?
+                              }
                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

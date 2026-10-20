@@ -2296,7 +2296,19 @@ module Aws::ECS
       attr_accessor services: ::Array[Types::ServiceConnectService]
       attr_accessor log_configuration: Types::LogConfiguration
       attr_accessor access_log_configuration: Types::ServiceConnectAccessLogConfiguration
+      attr_accessor container_configurations: ::Array[Types::ServiceConnectContainerConfiguration]
       SENSITIVE: []
+    end
+
+    class ServiceConnectContainerConfiguration
+      attr_accessor log_level: ("debug" | "info")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class LogLevel < ServiceConnectContainerConfiguration
+      end
+      class Unknown < ServiceConnectContainerConfiguration
+      end
     end
 
     class ServiceConnectService

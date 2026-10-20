@@ -2419,6 +2419,10 @@ module Aws::CloudWatchLogs
     #   Optionally specify the maximum number of deliveries to return in the
     #   response.
     #
+    # @option params [Array<String>] :delivery_source_names
+    #   An array of delivery source names that filters the results to
+    #   deliveries associated with any specified delivery source.
+    #
     # @return [Types::DescribeDeliveriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDeliveriesResponse#deliveries #deliveries} => Array&lt;Types::Delivery&gt;
@@ -2431,6 +2435,7 @@ module Aws::CloudWatchLogs
     #   resp = client.describe_deliveries({
     #     next_token: "NextToken",
     #     limit: 1,
+    #     delivery_source_names: ["DeliverySourceName"],
     #   })
     #
     # @example Response structure
@@ -2470,6 +2475,10 @@ module Aws::CloudWatchLogs
     #   Optionally specify the maximum number of delivery destinations to
     #   return in the response.
     #
+    # @option params [Array<String>] :names
+    #   An array of delivery destination names that filters the results to
+    #   delivery destinations with any specified name.
+    #
     # @return [Types::DescribeDeliveryDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDeliveryDestinationsResponse#delivery_destinations #delivery_destinations} => Array&lt;Types::DeliveryDestination&gt;
@@ -2482,6 +2491,7 @@ module Aws::CloudWatchLogs
     #   resp = client.describe_delivery_destinations({
     #     next_token: "NextToken",
     #     limit: 1,
+    #     names: ["DeliveryDestinationName"],
     #   })
     #
     # @example Response structure
@@ -2517,6 +2527,10 @@ module Aws::CloudWatchLogs
     #   Optionally specify the maximum number of delivery sources to return in
     #   the response.
     #
+    # @option params [Array<String>] :resource_arns
+    #   An array of Amazon Resource Names (ARNs) that filters the results to
+    #   delivery sources associated with any specified ARN.
+    #
     # @return [Types::DescribeDeliverySourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDeliverySourcesResponse#delivery_sources #delivery_sources} => Array&lt;Types::DeliverySource&gt;
@@ -2529,6 +2543,7 @@ module Aws::CloudWatchLogs
     #   resp = client.describe_delivery_sources({
     #     next_token: "NextToken",
     #     limit: 1,
+    #     resource_arns: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -6969,7 +6984,12 @@ module Aws::CloudWatchLogs
     #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
     #     `TRANSCODE_LOGS`.
     #
+    #   * For Amazon ECS, the valid value is `ACTION_LOGS`.
+    #
     #   * For Entity Resolution, the valid value is `WORKFLOW_LOGS`.
+    #
+    #   * For Amazon EventBridge Event Bus (Custom), the valid values are
+    #     `INFO_LOGS` and `ERROR_LOGS`.
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
@@ -6979,7 +6999,8 @@ module Aws::CloudWatchLogs
     #   * For Network Load Balancer, the valid value is `NLB_ACCESS_LOGS`.
     #
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS`,
-    #     `PCS_JOBCOMP_LOGS`, and `PCS_SCHEDULER_AUDIT_LOGS`.
+    #     `PCS_JOBCOMP_LOGS`, `PCS_SCHEDULER_AUDIT_LOGS`, and
+    #     `PCS_SCALING_LOGS`.
     #
     #   * For Amazon Q, the valid values are `EVENT_LOGS` and `SYNC_JOB_LOGS`.
     #
@@ -7805,7 +7826,7 @@ module Aws::CloudWatchLogs
     #
     # * **Supported principals** - Policy only applies when operations are
     #   invoked by Amazon Web Services service principals (not IAM users,
-    #   roles, or cross-account principals
+    #   roles, or cross-account principals)
     #
     # * **Policy limits** - An account can have a maximum of 10 policies
     #   without resourceARN and one per LogGroup resourceARN
@@ -9709,7 +9730,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

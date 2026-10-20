@@ -1757,6 +1757,7 @@ module Aws::BedrockAgentCore
     #   * {Types::GetBatchEvaluationResponse#data_source_config #data_source_config} => Types::DataSourceConfig
     #   * {Types::GetBatchEvaluationResponse#output_config #output_config} => Types::OutputConfig
     #   * {Types::GetBatchEvaluationResponse#evaluation_results #evaluation_results} => Types::EvaluationJobResults
+    #   * {Types::GetBatchEvaluationResponse#insight_results #insight_results} => Array&lt;Types::InsightResult&gt;
     #   * {Types::GetBatchEvaluationResponse#failure_analysis_result #failure_analysis_result} => Types::FailureAnalysisResultContent
     #   * {Types::GetBatchEvaluationResponse#user_intent_result #user_intent_result} => Types::UserIntentClusteringResultContent
     #   * {Types::GetBatchEvaluationResponse#execution_summary_result #execution_summary_result} => Types::ExecutionSummaryClusteringResultContent
@@ -1813,6 +1814,35 @@ module Aws::BedrockAgentCore
     #   resp.evaluation_results.evaluator_summaries[0].statistics.average_score #=> Float
     #   resp.evaluation_results.evaluator_summaries[0].total_evaluated #=> Integer
     #   resp.evaluation_results.evaluator_summaries[0].total_failed #=> Integer
+    #   resp.insight_results #=> Array
+    #   resp.insight_results[0].type #=> String, one of "FAILURE"
+    #   resp.insight_results[0].name #=> String
+    #   resp.insight_results[0].description #=> String
+    #   resp.insight_results[0].created_at #=> Time
+    #   resp.insight_results[0].affected_session_count #=> Integer
+    #   resp.insight_results[0].sample_sessions #=> Array
+    #   resp.insight_results[0].sample_sessions[0].session_id #=> String
+    #   resp.insight_results[0].sample_sessions[0].last_seen_at #=> Time
+    #   resp.insight_results[0].sample_sessions[0].findings #=> Array
+    #   resp.insight_results[0].sample_sessions[0].findings[0].target_id #=> String
+    #   resp.insight_results[0].sample_sessions[0].findings[0].target_type #=> String, one of "SPAN_ID", "TRACE_ID", "SPAN_NAME"
+    #   resp.insight_results[0].sample_sessions[0].findings[0].description #=> String
+    #   resp.insight_results[0].sample_sessions[0].findings[0].category #=> String
+    #   resp.insight_results[0].sample_sessions[0].findings[0].confidence #=> Float
+    #   resp.insight_results[0].root_causes #=> Array
+    #   resp.insight_results[0].root_causes[0].name #=> String
+    #   resp.insight_results[0].root_causes[0].explanation #=> String
+    #   resp.insight_results[0].root_causes[0].affected_session_count #=> Integer
+    #   resp.insight_results[0].root_causes[0].suggested_fix #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions #=> Array
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].session_id #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].last_seen_at #=> Time
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings #=> Array
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].target_id #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].target_type #=> String, one of "SPAN_ID", "TRACE_ID", "SPAN_NAME"
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].description #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].category #=> String
+    #   resp.insight_results[0].root_causes[0].sample_sessions[0].findings[0].confidence #=> Float
     #   resp.failure_analysis_result.failures #=> Array
     #   resp.failure_analysis_result.failures[0].cluster_id #=> Integer
     #   resp.failure_analysis_result.failures[0].name #=> String
@@ -4746,9 +4776,9 @@ module Aws::BedrockAgentCore
     #   memory records.
     #
     # @option params [String] :namespace
-    #   The namespace prefix to filter memory records by. Returns all memory
-    #   records in namespaces that start with the provided prefix. Either
-    #   `namespace` or `namespacePath` is required.
+    #   The exact namespace to filter memory records by. Returns all memory
+    #   records that matches the provided namespace. Either `namespace` or
+    #   `namespacePath` is required.
     #
     # @option params [String] :namespace_path
     #   Use namespacePath for hierarchical retrievals. Return all memory
@@ -5173,9 +5203,9 @@ module Aws::BedrockAgentCore
     #   memory records.
     #
     # @option params [String] :namespace
-    #   The namespace prefix to filter memory records by. Searches for memory
-    #   records in namespaces that start with the provided prefix. Either
-    #   `namespace` or `namespacePath` is required.
+    #   The exact namespace to filter memory records by. Searches for memory
+    #   records that matches the provided namespace value. Either `namespace`
+    #   or `namespacePath` is required.
     #
     # @option params [String] :namespace_path
     #   Use namespacePath for hierarchical retrievals. Return all memory
@@ -6626,7 +6656,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

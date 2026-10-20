@@ -968,7 +968,7 @@ module Aws::LambdaCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambdacore'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

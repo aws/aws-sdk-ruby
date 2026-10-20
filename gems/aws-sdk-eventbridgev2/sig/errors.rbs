@@ -11,49 +11,49 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+      class IdempotentParameterMismatchException < ServiceError
         def message: () -> ::String
       end
-      class InternalException < ::Aws::Errors::ServiceError
+      class InternalException < ServiceError
         def message: () -> ::String
       end
-      class InvalidInputException < ::Aws::Errors::ServiceError
+      class InvalidInputException < ServiceError
         def message: () -> ::String
       end
-      class InvalidStateException < ::Aws::Errors::ServiceError
+      class InvalidStateException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class PolicyLengthExceededException < ::Aws::Errors::ServiceError
+      class PolicyLengthExceededException < ServiceError
         def message: () -> ::String
       end
-      class PublicPolicyException < ::Aws::Errors::ServiceError
+      class PublicPolicyException < ServiceError
         def message: () -> ::String
       end
-      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ResourceAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class SchemaRegistryUnavailableException < ::Aws::Errors::ServiceError
+      class SchemaRegistryUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
       end
     end

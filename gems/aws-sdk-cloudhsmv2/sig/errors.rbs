@@ -11,25 +11,25 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class CloudHsmAccessDeniedException < ::Aws::Errors::ServiceError
+      class CloudHsmAccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class CloudHsmInternalFailureException < ::Aws::Errors::ServiceError
+      class CloudHsmInternalFailureException < ServiceError
         def message: () -> ::String
       end
-      class CloudHsmInvalidRequestException < ::Aws::Errors::ServiceError
+      class CloudHsmInvalidRequestException < ServiceError
         def message: () -> ::String
       end
-      class CloudHsmResourceLimitExceededException < ::Aws::Errors::ServiceError
+      class CloudHsmResourceLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class CloudHsmResourceNotFoundException < ::Aws::Errors::ServiceError
+      class CloudHsmResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class CloudHsmServiceException < ::Aws::Errors::ServiceError
+      class CloudHsmServiceException < ServiceError
         def message: () -> ::String
       end
-      class CloudHsmTagException < ::Aws::Errors::ServiceError
+      class CloudHsmTagException < ServiceError
         def message: () -> ::String
       end
     end

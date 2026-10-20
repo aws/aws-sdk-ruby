@@ -461,7 +461,7 @@ module Aws::Connect
       attr_accessor file_id: ::String
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
       attr_accessor associated_resource_arn: ::String
@@ -1375,7 +1375,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       SENSITIVE: []
     end
 
@@ -4237,6 +4237,7 @@ module Aws::Connect
       attr_accessor file_id: ::String
       attr_accessor url_expiry_in_seconds: ::Integer
       attr_accessor associated_resource_arn: ::String
+      attr_accessor url_content_disposition: ("INLINE" | "ATTACHMENT")
       SENSITIVE: []
     end
 
@@ -4244,7 +4245,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor associated_resource_arn: ::String
@@ -8109,7 +8110,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor upload_url_metadata: Types::UploadUrlMetadata
       SENSITIVE: []

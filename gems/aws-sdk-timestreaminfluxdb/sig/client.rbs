@@ -501,6 +501,16 @@ module Aws
                                            catalog_sync_interval: {
                                              duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
                                              value: ::Integer
+                                           }?,
+                                           upgrade_pacha_tree: bool?,
+                                           wal_buffer_size: ::Integer?,
+                                           snapshot_size: {
+                                             percent: ::String?,
+                                             absolute: ::Integer?
+                                           }?,
+                                           snapshot_duration: {
+                                             duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days"),
+                                             value: ::Integer
                                            }?
                                          }?
                                        },

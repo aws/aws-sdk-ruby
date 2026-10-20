@@ -1967,7 +1967,7 @@ module Aws::DataZone
     #           },
     #           name: "GlueConnectionInputNameString",
     #           description: "String",
-    #           connection_type: "SNOWFLAKE", # accepts SNOWFLAKE, BIGQUERY, DOCUMENTDB, DYNAMODB, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, SAPHANA, SQLSERVER, TERADATA, VERTICA
+    #           connection_type: "SNOWFLAKE", # accepts SNOWFLAKE, BIGQUERY, DOCUMENTDB, DYNAMODB, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, SAPHANA, SQLSERVER, TERADATA, VERTICA, ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, DATABRICKSICEBERGRESTCATALOG
     #           match_criteria: "GlueConnectionInputMatchCriteriaString",
     #           validate_credentials: false,
     #           validate_for_compute_environments: ["SPARK"], # accepts SPARK, ATHENA, PYTHON
@@ -2194,7 +2194,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.name #=> String
     #   resp.physical_endpoints[0].glue_connection.description #=> String
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
     #   resp.physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -2320,7 +2320,7 @@ module Aws::DataZone
     #   resp.props.git_properties.default_branch #=> String
     #   resp.props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.git_properties.error_message #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
     #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateConnection AWS API Documentation
@@ -6415,7 +6415,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.name #=> String
     #   resp.physical_endpoints[0].glue_connection.description #=> String
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
     #   resp.physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -6541,7 +6541,7 @@ module Aws::DataZone
     #   resp.props.git_properties.default_branch #=> String
     #   resp.props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.git_properties.error_message #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
     #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetConnection AWS API Documentation
@@ -9256,7 +9256,7 @@ module Aws::DataZone
     #     name: "ConnectionName",
     #     environment_identifier: "EnvironmentId",
     #     project_identifier: "ProjectId",
-    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, S3, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA, AMAZON_Q, MLFLOW, VPC, GIT
+    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, S3, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA, AMAZON_Q, MLFLOW, VPC, GIT, ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, DATABRICKSICEBERGRESTCATALOG
     #     scope: "DOMAIN", # accepts DOMAIN, PROJECT
     #   })
     #
@@ -9282,7 +9282,7 @@ module Aws::DataZone
     #   resp.items[0].physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.name #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.description #=> String
-    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
+    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
     #   resp.items[0].physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.items[0].physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -9408,7 +9408,7 @@ module Aws::DataZone
     #   resp.items[0].props.git_properties.default_branch #=> String
     #   resp.items[0].props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.items[0].props.git_properties.error_message #=> String
-    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
+    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
     #   resp.items[0].scope #=> String, one of "DOMAIN", "PROJECT"
     #   resp.next_token #=> String
     #
@@ -14645,7 +14645,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.name #=> String
     #   resp.physical_endpoints[0].glue_connection.description #=> String
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
     #   resp.physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -14771,7 +14771,7 @@ module Aws::DataZone
     #   resp.props.git_properties.default_branch #=> String
     #   resp.props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.git_properties.error_message #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
     #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateConnection AWS API Documentation
@@ -16737,7 +16737,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

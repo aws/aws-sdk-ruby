@@ -497,7 +497,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
         def scope: () -> ("DOMAIN" | "PROJECT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_connection-instance_method
@@ -534,7 +534,7 @@ module Aws
                                      }?,
                                      name: ::String?,
                                      description: ::String?,
-                                     connection_type: ("SNOWFLAKE" | "BIGQUERY" | "DOCUMENTDB" | "DYNAMODB" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SQLSERVER" | "TERADATA" | "VERTICA")?,
+                                     connection_type: ("SNOWFLAKE" | "BIGQUERY" | "DOCUMENTDB" | "DYNAMODB" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SQLSERVER" | "TERADATA" | "VERTICA" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")?,
                                      match_criteria: ::String?,
                                      validate_credentials: bool?,
                                      validate_for_compute_environments: Array[("SPARK" | "ATHENA" | "PYTHON")]?,
@@ -1888,7 +1888,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
         def scope: () -> ("DOMAIN" | "PROJECT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_connection-instance_method
@@ -2731,7 +2731,7 @@ module Aws
                               ?name: ::String,
                               ?environment_identifier: ::String,
                               ?project_identifier: ::String,
-                              ?type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT"),
+                              ?type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG"),
                               ?scope: ("DOMAIN" | "PROJECT")
                             ) -> _ListConnectionsResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectionsResponseSuccess
@@ -3871,7 +3871,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
         def scope: () -> ("DOMAIN" | "PROJECT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_connection-instance_method

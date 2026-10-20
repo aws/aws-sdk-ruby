@@ -11,22 +11,22 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ChannelInsufficientPermission < ::Aws::Errors::ServiceError
+      class ChannelInsufficientPermission < ServiceError
         def message: () -> ::String
       end
-      class ChannelNotFound < ::Aws::Errors::ServiceError
+      class ChannelNotFound < ServiceError
         def message: () -> ::String
       end
-      class ChannelUnsupportedSchema < ::Aws::Errors::ServiceError
+      class ChannelUnsupportedSchema < ServiceError
         def message: () -> ::String
       end
-      class DuplicatedAuditEventId < ::Aws::Errors::ServiceError
+      class DuplicatedAuditEventId < ServiceError
         def message: () -> ::String
       end
-      class InvalidChannelARN < ::Aws::Errors::ServiceError
+      class InvalidChannelARN < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+      class UnsupportedOperationException < ServiceError
         def message: () -> ::String
       end
     end

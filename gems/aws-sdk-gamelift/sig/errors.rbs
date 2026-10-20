@@ -11,52 +11,52 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class FleetCapacityExceededException < ::Aws::Errors::ServiceError
+      class FleetCapacityExceededException < ServiceError
         def message: () -> ::String
       end
-      class GameSessionFullException < ::Aws::Errors::ServiceError
+      class GameSessionFullException < ServiceError
         def message: () -> ::String
       end
-      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+      class IdempotentParameterMismatchException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceException < ::Aws::Errors::ServiceError
+      class InternalServiceException < ServiceError
         def message: () -> ::String
       end
-      class InvalidFleetStatusException < ::Aws::Errors::ServiceError
+      class InvalidFleetStatusException < ServiceError
         def message: () -> ::String
       end
-      class InvalidGameSessionStatusException < ::Aws::Errors::ServiceError
+      class InvalidGameSessionStatusException < ServiceError
         def message: () -> ::String
       end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def message: () -> ::String
       end
-      class NotReadyException < ::Aws::Errors::ServiceError
+      class NotReadyException < ServiceError
         def message: () -> ::String
       end
-      class OutOfCapacityException < ::Aws::Errors::ServiceError
+      class OutOfCapacityException < ServiceError
         def message: () -> ::String
       end
-      class TaggingFailedException < ::Aws::Errors::ServiceError
+      class TaggingFailedException < ServiceError
         def message: () -> ::String
       end
-      class TerminalRoutingStrategyException < ::Aws::Errors::ServiceError
+      class TerminalRoutingStrategyException < ServiceError
         def message: () -> ::String
       end
-      class UnauthorizedException < ::Aws::Errors::ServiceError
+      class UnauthorizedException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedRegionException < ::Aws::Errors::ServiceError
+      class UnsupportedRegionException < ServiceError
         def message: () -> ::String
       end
     end

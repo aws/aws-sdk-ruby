@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add RBS signatures for `TransferManager`, `MultipartUploadError`, `Errors::NotFound` and `Errors::SlowDown`.
+
+* Issue - Improve object key validation in `TransferManager#download_directory` on Windows.
+
+1.234.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.233.2 (2026-10-06)
 ------------------
 

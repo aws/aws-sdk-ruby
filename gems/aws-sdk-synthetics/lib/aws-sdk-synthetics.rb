@@ -54,7 +54,7 @@ module Aws::Synthetics
   autoload :EndpointProvider, 'aws-sdk-synthetics/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-synthetics/endpoints'
 
-  GEM_VERSION = '1.89.0'
+  GEM_VERSION = '1.90.0'
 
 end
 

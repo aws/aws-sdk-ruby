@@ -940,7 +940,8 @@ module Aws
                                                key: ::String,
                                                value: ::String?
                                              }
-                                           ]
+                                           ],
+                                           ?image_validation_mode: ("CUSTOMER_MANAGED" | "SERVICE_MANAGED")
                                          ) -> _ImportCustomWorkspaceImageResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportCustomWorkspaceImageResponseSuccess
 

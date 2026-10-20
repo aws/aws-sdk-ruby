@@ -11,12 +11,12 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class InternalServerError < ::Aws::Errors::ServiceError
+      class InternalServerError < ServiceError
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
       end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end

@@ -19,6 +19,7 @@ namespace :rbs do
         'RBS_TEST_LOGLEVEL' => 'error',
         'RBS_TEST_OPT' => "-I gems/aws-sdk-core/sig -I gems/#{gem_name}/sig",
         'RBS_TEST_TARGET' => "\"Aws,Aws::*,Seahorse,Seahorse::*\"",
+        'RBS_TEST_DOUBLE_SUITE' => 'rspec',
       }
       sh(env, "bundle exec rspec gems/#{gem_name}/spec --tag '~rbs_test:skip'") do |ok, _|
         failures << File.basename(File.dirname("gems/#{gem_name}/sig")) unless ok

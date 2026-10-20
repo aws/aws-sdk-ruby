@@ -3500,6 +3500,9 @@ module Aws::WorkSpaces
     #   The resource tags. Each WorkSpaces resource can have a maximum of 50
     #   tags.
     #
+    # @option params [String] :image_validation_mode
+    #   The image validation mode for the WorkSpace image import.
+    #
     # @return [Types::ImportCustomWorkspaceImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportCustomWorkspaceImageResult#image_id #image_id} => String
@@ -3526,6 +3529,7 @@ module Aws::WorkSpaces
     #         value: "TagValue",
     #       },
     #     ],
+    #     image_validation_mode: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, SERVICE_MANAGED
     #   })
     #
     # @example Response structure
@@ -5161,7 +5165,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.167.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

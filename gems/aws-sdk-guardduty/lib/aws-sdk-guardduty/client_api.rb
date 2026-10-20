@@ -1476,6 +1476,7 @@ module Aws::GuardDuty
 
     DestinationProperties.add_member(:destination_arn, Shapes::ShapeRef.new(shape: String, location_name: "destinationArn"))
     DestinationProperties.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
+    DestinationProperties.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "expectedBucketOwner"))
     DestinationProperties.struct_class = Types::DestinationProperties
 
     Destinations.member = Shapes::ShapeRef.new(shape: Destination)

@@ -130,6 +130,10 @@ module Aws::BedrockAgent
     CreatePromptResponse = Shapes::StructureShape.new(name: 'CreatePromptResponse')
     CreatePromptVersionRequest = Shapes::StructureShape.new(name: 'CreatePromptVersionRequest')
     CreatePromptVersionResponse = Shapes::StructureShape.new(name: 'CreatePromptVersionResponse')
+    CreateRetrievalInstructionRequest = Shapes::StructureShape.new(name: 'CreateRetrievalInstructionRequest')
+    CreateRetrievalInstructionResponse = Shapes::StructureShape.new(name: 'CreateRetrievalInstructionResponse')
+    CreateRetrievalInstructionVersionRequest = Shapes::StructureShape.new(name: 'CreateRetrievalInstructionVersionRequest')
+    CreateRetrievalInstructionVersionResponse = Shapes::StructureShape.new(name: 'CreateRetrievalInstructionVersionResponse')
     CreateVpcConfigurationRequest = Shapes::StructureShape.new(name: 'CreateVpcConfigurationRequest')
     CreateVpcConfigurationResponse = Shapes::StructureShape.new(name: 'CreateVpcConfigurationResponse')
     CreationMode = Shapes::StringShape.new(name: 'CreationMode')
@@ -181,6 +185,8 @@ module Aws::BedrockAgent
     DeletePromptResponse = Shapes::StructureShape.new(name: 'DeletePromptResponse')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
+    DeleteRetrievalInstructionRequest = Shapes::StructureShape.new(name: 'DeleteRetrievalInstructionRequest')
+    DeleteRetrievalInstructionResponse = Shapes::StructureShape.new(name: 'DeleteRetrievalInstructionResponse')
     DeleteVpcConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteVpcConfigurationRequest')
     DeleteVpcConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteVpcConfigurationResponse')
     DeletionProtectionConfiguration = Shapes::StructureShape.new(name: 'DeletionProtectionConfiguration')
@@ -318,6 +324,8 @@ module Aws::BedrockAgent
     GetPromptResponse = Shapes::StructureShape.new(name: 'GetPromptResponse')
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
+    GetRetrievalInstructionRequest = Shapes::StructureShape.new(name: 'GetRetrievalInstructionRequest')
+    GetRetrievalInstructionResponse = Shapes::StructureShape.new(name: 'GetRetrievalInstructionResponse')
     GetVpcConfigurationRequest = Shapes::StructureShape.new(name: 'GetVpcConfigurationRequest')
     GetVpcConfigurationResponse = Shapes::StructureShape.new(name: 'GetVpcConfigurationResponse')
     GraphArn = Shapes::StringShape.new(name: 'GraphArn')
@@ -421,6 +429,10 @@ module Aws::BedrockAgent
     ListKnowledgeBasesResponse = Shapes::StructureShape.new(name: 'ListKnowledgeBasesResponse')
     ListPromptsRequest = Shapes::StructureShape.new(name: 'ListPromptsRequest')
     ListPromptsResponse = Shapes::StructureShape.new(name: 'ListPromptsResponse')
+    ListRetrievalInstructionVersionsRequest = Shapes::StructureShape.new(name: 'ListRetrievalInstructionVersionsRequest')
+    ListRetrievalInstructionVersionsResponse = Shapes::StructureShape.new(name: 'ListRetrievalInstructionVersionsResponse')
+    ListRetrievalInstructionsRequest = Shapes::StructureShape.new(name: 'ListRetrievalInstructionsRequest')
+    ListRetrievalInstructionsResponse = Shapes::StructureShape.new(name: 'ListRetrievalInstructionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListVpcConfigurationsRequest = Shapes::StructureShape.new(name: 'ListVpcConfigurationsRequest')
@@ -602,6 +614,25 @@ module Aws::BedrockAgent
     RetrievalFlowNodeConfiguration = Shapes::StructureShape.new(name: 'RetrievalFlowNodeConfiguration')
     RetrievalFlowNodeS3Configuration = Shapes::StructureShape.new(name: 'RetrievalFlowNodeS3Configuration')
     RetrievalFlowNodeServiceConfiguration = Shapes::UnionShape.new(name: 'RetrievalFlowNodeServiceConfiguration')
+    RetrievalInstructionArn = Shapes::StringShape.new(name: 'RetrievalInstructionArn')
+    RetrievalInstructionContent = Shapes::StructureShape.new(name: 'RetrievalInstructionContent')
+    RetrievalInstructionDescription = Shapes::StringShape.new(name: 'RetrievalInstructionDescription')
+    RetrievalInstructionFailureReason = Shapes::StructureShape.new(name: 'RetrievalInstructionFailureReason')
+    RetrievalInstructionFailureReasonCode = Shapes::StringShape.new(name: 'RetrievalInstructionFailureReasonCode')
+    RetrievalInstructionFailureReasons = Shapes::ListShape.new(name: 'RetrievalInstructionFailureReasons')
+    RetrievalInstructionFieldName = Shapes::StringShape.new(name: 'RetrievalInstructionFieldName')
+    RetrievalInstructionFieldText = Shapes::StringShape.new(name: 'RetrievalInstructionFieldText')
+    RetrievalInstructionId = Shapes::StringShape.new(name: 'RetrievalInstructionId')
+    RetrievalInstructionLastTransitionStatus = Shapes::StringShape.new(name: 'RetrievalInstructionLastTransitionStatus')
+    RetrievalInstructionMaxResults = Shapes::IntegerShape.new(name: 'RetrievalInstructionMaxResults')
+    RetrievalInstructionName = Shapes::StringShape.new(name: 'RetrievalInstructionName')
+    RetrievalInstructionNumericalVersion = Shapes::StringShape.new(name: 'RetrievalInstructionNumericalVersion')
+    RetrievalInstructionStatus = Shapes::StringShape.new(name: 'RetrievalInstructionStatus')
+    RetrievalInstructionSummaries = Shapes::ListShape.new(name: 'RetrievalInstructionSummaries')
+    RetrievalInstructionSummary = Shapes::StructureShape.new(name: 'RetrievalInstructionSummary')
+    RetrievalInstructionVersionSelector = Shapes::StringShape.new(name: 'RetrievalInstructionVersionSelector')
+    RetrievalInstructionVersionSummaries = Shapes::ListShape.new(name: 'RetrievalInstructionVersionSummaries')
+    RetrievalInstructionVersionSummary = Shapes::StructureShape.new(name: 'RetrievalInstructionVersionSummary')
     RevisionId = Shapes::StringShape.new(name: 'RevisionId')
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
@@ -724,6 +755,8 @@ module Aws::BedrockAgent
     UpdateKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseResponse')
     UpdatePromptRequest = Shapes::StructureShape.new(name: 'UpdatePromptRequest')
     UpdatePromptResponse = Shapes::StructureShape.new(name: 'UpdatePromptResponse')
+    UpdateRetrievalInstructionRequest = Shapes::StructureShape.new(name: 'UpdateRetrievalInstructionRequest')
+    UpdateRetrievalInstructionResponse = Shapes::StructureShape.new(name: 'UpdateRetrievalInstructionResponse')
     Url = Shapes::StringShape.new(name: 'Url')
     UrlConfiguration = Shapes::StructureShape.new(name: 'UrlConfiguration')
     UserAgent = Shapes::StringShape.new(name: 'UserAgent')
@@ -1260,6 +1293,35 @@ module Aws::BedrockAgent
     CreatePromptVersionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     CreatePromptVersionResponse.struct_class = Types::CreatePromptVersionResponse
 
+    CreateRetrievalInstructionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateRetrievalInstructionRequest.add_member(:name, Shapes::ShapeRef.new(shape: RetrievalInstructionName, required: true, location_name: "name"))
+    CreateRetrievalInstructionRequest.add_member(:instruction, Shapes::ShapeRef.new(shape: RetrievalInstructionContent, required: true, location_name: "instruction"))
+    CreateRetrievalInstructionRequest.add_member(:description, Shapes::ShapeRef.new(shape: RetrievalInstructionDescription, location_name: "description"))
+    CreateRetrievalInstructionRequest.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
+    CreateRetrievalInstructionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateRetrievalInstructionRequest.struct_class = Types::CreateRetrievalInstructionRequest
+
+    CreateRetrievalInstructionResponse.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location_name: "retrievalInstructionId"))
+    CreateRetrievalInstructionResponse.add_member(:retrieval_instruction_arn, Shapes::ShapeRef.new(shape: RetrievalInstructionArn, required: true, location_name: "retrievalInstructionArn"))
+    CreateRetrievalInstructionResponse.add_member(:name, Shapes::ShapeRef.new(shape: RetrievalInstructionName, required: true, location_name: "name"))
+    CreateRetrievalInstructionResponse.add_member(:status, Shapes::ShapeRef.new(shape: RetrievalInstructionStatus, required: true, location_name: "status"))
+    CreateRetrievalInstructionResponse.add_member(:last_transition_status, Shapes::ShapeRef.new(shape: RetrievalInstructionLastTransitionStatus, required: true, location_name: "lastTransitionStatus"))
+    CreateRetrievalInstructionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    CreateRetrievalInstructionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    CreateRetrievalInstructionResponse.struct_class = Types::CreateRetrievalInstructionResponse
+
+    CreateRetrievalInstructionVersionRequest.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location: "uri", location_name: "retrievalInstructionId"))
+    CreateRetrievalInstructionVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: RetrievalInstructionDescription, location_name: "description"))
+    CreateRetrievalInstructionVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateRetrievalInstructionVersionRequest.struct_class = Types::CreateRetrievalInstructionVersionRequest
+
+    CreateRetrievalInstructionVersionResponse.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location_name: "retrievalInstructionId"))
+    CreateRetrievalInstructionVersionResponse.add_member(:retrieval_instruction_arn, Shapes::ShapeRef.new(shape: RetrievalInstructionArn, required: true, location_name: "retrievalInstructionArn"))
+    CreateRetrievalInstructionVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: RetrievalInstructionNumericalVersion, required: true, location_name: "version"))
+    CreateRetrievalInstructionVersionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    CreateRetrievalInstructionVersionResponse.add_member(:description, Shapes::ShapeRef.new(shape: RetrievalInstructionDescription, location_name: "description"))
+    CreateRetrievalInstructionVersionResponse.struct_class = Types::CreateRetrievalInstructionVersionResponse
+
     CreateVpcConfigurationRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     CreateVpcConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateVpcConfigurationRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
@@ -1449,6 +1511,15 @@ module Aws::BedrockAgent
     DeleteResourcePolicyResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     DeleteResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
     DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
+
+    DeleteRetrievalInstructionRequest.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location: "uri", location_name: "retrievalInstructionId"))
+    DeleteRetrievalInstructionRequest.add_member(:retrieval_instruction_version, Shapes::ShapeRef.new(shape: RetrievalInstructionNumericalVersion, location: "querystring", location_name: "retrievalInstructionVersion"))
+    DeleteRetrievalInstructionRequest.struct_class = Types::DeleteRetrievalInstructionRequest
+
+    DeleteRetrievalInstructionResponse.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location_name: "retrievalInstructionId"))
+    DeleteRetrievalInstructionResponse.add_member(:retrieval_instruction_arn, Shapes::ShapeRef.new(shape: RetrievalInstructionArn, required: true, location_name: "retrievalInstructionArn"))
+    DeleteRetrievalInstructionResponse.add_member(:version, Shapes::ShapeRef.new(shape: RetrievalInstructionNumericalVersion, location_name: "version"))
+    DeleteRetrievalInstructionResponse.struct_class = Types::DeleteRetrievalInstructionResponse
 
     DeleteVpcConfigurationRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     DeleteVpcConfigurationRequest.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: VpcConfigurationId, required: true, location: "uri", location_name: "vpcConfigurationId"))
@@ -1908,6 +1979,25 @@ module Aws::BedrockAgent
     GetResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
     GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
 
+    GetRetrievalInstructionRequest.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location: "uri", location_name: "retrievalInstructionId"))
+    GetRetrievalInstructionRequest.add_member(:retrieval_instruction_version, Shapes::ShapeRef.new(shape: RetrievalInstructionVersionSelector, location: "querystring", location_name: "retrievalInstructionVersion"))
+    GetRetrievalInstructionRequest.struct_class = Types::GetRetrievalInstructionRequest
+
+    GetRetrievalInstructionResponse.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location_name: "retrievalInstructionId"))
+    GetRetrievalInstructionResponse.add_member(:retrieval_instruction_arn, Shapes::ShapeRef.new(shape: RetrievalInstructionArn, required: true, location_name: "retrievalInstructionArn"))
+    GetRetrievalInstructionResponse.add_member(:name, Shapes::ShapeRef.new(shape: RetrievalInstructionName, required: true, location_name: "name"))
+    GetRetrievalInstructionResponse.add_member(:status, Shapes::ShapeRef.new(shape: RetrievalInstructionStatus, required: true, location_name: "status"))
+    GetRetrievalInstructionResponse.add_member(:last_transition_status, Shapes::ShapeRef.new(shape: RetrievalInstructionLastTransitionStatus, required: true, location_name: "lastTransitionStatus"))
+    GetRetrievalInstructionResponse.add_member(:instruction, Shapes::ShapeRef.new(shape: RetrievalInstructionContent, location_name: "instruction"))
+    GetRetrievalInstructionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    GetRetrievalInstructionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    GetRetrievalInstructionResponse.add_member(:description, Shapes::ShapeRef.new(shape: RetrievalInstructionDescription, location_name: "description"))
+    GetRetrievalInstructionResponse.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
+    GetRetrievalInstructionResponse.add_member(:last_transition_status_reasons, Shapes::ShapeRef.new(shape: RetrievalInstructionFailureReasons, location_name: "lastTransitionStatusReasons"))
+    GetRetrievalInstructionResponse.add_member(:version, Shapes::ShapeRef.new(shape: RetrievalInstructionVersionSelector, location_name: "version"))
+    GetRetrievalInstructionResponse.add_member(:latest_version, Shapes::ShapeRef.new(shape: RetrievalInstructionNumericalVersion, location_name: "latestVersion"))
+    GetRetrievalInstructionResponse.struct_class = Types::GetRetrievalInstructionResponse
+
     GetVpcConfigurationRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "knowledgeBaseId"))
     GetVpcConfigurationRequest.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: VpcConfigurationId, required: true, location: "uri", location_name: "vpcConfigurationId"))
     GetVpcConfigurationRequest.struct_class = Types::GetVpcConfigurationRequest
@@ -2227,6 +2317,24 @@ module Aws::BedrockAgent
     ListPromptsResponse.add_member(:prompt_summaries, Shapes::ShapeRef.new(shape: PromptSummaries, required: true, location_name: "promptSummaries"))
     ListPromptsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPromptsResponse.struct_class = Types::ListPromptsResponse
+
+    ListRetrievalInstructionVersionsRequest.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location: "uri", location_name: "retrievalInstructionId"))
+    ListRetrievalInstructionVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RetrievalInstructionMaxResults, location: "querystring", location_name: "maxResults"))
+    ListRetrievalInstructionVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListRetrievalInstructionVersionsRequest.struct_class = Types::ListRetrievalInstructionVersionsRequest
+
+    ListRetrievalInstructionVersionsResponse.add_member(:retrieval_instruction_version_summaries, Shapes::ShapeRef.new(shape: RetrievalInstructionVersionSummaries, required: true, location_name: "retrievalInstructionVersionSummaries"))
+    ListRetrievalInstructionVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRetrievalInstructionVersionsResponse.struct_class = Types::ListRetrievalInstructionVersionsResponse
+
+    ListRetrievalInstructionsRequest.add_member(:status, Shapes::ShapeRef.new(shape: RetrievalInstructionStatus, location: "querystring", location_name: "status"))
+    ListRetrievalInstructionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RetrievalInstructionMaxResults, location: "querystring", location_name: "maxResults"))
+    ListRetrievalInstructionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListRetrievalInstructionsRequest.struct_class = Types::ListRetrievalInstructionsRequest
+
+    ListRetrievalInstructionsResponse.add_member(:retrieval_instruction_summaries, Shapes::ShapeRef.new(shape: RetrievalInstructionSummaries, required: true, location_name: "retrievalInstructionSummaries"))
+    ListRetrievalInstructionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRetrievalInstructionsResponse.struct_class = Types::ListRetrievalInstructionsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableResourcesArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -2694,6 +2802,37 @@ module Aws::BedrockAgent
     RetrievalFlowNodeServiceConfiguration.add_member_subclass(:unknown, Types::RetrievalFlowNodeServiceConfiguration::Unknown)
     RetrievalFlowNodeServiceConfiguration.struct_class = Types::RetrievalFlowNodeServiceConfiguration
 
+    RetrievalInstructionContent.add_member(:retrieval_guidance, Shapes::ShapeRef.new(shape: RetrievalInstructionFieldText, location_name: "retrievalGuidance"))
+    RetrievalInstructionContent.add_member(:persona, Shapes::ShapeRef.new(shape: RetrievalInstructionFieldText, location_name: "persona"))
+    RetrievalInstructionContent.add_member(:answer_format, Shapes::ShapeRef.new(shape: RetrievalInstructionFieldText, location_name: "answerFormat"))
+    RetrievalInstructionContent.add_member(:answer_policy, Shapes::ShapeRef.new(shape: RetrievalInstructionFieldText, location_name: "answerPolicy"))
+    RetrievalInstructionContent.struct_class = Types::RetrievalInstructionContent
+
+    RetrievalInstructionFailureReason.add_member(:field_name, Shapes::ShapeRef.new(shape: RetrievalInstructionFieldName, location_name: "fieldName"))
+    RetrievalInstructionFailureReason.add_member(:code, Shapes::ShapeRef.new(shape: RetrievalInstructionFailureReasonCode, required: true, location_name: "code"))
+    RetrievalInstructionFailureReason.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    RetrievalInstructionFailureReason.struct_class = Types::RetrievalInstructionFailureReason
+
+    RetrievalInstructionFailureReasons.member = Shapes::ShapeRef.new(shape: RetrievalInstructionFailureReason)
+
+    RetrievalInstructionSummaries.member = Shapes::ShapeRef.new(shape: RetrievalInstructionSummary)
+
+    RetrievalInstructionSummary.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location_name: "retrievalInstructionId"))
+    RetrievalInstructionSummary.add_member(:retrieval_instruction_arn, Shapes::ShapeRef.new(shape: RetrievalInstructionArn, required: true, location_name: "retrievalInstructionArn"))
+    RetrievalInstructionSummary.add_member(:name, Shapes::ShapeRef.new(shape: RetrievalInstructionName, required: true, location_name: "name"))
+    RetrievalInstructionSummary.add_member(:status, Shapes::ShapeRef.new(shape: RetrievalInstructionStatus, required: true, location_name: "status"))
+    RetrievalInstructionSummary.add_member(:last_transition_status, Shapes::ShapeRef.new(shape: RetrievalInstructionLastTransitionStatus, required: true, location_name: "lastTransitionStatus"))
+    RetrievalInstructionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    RetrievalInstructionSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    RetrievalInstructionSummary.add_member(:description, Shapes::ShapeRef.new(shape: RetrievalInstructionDescription, location_name: "description"))
+    RetrievalInstructionSummary.struct_class = Types::RetrievalInstructionSummary
+
+    RetrievalInstructionVersionSummaries.member = Shapes::ShapeRef.new(shape: RetrievalInstructionVersionSummary)
+
+    RetrievalInstructionVersionSummary.add_member(:version, Shapes::ShapeRef.new(shape: RetrievalInstructionNumericalVersion, required: true, location_name: "version"))
+    RetrievalInstructionVersionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    RetrievalInstructionVersionSummary.struct_class = Types::RetrievalInstructionVersionSummary
+
     S3Content.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "s3Location"))
     S3Content.struct_class = Types::S3Content
 
@@ -3107,6 +3246,20 @@ module Aws::BedrockAgent
     UpdatePromptResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     UpdatePromptResponse.struct_class = Types::UpdatePromptResponse
 
+    UpdateRetrievalInstructionRequest.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location: "uri", location_name: "retrievalInstructionId"))
+    UpdateRetrievalInstructionRequest.add_member(:instruction, Shapes::ShapeRef.new(shape: RetrievalInstructionContent, required: true, location_name: "instruction"))
+    UpdateRetrievalInstructionRequest.add_member(:description, Shapes::ShapeRef.new(shape: RetrievalInstructionDescription, location_name: "description"))
+    UpdateRetrievalInstructionRequest.struct_class = Types::UpdateRetrievalInstructionRequest
+
+    UpdateRetrievalInstructionResponse.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location_name: "retrievalInstructionId"))
+    UpdateRetrievalInstructionResponse.add_member(:retrieval_instruction_arn, Shapes::ShapeRef.new(shape: RetrievalInstructionArn, required: true, location_name: "retrievalInstructionArn"))
+    UpdateRetrievalInstructionResponse.add_member(:name, Shapes::ShapeRef.new(shape: RetrievalInstructionName, required: true, location_name: "name"))
+    UpdateRetrievalInstructionResponse.add_member(:status, Shapes::ShapeRef.new(shape: RetrievalInstructionStatus, required: true, location_name: "status"))
+    UpdateRetrievalInstructionResponse.add_member(:last_transition_status, Shapes::ShapeRef.new(shape: RetrievalInstructionLastTransitionStatus, required: true, location_name: "lastTransitionStatus"))
+    UpdateRetrievalInstructionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    UpdateRetrievalInstructionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    UpdateRetrievalInstructionResponse.struct_class = Types::UpdateRetrievalInstructionResponse
+
     UrlConfiguration.add_member(:seed_urls, Shapes::ShapeRef.new(shape: SeedUrls, location_name: "seedUrls"))
     UrlConfiguration.struct_class = Types::UrlConfiguration
 
@@ -3412,6 +3565,35 @@ module Aws::BedrockAgent
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_retrieval_instruction, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRetrievalInstruction"
+        o.http_method = "POST"
+        o.http_request_uri = "/retrievalinstructions/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRetrievalInstructionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRetrievalInstructionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_retrieval_instruction_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRetrievalInstructionVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/retrievalinstructions/{retrievalInstructionId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: CreateRetrievalInstructionVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRetrievalInstructionVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:create_vpc_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateVpcConfiguration"
         o.http_method = "POST"
@@ -3586,6 +3768,20 @@ module Aws::BedrockAgent
         o.http_request_uri = "/resourcepolicy/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_retrieval_instruction, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRetrievalInstruction"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/retrievalinstructions/{retrievalInstructionId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRetrievalInstructionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRetrievalInstructionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -3825,6 +4021,19 @@ module Aws::BedrockAgent
         o.http_request_uri = "/resourcepolicy/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_retrieval_instruction, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRetrievalInstruction"
+        o.http_method = "GET"
+        o.http_request_uri = "/retrievalinstructions/{retrievalInstructionId}"
+        o.input = Shapes::ShapeRef.new(shape: GetRetrievalInstructionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRetrievalInstructionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -4123,6 +4332,43 @@ module Aws::BedrockAgent
         )
       end)
 
+      api.add_operation(:list_retrieval_instruction_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRetrievalInstructionVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/retrievalinstructions/{retrievalInstructionId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListRetrievalInstructionVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRetrievalInstructionVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_retrieval_instructions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRetrievalInstructions"
+        o.http_method = "GET"
+        o.http_request_uri = "/retrievalinstructions/"
+        o.input = Shapes::ShapeRef.new(shape: ListRetrievalInstructionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRetrievalInstructionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -4400,6 +4646,20 @@ module Aws::BedrockAgent
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:update_retrieval_instruction, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRetrievalInstruction"
+        o.http_method = "PUT"
+        o.http_request_uri = "/retrievalinstructions/{retrievalInstructionId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRetrievalInstructionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRetrievalInstructionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:validate_flow_definition, Seahorse::Model::Operation.new.tap do |o|

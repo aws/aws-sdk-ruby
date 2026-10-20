@@ -11,101 +11,101 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccountSendingPausedException < ::Aws::Errors::ServiceError
+      class AccountSendingPausedException < ServiceError
       end
-      class AlreadyExistsException < ::Aws::Errors::ServiceError
+      class AlreadyExistsException < ServiceError
         def name: () -> ::String
       end
-      class CannotDeleteException < ::Aws::Errors::ServiceError
+      class CannotDeleteException < ServiceError
         def name: () -> ::String
       end
-      class ConfigurationSetAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ConfigurationSetAlreadyExistsException < ServiceError
         def configuration_set_name: () -> ::String
       end
-      class ConfigurationSetDoesNotExistException < ::Aws::Errors::ServiceError
+      class ConfigurationSetDoesNotExistException < ServiceError
         def configuration_set_name: () -> ::String
       end
-      class ConfigurationSetSendingPausedException < ::Aws::Errors::ServiceError
+      class ConfigurationSetSendingPausedException < ServiceError
         def configuration_set_name: () -> ::String
       end
-      class CustomVerificationEmailInvalidContentException < ::Aws::Errors::ServiceError
+      class CustomVerificationEmailInvalidContentException < ServiceError
       end
-      class CustomVerificationEmailTemplateAlreadyExistsException < ::Aws::Errors::ServiceError
+      class CustomVerificationEmailTemplateAlreadyExistsException < ServiceError
         def custom_verification_email_template_name: () -> ::String
       end
-      class CustomVerificationEmailTemplateDoesNotExistException < ::Aws::Errors::ServiceError
+      class CustomVerificationEmailTemplateDoesNotExistException < ServiceError
         def custom_verification_email_template_name: () -> ::String
       end
-      class EventDestinationAlreadyExistsException < ::Aws::Errors::ServiceError
+      class EventDestinationAlreadyExistsException < ServiceError
         def configuration_set_name: () -> ::String
         def event_destination_name: () -> ::String
       end
-      class EventDestinationDoesNotExistException < ::Aws::Errors::ServiceError
+      class EventDestinationDoesNotExistException < ServiceError
         def configuration_set_name: () -> ::String
         def event_destination_name: () -> ::String
       end
-      class FromEmailAddressNotVerifiedException < ::Aws::Errors::ServiceError
+      class FromEmailAddressNotVerifiedException < ServiceError
         def from_email_address: () -> ::String
       end
-      class InvalidCloudWatchDestinationException < ::Aws::Errors::ServiceError
+      class InvalidCloudWatchDestinationException < ServiceError
         def configuration_set_name: () -> ::String
         def event_destination_name: () -> ::String
       end
-      class InvalidConfigurationSetException < ::Aws::Errors::ServiceError
+      class InvalidConfigurationSetException < ServiceError
       end
-      class InvalidDeliveryOptionsException < ::Aws::Errors::ServiceError
+      class InvalidDeliveryOptionsException < ServiceError
       end
-      class InvalidFirehoseDestinationException < ::Aws::Errors::ServiceError
+      class InvalidFirehoseDestinationException < ServiceError
         def configuration_set_name: () -> ::String
         def event_destination_name: () -> ::String
       end
-      class InvalidLambdaFunctionException < ::Aws::Errors::ServiceError
+      class InvalidLambdaFunctionException < ServiceError
         def function_arn: () -> ::String
       end
-      class InvalidPolicyException < ::Aws::Errors::ServiceError
+      class InvalidPolicyException < ServiceError
       end
-      class InvalidRenderingParameterException < ::Aws::Errors::ServiceError
+      class InvalidRenderingParameterException < ServiceError
         def template_name: () -> ::String
       end
-      class InvalidS3ConfigurationException < ::Aws::Errors::ServiceError
+      class InvalidS3ConfigurationException < ServiceError
         def bucket: () -> ::String
       end
-      class InvalidSNSDestinationException < ::Aws::Errors::ServiceError
+      class InvalidSNSDestinationException < ServiceError
         def configuration_set_name: () -> ::String
         def event_destination_name: () -> ::String
       end
-      class InvalidSnsTopicException < ::Aws::Errors::ServiceError
+      class InvalidSnsTopicException < ServiceError
         def topic: () -> ::String
       end
-      class InvalidTemplateException < ::Aws::Errors::ServiceError
+      class InvalidTemplateException < ServiceError
         def template_name: () -> ::String
       end
-      class InvalidTrackingOptionsException < ::Aws::Errors::ServiceError
+      class InvalidTrackingOptionsException < ServiceError
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
       end
-      class MailFromDomainNotVerifiedException < ::Aws::Errors::ServiceError
+      class MailFromDomainNotVerifiedException < ServiceError
       end
-      class MessageRejected < ::Aws::Errors::ServiceError
+      class MessageRejected < ServiceError
       end
-      class MissingRenderingAttributeException < ::Aws::Errors::ServiceError
+      class MissingRenderingAttributeException < ServiceError
         def template_name: () -> ::String
       end
-      class ProductionAccessNotGrantedException < ::Aws::Errors::ServiceError
+      class ProductionAccessNotGrantedException < ServiceError
       end
-      class RuleDoesNotExistException < ::Aws::Errors::ServiceError
+      class RuleDoesNotExistException < ServiceError
         def name: () -> ::String
       end
-      class RuleSetDoesNotExistException < ::Aws::Errors::ServiceError
+      class RuleSetDoesNotExistException < ServiceError
         def name: () -> ::String
       end
-      class TemplateDoesNotExistException < ::Aws::Errors::ServiceError
+      class TemplateDoesNotExistException < ServiceError
         def template_name: () -> ::String
       end
-      class TrackingOptionsAlreadyExistsException < ::Aws::Errors::ServiceError
+      class TrackingOptionsAlreadyExistsException < ServiceError
         def configuration_set_name: () -> ::String
       end
-      class TrackingOptionsDoesNotExistException < ::Aws::Errors::ServiceError
+      class TrackingOptionsDoesNotExistException < ServiceError
         def configuration_set_name: () -> ::String
       end
     end
