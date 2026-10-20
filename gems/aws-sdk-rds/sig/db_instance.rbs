@@ -294,6 +294,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#storage_operation_percent_progress-instance_method
       def storage_operation_percent_progress: () -> ::Integer
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#db_capacity_reservation_identifier-instance_method
+      def db_capacity_reservation_identifier: () -> ::String
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#load-instance_method
@@ -403,6 +406,7 @@ module Aws
                         ]?
                       }
                     ],
+                    ?db_capacity_reservation_identifier: ::String,
                     ?master_user_authentication_type: ("password" | "iam-db-auth")
                   ) -> DBInstance
                 | (?Hash[Symbol, untyped]) -> DBInstance
@@ -486,6 +490,7 @@ module Aws
                                      ]?
                                    }
                                  ],
+                                 ?db_capacity_reservation_identifier: ::String,
                                  ?source_region: ::String
                                ) -> DBInstance
                              | (?Hash[Symbol, untyped]) -> DBInstance
@@ -591,6 +596,7 @@ module Aws
                         set_for_delete: bool?
                       }
                     ],
+                    ?db_capacity_reservation_identifier: ::String,
                     ?tag_specifications: Array[
                       {
                         resource_type: ::String?,
@@ -687,6 +693,7 @@ module Aws
                      ?allocated_storage: ::Integer,
                      ?backup_retention_period: ::Integer,
                      ?preferred_backup_window: ::String,
+                     ?db_capacity_reservation_identifier: ::String,
                      ?dedicated_log_volume: bool,
                      ?ca_certificate_identifier: ::String,
                      ?engine_lifecycle_support: ::String,

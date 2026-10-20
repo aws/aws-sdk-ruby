@@ -54,7 +54,7 @@ module Aws::SecretsManager
   autoload :EndpointProvider, 'aws-sdk-secretsmanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-secretsmanager/endpoints'
 
-  GEM_VERSION = '1.137.0'
+  GEM_VERSION = '1.138.0'
 
 end
 

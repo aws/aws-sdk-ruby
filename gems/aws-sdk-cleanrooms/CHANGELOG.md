@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2026-10-20)
+------------------
+
+* Feature - This release allows customers and their partners to easily collaborate with data stored in Databricks, without having to move or share their underlying data among collaborators.
+
 1.82.0 (2026-10-19)
 ------------------
 

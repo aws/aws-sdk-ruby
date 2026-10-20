@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.250.0 (2026-10-20)
+------------------
+
+* Feature - ECS Service Gateway makes it easier for developers to deploy ECS services without having to worry about complex ingress networking constructs.
+
 1.249.0 (2026-10-19)
 ------------------
 

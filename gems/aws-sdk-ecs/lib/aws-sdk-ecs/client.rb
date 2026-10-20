@@ -199,12 +199,19 @@ module Aws::ECS
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -480,6 +487,65 @@ module Aws::ECS
     end
 
     # @!group API Operations
+
+    # Associates a gateway with an Amazon ECS cluster. After a cluster is
+    # associated with a gateway, services in that cluster can use the
+    # gateway for ingress. No changes take effect until you update a service
+    # in the cluster to use the gateway. A single cluster can be associated
+    # with up to 5 gateways.
+    #
+    # @option params [required, String] :gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway to associate.
+    #
+    # @option params [required, String] :cluster
+    #   The name or Amazon Resource Name (ARN) of the cluster to associate the
+    #   gateway with.
+    #
+    # @return [Types::AssociateGatewayWithClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateGatewayWithClusterResponse#gateway_arn #gateway_arn} => String
+    #   * {Types::AssociateGatewayWithClusterResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::AssociateGatewayWithClusterResponse#status #status} => String
+    #
+    #
+    # @example Example: To associate a gateway with a cluster
+    #
+    #   # This example associates the gateway named my-gateway with the cluster named my-cluster so that services in the cluster
+    #   # can use the gateway for ingress.
+    #
+    #   resp = client.associate_gateway_with_cluster({
+    #     cluster: "my-cluster", 
+    #     gateway: "my-gateway", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster", 
+    #     gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678", 
+    #     status: "ACTIVE", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_gateway_with_cluster({
+    #     gateway: "String", # required
+    #     cluster: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #   resp.cluster_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "DISASSOCIATING", "INACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AssociateGatewayWithCluster AWS API Documentation
+    #
+    # @overload associate_gateway_with_cluster(params = {})
+    # @param [Hash] params ({})
+    def associate_gateway_with_cluster(params = {}, options = {})
+      req = build_request(:associate_gateway_with_cluster, params)
+      req.send_request(options)
+    end
 
     # Continues or rolls back an Amazon ECS service deployment that is
     # paused at a lifecycle hook.
@@ -1609,6 +1675,162 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Creates a gateway. A gateway defines and dynamically manages ingress
+    # paths for your Amazon ECS services, handling traffic routing and
+    # infrastructure across multiple services while optimizing
+    # infrastructure usage. `CreateGateway` is a synchronous operation and
+    # the gateway is returned with a status of `ACTIVE`. The load balancers
+    # and other infrastructure that a gateway manages aren't created until
+    # a service in an associated cluster begins using the gateway.
+    #
+    # To use this operation, you must have the `iam:PassRole` permission for
+    # the infrastructure role that you specify in `infrastructureRoleArn`.
+    #
+    # @option params [required, String] :name
+    #   The name for the gateway. The name must be unique within your account
+    #   and can be up to 255 characters.
+    #
+    # @option params [required, String] :infrastructure_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the gateway
+    #   assumes to create and manage infrastructure on your behalf.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Specifies whether to enable deletion protection for the gateway. When
+    #   enabled, the gateway can't be deleted, and the gateway propagates
+    #   this setting to the load balancers it manages. The default is `true`.
+    #
+    # @option params [required, Types::GatewayConfiguration] :configuration
+    #   The type-specific configuration for the gateway. Exactly one
+    #   configuration variant must be set, and it determines the gateway type.
+    #   For example, `hostSharedAlb` configures a gateway that uses
+    #   Application Load Balancers with host-based routing.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the gateway to help you categorize and
+    #   organize it. Each tag consists of a key and an optional value.
+    #   Depending on `propagateTags`, these tags can be applied to the
+    #   infrastructure the gateway manages.
+    #
+    # @option params [String] :propagate_tags
+    #   Specifies whether to propagate the tags from the gateway to the
+    #   infrastructure that the gateway manages. The default is `GATEWAY`.
+    #
+    # @return [Types::CreateGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGatewayResponse#gateway_arn #gateway_arn} => String
+    #   * {Types::CreateGatewayResponse#name #name} => String
+    #   * {Types::CreateGatewayResponse#status #status} => String
+    #
+    #
+    # @example Example: To create a gateway
+    #
+    #   # This example creates a gateway named my-gateway that uses internet-facing Application Load Balancers with host-based
+    #   # routing in the specified subnets.
+    #
+    #   resp = client.create_gateway({
+    #     name: "my-gateway", 
+    #     configuration: {
+    #       host_shared_alb: {
+    #         http_desync: "defensive", 
+    #         max_alb_count: 10, 
+    #         network_configuration: {
+    #           ip_address_type: "ipv4", 
+    #           subnets: [
+    #             "subnet-0123456789abcdef0", 
+    #             "subnet-0fedcba9876543210", 
+    #           ], 
+    #         }, 
+    #         port: 443, 
+    #         protocol: "HTTPS", 
+    #         scheme: "internet-facing", 
+    #       }, 
+    #     }, 
+    #     infrastructure_role_arn: "arn:aws:iam::123456789012:role/ecsInfrastructureRole", 
+    #     propagate_tags: "GATEWAY", 
+    #     tags: [
+    #       {
+    #         key: "team", 
+    #         value: "web", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "my-gateway", 
+    #     gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678", 
+    #     status: "ACTIVE", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_gateway({
+    #     name: "String", # required
+    #     infrastructure_role_arn: "String", # required
+    #     client_token: "String",
+    #     deletion_protection: false,
+    #     configuration: { # required
+    #       host_shared_alb: {
+    #         network_configuration: {
+    #           inbound_security_group: "String",
+    #           subnets: ["String"],
+    #           ip_address_type: "ipv4", # accepts ipv4, dualstack, dualstack-without-public-ipv4
+    #         },
+    #         scheme: "internet-facing", # accepts internet-facing, internal
+    #         web_acl_arn: "String",
+    #         access_logs: {
+    #           destination: {
+    #             s3: {
+    #               bucket: "String", # required
+    #               prefix: "String",
+    #             },
+    #           },
+    #         },
+    #         port: 1,
+    #         protocol: "HTTP", # accepts HTTP, HTTPS
+    #         max_alb_count: 1,
+    #         http_desync: "monitor", # accepts monitor, defensive, strictest
+    #         test_traffic_rules: {
+    #           header: {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         },
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     propagate_tags: "NONE", # accepts NONE, GATEWAY
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateGateway AWS API Documentation
+    #
+    # @overload create_gateway(params = {})
+    # @param [Hash] params ({})
+    def create_gateway(params = {}, options = {})
+      req = build_request(:create_gateway, params)
+      req.send_request(options)
+    end
+
     # Runs and maintains your desired number of tasks from a specified task
     # definition. If the number of tasks running in a service drops below
     # the `desiredCount`, Amazon ECS runs another copy of the task in the
@@ -2210,6 +2432,10 @@ module Aws::ECS
     # @option params [Array<Types::VpcLatticeConfiguration>] :vpc_lattice_configurations
     #   The VPC Lattice configuration for the service being created.
     #
+    # @option params [Array<Types::GatewayConnector>] :gateway_connectors
+    #   The gateway connectors that attach the service to a gateway ingress
+    #   path. You can specify at most one gateway connector.
+    #
     # @option params [Types::MonitoringConfiguration] :monitoring
     #   The optional monitoring configuration for the service, which defines
     #   the resolution for the service-level `CPUUtilization` and
@@ -2670,6 +2896,27 @@ module Aws::ECS
     #           alternate_target_group_arn: "String",
     #           production_listener_rule: "String",
     #           test_listener_rule: "String",
+    #         },
+    #       },
+    #     ],
+    #     gateway_connectors: [
+    #       {
+    #         port_name: "String", # required
+    #         health_check: {
+    #           health_check_protocol: "HTTP", # accepts HTTP, HTTPS
+    #           health_check_port: 1,
+    #           health_check_path: "String",
+    #           health_check_timeout_seconds: 1,
+    #           health_check_interval_seconds: 1,
+    #           healthy_threshold_count: 1,
+    #           unhealthy_threshold_count: 1,
+    #           matcher: {
+    #             http_code: "String",
+    #             grpc_code: "String",
+    #           },
+    #         },
+    #         filters: {
+    #           access_types: ["PUBLIC"], # accepts PUBLIC, PRIVATE
     #         },
     #       },
     #     ],
@@ -3862,6 +4109,61 @@ module Aws::ECS
     # @param [Hash] params ({})
     def delete_express_gateway_service(params = {}, options = {})
       req = build_request(:delete_express_gateway_service, params)
+      req.send_request(options)
+    end
+
+    # Deletes a gateway. Before you can delete a gateway, deletion
+    # protection must be disabled and the gateway must not have any cluster
+    # associations that are in the `ACTIVE` or `DISASSOCIATING` state. If
+    # associations exist, the operation fails; disassociate all clusters
+    # first. `DeleteGateway` is a synchronous operation. After you delete a
+    # gateway, subsequent requests for it return a
+    # `GatewayNotFoundException`.
+    #
+    # @option params [required, String] :gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway to delete.
+    #
+    # @return [Types::DeleteGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteGatewayResponse#gateway_arn #gateway_arn} => String
+    #   * {Types::DeleteGatewayResponse#name #name} => String
+    #   * {Types::DeleteGatewayResponse#status #status} => String
+    #
+    #
+    # @example Example: To delete a gateway
+    #
+    #   # This example deletes the gateway named my-gateway. Deletion protection must be disabled and the gateway must not be
+    #   # associated with any clusters.
+    #
+    #   resp = client.delete_gateway({
+    #     gateway: "my-gateway", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "my-gateway", 
+    #     gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678", 
+    #     status: "DELETED", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_gateway({
+    #     gateway: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteGateway AWS API Documentation
+    #
+    # @overload delete_gateway(params = {})
+    # @param [Hash] params ({})
+    def delete_gateway(params = {}, options = {})
+      req = build_request(:delete_gateway, params)
       req.send_request(options)
     end
 
@@ -6162,6 +6464,285 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Describes a gateway, including its configuration, status, and the
+    # type-specific infrastructure settings that it uses.
+    #
+    # @option params [required, String] :gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway to describe.
+    #
+    # @return [Types::DescribeGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGatewayResponse#gateway #gateway} => Types::Gateway
+    #
+    #
+    # @example Example: To describe a gateway
+    #
+    #   # This example describes the gateway named my-gateway.
+    #
+    #   resp = client.describe_gateway({
+    #     gateway: "my-gateway", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway: {
+    #       name: "my-gateway", 
+    #       access_type: "PUBLIC", 
+    #       configuration: {
+    #         host_shared_alb: {
+    #           current_alb_count: 1, 
+    #           http_desync: "defensive", 
+    #           max_alb_count: 10, 
+    #           network_configuration: {
+    #             ip_address_type: "ipv4", 
+    #             subnets: [
+    #               "subnet-0123456789abcdef0", 
+    #               "subnet-0fedcba9876543210", 
+    #             ], 
+    #           }, 
+    #           port: 443, 
+    #           protocol: "HTTPS", 
+    #           scheme: "internet-facing", 
+    #         }, 
+    #       }, 
+    #       created_at: Time.parse("2026-10-20T12:00:00.000Z"), 
+    #       deletion_protection: true, 
+    #       gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678", 
+    #       infrastructure_role_arn: "arn:aws:iam::123456789012:role/ecsInfrastructureRole", 
+    #       propagate_tags: "GATEWAY", 
+    #       status: "ACTIVE", 
+    #       tags: [
+    #         {
+    #           key: "team", 
+    #           value: "web", 
+    #         }, 
+    #       ], 
+    #       updated_at: Time.parse("2026-10-20T12:00:00.000Z"), 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_gateway({
+    #     gateway: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway.gateway_arn #=> String
+    #   resp.gateway.name #=> String
+    #   resp.gateway.status #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "DELETED"
+    #   resp.gateway.status_reason #=> String
+    #   resp.gateway.failures #=> Array
+    #   resp.gateway.failures[0].arn #=> String
+    #   resp.gateway.failures[0].errors #=> Array
+    #   resp.gateway.failures[0].errors[0].operation #=> String
+    #   resp.gateway.failures[0].errors[0].code #=> String
+    #   resp.gateway.failures[0].errors[0].message #=> String
+    #   resp.gateway.infrastructure_role_arn #=> String
+    #   resp.gateway.deletion_protection #=> Boolean
+    #   resp.gateway.configuration.host_shared_alb.network_configuration.inbound_security_group #=> String
+    #   resp.gateway.configuration.host_shared_alb.network_configuration.subnets #=> Array
+    #   resp.gateway.configuration.host_shared_alb.network_configuration.subnets[0] #=> String
+    #   resp.gateway.configuration.host_shared_alb.network_configuration.ip_address_type #=> String, one of "ipv4", "dualstack", "dualstack-without-public-ipv4"
+    #   resp.gateway.configuration.host_shared_alb.scheme #=> String, one of "internet-facing", "internal"
+    #   resp.gateway.configuration.host_shared_alb.access_logs.destination.s3.bucket #=> String
+    #   resp.gateway.configuration.host_shared_alb.access_logs.destination.s3.prefix #=> String
+    #   resp.gateway.configuration.host_shared_alb.web_acl_arn #=> String
+    #   resp.gateway.configuration.host_shared_alb.port #=> Integer
+    #   resp.gateway.configuration.host_shared_alb.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.gateway.configuration.host_shared_alb.max_alb_count #=> Integer
+    #   resp.gateway.configuration.host_shared_alb.current_alb_count #=> Integer
+    #   resp.gateway.configuration.host_shared_alb.http_desync #=> String, one of "monitor", "defensive", "strictest"
+    #   resp.gateway.configuration.host_shared_alb.test_traffic_rules.header.name #=> String
+    #   resp.gateway.configuration.host_shared_alb.test_traffic_rules.header.values #=> Array
+    #   resp.gateway.configuration.host_shared_alb.test_traffic_rules.header.values[0] #=> String
+    #   resp.gateway.access_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.gateway.propagate_tags #=> String, one of "NONE", "GATEWAY"
+    #   resp.gateway.tags #=> Array
+    #   resp.gateway.tags[0].key #=> String
+    #   resp.gateway.tags[0].value #=> String
+    #   resp.gateway.created_at #=> Time
+    #   resp.gateway.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeGateway AWS API Documentation
+    #
+    # @overload describe_gateway(params = {})
+    # @param [Hash] params ({})
+    def describe_gateway(params = {}, options = {})
+      req = build_request(:describe_gateway, params)
+      req.send_request(options)
+    end
+
+    # Returns the infrastructure that a gateway has created and manages, so
+    # that you can follow the traffic path from top-level shared resources,
+    # such as load balancers, to the service-specific resources represented
+    # as gateway routes. Responses include only the Amazon Resource Names
+    # (ARNs) of gateway-managed infrastructure. For the current state of a
+    # resource, describe it with the corresponding Amazon Web Services
+    # service (Elastic Load Balancing, Amazon EC2, or Amazon Web Services
+    # Certificate Manager). The results are paginated.
+    #
+    # @option params [required, String] :gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that the operation returns in a single
+    #   page. The maximum value is 20 and the default is 10.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated request.
+    #
+    # @return [Types::DescribeGatewayResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGatewayResourcesResponse#gateway_resources #gateway_resources} => Types::GatewayResources
+    #   * {Types::DescribeGatewayResourcesResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To describe the infrastructure that a gateway manages
+    #
+    #   # This example returns the load balancers, listeners, and gateway routes that the gateway named my-gateway manages.
+    #
+    #   resp = client.describe_gateway_resources({
+    #     gateway: "my-gateway", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_resources: {
+    #       gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678", 
+    #       resources: {
+    #         host_shared_alb: [
+    #           {
+    #             gateway_route_arns: [
+    #               "arn:aws:ecs:us-east-1:123456789012:gateway-route/my-gateway/a1b2c3d4e5f6478890abcdef12345678/f0e1d2c3b4a5968778695a4b3c2d1e0f", 
+    #             ], 
+    #             listener_arn: "arn:aws:elasticloadbalancing:us-east-1:123456789012:listener/app/ecs-gateway-alb-1/50dc6c495c0c9188/f2f7dc8efc522ab2", 
+    #             load_balancer_arn: "arn:aws:elasticloadbalancing:us-east-1:123456789012:loadbalancer/app/ecs-gateway-alb-1/50dc6c495c0c9188", 
+    #             security_group: "sg-0123456789abcdef0", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_gateway_resources({
+    #     gateway: "String", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_resources.gateway_arn #=> String
+    #   resp.gateway_resources.resources.host_shared_alb #=> Array
+    #   resp.gateway_resources.resources.host_shared_alb[0].load_balancer_arn #=> String
+    #   resp.gateway_resources.resources.host_shared_alb[0].listener_arn #=> String
+    #   resp.gateway_resources.resources.host_shared_alb[0].security_group #=> String
+    #   resp.gateway_resources.resources.host_shared_alb[0].gateway_route_arns #=> Array
+    #   resp.gateway_resources.resources.host_shared_alb[0].gateway_route_arns[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeGatewayResources AWS API Documentation
+    #
+    # @overload describe_gateway_resources(params = {})
+    # @param [Hash] params ({})
+    def describe_gateway_resources(params = {}, options = {})
+      req = build_request(:describe_gateway_resources, params)
+      req.send_request(options)
+    end
+
+    # Describes a gateway route, including its status, the service it routes
+    # traffic to, and the service-specific infrastructure, such as target
+    # groups and listener rules, that the gateway manages for it.
+    #
+    # @option params [required, String] :gateway_route_arn
+    #   The Amazon Resource Name (ARN) of the gateway route to describe.
+    #
+    # @return [Types::DescribeGatewayRouteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGatewayRouteResponse#gateway_route #gateway_route} => Types::GatewayRoute
+    #
+    #
+    # @example Example: To describe a gateway route
+    #
+    #   # This example describes the specified gateway route, including the service URL and the load balancer resources that the
+    #   # gateway manages for the route.
+    #
+    #   resp = client.describe_gateway_route({
+    #     gateway_route_arn: "arn:aws:ecs:us-east-1:123456789012:gateway-route/my-gateway/a1b2c3d4e5f6478890abcdef12345678/f0e1d2c3b4a5968778695a4b3c2d1e0f", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_route: {
+    #       gateway_route_arn: "arn:aws:ecs:us-east-1:123456789012:gateway-route/my-gateway/a1b2c3d4e5f6478890abcdef12345678/f0e1d2c3b4a5968778695a4b3c2d1e0f", 
+    #       resources: {
+    #         host_shared_alb: [
+    #           {
+    #             acm_certificate_arn: "arn:aws:acm:us-east-1:123456789012:certificate/12345678-90ab-cdef-1234-567890abcdef", 
+    #             listener_arn: "arn:aws:elasticloadbalancing:us-east-1:123456789012:listener/app/ecs-gateway-alb-1/50dc6c495c0c9188/f2f7dc8efc522ab2", 
+    #             listener_rule_arn: "arn:aws:elasticloadbalancing:us-east-1:123456789012:listener-rule/app/ecs-gateway-alb-1/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee", 
+    #             load_balancer_arn: "arn:aws:elasticloadbalancing:us-east-1:123456789012:loadbalancer/app/ecs-gateway-alb-1/50dc6c495c0c9188", 
+    #             load_balancer_security_groups: [
+    #               {
+    #                 arn: "arn:aws:ec2:us-east-1:123456789012:security-group/sg-0123456789abcdef0", 
+    #                 rule_arns: [
+    #                   "arn:aws:ec2:us-east-1:123456789012:security-group-rule/sgr-0123456789abcdef0", 
+    #                 ], 
+    #               }, 
+    #             ], 
+    #             service_security_group_arn: "arn:aws:ec2:us-east-1:123456789012:security-group/sg-0fedcba9876543210", 
+    #             test_listener_rule_arns: [
+    #               "arn:aws:elasticloadbalancing:us-east-1:123456789012:listener-rule/app/ecs-gateway-alb-1/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cc1d2", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       service_arn: "arn:aws:ecs:us-east-1:123456789012:service/my-cluster/my-web-service", 
+    #       service_container_port_name: "web", 
+    #       service_url: "https://my-web-service.example.com", 
+    #       status: "ACTIVE", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_gateway_route({
+    #     gateway_route_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_route.gateway_route_arn #=> String
+    #   resp.gateway_route.service_arn #=> String
+    #   resp.gateway_route.service_container_port_name #=> String
+    #   resp.gateway_route.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.gateway_route.service_url #=> String
+    #   resp.gateway_route.resources.host_shared_alb #=> Array
+    #   resp.gateway_route.resources.host_shared_alb[0].acm_certificate_arn #=> String
+    #   resp.gateway_route.resources.host_shared_alb[0].load_balancer_arn #=> String
+    #   resp.gateway_route.resources.host_shared_alb[0].listener_arn #=> String
+    #   resp.gateway_route.resources.host_shared_alb[0].listener_rule_arn #=> String
+    #   resp.gateway_route.resources.host_shared_alb[0].test_listener_rule_arns #=> Array
+    #   resp.gateway_route.resources.host_shared_alb[0].test_listener_rule_arns[0] #=> String
+    #   resp.gateway_route.resources.host_shared_alb[0].load_balancer_security_groups #=> Array
+    #   resp.gateway_route.resources.host_shared_alb[0].load_balancer_security_groups[0].arn #=> String
+    #   resp.gateway_route.resources.host_shared_alb[0].load_balancer_security_groups[0].rule_arns #=> Array
+    #   resp.gateway_route.resources.host_shared_alb[0].load_balancer_security_groups[0].rule_arns[0] #=> String
+    #   resp.gateway_route.resources.host_shared_alb[0].service_security_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeGatewayRoute AWS API Documentation
+    #
+    # @overload describe_gateway_route(params = {})
+    # @param [Hash] params ({})
+    def describe_gateway_route(params = {}, options = {})
+      req = build_request(:describe_gateway_route, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your service deployments.
     #
     # A service deployment happens when you release a software update for
@@ -6671,7 +7252,37 @@ module Aws::ECS
     #   resp.service_revisions[0].ecs_managed_resources.log_groups[0].status_reason #=> String
     #   resp.service_revisions[0].ecs_managed_resources.log_groups[0].updated_at #=> Time
     #   resp.service_revisions[0].ecs_managed_resources.log_groups[0].log_group_name #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].gateway_arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].gateway_route_arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].port_name #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].service_url #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].access_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].resources.host_shared_alb #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].resources.host_shared_alb[0].acm_certificate_arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].resources.host_shared_alb[0].load_balancer_arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].resources.host_shared_alb[0].load_balancer_security_group_arns #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].resources.host_shared_alb[0].load_balancer_security_group_arns[0] #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].resources.host_shared_alb[0].listener_arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].resources.host_shared_alb[0].listener_rule_arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].resources.host_shared_alb[0].test_listener_rule_arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].resources.host_shared_alb[0].target_group_arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.gateway_connections[0].resources.host_shared_alb[0].alternate_target_group_arn #=> String
     #   resp.service_revisions[0].overrides.runtime_platform.cpu_architecture #=> String
+    #   resp.service_revisions[0].gateway_connectors #=> Array
+    #   resp.service_revisions[0].gateway_connectors[0].port_name #=> String
+    #   resp.service_revisions[0].gateway_connectors[0].health_check.health_check_protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.service_revisions[0].gateway_connectors[0].health_check.health_check_port #=> Integer
+    #   resp.service_revisions[0].gateway_connectors[0].health_check.health_check_path #=> String
+    #   resp.service_revisions[0].gateway_connectors[0].health_check.health_check_timeout_seconds #=> Integer
+    #   resp.service_revisions[0].gateway_connectors[0].health_check.health_check_interval_seconds #=> Integer
+    #   resp.service_revisions[0].gateway_connectors[0].health_check.healthy_threshold_count #=> Integer
+    #   resp.service_revisions[0].gateway_connectors[0].health_check.unhealthy_threshold_count #=> Integer
+    #   resp.service_revisions[0].gateway_connectors[0].health_check.matcher.http_code #=> String
+    #   resp.service_revisions[0].gateway_connectors[0].health_check.matcher.grpc_code #=> String
+    #   resp.service_revisions[0].gateway_connectors[0].filters.access_types #=> Array
+    #   resp.service_revisions[0].gateway_connectors[0].filters.access_types[0] #=> String, one of "PUBLIC", "PRIVATE"
     #   resp.service_revisions[0].monitoring.metric_configurations #=> Array
     #   resp.service_revisions[0].monitoring.metric_configurations[0].metric_names #=> Array
     #   resp.service_revisions[0].monitoring.metric_configurations[0].metric_names[0] #=> String
@@ -7740,6 +8351,67 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Removes the association between a gateway and an Amazon ECS cluster.
+    # The association remains in the `DISASSOCIATING` state until you remove
+    # all of the gateway routes for the cluster by updating the associated
+    # services. You can use `ListGatewayRoutes` with a cluster filter to
+    # determine which routes are preventing disassociation. No
+    # infrastructure changes are made until the affected services are
+    # updated.
+    #
+    # @option params [required, String] :gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway to disassociate.
+    #
+    # @option params [required, String] :cluster
+    #   The name or Amazon Resource Name (ARN) of the cluster to disassociate
+    #   the gateway from.
+    #
+    # @return [Types::DisassociateGatewayFromClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateGatewayFromClusterResponse#gateway_arn #gateway_arn} => String
+    #   * {Types::DisassociateGatewayFromClusterResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::DisassociateGatewayFromClusterResponse#status #status} => String
+    #
+    #
+    # @example Example: To disassociate a gateway from a cluster
+    #
+    #   # This example removes the association between the gateway named my-gateway and the cluster named my-cluster. The
+    #   # association remains in the DISASSOCIATING state until all gateway routes for the cluster are removed.
+    #
+    #   resp = client.disassociate_gateway_from_cluster({
+    #     cluster: "my-cluster", 
+    #     gateway: "my-gateway", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster", 
+    #     gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678", 
+    #     status: "DISASSOCIATING", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_gateway_from_cluster({
+    #     gateway: "String", # required
+    #     cluster: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #   resp.cluster_arn #=> String
+    #   resp.status #=> String, one of "ACTIVE", "DISASSOCIATING", "INACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DisassociateGatewayFromCluster AWS API Documentation
+    #
+    # @overload disassociate_gateway_from_cluster(params = {})
+    # @param [Hash] params ({})
+    def disassociate_gateway_from_cluster(params = {}, options = {})
+      req = build_request(:disassociate_gateway_from_cluster, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This action is only used by the Amazon ECS agent,
     # and it is not
     # intended for use outside of the agent.
@@ -8705,6 +9377,269 @@ module Aws::ECS
     # @param [Hash] params ({})
     def list_daemons(params = {}, options = {})
       req = build_request(:list_daemons, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the associations between gateways and clusters. You
+    # can filter the results by gateway, cluster, and status. The results
+    # are paginated. We recommend that you use pagination to ensure that the
+    # operation returns quickly and successfully.
+    #
+    # @option params [String] :gateway
+    #   The name or Amazon Resource Name (ARN) of a gateway to filter the
+    #   results by.
+    #
+    # @option params [String] :cluster
+    #   The name or Amazon Resource Name (ARN) of a cluster to filter the
+    #   results by.
+    #
+    # @option params [Array<String>] :status
+    #   The association status to filter the results by.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that the operation returns in a single
+    #   page. The default is 100.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated request.
+    #
+    # @return [Types::ListGatewayClusterAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGatewayClusterAssociationsResponse#gateway_cluster_associations #gateway_cluster_associations} => Array&lt;Types::GatewayClusterAssociationSummary&gt;
+    #   * {Types::ListGatewayClusterAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the clusters associated with a gateway
+    #
+    #   # This example lists the clusters that are associated with the gateway named my-gateway.
+    #
+    #   resp = client.list_gateway_cluster_associations({
+    #     gateway: "my-gateway", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_cluster_associations: [
+    #       {
+    #         cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster", 
+    #         gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #       {
+    #         cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/my-staging-cluster", 
+    #         gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_gateway_cluster_associations({
+    #     gateway: "String",
+    #     cluster: "String",
+    #     status: ["ACTIVE"], # accepts ACTIVE, DISASSOCIATING, INACTIVE
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_cluster_associations #=> Array
+    #   resp.gateway_cluster_associations[0].gateway_arn #=> String
+    #   resp.gateway_cluster_associations[0].cluster_arn #=> String
+    #   resp.gateway_cluster_associations[0].status #=> String, one of "ACTIVE", "DISASSOCIATING", "INACTIVE"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListGatewayClusterAssociations AWS API Documentation
+    #
+    # @overload list_gateway_cluster_associations(params = {})
+    # @param [Hash] params ({})
+    def list_gateway_cluster_associations(params = {}, options = {})
+      req = build_request(:list_gateway_cluster_associations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of gateway routes. A gateway route represents the
+    # association between a service and a gateway and the service-specific
+    # infrastructure the gateway manages for it. You can filter the results
+    # by gateway, cluster, service, container port name, and status. The
+    # results are paginated. We recommend that you use pagination to ensure
+    # that the operation returns quickly and successfully.
+    #
+    # @option params [String] :gateway
+    #   The name or Amazon Resource Name (ARN) of a gateway to filter the
+    #   results by.
+    #
+    # @option params [String] :cluster
+    #   The name or Amazon Resource Name (ARN) of a cluster to filter the
+    #   results by.
+    #
+    # @option params [String] :service
+    #   The name or Amazon Resource Name (ARN) of a service to filter the
+    #   results by. Because services can span clusters, a service name isn't
+    #   necessarily unique and can match multiple services.
+    #
+    # @option params [String] :service_container_port_name
+    #   The name of a task definition container port to filter the results by.
+    #
+    # @option params [Array<String>] :status
+    #   The gateway route status to filter the results by.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that the operation returns in a single
+    #   page. The default is 100.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated request.
+    #
+    # @return [Types::ListGatewayRoutesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGatewayRoutesResponse#gateway_routes #gateway_routes} => Array&lt;Types::GatewayRouteSummary&gt;
+    #   * {Types::ListGatewayRoutesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the gateway routes for a gateway
+    #
+    #   # This example lists the gateway routes for the gateway named my-gateway in the cluster named my-cluster.
+    #
+    #   resp = client.list_gateway_routes({
+    #     cluster: "my-cluster", 
+    #     gateway: "my-gateway", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_routes: [
+    #       {
+    #         cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/my-cluster", 
+    #         gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678", 
+    #         gateway_route_arn: "arn:aws:ecs:us-east-1:123456789012:gateway-route/my-gateway/a1b2c3d4e5f6478890abcdef12345678/f0e1d2c3b4a5968778695a4b3c2d1e0f", 
+    #         service_arn: "arn:aws:ecs:us-east-1:123456789012:service/my-cluster/my-web-service", 
+    #         service_container_port_name: "web", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_gateway_routes({
+    #     gateway: "String",
+    #     cluster: "String",
+    #     service: "String",
+    #     service_container_port_name: "String",
+    #     status: ["ACTIVE"], # accepts ACTIVE, CREATE_IN_PROGRESS, CREATE_FAILED, UPDATE_IN_PROGRESS, UPDATE_FAILED, DELETE_IN_PROGRESS, DELETE_FAILED
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_routes #=> Array
+    #   resp.gateway_routes[0].gateway_route_arn #=> String
+    #   resp.gateway_routes[0].gateway_arn #=> String
+    #   resp.gateway_routes[0].cluster_arn #=> String
+    #   resp.gateway_routes[0].service_arn #=> String
+    #   resp.gateway_routes[0].service_container_port_name #=> String
+    #   resp.gateway_routes[0].status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListGatewayRoutes AWS API Documentation
+    #
+    # @overload list_gateway_routes(params = {})
+    # @param [Hash] params ({})
+    def list_gateway_routes(params = {}, options = {})
+      req = build_request(:list_gateway_routes, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of gateways in your account. You can filter the results
+    # by gateway name and status. The results are paginated. We recommend
+    # that you use pagination to ensure that the operation returns quickly
+    # and successfully.
+    #
+    # @option params [Array<String>] :names
+    #   The gateway names to filter the results by. You can specify up to 10
+    #   names.
+    #
+    # @option params [Array<String>] :status
+    #   The gateway statuses to filter the results by.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of gateway results that `ListGateways` returns in a
+    #   single page. The default is 100.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListGateways` request where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results.
+    #
+    # @return [Types::ListGatewaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGatewaysResponse#gateways #gateways} => Array&lt;Types::GatewaySummary&gt;
+    #   * {Types::ListGatewaysResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list active gateways
+    #
+    #   # This example lists the gateways in your account that have a status of ACTIVE.
+    #
+    #   resp = client.list_gateways({
+    #     status: [
+    #       "ACTIVE", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateways: [
+    #       {
+    #         name: "my-gateway", 
+    #         created_at: Time.parse("2026-10-20T12:00:00.000Z"), 
+    #         gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #       {
+    #         name: "my-internal-gateway", 
+    #         created_at: Time.parse("2026-10-21T09:30:00.000Z"), 
+    #         gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-internal-gateway/0f1e2d3c4b5a69788796a5b4c3d2e1f0", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_gateways({
+    #     names: ["String"],
+    #     status: ["ACTIVE"], # accepts ACTIVE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_FAILED, DELETED
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateways #=> Array
+    #   resp.gateways[0].gateway_arn #=> String
+    #   resp.gateways[0].name #=> String
+    #   resp.gateways[0].status #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "DELETED"
+    #   resp.gateways[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListGateways AWS API Documentation
+    #
+    # @overload list_gateways(params = {})
+    # @param [Hash] params ({})
+    def list_gateways(params = {}, options = {})
+      req = build_request(:list_gateways, params)
       req.send_request(options)
     end
 
@@ -14918,6 +15853,119 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Modifies the configuration of a gateway. You can change only the
+    # properties that can be applied without interrupting traffic, and the
+    # configuration variant that you provide must match the gateway's type.
+    # `UpdateGateway` is an asynchronous operation: the changes are applied
+    # to each load balancer the gateway manages, and the gateway reports a
+    # status of `UPDATE_IN_PROGRESS` until the update completes. If Amazon
+    # ECS can't update one or more resources, it makes a best effort to
+    # update the rest and the gateway status changes to `UPDATE_FAILED`. Use
+    # `DescribeGateway` to inspect the gateway's `statusReason` and
+    # failures list, which gives the ARN of each load balancer that was not
+    # updated and the operation, error code, and message for each failure.
+    #
+    # If you specify `infrastructureRoleArn`, you must have the
+    # `iam:PassRole` permission for that role.
+    #
+    # @option params [required, String] :gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway to update.
+    #
+    # @option params [String] :infrastructure_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the gateway
+    #   assumes to manage infrastructure on your behalf.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Specifies whether to enable deletion protection for the gateway. When
+    #   enabled, the gateway can't be deleted.
+    #
+    # @option params [Types::UpdateGatewayConfiguration] :configuration
+    #   The updated type-specific configuration for the gateway. The
+    #   configuration variant must match the gateway's existing type, and
+    #   only mutable fields can be changed.
+    #
+    # @option params [String] :propagate_tags
+    #   Specifies whether to propagate the tags from the gateway to the
+    #   infrastructure that the gateway manages. If you don't specify a
+    #   value, the gateway's existing setting is unchanged.
+    #
+    # @return [Types::UpdateGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGatewayResponse#gateway_arn #gateway_arn} => String
+    #   * {Types::UpdateGatewayResponse#name #name} => String
+    #   * {Types::UpdateGatewayResponse#status #status} => String
+    #
+    #
+    # @example Example: To update a gateway
+    #
+    #   # This example raises the maximum number of Application Load Balancers that the gateway named my-gateway manages, and
+    #   # changes the desync mitigation mode to strictest.
+    #
+    #   resp = client.update_gateway({
+    #     configuration: {
+    #       host_shared_alb: {
+    #         http_desync: "strictest", 
+    #         max_alb_count: 20, 
+    #       }, 
+    #     }, 
+    #     gateway: "my-gateway", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "my-gateway", 
+    #     gateway_arn: "arn:aws:ecs:us-east-1:123456789012:gateway/my-gateway/a1b2c3d4e5f6478890abcdef12345678", 
+    #     status: "UPDATE_IN_PROGRESS", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_gateway({
+    #     gateway: "String", # required
+    #     infrastructure_role_arn: "String",
+    #     deletion_protection: false,
+    #     configuration: {
+    #       host_shared_alb: {
+    #         network_configuration: {
+    #           inbound_security_group: "String",
+    #         },
+    #         max_alb_count: 1,
+    #         web_acl_arn: "String",
+    #         access_logs: {
+    #           destination: {
+    #             s3: {
+    #               bucket: "String", # required
+    #               prefix: "String",
+    #             },
+    #           },
+    #         },
+    #         http_desync: "monitor", # accepts monitor, defensive, strictest
+    #         test_traffic_rules: {
+    #           header: {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         },
+    #       },
+    #     },
+    #     propagate_tags: "NONE", # accepts NONE, GATEWAY
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateGateway AWS API Documentation
+    #
+    # @overload update_gateway(params = {})
+    # @param [Hash] params ({})
+    def update_gateway(params = {}, options = {})
+      req = build_request(:update_gateway, params)
+      req.send_request(options)
+    end
+
     # Modifies the parameters of a service.
     #
     # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
@@ -15382,6 +16430,11 @@ module Aws::ECS
     #
     #   This parameter triggers a new service deployment.
     #
+    # @option params [Array<Types::GatewayConnector>] :gateway_connectors
+    #   The updated set of gateway connectors that connect the service to a
+    #   gateway ingress path. A service supports no more than one gateway
+    #   connector.
+    #
     # @option params [Types::MonitoringConfiguration] :monitoring
     #   The optional monitoring configuration for the service, which defines
     #   the resolution for the service-level `CPUUtilization` and
@@ -15680,6 +16733,27 @@ module Aws::ECS
     #           alternate_target_group_arn: "String",
     #           production_listener_rule: "String",
     #           test_listener_rule: "String",
+    #         },
+    #       },
+    #     ],
+    #     gateway_connectors: [
+    #       {
+    #         port_name: "String", # required
+    #         health_check: {
+    #           health_check_protocol: "HTTP", # accepts HTTP, HTTPS
+    #           health_check_port: 1,
+    #           health_check_path: "String",
+    #           health_check_timeout_seconds: 1,
+    #           health_check_interval_seconds: 1,
+    #           healthy_threshold_count: 1,
+    #           unhealthy_threshold_count: 1,
+    #           matcher: {
+    #             http_code: "String",
+    #             grpc_code: "String",
+    #           },
+    #         },
+    #         filters: {
+    #           access_types: ["PUBLIC"], # accepts PUBLIC, PRIVATE
     #         },
     #       },
     #     ],
@@ -16408,7 +17482,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.249.0'
+      context[:gem_version] = '1.250.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

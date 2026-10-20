@@ -125,6 +125,19 @@ module Aws::MarketplaceCatalog
     ErrorScopeList = Shapes::ListShape.new(name: 'ErrorScopeList')
     Errors = Shapes::MapShape.new(name: 'Errors')
     ExceptionMessageContent = Shapes::StringShape.new(name: 'ExceptionMessageContent')
+    ExpressPrivateOfferConfigurationEntityIdFilter = Shapes::StructureShape.new(name: 'ExpressPrivateOfferConfigurationEntityIdFilter')
+    ExpressPrivateOfferConfigurationEntityIdFilterValueList = Shapes::ListShape.new(name: 'ExpressPrivateOfferConfigurationEntityIdFilterValueList')
+    ExpressPrivateOfferConfigurationEntityIdString = Shapes::StringShape.new(name: 'ExpressPrivateOfferConfigurationEntityIdString')
+    ExpressPrivateOfferConfigurationFilters = Shapes::StructureShape.new(name: 'ExpressPrivateOfferConfigurationFilters')
+    ExpressPrivateOfferConfigurationProductIdFilter = Shapes::StructureShape.new(name: 'ExpressPrivateOfferConfigurationProductIdFilter')
+    ExpressPrivateOfferConfigurationProductIdFilterValueList = Shapes::ListShape.new(name: 'ExpressPrivateOfferConfigurationProductIdFilterValueList')
+    ExpressPrivateOfferConfigurationProductIdString = Shapes::StringShape.new(name: 'ExpressPrivateOfferConfigurationProductIdString')
+    ExpressPrivateOfferConfigurationSort = Shapes::StructureShape.new(name: 'ExpressPrivateOfferConfigurationSort')
+    ExpressPrivateOfferConfigurationSortBy = Shapes::StringShape.new(name: 'ExpressPrivateOfferConfigurationSortBy')
+    ExpressPrivateOfferConfigurationStateFilter = Shapes::StructureShape.new(name: 'ExpressPrivateOfferConfigurationStateFilter')
+    ExpressPrivateOfferConfigurationStateFilterValueList = Shapes::ListShape.new(name: 'ExpressPrivateOfferConfigurationStateFilterValueList')
+    ExpressPrivateOfferConfigurationStateString = Shapes::StringShape.new(name: 'ExpressPrivateOfferConfigurationStateString')
+    ExpressPrivateOfferConfigurationSummary = Shapes::StructureShape.new(name: 'ExpressPrivateOfferConfigurationSummary')
     FailureCode = Shapes::StringShape.new(name: 'FailureCode')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
     Filter = Shapes::StructureShape.new(name: 'Filter')
@@ -641,6 +654,7 @@ module Aws::MarketplaceCatalog
     EntitySummary.add_member(:resale_authorization_summary, Shapes::ShapeRef.new(shape: ResaleAuthorizationSummary, location_name: "ResaleAuthorizationSummary"))
     EntitySummary.add_member(:machine_learning_product_summary, Shapes::ShapeRef.new(shape: MachineLearningProductSummary, location_name: "MachineLearningProductSummary"))
     EntitySummary.add_member(:offer_set_summary, Shapes::ShapeRef.new(shape: OfferSetSummary, location_name: "OfferSetSummary"))
+    EntitySummary.add_member(:express_private_offer_configuration_summary, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationSummary, location_name: "ExpressPrivateOfferConfigurationSummary"))
     EntitySummary.struct_class = Types::EntitySummary
 
     EntitySummaryList.member = Shapes::ShapeRef.new(shape: EntitySummary)
@@ -653,6 +667,7 @@ module Aws::MarketplaceCatalog
     EntityTypeFilters.add_member(:resale_authorization_filters, Shapes::ShapeRef.new(shape: ResaleAuthorizationFilters, location_name: "ResaleAuthorizationFilters"))
     EntityTypeFilters.add_member(:machine_learning_product_filters, Shapes::ShapeRef.new(shape: MachineLearningProductFilters, location_name: "MachineLearningProductFilters"))
     EntityTypeFilters.add_member(:offer_set_filters, Shapes::ShapeRef.new(shape: OfferSetFilters, location_name: "OfferSetFilters"))
+    EntityTypeFilters.add_member(:express_private_offer_configuration_filters, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationFilters, location_name: "ExpressPrivateOfferConfigurationFilters"))
     EntityTypeFilters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EntityTypeFilters.add_member_subclass(:data_product_filters, Types::EntityTypeFilters::DataProductFilters)
     EntityTypeFilters.add_member_subclass(:saa_s_product_filters, Types::EntityTypeFilters::SaaSProductFilters)
@@ -662,6 +677,7 @@ module Aws::MarketplaceCatalog
     EntityTypeFilters.add_member_subclass(:resale_authorization_filters, Types::EntityTypeFilters::ResaleAuthorizationFilters)
     EntityTypeFilters.add_member_subclass(:machine_learning_product_filters, Types::EntityTypeFilters::MachineLearningProductFilters)
     EntityTypeFilters.add_member_subclass(:offer_set_filters, Types::EntityTypeFilters::OfferSetFilters)
+    EntityTypeFilters.add_member_subclass(:express_private_offer_configuration_filters, Types::EntityTypeFilters::ExpressPrivateOfferConfigurationFilters)
     EntityTypeFilters.add_member_subclass(:unknown, Types::EntityTypeFilters::Unknown)
     EntityTypeFilters.struct_class = Types::EntityTypeFilters
 
@@ -673,6 +689,7 @@ module Aws::MarketplaceCatalog
     EntityTypeSort.add_member(:resale_authorization_sort, Shapes::ShapeRef.new(shape: ResaleAuthorizationSort, location_name: "ResaleAuthorizationSort"))
     EntityTypeSort.add_member(:machine_learning_product_sort, Shapes::ShapeRef.new(shape: MachineLearningProductSort, location_name: "MachineLearningProductSort"))
     EntityTypeSort.add_member(:offer_set_sort, Shapes::ShapeRef.new(shape: OfferSetSort, location_name: "OfferSetSort"))
+    EntityTypeSort.add_member(:express_private_offer_configuration_sort, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationSort, location_name: "ExpressPrivateOfferConfigurationSort"))
     EntityTypeSort.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EntityTypeSort.add_member_subclass(:data_product_sort, Types::EntityTypeSort::DataProductSort)
     EntityTypeSort.add_member_subclass(:saa_s_product_sort, Types::EntityTypeSort::SaaSProductSort)
@@ -682,6 +699,7 @@ module Aws::MarketplaceCatalog
     EntityTypeSort.add_member_subclass(:resale_authorization_sort, Types::EntityTypeSort::ResaleAuthorizationSort)
     EntityTypeSort.add_member_subclass(:machine_learning_product_sort, Types::EntityTypeSort::MachineLearningProductSort)
     EntityTypeSort.add_member_subclass(:offer_set_sort, Types::EntityTypeSort::OfferSetSort)
+    EntityTypeSort.add_member_subclass(:express_private_offer_configuration_sort, Types::EntityTypeSort::ExpressPrivateOfferConfigurationSort)
     EntityTypeSort.add_member_subclass(:unknown, Types::EntityTypeSort::Unknown)
     EntityTypeSort.struct_class = Types::EntityTypeSort
 
@@ -699,6 +717,34 @@ module Aws::MarketplaceCatalog
 
     Errors.key = Shapes::ShapeRef.new(shape: EntityId)
     Errors.value = Shapes::ShapeRef.new(shape: BatchDescribeErrorDetail)
+
+    ExpressPrivateOfferConfigurationEntityIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationEntityIdFilterValueList, location_name: "ValueList"))
+    ExpressPrivateOfferConfigurationEntityIdFilter.struct_class = Types::ExpressPrivateOfferConfigurationEntityIdFilter
+
+    ExpressPrivateOfferConfigurationEntityIdFilterValueList.member = Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationEntityIdString)
+
+    ExpressPrivateOfferConfigurationFilters.add_member(:entity_id, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationEntityIdFilter, location_name: "EntityId"))
+    ExpressPrivateOfferConfigurationFilters.add_member(:product_id, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationProductIdFilter, location_name: "ProductId"))
+    ExpressPrivateOfferConfigurationFilters.add_member(:state, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationStateFilter, location_name: "State"))
+    ExpressPrivateOfferConfigurationFilters.struct_class = Types::ExpressPrivateOfferConfigurationFilters
+
+    ExpressPrivateOfferConfigurationProductIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationProductIdFilterValueList, location_name: "ValueList"))
+    ExpressPrivateOfferConfigurationProductIdFilter.struct_class = Types::ExpressPrivateOfferConfigurationProductIdFilter
+
+    ExpressPrivateOfferConfigurationProductIdFilterValueList.member = Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationProductIdString)
+
+    ExpressPrivateOfferConfigurationSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationSortBy, location_name: "SortBy"))
+    ExpressPrivateOfferConfigurationSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ExpressPrivateOfferConfigurationSort.struct_class = Types::ExpressPrivateOfferConfigurationSort
+
+    ExpressPrivateOfferConfigurationStateFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationStateFilterValueList, location_name: "ValueList"))
+    ExpressPrivateOfferConfigurationStateFilter.struct_class = Types::ExpressPrivateOfferConfigurationStateFilter
+
+    ExpressPrivateOfferConfigurationStateFilterValueList.member = Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationStateString)
+
+    ExpressPrivateOfferConfigurationSummary.add_member(:product_id, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationProductIdString, location_name: "ProductId"))
+    ExpressPrivateOfferConfigurationSummary.add_member(:state, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationStateString, location_name: "State"))
+    ExpressPrivateOfferConfigurationSummary.struct_class = Types::ExpressPrivateOfferConfigurationSummary
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "Name"))
     Filter.add_member(:value_list, Shapes::ShapeRef.new(shape: ValueList, location_name: "ValueList"))

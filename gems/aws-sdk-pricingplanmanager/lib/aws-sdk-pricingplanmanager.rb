@@ -54,7 +54,7 @@ module Aws::PricingPlanManager
   autoload :EndpointProvider, 'aws-sdk-pricingplanmanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pricingplanmanager/endpoints'
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end
 

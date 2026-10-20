@@ -55,7 +55,7 @@ module Aws::AccountAccess
   autoload :EndpointProvider, 'aws-sdk-accountaccess/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-accountaccess/endpoints'
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end
 

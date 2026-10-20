@@ -241,8 +241,9 @@ module Aws::S3Files
     #   `AVAILABLE` (the file system is available for use), `CREATING` (the
     #   file system is being created), `DELETING` (the file system is being
     #   deleted), `DELETED` (the file system has been deleted), `ERROR` (the
-    #   file system is in an error state), or `UPDATING` (the file system is
-    #   being updated).
+    #   file system is in an error state), `MISCONFIGURED` (the file system
+    #   has a misconfiguration), or `UPDATING` (the file system is being
+    #   updated).
     #   @return [String]
     #
     # @!attribute [rw] status_message

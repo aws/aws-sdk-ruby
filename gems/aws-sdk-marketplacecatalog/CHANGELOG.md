@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2026-10-20)
+------------------
+
+* Feature - Adds ListEntities filter, sort, and summary support for the ExpressPrivateOfferConfiguration entity type, including filtering by ProductId.
+
 1.88.0 (2026-10-19)
 ------------------
 

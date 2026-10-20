@@ -35,6 +35,12 @@ module Aws
       end
       class CustomDBEngineVersionQuotaExceededFault < ServiceError
       end
+      class DBCapacityReservationAlreadyExistsFault < ServiceError
+      end
+      class DBCapacityReservationNotFoundFault < ServiceError
+      end
+      class DBCapacityReservationUnsupportedFault < ServiceError
+      end
       class DBClusterAlreadyExistsFault < ServiceError
       end
       class DBClusterAutomatedBackupNotFoundFault < ServiceError
@@ -180,6 +186,8 @@ module Aws
       class InvalidBlueGreenDeploymentStateFault < ServiceError
       end
       class InvalidCustomDBEngineVersionStateFault < ServiceError
+      end
+      class InvalidDBCapacityReservationStateFault < ServiceError
       end
       class InvalidDBClusterAutomatedBackupStateFault < ServiceError
       end

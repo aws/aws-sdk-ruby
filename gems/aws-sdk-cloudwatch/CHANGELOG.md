@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2026-10-20)
+------------------
+
+* Feature - Amazon CloudWatch now supports two new anomaly detector settings. AdaptationSpeed (FAST, NORMAL, SLOW) controls how fast the model adapts to baseline changes, and OutlierFilteringStrength (MINIMAL, MODERATE, STRICT) controls how aggressively outliers are filtered.
+
 1.150.0 (2026-10-19)
 ------------------
 

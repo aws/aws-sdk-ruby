@@ -46,12 +46,14 @@ module Aws::CloudWatch
     AlarmTypes = Shapes::ListShape.new(name: 'AlarmTypes')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AnomalyDetector = Shapes::StructureShape.new(name: 'AnomalyDetector')
+    AnomalyDetectorAdaptationSpeed = Shapes::StringShape.new(name: 'AnomalyDetectorAdaptationSpeed')
     AnomalyDetectorConfiguration = Shapes::StructureShape.new(name: 'AnomalyDetectorConfiguration')
     AnomalyDetectorExcludedTimeRanges = Shapes::ListShape.new(name: 'AnomalyDetectorExcludedTimeRanges')
     AnomalyDetectorId = Shapes::StringShape.new(name: 'AnomalyDetectorId')
     AnomalyDetectorIds = Shapes::ListShape.new(name: 'AnomalyDetectorIds')
     AnomalyDetectorMetricStat = Shapes::StringShape.new(name: 'AnomalyDetectorMetricStat')
     AnomalyDetectorMetricTimezone = Shapes::StringShape.new(name: 'AnomalyDetectorMetricTimezone')
+    AnomalyDetectorOutlierFilteringStrength = Shapes::StringShape.new(name: 'AnomalyDetectorOutlierFilteringStrength')
     AnomalyDetectorStateValue = Shapes::StringShape.new(name: 'AnomalyDetectorStateValue')
     AnomalyDetectorType = Shapes::StringShape.new(name: 'AnomalyDetectorType')
     AnomalyDetectorTypes = Shapes::ListShape.new(name: 'AnomalyDetectorTypes')
@@ -463,6 +465,8 @@ module Aws::CloudWatch
 
     AnomalyDetectorConfiguration.add_member(:excluded_time_ranges, Shapes::ShapeRef.new(shape: AnomalyDetectorExcludedTimeRanges, location_name: "ExcludedTimeRanges"))
     AnomalyDetectorConfiguration.add_member(:metric_timezone, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricTimezone, location_name: "MetricTimezone"))
+    AnomalyDetectorConfiguration.add_member(:adaptation_speed, Shapes::ShapeRef.new(shape: AnomalyDetectorAdaptationSpeed, location_name: "AdaptationSpeed"))
+    AnomalyDetectorConfiguration.add_member(:outlier_filtering_strength, Shapes::ShapeRef.new(shape: AnomalyDetectorOutlierFilteringStrength, location_name: "OutlierFilteringStrength"))
     AnomalyDetectorConfiguration.struct_class = Types::AnomalyDetectorConfiguration
 
     AnomalyDetectorExcludedTimeRanges.member = Shapes::ShapeRef.new(shape: Range)

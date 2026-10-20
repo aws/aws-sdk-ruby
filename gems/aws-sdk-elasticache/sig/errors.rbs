@@ -93,6 +93,8 @@ module Aws
       end
       class InvalidVPCNetworkStateFault < ServiceError
       end
+      class MigrationHealthFault < ServiceError
+      end
       class NoOperationFault < ServiceError
       end
       class NodeGroupNotFoundFault < ServiceError
@@ -121,7 +123,11 @@ module Aws
       end
       class ServerlessCacheAlreadyExistsFault < ServiceError
       end
+      class ServerlessCacheAlreadyUnderMigrationFault < ServiceError
+      end
       class ServerlessCacheNotFoundFault < ServiceError
+      end
+      class ServerlessCacheNotUnderMigrationFault < ServiceError
       end
       class ServerlessCacheQuotaForCustomerExceededFault < ServiceError
       end

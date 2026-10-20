@@ -73,7 +73,7 @@ module Aws::ConnectHealth
   autoload :AsyncClient, 'aws-sdk-connecthealth/async_client'
   autoload :EventStreams, 'aws-sdk-connecthealth/event_streams'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

@@ -199,12 +199,19 @@ module Aws::MarketplaceCatalog
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1268,6 +1275,17 @@ module Aws::MarketplaceCatalog
     #           },
     #         },
     #       },
+    #       express_private_offer_configuration_filters: {
+    #         entity_id: {
+    #           value_list: ["ExpressPrivateOfferConfigurationEntityIdString"],
+    #         },
+    #         product_id: {
+    #           value_list: ["ExpressPrivateOfferConfigurationProductIdString"],
+    #         },
+    #         state: {
+    #           value_list: ["ACTIVE"], # accepts ACTIVE, INACTIVE
+    #         },
+    #       },
     #     },
     #     entity_type_sort: {
     #       data_product_sort: {
@@ -1300,6 +1318,10 @@ module Aws::MarketplaceCatalog
     #       },
     #       offer_set_sort: {
     #         sort_by: "Name", # accepts Name, State, ReleaseDate, SolutionId, EntityId, LastModifiedDate
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #       express_private_offer_configuration_sort: {
+    #         sort_by: "EntityId", # accepts EntityId, LastModifiedDate, ProductId, State
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #     },
@@ -1358,6 +1380,8 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].offer_set_summary.associated_offer_ids #=> Array
     #   resp.entity_summary_list[0].offer_set_summary.associated_offer_ids[0] #=> String
     #   resp.entity_summary_list[0].offer_set_summary.solution_id #=> String
+    #   resp.entity_summary_list[0].express_private_offer_configuration_summary.product_id #=> String
+    #   resp.entity_summary_list[0].express_private_offer_configuration_summary.state #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListEntities AWS API Documentation
@@ -1641,7 +1665,7 @@ module Aws::MarketplaceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

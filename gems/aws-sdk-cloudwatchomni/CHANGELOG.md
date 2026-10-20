@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2026-10-20)
+------------------
+
+* Feature - Updating max value for maxResults in SearchPrincipals API
+
 1.2.0 (2026-10-19)
 ------------------
 

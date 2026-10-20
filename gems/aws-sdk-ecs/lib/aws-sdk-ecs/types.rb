@@ -116,6 +116,46 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @!attribute [rw] gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway to associate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster
+    #   The name or Amazon Resource Name (ARN) of the cluster to associate
+    #   the gateway with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AssociateGatewayWithClusterRequest AWS API Documentation
+    #
+    class AssociateGatewayWithClusterRequest < Struct.new(
+      :gateway,
+      :cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the association. A new association is `ACTIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AssociateGatewayWithClusterResponse AWS API Documentation
+    #
+    class AssociateGatewayWithClusterResponse < Struct.new(
+      :gateway_arn,
+      :cluster_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing a container instance or task attachment.
     #
     # @!attribute [rw] id
@@ -3373,6 +3413,89 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name for the gateway. The name must be unique within your
+    #   account and can be up to 255 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] infrastructure_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the gateway
+    #   assumes to create and manage infrastructure on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If this token matches
+    #   a previous request, the service ignores the request, but does not
+    #   return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Specifies whether to enable deletion protection for the gateway.
+    #   When enabled, the gateway can't be deleted, and the gateway
+    #   propagates this setting to the load balancers it manages. The
+    #   default is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] configuration
+    #   The type-specific configuration for the gateway. Exactly one
+    #   configuration variant must be set, and it determines the gateway
+    #   type. For example, `hostSharedAlb` configures a gateway that uses
+    #   Application Load Balancers with host-based routing.
+    #   @return [Types::GatewayConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the gateway to help you categorize
+    #   and organize it. Each tag consists of a key and an optional value.
+    #   Depending on `propagateTags`, these tags can be applied to the
+    #   infrastructure the gateway manages.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] propagate_tags
+    #   Specifies whether to propagate the tags from the gateway to the
+    #   infrastructure that the gateway manages. The default is `GATEWAY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateGatewayRequest AWS API Documentation
+    #
+    class CreateGatewayRequest < Struct.new(
+      :name,
+      :infrastructure_role_arn,
+      :client_token,
+      :deletion_protection,
+      :configuration,
+      :tags,
+      :propagate_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the gateway. A newly created gateway is always
+    #   `ACTIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateGatewayResponse AWS API Documentation
+    #
+    class CreateGatewayResponse < Struct.new(
+      :gateway_arn,
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for creating a Amazon ECS Managed Instances
     # provider. This specifies how Amazon ECS should manage Amazon EC2
     # instances, including the infrastructure role, instance launch
@@ -3869,6 +3992,11 @@ module Aws::ECS
     #   The VPC Lattice configuration for the service being created.
     #   @return [Array<Types::VpcLatticeConfiguration>]
     #
+    # @!attribute [rw] gateway_connectors
+    #   The gateway connectors that attach the service to a gateway ingress
+    #   path. You can specify at most one gateway connector.
+    #   @return [Array<Types::GatewayConnector>]
+    #
     # @!attribute [rw] monitoring
     #   The optional monitoring configuration for the service, which defines
     #   the resolution for the service-level `CPUUtilization` and
@@ -3905,6 +4033,7 @@ module Aws::ECS
       :service_connect_configuration,
       :volume_configurations,
       :vpc_lattice_configurations,
+      :gateway_connectors,
       :monitoring)
       SENSITIVE = []
       include Aws::Structure
@@ -5407,6 +5536,41 @@ module Aws::ECS
     #
     class DeleteExpressGatewayServiceResponse < Struct.new(
       :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteGatewayRequest AWS API Documentation
+    #
+    class DeleteGatewayRequest < Struct.new(
+      :gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the deleted gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the deleted gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the gateway. After a successful delete, the status is
+    #   `DELETED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteGatewayResponse AWS API Documentation
+    #
+    class DeleteGatewayResponse < Struct.new(
+      :gateway_arn,
+      :name,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6945,6 +7109,190 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The configuration for a gateway that uses shared Application Load
+    # Balancers, as returned by `DescribeGateway`. This includes the current
+    # number of load balancers in addition to the configured settings.
+    #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for the load balancers that the gateway
+    #   manages.
+    #   @return [Types::GatewayElbNetworkConfiguration]
+    #
+    # @!attribute [rw] scheme
+    #   Specifies whether the load balancers the gateway manages are
+    #   `internet-facing` or `internal`.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_logs
+    #   The access log configuration for the load balancers that the gateway
+    #   manages.
+    #   @return [Types::GatewayElbAccessLogConfiguration]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the WAF web ACL associated with
+    #   the load balancers that the gateway manages.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port that the load balancer listener uses is 443. The gateway
+    #   supports only HTTPS at port 443.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol for the load balancer listener is `HTTPS`. No other
+    #   protocol is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_alb_count
+    #   The maximum number of Application Load Balancers that the gateway
+    #   manages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_alb_count
+    #   The current number of Application Load Balancers that the gateway
+    #   has allocated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_desync
+    #   The desync mitigation mode for the load balancers that the gateway
+    #   manages.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_traffic_rules
+    #   The rules that route test traffic for progressive deployments.
+    #   @return [Types::GatewayAlbTestTrafficRules]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeGatewayAlbConfiguration AWS API Documentation
+    #
+    class DescribeGatewayAlbConfiguration < Struct.new(
+      :network_configuration,
+      :scheme,
+      :access_logs,
+      :web_acl_arn,
+      :port,
+      :protocol,
+      :max_alb_count,
+      :current_alb_count,
+      :http_desync,
+      :test_traffic_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type-specific configuration for a gateway that is returned by
+    # `DescribeGateway`.
+    #
+    # @note DescribeGatewayConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DescribeGatewayConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] host_shared_alb
+    #   The configuration for a host-based, shared Application Load Balancer
+    #   gateway.
+    #   @return [Types::DescribeGatewayAlbConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeGatewayConfiguration AWS API Documentation
+    #
+    class DescribeGatewayConfiguration < Struct.new(
+      :host_shared_alb,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class HostSharedAlb < DescribeGatewayConfiguration; end
+      class Unknown < DescribeGatewayConfiguration; end
+    end
+
+    # @!attribute [rw] gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeGatewayRequest AWS API Documentation
+    #
+    class DescribeGatewayRequest < Struct.new(
+      :gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that the operation returns in a single
+    #   page. The maximum value is 20 and the default is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeGatewayResourcesRequest AWS API Documentation
+    #
+    class DescribeGatewayResourcesRequest < Struct.new(
+      :gateway,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_resources
+    #   The infrastructure resources that the gateway manages, grouped by
+    #   gateway type.
+    #   @return [Types::GatewayResources]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future request to retrieve the
+    #   next page of results. This value is `null` when there are no more
+    #   results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeGatewayResourcesResponse AWS API Documentation
+    #
+    class DescribeGatewayResourcesResponse < Struct.new(
+      :gateway_resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway
+    #   The details of the gateway.
+    #   @return [Types::Gateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeGatewayResponse AWS API Documentation
+    #
+    class DescribeGatewayResponse < Struct.new(
+      :gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_route_arn
+    #   The Amazon Resource Name (ARN) of the gateway route to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeGatewayRouteRequest AWS API Documentation
+    #
+    class DescribeGatewayRouteRequest < Struct.new(
+      :gateway_route_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_route
+    #   The details of the gateway route.
+    #   @return [Types::GatewayRoute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeGatewayRouteResponse AWS API Documentation
+    #
+    class DescribeGatewayRouteResponse < Struct.new(
+      :gateway_route)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] service_deployment_arns
     #   The ARN of the service deployment.
     #
@@ -7271,6 +7619,49 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @!attribute [rw] gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway to
+    #   disassociate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster
+    #   The name or Amazon Resource Name (ARN) of the cluster to
+    #   disassociate the gateway from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DisassociateGatewayFromClusterRequest AWS API Documentation
+    #
+    class DisassociateGatewayFromClusterRequest < Struct.new(
+      :gateway,
+      :cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the association. After a successful request, the
+    #   status is `DISASSOCIATING` until all routes are removed, after which
+    #   the association is deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DisassociateGatewayFromClusterResponse AWS API Documentation
+    #
+    class DisassociateGatewayFromClusterResponse < Struct.new(
+      :gateway_arn,
+      :cluster_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # <zonbook />
     #
     # <xhtml />
@@ -7511,6 +7902,12 @@ module Aws::ECS
     #   The log groups managed by the Express service.
     #   @return [Array<Types::ManagedLogGroup>]
     #
+    # @!attribute [rw] gateway_connections
+    #   The gateway-managed connections for the service revision, including
+    #   the gateway routes and infrastructure that a gateway created for the
+    #   service's connector.
+    #   @return [Array<Types::GatewayConnection>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ECSManagedResources AWS API Documentation
     #
     class ECSManagedResources < Struct.new(
@@ -7518,7 +7915,8 @@ module Aws::ECS
       :auto_scaling,
       :metric_alarms,
       :service_security_groups,
-      :log_groups)
+      :log_groups,
+      :gateway_connections)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7626,6 +8024,37 @@ module Aws::ECS
       :transit_encryption,
       :transit_encryption_port,
       :authorization_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Application Load Balancer and its associated resources that a
+    # gateway manages.
+    #
+    # @!attribute [rw] load_balancer_arn
+    #   The Amazon Resource Name (ARN) of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener on the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group
+    #   The ID of the security group attached to the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_route_arns
+    #   The Amazon Resource Names (ARNs) of the gateway routes that use this
+    #   load balancer for ingress.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ElbGatewayResources AWS API Documentation
+    #
+    class ElbGatewayResources < Struct.new(
+      :load_balancer_arn,
+      :listener_arn,
+      :security_group,
+      :gateway_route_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8294,6 +8723,846 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The details of a gateway, including its configuration, status, and the
+    # infrastructure settings for its type.
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A human-readable explanation of the current status. This value is
+    #   populated when the gateway is in a failure state, such as
+    #   `UPDATE_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] failures
+    #   The per-resource failure details for asynchronous gateway processes,
+    #   such as an `UpdateGateway` operation that couldn't update every
+    #   load balancer.
+    #   @return [Array<Types::GatewayResourceFailure>]
+    #
+    # @!attribute [rw] infrastructure_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the gateway uses
+    #   to manage infrastructure on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Specifies whether deletion protection is enabled for the gateway.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] configuration
+    #   The type-specific configuration for the gateway.
+    #   @return [Types::DescribeGatewayConfiguration]
+    #
+    # @!attribute [rw] access_type
+    #   Specifies whether the gateway is publicly accessible (`PUBLIC`) or
+    #   private (`PRIVATE`). The gateway derives this value from its scheme
+    #   when you create the gateway, and the value is immutable.
+    #   @return [String]
+    #
+    # @!attribute [rw] propagate_tags
+    #   Specifies whether the gateway propagates its tags to the
+    #   infrastructure it manages.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata applied to the gateway. Each tag consists of a key and
+    #   an optional value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp for the time when the gateway was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix timestamp for the time when the gateway was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Gateway AWS API Documentation
+    #
+    class Gateway < Struct.new(
+      :gateway_arn,
+      :name,
+      :status,
+      :status_reason,
+      :failures,
+      :infrastructure_role_arn,
+      :deletion_protection,
+      :configuration,
+      :access_type,
+      :propagate_tags,
+      :tags,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The rules that route test traffic to services behind a gateway during
+    # progressive deployments.
+    #
+    # @!attribute [rw] header
+    #   The header-based rule that identifies test traffic.
+    #   @return [Types::GatewayTestTrafficHeader]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayAlbTestTrafficRules AWS API Documentation
+    #
+    class GatewayAlbTestTrafficRules < Struct.new(
+      :header)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an association between a gateway and a cluster.
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayClusterAssociationSummary AWS API Documentation
+    #
+    class GatewayClusterAssociationSummary < Struct.new(
+      :gateway_arn,
+      :cluster_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type-specific configuration for a gateway that you provide when
+    # you create it. Exactly one variant is set, and it determines the
+    # gateway type.
+    #
+    # @note GatewayConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] host_shared_alb
+    #   The configuration for a host-based, shared Application Load Balancer
+    #   gateway. Each service that uses the gateway is assigned a unique DNS
+    #   host name.
+    #   @return [Types::HostSharedAlbConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayConfiguration AWS API Documentation
+    #
+    class GatewayConfiguration < Struct.new(
+      :host_shared_alb,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class HostSharedAlb < GatewayConfiguration; end
+      class Unknown < GatewayConfiguration; end
+    end
+
+    # A gateway-managed connection for a service revision. A connection
+    # represents the association between the service's gateway connector
+    # and a specific gateway, along with the infrastructure that the gateway
+    # created for it.
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_route_arn
+    #   The Amazon Resource Name (ARN) of the gateway route for the
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_name
+    #   The name of the service port that receives gateway-managed ingress
+    #   traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_url
+    #   The URL that the gateway uses to route ingress traffic to the
+    #   service.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_type
+    #   The access type of the gateway ingress path.
+    #
+    #   Valid values:
+    #
+    #   * `PUBLIC` - The ingress path is publicly accessible.
+    #
+    #   * `PRIVATE` - The ingress path is only accessible privately.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the gateway route for the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   The gateway-managed infrastructure resources for the connection.
+    #   @return [Types::GatewayConnectionResources]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayConnection AWS API Documentation
+    #
+    class GatewayConnection < Struct.new(
+      :gateway_arn,
+      :gateway_route_arn,
+      :port_name,
+      :service_url,
+      :access_type,
+      :status,
+      :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Application Load Balancer resources that a gateway created and
+    # manages for a connection.
+    #
+    # @!attribute [rw] acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Certificate Manager certificate that is attached to the load
+    #   balancer listener.
+    #   @return [String]
+    #
+    # @!attribute [rw] load_balancer_arn
+    #   The Amazon Resource Name (ARN) of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] load_balancer_security_group_arns
+    #   The Amazon Resource Names (ARNs) of the security groups that the
+    #   gateway attaches to the load balancer.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener on the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] listener_rule_arn
+    #   The Amazon Resource Name (ARN) of the listener rule that routes
+    #   production traffic to the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_listener_rule_arn
+    #   The Amazon Resource Name (ARN) of the listener rule that routes test
+    #   traffic to the service during progressive deployments.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_group_arn
+    #   The Amazon Resource Name (ARN) of the target group that receives
+    #   production traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] alternate_target_group_arn
+    #   The Amazon Resource Name (ARN) of the alternate target group that
+    #   the gateway uses during progressive deployments.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayConnectionAlbResources AWS API Documentation
+    #
+    class GatewayConnectionAlbResources < Struct.new(
+      :acm_certificate_arn,
+      :load_balancer_arn,
+      :load_balancer_security_group_arns,
+      :listener_arn,
+      :listener_rule_arn,
+      :test_listener_rule_arn,
+      :target_group_arn,
+      :alternate_target_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The gateway-managed infrastructure resources for a connection, as a
+    # union keyed by gateway type.
+    #
+    # @note GatewayConnectionResources is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GatewayConnectionResources corresponding to the set member.
+    #
+    # @!attribute [rw] host_shared_alb
+    #   The Application Load Balancer resources for a host-based, shared ALB
+    #   gateway.
+    #   @return [Array<Types::GatewayConnectionAlbResources>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayConnectionResources AWS API Documentation
+    #
+    class GatewayConnectionResources < Struct.new(
+      :host_shared_alb,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class HostSharedAlb < GatewayConnectionResources; end
+      class Unknown < GatewayConnectionResources; end
+    end
+
+    # A gateway connector that attaches an Amazon ECS service to a gateway
+    # ingress path. The connector specifies the service port that receives
+    # gateway-managed ingress traffic, along with the health check and
+    # traffic filters that the gateway applies. A service can have at most
+    # one gateway connector.
+    #
+    # @!attribute [rw] port_name
+    #   The name of the service port that the gateway routes ingress traffic
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check
+    #   The health check that the gateway uses to determine whether the
+    #   targets for this connector are healthy.
+    #   @return [Types::GatewayConnectorHealthCheck]
+    #
+    # @!attribute [rw] filters
+    #   The filters that control which gateway ingress paths the connector
+    #   applies to.
+    #   @return [Types::GatewayConnectorFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayConnector AWS API Documentation
+    #
+    class GatewayConnector < Struct.new(
+      :port_name,
+      :health_check,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filters that determine which gateway ingress paths a connector
+    # applies to.
+    #
+    # @!attribute [rw] access_types
+    #   The access types of the gateway ingress paths that the connector
+    #   applies to.
+    #
+    #   The access type can be one of the following values:
+    #
+    #   * `PUBLIC` - The ingress path is publicly accessible.
+    #
+    #   * `PRIVATE` - The ingress path is only accessible privately.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayConnectorFilters AWS API Documentation
+    #
+    class GatewayConnectorFilters < Struct.new(
+      :access_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The health check configuration that a gateway uses to evaluate the
+    # targets associated with a gateway connector.
+    #
+    # @!attribute [rw] health_check_protocol
+    #   The protocol that the gateway uses to perform health checks.
+    #
+    #   Valid values:
+    #
+    #   * `HTTP` - Health checks are performed over HTTP.
+    #
+    #   * `HTTPS` - Health checks are performed over HTTPS.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_port
+    #   The port that the gateway uses to perform health checks on the
+    #   targets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] health_check_path
+    #   The destination path for health check requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_timeout_seconds
+    #   The amount of time, in seconds, during which no response from a
+    #   target means a failed health check.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] health_check_interval_seconds
+    #   The approximate amount of time, in seconds, between health checks of
+    #   an individual target.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] healthy_threshold_count
+    #   The number of consecutive successful health checks that a target
+    #   must pass before the gateway considers it healthy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unhealthy_threshold_count
+    #   The number of consecutive failed health checks that a target must
+    #   fail before the gateway considers it unhealthy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] matcher
+    #   The HTTP or gRPC codes that indicate a successful health check
+    #   response from a target.
+    #   @return [Types::GatewayConnectorHealthCheckMatcher]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayConnectorHealthCheck AWS API Documentation
+    #
+    class GatewayConnectorHealthCheck < Struct.new(
+      :health_check_protocol,
+      :health_check_port,
+      :health_check_path,
+      :health_check_timeout_seconds,
+      :health_check_interval_seconds,
+      :healthy_threshold_count,
+      :unhealthy_threshold_count,
+      :matcher)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The codes that indicate a successful health check response from a
+    # target.
+    #
+    # @!attribute [rw] http_code
+    #   The HTTP codes that indicate a successful response from a target.
+    #   @return [String]
+    #
+    # @!attribute [rw] grpc_code
+    #   The gRPC codes that indicate a successful response from a target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayConnectorHealthCheckMatcher AWS API Documentation
+    #
+    class GatewayConnectorHealthCheckMatcher < Struct.new(
+      :http_code,
+      :grpc_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The access log configuration for the load balancers that a gateway
+    # manages.
+    #
+    # @!attribute [rw] destination
+    #   The destination where access logs are delivered.
+    #   @return [Types::GatewayElbAccessLogDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayElbAccessLogConfiguration AWS API Documentation
+    #
+    class GatewayElbAccessLogConfiguration < Struct.new(
+      :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The destination where the access logs for a gateway's load balancers
+    # are delivered.
+    #
+    # @note GatewayElbAccessLogDestination is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note GatewayElbAccessLogDestination is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GatewayElbAccessLogDestination corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   The Amazon S3 destination for access logs.
+    #   @return [Types::GatewayElbAccessLogS3Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayElbAccessLogDestination AWS API Documentation
+    #
+    class GatewayElbAccessLogDestination < Struct.new(
+      :s3,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < GatewayElbAccessLogDestination; end
+      class Unknown < GatewayElbAccessLogDestination; end
+    end
+
+    # The Amazon S3 destination for the access logs of a gateway's load
+    # balancers.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket where access logs are delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The object key prefix for the access logs in the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayElbAccessLogS3Destination AWS API Documentation
+    #
+    class GatewayElbAccessLogS3Destination < Struct.new(
+      :bucket,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The network configuration for the load balancers that a gateway
+    # manages.
+    #
+    # @!attribute [rw] inbound_security_group
+    #   The ID of a security group that you provide to control inbound
+    #   traffic to the load balancers that the gateway manages. When you
+    #   specify a security group, the gateway doesn't create inbound rules
+    #   on the security group it manages.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnets
+    #   The subnets for the load balancers that the gateway manages. The
+    #   default is the subnets in the default VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the load balancers that the gateway manages.
+    #   The default is `dualstack`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayElbNetworkConfiguration AWS API Documentation
+    #
+    class GatewayElbNetworkConfiguration < Struct.new(
+      :inbound_security_group,
+      :subnets,
+      :ip_address_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The gateway-managed infrastructure in a `DescribeGatewayResources`
+    # response, as a union keyed by gateway type.
+    #
+    # @note GatewayInfrastructureResources is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GatewayInfrastructureResources corresponding to the set member.
+    #
+    # @!attribute [rw] host_shared_alb
+    #   The Application Load Balancer resource groups for a host-based,
+    #   shared ALB gateway.
+    #   @return [Array<Types::ElbGatewayResources>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayInfrastructureResources AWS API Documentation
+    #
+    class GatewayInfrastructureResources < Struct.new(
+      :host_shared_alb,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class HostSharedAlb < GatewayInfrastructureResources; end
+      class Unknown < GatewayInfrastructureResources; end
+    end
+
+    # The specified gateway wasn't found. Check that the gateway name or
+    # ARN is correct and that the gateway exists in your account and Region.
+    #
+    # @!attribute [rw] message
+    #   Message that describes the cause of the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayNotFoundException AWS API Documentation
+    #
+    class GatewayNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single failed operation against a resource that a gateway manages.
+    #
+    # @!attribute [rw] operation
+    #   The IAM-style action identifier of the operation that failed, such
+    #   as `elasticloadbalancing:ModifyLoadBalancerAttributes`.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code returned by the failed operation, passed through from
+    #   the downstream service, such as `AccessDenied`.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayOperationError AWS API Documentation
+    #
+    class GatewayOperationError < Struct.new(
+      :operation,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The failures for a single resource that was touched by an asynchronous
+    # gateway process.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource that failed to
+    #   update, such as a load balancer ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   The errors that were encountered while operating on the resource.
+    #   @return [Array<Types::GatewayOperationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayResourceFailure AWS API Documentation
+    #
+    class GatewayResourceFailure < Struct.new(
+      :arn,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # `DescribeGatewayResources` returns the gateway-managed infrastructure,
+    # grouped by gateway type.
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   The infrastructure resources that the gateway manages.
+    #   @return [Types::GatewayInfrastructureResources]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayResources AWS API Documentation
+    #
+    class GatewayResources < Struct.new(
+      :gateway_arn,
+      :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A gateway route, which represents the association between a service
+    # and a gateway and the service-specific infrastructure that the gateway
+    # manages for the service's revisions.
+    #
+    # @!attribute [rw] gateway_route_arn
+    #   The Amazon Resource Name (ARN) of the gateway route.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The Amazon Resource Name (ARN) of the service associated with the
+    #   route.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_container_port_name
+    #   The task definition container port name that the route targets on
+    #   the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the gateway route.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_url
+    #   The URL for accessing the service, including the `https://` scheme.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   The service-specific infrastructure that the gateway manages for the
+    #   route, keyed by gateway type.
+    #   @return [Types::GatewayRouteResources]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayRoute AWS API Documentation
+    #
+    class GatewayRoute < Struct.new(
+      :gateway_route_arn,
+      :service_arn,
+      :service_container_port_name,
+      :status,
+      :service_url,
+      :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Application Load Balancer resources that a gateway manages for a
+    # route.
+    #
+    # @!attribute [rw] acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Certificate Manager certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] load_balancer_arn
+    #   The Amazon Resource Name (ARN) of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener.
+    #   @return [String]
+    #
+    # @!attribute [rw] listener_rule_arn
+    #   The Amazon Resource Name (ARN) of the listener rule for production
+    #   traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_listener_rule_arns
+    #   The Amazon Resource Names (ARNs) of the listener rules for test
+    #   traffic. There is one rule except when a test header configuration
+    #   is being changed to another.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] load_balancer_security_groups
+    #   The security groups attached to the load balancer.
+    #   @return [Array<Types::GatewayRouteLoadBalancerSecurityGroup>]
+    #
+    # @!attribute [rw] service_security_group_arn
+    #   The Amazon Resource Name (ARN) of the service security group in
+    #   which the gateway manages the ingress rule for this route.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayRouteAlbResources AWS API Documentation
+    #
+    class GatewayRouteAlbResources < Struct.new(
+      :acm_certificate_arn,
+      :load_balancer_arn,
+      :listener_arn,
+      :listener_rule_arn,
+      :test_listener_rule_arns,
+      :load_balancer_security_groups,
+      :service_security_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group attached to the load balancer for a gateway route.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_arns
+    #   The Amazon Resource Names (ARNs) of the security group rules.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayRouteLoadBalancerSecurityGroup AWS API Documentation
+    #
+    class GatewayRouteLoadBalancerSecurityGroup < Struct.new(
+      :arn,
+      :rule_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The service-specific infrastructure that a gateway manages for a
+    # route, keyed by gateway type.
+    #
+    # @note GatewayRouteResources is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GatewayRouteResources corresponding to the set member.
+    #
+    # @!attribute [rw] host_shared_alb
+    #   The Application Load Balancer resources for a host-based, shared ALB
+    #   gateway.
+    #   @return [Array<Types::GatewayRouteAlbResources>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayRouteResources AWS API Documentation
+    #
+    class GatewayRouteResources < Struct.new(
+      :host_shared_alb,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class HostSharedAlb < GatewayRouteResources; end
+      class Unknown < GatewayRouteResources; end
+    end
+
+    # A summary of a gateway route that is returned by the
+    # `ListGatewayRoutes` operation.
+    #
+    # @!attribute [rw] gateway_route_arn
+    #   The Amazon Resource Name (ARN) of the gateway route.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The Amazon Resource Name (ARN) of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_container_port_name
+    #   The task definition container port name that the route targets on
+    #   the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the gateway route.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayRouteSummary AWS API Documentation
+    #
+    class GatewayRouteSummary < Struct.new(
+      :gateway_route_arn,
+      :gateway_arn,
+      :cluster_arn,
+      :service_arn,
+      :service_container_port_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a gateway that is returned by the `ListGateways`
+    # operation.
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix timestamp for the time when the gateway was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewaySummary AWS API Documentation
+    #
+    class GatewaySummary < Struct.new(
+      :gateway_arn,
+      :name,
+      :status,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A header-based rule that identifies test traffic for progressive
+    # deployments.
+    #
+    # @!attribute [rw] name
+    #   The name of the header to match for test traffic routing.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The header values to match for test traffic routing.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayTestTrafficHeader AWS API Documentation
+    #
+    class GatewayTestTrafficHeader < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the service that the task sets exist in.
@@ -8590,6 +9859,74 @@ module Aws::ECS
     class HostEntry < Struct.new(
       :hostname,
       :ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a gateway that uses shared Application Load
+    # Balancers with host-based routing. Where they apply, the field names
+    # and values are kept consistent with the Elastic Load Balancing API.
+    #
+    # @!attribute [rw] network_configuration
+    #   The network configuration for the load balancers that the gateway
+    #   manages.
+    #   @return [Types::GatewayElbNetworkConfiguration]
+    #
+    # @!attribute [rw] scheme
+    #   Specifies whether the load balancers the gateway manages are
+    #   `internet-facing` or `internal`. The default is `internet-facing`.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the WAF web ACL to associate with
+    #   the load balancers that the gateway manages.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_logs
+    #   The access log configuration for the load balancers that the gateway
+    #   manages.
+    #   @return [Types::GatewayElbAccessLogConfiguration]
+    #
+    # @!attribute [rw] port
+    #   The port that the load balancer listener uses is 443. The gateway
+    #   supports only HTTPS at port 443.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol for the load balancer listener is `HTTPS`. No other
+    #   protocol is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_alb_count
+    #   The maximum number of Application Load Balancers that the gateway
+    #   manages. The default is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_desync
+    #   The desync mitigation mode for the load balancers that the gateway
+    #   manages, which determines how the load balancers handle requests
+    #   that might pose a security risk. The default is `defensive`.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_traffic_rules
+    #   The rules that route test traffic for progressive deployments.
+    #   During a progressive deployment, requests whose headers match these
+    #   rules are routed to the new service revision so that it can be
+    #   validated before production traffic shifts to it.
+    #   @return [Types::GatewayAlbTestTrafficRules]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HostSharedAlbConfiguration AWS API Documentation
+    #
+    class HostSharedAlbConfiguration < Struct.new(
+      :network_configuration,
+      :scheme,
+      :web_acl_arn,
+      :access_logs,
+      :port,
+      :protocol,
+      :max_alb_count,
+      :http_desync,
+      :test_traffic_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10051,6 +11388,179 @@ module Aws::ECS
     #
     class ListDaemonsResponse < Struct.new(
       :daemon_summaries_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway
+    #   The name or Amazon Resource Name (ARN) of a gateway to filter the
+    #   results by.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster
+    #   The name or Amazon Resource Name (ARN) of a cluster to filter the
+    #   results by.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The association status to filter the results by.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that the operation returns in a single
+    #   page. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListGatewayClusterAssociationsRequest AWS API Documentation
+    #
+    class ListGatewayClusterAssociationsRequest < Struct.new(
+      :gateway,
+      :cluster,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_cluster_associations
+    #   The gateway-cluster associations that match the request.
+    #   @return [Array<Types::GatewayClusterAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future request to retrieve the
+    #   next page of results. This value is `null` when there are no more
+    #   results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListGatewayClusterAssociationsResponse AWS API Documentation
+    #
+    class ListGatewayClusterAssociationsResponse < Struct.new(
+      :gateway_cluster_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway
+    #   The name or Amazon Resource Name (ARN) of a gateway to filter the
+    #   results by.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster
+    #   The name or Amazon Resource Name (ARN) of a cluster to filter the
+    #   results by.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The name or Amazon Resource Name (ARN) of a service to filter the
+    #   results by. Because services can span clusters, a service name
+    #   isn't necessarily unique and can match multiple services.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_container_port_name
+    #   The name of a task definition container port to filter the results
+    #   by.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The gateway route status to filter the results by.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that the operation returns in a single
+    #   page. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListGatewayRoutesRequest AWS API Documentation
+    #
+    class ListGatewayRoutesRequest < Struct.new(
+      :gateway,
+      :cluster,
+      :service,
+      :service_container_port_name,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_routes
+    #   The gateway routes that match the request.
+    #   @return [Array<Types::GatewayRouteSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future request to retrieve the
+    #   next page of results. This value is `null` when there are no more
+    #   results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListGatewayRoutesResponse AWS API Documentation
+    #
+    class ListGatewayRoutesResponse < Struct.new(
+      :gateway_routes,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] names
+    #   The gateway names to filter the results by. You can specify up to 10
+    #   names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The gateway statuses to filter the results by.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of gateway results that `ListGateways` returns in
+    #   a single page. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListGateways` request where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListGatewaysRequest AWS API Documentation
+    #
+    class ListGatewaysRequest < Struct.new(
+      :names,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateways
+    #   The list of gateways that match the request.
+    #   @return [Array<Types::GatewaySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListGateways` request.
+    #   When the results of a `ListGateways` request exceed `maxResults`,
+    #   this value can be used to retrieve the next page of results. This
+    #   value is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListGatewaysResponse AWS API Documentation
+    #
+    class ListGatewaysResponse < Struct.new(
+      :gateways,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -16166,6 +17676,11 @@ module Aws::ECS
     #   configuration.
     #   @return [Types::ServiceRevisionOverrides]
     #
+    # @!attribute [rw] gateway_connectors
+    #   The gateway connectors that are associated with the service
+    #   revision.
+    #   @return [Array<Types::GatewayConnector>]
+    #
     # @!attribute [rw] monitoring
     #   The optional monitoring configuration for the service, which defines
     #   the resolution for the service-level `CPUUtilization` and
@@ -16197,6 +17712,7 @@ module Aws::ECS
       :resolved_configuration,
       :ecs_managed_resources,
       :overrides,
+      :gateway_connectors,
       :monitoring)
       SENSITIVE = []
       include Aws::Structure
@@ -19143,6 +20659,154 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The mutable configuration fields for a gateway that uses shared
+    # Application Load Balancers. Only fields that can be changed without
+    # interrupting traffic are included.
+    #
+    # @!attribute [rw] network_configuration
+    #   The mutable network configuration for the load balancers that the
+    #   gateway manages.
+    #   @return [Types::UpdateGatewayNetworkConfiguration]
+    #
+    # @!attribute [rw] max_alb_count
+    #   The maximum number of Application Load Balancers that the gateway
+    #   manages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the WAF web ACL to associate with
+    #   the load balancers that the gateway manages.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_logs
+    #   The access log configuration for the load balancers that the gateway
+    #   manages.
+    #   @return [Types::GatewayElbAccessLogConfiguration]
+    #
+    # @!attribute [rw] http_desync
+    #   The desync mitigation mode for the load balancers that the gateway
+    #   manages.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_traffic_rules
+    #   The rules that route test traffic for progressive deployments.
+    #   @return [Types::GatewayAlbTestTrafficRules]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateGatewayAlbConfiguration AWS API Documentation
+    #
+    class UpdateGatewayAlbConfiguration < Struct.new(
+      :network_configuration,
+      :max_alb_count,
+      :web_acl_arn,
+      :access_logs,
+      :http_desync,
+      :test_traffic_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type-specific configuration to change on a gateway. The variant
+    # must match the gateway's existing type.
+    #
+    # @note UpdateGatewayConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] host_shared_alb
+    #   The mutable configuration for a host-based, shared Application Load
+    #   Balancer gateway.
+    #   @return [Types::UpdateGatewayAlbConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateGatewayConfiguration AWS API Documentation
+    #
+    class UpdateGatewayConfiguration < Struct.new(
+      :host_shared_alb,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class HostSharedAlb < UpdateGatewayConfiguration; end
+      class Unknown < UpdateGatewayConfiguration; end
+    end
+
+    # The mutable network configuration for the load balancers that a
+    # gateway manages.
+    #
+    # @!attribute [rw] inbound_security_group
+    #   The ID of a security group that you provide to control inbound
+    #   traffic to the load balancers that the gateway manages. When you
+    #   specify a security group, the gateway doesn't create inbound rules
+    #   on the security group it manages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateGatewayNetworkConfiguration AWS API Documentation
+    #
+    class UpdateGatewayNetworkConfiguration < Struct.new(
+      :inbound_security_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway
+    #   The name or Amazon Resource Name (ARN) of the gateway to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] infrastructure_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the gateway
+    #   assumes to manage infrastructure on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Specifies whether to enable deletion protection for the gateway.
+    #   When enabled, the gateway can't be deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] configuration
+    #   The updated type-specific configuration for the gateway. The
+    #   configuration variant must match the gateway's existing type, and
+    #   only mutable fields can be changed.
+    #   @return [Types::UpdateGatewayConfiguration]
+    #
+    # @!attribute [rw] propagate_tags
+    #   Specifies whether to propagate the tags from the gateway to the
+    #   infrastructure that the gateway manages. If you don't specify a
+    #   value, the gateway's existing setting is unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateGatewayRequest AWS API Documentation
+    #
+    class UpdateGatewayRequest < Struct.new(
+      :gateway,
+      :infrastructure_role_arn,
+      :deletion_protection,
+      :configuration,
+      :propagate_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the gateway. After a successful update request, the
+    #   status is `UPDATE_IN_PROGRESS`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateGatewayResponse AWS API Documentation
+    #
+    class UpdateGatewayResponse < Struct.new(
+      :gateway_arn,
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There's already a current Amazon ECS container agent update in
     # progress on the container instance that's specified. If the container
     # agent becomes disconnected while it's in a transitional stage, such
@@ -19607,6 +21271,12 @@ module Aws::ECS
     #   This parameter triggers a new service deployment.
     #   @return [Array<Types::VpcLatticeConfiguration>]
     #
+    # @!attribute [rw] gateway_connectors
+    #   The updated set of gateway connectors that connect the service to a
+    #   gateway ingress path. A service supports no more than one gateway
+    #   connector.
+    #   @return [Array<Types::GatewayConnector>]
+    #
     # @!attribute [rw] monitoring
     #   The optional monitoring configuration for the service, which defines
     #   the resolution for the service-level `CPUUtilization` and
@@ -19639,6 +21309,7 @@ module Aws::ECS
       :service_connect_configuration,
       :volume_configurations,
       :vpc_lattice_configurations,
+      :gateway_connectors,
       :monitoring)
       SENSITIVE = []
       include Aws::Structure

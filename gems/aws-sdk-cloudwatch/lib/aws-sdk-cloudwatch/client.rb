@@ -199,12 +199,19 @@ module Aws::CloudWatch
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1625,6 +1632,8 @@ module Aws::CloudWatch
     #   resp.anomaly_detectors[0].configuration.excluded_time_ranges[0].start_time #=> Time
     #   resp.anomaly_detectors[0].configuration.excluded_time_ranges[0].end_time #=> Time
     #   resp.anomaly_detectors[0].configuration.metric_timezone #=> String
+    #   resp.anomaly_detectors[0].configuration.adaptation_speed #=> String, one of "FAST", "NORMAL", "SLOW"
+    #   resp.anomaly_detectors[0].configuration.outlier_filtering_strength #=> String, one of "MINIMAL", "MODERATE", "STRICT"
     #   resp.anomaly_detectors[0].state_value #=> String, one of "PENDING_TRAINING", "TRAINED_INSUFFICIENT_DATA", "TRAINED"
     #   resp.anomaly_detectors[0].metric_characteristics.periodic_spikes #=> Boolean
     #   resp.anomaly_detectors[0].single_metric_anomaly_detector.account_id #=> String
@@ -3514,6 +3523,8 @@ module Aws::CloudWatch
     #         },
     #       ],
     #       metric_timezone: "AnomalyDetectorMetricTimezone",
+    #       adaptation_speed: "FAST", # accepts FAST, NORMAL, SLOW
+    #       outlier_filtering_strength: "MINIMAL", # accepts MINIMAL, MODERATE, STRICT
     #     },
     #     metric_characteristics: {
     #       periodic_spikes: false,
@@ -5908,7 +5919,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.150.0'
+      context[:gem_version] = '1.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -73,6 +73,8 @@ module Aws::CloudWatch
     class AnomalyDetectorConfiguration
       attr_accessor excluded_time_ranges: ::Array[Types::Range]
       attr_accessor metric_timezone: ::String
+      attr_accessor adaptation_speed: ("FAST" | "NORMAL" | "SLOW")
+      attr_accessor outlier_filtering_strength: ("MINIMAL" | "MODERATE" | "STRICT")
       SENSITIVE: []
     end
 

@@ -48,6 +48,9 @@ module Aws
       class DaemonNotFoundException < ServiceError
         def message: () -> ::String
       end
+      class GatewayNotFoundException < ServiceError
+        def message: () -> ::String
+      end
       class InvalidParameterException < ServiceError
         def message: () -> ::String
       end

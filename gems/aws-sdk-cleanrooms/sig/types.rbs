@@ -712,6 +712,7 @@ module Aws::CleanRooms
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor table_reference: Types::TableReference
+      attr_accessor table_type: ("GLUE" | "SNOWFLAKE" | "ATHENA" | "DATABRICKS")
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
@@ -855,6 +856,7 @@ module Aws::CleanRooms
       attr_accessor id: ::String
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor table_type: ("GLUE" | "SNOWFLAKE" | "ATHENA" | "DATABRICKS")
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
@@ -1156,6 +1158,31 @@ module Aws::CleanRooms
       attr_accessor allow_duplicates: bool
       attr_accessor allow_joins_on_columns_with_different_names: bool
       attr_accessor preserve_nulls: bool
+      SENSITIVE: []
+    end
+
+    class DatabricksConnectionType
+      attr_accessor delta_sharing: Types::DatabricksDeltaSharingConnection
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DeltaSharing < DatabricksConnectionType
+      end
+      class Unknown < DatabricksConnectionType
+      end
+    end
+
+    class DatabricksDeltaSharingConnection
+      attr_accessor delta_share_endpoint: ::String
+      attr_accessor share_name: ::String
+      SENSITIVE: []
+    end
+
+    class DatabricksTableReference
+      attr_accessor schema_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor workspace_url: ::String
+      attr_accessor connection_type: Types::DatabricksConnectionType
       SENSITIVE: []
     end
 
@@ -3186,6 +3213,7 @@ module Aws::CleanRooms
       attr_accessor glue: Types::GlueTableReference
       attr_accessor snowflake: Types::SnowflakeTableReference
       attr_accessor athena: Types::AthenaTableReference
+      attr_accessor databricks: Types::DatabricksTableReference
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -3194,6 +3222,8 @@ module Aws::CleanRooms
       class Snowflake < TableReference
       end
       class Athena < TableReference
+      end
+      class Databricks < TableReference
       end
       class Unknown < TableReference
       end

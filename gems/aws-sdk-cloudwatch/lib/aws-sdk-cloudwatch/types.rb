@@ -339,11 +339,48 @@ module Aws::CloudWatch
     #   [1]: https://en.wikipedia.org/wiki/Tz_database
     #   @return [String]
     #
+    # @!attribute [rw] adaptation_speed
+    #   The speed at which the anomaly detection model adapts to sustained
+    #   changes in the metric's baseline. Faster adaptation lets the model
+    #   track shifting workloads sooner, but increases the chance that the
+    #   model treats a real, lasting change as normal.
+    #
+    #   Valid values:
+    #
+    #   * `FAST` - The model adapts quickly to sustained changes in the
+    #     baseline.
+    #
+    #   * `NORMAL` - The model adapts at a moderate pace. This is the
+    #     default value.
+    #
+    #   * `SLOW` - The model adapts slowly, reducing the risk of treating a
+    #     real change as normal.
+    #   @return [String]
+    #
+    # @!attribute [rw] outlier_filtering_strength
+    #   The aggressiveness with which CloudWatch filters outliers from the
+    #   metric data that the anomaly detection model uses. Stronger
+    #   filtering excludes more extreme values, which can produce a tighter
+    #   band of expected values but may also suppress legitimate spikes.
+    #
+    #   Valid values:
+    #
+    #   * `MINIMAL` - Excludes only the most extreme outliers.
+    #
+    #   * `MODERATE` - Excludes a moderate range of outliers. This is the
+    #     default value.
+    #
+    #   * `STRICT` - Excludes a wider range of outliers, which can suppress
+    #     legitimate spikes.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AnomalyDetectorConfiguration AWS API Documentation
     #
     class AnomalyDetectorConfiguration < Struct.new(
       :excluded_time_ranges,
-      :metric_timezone)
+      :metric_timezone,
+      :adaptation_speed,
+      :outlier_filtering_strength)
       SENSITIVE = []
       include Aws::Structure
     end

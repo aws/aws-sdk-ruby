@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.326.0 (2026-10-20)
+------------------
+
+* Feature - Amazon RDS now supports On-Demand Capacity Reservations for DB instances.
+
 1.325.0 (2026-10-19)
 ------------------
 

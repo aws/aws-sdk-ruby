@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+3.259.0 (2026-10-20)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
 * Feature - Standardize clock skew correction: use a 4 minute detection threshold and an NTP-style midpoint calculation, refresh the stored correction from every response so a stale value can heal, and ignore cached (`Age` header) and slow (over 15 minute) responses. Add a `disable_clock_skew_correction` option (`AWS_DISABLE_CLOCK_SKEW_CORRECTION`) that takes precedence over `correct_clock_skew`, which continues to work when the new option is unset.
 
 3.258.0 (2026-10-19)

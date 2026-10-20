@@ -199,12 +199,19 @@ module Aws::CloudWatchOmni
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -5014,14 +5021,12 @@ module Aws::CloudWatchOmni
     #   Pass * to list all principals. Maximum 128 characters.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return. Defaults to 10. Valid only
-    #   when searchQuery is *; other searches reject this parameter and
-    #   return at most 10 results.
+    #   The maximum number of results to return. Defaults to 100.
     #
     # @option params [String] :next_token
-    #   A token to retrieve the next page of results. Valid only when
-    #   searchQuery is *; other searches do not paginate and reject this
-    #   parameter. Tokens expire after 24 hours.
+    #   A token to retrieve the next page of results. Supply the same
+    #   searchQuery used on the request that returned it. Tokens expire after
+    #   24 hours.
     #
     # @return [Types::SearchPrincipalsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5033,10 +5038,9 @@ module Aws::CloudWatchOmni
     #
     # @example Example: Search principals by name
     #
-    #   # The following example searches a domain for principals whose name matches a text query. A text search (any searchQuery
-    #   # other than *) returns at most 10 results and does not paginate, so maxResults and nextToken are not supplied and no
-    #   # nextToken is returned. To grant access to a result, pass its principalId to CreateAccessGrant with a principalType of
-    #   # IDC_USER for a user or IDC_GROUP for a group. Payloads are shown as JSON; on the wire they are CBOR-encoded.
+    #   # The following example searches a domain for principals whose name matches a text query. No nextToken is returned, so
+    #   # there are no more results. To grant access to a result, pass its principalId to CreateAccessGrant with a principalType
+    #   # of IDC_USER for a user or IDC_GROUP for a group. Payloads are shown as JSON; on the wire they are CBOR-encoded.
     #
     #   resp = client.search_principals({
     #     domain_id: "d-1a2b3c4d5e", 
@@ -6062,7 +6066,7 @@ module Aws::CloudWatchOmni
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchomni'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -375,6 +375,7 @@ module Aws::MarketplaceCatalog
       attr_accessor resale_authorization_summary: Types::ResaleAuthorizationSummary
       attr_accessor machine_learning_product_summary: Types::MachineLearningProductSummary
       attr_accessor offer_set_summary: Types::OfferSetSummary
+      attr_accessor express_private_offer_configuration_summary: Types::ExpressPrivateOfferConfigurationSummary
       SENSITIVE: []
     end
 
@@ -387,6 +388,7 @@ module Aws::MarketplaceCatalog
       attr_accessor resale_authorization_filters: Types::ResaleAuthorizationFilters
       attr_accessor machine_learning_product_filters: Types::MachineLearningProductFilters
       attr_accessor offer_set_filters: Types::OfferSetFilters
+      attr_accessor express_private_offer_configuration_filters: Types::ExpressPrivateOfferConfigurationFilters
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -406,6 +408,8 @@ module Aws::MarketplaceCatalog
       end
       class OfferSetFilters < EntityTypeFilters
       end
+      class ExpressPrivateOfferConfigurationFilters < EntityTypeFilters
+      end
       class Unknown < EntityTypeFilters
       end
     end
@@ -419,6 +423,7 @@ module Aws::MarketplaceCatalog
       attr_accessor resale_authorization_sort: Types::ResaleAuthorizationSort
       attr_accessor machine_learning_product_sort: Types::MachineLearningProductSort
       attr_accessor offer_set_sort: Types::OfferSetSort
+      attr_accessor express_private_offer_configuration_sort: Types::ExpressPrivateOfferConfigurationSort
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -438,6 +443,8 @@ module Aws::MarketplaceCatalog
       end
       class OfferSetSort < EntityTypeSort
       end
+      class ExpressPrivateOfferConfigurationSort < EntityTypeSort
+      end
       class Unknown < EntityTypeSort
       end
     end
@@ -451,6 +458,40 @@ module Aws::MarketplaceCatalog
     class ErrorScope
       attr_accessor name: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ExpressPrivateOfferConfigurationEntityIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExpressPrivateOfferConfigurationFilters
+      attr_accessor entity_id: Types::ExpressPrivateOfferConfigurationEntityIdFilter
+      attr_accessor product_id: Types::ExpressPrivateOfferConfigurationProductIdFilter
+      attr_accessor state: Types::ExpressPrivateOfferConfigurationStateFilter
+      SENSITIVE: []
+    end
+
+    class ExpressPrivateOfferConfigurationProductIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExpressPrivateOfferConfigurationSort
+      attr_accessor sort_by: ("EntityId" | "LastModifiedDate" | "ProductId" | "State")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ExpressPrivateOfferConfigurationStateFilter
+      attr_accessor value_list: ::Array[("ACTIVE" | "INACTIVE")]
+      SENSITIVE: []
+    end
+
+    class ExpressPrivateOfferConfigurationSummary
+      attr_accessor product_id: ::String
+      attr_accessor state: ("ACTIVE" | "INACTIVE")
       SENSITIVE: []
     end
 

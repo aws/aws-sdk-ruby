@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2026-10-20)
+------------------
+
+* Feature - Amazon Bedrock Guardrails now supports a configurable tier for the contextual grounding policy via a new tier option. Select the Standard tier for grounding that better supports conversations and reasoning, with expanded language coverage.
+
 1.96.0 (2026-10-19)
 ------------------
 

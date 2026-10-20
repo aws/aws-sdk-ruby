@@ -54,7 +54,7 @@ module Aws::Snowball
   autoload :EndpointProvider, 'aws-sdk-snowball/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-snowball/endpoints'
 
-  GEM_VERSION = '1.108.0'
+  GEM_VERSION = '1.109.0'
 
 end
 
