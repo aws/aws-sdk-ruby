@@ -143,6 +143,33 @@ module Aws
         end
 
         describe '#retryable?' do
+          { 429 => 'Throttling', 503 => 'ServerError' }.each do |status, type|
+            it "uses status #{status} to classify an ordinary callback failure" do
+              http_response.signal_headers(status, {})
+              http_response.on_done { raise 'callback failed' }
+              http_response.signal_done
+              expect(inspector(http_response.error).retryable?).to be(true)
+              expect(inspector(http_response.error).error_type).to eq(type)
+            end
+          end
+
+          it 'classifies an existing NetworkingError from a callback as transient' do
+            error = Smithy::Client::NetworkingError.new(IOError.new('nested request failed'))
+            http_response.signal_headers(200, {})
+            http_response.on_done { raise error }
+            http_response.signal_done
+            expect(http_response.error).to be(error)
+            expect(inspector(http_response.error).retryable?).to be(true)
+            expect(inspector(http_response.error).error_type).to eq('Transient')
+          end
+
+          it 'uses the normal credential classification for an error raised by a callback' do
+            error = service_error('ExpiredToken')
+            http_response.on_done { raise error }
+            http_response.signal_done
+            expect(inspector(http_response.error).expired_creds?).to be(true)
+          end
+
           it 'returns false for basic client errors' do
             expect(inspector(service_error('NotFound')).retryable?).to be false
           end

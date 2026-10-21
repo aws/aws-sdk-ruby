@@ -83,6 +83,26 @@ module Aws
 
           subject { RetryErrors::Handler.new }
 
+          [429, 503].each do |status|
+            it "retries an ordinary callback failure on status #{status}" do
+              allow(Kernel).to receive(:sleep)
+              config.retry_strategy = Smithy::Client::Retry::Standard.new
+              error = RuntimeError.new('response callback failed')
+              calls = 0
+              context.http_response.on_data { raise error if calls == 1 }
+              subject.handler = proc do |ctx|
+                calls += 1
+                ctx.http_response.signal_headers(calls == 1 ? status : 200, {})
+                ctx.http_response.signal_data('data')
+                ctx.http_response.signal_done
+                Smithy::Client::Response.new(context: ctx)
+              end
+              expect(subject.call(context).error).to be_nil
+              expect(context.retries).to eq(1)
+              expect(calls).to eq(2)
+            end
+          end
+
           # Helper to run retry test cases through the handler
           def handle_with_retry(test_cases)
             allow(Kernel).to receive(:sleep)
