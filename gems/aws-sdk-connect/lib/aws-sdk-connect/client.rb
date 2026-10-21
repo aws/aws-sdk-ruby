@@ -10208,6 +10208,7 @@ module Aws::Connect
     #   resp.security_profile.granular_access_control_configuration.data_table_access_control_configuration.primary_attribute_access_control_configuration.primary_attribute_values[0].attribute_name #=> String
     #   resp.security_profile.granular_access_control_configuration.data_table_access_control_configuration.primary_attribute_access_control_configuration.primary_attribute_values[0].values #=> Array
     #   resp.security_profile.granular_access_control_configuration.data_table_access_control_configuration.primary_attribute_access_control_configuration.primary_attribute_values[0].values[0] #=> String
+    #   resp.security_profile.type #=> String, one of "AWS_MANAGED", "CUSTOMER_MANAGED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeSecurityProfile AWS API Documentation
     #
@@ -19469,6 +19470,7 @@ module Aws::Connect
     #   resp.security_profile_summary_list[0].name #=> String
     #   resp.security_profile_summary_list[0].last_modified_time #=> Time
     #   resp.security_profile_summary_list[0].last_modified_region #=> String
+    #   resp.security_profile_summary_list[0].type #=> String, one of "AWS_MANAGED", "CUSTOMER_MANAGED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfiles AWS API Documentation
@@ -23449,6 +23451,7 @@ module Aws::Connect
     #   resp.security_profiles[0].description #=> String
     #   resp.security_profiles[0].tags #=> Hash
     #   resp.security_profiles[0].tags["TagKey"] #=> String
+    #   resp.security_profiles[0].type #=> String, one of "AWS_MANAGED", "CUSTOMER_MANAGED"
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -32027,7 +32030,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.287.0'
+      context[:gem_version] = '1.288.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

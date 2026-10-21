@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.198.0 (2026-10-21)
+------------------
+
+* Feature - Adds AV1 CBR rate control and scene change detection. New sliding window peak bitrate setting for all codecs. DASH adaptation set grouping update. Option to disable the AV1 perceptual quality filter. Support for vertical (portrait) AV1 encoding.
+
 1.197.0 (2026-10-20)
 ------------------
 

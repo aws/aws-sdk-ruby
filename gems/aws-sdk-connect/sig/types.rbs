@@ -7910,6 +7910,7 @@ module Aws::Connect
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
       attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
       SENSITIVE: []
     end
 
@@ -7932,6 +7933,7 @@ module Aws::Connect
       attr_accessor security_profile_name: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
       SENSITIVE: []
     end
 
@@ -7941,6 +7943,7 @@ module Aws::Connect
       attr_accessor name: ::String
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
       SENSITIVE: []
     end
 

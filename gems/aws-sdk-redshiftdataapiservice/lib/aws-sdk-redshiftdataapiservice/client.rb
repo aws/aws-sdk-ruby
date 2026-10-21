@@ -757,6 +757,7 @@ module Aws::RedshiftDataAPIService
     #   * {Types::DescribeStatementResponse#result_rows #result_rows} => Integer
     #   * {Types::DescribeStatementResponse#result_size #result_size} => Integer
     #   * {Types::DescribeStatementResponse#redshift_query_id #redshift_query_id} => Integer
+    #   * {Types::DescribeStatementResponse#redshift_query_uuid #redshift_query_uuid} => String
     #   * {Types::DescribeStatementResponse#query_parameters #query_parameters} => Array&lt;Types::SqlParameter&gt;
     #   * {Types::DescribeStatementResponse#sub_statements #sub_statements} => Array&lt;Types::SubStatementData&gt;
     #   * {Types::DescribeStatementResponse#workgroup_name #workgroup_name} => String
@@ -789,6 +790,7 @@ module Aws::RedshiftDataAPIService
     #   resp.result_rows #=> Integer
     #   resp.result_size #=> Integer
     #   resp.redshift_query_id #=> Integer
+    #   resp.redshift_query_uuid #=> String
     #   resp.query_parameters #=> Array
     #   resp.query_parameters[0].name #=> String
     #   resp.query_parameters[0].value #=> String
@@ -803,6 +805,7 @@ module Aws::RedshiftDataAPIService
     #   resp.sub_statements[0].result_rows #=> Integer
     #   resp.sub_statements[0].result_size #=> Integer
     #   resp.sub_statements[0].redshift_query_id #=> Integer
+    #   resp.sub_statements[0].redshift_query_uuid #=> String
     #   resp.sub_statements[0].has_result_set #=> Boolean
     #   resp.workgroup_name #=> String
     #   resp.result_format #=> String, one of "JSON", "CSV"
@@ -1942,7 +1945,7 @@ module Aws::RedshiftDataAPIService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

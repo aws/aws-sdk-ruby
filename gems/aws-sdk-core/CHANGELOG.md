@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.260.0 (2026-10-21)
+------------------
+
 * Issue - Remove the `AAA Certificate Services` root from the bundled CA file. It cross-signed eMudhra intermediate CAs whose private keys were compromised. This only affects applications that opt in with `Aws.use_bundled_cert!` and use it to reach non-AWS endpoints; AWS service endpoints are not affected.
 
 * Feature - Bump the minimum version of the aws-eventstream dependency.

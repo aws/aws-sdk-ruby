@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.204.0 (2026-10-21)
+------------------
+
+* Feature - Adds support for SharePoint and OneDrive two-legged OAuth certificate credentials and Google Workspace service account credentials when creating data sources
+
 1.203.0 (2026-10-20)
 ------------------
 

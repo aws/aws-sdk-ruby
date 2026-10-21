@@ -120,6 +120,7 @@ module Aws::EC2
     AnalysisRouteTableRoute = Shapes::StructureShape.new(name: 'AnalysisRouteTableRoute')
     AnalysisSecurityGroupRule = Shapes::StructureShape.new(name: 'AnalysisSecurityGroupRule')
     AnalysisStatus = Shapes::StringShape.new(name: 'AnalysisStatus')
+    AnalysisTransitGatewayPolicyTableEntry = Shapes::StructureShape.new(name: 'AnalysisTransitGatewayPolicyTableEntry')
     ApplianceModeSupportValue = Shapes::StringShape.new(name: 'ApplianceModeSupportValue')
     ApplicationStatus = Shapes::StructureShape.new(name: 'ApplicationStatus')
     ApplicationStatusCheckAssociationObject = Shapes::StructureShape.new(name: 'ApplicationStatusCheckAssociationObject')
@@ -3175,6 +3176,7 @@ module Aws::EC2
     PerformanceFactorReferenceRequest = Shapes::StructureShape.new(name: 'PerformanceFactorReferenceRequest')
     PerformanceFactorReferenceSet = Shapes::ListShape.new(name: 'PerformanceFactorReferenceSet')
     PerformanceFactorReferenceSetRequest = Shapes::ListShape.new(name: 'PerformanceFactorReferenceSetRequest')
+    PerformanceStatusSummary = Shapes::StructureShape.new(name: 'PerformanceStatusSummary')
     Period = Shapes::IntegerShape.new(name: 'Period')
     PeriodType = Shapes::StringShape.new(name: 'PeriodType')
     PermissionGroup = Shapes::StringShape.new(name: 'PermissionGroup')
@@ -4653,6 +4655,15 @@ module Aws::EC2
     AnalysisSecurityGroupRule.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: String, location_name: "prefixListId"))
     AnalysisSecurityGroupRule.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "protocol"))
     AnalysisSecurityGroupRule.struct_class = Types::AnalysisSecurityGroupRule
+
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "ruleNumber"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "protocol"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:source_cidr, Shapes::ShapeRef.new(shape: String, location_name: "sourceCidr"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:destination_cidr, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidr"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:source_port_range, Shapes::ShapeRef.new(shape: PortRange, location_name: "sourcePortRange"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:destination_port_range, Shapes::ShapeRef.new(shape: PortRange, location_name: "destinationPortRange"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:target_route_table_id, Shapes::ShapeRef.new(shape: String, location_name: "targetRouteTableId"))
+    AnalysisTransitGatewayPolicyTableEntry.struct_class = Types::AnalysisTransitGatewayPolicyTableEntry
 
     ApplicationStatus.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationStatusEnum, location_name: "status"))
     ApplicationStatus.add_member(:status_time_stamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "statusTimeStamp"))
@@ -11620,6 +11631,8 @@ module Aws::EC2
     Explanation.add_member(:transit_gateway, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGateway"))
     Explanation.add_member(:transit_gateway_route_table, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGatewayRouteTable"))
     Explanation.add_member(:transit_gateway_route_table_route, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableRoute, location_name: "transitGatewayRouteTableRoute"))
+    Explanation.add_member(:transit_gateway_policy_table, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGatewayPolicyTable"))
+    Explanation.add_member(:transit_gateway_policy_table_entry, Shapes::ShapeRef.new(shape: AnalysisTransitGatewayPolicyTableEntry, location_name: "transitGatewayPolicyTableEntry"))
     Explanation.add_member(:transit_gateway_attachment, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGatewayAttachment"))
     Explanation.add_member(:component_account, Shapes::ShapeRef.new(shape: ComponentAccount, location_name: "componentAccount"))
     Explanation.add_member(:component_region, Shapes::ShapeRef.new(shape: ComponentRegion, location_name: "componentRegion"))
@@ -13969,6 +13982,7 @@ module Aws::EC2
     InstanceStatus.add_member(:system_status, Shapes::ShapeRef.new(shape: InstanceStatusSummary, location_name: "systemStatus"))
     InstanceStatus.add_member(:attached_ebs_status, Shapes::ShapeRef.new(shape: EbsStatusSummary, location_name: "attachedEbsStatus"))
     InstanceStatus.add_member(:application_status, Shapes::ShapeRef.new(shape: ApplicationStatusSummary, location_name: "applicationStatus"))
+    InstanceStatus.add_member(:performance_status, Shapes::ShapeRef.new(shape: PerformanceStatusSummary, location_name: "performanceStatus"))
     InstanceStatus.struct_class = Types::InstanceStatus
 
     InstanceStatusDetails.add_member(:impaired_since, Shapes::ShapeRef.new(shape: DateTime, location_name: "impairedSince"))
@@ -16957,6 +16971,7 @@ module Aws::EC2
     PathComponent.add_member(:additional_details, Shapes::ShapeRef.new(shape: AdditionalDetailList, location_name: "additionalDetailSet"))
     PathComponent.add_member(:transit_gateway, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGateway"))
     PathComponent.add_member(:transit_gateway_route_table_route, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableRoute, location_name: "transitGatewayRouteTableRoute"))
+    PathComponent.add_member(:transit_gateway_policy_table_entry, Shapes::ShapeRef.new(shape: AnalysisTransitGatewayPolicyTableEntry, location_name: "transitGatewayPolicyTableEntry"))
     PathComponent.add_member(:explanations, Shapes::ShapeRef.new(shape: ExplanationList, location_name: "explanationSet"))
     PathComponent.add_member(:elastic_load_balancer_listener, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "elasticLoadBalancerListener"))
     PathComponent.add_member(:firewall_stateless_rule, Shapes::ShapeRef.new(shape: FirewallStatelessRule, location_name: "firewallStatelessRule"))
@@ -17027,6 +17042,11 @@ module Aws::EC2
     PerformanceFactorReferenceSet.member = Shapes::ShapeRef.new(shape: PerformanceFactorReference, location_name: "item")
 
     PerformanceFactorReferenceSetRequest.member = Shapes::ShapeRef.new(shape: PerformanceFactorReferenceRequest, location_name: "item")
+
+    PerformanceStatusSummary.add_member(:status, Shapes::ShapeRef.new(shape: SummaryStatus, location_name: "status"))
+    PerformanceStatusSummary.add_member(:impaired_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "impairedSince"))
+    PerformanceStatusSummary.add_member(:remediation, Shapes::ShapeRef.new(shape: String, location_name: "remediation"))
+    PerformanceStatusSummary.struct_class = Types::PerformanceStatusSummary
 
     Phase1DHGroupNumbersList.member = Shapes::ShapeRef.new(shape: Phase1DHGroupNumbersListValue, location_name: "item")
 

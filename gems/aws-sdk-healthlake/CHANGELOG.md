@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2026-10-21)
+------------------
+
+* Feature - Update the UpdateProfileWithAgent API to return a streaming response to provide more frequent updates on what the agent is doing.
+
 1.74.0 (2026-10-20)
 ------------------
 

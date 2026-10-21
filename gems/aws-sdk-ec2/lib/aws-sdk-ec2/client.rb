@@ -33786,6 +33786,9 @@ module Aws::EC2
     #   resp.instance_statuses[0].attached_ebs_status.status #=> String, one of "ok", "impaired", "insufficient-data", "not-applicable", "initializing"
     #   resp.instance_statuses[0].application_status.status #=> String, one of "ok", "impaired", "insufficient-data", "not-applicable", "initializing"
     #   resp.instance_statuses[0].application_status.impaired_since #=> Time
+    #   resp.instance_statuses[0].performance_status.status #=> String, one of "ok", "impaired", "insufficient-data", "not-applicable", "initializing"
+    #   resp.instance_statuses[0].performance_status.impaired_since #=> Time
+    #   resp.instance_statuses[0].performance_status.remediation #=> String
     #   resp.next_token #=> String
     #
     #
@@ -38671,6 +38674,15 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations #=> Array
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl.id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].acl.arn #=> String
@@ -38822,6 +38834,18 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_attachment.id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_attachment.arn #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
@@ -38995,6 +39019,15 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations #=> Array
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl.id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].acl.arn #=> String
@@ -39146,6 +39179,18 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_attachment.id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_attachment.arn #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
@@ -39364,6 +39409,18 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table.name #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.network_insights_analyses[0].explanations[0].transit_gateway_attachment.id #=> String
     #   resp.network_insights_analyses[0].explanations[0].transit_gateway_attachment.arn #=> String
     #   resp.network_insights_analyses[0].explanations[0].transit_gateway_attachment.name #=> String
@@ -57944,6 +58001,15 @@ module Aws::EC2
     #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations #=> Array
     #   resp.analysis_findings[0].finding_components[0].explanations[0].acl.id #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].acl.arn #=> String
@@ -58095,6 +58161,18 @@ module Aws::EC2
     #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_attachment.id #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_attachment.arn #=> String
     #   resp.analysis_findings[0].finding_components[0].explanations[0].transit_gateway_attachment.name #=> String
@@ -61916,8 +61994,8 @@ module Aws::EC2
     # @option params [Types::DevicePostureOptions] :device_posture_options
     #   The device posture options for the Client VPN endpoint. Specifying
     #   this parameter replaces the entire device posture configuration for
-    #   the endpoint. To remove all device trust providers, specify an empty
-    #   list.
+    #   the endpoint. To disable device posture and remove all device trust
+    #   providers, specify `false` for `Enabled`.
     #
     # @return [Types::ModifyClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -75979,6 +76057,15 @@ module Aws::EC2
     #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations #=> Array
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl.id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].acl.arn #=> String
@@ -76130,6 +76217,18 @@ module Aws::EC2
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_attachment.id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_attachment.arn #=> String
     #   resp.network_insights_analysis.forward_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
@@ -76303,6 +76402,15 @@ module Aws::EC2
     #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations #=> Array
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl.id #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].acl.arn #=> String
@@ -76454,6 +76562,18 @@ module Aws::EC2
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_attachment.id #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_attachment.arn #=> String
     #   resp.network_insights_analysis.return_path_components[0].explanations[0].transit_gateway_attachment.name #=> String
@@ -76672,6 +76792,18 @@ module Aws::EC2
     #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table_route.attachment_id #=> String
     #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table_route.resource_id #=> String
     #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table.id #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table.name #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table_entry.rule_number #=> Integer
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table_entry.protocol #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table_entry.source_cidr #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table_entry.destination_cidr #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table_entry.source_port_range.from #=> Integer
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table_entry.source_port_range.to #=> Integer
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table_entry.destination_port_range.from #=> Integer
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table_entry.destination_port_range.to #=> Integer
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_policy_table_entry.target_route_table_id #=> String
     #   resp.network_insights_analysis.explanations[0].transit_gateway_attachment.id #=> String
     #   resp.network_insights_analysis.explanations[0].transit_gateway_attachment.arn #=> String
     #   resp.network_insights_analysis.explanations[0].transit_gateway_attachment.name #=> String
@@ -77938,7 +78070,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.658.0'
+      context[:gem_version] = '1.659.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

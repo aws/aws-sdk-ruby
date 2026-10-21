@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.659.0 (2026-10-21)
+------------------
+
+* Feature - Adds new response fields to DescribeInstanceStatus and Network Insights analysis results.
+
 1.658.0 (2026-10-20)
 ------------------
 

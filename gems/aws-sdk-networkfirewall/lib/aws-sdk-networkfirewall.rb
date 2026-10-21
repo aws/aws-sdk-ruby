@@ -49,12 +49,13 @@ module Aws::NetworkFirewall
   end
   autoload :Client, 'aws-sdk-networkfirewall/client'
   autoload :Errors, 'aws-sdk-networkfirewall/errors'
+  autoload :Waiters, 'aws-sdk-networkfirewall/waiters'
   autoload :Resource, 'aws-sdk-networkfirewall/resource'
   autoload :EndpointParameters, 'aws-sdk-networkfirewall/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-networkfirewall/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-networkfirewall/endpoints'
 
-  GEM_VERSION = '1.101.0'
+  GEM_VERSION = '1.102.0'
 
 end
 

@@ -4600,7 +4600,7 @@ module Aws::SWF
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-swf'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

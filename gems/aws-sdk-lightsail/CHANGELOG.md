@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2026-10-21)
+------------------
+
+* Feature - This release adds support for metrics related to system-disk performance.
+
 1.139.0 (2026-10-20)
 ------------------
 

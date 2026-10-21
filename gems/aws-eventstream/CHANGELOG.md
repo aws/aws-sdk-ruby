@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.4.1 (2026-10-21)
+------------------
+
 * Issue - Raise an error when event stream header names or values exceed supported byte-length limits.
 * Issue - Raise an error when a fixed-width event stream header value does not fit its type's width.
 

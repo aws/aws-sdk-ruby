@@ -1876,6 +1876,57 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an entry in a transit gateway policy table.
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number for the policy table entry. Entries are evaluated in
+    #   ascending order of rule number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol number. A value of `-1` means that the entry matches
+    #   all protocols.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cidr
+    #   The source CIDR block. If this value is not present, the entry
+    #   matches any source address.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_cidr
+    #   The destination CIDR block. If this value is not present, the entry
+    #   matches any destination address.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_port_range
+    #   The source port range. If this value is not present, the entry
+    #   matches any source port.
+    #   @return [Types::PortRange]
+    #
+    # @!attribute [rw] destination_port_range
+    #   The destination port range. If this value is not present, the entry
+    #   matches any destination port.
+    #   @return [Types::PortRange]
+    #
+    # @!attribute [rw] target_route_table_id
+    #   The ID of the transit gateway route table to which the entry routes
+    #   matching traffic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AnalysisTransitGatewayPolicyTableEntry AWS API Documentation
+    #
+    class AnalysisTransitGatewayPolicyTableEntry < Struct.new(
+      :rule_number,
+      :protocol,
+      :source_cidr,
+      :destination_cidr,
+      :source_port_range,
+      :destination_port_range,
+      :target_route_table_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the application-level health status for an instance.
     #
     # @!attribute [rw] status
@@ -43705,6 +43756,14 @@ module Aws::EC2
     #   The transit gateway route table route.
     #   @return [Types::TransitGatewayRouteTableRoute]
     #
+    # @!attribute [rw] transit_gateway_policy_table
+    #   The transit gateway policy table.
+    #   @return [Types::AnalysisComponent]
+    #
+    # @!attribute [rw] transit_gateway_policy_table_entry
+    #   The transit gateway policy table entry.
+    #   @return [Types::AnalysisTransitGatewayPolicyTableEntry]
+    #
     # @!attribute [rw] transit_gateway_attachment
     #   The transit gateway attachment.
     #   @return [Types::AnalysisComponent]
@@ -43777,6 +43836,8 @@ module Aws::EC2
       :transit_gateway,
       :transit_gateway_route_table,
       :transit_gateway_route_table_route,
+      :transit_gateway_policy_table,
+      :transit_gateway_policy_table_entry,
       :transit_gateway_attachment,
       :component_account,
       :component_region,
@@ -57139,7 +57200,8 @@ module Aws::EC2
     end
 
     # Describes the status of an instance, including system status, instance
-    # status, attached EBS status, and application status.
+    # status, attached EBS status, application status, and performance
+    # status.
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone of the instance.
@@ -57191,6 +57253,12 @@ module Aws::EC2
     #   Reports the application-level health status for the instance.
     #   @return [Types::ApplicationStatusSummary]
     #
+    # @!attribute [rw] performance_status
+    #   Reports the performance-related health status for the instance. This
+    #   information is returned only when performance status checks are
+    #   enabled for the instance.
+    #   @return [Types::PerformanceStatusSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatus AWS API Documentation
     #
     class InstanceStatus < Struct.new(
@@ -57204,7 +57272,8 @@ module Aws::EC2
       :instance_status,
       :system_status,
       :attached_ebs_status,
-      :application_status)
+      :application_status,
+      :performance_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -65631,8 +65700,8 @@ module Aws::EC2
     # @!attribute [rw] device_posture_options
     #   The device posture options for the Client VPN endpoint. Specifying
     #   this parameter replaces the entire device posture configuration for
-    #   the endpoint. To remove all device trust providers, specify an empty
-    #   list.
+    #   the endpoint. To disable device posture and remove all device trust
+    #   providers, specify `false` for `Enabled`.
     #   @return [Types::DevicePostureOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
@@ -73503,6 +73572,10 @@ module Aws::EC2
     #   The route in a transit gateway route table.
     #   @return [Types::TransitGatewayRouteTableRoute]
     #
+    # @!attribute [rw] transit_gateway_policy_table_entry
+    #   The entry in a transit gateway policy table.
+    #   @return [Types::AnalysisTransitGatewayPolicyTableEntry]
+    #
     # @!attribute [rw] explanations
     #   The explanation codes.
     #   @return [Array<Types::Explanation>]
@@ -73541,6 +73614,7 @@ module Aws::EC2
       :additional_details,
       :transit_gateway,
       :transit_gateway_route_table_route,
+      :transit_gateway_policy_table_entry,
       :explanations,
       :elastic_load_balancer_listener,
       :firewall_stateless_rule,
@@ -73934,6 +74008,33 @@ module Aws::EC2
     #
     class PerformanceFactorReferenceRequest < Struct.new(
       :instance_family)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the performance status check results for an
+    # instance.
+    #
+    # @!attribute [rw] status
+    #   The current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] impaired_since
+    #   The date and time when the performance status became impaired.
+    #   @return [Time]
+    #
+    # @!attribute [rw] remediation
+    #   The recommended action to remediate the impaired instance, if one is
+    #   available. This value is returned only when the instance is
+    #   impaired.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PerformanceStatusSummary AWS API Documentation
+    #
+    class PerformanceStatusSummary < Struct.new(
+      :status,
+      :impaired_since,
+      :remediation)
       SENSITIVE = []
       include Aws::Structure
     end

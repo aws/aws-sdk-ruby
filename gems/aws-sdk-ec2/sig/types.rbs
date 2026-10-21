@@ -447,6 +447,17 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class AnalysisTransitGatewayPolicyTableEntry
+      attr_accessor rule_number: ::Integer
+      attr_accessor protocol: ::String
+      attr_accessor source_cidr: ::String
+      attr_accessor destination_cidr: ::String
+      attr_accessor source_port_range: Types::PortRange
+      attr_accessor destination_port_range: Types::PortRange
+      attr_accessor target_route_table_id: ::String
+      SENSITIVE: []
+    end
+
     class ApplicationStatus
       attr_accessor status: ("ok" | "impaired" | "initializing" | "insufficient-data" | "not-applicable" | "suppressed")
       attr_accessor status_time_stamp: ::Time
@@ -9596,6 +9607,8 @@ module Aws::EC2
       attr_accessor transit_gateway: Types::AnalysisComponent
       attr_accessor transit_gateway_route_table: Types::AnalysisComponent
       attr_accessor transit_gateway_route_table_route: Types::TransitGatewayRouteTableRoute
+      attr_accessor transit_gateway_policy_table: Types::AnalysisComponent
+      attr_accessor transit_gateway_policy_table_entry: Types::AnalysisTransitGatewayPolicyTableEntry
       attr_accessor transit_gateway_attachment: Types::AnalysisComponent
       attr_accessor component_account: ::String
       attr_accessor component_region: ::String
@@ -12385,6 +12398,7 @@ module Aws::EC2
       attr_accessor system_status: Types::InstanceStatusSummary
       attr_accessor attached_ebs_status: Types::EbsStatusSummary
       attr_accessor application_status: Types::ApplicationStatusSummary
+      attr_accessor performance_status: Types::PerformanceStatusSummary
       SENSITIVE: []
     end
 
@@ -15829,6 +15843,7 @@ module Aws::EC2
       attr_accessor additional_details: ::Array[Types::AdditionalDetail]
       attr_accessor transit_gateway: Types::AnalysisComponent
       attr_accessor transit_gateway_route_table_route: Types::TransitGatewayRouteTableRoute
+      attr_accessor transit_gateway_policy_table_entry: Types::AnalysisTransitGatewayPolicyTableEntry
       attr_accessor explanations: ::Array[Types::Explanation]
       attr_accessor elastic_load_balancer_listener: Types::AnalysisComponent
       attr_accessor firewall_stateless_rule: Types::FirewallStatelessRule
@@ -15914,6 +15929,13 @@ module Aws::EC2
 
     class PerformanceFactorReferenceRequest
       attr_accessor instance_family: ::String
+      SENSITIVE: []
+    end
+
+    class PerformanceStatusSummary
+      attr_accessor status: ("ok" | "impaired" | "insufficient-data" | "not-applicable" | "initializing")
+      attr_accessor impaired_since: ::Time
+      attr_accessor remediation: ::String
       SENSITIVE: []
     end
 

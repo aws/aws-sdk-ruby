@@ -2682,7 +2682,7 @@ module Aws::LexModelsV2
 
     class NluImprovementSpecification
       attr_accessor enabled: bool
-      attr_accessor assisted_nlu_mode: ("Primary" | "Fallback")
+      attr_accessor assisted_nlu_mode: ("Primary" | "Fallback" | "DialogManager")
       attr_accessor intent_disambiguation_settings: Types::IntentDisambiguationSettings
       SENSITIVE: []
     end

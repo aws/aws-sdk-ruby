@@ -16144,6 +16144,23 @@ module Aws::QuickSight
     #   information, see ` OAuthClientCredentials `.
     #   @return [Types::OAuthClientCredentials]
     #
+    # @!attribute [rw] service_account_credentials
+    #   The service account credentials for connecting to a data source that
+    #   uses Google Workspace domain-wide delegation.
+    #   @return [Types::ServiceAccountCredentials]
+    #
+    # @!attribute [rw] share_point_client_credentials
+    #   The client credentials for connecting to a Microsoft SharePoint data
+    #   source using two-legged OAuth (2LO) certificate-based
+    #   authentication.
+    #   @return [Types::SharePointClientCredentials]
+    #
+    # @!attribute [rw] one_drive_client_credentials
+    #   The client credentials for connecting to a Microsoft OneDrive data
+    #   source using two-legged OAuth (2LO) certificate-based
+    #   authentication.
+    #   @return [Types::OneDriveClientCredentials]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceCredentials AWS API Documentation
     #
     class DataSourceCredentials < Struct.new(
@@ -16152,7 +16169,10 @@ module Aws::QuickSight
       :secret_arn,
       :key_pair_credentials,
       :web_proxy_credentials,
-      :o_auth_client_credentials)
+      :o_auth_client_credentials,
+      :service_account_credentials,
+      :share_point_client_credentials,
+      :one_drive_client_credentials)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36230,6 +36250,31 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The client credentials for connecting to a Microsoft OneDrive data
+    # source using two-legged OAuth (2LO) certificate-based authentication.
+    # OneDrive connections access files stored in your OneDrive storage. The
+    # tenant ID and client ID are supplied through `OneDriveParameters`.
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) key used to encrypt the OneDrive certificate credentials.
+    #   This field is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] cert_thumbprint
+    #   The thumbprint of the certificate used for two-legged OAuth (2LO)
+    #   authentication to OneDrive. This field is required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OneDriveClientCredentials AWS API Documentation
+    #
+    class OneDriveClientCredentials < Struct.new(
+      :kms_key_arn,
+      :cert_thumbprint)
+      SENSITIVE = [:kms_key_arn, :cert_thumbprint]
+      include Aws::Structure
+    end
+
     # The connection parameters for an OneDrive data source. Provide these
     # parameters in the `DataSourceParameters` object when you create or
     # update a data source that uses OneDrive.
@@ -42889,6 +42934,37 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The service account credentials used for Google Workspace domain-wide
+    # delegation. Use this structure when you authenticate a data source
+    # connection using domain-wide delegation across your Google Workspace
+    # domain.
+    #
+    # @!attribute [rw] admin_account_email
+    #   The email address of the Google Workspace administrator account that
+    #   the service account impersonates through domain-wide delegation.
+    #   This field is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_private_key
+    #   The private key of the Google service account used for domain-wide
+    #   delegation. This field is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_email
+    #   The client email address of the Google service account used for
+    #   domain-wide delegation. This field is required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ServiceAccountCredentials AWS API Documentation
+    #
+    class ServiceAccountCredentials < Struct.new(
+      :admin_account_email,
+      :service_account_private_key,
+      :client_email)
+      SENSITIVE = [:service_account_private_key]
+      include Aws::Structure
+    end
+
     # The parameters for ServiceNow.
     #
     # @!attribute [rw] site_base_url
@@ -42976,6 +43052,32 @@ module Aws::QuickSight
     class ShapeConditionalFormat < Struct.new(
       :background_color)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The client credentials for connecting to a Microsoft SharePoint data
+    # source using two-legged OAuth (2LO) certificate-based authentication.
+    # SharePoint connections access documents stored in SharePoint sites and
+    # libraries. The tenant ID and client ID are supplied through
+    # `SharePointParameters`.
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) key used to encrypt the SharePoint certificate
+    #   credentials. This field is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] cert_thumbprint
+    #   The thumbprint of the certificate used for two-legged OAuth (2LO)
+    #   authentication to SharePoint. This field is required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SharePointClientCredentials AWS API Documentation
+    #
+    class SharePointClientCredentials < Struct.new(
+      :kms_key_arn,
+      :cert_thumbprint)
+      SENSITIVE = [:kms_key_arn, :cert_thumbprint]
       include Aws::Structure
     end
 

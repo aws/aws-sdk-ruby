@@ -784,7 +784,8 @@ module Aws::DataZone
     #         group_identifier: "GroupIdentifier",
     #       },
     #       project: {
-    #         project_designation: "OWNER", # required, accepts OWNER, CONTRIBUTOR, PROJECT_CATALOG_STEWARD
+    #         project_designation: "OWNER", # required, accepts OWNER, CONTRIBUTOR, PROJECT_CATALOG_STEWARD, USER_CREATED_DESIGNATION
+    #         user_created_designation_id: "DesignationId",
     #         project_identifier: "ProjectId",
     #         project_grant_filter: {
     #           domain_unit_filter: {
@@ -2818,6 +2819,74 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Creates a new user-defined designation with a Cedar permit policy. The
+    # designation defines a named role that can be assigned to project
+    # members.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon DataZone domain in which the designation
+    #   is created.
+    #
+    # @option params [required, String] :name
+    #   The name of the designation. The name must be unique within the
+    #   domain.
+    #
+    # @option params [String] :description
+    #   A human-readable description of the designation and its intended use.
+    #
+    # @option params [required, String] :policy
+    #   The Cedar permit policy that defines what actions holders of this
+    #   designation are allowed to perform.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Whether deletion protection is enabled for this designation. Defaults
+    #   to true when omitted.
+    #
+    # @return [Types::CreateDesignationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDesignationOutput#domain_id #domain_id} => String
+    #   * {Types::CreateDesignationOutput#id #id} => String
+    #   * {Types::CreateDesignationOutput#name #name} => String
+    #   * {Types::CreateDesignationOutput#description #description} => String
+    #   * {Types::CreateDesignationOutput#designation_type #designation_type} => String
+    #   * {Types::CreateDesignationOutput#policy #policy} => String
+    #   * {Types::CreateDesignationOutput#deletion_protection #deletion_protection} => Boolean
+    #   * {Types::CreateDesignationOutput#created_by #created_by} => String
+    #   * {Types::CreateDesignationOutput#created_at #created_at} => Time
+    #   * {Types::CreateDesignationOutput#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_designation({
+    #     domain_identifier: "DomainId", # required
+    #     name: "DesignationName", # required
+    #     description: "Description",
+    #     policy: "CedarDesignationPolicy", # required
+    #     deletion_protection: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.designation_type #=> String, one of "MANAGED", "USER_CREATED"
+    #   resp.policy #=> String
+    #   resp.deletion_protection #=> Boolean
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDesignation AWS API Documentation
+    #
+    # @overload create_designation(params = {})
+    # @param [Hash] params ({})
+    def create_designation(params = {}, options = {})
+      req = build_request(:create_designation, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon DataZone domain.
     #
     # @option params [required, String] :name
@@ -4018,7 +4087,8 @@ module Aws::DataZone
     #           user_identifier: "String",
     #           group_identifier: "String",
     #         },
-    #         designation: "PROJECT_OWNER", # required, accepts PROJECT_OWNER, PROJECT_CONTRIBUTOR, PROJECT_CATALOG_VIEWER, PROJECT_CATALOG_CONSUMER, PROJECT_CATALOG_STEWARD
+    #         designation: "PROJECT_OWNER", # required, accepts PROJECT_OWNER, PROJECT_CONTRIBUTOR, PROJECT_CATALOG_VIEWER, PROJECT_CATALOG_CONSUMER, PROJECT_CATALOG_STEWARD, USER_CREATED_DESIGNATION
+    #         user_created_designation_id: "DesignationId",
     #       },
     #     ],
     #   })
@@ -4084,6 +4154,11 @@ module Aws::DataZone
     # @option params [required, String] :designation
     #   The designation of the project membership.
     #
+    # @option params [String] :user_created_designation_id
+    #   The ID of the user-created designation to assign to the project
+    #   member. Required when `designation` is `USER_CREATED_DESIGNATION`;
+    #   must not be provided otherwise.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4095,7 +4170,8 @@ module Aws::DataZone
     #       user_identifier: "String",
     #       group_identifier: "String",
     #     },
-    #     designation: "PROJECT_OWNER", # required, accepts PROJECT_OWNER, PROJECT_CONTRIBUTOR, PROJECT_CATALOG_VIEWER, PROJECT_CATALOG_CONSUMER, PROJECT_CATALOG_STEWARD
+    #     designation: "PROJECT_OWNER", # required, accepts PROJECT_OWNER, PROJECT_CONTRIBUTOR, PROJECT_CATALOG_VIEWER, PROJECT_CATALOG_CONSUMER, PROJECT_CATALOG_STEWARD, USER_CREATED_DESIGNATION
+    #     user_created_designation_id: "DesignationId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProjectMembership AWS API Documentation
@@ -5205,6 +5281,34 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def delete_data_source(params = {}, options = {})
       req = build_request(:delete_data_source, params)
+      req.send_request(options)
+    end
+
+    # Deletes a designation. Managed designations cannot be deleted. This
+    # operation is idempotent.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation to delete.
+    #
+    # @option params [required, String] :identifier
+    #   The unique ID of the designation to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_designation({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "DesignationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDesignation AWS API Documentation
+    #
+    # @overload delete_designation(params = {})
+    # @param [Hash] params ({})
+    def delete_designation(params = {}, options = {})
+      req = build_request(:delete_designation, params)
       req.send_request(options)
     end
 
@@ -6859,6 +6963,57 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def get_data_source_run(params = {}, options = {})
       req = build_request(:get_data_source_run, params)
+      req.send_request(options)
+    end
+
+    # Gets the details of a designation, including its Cedar policy.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation.
+    #
+    # @option params [required, String] :identifier
+    #   The unique ID of the designation to retrieve.
+    #
+    # @return [Types::GetDesignationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDesignationOutput#domain_id #domain_id} => String
+    #   * {Types::GetDesignationOutput#id #id} => String
+    #   * {Types::GetDesignationOutput#name #name} => String
+    #   * {Types::GetDesignationOutput#description #description} => String
+    #   * {Types::GetDesignationOutput#designation_type #designation_type} => String
+    #   * {Types::GetDesignationOutput#policy #policy} => String
+    #   * {Types::GetDesignationOutput#deletion_protection #deletion_protection} => Boolean
+    #   * {Types::GetDesignationOutput#created_by #created_by} => String
+    #   * {Types::GetDesignationOutput#created_at #created_at} => Time
+    #   * {Types::GetDesignationOutput#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_designation({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "DesignationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.designation_type #=> String, one of "MANAGED", "USER_CREATED"
+    #   resp.policy #=> String
+    #   resp.deletion_protection #=> Boolean
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDesignation AWS API Documentation
+    #
+    # @overload get_designation(params = {})
+    # @param [Hash] params ({})
+    def get_designation(params = {}, options = {})
+      req = build_request(:get_designation, params)
       req.send_request(options)
     end
 
@@ -9736,6 +9891,65 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Lists the designations in a domain. Returns system-managed
+    # designations first, followed by user-created designations sorted
+    # alphabetically by name.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designations to list.
+    #
+    # @option params [String] :next_token
+    #   If the results exceed the value of `MaxResults`, the previous call
+    #   returns a pagination token. Specify this token in a subsequent call to
+    #   `ListDesignations` to retrieve the next set of results. If not
+    #   specified, the operation returns the first page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of designations to return in a single call to
+    #   `ListDesignations`. If the number of designations exceeds
+    #   `MaxResults`, the response includes a `NextToken` value. Use that
+    #   token in a subsequent call to `ListDesignations` to retrieve the next
+    #   set of designations. The default value is 20.
+    #
+    # @return [Types::ListDesignationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDesignationsOutput#items #items} => Array&lt;Types::DesignationSummary&gt;
+    #   * {Types::ListDesignationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_designations({
+    #     domain_identifier: "DomainId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].domain_id #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].designation_type #=> String, one of "MANAGED", "USER_CREATED"
+    #   resp.items[0].deletion_protection #=> Boolean
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDesignations AWS API Documentation
+    #
+    # @overload list_designations(params = {})
+    # @param [Hash] params ({})
+    def list_designations(params = {}, options = {})
+      req = build_request(:list_designations, params)
+      req.send_request(options)
+    end
+
     # Lists child domain units for the specified parent domain unit.
     #
     # @option params [required, String] :domain_identifier
@@ -10928,7 +11142,8 @@ module Aws::DataZone
     #   resp.grant_list #=> Array
     #   resp.grant_list[0].principal.user.user_identifier #=> String
     #   resp.grant_list[0].principal.group.group_identifier #=> String
-    #   resp.grant_list[0].principal.project.project_designation #=> String, one of "OWNER", "CONTRIBUTOR", "PROJECT_CATALOG_STEWARD"
+    #   resp.grant_list[0].principal.project.project_designation #=> String, one of "OWNER", "CONTRIBUTOR", "PROJECT_CATALOG_STEWARD", "USER_CREATED_DESIGNATION"
+    #   resp.grant_list[0].principal.project.user_created_designation_id #=> String
     #   resp.grant_list[0].principal.project.project_identifier #=> String
     #   resp.grant_list[0].principal.project.project_grant_filter.domain_unit_filter.domain_unit #=> String
     #   resp.grant_list[0].principal.project.project_grant_filter.domain_unit_filter.include_child_domain_units #=> Boolean
@@ -11014,7 +11229,8 @@ module Aws::DataZone
     #   resp.members #=> Array
     #   resp.members[0].member_details.user.user_id #=> String
     #   resp.members[0].member_details.group.group_id #=> String
-    #   resp.members[0].designation #=> String, one of "PROJECT_OWNER", "PROJECT_CONTRIBUTOR", "PROJECT_CATALOG_VIEWER", "PROJECT_CATALOG_CONSUMER", "PROJECT_CATALOG_STEWARD"
+    #   resp.members[0].designation #=> String, one of "PROJECT_OWNER", "PROJECT_CONTRIBUTOR", "PROJECT_CATALOG_VIEWER", "PROJECT_CATALOG_CONSUMER", "PROJECT_CATALOG_STEWARD", "USER_CREATED_DESIGNATION"
+    #   resp.members[0].user_created_designation_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListProjectMemberships AWS API Documentation
@@ -12591,7 +12807,8 @@ module Aws::DataZone
     #         group_identifier: "GroupIdentifier",
     #       },
     #       project: {
-    #         project_designation: "OWNER", # required, accepts OWNER, CONTRIBUTOR, PROJECT_CATALOG_STEWARD
+    #         project_designation: "OWNER", # required, accepts OWNER, CONTRIBUTOR, PROJECT_CATALOG_STEWARD, USER_CREATED_DESIGNATION
+    #         user_created_designation_id: "DesignationId",
     #         project_identifier: "ProjectId",
     #         project_grant_filter: {
     #           domain_unit_filter: {
@@ -15013,6 +15230,77 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Updates an existing designation. Managed designations cannot be
+    # modified.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation to update.
+    #
+    # @option params [required, String] :identifier
+    #   The unique ID of the designation to update.
+    #
+    # @option params [String] :name
+    #   The updated name of the designation. The name must be unique within
+    #   the domain.
+    #
+    # @option params [String] :description
+    #   The updated human-readable description of the designation and its
+    #   intended use.
+    #
+    # @option params [String] :policy
+    #   The updated Cedar permit policy.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Whether deletion protection is enabled for this designation. Omit to
+    #   keep the existing value.
+    #
+    # @return [Types::UpdateDesignationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDesignationOutput#domain_id #domain_id} => String
+    #   * {Types::UpdateDesignationOutput#id #id} => String
+    #   * {Types::UpdateDesignationOutput#name #name} => String
+    #   * {Types::UpdateDesignationOutput#description #description} => String
+    #   * {Types::UpdateDesignationOutput#designation_type #designation_type} => String
+    #   * {Types::UpdateDesignationOutput#policy #policy} => String
+    #   * {Types::UpdateDesignationOutput#deletion_protection #deletion_protection} => Boolean
+    #   * {Types::UpdateDesignationOutput#created_by #created_by} => String
+    #   * {Types::UpdateDesignationOutput#created_at #created_at} => Time
+    #   * {Types::UpdateDesignationOutput#last_updated_at #last_updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_designation({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "DesignationId", # required
+    #     name: "DesignationName",
+    #     description: "Description",
+    #     policy: "CedarDesignationPolicy",
+    #     deletion_protection: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.designation_type #=> String, one of "MANAGED", "USER_CREATED"
+    #   resp.policy #=> String
+    #   resp.deletion_protection #=> Boolean
+    #   resp.created_by #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateDesignation AWS API Documentation
+    #
+    # @overload update_designation(params = {})
+    # @param [Hash] params ({})
+    def update_designation(params = {}, options = {})
+      req = build_request(:update_designation, params)
+      req.send_request(options)
+    end
+
     # Updates a Amazon DataZone domain.
     #
     # @option params [required, String] :identifier
@@ -16744,7 +17032,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

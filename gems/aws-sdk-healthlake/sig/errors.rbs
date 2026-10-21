@@ -14,22 +14,13 @@ module Aws
       class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class AgentMessageOutOfContextException < ServiceError
-        def message: () -> ::String
-      end
       class ConflictException < ServiceError
-        def message: () -> ::String
-      end
-      class ConversationNotFoundException < ServiceError
         def message: () -> ::String
       end
       class FailedDependencyException < ServiceError
         def message: () -> ::String
       end
       class InternalServerException < ServiceError
-        def message: () -> ::String
-      end
-      class NotImplementedOperationException < ServiceError
         def message: () -> ::String
       end
       class ResourceNotFoundException < ServiceError
@@ -39,12 +30,6 @@ module Aws
         def message: () -> ::String
       end
       class ThrottlingException < ServiceError
-        def message: () -> ::String
-      end
-      class UnauthorizedException < ServiceError
-        def message: () -> ::String
-      end
-      class UnsupportedMIMETypeException < ServiceError
         def message: () -> ::String
       end
       class ValidationException < ServiceError

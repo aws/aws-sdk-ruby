@@ -405,6 +405,19 @@ module Aws
       def describe_account_limits: () -> _DescribeAccountLimitsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountLimitsResponseSuccess
 
+      interface _DescribeAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountSettingsAnswer]
+        def settings: () -> ::Array[Types::AccountSetting]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_account_settings-instance_method
+      def describe_account_settings: (
+                                       ?name: ::String,
+                                       ?next_token: ::String,
+                                       ?max_records: ::Integer
+                                     ) -> _DescribeAccountSettingsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountSettingsResponseSuccess
+
       interface _DescribeAdjustmentTypesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAdjustmentTypesAnswer]
         def adjustment_types: () -> ::Array[Types::AdjustmentType]
@@ -790,6 +803,16 @@ module Aws
                               ?retry_strategy: ("retry-with-group-configuration" | "none")
                             ) -> _LaunchInstancesResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _LaunchInstancesResponseSuccess
+
+      interface _PutAccountSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountSettingAnswer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#put_account_setting-instance_method
+      def put_account_setting: (
+                                 name: ::String,
+                                 value: ::String
+                               ) -> _PutAccountSettingResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountSettingResponseSuccess
 
       interface _PutLifecycleHookResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutLifecycleHookAnswer]

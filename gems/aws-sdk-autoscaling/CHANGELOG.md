@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2026-10-21)
+------------------
+
+* Feature - EC2 Auto Scaling now supports account settings, letting you manage account-level configuration for Auto Scaling.
+
 1.170.0 (2026-10-20)
 ------------------
 

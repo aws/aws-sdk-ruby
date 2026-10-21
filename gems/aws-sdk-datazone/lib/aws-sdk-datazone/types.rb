@@ -3811,6 +3811,111 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon DataZone domain in which the
+    #   designation is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the designation. The name must be unique within the
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the designation and its intended
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The Cedar permit policy that defines what actions holders of this
+    #   designation are allowed to perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation.
+    #   Defaults to true when omitted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDesignationInput AWS API Documentation
+    #
+    class CreateDesignationInput < Struct.new(
+      :domain_identifier,
+      :name,
+      :description,
+      :policy,
+      :deletion_protection)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # A designation defines a named role with a Cedar permit policy that
+    # controls what actions members holding this designation can perform
+    # within a project.
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon DataZone domain in which the
+    #   designation was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the designation. The name is unique within the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the designation and its intended
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] designation_type
+    #   The classification of this designation. MANAGED designations are
+    #   system-defined and cannot be modified or deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The Cedar permit policy that governs what actions holders of this
+    #   designation are allowed to perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation. When
+    #   true, DeleteDesignation is rejected until protection is disabled via
+    #   UpdateDesignation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the Amazon DataZone user who created the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the designation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the designation was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDesignationOutput AWS API Documentation
+    #
+    class CreateDesignationOutput < Struct.new(
+      :domain_id,
+      :id,
+      :name,
+      :description,
+      :designation_type,
+      :policy,
+      :deletion_protection,
+      :created_by,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the Amazon DataZone domain.
     #   @return [String]
@@ -5293,13 +5398,20 @@ module Aws::DataZone
     #   The designation of the project membership.
     #   @return [String]
     #
+    # @!attribute [rw] user_created_designation_id
+    #   The ID of the user-created designation to assign to the project
+    #   member. Required when `designation` is `USER_CREATED_DESIGNATION`;
+    #   must not be provided otherwise.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProjectMembershipInput AWS API Documentation
     #
     class CreateProjectMembershipInput < Struct.new(
       :domain_identifier,
       :project_identifier,
       :member,
-      :designation)
+      :designation,
+      :user_created_designation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7115,6 +7227,28 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The unique ID of the designation to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDesignationInput AWS API Documentation
+    #
+    class DeleteDesignationInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDesignationOutput AWS API Documentation
+    #
+    class DeleteDesignationOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] identifier
     #   The identifier of the Amazon Web Services domain that is to be
     #   deleted.
@@ -7791,6 +7925,63 @@ module Aws::DataZone
       :start_timeout_minutes,
       :end_timeout_minutes)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary representation of a designation returned by list operations.
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the designation. The name is unique within the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the designation and its intended
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] designation_type
+    #   The classification of this designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the Amazon DataZone user who created the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the designation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the designation was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DesignationSummary AWS API Documentation
+    #
+    class DesignationSummary < Struct.new(
+      :domain_id,
+      :id,
+      :name,
+      :description,
+      :designation_type,
+      :deletion_protection,
+      :created_by,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -9931,6 +10122,92 @@ module Aws::DataZone
       :started_at,
       :stopped_at)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The unique ID of the designation to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDesignationInput AWS API Documentation
+    #
+    class GetDesignationInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A designation defines a named role with a Cedar permit policy that
+    # controls what actions members holding this designation can perform
+    # within a project.
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the designation. The name is unique within the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the designation and its intended
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] designation_type
+    #   The classification of this designation. MANAGED designations are
+    #   system-defined and cannot be modified or deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The Cedar permit policy that governs what actions holders of this
+    #   designation are allowed to perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation. When
+    #   true, DeleteDesignation is rejected until protection is disabled via
+    #   UpdateDesignation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the Amazon DataZone user who created the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the designation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the designation was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDesignationOutput AWS API Documentation
+    #
+    class GetDesignationOutput < Struct.new(
+      :domain_id,
+      :id,
+      :name,
+      :description,
+      :designation_type,
+      :policy,
+      :deletion_protection,
+      :created_by,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -14893,6 +15170,57 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designations to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the results exceed the value of `MaxResults`, the previous call
+    #   returns a pagination token. Specify this token in a subsequent call
+    #   to `ListDesignations` to retrieve the next set of results. If not
+    #   specified, the operation returns the first page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of designations to return in a single call to
+    #   `ListDesignations`. If the number of designations exceeds
+    #   `MaxResults`, the response includes a `NextToken` value. Use that
+    #   token in a subsequent call to `ListDesignations` to retrieve the
+    #   next set of designations. The default value is 20.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDesignationsInput AWS API Documentation
+    #
+    class ListDesignationsInput < Struct.new(
+      :domain_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The designation summaries that `ListDesignations` returned. Each
+    #   item contains summary information about a designation in the domain.
+    #   @return [Array<Types::DesignationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that indicates that more results are available.
+    #   Pass this token to a subsequent call to `ListDesignations` to
+    #   retrieve the next page of results. If there are no more results,
+    #   this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDesignationsOutput AWS API Documentation
+    #
+    class ListDesignationsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
     #   The ID of the domain in which you want to list domain units for a
     #   parent domain unit.
     #   @return [String]
@@ -17616,8 +17944,8 @@ module Aws::DataZone
     # Unified Studio.
     #
     # @!attribute [rw] notify_on
-    #   Notebook run states that trigger notifications. Ordering is not
-    #   significant.
+    #   The notebook run states that trigger notifications. You can specify
+    #   up to 7 states, and the ordering of the states is not significant.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/NotificationConfig AWS API Documentation
@@ -18463,11 +18791,17 @@ module Aws::DataZone
     #   The designated role of a project member.
     #   @return [String]
     #
+    # @!attribute [rw] user_created_designation_id
+    #   The ID of the user-created designation held by the project member
+    #   when `designation` is `USER_CREATED_DESIGNATION`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ProjectMember AWS API Documentation
     #
     class ProjectMember < Struct.new(
       :member_details,
-      :designation)
+      :designation,
+      :user_created_designation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18483,11 +18817,18 @@ module Aws::DataZone
     #   The designation of the project membership.
     #   @return [String]
     #
+    # @!attribute [rw] user_created_designation_id
+    #   The ID of the user-created designation to assign to this member when
+    #   creating the project. Required when `designation` is
+    #   `USER_CREATED_DESIGNATION`; must not be provided otherwise.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ProjectMembershipAssignment AWS API Documentation
     #
     class ProjectMembershipAssignment < Struct.new(
       :member,
-      :designation)
+      :designation,
+      :user_created_designation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18496,6 +18837,12 @@ module Aws::DataZone
     #
     # @!attribute [rw] project_designation
     #   The project designation of the project policy grant principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_created_designation_id
+    #   The ID of the user-created designation granted to the project
+    #   principal. Required when `projectDesignation` is
+    #   `USER_CREATED_DESIGNATION`; must not be provided otherwise.
     #   @return [String]
     #
     # @!attribute [rw] project_identifier
@@ -18510,6 +18857,7 @@ module Aws::DataZone
     #
     class ProjectPolicyGrantPrincipal < Struct.new(
       :project_designation,
+      :user_created_designation_id,
       :project_identifier,
       :project_grant_filter)
       SENSITIVE = []
@@ -23975,6 +24323,115 @@ module Aws::DataZone
       :self_grant_status,
       :retain_permissions_on_revoke_failure)
       SENSITIVE = [:name, :description, :schedule]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The unique ID of the designation to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name of the designation. The name must be unique within
+    #   the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated human-readable description of the designation and its
+    #   intended use.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The updated Cedar permit policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation. Omit to
+    #   keep the existing value.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateDesignationInput AWS API Documentation
+    #
+    class UpdateDesignationInput < Struct.new(
+      :domain_identifier,
+      :identifier,
+      :name,
+      :description,
+      :policy,
+      :deletion_protection)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # A designation defines a named role with a Cedar permit policy that
+    # controls what actions members holding this designation can perform
+    # within a project.
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the designation. The name is unique within the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the designation and its intended
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] designation_type
+    #   The classification of this designation. MANAGED designations are
+    #   system-defined and cannot be modified or deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The Cedar permit policy that governs what actions holders of this
+    #   designation are allowed to perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation. When
+    #   true, DeleteDesignation is rejected until protection is disabled via
+    #   UpdateDesignation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the Amazon DataZone user who created the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the designation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the designation was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateDesignationOutput AWS API Documentation
+    #
+    class UpdateDesignationOutput < Struct.new(
+      :domain_id,
+      :id,
+      :name,
+      :description,
+      :designation_type,
+      :policy,
+      :deletion_protection,
+      :created_by,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 

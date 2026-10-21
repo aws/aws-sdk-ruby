@@ -1154,6 +1154,7 @@ module Aws::MediaConvert
     #           av_1_settings: {
     #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #             bit_depth: "BIT_8", # accepts BIT_8, BIT_10
+    #             bitrate: 1,
     #             film_grain_synthesis: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER, MAINTAIN_FRAME_COUNT
@@ -1167,8 +1168,11 @@ module Aws::MediaConvert
     #               qvbr_quality_level: 1,
     #               qvbr_quality_level_fine_tune: 1.0,
     #             },
-    #             rate_control_mode: "QVBR", # accepts QVBR
+    #             rate_control_mode: "CBR", # accepts CBR, QVBR
+    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
+    #             sliding_window_ms: 1,
+    #             sliding_window_peak_bitrate: 1,
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           },
     #           avc_intra_settings: {
@@ -1246,6 +1250,8 @@ module Aws::MediaConvert
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
+    #             sliding_window_ms: 1,
+    #             sliding_window_peak_bitrate: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             softness: 1,
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -1302,6 +1308,8 @@ module Aws::MediaConvert
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
+    #             sliding_window_ms: 1,
+    #             sliding_window_peak_bitrate: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, SOFT, HARD
@@ -1344,6 +1352,8 @@ module Aws::MediaConvert
     #             rate_control_mode: "VBR", # accepts VBR, CBR
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #             sliding_window_ms: 1,
+    #             sliding_window_peak_bitrate: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             softness: 1,
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -1567,7 +1577,7 @@ module Aws::MediaConvert
     #             sdr_reference_white_level: 1,
     #           },
     #           noise_reducer: {
-    #             filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
+    #             filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL, PERCEPTUAL, NONE
     #             filter_settings: {
     #               strength: 1,
     #             },
@@ -1955,6 +1965,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.chroma_position_mode #=> String, one of "AUTO", "FORCE_CENTER", "FORCE_TOP_LEFT"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.bit_depth #=> String, one of "BIT_8", "BIT_10"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.film_grain_synthesis #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
@@ -1967,8 +1978,11 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
-    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200", "CLASS_4K_2K"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_uhd_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
@@ -2034,6 +2048,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.softness #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -2085,6 +2101,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
@@ -2126,6 +2144,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.rate_control_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.softness #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -2298,7 +2318,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.sdr_reference_white_level #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL", "PERCEPTUAL", "NONE"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
@@ -3068,6 +3088,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.chroma_position_mode #=> String, one of "AUTO", "FORCE_CENTER", "FORCE_TOP_LEFT"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.bit_depth #=> String, one of "BIT_8", "BIT_10"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.film_grain_synthesis #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
@@ -3080,8 +3101,11 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
-    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200", "CLASS_4K_2K"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_uhd_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
@@ -3147,6 +3171,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.softness #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -3198,6 +3224,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
@@ -3239,6 +3267,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.rate_control_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.softness #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -3411,7 +3441,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.sdr_reference_white_level #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL", "PERCEPTUAL", "NONE"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
@@ -3990,6 +4020,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.chroma_position_mode #=> String, one of "AUTO", "FORCE_CENTER", "FORCE_TOP_LEFT"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.bit_depth #=> String, one of "BIT_8", "BIT_10"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.film_grain_synthesis #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
@@ -4002,8 +4033,11 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
-    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.sliding_window_ms #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.avc_intra_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200", "CLASS_4K_2K"
     #   resp.presets[0].settings.video_description.codec_settings.avc_intra_settings.avc_intra_uhd_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
@@ -4069,6 +4103,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.slices #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.sliding_window_ms #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.softness #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -4120,6 +4156,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.slices #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.sliding_window_ms #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
@@ -4161,6 +4199,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.rate_control_mode #=> String, one of "VBR", "CBR"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.sliding_window_ms #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.softness #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -4333,7 +4373,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.sdr_reference_white_level #=> Integer
-    #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
+    #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL", "PERCEPTUAL", "NONE"
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
@@ -5354,6 +5394,7 @@ module Aws::MediaConvert
     #           av_1_settings: {
     #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #             bit_depth: "BIT_8", # accepts BIT_8, BIT_10
+    #             bitrate: 1,
     #             film_grain_synthesis: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER, MAINTAIN_FRAME_COUNT
@@ -5367,8 +5408,11 @@ module Aws::MediaConvert
     #               qvbr_quality_level: 1,
     #               qvbr_quality_level_fine_tune: 1.0,
     #             },
-    #             rate_control_mode: "QVBR", # accepts QVBR
+    #             rate_control_mode: "CBR", # accepts CBR, QVBR
+    #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
+    #             sliding_window_ms: 1,
+    #             sliding_window_peak_bitrate: 1,
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           },
     #           avc_intra_settings: {
@@ -5446,6 +5490,8 @@ module Aws::MediaConvert
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
+    #             sliding_window_ms: 1,
+    #             sliding_window_peak_bitrate: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             softness: 1,
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -5502,6 +5548,8 @@ module Aws::MediaConvert
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
+    #             sliding_window_ms: 1,
+    #             sliding_window_peak_bitrate: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, SOFT, HARD
@@ -5544,6 +5592,8 @@ module Aws::MediaConvert
     #             rate_control_mode: "VBR", # accepts VBR, CBR
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
+    #             sliding_window_ms: 1,
+    #             sliding_window_peak_bitrate: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             softness: 1,
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
@@ -5767,7 +5817,7 @@ module Aws::MediaConvert
     #             sdr_reference_white_level: 1,
     #           },
     #           noise_reducer: {
-    #             filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
+    #             filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL, PERCEPTUAL, NONE
     #             filter_settings: {
     #               strength: 1,
     #             },
@@ -6152,6 +6202,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.chroma_position_mode #=> String, one of "AUTO", "FORCE_CENTER", "FORCE_TOP_LEFT"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.bit_depth #=> String, one of "BIT_8", "BIT_10"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.film_grain_synthesis #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"
@@ -6164,8 +6215,11 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.per_frame_metrics[0] #=> String, one of "PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
-    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200", "CLASS_4K_2K"
     #   resp.preset.settings.video_description.codec_settings.avc_intra_settings.avc_intra_uhd_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "MULTI_PASS"
@@ -6231,6 +6285,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.softness #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -6282,6 +6338,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
@@ -6323,6 +6381,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.rate_control_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.sliding_window_ms #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.sliding_window_peak_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.slow_pal #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.softness #=> Integer
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -6495,7 +6555,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].start_time #=> String
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images[0].width #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.sdr_reference_white_level #=> Integer
-    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter #=> String, one of "BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL", "PERCEPTUAL", "NONE"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.post_filter_sharpen_strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.speed #=> Integer
@@ -6630,7 +6690,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.197.0'
+      context[:gem_version] = '1.198.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

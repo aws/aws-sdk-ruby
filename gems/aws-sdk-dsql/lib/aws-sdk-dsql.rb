@@ -55,7 +55,7 @@ module Aws::DSQL
   autoload :EndpointProvider, 'aws-sdk-dsql/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-dsql/endpoints'
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end
 

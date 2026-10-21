@@ -51,48 +51,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # The agent message does not fit within the current conversation
-    # context. Start a new conversation or provide a message that relates to
-    # the current profile customization session.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/AgentMessageOutOfContextException AWS API Documentation
-    #
-    class AgentMessageOutOfContextException < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Represents a response message from the agent during chat-based profile
-    # customization.
-    #
-    # @!attribute [rw] body
-    #   The text of the agent's response.
-    #   @return [String]
-    #
-    # @!attribute [rw] type
-    #   The type of output message, which indicates how to interpret the
-    #   agent's response.
-    #   @return [String]
-    #
-    # @!attribute [rw] options_list
-    #   A list of selectable options presented when the response type is
-    #   `options`.
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/AgentOutputMessage AWS API Documentation
-    #
-    class AgentOutputMessage < Struct.new(
-      :body,
-      :type,
-      :options_list)
-      SENSITIVE = [:body, :options_list]
-      include Aws::Structure
-    end
-
     # The analytics configuration for a data store.
     #
     # @!attribute [rw] status
@@ -162,20 +120,6 @@ module Aws::HealthLake
     #
     class ContinuousBackupRestoreConfiguration < Struct.new(
       :restore_point_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The specified conversation identifier does not exist. Verify the
-    # conversation ID or omit it to start a new conversation.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ConversationNotFoundException AWS API Documentation
-    #
-    class ConversationNotFoundException < Struct.new(
-      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -881,6 +825,35 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
+    # Contains the final response event from the agent, including the
+    # response message, response options, and conversation ID.
+    #
+    # @!attribute [rw] final_response_message
+    #   The final response message from the agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The response options that you can use to easily answer follow-up
+    #   questions from the agent.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] conversation_id
+    #   The conversation ID of the request. You can use this ID to continue
+    #   the profile mapping based on this request's context at a later
+    #   time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/EndOfOutputEvent AWS API Documentation
+    #
+    class EndOfOutputEvent < Struct.new(
+      :final_response_message,
+      :options,
+      :conversation_id,
+      :event_type)
+      SENSITIVE = [:final_response_message, :options]
+      include Aws::Structure
+    end
+
     # The error information for `CreateFHIRDatastore` and
     # `DeleteFHIRDatastore` actions.
     #
@@ -898,6 +871,27 @@ module Aws::HealthLake
       :error_message,
       :error_category)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type of an event that returns an exception encountered while
+    # serving the request.
+    #
+    # @!attribute [rw] error
+    #   The type of the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ErrorEvent AWS API Documentation
+    #
+    class ErrorEvent < Struct.new(
+      :error,
+      :message,
+      :event_type)
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -1065,6 +1059,17 @@ module Aws::HealthLake
       :change_description,
       :last_updated_at)
       SENSITIVE = [:profile_mapping]
+      include Aws::Structure
+    end
+
+    # The type for a periodically emitted event to keep the connection
+    # alive.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/HeartbeatEvent AWS API Documentation
+    #
+    class HeartbeatEvent < Struct.new(
+      :event_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1748,20 +1753,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # The requested operation is not yet available. Check the service
-    # documentation for a list of supported operations.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/NotImplementedOperationException AWS API Documentation
-    #
-    class NotImplementedOperationException < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The output data configuration supplied when the export job was
     # created.
     #
@@ -1828,6 +1819,21 @@ module Aws::HealthLake
     class ProfileMappingSource < Struct.new(
       :profile_mapping)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type for an incremental progress update from the agent.
+    #
+    # @!attribute [rw] message
+    #   An incremental progress update message by the agent
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ProgressEvent AWS API Documentation
+    #
+    class ProgressEvent < Struct.new(
+      :message,
+      :event_type)
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -2387,6 +2393,21 @@ module Aws::HealthLake
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The type for an incremental text update from the agent.
+    #
+    # @!attribute [rw] message
+    #   An incremental text update from the agent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/TextMessageEvent AWS API Documentation
+    #
+    class TextMessageEvent < Struct.new(
+      :message,
+      :event_type)
+      SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
     # The user has exceeded their maximum number of allowed calls to the
     # given API.
     #
@@ -2607,35 +2628,6 @@ module Aws::HealthLake
       include Aws::Structure
     end
 
-    # You are not authorized to make this request. Verify that your Amazon
-    # Web Services credentials are valid and that you have the required
-    # permissions.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UnauthorizedException AWS API Documentation
-    #
-    class UnauthorizedException < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The content type in your request is not supported. Use a supported
-    # content type for this operation.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UnsupportedMIMETypeException AWS API Documentation
-    #
-    class UnsupportedMIMETypeException < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the data store from which tags are
     #   being removed.
@@ -2779,10 +2771,6 @@ module Aws::HealthLake
     #   The unique identifier of the profile to update via the agent.
     #   @return [String]
     #
-    # @!attribute [rw] source_format
-    #   The source data format for the transformation.
-    #   @return [String]
-    #
     # @!attribute [rw] input_message
     #   The message to send to the agent.
     #   @return [Types::AgentInputMessage]
@@ -2796,7 +2784,6 @@ module Aws::HealthLake
     #
     class UpdateProfileWithAgentRequest < Struct.new(
       :profile_id,
-      :source_format,
       :input_message,
       :conversation_id)
       SENSITIVE = []
@@ -2806,19 +2793,13 @@ module Aws::HealthLake
     # The response from the `UpdateProfileWithAgent` operation.
     #
     # @!attribute [rw] agent_response
-    #   The response message from the agent.
-    #   @return [Types::AgentOutputMessage]
-    #
-    # @!attribute [rw] conversation_id
-    #   The conversation identifier to use for follow-up messages in this
-    #   conversation.
-    #   @return [String]
+    #   The streaming response from the agent.
+    #   @return [Types::AgentOutputMessageStream]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UpdateProfileWithAgentResponse AWS API Documentation
     #
     class UpdateProfileWithAgentResponse < Struct.new(
-      :agent_response,
-      :conversation_id)
+      :agent_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2835,6 +2816,28 @@ module Aws::HealthLake
       :message)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Represents the response stream type from the agent during chat-based
+    # profile customization.
+    #
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/AgentOutputMessageStream AWS API Documentation
+    #
+    class AgentOutputMessageStream < Enumerator
+
+      def event_types
+        [
+          :text_message_event,
+          :progress_event,
+          :heartbeat_event,
+          :error_event,
+          :end_of_output_event
+        ]
+      end
+
     end
 
   end

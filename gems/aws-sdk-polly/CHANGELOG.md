@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2026-10-21)
+------------------
+
+* Feature - Added support for the new voices - Kenneth (en-US), Nate (en-US), Tina (de-DE), Carlos (es-US), Carolina (pt-BR), Leo (pt-BR), Curtis (en-AU), Kiara (en-IN), Arjun (en-IN) and Hyunduk (ko-KR). They are available as a Generative voices only.
+
 1.131.0 (2026-10-20)
 ------------------
 

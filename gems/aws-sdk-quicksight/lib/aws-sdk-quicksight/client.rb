@@ -4618,6 +4618,19 @@ module Aws::QuickSight
     #         client_secret: "OAuthClientSecret",
     #         username: "OAuthUsername",
     #       },
+    #       service_account_credentials: {
+    #         admin_account_email: "AdminAccountEmail", # required
+    #         service_account_private_key: "PrivateKey", # required
+    #         client_email: "ClientEmail", # required
+    #       },
+    #       share_point_client_credentials: {
+    #         kms_key_arn: "DataSourceKmsKeyArn", # required
+    #         cert_thumbprint: "DataSourceCertThumbprint", # required
+    #       },
+    #       one_drive_client_credentials: {
+    #         kms_key_arn: "DataSourceKmsKeyArn", # required
+    #         cert_thumbprint: "DataSourceCertThumbprint", # required
+    #       },
     #     },
     #     permissions: [
     #       {
@@ -25054,6 +25067,19 @@ module Aws::QuickSight
     #         client_secret: "OAuthClientSecret",
     #         username: "OAuthUsername",
     #       },
+    #       service_account_credentials: {
+    #         admin_account_email: "AdminAccountEmail", # required
+    #         service_account_private_key: "PrivateKey", # required
+    #         client_email: "ClientEmail", # required
+    #       },
+    #       share_point_client_credentials: {
+    #         kms_key_arn: "DataSourceKmsKeyArn", # required
+    #         cert_thumbprint: "DataSourceCertThumbprint", # required
+    #       },
+    #       one_drive_client_credentials: {
+    #         kms_key_arn: "DataSourceKmsKeyArn", # required
+    #         cert_thumbprint: "DataSourceCertThumbprint", # required
+    #       },
     #     },
     #     vpc_connection_properties: {
     #       vpc_connection_arn: "Arn", # required
@@ -28022,7 +28048,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.203.0'
+      context[:gem_version] = '1.204.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

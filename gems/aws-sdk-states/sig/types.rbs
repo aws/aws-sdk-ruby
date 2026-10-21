@@ -401,7 +401,7 @@ module Aws::States
     class GetActivityTaskOutput
       attr_accessor task_token: ::String
       attr_accessor input: ::String
-      SENSITIVE: [:input]
+      SENSITIVE: [:task_token, :input]
     end
 
     class GetExecutionHistoryInput
@@ -840,7 +840,7 @@ module Aws::States
       attr_accessor task_token: ::String
       attr_accessor error: ::String
       attr_accessor cause: ::String
-      SENSITIVE: [:error, :cause]
+      SENSITIVE: [:task_token, :error, :cause]
     end
 
     class SendTaskFailureOutput < Aws::EmptyStructure
@@ -848,7 +848,7 @@ module Aws::States
 
     class SendTaskHeartbeatInput
       attr_accessor task_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:task_token]
     end
 
     class SendTaskHeartbeatOutput < Aws::EmptyStructure
@@ -857,7 +857,7 @@ module Aws::States
     class SendTaskSuccessInput
       attr_accessor task_token: ::String
       attr_accessor output: ::String
-      SENSITIVE: [:output]
+      SENSITIVE: [:task_token, :output]
     end
 
     class SendTaskSuccessOutput < Aws::EmptyStructure

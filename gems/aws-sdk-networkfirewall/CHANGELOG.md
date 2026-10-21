@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2026-10-21)
+------------------
+
+* Feature - Adds support for Network Firewall Resolved IP validation.
+
 1.101.0 (2026-10-20)
 ------------------
 

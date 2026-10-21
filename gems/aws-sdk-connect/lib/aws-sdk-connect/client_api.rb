@@ -1913,6 +1913,7 @@ module Aws::Connect
     SecurityProfileSearchSummary = Shapes::StructureShape.new(name: 'SecurityProfileSearchSummary')
     SecurityProfileSummary = Shapes::StructureShape.new(name: 'SecurityProfileSummary')
     SecurityProfileSummaryList = Shapes::ListShape.new(name: 'SecurityProfileSummaryList')
+    SecurityProfileType = Shapes::StringShape.new(name: 'SecurityProfileType')
     SecurityProfiles = Shapes::ListShape.new(name: 'SecurityProfiles')
     SecurityProfiles100 = Shapes::ListShape.new(name: 'SecurityProfiles100')
     SecurityProfilesSearchFilter = Shapes::StructureShape.new(name: 'SecurityProfilesSearchFilter')
@@ -8714,6 +8715,7 @@ module Aws::Connect
     SecurityProfile.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
     SecurityProfile.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     SecurityProfile.add_member(:granular_access_control_configuration, Shapes::ShapeRef.new(shape: GranularAccessControlConfiguration, location_name: "GranularAccessControlConfiguration"))
+    SecurityProfile.add_member(:type, Shapes::ShapeRef.new(shape: SecurityProfileType, location_name: "Type"))
     SecurityProfile.struct_class = Types::SecurityProfile
 
     SecurityProfileIds.member = Shapes::ShapeRef.new(shape: SecurityProfileId)
@@ -8734,6 +8736,7 @@ module Aws::Connect
     SecurityProfileSearchSummary.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "SecurityProfileName"))
     SecurityProfileSearchSummary.add_member(:description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "Description"))
     SecurityProfileSearchSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    SecurityProfileSearchSummary.add_member(:type, Shapes::ShapeRef.new(shape: SecurityProfileType, location_name: "Type"))
     SecurityProfileSearchSummary.struct_class = Types::SecurityProfileSearchSummary
 
     SecurityProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: SecurityProfileId, location_name: "Id"))
@@ -8741,6 +8744,7 @@ module Aws::Connect
     SecurityProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "Name"))
     SecurityProfileSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     SecurityProfileSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    SecurityProfileSummary.add_member(:type, Shapes::ShapeRef.new(shape: SecurityProfileType, location_name: "Type"))
     SecurityProfileSummary.struct_class = Types::SecurityProfileSummary
 
     SecurityProfileSummaryList.member = Shapes::ShapeRef.new(shape: SecurityProfileSummary)

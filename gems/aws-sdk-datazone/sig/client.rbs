@@ -806,6 +806,29 @@ module Aws
                               ) -> _CreateDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceResponseSuccess
 
+      interface _CreateDesignationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDesignationOutput]
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def designation_type: () -> ("MANAGED" | "USER_CREATED")
+        def policy: () -> ::String
+        def deletion_protection: () -> bool
+        def created_by: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_designation-instance_method
+      def create_designation: (
+                                domain_identifier: ::String,
+                                name: ::String,
+                                ?description: ::String,
+                                policy: ::String,
+                                ?deletion_protection: bool
+                              ) -> _CreateDesignationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDesignationResponseSuccess
+
       interface _CreateDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainOutput]
         def id: () -> ::String
@@ -1181,7 +1204,8 @@ module Aws
                                   user_identifier: ::String?,
                                   group_identifier: ::String?
                                 },
-                                designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD")
+                                designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD" | "USER_CREATED_DESIGNATION"),
+                                user_created_designation_id: ::String?
                               }
                             ]
                           ) -> _CreateProjectResponseSuccess
@@ -1198,7 +1222,8 @@ module Aws
                                          user_identifier: ::String?,
                                          group_identifier: ::String?
                                        },
-                                       designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD")
+                                       designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD" | "USER_CREATED_DESIGNATION"),
+                                       ?user_created_designation_id: ::String
                                      ) -> _CreateProjectMembershipResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectMembershipResponseSuccess
 
@@ -1535,6 +1560,16 @@ module Aws
                                 ?retain_permissions_on_revoke_failure: bool
                               ) -> _DeleteDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataSourceResponseSuccess
+
+      interface _DeleteDesignationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDesignationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_designation-instance_method
+      def delete_designation: (
+                                domain_identifier: ::String,
+                                identifier: ::String
+                              ) -> _DeleteDesignationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDesignationResponseSuccess
 
       interface _DeleteDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainOutput]
@@ -1996,6 +2031,26 @@ module Aws
                                  identifier: ::String
                                ) -> _GetDataSourceRunResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceRunResponseSuccess
+
+      interface _GetDesignationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDesignationOutput]
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def designation_type: () -> ("MANAGED" | "USER_CREATED")
+        def policy: () -> ::String
+        def deletion_protection: () -> bool
+        def created_by: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_designation-instance_method
+      def get_designation: (
+                             domain_identifier: ::String,
+                             identifier: ::String
+                           ) -> _GetDesignationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDesignationResponseSuccess
 
       interface _GetDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainOutput]
@@ -2799,6 +2854,19 @@ module Aws
                                ?max_results: ::Integer
                              ) -> _ListDataSourcesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
+
+      interface _ListDesignationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDesignationsOutput]
+        def items: () -> ::Array[Types::DesignationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_designations-instance_method
+      def list_designations: (
+                               domain_identifier: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListDesignationsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDesignationsResponseSuccess
 
       interface _ListDomainUnitsForParentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainUnitsForParentOutput]
@@ -4045,6 +4113,30 @@ module Aws
                                 ?retain_permissions_on_revoke_failure: bool
                               ) -> _UpdateDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSourceResponseSuccess
+
+      interface _UpdateDesignationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDesignationOutput]
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def designation_type: () -> ("MANAGED" | "USER_CREATED")
+        def policy: () -> ::String
+        def deletion_protection: () -> bool
+        def created_by: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_designation-instance_method
+      def update_designation: (
+                                domain_identifier: ::String,
+                                identifier: ::String,
+                                ?name: ::String,
+                                ?description: ::String,
+                                ?policy: ::String,
+                                ?deletion_protection: bool
+                              ) -> _UpdateDesignationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDesignationResponseSuccess
 
       interface _UpdateDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainOutput]

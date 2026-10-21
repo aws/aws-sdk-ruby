@@ -726,7 +726,7 @@ module Aws
       def list_services: (
                            ?max_results: ::Integer,
                            ?next_token: ::String,
-                           ?filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
+                           ?filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "msteams" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
                          ) -> _ListServicesResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
 

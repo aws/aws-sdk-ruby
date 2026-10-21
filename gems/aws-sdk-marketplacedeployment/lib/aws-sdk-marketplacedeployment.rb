@@ -54,7 +54,7 @@ module Aws::MarketplaceDeployment
   autoload :EndpointProvider, 'aws-sdk-marketplacedeployment/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplacedeployment/endpoints'
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end
 

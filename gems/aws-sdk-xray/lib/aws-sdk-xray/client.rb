@@ -2812,7 +2812,7 @@ module Aws::XRay
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

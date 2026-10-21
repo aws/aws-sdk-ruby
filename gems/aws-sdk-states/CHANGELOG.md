@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2026-10-21)
+------------------
+
+* Feature - Release minor updates to API model
+
 1.115.0 (2026-10-20)
 ------------------
 

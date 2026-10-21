@@ -33792,6 +33792,11 @@ module Aws::Connect
     #   including data table permissions.
     #   @return [Types::GranularAccessControlConfiguration]
     #
+    # @!attribute [rw] type
+    #   The type of the security profile: `AWS_MANAGED` or
+    #   `CUSTOMER_MANAGED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfile AWS API Documentation
     #
     class SecurityProfile < Struct.new(
@@ -33807,7 +33812,8 @@ module Aws::Connect
       :last_modified_region,
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
-      :granular_access_control_configuration)
+      :granular_access_control_configuration,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33887,6 +33893,11 @@ module Aws::Connect
     #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] type
+    #   The type of the security profile: `AWS_MANAGED` or
+    #   `CUSTOMER_MANAGED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSearchSummary AWS API Documentation
     #
     class SecurityProfileSearchSummary < Struct.new(
@@ -33895,7 +33906,8 @@ module Aws::Connect
       :arn,
       :security_profile_name,
       :description,
-      :tags)
+      :tags,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33923,6 +33935,11 @@ module Aws::Connect
     #   modified.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the security profile: `AWS_MANAGED` or
+    #   `CUSTOMER_MANAGED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSummary AWS API Documentation
     #
     class SecurityProfileSummary < Struct.new(
@@ -33930,7 +33947,8 @@ module Aws::Connect
       :arn,
       :name,
       :last_modified_time,
-      :last_modified_region)
+      :last_modified_region,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -3779,6 +3779,9 @@ module Aws::QuickSight
       attr_accessor key_pair_credentials: Types::KeyPairCredentials
       attr_accessor web_proxy_credentials: Types::WebProxyCredentials
       attr_accessor o_auth_client_credentials: Types::OAuthClientCredentials
+      attr_accessor service_account_credentials: Types::ServiceAccountCredentials
+      attr_accessor share_point_client_credentials: Types::SharePointClientCredentials
+      attr_accessor one_drive_client_credentials: Types::OneDriveClientCredentials
       SENSITIVE: []
     end
 
@@ -9124,6 +9127,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class OneDriveClientCredentials
+      attr_accessor kms_key_arn: ::String
+      attr_accessor cert_thumbprint: ::String
+      SENSITIVE: [:kms_key_arn, :cert_thumbprint]
+    end
+
     class OneDriveParameters
       attr_accessor tenant_id: ::String
       attr_accessor client_id: ::String
@@ -10801,6 +10810,13 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ServiceAccountCredentials
+      attr_accessor admin_account_email: ::String
+      attr_accessor service_account_private_key: ::String
+      attr_accessor client_email: ::String
+      SENSITIVE: [:service_account_private_key]
+    end
+
     class ServiceNowParameters
       attr_accessor site_base_url: ::String
       SENSITIVE: []
@@ -10827,6 +10843,12 @@ module Aws::QuickSight
     class ShapeConditionalFormat
       attr_accessor background_color: Types::ConditionalFormattingColor
       SENSITIVE: []
+    end
+
+    class SharePointClientCredentials
+      attr_accessor kms_key_arn: ::String
+      attr_accessor cert_thumbprint: ::String
+      SENSITIVE: [:kms_key_arn, :cert_thumbprint]
     end
 
     class SharePointParameters

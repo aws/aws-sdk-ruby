@@ -5604,7 +5604,7 @@ module Aws::Lightsail
     #   resp.alarms[0].datapoints_to_alarm #=> Integer
     #   resp.alarms[0].treat_missing_data #=> String, one of "breaching", "notBreaching", "ignore", "missing"
     #   resp.alarms[0].statistic #=> String, one of "Minimum", "Maximum", "Sum", "Average", "SampleCount"
-    #   resp.alarms[0].metric_name #=> String, one of "CPUUtilization", "NetworkIn", "NetworkOut", "StatusCheckFailed", "StatusCheckFailed_Instance", "StatusCheckFailed_System", "ClientTLSNegotiationErrorCount", "HealthyHostCount", "UnhealthyHostCount", "HTTPCode_LB_4XX_Count", "HTTPCode_LB_5XX_Count", "HTTPCode_Instance_2XX_Count", "HTTPCode_Instance_3XX_Count", "HTTPCode_Instance_4XX_Count", "HTTPCode_Instance_5XX_Count", "InstanceResponseTime", "RejectedConnectionCount", "RequestCount", "DatabaseConnections", "DiskQueueDepth", "FreeStorageSpace", "NetworkReceiveThroughput", "NetworkTransmitThroughput", "FreeableMemory", "SwapUsage", "BurstCapacityTime", "BurstCapacityPercentage"
+    #   resp.alarms[0].metric_name #=> String, one of "CPUUtilization", "NetworkIn", "NetworkOut", "StatusCheckFailed", "StatusCheckFailed_Instance", "StatusCheckFailed_System", "ClientTLSNegotiationErrorCount", "HealthyHostCount", "UnhealthyHostCount", "HTTPCode_LB_4XX_Count", "HTTPCode_LB_5XX_Count", "HTTPCode_Instance_2XX_Count", "HTTPCode_Instance_3XX_Count", "HTTPCode_Instance_4XX_Count", "HTTPCode_Instance_5XX_Count", "InstanceResponseTime", "RejectedConnectionCount", "RequestCount", "DatabaseConnections", "DiskQueueDepth", "FreeStorageSpace", "NetworkReceiveThroughput", "NetworkTransmitThroughput", "FreeableMemory", "SwapUsage", "BurstCapacityTime", "BurstCapacityPercentage", "DiskReadOps", "DiskWriteOps", "DiskReadBytes", "DiskWriteBytes", "DiskTotalReadTime", "DiskTotalWriteTime", "DiskQueueLength"
     #   resp.alarms[0].state #=> String, one of "OK", "ALARM", "INSUFFICIENT_DATA"
     #   resp.alarms[0].unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
     #   resp.alarms[0].contact_protocols #=> Array
@@ -7958,9 +7958,76 @@ module Aws::Lightsail
     #
     #     `Unit`: The published unit is `Count`.
     #
+    #   * <b> <code>DiskReadOps</code> </b> - The number of read operations
+    #     completed on the system disk of the instance during the period. This
+    #     metric doesn't include activity on additional disks that you attach
+    #     to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   * <b> <code>DiskWriteOps</code> </b> - The number of write operations
+    #     completed on the system disk of the instance during the period. This
+    #     metric doesn't include activity on additional disks that you attach
+    #     to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   * <b> <code>DiskReadBytes</code> </b> - The number of bytes read from
+    #     the system disk of the instance during the period. This metric
+    #     doesn't include activity on additional disks that you attach to the
+    #     instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Bytes`.
+    #
+    #   * <b> <code>DiskWriteBytes</code> </b> - The number of bytes written
+    #     to the system disk of the instance during the period. This metric
+    #     doesn't include activity on additional disks that you attach to the
+    #     instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Bytes`.
+    #
+    #   * <b> <code>DiskTotalReadTime</code> </b> - The total number of
+    #     seconds spent by all read operations that completed on the system
+    #     disk of the instance during the period. This metric doesn't include
+    #     activity on additional disks that you attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Seconds`.
+    #
+    #   * <b> <code>DiskTotalWriteTime</code> </b> - The total number of
+    #     seconds spent by all write operations that completed on the system
+    #     disk of the instance during the period. This metric doesn't include
+    #     activity on additional disks that you attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Seconds`.
+    #
+    #   * <b> <code>DiskQueueLength</code> </b> - The number of read and write
+    #     requests that are waiting to access the system disk of the instance.
+    #     This metric doesn't include activity on additional disks that you
+    #     attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   For more information about system disk performance metrics, see [View
+    #   system disk performance metrics for your Lightsail instance][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-burst-capacity
+    #   [2]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-disk-performance-metrics
     #
     # @option params [required, Integer] :period
     #   The granularity, in seconds, of the returned data points.
@@ -8017,7 +8084,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_instance_metric_data({
     #     instance_name: "ResourceName", # required
-    #     metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, BurstCapacityTime, BurstCapacityPercentage, MetadataNoToken
+    #     metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, BurstCapacityTime, BurstCapacityPercentage, MetadataNoToken, DiskReadOps, DiskWriteOps, DiskReadBytes, DiskWriteBytes, DiskTotalReadTime, DiskTotalWriteTime, DiskQueueLength
     #     period: 1, # required
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
@@ -8027,7 +8094,7 @@ module Aws::Lightsail
     #
     # @example Response structure
     #
-    #   resp.metric_name #=> String, one of "CPUUtilization", "NetworkIn", "NetworkOut", "StatusCheckFailed", "StatusCheckFailed_Instance", "StatusCheckFailed_System", "BurstCapacityTime", "BurstCapacityPercentage", "MetadataNoToken"
+    #   resp.metric_name #=> String, one of "CPUUtilization", "NetworkIn", "NetworkOut", "StatusCheckFailed", "StatusCheckFailed_Instance", "StatusCheckFailed_System", "BurstCapacityTime", "BurstCapacityPercentage", "MetadataNoToken", "DiskReadOps", "DiskWriteOps", "DiskReadBytes", "DiskWriteBytes", "DiskTotalReadTime", "DiskTotalWriteTime", "DiskQueueLength"
     #   resp.metric_data #=> Array
     #   resp.metric_data[0].average #=> Float
     #   resp.metric_data[0].maximum #=> Float
@@ -10256,7 +10323,9 @@ module Aws::Lightsail
     #
     #   * **Instances**: `BurstCapacityPercentage`, `BurstCapacityTime`,
     #     `CPUUtilization`, `NetworkIn`, `NetworkOut`, `StatusCheckFailed`,
-    #     `StatusCheckFailed_Instance`, and `StatusCheckFailed_System`.
+    #     `StatusCheckFailed_Instance`, `StatusCheckFailed_System`,
+    #     `DiskReadOps`, `DiskWriteOps`, `DiskReadBytes`, `DiskWriteBytes`,
+    #     `DiskTotalReadTime`, `DiskTotalWriteTime`, and `DiskQueueLength`.
     #
     #   * **Load balancers**: `ClientTLSNegotiationErrorCount`,
     #     `HealthyHostCount`, `UnhealthyHostCount`, `HTTPCode_LB_4XX_Count`,
@@ -10396,7 +10465,7 @@ module Aws::Lightsail
     #
     #   resp = client.put_alarm({
     #     alarm_name: "ResourceName", # required
-    #     metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count, HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime, RejectedConnectionCount, RequestCount, DatabaseConnections, DiskQueueDepth, FreeStorageSpace, NetworkReceiveThroughput, NetworkTransmitThroughput, FreeableMemory, SwapUsage, BurstCapacityTime, BurstCapacityPercentage
+    #     metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count, HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime, RejectedConnectionCount, RequestCount, DatabaseConnections, DiskQueueDepth, FreeStorageSpace, NetworkReceiveThroughput, NetworkTransmitThroughput, FreeableMemory, SwapUsage, BurstCapacityTime, BurstCapacityPercentage, DiskReadOps, DiskWriteOps, DiskReadBytes, DiskWriteBytes, DiskTotalReadTime, DiskTotalWriteTime, DiskQueueLength
     #     monitored_resource_name: "ResourceName", # required
     #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #     threshold: 1.0, # required
@@ -12728,7 +12797,7 @@ module Aws::Lightsail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.139.0'
+      context[:gem_version] = '1.140.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

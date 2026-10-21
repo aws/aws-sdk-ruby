@@ -86,7 +86,7 @@ module Aws::Lightsail
       attr_accessor datapoints_to_alarm: ::Integer
       attr_accessor treat_missing_data: ("breaching" | "notBreaching" | "ignore" | "missing")
       attr_accessor statistic: ("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")
-      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage" | "BurstCapacityTime" | "BurstCapacityPercentage")
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage" | "BurstCapacityTime" | "BurstCapacityPercentage" | "DiskReadOps" | "DiskWriteOps" | "DiskReadBytes" | "DiskWriteBytes" | "DiskTotalReadTime" | "DiskTotalWriteTime" | "DiskQueueLength")
       attr_accessor state: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
       attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
       attr_accessor contact_protocols: ::Array[("Email" | "SMS")]
@@ -1705,7 +1705,7 @@ module Aws::Lightsail
 
     class GetInstanceMetricDataRequest
       attr_accessor instance_name: ::String
-      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken")
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken" | "DiskReadOps" | "DiskWriteOps" | "DiskReadBytes" | "DiskWriteBytes" | "DiskTotalReadTime" | "DiskTotalWriteTime" | "DiskQueueLength")
       attr_accessor period: ::Integer
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
@@ -1715,7 +1715,7 @@ module Aws::Lightsail
     end
 
     class GetInstanceMetricDataResult
-      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken")
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken" | "DiskReadOps" | "DiskWriteOps" | "DiskReadBytes" | "DiskWriteBytes" | "DiskTotalReadTime" | "DiskTotalWriteTime" | "DiskQueueLength")
       attr_accessor metric_data: ::Array[Types::MetricDatapoint]
       SENSITIVE: []
     end
@@ -2566,7 +2566,7 @@ module Aws::Lightsail
 
     class PutAlarmRequest
       attr_accessor alarm_name: ::String
-      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage" | "BurstCapacityTime" | "BurstCapacityPercentage")
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage" | "BurstCapacityTime" | "BurstCapacityPercentage" | "DiskReadOps" | "DiskWriteOps" | "DiskReadBytes" | "DiskWriteBytes" | "DiskTotalReadTime" | "DiskTotalWriteTime" | "DiskQueueLength")
       attr_accessor monitored_resource_name: ::String
       attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
       attr_accessor threshold: ::Float

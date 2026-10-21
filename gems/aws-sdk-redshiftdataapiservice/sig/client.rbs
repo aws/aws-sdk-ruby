@@ -147,6 +147,7 @@ module Aws
         def result_rows: () -> ::Integer
         def result_size: () -> ::Integer
         def redshift_query_id: () -> ::Integer
+        def redshift_query_uuid: () -> ::String
         def query_parameters: () -> ::Array[Types::SqlParameter]
         def sub_statements: () -> ::Array[Types::SubStatementData]
         def workgroup_name: () -> ::String

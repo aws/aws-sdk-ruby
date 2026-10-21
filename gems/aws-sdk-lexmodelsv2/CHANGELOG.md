@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2026-10-21)
+------------------
+
+* Feature - Adds support for Assisted NLU - Dialog Manager mode allowing usage of LLMs as the default NLU system and dialog management
+
 1.100.0 (2026-10-20)
 ------------------
 

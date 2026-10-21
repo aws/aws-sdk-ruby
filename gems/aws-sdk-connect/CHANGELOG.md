@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.288.0 (2026-10-21)
+------------------
+
+* Feature - Added support for AWS-managed security profiles.
+
 1.287.0 (2026-10-20)
 ------------------
 
