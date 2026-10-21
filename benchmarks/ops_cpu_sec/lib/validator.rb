@@ -22,8 +22,11 @@ module OpsCpuSec
     private_constant :Calls
 
     class << self
-      def run(cases)
-        failures = cases.count { |test_case| !report(test_case) }
+      def run(cases, transport = StubTransport)
+        failures = cases.count do |test_case|
+          transport.prepare(test_case)
+          !report(test_case)
+        end
         puts "#{cases.size - failures}/#{cases.size} cases valid"
         failures.zero?
       end
