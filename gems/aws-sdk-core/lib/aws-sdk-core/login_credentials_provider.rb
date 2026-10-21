@@ -13,6 +13,8 @@ module Aws
   #     ec2 = Aws::EC2::Client.new(credentials_provider: credentials)
   #
   # If you omit the `:client` option, a new {Aws::Signin::Client} object will be constructed.
+  # When the cached token records a different `signInRegion`, a client for that region is
+  # constructed the same way and used to refresh.
   class LoginCredentialsProvider
     include IdentityProvider
     include Smithy::Client::RefreshingIdentityProvider
@@ -26,7 +28,9 @@ module Aws
     #   PowerShell automatically.
     #
     # @option options [Signin::Client] :client Optional `Signin::Client`.
-    #   If not provided, a client will be constructed.
+    #   If not provided, a client will be constructed. A provided client is
+    #   used for every refresh, so it must be configured for the region the
+    #   login token was issued in.
     def initialize(options = {})
       unless defined?(Aws::Signin)
         raise 'The aws-sdk-signin gem must be required in order to use LoginCredentialsProvider.'
@@ -35,13 +39,16 @@ module Aws
       raise ArgumentError, 'Missing login_session' unless options[:login_session]
 
       @login_session = options.delete(:login_session)
-      @client = options[:client] || Signin::Client.new(options.merge(credentials_provider: nil))
+      @client_options = options.merge(credentials_provider: nil) unless options[:client]
+      @client = options[:client] || Signin::Client.new(@client_options)
       @features = ['CREDENTIALS_LOGIN']
       @async_refresh = true
       super
     end
 
-    # @return [Signin::Client]
+    # @return [Signin::Client] The client built from the given options. A refresh
+    #   uses a client for another region when the cached token records a different
+    #   `signInRegion`.
     attr_reader :client
 
     private
@@ -147,7 +154,16 @@ module Aws
           refresh_token: token_json['refreshToken']
         }
       }
-      @client.build_request(:create_o_auth2_token, options)
+      signin_client(token_json['signInRegion']).build_request(:create_o_auth2_token, options)
+    end
+
+    # Refresh tokens can only be redeemed in the region they were issued in,
+    # which the login tool records in the cached token as `signInRegion`.
+    def signin_client(signin_region)
+      return @client if @client_options.nil? || signin_region.to_s.empty? || signin_region == @client.config.region
+
+      @signin_region_clients ||= {}
+      @signin_region_clients[signin_region] ||= Signin::Client.new(@client_options.merge(region: signin_region))
     end
 
     def resolve_endpoint(req)
