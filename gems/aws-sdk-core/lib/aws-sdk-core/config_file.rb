@@ -48,11 +48,11 @@ module Aws
           @profiles[resolve_key(key)] = value
         end
 
-        def fetch(key, *, &)
+        def fetch(key, *args, &)
           if block_given?
             @profiles.fetch(resolve_key(key), &)
           else
-            @profiles.fetch(resolve_key(key), *)
+            @profiles.fetch(resolve_key(key), *args)
           end
         end
 

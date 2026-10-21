@@ -27,8 +27,8 @@ module Aws
         http_request.headers.update(signature.headers)
       end
 
-      def presign_url(*)
-        @signer.presign_url(*)
+      def presign_url(...)
+        @signer.presign_url(...)
       end
 
       private

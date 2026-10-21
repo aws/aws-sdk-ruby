@@ -77,3 +77,8 @@ Style/GlobalVars:
   Exclude:
     - 'Rakefile'
     - 'tasks/**/*.rake'
+
+Style/ArgumentsForwarding:
+  Exclude:
+    # Anonymous rest forwarding requires Ruby 3.2; keep this runtime compatible with 3.1.
+    - 'gems/aws-sdk-core/lib/aws-sdk-core/config_file.rb'
