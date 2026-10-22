@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - `MessageVerifier#authentic?` returns false, rather than raising, for messages that are not JSON objects or have malformed signing fields.
+* Issue - Fix `MessageVerifier#authentic?` to return false, rather than raise, for messages that are not JSON objects or have malformed signing fields.
 
 1.124.0 (2026-10-21)
 ------------------
