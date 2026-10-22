@@ -44,7 +44,7 @@ end
 
 group :build do
   gem 'kramdown'
-  gem 'mustache', '< 1.1.3'
+  gem 'mustache'
 end
 
 group :development do
