@@ -799,6 +799,7 @@ module Aws::BedrockAgentCore
       attr_accessor evaluator_arn: ::String
       attr_accessor evaluator_id: ::String
       attr_accessor evaluator_name: ::String
+      attr_accessor evaluation_dimension_name: ::String
       attr_accessor explanation: ::String
       attr_accessor context: Types::Context
       attr_accessor value: ::Float
@@ -843,6 +844,7 @@ module Aws::BedrockAgentCore
 
     class EvaluatorSummary
       attr_accessor evaluator_id: ::String
+      attr_accessor evaluation_dimension_name: ::String
       attr_accessor statistics: Types::EvaluatorStatistics
       attr_accessor total_evaluated: ::Integer
       attr_accessor total_failed: ::Integer

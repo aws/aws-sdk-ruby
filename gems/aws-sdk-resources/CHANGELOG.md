@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.278.0 (2026-10-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-continuum` gem.
+
 3.277.0 (2026-10-20)
 ------------------
 

@@ -364,6 +364,11 @@ module Aws::BedrockAgentCoreControl
       end
     end
 
+    class CircuitBreakerConfiguration
+      attr_accessor mode: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class ClaimMatchValueType
       attr_accessor match_value_string: ::String
       attr_accessor match_value_string_list: ::Array[::String]
@@ -494,12 +499,15 @@ module Aws::BedrockAgentCoreControl
     class Condition
       attr_accessor match_principals: Types::MatchPrincipals
       attr_accessor match_paths: Types::MatchPaths
+      attr_accessor match_models: Types::MatchModels
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class MatchPrincipals < Condition
       end
       class MatchPaths < Condition
+      end
+      class MatchModels < Condition
       end
       class Unknown < Condition
       end
@@ -1942,6 +1950,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class DimensionRatingScale
+      attr_accessor numerical: ::Array[Types::NumericalScaleDefinition]
+      attr_accessor categorical: ::Array[Types::CategoricalScaleDefinition]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Numerical < DimensionRatingScale
+      end
+      class Categorical < DimensionRatingScale
+      end
+      class Unknown < DimensionRatingScale
+      end
+    end
+
     class EbsVolumeConfiguration
       attr_accessor name: ::String
       attr_accessor size_gi_b: ::Integer
@@ -2075,6 +2097,13 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:append_to_prompt]
     end
 
+    class EvaluationDimension
+      attr_accessor dimension_name: ::String
+      attr_accessor dimension_instruction: ::String
+      attr_accessor dimension_rating_scale: Types::DimensionRatingScale
+      SENSITIVE: [:dimension_instruction, :dimension_rating_scale]
+    end
+
     class EvaluatorConfig
       attr_accessor llm_as_a_judge: Types::LlmAsAJudgeEvaluatorConfig
       attr_accessor code_based: Types::CodeBasedEvaluatorConfig
@@ -2153,6 +2182,28 @@ module Aws::BedrockAgentCoreControl
       end
       class Unknown < ExtractionConfiguration
       end
+    end
+
+    class Fallback
+      attr_accessor trigger_on: Types::FallbackTriggers
+      attr_accessor first_byte_timeout_milliseconds: ::Integer
+      attr_accessor circuit_breaker: Types::CircuitBreakerConfiguration
+      attr_accessor target_fallback: ::Array[Types::FallbackTarget]
+      SENSITIVE: []
+    end
+
+    class FallbackTarget
+      attr_accessor target_name: ::String
+      attr_accessor model: ::String
+      attr_accessor trigger_on: Types::FallbackTriggers
+      attr_accessor first_byte_timeout_milliseconds: ::Integer
+      SENSITIVE: [:target_name]
+    end
+
+    class FallbackTriggers
+      attr_accessor status_codes: ::Array[::String]
+      attr_accessor errors: ::Array[("CONNECTION_ERROR" | "FIRST_BYTE_TIMEOUT" | "UNROUTABLE")]
+      SENSITIVE: []
     end
 
     class FilesystemConfiguration
@@ -4306,6 +4357,17 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class MatchModelEntry
+      attr_accessor value: ::String
+      attr_accessor operator: ("StringEquals" | "StringLike")
+      SENSITIVE: []
+    end
+
+    class MatchModels
+      attr_accessor any_of: ::Array[Types::MatchModelEntry]
+      SENSITIVE: []
+    end
+
     class MatchPaths
       attr_accessor any_of: ::Array[::String]
       SENSITIVE: []
@@ -5034,12 +5096,15 @@ module Aws::BedrockAgentCoreControl
     class RatingScale
       attr_accessor numerical: ::Array[Types::NumericalScaleDefinition]
       attr_accessor categorical: ::Array[Types::CategoricalScaleDefinition]
+      attr_accessor multi_dimensional: ::Array[Types::EvaluationDimension]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Numerical < RatingScale
       end
       class Categorical < RatingScale
+      end
+      class MultiDimensional < RatingScale
       end
       class Unknown < RatingScale
       end
@@ -5504,6 +5569,8 @@ module Aws::BedrockAgentCoreControl
 
     class StaticRoute
       attr_accessor target_name: ::String
+      attr_accessor model: ::String
+      attr_accessor fallback: Types::Fallback
       SENSITIVE: [:target_name]
     end
 
@@ -5691,9 +5758,11 @@ module Aws::BedrockAgentCoreControl
     end
 
     class TargetTrafficSplitEntry
+      attr_accessor target_name: ::String
+      attr_accessor model: ::String
+      attr_accessor fallback: Types::Fallback
       attr_accessor name: ::String
       attr_accessor weight: ::Integer
-      attr_accessor target_name: ::String
       attr_accessor description: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
       SENSITIVE: [:target_name]

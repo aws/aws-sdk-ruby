@@ -8121,7 +8121,8 @@ module Aws::Lambda
     #   The unique identifier for the callback operation.
     #
     # @option params [Types::ErrorObject] :error
-    #   Error details describing why the callback operation failed.
+    #   Error details describing why the callback operation failed. The
+    #   combined size of all error fields is limited to 1 MB.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8179,7 +8180,7 @@ module Aws::Lambda
     #
     # @option params [String, StringIO, File] :result
     #   The result data from the successful callback operation. Maximum size
-    #   is 256 KB.
+    #   is 1 MB.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8212,6 +8213,7 @@ module Aws::Lambda
     #
     # @option params [Types::ErrorObject] :error
     #   Optional error details explaining why the execution is being stopped.
+    #   The combined size of all error fields is limited to 1 MB.
     #
     # @return [Types::StopDurableExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10049,7 +10051,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.202.0'
+      context[:gem_version] = '1.203.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

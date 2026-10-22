@@ -104,6 +104,23 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class CreateScheduleActionRequest
+      attr_accessor id: ::String
+      attr_accessor action_name: ::String
+      attr_accessor start_configuration: Types::ScheduleActionStartConfiguration
+      attr_accessor operations: ::Array[Types::ScheduleActionOperation]
+      SENSITIVE: []
+    end
+
+    class CreateScheduleActionResponse
+      attr_accessor action_name: ::String
+      attr_accessor start_configuration: Types::ScheduleActionStartConfiguration
+      attr_accessor operations: ::Array[Types::ScheduleActionOperation]
+      attr_accessor status: ("PENDING" | "COMPLETED" | "FAILED")
+      attr_accessor error: Types::ScheduleActionError
+      SENSITIVE: []
+    end
+
     class CroppingConfig
       attr_accessor template_groups: ::Array[Types::TemplateGroup]
       SENSITIVE: []
@@ -140,6 +157,17 @@ module Aws::ElementalInference
       attr_accessor arn: ::String
       attr_accessor id: ::String
       attr_accessor status: ("CREATING" | "AVAILABLE" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "ARCHIVED")
+      SENSITIVE: []
+    end
+
+    class DeleteScheduleActionRequest
+      attr_accessor id: ::String
+      attr_accessor action_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduleActionResponse
+      attr_accessor action_name: ::String
       SENSITIVE: []
     end
 
@@ -186,6 +214,11 @@ module Aws::ElementalInference
       attr_accessor name: ::String
       attr_accessor association: Types::FeedAssociation
       attr_accessor status: ("CREATING" | "AVAILABLE" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "ARCHIVED")
+      SENSITIVE: []
+    end
+
+    class FixedModeScheduleActionStartSettings
+      attr_accessor scheduled_at: ::Time
       SENSITIVE: []
     end
 
@@ -301,6 +334,19 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class ListScheduleActionsRequest
+      attr_accessor id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScheduleActionsResponse
+      attr_accessor schedule_actions: ::Array[Types::ScheduleAction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -340,9 +386,57 @@ module Aws::ElementalInference
     class PutFeedPolicyResponse < Aws::EmptyStructure
     end
 
+    class RemoveClippingDataSourceConfiguration
+      attr_accessor output_name: ::String
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class ScheduleAction
+      attr_accessor action_name: ::String
+      attr_accessor start_configuration: Types::ScheduleActionStartConfiguration
+      attr_accessor operations: ::Array[Types::ScheduleActionOperation]
+      attr_accessor status: ("PENDING" | "COMPLETED" | "FAILED")
+      attr_accessor error: Types::ScheduleActionError
+      SENSITIVE: []
+    end
+
+    class ScheduleActionError
+      attr_accessor error_code: ("INVALID_ACTION_TARGET" | "INTERNAL_ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduleActionOperation
+      attr_accessor update_output_status: Types::UpdateOutputStatus
+      attr_accessor update_clipping_data_source_configuration: Types::UpdateClippingDataSourceConfiguration
+      attr_accessor remove_clipping_data_source_configuration: Types::RemoveClippingDataSourceConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class UpdateOutputStatus < ScheduleActionOperation
+      end
+      class UpdateClippingDataSourceConfiguration < ScheduleActionOperation
+      end
+      class RemoveClippingDataSourceConfiguration < ScheduleActionOperation
+      end
+      class Unknown < ScheduleActionOperation
+      end
+    end
+
+    class ScheduleActionStartConfiguration
+      attr_accessor fixed_mode_schedule_action_start_settings: Types::FixedModeScheduleActionStartSettings
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FixedModeScheduleActionStartSettings < ScheduleActionStartConfiguration
+      end
+      class Unknown < ScheduleActionStartConfiguration
+      end
     end
 
     class SearchFilter
@@ -408,6 +502,12 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class UpdateClippingDataSourceConfiguration
+      attr_accessor output_name: ::String
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      SENSITIVE: []
+    end
+
     class UpdateDictionaryRequest
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -454,6 +554,12 @@ module Aws::ElementalInference
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor description: ::String
       attr_accessor from_association: bool
+      SENSITIVE: []
+    end
+
+    class UpdateOutputStatus
+      attr_accessor output_name: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

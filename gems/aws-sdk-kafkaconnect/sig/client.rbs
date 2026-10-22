@@ -83,7 +83,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectorResponse]
         def connector_arn: () -> ::String
         def connector_name: () -> ::String
-        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "RESTARTING")
+        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "PAUSED" | "RESTARTING" | "PAUSING" | "RESUMING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#create_connector-instance_method
       def create_connector: (
@@ -202,7 +202,7 @@ module Aws
       interface _DeleteConnectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectorResponse]
         def connector_arn: () -> ::String
-        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "RESTARTING")
+        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "PAUSED" | "RESTARTING" | "PAUSING" | "RESUMING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#delete_connector-instance_method
       def delete_connector: (
@@ -240,7 +240,7 @@ module Aws
         def connector_configuration: () -> ::Hash[::String, ::String]
         def connector_description: () -> ::String
         def connector_name: () -> ::String
-        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "RESTARTING")
+        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "PAUSED" | "RESTARTING" | "PAUSING" | "RESUMING")
         def creation_time: () -> ::Time
         def current_version: () -> ::String
         def kafka_cluster: () -> Types::KafkaClusterDescription
@@ -264,8 +264,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectorOperationResponse]
         def connector_arn: () -> ::String
         def connector_operation_arn: () -> ::String
-        def connector_operation_state: () -> ("PENDING" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "RESTART_IN_PROGRESS" | "RESTART_COMPLETE" | "RESTART_FAILED")
-        def connector_operation_type: () -> ("UPDATE_WORKER_SETTING" | "UPDATE_CONNECTOR_CONFIGURATION" | "ISOLATE_CONNECTOR" | "RESTORE_CONNECTOR" | "RESTART_CONNECTOR")
+        def connector_operation_state: () -> ("PENDING" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "PAUSE_COMPLETE" | "PAUSE_FAILED" | "RESUME_COMPLETE" | "RESUME_FAILED" | "PAUSE_IN_PROGRESS" | "RESUME_IN_PROGRESS" | "RESTART_IN_PROGRESS" | "RESTART_COMPLETE" | "RESTART_FAILED")
+        def connector_operation_type: () -> ("UPDATE_WORKER_SETTING" | "UPDATE_CONNECTOR_CONFIGURATION" | "ISOLATE_CONNECTOR" | "RESTORE_CONNECTOR" | "RESTART_CONNECTOR" | "PAUSE_CONNECTOR" | "RESUME_CONNECTOR")
         def operation_steps: () -> ::Array[Types::ConnectorOperationStep]
         def origin_worker_setting: () -> Types::WorkerSetting
         def origin_connector_configuration: () -> ::Hash[::String, ::String]
@@ -374,6 +374,17 @@ module Aws
                                       ) -> _ListWorkerConfigurationsResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkerConfigurationsResponseSuccess
 
+      interface _PauseConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PauseConnectorResponse]
+        def connector_arn: () -> ::String
+        def connector_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#pause_connector-instance_method
+      def pause_connector: (
+                             connector_arn: ::String
+                           ) -> _PauseConnectorResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PauseConnectorResponseSuccess
+
       interface _RestartConnectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RestartConnectorResponse]
         def connector_arn: () -> ::String
@@ -385,6 +396,17 @@ module Aws
                                ?only_failed_tasks: bool
                              ) -> _RestartConnectorResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestartConnectorResponseSuccess
+
+      interface _ResumeConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResumeConnectorResponse]
+        def connector_arn: () -> ::String
+        def connector_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#resume_connector-instance_method
+      def resume_connector: (
+                              connector_arn: ::String
+                            ) -> _ResumeConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResumeConnectorResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
@@ -409,7 +431,7 @@ module Aws
       interface _UpdateConnectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectorResponse]
         def connector_arn: () -> ::String
-        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "RESTARTING")
+        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "PAUSED" | "RESTARTING" | "PAUSING" | "RESUMING")
         def connector_operation_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#update_connector-instance_method
@@ -433,6 +455,7 @@ module Aws
                                 }?
                               },
                               ?connector_configuration: Hash[::String, ::String],
+                              ?skip_health_validation: bool,
                               connector_arn: ::String,
                               current_version: ::String
                             ) -> _UpdateConnectorResponseSuccess

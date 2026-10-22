@@ -1473,7 +1473,7 @@ module Aws::Glue
       attr_accessor public_key: ::String
       attr_accessor public_keys: ::Array[::String]
       attr_accessor number_of_nodes: ::Integer
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor glue_version: ::String
       attr_accessor number_of_workers: ::Integer
       attr_accessor extra_python_libs_s3_path: ::String
@@ -1493,7 +1493,7 @@ module Aws::Glue
       attr_accessor yarn_endpoint_address: ::String
       attr_accessor zeppelin_remote_spark_interpreter_port: ::Integer
       attr_accessor number_of_nodes: ::Integer
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor glue_version: ::String
       attr_accessor number_of_workers: ::Integer
       attr_accessor availability_zone: ::String
@@ -1646,7 +1646,7 @@ module Aws::Glue
       attr_accessor notification_property: Types::NotificationProperty
       attr_accessor glue_version: ::String
       attr_accessor number_of_workers: ::Integer
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor code_gen_configuration_nodes: ::Hash[::String, Types::CodeGenConfigurationNode]
       attr_accessor execution_class: ("FLEX" | "STANDARD")
       attr_accessor source_control_details: Types::SourceControlDetails
@@ -1673,7 +1673,7 @@ module Aws::Glue
       attr_accessor role: ::String
       attr_accessor glue_version: ::String
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_retries: ::Integer
@@ -1789,7 +1789,7 @@ module Aws::Glue
       attr_accessor connections: Types::ConnectionsList
       attr_accessor max_capacity: ::Float
       attr_accessor number_of_workers: ::Integer
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor security_configuration: ::String
       attr_accessor glue_version: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -2803,7 +2803,7 @@ module Aws::Glue
       attr_accessor zeppelin_remote_spark_interpreter_port: ::Integer
       attr_accessor public_address: ::String
       attr_accessor status: ::String
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor glue_version: ::String
       attr_accessor number_of_workers: ::Integer
       attr_accessor number_of_nodes: ::Integer
@@ -3955,7 +3955,7 @@ module Aws::Glue
       attr_accessor role: ::String
       attr_accessor glue_version: ::String
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_retries: ::Integer
@@ -5041,7 +5041,7 @@ module Aws::Glue
       attr_accessor allocated_capacity: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor security_configuration: ::String
       attr_accessor notification_property: Types::NotificationProperty
@@ -5103,7 +5103,7 @@ module Aws::Glue
       attr_accessor execution_time: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor security_configuration: ::String
       attr_accessor log_group_name: ::String
@@ -5133,7 +5133,7 @@ module Aws::Glue
       attr_accessor allocated_capacity: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor security_configuration: ::String
       attr_accessor notification_property: Types::NotificationProperty
@@ -5750,7 +5750,7 @@ module Aws::Glue
       attr_accessor role: ::String
       attr_accessor glue_version: ::String
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_retries: ::Integer
@@ -7167,7 +7167,7 @@ module Aws::Glue
       attr_accessor security_configuration: ::String
       attr_accessor glue_version: ::String
       attr_accessor number_of_workers: ::Integer
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor completed_on: ::Time
       attr_accessor execution_time: ::Float
       attr_accessor dpu_seconds: ::Float
@@ -7456,7 +7456,7 @@ module Aws::Glue
       attr_accessor max_capacity: ::Float
       attr_accessor security_configuration: ::String
       attr_accessor notification_property: Types::NotificationProperty
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor execution_class: ("FLEX" | "STANDARD")
       attr_accessor execution_role_session_policy: ::String
@@ -8368,7 +8368,7 @@ module Aws::Glue
       attr_accessor role: ::String
       attr_accessor glue_version: ::String
       attr_accessor max_capacity: ::Float
-      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+      attr_accessor worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
       attr_accessor number_of_workers: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor max_retries: ::Integer

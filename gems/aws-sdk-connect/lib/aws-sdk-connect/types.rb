@@ -932,6 +932,34 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains an approximate count of the resources of a given type that
+    # are not yet in sync in a Region, along with the time the count was
+    # last calculated.
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region that the count applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The approximate number of resources of the requested type that are
+    #   not yet in sync in the Region. A value of zero means the resources
+    #   are in sync.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timestamp
+    #   The time, in Unix epoch time, when the count was last calculated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ApproximateDriftedResourceCount AWS API Documentation
+    #
+    class ApproximateDriftedResourceCount < Struct.new(
+      :region,
+      :count,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This action must be set if `TriggerEventSource` is one of the
     # following values: `OnPostCallAnalysisAvailable` \|
     # `OnRealTimeCallAnalysisAvailable` \| `OnRealTimeChatAnalysisAvailable`
@@ -20244,6 +20272,13 @@ module Aws::Connect
     #   The distribution of agents between the instance and its replica(s).
     #   @return [Types::AgentConfig]
     #
+    # @!attribute [rw] last_failover_time
+    #   The timestamp of the most recent failover for the traffic
+    #   distribution group. This value is updated each time
+    #   `UpdateTrafficDistribution` is called to change the traffic
+    #   distribution.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTrafficDistributionResponse AWS API Documentation
     #
     class GetTrafficDistributionResponse < Struct.new(
@@ -20251,7 +20286,8 @@ module Aws::Connect
       :id,
       :arn,
       :sign_in_config,
-      :agent_config)
+      :agent_config,
+      :last_failover_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24706,6 +24742,92 @@ module Aws::Connect
       :status,
       :segments,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can provide
+    #   either the instance ID or the full instance ARN. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to list replication findings for. The following
+    #   values are currently supported: `AGENT`, `AGENT_GROUP`,
+    #   `AGENT_GROUP_LEVEL`, `AGENT_STATE`, `ATTRIBUTE`, `CONTACT_FLOW`,
+    #   `DATA_TABLE`, `DATA_TABLE_ATTRIBUTE`, `DATA_TABLE_RECORD`,
+    #   `DATA_TABLE_VALUE`, `FLOW_MODULE`, `FLOW_MODULE_ALIAS`,
+    #   `FLOW_MODULE_VERSION`, `METRIC`, `NOTIFICATION`, `OPERATING_HOURS`,
+    #   `PHONE_NUMBER`, `PROMPT`, `QUEUE`, `REPORT`, `ROUTING_PROFILE`,
+    #   `SECURITY_PROFILE`, `TASK_TEMPLATE`, `TEST_CASE`,
+    #   `TRANSFER_DESTINATION`, `VIEW`, and `WORKSPACE`. Additional resource
+    #   types can be supported over time. Specifying a value that is not
+    #   currently supported returns an `InvalidRequestException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListReplicationFindingsRequest AWS API Documentation
+    #
+    class ListReplicationFindingsRequest < Struct.new(
+      :instance_id,
+      :resource_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_findings_list
+    #   A list of replication findings for the requested resource type. Only
+    #   findings that require your action are returned, so this list can be
+    #   empty even when a drift count is nonzero. Results are paginated.
+    #   @return [Array<Types::ReplicationFinding>]
+    #
+    # @!attribute [rw] approximate_drifted_resource_counts
+    #   The approximate number of resources of the requested type that are
+    #   not yet in sync, reported per Amazon Web Services Region. This count
+    #   is independent of `ReplicationFindingsList` and can be higher than
+    #   the number of findings returned. It is eventually consistent and can
+    #   lag the current state of the instance. Each entry is the
+    #   `ApproximateDriftedResourceCount` for one Region; a Region appears
+    #   only when its count has been computed.
+    #   @return [Array<Types::ApproximateDriftedResourceCount>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for retrieving
+    #   the next page of `ReplicationFindingsList`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_replication_statuses
+    #   The replication status of the requested resource type in each Amazon
+    #   Web Services Region across which the Connect Customer instance is
+    #   deployed for Global Resiliency, with one entry per Region. This set
+    #   describes the overall replication state for the request and is
+    #   returned in full on every page of results, so it does not change as
+    #   you paginate.
+    #   @return [Array<Types::ResourceReplicationStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListReplicationFindingsResponse AWS API Documentation
+    #
+    class ListReplicationFindingsResponse < Struct.new(
+      :replication_findings_list,
+      :approximate_drifted_resource_counts,
+      :next_token,
+      :resource_replication_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30412,6 +30534,62 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains information about a resource that could not be replicated
+    # across the Regions of a Global Resiliency deployment, including the
+    # reason and any action required to resolve it.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource that the finding is
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the resource that the finding is for.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region that the finding was detected in.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource that the finding is for, such as `QUEUE` or
+    #   `ROUTING_PROFILE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the resource that the finding is for.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The replication operation that produced the finding, such as a
+    #   create, update, or delete of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_code
+    #   A stable code that identifies the class of the finding. Use this
+    #   code to look up the recommended steps to resolve the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable description of the finding and the action, if any,
+    #   required to resolve it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReplicationFinding AWS API Documentation
+    #
+    class ReplicationFinding < Struct.new(
+      :arn,
+      :id,
+      :region,
+      :resource_type,
+      :name,
+      :operation,
+      :reference_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Status information about the replication process, where you use the
     # [ReplicateInstance][1] API to create a replica of your Connect
     # Customer instance in another Amazon Web Services Region. For more
@@ -30525,6 +30703,29 @@ module Aws::Connect
     #
     class ResourceNotReadyException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates whether a resource type is being replicated and kept in sync
+    # in a specific Amazon Web Services Region of a Global Resiliency
+    # deployment.
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region that the replication status applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The replication status of the resource type in the Region, such as
+    #   `ENABLED`, `BLOCKED`, or `DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResourceReplicationStatus AWS API Documentation
+    #
+    class ResourceReplicationStatus < Struct.new(
+      :region,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

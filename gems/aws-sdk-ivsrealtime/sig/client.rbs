@@ -467,6 +467,15 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _RevokeConnectionTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeConnectionTokenResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#revoke_connection_token-instance_method
+      def revoke_connection_token: (
+                                     token_id: ::String
+                                   ) -> _RevokeConnectionTokenResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeConnectionTokenResponseSuccess
+
       interface _StartCompositionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartCompositionResponse]
         def composition: () -> Types::Composition

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.289.0 (2026-10-22)
+------------------
+
+* Feature - Adds support for customer queryable replication errors.
+
 1.288.0 (2026-10-21)
 ------------------
 

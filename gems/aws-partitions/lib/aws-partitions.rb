@@ -356,6 +356,7 @@ module Aws
             'ConnectHealth' => 'health-agent',
             'ConnectParticipant' => 'participant.connect',
             'ConnectWisdomService' => 'wisdom',
+            'Continuum' => 'continuum',
             'ControlCatalog' => 'controlcatalog',
             'ControlTower' => 'controltower',
             'CostExplorer' => 'ce',

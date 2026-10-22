@@ -2025,6 +2025,30 @@ module Aws::IVSRealTime
       req.send_request(options)
     end
 
+    # Revokes the specified connection token so that it can no longer
+    # connect to a stage. This operation disconnects any participant
+    # currently connected with the revoked token.
+    #
+    # @option params [required, String] :token_id
+    #   The ID of the connection token to revoke.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_connection_token({
+    #     token_id: "ConnectionTokenId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/RevokeConnectionToken AWS API Documentation
+    #
+    # @overload revoke_connection_token(params = {})
+    # @param [Hash] params ({})
+    def revoke_connection_token(params = {}, options = {})
+      req = build_request(:revoke_connection_token, params)
+      req.send_request(options)
+    end
+
     # Starts a Composition from a stage based on the configuration provided
     # in the request.
     #
@@ -2568,7 +2592,7 @@ module Aws::IVSRealTime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

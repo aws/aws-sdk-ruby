@@ -4584,22 +4584,22 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] input_payload
-    #   The JSON input payload that was provided when the durable execution
-    #   was started. For asynchronous invocations, this is limited to 256
-    #   KB. For synchronous invocations, this can be up to 6 MB.
+    #   The JSON input payload that you provided when you started the
+    #   durable execution. Asynchronous invocations support up to 1 MB, and
+    #   synchronous invocations support up to 6 MB.
     #   @return [String]
     #
     # @!attribute [rw] result
     #   The JSON result returned by the durable execution if it completed
     #   successfully. This field is only present when the execution status
-    #   is `SUCCEEDED`. The result is limited to 256 KB.
+    #   is `SUCCEEDED`. Asynchronous invocations support up to 1 MB, and
+    #   synchronous invocations support up to 6 MB.
     #   @return [String]
     #
     # @!attribute [rw] error
     #   Error information if the durable execution failed. This field is
     #   only present when the execution status is `FAILED`, `TIMED_OUT`, or
-    #   `STOPPED`. The combined size of all error fields is limited to 256
-    #   KB.
+    #   `STOPPED`. The combined size of all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @!attribute [rw] start_timestamp
@@ -7604,13 +7604,14 @@ module Aws::Lambda
     # @!attribute [rw] payload
     #   The payload for successful operations. The maximum payload size is 6
     #   MB for synchronous `EXECUTION` operations (RequestResponse
-    #   invocationType), 1 MB for asynchronous `EXECUTION` (Event
-    #   invocationType) and `CHAINED_INVOKE` operations, and 256 KB for
-    #   `CONTEXT`, `STEP`, `WAIT`, and `CALLBACK` operations.
+    #   invocationType), and 1 MB for asynchronous `EXECUTION` (Event
+    #   invocationType), `CHAINED_INVOKE`, `CONTEXT`, `STEP`, `WAIT`, and
+    #   `CALLBACK` operations.
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   The error information for failed operations.
+    #   The error information for failed operations. The combined size of
+    #   all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @!attribute [rw] context_options
@@ -8976,7 +8977,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   Error details describing why the callback operation failed.
+    #   Error details describing why the callback operation failed. The
+    #   combined size of all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SendDurableExecutionCallbackFailureRequest AWS API Documentation
@@ -9014,7 +9016,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] result
     #   The result data from the successful callback operation. Maximum size
-    #   is 256 KB.
+    #   is 1 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SendDurableExecutionCallbackSuccessRequest AWS API Documentation
@@ -9436,7 +9438,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] error
     #   Optional error details explaining why the execution is being
-    #   stopped.
+    #   stopped. The combined size of all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/StopDurableExecutionRequest AWS API Documentation

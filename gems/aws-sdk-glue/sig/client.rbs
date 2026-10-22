@@ -617,7 +617,7 @@ module Aws
         def yarn_endpoint_address: () -> ::String
         def zeppelin_remote_spark_interpreter_port: () -> ::Integer
         def number_of_nodes: () -> ::Integer
-        def worker_type: () -> ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+        def worker_type: () -> ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
         def glue_version: () -> ::String
         def number_of_workers: () -> ::Integer
         def availability_zone: () -> ::String
@@ -638,7 +638,7 @@ module Aws
                                  ?public_key: ::String,
                                  ?public_keys: Array[::String],
                                  ?number_of_nodes: ::Integer,
-                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                                  ?glue_version: ::String,
                                  ?number_of_workers: ::Integer,
                                  ?extra_python_libs_s3_path: ::String,
@@ -815,7 +815,7 @@ module Aws
                         },
                         ?glue_version: ::String,
                         ?number_of_workers: ::Integer,
-                        ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                        ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                         ?code_gen_configuration_nodes: Hash[::String, Params::code_gen_configuration_node],
                         ?execution_class: ("FLEX" | "STANDARD"),
                         ?source_control_details: Params::source_control_details,
@@ -844,7 +844,7 @@ module Aws
                                  role: ::String,
                                  ?glue_version: ::String,
                                  ?max_capacity: ::Float,
-                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                                  ?number_of_workers: ::Integer,
                                  ?timeout: ::Integer,
                                  ?max_retries: ::Integer,
@@ -1017,7 +1017,7 @@ module Aws
                             },
                             ?max_capacity: ::Float,
                             ?number_of_workers: ::Integer,
-                            ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                            ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                             ?security_configuration: ::String,
                             ?glue_version: ::String,
                             ?tags: Hash[::String, ::String],
@@ -2373,7 +2373,7 @@ module Aws
         def role: () -> ::String
         def glue_version: () -> ::String
         def max_capacity: () -> ::Float
-        def worker_type: () -> ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+        def worker_type: () -> ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
         def number_of_workers: () -> ::Integer
         def timeout: () -> ::Integer
         def max_retries: () -> ::Integer
@@ -4349,7 +4349,7 @@ module Aws
                            ?notification_property: {
                              notify_delay_after: ::Integer?
                            },
-                           ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                           ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                            ?number_of_workers: ::Integer,
                            ?execution_class: ("FLEX" | "STANDARD"),
                            ?execution_role_session_policy: ::String
@@ -4859,7 +4859,7 @@ module Aws
                           allocated_capacity: ::Integer?,
                           timeout: ::Integer?,
                           max_capacity: ::Float?,
-                          worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")?,
+                          worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")?,
                           number_of_workers: ::Integer?,
                           security_configuration: ::String?,
                           notification_property: {
@@ -4905,7 +4905,7 @@ module Aws
                                  ?role: ::String,
                                  ?glue_version: ::String,
                                  ?max_capacity: ::Float,
-                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                                  ?number_of_workers: ::Integer,
                                  ?timeout: ::Integer,
                                  ?max_retries: ::Integer

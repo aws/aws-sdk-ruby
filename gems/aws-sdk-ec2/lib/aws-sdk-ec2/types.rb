@@ -49921,6 +49921,54 @@ module Aws::EC2
     end
 
     # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayAttachmentNatConfigurationRequest AWS API Documentation
+    #
+    class GetTransitGatewayAttachmentNatConfigurationRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_support
+    #   The state of NAT gateway support for the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Specifies whether the transit gateway installs routes for the NAT
+    #   CIDRs in the route tables to which the attachment propagates.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT gateway rules for the attachment.
+    #   @return [Array<Types::TransitGatewayNatRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayAttachmentNatConfigurationResult AWS API Documentation
+    #
+    class GetTransitGatewayAttachmentNatConfigurationResult < Struct.new(
+      :transit_gateway_attachment_id,
+      :nat_gateway_support,
+      :nat_system_route_support,
+      :nat_gateway_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_id
     #   The ID of the attachment.
     #   @return [String]
     #
@@ -68948,6 +68996,95 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_support
+    #   Specifies whether to enable or disable NAT gateway support for the
+    #   attachment. To enable NAT gateway support, the attachment must have
+    #   at least one NAT gateway rule. You can't modify the NAT
+    #   configuration while NAT gateway support is `enabling` or
+    #   `disabling`. If you omit this parameter, the current value doesn't
+    #   change.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Specifies whether the transit gateway installs routes for the NAT
+    #   CIDRs in the route tables to which the attachment propagates. For
+    #   VPC attachments, the transit gateway always installs these routes.
+    #   You can enable or disable this option only for Amazon Web Services
+    #   Direct Connect gateway attachments and Site-to-Site VPN attachments
+    #   that use dynamic routing. For these attachments, the default is
+    #   `enable`. If you omit this parameter, the current value doesn't
+    #   change.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT gateway rules for the attachment. The rules that you specify
+    #   replace all existing NAT gateway rules for the attachment. You can
+    #   specify up to 50 rules for an attachment. If you omit this
+    #   parameter, the existing rules don't change. To remove all rules,
+    #   use `ResetNatGatewayRules`.
+    #   @return [Array<Types::TransitGatewayNatRuleRequest>]
+    #
+    # @!attribute [rw] reset_nat_gateway_rules
+    #   Specifies whether to remove all NAT gateway rules from the
+    #   attachment. If you omit this parameter, the transit gateway doesn't
+    #   remove any rules. You can't specify this parameter together with
+    #   `NatGatewayRules`. Because you can't enable NAT gateway support
+    #   without rules, also set `NatGatewaySupport` to `disable` in the same
+    #   request if NAT gateway support is currently enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayAttachmentNatConfigurationRequest AWS API Documentation
+    #
+    class ModifyTransitGatewayAttachmentNatConfigurationRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :nat_gateway_support,
+      :nat_system_route_support,
+      :nat_gateway_rules,
+      :reset_nat_gateway_rules,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_support
+    #   The state of NAT gateway support for the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Specifies whether the transit gateway installs routes for the NAT
+    #   CIDRs in the route tables to which the attachment propagates.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT gateway rules for the attachment.
+    #   @return [Array<Types::TransitGatewayNatRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayAttachmentNatConfigurationResult AWS API Documentation
+    #
+    class ModifyTransitGatewayAttachmentNatConfigurationResult < Struct.new(
+      :transit_gateway_attachment_id,
+      :nat_gateway_support,
+      :nat_system_route_support,
+      :nat_gateway_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] transit_gateway_metering_policy_id
     #   The ID of the transit gateway metering policy to modify.
     #   @return [String]
@@ -87408,6 +87545,11 @@ module Aws::EC2
     #   The tags for the attachment.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] nat_gateway_support
+    #   The state of NAT gateway support for the attachment. Only the owner
+    #   of the transit gateway receives this parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayAttachment AWS API Documentation
     #
     class TransitGatewayAttachment < Struct.new(
@@ -87420,7 +87562,8 @@ module Aws::EC2
       :state,
       :association,
       :creation_time,
-      :tags)
+      :tags,
+      :nat_gateway_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -88204,6 +88347,80 @@ module Aws::EC2
       :transit_gateway_multicast_domain_id,
       :registered_network_interface_ids,
       :group_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a NAT gateway rule for a transit gateway
+    # attachment, including the rule number, the source CIDR block, the
+    # translated CIDR block, and the state of the rule.
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] match_source_cidr
+    #   The IPv4 CIDR block of the source addresses to translate.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_cidr
+    #   The IPv4 CIDR block that the transit gateway translates the source
+    #   addresses to.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the NAT gateway rule. The possible values are:
+    #
+    #   * `pending` - The transit gateway is applying a change to the rule.
+    #
+    #   * `activated` - The rule is in effect because NAT gateway support is
+    #     enabled for the attachment.
+    #
+    #   * `deactivated` - The rule isn't in effect because NAT gateway
+    #     support is disabled for the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayNatRule AWS API Documentation
+    #
+    class TransitGatewayNatRule < Struct.new(
+      :rule_number,
+      :match_source_cidr,
+      :nat_cidr,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a NAT gateway rule to apply to a transit gateway attachment.
+    # A NAT gateway rule translates source addresses in the
+    # `MatchSourceCidr` range to the corresponding addresses in the
+    # `NatCidr` range.
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number. Valid values are 1 to 32766. Each rule number must
+    #   be unique within the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] match_source_cidr
+    #   The IPv4 CIDR block of the source addresses to translate. The CIDR
+    #   block can't overlap the multicast range (`224.0.0.0/4`) or the
+    #   link-local range (`169.254.0.0/16`).
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_cidr
+    #   The IPv4 CIDR block to translate the source addresses to. The CIDR
+    #   block must be in a private (RFC 1918) or shared address space (RFC
+    #   6598) range, and must have the same prefix length as
+    #   `MatchSourceCidr`. The CIDR blocks in the rules for an attachment
+    #   can't overlap each other.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayNatRuleRequest AWS API Documentation
+    #
+    class TransitGatewayNatRuleRequest < Struct.new(
+      :rule_number,
+      :match_source_cidr,
+      :nat_cidr)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2026-10-22)
+------------------
+
+* Feature - Elemental Inference now supports feed scheduling, letting you apply feed configuration changes at a time you choose instead of building your own automation.
+
 1.16.0 (2026-10-21)
 ------------------
 

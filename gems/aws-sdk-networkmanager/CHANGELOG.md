@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2026-10-22)
+------------------
+
+* Feature - AWS Cloud WAN now provides managed one-to-one NAT directly on it's core network attachments, through integration with Regional Private NAT Gateway. Use UpdateAttachmentNatConfiguration to enable NAT and configure NAT rules, and ListAttachmentNatConfigurations to view them.
+
 1.87.0 (2026-10-21)
 ------------------
 

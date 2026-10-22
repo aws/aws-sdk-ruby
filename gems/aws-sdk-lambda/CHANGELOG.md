@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.203.0 (2026-10-22)
+------------------
+
+* Feature - AWS Lambda durable functions now supports payloads up to 1 MB for checkpoints, callback completion, and error details.
+
 1.202.0 (2026-10-21)
 ------------------
 

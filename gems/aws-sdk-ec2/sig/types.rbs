@@ -10994,6 +10994,20 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class GetTransitGatewayAttachmentNatConfigurationRequest
+      attr_accessor transit_gateway_attachment_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetTransitGatewayAttachmentNatConfigurationResult
+      attr_accessor transit_gateway_attachment_id: ::String
+      attr_accessor nat_gateway_support: ("enabled" | "disabled" | "enabling" | "disabling")
+      attr_accessor nat_system_route_support: ("enable" | "disable")
+      attr_accessor nat_gateway_rules: ::Array[Types::TransitGatewayNatRule]
+      SENSITIVE: []
+    end
+
     class GetTransitGatewayAttachmentPropagationsRequest
       attr_accessor transit_gateway_attachment_id: ::String
       attr_accessor filters: ::Array[Types::Filter]
@@ -14788,6 +14802,24 @@ module Aws::EC2
 
     class ModifyTrafficMirrorSessionResult
       attr_accessor traffic_mirror_session: Types::TrafficMirrorSession
+      SENSITIVE: []
+    end
+
+    class ModifyTransitGatewayAttachmentNatConfigurationRequest
+      attr_accessor transit_gateway_attachment_id: ::String
+      attr_accessor nat_gateway_support: ("enable" | "disable")
+      attr_accessor nat_system_route_support: ("enable" | "disable")
+      attr_accessor nat_gateway_rules: ::Array[Types::TransitGatewayNatRuleRequest]
+      attr_accessor reset_nat_gateway_rules: bool
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ModifyTransitGatewayAttachmentNatConfigurationResult
+      attr_accessor transit_gateway_attachment_id: ::String
+      attr_accessor nat_gateway_support: ("enabled" | "disabled" | "enabling" | "disabling")
+      attr_accessor nat_system_route_support: ("enable" | "disable")
+      attr_accessor nat_gateway_rules: ::Array[Types::TransitGatewayNatRule]
       SENSITIVE: []
     end
 
@@ -18763,6 +18795,7 @@ module Aws::EC2
       attr_accessor association: Types::TransitGatewayAttachmentAssociation
       attr_accessor creation_time: ::Time
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor nat_gateway_support: ("enabled" | "disabled" | "enabling" | "disabling")
       SENSITIVE: []
     end
 
@@ -18967,6 +19000,21 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class TransitGatewayNatRule
+      attr_accessor rule_number: ::Integer
+      attr_accessor match_source_cidr: ::String
+      attr_accessor nat_cidr: ::String
+      attr_accessor state: ("pending" | "activated" | "deactivated" | "deleting")
+      SENSITIVE: []
+    end
+
+    class TransitGatewayNatRuleRequest
+      attr_accessor rule_number: ::Integer
+      attr_accessor match_source_cidr: ::String
+      attr_accessor nat_cidr: ::String
+      SENSITIVE: []
+    end
+
     class TransitGatewayOptions
       attr_accessor amazon_side_asn: ::Integer
       attr_accessor transit_gateway_cidr_blocks: ::Array[::String]
@@ -19104,7 +19152,7 @@ module Aws::EC2
       attr_accessor prefix_list_id: ::String
       attr_accessor transit_gateway_route_table_announcement_id: ::String
       attr_accessor transit_gateway_attachments: ::Array[Types::TransitGatewayRouteAttachment]
-      attr_accessor type: ("static" | "propagated")
+      attr_accessor type: ("static" | "propagated" | "system")
       attr_accessor state: ("pending" | "active" | "blackhole" | "deleting" | "deleted")
       SENSITIVE: []
     end

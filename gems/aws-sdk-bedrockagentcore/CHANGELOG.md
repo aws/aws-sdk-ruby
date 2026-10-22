@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2026-10-22)
+------------------
+
+* Feature - Adds the dimension name to evaluation results and batch evaluation summaries. For multi-dimensional LLM-as-a-Judge evaluators, each result and summary now identifies which dimension it corresponds to.
+
 1.61.0 (2026-10-21)
 ------------------
 

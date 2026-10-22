@@ -1387,7 +1387,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
-    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
@@ -1875,7 +1875,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -1949,7 +1949,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -3207,7 +3207,7 @@ module Aws::Glue
     #     public_key: "GenericString",
     #     public_keys: ["GenericString"],
     #     number_of_nodes: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X, Z.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.4X, G.8X, G.025X, Z.2X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X
     #     glue_version: "GlueVersionString",
     #     number_of_workers: 1,
     #     extra_python_libs_s3_path: "GenericString",
@@ -3232,7 +3232,7 @@ module Aws::Glue
     #   resp.yarn_endpoint_address #=> String
     #   resp.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.number_of_nodes #=> Integer
-    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.glue_version #=> String
     #   resp.number_of_workers #=> Integer
     #   resp.availability_zone #=> String
@@ -3833,8 +3833,15 @@ module Aws::Glue
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs.
-    #   Accepts the value Z.2X for Ray jobs.
+    #   Accepts a value of G.025X, G.1X, G.2X, G.4X, G.8X, G.12X, G.16X, R.1X,
+    #   R.2X, R.4X, or R.8X for Spark jobs. Accepts the value Z.2X for Ray
+    #   jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPUs,
+    #     4 GB of memory) with 84GB disk, and provides 1 executor per worker.
+    #     We recommend this worker type for low volume streaming jobs. This
+    #     worker type is only available for Glue version 3.0 or later
+    #     streaming jobs.
     #
     #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPUs, 16
     #     GB of memory) with 94GB disk, and provides 1 executor per worker. We
@@ -3853,30 +3860,74 @@ module Aws::Glue
     #     We recommend this worker type for jobs whose workloads contain your
     #     most demanding transforms, aggregations, joins, and queries. This
     #     worker type is available only for Glue version 3.0 or later Spark
-    #     ETL jobs in the following Amazon Web Services Regions: US East
-    #     (Ohio), US East (N. Virginia), US West (N. California), US West
-    #     (Oregon), Asia Pacific (Mumbai), Asia Pacific (Seoul), Asia Pacific
-    #     (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Canada
-    #     (Central), Europe (Frankfurt), Europe (Ireland), Europe (London),
-    #     Europe (Spain), Europe (Stockholm), and South America (São Paulo).
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
     #
     #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs, 128
     #     GB of memory) with 512GB disk, and provides 1 executor per worker.
     #     We recommend this worker type for jobs whose workloads contain your
     #     most demanding transforms, aggregations, joins, and queries. This
     #     worker type is available only for Glue version 3.0 or later Spark
-    #     ETL jobs, in the same Amazon Web Services Regions as supported for
-    #     the `G.4X` worker type.
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
     #
-    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPUs,
-    #     4 GB of memory) with 84GB disk, and provides 1 executor per worker.
-    #     We recommend this worker type for low volume streaming jobs. This
-    #     worker type is only available for Glue version 3.0 or later
-    #     streaming jobs.
+    #   * For the `G.12X` worker type, each worker maps to 12 DPU (48 vCPUs,
+    #     192 GB of memory) with 768GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `G.16X` worker type, each worker maps to 16 DPU (64 vCPUs,
+    #     256 GB of memory) with 1024GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.1X` worker type, each worker maps to 1 M-DPU (4 vCPUs, 32
+    #     GB of memory) with 94GB disk, and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive workloads. This
+    #     worker type is available only for Glue version 4.0 or later Spark
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
+    #
+    #   * For the `R.2X` worker type, each worker maps to 2 M-DPU (8 vCPUs, 64
+    #     GB of memory) with 138GB disk, and provides 1 executor per worker.
+    #     We recommend this worker type for memory-intensive workloads. This
+    #     worker type is available only for Glue version 4.0 or later Spark
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
+    #
+    #   * For the `R.4X` worker type, each worker maps to 4 M-DPU (16 vCPUs,
+    #     128 GB of memory) with 256GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.8X` worker type, each worker maps to 8 M-DPU (32 vCPUs,
+    #     256 GB of memory) with 512GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
     #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs, 64
     #     GB of memory) with 128 GB disk, and provides up to 8 Ray workers
     #     based on the autoscaler.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #
     # @option params [Hash<String,Types::CodeGenConfigurationNode>] :code_gen_configuration_nodes
     #   The representation of a directed acyclic graph on which both the Glue
@@ -4109,7 +4160,7 @@ module Aws::Glue
     #     role: "RoleString", # required
     #     glue_version: "GlueVersionString",
     #     max_capacity: 1.0,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X, Z.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.4X, G.8X, G.025X, Z.2X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X
     #     number_of_workers: 1,
     #     timeout: 1,
     #     max_retries: 1,
@@ -4631,8 +4682,9 @@ module Aws::Glue
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of G.1X, G.2X, G.4X, or G.8X for Spark jobs. Accepts
-    #   the value Z.2X for Ray notebooks.
+    #   Accepts a value of G.1X, G.2X, G.4X, G.8X, G.12X, G.16X, R.1X, R.2X,
+    #   R.4X, or R.8X for Spark jobs. Accepts the value Z.2X for Ray
+    #   notebooks.
     #
     #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPUs, 16
     #     GB of memory) with 94GB disk, and provides 1 executor per worker. We
@@ -4651,23 +4703,74 @@ module Aws::Glue
     #     We recommend this worker type for jobs whose workloads contain your
     #     most demanding transforms, aggregations, joins, and queries. This
     #     worker type is available only for Glue version 3.0 or later Spark
-    #     ETL jobs in the following Amazon Web Services Regions: US East
-    #     (Ohio), US East (N. Virginia), US West (Oregon), Asia Pacific
-    #     (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Canada
-    #     (Central), Europe (Frankfurt), Europe (Ireland), and Europe
-    #     (Stockholm).
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
     #
     #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs, 128
     #     GB of memory) with 512GB disk, and provides 1 executor per worker.
     #     We recommend this worker type for jobs whose workloads contain your
     #     most demanding transforms, aggregations, joins, and queries. This
     #     worker type is available only for Glue version 3.0 or later Spark
-    #     ETL jobs, in the same Amazon Web Services Regions as supported for
-    #     the `G.4X` worker type.
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
+    #
+    #   * For the `G.12X` worker type, each worker maps to 12 DPU (48 vCPUs,
+    #     192 GB of memory) with 768GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `G.16X` worker type, each worker maps to 16 DPU (64 vCPUs,
+    #     256 GB of memory) with 1024GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.1X` worker type, each worker maps to 1 M-DPU (4 vCPUs, 32
+    #     GB of memory) with 94GB disk, and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive workloads. This
+    #     worker type is available only for Glue version 4.0 or later Spark
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
+    #
+    #   * For the `R.2X` worker type, each worker maps to 2 M-DPU (8 vCPUs, 64
+    #     GB of memory) with 138GB disk, and provides 1 executor per worker.
+    #     We recommend this worker type for memory-intensive workloads. This
+    #     worker type is available only for Glue version 4.0 or later Spark
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
+    #
+    #   * For the `R.4X` worker type, each worker maps to 4 M-DPU (16 vCPUs,
+    #     128 GB of memory) with 256GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.8X` worker type, each worker maps to 8 M-DPU (32 vCPUs,
+    #     256 GB of memory) with 512GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
     #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs, 64
     #     GB of memory) with 128 GB disk, and provides up to 8 Ray workers
     #     based on the autoscaler.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #
     # @option params [String] :security_configuration
     #   The name of the SecurityConfiguration structure to be used with the
@@ -4710,7 +4813,7 @@ module Aws::Glue
     #     },
     #     max_capacity: 1.0,
     #     number_of_workers: 1,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X, Z.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.4X, G.8X, G.025X, Z.2X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X
     #     security_configuration: "NameString",
     #     glue_version: "GlueVersionString",
     #     tags: {
@@ -4739,7 +4842,7 @@ module Aws::Glue
     #   resp.session.security_configuration #=> String
     #   resp.session.glue_version #=> String
     #   resp.session.number_of_workers #=> Integer
-    #   resp.session.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.session.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.session.completed_on #=> Time
     #   resp.session.execution_time #=> Float
     #   resp.session.dpu_seconds #=> Float
@@ -9445,7 +9548,7 @@ module Aws::Glue
     #   resp.dev_endpoint.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoint.public_address #=> String
     #   resp.dev_endpoint.status #=> String
-    #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.dev_endpoint.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.dev_endpoint.glue_version #=> String
     #   resp.dev_endpoint.number_of_workers #=> Integer
     #   resp.dev_endpoint.number_of_nodes #=> Integer
@@ -9516,7 +9619,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
-    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.dev_endpoints[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.dev_endpoints[0].glue_version #=> String
     #   resp.dev_endpoints[0].number_of_workers #=> Integer
     #   resp.dev_endpoints[0].number_of_nodes #=> Integer
@@ -9972,7 +10075,7 @@ module Aws::Glue
     #   resp.job_run.execution_time #=> Integer
     #   resp.job_run.timeout #=> Integer
     #   resp.job_run.max_capacity #=> Float
-    #   resp.job_run.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.job_run.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.job_run.number_of_workers #=> Integer
     #   resp.job_run.security_configuration #=> String
     #   resp.job_run.log_group_name #=> String
@@ -10047,7 +10150,7 @@ module Aws::Glue
     #   resp.job_runs[0].execution_time #=> Integer
     #   resp.job_runs[0].timeout #=> Integer
     #   resp.job_runs[0].max_capacity #=> Float
-    #   resp.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.job_runs[0].number_of_workers #=> Integer
     #   resp.job_runs[0].security_configuration #=> String
     #   resp.job_runs[0].log_group_name #=> String
@@ -10322,7 +10425,7 @@ module Aws::Glue
     #   resp.role #=> String
     #   resp.glue_version #=> String
     #   resp.max_capacity #=> Float
-    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.number_of_workers #=> Integer
     #   resp.timeout #=> Integer
     #   resp.max_retries #=> Integer
@@ -10432,7 +10535,7 @@ module Aws::Glue
     #   resp.transforms[0].role #=> String
     #   resp.transforms[0].glue_version #=> String
     #   resp.transforms[0].max_capacity #=> Float
-    #   resp.transforms[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.transforms[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.transforms[0].number_of_workers #=> Integer
     #   resp.transforms[0].timeout #=> Integer
     #   resp.transforms[0].max_retries #=> Integer
@@ -11543,7 +11646,7 @@ module Aws::Glue
     #   resp.session.security_configuration #=> String
     #   resp.session.glue_version #=> String
     #   resp.session.number_of_workers #=> Integer
-    #   resp.session.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.session.worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.session.completed_on #=> Time
     #   resp.session.execution_time #=> Float
     #   resp.session.dpu_seconds #=> Float
@@ -13738,7 +13841,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -13812,7 +13915,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -13940,7 +14043,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -14107,7 +14210,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].execution_time #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].timeout #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].max_capacity #=> Float
-    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].number_of_workers #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].security_configuration #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
@@ -15860,7 +15963,7 @@ module Aws::Glue
     #   resp.sessions[0].security_configuration #=> String
     #   resp.sessions[0].glue_version #=> String
     #   resp.sessions[0].number_of_workers #=> Integer
-    #   resp.sessions[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.025X", "G.4X", "G.8X", "Z.2X"
+    #   resp.sessions[0].worker_type #=> String, one of "Standard", "G.1X", "G.2X", "G.4X", "G.8X", "G.025X", "Z.2X", "G.12X", "G.16X", "R.1X", "R.2X", "R.4X", "R.8X"
     #   resp.sessions[0].completed_on #=> Time
     #   resp.sessions[0].execution_time #=> Float
     #   resp.sessions[0].dpu_seconds #=> Float
@@ -18881,8 +18984,15 @@ module Aws::Glue
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs.
-    #   Accepts the value Z.2X for Ray jobs.
+    #   Accepts a value of G.025X, G.1X, G.2X, G.4X, G.8X, G.12X, G.16X, R.1X,
+    #   R.2X, R.4X, or R.8X for Spark jobs. Accepts the value Z.2X for Ray
+    #   jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPUs,
+    #     4 GB of memory) with 84GB disk, and provides 1 executor per worker.
+    #     We recommend this worker type for low volume streaming jobs. This
+    #     worker type is only available for Glue version 3.0 or later
+    #     streaming jobs.
     #
     #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPUs, 16
     #     GB of memory) with 94GB disk, and provides 1 executor per worker. We
@@ -18901,29 +19011,74 @@ module Aws::Glue
     #     We recommend this worker type for jobs whose workloads contain your
     #     most demanding transforms, aggregations, joins, and queries. This
     #     worker type is available only for Glue version 3.0 or later Spark
-    #     ETL jobs in the following Amazon Web Services Regions: US East
-    #     (Ohio), US East (N. Virginia), US West (Oregon), Asia Pacific
-    #     (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo), Canada
-    #     (Central), Europe (Frankfurt), Europe (Ireland), and Europe
-    #     (Stockholm).
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
     #
     #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs, 128
     #     GB of memory) with 512GB disk, and provides 1 executor per worker.
     #     We recommend this worker type for jobs whose workloads contain your
     #     most demanding transforms, aggregations, joins, and queries. This
     #     worker type is available only for Glue version 3.0 or later Spark
-    #     ETL jobs, in the same Amazon Web Services Regions as supported for
-    #     the `G.4X` worker type.
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
     #
-    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2 vCPUs,
-    #     4 GB of memory) with 84GB disk, and provides 1 executor per worker.
-    #     We recommend this worker type for low volume streaming jobs. This
-    #     worker type is only available for Glue version 3.0 or later
-    #     streaming jobs.
+    #   * For the `G.12X` worker type, each worker maps to 12 DPU (48 vCPUs,
+    #     192 GB of memory) with 768GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `G.16X` worker type, each worker maps to 16 DPU (64 vCPUs,
+    #     256 GB of memory) with 1024GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.1X` worker type, each worker maps to 1 M-DPU (4 vCPUs, 32
+    #     GB of memory) with 94GB disk, and provides 1 executor per worker. We
+    #     recommend this worker type for memory-intensive workloads. This
+    #     worker type is available only for Glue version 4.0 or later Spark
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
+    #
+    #   * For the `R.2X` worker type, each worker maps to 2 M-DPU (8 vCPUs, 64
+    #     GB of memory) with 138GB disk, and provides 1 executor per worker.
+    #     We recommend this worker type for memory-intensive workloads. This
+    #     worker type is available only for Glue version 4.0 or later Spark
+    #     ETL jobs in select Amazon Web Services Regions. For the supported
+    #     Regions, see [Configuring job properties for Spark jobs][1] in the
+    #     developer guide.
+    #
+    #   * For the `R.4X` worker type, each worker maps to 4 M-DPU (16 vCPUs,
+    #     128 GB of memory) with 256GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.8X` worker type, each worker maps to 8 M-DPU (32 vCPUs,
+    #     256 GB of memory) with 512GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
     #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs, 64
     #     GB of memory) with 128 GB disk, and provides up to 8 Ray workers
     #     based on the autoscaler.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #
     # @option params [Integer] :number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
@@ -18967,7 +19122,7 @@ module Aws::Glue
     #     notification_property: {
     #       notify_delay_after: 1,
     #     },
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X, Z.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.4X, G.8X, G.025X, Z.2X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X
     #     number_of_workers: 1,
     #     execution_class: "FLEX", # accepts FLEX, STANDARD
     #     execution_role_session_policy: "OrchestrationPolicyJsonString",
@@ -21022,7 +21177,7 @@ module Aws::Glue
     #     role: "RoleString",
     #     glue_version: "GlueVersionString",
     #     max_capacity: 1.0,
-    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.025X, G.4X, G.8X, Z.2X
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X, G.4X, G.8X, G.025X, Z.2X, G.12X, G.16X, R.1X, R.2X, R.4X, R.8X
     #     number_of_workers: 1,
     #     timeout: 1,
     #     max_retries: 1,
@@ -21914,7 +22069,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.286.0'
+      context[:gem_version] = '1.287.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -18067,7 +18067,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
     #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "vpn-concentrator", "direct-connect-gateway", "connect", "peering", "tgw-peering", "network-function", "client-vpn"
-    #   resp.route.type #=> String, one of "static", "propagated"
+    #   resp.route.type #=> String, one of "static", "propagated", "system"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayRoute AWS API Documentation
@@ -24718,7 +24718,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
     #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "vpn-concentrator", "direct-connect-gateway", "connect", "peering", "tgw-peering", "network-function", "client-vpn"
-    #   resp.route.type #=> String, one of "static", "propagated"
+    #   resp.route.type #=> String, one of "static", "propagated", "system"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayRoute AWS API Documentation
@@ -24730,11 +24730,13 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes the specified transit gateway route table. If there are any
-    # route tables associated with the transit gateway route table, you must
-    # first run DisassociateRouteTable before you can delete the transit
-    # gateway route table. This removes any route tables associated with the
-    # transit gateway route table.
+    # Deletes the specified transit gateway route table. Before you can
+    # delete a transit gateway route table, you must disassociate all
+    # attachments from it by using DisassociateTransitGatewayRouteTable and
+    # wait for the disassociations to complete. You can't delete a transit
+    # gateway route table that is the default association route table or
+    # default propagation route table for the transit gateway. To change the
+    # default route tables, use ModifyTransitGateway.
     #
     # @option params [required, String] :transit_gateway_route_table_id
     #   The ID of the transit gateway route table.
@@ -45903,6 +45905,7 @@ module Aws::EC2
     #   resp.transit_gateway_attachments[0].tags #=> Array
     #   resp.transit_gateway_attachments[0].tags[0].key #=> String
     #   resp.transit_gateway_attachments[0].tags[0].value #=> String
+    #   resp.transit_gateway_attachments[0].nat_gateway_support #=> String, one of "enabled", "disabled", "enabling", "disabling"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayAttachments AWS API Documentation
@@ -59179,6 +59182,53 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the NAT configuration for the specified transit gateway
+    # attachment. Only the owner of the transit gateway can describe the NAT
+    # configuration.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetTransitGatewayAttachmentNatConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTransitGatewayAttachmentNatConfigurationResult#transit_gateway_attachment_id #transit_gateway_attachment_id} => String
+    #   * {Types::GetTransitGatewayAttachmentNatConfigurationResult#nat_gateway_support #nat_gateway_support} => String
+    #   * {Types::GetTransitGatewayAttachmentNatConfigurationResult#nat_system_route_support #nat_system_route_support} => String
+    #   * {Types::GetTransitGatewayAttachmentNatConfigurationResult#nat_gateway_rules #nat_gateway_rules} => Array&lt;Types::TransitGatewayNatRule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_transit_gateway_attachment_nat_configuration({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_attachment_id #=> String
+    #   resp.nat_gateway_support #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.nat_system_route_support #=> String, one of "enable", "disable"
+    #   resp.nat_gateway_rules #=> Array
+    #   resp.nat_gateway_rules[0].rule_number #=> Integer
+    #   resp.nat_gateway_rules[0].match_source_cidr #=> String
+    #   resp.nat_gateway_rules[0].nat_cidr #=> String
+    #   resp.nat_gateway_rules[0].state #=> String, one of "pending", "activated", "deactivated", "deleting"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayAttachmentNatConfiguration AWS API Documentation
+    #
+    # @overload get_transit_gateway_attachment_nat_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_transit_gateway_attachment_nat_configuration(params = {}, options = {})
+      req = build_request(:get_transit_gateway_attachment_nat_configuration, params)
+      req.send_request(options)
+    end
+
     # Lists the route tables to which the specified resource attachment
     # propagates routes.
     #
@@ -66730,6 +66780,110 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the NAT configuration for the specified transit gateway
+    # attachment. Use this operation to do the following:
+    #
+    # * Enable or disable NAT gateway support for the attachment.
+    #
+    # * Specify whether the transit gateway installs routes for the NAT
+    #   CIDRs.
+    #
+    # * Replace the NAT gateway rules for the attachment.
+    #
+    # Only the owner of the transit gateway can modify the NAT
+    # configuration.
+    #
+    # With NAT gateway support enabled, the transit gateway translates
+    # addresses in each rule's `MatchSourceCidr` range to the corresponding
+    # addresses in its `NatCidr` range.
+    #
+    # The transit gateway applies changes asynchronously. To check the
+    # result, use `GetTransitGatewayAttachmentNatConfiguration`.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #
+    # @option params [String] :nat_gateway_support
+    #   Specifies whether to enable or disable NAT gateway support for the
+    #   attachment. To enable NAT gateway support, the attachment must have at
+    #   least one NAT gateway rule. You can't modify the NAT configuration
+    #   while NAT gateway support is `enabling` or `disabling`. If you omit
+    #   this parameter, the current value doesn't change.
+    #
+    # @option params [String] :nat_system_route_support
+    #   Specifies whether the transit gateway installs routes for the NAT
+    #   CIDRs in the route tables to which the attachment propagates. For VPC
+    #   attachments, the transit gateway always installs these routes. You can
+    #   enable or disable this option only for Amazon Web Services Direct
+    #   Connect gateway attachments and Site-to-Site VPN attachments that use
+    #   dynamic routing. For these attachments, the default is `enable`. If
+    #   you omit this parameter, the current value doesn't change.
+    #
+    # @option params [Array<Types::TransitGatewayNatRuleRequest>] :nat_gateway_rules
+    #   The NAT gateway rules for the attachment. The rules that you specify
+    #   replace all existing NAT gateway rules for the attachment. You can
+    #   specify up to 50 rules for an attachment. If you omit this parameter,
+    #   the existing rules don't change. To remove all rules, use
+    #   `ResetNatGatewayRules`.
+    #
+    # @option params [Boolean] :reset_nat_gateway_rules
+    #   Specifies whether to remove all NAT gateway rules from the attachment.
+    #   If you omit this parameter, the transit gateway doesn't remove any
+    #   rules. You can't specify this parameter together with
+    #   `NatGatewayRules`. Because you can't enable NAT gateway support
+    #   without rules, also set `NatGatewaySupport` to `disable` in the same
+    #   request if NAT gateway support is currently enabled.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyTransitGatewayAttachmentNatConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyTransitGatewayAttachmentNatConfigurationResult#transit_gateway_attachment_id #transit_gateway_attachment_id} => String
+    #   * {Types::ModifyTransitGatewayAttachmentNatConfigurationResult#nat_gateway_support #nat_gateway_support} => String
+    #   * {Types::ModifyTransitGatewayAttachmentNatConfigurationResult#nat_system_route_support #nat_system_route_support} => String
+    #   * {Types::ModifyTransitGatewayAttachmentNatConfigurationResult#nat_gateway_rules #nat_gateway_rules} => Array&lt;Types::TransitGatewayNatRule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_transit_gateway_attachment_nat_configuration({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     nat_gateway_support: "enable", # accepts enable, disable
+    #     nat_system_route_support: "enable", # accepts enable, disable
+    #     nat_gateway_rules: [
+    #       {
+    #         rule_number: 1,
+    #         match_source_cidr: "String",
+    #         nat_cidr: "String",
+    #       },
+    #     ],
+    #     reset_nat_gateway_rules: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_attachment_id #=> String
+    #   resp.nat_gateway_support #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.nat_system_route_support #=> String, one of "enable", "disable"
+    #   resp.nat_gateway_rules #=> Array
+    #   resp.nat_gateway_rules[0].rule_number #=> Integer
+    #   resp.nat_gateway_rules[0].match_source_cidr #=> String
+    #   resp.nat_gateway_rules[0].nat_cidr #=> String
+    #   resp.nat_gateway_rules[0].state #=> String, one of "pending", "activated", "deactivated", "deleting"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayAttachmentNatConfiguration AWS API Documentation
+    #
+    # @overload modify_transit_gateway_attachment_nat_configuration(params = {})
+    # @param [Hash] params ({})
+    def modify_transit_gateway_attachment_nat_configuration(params = {}, options = {})
+      req = build_request(:modify_transit_gateway_attachment_nat_configuration, params)
+      req.send_request(options)
+    end
+
     # Modifies a transit gateway metering policy.
     #
     # @option params [required, String] :transit_gateway_metering_policy_id
@@ -72071,7 +72225,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
     #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "vpn-concentrator", "direct-connect-gateway", "connect", "peering", "tgw-peering", "network-function", "client-vpn"
-    #   resp.route.type #=> String, one of "static", "propagated"
+    #   resp.route.type #=> String, one of "static", "propagated", "system"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceTransitGatewayRoute AWS API Documentation
@@ -75515,7 +75669,7 @@ module Aws::EC2
     #   resp.routes[0].transit_gateway_attachments[0].resource_id #=> String
     #   resp.routes[0].transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
     #   resp.routes[0].transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "vpn-concentrator", "direct-connect-gateway", "connect", "peering", "tgw-peering", "network-function", "client-vpn"
-    #   resp.routes[0].type #=> String, one of "static", "propagated"
+    #   resp.routes[0].type #=> String, one of "static", "propagated", "system"
     #   resp.routes[0].state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #   resp.additional_routes_available #=> Boolean
     #   resp.next_token #=> String
@@ -78070,7 +78224,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.659.0'
+      context[:gem_version] = '1.660.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

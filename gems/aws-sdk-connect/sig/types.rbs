@@ -247,6 +247,13 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ApproximateDriftedResourceCount
+      attr_accessor region: ::String
+      attr_accessor count: ::Integer
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class AssignContactCategoryActionDefinition < Aws::EmptyStructure
     end
 
@@ -4485,6 +4492,7 @@ module Aws::Connect
       attr_accessor arn: ::String
       attr_accessor sign_in_config: Types::SignInConfig
       attr_accessor agent_config: Types::AgentConfig
+      attr_accessor last_failover_time: ::Time
       SENSITIVE: []
     end
 
@@ -5597,6 +5605,22 @@ module Aws::Connect
       attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
       attr_accessor segments: ::Array[Types::RealtimeContactAnalysisSegment]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReplicationFindingsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReplicationFindingsResponse
+      attr_accessor replication_findings_list: ::Array[Types::ReplicationFinding]
+      attr_accessor approximate_drifted_resource_counts: ::Array[Types::ApproximateDriftedResourceCount]
+      attr_accessor next_token: ::String
+      attr_accessor resource_replication_statuses: ::Array[Types::ResourceReplicationStatus]
       SENSITIVE: []
     end
 
@@ -7082,6 +7106,18 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ReplicationFinding
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor region: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor name: ::String
+      attr_accessor operation: ::String
+      attr_accessor reference_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ReplicationStatusSummary
       attr_accessor region: ::String
       attr_accessor replication_status: ("INSTANCE_REPLICATION_COMPLETE" | "INSTANCE_REPLICATION_IN_PROGRESS" | "INSTANCE_REPLICATION_FAILED" | "INSTANCE_REPLICA_DELETING" | "INSTANCE_REPLICATION_DELETION_FAILED" | "RESOURCE_REPLICATION_NOT_STARTED")
@@ -7113,6 +7149,12 @@ module Aws::Connect
 
     class ResourceNotReadyException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceReplicationStatus
+      attr_accessor region: ::String
+      attr_accessor status: ::String
       SENSITIVE: []
     end
 

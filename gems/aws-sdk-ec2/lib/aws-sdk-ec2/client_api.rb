@@ -2041,6 +2041,8 @@ module Aws::EC2
     GetSubnetCidrReservationsMaxResults = Shapes::IntegerShape.new(name: 'GetSubnetCidrReservationsMaxResults')
     GetSubnetCidrReservationsRequest = Shapes::StructureShape.new(name: 'GetSubnetCidrReservationsRequest')
     GetSubnetCidrReservationsResult = Shapes::StructureShape.new(name: 'GetSubnetCidrReservationsResult')
+    GetTransitGatewayAttachmentNatConfigurationRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentNatConfigurationRequest')
+    GetTransitGatewayAttachmentNatConfigurationResult = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentNatConfigurationResult')
     GetTransitGatewayAttachmentPropagationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentPropagationsRequest')
     GetTransitGatewayAttachmentPropagationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentPropagationsResult')
     GetTransitGatewayMeteringPolicyEntriesRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayMeteringPolicyEntriesRequest')
@@ -2943,6 +2945,8 @@ module Aws::EC2
     ModifyTrafficMirrorFilterRuleResult = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorFilterRuleResult')
     ModifyTrafficMirrorSessionRequest = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorSessionRequest')
     ModifyTrafficMirrorSessionResult = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorSessionResult')
+    ModifyTransitGatewayAttachmentNatConfigurationRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayAttachmentNatConfigurationRequest')
+    ModifyTransitGatewayAttachmentNatConfigurationResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayAttachmentNatConfigurationResult')
     ModifyTransitGatewayMeteringPolicyRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayMeteringPolicyRequest')
     ModifyTransitGatewayMeteringPolicyResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayMeteringPolicyResult')
     ModifyTransitGatewayOptions = Shapes::StructureShape.new(name: 'ModifyTransitGatewayOptions')
@@ -3912,6 +3916,9 @@ module Aws::EC2
     TransitGatewayAttachmentId = Shapes::StringShape.new(name: 'TransitGatewayAttachmentId')
     TransitGatewayAttachmentIdStringList = Shapes::ListShape.new(name: 'TransitGatewayAttachmentIdStringList')
     TransitGatewayAttachmentList = Shapes::ListShape.new(name: 'TransitGatewayAttachmentList')
+    TransitGatewayAttachmentNatGatewaySupportState = Shapes::StringShape.new(name: 'TransitGatewayAttachmentNatGatewaySupportState')
+    TransitGatewayAttachmentNatGatewaySupportValue = Shapes::StringShape.new(name: 'TransitGatewayAttachmentNatGatewaySupportValue')
+    TransitGatewayAttachmentNatSystemRouteSupportValue = Shapes::StringShape.new(name: 'TransitGatewayAttachmentNatSystemRouteSupportValue')
     TransitGatewayAttachmentPropagation = Shapes::StructureShape.new(name: 'TransitGatewayAttachmentPropagation')
     TransitGatewayAttachmentPropagationList = Shapes::ListShape.new(name: 'TransitGatewayAttachmentPropagationList')
     TransitGatewayAttachmentResourceType = Shapes::StringShape.new(name: 'TransitGatewayAttachmentResourceType')
@@ -3961,6 +3968,11 @@ module Aws::EC2
     TransitGatewayMulticastGroupList = Shapes::ListShape.new(name: 'TransitGatewayMulticastGroupList')
     TransitGatewayMulticastRegisteredGroupMembers = Shapes::StructureShape.new(name: 'TransitGatewayMulticastRegisteredGroupMembers')
     TransitGatewayMulticastRegisteredGroupSources = Shapes::StructureShape.new(name: 'TransitGatewayMulticastRegisteredGroupSources')
+    TransitGatewayNatRule = Shapes::StructureShape.new(name: 'TransitGatewayNatRule')
+    TransitGatewayNatRuleList = Shapes::ListShape.new(name: 'TransitGatewayNatRuleList')
+    TransitGatewayNatRuleRequest = Shapes::StructureShape.new(name: 'TransitGatewayNatRuleRequest')
+    TransitGatewayNatRuleRequestList = Shapes::ListShape.new(name: 'TransitGatewayNatRuleRequestList')
+    TransitGatewayNatRuleState = Shapes::StringShape.new(name: 'TransitGatewayNatRuleState')
     TransitGatewayNetworkInterfaceIdList = Shapes::ListShape.new(name: 'TransitGatewayNetworkInterfaceIdList')
     TransitGatewayOptions = Shapes::StructureShape.new(name: 'TransitGatewayOptions')
     TransitGatewayPeeringAttachment = Shapes::StructureShape.new(name: 'TransitGatewayPeeringAttachment')
@@ -12705,6 +12717,16 @@ module Aws::EC2
     GetSubnetCidrReservationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetSubnetCidrReservationsResult.struct_class = Types::GetSubnetCidrReservationsResult
 
+    GetTransitGatewayAttachmentNatConfigurationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    GetTransitGatewayAttachmentNatConfigurationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetTransitGatewayAttachmentNatConfigurationRequest.struct_class = Types::GetTransitGatewayAttachmentNatConfigurationRequest
+
+    GetTransitGatewayAttachmentNatConfigurationResult.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "transitGatewayAttachmentId"))
+    GetTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatGatewaySupportState, location_name: "natGatewaySupport"))
+    GetTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatSystemRouteSupportValue, location_name: "natSystemRouteSupport"))
+    GetTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: TransitGatewayNatRuleList, location_name: "natGatewayRuleSet"))
+    GetTransitGatewayAttachmentNatConfigurationResult.struct_class = Types::GetTransitGatewayAttachmentNatConfigurationResult
+
     GetTransitGatewayAttachmentPropagationsRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
     GetTransitGatewayAttachmentPropagationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     GetTransitGatewayAttachmentPropagationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
@@ -16077,6 +16099,20 @@ module Aws::EC2
 
     ModifyTrafficMirrorSessionResult.add_member(:traffic_mirror_session, Shapes::ShapeRef.new(shape: TrafficMirrorSession, location_name: "trafficMirrorSession"))
     ModifyTrafficMirrorSessionResult.struct_class = Types::ModifyTrafficMirrorSessionResult
+
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatGatewaySupportValue, location_name: "NatGatewaySupport"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatSystemRouteSupportValue, location_name: "NatSystemRouteSupport"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: TransitGatewayNatRuleRequestList, location_name: "NatGatewayRule"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:reset_nat_gateway_rules, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResetNatGatewayRules"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.struct_class = Types::ModifyTransitGatewayAttachmentNatConfigurationRequest
+
+    ModifyTransitGatewayAttachmentNatConfigurationResult.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "transitGatewayAttachmentId"))
+    ModifyTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatGatewaySupportState, location_name: "natGatewaySupport"))
+    ModifyTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatSystemRouteSupportValue, location_name: "natSystemRouteSupport"))
+    ModifyTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: TransitGatewayNatRuleList, location_name: "natGatewayRuleSet"))
+    ModifyTransitGatewayAttachmentNatConfigurationResult.struct_class = Types::ModifyTransitGatewayAttachmentNatConfigurationResult
 
     ModifyTransitGatewayMeteringPolicyRequest.add_member(:transit_gateway_metering_policy_id, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyId, required: true, location_name: "TransitGatewayMeteringPolicyId"))
     ModifyTransitGatewayMeteringPolicyRequest.add_member(:add_middlebox_attachment_ids, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentIdStringList, location_name: "AddMiddleboxAttachmentId"))
@@ -19625,6 +19661,7 @@ module Aws::EC2
     TransitGatewayAttachment.add_member(:association, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentAssociation, location_name: "association"))
     TransitGatewayAttachment.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
     TransitGatewayAttachment.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    TransitGatewayAttachment.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatGatewaySupportState, location_name: "natGatewaySupport"))
     TransitGatewayAttachment.struct_class = Types::TransitGatewayAttachment
 
     TransitGatewayAttachmentAssociation.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayRouteTableId"))
@@ -19815,6 +19852,21 @@ module Aws::EC2
     TransitGatewayMulticastRegisteredGroupSources.add_member(:registered_network_interface_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "registeredNetworkInterfaceIds"))
     TransitGatewayMulticastRegisteredGroupSources.add_member(:group_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "groupIpAddress"))
     TransitGatewayMulticastRegisteredGroupSources.struct_class = Types::TransitGatewayMulticastRegisteredGroupSources
+
+    TransitGatewayNatRule.add_member(:rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "ruleNumber"))
+    TransitGatewayNatRule.add_member(:match_source_cidr, Shapes::ShapeRef.new(shape: String, location_name: "matchSourceCidr"))
+    TransitGatewayNatRule.add_member(:nat_cidr, Shapes::ShapeRef.new(shape: String, location_name: "natCidr"))
+    TransitGatewayNatRule.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayNatRuleState, location_name: "state"))
+    TransitGatewayNatRule.struct_class = Types::TransitGatewayNatRule
+
+    TransitGatewayNatRuleList.member = Shapes::ShapeRef.new(shape: TransitGatewayNatRule, location_name: "item")
+
+    TransitGatewayNatRuleRequest.add_member(:rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "RuleNumber"))
+    TransitGatewayNatRuleRequest.add_member(:match_source_cidr, Shapes::ShapeRef.new(shape: String, location_name: "MatchSourceCidr"))
+    TransitGatewayNatRuleRequest.add_member(:nat_cidr, Shapes::ShapeRef.new(shape: String, location_name: "NatCidr"))
+    TransitGatewayNatRuleRequest.struct_class = Types::TransitGatewayNatRuleRequest
+
+    TransitGatewayNatRuleRequestList.member = Shapes::ShapeRef.new(shape: TransitGatewayNatRuleRequest, location_name: "item")
 
     TransitGatewayNetworkInterfaceIdList.member = Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "item")
 
@@ -26883,6 +26935,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: GetSubnetCidrReservationsResult)
       end)
 
+      api.add_operation(:get_transit_gateway_attachment_nat_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTransitGatewayAttachmentNatConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayAttachmentNatConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayAttachmentNatConfigurationResult)
+      end)
+
       api.add_operation(:get_transit_gateway_attachment_propagations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTransitGatewayAttachmentPropagations"
         o.http_method = "POST"
@@ -27589,6 +27649,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyTransitGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyTransitGatewayResult)
+      end)
+
+      api.add_operation(:modify_transit_gateway_attachment_nat_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyTransitGatewayAttachmentNatConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyTransitGatewayAttachmentNatConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyTransitGatewayAttachmentNatConfigurationResult)
       end)
 
       api.add_operation(:modify_transit_gateway_metering_policy, Seahorse::Model::Operation.new.tap do |o|

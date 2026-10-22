@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2026-10-22)
+------------------
+
+* Feature - Amazon MSK Connect now supports pausing and resuming connectors via the asynchronous PauseConnector and ResumeConnector APIs. Paused connectors keep their configuration and committed offsets and resume where they left off. Each call returns an operation ARN to track with DescribeConnectorOperation.
+
 1.66.0 (2026-10-21)
 ------------------
 

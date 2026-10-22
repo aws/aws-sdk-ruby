@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1298.0 (2026-10-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Continuum`.
+
 1.1297.0 (2026-10-21)
 ------------------
 

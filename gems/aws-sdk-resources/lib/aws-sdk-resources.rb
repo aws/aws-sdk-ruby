@@ -117,6 +117,7 @@ module Aws
   autoload :ConnectHealth, 'aws-sdk-connecthealth'
   autoload :ConnectParticipant, 'aws-sdk-connectparticipant'
   autoload :ConnectWisdomService, 'aws-sdk-connectwisdomservice'
+  autoload :Continuum, 'aws-sdk-continuum'
   autoload :ControlCatalog, 'aws-sdk-controlcatalog'
   autoload :ControlTower, 'aws-sdk-controltower'
   autoload :CostExplorer, 'aws-sdk-costexplorer'

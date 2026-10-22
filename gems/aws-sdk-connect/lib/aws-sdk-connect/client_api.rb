@@ -109,6 +109,8 @@ module Aws::Connect
     ApplicationPermissions = Shapes::ListShape.new(name: 'ApplicationPermissions')
     ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
     Applications = Shapes::ListShape.new(name: 'Applications')
+    ApproximateDriftedResourceCount = Shapes::StructureShape.new(name: 'ApproximateDriftedResourceCount')
+    ApproximateDriftedResourceCounts = Shapes::ListShape.new(name: 'ApproximateDriftedResourceCounts')
     ApproximateTotalCount = Shapes::IntegerShape.new(name: 'ApproximateTotalCount')
     ArtifactId = Shapes::StringShape.new(name: 'ArtifactId')
     ArtifactStatus = Shapes::StringShape.new(name: 'ArtifactStatus')
@@ -1275,6 +1277,8 @@ module Aws::Connect
     ListQuickConnectsResponse = Shapes::StructureShape.new(name: 'ListQuickConnectsResponse')
     ListRealtimeContactAnalysisSegmentsV2Request = Shapes::StructureShape.new(name: 'ListRealtimeContactAnalysisSegmentsV2Request')
     ListRealtimeContactAnalysisSegmentsV2Response = Shapes::StructureShape.new(name: 'ListRealtimeContactAnalysisSegmentsV2Response')
+    ListReplicationFindingsRequest = Shapes::StructureShape.new(name: 'ListReplicationFindingsRequest')
+    ListReplicationFindingsResponse = Shapes::StructureShape.new(name: 'ListReplicationFindingsResponse')
     ListRoutingProfileManualAssignmentQueuesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfileManualAssignmentQueuesRequest')
     ListRoutingProfileManualAssignmentQueuesResponse = Shapes::StructureShape.new(name: 'ListRoutingProfileManualAssignmentQueuesResponse')
     ListRoutingProfileQueuesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfileQueuesRequest')
@@ -1734,6 +1738,13 @@ module Aws::Connect
     ReplicateInstanceRequest = Shapes::StructureShape.new(name: 'ReplicateInstanceRequest')
     ReplicateInstanceResponse = Shapes::StructureShape.new(name: 'ReplicateInstanceResponse')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
+    ReplicationFinding = Shapes::StructureShape.new(name: 'ReplicationFinding')
+    ReplicationFindingMessage = Shapes::StringShape.new(name: 'ReplicationFindingMessage')
+    ReplicationFindingOperation = Shapes::StringShape.new(name: 'ReplicationFindingOperation')
+    ReplicationFindingReferenceCode = Shapes::StringShape.new(name: 'ReplicationFindingReferenceCode')
+    ReplicationFindingResourceName = Shapes::StringShape.new(name: 'ReplicationFindingResourceName')
+    ReplicationFindingResourceType = Shapes::StringShape.new(name: 'ReplicationFindingResourceType')
+    ReplicationFindingsList = Shapes::ListShape.new(name: 'ReplicationFindingsList')
     ReplicationStatusReason = Shapes::StringShape.new(name: 'ReplicationStatusReason')
     ReplicationStatusSummary = Shapes::StructureShape.new(name: 'ReplicationStatusSummary')
     ReplicationStatusSummaryList = Shapes::ListShape.new(name: 'ReplicationStatusSummaryList')
@@ -1746,6 +1757,9 @@ module Aws::Connect
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
+    ResourceReplicationStatus = Shapes::StructureShape.new(name: 'ResourceReplicationStatus')
+    ResourceReplicationStatusValue = Shapes::StringShape.new(name: 'ResourceReplicationStatusValue')
+    ResourceReplicationStatuses = Shapes::ListShape.new(name: 'ResourceReplicationStatuses')
     ResourceTagsSearchCriteria = Shapes::StructureShape.new(name: 'ResourceTagsSearchCriteria')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
@@ -2622,6 +2636,13 @@ module Aws::Connect
     ApplicationPermissions.member = Shapes::ShapeRef.new(shape: Permission)
 
     Applications.member = Shapes::ShapeRef.new(shape: Application)
+
+    ApproximateDriftedResourceCount.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "Region"))
+    ApproximateDriftedResourceCount.add_member(:count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, required: true, location_name: "Count"))
+    ApproximateDriftedResourceCount.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    ApproximateDriftedResourceCount.struct_class = Types::ApproximateDriftedResourceCount
+
+    ApproximateDriftedResourceCounts.member = Shapes::ShapeRef.new(shape: ApproximateDriftedResourceCount)
 
     AssignContactCategoryActionDefinition.struct_class = Types::AssignContactCategoryActionDefinition
 
@@ -5968,6 +5989,7 @@ module Aws::Connect
     GetTrafficDistributionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ACGRTrafficDistributionGroupArn, location_name: "Arn"))
     GetTrafficDistributionResponse.add_member(:sign_in_config, Shapes::ShapeRef.new(shape: SignInConfig, location_name: "SignInConfig"))
     GetTrafficDistributionResponse.add_member(:agent_config, Shapes::ShapeRef.new(shape: AgentConfig, location_name: "AgentConfig"))
+    GetTrafficDistributionResponse.add_member(:last_failover_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastFailoverTime"))
     GetTrafficDistributionResponse.struct_class = Types::GetTrafficDistributionResponse
 
     GlobalResiliencyMetadata.add_member(:active_region, Shapes::ShapeRef.new(shape: ActiveRegion, location_name: "ActiveRegion"))
@@ -6819,6 +6841,18 @@ module Aws::Connect
     ListRealtimeContactAnalysisSegmentsV2Response.add_member(:segments, Shapes::ShapeRef.new(shape: RealtimeContactAnalysisSegments, required: true, location_name: "Segments"))
     ListRealtimeContactAnalysisSegmentsV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
     ListRealtimeContactAnalysisSegmentsV2Response.struct_class = Types::ListRealtimeContactAnalysisSegmentsV2Response
+
+    ListReplicationFindingsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    ListReplicationFindingsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ReplicationFindingResourceType, required: true, location: "querystring", location_name: "resourceType"))
+    ListReplicationFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListReplicationFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location: "querystring", location_name: "nextToken"))
+    ListReplicationFindingsRequest.struct_class = Types::ListReplicationFindingsRequest
+
+    ListReplicationFindingsResponse.add_member(:replication_findings_list, Shapes::ShapeRef.new(shape: ReplicationFindingsList, required: true, location_name: "ReplicationFindingsList"))
+    ListReplicationFindingsResponse.add_member(:approximate_drifted_resource_counts, Shapes::ShapeRef.new(shape: ApproximateDriftedResourceCounts, location_name: "ApproximateDriftedResourceCounts"))
+    ListReplicationFindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
+    ListReplicationFindingsResponse.add_member(:resource_replication_statuses, Shapes::ShapeRef.new(shape: ResourceReplicationStatuses, location_name: "ResourceReplicationStatuses"))
+    ListReplicationFindingsResponse.struct_class = Types::ListReplicationFindingsResponse
 
     ListRoutingProfileManualAssignmentQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListRoutingProfileManualAssignmentQueuesRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
@@ -8040,6 +8074,18 @@ module Aws::Connect
     ReplicationConfiguration.add_member(:global_sign_in_endpoint, Shapes::ShapeRef.new(shape: GlobalSignInEndpoint, location_name: "GlobalSignInEndpoint"))
     ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
 
+    ReplicationFinding.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "Arn"))
+    ReplicationFinding.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Id"))
+    ReplicationFinding.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "Region"))
+    ReplicationFinding.add_member(:resource_type, Shapes::ShapeRef.new(shape: ReplicationFindingResourceType, required: true, location_name: "ResourceType"))
+    ReplicationFinding.add_member(:name, Shapes::ShapeRef.new(shape: ReplicationFindingResourceName, location_name: "Name"))
+    ReplicationFinding.add_member(:operation, Shapes::ShapeRef.new(shape: ReplicationFindingOperation, location_name: "Operation"))
+    ReplicationFinding.add_member(:reference_code, Shapes::ShapeRef.new(shape: ReplicationFindingReferenceCode, location_name: "ReferenceCode"))
+    ReplicationFinding.add_member(:message, Shapes::ShapeRef.new(shape: ReplicationFindingMessage, location_name: "Message"))
+    ReplicationFinding.struct_class = Types::ReplicationFinding
+
+    ReplicationFindingsList.member = Shapes::ShapeRef.new(shape: ReplicationFinding)
+
     ReplicationStatusSummary.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "Region"))
     ReplicationStatusSummary.add_member(:replication_status, Shapes::ShapeRef.new(shape: InstanceReplicationStatus, location_name: "ReplicationStatus"))
     ReplicationStatusSummary.add_member(:replication_status_reason, Shapes::ShapeRef.new(shape: ReplicationStatusReason, location_name: "ReplicationStatusReason"))
@@ -8065,6 +8111,12 @@ module Aws::Connect
 
     ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
+
+    ResourceReplicationStatus.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "Region"))
+    ResourceReplicationStatus.add_member(:status, Shapes::ShapeRef.new(shape: ResourceReplicationStatusValue, required: true, location_name: "Status"))
+    ResourceReplicationStatus.struct_class = Types::ResourceReplicationStatus
+
+    ResourceReplicationStatuses.member = Shapes::ShapeRef.new(shape: ResourceReplicationStatus)
 
     ResourceTagsSearchCriteria.add_member(:tag_search_condition, Shapes::ShapeRef.new(shape: TagSearchCondition, location_name: "TagSearchCondition"))
     ResourceTagsSearchCriteria.struct_class = Types::ResourceTagsSearchCriteria
@@ -14036,6 +14088,25 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_replication_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReplicationFindings"
+        o.http_method = "GET"
+        o.http_request_uri = "/replication-findings/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListReplicationFindingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReplicationFindingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

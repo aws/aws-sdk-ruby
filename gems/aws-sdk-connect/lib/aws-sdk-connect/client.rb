@@ -15656,6 +15656,7 @@ module Aws::Connect
     #   * {Types::GetTrafficDistributionResponse#arn #arn} => String
     #   * {Types::GetTrafficDistributionResponse#sign_in_config #sign_in_config} => Types::SignInConfig
     #   * {Types::GetTrafficDistributionResponse#agent_config #agent_config} => Types::AgentConfig
+    #   * {Types::GetTrafficDistributionResponse#last_failover_time #last_failover_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -15676,6 +15677,7 @@ module Aws::Connect
     #   resp.agent_config.distributions #=> Array
     #   resp.agent_config.distributions[0].region #=> String
     #   resp.agent_config.distributions[0].percentage #=> Integer
+    #   resp.last_failover_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTrafficDistribution AWS API Documentation
     #
@@ -18839,6 +18841,90 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_realtime_contact_analysis_segments_v2(params = {}, options = {})
       req = build_request(:list_realtime_contact_analysis_segments_v2, params)
+      req.send_request(options)
+    end
+
+    # Lists replication findings for resources of a specified resource type
+    # in a specified Connect Customer instance. A replication finding
+    # describes a single resource whose replication to one or more Regions
+    # is incomplete or has encountered an error. Results are returned in
+    # pages. This operation is available only for instances that are set up
+    # for Global Resiliency.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can provide
+    #   either the instance ID or the full instance ARN. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resource to list replication findings for. The following
+    #   values are currently supported: `AGENT`, `AGENT_GROUP`,
+    #   `AGENT_GROUP_LEVEL`, `AGENT_STATE`, `ATTRIBUTE`, `CONTACT_FLOW`,
+    #   `DATA_TABLE`, `DATA_TABLE_ATTRIBUTE`, `DATA_TABLE_RECORD`,
+    #   `DATA_TABLE_VALUE`, `FLOW_MODULE`, `FLOW_MODULE_ALIAS`,
+    #   `FLOW_MODULE_VERSION`, `METRIC`, `NOTIFICATION`, `OPERATING_HOURS`,
+    #   `PHONE_NUMBER`, `PROMPT`, `QUEUE`, `REPORT`, `ROUTING_PROFILE`,
+    #   `SECURITY_PROFILE`, `TASK_TEMPLATE`, `TEST_CASE`,
+    #   `TRANSFER_DESTINATION`, `VIEW`, and `WORKSPACE`. Additional resource
+    #   types can be supported over time. Specifying a value that is not
+    #   currently supported returns an `InvalidRequestException`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListReplicationFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReplicationFindingsResponse#replication_findings_list #replication_findings_list} => Array&lt;Types::ReplicationFinding&gt;
+    #   * {Types::ListReplicationFindingsResponse#approximate_drifted_resource_counts #approximate_drifted_resource_counts} => Array&lt;Types::ApproximateDriftedResourceCount&gt;
+    #   * {Types::ListReplicationFindingsResponse#next_token #next_token} => String
+    #   * {Types::ListReplicationFindingsResponse#resource_replication_statuses #resource_replication_statuses} => Array&lt;Types::ResourceReplicationStatus&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_replication_findings({
+    #     instance_id: "InstanceIdOrArn", # required
+    #     resource_type: "ReplicationFindingResourceType", # required
+    #     max_results: 1,
+    #     next_token: "LargeNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_findings_list #=> Array
+    #   resp.replication_findings_list[0].arn #=> String
+    #   resp.replication_findings_list[0].id #=> String
+    #   resp.replication_findings_list[0].region #=> String
+    #   resp.replication_findings_list[0].resource_type #=> String
+    #   resp.replication_findings_list[0].name #=> String
+    #   resp.replication_findings_list[0].operation #=> String
+    #   resp.replication_findings_list[0].reference_code #=> String
+    #   resp.replication_findings_list[0].message #=> String
+    #   resp.approximate_drifted_resource_counts #=> Array
+    #   resp.approximate_drifted_resource_counts[0].region #=> String
+    #   resp.approximate_drifted_resource_counts[0].count #=> Integer
+    #   resp.approximate_drifted_resource_counts[0].timestamp #=> Time
+    #   resp.next_token #=> String
+    #   resp.resource_replication_statuses #=> Array
+    #   resp.resource_replication_statuses[0].region #=> String
+    #   resp.resource_replication_statuses[0].status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListReplicationFindings AWS API Documentation
+    #
+    # @overload list_replication_findings(params = {})
+    # @param [Hash] params ({})
+    def list_replication_findings(params = {}, options = {})
+      req = build_request(:list_replication_findings, params)
       req.send_request(options)
     end
 
@@ -32030,7 +32116,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.288.0'
+      context[:gem_version] = '1.289.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

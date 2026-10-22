@@ -1588,6 +1588,7 @@ module Aws::BedrockAgentCore
     #   resp.evaluation_results[0].evaluator_arn #=> String
     #   resp.evaluation_results[0].evaluator_id #=> String
     #   resp.evaluation_results[0].evaluator_name #=> String
+    #   resp.evaluation_results[0].evaluation_dimension_name #=> String
     #   resp.evaluation_results[0].explanation #=> String
     #   resp.evaluation_results[0].context.span_context.session_id #=> String
     #   resp.evaluation_results[0].context.span_context.trace_id #=> String
@@ -1818,6 +1819,7 @@ module Aws::BedrockAgentCore
     #   resp.evaluation_results.number_of_sessions_ignored #=> Integer
     #   resp.evaluation_results.evaluator_summaries #=> Array
     #   resp.evaluation_results.evaluator_summaries[0].evaluator_id #=> String
+    #   resp.evaluation_results.evaluator_summaries[0].evaluation_dimension_name #=> String
     #   resp.evaluation_results.evaluator_summaries[0].statistics.average_score #=> Float
     #   resp.evaluation_results.evaluator_summaries[0].total_evaluated #=> Integer
     #   resp.evaluation_results.evaluator_summaries[0].total_failed #=> Integer
@@ -4434,6 +4436,7 @@ module Aws::BedrockAgentCore
     #   resp.batch_evaluations[0].evaluation_results.number_of_sessions_ignored #=> Integer
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries #=> Array
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].evaluator_id #=> String
+    #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].evaluation_dimension_name #=> String
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].statistics.average_score #=> Float
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].total_evaluated #=> Integer
     #   resp.batch_evaluations[0].evaluation_results.evaluator_summaries[0].total_failed #=> Integer
@@ -6663,7 +6666,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

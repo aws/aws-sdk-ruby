@@ -356,6 +356,9 @@
   "ConnectWisdomService": {
     "models": "wisdom/2020-10-19"
   },
+  "Continuum": {
+    "models": "continuum/2022-07-26"
+  },
   "ControlCatalog": {
     "models": "controlcatalog/2018-05-10"
   },

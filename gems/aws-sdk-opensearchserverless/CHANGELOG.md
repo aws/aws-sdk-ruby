@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2026-10-22)
+------------------
+
+* Feature - Adds APIs to create, get, list, and cancel ingestion jobs, and to create, get, list, and delete ingestion streams, for ingesting data from Amazon S3 into OpenSearch Serverless collections.
+
 1.67.0 (2026-10-21)
 ------------------
 

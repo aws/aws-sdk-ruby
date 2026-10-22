@@ -197,6 +197,7 @@ module Aws::BedrockAgentCore
     EvaluationContent = Shapes::UnionShape.new(name: 'EvaluationContent')
     EvaluationContentList = Shapes::ListShape.new(name: 'EvaluationContentList')
     EvaluationContentTextString = Shapes::StringShape.new(name: 'EvaluationContentTextString')
+    EvaluationDimensionName = Shapes::StringShape.new(name: 'EvaluationDimensionName')
     EvaluationErrorCode = Shapes::StringShape.new(name: 'EvaluationErrorCode')
     EvaluationErrorMessage = Shapes::StringShape.new(name: 'EvaluationErrorMessage')
     EvaluationExpectedTrajectory = Shapes::StructureShape.new(name: 'EvaluationExpectedTrajectory')
@@ -1456,6 +1457,7 @@ module Aws::BedrockAgentCore
     EvaluationResultContent.add_member(:evaluator_arn, Shapes::ShapeRef.new(shape: EvaluatorArn, required: true, location_name: "evaluatorArn"))
     EvaluationResultContent.add_member(:evaluator_id, Shapes::ShapeRef.new(shape: EvaluatorId, required: true, location_name: "evaluatorId"))
     EvaluationResultContent.add_member(:evaluator_name, Shapes::ShapeRef.new(shape: EvaluatorName, required: true, location_name: "evaluatorName"))
+    EvaluationResultContent.add_member(:evaluation_dimension_name, Shapes::ShapeRef.new(shape: EvaluationDimensionName, location_name: "evaluationDimensionName"))
     EvaluationResultContent.add_member(:explanation, Shapes::ShapeRef.new(shape: EvaluationExplanation, location_name: "explanation"))
     EvaluationResultContent.add_member(:context, Shapes::ShapeRef.new(shape: Context, required: true, location_name: "context"))
     EvaluationResultContent.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "value"))
@@ -1494,6 +1496,7 @@ module Aws::BedrockAgentCore
     EvaluatorStatistics.struct_class = Types::EvaluatorStatistics
 
     EvaluatorSummary.add_member(:evaluator_id, Shapes::ShapeRef.new(shape: String, location_name: "evaluatorId"))
+    EvaluatorSummary.add_member(:evaluation_dimension_name, Shapes::ShapeRef.new(shape: String, location_name: "evaluationDimensionName"))
     EvaluatorSummary.add_member(:statistics, Shapes::ShapeRef.new(shape: EvaluatorStatistics, location_name: "statistics"))
     EvaluatorSummary.add_member(:total_evaluated, Shapes::ShapeRef.new(shape: Integer, location_name: "totalEvaluated"))
     EvaluatorSummary.add_member(:total_failed, Shapes::ShapeRef.new(shape: Integer, location_name: "totalFailed"))

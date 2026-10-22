@@ -140,6 +140,8 @@ module Aws::BedrockAgentCoreControl
     CertificateS3Uri = Shapes::StringShape.new(name: 'CertificateS3Uri')
     CertificateSecretArn = Shapes::StringShape.new(name: 'CertificateSecretArn')
     Certificates = Shapes::ListShape.new(name: 'Certificates')
+    CircuitBreakerConfiguration = Shapes::StructureShape.new(name: 'CircuitBreakerConfiguration')
+    CircuitBreakerMode = Shapes::StringShape.new(name: 'CircuitBreakerMode')
     ClaimMatchOperatorType = Shapes::StringShape.new(name: 'ClaimMatchOperatorType')
     ClaimMatchValueType = Shapes::UnionShape.new(name: 'ClaimMatchValueType')
     ClientAuthenticationMethodType = Shapes::StringShape.new(name: 'ClientAuthenticationMethodType')
@@ -176,6 +178,7 @@ module Aws::BedrockAgentCoreControl
     CompositeIdentifierEntry = Shapes::StringShape.new(name: 'CompositeIdentifierEntry')
     CompositeIdentifierList = Shapes::ListShape.new(name: 'CompositeIdentifierList')
     ComputeConfiguration = Shapes::UnionShape.new(name: 'ComputeConfiguration')
+    ConcreteModelId = Shapes::StringShape.new(name: 'ConcreteModelId')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     Condition = Shapes::UnionShape.new(name: 'Condition')
     Conditions = Shapes::ListShape.new(name: 'Conditions')
@@ -410,6 +413,7 @@ module Aws::BedrockAgentCoreControl
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
     DimensionKey = Shapes::StringShape.new(name: 'DimensionKey')
     DimensionKeys = Shapes::ListShape.new(name: 'DimensionKeys')
+    DimensionRatingScale = Shapes::UnionShape.new(name: 'DimensionRatingScale')
     DimensionValue = Shapes::StringShape.new(name: 'DimensionValue')
     DiscoveryUrl = Shapes::StringShape.new(name: 'DiscoveryUrl')
     DiscoveryUrlType = Shapes::StringShape.new(name: 'DiscoveryUrlType')
@@ -451,8 +455,13 @@ module Aws::BedrockAgentCoreControl
     EpisodicReflectionConfiguration = Shapes::StructureShape.new(name: 'EpisodicReflectionConfiguration')
     EpisodicReflectionConfigurationInput = Shapes::StructureShape.new(name: 'EpisodicReflectionConfigurationInput')
     EpisodicReflectionOverride = Shapes::StructureShape.new(name: 'EpisodicReflectionOverride')
+    ErrorStatusCodePattern = Shapes::StringShape.new(name: 'ErrorStatusCodePattern')
     EvaluationConfigDescription = Shapes::StringShape.new(name: 'EvaluationConfigDescription')
     EvaluationConfigName = Shapes::StringShape.new(name: 'EvaluationConfigName')
+    EvaluationDimension = Shapes::StructureShape.new(name: 'EvaluationDimension')
+    EvaluationDimensionInstruction = Shapes::StringShape.new(name: 'EvaluationDimensionInstruction')
+    EvaluationDimensionName = Shapes::StringShape.new(name: 'EvaluationDimensionName')
+    EvaluationDimensions = Shapes::ListShape.new(name: 'EvaluationDimensions')
     EvaluatorArn = Shapes::StringShape.new(name: 'EvaluatorArn')
     EvaluatorConfig = Shapes::UnionShape.new(name: 'EvaluatorConfig')
     EvaluatorDescription = Shapes::StringShape.new(name: 'EvaluatorDescription')
@@ -474,6 +483,15 @@ module Aws::BedrockAgentCoreControl
     ExtractionConfig = Shapes::UnionShape.new(name: 'ExtractionConfig')
     ExtractionConfiguration = Shapes::UnionShape.new(name: 'ExtractionConfiguration')
     ExtractionType = Shapes::StringShape.new(name: 'ExtractionType')
+    Fallback = Shapes::StructureShape.new(name: 'Fallback')
+    FallbackError = Shapes::StringShape.new(name: 'FallbackError')
+    FallbackFirstByteTimeoutMillisecondsInteger = Shapes::IntegerShape.new(name: 'FallbackFirstByteTimeoutMillisecondsInteger')
+    FallbackTarget = Shapes::StructureShape.new(name: 'FallbackTarget')
+    FallbackTargetFallbackList = Shapes::ListShape.new(name: 'FallbackTargetFallbackList')
+    FallbackTargetFirstByteTimeoutMillisecondsInteger = Shapes::IntegerShape.new(name: 'FallbackTargetFirstByteTimeoutMillisecondsInteger')
+    FallbackTriggers = Shapes::StructureShape.new(name: 'FallbackTriggers')
+    FallbackTriggersErrorsList = Shapes::ListShape.new(name: 'FallbackTriggersErrorsList')
+    FallbackTriggersStatusCodesList = Shapes::ListShape.new(name: 'FallbackTriggersStatusCodesList')
     FilesystemConfiguration = Shapes::UnionShape.new(name: 'FilesystemConfiguration')
     FilesystemConfigurations = Shapes::ListShape.new(name: 'FilesystemConfigurations')
     Filter = Shapes::StructureShape.new(name: 'Filter')
@@ -886,6 +904,10 @@ module Aws::BedrockAgentCoreControl
     MCPGatewayConfiguration = Shapes::StructureShape.new(name: 'MCPGatewayConfiguration')
     ManagedResourceDetails = Shapes::StructureShape.new(name: 'ManagedResourceDetails')
     ManagedVpcResource = Shapes::StructureShape.new(name: 'ManagedVpcResource')
+    MatchModelEntry = Shapes::StructureShape.new(name: 'MatchModelEntry')
+    MatchModels = Shapes::StructureShape.new(name: 'MatchModels')
+    MatchModelsAnyOfList = Shapes::ListShape.new(name: 'MatchModelsAnyOfList')
+    MatchOperator = Shapes::StringShape.new(name: 'MatchOperator')
     MatchPathPattern = Shapes::StringShape.new(name: 'MatchPathPattern')
     MatchPaths = Shapes::StructureShape.new(name: 'MatchPaths')
     MatchPathsAnyOfList = Shapes::ListShape.new(name: 'MatchPathsAnyOfList')
@@ -1742,6 +1764,9 @@ module Aws::BedrockAgentCoreControl
 
     Certificates.member = Shapes::ShapeRef.new(shape: Certificate)
 
+    CircuitBreakerConfiguration.add_member(:mode, Shapes::ShapeRef.new(shape: CircuitBreakerMode, location_name: "mode"))
+    CircuitBreakerConfiguration.struct_class = Types::CircuitBreakerConfiguration
+
     ClaimMatchValueType.add_member(:match_value_string, Shapes::ShapeRef.new(shape: MatchValueString, location_name: "matchValueString"))
     ClaimMatchValueType.add_member(:match_value_string_list, Shapes::ShapeRef.new(shape: MatchValueStringList, location_name: "matchValueStringList"))
     ClaimMatchValueType.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1847,9 +1872,11 @@ module Aws::BedrockAgentCoreControl
 
     Condition.add_member(:match_principals, Shapes::ShapeRef.new(shape: MatchPrincipals, location_name: "matchPrincipals"))
     Condition.add_member(:match_paths, Shapes::ShapeRef.new(shape: MatchPaths, location_name: "matchPaths"))
+    Condition.add_member(:match_models, Shapes::ShapeRef.new(shape: MatchModels, location_name: "matchModels"))
     Condition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Condition.add_member_subclass(:match_principals, Types::Condition::MatchPrincipals)
     Condition.add_member_subclass(:match_paths, Types::Condition::MatchPaths)
+    Condition.add_member_subclass(:match_models, Types::Condition::MatchModels)
     Condition.add_member_subclass(:unknown, Types::Condition::Unknown)
     Condition.struct_class = Types::Condition
 
@@ -2950,6 +2977,14 @@ module Aws::BedrockAgentCoreControl
 
     DimensionKeys.member = Shapes::ShapeRef.new(shape: DimensionKey)
 
+    DimensionRatingScale.add_member(:numerical, Shapes::ShapeRef.new(shape: NumericalScaleDefinitions, location_name: "numerical"))
+    DimensionRatingScale.add_member(:categorical, Shapes::ShapeRef.new(shape: CategoricalScaleDefinitions, location_name: "categorical"))
+    DimensionRatingScale.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DimensionRatingScale.add_member_subclass(:numerical, Types::DimensionRatingScale::Numerical)
+    DimensionRatingScale.add_member_subclass(:categorical, Types::DimensionRatingScale::Categorical)
+    DimensionRatingScale.add_member_subclass(:unknown, Types::DimensionRatingScale::Unknown)
+    DimensionRatingScale.struct_class = Types::DimensionRatingScale
+
     EbsVolumeConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: VolumeName, required: true, location_name: "name"))
     EbsVolumeConfiguration.add_member(:size_gi_b, Shapes::ShapeRef.new(shape: VolumeSizeGiB, required: true, location_name: "sizeGiB"))
     EbsVolumeConfiguration.add_member(:volume_type, Shapes::ShapeRef.new(shape: EbsVolumeType, location_name: "volumeType"))
@@ -3054,6 +3089,13 @@ module Aws::BedrockAgentCoreControl
     EpisodicReflectionOverride.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
     EpisodicReflectionOverride.struct_class = Types::EpisodicReflectionOverride
 
+    EvaluationDimension.add_member(:dimension_name, Shapes::ShapeRef.new(shape: EvaluationDimensionName, required: true, location_name: "dimensionName"))
+    EvaluationDimension.add_member(:dimension_instruction, Shapes::ShapeRef.new(shape: EvaluationDimensionInstruction, required: true, location_name: "dimensionInstruction"))
+    EvaluationDimension.add_member(:dimension_rating_scale, Shapes::ShapeRef.new(shape: DimensionRatingScale, required: true, location_name: "dimensionRatingScale"))
+    EvaluationDimension.struct_class = Types::EvaluationDimension
+
+    EvaluationDimensions.member = Shapes::ShapeRef.new(shape: EvaluationDimension)
+
     EvaluatorConfig.add_member(:llm_as_a_judge, Shapes::ShapeRef.new(shape: LlmAsAJudgeEvaluatorConfig, location_name: "llmAsAJudge"))
     EvaluatorConfig.add_member(:code_based, Shapes::ShapeRef.new(shape: CodeBasedEvaluatorConfig, location_name: "codeBased"))
     EvaluatorConfig.add_member(:derived, Shapes::ShapeRef.new(shape: DerivedEvaluatorConfig, location_name: "derived"))
@@ -3109,6 +3151,28 @@ module Aws::BedrockAgentCoreControl
     ExtractionConfiguration.add_member_subclass(:custom_extraction_configuration, Types::ExtractionConfiguration::CustomExtractionConfiguration)
     ExtractionConfiguration.add_member_subclass(:unknown, Types::ExtractionConfiguration::Unknown)
     ExtractionConfiguration.struct_class = Types::ExtractionConfiguration
+
+    Fallback.add_member(:trigger_on, Shapes::ShapeRef.new(shape: FallbackTriggers, location_name: "triggerOn"))
+    Fallback.add_member(:first_byte_timeout_milliseconds, Shapes::ShapeRef.new(shape: FallbackFirstByteTimeoutMillisecondsInteger, location_name: "firstByteTimeoutMilliseconds"))
+    Fallback.add_member(:circuit_breaker, Shapes::ShapeRef.new(shape: CircuitBreakerConfiguration, location_name: "circuitBreaker"))
+    Fallback.add_member(:target_fallback, Shapes::ShapeRef.new(shape: FallbackTargetFallbackList, required: true, location_name: "targetFallback"))
+    Fallback.struct_class = Types::Fallback
+
+    FallbackTarget.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "targetName"))
+    FallbackTarget.add_member(:model, Shapes::ShapeRef.new(shape: ConcreteModelId, location_name: "model"))
+    FallbackTarget.add_member(:trigger_on, Shapes::ShapeRef.new(shape: FallbackTriggers, location_name: "triggerOn"))
+    FallbackTarget.add_member(:first_byte_timeout_milliseconds, Shapes::ShapeRef.new(shape: FallbackTargetFirstByteTimeoutMillisecondsInteger, location_name: "firstByteTimeoutMilliseconds"))
+    FallbackTarget.struct_class = Types::FallbackTarget
+
+    FallbackTargetFallbackList.member = Shapes::ShapeRef.new(shape: FallbackTarget)
+
+    FallbackTriggers.add_member(:status_codes, Shapes::ShapeRef.new(shape: FallbackTriggersStatusCodesList, location_name: "statusCodes"))
+    FallbackTriggers.add_member(:errors, Shapes::ShapeRef.new(shape: FallbackTriggersErrorsList, location_name: "errors"))
+    FallbackTriggers.struct_class = Types::FallbackTriggers
+
+    FallbackTriggersErrorsList.member = Shapes::ShapeRef.new(shape: FallbackError)
+
+    FallbackTriggersStatusCodesList.member = Shapes::ShapeRef.new(shape: ErrorStatusCodePattern)
 
     FilesystemConfiguration.add_member(:session_storage, Shapes::ShapeRef.new(shape: SessionStorageConfiguration, location_name: "sessionStorage"))
     FilesystemConfiguration.add_member(:s3_files_access_point, Shapes::ShapeRef.new(shape: S3FilesAccessPointConfiguration, location_name: "s3FilesAccessPoint"))
@@ -4734,6 +4798,15 @@ module Aws::BedrockAgentCoreControl
     ManagedVpcResource.add_member(:routing_domain, Shapes::ShapeRef.new(shape: RoutingDomain, location_name: "routingDomain"))
     ManagedVpcResource.struct_class = Types::ManagedVpcResource
 
+    MatchModelEntry.add_member(:value, Shapes::ShapeRef.new(shape: ModelPattern, required: true, location_name: "value"))
+    MatchModelEntry.add_member(:operator, Shapes::ShapeRef.new(shape: MatchOperator, location_name: "operator"))
+    MatchModelEntry.struct_class = Types::MatchModelEntry
+
+    MatchModels.add_member(:any_of, Shapes::ShapeRef.new(shape: MatchModelsAnyOfList, required: true, location_name: "anyOf"))
+    MatchModels.struct_class = Types::MatchModels
+
+    MatchModelsAnyOfList.member = Shapes::ShapeRef.new(shape: MatchModelEntry)
+
     MatchPaths.add_member(:any_of, Shapes::ShapeRef.new(shape: MatchPathsAnyOfList, required: true, location_name: "anyOf"))
     MatchPaths.struct_class = Types::MatchPaths
 
@@ -5304,9 +5377,11 @@ module Aws::BedrockAgentCoreControl
 
     RatingScale.add_member(:numerical, Shapes::ShapeRef.new(shape: NumericalScaleDefinitions, location_name: "numerical"))
     RatingScale.add_member(:categorical, Shapes::ShapeRef.new(shape: CategoricalScaleDefinitions, location_name: "categorical"))
+    RatingScale.add_member(:multi_dimensional, Shapes::ShapeRef.new(shape: EvaluationDimensions, location_name: "multiDimensional"))
     RatingScale.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RatingScale.add_member_subclass(:numerical, Types::RatingScale::Numerical)
     RatingScale.add_member_subclass(:categorical, Types::RatingScale::Categorical)
+    RatingScale.add_member_subclass(:multi_dimensional, Types::RatingScale::MultiDimensional)
     RatingScale.add_member_subclass(:unknown, Types::RatingScale::Unknown)
     RatingScale.struct_class = Types::RatingScale
 
@@ -5648,6 +5723,8 @@ module Aws::BedrockAgentCoreControl
     StaticQueryParameters.value = Shapes::ShapeRef.new(shape: StaticQueryParameterValue)
 
     StaticRoute.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "targetName"))
+    StaticRoute.add_member(:model, Shapes::ShapeRef.new(shape: ConcreteModelId, location_name: "model"))
+    StaticRoute.add_member(:fallback, Shapes::ShapeRef.new(shape: Fallback, location_name: "fallback"))
     StaticRoute.struct_class = Types::StaticRoute
 
     StatusReasons.member = Shapes::ShapeRef.new(shape: StatusReason)
@@ -5797,9 +5874,11 @@ module Aws::BedrockAgentCoreControl
 
     TargetTrafficSplitEntries.member = Shapes::ShapeRef.new(shape: TargetTrafficSplitEntry)
 
+    TargetTrafficSplitEntry.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "targetName"))
+    TargetTrafficSplitEntry.add_member(:model, Shapes::ShapeRef.new(shape: ConcreteModelId, location_name: "model"))
+    TargetTrafficSplitEntry.add_member(:fallback, Shapes::ShapeRef.new(shape: Fallback, location_name: "fallback"))
     TargetTrafficSplitEntry.add_member(:name, Shapes::ShapeRef.new(shape: TargetTrafficSplitEntryNameString, required: true, location_name: "name"))
     TargetTrafficSplitEntry.add_member(:weight, Shapes::ShapeRef.new(shape: TargetTrafficSplitEntryWeightInteger, required: true, location_name: "weight"))
-    TargetTrafficSplitEntry.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "targetName"))
     TargetTrafficSplitEntry.add_member(:description, Shapes::ShapeRef.new(shape: TargetTrafficSplitEntryDescriptionString, location_name: "description"))
     TargetTrafficSplitEntry.add_member(:metadata, Shapes::ShapeRef.new(shape: TrafficSplitMetadataMap, location_name: "metadata"))
     TargetTrafficSplitEntry.struct_class = Types::TargetTrafficSplitEntry

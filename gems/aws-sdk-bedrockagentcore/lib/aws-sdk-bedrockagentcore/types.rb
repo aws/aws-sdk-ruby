@@ -2688,6 +2688,14 @@ module Aws::BedrockAgentCore
     #   the user-defined name.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_dimension_name
+    #   The name of the dimension that this result scores. This field is set
+    #   only on results produced by an evaluator that uses a
+    #   multi-dimensional rating scale, where each dimension is scored
+    #   independently. For evaluators with a single rating scale, this field
+    #   is absent.
+    #   @return [String]
+    #
     # @!attribute [rw] explanation
     #   The detailed explanation provided by the evaluator describing the
     #   reasoning behind the assigned score. This qualitative feedback helps
@@ -2748,6 +2756,7 @@ module Aws::BedrockAgentCore
       :evaluator_arn,
       :evaluator_id,
       :evaluator_name,
+      :evaluation_dimension_name,
       :explanation,
       :context,
       :value,
@@ -2853,6 +2862,13 @@ module Aws::BedrockAgentCore
     #   The unique identifier of the evaluator.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_dimension_name
+    #   The name of the dimension that this summary covers. This field is
+    #   set only for evaluators that use a multi-dimensional rating scale,
+    #   where each dimension is summarized separately. For single-scale
+    #   evaluators, this field is not set.
+    #   @return [String]
+    #
     # @!attribute [rw] statistics
     #   The aggregated statistics for this evaluator.
     #   @return [Types::EvaluatorStatistics]
@@ -2870,6 +2886,7 @@ module Aws::BedrockAgentCore
     #
     class EvaluatorSummary < Struct.new(
       :evaluator_id,
+      :evaluation_dimension_name,
       :statistics,
       :total_evaluated,
       :total_failed)

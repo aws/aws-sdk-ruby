@@ -11218,6 +11218,20 @@ module Aws
                                         ) -> _GetSubnetCidrReservationsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubnetCidrReservationsResponseSuccess
 
+      interface _GetTransitGatewayAttachmentNatConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTransitGatewayAttachmentNatConfigurationResult]
+        def transit_gateway_attachment_id: () -> ::String
+        def nat_gateway_support: () -> ("enabled" | "disabled" | "enabling" | "disabling")
+        def nat_system_route_support: () -> ("enable" | "disable")
+        def nat_gateway_rules: () -> ::Array[Types::TransitGatewayNatRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_transit_gateway_attachment_nat_configuration-instance_method
+      def get_transit_gateway_attachment_nat_configuration: (
+                                                              transit_gateway_attachment_id: ::String,
+                                                              ?dry_run: bool
+                                                            ) -> _GetTransitGatewayAttachmentNatConfigurationResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransitGatewayAttachmentNatConfigurationResponseSuccess
+
       interface _GetTransitGatewayAttachmentPropagationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTransitGatewayAttachmentPropagationsResult]
         def transit_gateway_attachment_propagations: () -> ::Array[Types::TransitGatewayAttachmentPropagation]
@@ -12839,6 +12853,30 @@ module Aws
                                     ?dry_run: bool
                                   ) -> _ModifyTransitGatewayResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTransitGatewayResponseSuccess
+
+      interface _ModifyTransitGatewayAttachmentNatConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyTransitGatewayAttachmentNatConfigurationResult]
+        def transit_gateway_attachment_id: () -> ::String
+        def nat_gateway_support: () -> ("enabled" | "disabled" | "enabling" | "disabling")
+        def nat_system_route_support: () -> ("enable" | "disable")
+        def nat_gateway_rules: () -> ::Array[Types::TransitGatewayNatRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#modify_transit_gateway_attachment_nat_configuration-instance_method
+      def modify_transit_gateway_attachment_nat_configuration: (
+                                                                 transit_gateway_attachment_id: ::String,
+                                                                 ?nat_gateway_support: ("enable" | "disable"),
+                                                                 ?nat_system_route_support: ("enable" | "disable"),
+                                                                 ?nat_gateway_rules: Array[
+                                                                   {
+                                                                     rule_number: ::Integer?,
+                                                                     match_source_cidr: ::String?,
+                                                                     nat_cidr: ::String?
+                                                                   }
+                                                                 ],
+                                                                 ?reset_nat_gateway_rules: bool,
+                                                                 ?dry_run: bool
+                                                               ) -> _ModifyTransitGatewayAttachmentNatConfigurationResponseSuccess
+                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTransitGatewayAttachmentNatConfigurationResponseSuccess
 
       interface _ModifyTransitGatewayMeteringPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyTransitGatewayMeteringPolicyResult]

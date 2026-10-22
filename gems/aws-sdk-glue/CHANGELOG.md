@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.287.0 (2026-10-22)
+------------------
+
+* Feature - Add support for large worker types in AWS Glue
+
 1.286.0 (2026-10-21)
 ------------------
 

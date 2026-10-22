@@ -1903,6 +1903,27 @@ module Aws::BedrockAgentCoreControl
     #               label: "CategoricalScaleDefinitionLabelString", # required
     #             },
     #           ],
+    #           multi_dimensional: [
+    #             {
+    #               dimension_name: "EvaluationDimensionName", # required
+    #               dimension_instruction: "EvaluationDimensionInstruction", # required
+    #               dimension_rating_scale: { # required
+    #                 numerical: [
+    #                   {
+    #                     definition: "String", # required
+    #                     value: 1.0, # required
+    #                     label: "NumericalScaleDefinitionLabelString", # required
+    #                   },
+    #                 ],
+    #                 categorical: [
+    #                   {
+    #                     definition: "String", # required
+    #                     label: "CategoricalScaleDefinitionLabelString", # required
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
     #         },
     #         model_config: { # required
     #           bedrock_evaluator_model_config: {
@@ -2481,6 +2502,14 @@ module Aws::BedrockAgentCoreControl
     #         match_paths: {
     #           any_of: ["MatchPathPattern"], # required
     #         },
+    #         match_models: {
+    #           any_of: [ # required
+    #             {
+    #               value: "ModelPattern", # required
+    #               operator: "StringEquals", # accepts StringEquals, StringLike
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     actions: [ # required
@@ -2510,13 +2539,57 @@ module Aws::BedrockAgentCoreControl
     #         route_to_target: {
     #           static_route: {
     #             target_name: "TargetName", # required
+    #             model: "ConcreteModelId",
+    #             fallback: {
+    #               trigger_on: {
+    #                 status_codes: ["ErrorStatusCodePattern"],
+    #                 errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #               },
+    #               first_byte_timeout_milliseconds: 1,
+    #               circuit_breaker: {
+    #                 mode: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
+    #               target_fallback: [ # required
+    #                 {
+    #                   target_name: "TargetName", # required
+    #                   model: "ConcreteModelId",
+    #                   trigger_on: {
+    #                     status_codes: ["ErrorStatusCodePattern"],
+    #                     errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                   },
+    #                   first_byte_timeout_milliseconds: 1,
+    #                 },
+    #               ],
+    #             },
     #           },
     #           weighted_route: {
     #             traffic_split: [ # required
     #               {
+    #                 target_name: "TargetName", # required
+    #                 model: "ConcreteModelId",
+    #                 fallback: {
+    #                   trigger_on: {
+    #                     status_codes: ["ErrorStatusCodePattern"],
+    #                     errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                   },
+    #                   first_byte_timeout_milliseconds: 1,
+    #                   circuit_breaker: {
+    #                     mode: "ENABLED", # accepts ENABLED, DISABLED
+    #                   },
+    #                   target_fallback: [ # required
+    #                     {
+    #                       target_name: "TargetName", # required
+    #                       model: "ConcreteModelId",
+    #                       trigger_on: {
+    #                         status_codes: ["ErrorStatusCodePattern"],
+    #                         errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                       },
+    #                       first_byte_timeout_milliseconds: 1,
+    #                     },
+    #                   ],
+    #                 },
     #                 name: "TargetTrafficSplitEntryNameString", # required
     #                 weight: 1, # required
-    #                 target_name: "TargetName", # required
     #                 description: "TargetTrafficSplitEntryDescriptionString",
     #                 metadata: {
     #                   "TrafficSplitMetadataKey" => "TrafficSplitMetadataValue",
@@ -2541,6 +2614,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.conditions[0].match_principals.any_of[0].iam_principal.operator #=> String, one of "StringEquals", "StringLike"
     #   resp.conditions[0].match_paths.any_of #=> Array
     #   resp.conditions[0].match_paths.any_of[0] #=> String
+    #   resp.conditions[0].match_models.any_of #=> Array
+    #   resp.conditions[0].match_models.any_of[0].value #=> String
+    #   resp.conditions[0].match_models.any_of[0].operator #=> String, one of "StringEquals", "StringLike"
     #   resp.actions #=> Array
     #   resp.actions[0].configuration_bundle.static_override.bundle_arn #=> String
     #   resp.actions[0].configuration_bundle.static_override.bundle_version #=> String
@@ -2553,10 +2629,40 @@ module Aws::BedrockAgentCoreControl
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
     #   resp.actions[0].route_to_target.static_route.target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.static_route.fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].weight #=> Integer
-    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].description #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
@@ -7845,6 +7951,16 @@ module Aws::BedrockAgentCoreControl
     #   resp.evaluator_config.llm_as_a_judge.rating_scale.categorical #=> Array
     #   resp.evaluator_config.llm_as_a_judge.rating_scale.categorical[0].definition #=> String
     #   resp.evaluator_config.llm_as_a_judge.rating_scale.categorical[0].label #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional #=> Array
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_name #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_instruction #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.numerical #=> Array
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.numerical[0].definition #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.numerical[0].value #=> Float
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.numerical[0].label #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.categorical #=> Array
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.categorical[0].definition #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.categorical[0].label #=> String
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.model_id #=> String
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.inference_config.max_tokens #=> Integer
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.inference_config.temperature #=> Float
@@ -8110,6 +8226,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.conditions[0].match_principals.any_of[0].iam_principal.operator #=> String, one of "StringEquals", "StringLike"
     #   resp.conditions[0].match_paths.any_of #=> Array
     #   resp.conditions[0].match_paths.any_of[0] #=> String
+    #   resp.conditions[0].match_models.any_of #=> Array
+    #   resp.conditions[0].match_models.any_of[0].value #=> String
+    #   resp.conditions[0].match_models.any_of[0].operator #=> String, one of "StringEquals", "StringLike"
     #   resp.actions #=> Array
     #   resp.actions[0].configuration_bundle.static_override.bundle_arn #=> String
     #   resp.actions[0].configuration_bundle.static_override.bundle_version #=> String
@@ -8122,10 +8241,40 @@ module Aws::BedrockAgentCoreControl
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
     #   resp.actions[0].route_to_target.static_route.target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.static_route.fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].weight #=> Integer
-    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].description #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
@@ -10679,6 +10828,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.gateway_rules[0].conditions[0].match_principals.any_of[0].iam_principal.operator #=> String, one of "StringEquals", "StringLike"
     #   resp.gateway_rules[0].conditions[0].match_paths.any_of #=> Array
     #   resp.gateway_rules[0].conditions[0].match_paths.any_of[0] #=> String
+    #   resp.gateway_rules[0].conditions[0].match_models.any_of #=> Array
+    #   resp.gateway_rules[0].conditions[0].match_models.any_of[0].value #=> String
+    #   resp.gateway_rules[0].conditions[0].match_models.any_of[0].operator #=> String, one of "StringEquals", "StringLike"
     #   resp.gateway_rules[0].actions #=> Array
     #   resp.gateway_rules[0].actions[0].configuration_bundle.static_override.bundle_arn #=> String
     #   resp.gateway_rules[0].actions[0].configuration_bundle.static_override.bundle_version #=> String
@@ -10691,10 +10843,40 @@ module Aws::BedrockAgentCoreControl
     #   resp.gateway_rules[0].actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata #=> Hash
     #   resp.gateway_rules[0].actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
     #   resp.gateway_rules[0].actions[0].route_to_target.static_route.target_name #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.model #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.trigger_on.status_codes #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.trigger_on.status_codes[0] #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.trigger_on.errors #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].target_name #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].model #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].model #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes[0] #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].target_name #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].model #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].name #=> String
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].weight #=> Integer
-    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].description #=> String
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].metadata #=> Hash
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
@@ -13237,6 +13419,27 @@ module Aws::BedrockAgentCoreControl
     #               label: "CategoricalScaleDefinitionLabelString", # required
     #             },
     #           ],
+    #           multi_dimensional: [
+    #             {
+    #               dimension_name: "EvaluationDimensionName", # required
+    #               dimension_instruction: "EvaluationDimensionInstruction", # required
+    #               dimension_rating_scale: { # required
+    #                 numerical: [
+    #                   {
+    #                     definition: "String", # required
+    #                     value: 1.0, # required
+    #                     label: "NumericalScaleDefinitionLabelString", # required
+    #                   },
+    #                 ],
+    #                 categorical: [
+    #                   {
+    #                     definition: "String", # required
+    #                     label: "CategoricalScaleDefinitionLabelString", # required
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
     #         },
     #         model_config: { # required
     #           bedrock_evaluator_model_config: {
@@ -13314,6 +13517,15 @@ module Aws::BedrockAgentCoreControl
     end
 
     # Updates an existing gateway.
+    #
+    # Replaces the entire gateway configuration. Any optional field that you
+    # omit, including fields in `protocolConfiguration`, is reset. For
+    # information about retrieving the current configuration, see
+    # [GetGateway][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetGateway.html
     #
     # @option params [required, String] :gateway_identifier
     #   The identifier of the gateway to update.
@@ -13759,6 +13971,14 @@ module Aws::BedrockAgentCoreControl
     #         match_paths: {
     #           any_of: ["MatchPathPattern"], # required
     #         },
+    #         match_models: {
+    #           any_of: [ # required
+    #             {
+    #               value: "ModelPattern", # required
+    #               operator: "StringEquals", # accepts StringEquals, StringLike
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     actions: [
@@ -13788,13 +14008,57 @@ module Aws::BedrockAgentCoreControl
     #         route_to_target: {
     #           static_route: {
     #             target_name: "TargetName", # required
+    #             model: "ConcreteModelId",
+    #             fallback: {
+    #               trigger_on: {
+    #                 status_codes: ["ErrorStatusCodePattern"],
+    #                 errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #               },
+    #               first_byte_timeout_milliseconds: 1,
+    #               circuit_breaker: {
+    #                 mode: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
+    #               target_fallback: [ # required
+    #                 {
+    #                   target_name: "TargetName", # required
+    #                   model: "ConcreteModelId",
+    #                   trigger_on: {
+    #                     status_codes: ["ErrorStatusCodePattern"],
+    #                     errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                   },
+    #                   first_byte_timeout_milliseconds: 1,
+    #                 },
+    #               ],
+    #             },
     #           },
     #           weighted_route: {
     #             traffic_split: [ # required
     #               {
+    #                 target_name: "TargetName", # required
+    #                 model: "ConcreteModelId",
+    #                 fallback: {
+    #                   trigger_on: {
+    #                     status_codes: ["ErrorStatusCodePattern"],
+    #                     errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                   },
+    #                   first_byte_timeout_milliseconds: 1,
+    #                   circuit_breaker: {
+    #                     mode: "ENABLED", # accepts ENABLED, DISABLED
+    #                   },
+    #                   target_fallback: [ # required
+    #                     {
+    #                       target_name: "TargetName", # required
+    #                       model: "ConcreteModelId",
+    #                       trigger_on: {
+    #                         status_codes: ["ErrorStatusCodePattern"],
+    #                         errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                       },
+    #                       first_byte_timeout_milliseconds: 1,
+    #                     },
+    #                   ],
+    #                 },
     #                 name: "TargetTrafficSplitEntryNameString", # required
     #                 weight: 1, # required
-    #                 target_name: "TargetName", # required
     #                 description: "TargetTrafficSplitEntryDescriptionString",
     #                 metadata: {
     #                   "TrafficSplitMetadataKey" => "TrafficSplitMetadataValue",
@@ -13819,6 +14083,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.conditions[0].match_principals.any_of[0].iam_principal.operator #=> String, one of "StringEquals", "StringLike"
     #   resp.conditions[0].match_paths.any_of #=> Array
     #   resp.conditions[0].match_paths.any_of[0] #=> String
+    #   resp.conditions[0].match_models.any_of #=> Array
+    #   resp.conditions[0].match_models.any_of[0].value #=> String
+    #   resp.conditions[0].match_models.any_of[0].operator #=> String, one of "StringEquals", "StringLike"
     #   resp.actions #=> Array
     #   resp.actions[0].configuration_bundle.static_override.bundle_arn #=> String
     #   resp.actions[0].configuration_bundle.static_override.bundle_version #=> String
@@ -13831,10 +14098,40 @@ module Aws::BedrockAgentCoreControl
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
     #   resp.actions[0].route_to_target.static_route.target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.static_route.fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].weight #=> Integer
-    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].description #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
@@ -17151,7 +17448,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

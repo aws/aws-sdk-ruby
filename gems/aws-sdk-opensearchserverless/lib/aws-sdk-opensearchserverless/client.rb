@@ -777,6 +777,54 @@ module Aws::OpenSearchServerless
       req.send_request(options)
     end
 
+    # Cancels an in-progress ingestion job. Documents that were already
+    # indexed before the cancellation remain in the index.
+    #
+    # @option params [required, String] :collection_id
+    #   The unique identifier of the collection that the ingestion job belongs
+    #   to.
+    #
+    # @option params [required, String] :ingestion_job_id
+    #   The unique identifier of the ingestion job to cancel.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CancelIngestionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelIngestionJobResponse#ingestion_job_id #ingestion_job_id} => String
+    #   * {Types::CancelIngestionJobResponse#collection_id #collection_id} => String
+    #   * {Types::CancelIngestionJobResponse#ingestion_job_name #ingestion_job_name} => String
+    #   * {Types::CancelIngestionJobResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_ingestion_job({
+    #     collection_id: "CollectionId", # required
+    #     ingestion_job_id: "IngestionJobId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingestion_job_id #=> String
+    #   resp.collection_id #=> String
+    #   resp.ingestion_job_name #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "COMPLETED", "CANCELLING", "CANCELLED", "FAILED", "CREATE_FAILED", "CANCEL_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CancelIngestionJob AWS API Documentation
+    #
+    # @overload cancel_ingestion_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_ingestion_job(params = {}, options = {})
+      req = build_request(:cancel_ingestion_job, params)
+      req.send_request(options)
+    end
+
     # Creates a data access policy for OpenSearch Serverless. Access
     # policies limit access to collections and the resources within them,
     # and allow a user to access that data irrespective of the access
@@ -1073,6 +1121,214 @@ module Aws::OpenSearchServerless
     # @param [Hash] params ({})
     def create_index(params = {}, options = {})
       req = build_request(:create_index, params)
+      req.send_request(options)
+    end
+
+    # Creates an ingestion job that performs a one-time bulk ingestion of
+    # data from an Amazon S3 bucket into an index in an OpenSearch
+    # Serverless collection. An ingestion job scans the source bucket,
+    # indexes the documents it finds, and then completes. To continuously
+    # ingest new data as it arrives, use `CreateIngestionStream` instead.
+    #
+    # @option params [required, String] :collection_id
+    #   The unique identifier of the collection to ingest data into.
+    #
+    # @option params [required, String] :ingestion_job_name
+    #   The name of the ingestion job. The name must be unique within the
+    #   collection.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the index to ingest documents into.
+    #
+    # @option params [String] :failure_index_name
+    #   The name of the index where documents that fail to be ingested are
+    #   recorded.
+    #
+    # @option params [required, Types::IngestionJobSource] :source
+    #   The Amazon S3 source to ingest data from.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An arbitrary set of tags (key–value pairs) to associate with the
+    #   ingestion job.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateIngestionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIngestionJobResponse#ingestion_job_detail #ingestion_job_detail} => Types::IngestionJobDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ingestion_job({
+    #     collection_id: "CollectionId", # required
+    #     ingestion_job_name: "IngestionJobName", # required
+    #     index_name: "IngestionIndexName", # required
+    #     failure_index_name: "IngestionIndexName",
+    #     source: { # required
+    #       s3: { # required
+    #         bucket: "S3BucketNameOrArn",
+    #         bucket_owner_account_id: "BucketOwnerAccountId",
+    #         key_prefix: "IngestionJobS3SourceKeyPrefixString",
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingestion_job_detail.ingestion_job_id #=> String
+    #   resp.ingestion_job_detail.arn #=> String
+    #   resp.ingestion_job_detail.collection_id #=> String
+    #   resp.ingestion_job_detail.ingestion_job_name #=> String
+    #   resp.ingestion_job_detail.index_name #=> String
+    #   resp.ingestion_job_detail.failure_index_name #=> String
+    #   resp.ingestion_job_detail.source.s3.bucket #=> String
+    #   resp.ingestion_job_detail.source.s3.bucket_owner_account_id #=> String
+    #   resp.ingestion_job_detail.source.s3.key_prefix #=> String
+    #   resp.ingestion_job_detail.status #=> String, one of "CREATING", "ACTIVE", "COMPLETED", "CANCELLING", "CANCELLED", "FAILED", "CREATE_FAILED", "CANCEL_FAILED"
+    #   resp.ingestion_job_detail.state #=> String, one of "STARTING", "SCANNING", "INGESTION_IN_PROGRESS", "INGESTION_COMPLETE", "STOPPED", "FAILED"
+    #   resp.ingestion_job_detail.statistics.s3.objects_discovered #=> Integer
+    #   resp.ingestion_job_detail.statistics.s3.objects_ingested #=> Integer
+    #   resp.ingestion_job_detail.statistics.s3.objects_failed #=> Integer
+    #   resp.ingestion_job_detail.revision #=> Integer
+    #   resp.ingestion_job_detail.created_at #=> Time
+    #   resp.ingestion_job_detail.updated_at #=> Time
+    #   resp.ingestion_job_detail.failure_reasons #=> Array
+    #   resp.ingestion_job_detail.failure_reasons[0].code #=> String, one of "SOURCE_ACCESS_DENIED", "SOURCE_RESOURCE_NOT_FOUND", "DESTINATION_ACCESS_DENIED", "DESTINATION_RESOURCE_NOT_FOUND", "INTERNAL_SERVER_ERROR"
+    #   resp.ingestion_job_detail.failure_reasons[0].message #=> String
+    #   resp.ingestion_job_detail.active_alerts #=> Array
+    #   resp.ingestion_job_detail.active_alerts[0].code #=> String, one of "SOURCE_ACCESS_DENIED", "SOURCE_RESOURCE_NOT_FOUND", "DESTINATION_ACCESS_DENIED", "DESTINATION_RESOURCE_NOT_FOUND", "INTERNAL_SERVER_ERROR"
+    #   resp.ingestion_job_detail.active_alerts[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateIngestionJob AWS API Documentation
+    #
+    # @overload create_ingestion_job(params = {})
+    # @param [Hash] params ({})
+    def create_ingestion_job(params = {}, options = {})
+      req = build_request(:create_ingestion_job, params)
+      req.send_request(options)
+    end
+
+    # Creates an ingestion stream that continuously ingests data from an
+    # Amazon S3 bucket into an index in an OpenSearch Serverless collection.
+    # An ingestion stream processes Amazon S3 event notifications delivered
+    # to an Amazon SQS queue and ingests new objects as they arrive. The
+    # stream continues to ingest data until you delete it. To perform a
+    # one-time bulk ingestion instead, use `CreateIngestionJob`.
+    #
+    # @option params [required, String] :collection_id
+    #   The unique identifier of the collection to ingest data into.
+    #
+    # @option params [required, String] :ingestion_stream_name
+    #   The name of the ingestion stream. The name must be unique within the
+    #   collection.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the index to ingest documents into.
+    #
+    # @option params [String] :failure_index_name
+    #   The name of the index where documents that fail to be ingested are
+    #   recorded.
+    #
+    # @option params [required, Types::IngestionStreamSource] :source
+    #   The Amazon S3 source to ingest data from, including the Amazon SQS
+    #   queue that receives S3 event notifications.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that OpenSearch
+    #   Serverless assumes to read data from the source. The role must be in
+    #   the same account as the collection.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An arbitrary set of tags (key–value pairs) to associate with the
+    #   ingestion stream.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateIngestionStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIngestionStreamResponse#ingestion_stream_detail #ingestion_stream_detail} => Types::IngestionStreamDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ingestion_stream({
+    #     collection_id: "CollectionId", # required
+    #     ingestion_stream_name: "IngestionStreamName", # required
+    #     index_name: "IngestionIndexName", # required
+    #     failure_index_name: "IngestionIndexName",
+    #     source: { # required
+    #       s3: { # required
+    #         sqs_arn: "SqsArn", # required
+    #         buckets: [
+    #           {
+    #             bucket: "S3BucketNameOrArn", # required
+    #             bucket_owner_account_id: "BucketOwnerAccountId",
+    #             initial_scan: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingestion_stream_detail.ingestion_stream_id #=> String
+    #   resp.ingestion_stream_detail.arn #=> String
+    #   resp.ingestion_stream_detail.collection_id #=> String
+    #   resp.ingestion_stream_detail.ingestion_stream_name #=> String
+    #   resp.ingestion_stream_detail.index_name #=> String
+    #   resp.ingestion_stream_detail.failure_index_name #=> String
+    #   resp.ingestion_stream_detail.source.s3.sqs_arn #=> String
+    #   resp.ingestion_stream_detail.source.s3.buckets #=> Array
+    #   resp.ingestion_stream_detail.source.s3.buckets[0].bucket #=> String
+    #   resp.ingestion_stream_detail.source.s3.buckets[0].bucket_owner_account_id #=> String
+    #   resp.ingestion_stream_detail.source.s3.buckets[0].initial_scan #=> String, one of "ENABLED", "DISABLED"
+    #   resp.ingestion_stream_detail.role_arn #=> String
+    #   resp.ingestion_stream_detail.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.ingestion_stream_detail.state #=> String, one of "STARTING", "SCANNING", "INGESTION_IN_PROGRESS", "INGESTION_COMPLETE", "STOPPED", "FAILED"
+    #   resp.ingestion_stream_detail.statistics.s3.objects_discovered #=> Integer
+    #   resp.ingestion_stream_detail.statistics.s3.objects_ingested #=> Integer
+    #   resp.ingestion_stream_detail.statistics.s3.objects_failed #=> Integer
+    #   resp.ingestion_stream_detail.revision #=> Integer
+    #   resp.ingestion_stream_detail.created_at #=> Time
+    #   resp.ingestion_stream_detail.updated_at #=> Time
+    #   resp.ingestion_stream_detail.failure_reasons #=> Array
+    #   resp.ingestion_stream_detail.failure_reasons[0].code #=> String, one of "SOURCE_ACCESS_DENIED", "SOURCE_RESOURCE_NOT_FOUND", "DESTINATION_ACCESS_DENIED", "DESTINATION_RESOURCE_NOT_FOUND", "INTERNAL_SERVER_ERROR"
+    #   resp.ingestion_stream_detail.failure_reasons[0].message #=> String
+    #   resp.ingestion_stream_detail.active_alerts #=> Array
+    #   resp.ingestion_stream_detail.active_alerts[0].code #=> String, one of "SOURCE_ACCESS_DENIED", "SOURCE_RESOURCE_NOT_FOUND", "DESTINATION_ACCESS_DENIED", "DESTINATION_RESOURCE_NOT_FOUND", "INTERNAL_SERVER_ERROR"
+    #   resp.ingestion_stream_detail.active_alerts[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateIngestionStream AWS API Documentation
+    #
+    # @overload create_ingestion_stream(params = {})
+    # @param [Hash] params ({})
+    def create_ingestion_stream(params = {}, options = {})
+      req = build_request(:create_ingestion_stream, params)
       req.send_request(options)
     end
 
@@ -1518,6 +1774,54 @@ module Aws::OpenSearchServerless
       req.send_request(options)
     end
 
+    # Deletes an ingestion stream. Documents that were already indexed by
+    # the stream remain in the index.
+    #
+    # @option params [required, String] :collection_id
+    #   The unique identifier of the collection that the ingestion stream
+    #   belongs to.
+    #
+    # @option params [required, String] :ingestion_stream_id
+    #   The unique identifier of the ingestion stream to delete.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteIngestionStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteIngestionStreamResponse#ingestion_stream_id #ingestion_stream_id} => String
+    #   * {Types::DeleteIngestionStreamResponse#collection_id #collection_id} => String
+    #   * {Types::DeleteIngestionStreamResponse#ingestion_stream_name #ingestion_stream_name} => String
+    #   * {Types::DeleteIngestionStreamResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ingestion_stream({
+    #     collection_id: "CollectionId", # required
+    #     ingestion_stream_id: "IngestionStreamId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingestion_stream_id #=> String
+    #   resp.collection_id #=> String
+    #   resp.ingestion_stream_name #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "CREATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteIngestionStream AWS API Documentation
+    #
+    # @overload delete_ingestion_stream(params = {})
+    # @param [Hash] params ({})
+    def delete_ingestion_stream(params = {}, options = {})
+      req = build_request(:delete_ingestion_stream, params)
+      req.send_request(options)
+    end
+
     # Deletes an OpenSearch Serverless lifecycle policy. For more
     # information, see [Deleting data lifecycle policies][1].
     #
@@ -1772,6 +2076,121 @@ module Aws::OpenSearchServerless
     # @param [Hash] params ({})
     def get_index(params = {}, options = {})
       req = build_request(:get_index, params)
+      req.send_request(options)
+    end
+
+    # Returns information about an ingestion job, including its
+    # configuration, status, and processing state.
+    #
+    # @option params [required, String] :collection_id
+    #   The unique identifier of the collection that the ingestion job belongs
+    #   to.
+    #
+    # @option params [required, String] :ingestion_job_id
+    #   The unique identifier of the ingestion job to retrieve.
+    #
+    # @return [Types::GetIngestionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIngestionJobResponse#ingestion_job_detail #ingestion_job_detail} => Types::IngestionJobDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ingestion_job({
+    #     collection_id: "CollectionId", # required
+    #     ingestion_job_id: "IngestionJobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingestion_job_detail.ingestion_job_id #=> String
+    #   resp.ingestion_job_detail.arn #=> String
+    #   resp.ingestion_job_detail.collection_id #=> String
+    #   resp.ingestion_job_detail.ingestion_job_name #=> String
+    #   resp.ingestion_job_detail.index_name #=> String
+    #   resp.ingestion_job_detail.failure_index_name #=> String
+    #   resp.ingestion_job_detail.source.s3.bucket #=> String
+    #   resp.ingestion_job_detail.source.s3.bucket_owner_account_id #=> String
+    #   resp.ingestion_job_detail.source.s3.key_prefix #=> String
+    #   resp.ingestion_job_detail.status #=> String, one of "CREATING", "ACTIVE", "COMPLETED", "CANCELLING", "CANCELLED", "FAILED", "CREATE_FAILED", "CANCEL_FAILED"
+    #   resp.ingestion_job_detail.state #=> String, one of "STARTING", "SCANNING", "INGESTION_IN_PROGRESS", "INGESTION_COMPLETE", "STOPPED", "FAILED"
+    #   resp.ingestion_job_detail.statistics.s3.objects_discovered #=> Integer
+    #   resp.ingestion_job_detail.statistics.s3.objects_ingested #=> Integer
+    #   resp.ingestion_job_detail.statistics.s3.objects_failed #=> Integer
+    #   resp.ingestion_job_detail.revision #=> Integer
+    #   resp.ingestion_job_detail.created_at #=> Time
+    #   resp.ingestion_job_detail.updated_at #=> Time
+    #   resp.ingestion_job_detail.failure_reasons #=> Array
+    #   resp.ingestion_job_detail.failure_reasons[0].code #=> String, one of "SOURCE_ACCESS_DENIED", "SOURCE_RESOURCE_NOT_FOUND", "DESTINATION_ACCESS_DENIED", "DESTINATION_RESOURCE_NOT_FOUND", "INTERNAL_SERVER_ERROR"
+    #   resp.ingestion_job_detail.failure_reasons[0].message #=> String
+    #   resp.ingestion_job_detail.active_alerts #=> Array
+    #   resp.ingestion_job_detail.active_alerts[0].code #=> String, one of "SOURCE_ACCESS_DENIED", "SOURCE_RESOURCE_NOT_FOUND", "DESTINATION_ACCESS_DENIED", "DESTINATION_RESOURCE_NOT_FOUND", "INTERNAL_SERVER_ERROR"
+    #   resp.ingestion_job_detail.active_alerts[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetIngestionJob AWS API Documentation
+    #
+    # @overload get_ingestion_job(params = {})
+    # @param [Hash] params ({})
+    def get_ingestion_job(params = {}, options = {})
+      req = build_request(:get_ingestion_job, params)
+      req.send_request(options)
+    end
+
+    # Returns information about an ingestion stream, including its
+    # configuration, status, and processing state.
+    #
+    # @option params [required, String] :collection_id
+    #   The unique identifier of the collection that the ingestion stream
+    #   belongs to.
+    #
+    # @option params [required, String] :ingestion_stream_id
+    #   The unique identifier of the ingestion stream to retrieve.
+    #
+    # @return [Types::GetIngestionStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIngestionStreamResponse#ingestion_stream_detail #ingestion_stream_detail} => Types::IngestionStreamDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ingestion_stream({
+    #     collection_id: "CollectionId", # required
+    #     ingestion_stream_id: "IngestionStreamId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingestion_stream_detail.ingestion_stream_id #=> String
+    #   resp.ingestion_stream_detail.arn #=> String
+    #   resp.ingestion_stream_detail.collection_id #=> String
+    #   resp.ingestion_stream_detail.ingestion_stream_name #=> String
+    #   resp.ingestion_stream_detail.index_name #=> String
+    #   resp.ingestion_stream_detail.failure_index_name #=> String
+    #   resp.ingestion_stream_detail.source.s3.sqs_arn #=> String
+    #   resp.ingestion_stream_detail.source.s3.buckets #=> Array
+    #   resp.ingestion_stream_detail.source.s3.buckets[0].bucket #=> String
+    #   resp.ingestion_stream_detail.source.s3.buckets[0].bucket_owner_account_id #=> String
+    #   resp.ingestion_stream_detail.source.s3.buckets[0].initial_scan #=> String, one of "ENABLED", "DISABLED"
+    #   resp.ingestion_stream_detail.role_arn #=> String
+    #   resp.ingestion_stream_detail.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.ingestion_stream_detail.state #=> String, one of "STARTING", "SCANNING", "INGESTION_IN_PROGRESS", "INGESTION_COMPLETE", "STOPPED", "FAILED"
+    #   resp.ingestion_stream_detail.statistics.s3.objects_discovered #=> Integer
+    #   resp.ingestion_stream_detail.statistics.s3.objects_ingested #=> Integer
+    #   resp.ingestion_stream_detail.statistics.s3.objects_failed #=> Integer
+    #   resp.ingestion_stream_detail.revision #=> Integer
+    #   resp.ingestion_stream_detail.created_at #=> Time
+    #   resp.ingestion_stream_detail.updated_at #=> Time
+    #   resp.ingestion_stream_detail.failure_reasons #=> Array
+    #   resp.ingestion_stream_detail.failure_reasons[0].code #=> String, one of "SOURCE_ACCESS_DENIED", "SOURCE_RESOURCE_NOT_FOUND", "DESTINATION_ACCESS_DENIED", "DESTINATION_RESOURCE_NOT_FOUND", "INTERNAL_SERVER_ERROR"
+    #   resp.ingestion_stream_detail.failure_reasons[0].message #=> String
+    #   resp.ingestion_stream_detail.active_alerts #=> Array
+    #   resp.ingestion_stream_detail.active_alerts[0].code #=> String, one of "SOURCE_ACCESS_DENIED", "SOURCE_RESOURCE_NOT_FOUND", "DESTINATION_ACCESS_DENIED", "DESTINATION_RESOURCE_NOT_FOUND", "INTERNAL_SERVER_ERROR"
+    #   resp.ingestion_stream_detail.active_alerts[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetIngestionStream AWS API Documentation
+    #
+    # @overload get_ingestion_stream(params = {})
+    # @param [Hash] params ({})
+    def get_ingestion_stream(params = {}, options = {})
+      req = build_request(:get_ingestion_stream, params)
       req.send_request(options)
     end
 
@@ -2073,6 +2492,120 @@ module Aws::OpenSearchServerless
     # @param [Hash] params ({})
     def list_collections(params = {}, options = {})
       req = build_request(:list_collections, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of ingestion jobs in a collection.
+    #
+    # @option params [required, String] :collection_id
+    #   The unique identifier of the collection to list ingestion jobs for.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListIngestionJobs` operation returns a `nextToken`,
+    #   you can include the returned `nextToken` in subsequent
+    #   `ListIngestionJobs` operations, which returns results in the next
+    #   page.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Valid values are 1–100. If
+    #   you don't specify a value, the default is 100. You can use
+    #   `nextToken` to get the next page of results.
+    #
+    #   A response can contain fewer results than `maxResults`, or no results,
+    #   and still include a `nextToken`. To retrieve all results, continue to
+    #   make the call with the returned `nextToken` until no `nextToken` is
+    #   returned.
+    #
+    # @return [Types::ListIngestionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIngestionJobsResponse#ingestion_job_summaries #ingestion_job_summaries} => Array&lt;Types::IngestionJobSummary&gt;
+    #   * {Types::ListIngestionJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ingestion_jobs({
+    #     collection_id: "CollectionId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingestion_job_summaries #=> Array
+    #   resp.ingestion_job_summaries[0].ingestion_job_id #=> String
+    #   resp.ingestion_job_summaries[0].arn #=> String
+    #   resp.ingestion_job_summaries[0].ingestion_job_name #=> String
+    #   resp.ingestion_job_summaries[0].index_name #=> String
+    #   resp.ingestion_job_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "COMPLETED", "CANCELLING", "CANCELLED", "FAILED", "CREATE_FAILED", "CANCEL_FAILED"
+    #   resp.ingestion_job_summaries[0].created_at #=> Time
+    #   resp.ingestion_job_summaries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListIngestionJobs AWS API Documentation
+    #
+    # @overload list_ingestion_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_ingestion_jobs(params = {}, options = {})
+      req = build_request(:list_ingestion_jobs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of ingestion streams in a collection.
+    #
+    # @option params [required, String] :collection_id
+    #   The unique identifier of the collection to list ingestion streams for.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListIngestionStreams` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListIngestionStreams` operations, which returns results in the next
+    #   page.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Valid values are 1–100. If
+    #   you don't specify a value, the default is 100. You can use
+    #   `nextToken` to get the next page of results.
+    #
+    #   A response can contain fewer results than `maxResults`, or no results,
+    #   and still include a `nextToken`. To retrieve all results, continue to
+    #   make the call with the returned `nextToken` until no `nextToken` is
+    #   returned.
+    #
+    # @return [Types::ListIngestionStreamsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIngestionStreamsResponse#ingestion_stream_summaries #ingestion_stream_summaries} => Array&lt;Types::IngestionStreamSummary&gt;
+    #   * {Types::ListIngestionStreamsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ingestion_streams({
+    #     collection_id: "CollectionId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingestion_stream_summaries #=> Array
+    #   resp.ingestion_stream_summaries[0].ingestion_stream_id #=> String
+    #   resp.ingestion_stream_summaries[0].arn #=> String
+    #   resp.ingestion_stream_summaries[0].ingestion_stream_name #=> String
+    #   resp.ingestion_stream_summaries[0].index_name #=> String
+    #   resp.ingestion_stream_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.ingestion_stream_summaries[0].created_at #=> Time
+    #   resp.ingestion_stream_summaries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListIngestionStreams AWS API Documentation
+    #
+    # @overload list_ingestion_streams(params = {})
+    # @param [Hash] params ({})
+    def list_ingestion_streams(params = {}, options = {})
+      req = build_request(:list_ingestion_streams, params)
       req.send_request(options)
     end
 
@@ -2545,6 +3078,9 @@ module Aws::OpenSearchServerless
     #   Indicates whether to enable or disable deletion protection for the
     #   collection. When set to `ENABLED`, the collection cannot be deleted.
     #
+    # @option params [Types::EncryptionConfig] :encryption_config
+    #   Encryption settings for a collection.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -2565,6 +3101,10 @@ module Aws::OpenSearchServerless
     #       serverless_vector_acceleration: "ENABLED", # required, accepts ENABLED, DISABLED, ALLOWED
     #     },
     #     deletion_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #     encryption_config: {
+    #       a_ws_owned_key: false,
+    #       kms_key_arn: "EncryptionConfigKmsKeyArnString",
+    #     },
     #     client_token: "ClientToken",
     #   })
     #
@@ -2576,6 +3116,7 @@ module Aws::OpenSearchServerless
     #   resp.update_collection_detail.type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
     #   resp.update_collection_detail.description #=> String
     #   resp.update_collection_detail.vector_options.serverless_vector_acceleration #=> String, one of "ENABLED", "DISABLED", "ALLOWED"
+    #   resp.update_collection_detail.kms_key_arn #=> String
     #   resp.update_collection_detail.arn #=> String
     #   resp.update_collection_detail.created_date #=> Integer
     #   resp.update_collection_detail.last_modified_date #=> Integer
@@ -2599,8 +3140,9 @@ module Aws::OpenSearchServerless
     #   A new description for the collection group.
     #
     # @option params [Types::CollectionGroupCapacityLimits] :capacity_limits
-    #   Updated capacity limits for the collection group, in OpenSearch
-    #   Compute Units (OCUs).
+    #   The updated capacity limits for the collection group, in OpenSearch
+    #   Compute Units (OCUs). Updates to capacity limits are not incremental.
+    #   Any field not specified resets to its default value.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
@@ -3008,7 +3550,7 @@ module Aws::OpenSearchServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
