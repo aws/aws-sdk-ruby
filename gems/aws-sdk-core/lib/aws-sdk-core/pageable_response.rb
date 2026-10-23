@@ -46,10 +46,16 @@ module Aws
   #       puts response.contents.map(&:key)
   #     end
   #
+  # Every client response supports these methods. A response from an
+  # operation that does not paginate has a single page, so `last_page?`
+  # returns `true` and `each` yields only that response.
+  #
   module PageableResponse
 
+    # Adds paging methods when needed and resets cached paging state.
+    # An {Aws::Response} already has the methods through its class.
     def self.apply(base)
-      base.extend Extension
+      base.extend Extension unless Extension === base
       base.instance_variable_set(:@last_page, nil)
       base.instance_variable_set(:@more_results, nil)
       base
@@ -217,5 +223,6 @@ module Aws
       end
 
     end
+
   end
 end

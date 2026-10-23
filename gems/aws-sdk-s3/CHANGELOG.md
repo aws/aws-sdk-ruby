@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Reduce object allocation overhead in `Aws::S3::Presigner` by returning `Aws::Response` instances.
+
 1.235.0 (2026-10-20)
 ------------------
 
