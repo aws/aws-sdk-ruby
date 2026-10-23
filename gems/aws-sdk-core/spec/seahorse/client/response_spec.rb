@@ -6,6 +6,10 @@ require 'pp'
 module Seahorse
   module Client
     describe Response do
+      it 'delegates Enumerable methods to its data' do
+        expect(Response.new(data: [1, 2]).first).to eq(1)
+      end
+
       describe '#data' do
 
         it 'can be set' do

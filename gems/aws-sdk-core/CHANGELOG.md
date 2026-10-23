@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Reduce object allocation overhead for SDK responses. SDK clients now return `Aws::Response`, a subclass of `Seahorse::Client::Response`.
+
 3.260.0 (2026-10-21)
 ------------------
 
