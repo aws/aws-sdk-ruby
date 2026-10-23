@@ -481,6 +481,31 @@ module Aws
       end
 
       describe 'AwsChunkedTrailerDigestIO' do
+        let(:payload) { "\x00\xff".b * 11 }
+        let(:io) { StringIO.new(payload) }
+        let(:body) do
+          ChecksumAlgorithm::AwsChunkedTrailerDigestIO.new(
+            io: io,
+            algorithm: 'CRC32',
+            location_name: 'x-amz-checksum-crc32'
+          )
+        end
+        let(:encoded_payload) do
+          checksum = Base64.strict_encode64([Zlib.crc32(payload)].pack('N'))
+          "a\r\n#{payload.byteslice(0, 10)}\r\n" \
+            "a\r\n#{payload.byteslice(10, 10)}\r\n" \
+            "2\r\n#{payload.byteslice(20, 2)}\r\n" \
+            "0\r\nx-amz-checksum-crc32:#{checksum}\r\n\r\n"
+        end
+
+        around do |example|
+          previous_chunk_size = Thread.current[:net_http_override_body_stream_chunk]
+          Thread.current[:net_http_override_body_stream_chunk] = 16
+          example.run
+        ensure
+          Thread.current[:net_http_override_body_stream_chunk] = previous_chunk_size
+        end
+
         it 'rewinds IO on initialization' do
           io = StringIO.new('hello world')
           io.read # move to EOF
@@ -493,6 +518,57 @@ module Aws
           )
 
           expect(io.pos).to eq(0)
+        end
+
+        it 'reuses the input buffer without changing encoded binary chunks' do
+          buffers = []
+          allow(io).to receive(:read).and_wrap_original do |read, length, buffer|
+            buffers << buffer
+            read.call(length, buffer)
+          end
+
+          output = String.new
+          buffer = String.new
+          output << buffer while body.read(7, buffer)
+
+          expect(output).to eq(encoded_payload)
+          expect(buffers.size).to eq(4) # three data chunks and EOF
+          expect(buffers.first).to be_a(String)
+          expect(buffers).to all(equal(buffers.first))
+          expect(body).to be_eof
+        end
+
+        it 'reinitializes the input buffer when rewound after EOF' do
+          expect(body.read).to eq(encoded_payload)
+          expect(body.read).to be_nil
+          body.rewind
+
+          expect(io).to receive(:read).with(10, an_instance_of(String))
+            .at_least(:once).and_call_original
+          expect(body.read).to eq(encoded_payload)
+          expect(body).to be_eof
+        end
+
+        [16, 17, 64].each do |length|
+          it "preserves chunk boundaries and the trailer with #{length}-byte reads" do
+            output = String.new
+            buffer = String.new
+            while (chunk = body.read(length, buffer))
+              expect(chunk).to equal(buffer)
+              expect(chunk.bytesize).to be <= length
+              output << chunk
+            end
+
+            expect(output).to eq(encoded_payload)
+            expect(body).to be_eof
+          end
+        end
+
+        it 'writes the checksum trailer for an empty input' do
+          io.truncate(0)
+
+          expect(body.read).to eq("0\r\nx-amz-checksum-crc32:AAAAAA==\r\n\r\n")
+          expect(body.read).to be_nil
         end
       end
     end

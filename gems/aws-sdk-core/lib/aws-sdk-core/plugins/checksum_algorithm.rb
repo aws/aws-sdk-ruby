@@ -492,6 +492,7 @@ module Aws
           @chunk_size = Thread.current[:net_http_override_body_stream_chunk] || DEFAULT_TRAILER_CHUNK_SIZE
           @overhead_bytes = calculate_overhead(@chunk_size)
           @base_chunk_size = @chunk_size - @overhead_bytes
+          @chunk = ''.b
           @encoded_buffer = +''
           @eof = false
         end
@@ -513,6 +514,7 @@ module Aws
 
         def rewind
           @io.rewind
+          @chunk = ''.b
           @encoded_buffer = +''
           @eof = false
           @digest = ChecksumAlgorithm.digest_for_algorithm(@algorithm)
@@ -527,8 +529,9 @@ module Aws
 
           fill_encoded_buffer(length)
 
-          if length
-            output_buffer << @encoded_buffer.slice!(0, length)
+          if length && length < @encoded_buffer.bytesize
+            output_buffer << @encoded_buffer.byteslice(0, length)
+            @encoded_buffer = @encoded_buffer.byteslice(length, @encoded_buffer.bytesize - length)
           else
             output_buffer << @encoded_buffer
             @encoded_buffer.clear
@@ -551,12 +554,12 @@ module Aws
           return if required_length && @encoded_buffer.bytesize >= required_length
 
           while !@eof && fill_data?(required_length)
-            chunk = @io.read(@base_chunk_size)
-            if chunk && !chunk.empty?
-              @digest.update(chunk)
-              @encoded_buffer << "#{chunk.bytesize.to_s(HEX_BASE)}\r\n#{chunk}\r\n"
+            @chunk = @io.read(@base_chunk_size, @chunk)
+            if @chunk && !@chunk.empty?
+              @digest.update(@chunk)
+              @encoded_buffer << @chunk.bytesize.to_s(HEX_BASE) << "\r\n" << @chunk << "\r\n"
             else
-              @encoded_buffer << "0\r\n#{trailer_string}\r\n\r\n"
+              @encoded_buffer << "0\r\n" << trailer_string << "\r\n\r\n"
               @eof = true
             end
           end
