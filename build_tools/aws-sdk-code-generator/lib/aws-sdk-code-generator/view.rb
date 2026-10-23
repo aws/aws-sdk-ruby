@@ -8,6 +8,8 @@ module AwsSdkCodeGenerator
     TEMPLATE_DIR = File.expand_path('../../../templates', __FILE__)
 
     def self.inherited(subclass)
+      super
+
       parts = subclass.name.split('::')
       parts.shift #=> remove AwsSdkCodeGenerator
       parts.shift #=> remove Views

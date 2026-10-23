@@ -5,8 +5,6 @@ module AwsSdkCodeGenerator
     module Spec
       class SpecHelper < View
 
-        self.template_file = "#{self.template_path}/spec/spec_helper.mustache"
-
         # @param [Hash] options
         # @option options [required, Service] :service
         # @option options[required, String] :aws_sdk_core_lib_path
