@@ -63,8 +63,9 @@ module Aws
       # @raise [VerificationError] Raised when the given message has failed
       #   verification.
       def authenticate!(message_body)
-        msg = Json.load(message_body)
+        msg = parse(message_body)
         msg = convert_lambda_msg(msg) if is_from_lambda(msg)
+        verify_signing_fields!(msg)
 
         case msg['SignatureVersion']
         when '1'
@@ -78,6 +79,21 @@ module Aws
       end
 
       private
+
+      def parse(message_body)
+        msg = Json.load(message_body)
+        raise VerificationError, 'the message must be a JSON object' unless msg.is_a?(Hash)
+
+        msg
+      rescue Json::ParseError
+        raise VerificationError, 'the message is not valid JSON'
+      end
+
+      def verify_signing_fields!(msg)
+        unless msg['Signature'].is_a?(String) && msg['SigningCertURL'].is_a?(String)
+          raise VerificationError, 'the Signature and SigningCertURL must be strings'
+        end
+      end
 
       def is_from_lambda(message)
         message.key? 'SigningCertUrl'
@@ -125,7 +141,11 @@ module Aws
       end
 
       def public_key(message)
-        x509_url = URI.parse(message['SigningCertURL'])
+        x509_url = begin
+          URI.parse(message['SigningCertURL'])
+        rescue URI::InvalidURIError
+          raise VerificationError, 'the SigningCertURL is not a valid URI'
+        end
         x509 = OpenSSL::X509::Certificate.new(pem(x509_url))
         OpenSSL::PKey::RSA.new(x509.public_key)
       end
